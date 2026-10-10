@@ -1,0 +1,171 @@
+{
+  "scope": "ADDITIVE_SAMPLER_FACTORY_TRIGGER_TO_STOP_HOST_ONLY",
+  "implementation": "Distinct genuine empty-owner STOP binding, retained original ACTIVE reader handles, one new command holder, no new sample reader/cache/upload, actual enqueue OK ownership transfer and independent command/reader/source quiet proofs.",
+  "source_freeze": "factory14; Root indentation/newline-only strict GCC correction after independent factory13 source review",
+  "source_pins": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "mode": "0o644"
+    },
+    "src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 2777,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f",
+      "mode": "0o644"
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "mode": "0o644"
+    },
+    "src/editor/sampler_mixed_causal_stop_internal.h": {
+      "bytes": 2371,
+      "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf",
+      "mode": "0o644"
+    },
+    "tests/sampler_mixed_causal_stop_test.c": {
+      "bytes": 24245,
+      "sha256": "729d886401a5ecf19daf009434a0b2b5d4a488d21c6dde60563f44cb7ac77539",
+      "mode": "0o644"
+    },
+    "tests/sampler_mixed_causal_stop_port_helpers.c": {
+      "bytes": 12231,
+      "sha256": "ad9594afa088cc446ec3346aad14bf3ed0aeebf9548203efe3469f3df315df2f",
+      "mode": "0o644"
+    },
+    "tests/test_sampler_mixed_causal_stop.py": {
+      "bytes": 2539,
+      "sha256": "3066f1eca73c836f680519ad3157eb71a5d6e014ede3148e259d686f587308a6",
+      "mode": "0o644"
+    }
+  },
+  "normal_repo_driver55": {
+    "status": "PASS_ACTUAL_REPOSITORY_DRIVER55_HOST_ONLY",
+    "source_guards": 79,
+    "seconds": 11.490590500005055,
+    "direct_child": {
+      "argv": [
+        "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-I",
+        "-B",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_sampler_mixed_causal_stop.py"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "DISPATCHED_ACTUAL_ORIGINAL_DRIVER",
+      "pid": 34898,
+      "pgid": 34898,
+      "row_recorded_before_popen": true,
+      "wait_completed": true,
+      "stdout_eof": true,
+      "stderr_eof": true,
+      "returncode": 0,
+      "independent_wait_returncode": 0,
+      "own_group_absent": true
+    },
+    "record": "repo-driver.json"
+  },
+  "current_default_factory24": {
+    "status": "PASS_CURRENT_DEFAULT_FACTORY24_HOST_ONLY",
+    "named_input_guards": 81,
+    "seconds": 10.50668216699978,
+    "direct_child": {
+      "argv": [
+        "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-I",
+        "-B",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/run_current_default24.py"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "DISPATCHED_ACTUAL_ORIGINAL_DRIVER",
+      "pid": 12451,
+      "pgid": 12451,
+      "row_recorded_before_popen": true,
+      "wait_completed": true,
+      "stdout_eof": true,
+      "stderr_eof": true,
+      "returncode": 0,
+      "independent_wait_returncode": 0,
+      "own_group_absent": true
+    },
+    "record": "default-factory-driver.json",
+    "driver": "Private current-source driver, unchanged original C fixture; historical c4cbc04 archive driver NOT RUN."
+  },
+  "inner_stream_scope": "Each exact driver captured and asserted its own literal stdout and empty compile/runtime stderr. Outer supervisor saved only unittest stdout/stderr, not independent inner captures.",
+  "dependency_counts": {
+    "STOP_private_absolute_rows": 109,
+    "STOP_duplicate_header_aliases": 31,
+    "STOP_unique_repo_inputs": 78,
+    "STOP_normal_repo_inputs_including_driver": 79,
+    "default_MM_absolute_rows": 114,
+    "default_MM_duplicate_aliases": 37,
+    "default_MM_unique": 77,
+    "default_MM_repo_unique": 75,
+    "default_MM_other": [
+      "SDKSettings.json",
+      "byte-identical private original fixture"
+    ]
+  },
+  "compiler_only": {
+    "status": "FOUR_COMMANDS_RC0_WAIT_EOF_GROUP_ABSENT_SOURCE_PINS_EQUAL",
+    "source_header_observations": 105,
+    "core_object_bytes": 27184,
+    "core_object_sha256": "abbeff71d35dd005efcd425852b6610435279bb85a4a02d734432c6bda22ab2e",
+    "sampler_object_bytes": 25576,
+    "sampler_object_sha256": "6eaa17d98d082abe9bbbb55ae30bdb9fac2c2789dd07cd8deb484a5b0d5c74d0",
+    "record": "compiler-only.json",
+    "aggregate_stack": "UNKNOWN",
+    "native_link_or_execution": "NOT_RUN"
+  },
+  "protected16_equal": true,
+  "preserved_failures": [
+    "Initial compiler nlink gate refusal, dependency timeout and strict indentation failure",
+    "Two adoption source-custody refusals before repository mutation",
+    "Normal55 dataless preflight refused before child dispatch; subsequent exact-file materialized-state admission was separate",
+    "Default dependency-01 dataless sampler_wavetable.c and Root dependency-02 dataless playback_pcm.c refused before cc dispatch; dependency-03 followed distinct exact-file materialization and metadata observations"
+  ],
+  "copies": {
+    "default-factory-driver.json": {
+      "bytes": 89164,
+      "sha256": "b61405ec6d90f5b94e8077bd56748c2c5993d65dcdddbbfbab0b11704f8d7152",
+      "mode": "0o644"
+    },
+    "default-factory-driver.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o644"
+    },
+    "default-factory-driver.stderr": {
+      "bytes": 99,
+      "sha256": "0a147da965db41c86c82176792ce48b146e9fb4ce2631d0e2a765108fafabbfd",
+      "mode": "0o644"
+    },
+    "default-factory-recipe.json": {
+      "bytes": 15089,
+      "sha256": "18d554aceee1754339a84c9276f7e1ad1459e1a492191ee1977049972e8e75a3",
+      "mode": "0o644"
+    },
+    "default-factory-driver.py": {
+      "bytes": 5643,
+      "sha256": "e92237333a2acf31c674bd02f29860dbd4fa0377ea0d3c645d6dc9aedf7b0aa3",
+      "mode": "0o644"
+    },
+    "default-factory-expected.stdout": {
+      "bytes": 1280,
+      "sha256": "b564b11df35e43afc52c5f558a320ee38a4f4d9ca260319f1378dd10b7b411d7",
+      "mode": "0o644"
+    },
+    "default-factory-dependencies.json": {
+      "bytes": 87184,
+      "sha256": "24487c2f2dd2b256ee92018728f4c9cad78ceef55c248793e7d58c92a0d3a4ff",
+      "mode": "0o644"
+    }
+  },
+  "amiberry": "NOT_RUN",
+  "real_A1200_AmiGUS": "NOT_RUN",
+  "controller_producer_native_binding": "UNFINISHED",
+  "third_CONTROL_STOP_lineage": "UNFINISHED",
+  "exact_live_schedule_and_preparation_aperture": "UNQUALIFIED",
+  "device_stop_quiet_order_completion": "UNQUALIFIED",
+  "audio_listening": "NOT_RUN",
+  "shared_target_or_service_operations": false
+}

@@ -1,0 +1,187 @@
+{
+  "final_seven_files": {
+    "src/core/mixed_readers_causal.c": {
+      "after_close_equal": true,
+      "bytes": 78794,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253722,
+        33060,
+        1,
+        78794,
+        1791648753900590386,
+        1791648762320655639,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8"
+    },
+    "src/core/mixed_readers_causal_factory_internal.h": {
+      "after_close_equal": true,
+      "bytes": 2777,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253723,
+        33060,
+        1,
+        2777,
+        1791648753900736678,
+        1791648762351748562,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f"
+    },
+    "src/editor/sampler_mixed_causal_stop_internal.h": {
+      "after_close_equal": true,
+      "bytes": 2371,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253726,
+        33060,
+        1,
+        2371,
+        1791648753901338472,
+        1791648762335312701,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf"
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "after_close_equal": true,
+      "bytes": 66879,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253725,
+        33060,
+        1,
+        66879,
+        1791648753901185430,
+        1791648762297807125,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "6faf337c1264a6f617031da3142d8bcdb6a282989424dcf458dae7a30055edad"
+    },
+    "tests/sampler_mixed_causal_stop_port_helpers.c": {
+      "after_close_equal": true,
+      "bytes": 12231,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253729,
+        33060,
+        1,
+        12231,
+        1791648753902004100,
+        1791648762361229560,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "ad9594afa088cc446ec3346aad14bf3ed0aeebf9548203efe3469f3df315df2f"
+    },
+    "tests/sampler_mixed_causal_stop_test.c": {
+      "after_close_equal": true,
+      "bytes": 24245,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253728,
+        33060,
+        1,
+        24245,
+        1791648753901849057,
+        1791648762315243157,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "729d886401a5ecf19daf009434a0b2b5d4a488d21c6dde60563f44cb7ac77539"
+    },
+    "tests/test_sampler_mixed_causal_stop.py": {
+      "after_close_equal": true,
+      "bytes": 2539,
+      "complete_eof": true,
+      "identity": [
+        16777231,
+        211253730,
+        33060,
+        1,
+        2539,
+        1791648753902251226,
+        1791648762311530017,
+        502,
+        20
+      ],
+      "paired_full9_and_body": true,
+      "sha256": "3066f1eca73c836f680519ad3157eb71a5d6e014ede3148e259d686f587308a6"
+    }
+  },
+  "manifest": {
+    "after_close_equal": true,
+    "bytes": 1734,
+    "complete_eof": true,
+    "identity": [
+      16777231,
+      211253732,
+      33188,
+      1,
+      1734,
+      1791648753902978146,
+      1791648759494315929,
+      502,
+      20
+    ],
+    "paired_full9_and_body": true,
+    "sha256": "a154a4e57fe4ca6c52efe3714e2f40f4ba46f27ae22323459c6e6553d70a0a37"
+  },
+  "normal_final_driver_execution": "NOT RUN",
+  "reviewer_test_execution": false,
+  "saved_actual55_result": {
+    "after_close_equal": true,
+    "bytes": 4355,
+    "complete_eof": true,
+    "identity": [
+      16777231,
+      211251283,
+      33188,
+      1,
+      4355,
+      1791648567619040752,
+      1791648588046430187,
+      502,
+      20
+    ],
+    "paired_full9_and_body": true,
+    "sha256": "40cc864fc42677b61f5f80d091999d7d81b8562cbe5dd22e7b46c04d079d26bf"
+  },
+  "saved_actual55_stdout": {
+    "after_close_equal": true,
+    "bytes": 604,
+    "complete_eof": true,
+    "identity": [
+      16777231,
+      211251723,
+      33188,
+      1,
+      604,
+      1791648567591628969,
+      1791648577837660699,
+      502,
+      20
+    ],
+    "paired_full9_and_body": true,
+    "sha256": "870c07c33223d777e173db6b81743efe19bc5bc6bb26b29d617f67c6e782ac03"
+  },
+  "scope": "INDEPENDENT_SOURCE_ONLY_FINAL_FACTORY_F1_F2_CORRECTION"
+}

@@ -1,0 +1,3112 @@
+{
+  "status": "PASS_ACTUAL_REPOSITORY_DRIVER55_HOST_ONLY",
+  "scope": "ACTUAL_NORMAL_DRIVER_HOST_ONLY",
+  "wall_bound_seconds": 200,
+  "errors": [],
+  "automatic_retry": false,
+  "source_before": {
+    "src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569113,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790550204992899901,
+        "ctime_ns": 1790550210741455912,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569112,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549983454117536,
+        "ctime_ns": 1790549993550856075,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188945548,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076752361451,
+        "ctime_ns": 1790549083371555699,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188945546,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076753328915,
+        "ctime_ns": 1790549083375956307,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203859957,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791318980255901736,
+        "ctime_ns": 1791323788047729726,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203859958,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791318980258259124,
+        "ctime_ns": 1791323786458519844,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188953046,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790475630808068513,
+        "ctime_ns": 1791649611900618877,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188953044,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790475557695989069,
+        "ctime_ns": 1790475569814018302,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947234,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076752958204,
+        "ctime_ns": 1790549083366414088,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947232,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076753969918,
+        "ctime_ns": 1790549083393143275,
+        "flags": 64
+      }
+    },
+    "src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181621839,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789816130657589244,
+        "ctime_ns": 1789816294861621030,
+        "flags": 64
+      }
+    },
+    "src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181621838,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789816130554279565,
+        "ctime_ns": 1791649614528886131,
+        "flags": 64
+      }
+    },
+    "src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655706,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237808827963391,
+        "ctime_ns": 1790237816251050716,
+        "flags": 64
+      }
+    },
+    "src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655705,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237808827696764,
+        "ctime_ns": 1790237813160569110,
+        "flags": 64
+      }
+    },
+    "src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189143736,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790852512516031412,
+        "ctime_ns": 1790867204227837251,
+        "flags": 64
+      }
+    },
+    "src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189143734,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790504745844955934,
+        "ctime_ns": 1790504754458858442,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 206999181,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454457147170,
+        "ctime_ns": 1791650461070466953,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 206999184,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791483424533358258,
+        "ctime_ns": 1791490925102883532,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211073306,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791643852833164804,
+        "ctime_ns": 1791643859543769166,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 2777,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205842770,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454475705139,
+        "ctime_ns": 1791650461049453389,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205164306,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791373758588787796,
+        "ctime_ns": 1791379594629672804,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_stop_internal.h": {
+      "bytes": 3259,
+      "sha256": "70216763b72622013cabe3f61e8a98610637cb6259b2db14e7bdab98bc7e3aac",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211085823,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791645751321267107,
+        "ctime_ns": 1791645758339392885,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203331508,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791374954819569635,
+        "ctime_ns": 1791377695953811100,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203331460,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791308659852888573,
+        "ctime_ns": 1791308698208083416,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 204408796,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791348740349047422,
+        "ctime_ns": 1791649618454031902,
+        "flags": 64
+      }
+    },
+    "src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181577199,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790234604688455221,
+        "ctime_ns": 1790234612348527207,
+        "flags": 64
+      }
+    },
+    "src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181577171,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790234604687966176,
+        "ctime_ns": 1790234615448465719,
+        "flags": 64
+      }
+    },
+    "src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655147,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790999320076781179,
+        "ctime_ns": 1790999331843351722,
+        "flags": 64
+      }
+    },
+    "src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655132,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790999320077368432,
+        "ctime_ns": 1790999331891943226,
+        "flags": 64
+      }
+    },
+    "src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181715767,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789904895158490851,
+        "ctime_ns": 1789904949469327575,
+        "flags": 64
+      }
+    },
+    "src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181707323,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789904895157619225,
+        "ctime_ns": 1789904949781946360,
+        "flags": 64
+      }
+    },
+    "src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181622946,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791040614873654716,
+        "ctime_ns": 1791040621859136189,
+        "flags": 64
+      }
+    },
+    "src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181622945,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791040614873956441,
+        "ctime_ns": 1791649628675462940,
+        "flags": 64
+      }
+    },
+    "src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182178228,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789899146347679615,
+        "ctime_ns": 1791651336990174597,
+        "flags": 64
+      }
+    },
+    "src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188997994,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790482750953031792,
+        "ctime_ns": 1790482762180686897,
+        "flags": 64
+      }
+    },
+    "src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189031649,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790486631078656046,
+        "ctime_ns": 1790486638296242119,
+        "flags": 64
+      }
+    },
+    "src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186295400,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791048223629294842,
+        "ctime_ns": 1791048228552921100,
+        "flags": 64
+      }
+    },
+    "src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186295398,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791048223632578496,
+        "ctime_ns": 1791048231912870440,
+        "flags": 64
+      }
+    },
+    "src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182190492,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237697441123165,
+        "ctime_ns": 1790237708925719448,
+        "flags": 64
+      }
+    },
+    "src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182190491,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237697441794419,
+        "ctime_ns": 1790237706120895986,
+        "flags": 64
+      }
+    },
+    "src/core/project.c": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198109275,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791384115635457145,
+        "ctime_ns": 1791386310927661766,
+        "flags": 64
+      }
+    },
+    "src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198109276,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791123452208131682,
+        "ctime_ns": 1791123466153790789,
+        "flags": 64
+      }
+    },
+    "src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182186354,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790996017274904727,
+        "ctime_ns": 1791651336987830874,
+        "flags": 64
+      }
+    },
+    "src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182186353,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790996017275485277,
+        "ctime_ns": 1791651336978102898,
+        "flags": 64
+      }
+    },
+    "src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186289718,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790191017447431943,
+        "ctime_ns": 1790191024914269428,
+        "flags": 64
+      }
+    },
+    "src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186289716,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790486584385600246,
+        "ctime_ns": 1790486595223658204,
+        "flags": 64
+      }
+    },
+    "src/core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 200076308,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791078992320214542,
+        "ctime_ns": 1791079001746748364,
+        "flags": 64
+      }
+    },
+    "src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182178238,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789897713906912975,
+        "ctime_ns": 1789897724540181956,
+        "flags": 64
+      }
+    },
+    "src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181719380,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791042557423478023,
+        "ctime_ns": 1791042562417235545,
+        "flags": 64
+      }
+    },
+    "src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181719367,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791042557424634181,
+        "ctime_ns": 1791042565471562078,
+        "flags": 64
+      }
+    },
+    "src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149121,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963485764903,
+        "ctime_ns": 1790994972777546736,
+        "flags": 64
+      }
+    },
+    "src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149122,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963485859112,
+        "ctime_ns": 1790994976470920457,
+        "flags": 64
+      }
+    },
+    "src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181623735,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790997501794330812,
+        "ctime_ns": 1790997527556036711,
+        "flags": 64
+      }
+    },
+    "src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181623734,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790997501798107958,
+        "ctime_ns": 1790997527968370293,
+        "flags": 64
+      }
+    },
+    "src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189296769,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790509963956846670,
+        "ctime_ns": 1790509972226871219,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149123,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791236264257845421,
+        "ctime_ns": 1791237018812726880,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149124,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963486028989,
+        "ctime_ns": 1790994972808891567,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198015943,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791061093955948257,
+        "ctime_ns": 1791061101568128573,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_master_guard_internal.h": {
+      "bytes": 1059,
+      "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 202686171,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791236264220196052,
+        "ctime_ns": 1791237026885879007,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_causal_internal.h": {
+      "bytes": 2546,
+      "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205842771,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791385957253132265,
+        "ctime_ns": 1791407438134811051,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_causal_stop_internal.h": {
+      "bytes": 2371,
+      "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296482,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454487224780,
+        "ctime_ns": 1791650460999636470,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203405698,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454483403095,
+        "ctime_ns": 1791650460978120944,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers.h": {
+      "bytes": 11621,
+      "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203401824,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791321266061522926,
+        "ctime_ns": 1791324186593182021,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers_internal.h": {
+      "bytes": 1535,
+      "sha256": "b4fa697ba6ca17f6be591ee901b1e44ea632c5244dc084c357d72505e3c86edf",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 204408798,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791348740352840185,
+        "ctime_ns": 1791651336973652996,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191061713,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790837076181151783,
+        "ctime_ns": 1790927884492462679,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191061711,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790758813103644618,
+        "ctime_ns": 1790759097369920568,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191842183,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790837164049853482,
+        "ctime_ns": 1790927806466382359,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188949084,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791224102642369270,
+        "ctime_ns": 1791651336970610727,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188949082,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790487151134663820,
+        "ctime_ns": 1791651336637933482,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable_internal.h": {
+      "bytes": 1671,
+      "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189041133,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791224102642719905,
+        "ctime_ns": 1791224110960618914,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 200076309,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791123452209407184,
+        "ctime_ns": 1791123466588684319,
+        "flags": 64
+      }
+    },
+    "src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182303247,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789907336323357105,
+        "ctime_ns": 1791651336959931995,
+        "flags": 64
+      }
+    },
+    "tests/amigus_reservation_test.c": {
+      "bytes": 5856,
+      "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569493,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790473474865943462,
+        "ctime_ns": 1790473483414972884,
+        "flags": 64
+      }
+    },
+    "tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947420,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076751662906,
+        "ctime_ns": 1790549083345263473,
+        "flags": 64
+      }
+    },
+    "tests/mixed_readers_causal_test.c": {
+      "bytes": 21400,
+      "sha256": "da7ac70ecf1e889743bc911df16a2ad6ec36539a1c7f019d7b3be729d3e2f63c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205164307,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791376408406462430,
+        "ctime_ns": 1791651336956010888,
+        "flags": 64
+      }
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203332851,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791308659934509277,
+        "ctime_ns": 1791651336953498539,
+        "flags": 64
+      }
+    },
+    "tests/sampler_mixed_causal_stop_port_helpers.c": {
+      "bytes": 12231,
+      "sha256": "ad9594afa088cc446ec3346aad14bf3ed0aeebf9548203efe3469f3df315df2f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296484,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454491731762,
+        "ctime_ns": 1791650461016950308,
+        "flags": 64
+      }
+    },
+    "tests/sampler_mixed_causal_stop_test.c": {
+      "bytes": 24245,
+      "sha256": "729d886401a5ecf19daf009434a0b2b5d4a488d21c6dde60563f44cb7ac77539",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296483,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454489641418,
+        "ctime_ns": 1791650461038843293,
+        "flags": 64
+      }
+    },
+    "tests/test_sampler_mixed_causal_stop.py": {
+      "bytes": 2539,
+      "sha256": "3066f1eca73c836f680519ad3157eb71a5d6e014ede3148e259d686f587308a6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296486,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454493369520,
+        "ctime_ns": 1791650461041929434,
+        "flags": 64
+      }
+    }
+  },
+  "source_after": {
+    "src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569113,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790550204992899901,
+        "ctime_ns": 1790550210741455912,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569112,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549983454117536,
+        "ctime_ns": 1790549993550856075,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188945548,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076752361451,
+        "ctime_ns": 1790549083371555699,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188945546,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076753328915,
+        "ctime_ns": 1790549083375956307,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203859957,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791318980255901736,
+        "ctime_ns": 1791323788047729726,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203859958,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791318980258259124,
+        "ctime_ns": 1791323786458519844,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188953046,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790475630808068513,
+        "ctime_ns": 1791649611900618877,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188953044,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790475557695989069,
+        "ctime_ns": 1790475569814018302,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947234,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076752958204,
+        "ctime_ns": 1790549083366414088,
+        "flags": 64
+      }
+    },
+    "src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947232,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076753969918,
+        "ctime_ns": 1790549083393143275,
+        "flags": 64
+      }
+    },
+    "src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181621839,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789816130657589244,
+        "ctime_ns": 1789816294861621030,
+        "flags": 64
+      }
+    },
+    "src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181621838,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789816130554279565,
+        "ctime_ns": 1791649614528886131,
+        "flags": 64
+      }
+    },
+    "src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655706,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237808827963391,
+        "ctime_ns": 1790237816251050716,
+        "flags": 64
+      }
+    },
+    "src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655705,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237808827696764,
+        "ctime_ns": 1790237813160569110,
+        "flags": 64
+      }
+    },
+    "src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189143736,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790852512516031412,
+        "ctime_ns": 1790867204227837251,
+        "flags": 64
+      }
+    },
+    "src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189143734,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790504745844955934,
+        "ctime_ns": 1790504754458858442,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 206999181,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454457147170,
+        "ctime_ns": 1791650461070466953,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 206999184,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791483424533358258,
+        "ctime_ns": 1791490925102883532,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211073306,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791643852833164804,
+        "ctime_ns": 1791643859543769166,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 2777,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205842770,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454475705139,
+        "ctime_ns": 1791650461049453389,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205164306,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791373758588787796,
+        "ctime_ns": 1791379594629672804,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_readers_causal_stop_internal.h": {
+      "bytes": 3259,
+      "sha256": "70216763b72622013cabe3f61e8a98610637cb6259b2db14e7bdab98bc7e3aac",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211085823,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791645751321267107,
+        "ctime_ns": 1791645758339392885,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203331508,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791374954819569635,
+        "ctime_ns": 1791377695953811100,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203331460,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791308659852888573,
+        "ctime_ns": 1791308698208083416,
+        "flags": 64
+      }
+    },
+    "src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 204408796,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791348740349047422,
+        "ctime_ns": 1791649618454031902,
+        "flags": 64
+      }
+    },
+    "src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181577199,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790234604688455221,
+        "ctime_ns": 1790234612348527207,
+        "flags": 64
+      }
+    },
+    "src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181577171,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790234604687966176,
+        "ctime_ns": 1790234615448465719,
+        "flags": 64
+      }
+    },
+    "src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655147,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790999320076781179,
+        "ctime_ns": 1790999331843351722,
+        "flags": 64
+      }
+    },
+    "src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181655132,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790999320077368432,
+        "ctime_ns": 1790999331891943226,
+        "flags": 64
+      }
+    },
+    "src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181715767,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789904895158490851,
+        "ctime_ns": 1789904949469327575,
+        "flags": 64
+      }
+    },
+    "src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181707323,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789904895157619225,
+        "ctime_ns": 1789904949781946360,
+        "flags": 64
+      }
+    },
+    "src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181622946,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791040614873654716,
+        "ctime_ns": 1791040621859136189,
+        "flags": 64
+      }
+    },
+    "src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181622945,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791040614873956441,
+        "ctime_ns": 1791649628675462940,
+        "flags": 64
+      }
+    },
+    "src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182178228,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789899146347679615,
+        "ctime_ns": 1791651336990174597,
+        "flags": 64
+      }
+    },
+    "src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188997994,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790482750953031792,
+        "ctime_ns": 1790482762180686897,
+        "flags": 64
+      }
+    },
+    "src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189031649,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790486631078656046,
+        "ctime_ns": 1790486638296242119,
+        "flags": 64
+      }
+    },
+    "src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186295400,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791048223629294842,
+        "ctime_ns": 1791048228552921100,
+        "flags": 64
+      }
+    },
+    "src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186295398,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791048223632578496,
+        "ctime_ns": 1791048231912870440,
+        "flags": 64
+      }
+    },
+    "src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182190492,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237697441123165,
+        "ctime_ns": 1790237708925719448,
+        "flags": 64
+      }
+    },
+    "src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182190491,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790237697441794419,
+        "ctime_ns": 1790237706120895986,
+        "flags": 64
+      }
+    },
+    "src/core/project.c": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198109275,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791384115635457145,
+        "ctime_ns": 1791386310927661766,
+        "flags": 64
+      }
+    },
+    "src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198109276,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791123452208131682,
+        "ctime_ns": 1791123466153790789,
+        "flags": 64
+      }
+    },
+    "src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182186354,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790996017274904727,
+        "ctime_ns": 1791651336987830874,
+        "flags": 64
+      }
+    },
+    "src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182186353,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790996017275485277,
+        "ctime_ns": 1791651336978102898,
+        "flags": 64
+      }
+    },
+    "src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186289718,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790191017447431943,
+        "ctime_ns": 1790191024914269428,
+        "flags": 64
+      }
+    },
+    "src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186289716,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790486584385600246,
+        "ctime_ns": 1790486595223658204,
+        "flags": 64
+      }
+    },
+    "src/core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 200076308,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791078992320214542,
+        "ctime_ns": 1791079001746748364,
+        "flags": 64
+      }
+    },
+    "src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182178238,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789897713906912975,
+        "ctime_ns": 1789897724540181956,
+        "flags": 64
+      }
+    },
+    "src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181719380,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791042557423478023,
+        "ctime_ns": 1791042562417235545,
+        "flags": 64
+      }
+    },
+    "src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181719367,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791042557424634181,
+        "ctime_ns": 1791042565471562078,
+        "flags": 64
+      }
+    },
+    "src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149121,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963485764903,
+        "ctime_ns": 1790994972777546736,
+        "flags": 64
+      }
+    },
+    "src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149122,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963485859112,
+        "ctime_ns": 1790994976470920457,
+        "flags": 64
+      }
+    },
+    "src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181623735,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790997501794330812,
+        "ctime_ns": 1790997527556036711,
+        "flags": 64
+      }
+    },
+    "src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181623734,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790997501798107958,
+        "ctime_ns": 1790997527968370293,
+        "flags": 64
+      }
+    },
+    "src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189296769,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790509963956846670,
+        "ctime_ns": 1790509972226871219,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149123,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791236264257845421,
+        "ctime_ns": 1791237018812726880,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198149124,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790994963486028989,
+        "ctime_ns": 1790994972808891567,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 198015943,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791061093955948257,
+        "ctime_ns": 1791061101568128573,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_master_guard_internal.h": {
+      "bytes": 1059,
+      "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 202686171,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791236264220196052,
+        "ctime_ns": 1791237026885879007,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_causal_internal.h": {
+      "bytes": 2546,
+      "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205842771,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791385957253132265,
+        "ctime_ns": 1791407438134811051,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_causal_stop_internal.h": {
+      "bytes": 2371,
+      "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296482,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454487224780,
+        "ctime_ns": 1791650460999636470,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203405698,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454483403095,
+        "ctime_ns": 1791650460978120944,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers.h": {
+      "bytes": 11621,
+      "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203401824,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791321266061522926,
+        "ctime_ns": 1791324186593182021,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_mixed_readers_internal.h": {
+      "bytes": 1535,
+      "sha256": "b4fa697ba6ca17f6be591ee901b1e44ea632c5244dc084c357d72505e3c86edf",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 204408798,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791348740352840185,
+        "ctime_ns": 1791651336973652996,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191061713,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790837076181151783,
+        "ctime_ns": 1790927884492462679,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191061711,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790758813103644618,
+        "ctime_ns": 1790759097369920568,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 191842183,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790837164049853482,
+        "ctime_ns": 1790927806466382359,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188949084,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791224102642369270,
+        "ctime_ns": 1791651336970610727,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188949082,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790487151134663820,
+        "ctime_ns": 1791651336637933482,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_wavetable_internal.h": {
+      "bytes": 1671,
+      "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 189041133,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791224102642719905,
+        "ctime_ns": 1791224110960618914,
+        "flags": 64
+      }
+    },
+    "src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 200076309,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791123452209407184,
+        "ctime_ns": 1791123466588684319,
+        "flags": 64
+      }
+    },
+    "src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182303247,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1789907336323357105,
+        "ctime_ns": 1791651336959931995,
+        "flags": 64
+      }
+    },
+    "tests/amigus_reservation_test.c": {
+      "bytes": 5856,
+      "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186569493,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790473474865943462,
+        "ctime_ns": 1790473483414972884,
+        "flags": 64
+      }
+    },
+    "tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 188947420,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790549076751662906,
+        "ctime_ns": 1790549083345263473,
+        "flags": 64
+      }
+    },
+    "tests/mixed_readers_causal_test.c": {
+      "bytes": 21400,
+      "sha256": "da7ac70ecf1e889743bc911df16a2ad6ec36539a1c7f019d7b3be729d3e2f63c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 205164307,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791376408406462430,
+        "ctime_ns": 1791651336956010888,
+        "flags": 64
+      }
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 203332851,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791308659934509277,
+        "ctime_ns": 1791651336953498539,
+        "flags": 64
+      }
+    },
+    "tests/sampler_mixed_causal_stop_port_helpers.c": {
+      "bytes": 12231,
+      "sha256": "ad9594afa088cc446ec3346aad14bf3ed0aeebf9548203efe3469f3df315df2f",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296484,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454491731762,
+        "ctime_ns": 1791650461016950308,
+        "flags": 64
+      }
+    },
+    "tests/sampler_mixed_causal_stop_test.c": {
+      "bytes": 24245,
+      "sha256": "729d886401a5ecf19daf009434a0b2b5d4a488d21c6dde60563f44cb7ac77539",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296483,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454489641418,
+        "ctime_ns": 1791650461038843293,
+        "flags": 64
+      }
+    },
+    "tests/test_sampler_mixed_causal_stop.py": {
+      "bytes": 2539,
+      "sha256": "3066f1eca73c836f680519ad3157eb71a5d6e014ede3148e259d686f587308a6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 211296486,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791650454493369520,
+        "ctime_ns": 1791650461041929434,
+        "flags": 64
+      }
+    }
+  },
+  "protected_before": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181731562,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503110742330,
+        "ctime_ns": 1791649695520437731,
+        "flags": 64
+      }
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181731560,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503110951423,
+        "ctime_ns": 1791649696638977722,
+        "flags": 64
+      }
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732068,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111279712,
+        "ctime_ns": 1791593512004928040,
+        "flags": 64
+      }
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732067,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176159359866142,
+        "ctime_ns": 1791649863895845811,
+        "flags": 64
+      }
+    },
+    "src/native/editor_main.c": {
+      "bytes": 52400,
+      "sha256": "7ba633168185774c6a0b197d8909bcef7c7bac97aa2b2fbadb3bd0bea3c91e75",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732622,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111490005,
+        "ctime_ns": 1791593511800270233,
+        "flags": 64
+      }
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181733425,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176550467057829,
+        "ctime_ns": 1790176558111656902,
+        "flags": 64
+      }
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "4d0f62c53201499d552e68437ab5fcf561e42c67e50e285840fdf5966f56bdf7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181733427,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503112032343,
+        "ctime_ns": 1791593512018272306,
+        "flags": 64
+      }
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39983,
+      "sha256": "005749490be8198fd24d1668a1016f59ebcbc257ad969b5c36ee080dcf92bacd",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181625355,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111813633,
+        "ctime_ns": 1791593511774881587,
+        "flags": 64
+      }
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182037983,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790162027707313941,
+        "ctime_ns": 1790162057039797107,
+        "flags": 64
+      }
+    },
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186256412,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790188385022944450,
+        "ctime_ns": 1791649864063041282,
+        "flags": 64
+      }
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 183619784,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790161042532301416,
+        "ctime_ns": 1790161047204968655,
+        "flags": 64
+      }
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185873310,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176550467604875,
+        "ctime_ns": 1790176557986265188,
+        "flags": 64
+      }
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185873308,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176292302271325,
+        "ctime_ns": 1790176313855719761,
+        "flags": 64
+      }
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185977288,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790188721526271883,
+        "ctime_ns": 1790188725901226419,
+        "flags": 64
+      }
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 184388772,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790161042528511553,
+        "ctime_ns": 1790161050455129244,
+        "flags": 64
+      }
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 183898490,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790157309343043670,
+        "ctime_ns": 1790157386688306903,
+        "flags": 64
+      }
+    }
+  },
+  "protected_after": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181731562,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503110742330,
+        "ctime_ns": 1791649695520437731,
+        "flags": 64
+      }
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181731560,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503110951423,
+        "ctime_ns": 1791649696638977722,
+        "flags": 64
+      }
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732068,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111279712,
+        "ctime_ns": 1791593512004928040,
+        "flags": 64
+      }
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732067,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176159359866142,
+        "ctime_ns": 1791649863895845811,
+        "flags": 64
+      }
+    },
+    "src/native/editor_main.c": {
+      "bytes": 52400,
+      "sha256": "7ba633168185774c6a0b197d8909bcef7c7bac97aa2b2fbadb3bd0bea3c91e75",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181732622,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111490005,
+        "ctime_ns": 1791593511800270233,
+        "flags": 64
+      }
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181733425,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176550467057829,
+        "ctime_ns": 1790176558111656902,
+        "flags": 64
+      }
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "4d0f62c53201499d552e68437ab5fcf561e42c67e50e285840fdf5966f56bdf7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181733427,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503112032343,
+        "ctime_ns": 1791593512018272306,
+        "flags": 64
+      }
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39983,
+      "sha256": "005749490be8198fd24d1668a1016f59ebcbc257ad969b5c36ee080dcf92bacd",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 181625355,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1791593503111813633,
+        "ctime_ns": 1791593511774881587,
+        "flags": 64
+      }
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 182037983,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790162027707313941,
+        "ctime_ns": 1790162057039797107,
+        "flags": 64
+      }
+    },
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 186256412,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790188385022944450,
+        "ctime_ns": 1791649864063041282,
+        "flags": 64
+      }
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 183619784,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790161042532301416,
+        "ctime_ns": 1790161047204968655,
+        "flags": 64
+      }
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185873310,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176550467604875,
+        "ctime_ns": 1790176557986265188,
+        "flags": 64
+      }
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185873308,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790176292302271325,
+        "ctime_ns": 1790176313855719761,
+        "flags": 64
+      }
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 185977288,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790188721526271883,
+        "ctime_ns": 1790188725901226419,
+        "flags": 64
+      }
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 184388772,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790161042528511553,
+        "ctime_ns": 1790161050455129244,
+        "flags": 64
+      }
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": "0o644",
+      "positive_full_eof": true,
+      "identity": {
+        "dev": 16777231,
+        "ino": 183898490,
+        "nlink": 1,
+        "uid": 502,
+        "gid": 20,
+        "mtime_ns": 1790157309343043670,
+        "ctime_ns": 1790157386688306903,
+        "flags": 64
+      }
+    }
+  },
+  "child": {
+    "argv": [
+      "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+      "-I",
+      "-B",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_sampler_mixed_causal_stop.py"
+    ],
+    "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+    "state": "DISPATCHED_ACTUAL_ORIGINAL_DRIVER",
+    "pid": 34898,
+    "pgid": 34898,
+    "row_recorded_before_popen": true,
+    "wait_completed": true,
+    "stdout_eof": true,
+    "stderr_eof": true,
+    "returncode": 0,
+    "independent_wait_returncode": 0,
+    "own_group_absent": true
+  },
+  "repository_write": false,
+  "target_operation": false,
+  "inner_streams": "ORIGINAL_DRIVER_CAPTURED_AND_ASSERTED; NOT_EXTERNALLY_SAVED",
+  "literal55": "ASSERTED_BY_EXACT_ADMITTED_ORIGINAL_DRIVER_RC0; INNER_STREAM_NOT_EXTERNALLY_SAVED",
+  "full_after_guard": true,
+  "manifest_pin": {
+    "bytes": 76890,
+    "sha256": "51353253f9cddd3e05c15b11f1e9afee69586f898f0d8fa001bd5e20fc2f19bc",
+    "mode": "0o444",
+    "positive_full_eof": true,
+    "identity": {
+      "dev": 16777231,
+      "ino": 211306609,
+      "nlink": 1,
+      "uid": 502,
+      "gid": 20,
+      "mtime_ns": 1791650917724236527,
+      "ctime_ns": 1791651405392587670,
+      "flags": 64
+    }
+  },
+  "python_pin": {
+    "bytes": 52448,
+    "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757",
+    "mode": "0o755",
+    "positive_full_eof": true,
+    "identity": {
+      "dev": 16777231,
+      "ino": 99971036,
+      "nlink": 1,
+      "uid": 502,
+      "gid": 80,
+      "mtime_ns": 1760710046397545205,
+      "ctime_ns": 1763734040806305177,
+      "flags": 0
+    }
+  },
+  "elapsed_seconds": 11.490590500005055
+}

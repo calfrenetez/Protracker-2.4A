@@ -8,6 +8,17 @@
  * source acquisition. Used only before the one genuine factory attempt. */
 int pt_mixed_causal_factory_original_empty(struct pt_mixed_causal_owner *,
     struct pt_mixed_readers_output *,uint64_t session,uint64_t generation);
+/* Distinct STOP factory authority: the actual immutable installed STOP port,
+ * original registration and entirely empty custody are checked under exclusion.
+ * A caller flag, copied registration or ordinary trigger-only owner is not a
+ * capability. The completed-first query is likewise actual owner state only;
+ * it is not a reader key, scheduling readiness or source-quiet certificate.
+ * Exclusion may invoke the original port ownership callback; these queries
+ * do not invoke source-acquisition or publication callbacks. */
+int pt_mixed_causal_factory_stop_original_empty(struct pt_mixed_causal_owner *,
+    struct pt_mixed_readers_output *,uint64_t session,uint64_t generation);
+int pt_mixed_causal_factory_stop_first_current(struct pt_mixed_causal_owner *,
+    uint64_t predecessor);
 struct pt_mixed_causal_factory_bind_result {int raw;unsigned called,current;};
 /* One exact original callback under genuine owner task exclusion. Its supplied
  * context/extent MUST be the originally installed port context/extent. Copies

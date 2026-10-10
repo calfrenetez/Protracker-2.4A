@@ -1,0 +1,203 @@
+{
+  "status": "SEVEN_FILES_ADOPTED; FINAL_REPOSITORY_DRIVER_NOT_RUN",
+  "source_freeze": {
+    "status": "ROOT_LITERAL_FROZEN14_CONTENT_PIN_CAPSULE",
+    "files": {
+      "src/core/mixed_readers_causal.c": {
+        "bytes": 78794,
+        "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8"
+      },
+      "src/core/mixed_readers_causal_factory_internal.h": {
+        "bytes": 2777,
+        "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f"
+      },
+      "src/editor/sampler_mixed_readers.c": {
+        "bytes": 66882,
+        "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783"
+      },
+      "src/editor/sampler_mixed_causal_stop_internal.h": {
+        "bytes": 2371,
+        "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf"
+      },
+      "tests/sampler_mixed_causal_stop_test.c": {
+        "bytes": 24245,
+        "sha256": "729d886401a5ecf19daf009434a0b2b5d4a488d21c6dde60563f44cb7ac77539"
+      },
+      "tests/sampler_mixed_causal_stop_port_helpers.c": {
+        "bytes": 12231,
+        "sha256": "ad9594afa088cc446ec3346aad14bf3ed0aeebf9548203efe3469f3df315df2f"
+      },
+      "tests/test_sampler_mixed_causal_stop.py": {
+        "bytes": 2539,
+        "sha256": "3066f1eca73c836f680519ad3157eb71a5d6e014ede3148e259d686f587308a6"
+      }
+    },
+    "scope": "no historical manifest custody repair; all original seven SOURCE bodies still require paired admission"
+  },
+  "protected_before": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6",
+      "mode": "0o644"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3",
+      "mode": "0o644"
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432",
+      "mode": "0o644"
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": "0o644"
+    },
+    "src/native/editor_main.c": {
+      "bytes": 52400,
+      "sha256": "7ba633168185774c6a0b197d8909bcef7c7bac97aa2b2fbadb3bd0bea3c91e75",
+      "mode": "0o644"
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": "0o644"
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "4d0f62c53201499d552e68437ab5fcf561e42c67e50e285840fdf5966f56bdf7",
+      "mode": "0o644"
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39983,
+      "sha256": "005749490be8198fd24d1668a1016f59ebcbc257ad969b5c36ee080dcf92bacd",
+      "mode": "0o644"
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": "0o644"
+    },
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": "0o644"
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": "0o644"
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": "0o644"
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": "0o644"
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": "0o644"
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": "0o644"
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": "0o644"
+    }
+  },
+  "protected_after": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6",
+      "mode": "0o644"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3",
+      "mode": "0o644"
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432",
+      "mode": "0o644"
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": "0o644"
+    },
+    "src/native/editor_main.c": {
+      "bytes": 52400,
+      "sha256": "7ba633168185774c6a0b197d8909bcef7c7bac97aa2b2fbadb3bd0bea3c91e75",
+      "mode": "0o644"
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": "0o644"
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "4d0f62c53201499d552e68437ab5fcf561e42c67e50e285840fdf5966f56bdf7",
+      "mode": "0o644"
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39983,
+      "sha256": "005749490be8198fd24d1668a1016f59ebcbc257ad969b5c36ee080dcf92bacd",
+      "mode": "0o644"
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": "0o644"
+    },
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": "0o644"
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": "0o644"
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": "0o644"
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": "0o644"
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": "0o644"
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": "0o644"
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": "0o644"
+    }
+  },
+  "protected_equal": true,
+  "scope": "HOST SOURCE ADOPTION from fresh exact-content local escrow; prior source refusals preserved; no shared or target action"
+}

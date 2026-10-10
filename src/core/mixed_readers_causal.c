@@ -1083,6 +1083,29 @@ int pt_mixed_causal_factory_original_empty(struct pt_mixed_causal_owner *b,
     if(!task_enter(b))return 0;
     ok=factory_empty(b,queue,session,generation);b->task_busy=0;return ok;
 }
+int pt_mixed_causal_factory_stop_original_empty(struct pt_mixed_causal_owner *b,
+    struct pt_mixed_readers_output *queue,uint64_t session,uint64_t generation)
+{
+    int ok;
+    if(!b||!queue||!session||!generation)return 0;
+    if(!task_enter(b))return 0;
+    ok=b->stop_bound&&!b->control_bound&&!b->ordered&&!b->source_uncertain&&
+       b->stop_port.context==b->port.context&&b->stop_port.context_bytes==b->port.context_bytes&&
+       b->stop_port.version==PT_MIXED_CAUSAL_STOP_VERSION&&
+       b->stop_port.flags==PT_MIXED_CAUSAL_STOP_REQUIRED&&b->stop_port.publish_stop&&
+       factory_empty(b,queue,session,generation);
+    b->task_busy=0;return ok;
+}
+int pt_mixed_causal_factory_stop_first_current(struct pt_mixed_causal_owner *b,
+    uint64_t predecessor)
+{
+    int ok;
+    if(!b||!predecessor)return 0;
+    if(!task_enter(b))return 0;
+    ok=predecessor==b->causal.first&&stop_first_current(b)&&
+       !b->causal.admitted&&!b->causal.published;
+    b->task_busy=0;return ok;
+}
 struct pt_mixed_causal_factory_bind_result pt_mixed_causal_factory_bind_original(
     struct pt_mixed_causal_owner *b,
     int (*callback)(void *,const struct pt_mixed_causal_registration *),

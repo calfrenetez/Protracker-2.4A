@@ -1,0 +1,3210 @@
+{
+  "scope": "DEPENDENCY_ONLY_HOST_NO_FIXTURE_COMPILE_OR_EXECUTE",
+  "status": "DEPENDENCY_ONLY_CHECKS_RECORDED_RESTORATION_PENDING",
+  "errors": [],
+  "child": {
+    "argv": [
+      "/usr/bin/cc",
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+      "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+      "-MM",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/source/tests/sampler_mixed_readers_test.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_trigger_levels.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+    ],
+    "pid": 12280,
+    "state": "DISPATCHED_DEPENDENCY_ONLY",
+    "wait_completed": true,
+    "stdout_eof": true,
+    "stderr_eof": true,
+    "pgid": 12280,
+    "returncode": 0,
+    "independent_wait_returncode": 0,
+    "own_group_absent": true
+  },
+  "started_monotonic": 6966.419733625,
+  "whole_seconds": 200,
+  "file_seconds": 5,
+  "compile_seconds": 120,
+  "failure_seconds": 10,
+  "automatic_retry": false,
+  "recipe_pin": {
+    "bytes": 15089,
+    "sha256": "18d554aceee1754339a84c9276f7e1ad1459e1a492191ee1977049972e8e75a3",
+    "identity": [
+      16777233,
+      211317086,
+      33188,
+      1,
+      502,
+      20,
+      15089,
+      1791651535078600533,
+      1791651538964144942,
+      64
+    ],
+    "complete_eof": true,
+    "named_after_close": true
+  },
+  "units_before": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/source/tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "identity": [
+        16777233,
+        211316191,
+        33060,
+        1,
+        502,
+        20,
+        41970,
+        1791651447669629702,
+        1791651453267408425,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "identity": [
+        16777233,
+        203405698,
+        33188,
+        1,
+        502,
+        20,
+        66882,
+        1791650454483403095,
+        1791650460978120944,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "identity": [
+        16777233,
+        203859957,
+        33188,
+        1,
+        502,
+        20,
+        3763,
+        1791318980255901736,
+        1791323788047729726,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "identity": [
+        16777233,
+        206999181,
+        33188,
+        1,
+        502,
+        20,
+        78794,
+        1791650454457147170,
+        1791650461070466953,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "identity": [
+        16777233,
+        203331508,
+        33188,
+        1,
+        502,
+        20,
+        45150,
+        1791374954819569635,
+        1791377695953811100,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "identity": [
+        16777233,
+        189143736,
+        33188,
+        1,
+        502,
+        20,
+        3917,
+        1790852512516031412,
+        1790867204227837251,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "identity": [
+        16777233,
+        191061713,
+        33188,
+        1,
+        502,
+        20,
+        7401,
+        1790837076181151783,
+        1790927884492462679,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+      "identity": [
+        16777233,
+        188949084,
+        33188,
+        1,
+        502,
+        20,
+        6727,
+        1791224102642369270,
+        1791652274911556626,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+      "identity": [
+        16777233,
+        188953046,
+        33188,
+        1,
+        502,
+        20,
+        2018,
+        1790475630808068513,
+        1791652280406881013,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+      "identity": [
+        16777233,
+        198149123,
+        33188,
+        1,
+        502,
+        20,
+        64117,
+        1791236264257845421,
+        1791237018812726880,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "identity": [
+        16777233,
+        182303247,
+        33188,
+        1,
+        502,
+        20,
+        3233,
+        1789907336323357105,
+        1791652274905400755,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "identity": [
+        16777233,
+        182178228,
+        33188,
+        1,
+        502,
+        20,
+        4604,
+        1789899146347679615,
+        1791652274971668411,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "identity": [
+        16777233,
+        181719380,
+        33188,
+        1,
+        502,
+        20,
+        6060,
+        1791042557423478023,
+        1791042562417235545,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "identity": [
+        16777233,
+        181715767,
+        33188,
+        1,
+        502,
+        20,
+        15753,
+        1789904895158490851,
+        1789904949469327575,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "identity": [
+        16777233,
+        181655706,
+        33188,
+        1,
+        502,
+        20,
+        9127,
+        1790237808827963391,
+        1790237816251050716,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "identity": [
+        16777233,
+        182190492,
+        33188,
+        1,
+        502,
+        20,
+        7187,
+        1790237697441123165,
+        1790237708925719448,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "identity": [
+        16777233,
+        198109275,
+        33188,
+        1,
+        502,
+        20,
+        47003,
+        1791384115635457145,
+        1791386310927661766,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "identity": [
+        16777233,
+        181655147,
+        33188,
+        1,
+        502,
+        20,
+        23640,
+        1790999320076781179,
+        1790999331843351722,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "identity": [
+        16777233,
+        181577199,
+        33188,
+        1,
+        502,
+        20,
+        3513,
+        1790234604688455221,
+        1790234612348527207,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "identity": [
+        16777233,
+        181621839,
+        33188,
+        1,
+        502,
+        20,
+        6996,
+        1789816130657589244,
+        1789816294861621030,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "identity": [
+        16777233,
+        181622946,
+        33188,
+        1,
+        502,
+        20,
+        7061,
+        1791040614873654716,
+        1791040621859136189,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "identity": [
+        16777233,
+        181623735,
+        33188,
+        1,
+        502,
+        20,
+        7200,
+        1790997501794330812,
+        1790997527556036711,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "identity": [
+        16777233,
+        198149121,
+        33188,
+        1,
+        502,
+        20,
+        7817,
+        1790994963485764903,
+        1790994972777546736,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "identity": [
+        16777233,
+        182186354,
+        33188,
+        1,
+        502,
+        20,
+        3920,
+        1790996017274904727,
+        1791652274950085320,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+      "identity": [
+        16777233,
+        186569113,
+        33188,
+        1,
+        502,
+        20,
+        3456,
+        1790550204992899901,
+        1790550210741455912,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+      "identity": [
+        16777233,
+        188947234,
+        33188,
+        1,
+        502,
+        20,
+        6165,
+        1790549076752958297,
+        1791652283349634068,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+      "identity": [
+        16777233,
+        188945548,
+        33188,
+        1,
+        502,
+        20,
+        3973,
+        1790549076752361451,
+        1790549083371555699,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "identity": [
+        16777233,
+        186289718,
+        33188,
+        1,
+        502,
+        20,
+        4018,
+        1790191017447431943,
+        1790191024914269428,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "identity": [
+        16777233,
+        186295400,
+        33188,
+        1,
+        502,
+        20,
+        11344,
+        1791048223629294872,
+        1791660158391664609,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    }
+  },
+  "actual_closure": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/SDKSettings.json": {
+      "bytes": 7948,
+      "sha256": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+      "identity": [
+        16777233,
+        176001083,
+        33188,
+        1,
+        0,
+        0,
+        7948,
+        1786217774000000000,
+        1789060650128508087,
+        0
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/source/tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "identity": [
+        16777233,
+        211316191,
+        33060,
+        1,
+        502,
+        20,
+        41970,
+        1791651447669629702,
+        1791651453267408425,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+      "identity": [
+        16777233,
+        186569113,
+        33188,
+        1,
+        502,
+        20,
+        3456,
+        1790550204992899901,
+        1790550210741455912,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "identity": [
+        16777233,
+        186569112,
+        33188,
+        1,
+        502,
+        20,
+        3404,
+        1790549983454117536,
+        1790549993550856075,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+      "identity": [
+        16777233,
+        188945548,
+        33188,
+        1,
+        502,
+        20,
+        3973,
+        1790549076752361451,
+        1790549083371555699,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "identity": [
+        16777233,
+        188945546,
+        33188,
+        1,
+        502,
+        20,
+        2813,
+        1790549076753328915,
+        1790549083375956307,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "identity": [
+        16777233,
+        203859957,
+        33188,
+        1,
+        502,
+        20,
+        3763,
+        1791318980255901736,
+        1791323788047729726,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "identity": [
+        16777233,
+        203859958,
+        33188,
+        1,
+        502,
+        20,
+        1886,
+        1791318980258259124,
+        1791323786458519844,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+      "identity": [
+        16777233,
+        188953046,
+        33188,
+        1,
+        502,
+        20,
+        2018,
+        1790475630808068513,
+        1791652280406881013,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+      "identity": [
+        16777233,
+        188953044,
+        33188,
+        1,
+        502,
+        20,
+        1701,
+        1790475557695989069,
+        1790475569814018302,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+      "identity": [
+        16777233,
+        188947234,
+        33188,
+        1,
+        502,
+        20,
+        6165,
+        1790549076752958297,
+        1791652283349634068,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "identity": [
+        16777233,
+        188947232,
+        33188,
+        1,
+        502,
+        20,
+        3792,
+        1790549076753969918,
+        1790549083393143275,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "identity": [
+        16777233,
+        181621839,
+        33188,
+        1,
+        502,
+        20,
+        6996,
+        1789816130657589244,
+        1789816294861621030,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "identity": [
+        16777233,
+        181621838,
+        33188,
+        1,
+        502,
+        20,
+        1818,
+        1789816130554279565,
+        1791652275659392120,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "identity": [
+        16777233,
+        181655706,
+        33188,
+        1,
+        502,
+        20,
+        9127,
+        1790237808827963391,
+        1790237816251050716,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "identity": [
+        16777233,
+        181655705,
+        33188,
+        1,
+        502,
+        20,
+        1965,
+        1790237808827696764,
+        1790237813160569110,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "identity": [
+        16777233,
+        189143736,
+        33188,
+        1,
+        502,
+        20,
+        3917,
+        1790852512516031412,
+        1790867204227837251,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "identity": [
+        16777233,
+        189143734,
+        33188,
+        1,
+        502,
+        20,
+        1659,
+        1790504745844955934,
+        1790504754458858442,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "identity": [
+        16777233,
+        206999181,
+        33188,
+        1,
+        502,
+        20,
+        78794,
+        1791650454457147170,
+        1791650461070466953,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f",
+      "identity": [
+        16777233,
+        206999184,
+        33188,
+        1,
+        502,
+        20,
+        13986,
+        1791483424533358258,
+        1791490925102883532,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af",
+      "identity": [
+        16777233,
+        211073306,
+        33188,
+        1,
+        502,
+        20,
+        3954,
+        1791643852833164691,
+        1791652283346670341,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 2777,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f",
+      "identity": [
+        16777233,
+        205842770,
+        33188,
+        1,
+        502,
+        20,
+        2777,
+        1791650454475705139,
+        1791650461049453389,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+      "identity": [
+        16777233,
+        205164306,
+        33188,
+        1,
+        502,
+        20,
+        1655,
+        1791373758588787796,
+        1791379594629672804,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_stop_internal.h": {
+      "bytes": 3259,
+      "sha256": "70216763b72622013cabe3f61e8a98610637cb6259b2db14e7bdab98bc7e3aac",
+      "identity": [
+        16777233,
+        211085823,
+        33188,
+        1,
+        502,
+        20,
+        3259,
+        1791645751321267107,
+        1791645758339392885,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "identity": [
+        16777233,
+        203331508,
+        33188,
+        1,
+        502,
+        20,
+        45150,
+        1791374954819569635,
+        1791377695953811100,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "identity": [
+        16777233,
+        203331460,
+        33188,
+        1,
+        502,
+        20,
+        11336,
+        1791308659852888573,
+        1791308698208083416,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced",
+      "identity": [
+        16777233,
+        204408796,
+        33188,
+        1,
+        502,
+        20,
+        1970,
+        1791348740349047422,
+        1791652275656309684,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "identity": [
+        16777233,
+        181577199,
+        33188,
+        1,
+        502,
+        20,
+        3513,
+        1790234604688455221,
+        1790234612348527207,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "identity": [
+        16777233,
+        181577171,
+        33188,
+        1,
+        502,
+        20,
+        1240,
+        1790234604687966176,
+        1790234615448465719,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "identity": [
+        16777233,
+        181655147,
+        33188,
+        1,
+        502,
+        20,
+        23640,
+        1790999320076781179,
+        1790999331843351722,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "identity": [
+        16777233,
+        181655132,
+        33188,
+        1,
+        502,
+        20,
+        5051,
+        1790999320077368497,
+        1791652275579906425,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "identity": [
+        16777233,
+        181715767,
+        33188,
+        1,
+        502,
+        20,
+        15753,
+        1789904895158490851,
+        1789904949469327575,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "identity": [
+        16777233,
+        181707323,
+        33188,
+        1,
+        502,
+        20,
+        3642,
+        1789904895157619225,
+        1789904949781946360,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "identity": [
+        16777233,
+        181622946,
+        33188,
+        1,
+        502,
+        20,
+        7061,
+        1791040614873654716,
+        1791040621859136189,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "identity": [
+        16777233,
+        181622945,
+        33188,
+        1,
+        502,
+        20,
+        2494,
+        1791040614873956441,
+        1791652274974448177,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "identity": [
+        16777233,
+        182178228,
+        33188,
+        1,
+        502,
+        20,
+        4604,
+        1789899146347679615,
+        1791652274971668411,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "identity": [
+        16777233,
+        188997994,
+        33188,
+        1,
+        502,
+        20,
+        615,
+        1790482750953031792,
+        1790482762180686897,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "identity": [
+        16777233,
+        189031649,
+        33188,
+        1,
+        502,
+        20,
+        1893,
+        1790486631078656046,
+        1790486638296242119,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "identity": [
+        16777233,
+        186295400,
+        33188,
+        1,
+        502,
+        20,
+        11344,
+        1791048223629294872,
+        1791660158391664609,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "identity": [
+        16777233,
+        186295398,
+        33188,
+        1,
+        502,
+        20,
+        6034,
+        1791048223632578496,
+        1791048231912870440,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "identity": [
+        16777233,
+        182190492,
+        33188,
+        1,
+        502,
+        20,
+        7187,
+        1790237697441123165,
+        1790237708925719448,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "identity": [
+        16777233,
+        182190491,
+        33188,
+        1,
+        502,
+        20,
+        966,
+        1790237697441794419,
+        1790237706120895986,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "identity": [
+        16777233,
+        198109275,
+        33188,
+        1,
+        502,
+        20,
+        47003,
+        1791384115635457145,
+        1791386310927661766,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "identity": [
+        16777233,
+        198109276,
+        33188,
+        1,
+        502,
+        20,
+        8827,
+        1791123452208131682,
+        1791123466153790789,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "identity": [
+        16777233,
+        182186354,
+        33188,
+        1,
+        502,
+        20,
+        3920,
+        1790996017274904727,
+        1791652274950085320,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "identity": [
+        16777233,
+        182186353,
+        33188,
+        1,
+        502,
+        20,
+        1171,
+        1790996017275485277,
+        1791652274946793092,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "identity": [
+        16777233,
+        186289718,
+        33188,
+        1,
+        502,
+        20,
+        4018,
+        1790191017447431943,
+        1790191024914269428,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "identity": [
+        16777233,
+        186289716,
+        33188,
+        1,
+        502,
+        20,
+        1999,
+        1790486584385600246,
+        1790486595223658204,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "identity": [
+        16777233,
+        182178238,
+        33188,
+        1,
+        502,
+        20,
+        28756,
+        1789897713906912975,
+        1789897724540181956,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "identity": [
+        16777233,
+        181719380,
+        33188,
+        1,
+        502,
+        20,
+        6060,
+        1791042557423478023,
+        1791042562417235545,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "identity": [
+        16777233,
+        181719367,
+        33188,
+        1,
+        502,
+        20,
+        2003,
+        1791042557424634181,
+        1791042565471562078,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "identity": [
+        16777233,
+        198149121,
+        33188,
+        1,
+        502,
+        20,
+        7817,
+        1790994963485764903,
+        1790994972777546736,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "identity": [
+        16777233,
+        198149122,
+        33188,
+        1,
+        502,
+        20,
+        1442,
+        1790994963485859112,
+        1790994976470920457,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "identity": [
+        16777233,
+        181623735,
+        33188,
+        1,
+        502,
+        20,
+        7200,
+        1790997501794330812,
+        1790997527556036711,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "identity": [
+        16777233,
+        181623734,
+        33188,
+        1,
+        502,
+        20,
+        1384,
+        1790997501798107958,
+        1790997527968370293,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "identity": [
+        16777233,
+        186569112,
+        33188,
+        1,
+        502,
+        20,
+        3404,
+        1790549983454117536,
+        1790549993550856075,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "identity": [
+        16777233,
+        188945546,
+        33188,
+        1,
+        502,
+        20,
+        2813,
+        1790549076753328915,
+        1790549083375956307,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "identity": [
+        16777233,
+        203859958,
+        33188,
+        1,
+        502,
+        20,
+        1886,
+        1791318980258259124,
+        1791323786458519844,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+      "identity": [
+        16777233,
+        188953044,
+        33188,
+        1,
+        502,
+        20,
+        1701,
+        1790475557695989069,
+        1790475569814018302,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "identity": [
+        16777233,
+        188947232,
+        33188,
+        1,
+        502,
+        20,
+        3792,
+        1790549076753969918,
+        1790549083393143275,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "identity": [
+        16777233,
+        181621838,
+        33188,
+        1,
+        502,
+        20,
+        1818,
+        1789816130554279565,
+        1791652275659392120,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "identity": [
+        16777233,
+        181655705,
+        33188,
+        1,
+        502,
+        20,
+        1965,
+        1790237808827696764,
+        1790237813160569110,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "identity": [
+        16777233,
+        189143734,
+        33188,
+        1,
+        502,
+        20,
+        1659,
+        1790504745844955934,
+        1790504754458858442,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f",
+      "identity": [
+        16777233,
+        206999184,
+        33188,
+        1,
+        502,
+        20,
+        13986,
+        1791483424533358258,
+        1791490925102883532,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 2777,
+      "sha256": "d500164e5c6ccf2d8c02a7e0eb35d62c09f90497259cc557b5eb77d6d272d63f",
+      "identity": [
+        16777233,
+        205842770,
+        33188,
+        1,
+        502,
+        20,
+        2777,
+        1791650454475705139,
+        1791650461049453389,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/mixed_readers_causal_stop_internal.h": {
+      "bytes": 3259,
+      "sha256": "70216763b72622013cabe3f61e8a98610637cb6259b2db14e7bdab98bc7e3aac",
+      "identity": [
+        16777233,
+        211085823,
+        33188,
+        1,
+        502,
+        20,
+        3259,
+        1791645751321267107,
+        1791645758339392885,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "identity": [
+        16777233,
+        203331460,
+        33188,
+        1,
+        502,
+        20,
+        11336,
+        1791308659852888573,
+        1791308698208083416,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced",
+      "identity": [
+        16777233,
+        204408796,
+        33188,
+        1,
+        502,
+        20,
+        1970,
+        1791348740349047422,
+        1791652275656309684,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "identity": [
+        16777233,
+        181622945,
+        33188,
+        1,
+        502,
+        20,
+        2494,
+        1791040614873956441,
+        1791652274974448177,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "identity": [
+        16777233,
+        188997994,
+        33188,
+        1,
+        502,
+        20,
+        615,
+        1790482750953031792,
+        1790482762180686897,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "identity": [
+        16777233,
+        189031649,
+        33188,
+        1,
+        502,
+        20,
+        1893,
+        1790486631078656046,
+        1790486638296242119,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "identity": [
+        16777233,
+        186295398,
+        33188,
+        1,
+        502,
+        20,
+        6034,
+        1791048223632578496,
+        1791048231912870440,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "identity": [
+        16777233,
+        198109276,
+        33188,
+        1,
+        502,
+        20,
+        8827,
+        1791123452208131682,
+        1791123466153790789,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "identity": [
+        16777233,
+        186289716,
+        33188,
+        1,
+        502,
+        20,
+        1999,
+        1790486584385600246,
+        1790486595223658204,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/../core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+      "identity": [
+        16777233,
+        200076308,
+        33188,
+        1,
+        502,
+        20,
+        3167,
+        1791078992320214542,
+        1791079001746748364,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "identity": [
+        16777233,
+        189296769,
+        33188,
+        1,
+        502,
+        20,
+        1203,
+        1790509963956846714,
+        1791652274914671062,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+      "identity": [
+        16777233,
+        198149123,
+        33188,
+        1,
+        502,
+        20,
+        64117,
+        1791236264257845421,
+        1791237018812726880,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "identity": [
+        16777233,
+        198149124,
+        33188,
+        1,
+        502,
+        20,
+        6264,
+        1790994963486028989,
+        1790994972808891567,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "identity": [
+        16777233,
+        198015943,
+        33188,
+        1,
+        502,
+        20,
+        3679,
+        1791061093955948257,
+        1791061101568128573,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_master_guard_internal.h": {
+      "bytes": 1059,
+      "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a",
+      "identity": [
+        16777233,
+        202686171,
+        33188,
+        1,
+        502,
+        20,
+        1059,
+        1791236264220196052,
+        1791237026885879007,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_causal_internal.h": {
+      "bytes": 2546,
+      "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+      "identity": [
+        16777233,
+        205842771,
+        33188,
+        1,
+        502,
+        20,
+        2546,
+        1791385957253132265,
+        1791407438134811051,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_causal_stop_internal.h": {
+      "bytes": 2371,
+      "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf",
+      "identity": [
+        16777233,
+        211296482,
+        33188,
+        1,
+        502,
+        20,
+        2371,
+        1791650454487224780,
+        1791650460999636470,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "identity": [
+        16777233,
+        203405698,
+        33188,
+        1,
+        502,
+        20,
+        66882,
+        1791650454483403095,
+        1791650460978120944,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers.h": {
+      "bytes": 11621,
+      "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e",
+      "identity": [
+        16777233,
+        203401824,
+        33188,
+        1,
+        502,
+        20,
+        11621,
+        1791321266061522926,
+        1791324186593182021,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers_internal.h": {
+      "bytes": 1535,
+      "sha256": "b4fa697ba6ca17f6be591ee901b1e44ea632c5244dc084c357d72505e3c86edf",
+      "identity": [
+        16777233,
+        204408798,
+        33188,
+        1,
+        502,
+        20,
+        1535,
+        1791348740352840185,
+        1791652274912539798,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "identity": [
+        16777233,
+        191061713,
+        33188,
+        1,
+        502,
+        20,
+        7401,
+        1790837076181151783,
+        1790927884492462679,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "identity": [
+        16777233,
+        191061711,
+        33188,
+        1,
+        502,
+        20,
+        2718,
+        1790758813103644618,
+        1790759097369920568,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "identity": [
+        16777233,
+        191842183,
+        33188,
+        1,
+        502,
+        20,
+        3013,
+        1790837164049853482,
+        1790927806466382359,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+      "identity": [
+        16777233,
+        188949084,
+        33188,
+        1,
+        502,
+        20,
+        6727,
+        1791224102642369270,
+        1791652274911556626,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d",
+      "identity": [
+        16777233,
+        188949082,
+        33188,
+        1,
+        502,
+        20,
+        4278,
+        1790487151134663820,
+        1791652274907009890,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable_internal.h": {
+      "bytes": 1671,
+      "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df",
+      "identity": [
+        16777233,
+        189041133,
+        33188,
+        1,
+        502,
+        20,
+        1671,
+        1791224102642719905,
+        1791224110960618914,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+      "identity": [
+        16777233,
+        200076309,
+        33188,
+        1,
+        502,
+        20,
+        4356,
+        1791123452209407091,
+        1791660158888740503,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "identity": [
+        16777233,
+        182303247,
+        33188,
+        1,
+        502,
+        20,
+        3233,
+        1789907336323357105,
+        1791652274905400755,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+      "identity": [
+        16777233,
+        188953044,
+        33188,
+        1,
+        502,
+        20,
+        1701,
+        1790475557695989069,
+        1790475569814018302,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "identity": [
+        16777233,
+        181621838,
+        33188,
+        1,
+        502,
+        20,
+        1818,
+        1789816130554279565,
+        1791652275659392120,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "identity": [
+        16777233,
+        181655705,
+        33188,
+        1,
+        502,
+        20,
+        1965,
+        1790237808827696764,
+        1790237813160569110,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "identity": [
+        16777233,
+        189143734,
+        33188,
+        1,
+        502,
+        20,
+        1659,
+        1790504745844955934,
+        1790504754458858442,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "identity": [
+        16777233,
+        203331460,
+        33188,
+        1,
+        502,
+        20,
+        11336,
+        1791308659852888573,
+        1791308698208083416,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "identity": [
+        16777233,
+        181577171,
+        33188,
+        1,
+        502,
+        20,
+        1240,
+        1790234604687966176,
+        1790234615448465719,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "identity": [
+        16777233,
+        181622945,
+        33188,
+        1,
+        502,
+        20,
+        2494,
+        1791040614873956441,
+        1791652274974448177,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "identity": [
+        16777233,
+        186295398,
+        33188,
+        1,
+        502,
+        20,
+        6034,
+        1791048223632578496,
+        1791048231912870440,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "identity": [
+        16777233,
+        182190491,
+        33188,
+        1,
+        502,
+        20,
+        966,
+        1790237697441794419,
+        1790237706120895986,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "identity": [
+        16777233,
+        198109276,
+        33188,
+        1,
+        502,
+        20,
+        8827,
+        1791123452208131682,
+        1791123466153790789,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/../core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "identity": [
+        16777233,
+        188947232,
+        33188,
+        1,
+        502,
+        20,
+        3792,
+        1790549076753969918,
+        1790549083393143275,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/../core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "identity": [
+        16777233,
+        203331460,
+        33188,
+        1,
+        502,
+        20,
+        11336,
+        1791308659852888573,
+        1791308698208083416,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/../core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "identity": [
+        16777233,
+        186295398,
+        33188,
+        1,
+        502,
+        20,
+        6034,
+        1791048223632578496,
+        1791048231912870440,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "identity": [
+        16777233,
+        198149124,
+        33188,
+        1,
+        502,
+        20,
+        6264,
+        1790994963486028989,
+        1790994972808891567,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "identity": [
+        16777233,
+        198015943,
+        33188,
+        1,
+        502,
+        20,
+        3679,
+        1791061093955948257,
+        1791061101568128573,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/sampler_mixed_readers.h": {
+      "bytes": 11621,
+      "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e",
+      "identity": [
+        16777233,
+        203401824,
+        33188,
+        1,
+        502,
+        20,
+        11621,
+        1791321266061522926,
+        1791324186593182021,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "identity": [
+        16777233,
+        191061711,
+        33188,
+        1,
+        502,
+        20,
+        2718,
+        1790758813103644618,
+        1790759097369920568,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/../src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d",
+      "identity": [
+        16777233,
+        188949082,
+        33188,
+        1,
+        502,
+        20,
+        4278,
+        1790487151134663820,
+        1791652274907009890,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/amigus_reservation_test.c": {
+      "bytes": 5856,
+      "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572",
+      "identity": [
+        16777233,
+        186569493,
+        33188,
+        1,
+        502,
+        20,
+        5856,
+        1790473474865943462,
+        1790473483414972884,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef",
+      "identity": [
+        16777233,
+        188947420,
+        33188,
+        1,
+        502,
+        20,
+        13852,
+        1790549076751662906,
+        1790549083345263473,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "identity": [
+        16777233,
+        203332851,
+        33188,
+        1,
+        502,
+        20,
+        42588,
+        1791308659934509277,
+        1791652274897041037,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    }
+  },
+  "units_after": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/source/tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "identity": [
+        16777233,
+        211316191,
+        33060,
+        1,
+        502,
+        20,
+        41970,
+        1791651447669629702,
+        1791651453267408425,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_mixed_readers.c": {
+      "bytes": 66882,
+      "sha256": "bf38f5e004b53b802b732ff7618633a74e6aa5afb71260523ecf82d01fdd6783",
+      "identity": [
+        16777233,
+        203405698,
+        33188,
+        1,
+        502,
+        20,
+        66882,
+        1791650454483403095,
+        1791650460978120944,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "identity": [
+        16777233,
+        203859957,
+        33188,
+        1,
+        502,
+        20,
+        3763,
+        1791318980255901736,
+        1791323788047729726,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.c": {
+      "bytes": 78794,
+      "sha256": "1e0080eb83e4960a56b981bde09dd52804537220c15241eff9e4ae8a7de46ed8",
+      "identity": [
+        16777233,
+        206999181,
+        33188,
+        1,
+        502,
+        20,
+        78794,
+        1791650454457147170,
+        1791650461070466953,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "identity": [
+        16777233,
+        203331508,
+        33188,
+        1,
+        502,
+        20,
+        45150,
+        1791374954819569635,
+        1791377695953811100,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "identity": [
+        16777233,
+        189143736,
+        33188,
+        1,
+        502,
+        20,
+        3917,
+        1790852512516031412,
+        1790867204227837251,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "identity": [
+        16777233,
+        191061713,
+        33188,
+        1,
+        502,
+        20,
+        7401,
+        1790837076181151783,
+        1790927884492462679,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+      "identity": [
+        16777233,
+        188949084,
+        33188,
+        1,
+        502,
+        20,
+        6727,
+        1791224102642369270,
+        1791652274911556626,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+      "identity": [
+        16777233,
+        188953046,
+        33188,
+        1,
+        502,
+        20,
+        2018,
+        1790475630808068513,
+        1791652280406881013,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+      "identity": [
+        16777233,
+        198149123,
+        33188,
+        1,
+        502,
+        20,
+        64117,
+        1791236264257845421,
+        1791237018812726880,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "identity": [
+        16777233,
+        182303247,
+        33188,
+        1,
+        502,
+        20,
+        3233,
+        1789907336323357105,
+        1791652274905400755,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "identity": [
+        16777233,
+        182178228,
+        33188,
+        1,
+        502,
+        20,
+        4604,
+        1789899146347679615,
+        1791652274971668411,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "identity": [
+        16777233,
+        181719380,
+        33188,
+        1,
+        502,
+        20,
+        6060,
+        1791042557423478023,
+        1791042562417235545,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "identity": [
+        16777233,
+        181715767,
+        33188,
+        1,
+        502,
+        20,
+        15753,
+        1789904895158490851,
+        1789904949469327575,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "identity": [
+        16777233,
+        181655706,
+        33188,
+        1,
+        502,
+        20,
+        9127,
+        1790237808827963391,
+        1790237816251050716,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "identity": [
+        16777233,
+        182190492,
+        33188,
+        1,
+        502,
+        20,
+        7187,
+        1790237697441123165,
+        1790237708925719448,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "identity": [
+        16777233,
+        198109275,
+        33188,
+        1,
+        502,
+        20,
+        47003,
+        1791384115635457145,
+        1791386310927661766,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "identity": [
+        16777233,
+        181655147,
+        33188,
+        1,
+        502,
+        20,
+        23640,
+        1790999320076781179,
+        1790999331843351722,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "identity": [
+        16777233,
+        181577199,
+        33188,
+        1,
+        502,
+        20,
+        3513,
+        1790234604688455221,
+        1790234612348527207,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "identity": [
+        16777233,
+        181621839,
+        33188,
+        1,
+        502,
+        20,
+        6996,
+        1789816130657589244,
+        1789816294861621030,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "identity": [
+        16777233,
+        181622946,
+        33188,
+        1,
+        502,
+        20,
+        7061,
+        1791040614873654716,
+        1791040621859136189,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "identity": [
+        16777233,
+        181623735,
+        33188,
+        1,
+        502,
+        20,
+        7200,
+        1790997501794330812,
+        1790997527556036711,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "identity": [
+        16777233,
+        198149121,
+        33188,
+        1,
+        502,
+        20,
+        7817,
+        1790994963485764903,
+        1790994972777546736,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "identity": [
+        16777233,
+        182186354,
+        33188,
+        1,
+        502,
+        20,
+        3920,
+        1790996017274904727,
+        1791652274950085320,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+      "identity": [
+        16777233,
+        186569113,
+        33188,
+        1,
+        502,
+        20,
+        3456,
+        1790550204992899901,
+        1790550210741455912,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+      "identity": [
+        16777233,
+        188947234,
+        33188,
+        1,
+        502,
+        20,
+        6165,
+        1790549076752958297,
+        1791652283349634068,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+      "identity": [
+        16777233,
+        188945548,
+        33188,
+        1,
+        502,
+        20,
+        3973,
+        1790549076752361451,
+        1790549083371555699,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "identity": [
+        16777233,
+        186289718,
+        33188,
+        1,
+        502,
+        20,
+        4018,
+        1790191017447431943,
+        1790191024914269428,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "identity": [
+        16777233,
+        186295400,
+        33188,
+        1,
+        502,
+        20,
+        11344,
+        1791048223629294872,
+        1791660158391664609,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    }
+  },
+  "fixture_mapping": {
+    "private": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-default-factory-current-source-20261010-v1/source/tests/sampler_mixed_readers_test.c",
+    "repository": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/sampler_mixed_readers_test.c",
+    "repository_pin": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "identity": [
+        16777233,
+        203409399,
+        33188,
+        1,
+        502,
+        20,
+        41970,
+        1791303906652832494,
+        1791304086277124190,
+        64
+      ],
+      "complete_eof": true,
+      "named_after_close": true
+    },
+    "body_equal": true
+  },
+  "elapsed_seconds": 0.4971524579996185
+}

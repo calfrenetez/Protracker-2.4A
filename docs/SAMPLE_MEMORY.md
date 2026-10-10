@@ -6805,3 +6805,34 @@ Amiberry and real-A1200 execution are **NOT RUN**. Producer/controller/native
 STOP integration, preparation/exclusion/timer aperture, aggregate stack/WCET,
 exact live scheduling, hardware stop/quiet/order/completion and listening remain
 unqualified. See [scoped STOP evidence](../evidence/enhanced-editor/causal-after-first-stop/README.md).
+
+## 10 October — Sampler factory binds the optional scheduled STOP
+
+The sampler factory now has a separate STOP-capable binding and constructor.
+It verifies the genuine original empty-owner capability before allocation and
+accepts one finite STOP successor using the original completed first TRIGGER
+and retained ACTIVE reader handles. It derives original keys internally,
+prepares one command holder, acquires no new sample reader/cache/upload, and
+keeps master versions and selective Chip/card caches until independent command,
+reader and source quiet proofs. Lower enqueue OK transfers the command even
+when an outer callback faults. Default two-TRIGGER behavior is preserved.
+
+The actual adopted repository driver passed 55 strict assertions-enabled
+ASan/UBSan cases. The affected default factory passed its unchanged 24-case C
+fixture and five-line oracle through a separate current-source driver. The 79
+repository inputs for STOP and 81 named inputs for default matched before/after,
+as did all sixteen protected display/editor files. The old archive driver was
+not run. Each exact driver asserted its own inner stdout and empty errors;
+outer receipts independently saved only unittest streams. Dependency rows
+include aliases and are not counts of distinct repository files.
+
+Independent source correction review covered factory13; factory14 changes only
+strict-GCC indentation/newline formatting. Both changed C units compiled to
+m68k objects. Numbered compiler/custody refusals and dataless preflight failures
+remain preserved separately from later exact-file materialized-state admissions.
+
+Amiberry and real A1200/AmiGUS execution are **NOT RUN**. Controller, producer and
+native STOP binding, third CONTROL-to-STOP lineage, native preparation/timer
+aperture, aggregate stack/IRQ/WCET, exact live timing, hardware stop/quiet/order/
+completion and listening remain unfinished or unqualified. See
+[scoped sampler STOP evidence](../evidence/enhanced-editor/sampler-causal-after-first-stop/README.md).

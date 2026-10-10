@@ -2,6 +2,8 @@
 #include "sampler_mixed_readers.h"
 #include "sampler_mixed_readers_internal.h"
 #include "sampler_mixed_causal_internal.h"
+#include "sampler_mixed_causal_stop_internal.h"
+#include "../core/mixed_readers_causal_stop_internal.h"
 #include "../core/mixed_readers_causal_factory_internal.h"
 #include "../core/mixed_scheduled_readers_internal.h"
 #include "sampler_internal.h"
@@ -24,7 +26,7 @@ uint64_t token;
 struct pt_sampler_mixed_command {
  struct pt_sampler_mixed_pool *pool;
 uint64_t token,frame,ticket;
-unsigned state,count,index,phase,terminal,valid;
+unsigned state,count,index,phase,terminal,valid,causal_stop;
  struct source source[PT_SAMPLER_MIXED_ACTIONS];
 struct pt_mixed_readers_inputs inputs;
 };
@@ -76,6 +78,8 @@ unsigned *release_fault;
  struct pt_sampler_mixed_causal_binding *causal_binding;
  struct pt_sampler_mixed_causal_binding causal_original;
  unsigned causal_phase;uint64_t causal_first,causal_successor;
+ struct pt_sampler_mixed_causal_stop_binding *stop_binding;
+ struct pt_sampler_mixed_causal_stop_binding stop_original;
 };
 struct workspace {struct pt_sampler_mixed_pool pool;
 struct pt_sampler_mixed_config original;
@@ -148,7 +152,10 @@ static int causal_fields_same(const struct pt_sampler_mixed_causal_binding *a,
 static int causal_current(const struct pt_sampler_mixed_pool *p)
 {return !p->causal_binding||(p->causal_binding->self==p->causal_binding&&
  causal_fields_same(p->causal_binding,&p->causal_original)&&
- p->causal_binding->phase==p->causal_phase);}
+ p->causal_binding->phase==p->causal_phase&&
+ (!p->stop_binding||(p->stop_binding->self==p->stop_binding&&
+ p->stop_original.self==p->stop_binding&&
+ &p->stop_binding->original==p->causal_binding)));}
 int pt_sampler_mixed_causal_bind(struct pt_sampler_mixed_causal_binding *b,
  struct pt_mixed_causal_owner *owner,struct pt_mixed_readers_output *queue,
  uint64_t session,uint64_t generation,struct pt_mixed_readers_span contexts)
@@ -165,10 +172,33 @@ int pt_sampler_mixed_causal_bind(struct pt_sampler_mixed_causal_binding *b,
  b->self=b;b->owner=owner;b->queue=queue;b->session=session;b->generation=generation;
  b->contexts=contexts;b->phase=CB_BOUND;return 1;
 }
+int pt_sampler_mixed_causal_stop_bind(struct pt_sampler_mixed_causal_stop_binding *b,
+ struct pt_mixed_causal_owner *owner,struct pt_mixed_readers_output *queue,
+ uint64_t session,uint64_t generation,struct pt_mixed_readers_span contexts)
+{
+ const unsigned char *v;size_t i;
+ if(!b||!owner||!queue||!session||!generation||
+    (uintptr_t)b%_Alignof(struct pt_sampler_mixed_causal_stop_binding)||
+    !span(b,sizeof(*b))||!causal_inside(contexts,b,sizeof(*b))||
+    !apart(contexts.data,contexts.bytes,owner,pt_mixed_causal_control_size())||
+    !apart(contexts.data,contexts.bytes,queue,pt_mixed_readers_control_size()))return 0;
+ v=(const unsigned char *)b;for(i=0;i<sizeof(*b);++i)if(v[i])return 0;
+ if(!pt_mixed_causal_factory_stop_original_empty(owner,queue,session,generation))return 0;
+ for(i=0;i<sizeof(*b);++i)if(v[i])return 0;
+ b->original.self=&b->original;b->original.owner=owner;b->original.queue=queue;
+ b->original.session=session;b->original.generation=generation;
+ b->original.contexts=contexts;b->original.phase=CB_BOUND;b->self=b;return 1;
+}
 static int causal_admit(const struct pt_sampler_mixed_config *c,
- struct pt_sampler_mixed_causal_binding *b)
+ struct pt_sampler_mixed_causal_binding *b,struct pt_sampler_mixed_causal_stop_binding *stop)
 {
  unsigned i,covered=0,owner_covered=0;
+ if(stop){
+  if((uintptr_t)stop%_Alignof(struct pt_sampler_mixed_causal_stop_binding))return 0;
+  for(i=0;i<c->context_count;++i)if(causal_inside(c->contexts[i],stop,sizeof(*stop)))covered=1;
+  if(!covered||&stop->original!=b||stop->self!=stop)return 0;
+  covered=0;
+ }
  if(!b)return 1;
  /* Complete context coverage precedes its first field read. Contexts include
   * original whole parent capacities; no narrower binding-slot exemption. */
@@ -184,7 +214,9 @@ static int causal_admit(const struct pt_sampler_mixed_config *c,
   * these full spans, before workspace/output writes or allocator callbacks. */
  for(i=0;i<c->context_count;++i)if(causal_inside(c->contexts[i],b->owner,
     pt_mixed_causal_control_size()))owner_covered=1;
- return covered&&owner_covered&&pt_mixed_causal_factory_original_empty(b->owner,b->queue,b->session,b->generation);
+ return covered&&owner_covered&&(stop?
+ pt_mixed_causal_factory_stop_original_empty(b->owner,b->queue,b->session,b->generation):
+ pt_mixed_causal_factory_original_empty(b->owner,b->queue,b->session,b->generation));
 }
 static void causal_refuse(struct pt_sampler_mixed_causal_binding *b)
 {if(b)b->phase=CB_REFUSED;}
@@ -262,21 +294,22 @@ if(!b->reservation||!b->owned||!b->write32||b->closing||b->faulted||b->cache.byt
  for(i=0;i<c->context_count;++i)if(!c->contexts[i].bytes||!span(c->contexts[i].data,c->contexts[i].bytes))return 0;
  return context_covered(c,c->allocator.context)&&context_covered(c,c->sampler->allocator.context)&&context_covered(c,c->sampler->progress_context)&&context_covered(c,c->chip_context)&&context_covered(c,b->context)&&context_covered(c,b->arena.context)&&context_covered(c,b->reservation->api.context);
 }
-static enum pt_sampler_mixed_result mixed_open_private(const struct pt_sampler_mixed_config *c,uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,struct pt_sampler_mixed_pool **out)
+static enum pt_sampler_mixed_result mixed_open_private(const struct pt_sampler_mixed_config *c,uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,struct pt_sampler_mixed_causal_stop_binding *stop,struct pt_sampler_mixed_pool **out)
 {
  struct workspace *w=storage;
 struct pt_sampler_mixed_pool *p;
 unsigned char *v;
 size_t i;
 unsigned ok;
- if(!config_valid(c)||!storage||capacity<sizeof(*w)||(uintptr_t)storage%_Alignof(struct workspace)||!span(storage,capacity)||!span(out,sizeof(*out))||!apart(storage,capacity,c,sizeof(*c))||!apart(storage,capacity,out,sizeof(*out))||!apart(out,sizeof(*out),c,sizeof(*c))||!initial_apart(c,storage,capacity)||!initial_apart(c,out,sizeof(*out))||!initial_apart(c,c,sizeof(*c))||!causal_admit(c,binding))return PT_SAMPLER_MIXED_INVALID;
+ if(!config_valid(c)||!storage||capacity<sizeof(*w)||(uintptr_t)storage%_Alignof(struct workspace)||!span(storage,capacity)||!span(out,sizeof(*out))||!apart(storage,capacity,c,sizeof(*c))||!apart(storage,capacity,out,sizeof(*out))||!apart(out,sizeof(*out),c,sizeof(*c))||!initial_apart(c,storage,capacity)||!initial_apart(c,out,sizeof(*out))||!initial_apart(c,c,sizeof(*c))||!causal_admit(c,binding,stop))return PT_SAMPLER_MIXED_INVALID;
  if(w->busy){w->failed=1;
 return PT_SAMPLER_MIXED_BUSY;
 }
  v=storage;
 for(i=0;i<sizeof(*w);++i)if(v[i])return PT_SAMPLER_MIXED_INVALID;
  if(binding){binding->phase=CB_OPENING;w->pool.causal_binding=binding;
- w->pool.causal_original=*binding;w->pool.causal_phase=CB_OPENING;}
+ memcpy(&w->pool.causal_original,binding,sizeof(*binding));w->pool.causal_phase=CB_OPENING;}
+ if(stop){w->pool.stop_binding=stop;memcpy(&w->pool.stop_original,stop,sizeof(*stop));}
  w->busy=1;
 memcpy(&w->original,c,sizeof(*c));
 memcpy(&w->pool.config,c,sizeof(*c));
@@ -315,12 +348,18 @@ return PT_SAMPLER_MIXED_PENDING;
 }
 enum pt_sampler_mixed_result pt_sampler_mixed_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_pool **out)
-{return mixed_open_private(c,revision,storage,capacity,NULL,out);}
+{return mixed_open_private(c,revision,storage,capacity,NULL,NULL,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,
  struct pt_sampler_mixed_pool **out)
 {if(!binding)return PT_SAMPLER_MIXED_INVALID;
- return mixed_open_private(c,revision,storage,capacity,binding,out);}
+ return mixed_open_private(c,revision,storage,capacity,binding,NULL,out);}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_stop_open(const struct pt_sampler_mixed_config *c,
+ uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_stop_binding *binding,
+ struct pt_sampler_mixed_pool **out)
+{if(!binding||(uintptr_t)binding%_Alignof(struct pt_sampler_mixed_causal_stop_binding)||
+    !out||(uintptr_t)out%_Alignof(struct pt_sampler_mixed_pool *))return PT_SAMPLER_MIXED_INVALID;
+ return mixed_open_private(c,revision,storage,capacity,&binding->original,binding,out);}
 static void *chip_allocate(void *context,size_t bytes)
 {
  struct pt_sampler_mixed_pool *p=context;
@@ -538,7 +577,7 @@ request_bytes=(size_t)n*sizeof(*x);
  if(!output_apart(p,input,input_bytes)||!output_apart(p,out,sizeof(*out))||
  !apart(out,sizeof(*out),input,input_bytes)||!fixed_current(p,revision)||p->state!=OPEN||
  !request_valid(p,x,n,frame,&triggers,levels))return PT_SAMPLER_MIXED_INVALID;
- if(p->causal_binding&&p->causal_successor)return PT_SAMPLER_MIXED_CAPACITY;
+ if(p->causal_binding&&(p->causal_successor||(p->stop_binding&&p->causal_first)))return PT_SAMPLER_MIXED_CAPACITY;
  for(ci=0;ci<p->config.maximum_commands&&p->commands[ci];++ci){}
 for(i=0;i<p->config.maximum_readers;++i)if(!p->readers[i])free_readers++;
  if(ci==p->config.maximum_commands||free_readers<triggers||p->serial>UINT64_MAX-triggers-1||sizeof(*c)>p->config.control_budget-p->bytes||triggers>(p->config.control_budget-p->bytes-sizeof(*c))/sizeof(struct pt_sampler_mixed_reader))return PT_SAMPLER_MIXED_CAPACITY;
@@ -605,6 +644,78 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_
  !output_apart(p,batch,sizeof(*batch))||!output_apart(p,out,sizeof(*out))||
  !apart(batch,sizeof(*batch),out,sizeof(*out)))return PT_SAMPLER_MIXED_INVALID;
  return begin_private(p,revision,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),out);
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_stop_begin(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_sampler_mixed_causal_stop_batch *batch,
+ struct pt_sampler_mixed_command_handle *out)
+{
+ struct pt_sampler_mixed_causal_stop_batch saved;
+ struct pt_sampler_mixed_request request[PT_SAMPLER_MIXED_ACTIONS];
+ struct pt_mixed_readers_key key;
+ struct pt_sampler_mixed_reader *r;
+ struct pt_sampler_mixed_command *c;
+ unsigned i,j,ci,mask=0,index;enum pt_mixed_readers_result result;
+ /* WHOLE original caller, output, genuine holders and local capacities are
+  * guarded before writes/getters/allocator callbacks; transformed scratch
+  * never hides an alias into the original fixed handle vector. */
+ if(!p||(uintptr_t)batch%_Alignof(struct pt_sampler_mixed_causal_stop_batch)||
+    (uintptr_t)out%_Alignof(struct pt_sampler_mixed_command_handle)||
+    !output_apart(p,batch,sizeof(*batch))||!output_apart(p,out,sizeof(*out))||
+    !apart(batch,sizeof(*batch),out,sizeof(*out))||
+    !output_address_apart(p,(uintptr_t)&saved,sizeof(saved))||
+    !output_address_apart(p,(uintptr_t)request,sizeof(request))||
+    !output_address_apart(p,(uintptr_t)&key,sizeof(key))||
+    !apart(&saved,sizeof(saved),batch,sizeof(*batch))||!apart(request,sizeof(request),batch,sizeof(*batch))||
+    !apart(&key,sizeof(key),batch,sizeof(*batch))||!apart(&saved,sizeof(saved),out,sizeof(*out))||
+    !apart(request,sizeof(request),out,sizeof(*out))||!apart(&key,sizeof(key),out,sizeof(*out))||
+    !fixed_current(p,revision)||p->state!=OPEN||!p->stop_binding||!p->causal_first||p->causal_successor||
+    !batch->count||batch->count>PT_SAMPLER_MIXED_ACTIONS||batch->frame==UINT64_MAX)return PT_SAMPLER_MIXED_INVALID;
+ for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i){
+  if(i>=batch->count){if(batch->reader[i].address||batch->reader[i].token)return PT_SAMPLER_MIXED_INVALID;continue;}
+  r=reader(p,batch->reader[i]);
+  if(!r||r->state!=LIVE||r->ticket!=p->causal_first||r->frame>=batch->frame)return PT_SAMPLER_MIXED_INVALID;
+  index=r->route==PT_MIXED_READERS_PAULA?r->slot:r->slot+4;
+  if(index>=20||(mask&(1U<<index)))return PT_SAMPLER_MIXED_INVALID;
+  mask|=1U<<index;
+ }
+ for(ci=0;ci<p->config.maximum_commands&&p->commands[ci];++ci){}
+ if(ci==p->config.maximum_commands||p->serial==UINT64_MAX||
+    sizeof(*c)>p->config.control_budget-p->bytes)return PT_SAMPLER_MIXED_CAPACITY;
+ if(reentry(p))return PT_SAMPLER_MIXED_BUSY;
+ p->busy=1;p->queue_call=1;memcpy(&saved,batch,sizeof(saved));memset(request,0,sizeof(request));
+ j=pt_mixed_causal_factory_stop_first_current(p->causal_original.owner,p->causal_first);
+ if(memcmp(batch,&saved,sizeof(saved)))p->failed=1;
+ if(!j||p->failed||!fixed_current(p,revision)||!backend_fixed(p)){
+  p->queue_call=0;p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_INVALID;}
+ for(i=0;i<saved.count;++i){
+  r=reader(p,saved.reader[i]);
+  result=pt_mixed_causal_reader_key(p->causal_original.owner,r->ticket,r->action,&key);
+  if(memcmp(batch,&saved,sizeof(saved)))p->failed=1;
+  if(result!=PT_MIXED_READERS_OK||p->failed||!fixed_current(p,revision)||!backend_fixed(p)||
+     reader(p,saved.reader[i])!=r||r->state!=LIVE||key.trigger!=p->causal_first||
+     key.action!=r->action||key.owner!=r->token||key.session!=p->causal_original.session||
+     key.generation!=p->config.generation||key.queue!=p->config.queue||key.route!=r->route||key.slot!=r->slot){
+   p->queue_call=0;p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_INVALID;}
+  r->key=key;r->key_seen=1;request[i].kind=PT_MIXED_READERS_STOP;request[i].track=r->track;
+  request[i].sample=r->sample;request[i].channel=r->channel;request[i].key=key;
+ }
+ p->queue_call=0;
+ if(!current(p,revision,1)||memcmp(batch,&saved,sizeof(saved))){p->failed=1;p->busy=0;return PT_SAMPLER_MIXED_STALE;}
+ /* All local scratch extents remain guarded across the actual allocator;
+  * no recognized alias is initialized or released. */
+ c=p->config.allocator.allocate(p->config.allocator.context,sizeof(*c));
+ if(!c){p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_CAPACITY;}
+ if(!output_apart(p,c,sizeof(*c))||!apart(c,sizeof(*c),batch,sizeof(*batch))||
+    !apart(c,sizeof(*c),out,sizeof(*out))||!apart(c,sizeof(*c),&saved,sizeof(saved))||
+    !apart(c,sizeof(*c),request,sizeof(request))||!apart(c,sizeof(*c),&key,sizeof(key))){
+  p->busy=0;return PT_SAMPLER_MIXED_INVALID;}
+ if((uintptr_t)c%_Alignof(struct pt_sampler_mixed_command)||memcmp(batch,&saved,sizeof(saved))||
+    !fixed_current(p,revision)||!backend_fixed(p)){
+  p->failed=1;p->config.allocator.release(p->config.allocator.context,c);
+  p->busy=0;return PT_SAMPLER_MIXED_STALE;}
+ p->bytes+=sizeof(*c);memset(c,0,sizeof(*c));c->pool=p;c->token=++p->serial;c->state=PREPARING;c->causal_stop=1;c->frame=saved.frame;c->count=saved.count;
+ for(j=0;j<saved.count;++j)memcpy(&c->source[j].request,request+j,sizeof(request[j]));
+ p->commands[ci]=c;out->address=c;out->token=c->token;p->busy=0;return PT_SAMPLER_MIXED_PENDING;
 }
 static int source_current(struct pt_sampler_mixed_reader *r)
 {
@@ -833,7 +944,11 @@ enum pt_mixed_readers_result pt_sampler_mixed_enqueue(struct pt_sampler_mixed_po
 enum pt_mixed_readers_result result;
 uint64_t ticket;
 unsigned i;
+struct pt_mixed_causal_stop_request stop;
  if(!p||!output_apart(p,out,sizeof(*out))||!(c=command(p,h))||c->state!=READY)return PT_MIXED_READERS_INVALID;
+ if(c->causal_stop&&((uintptr_t)out%_Alignof(uint64_t)||
+ !output_address_apart(p,(uintptr_t)&stop,sizeof(stop))||
+ !apart(&stop,sizeof(stop),out,sizeof(*out))))return PT_MIXED_READERS_INVALID;
  if(reentry(p))return PT_MIXED_READERS_BACKEND;
 if(!current(p,revision,0))return PT_MIXED_READERS_STALE;
  p->busy=1;
@@ -850,6 +965,12 @@ c->inputs.command.release=command_release;
  if(p->causal_binding){
     if(p->causal_successor)result=PT_MIXED_READERS_INVALID;
     else if(!p->causal_first)result=pt_mixed_causal_enqueue(p->causal_original.owner,&c->inputs,out);
+    else if(p->stop_binding&&c->causal_stop){
+       memset(&stop,0,sizeof(stop));stop.predecessor=p->causal_first;stop.frame=c->frame;
+       stop.count=c->count;memcpy(&stop.command,&c->inputs.command,sizeof(stop.command));
+       for(i=0;i<c->count;++i){stop.action[i].route=c->inputs.batch.action[i].route;stop.action[i].slot=c->inputs.batch.action[i].slot;}
+       result=pt_mixed_causal_stop_enqueue(p->causal_original.owner,&stop,out);
+    }else if(p->stop_binding)result=PT_MIXED_READERS_INVALID;
     else result=pt_mixed_causal_enqueue_successor(p->causal_original.owner,p->causal_first,&c->inputs,out);
     if(result==PT_MIXED_READERS_OK){ticket=*out;
        if(!p->causal_first)p->causal_first=ticket;else p->causal_successor=ticket;}
@@ -934,7 +1055,9 @@ p->queue_call=0;
 return PT_MIXED_READERS_STALE;
 }if(p->causal_binding){
  if(ticket==p->causal_first)result=pt_mixed_causal_publish(p->causal_original.owner,ticket);
- else if(ticket==p->causal_successor&&ticket)result=pt_mixed_causal_publish_successor(p->causal_original.owner,p->causal_first,ticket);
+ else if(ticket==p->causal_successor&&ticket)result=p->stop_binding?
+ pt_mixed_causal_stop_publish(p->causal_original.owner,ticket):
+ pt_mixed_causal_publish_successor(p->causal_original.owner,p->causal_first,ticket);
  else result=PT_MIXED_READERS_INVALID;
 }else result=pt_mixed_readers_publish(p->config.queue,ticket);
 p->queue_call=0;

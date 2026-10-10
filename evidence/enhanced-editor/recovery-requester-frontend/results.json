@@ -1,0 +1,212 @@
+{
+  "schema": "PT24G_RECOVERY_FRONTEND_EVIDENCE_V1",
+  "date": "2026-10-10",
+  "status": "IMPLEMENTED_HOST_TESTED_AND_NATIVE_LINKED",
+  "source_base": "ad669cf73bb3749d6ee6f41925d09beb509c0a8c",
+  "source": {
+    "src/native/recovery_requester.c": {
+      "bytes": 8837,
+      "sha256": "56944eac2476bda23294c0252ec075a94de8d01a96c8ebc81aae88ce0b848c9e"
+    },
+    "tests/editor_recovery_dispatch_test.c": {
+      "bytes": 5195,
+      "sha256": "ed87b2970d11b734c266657b32ec206d8a46802cfbcc97347de934f5c329d086"
+    },
+    "tests/test_editor_recovery_dispatch.py": {
+      "bytes": 1439,
+      "sha256": "b073c27b695d1949af4d7c8f7a096fdfb8f53bde226417259a194c4e5ff8e52a"
+    },
+    "tests/native_recovery_requester_loop_test.c": {
+      "bytes": 10627,
+      "sha256": "ab3695980bc4bdd61e898c931d331dda8020d60725ee931f457acea3b941476c"
+    },
+    "tests/test_native_recovery_requester_loop.py": {
+      "bytes": 1683,
+      "sha256": "6aa025c2539e997b67f5fdbc2a5a68d5dd8c32b63c86830ba65a97b99f31a7eb"
+    },
+    "tests/recovery_requester_host_stubs/pt_host_intuition.h": {
+      "bytes": 1514,
+      "sha256": "faa77c9236c3cbfab40929aa23446d984e12f44330ed8e0325ff8f36bc67528a"
+    },
+    "tests/recovery_requester_host_stubs/dos/var.h": {
+      "bytes": 56,
+      "sha256": "8a601f82a9ab45f7b3c4a39c24073d599ade933236614279899d6e9356af3c45"
+    },
+    "tests/recovery_requester_host_stubs/proto/intuition.h": {
+      "bytes": 183,
+      "sha256": "01e92fc35a36680315c1841c3c09548dd438c661c047df0a1e3f16302606ab00"
+    },
+    "tests/recovery_requester_host_stubs/proto/exec.h": {
+      "bytes": 125,
+      "sha256": "381cd43bacc51d4b43973347edb05deecc06d7dc29952fa4e0752db8713d7f6a"
+    },
+    "tests/recovery_requester_host_stubs/proto/graphics.h": {
+      "bytes": 479,
+      "sha256": "2ff6f4277926882e1675e82af740cf6eb7d6977b2a2afb072319f7b2159a5d36"
+    },
+    "tests/recovery_requester_host_stubs/proto/dos.h": {
+      "bytes": 449,
+      "sha256": "fdb4ec79bdfcc250b58766cece4900be0701b12e1115472be7305094b33fbfd5"
+    },
+    "tests/recovery_requester_host_stubs/intuition/intuition.h": {
+      "bytes": 31,
+      "sha256": "e5cbe9e03730dc5c12ae955986c7ed9ef0236ea97486b100a854d0884837759d"
+    },
+    "tests/recovery_requester_host_stubs/graphics/text.h": {
+      "bytes": 31,
+      "sha256": "e5cbe9e03730dc5c12ae955986c7ed9ef0236ea97486b100a854d0884837759d"
+    }
+  },
+  "dispatch": {
+    "current_overlay": {
+      "tests": 1,
+      "seconds": 6.634,
+      "rc": 0
+    },
+    "clean_overlay": {
+      "tests": 1,
+      "seconds": 6.543,
+      "rc": 0
+    },
+    "checks": "Strict C99, assertions, ASan/UBSan; real staged 24-bit master copy and busy/cancel routing"
+  },
+  "renderer_loop": {
+    "tests": 1,
+    "assertion_groups": 8,
+    "seconds": 2.952,
+    "rc": 0,
+    "fixture": {
+      "bytes": 10627,
+      "sha256": "ab3695980bc4bdd61e898c931d331dda8020d60725ee931f457acea3b941476c"
+    },
+    "checks": "HOST actual requester renderer/model/preferences/controller with deterministic platform stubs",
+    "focus_release_oracle": "Refresh before Escape must be observed after Apply-down, focus change to Cancel and Apply-up; catches premature Cancel"
+  },
+  "editor_pixel_comparison": {
+    "status": "HOST_FOUR_RENDER_PIXEL_COMPARISON_PASS",
+    "four_host_compile_and_render_commands_passed": true,
+    "recovery_cell": [
+      476,
+      78,
+      599,
+      97
+    ],
+    "variants": {
+      "clean": {
+        "actual_ppm_sha256": "17487c7c68be850fc6c8299967cc251bb60168aace4c71ae20c9d4da6824360b",
+        "changed_bounds": [
+          490,
+          81,
+          584,
+          93
+        ],
+        "changed_pixels": 749,
+        "expected_complete_after_equal": true,
+        "expected_png_sha256": "e644f838c37d97d42406769d5ab147b3e5b46cc3f91f3c686d1492f71d0a3b23",
+        "expected_ppm_sha256": "17487c7c68be850fc6c8299967cc251bb60168aace4c71ae20c9d4da6824360b",
+        "outside_changed_pixels": 0
+      },
+      "current": {
+        "actual_ppm_sha256": "54018ad085b550f6868bd73b6a6c85d987ec261f7768c4c55940d99058b180a1",
+        "changed_bounds": [
+          490,
+          81,
+          584,
+          93
+        ],
+        "changed_pixels": 749,
+        "expected_complete_after_equal": true,
+        "expected_png_sha256": "5d9fba5fc0c8ec7c4dd7d8f2c2f6fbe1c4f16bd00484227eada9dde90207e88b",
+        "expected_ppm_sha256": "54018ad085b550f6868bd73b6a6c85d987ec261f7768c4c55940d99058b180a1",
+        "outside_changed_pixels": 0
+      }
+    },
+    "operator_visual_review": "Current recovery-cell and clean full-screen PNG inspected; original layout preserved",
+    "human_visual_acceptance": false
+  },
+  "native_builds": {
+    "clean": {
+      "status": "HOST_APP_LINK_AND_HUNK_HEADER_CHECK_PASS",
+      "artifact": {
+        "bytes": 326776,
+        "check": "Leading Amiga HUNK_HEADER1011 only; no runtime/loadability/whole-stack acceptance.",
+        "sha256": "f68d19d8a414d4bd78b995c84f7507dbc343d6851c4c620bfdb12fff4e4da595"
+      },
+      "translation_units": 68,
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-"
+      ],
+      "complete_capture_and_positive_wait": true,
+      "saved_result": {
+        "bytes": 134910,
+        "sha256": "e60f7070649f274fc8a1f5eedd3c398616519669e5e0c5eb2639ab5832588839"
+      }
+    },
+    "current": {
+      "status": "HOST_APP_LINK_AND_HUNK_HEADER_CHECK_PASS",
+      "artifact": {
+        "bytes": 331288,
+        "check": "Leading Amiga HUNK_HEADER1011 only; no runtime/loadability/whole-stack acceptance.",
+        "sha256": "6aa0e298b52975843b26405a0c074ef710dddf328849bb89fdff2bc173281788"
+      },
+      "translation_units": 69,
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-"
+      ],
+      "complete_capture_and_positive_wait": true,
+      "saved_result": {
+        "bytes": 131785,
+        "sha256": "8f2920cef9a99cc12677cc14b2b0142f91353a9f48c00011f6505ccea43a41e3"
+      }
+    }
+  },
+  "earlier_build_failure": {
+    "variant": "clean V1",
+    "status": "FAILED_TIMEOUT",
+    "budget_seconds": 120,
+    "app_rc_after_owned_SIGTERM": -15,
+    "captures": "Partial empty app streams without EOF; no absence-of-diagnostics claim",
+    "saved_result": {
+      "bytes": 136645,
+      "sha256": "ac2fe3c0b9712812c1270f6ee26ce1943dad2a6d36380c0078608ad141c89fda"
+    },
+    "preserved": true
+  },
+  "integration": {
+    "index": "Own clean frontend/build/pixel deltas only",
+    "working_tree": "Existing unrelated display/editor/infrastructure work preserved",
+    "protected_paths": 16
+  },
+  "not_tested": [
+    "Amiberry requester GUI",
+    "Real A1200 requester GUI",
+    "Native tag ABI and parent input/mask/timer lifetime",
+    "Aggregate native stack and scheduling WCET",
+    "Hardware audio and human listening"
+  ],
+  "limits": [
+    "HOST platform stubs are not native ABI acceptance",
+    "Full compile/link and HUNK header check are not runtime/loadability acceptance",
+    "No sample-memory architecture, baseline or deferred features changed"
+  ]
+}

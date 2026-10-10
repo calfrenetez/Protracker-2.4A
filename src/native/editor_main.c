@@ -38,12 +38,33 @@
 #include "render_invert.h"
 #include "../platform/recent_file.h"
 #include "recovery.h"
+#include "recovery_preferences.h"
+#include "recovery_requester.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
 static struct pt_master_memory master_memory;
 static const struct pt_allocator render_allocator={&master_memory,pt_master_allocate,pt_master_release};
 static struct pt_recent recent_projects;
 static struct pt_native_recovery recovery;
+static struct pt_native_recovery_source recovery_source;
+static unsigned recovery_modal;
+/* The actual committed document path, not a requester seed or an output argv.
+ * A successful transition with an untrackable path invalidates the old identity;
+ * failed document operations never call this helper. Restoration keeps the
+ * original song identity, never the recovery-copy filename. */
+static void recovery_source_committed(enum pt_native_recovery_source_transition transition,const char *path)
+{
+    size_t capacity=0;
+    if(path) {
+        while(capacity<=PT_RECOVERY_SOURCE_MAX && path[capacity])++capacity;
+        if(capacity<=PT_RECOVERY_SOURCE_MAX)++capacity;
+        else capacity=PT_RECOVERY_SOURCE_MAX+1;
+    }
+    if(!pt_native_recovery_source_commit(&recovery_source,transition,1,path,capacity)) {
+        if(transition!=PT_NATIVE_RECOVERY_SOURCE_RESTORE)memset(&recovery_source,0,sizeof(recovery_source));
+        puts("EDITOR RECOVERY current source unavailable; initial settings bind will refuse");fflush(stdout);
+    }
+}
 static char recent_override[PT_RECENT_PATH];
 static const char *recent_prefix="ENVARC:ProTracker2.4G/recent";
 static void recent_persist(struct pt_editor *e)
@@ -99,6 +120,7 @@ static void recovery_offer(struct pt_document *doc,struct pt_editor **current,st
             next->project=&doc->project;next->recent=&recent_projects;
             /* The restored journal starts empty; its state has not been saved. */
             next->history.saved_revision=UINT32_MAX;*current=next;
+            recovery_source_committed(PT_NATIVE_RECOVERY_SOURCE_RESTORE,NULL);
             pt_editor_status(next,"RECOVERED WORK - SAVE AS");
             puts("EDITOR RECOVERY restored dirty=1");fflush(stdout);return;
         }
@@ -158,12 +180,15 @@ static void save_svx(struct pt_editor *e,const char *path)
     pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR IFF result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
-static void save(struct pt_editor *e,const char *path)
+static void save(struct pt_editor *e,const char *path,enum pt_native_recovery_source_transition transition)
 {
     enum pt_save_result result;
     if(!path) {pt_editor_status(e,"START WITH INPUT AND NEW_OUTPUT PATH TO ENABLE SAVE");return;}
     result=pt_project_file_save(path,e->project,&render_allocator);
-    if(result==PT_SAVE_OK) {pt_editor_saved(e);recent_success(e,path);pt_native_recovery_bind(&recovery,path);}
+    if(result==PT_SAVE_OK) {
+        pt_editor_saved(e);recent_success(e,path);pt_native_recovery_bind(&recovery,path);
+        recovery_source_committed(transition,path);
+    }
     else pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
@@ -199,6 +224,72 @@ struct conversion_ui {
     struct BitMap *bitmap;struct pt_view_cache *cache;
     unsigned percent;
 };
+static void recovery_display_reset(struct conversion_ui *ui,int suspend)
+{
+#ifdef PT_PATTERN_DISPLAY_H
+    /* Preserve the separate prepared-display work when that adapter is present.
+     * The committed editor keeps its ordinary bitmap presentation path. */
+    if(suspend)pt_pattern_display_suspend(ui->pattern_display);
+    ui->cache->prepared=0;
+#else
+    (void)suspend;
+#endif
+    ui->cache->valid=0;
+}
+struct recovery_settings_ui {struct pt_editor *editor;struct pt_paula *audio;};
+static int recovery_settings_idle(void *context)
+{
+    const struct recovery_settings_ui *ui=context;const struct pt_editor_workflow *w;
+    if(!ui || !ui->editor || !ui->audio || ui->audio->opened || ui->editor->playback.active)return 0;
+    w=&ui->editor->workflow;
+    if(w->busy || w->scanning || w->scan_for_copy || w->transaction || w->pending_apply || w->resolving)return 0;
+    return !w->recording_busy || w->recording_busy(w->recording_context)==0;
+}
+static void recovery_parent_drain(struct conversion_ui *ui)
+{
+    struct IntuiMessage *message;
+    /* Only this frontend's owned parent port. Never touch the timer port or
+     * another window's messages. Input queued before modal isolation is replied
+     * without dispatch; refresh invalidates the prepared backing surface. */
+    while((message=(struct IntuiMessage *)GetMsg(ui->window->UserPort))) {
+        ULONG kind=message->Class;ReplyMsg((struct Message *)message);
+        if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(ui->window);EndRefresh(ui->window,TRUE);ui->cache->valid=0;}
+    }
+}
+static int recovery_settings(struct conversion_ui *ui,struct pt_paula *audio)
+{
+    struct recovery_settings_ui admission={ui->editor,audio};
+    struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned n;ULONG idcmp;
+    enum pt_recovery_requester_result result;
+    /* Normal main Task is the only caller. Other file/export/conversion modals
+     * are synchronous and have returned before action dispatch reaches here. */
+    if(recovery_modal || !recovery_settings_idle(&admission)) {
+        pt_editor_status(ui->editor,"RECOVERY SETTINGS NEED IDLE AUDIO/CAPTURE/WORKFLOW");return 1;
+    }
+    idcmp=ui->window->IDCMPFlags;
+    if(!idcmp || !ui->window->UserPort || !ModifyIDCMP(ui->window,IDCMP_REFRESHWINDOW)) {
+        pt_editor_status(ui->editor,"RECOVERY INPUT ISOLATION FAILED");return 0;
+    }
+    recovery_modal=1;recovery_parent_drain(ui);
+    recovery_display_reset(ui,1);
+    n=pt_editor_draw_update(ui->editor,ui->canvas,pt_font,ui->cache,areas);
+    pt_native_present(ui->canvas,ui->bitmap,ui->window->RPort,areas,n,0);
+    result=pt_native_recovery_requester(ui->window,&recovery,&recovery_source,recovery_settings_idle,&admission);
+    recovery_parent_drain(ui);
+    /* The mask remains nonzero throughout, so the owned parent port/signal is
+     * retained. Restore it before ordinary dispatch; fail closed if restoration
+     * cannot be confirmed. The main timer request was never polled/rearmed here. */
+    if(!ModifyIDCMP(ui->window,idcmp)) {
+        recovery_modal=0;pt_editor_status(ui->editor,"RECOVERY INPUT RESTORE FAILED");return 0;
+    }
+    recovery_modal=0;ActivateWindow(ui->window);recovery_display_reset(ui,0);
+    pt_editor_status(ui->editor,result==PT_RECOVERY_REQUESTER_APPLIED?"RECOVERY SETTINGS APPLIED - SESSION ONLY":
+        result==PT_RECOVERY_REQUESTER_NOOP?"RECOVERY SETTINGS UNCHANGED":
+        result==PT_RECOVERY_REQUESTER_CANCELLED?"RECOVERY SETTINGS CANCELLED":
+        result==PT_RECOVERY_REQUESTER_REFUSED?"RECOVERY SETTINGS UNAVAILABLE DURING ACTIVE RECOVERY":
+        "RECOVERY REQUESTER UNAVAILABLE - SETTINGS KEPT");
+    printf("EDITOR RECOVERY settings=%d\n",result);fflush(stdout);return 1;
+}
 static int conversion_progress(void *context,uint32_t done,uint32_t total)
 {
     struct conversion_ui *ui=context;struct IntuiMessage *message;unsigned percent=total?(unsigned)((uint64_t)done*100/total):100;
@@ -384,6 +475,7 @@ int main(int argc,char **argv)
         printf("EDITOR RECENT loaded=%u prefix=%s\n",recent_projects.count,recent_prefix);fflush(stdout);
         if(argc>1)recent_success(editor,argv[1]);
     }
+    recovery_source_committed(argc>1?PT_NATIVE_RECOVERY_SOURCE_LOAD:PT_NATIVE_RECOVERY_SOURCE_NEW,argc>1?argv[1]:NULL);
     pt_native_recovery_configure(&recovery,&allocator);
     pt_native_recovery_bind(&recovery,argc>1?argv[1]:NULL);
     if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
@@ -497,6 +589,7 @@ int main(int argc,char **argv)
             else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);view_cache.valid=0;}
             else if(kind==IDCMP_INACTIVEWINDOW) {editor->quit_pending=0;editor->load_pending=0;}
             editor->sampler.progress=NULL;editor->sampler.progress_context=NULL;
+            if(action==PT_UI_RECOVERY_SETTINGS && !recovery_settings(&conversion,&audio))goto done;
             if(action==PT_UI_PLAY || action==PT_UI_PATTERN) {
                 error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
                 pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");
@@ -521,11 +614,12 @@ int main(int argc,char **argv)
             if(error || action==PT_UI_PLAY || action==PT_UI_PATTERN || action==PT_UI_AUDITION || action==PT_UI_STOP)
                 pt_paula_poll(&audio,&editor->playback);
             if(action==PT_UI_SAVE || action==PT_UI_SAVE_AS) {
-                if(action==PT_UI_SAVE && argc==3)save(editor,argv[2]);
+                if(action==PT_UI_SAVE && argc==3)save(editor,argv[2],PT_NATIVE_RECOVERY_SOURCE_SAVE);
                 else {
                     int selected;printf("EDITOR REQUEST save\n");fflush(stdout);
                     selected=pt_file_request(window,1,save_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
-                    if(selected==1) {strcpy(save_path,chosen_path);save(editor,save_path);}
+                    if(selected==1) {strcpy(save_path,chosen_path);save(editor,save_path,
+                        action==PT_UI_SAVE_AS?PT_NATIVE_RECOVERY_SOURCE_SAVE_AS:PT_NATIVE_RECOVERY_SOURCE_SAVE);}
                     else pt_editor_status(editor,selected==0?"SAVE CANCELLED - EDITS PRESERVED":"SAVE REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
@@ -585,6 +679,7 @@ int main(int argc,char **argv)
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
                     pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
                     pt_native_recovery_bind(&recovery,NULL);
+                    recovery_source_committed(PT_NATIVE_RECOVERY_SOURCE_NEW,NULL);
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
                     printf("EDITOR NEW channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                 } else pt_editor_status(editor,"NEW SONG FAILED - CURRENT PROJECT AND EDITS PRESERVED");
@@ -607,7 +702,9 @@ int main(int argc,char **argv)
                         if(load(&doc,chosen_path)) {
                             pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
                             pt_editor_status(editor,"PROJECT LOADED");recent_success(editor,chosen_path);
-                            pt_native_recovery_bind(&recovery,chosen_path);recovery_offer(&doc,&editor,window);
+                            pt_native_recovery_bind(&recovery,chosen_path);
+                            recovery_source_committed(PT_NATIVE_RECOVERY_SOURCE_LOAD,chosen_path);
+                            recovery_offer(&doc,&editor,window);
                             printf("EDITOR LOAD success channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                         } else pt_editor_status(editor,"LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED");
                     } else pt_editor_status(editor,selected==0?"LOAD CANCELLED - EDITS PRESERVED":"LOAD REQUESTER UNAVAILABLE OR PATH TOO LONG");

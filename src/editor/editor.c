@@ -707,6 +707,9 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         return PT_UI_NONE;
     }
+    /* Recovery is a modal action, never a note or an implicit stop. */
+    if(e->panel==0 && raw==0x25 && (qualifier&8) && (qualifier&3))
+        return PT_UI_RECOVERY_SETTINGS;
     if(e->panel==3 && raw==0x44)return request_new(e);
     if(e->new_pending)pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");
     e->new_pending=0;
@@ -938,6 +941,14 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
 {
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
+    /* The default Recovery cell shares the workflow Cancel coordinate. Refuse
+     * this new default-panel action without cancelling an existing transaction;
+     * the old Cancel adapter remains unchanged in every other panel. */
+    if(e->panel==0 && !e->number_field && !e->name_entry &&
+        x>=476 && x<599 && y>=78 && y<97 &&
+        (e->workflow.busy || (e->workflow.scanning && e->workflow.scan_for_copy))) {
+        pt_editor_status(e,"WORKFLOW BUSY - RECOVERY SETTINGS UNAVAILABLE");return PT_UI_NONE;
+    }
     {enum pt_editor_action action;if(pt_editor_workflow_click(e,x,y,&action))return action;}
     if(e->number_field || e->name_entry) {pt_editor_status(e,"FINISH ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
     if(e->panel==2 && e->export_details) {
@@ -969,6 +980,8 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         }
         return PT_UI_NONE;
     }
+    if(e->panel==0 && x>=476 && x<599 && y>=78 && y<97)
+        return PT_UI_RECOVERY_SETTINGS;
     if(e->panel==3 && x>=230 && x<414 && y>=59 && y<97)return request_new(e);
     if(e->new_pending)pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");
     e->new_pending=0;

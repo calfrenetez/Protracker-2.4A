@@ -274,7 +274,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     char s[80];int x,y;
     static const char *fields[9]={"POS","PATTERN","LENGTH","FINETUNE","SAMPLE","VOLUME","LENGTH","REPEAT","REPLEN"};
     static const char *buttons[5][3]={{"PLAY","STOP","MOD2WAV"},{"PATTERN","CLEAR","PAT2SMP"},
-        {"EDIT","EDIT OP.","POS ED."},{"RECORD","DISK OP.","SAMPLER"},{"SAMPLE","SAMPLER",""}};
+        {"EDIT","EDIT OP.","POS ED."},{"RECORD","DISK OP.","SAMPLER"},{"SAMPLE","SAMPLER","RECOVERY"}};
     unsigned long values[9];size_t bytes=0;
     values[0]=e->position;values[1]=e->pattern;values[2]=p->order_count;
     values[3]=sample?(unsigned)(sample->finetune&15):0;values[4]=e->sample;

@@ -68,6 +68,7 @@ def main():
     inputs['PTExecSampleSvxFileTest'] = ['tests/native_exec_sample_svx_file_test.c', *inputs['PTSampleSvxFileTest'][1:]]
     inputs['PT24GEdit'] += ['src/platform/project_file.c']
     inputs['PT24GEdit'] += ['src/native/recovery.c','src/core/recovery.c','src/platform/recovery_file.c','src/platform/recovery_store.c','src/platform/recovery_find.c']
+    inputs['PT24GEdit'] += ['src/native/recovery_preferences.c','src/native/recovery_requester_model.c','src/native/recovery_requester.c']
     inputs['PTProjectStreamTest'] = ['tests/project_stream_test.c', 'src/platform/project_file.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c']
     inputs['PTExecProjectStreamTest'] = ['tests/native_exec_project_stream_test.c', *inputs['PTProjectStreamTest'][1:]]
     inputs['PT24GEdit'] += ['src/platform/mod_file.c']

@@ -6646,9 +6646,10 @@ and full-precision recovery snapshot tests also passed. See
 The preferences translation unit also compiled for 68000/soft-float with the
 existing Amiga compiler and warnings treated as errors. This single object
 does not establish a linked application or native ABI/runtime acceptance.
-Requester layout, native input dispatch, modal-loop and current-document hookups
-remain **unimplemented**. Linked application, Amiberry and real-A1200 checks
-of this new seam are **NOT RUN**. This HOST result does not qualify musical
+At this controller-only milestone, requester layout, native input dispatch,
+modal-loop and current-document hookups remained unimplemented. The subsequent
+frontend milestone below records their implementation and current checks.
+This HOST result does not qualify musical
 timing, hardware ownership, output or listening; the existing sample-memory
 architecture and exact-scheduling requirement are unchanged.
 
@@ -6669,6 +6670,41 @@ and ownership/alias/final-idle refusal. The model also compiled as a single
 68000/soft-float object with the existing Amiga compiler. See
 `evidence/enhanced-editor/recovery-requester-model/results.json`.
 
-The native window, editor command routing, input-release translation, rendering,
-modal/main-timer lifecycle, linked application, Amiberry and real-A1200 checks
-remain outstanding. These results qualify the portable input model only.
+These results qualify the portable input model only; native frontend and
+application checks are recorded separately below.
+
+## Recovery settings frontend — 10 October 2026
+
+The editor now opens a seven-control Recovery settings window from the existing
+empty default-panel cell or Control-Shift-H. The window edits a copied draft;
+Apply is explicit, invalid or refused settings remain available for correction,
+and Cancel, Escape, right-click or closing discard the draft. Busy workflows
+refuse the recovery action without cancelling their staged work. Existing
+Toolbox Cancel and Escape behaviour is preserved.
+
+Successful New, load, recent-load, Save and Save As update the committed song
+source used by recovery. Failed document transitions preserve the previous
+source. The modal entry checks playback and workflow ownership, preserves the
+parent's message mask, drains parent input and restores/redraws on return.
+These lifecycle paths are implemented but still require native observation.
+
+The actual renderer loop passed eight host assertion groups with deterministic
+Intuition/Exec/DOS/graphics stubs and ASan/UBSan. Both current-display and clean
+editor dispatch fixtures passed. Four independent before/after editor renders
+passed: only the RECOVERY label's 749 pixels changed within the existing cell,
+with zero changes elsewhere in either layout. The expected image hashes were
+updated only after this comparison and visual inspection.
+
+The full editor compiled and linked for 68000/soft-float with strict warnings
+in two private snapshots: clean committed source plus this frontend, and the
+current checkout retaining the unrelated display work. Both replay assembly
+and application link returned zero with complete captures. An earlier separate
+120-second build timeout remains a failed attempt; its partial empty captures
+are not evidence that compiler diagnostics were absent.
+
+See `evidence/enhanced-editor/recovery-requester-frontend/results.json`.
+Amiberry and real-A1200 execution of this frontend are **NOT RUN**. Host stubs
+and linked binaries do not establish native tag ABI, message/timer retirement,
+aggregate stack, hardware output, exact musical scheduling or listening
+acceptance. The sample-memory architecture, classic layout and deferred-feature
+boundaries remain unchanged.

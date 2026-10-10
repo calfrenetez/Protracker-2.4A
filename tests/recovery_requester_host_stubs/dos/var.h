@@ -1,0 +1,2 @@
+#define GVF_GLOBAL_ONLY 256
+#define GVF_BINARY_VAR 1024

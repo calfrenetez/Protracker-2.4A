@@ -6751,3 +6751,32 @@ procedure. No rollover, reset, pruning or new window was performed. The native
 requester and real-A1200 tests remain **NOT RUN**. See the separate completion
 entry in the frontend evidence; architecture and exact-scheduling requirements
 are unchanged.
+
+## 10 October — Optional after-first controls preserve active sample ownership
+
+An additive internal owner mode can apply one CONTROL after a genuine first
+TRIGGER completion and positive queue ACTIVE observations. Typed requests carry
+only numerical Paula period/volume or AmiGUS rate/levels; target keys are derived
+internally. A distinct declared port capability independently checks its own
+first completion and complete twenty-slot registry. Existing master versions,
+sample geometry, selective Chip caches and card cache leases remain retained;
+CONTROL creates no replacement reader, PCM representation or upload. Command,
+reader and source proof domains remain independent, including expected-only
+dependencies and uncertain callbacks. Original absolute windows and late failure
+remain unchanged. The default prepublished two-TRIGGER API stays separate.
+
+The new34-case and unchanged26-case fixtures passed strict HOST ASAN/UBSAN builds
+against the corrected core. Eight affected software groups passed the earlier
+candidate; their exact earlier source scope is recorded rather than relabelled.
+Independent review resolved six object-representation copy hazards with memcpy
+and found no remaining blocker for this bounded software groundwork. Final
+header prose alone changed after those HOST runs. The exact final C/header also
+passed strict pinned m68k compilation to an object, with local stack annotations.
+The normal repository test-driver integration is recorded separately.
+
+Amiberry and real-A1200 execution are **NOT RUN**. This does not qualify native
+task preparation/exclusion/timer aperture, aggregate task/IRQ stack, WCET,
+device ordering/completion/voice-stop, exact live timing, audio or listening.
+Producer/controller/native CONTROL binding, prepublished controls, musical STOP,
+third command, rolling refill and default/classic PLAY remain unfinished. See
+[scoped source and test evidence](../evidence/enhanced-editor/causal-after-first-control/README.md).

@@ -1,0 +1,18 @@
+{
+  "src/core/mixed_readers_causal.c": {
+    "bytes": 68790,
+    "sha256": "d5e121f472d1b699983665f27212c063a50699a411e26219515e828fd31e30e1"
+  },
+  "src/core/mixed_readers_causal_control_internal.h": {
+    "bytes": 3954,
+    "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af"
+  },
+  "tests/mixed_readers_causal_control_test.c": {
+    "bytes": 21886,
+    "sha256": "d322bdbcde6d946085eedfe8da7d48ec5e3e6bf4ea4bb6255202a6e75a1f43a7"
+  },
+  "tests/test_mixed_readers_causal_control.py": {
+    "bytes": 3036,
+    "sha256": "36a20155d76c5e41c5c55ed99f401df846326bf248ba106832b4c4ae8e524b38"
+  }
+}

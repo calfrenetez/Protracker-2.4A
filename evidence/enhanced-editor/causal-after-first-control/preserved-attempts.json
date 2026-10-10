@@ -1,0 +1,433 @@
+{
+  "scope": "HISTORICAL_PRIVATE_HOST_ATTEMPTS",
+  "attempts": [
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-01",
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138106,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 1,
+          "stdout_bytes": 0,
+          "stderr_bytes": 1409
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 6.7540794590022415
+      },
+      "saved_leaves": {
+        "compile.stderr": {
+          "bytes": 1409,
+          "sha256": "6d3fb1c91c7bf9e1d09705cd428b664228fbc6e3a13c989ac14f43bdc833b47a",
+          "text": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:738:103: error: variable 'key' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  738 |        !output_apart(b,&saved,sizeof(saved))||!output_apart(b,&input,sizeof(input))||!output_apart(b,&key,sizeof(key))||\n      |                                                                                                       ^~~\n/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:738:64: error: variable 'input' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  738 |        !output_apart(b,&saved,sizeof(saved))||!output_apart(b,&input,sizeof(input))||!output_apart(b,&key,sizeof(key))||\n      |                                                                ^~~~~\n/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:738:25: error: variable 'saved' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  738 |        !output_apart(b,&saved,sizeof(saved))||!output_apart(b,&input,sizeof(input))||!output_apart(b,&key,sizeof(key))||\n      |                         ^~~~~\n3 errors generated.\n"
+        },
+        "source_before.json": {
+          "bytes": 11947,
+          "sha256": "58570a266e8f80e4650f870a9ec8823e146504baa71a147192e4eda3ca3ff45c"
+        },
+        "source_after.json": {
+          "bytes": 11947,
+          "sha256": "58570a266e8f80e4650f870a9ec8823e146504baa71a147192e4eda3ca3ff45c"
+        }
+      }
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-02",
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138106,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 1,
+          "stdout_bytes": 0,
+          "stderr_bytes": 1215
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 6.569740167004056
+      },
+      "saved_leaves": {
+        "compile.stderr": {
+          "bytes": 1215,
+          "sha256": "e584a39cfcdc1b0b06926510e81de848ed08f2ba6b4c9205adc3d0541f8796c2",
+          "text": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:740:50: error: variable 'key' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  740 |        !output_apart(b,(const void *)(uintptr_t)&key,sizeof(key))||\n      |                                                  ^~~\n/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:739:50: error: variable 'input' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  739 |        !output_apart(b,(const void *)(uintptr_t)&input,sizeof(input))||\n      |                                                  ^~~~~\n/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c:738:50: error: variable 'saved' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]\n  738 |        !output_apart(b,(const void *)(uintptr_t)&saved,sizeof(saved))||\n      |                                                  ^~~~~\n3 errors generated.\n"
+        },
+        "source_before.json": {
+          "bytes": 11947,
+          "sha256": "ab9ea5f2b1c13036b47f60937e58a3d4efab77590bd5efbf59ef6d3f54321c17"
+        },
+        "source_after.json": {
+          "bytes": 11947,
+          "sha256": "ab9ea5f2b1c13036b47f60937e58a3d4efab77590bd5efbf59ef6d3f54321c17"
+        }
+      }
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-03",
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138106,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 195
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.777162500016857
+      },
+      "saved_leaves": {
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "execute.stderr": {
+          "bytes": 195,
+          "sha256": "35e0dfe64618d8fafbc17a3f6835437a3bec1303422f6f53c58870701cb0321d",
+          "text": "Assertion failed: (pt_mixed_causal_fire(c->owner,second)==(unknown?PT_MIXED_CAUSAL_FAILED:PT_MIXED_CAUSAL_FAILED)), function cc_expected_only, file mixed_readers_causal_control_test.c, line 235.\n"
+        },
+        "source_before.json": {
+          "bytes": 11947,
+          "sha256": "2c5a6b069435b8c32024cc998a24019aefba07cde1b34f0e602953ec950dd1d2"
+        },
+        "source_after.json": {
+          "bytes": 11947,
+          "sha256": "2c5a6b069435b8c32024cc998a24019aefba07cde1b34f0e602953ec950dd1d2"
+        }
+      }
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-04",
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138106,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 171
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.393841042008717
+      },
+      "saved_leaves": {
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "execute.stderr": {
+          "bytes": 171,
+          "sha256": "3e5aaafb1c84a48977fd24cf14d55a4fa96a379ac36a6cc577c61af036cb55d7",
+          "text": "Assertion failed: (pt_mixed_causal_service_command(c->owner,second,1,NULL)==PT_MIXED_READERS_OK), function cc_failure, file mixed_readers_causal_control_test.c, line 251.\n"
+        },
+        "source_before.json": {
+          "bytes": 11947,
+          "sha256": "edc2a1b3b152caa6ec7c72dbadc744794c7106923961918b321cecd43e8a67d4"
+        },
+        "source_after.json": {
+          "bytes": 11947,
+          "sha256": "edc2a1b3b152caa6ec7c72dbadc744794c7106923961918b321cecd43e8a67d4"
+        }
+      }
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-05",
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138106,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 181
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.583417333022226
+      },
+      "saved_leaves": {
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "execute.stderr": {
+          "bytes": 181,
+          "sha256": "70252ca1f316aa0865ad1212f024fd5efffe5285af4057320836b287e654f2a6",
+          "text": "Assertion failed: (pt_mixed_causal_control_publish(c->owner,second)==PT_MIXED_READERS_BACKEND), function cc_publication_failure, file mixed_readers_causal_control_test.c, line 273.\n"
+        },
+        "source_before.json": {
+          "bytes": 11947,
+          "sha256": "7a8e6c487b09433c1b997656b0625abdf814dbd375f063b2ec4ce84ec177d0fd"
+        },
+        "source_after.json": {
+          "bytes": 11947,
+          "sha256": "7a8e6c487b09433c1b997656b0625abdf814dbd375f063b2ec4ce84ec177d0fd"
+        }
+      }
+    }
+  ],
+  "numbered_original_logs_preserved": true,
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN"
+}

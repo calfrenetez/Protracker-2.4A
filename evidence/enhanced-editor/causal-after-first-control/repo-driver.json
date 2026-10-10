@@ -1,0 +1,22 @@
+{
+  "scope": "NORMAL_REPOSITORY_HOST_TEST_DRIVER",
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+    "-I",
+    "-B",
+    "tests/test_mixed_readers_causal_control.py"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 8.28558141697431,
+  "stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "bytes": 98,
+    "sha256": "4b0f5f8925563cd63ba0510a47ce3c2de78384d9d7d77ab23d3fcbd6a53a9982"
+  },
+  "candidate_unchanged": true,
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN"
+}

@@ -1,0 +1,154 @@
+{
+  "scope": "SAVED_HOST_RESULTS_ONLY",
+  "candidate_freeze": {
+    "bytes": 619,
+    "sha256": "76700b119f0b482a2bd0ae5f3967bfb4f722d1f30324d4b40ac6511c5822652a"
+  },
+  "groups": [
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/publication56-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 3846,
+        "sha256": "4ba031b62342629ff0bde26b14c0b93ee4652d87bdb1e16c4603ba81871165bb"
+      },
+      "oracle": {
+        "bytes": 404,
+        "sha256": "20614a7624f7eae0259da6590fa3826b8f5beb1b006b887c251fce14a6a2e74e"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/factory24-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 4046,
+        "sha256": "7058936bca1473c3835c63dfd5c5d48a47512d3f67cc487ef9c7f96f092b2b06"
+      },
+      "oracle": {
+        "bytes": 1280,
+        "sha256": "b564b11df35e43afc52c5f558a320ee38a4f4d9ca260319f1378dd10b7b411d7"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/controller-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 9080,
+        "sha256": "7363f801eeeb7b886974abf31cc4548b55a723fa4ddccd217f47eba6672e5fef"
+      },
+      "oracle": {
+        "bytes": 2273,
+        "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/focus43-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 8964,
+        "sha256": "ab09b4f08f61adbd648e8e5a767d44c1e868abae33a32712ab25853a32ca8452"
+      },
+      "oracle": {
+        "bytes": 337,
+        "sha256": "4be6008682f3da87970637b13f676593774ba6534857ea8436139213fb4595fa"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/song62-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 9409,
+        "sha256": "97d0de5aeb24d00b5b28cfa4e5464f3f9ed7f7ddaa316dcb16924ab8eaa52031"
+      },
+      "oracle": {
+        "bytes": 617,
+        "sha256": "108553b93a0b9941faa20954633970a79123468995462226a9675a168f774798"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/quantized39-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 8976,
+        "sha256": "bf3c8f76116d7decee1759022726c55ec8a30a0ac00d7adacc797f46cd11d362"
+      },
+      "oracle": {
+        "bytes": 412,
+        "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/ram34-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 9090,
+        "sha256": "186c068ae15de797dac1a52e7097afb569147cf4328c64c8f5e9fdacf84737c0"
+      },
+      "oracle": {
+        "bytes": 502,
+        "sha256": "01d6660b8f95002872d8aa3a8a39e7ed3a6b2a6998524e8dbe18d8afada43206"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/hooks34-01",
+      "freeze": "01",
+      "summary": {
+        "bytes": 9101,
+        "sha256": "a8a9c1ba0b327b3522ccecf86fede8d5a64c69b88ade938e134290951e41d01c"
+      },
+      "oracle": {
+        "bytes": 4084,
+        "sha256": "eed7ffeb8cc6ab35ba040fec57f250688716c72706a62216d9cf9d9aaeea7039"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/control-07",
+      "freeze": "02",
+      "summary": {
+        "bytes": 3610,
+        "sha256": "d2db258a21203b9621be215104ff74e85d11bb73c995db05b9ca613e4e8208ff"
+      },
+      "oracle": {
+        "bytes": 449,
+        "sha256": "fbc404dc529eaf0af68f5bf5241c5f58e8cbe86820e8a039405c81032b94b41f"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    },
+    {
+      "run": "outputs/causal-control-host-prototype-20261010/runs/legacy-02",
+      "freeze": "02",
+      "summary": {
+        "bytes": 3576,
+        "sha256": "7831cf868d8547c9ca5cdb0264a7e54c7a793d13115992ffad693327f8e16a88"
+      },
+      "oracle": {
+        "bytes": 521,
+        "sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f"
+      },
+      "dependencies_unchanged": true,
+      "compile_execute_rc": 0
+    }
+  ],
+  "header_comment_only_post_host_test": true,
+  "native_run": "NOT_RUN",
+  "physical_run": "NOT_RUN",
+  "exact_live_timing": "UNQUALIFIED",
+  "earlier_failures_preserved": true
+}

@@ -1,0 +1,61 @@
+{
+  "candidate": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 68790,
+      "sha256": "d5e121f472d1b699983665f27212c063a50699a411e26219515e828fd31e30e1"
+    },
+    "src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af"
+    },
+    "tests/mixed_readers_causal_control_test.c": {
+      "bytes": 21886,
+      "sha256": "d322bdbcde6d946085eedfe8da7d48ec5e3e6bf4ea4bb6255202a6e75a1f43a7"
+    },
+    "tests/test_mixed_readers_causal_control.py": {
+      "bytes": 3036,
+      "sha256": "36a20155d76c5e41c5c55ed99f401df846326bf248ba106832b4c4ae8e524b38"
+    }
+  },
+  "focused_freeze02": [
+    {
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/runs/control-07",
+      "exact_oracle": true,
+      "source_unchanged": true,
+      "execute": {
+        "rc": 0,
+        "stdout_bytes": 449,
+        "stderr_bytes": 0
+      }
+    },
+    {
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/runs/legacy-02",
+      "exact_oracle": true,
+      "source_unchanged": true,
+      "execute": {
+        "rc": 0,
+        "stdout_bytes": 521,
+        "stderr_bytes": 0
+      }
+    }
+  ],
+  "header_comment_only_post_test": true,
+  "header_tested_pin": {
+    "bytes": 3873,
+    "sha256": "3827362f889d65388fee913b81c815ee12a795f9626d71d9f07d45bd41942a68"
+  },
+  "affected_freeze01": "AFFECTED_FREEZE_01.json",
+  "original_six_repo_inputs_unchanged": {
+    "src/core/mixed_readers_causal.c": true,
+    "src/core/mixed_readers_causal.h": true,
+    "src/core/mixed_readers_causal_queue_internal.h": true,
+    "src/core/mixed_readers_causal_factory_internal.h": true,
+    "tests/mixed_readers_causal_test.c": true,
+    "tests/test_mixed_readers_causal.py": true
+  },
+  "default_tests_bytes_unchanged": true,
+  "normal_repo_driver": "prepared; focused current-source overlay runner actually executed",
+  "native": "NOT RUN",
+  "physical": "NOT RUN",
+  "exact_live_scheduling": "NOT QUALIFIED"
+}

@@ -1,0 +1,242 @@
+{
+  "scope": "COMPILER_ONLY_NO_TARGET",
+  "native_run": "NOT_RUN",
+  "physical_run": "NOT_RUN",
+  "aggregate_stack": "UNQUALIFIED",
+  "compiler": {
+    "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+    "resolved": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+    "bytes": 821944,
+    "sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f"
+  },
+  "source_freeze": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 68790,
+      "sha256": "d5e121f472d1b699983665f27212c063a50699a411e26219515e828fd31e30e1"
+    },
+    "src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af"
+    },
+    "tests/mixed_readers_causal_control_test.c": {
+      "bytes": 21886,
+      "sha256": "d322bdbcde6d946085eedfe8da7d48ec5e3e6bf4ea4bb6255202a6e75a1f43a7"
+    },
+    "tests/test_mixed_readers_causal_control.py": {
+      "bytes": 3036,
+      "sha256": "36a20155d76c5e41c5c55ed99f401df846326bf248ba106832b4c4ae8e524b38"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core",
+        "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+        "-MM",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal.c"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.06075875001261011,
+      "stdout": {
+        "bytes": 1873,
+        "sha256": "25c4236df03e05878d55f331aad6f172317afd0ca9fb83542295c15273dfc1d4"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core",
+        "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+        "-c",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-compiler-only-20261010-v2/mixed_readers_causal.o"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.3346354590030387,
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "source_before": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal.c": {
+      "bytes": 68790,
+      "sha256": "d5e121f472d1b699983665f27212c063a50699a411e26219515e828fd31e30e1"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 1982,
+      "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    }
+  },
+  "source_after": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal.c": {
+      "bytes": 68790,
+      "sha256": "d5e121f472d1b699983665f27212c063a50699a411e26219515e828fd31e30e1"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-control-host-prototype-20261010/frozen-02/src/core/mixed_readers_causal_control_internal.h": {
+      "bytes": 3954,
+      "sha256": "00827c4aab764fa05f86c42fcb1bb6e1b2c128fb8c6300e9c8fd26e7895552af"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal.h": {
+      "bytes": 13986,
+      "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 1982,
+      "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 1970,
+      "sha256": "760bc5f8b8c54d633993b2e5bd62d652537f6d419b8c031fce739e273ad73ced"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    }
+  },
+  "source_unchanged": true,
+  "mixed_readers_causal.o": {
+    "bytes": 24188,
+    "sha256": "186bd3af1de8c4dc1d33a17fce1ce962fc91382c1e38c8d7204d3c57f4158d92"
+  },
+  "mixed_readers_causal.su": {
+    "bytes": 3951,
+    "sha256": "d26c29769c9bbd2163dd12b539b1aefc50105fd3a8c1ba5d306b02109476ad58"
+  },
+  "status": "PASS_COMPILER_ONLY"
+}

@@ -3,6 +3,7 @@
 #include "mixed_readers_causal_factory_internal.h"
 #include "mixed_readers_causal_control_internal.h"
 #include "mixed_readers_causal_stop_internal.h"
+#include "mixed_readers_causal_lineage_internal.h"
 #include <stddef.h>
 #include <string.h>
 struct activation_reader {
@@ -37,6 +38,16 @@ struct causal_pair {
     unsigned admitted,published,completed,suppressed,commit_called;
     int commit_outcome;
 };
+/* Fixed third-stage state, never a rolling refill or a third live C slot.
+ * Completion identities survive C disposal only as copied opaque values.
+ * Owner-resident full publication backup avoids a new large automatic object. */
+struct control_stop_lineage {
+    uint64_t ticket,serial,publishing,root_frame;
+    unsigned first_detached,admitted,published,suppressed;
+    unsigned control_called,control_completed;int control_outcome;
+    struct pt_mixed_causal_completed_value control;
+    struct pt_mixed_causal_control_stop_publication publication,saved_publication;
+};
 struct pt_mixed_causal_owner {
     struct pt_allocator allocator;struct pt_mixed_readers_span allocator_context;
     struct pt_mixed_readers_grid grid;struct pt_mixed_causal_port port;
@@ -61,6 +72,8 @@ struct pt_mixed_causal_owner {
     struct pt_mixed_causal_stop_port stop_port;
     struct pt_mixed_causal_stop_publication stop_publication;
     unsigned stop_bound;
+    struct pt_mixed_causal_control_stop_port control_stop_port;
+    struct control_stop_lineage lineage;unsigned control_stop_bound;
 };
 static int extent(const void *p,size_t n)
 {return !n||(p&&(uintptr_t)p<=UINTPTR_MAX-(n-1));}
@@ -88,7 +101,7 @@ static int slot_index(unsigned route,unsigned slot,unsigned *index)
 {if(route==PT_MIXED_READERS_PAULA&&slot<4){*index=slot;return 1;}
  if(route==PT_MIXED_READERS_AMIGUS&&slot<16){*index=4+slot;return 1;}return 0;}
 static void fault(struct pt_mixed_causal_owner *b)
-{b->failed=1;b->causal.suppressed=1;++b->faults;if(b->release_latch)*b->release_latch=1;}
+{b->failed=1;b->causal.suppressed=1;b->lineage.suppressed=1;++b->faults;if(b->release_latch)*b->release_latch=1;}
 void pt_mixed_causal_fail_closed(struct pt_mixed_causal_owner *b)
 {if(b)fault(b);}
 static int enter(struct pt_mixed_causal_owner *b)
@@ -296,24 +309,90 @@ static void control_first_prediction(struct pt_mixed_causal_owner *b,const struc
     }
     /* adopted_mask deliberately stays zero; this is not actual adoption. */
 }
+static int lineage_identity_same(const struct pt_mixed_causal_command_identity *a,
+    const struct pt_mixed_causal_command_identity *b)
+{
+    return a->registration.owner==b->registration.owner&&a->registration.queue==b->registration.queue&&
+        a->registration.session==b->registration.session&&a->registration.generation==b->registration.generation&&
+        a->ticket==b->ticket&&a->owner==b->owner&&a->event==b->event&&
+        a->binding.context==b->binding.context&&a->binding.context_bytes==b->binding.context_bytes;
+}
+/* Copied owner metadata only; fire never walks historical C/event/domain/span
+ * storage. Task admission independently repeats genuine queue ACTIVE getters.
+ * Accepted STOP closes R to admission, but still-ACTIVE copied R may fire. */
+static int lineage_control_current(const struct pt_mixed_causal_owner *b,unsigned admission)
+{
+    const struct causal_pair *root=&b->causal;
+    const struct control_stop_lineage *p=&b->lineage;
+    const struct pt_mixed_causal_completed_value *c=&p->control;unsigned i;
+    if(!b->control_stop_bound||!b->control_bound||b->stop_bound||b->failed||
+       b->source_closed||b->source_attempted||b->source_uncertain||p->suppressed||
+       !root->first||!root->successor||!root->completed||root->suppressed||
+       !root->admitted||!root->published||!root->commit_called||root->commit_outcome!=1||
+       root->predecessor.ticket!=root->first||root->predecessor.registration.owner!=b||
+       root->predecessor.registration.queue!=b->registration.queue||
+       root->predecessor.registration.session!=b->registration.session||
+       root->predecessor.registration.generation!=b->registration.generation||
+       root->completed_first_tick>=root->completed_last_tick||root->observed<root->completed_first_tick||
+       root->issued<root->observed||root->issued>=root->completed_last_tick||
+       !p->first_detached||!p->control_called||p->control_outcome!=1||!p->control_completed||
+       c->identity.ticket!=root->successor||c->identity.registration.owner!=b||
+       c->identity.registration.queue!=b->registration.queue||
+       c->identity.registration.session!=b->registration.session||
+       c->identity.registration.generation!=b->registration.generation||
+       c->frame<=p->root_frame||c->first_tick>=c->last_tick||c->observed<c->first_tick||
+       c->issued<c->observed||c->issued>=c->last_tick||
+       root->predicted.active_mask!=b->mask||root->predicted.adopted_mask||
+       root->completed_post.active_mask!=b->mask||root->completed_post.adopted_mask!=b->mask||
+       c->post.active_mask!=b->mask||c->post.adopted_mask!=b->mask)return 0;
+    for(i=0;i<PT_MIXED_CAUSAL_SLOTS;++i){struct activation_reader *r;
+        if(!key_equal(root->predicted.slot+i,b->slot+i)||
+           !key_equal(root->completed_post.slot+i,b->slot+i)||!key_equal(c->post.slot+i,b->slot+i))return 0;
+        if(!(b->mask&(1U<<i))){if(!key_zero(b->slot+i))return 0;continue;}
+        r=find_reader((struct pt_mixed_causal_owner *)(void *)b,b->slot+i);
+        if(!r||!r->held||!r->adopted||r->cancelled||r->state!=PT_MIXED_READER_ACTIVE||
+           (admission&&r->closed)||r->identity.key.trigger!=root->first||
+           r->observed!=root->observed||r->issued!=root->issued)return 0;
+    }
+    return 1;
+}
+static int lineage_publish_stop(struct pt_mixed_causal_owner *b,struct activation_command *c)
+{
+    struct pt_mixed_causal_control_stop_publication *p=&b->lineage.publication;
+    int raw;
+    memset(p,0,sizeof(*p));memcpy(&p->root.identity,&b->causal.predecessor,sizeof(p->root.identity));
+    p->root.frame=b->lineage.root_frame;p->root.first_tick=b->causal.completed_first_tick;
+    p->root.last_tick=b->causal.completed_last_tick;p->root.observed=b->causal.observed;p->root.issued=b->causal.issued;
+    memcpy(&p->root.post,&b->causal.completed_post,sizeof(p->root.post));
+    memcpy(&p->control,&b->lineage.control,sizeof(p->control));memcpy(&p->stop,&c->identity,sizeof(p->stop));
+    p->serial=b->lineage.serial;memcpy(&p->packet,&c->packet,sizeof(p->packet));
+    memcpy(&b->lineage.saved_publication,p,sizeof(*p));
+    raw=b->control_stop_port.publish_stop_after_control(b->port.context,b,p);
+    if(memcmp(p,&b->lineage.saved_publication,sizeof(*p)))fault(b);
+    memset(p,0,sizeof(*p));memset(&b->lineage.saved_publication,0,sizeof(b->lineage.saved_publication));
+    return raw;
+}
 static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
 {
     struct pt_mixed_causal_owner *b=context;struct activation_command *c;
     unsigned i,j,index=PT_MIXED_CAUSAL_COMMANDS,n=0,free_count=0;
-    unsigned assigned[PT_MIXED_READERS_ACTIONS];uint64_t now,after;int result;
+    unsigned assigned[PT_MIXED_READERS_ACTIONS],third;uint64_t now,after;int result;
     struct pt_mixed_causal_command_identity identity;
     if(!b)return -1;
     if(!candidate_guard(b,e))return 0;
     if(!enter(b))return -1;
     if(b->failed||b->source_closed||b->source_uncertain){b->busy=0;return -1;}
+    third=b->control_stop_bound&&e->ticket==b->lineage.ticket;
     if(e->ticket!=b->causal.first&&
        (e->ticket!=b->causal.successor||b->causal.publishing!=e->ticket||
-        !b->causal.admitted||b->causal.suppressed)){b->busy=0;return 0;}
+         !b->causal.admitted||b->causal.suppressed)&&
+        (!third||b->lineage.publishing!=e->ticket||!b->lineage.admitted||b->lineage.suppressed)){b->busy=0;return 0;}
     for(i=0;i<PT_MIXED_CAUSAL_COMMANDS;++i)if(!b->command[i].held){index=i;break;}
     for(i=0;i<PT_MIXED_CAUSAL_READERS;++i)free_count+=!b->reader[i].held;
     if(index==PT_MIXED_CAUSAL_COMMANDS||!prepare(b,e,&n)||n>free_count){staged_clear(b);b->busy=0;return 0;}
     for(i=0;i<b->staged.packet.count;++i)
-        if(b->staged.packet.action[i].kind!=(b->control_bound&&e->ticket==b->causal.successor?
+        if(b->staged.packet.action[i].kind!=(third?PT_MIXED_READERS_STOP:
+            b->control_bound&&e->ticket==b->causal.successor?
             PT_MIXED_READERS_CONTROL:b->stop_bound&&e->ticket==b->causal.successor?
             PT_MIXED_READERS_STOP:PT_MIXED_READERS_TRIGGER)){
             staged_clear(b);b->busy=0;return 0;}
@@ -321,6 +400,7 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
        (n||!control_first_current(b))){staged_clear(b);b->busy=0;return 0;}
     if(b->stop_bound&&e->ticket==b->causal.successor&&
        (n||!stop_first_current(b))){staged_clear(b);b->busy=0;return 0;}
+    if(third&&(n||!lineage_control_current(b,1))){staged_clear(b);b->busy=0;return 0;}
     if(e->ticket==b->causal.successor&&!b->control_bound&&!b->stop_bound){
         b->staged.packet.expected_mask=b->causal.predicted.active_mask;
         memcpy(b->staged.packet.expected,b->causal.predicted.slot,sizeof(b->staged.packet.expected));
@@ -334,7 +414,8 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
     c->port_refs=1;for(i=0;i<n;++i)b->reader[assigned[i]].port_refs=1;
     /* Staging is already transferred and cleared; busy excludes reuse. */
     memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));memcpy(&identity,&c->identity,sizeof(identity));
-    if(e->ticket==b->causal.successor&&b->control_bound){
+    if(third)result=lineage_publish_stop(b,c);
+    else if(e->ticket==b->causal.successor&&b->control_bound){
         struct pt_mixed_causal_control_publication *p=&b->control_publication;
         memset(p,0,sizeof(*p));memcpy(&p->predecessor,&b->causal.predecessor,sizeof(p->predecessor));
         memcpy(&p->successor,&c->identity,sizeof(p->successor));
@@ -342,6 +423,7 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
         p->observed=b->causal.observed;p->issued=b->causal.issued;p->serial=b->causal.serial;
         memcpy(&p->first_post,&b->causal.completed_post,sizeof(p->first_post));
         memcpy(&p->packet,&c->packet,sizeof(p->packet));
+        if(b->control_stop_bound)memcpy(&b->lineage.control.identity,&c->identity,sizeof(c->identity));
         result=b->control_port.publish_control(b->port.context,b,p);
         if(memcmp(&p->predecessor,&b->causal.predecessor,sizeof(p->predecessor))||
            memcmp(&p->successor,&c->identity,sizeof(p->successor))||
@@ -396,6 +478,7 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
      * post-read can only retain and classify unknown, never become refusal. */
     if(!clock_read(b,&after)||after>=c->packet.first||result!=1||b->failed){c->unknown=1;b->failed=1;b->causal.suppressed=1;result=-1;}
     if(e->ticket==b->causal.successor){b->causal.published=1;if(result!=1)b->causal.suppressed=1;}
+    if(third){b->lineage.published=1;if(result!=1)b->lineage.suppressed=1;}
     for(i=0;i<c->packet.count;++i)if(c->packet.action[i].kind==PT_MIXED_READERS_STOP){struct activation_reader *r=find_reader(b,c->packet.key+i);if(r)r->closed=1;}
     b->busy=0;return result;
 }
@@ -434,15 +517,19 @@ static int causal_current(const struct pt_mixed_causal_owner *b)
 enum pt_mixed_causal_result pt_mixed_causal_fire(struct pt_mixed_causal_owner *b,uint64_t ticket)
 {
     struct activation_command *c;struct pt_mixed_causal_actual actual;
-    uint64_t observed,issued;unsigned i,j,index;int result;
+    uint64_t observed,issued;unsigned i,j,index,third;int result;
     if(!b)return PT_MIXED_CAUSAL_INVALID;
     if(b->task_busy){fault(b);return PT_MIXED_CAUSAL_INVALID;}
     if(!enter(b))return PT_MIXED_CAUSAL_INVALID;
     c=find_command(b,ticket);
     if(!c||c->command!=PT_MIXED_COMMAND_WAITING){b->busy=0;return PT_MIXED_CAUSAL_INVALID;}
+    third=b->control_stop_bound&&ticket==b->lineage.ticket;
     if(b->failed||b->source_closed||b->source_uncertain||!clock_read(b,&observed))goto failed;
     if(observed<c->packet.first){
-        if(ticket==b->causal.successor){
+        if(third){
+            if(!b->lineage.admitted||!b->lineage.published||b->lineage.suppressed||
+               !lineage_control_current(b,0)||!current_packet(b,&c->packet))goto failed;
+        }else if(ticket==b->causal.successor){
             if(!b->causal.admitted||!b->causal.published||b->causal.suppressed)goto failed;
             if(b->causal.completed){if(!causal_current(b)||!current_packet(b,&c->packet))goto failed;}
             else{
@@ -464,11 +551,17 @@ enum pt_mixed_causal_result pt_mixed_causal_fire(struct pt_mixed_causal_owner *b
         if(b->control_bound||b->stop_bound){if(b->causal.admitted||b->causal.published||b->causal.suppressed)goto failed;}
         else if(!b->causal.admitted||!b->causal.published||b->causal.suppressed)goto failed;
     }
+    else if(third){if(!b->lineage.admitted||!b->lineage.published||b->lineage.suppressed||
+        !lineage_control_current(b,0))goto failed;}
     else if(ticket!=b->causal.successor||!causal_current(b))goto failed;
+    if(b->control_stop_bound&&ticket==b->causal.successor&&
+       !lineage_identity_same(&c->identity,&b->lineage.control.identity))goto failed;
     for(i=0;i<c->packet.count;++i){struct activation_reader *r=find_reader(b,c->packet.key+i);if(!r||r->cancelled)goto failed;}
     /* Keep actual automatic; only the complete packet backup uses scratch. */
     memset(&actual,0,sizeof(actual));memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));result=b->port.commit(b->port.context,&c->packet,&actual);
     if(ticket==b->causal.first){b->causal.commit_called=1;b->causal.commit_outcome=result;b->causal.observed=observed;}
+    if(b->control_stop_bound&&ticket==b->causal.successor){
+        b->lineage.control_called=1;b->lineage.control_outcome=result;b->lineage.control.observed=observed;}
     if(memcmp(&b->staged.packet,&c->packet,sizeof(c->packet))){memcpy(&c->packet,&b->staged.packet,sizeof(c->packet));fault(b);}
     memset(&b->staged.packet,0,sizeof(b->staged.packet));
     if(result!=1||!clock_read(b,&issued)||issued>=c->packet.last||actual.active_mask&~0xFFFFFU||
@@ -499,7 +592,13 @@ enum pt_mixed_causal_result pt_mixed_causal_fire(struct pt_mixed_causal_owner *b
     b->mask=actual.active_mask;memcpy(b->slot,actual.slot,sizeof(b->slot));geometry_drop(c);
     if(ticket==b->causal.first){memcpy(&b->causal.completed_post,&actual,sizeof(actual));
         b->causal.completed_first_tick=c->packet.first;b->causal.completed_last_tick=c->packet.last;
-        b->causal.issued=issued;b->causal.completed=1;}
+        b->causal.issued=issued;b->causal.completed=1;
+        if(b->control_stop_bound)b->lineage.root_frame=c->packet.frame;}
+    if(b->control_stop_bound&&ticket==b->causal.successor){
+        struct pt_mixed_causal_completed_value *completed=&b->lineage.control;
+        completed->frame=c->packet.frame;completed->first_tick=c->packet.first;completed->last_tick=c->packet.last;
+        completed->observed=observed;completed->issued=issued;memcpy(&completed->post,&actual,sizeof(actual));
+        b->lineage.control_completed=1;}
     c->observed=observed;c->issued=issued;c->command=PT_MIXED_COMMAND_ISSUED;b->busy=0;return PT_MIXED_CAUSAL_COMMITTED;
 failed:
     c->unknown=1;b->causal.suppressed=1;b->failed=1;b->busy=0;return PT_MIXED_CAUSAL_FAILED;
@@ -529,6 +628,9 @@ static enum pt_mixed_readers_reply backend_command(void *context,uint64_t ticket
         if(c->command==PT_MIXED_COMMAND_ISSUED||c->command==PT_MIXED_COMMAND_CANCELLED_AFTER){a->observed=c->observed;a->issued=c->issued;}
     }
     if(result==1&&ticket==b->causal.first&&!b->causal.completed)b->causal.suppressed=1;
+    if(result==1&&b->control_stop_bound&&
+       ((ticket==b->causal.successor&&!b->lineage.control_completed)||
+        (ticket==b->lineage.ticket&&c->command==PT_MIXED_COMMAND_CANCELLED_BEFORE)))b->lineage.suppressed=1;
     if(result==1)memset(c,0,sizeof(*c));
     *out=receipt;b->busy=0;
     return result==1?PT_MIXED_COMMAND_DETACHED:PT_MIXED_OBSERVATION;
@@ -561,7 +663,9 @@ static enum pt_mixed_readers_reply backend_reader(void *context,const struct pt_
             if(dependent&&c->command==PT_MIXED_COMMAND_WAITING){
                 if(!cancel){b->busy=0;return PT_MIXED_REPLY_PENDING;}
                 c->command=PT_MIXED_COMMAND_CANCELLED_BEFORE;geometry_drop(c);
-                if(c->packet.ticket==b->causal.first||c->packet.ticket==b->causal.successor)b->causal.suppressed=1;
+                if(c->packet.ticket==b->causal.first||c->packet.ticket==b->causal.successor||
+                   (b->control_stop_bound&&c->packet.ticket==b->lineage.ticket)){
+                    b->causal.suppressed=1;b->lineage.suppressed=1;}
             }
         }
         for(i=0;i<PT_MIXED_CAUSAL_COMMANDS;++i)if(b->command[i].held)
@@ -914,6 +1018,79 @@ enum pt_mixed_readers_result pt_mixed_causal_stop_publish(struct pt_mixed_causal
     b->causal.publishing=ticket;result=pt_mixed_readers_publish(b->queue,ticket);b->causal.publishing=0;
     b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:result;
 }
+enum pt_mixed_readers_result pt_mixed_causal_control_stop_bind(struct pt_mixed_causal_owner *b,
+    const struct pt_mixed_causal_control_stop_port *port)
+{
+    unsigned i;
+    if(!b||!port||!output_apart(b,port,sizeof(*port))||
+       port->context!=b->port.context||port->context_bytes!=b->port.context_bytes||
+       port->version!=PT_MIXED_CAUSAL_CONTROL_STOP_VERSION||port->flags!=PT_MIXED_CAUSAL_CONTROL_STOP_REQUIRED||
+       !port->publish_control||!port->publish_stop_after_control||b->control_bound||b->stop_bound||
+       b->control_stop_bound||!b->queue||b->causal.first||b->ordered||b->mask||
+       b->failed||b->source_closed||b->source_attempted||b->source_uncertain||
+       pt_mixed_readers_commands_held(b->queue)||pt_mixed_readers_readers_held(b->queue))return PT_MIXED_READERS_INVALID;
+    for(i=0;i<PT_MIXED_CAUSAL_COMMANDS;++i)if(b->command[i].held)return PT_MIXED_READERS_INVALID;
+    for(i=0;i<PT_MIXED_CAUSAL_READERS;++i)if(b->reader[i].held)return PT_MIXED_READERS_INVALID;
+    if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
+    memcpy(&b->control_stop_port,port,sizeof(*port));
+    memset(&b->control_port,0,sizeof(b->control_port));b->control_port.context=port->context;
+    b->control_port.context_bytes=port->context_bytes;b->control_port.version=PT_MIXED_CAUSAL_CONTROL_VERSION;
+    b->control_port.flags=PT_MIXED_CAUSAL_CONTROL_REQUIRED;b->control_port.publish_control=port->publish_control;
+    b->control_bound=b->control_stop_bound=1;b->task_busy=0;return PT_MIXED_READERS_OK;
+}
+enum pt_mixed_readers_result pt_mixed_causal_stop_after_control_enqueue(struct pt_mixed_causal_owner *b,
+    const struct pt_mixed_causal_stop_request *request,uint64_t *out)
+{
+    struct pt_mixed_causal_stop_request saved;
+    struct pt_mixed_readers_inputs input;struct pt_mixed_readers_key key;
+    enum pt_mixed_readers_result result;unsigned i,index;
+    /* Same complete original/transformed guards as the separate STOP successor.
+     * No local-ticket bypass; successful actual lower enqueue is C transfer. */
+    if(!b||!request||!out||!output_apart(b,request,sizeof(*request))||!output_apart(b,out,sizeof(*out))||
+       !output_apart(b,request->command.context,request->command.context_bytes)||
+       !apart(request,sizeof(*request),out,sizeof(*out))||
+       !apart(request,sizeof(*request),request->command.context,request->command.context_bytes)||
+       !apart(out,sizeof(*out),request->command.context,request->command.context_bytes)||
+       !output_address_apart(b,(uintptr_t)&saved,sizeof(saved))||
+       !output_address_apart(b,(uintptr_t)&input,sizeof(input))||
+       !output_address_apart(b,(uintptr_t)&key,sizeof(key))||
+       !apart(&saved,sizeof(saved),request,sizeof(*request))||!apart(&input,sizeof(input),request,sizeof(*request))||
+       !apart(&key,sizeof(key),request,sizeof(*request))||!apart(&saved,sizeof(saved),out,sizeof(*out))||
+       !apart(&input,sizeof(input),out,sizeof(*out))||!apart(&key,sizeof(key),out,sizeof(*out))||
+       !apart(&saved,sizeof(saved),request->command.context,request->command.context_bytes)||
+       !apart(&input,sizeof(input),request->command.context,request->command.context_bytes)||
+       !apart(&key,sizeof(key),request->command.context,request->command.context_bytes)||
+       !stop_request_valid(request)||!b->queue||!lineage_control_current(b,1)||
+       b->lineage.admitted||b->lineage.published||request->predecessor!=b->causal.successor||
+       request->frame<=b->lineage.control.frame||request->frame<=b->last_frame)return PT_MIXED_READERS_INVALID;
+    if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
+    memcpy(&saved,request,sizeof(saved));memset(&input,0,sizeof(input));
+    input.batch.generation=b->grid.generation;input.batch.frame=saved.frame;input.batch.count=saved.count;input.command=saved.command;
+    for(i=0;i<saved.count;++i){const struct pt_mixed_causal_stop_action *a=saved.action+i;
+        struct pt_mixed_readers_action *d=input.batch.action+i;
+        if(!slot_index(a->route,a->slot,&index)||!(b->mask&(1U<<index))){b->task_busy=0;return PT_MIXED_READERS_STALE;}
+        key=b->lineage.control.post.slot[index];
+        result=pt_mixed_readers_reader_key(b->queue,key.trigger,key.action,input.target+i);
+        if(memcmp(request,&saved,sizeof(saved)))fault(b);
+        if(result!=PT_MIXED_READERS_OK||!key_equal(&key,input.target+i)||!lineage_control_current(b,1)){
+            b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:result==PT_MIXED_READERS_OK?PT_MIXED_READERS_STALE:result;
+        }
+        d->route=a->route;d->slot=a->slot;d->kind=PT_MIXED_READERS_STOP;
+    }
+    result=pt_mixed_readers_enqueue(b->queue,&input,out);
+    if(memcmp(request,&saved,sizeof(saved)))fault(b);
+    if(result==PT_MIXED_READERS_OK){b->lineage.ticket=*out;b->lineage.serial=2;b->lineage.admitted=1;}
+    b->task_busy=0;return result==PT_MIXED_READERS_OK?result:b->failed?PT_MIXED_READERS_BACKEND:result;
+}
+enum pt_mixed_readers_result pt_mixed_causal_stop_after_control_publish(struct pt_mixed_causal_owner *b,uint64_t ticket)
+{
+    enum pt_mixed_readers_result result;
+    if(!b||!b->queue||!lineage_control_current(b,1)||!b->lineage.admitted||b->lineage.published||
+       !ticket||ticket!=b->lineage.ticket)return PT_MIXED_READERS_INVALID;
+    if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
+    b->lineage.publishing=ticket;result=pt_mixed_readers_publish(b->queue,ticket);b->lineage.publishing=0;
+    b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:result;
+}
 enum pt_mixed_readers_result pt_mixed_causal_enqueue_successor(
     struct pt_mixed_causal_owner *b,uint64_t predecessor,const struct pt_mixed_readers_inputs *input,uint64_t *out)
 {
@@ -1009,7 +1186,12 @@ enum pt_mixed_readers_result pt_mixed_causal_service_command(struct pt_mixed_cau
     if(!b||cancel>1||(out&&!output_apart(b,out,sizeof(*out))))return PT_MIXED_READERS_INVALID;
     if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
     if(!b->queue){b->task_busy=0;return PT_MIXED_READERS_INVALID;}
-    r=pt_mixed_readers_service_command(b->queue,ticket,cancel,out);b->task_busy=0;return r;
+    r=pt_mixed_readers_service_command(b->queue,ticket,cancel,out);
+    /* The actual genuine queue validated DETACHED and consumed C1. Counts or a
+     * copied receipt/backend disappearance alone never create this authority. */
+    if(b->control_stop_bound&&ticket==b->causal.first&&!cancel&&r==PT_MIXED_READERS_OK&&
+       !b->failed&&b->causal.completed&&!b->causal.suppressed&&!find_command(b,ticket))b->lineage.first_detached=1;
+    b->task_busy=0;return r;
 }
 enum pt_mixed_readers_result pt_mixed_causal_service_reader(struct pt_mixed_causal_owner *b,uint64_t ticket,unsigned action,unsigned cancel,struct pt_mixed_readers_reader_receipt *out)
 {

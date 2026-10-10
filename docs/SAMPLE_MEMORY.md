@@ -6836,3 +6836,48 @@ native STOP binding, third CONTROL-to-STOP lineage, native preparation/timer
 aperture, aggregate stack/IRQ/WCET, exact live timing, hardware stop/quiet/order/
 completion and listening remain unfinished or unqualified. See
 [scoped sampler STOP evidence](../evidence/enhanced-editor/sampler-causal-after-first-stop/README.md).
+
+
+## Finite TRIGGER -> CONTROL -> STOP ownership: host-tested core
+
+The private `mixed_readers_causal_lineage_internal.h` capability now permits one
+TRIGGER, one CONTROL and one later STOP while keeping the existing limit of two
+live command slots and 32 retained readers. Binding requires a genuine empty
+owner. Default two-TRIGGER, CONTROL-only and STOP-only owners retain their
+existing admission rules. This is opt-in core groundwork; the sampler factory,
+controller, producer and native backend do not acquire this capability merely
+because the core implements it.
+
+The third STOP requires successful genuine first-command queue detachment,
+actual CONTROL completion and independently checked original ACTIVE reader
+keys. Retired command identities are copied opaque comparison values; disposed
+events and holders are never dereferenced. The port must independently compare
+its actual root and CONTROL completions and the complete current registry. All
+frames, windows and observed/issued timestamps remain original. No timing jitter
+is allowed, no fourth command is admitted and CONTROL/STOP acquire no new
+reader, sample master, cache lease, conversion or upload.
+
+STOP publication closes selected readers to future admission; their original
+accepted activation may still fire. Only actual STOP commit makes them DRAINING.
+Independent command, reader and source quiet proofs govern release. An uncertain
+publication or reentrant/mutating callback retains possible ownership. Successful
+lower enqueue transfers the genuine third command even if an outer callback
+faults afterward. Fixed owner-resident publication beforeimages cover complete
+representations and the whole owner remains covered by existing alias guards.
+
+The new genuine-holder host fixture passed all 25 cases with C99 assertions,
+warnings treated as errors, AddressSanitizer and UndefinedBehaviorSanitizer.
+Separate unchanged default26, CONTROL34, STOP45 and affected sampler-factory55
+fixtures passed against this core. Cases cover 8/16/24-bit masters, 8/16-bit card
+cache leases, Chip leases, command-slot reuse, disposed command poisoning,
+independent retirement orders, guarded aliases, refused/uncertain publication,
+mutation, reentry and lower-layer ownership transfer. Original master contents
+and retained cache/pin counts are independent before-and-after assertions.
+
+These are host model results. A native compiler dependency-stage attempt timed
+out without qualified output, original child wait or stream EOF; no native
+object or assembly was qualified. Native ABI, aggregate stack, callback
+residency, exact activation timing, interrupt behavior, WCET, device stop and
+ordering, sample-RAM capacity/completion, Amiberry, real-A1200 and human listening
+acceptance remain separate and pending. This finite core mode does not implement
+the deferred general live broker or any ZooperTracker features.

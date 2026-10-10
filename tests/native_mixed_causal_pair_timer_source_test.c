@@ -311,7 +311,10 @@ static void ts_empty_clean_acquire(void)
     assert(!h->entry&&!h->releases&&!memcmp(&h->state,&h->original,sizeof(h->state)));
     assert(ts_end()==1);ts_finish(f);
 }
-int main(void)
+#ifndef PT_PRIVATE_PAIR_TIMER_FIXTURE_ENTRY
+#define PT_PRIVATE_PAIR_TIMER_FIXTURE_ENTRY main
+#endif
+int PT_PRIVATE_PAIR_TIMER_FIXTURE_ENTRY(void)
 {
     ts_success();ts_early();ts_pending_excluded(0);ts_pending_excluded(2);
     ts_arm_unknown(1);ts_arm_unknown(2);ts_first_due_before_successor();ts_unknown_source();ts_exclusion_reentry();ts_empty_clean_acquire();

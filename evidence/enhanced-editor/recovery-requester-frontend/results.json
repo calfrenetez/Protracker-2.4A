@@ -208,5 +208,53 @@
     "HOST platform stubs are not native ABI acceptance",
     "Full compile/link and HUNK header check are not runtime/loadability acceptance",
     "No sample-memory architecture, baseline or deferred features changed"
-  ]
+  ],
+  "amiberry_first_window": {
+    "date": "2026-10-10",
+    "status": "INFRASTRUCTURE_START_FAILED_CANDIDATE_NOT_RUN",
+    "tag": "PT24G-RECOVERY-UI-20261010-A",
+    "candidate": {
+      "bytes": 331288,
+      "check": "Leading Amiga HUNK_HEADER1011 only; no runtime/loadability/whole-stack acceptance.",
+      "sha256": "6aa0e298b52975843b26405a0c074ef710dddf328849bb89fdff2bc173281788"
+    },
+    "take": {
+      "actual": "5988fb",
+      "rc": 0
+    },
+    "startup": {
+      "actual": "3f7560/session51019 -> 8bf60c",
+      "rc": 1,
+      "error": "TimeoutError",
+      "first_failing_leaf": "Protected Amiberry startup IPC PING reader.readline timeout"
+    },
+    "candidate_staged": false,
+    "candidate_launched": false,
+    "native_ENV_changed": false,
+    "physical_operation": false,
+    "last_saved_local_guard": {
+      "phase": "HOLD",
+      "fence": 1439,
+      "holds": 3,
+      "release_archives": 31,
+      "inflight": false,
+      "potential_resident": true
+    },
+    "post_failure_process_identity": "NOT_OBSERVED",
+    "automatic_retry_probe_cleanup_or_release": false,
+    "saved_failure_summary": {
+      "bytes": 1033,
+      "sha256": "7b8632c08fc10e01c226168a5100c225a07d618833fa6af2ebf6a10a5973c7b0"
+    },
+    "saved_boot_failure": {
+      "bytes": 86,
+      "sha256": "5851c20647293e1969ca1ceb512685737bbe9b40f75fcbef710e7a4e4f91d370"
+    },
+    "saved_local_hold_status": {
+      "bytes": 7348,
+      "sha256": "42bc2e5b6b29481f6f53389885d56821df4499b36c4b66cb3189b81af9dc88ca"
+    },
+    "recovery": "Separate bounded HOST-only recovery proposal prepared; approval pending; not executed",
+    "limits": "Startup failure is infrastructure evidence only. It neither fails nor qualifies the requester GUI, native ABI/lifetime, hardware or listening."
+  }
 }

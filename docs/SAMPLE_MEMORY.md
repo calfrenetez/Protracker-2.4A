@@ -6708,3 +6708,13 @@ and linked binaries do not establish native tag ABI, message/timer retirement,
 aggregate stack, hardware output, exact musical scheduling or listening
 acceptance. The sample-memory architecture, classic layout and deferred-feature
 boundaries remain unchanged.
+
+
+The first separately coordinated Amiberry window on 10 October failed during
+Amiberry startup: its protected IPC PING timed out before ProTracker was staged
+or launched. The requester remains **NOT RUN**; no native ENV settings or
+physical target were changed. The saved launcher observation retained HOLD
+with the original reservation. No automatic retry, target probe, cleanup or
+release followed. A separately approved bounded host recovery is required
+before another shared operation. This infrastructure failure does not change
+the passing host checks or establish any native acceptance.

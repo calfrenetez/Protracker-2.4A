@@ -858,7 +858,12 @@ static void sl_target_refusal(unsigned which)
  e->port.external.hold[2]=e->port.external.hold[3]=0;
  sl_close(e);sl_same(e);sl_drop(e);
 }
-int main(void)
+/* A private including fixture may select only this dormant donor entry.
+ * The ordinary rolling68 entry and every assertion remain the default. */
+#ifndef PT_PRIVATE_ROLLING_RAM_FIXTURE_ENTRY
+#define PT_PRIVATE_ROLLING_RAM_FIXTURE_ENTRY main
+#endif
+int PT_PRIVATE_ROLLING_RAM_FIXTURE_ENTRY(void)
 {
  unsigned b,r;sl_case="mixed16";sl_four(16,0,0);sl_case="mixed24-sourcehold";sl_four(24,0,1);
  sl_case="card16";sl_four(16,1,0);sl_case="card24-sourcehold";sl_four(24,1,1);

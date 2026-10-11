@@ -1,0 +1,193 @@
+{
+  "scope": "FIXED_FOUR_EVENT_ROLLING_HOST_RESOURCE_MODEL",
+  "status": "HOST_PRIVATE_CANONICAL_AND_DEFAULT68_ACCEPTED_TARGETS_NOT_RUN",
+  "candidate": "V7_CHANGED_FIXTURE_WITH_PRODUCTION_C_H_AND_DONOR_UNCHANGED",
+  "profile": {
+    "events": [
+      "TRIGGER16",
+      "CONTROL16",
+      "CONTROL16",
+      "STOP16"
+    ],
+    "original_absolute_frames": [
+      960,
+      1920,
+      2880,
+      3840
+    ],
+    "retained_original_events": 4,
+    "logical_slots": 2,
+    "physical_counter_count": "NOT_INFERRED",
+    "configured_reader_bound": 32,
+    "focused_live_readers": 16
+  },
+  "host_requirements": {
+    "translation_units": 86,
+    "fixture_cases_asserted_internally": 36,
+    "compiler": "C99_WARNINGS_AS_ERRORS_ASSERTIONS_ASAN_UBSAN",
+    "compile_timeout_seconds": 120,
+    "fixture_timeout_seconds": 30,
+    "required_fixture_stdout": "ROLLING TIMER T16-C16-C16-S16 HOST FIXTURE PASS:36 cases;genuine rolling producer;actual task service and retirement before continuation;two independently quiet recycled slots;four retained original identities;ticket-free vectors;all4 EARLY original deadlines;stale delivery refusal;callback custody;clean-unknown-mutated acquisition;release mutation retained obligations and read-only quiet;aligned disjoint constructors and bind refusers;whole exclusion and primitive reentry;once-only source close and read-only later quiet;exact960-1920-2880-3840;HOST_RESOURCE_MODEL_ONLY\n",
+    "required_compile_stdout": "EMPTY",
+    "required_compile_stderr": "EMPTY",
+    "required_fixture_stderr": "EMPTY",
+    "required_return_code": 0,
+    "font": "EXACT_LOCKED_FONT_AND_GENERATED_HEADER",
+    "classic_baseline_paths": 51,
+    "dataless_policy": "METADATA_ONLY_NO_HYDRATION_OR_CURRENT_BODY_CLAIM",
+    "protected_paths": 16
+  },
+  "actual_results": {
+    "private_host_compilation": "PASS_ONCE_RC0_86_STRICT_UNITS_EMPTY_DIAGNOSTICS",
+    "private_fixture": "PASS_ONCE_RC0_EXACT_COMPLETE36_ORACLE_EMPTY_STDERR",
+    "private_outer_unittest": "PASS_ONE_TEST",
+    "private_internal_preservation_assertions": "PASS_FONT_BASELINE51_PROTECTED16_LITERAL_INCLUDE_CLOSURE",
+    "private_driver_before_after": "PASS",
+    "saved_private_data_paired_guard_inspection": "PASS",
+    "direct_child_wait_eof_and_separate_closure": "PASS_RECORDED_FOR_BOTH_CHILDREN",
+    "candidate_restoration": "PASS_RECORDED_HANDLER_TIMER_SUBPROCESS_WRAPPER",
+    "final_outcome_close_and_restoration": "PASS_ROOT_OBSERVED_SEPARATELY_NOT_INFERRED_FROM_RECEIPT",
+    "canonical_repository_qualification": "PASS_ONCE_RC0_86_STRICT_UNITS_EXACT_COMPLETE36_ORACLE_EMPTY_DIAGNOSTICS",
+    "canonical_saved_data_review": "PASS_PAIRED_GUARDED_STREAM_AND_RECEIPT_INSPECTION",
+    "native_build_and_abi": "NOT_RUN",
+    "native_timer_and_mmio": "NOT_RUN",
+    "aggregate_task_irq_stack_and_wcet": "NOT_RUN",
+    "amiberry": "NOT_RUN",
+    "real_A1200_AmiGUS": "NOT_RUN",
+    "audio": "NOT_RUN",
+    "human_listening": "NOT_RUN",
+    "host_process_group_absence": "NOT_QUALIFIED",
+    "escaped_leases": "NOT_QUALIFIED",
+    "canonical_outer_unittest": "PASS_ONE_TEST",
+    "canonical_internal_preservation_assertions": "PASS_FONT_BASELINE51_PROTECTED16_LITERAL_INCLUDE_CLOSURE",
+    "canonical_driver_before_after": "PASS",
+    "canonical_final_outcome_close_and_restoration": "PASS_ROOT_OBSERVED_TRANSCRIBED_DATA_RECORD_NOT_RAW_REPLAY",
+    "private_independent_formal_saved_data_audit": "PASS_SEPARATE_PRIVATE_HOST36",
+    "canonical_independent_formal_saved_data_audit": "PASS_SEPARATE_CANONICAL_HOST36",
+    "original_default_rolling68_hook_regression": "PASS_ONCE_RC0_85_STRICT_UNITS_EXACT_COMPLETE68_ORACLE_EMPTY_DIAGNOSTICS",
+    "default_rolling68_independent_saved_data_audit": "PASS_CURRENT_DRIVER_MATCH_AND_RECORDED_STREAM_CLEANUP_CHECKS"
+  },
+  "recorded_streams": {
+    "0-stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "0-stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "1-stdout": {
+      "bytes": 576,
+      "sha256": "112dc03fa8c4576888d9c28b1889c005c9157dfe544b2ec5524a9e974918c631"
+    },
+    "1-stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preserved_scope": [
+    "exact_original_schedule",
+    "existing_pair_implementation_and_native_header_refusal",
+    "authoritative_master_and_selective_cache_architecture",
+    "master_preserving_save",
+    "direct_24bit_Studio_mixing",
+    "classic_layout",
+    "no_frontend_activation",
+    "no_arbitrary_song_admission",
+    "no_deferred_ZooperTracker_features"
+  ],
+  "preserved_failures": [
+    {
+      "candidate": "V2",
+      "compilation": "FAILED",
+      "fixture": "NOT_RUN",
+      "input_custody": "SEPARATE_METADATA_REFUSAL"
+    },
+    {
+      "candidate": "V3",
+      "compilation": "PASS",
+      "fixture": "FAILED_MISSING_GENUINE_TASK_SERVICE",
+      "input_custody": "SEPARATE_METADATA_REFUSAL_CHANGED_ATOMS_NOT_EXPORTED"
+    },
+    {
+      "candidate": "V4",
+      "compilation": "PASS",
+      "fixture": "FAILED_INDEPENDENT_ROW_MAPPING",
+      "input_custody": "PASS_PRIVATE"
+    },
+    {
+      "candidate": "V5",
+      "compilation": "PASS",
+      "fixture": "FAILED_EXACT_FAULT_CLASSIFICATION_EXPECTATION",
+      "input_custody": "PASS_PRIVATE",
+      "initial_STOPPED_or_donor_cleanup_attribution": "EXPLICITLY_CORRECTED"
+    },
+    {
+      "candidate": "V6",
+      "compilation": "PASS",
+      "fixture": "FAILED_RELEASE_COMPOUND_PREDICATE",
+      "input_custody": "PASS_PRIVATE",
+      "individual_failed_atom": "NOT_EXPORTED_SOURCE_LIFECYCLE_DIAGNOSIS_SEPARATE"
+    }
+  ],
+  "historical_failure_reclassification": "NONE",
+  "receipt_boundary": "Each accepted entry was actually run once by Root. Independent paired saved-DATA audits verify exact streams, recorded custody/waits/EOF/separate closes and restoration. Final outcome close/restoration is separately Root-observed and honestly transcribed, not raw stdout replay. Internal preservation assertions are accepted through the reviewed executed drivers; unsaved Source/preservation snapshots cannot be independently reconstructed.",
+  "public_data_boundary": "NO_PRIVATE_PATH_PROCESS_ENVIRONMENT_PEER_RECOVERY_OR_RAW_SOURCE_AUDIT_FIELDS",
+  "outcome_candidate_resumption": false,
+  "canonical_recorded_streams": {
+    "0-stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "0-stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "1-stdout": {
+      "bytes": 576,
+      "sha256": "112dc03fa8c4576888d9c28b1889c005c9157dfe544b2ec5524a9e974918c631"
+    },
+    "1-stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preservation_boundary": {
+    "basis": "INTERNAL_ASSERTIONS_THROUGH_ACTUAL_REVIEWED_EXECUTED_DRIVERS",
+    "classic_baseline_paths": 51,
+    "protected_paths": 16,
+    "raw_source_and_preservation_snapshot_replay": "NOT_AVAILABLE_NOT_RECONSTRUCTED",
+    "ordinary_baseline_body_policy": "HASH_CHECKED_BY_EXECUTED_DRIVER",
+    "dataless_placeholder_policy": "METADATA_ONLY_NO_HYDRATION_OR_CURRENT_BODY_CLAIM",
+    "exact_per_run_category_counts": "NOT_INDEPENDENTLY_RECONSTRUCTED"
+  },
+  "independent_safe_review_pins": {
+    "private36": {
+      "bytes": 4243,
+      "sha256": "09c128920fcf6d21075e6b1e4da1b83bb6d24aa6d8e32b9fa58cf827e8ba03fd"
+    },
+    "canonical36": {
+      "bytes": 4749,
+      "sha256": "ec7e1c8ca6bae5dd0e7c0fbd4984f14efd311fc048ea11eefd624c754456a371"
+    },
+    "default68": {
+      "bytes": 3056,
+      "sha256": "e4bde4033ae311e2347f0d08864838282af3fb5baea57c450c7e487cffefe963"
+    }
+  },
+  "default_rolling68_regression": {
+    "scope": "DEFAULT_ENTRY_AFTER_DORMANT_DONOR_SELECTOR_CHANGE_SEPARATE_FROM_RESOURCE36",
+    "translation_units": 85,
+    "complete_oracle_cases": 68,
+    "compiler_returncode": 0,
+    "fixture_returncode": 0,
+    "exact_complete_oracle_matched": true,
+    "empty_diagnostics": true,
+    "fixture_stdout_bytes": 448,
+    "fixture_stdout_sha256": "fa2d96df6412113a797cbc32c5702daca304fca679318e6635a43870812223b1",
+    "outer_unittest_tests": 1,
+    "direct_wait_eof_separate_close_and_restoration": "PASS_RECORDED",
+    "final_outcome": "PASS_ROOT_OBSERVED_TRANSCRIBED_RECORD_NOT_RAW_REPLAY",
+    "candidate_resumed": false
+  }
+}

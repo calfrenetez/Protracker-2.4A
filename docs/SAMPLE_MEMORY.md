@@ -7117,3 +7117,58 @@ physical RAM capacity/transfer ordering/completion/voice stop, audio or human
 listening. Those remain separate work. Fast-master, selective-cache, save,
 direct 24-bit Studio mixing and classic-layout architecture remain unchanged;
 no deferred ZooperTracker feature is introduced.
+
+
+### Fixed four-event rolling resource Source
+
+The separate opt-in HOST resource model composes the genuine rolling
+TRIGGER16 -> CONTROL16 -> CONTROL16 -> STOP16 profile using two recyclable
+logical event slots. Original tickets and absolute frames 960/1920/2880/3840
+remain retained. Reuse requires independent exact-ticket positive quiet and
+actual provider event absence, alongside genuine command retirement, core
+detach and NULL disposal. EARLY retains the original deadline; stale delivery
+cannot acknowledge or cancel the current successor.
+
+Unknown operations and callback mutation retain original custody. Acquisition
+and SOURCE release are attempted once; later read-only SOURCE quiet observes
+real restoration. Source/port/context/code remain live through positive SOURCE
+quiet and complete outer task_leave restoration. Fixed aligned disjoint bind
+inputs are checked before typed registration/port reads; opaque owner/queue
+extents are checked numerically before port profile/adapter reads. The existing
+pair and its native-platform header refusal remain unchanged.
+
+Earlier changed candidates retain their failures: V2 strict compilation/main
+macro collision plus separate metadata refusal; V3 missing genuine task service
+plus separate metadata refusal; V4 independent sampler/factory-row mapping;
+V5 REFUSED expectation instead of deliberate failed-bind FAULT; V6 a compound
+release predicate requiring the queue remain live after genuine consumption.
+Metadata changed atoms and V6's individual failed atom were not exported; no
+cause or waived guard is inferred from those receipts. Source supports the
+separate lifecycle diagnosis. Result10 is LINEAGE_FAULT, not STOPPED, and the
+initial donor-cleanup attribution was explicitly corrected. V4/V5/V6 private
+Source custody passed. Fixes retain genuine task service, exact original row
+identity, sticky controller/outer FAULT, and bounded genuine quiet/cleanup.
+Current V7 retains original numeric registration after real queue/pool NULL,
+while owner/master pins/borrow survive until later read-only SOURCE quiet.
+A former queue is never followed; no completion or quiet is manufactured.
+
+Exact V7 private and canonical HOST entries each passed once: strict86 units,
+complete36 oracle, return0, empty diagnostics and successful outer unittest.
+Their independent paired saved-data audits passed. The normal default rolling68
+entry then passed once separately after the dormant-entry selector change:
+strict85 units, complete68 oracle, return0 and empty diagnostics, with an
+independent saved-data audit. Root observed final six-file closure and positive
+restoration for each; saved records are Root-transcribed observations, not raw
+stdout replays. Preservation assertions passed internally through the executed
+drivers; unsaved Source/preservation snapshots are not independently recreated.
+Baseline51 guards hash-check ordinary bodies and keep dataless placeholders metadata-only; exact per-run category counts are not independently reconstructed. Prior failures
+remain failures. See the [resource contract](NATIVE_MIXED_CAUSAL_ROLLING_TIMER.md)
+and [scoped evidence](../evidence/enhanced-editor/causal-rolling-timer-host-model/README.md).
+
+Native ABI/build/aggregate stack/IRQ/WCET, Amiberry, real A1200/AmiGUS, exact live
+activation, device capacity/order/completion/voice stop, audio and listening
+remain NOT_RUN for this addition. HOST process-group absence and escaped leases
+are not qualified. Earlier rolling RAM HOST evidence cannot qualify this
+resource model or peripheral behavior. Master/cache/save/direct24-bit Studio
+mixing, the accepted classic layout and protected16 remain preserved; no
+frontend, arbitrary songs or deferred ZooperTracker features are added.

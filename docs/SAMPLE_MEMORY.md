@@ -6874,9 +6874,14 @@ independent retirement orders, guarded aliases, refused/uncertain publication,
 mutation, reentry and lower-layer ownership transfer. Original master contents
 and retained cache/pin counts are independent before-and-after assertions.
 
-These are host model results. A native compiler dependency-stage attempt timed
-out without qualified output, original child wait or stream EOF; no native
-object or assembly was qualified. Native ABI, aggregate stack, callback
+These are host model results. The initial native compiler dependency-stage
+attempt timed out without qualified output, original child wait or stream EOF;
+that failed observation remains preserved. After fresh admission of the
+previously unavailable named header and a separately reviewed build setup, the
+same core passed strict 68000/soft-float dependency discovery, object compilation
+and assembly generation. The object is 31,732 bytes. No linked fixture or target
+artifact ran. Compiler-reported individual stack rows are separate from aggregate
+stack acceptance. Native ABI, aggregate stack, callback
 residency, exact activation timing, interrupt behavior, WCET, device stop and
 ordering, sample-RAM capacity/completion, Amiberry, real-A1200 and human listening
 acceptance remain separate and pending. This finite core mode does not implement

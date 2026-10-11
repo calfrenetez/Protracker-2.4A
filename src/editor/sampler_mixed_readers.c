@@ -5,6 +5,7 @@
 #include "sampler_mixed_causal_stop_internal.h"
 #include "sampler_mixed_causal_lineage_internal.h"
 #include "sampler_mixed_causal_lineage_control16_internal.h"
+#include "sampler_mixed_causal_rolling_internal.h"
 #include "../core/mixed_readers_causal_control16_internal.h"
 #include "../core/mixed_readers_causal_lineage_internal.h"
 #include "../core/mixed_readers_causal_stop_internal.h"
@@ -29,7 +30,7 @@ uint64_t token;
 };
 struct pt_sampler_mixed_command {
  struct pt_sampler_mixed_pool *pool;
-uint64_t token,frame,ticket;
+uint64_t token,frame,ticket,rolling_serial;
 unsigned state,count,index,phase,terminal,valid,causal_stop,causal_control;
  struct source source[PT_SAMPLER_MIXED_ACTIONS];
 struct pt_mixed_readers_inputs inputs;
@@ -88,6 +89,11 @@ unsigned *release_fault;
  struct pt_sampler_mixed_causal_lineage_binding lineage_original;
  unsigned lineage_stage,lineage_enqueue_attempt,lineage_root_detached,lineage_root_closed;
  uint64_t lineage_root_token,lineage_control,lineage_control_frame,lineage_stop;
+ struct pt_sampler_mixed_causal_rolling_binding *rolling_binding;
+ struct pt_sampler_mixed_causal_rolling_binding rolling_original;
+ unsigned rolling_stage,rolling_enqueue_attempt,rolling_terminal;
+ uint64_t rolling_latest,rolling_frame;
+ struct {uint64_t token,ticket,serial;unsigned detached,closed;} rolling_row[2];
 };
 struct workspace {struct pt_sampler_mixed_pool pool;
 struct pt_sampler_mixed_config original;
@@ -166,7 +172,10 @@ static int causal_current(const struct pt_sampler_mixed_pool *p)
  &p->stop_binding->original==p->causal_binding))&&
  (!p->lineage_binding||(p->lineage_binding->self==p->lineage_binding&&
  p->lineage_original.self==p->lineage_binding&&
- &p->lineage_binding->original==p->causal_binding)));}
+ &p->lineage_binding->original==p->causal_binding))&&
+ (!p->rolling_binding||(p->rolling_binding->self==p->rolling_binding&&
+ p->rolling_original.self==p->rolling_binding&&
+ &p->rolling_binding->original==p->causal_binding)));}
 int pt_sampler_mixed_causal_bind(struct pt_sampler_mixed_causal_binding *b,
  struct pt_mixed_causal_owner *owner,struct pt_mixed_readers_output *queue,
  uint64_t session,uint64_t generation,struct pt_mixed_readers_span contexts)
@@ -217,12 +226,36 @@ int pt_sampler_mixed_causal_lineage_bind(struct pt_sampler_mixed_causal_lineage_
  b->original.session=session;b->original.generation=generation;
  b->original.contexts=contexts;b->original.phase=CB_BOUND;b->self=b;return 1;
 }
+int pt_sampler_mixed_causal_rolling_bind(struct pt_sampler_mixed_causal_rolling_binding *b,
+ struct pt_mixed_causal_owner *owner,struct pt_mixed_readers_output *queue,
+ uint64_t session,uint64_t generation,struct pt_mixed_readers_span contexts)
+{
+ const unsigned char *v;size_t i;
+ if(!b||!owner||!queue||!session||!generation||
+    (uintptr_t)b%_Alignof(struct pt_sampler_mixed_causal_rolling_binding)||
+    !span(b,sizeof(*b))||!causal_inside(contexts,b,sizeof(*b))||
+    !apart(contexts.data,contexts.bytes,owner,pt_mixed_causal_control_size())||
+    !apart(contexts.data,contexts.bytes,queue,pt_mixed_readers_control_size()))return 0;
+ v=(const unsigned char *)b;for(i=0;i<sizeof(*b);++i)if(v[i])return 0;
+ if(!pt_mixed_causal_factory_rolling_original_empty(owner,queue,session,generation))return 0;
+ for(i=0;i<sizeof(*b);++i)if(v[i])return 0;
+ b->original.self=&b->original;b->original.owner=owner;b->original.queue=queue;
+ b->original.session=session;b->original.generation=generation;
+ b->original.contexts=contexts;b->original.phase=CB_BOUND;b->self=b;return 1;
+}
 static int causal_admit(const struct pt_sampler_mixed_config *c,
  struct pt_sampler_mixed_causal_binding *b,struct pt_sampler_mixed_causal_stop_binding *stop,
- struct pt_sampler_mixed_causal_lineage_binding *lineage)
+ struct pt_sampler_mixed_causal_lineage_binding *lineage,
+ struct pt_sampler_mixed_causal_rolling_binding *rolling)
 {
  unsigned i,covered=0,owner_covered=0;
- if(stop&&lineage)return 0;
+ if((stop&&lineage)||(rolling&&(stop||lineage)))return 0;
+ if(rolling){
+  if((uintptr_t)rolling%_Alignof(struct pt_sampler_mixed_causal_rolling_binding))return 0;
+  for(i=0;i<c->context_count;++i)if(causal_inside(c->contexts[i],rolling,sizeof(*rolling)))covered=1;
+  if(!covered||&rolling->original!=b||rolling->self!=rolling)return 0;
+  covered=0;
+ }
  if(lineage){
   if((uintptr_t)lineage%_Alignof(struct pt_sampler_mixed_causal_lineage_binding))return 0;
   for(i=0;i<c->context_count;++i)if(causal_inside(c->contexts[i],lineage,sizeof(*lineage)))covered=1;
@@ -250,7 +283,8 @@ static int causal_admit(const struct pt_sampler_mixed_config *c,
   * these full spans, before workspace/output writes or allocator callbacks. */
  for(i=0;i<c->context_count;++i)if(causal_inside(c->contexts[i],b->owner,
     pt_mixed_causal_control_size()))owner_covered=1;
- return covered&&owner_covered&&(lineage?
+ return covered&&owner_covered&&(rolling?
+ pt_mixed_causal_factory_rolling_original_empty(b->owner,b->queue,b->session,b->generation):lineage?
  pt_mixed_causal_factory_control_stop_original_empty(b->owner,b->queue,b->session,b->generation):stop?
  pt_mixed_causal_factory_stop_original_empty(b->owner,b->queue,b->session,b->generation):
  pt_mixed_causal_factory_original_empty(b->owner,b->queue,b->session,b->generation));
@@ -331,14 +365,14 @@ if(!b->reservation||!b->owned||!b->write32||b->closing||b->faulted||b->cache.byt
  for(i=0;i<c->context_count;++i)if(!c->contexts[i].bytes||!span(c->contexts[i].data,c->contexts[i].bytes))return 0;
  return context_covered(c,c->allocator.context)&&context_covered(c,c->sampler->allocator.context)&&context_covered(c,c->sampler->progress_context)&&context_covered(c,c->chip_context)&&context_covered(c,b->context)&&context_covered(c,b->arena.context)&&context_covered(c,b->reservation->api.context);
 }
-static enum pt_sampler_mixed_result mixed_open_private(const struct pt_sampler_mixed_config *c,uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,struct pt_sampler_mixed_causal_stop_binding *stop,struct pt_sampler_mixed_causal_lineage_binding *lineage,struct pt_sampler_mixed_pool **out)
+static enum pt_sampler_mixed_result mixed_open_private(const struct pt_sampler_mixed_config *c,uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,struct pt_sampler_mixed_causal_stop_binding *stop,struct pt_sampler_mixed_causal_lineage_binding *lineage,struct pt_sampler_mixed_causal_rolling_binding *rolling,struct pt_sampler_mixed_pool **out)
 {
  struct workspace *w=storage;
 struct pt_sampler_mixed_pool *p;
 unsigned char *v;
 size_t i;
 unsigned ok;
- if(!config_valid(c)||!storage||capacity<sizeof(*w)||(uintptr_t)storage%_Alignof(struct workspace)||!span(storage,capacity)||!span(out,sizeof(*out))||!apart(storage,capacity,c,sizeof(*c))||!apart(storage,capacity,out,sizeof(*out))||!apart(out,sizeof(*out),c,sizeof(*c))||!initial_apart(c,storage,capacity)||!initial_apart(c,out,sizeof(*out))||!initial_apart(c,c,sizeof(*c))||!causal_admit(c,binding,stop,lineage))return PT_SAMPLER_MIXED_INVALID;
+ if(!config_valid(c)||!storage||capacity<sizeof(*w)||(uintptr_t)storage%_Alignof(struct workspace)||!span(storage,capacity)||!span(out,sizeof(*out))||!apart(storage,capacity,c,sizeof(*c))||!apart(storage,capacity,out,sizeof(*out))||!apart(out,sizeof(*out),c,sizeof(*c))||!initial_apart(c,storage,capacity)||!initial_apart(c,out,sizeof(*out))||!initial_apart(c,c,sizeof(*c))||!causal_admit(c,binding,stop,lineage,rolling))return PT_SAMPLER_MIXED_INVALID;
  if(w->busy){w->failed=1;
 return PT_SAMPLER_MIXED_BUSY;
 }
@@ -348,6 +382,7 @@ for(i=0;i<sizeof(*w);++i)if(v[i])return PT_SAMPLER_MIXED_INVALID;
  memcpy(&w->pool.causal_original,binding,sizeof(*binding));w->pool.causal_phase=CB_OPENING;}
  if(stop){w->pool.stop_binding=stop;memcpy(&w->pool.stop_original,stop,sizeof(*stop));}
  if(lineage){w->pool.lineage_binding=lineage;memcpy(&w->pool.lineage_original,lineage,sizeof(*lineage));}
+ if(rolling){w->pool.rolling_binding=rolling;memcpy(&w->pool.rolling_original,rolling,sizeof(*rolling));}
  w->busy=1;
 memcpy(&w->original,c,sizeof(*c));
 memcpy(&w->pool.config,c,sizeof(*c));
@@ -386,24 +421,30 @@ return PT_SAMPLER_MIXED_PENDING;
 }
 enum pt_sampler_mixed_result pt_sampler_mixed_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_pool **out)
-{return mixed_open_private(c,revision,storage,capacity,NULL,NULL,NULL,out);}
+{return mixed_open_private(c,revision,storage,capacity,NULL,NULL,NULL,NULL,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_binding *binding,
  struct pt_sampler_mixed_pool **out)
 {if(!binding)return PT_SAMPLER_MIXED_INVALID;
- return mixed_open_private(c,revision,storage,capacity,binding,NULL,NULL,out);}
+ return mixed_open_private(c,revision,storage,capacity,binding,NULL,NULL,NULL,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_stop_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_stop_binding *binding,
  struct pt_sampler_mixed_pool **out)
 {if(!binding||(uintptr_t)binding%_Alignof(struct pt_sampler_mixed_causal_stop_binding)||
     !out||(uintptr_t)out%_Alignof(struct pt_sampler_mixed_pool *))return PT_SAMPLER_MIXED_INVALID;
- return mixed_open_private(c,revision,storage,capacity,&binding->original,binding,NULL,out);}
+ return mixed_open_private(c,revision,storage,capacity,&binding->original,binding,NULL,NULL,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_open(const struct pt_sampler_mixed_config *c,
  uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_lineage_binding *binding,
  struct pt_sampler_mixed_pool **out)
 {if(!binding||(uintptr_t)binding%_Alignof(struct pt_sampler_mixed_causal_lineage_binding)||
     !out||(uintptr_t)out%_Alignof(struct pt_sampler_mixed_pool *))return PT_SAMPLER_MIXED_INVALID;
- return mixed_open_private(c,revision,storage,capacity,&binding->original,NULL,binding,out);}
+ return mixed_open_private(c,revision,storage,capacity,&binding->original,NULL,binding,NULL,out);}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_rolling_open(const struct pt_sampler_mixed_config *c,
+ uint32_t revision,void *storage,size_t capacity,struct pt_sampler_mixed_causal_rolling_binding *binding,
+ struct pt_sampler_mixed_pool **out)
+{if(!binding||(uintptr_t)binding%_Alignof(struct pt_sampler_mixed_causal_rolling_binding)||
+    !out||(uintptr_t)out%_Alignof(struct pt_sampler_mixed_pool *))return PT_SAMPLER_MIXED_INVALID;
+ return mixed_open_private(c,revision,storage,capacity,&binding->original,NULL,NULL,binding,out);}
 static void *chip_allocate(void *context,size_t bytes)
 {
  struct pt_sampler_mixed_pool *p=context;
@@ -622,7 +663,7 @@ request_bytes=(size_t)n*sizeof(*x);
  !apart(out,sizeof(*out),input,input_bytes)||!fixed_current(p,revision)||p->state!=OPEN||
  !request_valid(p,x,n,frame,&triggers,levels))return PT_SAMPLER_MIXED_INVALID;
  if(p->causal_binding&&(p->causal_successor||(p->stop_binding&&p->causal_first)||
- (p->lineage_binding&&p->lineage_stage)))return PT_SAMPLER_MIXED_CAPACITY;
+ (p->lineage_binding&&p->lineage_stage)||(p->rolling_binding&&p->rolling_stage)))return PT_SAMPLER_MIXED_CAPACITY;
  for(ci=0;ci<p->config.maximum_commands&&p->commands[ci];++ci){}
 for(i=0;i<p->config.maximum_readers;++i)if(!p->readers[i])free_readers++;
  if(ci==p->config.maximum_commands||free_readers<triggers||p->serial>UINT64_MAX-triggers-1||sizeof(*c)>p->config.control_budget-p->bytes||triggers>(p->config.control_budget-p->bytes-sizeof(*c))/sizeof(struct pt_sampler_mixed_reader))return PT_SAMPLER_MIXED_CAPACITY;
@@ -631,6 +672,7 @@ p->busy=1;
 /* This private lifetime stage is consumed before the first callback/allocation,
  * never supplied by the caller and never reset when a command is cancelled. */
 if(p->lineage_binding)p->lineage_stage=1;
+if(p->rolling_binding)p->rolling_stage=1;
 memcpy(p->scratch,x,request_bytes);
 /* Every legacy admission resets the WHOLE vector, including slots reused after
  * an exact command. New admission copies every previously validated tail. */
@@ -650,7 +692,7 @@ c->state=PREPARING;
 c->frame=frame;
 c->count=n;
 p->commands[ci]=c;
-if(p->lineage_binding)p->lineage_root_token=c->token;
+if(p->lineage_binding||p->rolling_binding)p->lineage_root_token=c->token;
  for(i=0;i<n;++i){struct pt_sampler_mixed_reader *r;
 c->source[i].request=p->scratch[i];
 c->source[i].levels=p->level_scratch[i];
@@ -869,12 +911,13 @@ static enum pt_sampler_mixed_result lineage_begin(struct pt_sampler_mixed_pool *
  * in the already-existing unsigned causal_control field. No new layout or
  * caller mode flag. The retained stop branch has no public caller here. */
 static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mixed_pool *p,
- uint32_t revision,const void *input,unsigned is_stop,struct pt_sampler_mixed_command_handle *out)
+ uint32_t revision,const void *input,unsigned is_stop,unsigned rolling,struct pt_sampler_mixed_command_handle *out)
 {
  union {struct pt_sampler_mixed_causal_lineage_control16_batch control;
         struct pt_sampler_mixed_causal_lineage_stop_batch stop;} saved;
  struct pt_sampler_mixed_request request[PT_SAMPLER_MIXED_ACTIONS];
  struct pt_mixed_readers_key key;
+ struct pt_mixed_causal_rolling_basis basis;
  struct pt_sampler_mixed_reader *r;
  struct pt_sampler_mixed_command *c;
  size_t input_bytes=is_stop?sizeof(saved.stop):sizeof(saved.control);
@@ -887,19 +930,25 @@ static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mi
     !output_address_apart(p,(uintptr_t)&saved,sizeof(saved))||
     !output_address_apart(p,(uintptr_t)request,sizeof(request))||
     !output_address_apart(p,(uintptr_t)&key,sizeof(key))||
+    (rolling&&(!output_address_apart(p,(uintptr_t)&basis,sizeof(basis))||
+      !apart(&basis,sizeof(basis),input,input_bytes)||!apart(&basis,sizeof(basis),out,sizeof(*out))||
+      !apart(&basis,sizeof(basis),&saved,sizeof(saved))||!apart(&basis,sizeof(basis),request,sizeof(request))||
+      !apart(&basis,sizeof(basis),&key,sizeof(key))))||
     !apart(&saved,sizeof(saved),input,input_bytes)||!apart(request,sizeof(request),input,input_bytes)||
     !apart(&key,sizeof(key),input,input_bytes)||!apart(&saved,sizeof(saved),out,sizeof(*out))||
     !apart(request,sizeof(request),out,sizeof(*out))||!apart(&key,sizeof(key),out,sizeof(*out))||
     !apart(&saved,sizeof(saved),request,sizeof(request))||!apart(&saved,sizeof(saved),&key,sizeof(key))||
     !apart(request,sizeof(request),&key,sizeof(key))||!fixed_current(p,revision)||p->state!=OPEN||
-    !p->lineage_binding||!p->causal_first||p->lineage_stop||
-    p->lineage_stage!=(is_stop?2U:1U)||
-    (is_stop&&(!p->lineage_control||!p->lineage_root_detached||!p->lineage_root_closed)))
+    !p->causal_first||(rolling?
+      (!p->rolling_binding||p->rolling_terminal||p->rolling_stage!=(is_stop?3U:p->rolling_enqueue_attempt)||
+       (!is_stop&&(p->rolling_stage<1||p->rolling_stage>2))):
+      (!p->lineage_binding||p->rolling_binding||p->lineage_stop||p->lineage_stage!=(is_stop?2U:1U)||
+       (is_stop&&(!p->lineage_control||!p->lineage_root_detached||!p->lineage_root_closed)))))
     return PT_SAMPLER_MIXED_INVALID;
  memcpy(&saved,input,input_bytes);memset(request,0,sizeof(request));
  frame=is_stop?saved.stop.frame:saved.control.frame;count=is_stop?saved.stop.count:saved.control.count;
  if(!count||count>PT_SAMPLER_MIXED_ACTIONS||frame==UINT64_MAX||
- (is_stop&&frame<=p->lineage_control_frame))return PT_SAMPLER_MIXED_INVALID;
+ (rolling?frame<=p->rolling_frame:(is_stop&&frame<=p->lineage_control_frame)))return PT_SAMPLER_MIXED_INVALID;
  for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i){
   struct pt_sampler_mixed_reader_handle h=is_stop?saved.stop.reader[i]:saved.control.action[i].reader;
   const struct pt_sampler_mixed_causal_lineage_control16_action *a=is_stop?NULL:saved.control.action+i;
@@ -924,7 +973,16 @@ static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mi
     return PT_SAMPLER_MIXED_CAPACITY;
  if(reentry(p))return PT_SAMPLER_MIXED_BUSY;
  p->busy=1;p->queue_call=1;
- j=is_stop?pt_mixed_causal_factory_control_stop_control_current(p->causal_original.owner,p->lineage_control):
+ if(rolling){unsigned row;
+  j=pt_mixed_causal_factory_rolling_basis(p->causal_original.owner,&basis);
+  if(j&&(basis.root!=p->causal_first||basis.predecessor!=p->rolling_latest||
+     basis.serial!=p->rolling_stage||basis.serial!=(is_stop?3U:p->rolling_enqueue_attempt)||
+     basis.reuse_required!=(unsigned)(basis.serial>=2)||(!basis.reuse_required&&basis.reuse)))j=0;
+  if(j&&basis.reuse_required){row=(unsigned)(basis.serial&1U);
+   if(p->rolling_row[row].ticket!=basis.reuse||!p->rolling_row[row].detached||
+      !p->rolling_row[row].closed||p->rolling_row[row].serial+2!=basis.serial)j=0;
+  }
+ }else j=is_stop?pt_mixed_causal_factory_control_stop_control_current(p->causal_original.owner,p->lineage_control):
     pt_mixed_causal_factory_control_stop_first_current(p->causal_original.owner,p->causal_first);
  if(memcmp(input,&saved,input_bytes))p->failed=1;
  if(!j||p->failed||!fixed_current(p,revision)||!backend_fixed(p)){
@@ -950,17 +1008,19 @@ static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mi
  if(!current(p,revision,1)||memcmp(input,&saved,input_bytes)){p->failed=1;p->busy=0;return PT_SAMPLER_MIXED_STALE;}
  /* Monotonic attempt boundary. A NULL/alias/mutation/cancel cannot reconstruct
   * this stage. The pool separately consumes each actual lower enqueue attempt. */
- p->lineage_stage=is_stop?3U:2U;
+ if(rolling)++p->rolling_stage;else p->lineage_stage=is_stop?3U:2U;
  c=p->config.allocator.allocate(p->config.allocator.context,sizeof(*c));
  if(!c){p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_CAPACITY;}
  if(!output_apart(p,c,sizeof(*c))||!apart(c,sizeof(*c),input,input_bytes)||
     !apart(c,sizeof(*c),out,sizeof(*out))||!apart(c,sizeof(*c),&saved,sizeof(saved))||
-    !apart(c,sizeof(*c),request,sizeof(request))||!apart(c,sizeof(*c),&key,sizeof(key))){
+    !apart(c,sizeof(*c),request,sizeof(request))||!apart(c,sizeof(*c),&key,sizeof(key))||
+    (rolling&&!apart(c,sizeof(*c),&basis,sizeof(basis)))){
   p->busy=0;return PT_SAMPLER_MIXED_INVALID;}
  if((uintptr_t)c%_Alignof(struct pt_sampler_mixed_command)||memcmp(input,&saved,input_bytes)||
     !fixed_current(p,revision)||!backend_fixed(p)){
   p->failed=1;p->config.allocator.release(p->config.allocator.context,c);p->busy=0;return PT_SAMPLER_MIXED_STALE;}
  p->bytes+=sizeof(*c);memset(c,0,sizeof(*c));c->pool=p;c->token=++p->serial;c->state=PREPARING;
+ c->rolling_serial=rolling?basis.serial:0;
  c->causal_stop=is_stop;c->causal_control=is_stop?0U:2U;c->frame=frame;c->count=count;
  for(i=0;i<count;++i)memcpy(&c->source[i].request,request+i,sizeof(request[i]));
  p->commands[ci]=c;out->address=c;out->token=c->token;p->busy=0;return PT_SAMPLER_MIXED_PENDING;
@@ -968,7 +1028,7 @@ static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mi
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_control16_begin(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_causal_lineage_control16_batch *batch,
  struct pt_sampler_mixed_command_handle *out)
-{return lineage_control16_begin(p,revision,batch,0,out);}
+{return lineage_control16_begin(p,revision,batch,0,0,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_control_begin(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_causal_lineage_control_batch *batch,
  struct pt_sampler_mixed_command_handle *out)
@@ -977,6 +1037,14 @@ enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_stop_begin(struct p
  uint32_t revision,const struct pt_sampler_mixed_causal_lineage_stop_batch *batch,
  struct pt_sampler_mixed_command_handle *out)
 {return lineage_begin(p,revision,batch,1,out);}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_rolling_control16_begin(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_sampler_mixed_causal_lineage_control16_batch *batch,
+ struct pt_sampler_mixed_command_handle *out)
+{return lineage_control16_begin(p,revision,batch,0,1,out);}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_rolling_stop_begin(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_sampler_mixed_causal_lineage_stop_batch *batch,
+ struct pt_sampler_mixed_command_handle *out)
+{return lineage_control16_begin(p,revision,batch,1,1,out);}
 static int source_current(struct pt_sampler_mixed_reader *r)
 {
  struct pt_sampler_mixed_pool *p=r->pool;
@@ -1208,14 +1276,15 @@ static enum pt_mixed_readers_result lineage_control16_enqueue(struct pt_sampler_
  if((uintptr_t)out%_Alignof(uint64_t)||
     !output_address_apart(p,(uintptr_t)control,sizeof(*control))||
     !apart(control,sizeof(*control),out,sizeof(*out)))return PT_MIXED_READERS_INVALID;
- memset(control,0,sizeof(*control));control->predecessor=p->causal_first;control->frame=c->frame;
+ memset(control,0,sizeof(*control));control->predecessor=p->rolling_binding?p->rolling_latest:p->causal_first;control->frame=c->frame;
  control->count=c->count;memcpy(&control->command,&c->inputs.command,sizeof(control->command));
  for(i=0;i<c->count;++i){struct pt_mixed_causal_control16_action *a=control->action+i;
     const struct pt_mixed_readers_action *source=c->inputs.batch.action+i;
     a->route=source->route;a->slot=source->slot;
     if(a->route==PT_MIXED_READERS_PAULA){a->period=source->geometry.paula.period;a->volume=source->geometry.paula.volume;}
     else{a->rate=source->geometry.amigus.rate;a->left=source->geometry.amigus.left;a->right=source->geometry.amigus.right;}}
- return pt_mixed_causal_control16_enqueue(p->causal_original.owner,control,out);
+ return p->rolling_binding?pt_mixed_causal_rolling_control16_enqueue(p->causal_original.owner,control,out):
+ pt_mixed_causal_control16_enqueue(p->causal_original.owner,control,out);
 }
 enum pt_mixed_readers_result pt_sampler_mixed_enqueue(struct pt_sampler_mixed_pool *p,uint32_t revision,struct pt_sampler_mixed_command_handle h,uint64_t *out)
 {
@@ -1252,7 +1321,28 @@ c->inputs.command.token=c->token;
 c->inputs.command.current=command_current;
 c->inputs.command.terminal=command_terminal;
 c->inputs.command.release=command_release;
- if(p->lineage_binding){
+ if(p->rolling_binding){
+    if(!p->causal_first&&!c->causal_control&&!c->causal_stop&&c->token==p->lineage_root_token&&
+       !p->rolling_enqueue_attempt&&p->rolling_stage==1){
+       p->rolling_enqueue_attempt=1;result=pt_mixed_causal_enqueue(p->causal_original.owner,&c->inputs,out);
+    }else if(p->causal_first&&c->rolling_serial==p->rolling_enqueue_attempt&&
+       p->rolling_stage==p->rolling_enqueue_attempt+1&&!p->rolling_terminal&&
+       ((c->causal_control==2U&&c->rolling_serial<=2)||(c->causal_stop&&c->rolling_serial==3))){
+       ++p->rolling_enqueue_attempt;
+       if(c->causal_control==2U)result=lineage_control16_enqueue(p,c,&control16,out);
+       else{memset(&stop,0,sizeof(stop));stop.predecessor=p->rolling_latest;stop.frame=c->frame;
+          stop.count=c->count;memcpy(&stop.command,&c->inputs.command,sizeof(stop.command));
+          for(i=0;i<c->count;++i){stop.action[i].route=c->inputs.batch.action[i].route;stop.action[i].slot=c->inputs.batch.action[i].slot;}
+          result=pt_mixed_causal_rolling_stop_enqueue(p->causal_original.owner,&stop,out);
+       }
+    }else result=PT_MIXED_READERS_INVALID;
+    if(result==PT_MIXED_READERS_OK){unsigned row=(unsigned)(c->rolling_serial&1U);ticket=*out;
+       if(!p->causal_first)p->causal_first=ticket;
+       p->rolling_latest=ticket;p->rolling_frame=c->frame;p->rolling_terminal=c->causal_stop;
+       p->rolling_row[row].token=c->token;p->rolling_row[row].ticket=ticket;
+       p->rolling_row[row].serial=c->rolling_serial;p->rolling_row[row].detached=0;p->rolling_row[row].closed=0;
+    }
+ }else if(p->lineage_binding){
     if(!p->causal_first&&!c->causal_control&&!c->causal_stop&&c->token==p->lineage_root_token&&!p->lineage_enqueue_attempt){
        p->lineage_enqueue_attempt=1;result=pt_mixed_causal_enqueue(p->causal_original.owner,&c->inputs,out);}
     else if(p->causal_first&&c->causal_control&&!p->lineage_control&&!p->lineage_stop&&p->lineage_enqueue_attempt==1){
@@ -1370,7 +1460,8 @@ if(!fixed_current(p,p->revision)){p->busy=0;
 p->queue_call=0;
 return PT_MIXED_READERS_STALE;
 }if(p->causal_binding){
- if(ticket==p->causal_first)result=pt_mixed_causal_publish(p->causal_original.owner,ticket);
+ if(p->rolling_binding&&ticket&&ticket==p->rolling_latest)result=pt_mixed_causal_rolling_publish(p->causal_original.owner,ticket);
+ else if(ticket==p->causal_first)result=pt_mixed_causal_publish(p->causal_original.owner,ticket);
  else if(p->lineage_binding&&ticket==p->lineage_control&&ticket)
  result=pt_mixed_causal_control_publish(p->causal_original.owner,ticket);
  else if(p->lineage_binding&&ticket==p->lineage_stop&&ticket)
@@ -1391,6 +1482,9 @@ if(cancel>1||!service_ready(p,out,sizeof(*out)))return PT_MIXED_READERS_INVALID;
 result=p->causal_binding?pt_mixed_causal_service_command(p->causal_original.owner,ticket,cancel,out?&receipt:NULL):
  pt_mixed_readers_service_command(p->config.queue,ticket,cancel,out?&receipt:NULL);
 p->queue_call=0;
+if(p->rolling_binding&&!cancel&&result==PT_MIXED_READERS_OK&&!p->failed){unsigned row;
+ for(row=0;row<2;++row)if(p->rolling_row[row].ticket==ticket)p->rolling_row[row].detached=1;
+}
 if(p->lineage_binding&&ticket==p->causal_first&&!cancel&&result==PT_MIXED_READERS_OK)
  p->lineage_root_detached=1;
 if(out&&result==PT_MIXED_READERS_OK&&!p->failed&&fixed_current(p,p->revision)&&output_apart(p,out,sizeof(*out)))*out=receipt;
@@ -1556,7 +1650,7 @@ struct pt_mixed_reader_retirement pt_sampler_mixed_retire_original_reader(
 }
 int pt_sampler_mixed_command_close(struct pt_sampler_mixed_pool *p,struct pt_sampler_mixed_command_handle *h)
 {struct pt_sampler_mixed_command *c;
-unsigned i,root_close=0;
+unsigned i,root_close=0,rolling_close=2;
 if(!span(h,sizeof(*h))||!h)return 0;
 if(!h->address&&!h->token)return 1;
 if(!p||!output_apart(p,h,sizeof(*h))||!(c=command(p,*h))||c->state==LIVE)return 0;
@@ -1568,12 +1662,17 @@ if(r&&r->state!=LIVE&&r->state!=RETIRED)reader_free(p,r);
 }}
 root_close=p->lineage_binding&&c->token==p->lineage_root_token&&
  c->ticket==p->causal_first&&c->state==RETIRED&&c->terminal&&c->valid&&p->lineage_root_detached;
+if(p->rolling_binding&&c->state==RETIRED&&c->terminal==1&&c->valid==1){
+ for(i=0;i<2;++i)if(p->rolling_row[i].token==c->token&&p->rolling_row[i].ticket==c->ticket&&
+    p->rolling_row[i].serial==c->rolling_serial&&p->rolling_row[i].detached)rolling_close=i;
+}
 h->address=NULL;
 h->token=0;
 command_free(p,c);
 /* Observe actual caller NULL consumption after the release callback; never
  * touch the disposed C again, and retain no pointer for later preparation. */
 if(root_close&&!h->address&&!h->token)p->lineage_root_closed=1;
+if(rolling_close<2&&!h->address&&!h->token&&!p->failed)p->rolling_row[rolling_close].closed=1;
 p->busy=0;
 return !p->failed;
 }

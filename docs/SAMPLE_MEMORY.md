@@ -7089,3 +7089,31 @@ listening. The authoritative masters, selective caches, master-preserving save,
 direct 24-bit Studio mixing, accepted layout and sixteen unrelated paths retain
 their existing architecture. Earlier failed evidence remains preserved; no
 deferred ZooperTracker feature is introduced.
+
+
+### Four-event rolling ordinary-RAM ownership
+
+The optional fixed TRIGGER16 -> CONTROL16 -> CONTROL16 -> STOP16 profile now
+composes the genuine producer, factory, controller and causal core at unchanged
+absolute frames 960/1920/2880/3840. Two command rows recycle only after actual
+independent quiet, core detach, no held/findable old command, NULL consumption
+and disposal. Original sixteen readers, authoritative masters and selective
+cache leases remain owned through both CONTROL events and independent STOP,
+reader and SOURCE retirement. STOP closes admission without supplying quiet.
+Pre-clock no-arm tombstones and sticky attempted-arm custody retain exact
+ownership through callback erasure and unknown replies. Legacy pair, CONTROL
+and finite profiles remain separate.
+
+The exact 68-case private sanitizer fixture, six separate regression groups
+and canonical repository HOST entry passed once with independent saved-data
+audits. The 51 classic baseline paths stayed guarded: 47 checked ordinary
+bodies plus four unchanged metadata-only placeholders. All sixteen unrelated
+display/editor paths remain preserved. See the [rolling contract](NATIVE_MIXED_CAUSAL_RAM_ROLLING.md)
+and [scoped HOST evidence](../evidence/enhanced-editor/native-mixed-causal-ram-rolling/README.md).
+
+This does not qualify a four-event resource/timer composition, native ABI or
+aggregate stack/IRQ/WCET, exact live activation, Amiberry, real A1200/AmiGUS,
+physical RAM capacity/transfer ordering/completion/voice stop, audio or human
+listening. Those remain separate work. Fast-master, selective-cache, save,
+direct 24-bit Studio mixing and classic-layout architecture remain unchanged;
+no deferred ZooperTracker feature is introduced.

@@ -2,6 +2,7 @@
  * lineage at original absolute musical frames. Default pair is untouched;
  * no timer, IRQ, device, whole-song PLAY, lead, jitter or refill integration. */
 #include "editor_mixed_causal_song_lineage_internal.h"
+#include "editor_mixed_causal_song_rolling_internal.h"
 #include "../core/render_storage_internal.h"
 #include "../core/paula_render_voice.h"
 #include "../core/amigus_render_voice.h"
@@ -27,6 +28,35 @@ static enum pt_editor_mixed_causal_song_lineage_result fail(struct pt_editor_mix
  enum pt_editor_mixed_causal_song_lineage_result r)
 {if(!p->first_error)p->first_error=r;p->result=p->first_error;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_DRAIN;
  return p->result;}
+static int rolling_identity(const struct pt_editor_mixed_causal_song_lineage *p)
+{
+ const struct pt_editor_mixed_causal_song_rolling *w=p->rolling_owner;
+ return !w||(span(w,sizeof(*w))&&inside(p->parent,w,sizeof(*w))&&
+    &w->original==p&&w->self==w&&w->joint&&w->source&&w->outputs&&
+    inside(p->parent,w->joint,sizeof(*w->joint))&&p->joint==&w->joint->original&&
+    span(w->source,sizeof(*w->source))&&
+    p->source==&w->source->original&&p->outputs==&w->outputs->original&&
+    p->controller->source_mode==3&&p->controller->rolling_owner==&w->joint->rolling&&
+    w->joint->rolling.self==&w->joint->rolling&&w->joint->rolling.joint==1&&
+    w->joint->rolling.preparation==&w->joint->original.original&&
+    w->joint->rolling.inputs==&w->preparation&&
+    p->extent[7].data==w->outputs&&p->extent[7].bytes>=sizeof(*w->outputs)&&
+    w->source->preparation==&w->preparation&&
+    !memcmp(&w->port,&w->saved_port,sizeof(w->port))&&
+    !memcmp(&w->preparation.rolling,&w->saved_port,sizeof(w->port)));
+}
+static size_t source_bytes(const struct pt_editor_mixed_causal_song_lineage *p)
+{return p->rolling_owner?sizeof(struct pt_editor_mixed_causal_rolling_source_inputs):sizeof(*p->source);}
+static unsigned profile_count(const struct pt_editor_mixed_causal_song_lineage *p)
+{return p->rolling_owner?4U:3U;}
+static unsigned profile_control(const struct pt_editor_mixed_causal_song_lineage *p,unsigned index)
+{return index&&index+1<profile_count(p);}
+static struct pt_mixed_plan_quantized_batch *profile_frozen(struct pt_editor_mixed_causal_song_lineage *p,unsigned i)
+{return i<3?p->frozen+i:i==3&&p->rolling_owner?&p->rolling_owner->fourth:NULL;}
+static struct pt_mixed_plan_quantized_batch *profile_output(struct pt_editor_mixed_causal_song_lineage *p,unsigned i)
+{return i<3?p->outputs->candidate+i:i==3&&p->rolling_owner?&p->rolling_owner->outputs->fourth:NULL;}
+static struct pt_editor_mixed_causal_song_lineage_history *profile_history(struct pt_editor_mixed_causal_song_lineage *p,unsigned i)
+{return i<3?p->history+i:i==3&&p->rolling_owner?&p->rolling_owner->fourth_history:NULL;}
 static int identity(const struct pt_editor_mixed_causal_song_lineage *p)
 {return p&&span(p,sizeof(*p))&&p->original==p&&p->adopted&&p->source&&p->borrow&&p->outputs&&p->controller&&
   p->joint&&span(p->joint,sizeof(*p->joint))&&
@@ -35,13 +65,13 @@ static int identity(const struct pt_editor_mixed_causal_song_lineage *p)
   apart(p,sizeof(*p),p->joint,sizeof(*p->joint))&&
   p->controller==&p->joint->original.original&&
   p->joint->self==p->joint&&p->joint->inputs==p->source&&p->controller->source_publisher==p->borrow&&
-  p->outputs==(const void *)p->extent[7].data;}
+  p->outputs==(const void *)p->extent[7].data&&rolling_identity(p);}
 static int local_apart(const struct pt_editor_mixed_causal_song_lineage *p,uintptr_t address,size_t n)
 {
  const void *v=(const void *)address;
  unsigned i;
  if(!identity(p)||!v||!n||!span(v,n)||!apart(v,n,p->parent.data,p->parent.bytes)||
-    !apart(v,n,p->source,sizeof(*p->source))||!apart(v,n,p->borrow,sizeof(*p->borrow))||
+    !apart(v,n,p->source,source_bytes(p))||!apart(v,n,p->borrow,sizeof(*p->borrow))||
     p->requests>PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REQUESTS)return 0;
  for(i=0;i<8;++i)if(!apart(v,n,p->extent[i].data,p->extent[i].bytes))return 0;
  for(i=0;i<p->requests;++i)if(!apart(v,n,(const void *)p->allocation[i].address,p->allocation[i].bytes))return 0;
@@ -56,9 +86,9 @@ static int current(struct pt_editor_mixed_causal_song_lineage *p)
  struct pt_editor_mixed_source_observation o;
  unsigned i;
  if(!identity(p)||p->first_error||p->cancelled||p->borrow_closed)return 0;
-  if(p->candidate_count>3||p->lineage_index>3||p->attempted_mask>7||
+  if(p->candidate_count>profile_count(p)||p->lineage_index>profile_count(p)||p->attempted_mask>=(1U<<profile_count(p))||
      !local_apart(p,(uintptr_t)&o,sizeof(o))){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);return 0;}
- for(i=0;i<p->candidate_count;++i)if(memcmp(p->outputs->candidate+i,p->frozen+i,sizeof(p->frozen[i]))){
+ for(i=0;i<p->candidate_count;++i)if(memcmp(profile_output(p,i),profile_frozen(p,i),sizeof(*profile_frozen(p,i)))){
     fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);return 0;}
  o=pt_editor_mixed_causal_source_observe(p->controller,p->borrow);
  if(o.scope!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||o.first_error||o.cancel_requested||
@@ -161,10 +191,10 @@ static int prune(struct pt_editor_mixed_causal_song_lineage *p)
     o=pt_editor_mixed_causal_source_command_registration(p->controller,p->borrow,p->command[i].reference);
     if(o==PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID)return 0;
     if(o==PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT)memset(p->command+i,0,sizeof(p->command[i]));}
-  for(i=0;i<3;++i)if(p->history[i].reference.serial&&!p->history[i].detached){
-     o=pt_editor_mixed_causal_source_command_registration(p->controller,p->borrow,p->history[i].reference);
+  for(i=0;i<profile_count(p);++i)if((*profile_history(p,i)).reference.serial&&!(*profile_history(p,i)).detached){
+     o=pt_editor_mixed_causal_source_command_registration(p->controller,p->borrow,(*profile_history(p,i)).reference);
      if(o==PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID)return 0;
-     if(o==PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT)p->history[i].detached=1;
+     if(o==PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT)(*profile_history(p,i)).detached=1;
   }
   for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(p->reader[i].reference.serial){
     o=pt_editor_mixed_causal_source_reader_registration(p->controller,p->borrow,p->reader[i].reference);
@@ -246,12 +276,12 @@ static int lower(struct pt_editor_mixed_causal_song_lineage *p)
  struct pt_editor_mixed_causal_song_lineage_outputs *u=p->outputs;unsigned i;
  const struct pt_mixed_plan_batch *b=&u->normalized.normalized;
  if(!p->lineage_index)return lower_trigger(p);
- if(p->lineage_index>2||!b->count||b->count>PT_MIXED_PLAN_RECORDS||b->frame!=p->target)return 0;
+ if(p->lineage_index>=profile_count(p)||!b->count||b->count>PT_MIXED_PLAN_RECORDS||b->frame!=p->target)return 0;
  memset(&u->control,0,sizeof(u->control));memset(&u->stop,0,sizeof(u->stop));
  u->control.frame=u->stop.frame=b->frame;u->control.count=u->stop.count=b->count;
  for(i=0;i<b->count;++i){const struct pt_mixed_plan_record *r=b->record+i;
     if(r->track>=PT_MIXED_PLAN_RECORDS||!p->track[r->track].serial)return 0;
-    if(p->lineage_index==1){struct pt_editor_mixed_causal_lineage_control16_action *a=u->control.action+i;
+    if(profile_control(p,p->lineage_index)){struct pt_editor_mixed_causal_lineage_control16_action *a=u->control.action+i;
        if(r->kind!=PT_MIXED_PLAN_CONTROL)return 0;
        a->reader=p->track[r->track];
        if(r->route==PT_PAULA){a->period=r->geometry.paula.period;a->volume=r->geometry.paula.volume;}
@@ -301,14 +331,14 @@ static int snapshot_checked_batch(struct pt_editor_mixed_causal_song_lineage *p,
 {
  struct {struct pt_mixed_plan_origin next[PT_MIXED_PLAN_RECORDS];uint8_t samples[2][PT_PROJECT_SAMPLES];} local;
  unsigned i,seen=0,slots=0,stage=p->candidate_count;
- enum pt_mixed_plan_kind kind=stage==0?PT_MIXED_PLAN_TRIGGER:stage==1?PT_MIXED_PLAN_CONTROL:PT_MIXED_PLAN_STOP;
+ enum pt_mixed_plan_kind kind=stage==0?PT_MIXED_PLAN_TRIGGER:profile_control(p,stage)?PT_MIXED_PLAN_CONTROL:PT_MIXED_PLAN_STOP;
  if(!local_apart(p,(uintptr_t)&local,sizeof(local))||b->normalized.frame!=p->target||
     b->normalized.count>PT_MIXED_PLAN_RECORDS||(p->outputs->interval.end&&b->normalized.count)||
-    (b->normalized.count&&stage>=3))return 0;
+    (b->normalized.count&&stage>=profile_count(p)))return 0;
  memcpy(local.next,p->origins,sizeof(local.next));memset(local.samples,0,sizeof(local.samples));
  for(i=0;i<b->normalized.count;++i){const struct pt_mixed_plan_record *r=b->normalized.record+i;
      const struct pt_mixed_plan_trigger_levels *level=b->levels+i;unsigned index;
-     unsigned control=raw&&stage&&stage<3&&r->kind==PT_MIXED_PLAN_CONTROL;
+     unsigned control=raw&&stage&&stage<profile_count(p)&&r->kind==PT_MIXED_PLAN_CONTROL;
     const struct pt_channels *channels=&p->source->original.binding->editor->project->channels;
     unsigned t,expected_slot=0;
      if((r->kind!=kind&&!control)||r->track>=PT_MIXED_PLAN_RECORDS||r->track>=channels->count||
@@ -322,7 +352,7 @@ static int snapshot_checked_batch(struct pt_editor_mixed_causal_song_lineage *p,
     slots|=1U<<index;seen|=1U<<r->track;
     if(r->first_action>=p->outputs->plan.count||p->outputs->plan.action[r->first_action].channel!=r->track||
         p->outputs->plan.action[r->first_action].kind!=(control?PT_RENDER_CONTROL:
-          stage==0?PT_RENDER_TRIGGER:stage==1?PT_RENDER_CONTROL:PT_RENDER_STOP))return 0;
+          stage==0?PT_RENDER_TRIGGER:profile_control(p,stage)?PT_RENDER_CONTROL:PT_RENDER_STOP))return 0;
     if(r->kind==PT_MIXED_PLAN_CONTROL&&!control_from_action(p,r))return 0;
     if(!stage){
        if(r->control_action!=UINT_MAX&&(r->control_action>=p->outputs->plan.count||
@@ -335,8 +365,8 @@ static int snapshot_checked_batch(struct pt_editor_mixed_causal_song_lineage *p,
        local.next[r->track]=(struct pt_mixed_plan_origin){1,r->sample,r->channel,p->target};
        local.samples[r->route==PT_PAULA?0:1][r->sample]=1;
     }else{const struct pt_mixed_plan_record *first=record_track(p->frozen,r->track);
-        const struct pt_mixed_plan_record *controlled=stage==2&&r->kind==PT_MIXED_PLAN_STOP?
-           record_track(p->frozen+1,r->track):first;
+        const struct pt_mixed_plan_record *controlled=stage+1==profile_count(p)&&r->kind==PT_MIXED_PLAN_STOP?
+           record_track(profile_frozen(p,stage-1),r->track):first;
        if(!first||!controlled||first->sample!=r->sample||first->channel!=r->channel||
           first->route!=r->route||first->slot!=r->slot||controlled->sample!=r->sample||
           controlled->channel!=r->channel||controlled->route!=r->route||controlled->slot!=r->slot||
@@ -346,7 +376,7 @@ static int snapshot_checked_batch(struct pt_editor_mixed_causal_song_lineage *p,
           !zero_image(&r->image))return 0;
        if(r->route==PT_AMIGUS&&(!zero_trigger(&r->geometry.amigus.trigger)||
           r->geometry.amigus.bits||r->geometry.amigus.little_endian))return 0;
-        if(stage==2&&r->kind==PT_MIXED_PLAN_STOP){
+        if(stage+1==profile_count(p)&&r->kind==PT_MIXED_PLAN_STOP){
            if(r->route==PT_PAULA){if(r->geometry.paula.period||r->geometry.paula.volume)return 0;}
           else if(r->geometry.amigus.rate||r->geometry.amigus.left||r->geometry.amigus.right)return 0;
           memset(local.next+r->track,0,sizeof(local.next[r->track]));
@@ -363,19 +393,19 @@ static int snapshot_checked(struct pt_editor_mixed_causal_song_lineage *p)
 /* Captured descriptive geometry is neither a live key nor a readiness proof.
  * The whole prior batches were checked and remain exact current SOURCE images.
  * Only the effective rate/levels can prove that a raw CONTROL does no work. */
-static int control_matches_previous(const struct pt_editor_mixed_causal_song_lineage *p,
+static int control_matches_previous(struct pt_editor_mixed_causal_song_lineage *p,
  const struct pt_mixed_plan_record *r)
 {
  const struct pt_mixed_plan_record *first=record_track(p->frozen,r->track);
- const struct pt_mixed_plan_record *prior=p->candidate_count==2?
-    record_track(p->frozen+1,r->track):NULL;
+ const struct pt_mixed_plan_record *prior=p->candidate_count>=2?
+    record_track(profile_frozen(p,p->candidate_count-1),r->track):NULL;
  const struct pt_mixed_plan_trigger_levels *levels;unsigned i;
  if(!first||first->kind!=PT_MIXED_PLAN_TRIGGER||first->sample!=r->sample||
     first->channel!=r->channel||first->route!=r->route||first->slot!=r->slot)return -1;
  if(prior){
     if(prior->kind!=PT_MIXED_PLAN_CONTROL||prior->sample!=r->sample||
        prior->channel!=r->channel||prior->route!=r->route||prior->slot!=r->slot)return -1;
-    i=(unsigned)(prior-p->frozen[1].normalized.record);levels=p->frozen[1].levels+i;
+    i=(unsigned)(prior-profile_frozen(p,p->candidate_count-1)->normalized.record);levels=profile_frozen(p,p->candidate_count-1)->levels+i;
     if(levels->mode!=PT_MIXED_PLAN_LEVEL_LEGACY||levels->left||levels->right)return -1;
     if(r->route==PT_PAULA)return r->geometry.paula.period==prior->geometry.paula.period&&
        r->geometry.paula.volume==prior->geometry.paula.volume;
@@ -406,7 +436,7 @@ static int reduce_controls(struct pt_editor_mixed_causal_song_lineage *p)
  memcpy(&local,b,sizeof(local));
  for(i=0;i<b->normalized.count;++i){
     const struct pt_mixed_plan_record *r=b->normalized.record+i;
-    if(p->candidate_count&&p->candidate_count<3&&r->kind==PT_MIXED_PLAN_CONTROL){
+    if(p->candidate_count&&p->candidate_count<profile_count(p)&&r->kind==PT_MIXED_PLAN_CONTROL){
        same=control_matches_previous(p,r);
        if(same<0)return 0;
        if(same)continue;
@@ -439,7 +469,7 @@ static void audit_inputs(struct pt_editor_mixed_causal_song_lineage *p)
 {
  unsigned i;struct pt_editor_mixed_causal_lineage_source_inputs const *s=p->source;
  p->audit_contexts[0]=(struct pt_mixed_plan_span){p->parent.data,p->parent.bytes};
- p->audit_contexts[1]=(struct pt_mixed_plan_span){s,sizeof(*s)};
+ p->audit_contexts[1]=(struct pt_mixed_plan_span){s,source_bytes(p)};
  p->audit_contexts[2]=(struct pt_mixed_plan_span){p->borrow,sizeof(*p->borrow)};
  for(i=0;i<3;++i)p->audit_contexts[i+3]=(struct pt_mixed_plan_span){p->extent[i].data,p->extent[i].bytes};
  p->audit_contexts[6]=(struct pt_mixed_plan_span){p->extent[5].data,p->extent[5].bytes};
@@ -453,7 +483,7 @@ static void normalizer_inputs(struct pt_editor_mixed_causal_song_lineage *p)
 {
  unsigned i;const struct pt_editor_mixed_causal_lineage_source_inputs *s=p->source;
  p->normalizer_contexts[0]=(struct pt_mixed_plan_span){p->parent.data,p->parent.bytes};
- p->normalizer_contexts[1]=(struct pt_mixed_plan_span){s,sizeof(*s)};
+ p->normalizer_contexts[1]=(struct pt_mixed_plan_span){s,source_bytes(p)};
  p->normalizer_contexts[2]=(struct pt_mixed_plan_span){p->borrow,sizeof(*p->borrow)};
  for(i=0;i<5;++i)p->normalizer_contexts[3+i]=(struct pt_mixed_plan_span){p->extent[i].data,p->extent[i].bytes};
  p->normalizer_contexts[8]=(struct pt_mixed_plan_span){p->extent[6].data,p->extent[6].bytes};
@@ -463,8 +493,9 @@ static void normalizer_inputs(struct pt_editor_mixed_causal_song_lineage *p)
     PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_Q_CONTEXTS,p->saved.options.rate,p->target,p->revision,p->generation};
 }
 
-enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_lineage_begin(struct pt_editor_mixed_causal_song_lineage *p,
- const struct pt_editor_mixed_causal_lineage_source_inputs *s,struct pt_editor_mixed_causal_source_borrow *b)
+static enum pt_editor_mixed_causal_song_lineage_result song_begin(struct pt_editor_mixed_causal_song_lineage *p,
+ const struct pt_editor_mixed_causal_lineage_source_inputs *s,struct pt_editor_mixed_causal_source_borrow *b,
+ struct pt_editor_mixed_causal_song_rolling *w,const struct pt_editor_mixed_causal_rolling_source_inputs *rs)
 {
  enum pt_editor_mixed_readers_result r;unsigned i;size_t total=0;
  struct pt_editor_mixed_causal_song_lineage_outputs *u;
@@ -479,11 +510,11 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
     !inside(s->original.contexts,p,sizeof(*p))||
     (uintptr_t)p->controller%ALIGN_OF(struct pt_editor_mixed_causal_prepare)||
     !apart(p,sizeof(*p),p->joint,sizeof(*p->joint))||
-    s->preparation!=&p->preparation||s->original.preparation!=&p->preparation.original||s->original.immutable_count!=6||s->original.mutable_count!=2||
+    s->preparation!=(w?&w->preparation.original:&p->preparation)||s->original.preparation!=(w?&w->preparation.original.original:&p->preparation.original)||s->original.immutable_count!=6||s->original.mutable_count!=2||
     s->original.causal_workspace.data!=s->original.immutable[0].data||s->original.causal_workspace.bytes!=s->original.immutable[0].bytes||
     s->original.factory_workspace.data!=s->original.immutable[1].data||s->original.factory_workspace.bytes!=s->original.immutable[1].bytes||
     s->original.backend_parent.data!=s->original.immutable[2].data||s->original.backend_parent.bytes!=s->original.immutable[2].bytes||
-    s->original.mutable[1].bytes<sizeof(*u)||!span(s->original.mutable[1].data,s->original.mutable[1].bytes)||
+    s->original.mutable[1].bytes<(w?sizeof(struct pt_editor_mixed_causal_song_rolling_outputs):sizeof(*u))||!span(s->original.mutable[1].data,s->original.mutable[1].bytes)||
     (uintptr_t)s->original.mutable[1].data%ALIGN_OF(struct pt_editor_mixed_causal_song_lineage_outputs)||
     s->original.immutable[3].bytes<pt_mixed_quantized_audit_workspace_size()||
     (uintptr_t)s->original.immutable[3].data%pt_mixed_quantized_audit_workspace_alignment()||
@@ -525,21 +556,56 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
  if(!apart(u,s->original.mutable[1].bytes,s->original.mutable[0].data,s->original.mutable[0].bytes)||!empty_bytes(u,sizeof(*u))||
     !empty_bytes(&p->saved,sizeof(*p)-offsetof(struct pt_editor_mixed_causal_song_lineage,saved)))
     return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
- /* No external source callback has occurred. Genuine SOURCE admission performs
-  * complete pair/source guards before the first owned write. */
-  r=pt_editor_mixed_causal_lineage_source_begin(p->joint,s,b);
+ /* New typed constructor supplies mode; no old finite entry accepts a
+  * caller flag/backlink. Admit the complete wrapper/config/descriptor before
+  * any rolling owned write or SOURCE early-hook adoption. */
+ if(w){
+    if(!rs||&w->original!=p||s!=&rs->original||!span(w,sizeof(*w))||
+       !inside(s->original.contexts,w,sizeof(*w))||!w->joint||
+       !inside(s->original.contexts,w->joint,sizeof(*w->joint))||p->joint!=&w->joint->original||
+       !span(rs,sizeof(*rs))||!apart(u,s->original.mutable[1].bytes,rs,sizeof(*rs))||
+       !apart(w,sizeof(*w),rs,sizeof(*rs))||!apart(w,sizeof(*w),b,sizeof(*b))||
+       !apart(w,sizeof(*w),w->joint,sizeof(*w->joint))||
+       !apart(w,sizeof(*w),u,s->original.mutable[1].bytes)||
+       !apart(w,sizeof(*w),s->original.binding,sizeof(*s->original.binding))||
+       !apart(w,sizeof(*w),s->original.binding->editor,sizeof(*s->original.binding->editor))||
+       !pt_sampler_output_disjoint(&s->original.binding->editor->sampler,w,sizeof(*w))||
+       !pt_render_project_storage_output_disjoint(s->original.binding->editor->project,w,sizeof(*w))||
+       !pt_sampler_output_disjoint(&s->original.binding->editor->sampler,rs,sizeof(*rs))||
+       !pt_render_project_storage_output_disjoint(s->original.binding->editor->project,rs,sizeof(*rs))||
+       rs->preparation!=&w->preparation||
+       w->port.version!=PT_MIXED_CAUSAL_ROLLING_VERSION||w->port.flags!=PT_MIXED_CAUSAL_ROLLING_REQUIRED||
+       !w->port.publish_next||w->port.context!=p->configuration.preparation.causal.port.context||
+       w->port.context_bytes!=p->configuration.preparation.causal.port.context_bytes||
+       !empty_bytes(&p->configuration.lineage,sizeof(p->configuration.lineage))||
+       !empty_bytes(&w->preparation,sizeof(w->preparation))||
+       !empty_bytes(&w->self,sizeof(*w)-offsetof(struct pt_editor_mixed_causal_song_rolling,self))||
+       !empty_bytes(u,sizeof(*w->outputs)))return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
+    for(i=0;i<6;++i)if(!apart(w,sizeof(*w),s->original.immutable[i].data,s->original.immutable[i].bytes)||
+       !apart(rs,sizeof(*rs),s->original.immutable[i].data,s->original.immutable[i].bytes))
+       return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
+    if(!apart(w,sizeof(*w),s->original.mutable[0].data,s->original.mutable[0].bytes)||
+       !apart(rs,sizeof(*rs),s->original.mutable[0].data,s->original.mutable[0].bytes)||
+       !apart(rs,sizeof(*rs),s->original.contexts.data,s->original.contexts.bytes)||
+       !apart(rs,sizeof(*rs),b,sizeof(*b)))return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
+    /* Complete parent/input/output guards are established above. This internal
+     * descriptor is intentionally promoted once before the early SOURCE hook. */
+    w->preparation.rolling=w->port;
+    r=pt_editor_mixed_causal_rolling_source_begin(w->joint,rs,b);
+ }else r=pt_editor_mixed_causal_lineage_source_begin(p->joint,s,b);
  if(r!=PT_EDITOR_MIXED_READERS_PENDING)return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
  p->adopted=1;p->original=p;p->source=s;p->borrow=b;p->outputs=u;p->parent=s->original.contexts;
+ if(w){p->rolling_owner=w;w->self=w;w->source=rs;w->outputs=(void *)u;w->saved_port=w->port;}
  memcpy(&p->saved,&p->configuration,sizeof(p->saved));
  for(i=0;i<6;++i)p->extent[i]=s->original.immutable[i];
  p->extent[6]=s->original.mutable[0];p->extent[7]=s->original.mutable[1];
- if(!add_size(&total,p->parent.bytes)||!add_size(&total,sizeof(*s))||!add_size(&total,sizeof(*b)))
+ if(!add_size(&total,p->parent.bytes)||!add_size(&total,w?sizeof(*rs):sizeof(*s))||!add_size(&total,sizeof(*b)))
     return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CAPACITY);
  for(i=0;i<8;++i)if(!add_size(&total,p->extent[i].bytes))return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CAPACITY);
  if(total>p->saved.ordinary_budget)return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CAPACITY);
  p->base_bytes=p->live_bytes=total;p->allocator=(struct pt_allocator){p,allocate_external,release_external};
  p->establish_parents[0]=p->parent;
- p->establish_parents[1]=(struct pt_sampler_storage_span){s,sizeof(*s)};
+ p->establish_parents[1]=(struct pt_sampler_storage_span){s,w?sizeof(*rs):sizeof(*s)};
  p->establish_parents[2]=(struct pt_sampler_storage_span){b,sizeof(*b)};
  for(i=0;i<8;++i)p->establish_parents[i+3]=p->extent[i];
  p->revision=s->original.binding->editor->history.revision;p->generation=s->original.binding->editor->sampler.generation;
@@ -547,6 +613,19 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
  p->result=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING;return p->result;
 }
 
+enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_lineage_begin(
+ struct pt_editor_mixed_causal_song_lineage *p,const struct pt_editor_mixed_causal_lineage_source_inputs *s,
+ struct pt_editor_mixed_causal_source_borrow *b)
+{return song_begin(p,s,b,NULL,NULL);}
+enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_rolling_begin(
+ struct pt_editor_mixed_causal_song_rolling *w,const struct pt_editor_mixed_causal_rolling_source_inputs *s,
+ struct pt_editor_mixed_causal_source_borrow *b)
+{
+ if(!w||!s||!span(w,sizeof(*w))||!span(s,sizeof(*s))||
+    (uintptr_t)w%ALIGN_OF(struct pt_editor_mixed_causal_song_rolling)||
+    (uintptr_t)s%ALIGN_OF(struct pt_editor_mixed_causal_rolling_source_inputs))return PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;
+ return song_begin(&w->original,&s->original,b,w,s);
+}
 enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_lineage_step(struct pt_editor_mixed_causal_song_lineage *p,unsigned work)
 {
  struct pt_editor_mixed_causal_song_lineage_outputs *u;struct pt_editor *e;
@@ -614,8 +693,11 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
     if(!n||p->establish.active)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_ACTIVATE;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_ACTIVATE:
     if(p->activated||p->pin_count!=e->project->sample_count){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-    p->preparation.original=p->saved.preparation;p->preparation.lineage=p->saved.lineage;
-    cr=pt_editor_mixed_causal_lineage_source_activate(p->joint,p->borrow,&p->preparation);
+    if(p->rolling_owner){struct pt_editor_mixed_causal_song_rolling *w=p->rolling_owner;
+       w->preparation.original.original=p->saved.preparation;
+       cr=pt_editor_mixed_causal_rolling_source_activate(w->joint,p->borrow,&w->preparation);
+    }else{p->preparation.original=p->saved.preparation;p->preparation.lineage=p->saved.lineage;
+       cr=pt_editor_mixed_causal_lineage_source_activate(p->joint,p->borrow,&p->preparation);}
     if(!current(p))break;
     if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
     else{p->activated=1;audit_inputs(p);p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_AUDIT_BEGIN;}break;
@@ -661,8 +743,8 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
     else if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
     break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_LOAD:
-    if(p->lineage_index>=3||p->candidate_count!=3){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-    memcpy(&u->normalized,p->frozen+p->lineage_index,sizeof(u->normalized));
+    if(p->lineage_index>=profile_count(p)||p->candidate_count!=profile_count(p)){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
+    memcpy(&u->normalized,profile_frozen(p,p->lineage_index),sizeof(u->normalized));
     p->target=u->normalized.normalized.frame;
     if(!lower(p)){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);break;}
     p->action=0;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_BATCH_BEGIN;break;
@@ -737,20 +819,30 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
        if(!checked_empty(p))fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
        else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CONSUME;
        break;}
-    if(p->candidate_count>=3||
+    if(p->candidate_count>=profile_count(p)||
        (p->candidate_count&&p->target<=p->frozen[p->candidate_count-1].normalized.frame)){
        fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);break;}
     p->candidate_pending=1;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CONSUME;break;
   case PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_BATCH_BEGIN:
-    if(p->lineage_index>=3||(p->attempted_mask&(1U<<p->lineage_index))){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-    if(p->lineage_index==1){
-       if(!p->history[0].service_seen||!p->history[0].ticket||
-          !pt_mixed_causal_factory_control_stop_first_current(p->controller->causal,p->history[0].ticket)){
+    if(p->lineage_index>=profile_count(p)||(p->attempted_mask&(1U<<p->lineage_index))){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
+    if(p->rolling_owner&&p->lineage_index){
+       struct pt_mixed_causal_rolling_basis basis;
+       if(!local_apart(p,(uintptr_t)&basis,sizeof(basis))){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
+       memset(&basis,0,sizeof(basis));
+       if(!prune(p)||!pt_mixed_causal_factory_rolling_basis(p->controller->causal,&basis)||
+          basis.predecessor!=profile_history(p,p->lineage_index-1)->ticket||
+          basis.serial!=p->lineage_index||!profile_history(p,0)->service_seen||
+          (basis.reuse_required&&(!profile_history(p,p->lineage_index-2)->detached||
+            basis.reuse!=profile_history(p,p->lineage_index-2)->ticket))){
+          p->result=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_WAIT_ACTIVE;break;}
+    }else if(p->lineage_index==1){
+       if(!(*profile_history(p,0)).service_seen||!(*profile_history(p,0)).ticket||
+          !pt_mixed_causal_factory_control_stop_first_current(p->controller->causal,(*profile_history(p,0)).ticket)){
           p->result=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_WAIT_ACTIVE;break;}
     }else if(p->lineage_index==2){
        if(!prune(p)){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-       if(!p->history[0].detached||!p->joint->original.root_detached||!p->joint->original.root_closed||
-          !p->history[1].ticket||!pt_mixed_causal_factory_control_stop_control_current(p->controller->causal,p->history[1].ticket)){
+       if(!(*profile_history(p,0)).detached||!p->joint->original.root_detached||!p->joint->original.root_closed||
+          !(*profile_history(p,1)).ticket||!pt_mixed_causal_factory_control_stop_control_current(p->controller->causal,(*profile_history(p,1)).ticket)){
           p->result=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_WAIT_ACTIVE;break;}
     }
     {int available=pressure(p);if(available<0){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
@@ -766,15 +858,18 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
      memcpy(&local.stop,&u->stop,sizeof(local.stop));local.command=(struct pt_editor_mixed_command_ref){0,0};
      p->attempted_mask|=1U<<p->lineage_index;
      cr=!p->lineage_index?pt_editor_mixed_causal_prepare_batch_begin_quantized(p->controller,p->target,&local.trigger,&local.command):
+        p->rolling_owner?(profile_control(p,p->lineage_index)?
+          pt_editor_mixed_causal_rolling_control16_prepare_batch_begin(&p->joint->original,&local.control,&local.command):
+          pt_editor_mixed_causal_rolling_stop_prepare_batch_begin(&p->joint->original,&local.stop,&local.command)):
         p->lineage_index==1?pt_editor_mixed_causal_lineage_control16_prepare_batch_begin(&p->joint->original,&local.control,&local.command):
         pt_editor_mixed_causal_lineage_stop_prepare_batch_begin(&p->joint->original,&local.stop,&local.command);
      /* Retain actual original issued custody before an independent outer fault.
       * The mutable U parent was admitted at begin, never passed to controller. */
      u->command=local.command;
      if(local.command.serial){i=local.command.slot;
-        if(i>=PT_SAMPLER_MIXED_COMMANDS||p->command[i].reference.serial||p->history[p->lineage_index].reference.serial){
+        if(i>=PT_SAMPLER_MIXED_COMMANDS||p->command[i].reference.serial||(*profile_history(p,p->lineage_index)).reference.serial){
            fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-        p->command[i].reference=local.command;p->history[p->lineage_index].reference=local.command;p->working_command=i;}
+        p->command[i].reference=local.command;(*profile_history(p,p->lineage_index)).reference=local.command;p->working_command=i;}
     }
     if(!current(p))break;
     if(cr!=PT_EDITOR_MIXED_READERS_PENDING||p->working_command==NO_COMMAND)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
@@ -810,7 +905,7 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
     }
     p->scheduled_result=mr;
     if(mr==PT_MIXED_READERS_OK&&u->ticket){
-       p->command[p->working_command].ticket=u->ticket;p->history[p->lineage_index].ticket=u->ticket;
+       p->command[p->working_command].ticket=u->ticket;(*profile_history(p,p->lineage_index)).ticket=u->ticket;
        /* Actual transfer is retained even through an independent outer fault.
         * Descriptive replay state was already committed at genuine EOF; it is
         * never replaced with a predicted ACTIVE key or factory reference. */
@@ -833,16 +928,16 @@ enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_line
     for(i=0;i<PT_MIXED_PLAN_RECORDS;++i)p->origins[i]=u->normalized.normalized.next[i];
     for(j=0;j<2;++j)for(i=0;i<PT_PROJECT_SAMPLES;++i)p->samples[j][i]|=u->normalized.normalized.samples[j][i];
     if(p->candidate_pending){
-       if(p->candidate_count>=3){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
-       memcpy(p->frozen+p->candidate_count,&u->normalized,sizeof(u->normalized));
-       memcpy(u->candidate+p->candidate_count,&u->normalized,sizeof(u->normalized));
+       if(p->candidate_count>=profile_count(p)){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;}
+       memcpy(profile_frozen(p,p->candidate_count),&u->normalized,sizeof(u->normalized));
+       memcpy(profile_output(p,p->candidate_count),&u->normalized,sizeof(u->normalized));
        ++p->candidate_count;p->candidate_pending=0;
     }
     p->frames+=u->interval.frames;++p->intervals;p->working_command=NO_COMMAND;
     if(u->interval.end){
        if(p->frames!=p->audited.frames||p->intervals!=p->audited.intervals||
           memcmp(p->samples,p->audited.samples,sizeof(p->samples)))fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);
-       else if(p->candidate_count!=3)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
+       else if(p->candidate_count!=profile_count(p))fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_REFUSED);
        else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CONTROLLER;
     }else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_NEXT;break;
  default:fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);break;
@@ -870,13 +965,13 @@ enum pt_mixed_readers_result pt_editor_mixed_causal_song_lineage_publish(struct 
     p->busy=0;return PT_MIXED_READERS_INVALID;}
  c=p->command+p->working_command;
  r=pt_editor_mixed_causal_prepare_publish(p->controller,c->reference);p->scheduled_result=r;
-  if(r==PT_MIXED_READERS_OK){c->published=1;p->history[p->lineage_index].published=1;}
-  else if(r!=PT_MIXED_READERS_PENDING){c->uncertain=1;p->history[p->lineage_index].uncertain=1;}
+  if(r==PT_MIXED_READERS_OK){c->published=1;(*profile_history(p,p->lineage_index)).published=1;}
+  else if(r!=PT_MIXED_READERS_PENDING){c->uncertain=1;(*profile_history(p,p->lineage_index)).uncertain=1;}
   if(!current(p)){p->busy=0;return r==PT_MIXED_READERS_OK?r:PT_MIXED_READERS_BACKEND;}
  if(r==PT_MIXED_READERS_OK){
     p->working_command=NO_COMMAND;++p->lineage_index;
-    p->phase=p->lineage_index==3?PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_END:PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_LOAD;
-    p->result=p->lineage_index==3?PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PUBLISHED:PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING;
+    p->phase=p->lineage_index==profile_count(p)?PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_END:PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_LOAD;
+    p->result=p->lineage_index==profile_count(p)?PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PUBLISHED:PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING;
  }
  else if(r!=PT_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);
  p->busy=0;return r;
@@ -884,14 +979,15 @@ enum pt_mixed_readers_result pt_editor_mixed_causal_song_lineage_publish(struct 
 enum pt_mixed_readers_result pt_editor_mixed_causal_song_lineage_service_command(struct pt_editor_mixed_causal_song_lineage *p,unsigned i,unsigned cancel)
 {
  enum pt_mixed_readers_result r;struct pt_editor_mixed_causal_song_lineage_history *h;
- if(i>=3||cancel>1||!enter(p,1))return PT_MIXED_READERS_INVALID;
- h=p->history+i;
+ if(!identity(p)||i>=profile_count(p)||cancel>1||!enter(p,1))return PT_MIXED_READERS_INVALID;
+ h=profile_history(p,i);
  if(!h->reference.serial||!h->ticket||h->detached){p->busy=0;return PT_MIXED_READERS_INVALID;}
  /* NULL is essential: a PENDING committed C1 service really adopts/times the
   * original queue readers and is not an invented output receipt. */
  r=pt_editor_mixed_causal_prepare_service_command(p->controller,h->reference,cancel,NULL);p->scheduled_result=r;
  if(!i&&!cancel&&(r==PT_MIXED_READERS_PENDING||r==PT_MIXED_READERS_OK)&&
-    p->controller->causal&&pt_mixed_causal_factory_control_stop_first_current(p->controller->causal,h->ticket))h->service_seen=1;
+    p->controller->causal&&(p->rolling_owner?pt_mixed_causal_factory_rolling_current(p->controller->causal,h->ticket):
+     pt_mixed_causal_factory_control_stop_first_current(p->controller->causal,h->ticket)))h->service_seen=1;
  if(!prune(p))fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);
  if(r!=PT_MIXED_READERS_OK&&r!=PT_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_FAULT);
  if(!p->first_error&&(p->result==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_WAIT_CAPACITY||p->result==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_WAIT_ACTIVE))
@@ -1007,3 +1103,17 @@ int pt_editor_mixed_causal_song_lineage_close(struct pt_editor_mixed_causal_song
  }
  p->busy=0;return n&&p->hook_closed;
 }
+
+/* Thin typed rolling entries share the original engine after genuine begin. */
+enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_rolling_step(struct pt_editor_mixed_causal_song_rolling *w,unsigned work)
+{return w&&w->self==w?pt_editor_mixed_causal_song_lineage_step(&w->original,work):PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;}
+enum pt_mixed_readers_result pt_editor_mixed_causal_song_rolling_publish(struct pt_editor_mixed_causal_song_rolling *w)
+{return w&&w->self==w?pt_editor_mixed_causal_song_lineage_publish(&w->original):PT_MIXED_READERS_INVALID;}
+enum pt_mixed_readers_result pt_editor_mixed_causal_song_rolling_service_command(struct pt_editor_mixed_causal_song_rolling *w,unsigned i,unsigned cancel)
+{return w&&w->self==w?pt_editor_mixed_causal_song_lineage_service_command(&w->original,i,cancel):PT_MIXED_READERS_INVALID;}
+enum pt_mixed_readers_result pt_editor_mixed_causal_song_rolling_service_reader(struct pt_editor_mixed_causal_song_rolling *w,unsigned i,unsigned cancel)
+{return w&&w->self==w?pt_editor_mixed_causal_song_lineage_service_reader(&w->original,i,cancel):PT_MIXED_READERS_INVALID;}
+enum pt_editor_mixed_causal_song_lineage_result pt_editor_mixed_causal_song_rolling_cancel(struct pt_editor_mixed_causal_song_rolling *w)
+{return w&&w->self==w?pt_editor_mixed_causal_song_lineage_cancel(&w->original):PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID;}
+int pt_editor_mixed_causal_song_rolling_close(struct pt_editor_mixed_causal_song_rolling *w)
+{return w&&w->self==w&&pt_editor_mixed_causal_song_lineage_close(&w->original);}

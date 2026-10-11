@@ -1,0 +1,63 @@
+{
+  "actual": {
+    "cancelled": false,
+    "canonical_RC": 0,
+    "direct_wait_complete": true,
+    "elapsed_seconds": 93.15311562499846,
+    "own15_and_protected16_checks_completed_without_failure": true,
+    "owned_new_process_session": true,
+    "separate_regular_output_files_closed": true,
+    "stderr_normal_unittest_summary_only": true,
+    "stdout_empty": true,
+    "unittest_seconds": 92.587,
+    "unittest_tests": 1
+  },
+  "bounds_seconds": {
+    "canonical_process": 190,
+    "compile": 120,
+    "fixture": 30,
+    "named_file": 5,
+    "wrapper_immutable_endpoint": 200
+  },
+  "case_count": 68,
+  "custody": "Exact15 adopted body pins match manifest plus canonical driver. Fresh current full10 admission recorded only ctime changes and seven flags0 to64 changes against adoption metadata; all other eight fields remain exact. Wrapper checks that fresh full10 before and after the actual canonical process. Protected16 guards remain exact. Receipt exports one expected checked map, rather than two independent raw snapshots.",
+  "evidence_limits": "HOST only. No native runtime, emulator, physical-A1200, Paula DMA, AmiGUS capacity/order/timing, human listening or release acceptance. Actual canonical receipt close is Root-observed in the final tool marker; no separate post-restore timer snapshot is exported here.",
+  "metadata_refusal_boundary": "Earlier V3 historical-metadata refusal remains separate and failed before any test. This V4 success establishes only its distinct current-context run; no retroactive V3 pass or historical metadata equivalence is claimed.",
+  "pins": {
+    "actual_receipt": {
+      "bytes": 19759,
+      "sha256": "774850139f179123ffdf7ad7b3a79773205c574d3176d4a511babc93db38b38d"
+    },
+    "adopted_canonical_driver": {
+      "bytes": 11578,
+      "sha256": "1094b0a65812829b718d2dcd05b72ecca79af840fc495589645c720e424e4b27"
+    },
+    "adoption_receipt": {
+      "bytes": 7473,
+      "sha256": "28323a742ad61fd347d7f723a68f40c69708937939691d2946085a941d6f531d"
+    },
+    "stderr": {
+      "bytes": 99,
+      "sha256": "7b2dacc2fccb0572ae438e5a8b67c938ed5c74aad7d45ec4905889b8f0c1fffa"
+    },
+    "stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "wrapper_V4": {
+      "bytes": 6681,
+      "sha256": "e987663f6acf5cd41255c6518b86223d1938ea2fb46ed14571ebd6edbff221d9"
+    }
+  },
+  "profile": "Current adopted canonical driver independently re-read: exact85 selected vectors, Werror/assertions/ASan/UBSan flags and full68 oracle match the independently accepted V13 private profile. Passing canonical assertions recheck private closure, baseline51/protected16/fonts and compile120/fixture30.",
+  "publication_crossreference": {
+    "private_rolling68_and_six_regressions": {
+      "bytes": 6910,
+      "sha256": "a251f076918cd58053e82a07637832dfa8ffc98e49f89542b5f6ad76a5faa727"
+    }
+  },
+  "review_method": "Fresh bounded paired ordinary no-follow Source and saved DATA reads with EOF/genuine-close/full10 consistency. No test repetition, compiler, Git, mutation or target action by reviewer.",
+  "schema": "pt24g-canonical-rolling-host-acceptance/v1",
+  "status": "PASS_CANONICAL_HOST68",
+  "strict_translation_units": 85
+}

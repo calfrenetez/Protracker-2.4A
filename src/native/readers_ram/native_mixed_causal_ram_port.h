@@ -5,6 +5,7 @@
 #include "mixed_readers_causal.h"
 #include "mixed_readers_causal_control_internal.h"
 #include "mixed_readers_causal_lineage_internal.h"
+#include "mixed_readers_causal_rolling_internal.h"
 #define PT_PRIVATE_CAUSAL_RAM_COMMANDS 2U
 #define PT_PRIVATE_CAUSAL_RAM_READERS 32U
 #define PT_PRIVATE_CAUSAL_RAM_SLOTS 20U
@@ -23,6 +24,11 @@ struct pt_private_mixed_causal_ram_adapter {
     int (*source_close)(void *,const struct pt_mixed_causal_registration *);
     int (*source_quiet)(void *,const struct pt_mixed_causal_registration *);
 };
+/* Rolling-only recorded control flow, never inferred from !armed/raw0.
+ * NOT_ENTERED authenticates the pre-clock owned identity without a packet;
+ * ENTERED is sticky around every actual arm/quiet callback. Old modes use0. */
+#define PT_PRIVATE_CAUSAL_RAM_ARM_NOT_ENTERED 1U
+#define PT_PRIVATE_CAUSAL_RAM_ARM_ENTERED 2U
 struct pt_private_mixed_causal_ram_command {
     struct pt_mixed_causal_packet packet;
     struct pt_mixed_causal_command_identity identity,predecessor;
@@ -30,8 +36,10 @@ struct pt_private_mixed_causal_ram_command {
     uint64_t arm_tick,serial,predecessor_observed,predecessor_issued;
     unsigned known,live,armed,finished,disabled,uncertain,quiet_confirmed;
     unsigned successor,predecessor_completed;
+    unsigned rolling_arm_state;
     unsigned lineage_phase; /* 0 existing modes; 1 root,2 CONTROL,3 STOP. */
     int arm_outcome,ticket_outcome,fire_result;
+    int rolling_ticket_raw; /* Actual adapter return; ticket_outcome is guarded. */
 };
 struct pt_private_mixed_causal_ram_reader {
     struct pt_mixed_readers_key key;
@@ -73,6 +81,12 @@ struct pt_private_mixed_causal_ram_port {
     unsigned lineage_mode,stops,root_command_quiet;
     struct pt_private_mixed_causal_ram_completed control_completed;
     struct pt_mixed_causal_control_stop_publication stop_before;
+    /* Constructor-issued disjoint rolling capability. Two rows are recycled
+     * only after independent ticket quiet; root/latest completion copies are
+     * scalar histories, never ownership or dereferenced disposed addresses. */
+    unsigned rolling_mode;
+    uint64_t rolling_serial;
+    struct pt_mixed_causal_rolling_publication rolling_before;
 };
 /* Fresh full ZERO, noncopyable, immutable complete extents, no reset/reuse.
  * Whole-entry task/fire/input-edit exclusion is caller-owned. The entire port,
@@ -94,6 +108,13 @@ int pt_private_mixed_causal_ram_init_control(struct pt_private_mixed_causal_ram_
 int pt_private_mixed_causal_ram_init_lineage(struct pt_private_mixed_causal_ram_port *,
     uint64_t,uint64_t,uint32_t,const struct pt_private_mixed_causal_ram_adapter *,unsigned,unsigned);
 struct pt_mixed_causal_control_stop_port pt_private_mixed_causal_ram_lineage_api(
+    struct pt_private_mixed_causal_ram_port *);
+/* Distinct rolling constructor; existing CONTROL/finite API getters refuse
+ * this mode. Actual core/factory disposal is checked independently by their
+ * typed rolling admission, never inferred from this port's quiet result. */
+int pt_private_mixed_causal_ram_init_rolling(struct pt_private_mixed_causal_ram_port *,
+    uint64_t,uint64_t,uint32_t,const struct pt_private_mixed_causal_ram_adapter *,unsigned,unsigned);
+struct pt_mixed_causal_rolling_port pt_private_mixed_causal_ram_rolling_api(
     struct pt_private_mixed_causal_ram_port *);
 /* Once immediately after genuine open+queue borrow, before factory, packets
  * or source exposure. Includes successful empty/cancel-before-publish owners.

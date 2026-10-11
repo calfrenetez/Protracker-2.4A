@@ -54,9 +54,11 @@ static void geometry_drop(struct pt_private_mixed_causal_ram_command *c)
 {unsigned i;for(i=0;i<16;++i){memset(&c->packet.action[i].geometry,0,sizeof(c->packet.action[i].geometry));memset(c->packet.card+i,0,sizeof(c->packet.card[i]));}}
 static int clock_locked(struct pt_private_mixed_causal_ram_port *p,uint64_t *ticks,uint32_t *frequency)
 {
-    uint64_t t=0;uint32_t f=0;unsigned before=p->faults;int raw;
+    uint64_t t=0;uint32_t f=0;unsigned before=p->faults;
+    unsigned rolling=p->rolling_mode,control=p->control_mode,lineage=p->lineage_mode;int raw;
     if(p->adapter_busy||(p->dispatching&&p->trace_count>=p->maximum_reads)){if(p->adapter_busy)fault(p);return 0;}
     p->adapter_busy=1;raw=p->adapter.clock(p->adapter.context,&t,&f);p->adapter_busy=0;p->clock_outcome=raw;
+    if(p->rolling_mode!=rolling||p->control_mode!=control||p->lineage_mode!=lineage)fault(p);
     if(raw!=1||p->faults!=before)return 0;
     if(p->dispatching)p->trace[p->trace_count++]=(struct pt_private_mixed_causal_ram_trace){t,f};
     if(f!=p->frequency||(p->clock_seen&&t<p->last_clock))return 0;
@@ -72,13 +74,44 @@ static int read_clock(void *context,uint64_t *ticks,uint32_t *frequency)
 }
 static int ticket_quiet(struct pt_private_mixed_causal_ram_port *p,uint64_t ticket,unsigned cancel,int *outcome)
 {
-    struct pt_mixed_causal_registration identity;unsigned before=p->faults;int raw;
-    memcpy(&identity,&p->registration,sizeof(identity));p->adapter_busy=1;
-    raw=p->adapter.ticket_quiet(p->adapter.context,&identity,ticket,cancel);p->adapter_busy=0;*outcome=raw;
+    struct pt_mixed_causal_registration identity;unsigned before=p->faults;
+    unsigned rolling=p->rolling_mode,control=p->control_mode,lineage=p->lineage_mode;int raw;
+    struct pt_private_mixed_causal_ram_command saved,*row=NULL;
+    struct pt_private_mixed_causal_ram_completed root,latest;
+    struct pt_mixed_readers_key keys[20];unsigned mask=0;uint64_t serial=0;
+    unsigned row_custody;int actual_raw;
+    memcpy(&identity,&p->registration,sizeof(identity));
+    row=command_find(p,ticket);
+    /* A prior callback may have corrupted the profile. Recorded rolling row
+     * custody still requires complete snapshots and sticky actual arm entry. */
+    row_custody=rolling||(row&&row->rolling_arm_state!=0);
+    if(row_custody){if(!row)return -1;
+        memcpy(&saved,row,sizeof(saved));memcpy(&root,&p->completed,sizeof(root));
+        memcpy(&latest,&p->control_completed,sizeof(latest));memcpy(keys,p->slot,sizeof(keys));
+        mask=p->mask;serial=p->rolling_serial;}
+    p->adapter_busy=1;
+    raw=p->adapter.ticket_quiet(p->adapter.context,&identity,ticket,cancel);p->adapter_busy=0;actual_raw=raw;
+    if(row_custody&&(memcmp(row,&saved,sizeof(saved))||
+       memcmp(&root,&p->completed,sizeof(root))||memcmp(&latest,&p->control_completed,sizeof(latest))||
+       memcmp(keys,p->slot,sizeof(keys))||mask!=p->mask||serial!=p->rolling_serial)){
+        /* Restore only saved owned command custody, not profiles/histories.
+         * No callback may erase lookup or forge live0/quiet1 absence. */
+        memcpy(row,&saved,sizeof(*row));fault(p);row->uncertain=1;p->suppressed=1;raw=-1;}
+    if(p->rolling_mode!=rolling||p->control_mode!=control||p->lineage_mode!=lineage){
+        fault(p);if(row_custody&&row)row->uncertain=1;p->suppressed=1;raw=-1;}
+    /* The external quiet callback cannot erase an actual arm entry. Compare
+     * its full row first (above), then reassert this recorded control flow. */
+    if(row_custody&&row&&saved.rolling_arm_state==PT_PRIVATE_CAUSAL_RAM_ARM_ENTERED)
+        row->rolling_arm_state=PT_PRIVATE_CAUSAL_RAM_ARM_ENTERED;
+    /* Record the actual adapter result after snapshot checking/restoration.
+     * This observation never supplies quiet authority or changes old modes. */
+    if(row_custody&&row)row->rolling_ticket_raw=actual_raw;
+    *outcome=raw;
     if(!registration_same(&identity,&p->registration)){fault(p);return -1;}
     if(p->faults!=before)return -1;
     return raw==0?0:raw==1?1:-1;
 }
+
 static int card_valid(const struct pt_mixed_readers_card *c,const struct pt_amigus_voice_plan *a)
 {
     uint32_t end;
@@ -160,17 +193,30 @@ static int control_packet_valid(const struct pt_private_mixed_causal_ram_port *p
     for(i=b->count;i<16;++i)if(!key_same(b->key+i,&key_zero)||
         !action_same(b->action+i,&action_zero)||!zero_bytes(&b->action[i].geometry,sizeof(b->action[i].geometry))||
         !card_zero(b->card+i))return 0;
-    return !p->lineage_mode||(b->count==16&&used==p->mask);
+    return !(p->lineage_mode||p->rolling_mode)||(b->count==16&&used==p->mask);
 }
 static int arm_locked(struct pt_private_mixed_causal_ram_port *p,struct pt_private_mixed_causal_ram_command *c,
     struct pt_mixed_causal_owner *owner,const struct pt_mixed_causal_command_identity *identity,const struct pt_mixed_causal_packet *b)
 {
-    struct pt_mixed_causal_registration copy;unsigned before=p->faults;int raw;
+    struct pt_mixed_causal_registration copy;struct pt_private_mixed_causal_ram_command rolling_copy;unsigned before=p->faults;
+    unsigned rolling=p->rolling_mode,control=p->control_mode,lineage=p->lineage_mode;int raw;
     memcpy(&c->packet,b,sizeof(*b));memcpy(&c->identity,identity,sizeof(*identity));c->owner=owner;
     c->arm_tick=b->first;c->known=c->live=c->armed=1;
-    c->lineage_phase=p->lineage_mode?p->pair_used:0;
+    c->lineage_phase=p->rolling_mode?
+        (b->action[0].kind==PT_MIXED_READERS_TRIGGER?1U:
+         b->action[0].kind==PT_MIXED_READERS_CONTROL?2U:3U):p->lineage_mode?p->pair_used:0;
+    if(rolling){c->quiet_confirmed=0;c->rolling_arm_state=PT_PRIVATE_CAUSAL_RAM_ARM_ENTERED;
+        memcpy(&rolling_copy,c,sizeof(rolling_copy));}
     memcpy(&copy,&p->registration,sizeof(copy));p->adapter_busy=1;
-    raw=p->adapter.arm_at(p->adapter.context,&copy,b->ticket,b->first,p->frequency);p->adapter_busy=0;c->arm_outcome=raw;
+    raw=p->adapter.arm_at(p->adapter.context,&copy,b->ticket,b->first,p->frequency);p->adapter_busy=0;
+    if(rolling&&memcmp(c,&rolling_copy,sizeof(rolling_copy))){
+        /* Retain the actual pre-callback state, including finished/armed bits.
+         * This attempted arm may own callbacks even after raw0/malformed. */
+        memcpy(c,&rolling_copy,sizeof(*c));fault(p);c->uncertain=1;p->suppressed=1;}
+    /* Sticky even on raw0, unknown, malformed, reentry or callback mutation. */
+    if(rolling)c->rolling_arm_state=PT_PRIVATE_CAUSAL_RAM_ARM_ENTERED;
+    if(p->rolling_mode!=rolling||p->control_mode!=control||p->lineage_mode!=lineage)fault(p);
+    c->arm_outcome=raw;
     if(!registration_same(&copy,&p->registration))fault(p);
     if(raw==0&&p->faults==before){memset(&c->packet,0,sizeof(c->packet));c->owner=NULL;
         c->live=c->armed=0;c->quiet_confirmed=1;return 0;}
@@ -185,9 +231,41 @@ static int publish(void *context,struct pt_mixed_causal_owner *owner,
     ++p->publishes;
     if(p->failed||p->source_attempted){result=-1;goto done;}
     if(p->pair_used||owner!=p->registration.owner||!identity_valid(p,identity,b->ticket)||
-       !packet_valid(p,b)||!expected_same(p,b)||(p->lineage_mode&&b->count!=16))goto done;
-    if(!clock_locked(p,&now,&frequency)){result=-1;fault(p);goto done;}
-    if(now>=b->first)goto done;
+       !packet_valid(p,b)||!expected_same(p,b)||((p->lineage_mode||p->rolling_mode)&&b->count!=16))goto done;
+    if(p->rolling_mode){
+        struct pt_mixed_causal_packet packet_before;
+        struct pt_mixed_causal_command_identity identity_before;
+        struct pt_private_mixed_causal_ram_command row_before;
+        struct pt_mixed_causal_registration registration_before;
+        unsigned pair_before=p->pair_used,control=p->control_mode,lineage=p->lineage_mode;
+        uint64_t serial_before=p->rolling_serial;
+        if(!p->control_mode||p->lineage_mode||p->rolling_serial||
+           !zero_bytes(p->command,sizeof(p->command)))goto done;
+        memcpy(&packet_before,b,sizeof(packet_before));memcpy(&identity_before,identity,sizeof(identity_before));
+        memcpy(&registration_before,&p->registration,sizeof(registration_before));
+        /* Root uses the same explicit absence record, while old profiles retain
+         * their original branch below. No packet/owner/arm exists in this row. */
+        memcpy(&p->command[0].identity,&identity_before,sizeof(identity_before));
+        p->command[0].known=p->command[0].quiet_confirmed=1;
+        p->command[0].rolling_arm_state=PT_PRIVATE_CAUSAL_RAM_ARM_NOT_ENTERED;
+        memcpy(&row_before,p->command,sizeof(row_before));
+        if(!clock_locked(p,&now,&frequency)||!current(p)||!p->rolling_mode||
+           p->control_mode!=control||p->lineage_mode!=lineage||
+           !registration_same(&p->registration,&registration_before)||
+           p->pair_used!=pair_before||p->rolling_serial!=serial_before||
+           memcmp(identity,&identity_before,sizeof(identity_before))||
+           !packet_same(b,&packet_before)||!packet_valid(p,b)||!expected_same(p,b)||
+           memcmp(p->command,&row_before,sizeof(row_before))||
+           !zero_bytes(p->command+1,sizeof(p->command[1]))){
+            /* Guaranteed no arm entry: preserve the original staged identity,
+             * not arbitrary callback-written bytes or any global failure undo. */
+            memcpy(p->command,&row_before,sizeof(row_before));fault(p);
+            p->command[0].uncertain=1;p->suppressed=1;result=-1;goto done;}
+        if(now>=b->first){memset(p->command,0,sizeof(row_before));goto done;}
+    }else{
+        if(!clock_locked(p,&now,&frequency)){result=-1;fault(p);goto done;}
+        if(now>=b->first)goto done;
+    }
     p->pair_used=1;result=arm_locked(p,p->command,owner,identity,b);
  done:p->entry_busy=0;return result;
 }
@@ -229,7 +307,7 @@ static int publish_control(void *context,struct pt_mixed_causal_owner *owner,
     if(!enter(p))return -1;
     ++p->publishes;
     if(p->failed||p->source_attempted){result=-1;goto done;}
-    if(!control_current(p)||p->pair_used!=1||owner!=p->registration.owner||
+    if(p->rolling_mode||!control_current(p)||p->pair_used!=1||owner!=p->registration.owner||
        p->command[1].known||p->command[1].live||p->command[1].armed)goto done;
     memcpy(&p->control_before,d,sizeof(*d));b=&p->control_before;
     if(b->serial!=1||!identity_same(&b->predecessor,&p->completed.identity)||
@@ -256,7 +334,7 @@ static int lineage_current(const struct pt_private_mixed_causal_ram_port *p)
 {
     const struct pt_private_mixed_causal_ram_completed *h=&p->control_completed;
     unsigned i;
-    if(!p->lineage_mode||!control_current(p)||!h->valid||
+    if(!(p->lineage_mode||p->rolling_mode)||!control_current(p)||!h->valid||
        !identity_valid(p,&h->identity,h->identity.ticket)||
        h->identity.ticket==p->completed.identity.ticket||h->frame<=p->completed.frame||
        h->first_tick<p->completed.last_tick||h->first_tick>=h->last_tick||
@@ -311,7 +389,7 @@ static int publish_stop_after_control(void *context,struct pt_mixed_causal_owner
     /* Port quiet proves callback absence. The distinct genuine core publication
      * separately requires actual C1 queue service(cancel0), NULL consumption and
      * detachment. No callback reenters a busy core getter or walks retired C1. */
-    if(!lineage_current(p)||p->pair_used!=2||!p->root_command_quiet||
+    if(!p->lineage_mode||p->rolling_mode||!lineage_current(p)||p->pair_used!=2||!p->root_command_quiet||
        owner!=p->registration.owner||!retired->known||retired->live||retired->armed||
        retired->owner||!retired->quiet_confirmed||!retired->finished||retired->uncertain||
        !identity_same(&retired->identity,&p->completed.identity)||
@@ -333,6 +411,84 @@ static int publish_stop_after_control(void *context,struct pt_mixed_causal_owner
     if(memcmp(d,b,sizeof(*d))){fault(p);retired->uncertain=1;p->suppressed=1;result=-1;}
  done:memset(&p->stop_before,0,sizeof(p->stop_before));p->entry_busy=0;return result;
 }
+/* Common scalar validation still owns all numeric geometry/key rules. The
+ * rolling layer adds actual immediate-predecessor order and both row lifetimes. */
+static int rolling_packet_valid(const struct pt_private_mixed_causal_ram_port *p,
+ const struct pt_mixed_causal_packet *b,unsigned kind)
+{
+    const struct pt_private_mixed_causal_ram_completed *h=p->control_completed.valid?
+        &p->control_completed:&p->completed;
+    if(!p->rolling_mode||!control_current(p)||!h->valid||
+       b->frame<=h->frame||b->first<h->last_tick||b->ticket==h->identity.ticket)return 0;
+    return kind==PT_MIXED_READERS_CONTROL?control_packet_valid(p,b):
+        kind==PT_MIXED_READERS_STOP&&p->control_completed.valid&&stop_packet_valid(p,b);
+}
+static int publish_rolling_next(void *context,struct pt_mixed_causal_owner *owner,
+ const struct pt_mixed_causal_rolling_publication *d)
+{
+    struct pt_private_mixed_causal_ram_port *p=context;
+    const struct pt_mixed_causal_rolling_publication *b;
+    const struct pt_private_mixed_causal_ram_completed *h;
+    struct pt_private_mixed_causal_ram_command *row;
+    struct pt_private_mixed_causal_ram_completed root_before,latest_before;
+    struct pt_private_mixed_causal_ram_command retired_before,row_before;
+    uint64_t now,serial_before;uint32_t frequency;unsigned pair_before;int result=0;
+    if(!extent(p,sizeof(*p))||!extent(d,sizeof(*d))||!apart(p,sizeof(*p),d,sizeof(*d)))return 0;
+    if(!enter(p))return -1;
+    ++p->publishes;
+    if(p->failed||p->suppressed||p->source_attempted){result=-1;goto done;}
+    if(!p->rolling_mode||!control_current(p)||owner!=p->registration.owner||
+       p->rolling_serial==UINT64_MAX||p->pair_used==UINT32_MAX)goto done;
+    memcpy(&p->rolling_before,d,sizeof(*d));b=&p->rolling_before;
+    h=p->control_completed.valid?&p->control_completed:&p->completed;
+    if(b->serial!=p->rolling_serial+1||!completed_same(&p->completed,&b->root)||
+       !completed_same(h,&b->predecessor)||!identity_valid(p,&b->next,b->packet.ticket)||
+       !rolling_packet_valid(p,&b->packet,b->kind))goto done;
+    row=p->command+(unsigned)(b->serial&1U);
+    /* The genuinely empty initial second row is distinct from a recycled row.
+     * A recycled row's own ticket_quiet1 is indispensable even after commit. */
+    if(b->serial==1){if(row->known||row->live||row->armed||b->reuse_required||b->reuse_serial||
+        !zero_bytes(&b->reuse,sizeof(b->reuse)))goto done;}
+    else if(!row->known||row->live||row->armed||row->owner||!row->quiet_confirmed||
+        !row->finished||row->uncertain||!zero_bytes(&row->packet,sizeof(row->packet))||
+        row->serial!=b->serial-2||row->identity.ticket==h->identity.ticket||
+        b->reuse_required!=1||b->reuse_serial!=row->serial||
+        !identity_same(&row->identity,&b->reuse))goto done;
+    memcpy(&root_before,&p->completed,sizeof(root_before));
+    memcpy(&latest_before,&p->control_completed,sizeof(latest_before));
+    memcpy(&retired_before,row,sizeof(retired_before));serial_before=p->rolling_serial;pair_before=p->pair_used;
+    /* Reuse was authenticated above. Reserve the already-owned new identity
+     * BEFORE the first external callback. This tombstone has no live packet,
+     * owner or arm; it authorizes exact detach only, never completion/reuse. */
+    memset(row,0,sizeof(*row));memcpy(&row->identity,&b->next,sizeof(row->identity));
+    memcpy(&row->predecessor,&b->predecessor.identity,sizeof(row->predecessor));
+    row->known=row->quiet_confirmed=1;row->serial=b->serial;
+    row->rolling_arm_state=PT_PRIVATE_CAUSAL_RAM_ARM_NOT_ENTERED;
+    memcpy(&row_before,row,sizeof(row_before));
+    if(!clock_locked(p,&now,&frequency)){
+        /* No arm call was entered. Restore only this newly reserved identity
+         * and absence proof, not histories, profiles or real failure state. */
+        memcpy(row,&row_before,sizeof(*row));fault(p);row->uncertain=1;
+        p->suppressed=1;result=-1;goto done;}
+    if(memcmp(d,b,sizeof(*d))||!p->rolling_mode||!p->control_mode||p->lineage_mode||!control_current(p)||
+       memcmp(&p->completed,&root_before,sizeof(root_before))||
+       memcmp(&p->control_completed,&latest_before,sizeof(latest_before))||
+       memcmp(row,&row_before,sizeof(row_before))||p->rolling_serial!=serial_before||p->pair_used!=pair_before){
+        memcpy(row,&row_before,sizeof(*row));fault(p);row->uncertain=1;p->suppressed=1;result=-1;goto done;}
+    if(now>=b->packet.first){memcpy(row,&retired_before,sizeof(*row));goto done;}
+    /* Counters advance only at actual arm entry, never for the tombstone. */
+    p->rolling_serial=b->serial;++p->pair_used;
+    memcpy(&row->predecessor,&b->predecessor.identity,sizeof(row->predecessor));
+    row->successor=row->predecessor_completed=1;row->serial=b->serial;
+    row->predecessor_observed=b->predecessor.observed;row->predecessor_issued=b->predecessor.issued;
+    result=arm_locked(p,row,owner,&b->next,&b->packet);
+    if(memcmp(d,b,sizeof(*d))||!p->rolling_mode||!p->control_mode||p->lineage_mode||!control_current(p)||
+       memcmp(&p->completed,&root_before,sizeof(root_before))||
+       memcmp(&p->control_completed,&latest_before,sizeof(latest_before))||
+       p->rolling_serial!=b->serial||p->pair_used!=pair_before+1){
+        fault(p);row->uncertain=1;p->suppressed=1;result=-1;}
+ done:memset(&p->rolling_before,0,sizeof(p->rolling_before));p->entry_busy=0;return result;
+}
 static int commit(void *context,const struct pt_mixed_causal_packet *b,struct pt_mixed_causal_actual *out)
 {
     struct pt_private_mixed_causal_ram_port *p=context;struct pt_private_mixed_causal_ram_command *c;
@@ -342,11 +498,12 @@ static int commit(void *context,const struct pt_mixed_causal_packet *b,struct pt
     if(!p->dispatching||!p->fire_running||p->adapter_busy){if(p->entry_busy)fault(p);return 0;}
     c=command_find(p,b->ticket);
     if(p->failed||p->suppressed||p->source_attempted||!c||!c->live||!c->armed||c->finished||c->disabled||c->uncertain||
-       !(p->lineage_mode&&c->lineage_phase==3?stop_packet_valid(p,b):
+       !(p->rolling_mode&&c->lineage_phase!=1?rolling_packet_valid(p,b,b->action[0].kind):
+         p->lineage_mode&&c->lineage_phase==3?stop_packet_valid(p,b):
          p->control_mode&&c==p->command+1?control_packet_valid(p,b):packet_valid(p,b))||
        !packet_same(&c->packet,b)||!expected_same(p,b)||!p->clock_seen||
        p->last_clock<b->first||p->last_clock>=b->last||(c->successor&&!c->predecessor_completed))return 0;
-    if(p->lineage_mode&&c->lineage_phase==3){
+    if((p->lineage_mode||p->rolling_mode)&&c->lineage_phase==3){
         /* STOP removes activity only. Reader/key/source/geometry/card bytes stay
          * owned until independent quiet covers every live expected-only C. */
         for(i=0;i<b->count;++i){struct pt_private_mixed_causal_ram_reader *r=reader_find(p,b->key+i);
@@ -354,7 +511,7 @@ static int commit(void *context,const struct pt_mixed_causal_packet *b,struct pt
             p->mask&=~(1U<<index);memset(p->slot+index,0,sizeof(p->slot[index]));++p->stops;}
         out->active_mask=out->adopted_mask=p->mask;memcpy(out->slot,p->slot,sizeof(p->slot));return 1;
     }
-    if(p->control_mode&&c==p->command+1){
+    if((p->rolling_mode&&c->lineage_phase==2)||(!p->rolling_mode&&p->control_mode&&c==p->command+1)){
         /* Complete admission is repeated above before ANY numeric effect. These
          * writes preserve every reader/key/source/geometry/cache/card byte except
          * the explicitly selected period/volume or rate/full uint16 levels. */
@@ -388,6 +545,12 @@ static int command_quiet(void *context,const struct pt_mixed_causal_command_iden
     if(!p||!identity||cancel>1||!enter(p))return -1;
     c=command_find(p,identity->ticket);
     if(!c||!identity_same(&c->identity,identity))goto done;
+    if(c->rolling_arm_state==PT_PRIVATE_CAUSAL_RAM_ARM_NOT_ENTERED){
+        /* Exact recorded absence, not !armed or a guessed ticket proof. This
+         * failed row cannot pass finished/nonuncertain publication guards. */
+        if(c->known&&!c->live&&!c->armed&&!c->owner&&c->quiet_confirmed&&
+           !c->finished&&!c->disabled&&zero_bytes(&c->packet,sizeof(c->packet)))result=1;
+        goto done;}
     if(!c->live&&c->quiet_confirmed){result=1;goto done;}
     if(!cancel&&!c->finished&&!c->disabled){result=0;goto done;}
     quiet=ticket_quiet(p,identity->ticket,cancel,&c->ticket_outcome);
@@ -472,6 +635,13 @@ int pt_private_mixed_causal_ram_init_lineage(struct pt_private_mixed_causal_ram_
     if(!pt_private_mixed_causal_ram_init_control(p,session,generation,frequency,a,residency,reads))return 0;
     p->lineage_mode=1;return 1;
 }
+int pt_private_mixed_causal_ram_init_rolling(struct pt_private_mixed_causal_ram_port *p,uint64_t session,
+ uint64_t generation,uint32_t frequency,const struct pt_private_mixed_causal_ram_adapter *a,
+ unsigned residency,unsigned reads)
+{
+    if(!pt_private_mixed_causal_ram_init_control(p,session,generation,frequency,a,residency,reads))return 0;
+    p->rolling_mode=1;return 1;
+}
 int pt_private_mixed_causal_ram_bind(struct pt_private_mixed_causal_ram_port *p,struct pt_mixed_causal_owner *owner,
  struct pt_mixed_readers_output *queue,uint64_t session,uint64_t generation)
 {
@@ -486,7 +656,7 @@ struct pt_mixed_causal_port pt_private_mixed_causal_ram_api(struct pt_private_mi
 struct pt_mixed_causal_control_port pt_private_mixed_causal_ram_control_api(struct pt_private_mixed_causal_ram_port *p)
 {
     struct pt_mixed_causal_control_port result={0};
-    if(p&&p->self==p&&p->initialized&&p->control_mode&&!p->lineage_mode)
+    if(p&&p->self==p&&p->initialized&&p->control_mode&&!p->lineage_mode&&!p->rolling_mode)
         result=(struct pt_mixed_causal_control_port){p,sizeof(*p),PT_MIXED_CAUSAL_CONTROL_VERSION,
             PT_MIXED_CAUSAL_CONTROL_REQUIRED,publish_control};
     return result;
@@ -494,9 +664,17 @@ struct pt_mixed_causal_control_port pt_private_mixed_causal_ram_control_api(stru
 struct pt_mixed_causal_control_stop_port pt_private_mixed_causal_ram_lineage_api(struct pt_private_mixed_causal_ram_port *p)
 {
     struct pt_mixed_causal_control_stop_port result={0};
-    if(p&&p->self==p&&p->initialized&&p->lineage_mode)
+    if(p&&p->self==p&&p->initialized&&p->lineage_mode&&!p->rolling_mode)
         result=(struct pt_mixed_causal_control_stop_port){p,sizeof(*p),PT_MIXED_CAUSAL_CONTROL_STOP_VERSION,
             PT_MIXED_CAUSAL_CONTROL_STOP_REQUIRED,publish_control,publish_stop_after_control};
+    return result;
+}
+struct pt_mixed_causal_rolling_port pt_private_mixed_causal_ram_rolling_api(struct pt_private_mixed_causal_ram_port *p)
+{
+    struct pt_mixed_causal_rolling_port result={0};
+    if(p&&p->self==p&&p->initialized&&p->rolling_mode&&!p->lineage_mode)
+        result=(struct pt_mixed_causal_rolling_port){p,sizeof(*p),PT_MIXED_CAUSAL_ROLLING_VERSION,
+            PT_MIXED_CAUSAL_ROLLING_REQUIRED,publish_rolling_next};
     return result;
 }
 int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port *p,uint64_t ticket)
@@ -513,7 +691,7 @@ int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port
     if(p->faults!=before||p->failed||p->last_clock<entry||p->last_clock-entry>p->residency_ticks)result=PT_MIXED_CAUSAL_FAILED;
     if(result==PT_MIXED_CAUSAL_EARLY)goto ended;
     if(result==PT_MIXED_CAUSAL_COMMITTED&&p->control_mode&&c==p->command&&
-       (!p->lineage_mode||c->lineage_phase==1)){
+       (!(p->lineage_mode||p->rolling_mode)||c->lineage_phase==1)){
         struct pt_private_mixed_causal_ram_completed *h=&p->completed;
         struct pt_mixed_causal_actual predicted;unsigned index;
         memset(&predicted,0,sizeof(predicted));predicted.active_mask=predicted.adopted_mask=c->packet.expected_mask;
@@ -536,6 +714,26 @@ int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port
                 if(!control_current(p)){h->valid=0;result=PT_MIXED_CAUSAL_FAILED;}
             }
         }
+    }else if(result==PT_MIXED_CAUSAL_COMMITTED&&p->rolling_mode&&c->lineage_phase==2){
+        struct pt_private_mixed_causal_ram_completed *h=&p->control_completed;
+        if(c->serial!=p->rolling_serial||!control_current(p)||p->trace_count!=3||
+           p->trace[0].ticks!=entry||p->trace[0].frequency!=p->frequency||
+           p->trace[1].frequency!=p->frequency||p->trace[2].frequency!=p->frequency||
+           p->trace[1].ticks<c->packet.first||p->trace[2].ticks<p->trace[1].ticks||
+           p->trace[2].ticks>=c->packet.last)result=PT_MIXED_CAUSAL_FAILED;
+        else{
+            memcpy(&h->identity,&c->identity,sizeof(h->identity));h->frame=c->packet.frame;
+            h->first_tick=c->packet.first;h->last_tick=c->packet.last;
+            h->observed=p->trace[1].ticks;h->issued=p->trace[2].ticks;
+            h->post.active_mask=h->post.adopted_mask=p->mask;memcpy(h->post.slot,p->slot,sizeof(p->slot));h->valid=1;
+            if(!lineage_current(p)){h->valid=0;result=PT_MIXED_CAUSAL_FAILED;}
+        }
+    }else if(result==PT_MIXED_CAUSAL_COMMITTED&&p->rolling_mode&&c->lineage_phase==3){
+        if(c->serial!=p->rolling_serial||p->mask||!zero_bytes(p->slot,sizeof(p->slot))||p->trace_count!=3||
+           p->trace[0].ticks!=entry||p->trace[0].frequency!=p->frequency||
+           p->trace[1].frequency!=p->frequency||p->trace[2].frequency!=p->frequency||
+           p->trace[1].ticks<c->packet.first||p->trace[2].ticks<p->trace[1].ticks||
+           p->trace[2].ticks>=c->packet.last)result=PT_MIXED_CAUSAL_FAILED;
     }else if(result==PT_MIXED_CAUSAL_COMMITTED&&p->lineage_mode&&c->lineage_phase==2){
         struct pt_private_mixed_causal_ram_completed *h=&p->control_completed;
         if(p->pair_used!=2||h->valid||!control_current(p)||p->trace_count!=3||

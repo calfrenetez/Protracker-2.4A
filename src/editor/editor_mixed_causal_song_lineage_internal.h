@@ -126,6 +126,7 @@ struct pt_editor_mixed_causal_song_lineage_status {
  * Persistent pins are genuine ownership, not a readiness certificate. The
  * C2/R32 maps contain only actual refs returned into disjoint admitted locals; descriptive U is never a controller output target.
  */
+struct pt_editor_mixed_causal_song_rolling;
 struct pt_editor_mixed_causal_song_lineage {
     struct pt_editor_mixed_causal_prepare *controller;
     struct pt_editor_mixed_causal_lineage_source_prepare *joint;
@@ -166,6 +167,9 @@ struct pt_editor_mixed_causal_song_lineage {
     enum pt_editor_mixed_causal_song_lineage_phase phase;
     enum pt_editor_mixed_causal_song_lineage_result result,first_error;
     enum pt_mixed_readers_result scheduled_result;
+    /* Constructor-issued disjoint rolling wrapper, never a copied capability.
+     * Existing constructor keeps this zero and its three-profile stays closed. */
+    struct pt_editor_mixed_causal_song_rolling *rolling_owner;
 };
 
 /* Exactly three nonempty TRIGGER/CONTROL16/STOP boundaries, full audit and real EOF replay BEFORE

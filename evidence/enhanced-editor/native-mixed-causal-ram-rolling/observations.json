@@ -1,0 +1,190 @@
+{
+  "absolute_frames": [
+    960,
+    1920,
+    2880,
+    3840
+  ],
+  "canonical_repository_entry": {
+    "compile_seconds": 120,
+    "fixture_oracle": "FULL68_INTERNALLY_ASSERTED_NOT_SEPARATELY_EXPORTED",
+    "fixture_seconds": 30,
+    "genuine_wait_and_separate_stream_closes": true,
+    "independent_saved_data_audit": "PASS",
+    "nested_compile_fixture_counters": "NOT_SEPARATELY_EXPORTED",
+    "normal_unittest_summary": true,
+    "outer_seconds": 190,
+    "outer_stderr_bytes": 99,
+    "outer_stderr_sha256": "7b2dacc2fccb0572ae438e5a8b67c938ed5c74aad7d45ec4905889b8f0c1fffa",
+    "outer_stdout_empty": true,
+    "own15_protected16_preserved": true,
+    "public_safe_audit_sha256": "ee34aa48b2b65a3f681b39b1df4c827d92b69b9f2e013dd3ae08748192a364c2",
+    "receipt": {
+      "bytes": 19759,
+      "sha256": "774850139f179123ffdf7ad7b3a79773205c574d3176d4a511babc93db38b38d"
+    },
+    "return_code": 0,
+    "run_count": 1,
+    "status": "PASS",
+    "unittest_count": 1
+  },
+  "counting": "Case/check counts describe separate fixture groups. No aggregate unique-case count is claimed.",
+  "emulator_030": "NOT_RUN",
+  "escaped_leases": "NOT_QUALIFIED",
+  "events": [
+    "TRIGGER16",
+    "CONTROL16",
+    "CONTROL16",
+    "STOP16"
+  ],
+  "final_profile_host_regressions": [
+    {
+      "cases": 34,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "fixture_return_code": 0,
+      "group": "ram-default-pair34",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 80
+    },
+    {
+      "baseline_distinct_checks": 219,
+      "cases": 36,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "fixture_return_code": 0,
+      "group": "ram-completion36-checks219",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 80
+    },
+    {
+      "cases": 10,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "exact_timer_resource_model_define": true,
+      "fixture_return_code": 0,
+      "group": "ram-timer-resource10",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 81
+    },
+    {
+      "cases": 8,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "fixture_return_code": 0,
+      "group": "ram-retained-c1-8",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 29
+    },
+    {
+      "cases": 26,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "fixture_return_code": 0,
+      "group": "ram-control26",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 29
+    },
+    {
+      "cases": 17,
+      "compile_return_code": 0,
+      "empty_diagnostics": true,
+      "exact_oracle": true,
+      "fixture_return_code": 0,
+      "group": "ram-finite17",
+      "independent_saved_data_audit": "PASS",
+      "run_count": 1,
+      "source_and_preservation_guards": true,
+      "status": "PASS",
+      "translation_units": 85
+    }
+  ],
+  "historical_failed_diagnostic_candidates": "PRESERVED_SEPARATELY",
+  "host_recipe": {
+    "address_and_undefined_sanitizers": true,
+    "assertions_enabled": true,
+    "classic_baseline_body_reads": 47,
+    "classic_baseline_metadata_only_preserved": 4,
+    "classic_baseline_paths": 51,
+    "compile_seconds": 120,
+    "fixture_seconds": 30,
+    "font_header_bytes": 1630,
+    "font_raw_bytes": 580,
+    "metadata_only_baseline_bodies_read_or_hydrated": false,
+    "protected_paths": 16,
+    "strict_c99": true,
+    "translation_units": 85,
+    "warnings_as_errors": true
+  },
+  "human_listening": "NOT_RUN",
+  "independent_review_summary": {
+    "bytes": 6910,
+    "sha256": "a251f076918cd58053e82a07637832dfa8ffc98e49f89542b5f6ad76a5faa727"
+  },
+  "independent_saved_data_audit": "PASS",
+  "musical_audio": "NOT_RUN",
+  "native_build_abi_stack": "NOT_RUN",
+  "outcome_marker_boundary": "Root separately observed all six actual final markers reporting genuine outcome writer-close and post-DATA timer/handler restoration. Those later observations are not inferred from the receipts serialized before writer-close.",
+  "private_host_fixture": {
+    "cases": 68,
+    "empty_diagnostics": true,
+    "exact_oracle": true,
+    "independent_saved_data_audit": "PASS",
+    "protected16_preserved": true,
+    "return_code": 0,
+    "run_count": 1,
+    "source221_preserved": true,
+    "status": "PASS"
+  },
+  "process_group_absence": "NOT_QUALIFIED",
+  "profile": "optional_four_event_ordinary_ram_rolling",
+  "publication_status": "HOST_ACCEPTED_CANONICAL_AUDITED_TARGETS_NOT_RUN",
+  "real_a1200_amigus": "NOT_RUN",
+  "result_provenance": "Independently reviewed saved HOST data; final outcome-marker observations separately made by Root.",
+  "schema": 1,
+  "scope": {
+    "classic_layout_preserved": true,
+    "deferred_zoopertracker_features_added": false,
+    "frontend_activation": false,
+    "legacy_constructors_preserved": true,
+    "physical_device_acceptance": false
+  },
+  "source_pins": {
+    "canonical_entry": {
+      "bytes": 11578,
+      "sha256": "1094b0a65812829b718d2dcd05b72ecca79af840fc495589645c720e424e4b27"
+    },
+    "ram_port": {
+      "bytes": 55512,
+      "sha256": "fce2d3fe4c6c6a1860c791ae6d56b7e861f044d12764c75890052feb231b0a0e"
+    },
+    "ram_port_header": {
+      "bytes": 8784,
+      "sha256": "40eb6232b13a4318f50f54ba58aaf4429ec35dc59959910ce025eb4198494dbc"
+    },
+    "rolling_fixture": {
+      "bytes": 64163,
+      "sha256": "5355af1471fbe98f018e65b4f894a7b1adab5938a313697ae7c149b5993bd750"
+    }
+  }
+}

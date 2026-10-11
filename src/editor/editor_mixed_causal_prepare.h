@@ -10,6 +10,7 @@
 struct pt_editor_mixed_causal_prepare;
 struct pt_editor_mixed_causal_stop_prepare;
 struct pt_editor_mixed_causal_lineage_prepare;
+struct pt_editor_mixed_causal_rolling_state;
 struct pt_editor_mixed_causal_source_inputs;
 struct pt_editor_mixed_causal_source_borrow;
 struct pt_editor_mixed_causal_prepare_inputs {
@@ -135,6 +136,7 @@ struct pt_editor_mixed_causal_prepare {
      * complete sizeof/query guards include this appended backlink. Default,
      * STOP-only and SOURCE paths leave it zero. Never a caller capability. */
     struct pt_editor_mixed_causal_lineage_prepare *lineage_owner;
+    struct pt_editor_mixed_causal_rolling_state *rolling_owner;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_causal_prepare_begin(
     struct pt_editor_mixed_causal_prepare *,const struct pt_editor_mixed_causal_prepare_inputs *);

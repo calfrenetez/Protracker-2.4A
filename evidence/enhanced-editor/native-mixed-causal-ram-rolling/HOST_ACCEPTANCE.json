@@ -1,0 +1,191 @@
+{
+  "common_verification": {
+    "classic_baseline_body_reads": 47,
+    "classic_baseline_entries_preserved": 51,
+    "classic_baseline_metadata_only_preserved": 4,
+    "classic_lock_preserved": true,
+    "compiler_bound_seconds": 120,
+    "exact_vectors_and_complete_oracles": true,
+    "file_bound_seconds": 5,
+    "first_failure": null,
+    "fixture_bound_seconds": 30,
+    "generated_font_bytes": 1630,
+    "handler_and_timer_restored": true,
+    "independent_genuine_waits_and_separate_stream_EOF_closes": true,
+    "metadata_only_baseline_bodies_read_or_hydrated": false,
+    "protected_inputs_preserved": 16,
+    "raw_font_bytes": 580,
+    "role_bound_seconds": 190,
+    "selected_input_union": 229,
+    "selected_sources_and_private_copies_preserved": true,
+    "strict_Werror_assertions_ASan_UBSan_retained": true
+  },
+  "counting": "Case/check counts describe separate fixture groups. No aggregate unique-case count is claimed.",
+  "groups": [
+    {
+      "cases": 34,
+      "compile_RC": 0,
+      "distinct_checks": null,
+      "exact_timer_resource_model_define": false,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 502,
+        "sha256": "01d6660b8f95002872d8aa3a8a39e7ed3a6b2a6998524e8dbe18d8afada43206"
+      },
+      "group": "ram-default-pair34",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 500941,
+        "sha256": "09806f6a35f69bdfd3c2d4bb6b51515e139b9ddce4f45c366f2a75241488c79c"
+      },
+      "selected_inputs_including_generated_font": 209,
+      "status": "PASS",
+      "translation_units": 80
+    },
+    {
+      "cases": 36,
+      "compile_RC": 0,
+      "distinct_checks": 219,
+      "exact_timer_resource_model_define": false,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 842,
+        "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1"
+      },
+      "group": "ram-completion36-checks219",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 503106,
+        "sha256": "735d1919e383b04b92333945c59f2cb028bc580312b9591efb8ebb5adcebccb6"
+      },
+      "selected_inputs_including_generated_font": 210,
+      "status": "PASS",
+      "translation_units": 80
+    },
+    {
+      "cases": 10,
+      "compile_RC": 0,
+      "distinct_checks": null,
+      "exact_timer_resource_model_define": true,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 352,
+        "sha256": "6987cebd788b7460319820cb632ca639ea1dce7da9cc7190ce99579b2002b81c"
+      },
+      "group": "ram-timer-resource10",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 505483,
+        "sha256": "701e4ccdee54252b0d4d6cfc834455ddfe8e1708d6be6f2a1622ddde8bd700f0"
+      },
+      "selected_inputs_including_generated_font": 211,
+      "status": "PASS",
+      "translation_units": 81
+    },
+    {
+      "cases": 8,
+      "compile_RC": 0,
+      "distinct_checks": null,
+      "exact_timer_resource_model_define": false,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 428,
+        "sha256": "5643c974b7ccf0d021205ad397575f8c8763dff8b476173443dcb4bb603f9d7f"
+      },
+      "group": "ram-retained-c1-8",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 233842,
+        "sha256": "341598f0007dae4c275db066ed15feb30dc27921132c39b3a8fce4c42b82fa2e"
+      },
+      "selected_inputs_including_generated_font": 79,
+      "status": "PASS",
+      "translation_units": 29
+    },
+    {
+      "cases": 26,
+      "compile_RC": 0,
+      "distinct_checks": null,
+      "exact_timer_resource_model_define": false,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 407,
+        "sha256": "293c908e039de24cdadd192c00b2c526db4c3162810bc8e1a9bd21164e604984"
+      },
+      "group": "ram-control26",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 231698,
+        "sha256": "e93c234c66467d63ffac23ef295d260614ab0eaac80eb92e0f65a39353583a6d"
+      },
+      "selected_inputs_including_generated_font": 78,
+      "status": "PASS",
+      "translation_units": 29
+    },
+    {
+      "cases": 17,
+      "compile_RC": 0,
+      "distinct_checks": null,
+      "exact_timer_resource_model_define": false,
+      "fixture_RC": 0,
+      "fixture_stdout": {
+        "bytes": 514,
+        "sha256": "8c3021a1f004d76cab0d7aaa9cc3706cabdcb211c99a6cc0858512b85a3c069b"
+      },
+      "group": "ram-finite17",
+      "other_three_streams_empty": true,
+      "receipt": {
+        "bytes": 526417,
+        "sha256": "eb1be5102d1c5c7a71a28376adb8076985ba644d19b710887ab126edd47210d5"
+      },
+      "selected_inputs_including_generated_font": 221,
+      "status": "PASS",
+      "translation_units": 85
+    }
+  ],
+  "historical_evidence": "Earlier failed rolling candidates and diagnoses remain preserved as negative evidence. V10/V11/V12 remained unexecuted Source; final V13 was separately qualified.",
+  "limits": "No native runtime, emulator, real-A1200, Paula DMA, AmiGUS card-RAM, actual scheduling/timing or human listening acceptance. Process-group absence and escaped leases remain unqualified. No repository adoption, Git publication or release acceptance follows from this HOST result.",
+  "outcome_marker_boundary": "Root separately observed all six actual final markers reporting genuine outcome writer-close and post-DATA timer/handler restoration. Those later observations are not inferred from the receipts serialized before writer-close.",
+  "rolling68": {
+    "cases": 68,
+    "compile_RC": 0,
+    "empty_stderr": true,
+    "exact_oracle": true,
+    "fixture_RC": 0,
+    "independent_review": {
+      "bytes": 2439,
+      "sha256": "13da9a96e2d5f2fbe8a7a86a4405054186a2105ffb80a1fca6bc5645ec1f64a5"
+    },
+    "receipt": {
+      "bytes": 243063,
+      "sha256": "33da1bf4375b94e6ac15d1462fdc548e6a6d816059251d2b7a7fe8ebad84c0b3"
+    },
+    "translation_units": 85
+  },
+  "schema": "pt24g-rolling-host-acceptance/v1",
+  "scope": "HOST software-only with genuine producer, factory, controller, core and ordinary RAM callbacks.",
+  "source_profile": {
+    "RAM_C": {
+      "bytes": 55512,
+      "sha256": "fce2d3fe4c6c6a1860c791ae6d56b7e861f044d12764c75890052feb231b0a0e"
+    },
+    "RAM_H": {
+      "bytes": 8784,
+      "sha256": "40eb6232b13a4318f50f54ba58aaf4429ec35dc59959910ce025eb4198494dbc"
+    },
+    "config": {
+      "bytes": 115742,
+      "sha256": "29349ddd58fc3a0cccb72868d73da2bf9f662e81a5198b7821ac407e5222fc80"
+    },
+    "enabled_derivative": "Exactly one gate and three final-context bindings; all reviewed runner functions unchanged.",
+    "enabled_runner": {
+      "bytes": 21095,
+      "sha256": "892f88c3fdd7b021c32b9e8fddf5632fab0fab98fca193388c61c61d54fa54f3"
+    },
+    "selection": {
+      "bytes": 67491,
+      "sha256": "23a8e1d9c15c6dd69ab269464091054f33620eaa7d54244f17fc2025d439b248"
+    }
+  },
+  "status": "PASS_PRIVATE_HOST_ROLLING68_AND_SIX_EXACT_REGRESSION_GROUPS"
+}

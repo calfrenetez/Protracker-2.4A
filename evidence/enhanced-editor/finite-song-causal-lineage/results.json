@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "date": "2026-10-11",
+  "scope": "Finite song TRIGGER -> CONTROL16 -> STOP; HOST models and producer compiler only",
+  "baseline_commit": "38cbe60be2a4cb97db21815bbd23b43a2e6fe7c6",
+  "implementation": {
+    "source_pins": {
+      "src/editor/editor_mixed_causal_song_lineage.c": {
+        "bytes": 65668,
+        "sha256": "5abfdceb4511654bf4e6288b0b13ff72a05f6a4ff248605613fd826ef02a3155"
+      },
+      "src/editor/editor_mixed_causal_song_lineage_internal.h": {
+        "bytes": 13175,
+        "sha256": "c232b02081c2d62e44cf0fa33765afd0772fe9c67fa45c302a22de9dd7c43221"
+      },
+      "tests/editor_mixed_causal_song_lineage_test.c": {
+        "bytes": 54262,
+        "sha256": "2a1efb879139f3e15c02e94b00a1e03c076c5cb120869444ef4cff98da2c3f4b"
+      },
+      "tests/song_lineage_fixture_support.inc": {
+        "bytes": 5652,
+        "sha256": "152555f55c5854b37202357a9b0ef06836e055f4ab82e7fe4a3cb7ffdd864fef"
+      },
+      "tests/test_editor_mixed_causal_song_lineage.py": {
+        "bytes": 5954,
+        "sha256": "c978be75b30709b4ff483db24397794b9acd2c6e92693c8eccfd15217213e899"
+      },
+      "tests/editor_mixed_causal_song_qclose_refusal_test.c": {
+        "bytes": 9951,
+        "sha256": "054929d8ced270dd4c24505497056ab5e76524d197b07455ade4d21a873ceb6b"
+      },
+      "tests/test_editor_mixed_causal_song_qclose_refusal.py": {
+        "bytes": 5727,
+        "sha256": "406345802c274ada3d2dbfbda5c3ce936b37404657174f60ef9a528a1eda3d54"
+      }
+    },
+    "exactly_three_nonempty_boundaries": true,
+    "same_original_sequence_audit_and_replay_to_EOF": true,
+    "absolute_schedule_preserved": true,
+    "later_CONTROL_STOP_new_master_or_cache": false,
+    "independent_command_reader_SOURCE_retirement": true,
+    "actual_first_service_and_disposal_before_slot_reuse": true,
+    "unknown_quiet_retains_custody_and_pins": true,
+    "native_PLAY_integrated": false,
+    "general_whole_song_PLAY_integrated": false,
+    "independent_adoption_capture_audit_sha256": "20223161175e67994ec824e98f562c1d09ef280d77dd6521db67da1c5224a8f7"
+  },
+  "private_host": {
+    "status": "PASS_CURRENT_CONTEXT_PRIVATE_ORDINARY_HOST",
+    "rows": [
+      {
+        "fixture_oracle_asserted_cases": 38,
+        "source_receipt_sha256": "95acf4ab65f8be0304165ec1d0944b26f1fdf8dfdf007a2f57f6f3e1c2a58f1d"
+      },
+      {
+        "fixture_oracle_asserted_cases": 12,
+        "source_receipt_sha256": "757a6e377435bac12367b46b4114491084ee092809933cccb9353842c57faed3"
+      }
+    ],
+    "assertions_ASan_UBSan_strict_warnings": true,
+    "independent_saved_audit_sha256": "1cc4404fc2b019c1f186a034baf5a68d4d0678aaa9813475d46d74dfe43a349c"
+  },
+  "matching_repository_host": {
+    "status": "PASS_TWO_MATCHING_REPOSITORY_ORDINARY_HOST_DRIVERS",
+    "total_fixture_oracle_asserted_cases": 50,
+    "rows": [
+      {
+        "role": "matching-repository38",
+        "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+        "fixture_oracle_asserted_cases": 38,
+        "source_receipt_sha256": "d0f5efc2b231165610ed32e5af3482b8451e6770520ca4e3465fdc0ffac5d82d",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "separate_stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_and_protected_before_after_equal": true
+      },
+      {
+        "role": "matching-repository12",
+        "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+        "fixture_oracle_asserted_cases": 12,
+        "source_receipt_sha256": "f08f1d2a7c94f95a98bb77a3dcc55df7f4d77e04842fcea51633a78f5ce220d3",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "separate_stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_and_protected_before_after_equal": true
+      }
+    ],
+    "assertions_ASan_UBSan_strict_warnings": true,
+    "nested_raw_counter_exports": "NOT_QUALIFIED",
+    "actual_MM": "NOT_QUALIFIED_BY_ORDINARY_ROUTE",
+    "process_group_absence": "NOT_QUALIFIED_BY_ORDINARY_ROUTE",
+    "independent_saved_audit_sha256": "9567ca67df1ba0bd52e8bb78a912be2e6bed10da68329a3db0507ec19caa0bd2"
+  },
+  "native_producer_compiler": {
+    "status": "PASS_NATIVE76_COMPILER_ONLY_PENDING_INTERVAL_PRODUCER_LIMITED",
+    "actual_MM_rules": 1,
+    "actual_non_system_dependency_paths": 75,
+    "admitted_source_inventory": 76,
+    "dependency_object_assembly_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "strict_m68000_soft_float_nix20_Os_Werror": true,
+    "inner_operator_timer_handler_restored": true,
+    "outer_timer_handler_restoration": "NOT_EXPORTED_UNKNOWN",
+    "linked": false,
+    "artifact_executed": false,
+    "aggregate_stack_ABI_IRQ_residency_WCET_timing": "NOT_QUALIFIED",
+    "focused_assessment_sha256": "347d8c3c44decef1d2413adb65937011ea630544e02c3998ac19451f51911c75",
+    "independent_raw_audit_sha256": "98fcdb90c110293cac723158c1d1f167643443b66c61ae39a9986e9081b0da97",
+    "independent_focused_audit_sha256": "cbd1f6e5dbf1cc70b9aeaea01f58b015aa0404eb3415c899d65bd46d460b9153"
+  },
+  "preservation": {
+    "unrelated_display_editor_paths_and_modes": 16,
+    "authoritative_masters_selective_caches_save_Studio_architecture": true,
+    "classic_layout": true,
+    "historical_failed_candidates_preserved_separately": true,
+    "refusal_setup_correction_changes_schedule": false
+  },
+  "acceptance": {
+    "finite_song_host_models": "PASS",
+    "matching_repository_host": "PASS",
+    "producer_native_compiler_only": "PASS",
+    "native_runtime_ABI_exact_activation": "NOT_QUALIFIED",
+    "amiberry": "NOT_RUN_FOR_THIS_INCREMENT",
+    "real_A1200_AmiGUS": "NOT_RUN_FOR_THIS_INCREMENT",
+    "device_capacity_ordering_completion_voice_stop": "NOT_QUALIFIED",
+    "audio_listening": "NOT_QUALIFIED"
+  },
+  "privacy": "Compact redacted result; raw local filesystem/process/environment observations are excluded",
+  "publication_source_cleanup": {
+    "scope": "ONE_EOF_BLANK_LINE_REMOVED_FROM_TEST_SUPPORT",
+    "before": {
+      "bytes": 5653,
+      "sha256": "786331cbd2875421c5bebd115684223ac89d08ef1671e827ac973d1af67c1d85"
+    },
+    "after": {
+      "bytes": 5652,
+      "sha256": "152555f55c5854b37202357a9b0ef06836e055f4ab82e7fe4a3cb7ffdd864fef"
+    },
+    "whole_inverse": "append one LF to the current support body",
+    "production_assertions_drivers_and_oracles_changed": false,
+    "host_evidence": "The saved passing runs used the preserved pre-cleanup support body; this publication-only trailing whitespace removal changes no C tokens."
+  }
+}

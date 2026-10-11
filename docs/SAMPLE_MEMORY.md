@@ -7061,3 +7061,31 @@ activation, Amiberry, real A1200/AmiGUS, device capacity/order/completion/stop o
 listening acceptance. Master, cache, save, Studio-mixing and classic-layout
 architecture remain unchanged; all sixteen unrelated display/editor paths were
 preserved.
+
+### Finite song TRIGGER -> CONTROL16 -> STOP producer
+
+The internal opt-in song producer now composes genuine early SOURCE ownership,
+master establishment, persistent pins, strict song audit and the same original
+replay sequence to actual EOF. It accepts exactly three nonempty boundaries and
+retains their original absolute frames. Later CONTROL16 and STOP use issued
+readers without a new master or cache; independent command, reader and SOURCE
+closure retains custody through uncertain quiet. Actual first-command service
+and disposal are required before slot reuse. General whole-song/native PLAY
+integration remains separate.
+
+The private 38-case preparation and 12-case refusal fixtures passed once with
+assertions, ASan, UBSan and strict warnings. Their matching repository drivers
+also passed once against the same product, asserting the original 50 cases
+internally. Separate strict m68000/soft-float/nix20/Os/Werror dependency, object
+and assembly checks passed for the producer C unit: one actual dependency rule,
+75 non-system paths and a distinct 76-file admitted inventory. No native artifact
+was linked or run; individual stack reports do not establish aggregate stack or
+ABI. See [the finite producer contract](EDITOR_MIXED_CAUSAL_SONG_LINEAGE.md) and
+[scoped evidence](../evidence/enhanced-editor/finite-song-causal-lineage/README.md).
+
+These results do not establish Amiberry or real A1200/AmiGUS runtime, IRQ/WCET,
+exact live activation, hardware capacity/order/completion/voice stop, audio or
+listening. The authoritative masters, selective caches, master-preserving save,
+direct 24-bit Studio mixing, accepted layout and sixteen unrelated paths retain
+their existing architecture. Earlier failed evidence remains preserved; no
+deferred ZooperTracker feature is introduced.

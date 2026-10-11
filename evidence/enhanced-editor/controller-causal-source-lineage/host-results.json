@@ -1,0 +1,164 @@
+{
+  "scope": "HOST_MODEL_ONLY",
+  "product_sources": {
+    "src/editor/editor_mixed_causal_prepare.c": {
+      "bytes": 126645,
+      "sha256": "48822fbd7efd7ad8c105cd7cc1be9da87071afa8367d1c29425aad387a46e8c1"
+    },
+    "src/editor/editor_mixed_causal_lineage_source_internal.h": {
+      "bytes": 3364,
+      "sha256": "09e7ddf404ab783bf9cd79d4afa9d721d5163b3feb1db218b63500d7687363b9"
+    },
+    "tests/editor_mixed_causal_joint_source_lineage_test.c": {
+      "bytes": 35556,
+      "sha256": "c2c656aaf2b0451721dc079c4f9deffc4e3ff07ccfd93747e253637853a6ee53"
+    },
+    "tests/joint_source_lineage_fixture_support.inc": {
+      "bytes": 50484,
+      "sha256": "0df46f25c19eea1f50918bc43dcc6d4860fa5b07007c7f235fcc82b876fdbc0e"
+    },
+    "tests/joint_source_control16_fixture_support.inc": {
+      "bytes": 39122,
+      "sha256": "3a15f621c1bb8d43843815457ec439c61084f0d833d6b94b86e170ed7fa28054"
+    },
+    "tests/test_editor_mixed_causal_joint_source_lineage.py": {
+      "bytes": 5689,
+      "sha256": "3173b047d967917a831cb8ee2af0ea0c7ef656a0e96516db81cc0918ff2a19dd"
+    }
+  },
+  "focused_fixture": {
+    "actual_dependency_rules": 79,
+    "compile_returncode": 0,
+    "fixture_returncode": 0,
+    "fixture_asserted_cases": 31,
+    "stdout_bytes": 533,
+    "stdout_sha256": "50fa2e2dacb0ac8addeddd12e3398c797ca64f18eb160cd8fa3b202143feefe1",
+    "stderr_bytes": 0,
+    "flags": [
+      "C99",
+      "assertions enabled",
+      "warnings as errors",
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ],
+    "separate_waits_EOF_cleanup_and_restoration_audited": true
+  },
+  "post_adoption_ordinary_tests": [
+    {
+      "name": "matching-repository31",
+      "driver_asserted_cases": 31,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    },
+    {
+      "name": "controller-default43",
+      "driver_asserted_cases": 43,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    },
+    {
+      "name": "controller-stop52",
+      "driver_asserted_cases": 52,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    },
+    {
+      "name": "controller-lineage55",
+      "driver_asserted_cases": 55,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    },
+    {
+      "name": "controller-control25",
+      "driver_asserted_cases": 25,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    },
+    {
+      "name": "producer62",
+      "driver_asserted_cases": 62,
+      "returncode": 0,
+      "direct_wait": true,
+      "stdout_EOF": true,
+      "stderr_EOF": true,
+      "closed_streams": {
+        "stdout": true,
+        "stderr": true
+      },
+      "restoration": {
+        "timer": true,
+        "handler": true
+      },
+      "nested_fixture_counter": "NOT_EXPORTED",
+      "actual_MM": "NOT_QUALIFIED",
+      "group_absence": "NOT_QUALIFIED"
+    }
+  ],
+  "protected_unrelated_paths": 16,
+  "native_runtime_emulator_physical_timing_listening": "NOT_QUALIFIED"
+}

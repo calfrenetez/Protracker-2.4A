@@ -7009,3 +7009,30 @@ device capacity/order/completion/voice stop and listening remain unqualified.
 Authoritative masters, selective caches, master-preserving save and direct
 24-bit mixing retain their existing architecture. No deferred ZooperTracker
 feature is introduced.
+
+
+### Early source ownership through the finite controller lifetime
+
+The additive typed controller/source wrapper now retains the original source
+borrow across one TRIGGER -> CONTROL -> STOP sequence. Complete declared source
+and mutable capacities, descriptor/publisher identities and local scratch are
+admitted before writes or callbacks. Later CONTROL/STOP allocate no new reader,
+master version, pin, cache conversion or upload. Independent command, reader and
+source retirement preserve potentially live ownership through uncertain callbacks;
+original absolute frames and the selected exact schedule never rebase.
+
+The focused 31-case genuine-holder fixture passed strict assertions/ASan/UBSan
+checks. Following adoption, matching31, default43, STOP52, lineage55, CONTROL25
+and producer62 passed once against the same product. The ordinary routes assert
+their 268 cases internally; separate nested counters and process-group absence
+remain unqualified. Strict 68000/soft-float compiler-only dependency/object/assembly
+checks passed for the changed controller, admitting 73 actual non-system paths.
+Individual stack rows do not establish aggregate stack, ABI, residency or WCET.
+See [controller/source evidence](../evidence/enhanced-editor/controller-causal-source-lineage/README.md).
+
+Finite song producer and RAM-only/native frontend integration remain ongoing.
+No Amiberry/physical runtime, exact live activation, IRQ, device capacity/ordering/
+completion/stop, audio or listening acceptance is inferred. Authoritative Fast
+masters, bounded selective caches, master-preserving save, direct 24-bit Studio
+mixing, the classic layout and all sixteen unrelated display/editor paths retain
+their existing architecture. No deferred ZooperTracker feature is introduced.

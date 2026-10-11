@@ -1,0 +1,1299 @@
+{
+  "scope": "COMPILER_ONLY_NO_LINK_OR_TARGET_EXECUTION",
+  "source_count": 73,
+  "actual_dependency_rules": 1,
+  "actual_non_system_dependency_count": 73,
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "dependency_object_assembly_returncodes": [
+    0,
+    0,
+    0
+  ],
+  "artifacts": {
+    "object/editor_mixed_causal_prepare.o": {
+      "bytes": 41724,
+      "sha256": "d67bc85db14a355c05eb673ed6e5a85d74b445dc10593948de2b1c456462e343"
+    },
+    "object/editor_mixed_causal_prepare.su": {
+      "bytes": 8339,
+      "sha256": "b9c955d3dbe774dd18cc4913a5386b30973f9a28c07553abf3fe513b942a80e7"
+    },
+    "assembly/editor_mixed_causal_prepare.s": {
+      "bytes": 189691,
+      "sha256": "b208c047bf4a692d8c65608c9ad66933f7bf8af5bdebbe7a9bea87acaf091478"
+    },
+    "assembly/editor_mixed_causal_prepare.su": {
+      "bytes": 8339,
+      "sha256": "b9c955d3dbe774dd18cc4913a5386b30973f9a28c07553abf3fe513b942a80e7"
+    }
+  },
+  "individual_stack_rows": [
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "memcmp",
+      "individual_reported_bytes": 4,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_project_snapshot_equal",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "span",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "apart",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "inside",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "zero",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "fail",
+      "individual_reported_bytes": 24,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "reentry",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "idle",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "stop_scope",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_source_scope",
+      "individual_reported_bytes": 56,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_scope",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "fixed_current",
+      "individual_reported_bytes": 1544,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_apart",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "callback_covered",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "add",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_source_local",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "capture_sources",
+      "individual_reported_bytes": 108,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "capture",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "output_apart",
+      "individual_reported_bytes": 44,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "allocation_apart",
+      "individual_reported_bytes": 40,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "retire",
+      "individual_reported_bytes": 8,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_allocate",
+      "individual_reported_bytes": 60,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_release",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_chip_allocate",
+      "individual_reported_bytes": 64,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_chip_release",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "hook_owned",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "post",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "snapshot",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "callback_fault",
+      "individual_reported_bytes": 3180,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_clock",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_commit",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish",
+      "individual_reported_bytes": 3208,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_original_bind",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_successor",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_stop",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_control",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_stop_after_control",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_command",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_reader",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_source_close",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "guard_port_source_quiet",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "factory_result",
+      "individual_reported_bytes": 4,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "prepare_admit",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_identity",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_original",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_descriptor",
+      "individual_reported_bytes": 24,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_fixed",
+      "individual_reported_bytes": 2624,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_role_declared",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_role_apart",
+      "individual_reported_bytes": 52,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_roles_current",
+      "individual_reported_bytes": 44,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_begin",
+      "individual_reported_bytes": 504,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_source_begin",
+      "individual_reported_bytes": 112,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_activate",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_children_closed",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_enter",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_leave",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_borrow_close",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_query_scope",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_observe",
+      "individual_reported_bytes": 40,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_query_extent",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_command_registration",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_reader_registration",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_begin",
+      "individual_reported_bytes": 216,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_stop_prepare_begin",
+      "individual_reported_bytes": 88,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_get",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_admit",
+      "individual_reported_bytes": 128,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_source_activate",
+      "individual_reported_bytes": 316,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_advance_validation",
+      "individual_reported_bytes": 460,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "command",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "reader",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_reader_readiness",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "reader_close",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_retire_original_reader",
+      "individual_reported_bytes": 68,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "command_close",
+      "individual_reported_bytes": 64,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "batch_spans",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "batch_pair_end",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "batch_voice_zero",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "batch_begin_private",
+      "individual_reported_bytes": 36,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_begin",
+      "individual_reported_bytes": 56,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+      "individual_reported_bytes": 60,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+      "individual_reported_bytes": 520,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_batch_begin",
+      "individual_reported_bytes": 916,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_advance",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_reader_reference",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_enqueue",
+      "individual_reported_bytes": 72,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_publish",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "service_enter",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_service_command",
+      "individual_reported_bytes": 1456,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_service_reader",
+      "individual_reported_bytes": 144,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "local_cancel",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_cancel",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "finish",
+      "individual_reported_bytes": 76,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_close",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "span.part.0",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "prepare_admit.part.18",
+      "individual_reported_bytes": 360,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "source_activate_original.part.19",
+      "individual_reported_bytes": 212,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "batch_begin_private.part.25",
+      "individual_reported_bytes": 2500,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "object/editor_mixed_causal_prepare.su",
+      "function": "lineage_control16_batch_begin.constprop",
+      "individual_reported_bytes": 960,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "memcmp",
+      "individual_reported_bytes": 4,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_project_snapshot_equal",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "span",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "apart",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "inside",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "zero",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "fail",
+      "individual_reported_bytes": 24,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "reentry",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "idle",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "stop_scope",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_source_scope",
+      "individual_reported_bytes": 56,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_scope",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "fixed_current",
+      "individual_reported_bytes": 1544,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_apart",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "callback_covered",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "add",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_source_local",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "capture_sources",
+      "individual_reported_bytes": 108,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "capture",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "output_apart",
+      "individual_reported_bytes": 44,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "allocation_apart",
+      "individual_reported_bytes": 40,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "retire",
+      "individual_reported_bytes": 8,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_allocate",
+      "individual_reported_bytes": 60,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_release",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_chip_allocate",
+      "individual_reported_bytes": 64,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_chip_release",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "hook_owned",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "post",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "snapshot",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "callback_fault",
+      "individual_reported_bytes": 3180,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_clock",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_commit",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish",
+      "individual_reported_bytes": 3208,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_original_bind",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_successor",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_stop",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_control",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_publish_stop_after_control",
+      "individual_reported_bytes": 3196,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_command",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_reader",
+      "individual_reported_bytes": 3192,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_source_close",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "guard_port_source_quiet",
+      "individual_reported_bytes": 3188,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "factory_result",
+      "individual_reported_bytes": 4,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "prepare_admit",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_identity",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_original",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_descriptor",
+      "individual_reported_bytes": 24,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_fixed",
+      "individual_reported_bytes": 2624,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_role_declared",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_role_apart",
+      "individual_reported_bytes": 52,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_roles_current",
+      "individual_reported_bytes": 44,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_begin",
+      "individual_reported_bytes": 504,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_source_begin",
+      "individual_reported_bytes": 112,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_activate",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_children_closed",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_enter",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_leave",
+      "individual_reported_bytes": 12,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_borrow_close",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_query_scope",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_observe",
+      "individual_reported_bytes": 40,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_query_extent",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_command_registration",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_reader_registration",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_begin",
+      "individual_reported_bytes": 216,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_stop_prepare_begin",
+      "individual_reported_bytes": 88,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_get",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_admit",
+      "individual_reported_bytes": 128,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_source_activate",
+      "individual_reported_bytes": 316,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_advance_validation",
+      "individual_reported_bytes": 460,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "command",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "reader",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_reader_readiness",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "reader_close",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_source_retire_original_reader",
+      "individual_reported_bytes": 68,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "command_close",
+      "individual_reported_bytes": 64,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "batch_spans",
+      "individual_reported_bytes": 48,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "batch_pair_end",
+      "individual_reported_bytes": 28,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "batch_voice_zero",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "batch_begin_private",
+      "individual_reported_bytes": 36,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_begin",
+      "individual_reported_bytes": 56,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+      "individual_reported_bytes": 60,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+      "individual_reported_bytes": 520,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_batch_begin",
+      "individual_reported_bytes": 916,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+      "individual_reported_bytes": 16,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_batch_advance",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_reader_reference",
+      "individual_reported_bytes": 36,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_enqueue",
+      "individual_reported_bytes": 72,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_publish",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "service_enter",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_service_command",
+      "individual_reported_bytes": 1456,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_service_reader",
+      "individual_reported_bytes": 144,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "local_cancel",
+      "individual_reported_bytes": 8,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_cancel",
+      "individual_reported_bytes": 20,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "finish",
+      "individual_reported_bytes": 76,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "pt_editor_mixed_causal_prepare_close",
+      "individual_reported_bytes": 32,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "span.part.0",
+      "individual_reported_bytes": 0,
+      "qualifier": "static"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "prepare_admit.part.18",
+      "individual_reported_bytes": 360,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "source_activate_original.part.19",
+      "individual_reported_bytes": 212,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "batch_begin_private.part.25",
+      "individual_reported_bytes": 2500,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "artifact": "assembly/editor_mixed_causal_prepare.su",
+      "function": "lineage_control16_batch_begin.constprop",
+      "individual_reported_bytes": 960,
+      "qualifier": "dynamic,bounded"
+    }
+  ],
+  "child_restoration": {
+    "timer_disarm_attempted": true,
+    "timer_disarmed": true,
+    "handler_restore_attempted": true,
+    "handler_restored": true
+  },
+  "parent_restoration": "SOURCE_FINALLY_ONLY_NOT_EXPORTED",
+  "ABI_aggregate_stack_IRQ_WCET_exact_activation_hardware_audio": "NOT_QUALIFIED"
+}

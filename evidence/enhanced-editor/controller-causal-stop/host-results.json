@@ -1,0 +1,131 @@
+{
+  "scope": "HOST_MODEL_CONTROLLER_STOP_AND_FACTORY_QUERY",
+  "controller_stop": {
+    "receipt": {
+      "name": "root-controller-fixed-suite-exact-cancel-outcome-stop52-20261011-v9.json",
+      "bytes": 1840802,
+      "sha256": "a8fea20b31f4c4b81bf4c83c9d142bab365a16208410bd4bb066ab39279eb8e6"
+    },
+    "actual_child_status": "PASS_ONE_FIXED_CONTROLLER_SUITE_HOST_ONLY",
+    "actual_fixture_counter": {
+      "actual_own_fixture_asserted_count": 52,
+      "independently_instrumented_extra_counter": false,
+      "inherited_mains_invoked": false,
+      "source": "actual exact original stdout and RC0"
+    },
+    "original_named_pairs": 659,
+    "outer_named_pairs": 23,
+    "original_wait_rc0_both_eof": true,
+    "signals": [],
+    "group_audit_count": 11,
+    "independent_group_audits": "actual original anchor only; general descendants/loader not qualified",
+    "native_emulator_physical_audio": "NOT_RUN"
+  },
+  "query": {
+    "receipt": {
+      "name": "root-factory-query-fixed-suite-default-pair-third-query17-20261011-v3.json",
+      "bytes": 2202686,
+      "sha256": "d2c732efb25eb472849aae459cd49d1d9085dfab746009954fb8247f709c35c8"
+    },
+    "actual_child_status": "PASS_ONE_FIXED_FACTORY_QUERY_HOST_ONLY",
+    "actual_fixture_counter": {
+      "actual_own_fixture_asserted_count": null,
+      "independently_instrumented_extra_counter": false,
+      "inherited_mains_invoked": false,
+      "source": "actual exact query stdout and RC0; no numeric counter",
+      "source_named_groups": 8,
+      "source_prospective_case_invocations": 17
+    },
+    "original_named_pairs": 991,
+    "outer_named_pairs": 23,
+    "original_wait_rc0_both_eof": true,
+    "signals": [],
+    "group_audit_count": 11,
+    "independent_group_audits": "actual original anchor only; general descendants/loader not qualified",
+    "native_emulator_physical_audio": "NOT_RUN"
+  },
+  "query_count_boundary": "8 groups/17 instances inferred from source; no exported runtime numeric counter",
+  "repository_drivers": {
+    "stop": {
+      "dispatch": "723b67",
+      "session": 12295,
+      "poll": "64c6ee",
+      "exit_code": 0,
+      "output": ".\n----------------------------------------------------------------------\nRan 1 test in 18.938s\n\nOK\n"
+    },
+    "query": {
+      "dispatch": "d1cd32",
+      "session": 26174,
+      "poll": "077084",
+      "exit_code": 0,
+      "output": ".\n----------------------------------------------------------------------\nRan 1 test in 8.859s\n\nOK\n"
+    }
+  },
+  "repository_driver_boundary": "Normal drivers assert original exact fixture stdout and empty errors internally; exported streams show one unittest OK each. No independent group absence is claimed for these ordinary jobs.",
+  "existing_controller43_producer62": "Passed separate exact anchored jobs against byte-identical controller product; see source receipt refs below.",
+  "regression_receipts": [
+    {
+      "name": "root-controller-fixed-suite-unpublished-controller43-20261011-v7.json",
+      "bytes": 1839973,
+      "sha256": "cc7532697da83de9b915ab223c878e67f08f4017269e38be5f0bdb69a3d26b0a"
+    },
+    {
+      "name": "root-controller-fixed-suite-unpublished-producer62-20261011-v7.json",
+      "bytes": 1878628,
+      "sha256": "396cb5f34729359dc1963028f79b8a5816c40d716397fe03294f001a2c2cd3da"
+    },
+    {
+      "name": "core-factory-query-control-stop-normal-evidence-20261011-v1.json",
+      "bytes": 6143,
+      "sha256": "8a91852b83409b6e04ebd047b5896385e33fc4d4641e459a09e2fa7dc4474f54"
+    },
+    {
+      "name": "root-core-factory-query-normal-regressions-first-tool-results-20261011-v1.json",
+      "bytes": 6171,
+      "sha256": "ccc9650efcc7fb2a81a55d26ac9ea150ead6938226425a66c0403046d22c6fb2"
+    }
+  ],
+  "adoption": {
+    "name": "root-query-controller-stop-adoption-20261011-v1.json",
+    "bytes": 12270,
+    "sha256": "73bf4153e0d4a9e8589938ffec213cc1d595343dc263b42cdfb38ce5b07cfe75"
+  },
+  "protected_unrelated_paths": 16,
+  "native_compilation": "PASS_COMPILER_ONLY; see compiler-results.json; no link/runtime",
+  "timing_device_listening": "NOT_QUALIFIED",
+  "combined_new_sampler_stop52": {
+    "dispatch": "1599b8",
+    "session": 22106,
+    "poll": "f7a704",
+    "exit_code": 0,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 19.241s\n\nOK\n"
+  },
+  "combined_controller43_producer62": {
+    "scope": "CURRENT_COMBINED_CONTROLLER43_PRODUCER62_ORDINARY_HOST",
+    "source_before_after_equal": true,
+    "source_recipe_sha256": "92e31d31c4e2c2011eea9b365ecf19402809eb1fb88e3dd3e309724e3011614e",
+    "source_counts": {
+      "controller43": 79,
+      "producer62": 83
+    },
+    "fixture_oracles": "exact original 43/62 stdout asserted inside each normal driver; only unittest stream exported",
+    "native_emulator_physical": "NOT_RUN",
+    "independent_process_group_absence": "NOT_QUALIFIED",
+    "suites": {
+      "controller43": {
+        "dispatch": "c6c536",
+        "session": 57961,
+        "poll": "4da602",
+        "exit_code": 0,
+        "output": ".\n----------------------------------------------------------------------\nRan 1 test in 18.815s\n\nOK\n"
+      },
+      "producer62": {
+        "dispatch": "84f81d",
+        "session": 44811,
+        "poll": "d977cd",
+        "exit_code": 0,
+        "output": ".\n----------------------------------------------------------------------\nRan 1 test in 21.932s\n\nOK\n"
+      }
+    }
+  }
+}

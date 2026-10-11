@@ -1,0 +1,135 @@
+{
+  "scope": "strict m68000 compiler-only sampler finite lineage check",
+  "results": {
+    "sampler": {
+      "receipt": {
+        "name": "receipt.json",
+        "bytes": 173745,
+        "sha256": "90bc7c0eb989410298faaa26724c7dafeed7868497e3739b2a8d8c1f9f0cb058",
+        "scope": "sampler compiler-first-v4"
+      },
+      "outer": {
+        "name": "root-current-sampler-native-compiler-outer-first-20261011-v4.json",
+        "bytes": 1169,
+        "sha256": "5d5ec5e8a3bd57fe7d6a9f848fb39e1fa2f90cddcdb9a74b44dfb4ffff9addb3"
+      },
+      "status": "PASS_COMPILER_ONLY_SAMPLER_LINEAGE_LIMITED",
+      "actual_non_system_dependencies": 38,
+      "original_pairs": 44,
+      "local_pairs": 38,
+      "artifacts": {
+        "object/sampler_mixed_readers.o": {
+          "bytes": 30700,
+          "sha256": "1cf096020ca5a1e5c4a98540bebd11c8a4df7ab6a5602ed21774007ccfc183b0"
+        },
+        "object/sampler_mixed_readers.su": {
+          "bytes": 4830,
+          "sha256": "5642b998f08bbdad292b0256f7b407566e45684a233dd6bb47c71fd2a1c1bb7c"
+        },
+        "assembly/sampler_mixed_readers.s": {
+          "bytes": 134613,
+          "sha256": "a602d6c188fe31f488624ba6a6626557658154e0acb99f8bf867db127cda5103"
+        },
+        "assembly/sampler_mixed_readers.su": {
+          "bytes": 4830,
+          "sha256": "5642b998f08bbdad292b0256f7b407566e45684a233dd6bb47c71fd2a1c1bb7c"
+        }
+      },
+      "individual_rows": {
+        "pt_sampler_mixed_causal_lineage_bind": [
+          {
+            "function": "pt_sampler_mixed_causal_lineage_bind",
+            "reported_individual_bytes": 64,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_open": [
+          {
+            "function": "pt_sampler_mixed_causal_lineage_open",
+            "reported_individual_bytes": 48,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "lineage_begin": [
+          {
+            "function": "lineage_begin",
+            "reported_individual_bytes": 2368,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_control_begin": [
+          {
+            "function": "pt_sampler_mixed_causal_lineage_control_begin",
+            "reported_individual_bytes": 20,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_stop_begin": [
+          {
+            "function": "pt_sampler_mixed_causal_lineage_stop_begin",
+            "reported_individual_bytes": 20,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_advance": [
+          {
+            "function": "pt_sampler_mixed_advance",
+            "reported_individual_bytes": 64,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_enqueue": [
+          {
+            "function": "pt_sampler_mixed_enqueue",
+            "reported_individual_bytes": 576,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_publish": [
+          {
+            "function": "pt_sampler_mixed_publish",
+            "reported_individual_bytes": 40,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_service_command": [
+          {
+            "function": "pt_sampler_mixed_service_command",
+            "reported_individual_bytes": 1444,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_reader_close": [
+          {
+            "function": "pt_sampler_mixed_reader_close",
+            "reported_individual_bytes": 32,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_command_close": [
+          {
+            "function": "pt_sampler_mixed_command_close",
+            "reported_individual_bytes": 64,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_sampler_mixed_close": [
+          {
+            "function": "pt_sampler_mixed_close",
+            "reported_individual_bytes": 36,
+            "qualifier": "dynamic,bounded"
+          }
+        ]
+      },
+      "original_wait_rc0_both_eof": true,
+      "elapsed_seconds": 0.8923057089996291,
+      "scope": "compiler-only; no link/runtime, aggregate task or interrupt stack, WCET/timing, device or listening qualification",
+      "all_original_local_artifact_pairs_equal": true,
+      "artifact_pairs": 4,
+      "restoration_timer_handler": true,
+      "signals": 0,
+      "targets": 0
+    }
+  },
+  "runtime_emulator_physical_listening": "NOT_RUN_OR_UNQUALIFIED"
+}

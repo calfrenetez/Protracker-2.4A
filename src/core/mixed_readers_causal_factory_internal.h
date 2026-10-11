@@ -19,6 +19,22 @@ int pt_mixed_causal_factory_stop_original_empty(struct pt_mixed_causal_owner *,
     struct pt_mixed_readers_output *,uint64_t session,uint64_t generation);
 int pt_mixed_causal_factory_stop_first_current(struct pt_mixed_causal_owner *,
     uint64_t predecessor);
+/* Distinct finite TRIGGER -> CONTROL -> STOP factory checks. Only the actual
+ * once-installed composite port, its matching derived CONTROL context/extent/
+ * callback and the original owner registration qualify. Empty custody is
+ * required before construction; subsequent predicates require the actual
+ * completed TRIGGER or actual completed CONTROL plus clean genuine C1 detach.
+ * They refuse once the corresponding next command has transferred to queue.
+ * These task-only booleans return no key, queue, READY, fire or quiet authority;
+ * typed admission must still repeat its genuine ACTIVE getters and all guards.
+ * No callback, clock, source acquisition or publication runs here. Reentry
+ * faults the owner through the existing task exclusion and returns zero. */
+int pt_mixed_causal_factory_control_stop_original_empty(struct pt_mixed_causal_owner *,
+    struct pt_mixed_readers_output *,uint64_t session,uint64_t generation);
+int pt_mixed_causal_factory_control_stop_first_current(struct pt_mixed_causal_owner *,
+    uint64_t predecessor);
+int pt_mixed_causal_factory_control_stop_control_current(struct pt_mixed_causal_owner *,
+    uint64_t predecessor);
 struct pt_mixed_causal_factory_bind_result {int raw;unsigned called,current;};
 /* One exact original callback under genuine owner task exclusion. Its supplied
  * context/extent MUST be the originally installed port context/extent. Copies

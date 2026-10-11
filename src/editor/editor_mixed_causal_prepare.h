@@ -8,6 +8,7 @@
 #include "editor_mixed_readers_prepare.h"
 #include "sampler_mixed_causal_internal.h"
 struct pt_editor_mixed_causal_prepare;
+struct pt_editor_mixed_causal_stop_prepare;
 struct pt_editor_mixed_causal_source_inputs;
 struct pt_editor_mixed_causal_source_borrow;
 struct pt_editor_mixed_causal_prepare_inputs {
@@ -110,6 +111,9 @@ struct pt_editor_mixed_causal_prepare {
     unsigned source_mode,source_held,source_released,source_activated,source_busy;
     unsigned source_cancel_requested,source_drained,source_publisher_guard;
     unsigned source_immutable_count,source_mutable_count;
+    /* Internal constructor-issued complete-wrapper identity; default/SOURCE
+     * paths leave this zero. Never a public STOP capability or READY flag. */
+    struct pt_editor_mixed_causal_stop_prepare *stop_owner;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_causal_prepare_begin(
     struct pt_editor_mixed_causal_prepare *,const struct pt_editor_mixed_causal_prepare_inputs *);

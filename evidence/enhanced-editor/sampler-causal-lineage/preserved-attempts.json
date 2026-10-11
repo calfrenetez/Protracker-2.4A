@@ -1,0 +1,16 @@
+{
+  "first": {
+    "name": "root-sampler-lineage-fixed-suite-first-sampler74-20261011-v1.json",
+    "bytes": 743745,
+    "sha256": "257a2617101bf889278d83363b5ba0e519aa8a4ae23b27166f6023aa625c38da",
+    "result": "FAILED_PRESERVED",
+    "cause": "Strict compiler misleading-indentation refusal; fixture never ran."
+  },
+  "second": {
+    "name": "root-sampler-lineage-fixed-suite-explicit-tail-second-sampler74-20261011-v2.json",
+    "bytes": 709163,
+    "sha256": "db5288b0e12eeab9e4da06d5a6af67c4ea1dce4f8bc563eb71c805fc18c4264a",
+    "result": "FAILED_PRESERVED",
+    "cause": "Fixture expected a receipt write on PENDING, contrary to genuine service contract. Product untouched; distinct initialized-byte unchanged-output fixture correction."
+  }
+}

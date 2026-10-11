@@ -1,0 +1,156 @@
+{
+  "scope": "HOST_MODEL_FINITE_SAMPLER_TRIGGER_CONTROL_STOP",
+  "actual_fixture_counter": {
+    "actual_own_fixture_asserted_count": 74,
+    "independently_instrumented_extra_counter": false,
+    "inherited_mains_invoked": false,
+    "source": "actual exact original stdout and RC0"
+  },
+  "actual_MM_rules": 29,
+  "paired_child_inputs": 671,
+  "paired_outer_inputs": 23,
+  "three_original_job_wait_rc0_both_eof": true,
+  "original_anchor_wait_rc0_both_eof": true,
+  "original_anchor_only_audits": 9,
+  "final_original_empty_audits": 2,
+  "owned_closes_and_timer_handler_restoration": true,
+  "signals": 0,
+  "targets": 0,
+  "receipt": {
+    "name": "root-sampler-lineage-fixed-suite-pending-output-third-sampler74-20261011-v3.json",
+    "bytes": 1564015,
+    "sha256": "b9a461e07f69b350cbc5eb0d4ce206bce4e89aa7c5a070cb68f1ff2d2cc10c66"
+  },
+  "root_audit": {
+    "name": "root-sampler-lineage-third-receipt-assessment-20261011-v3.json",
+    "bytes": 3120,
+    "sha256": "2b69922c9e45f5fd786cdf1b3d0b75e043b2e1e2ee8a27e223d7c037d5ec6dc8"
+  },
+  "adoption": {
+    "name": "root-sampler-lineage-adoption-20261011-v1.json",
+    "bytes": 8685,
+    "sha256": "dd2407c24b36c0caad369d35e9d32faff376c2e2e9d36706dd788baa93670896"
+  },
+  "repository_sampler74": {
+    "dispatch": "fc0531",
+    "session": 67788,
+    "poll": "c6b70c",
+    "exit_code": 0,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 10.705s\n\nOK\n"
+  },
+  "combined_controller_stop52": {
+    "dispatch": "1599b8",
+    "session": 22106,
+    "poll": "f7a704",
+    "exit_code": 0,
+    "output": ".\n----------------------------------------------------------------------\nRan 1 test in 19.241s\n\nOK\n"
+  },
+  "ordinary_driver_boundary": "Fixture full original output and empty errors asserted internally; unittest output exported, no independent ordinary-job group absence claim.",
+  "affected_default24_stop55": {
+    "scope": "CURRENT_SAMPLER_LINEAGE_AFFECTED_NORMAL_DEFAULT24_STOP55_HOST",
+    "results": {
+      "default24": {
+        "dispatch": "17e5da",
+        "original_session": 68984,
+        "poll": "978986",
+        "exit_code": 0,
+        "receipt": {
+          "name": "default24-NORMAL_RESULT_01.json",
+          "bytes": 2876085,
+          "sha256": "e56d9337e77d958bcde6c928d313c9e80de176f3aac5d15db59f9c75359822ad"
+        },
+        "source_pairs_equal": 328,
+        "original_direct_wait_rc0_both_eof": true,
+        "normal_unittest": {
+          "actual_fixture_output_checked_by_unchanged_normal_driver": true,
+          "actual_test_RC0": true,
+          "actual_test_count": 1,
+          "fixture_counter_instrumentation": "NONE_ADDED",
+          "underlying_process_groups": "NOT_OBSERVED"
+        },
+        "raw_normal_stream_pins": {
+          "raw_stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "raw_stderr": {
+            "bytes": 99,
+            "sha256": "fd3d87eae494e93a2c343dc570cd17a669d5aa4e6445c83539e5739a4f09d17e"
+          }
+        },
+        "own_closes_and_restoration": true,
+        "final_storage_terminal": "Actual original pollRC0; pre-storage saved restoration is distinct from final observer storage/second restoration.",
+        "general_group_absence": "NOT_QUALIFIED"
+      },
+      "stop55": {
+        "dispatch": "dca6f6",
+        "original_session": 26564,
+        "poll": "bad92b",
+        "exit_code": 0,
+        "receipt": {
+          "name": "stop55-NORMAL_RESULT_01.json",
+          "bytes": 2876066,
+          "sha256": "9c0a4f36db171d8f30cdf0dbe8db495347f76daedfb4a69d001446815f6931ef"
+        },
+        "source_pairs_equal": 328,
+        "original_direct_wait_rc0_both_eof": true,
+        "normal_unittest": {
+          "actual_fixture_output_checked_by_unchanged_normal_driver": true,
+          "actual_test_RC0": true,
+          "actual_test_count": 1,
+          "fixture_counter_instrumentation": "NONE_ADDED",
+          "underlying_process_groups": "NOT_OBSERVED"
+        },
+        "raw_normal_stream_pins": {
+          "raw_stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "raw_stderr": {
+            "bytes": 98,
+            "sha256": "32e48dfcb1bbb52b14f23f78c92ec6b0c3dca30f7f070b454cbefca2c67d88e0"
+          }
+        },
+        "own_closes_and_restoration": true,
+        "final_storage_terminal": "Actual original pollRC0; pre-storage saved restoration is distinct from final observer storage/second restoration.",
+        "general_group_absence": "NOT_QUALIFIED"
+      }
+    },
+    "data_reader_refusal": "a74397 before writes incorrectly compared after_restoration monotonic timestamp to source map. Corrected schema read keeps genuine before==after; no candidate/test retry.",
+    "targets": 0,
+    "signals": 0,
+    "native_emulator_physical": "NOT_RUN"
+  },
+  "native_compilation": "PASS_COMPILER_ONLY; see compiler-results.json; no link/runtime",
+  "controller_third_stage": "SOURCE_IMPLEMENTATION_IN_PROGRESS_NOT_ADOPTED",
+  "native_emulator_physical_timing_device_audio_listening": "NOT_RUN_OR_UNQUALIFIED",
+  "full32_occupancy_quantized_first_runtime": "NOT_RUN",
+  "combined_controller43_producer62": {
+    "scope": "CURRENT_COMBINED_CONTROLLER43_PRODUCER62_ORDINARY_HOST",
+    "source_before_after_equal": true,
+    "source_recipe_sha256": "92e31d31c4e2c2011eea9b365ecf19402809eb1fb88e3dd3e309724e3011614e",
+    "source_counts": {
+      "controller43": 79,
+      "producer62": 83
+    },
+    "fixture_oracles": "exact original 43/62 stdout asserted inside each normal driver; only unittest stream exported",
+    "native_emulator_physical": "NOT_RUN",
+    "independent_process_group_absence": "NOT_QUALIFIED",
+    "suites": {
+      "controller43": {
+        "dispatch": "c6c536",
+        "session": 57961,
+        "poll": "4da602",
+        "exit_code": 0,
+        "output": ".\n----------------------------------------------------------------------\nRan 1 test in 18.815s\n\nOK\n"
+      },
+      "producer62": {
+        "dispatch": "84f81d",
+        "session": 44811,
+        "poll": "d977cd",
+        "exit_code": 0,
+        "output": ".\n----------------------------------------------------------------------\nRan 1 test in 21.932s\n\nOK\n"
+      }
+    }
+  }
+}

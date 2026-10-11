@@ -6886,3 +6886,43 @@ residency, exact activation timing, interrupt behavior, WCET, device stop and
 ordering, sample-RAM capacity/completion, Amiberry, real-A1200 and human listening
 acceptance remain separate and pending. This finite core mode does not implement
 the deferred general live broker or any ZooperTracker features.
+
+
+## 11 October — Controller STOP and sampler finite three-event integration
+
+The optional typed controller now prepares a STOP after its genuine original
+TRIGGER using only issued reader references. It retains original readers and
+allocates one command, with no new master, PCM conversion, cache or upload.
+Transferred but unpublished commands require genuine local cancellation;
+uncertain callbacks retain potentially live ownership. Publication, exact
+commit and independent command/reader/source quiet remain separate. The new
+52-case controller fixture, affected controller43/producer62 and matching
+repository driver passed strict host checks. See
+[controller evidence](../evidence/enhanced-editor/controller-causal-stop/README.md).
+
+Three narrow factory queries inspect genuine composite capability and actual
+predecessor completions under existing task exclusion. The separate sampler
+factory now supports one TRIGGER→CONTROL→STOP lifetime with two live command
+slots and the existing 32-reader bound. The third requires completed CONTROL
+and actual first-command service plus consumed NULL handle closure. Typed
+CONTROL/STOP derive original keys internally and acquire no new readers, pins,
+master versions, conversions or playback caches. Preparation/enqueue attempts
+consume their stage; no fourth command or implicit retry is admitted. All
+original frames and timestamps remain fixed.
+
+Its genuine 74-case host fixture and matching normal repository driver passed,
+including 24 positive 8/16/24-bit master lifetimes and 8/16-bit card caches.
+Original save/cache/master beforeimages, slot reuse, mutation/reentry/aliases,
+publication uncertainty and independent cleanup are asserted. Core default26,
+CONTROL34, STOP45, third25 and factory-state query regressions passed separately.
+See [sampler evidence](../evidence/enhanced-editor/sampler-causal-lineage/README.md)
+for actual counters, preserved failures and current affected regression status.
+
+These are host model results. The controller three-event wrapper, producer and
+native frontend binding remain separate unfinished work. Separate strict
+m68000/soft-float compilation passed for all three changed C units: actual
+dependency admission, object and assembly with individual stack rows. See the
+linked compiler evidence. No native runtime, aggregate stack/IRQ/WCET, exact live timing,
+hardware voice stop/quiet/order/completion, Amiberry, A1200/AmiGUS or listening
+acceptance is inferred. The accepted classic layout and sixteen unrelated
+display/editor paths are preserved.

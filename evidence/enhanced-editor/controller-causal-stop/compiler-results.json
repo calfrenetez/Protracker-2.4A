@@ -1,0 +1,202 @@
+{
+  "scope": "strict m68000 compiler-only query and controller STOP checks",
+  "results": {
+    "query": {
+      "receipt": {
+        "name": "receipt.json",
+        "bytes": 116773,
+        "sha256": "93e586d29873dd066b11e95fd9dbd14e06b0ea89d491cea000f8d4514f908615",
+        "scope": "query compiler-first-v4"
+      },
+      "outer": {
+        "name": "root-current-query-native-compiler-outer-first-20261011-v4.json",
+        "bytes": 1164,
+        "sha256": "5ced6b8c929e81efcb994a90051be2e65daa8e17dcd5040f0cda91a203f0e830"
+      },
+      "status": "PASS_COMPILER_ONLY_QUERY_CORE_LIMITED",
+      "actual_non_system_dependencies": 19,
+      "original_pairs": 25,
+      "local_pairs": 19,
+      "artifacts": {
+        "object/mixed_readers_causal.o": {
+          "bytes": 32620,
+          "sha256": "55024ef787dfc639f4c54530d17d7f7bfa79df5b02c2529001e4e07929a0231e"
+        },
+        "object/mixed_readers_causal.su": {
+          "bytes": 5309,
+          "sha256": "2c381ef01c5191b6b6f34867e2ce3a7d61803a54a4a687e697f8fc903f5da723"
+        },
+        "assembly/mixed_readers_causal.s": {
+          "bytes": 153531,
+          "sha256": "27c03bd0ec801cd05fdd09781433e95fce5ed91e5b12dc823a59d7e85e87d307"
+        },
+        "assembly/mixed_readers_causal.su": {
+          "bytes": 5309,
+          "sha256": "2c381ef01c5191b6b6f34867e2ce3a7d61803a54a4a687e697f8fc903f5da723"
+        }
+      },
+      "individual_rows": {
+        "pt_mixed_causal_factory_control_stop_first_current": [
+          {
+            "function": "pt_mixed_causal_factory_control_stop_first_current",
+            "reported_individual_bytes": 16,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_mixed_causal_factory_control_stop_control_current": [
+          {
+            "function": "pt_mixed_causal_factory_control_stop_control_current",
+            "reported_individual_bytes": 20,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "lineage_control_current": [
+          {
+            "function": "lineage_control_current",
+            "reported_individual_bytes": 88,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_mixed_causal_control_stop_bind": [
+          {
+            "function": "pt_mixed_causal_control_stop_bind",
+            "reported_individual_bytes": 20,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_mixed_causal_stop_after_control_enqueue": [
+          {
+            "function": "pt_mixed_causal_stop_after_control_enqueue",
+            "reported_individual_bytes": 3208,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_mixed_causal_fire": [
+          {
+            "function": "pt_mixed_causal_fire",
+            "reported_individual_bytes": 1228,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_mixed_causal_service_command": [
+          {
+            "function": "pt_mixed_causal_service_command",
+            "reported_individual_bytes": 40,
+            "qualifier": "dynamic,bounded"
+          }
+        ]
+      },
+      "original_wait_rc0_both_eof": true,
+      "elapsed_seconds": 0.9911408750012924,
+      "scope": "compiler-only; no link/runtime, aggregate task or interrupt stack, WCET/timing, device or listening qualification",
+      "all_original_local_artifact_pairs_equal": true,
+      "artifact_pairs": 4,
+      "restoration_timer_handler": true,
+      "signals": 0,
+      "targets": 0
+    },
+    "controller": {
+      "receipt": {
+        "name": "receipt.json",
+        "bytes": 255661,
+        "sha256": "b800db5ce1af3299d0bb9c0fade456f824eb2a54d6909838b00e0de0ab08a52b",
+        "scope": "controller compiler-first-v4"
+      },
+      "outer": {
+        "name": "root-current-controller-native-compiler-outer-first-20261011-v4.json",
+        "bytes": 1169,
+        "sha256": "d838cae4b6f1e528a904e7ad41b913a208f5db19c9e4954bd656454374d6a4ca"
+      },
+      "status": "PASS_COMPILER_ONLY_CONTROLLER_STOP_LIMITED",
+      "actual_non_system_dependencies": 66,
+      "original_pairs": 72,
+      "local_pairs": 66,
+      "artifacts": {
+        "object/editor_mixed_causal_prepare.o": {
+          "bytes": 30008,
+          "sha256": "0d02d267788583a527447cacb2a86e152c0262d21a4d5d5efbed8fb528fbf165"
+        },
+        "object/editor_mixed_causal_prepare.su": {
+          "bytes": 6855,
+          "sha256": "5f86a23c57c5b77dc276ea8da87580fb7897ac5ed71a28380b5f910e0ca7c3b3"
+        },
+        "assembly/editor_mixed_causal_prepare.s": {
+          "bytes": 134521,
+          "sha256": "b30b90e831c714daefd48b71972900b6cd233e55f674f94177e85099b0201b3a"
+        },
+        "assembly/editor_mixed_causal_prepare.su": {
+          "bytes": 6855,
+          "sha256": "5f86a23c57c5b77dc276ea8da87580fb7897ac5ed71a28380b5f910e0ca7c3b3"
+        }
+      },
+      "individual_rows": {
+        "stop_scope": [
+          {
+            "function": "stop_scope",
+            "reported_individual_bytes": 48,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "stop_current": [],
+        "pt_editor_mixed_causal_stop_prepare_begin": [
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_begin",
+            "reported_individual_bytes": 88,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_stop_prepare_batch_begin": [
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+            "reported_individual_bytes": 520,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_enqueue": [
+          {
+            "function": "pt_editor_mixed_causal_prepare_enqueue",
+            "reported_individual_bytes": 64,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_publish": [
+          {
+            "function": "pt_editor_mixed_causal_prepare_publish",
+            "reported_individual_bytes": 32,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_service_command": [
+          {
+            "function": "pt_editor_mixed_causal_prepare_service_command",
+            "reported_individual_bytes": 1448,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_cancel": [
+          {
+            "function": "pt_editor_mixed_causal_prepare_cancel",
+            "reported_individual_bytes": 20,
+            "qualifier": "dynamic,bounded"
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_close": [
+          {
+            "function": "pt_editor_mixed_causal_prepare_close",
+            "reported_individual_bytes": 32,
+            "qualifier": "dynamic,bounded"
+          }
+        ]
+      },
+      "original_wait_rc0_both_eof": true,
+      "elapsed_seconds": 1.9633543340023607,
+      "scope": "compiler-only; no link/runtime, aggregate task or interrupt stack, WCET/timing, device or listening qualification",
+      "all_original_local_artifact_pairs_equal": true,
+      "artifact_pairs": 4,
+      "restoration_timer_handler": true,
+      "signals": 0,
+      "targets": 0
+    }
+  },
+  "runtime_emulator_physical_listening": "NOT_RUN_OR_UNQUALIFIED"
+}

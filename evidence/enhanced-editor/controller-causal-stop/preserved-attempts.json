@@ -1,0 +1,54 @@
+{
+  "failed_attempts": [
+    {
+      "name": "root-controller-fixed-suite-private-temp-stop52-20261011-v4.json",
+      "bytes": 922272,
+      "sha256": "2e1a4ee8cea0cf8b5082e1f6ec48b3f45d980750e4fe776e964c5818ddd936a7",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Fixture snapshot over-read actual allocation; ASan rejected."
+    },
+    {
+      "name": "root-controller-fixed-suite-snapshot-stop52-20261011-v5.json",
+      "bytes": 922180,
+      "sha256": "09749d142b2bcb46fa355ce841e2a9c9bbe0614ef07703cb83b48dd5b1b041ec",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Genuine transferred unpublished STOP was serviced as published; assertion rejected."
+    },
+    {
+      "name": "root-controller-fixed-suite-diagnostic-stop52-20261011-v6.json",
+      "bytes": 841619,
+      "sha256": "9bd76509c98ddc2e74d168321215ef39e6b391620dca04a24fbe0171ae16c4ef",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Exact unpublished STOP service INVALID; genuine local cancel required."
+    },
+    {
+      "name": "root-controller-fixed-suite-unpublished-stop52-20261011-v7.json",
+      "bytes": 841640,
+      "sha256": "9061abb5579a9af12ac6f0992638671691eb39a42e9a08185e19d62842ea94bc",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Cancellation result expectation rejected."
+    },
+    {
+      "name": "root-controller-fixed-suite-cancel-diagnostic-stop52-20261011-v8.json",
+      "bytes": 841757,
+      "sha256": "bdcbb60ec864d1b4511a39d3a87a9d41644773758d6c42d8c0b40ef339e62d9f",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Whole local cancel FAILED vs independent reader cancel INVALID; zero STOP required."
+    },
+    {
+      "name": "root-factory-query-fixed-suite-first-query17-20261011-v1.json",
+      "bytes": 1044116,
+      "sha256": "25af4fc42f1e17cb9bd8d75269c52f09b26055702d1a937ad8ac2f2e771b4a79",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Nested donor main macros refused compilation; fixture not run."
+    },
+    {
+      "name": "root-factory-query-fixed-suite-second-query17-20261011-v2.json",
+      "bytes": 1050077,
+      "sha256": "38e48c2d678f3afed335ec3dc592bcdccdc5b11993b12d0d9b01b738ba9388ca",
+      "original_result": "FAILED_PRESERVED",
+      "reason": "Default two-TRIGGER protocol incorrectly used standalone first; assertion rejected."
+    }
+  ],
+  "earlier_controller_source_temp_font_refusals": "Preserved outside repository in checkpoint/numbered original receipts; never promoted."
+}

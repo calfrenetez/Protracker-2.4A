@@ -1288,6 +1288,54 @@ int pt_mixed_causal_factory_stop_first_current(struct pt_mixed_causal_owner *b,
        !b->causal.admitted&&!b->causal.published;
     b->task_busy=0;return ok;
 }
+/* Exact installed composite capability, not an ordinary CONTROL/STOP port or
+ * a caller's copy. Binding copied the complete composite port and derived its
+ * CONTROL port from that same context/extent/callback. */
+static int factory_control_stop_bound(const struct pt_mixed_causal_owner *b)
+{
+    return b->control_stop_bound&&b->control_bound&&!b->stop_bound&&
+        b->registration.owner==b&&b->registration.queue==b->queue&&b->queue&&
+        b->registration.session&&b->registration.generation==b->grid.generation&&
+        b->control_stop_port.context==b->port.context&&
+        b->control_stop_port.context_bytes==b->port.context_bytes&&
+        b->control_stop_port.version==PT_MIXED_CAUSAL_CONTROL_STOP_VERSION&&
+        b->control_stop_port.flags==PT_MIXED_CAUSAL_CONTROL_STOP_REQUIRED&&
+        b->control_stop_port.publish_control&&b->control_stop_port.publish_stop_after_control&&
+        b->control_port.context==b->port.context&&b->control_port.context_bytes==b->port.context_bytes&&
+        b->control_port.version==PT_MIXED_CAUSAL_CONTROL_VERSION&&
+        b->control_port.flags==PT_MIXED_CAUSAL_CONTROL_REQUIRED&&
+        b->control_port.publish_control==b->control_stop_port.publish_control;
+}
+int pt_mixed_causal_factory_control_stop_original_empty(struct pt_mixed_causal_owner *b,
+    struct pt_mixed_readers_output *queue,uint64_t session,uint64_t generation)
+{
+    int ok;
+    if(!b||!queue||!session||!generation)return 0;
+    if(!task_enter(b))return 0;
+    ok=factory_control_stop_bound(b)&&!b->ordered&&!b->source_uncertain&&
+        factory_empty(b,queue,session,generation);
+    b->task_busy=0;return ok;
+}
+int pt_mixed_causal_factory_control_stop_first_current(struct pt_mixed_causal_owner *b,
+    uint64_t predecessor)
+{
+    int ok;
+    if(!b||!predecessor)return 0;
+    if(!task_enter(b))return 0;
+    ok=factory_control_stop_bound(b)&&predecessor==b->causal.first&&
+        control_first_current(b)&&!b->causal.admitted&&!b->causal.published;
+    b->task_busy=0;return ok;
+}
+int pt_mixed_causal_factory_control_stop_control_current(struct pt_mixed_causal_owner *b,
+    uint64_t predecessor)
+{
+    int ok;
+    if(!b||!predecessor)return 0;
+    if(!task_enter(b))return 0;
+    ok=factory_control_stop_bound(b)&&predecessor==b->causal.successor&&
+        lineage_control_current(b,1)&&!b->lineage.admitted&&!b->lineage.published;
+    b->task_busy=0;return ok;
+}
 struct pt_mixed_causal_factory_bind_result pt_mixed_causal_factory_bind_original(
     struct pt_mixed_causal_owner *b,
     int (*callback)(void *,const struct pt_mixed_causal_registration *),

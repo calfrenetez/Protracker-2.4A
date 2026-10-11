@@ -1,0 +1,38 @@
+{
+  "scope": "original failures remain separate; no unchanged retry or weaker assertion",
+  "product_unchanged_during_fixture_repairs": true,
+  "attempts": [
+    {
+      "name": "first-command-receipt",
+      "RC": 1,
+      "issue": "fixture omitted genuine first-command service",
+      "receipt_pin_scope": "full original pin in private checkpoint"
+    },
+    {
+      "name": "retained-reader-contract",
+      "RC": 1,
+      "issue": "closed retained R is STALE rather than INVALID",
+      "receipt_sha256": "cc62f20cdbbb6b980e0645a5b97166a43c4b2319eaa1cbb4b793dadedfc22240"
+    },
+    {
+      "name": "positive-control-enqueue-boundary",
+      "RC": 1,
+      "issue": "donor injected fault at preliminary getter instead of lower validation",
+      "receipt_sha256": "5c75e25f23e4c28d225e0a37228cf2d60a83997b1a080a1b43a028b614975f85"
+    },
+    {
+      "name": "source-retirement-prerequisite",
+      "RC": 1,
+      "issue": "fixture retained commands/readers before source shutdown",
+      "receipt_sha256": "2c4571f23fdef36d88775e36839f8def22a6b907dde6862da0ebc474920bdddb"
+    },
+    {
+      "name": "source-close-numeric-diagnostic",
+      "RC": 1,
+      "numeric_observation": "close0 pool1 queue1 causal1 ordinary_live21 command_handles2 reader_handles16 shutdowns0 probes0",
+      "receipt_sha256": "b866a0d4f721fc8e6d00b7a97054c9663100cc593700ba2c436151ded44c5ea5"
+    }
+  ],
+  "final_fixture_sha256": "0dbdf1ba020ac179c39e3af23ca5b5c83105fb7fd6e1c8da175df09a00628e24",
+  "original_failures_not_reclassified": true
+}

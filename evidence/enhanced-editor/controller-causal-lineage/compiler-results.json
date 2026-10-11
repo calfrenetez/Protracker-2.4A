@@ -1,0 +1,1440 @@
+{
+  "status": "PASS_COMPILER_ONLY",
+  "source": "src/editor/editor_mixed_causal_prepare.c",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "actual_MM_paths": 70,
+  "source_pairs": {
+    "original": 76,
+    "private": 70,
+    "artifacts": 4
+  },
+  "stages": [
+    {
+      "stage": "finite_non_system_dependency_discovery",
+      "RC": 0,
+      "wait": true,
+      "EOF": {
+        "stdout": true,
+        "stderr": true
+      },
+      "closes": {
+        "selector": true,
+        "stdout": true,
+        "stderr": true
+      },
+      "signals": 0
+    },
+    {
+      "stage": "one_core_object",
+      "RC": 0,
+      "wait": true,
+      "EOF": {
+        "stdout": true,
+        "stderr": true
+      },
+      "closes": {
+        "selector": true,
+        "stdout": true,
+        "stderr": true
+      },
+      "signals": 0
+    },
+    {
+      "stage": "one_core_assembly",
+      "RC": 0,
+      "wait": true,
+      "EOF": {
+        "stdout": true,
+        "stderr": true
+      },
+      "closes": {
+        "selector": true,
+        "stdout": true,
+        "stderr": true
+      },
+      "signals": 0
+    }
+  ],
+  "inner_timer_handler_restoration": {
+    "timer_disarm_attempted": true,
+    "timer_disarmed": true,
+    "handler_restore_attempted": true,
+    "handler_restored": true
+  },
+  "outer_direct_wait_and_both_EOF": true,
+  "outer_restoration": "accepted finally; no independent saved fields",
+  "artifacts": {
+    "object/editor_mixed_causal_prepare.o": {
+      "bytes": 35276,
+      "sha256": "b01135e025f428f5ef3aaf0e70ee934b148f357d9ae18c01bb852ac95aa49891"
+    },
+    "object/editor_mixed_causal_prepare.su": {
+      "bytes": 7521,
+      "sha256": "004e83916d1cd3673a3d7179990e97cdb2738a57518e41552d093722b7fe7197"
+    },
+    "assembly/editor_mixed_causal_prepare.s": {
+      "bytes": 158574,
+      "sha256": "b78e6966fd4e123559aafdfd823973e08de069df13fdb7bde8eb5b34bbfce7bf"
+    },
+    "assembly/editor_mixed_causal_prepare.su": {
+      "bytes": 7521,
+      "sha256": "004e83916d1cd3673a3d7179990e97cdb2738a57518e41552d093722b7fe7197"
+    }
+  },
+  "individual_stack_rows": {
+    "object/editor_mixed_causal_prepare.su": [
+      {
+        "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+        "function": "memcmp",
+        "reported_individual_bytes": 4,
+        "qualifier": "static"
+      },
+      {
+        "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+        "function": "pt_project_snapshot_equal",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:17:12:span\t0\tstatic",
+        "function": "span",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:19:12:apart\t28\tdynamic,bounded",
+        "function": "apart",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:22:12:inside\t36\tdynamic,bounded",
+        "function": "inside",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:25:12:zero\t0\tstatic",
+        "function": "zero",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:36:44:fail\t24\tdynamic,bounded",
+        "function": "fail",
+        "reported_individual_bytes": 24,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:45:12:reentry\t8\tdynamic,bounded",
+        "function": "reentry",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:47:12:idle\t0\tstatic",
+        "function": "idle",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:53:52:stop_scope\t48\tdynamic,bounded",
+        "function": "stop_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:73:55:lineage_scope\t48\tdynamic,bounded",
+        "function": "lineage_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:94:12:fixed_current\t1540\tdynamic,bounded",
+        "function": "fixed_current",
+        "reported_individual_bytes": 1540,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:109:12:source_apart\t36\tdynamic,bounded",
+        "function": "source_apart",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:113:12:callback_covered\t32\tdynamic,bounded",
+        "function": "callback_covered",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:116:12:add\t20\tdynamic,bounded",
+        "function": "add",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:126:12:capture_sources\t108\tdynamic,bounded",
+        "function": "capture_sources",
+        "reported_individual_bytes": 108,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:146:12:capture\t20\tdynamic,bounded",
+        "function": "capture",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:160:12:output_apart\t44\tdynamic,bounded",
+        "function": "output_apart",
+        "reported_individual_bytes": 44,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:170:12:allocation_apart\t40\tdynamic,bounded",
+        "function": "allocation_apart",
+        "reported_individual_bytes": 40,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:184:12:retire\t8\tstatic",
+        "function": "retire",
+        "reported_individual_bytes": 8,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:190:14:guard_allocate\t60\tdynamic,bounded",
+        "function": "guard_allocate",
+        "reported_individual_bytes": 60,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:215:13:guard_release\t28\tdynamic,bounded",
+        "function": "guard_release",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:229:14:guard_chip_allocate\t64\tdynamic,bounded",
+        "function": "guard_chip_allocate",
+        "reported_individual_bytes": 64,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:243:13:guard_chip_release\t32\tdynamic,bounded",
+        "function": "guard_chip_release",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:251:12:hook_owned\t12\tdynamic,bounded",
+        "function": "hook_owned",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:255:12:post\t16\tdynamic,bounded",
+        "function": "post",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:267:13:snapshot\t28\tdynamic,bounded",
+        "function": "snapshot",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:278:13:callback_fault\t3188\tdynamic,bounded",
+        "function": "callback_fault",
+        "reported_individual_bytes": 3188,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:290:12:guard_port_clock\t0\tstatic",
+        "function": "guard_port_clock",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:295:12:guard_port_commit\t0\tstatic",
+        "function": "guard_port_commit",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:300:12:guard_port_publish\t3216\tdynamic,bounded",
+        "function": "guard_port_publish",
+        "reported_individual_bytes": 3216,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:309:12:guard_original_bind\t3196\tdynamic,bounded",
+        "function": "guard_original_bind",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:319:12:guard_port_publish_successor\t3200\tdynamic,bounded",
+        "function": "guard_port_publish_successor",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:330:12:guard_port_publish_stop\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:341:12:guard_port_publish_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:351:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop_after_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:361:12:guard_port_command\t3200\tdynamic,bounded",
+        "function": "guard_port_command",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:368:12:guard_port_reader\t3200\tdynamic,bounded",
+        "function": "guard_port_reader",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:375:12:guard_port_source_close\t3196\tdynamic,bounded",
+        "function": "guard_port_source_close",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:382:12:guard_port_source_quiet\t3196\tdynamic,bounded",
+        "function": "guard_port_source_quiet",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:389:44:factory_result\t4\tstatic",
+        "function": "factory_result",
+        "reported_individual_bytes": 4,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:398:12:prepare_admit\t28\tdynamic,bounded",
+        "function": "prepare_admit",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:465:12:source_identity\t8\tstatic",
+        "function": "source_identity",
+        "reported_individual_bytes": 8,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:472:12:source_original\t8\tdynamic,bounded",
+        "function": "source_original",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:475:12:source_descriptor\t24\tdynamic,bounded",
+        "function": "source_descriptor",
+        "reported_individual_bytes": 24,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:493:12:source_fixed\t2620\tdynamic,bounded",
+        "function": "source_fixed",
+        "reported_individual_bytes": 2620,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:526:12:source_role_declared\t20\tdynamic,bounded",
+        "function": "source_role_declared",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:533:12:source_role_apart\t52\tdynamic,bounded",
+        "function": "source_role_apart",
+        "reported_individual_bytes": 52,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:564:37:pt_editor_mixed_causal_source_begin\t504\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_begin",
+        "reported_individual_bytes": 504,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:639:37:pt_editor_mixed_causal_source_activate\t212\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_activate",
+        "reported_individual_bytes": 212,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:662:5:pt_editor_mixed_causal_source_children_closed\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_children_closed",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:665:5:pt_editor_mixed_causal_source_enter\t12\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_enter",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:673:5:pt_editor_mixed_causal_source_leave\t12\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_leave",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:682:5:pt_editor_mixed_causal_source_borrow_close\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_borrow_close",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:706:54:source_query_scope\t36\tdynamic,bounded",
+        "function": "source_query_scope",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:722:43:pt_editor_mixed_causal_source_observe\t40\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_observe",
+        "reported_individual_bytes": 40,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:734:12:source_query_extent\t32\tdynamic,bounded",
+        "function": "source_query_extent",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:740:5:pt_editor_mixed_causal_source_allocation_disjoint\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:784:54:pt_editor_mixed_causal_source_command_registration\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_command_registration",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:801:54:pt_editor_mixed_causal_source_reader_registration\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_reader_registration",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:815:37:pt_editor_mixed_causal_prepare_begin\t216\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_begin",
+        "reported_individual_bytes": 216,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:878:37:pt_editor_mixed_causal_stop_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_stop_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:907:37:pt_editor_mixed_causal_prepare_get\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_get",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:943:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:997:37:pt_editor_mixed_causal_prepare_advance_validation\t460\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_advance_validation",
+        "reported_individual_bytes": 460,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1080:47:command\t36\tdynamic,bounded",
+        "function": "command",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1085:46:reader\t36\tdynamic,bounded",
+        "function": "reader",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1090:30:pt_editor_mixed_causal_source_reader_readiness\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_reader_readiness",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1111:12:reader_close\t48\tdynamic,bounded",
+        "function": "reader_close",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1121:35:pt_editor_mixed_causal_source_retire_original_reader\t68\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_retire_original_reader",
+        "reported_individual_bytes": 68,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1149:12:command_close\t64\tdynamic,bounded",
+        "function": "command_close",
+        "reported_individual_bytes": 64,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1173:12:batch_spans\t48\tdynamic,bounded",
+        "function": "batch_spans",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1193:12:batch_pair_end\t28\tdynamic,bounded",
+        "function": "batch_pair_end",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1208:12:batch_voice_zero\t0\tstatic",
+        "function": "batch_voice_zero",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1272:44:batch_begin_private\t36\tstatic",
+        "function": "batch_begin_private",
+        "reported_individual_bytes": 36,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1352:37:pt_editor_mixed_causal_prepare_batch_begin\t56\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_begin",
+        "reported_individual_bytes": 56,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1360:37:pt_editor_mixed_causal_prepare_batch_begin_quantized\t60\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+        "reported_individual_bytes": 60,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1379:37:pt_editor_mixed_causal_stop_prepare_batch_begin\t520\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+        "reported_individual_bytes": 520,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1447:44:lineage_batch_begin\t916\tdynamic,bounded",
+        "function": "lineage_batch_begin",
+        "reported_individual_bytes": 916,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1552:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1556:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1561:37:pt_editor_mixed_causal_prepare_batch_advance\t36\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_advance",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1570:37:pt_editor_mixed_causal_prepare_reader_reference\t36\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_reader_reference",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1580:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_enqueue",
+        "reported_individual_bytes": 72,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1602:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_publish",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1611:12:service_enter\t20\tdynamic,bounded",
+        "function": "service_enter",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1621:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_command",
+        "reported_individual_bytes": 1456,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1641:30:pt_editor_mixed_causal_prepare_service_reader\t144\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_reader",
+        "reported_individual_bytes": 144,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1653:12:local_cancel\t8\tdynamic,bounded",
+        "function": "local_cancel",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1660:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_cancel",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1670:12:finish\t76\tdynamic,bounded",
+        "function": "finish",
+        "reported_individual_bytes": 76,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1704:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_close",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:17:12:span.part.0\t0\tstatic",
+        "function": "span.part.0",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:398:12:prepare_admit.part.15\t332\tdynamic,bounded",
+        "function": "prepare_admit.part.15",
+        "reported_individual_bytes": 332,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1272:44:batch_begin_private.part.20\t2500\tdynamic,bounded",
+        "function": "batch_begin_private.part.20",
+        "reported_individual_bytes": 2500,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "assembly/editor_mixed_causal_prepare.su": [
+      {
+        "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+        "function": "memcmp",
+        "reported_individual_bytes": 4,
+        "qualifier": "static"
+      },
+      {
+        "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+        "function": "pt_project_snapshot_equal",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:17:12:span\t0\tstatic",
+        "function": "span",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:19:12:apart\t28\tdynamic,bounded",
+        "function": "apart",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:22:12:inside\t36\tdynamic,bounded",
+        "function": "inside",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:25:12:zero\t0\tstatic",
+        "function": "zero",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:36:44:fail\t24\tdynamic,bounded",
+        "function": "fail",
+        "reported_individual_bytes": 24,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:45:12:reentry\t8\tdynamic,bounded",
+        "function": "reentry",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:47:12:idle\t0\tstatic",
+        "function": "idle",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:53:52:stop_scope\t48\tdynamic,bounded",
+        "function": "stop_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:73:55:lineage_scope\t48\tdynamic,bounded",
+        "function": "lineage_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:94:12:fixed_current\t1540\tdynamic,bounded",
+        "function": "fixed_current",
+        "reported_individual_bytes": 1540,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:109:12:source_apart\t36\tdynamic,bounded",
+        "function": "source_apart",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:113:12:callback_covered\t32\tdynamic,bounded",
+        "function": "callback_covered",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:116:12:add\t20\tdynamic,bounded",
+        "function": "add",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:126:12:capture_sources\t108\tdynamic,bounded",
+        "function": "capture_sources",
+        "reported_individual_bytes": 108,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:146:12:capture\t20\tdynamic,bounded",
+        "function": "capture",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:160:12:output_apart\t44\tdynamic,bounded",
+        "function": "output_apart",
+        "reported_individual_bytes": 44,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:170:12:allocation_apart\t40\tdynamic,bounded",
+        "function": "allocation_apart",
+        "reported_individual_bytes": 40,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:184:12:retire\t8\tstatic",
+        "function": "retire",
+        "reported_individual_bytes": 8,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:190:14:guard_allocate\t60\tdynamic,bounded",
+        "function": "guard_allocate",
+        "reported_individual_bytes": 60,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:215:13:guard_release\t28\tdynamic,bounded",
+        "function": "guard_release",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:229:14:guard_chip_allocate\t64\tdynamic,bounded",
+        "function": "guard_chip_allocate",
+        "reported_individual_bytes": 64,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:243:13:guard_chip_release\t32\tdynamic,bounded",
+        "function": "guard_chip_release",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:251:12:hook_owned\t12\tdynamic,bounded",
+        "function": "hook_owned",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:255:12:post\t16\tdynamic,bounded",
+        "function": "post",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:267:13:snapshot\t28\tdynamic,bounded",
+        "function": "snapshot",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:278:13:callback_fault\t3188\tdynamic,bounded",
+        "function": "callback_fault",
+        "reported_individual_bytes": 3188,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:290:12:guard_port_clock\t0\tstatic",
+        "function": "guard_port_clock",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:295:12:guard_port_commit\t0\tstatic",
+        "function": "guard_port_commit",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:300:12:guard_port_publish\t3216\tdynamic,bounded",
+        "function": "guard_port_publish",
+        "reported_individual_bytes": 3216,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:309:12:guard_original_bind\t3196\tdynamic,bounded",
+        "function": "guard_original_bind",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:319:12:guard_port_publish_successor\t3200\tdynamic,bounded",
+        "function": "guard_port_publish_successor",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:330:12:guard_port_publish_stop\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:341:12:guard_port_publish_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:351:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop_after_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:361:12:guard_port_command\t3200\tdynamic,bounded",
+        "function": "guard_port_command",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:368:12:guard_port_reader\t3200\tdynamic,bounded",
+        "function": "guard_port_reader",
+        "reported_individual_bytes": 3200,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:375:12:guard_port_source_close\t3196\tdynamic,bounded",
+        "function": "guard_port_source_close",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:382:12:guard_port_source_quiet\t3196\tdynamic,bounded",
+        "function": "guard_port_source_quiet",
+        "reported_individual_bytes": 3196,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:389:44:factory_result\t4\tstatic",
+        "function": "factory_result",
+        "reported_individual_bytes": 4,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:398:12:prepare_admit\t28\tdynamic,bounded",
+        "function": "prepare_admit",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:465:12:source_identity\t8\tstatic",
+        "function": "source_identity",
+        "reported_individual_bytes": 8,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:472:12:source_original\t8\tdynamic,bounded",
+        "function": "source_original",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:475:12:source_descriptor\t24\tdynamic,bounded",
+        "function": "source_descriptor",
+        "reported_individual_bytes": 24,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:493:12:source_fixed\t2620\tdynamic,bounded",
+        "function": "source_fixed",
+        "reported_individual_bytes": 2620,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:526:12:source_role_declared\t20\tdynamic,bounded",
+        "function": "source_role_declared",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:533:12:source_role_apart\t52\tdynamic,bounded",
+        "function": "source_role_apart",
+        "reported_individual_bytes": 52,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:564:37:pt_editor_mixed_causal_source_begin\t504\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_begin",
+        "reported_individual_bytes": 504,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:639:37:pt_editor_mixed_causal_source_activate\t212\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_activate",
+        "reported_individual_bytes": 212,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:662:5:pt_editor_mixed_causal_source_children_closed\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_children_closed",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:665:5:pt_editor_mixed_causal_source_enter\t12\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_enter",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:673:5:pt_editor_mixed_causal_source_leave\t12\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_leave",
+        "reported_individual_bytes": 12,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:682:5:pt_editor_mixed_causal_source_borrow_close\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_borrow_close",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:706:54:source_query_scope\t36\tdynamic,bounded",
+        "function": "source_query_scope",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:722:43:pt_editor_mixed_causal_source_observe\t40\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_observe",
+        "reported_individual_bytes": 40,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:734:12:source_query_extent\t32\tdynamic,bounded",
+        "function": "source_query_extent",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:740:5:pt_editor_mixed_causal_source_allocation_disjoint\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:784:54:pt_editor_mixed_causal_source_command_registration\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_command_registration",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:801:54:pt_editor_mixed_causal_source_reader_registration\t48\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_reader_registration",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:815:37:pt_editor_mixed_causal_prepare_begin\t216\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_begin",
+        "reported_individual_bytes": 216,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:878:37:pt_editor_mixed_causal_stop_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_stop_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:907:37:pt_editor_mixed_causal_prepare_get\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_get",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:943:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:997:37:pt_editor_mixed_causal_prepare_advance_validation\t460\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_advance_validation",
+        "reported_individual_bytes": 460,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1080:47:command\t36\tdynamic,bounded",
+        "function": "command",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1085:46:reader\t36\tdynamic,bounded",
+        "function": "reader",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1090:30:pt_editor_mixed_causal_source_reader_readiness\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_reader_readiness",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1111:12:reader_close\t48\tdynamic,bounded",
+        "function": "reader_close",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1121:35:pt_editor_mixed_causal_source_retire_original_reader\t68\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_source_retire_original_reader",
+        "reported_individual_bytes": 68,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1149:12:command_close\t64\tdynamic,bounded",
+        "function": "command_close",
+        "reported_individual_bytes": 64,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1173:12:batch_spans\t48\tdynamic,bounded",
+        "function": "batch_spans",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1193:12:batch_pair_end\t28\tdynamic,bounded",
+        "function": "batch_pair_end",
+        "reported_individual_bytes": 28,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1208:12:batch_voice_zero\t0\tstatic",
+        "function": "batch_voice_zero",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1272:44:batch_begin_private\t36\tstatic",
+        "function": "batch_begin_private",
+        "reported_individual_bytes": 36,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1352:37:pt_editor_mixed_causal_prepare_batch_begin\t56\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_begin",
+        "reported_individual_bytes": 56,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1360:37:pt_editor_mixed_causal_prepare_batch_begin_quantized\t60\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+        "reported_individual_bytes": 60,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1379:37:pt_editor_mixed_causal_stop_prepare_batch_begin\t520\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+        "reported_individual_bytes": 520,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1447:44:lineage_batch_begin\t916\tdynamic,bounded",
+        "function": "lineage_batch_begin",
+        "reported_individual_bytes": 916,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1552:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1556:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1561:37:pt_editor_mixed_causal_prepare_batch_advance\t36\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_batch_advance",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1570:37:pt_editor_mixed_causal_prepare_reader_reference\t36\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_reader_reference",
+        "reported_individual_bytes": 36,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1580:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_enqueue",
+        "reported_individual_bytes": 72,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1602:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_publish",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1611:12:service_enter\t20\tdynamic,bounded",
+        "function": "service_enter",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1621:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_command",
+        "reported_individual_bytes": 1456,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1641:30:pt_editor_mixed_causal_prepare_service_reader\t144\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_reader",
+        "reported_individual_bytes": 144,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1653:12:local_cancel\t8\tdynamic,bounded",
+        "function": "local_cancel",
+        "reported_individual_bytes": 8,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1660:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_cancel",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1670:12:finish\t76\tdynamic,bounded",
+        "function": "finish",
+        "reported_individual_bytes": 76,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1704:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_close",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:17:12:span.part.0\t0\tstatic",
+        "function": "span.part.0",
+        "reported_individual_bytes": 0,
+        "qualifier": "static"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:398:12:prepare_admit.part.15\t332\tdynamic,bounded",
+        "function": "prepare_admit.part.15",
+        "reported_individual_bytes": 332,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "raw": "editor_mixed_causal_prepare.c:1272:44:batch_begin_private.part.20\t2500\tdynamic,bounded",
+        "function": "batch_begin_private.part.20",
+        "reported_individual_bytes": 2500,
+        "qualifier": "dynamic,bounded"
+      }
+    ]
+  },
+  "selected_individual_stack_rows": {
+    "lineage_scope": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:73:55:lineage_scope\t48\tdynamic,bounded",
+        "function": "lineage_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:73:55:lineage_scope\t48\tdynamic,bounded",
+        "function": "lineage_scope",
+        "reported_individual_bytes": 48,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "lineage_current": [],
+    "pt_editor_mixed_causal_lineage_prepare_begin": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:943:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:943:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+        "reported_individual_bytes": 88,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "lineage_batch_begin": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1447:44:lineage_batch_begin\t916\tdynamic,bounded",
+        "function": "lineage_batch_begin",
+        "reported_individual_bytes": 916,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1447:44:lineage_batch_begin\t916\tdynamic,bounded",
+        "function": "lineage_batch_begin",
+        "reported_individual_bytes": 916,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_lineage_control_prepare_batch_begin": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1552:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1552:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1556:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1556:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+        "reported_individual_bytes": 16,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "guard_port_publish_control": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:341:12:guard_port_publish_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:341:12:guard_port_publish_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "guard_port_publish_stop_after_control": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:351:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop_after_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:351:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+        "function": "guard_port_publish_stop_after_control",
+        "reported_individual_bytes": 3204,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_prepare_enqueue": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1580:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_enqueue",
+        "reported_individual_bytes": 72,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1580:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_enqueue",
+        "reported_individual_bytes": 72,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_prepare_publish": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1602:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_publish",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1602:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_publish",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_prepare_service_command": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1621:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_command",
+        "reported_individual_bytes": 1456,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1621:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_service_command",
+        "reported_individual_bytes": 1456,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_prepare_cancel": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1660:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_cancel",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1660:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_cancel",
+        "reported_individual_bytes": 20,
+        "qualifier": "dynamic,bounded"
+      }
+    ],
+    "pt_editor_mixed_causal_prepare_close": [
+      {
+        "artifact": "object/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1704:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_close",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      },
+      {
+        "artifact": "assembly/editor_mixed_causal_prepare.su",
+        "raw": "editor_mixed_causal_prepare.c:1704:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+        "function": "pt_editor_mixed_causal_prepare_close",
+        "reported_individual_bytes": 32,
+        "qualifier": "dynamic,bounded"
+      }
+    ]
+  },
+  "aggregate_stack_IRQ_WCET_ABI_exact_timing_device_listening": "NOT_QUALIFIED",
+  "link": false,
+  "native_runtime": false,
+  "targets": 0
+}

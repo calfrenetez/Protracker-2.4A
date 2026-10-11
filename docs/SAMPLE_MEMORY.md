@@ -6950,3 +6950,28 @@ recorded separately; this ordinary route makes no process-group absence claim.
 Full32-reader occupancy, controller integration, native
 runtime, Amiberry, A1200/AmiGUS, device ordering/stop/completion, exact live timing
 and listening remain separate. See [quantized-first host evidence](../evidence/enhanced-editor/sampler-causal-lineage/quantized-first/README.md).
+
+
+### Finite controller TRIGGER -> CONTROL -> STOP
+
+The optional typed controller wrapper now exposes the existing finite sampler
+lifetime through genuine original reader references. Later CONTROL and STOP
+consume their preparation stages before external allocation callbacks and retain
+zero new readers, pins, master versions, conversions, playback caches or uploads.
+Two live command slots and the existing 32-reader bound remain; STOP requires
+completed CONTROL and actual first-command service plus consumed NULL handle
+closure. Publication, activation, command retirement, reader retirement and
+SOURCE quiet remain distinct. Original absolute frames never rebase.
+
+All 55 genuine controller cases, affected controller43/STOP52/producer62 and
+the matching normal repository driver passed strict host checks. Cases reach 16
+live readers; full 32 occupancy is still separate. Strict m68000/soft-float
+dependency, object and assembly checks passed for the changed controller C.
+The constructor/header extension requires a coherent rebuild; compiler success
+does not establish native ABI or runtime. See
+[controller lineage evidence](../evidence/enhanced-editor/controller-causal-lineage/README.md).
+
+The finite song producer, early SOURCE bridge, wide CONTROL16 adoption and native
+frontend are still separate unfinished work. Native runtime, aggregate stack/IRQ/
+WCET, exact live activation, Amiberry, A1200/AmiGUS, hardware stop/order/completion
+and listening remain unqualified. The accepted classic layout is preserved.

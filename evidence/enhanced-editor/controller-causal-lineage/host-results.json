@@ -1,0 +1,72 @@
+{
+  "status": "PASS_HOST_MODEL_AND_MATCHING_REPOSITORY_DRIVER",
+  "scope": "optional finite controller TRIGGER_CONTROL_STOP; no native runtime or device acceptance",
+  "fixture": {
+    "own_instances": 55,
+    "inherited_mains_invoked": false,
+    "actual_MM_rules": 79,
+    "compile_RC": 0,
+    "fixture_RC": 0,
+    "stdout_bytes": 598,
+    "stdout_sha256": "c06208db3dcefd0e8cda85f26dcf25e0dcf88f39b7ae2d107cb7d670dd3dff6b",
+    "stderr_bytes": 0,
+    "source_pairs": {
+      "child": 684,
+      "outer": 26
+    },
+    "original_wait_and_both_EOF": true,
+    "original_anchor_RC": 0,
+    "anchor_group_audits": {
+      "anchor_only": 9,
+      "empty": 2
+    },
+    "independent_closes": true,
+    "caller_timer_handler_restoration": true,
+    "outer_restoration_scope": "positive original session terminal only"
+  },
+  "affected": {
+    "controller43": {
+      "status": "PASS",
+      "ordinary_unittest": ".\n----------------------------------------------------------------------\nRan 1 test in 18.957s\n\nOK\n",
+      "fixture_oracle_asserted_in_driver": true,
+      "ordinary_group_absence": "NOT_QUALIFIED"
+    },
+    "stop52": {
+      "status": "PASS",
+      "ordinary_unittest": ".\n----------------------------------------------------------------------\nRan 1 test in 19.346s\n\nOK\n",
+      "fixture_oracle_asserted_in_driver": true,
+      "ordinary_group_absence": "NOT_QUALIFIED"
+    },
+    "producer62": {
+      "status": "PASS",
+      "ordinary_unittest": ".\n----------------------------------------------------------------------\nRan 1 test in 21.898s\n\nOK\n",
+      "fixture_oracle_asserted_in_driver": true,
+      "ordinary_group_absence": "NOT_QUALIFIED"
+    }
+  },
+  "matching_repository": {
+    "status": "PASS",
+    "ordinary_unittest": ".\n----------------------------------------------------------------------\nRan 1 test in 20.338s\n\nOK\n",
+    "direct_wait_and_both_EOF": true,
+    "source_pairs_equal": 599,
+    "closes": true,
+    "timer_handler_restoration": true,
+    "compile_seconds": 120,
+    "fixture_seconds": 30,
+    "private_TMPDIR": true,
+    "ordinary_group_absence": "NOT_QUALIFIED"
+  },
+  "reader_bound": 32,
+  "maximum_live_readers_in_these_cases": 16,
+  "frames": [
+    960,
+    1920,
+    2880
+  ],
+  "original_master_save_assertions": true,
+  "later_commands_new_readers": 0,
+  "later_commands_new_conversions_or_uploads": 0,
+  "targets": 0,
+  "signals": 0,
+  "native_runtime_Amiberry_physical_exact_timing_listening": "NOT_RUN"
+}

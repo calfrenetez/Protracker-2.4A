@@ -9,6 +9,7 @@
 #include "sampler_mixed_causal_internal.h"
 struct pt_editor_mixed_causal_prepare;
 struct pt_editor_mixed_causal_stop_prepare;
+struct pt_editor_mixed_causal_lineage_prepare;
 struct pt_editor_mixed_causal_source_inputs;
 struct pt_editor_mixed_causal_source_borrow;
 struct pt_editor_mixed_causal_prepare_inputs {
@@ -114,6 +115,10 @@ struct pt_editor_mixed_causal_prepare {
     /* Internal constructor-issued complete-wrapper identity; default/SOURCE
      * paths leave this zero. Never a public STOP capability or READY flag. */
     struct pt_editor_mixed_causal_stop_prepare *stop_owner;
+    /* Separate private opt-in scope. Existing field offsets/prefixes stay;
+     * complete sizeof/query guards include this appended backlink. Default,
+     * STOP-only and SOURCE paths leave it zero. Never a caller capability. */
+    struct pt_editor_mixed_causal_lineage_prepare *lineage_owner;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_causal_prepare_begin(
     struct pt_editor_mixed_causal_prepare *,const struct pt_editor_mixed_causal_prepare_inputs *);

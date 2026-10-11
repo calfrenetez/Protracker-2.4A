@@ -3,6 +3,8 @@
 #ifndef PT_PRIVATE_NATIVE_MIXED_CAUSAL_RAM_PORT_H
 #define PT_PRIVATE_NATIVE_MIXED_CAUSAL_RAM_PORT_H
 #include "mixed_readers_causal.h"
+#include "mixed_readers_causal_control_internal.h"
+#include "mixed_readers_causal_lineage_internal.h"
 #define PT_PRIVATE_CAUSAL_RAM_COMMANDS 2U
 #define PT_PRIVATE_CAUSAL_RAM_READERS 32U
 #define PT_PRIVATE_CAUSAL_RAM_SLOTS 20U
@@ -28,6 +30,7 @@ struct pt_private_mixed_causal_ram_command {
     uint64_t arm_tick,serial,predecessor_observed,predecessor_issued;
     unsigned known,live,armed,finished,disabled,uncertain,quiet_confirmed;
     unsigned successor,predecessor_completed;
+    unsigned lineage_phase; /* 0 existing modes; 1 root,2 CONTROL,3 STOP. */
     int arm_outcome,ticket_outcome,fire_result;
 };
 struct pt_private_mixed_causal_ram_reader {
@@ -37,6 +40,14 @@ struct pt_private_mixed_causal_ram_reader {
     unsigned live,active;
 };
 struct pt_private_mixed_causal_ram_trace {uint64_t ticks;uint32_t frequency;};
+/* Geometry-free ORIGINAL first completion. Event/holder addresses are opaque
+ * copied identities, including after actual command disposal; never followed. */
+struct pt_private_mixed_causal_ram_completed {
+    struct pt_mixed_causal_command_identity identity;
+    uint64_t frame,first_tick,last_tick,observed,issued;
+    struct pt_mixed_causal_actual post;
+    unsigned valid;
+};
 struct pt_private_mixed_causal_ram_port {
     struct pt_private_mixed_causal_ram_port *self;
     struct pt_private_mixed_causal_ram_adapter adapter;
@@ -52,6 +63,16 @@ struct pt_private_mixed_causal_ram_port {
     unsigned trace_count,publishes,commits,effects,entries,fires,pair_used,suppressed;
     unsigned source_attempted,source_closed,source_probes,quiet_probes;
     int clock_outcome,source_outcome,quiet_outcome,dispatch_result,ledger_result;
+    /* Additive opt-in after-first CONTROL mode. Default init leaves these ZERO.
+     * This full port parent must be admitted with its enlarged sizeof. */
+    unsigned control_mode,controls;
+    struct pt_private_mixed_causal_ram_completed completed;
+    struct pt_mixed_causal_control_publication control_before;
+    /* Separate finite capability. Existing constructors keep this full tail ZERO.
+     * Histories contain scalar original identities only, never live C ownership. */
+    unsigned lineage_mode,stops,root_command_quiet;
+    struct pt_private_mixed_causal_ram_completed control_completed;
+    struct pt_mixed_causal_control_stop_publication stop_before;
 };
 /* Fresh full ZERO, noncopyable, immutable complete extents, no reset/reuse.
  * Whole-entry task/fire/input-edit exclusion is caller-owned. The entire port,
@@ -59,6 +80,21 @@ struct pt_private_mixed_causal_ram_port {
  * independent source quiet and actual owner disposal. Unknown retains all. */
 int pt_private_mixed_causal_ram_init(struct pt_private_mixed_causal_ram_port *,
     uint64_t,uint64_t,uint32_t,const struct pt_private_mixed_causal_ram_adapter *,unsigned,unsigned);
+/* Explicit fresh opt-in constructor, otherwise the same original contracts.
+ * Caller must separately bind control_api to the genuine EMPTY core owner before
+ * factory/first admission. No STOP, third command, source or timer authority. */
+int pt_private_mixed_causal_ram_init_control(struct pt_private_mixed_causal_ram_port *,
+    uint64_t,uint64_t,uint32_t,const struct pt_private_mixed_causal_ram_adapter *,unsigned,unsigned);
+/* Distinct fresh finite TRIGGER16 -> CONTROL16 -> STOP16 constructor. Two
+ * command rows only; actual independent C1 quiet plus the genuine core typed
+ * C1-detachment admission permit exactly one reuse of row0 for C3. Bind the
+ * distinct lineage_api to the genuine EMPTY owner through its typed controller.
+ * Never bind the existing CONTROL-only capability for this mode. Histories
+ * remain copied values after actual C1 storage disposal. No fourth command. */
+int pt_private_mixed_causal_ram_init_lineage(struct pt_private_mixed_causal_ram_port *,
+    uint64_t,uint64_t,uint32_t,const struct pt_private_mixed_causal_ram_adapter *,unsigned,unsigned);
+struct pt_mixed_causal_control_stop_port pt_private_mixed_causal_ram_lineage_api(
+    struct pt_private_mixed_causal_ram_port *);
 /* Once immediately after genuine open+queue borrow, before factory, packets
  * or source exposure. Includes successful empty/cancel-before-publish owners.
  * Unbound constructor-recovery close is deliberately refused; no software
@@ -66,6 +102,9 @@ int pt_private_mixed_causal_ram_init(struct pt_private_mixed_causal_ram_port *,
 int pt_private_mixed_causal_ram_bind(struct pt_private_mixed_causal_ram_port *,
     struct pt_mixed_causal_owner *,struct pt_mixed_readers_output *,uint64_t,uint64_t);
 struct pt_mixed_causal_port pt_private_mixed_causal_ram_api(struct pt_private_mixed_causal_ram_port *);
+/* Returns an all-ZERO refused capability unless explicit constructor mode was
+ * selected. Copied by genuine control_bind; no implicit bind or callback. */
+struct pt_mixed_causal_control_port pt_private_mixed_causal_ram_control_api(struct pt_private_mixed_causal_ram_port *);
 /* Genuine fire once for this exact original ticket. EARLY retains ticket,
  * callbacks and geometry. No polling, rebasing or predicted ACTIVE. COMMITTED
  * preserves raw adoption separately from a later completion-check failure.

@@ -1,0 +1,374 @@
+{
+  "schema": "finite-causal-ram-public-evidence-v3",
+  "status": "PASS_EXACT_SIX_FINITE_C_H_HOST_SOFTWARE_GROUPS",
+  "scope": "FINITE_ORDINARY_RAM_HOST_SOFTWARE_ONLY",
+  "source_review": {
+    "status": "READY_SOURCE_FOR_SEPARATELY_REVIEWED_BOUNDED_HOST_MATRIX",
+    "bytes": 3545,
+    "sha256": "5b189f8ce2cd339882d9acdffa275010dbc540c275236f0318b4b642c25a6dde"
+  },
+  "implementation_source": {
+    "ram_c": {
+      "bytes": 41638,
+      "sha256": "d3282a05afa60569491335315e263cb90ed55dc5a2e6acb294d735d1bae4ff7f"
+    },
+    "ram_h": {
+      "bytes": 7396,
+      "sha256": "6c1492ea96e7b8f1b54cfe954caf51fe53addc2ad03abd3526ec3e56fa91d097"
+    },
+    "fixture": {
+      "bytes": 44906,
+      "sha256": "bb91b0b129b4cf6ae09c648008436bf0ad89ec3b558d973797084e3b4596a08d"
+    }
+  },
+  "fixture_correction_source_status": "READY_SOURCE_ONLY",
+  "focused_driver_source": {
+    "bytes": 9328,
+    "sha256": "0e5dde6cd1bca4cf543704d220b953cc0d535bf1f5eff1ec4149c2a103bdf91b"
+  },
+  "expected_finite_marker": {
+    "bytes": 514,
+    "sha256": "8c3021a1f004d76cab0d7aaa9cc3706cabdcb211c99a6cc0858512b85a3c069b",
+    "lines": 1,
+    "case_count": 17
+  },
+  "flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-Itests",
+    "-I."
+  ],
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "raw_font": {
+    "bytes": 580,
+    "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
+  },
+  "generated_font": {
+    "bytes": 1630,
+    "sha256": "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0"
+  },
+  "groups": [
+    {
+      "group": "ram-default-pair34",
+      "software_cases": 34,
+      "checks_if_distinct": null,
+      "translation_units": 80,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 502,
+        "sha256": "01d6660b8f95002872d8aa3a8a39e7ed3a6b2a6998524e8dbe18d8afada43206"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7296410,
+        "sha256": "2f98077996dd0c59d53e4442c836deae148fee449d851317e0a55c5d5ac93b5f"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    },
+    {
+      "group": "ram-completion36-checks219",
+      "software_cases": 36,
+      "checks_if_distinct": 219,
+      "translation_units": 80,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 842,
+        "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7297143,
+        "sha256": "9b0bc7602a057c388d052555cfc89878559f6bb7653760880917ac58845e64fe"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    },
+    {
+      "group": "ram-timer-resource10",
+      "software_cases": 10,
+      "checks_if_distinct": null,
+      "translation_units": 81,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 352,
+        "sha256": "6987cebd788b7460319820cb632ca639ea1dce7da9cc7190ce99579b2002b81c"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7296390,
+        "sha256": "521f355de26740c537e8d9b8e081b77d18340d325d110b6110587e40d8cc3519"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    },
+    {
+      "group": "ram-retained-c1-8",
+      "software_cases": 8,
+      "checks_if_distinct": null,
+      "translation_units": 29,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 428,
+        "sha256": "5643c974b7ccf0d021205ad397575f8c8763dff8b476173443dcb4bb603f9d7f"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7331937,
+        "sha256": "71c9cb6823855eaa7247ff657276b2a52e85e9f264652751f095832a7b6529a0"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    },
+    {
+      "group": "ram-control26",
+      "software_cases": 26,
+      "checks_if_distinct": null,
+      "translation_units": 29,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 407,
+        "sha256": "293c908e039de24cdadd192c00b2c526db4c3162810bc8e1a9bd21164e604984"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7312297,
+        "sha256": "c96632a435d322a98a5806664804bee02a880c2844d39d58d75f57e7348abfa7"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    },
+    {
+      "group": "ram-finite17",
+      "software_cases": 17,
+      "checks_if_distinct": null,
+      "translation_units": 85,
+      "compiler_returncode": 0,
+      "fixture_returncode": 0,
+      "complete_oracle_status": "PASS",
+      "stdout_marker": {
+        "bytes": 514,
+        "sha256": "8c3021a1f004d76cab0d7aaa9cc3706cabdcb211c99a6cc0858512b85a3c069b"
+      },
+      "stderr_bytes": 0,
+      "receipt": {
+        "bytes": 7316539,
+        "sha256": "72fc3436aa190dad0f5c6b9ffe9de46464a92dcae8175354b0c24c552cce39b0"
+      },
+      "independent_result_audit": "PASS",
+      "source_preservation": "PASS",
+      "owned_process_cleanup": "PASS"
+    }
+  ],
+  "combined_matrix_audit": {
+    "status": "PASS_EXACT_SIX_FINITE_C_H_HOST_SOFTWARE_GROUPS",
+    "compact_public_safe_data": {
+      "bytes": 7328,
+      "sha256": "3babcf1dc5d3ee71ac5a985d458bc79ea01bf5a45827c6435b4f6de4bb14fbd6"
+    },
+    "five_prior_positive_group_audits_reused": true,
+    "finite17_changed_fixture_new_audit": true
+  },
+  "protected16_test_preservation": "PASS_AUDITED_HOST_INPUT_PRESERVATION",
+  "classic_baseline_test_preservation": {
+    "source_review": "47 ordinary manifest hashes and four dataless metadata-only guards; no placeholder hydration/current-body equivalence claim",
+    "repository_entry_result": "Recorded separately in standalone_repository_entry_result"
+  },
+  "native_compile": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "native_activation": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "emulator": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "physical": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "abi_stack_irq_timing": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "audio_listening": "NOT_RUN_FOR_THIS_FINITE_CONTINUATION",
+  "publication_gate": "PASS_AUDITED_HOST_EVIDENCE_ONLY_NOT_NATIVE_OR_RELEASE_ACCEPTANCE",
+  "private_metadata_included": false,
+  "historical_failed_attempts": [
+    {
+      "kind": "finite17_V2_compile_refusal",
+      "compiler_returncode": 1,
+      "fixture_executed": false,
+      "fixture_returncode": null,
+      "receipt": {
+        "bytes": 7301592,
+        "sha256": "ddfeb8ce34a32d52f0284dc2890d354e6e490d209045fb8df64df4111135aa63"
+      },
+      "reclassified": false
+    },
+    {
+      "kind": "finite17_V3_runtime_assertion_failure",
+      "compiler_returncode": 0,
+      "fixture_executed": true,
+      "fixture_returncode": -6,
+      "receipt": {
+        "bytes": 7316276,
+        "sha256": "2884be79d6aac38f0102f89230c117c97fe056ea8fcbc1ec26e25f0155f76517"
+      },
+      "reclassified": false,
+      "compound_atom_values": "NOT_EXPORTED",
+      "unique_actual_failing_atom": "NOT_ESTABLISHED"
+    }
+  ],
+  "clean_refusal_contract": {
+    "history": "Exact PENDING; no new arm, pair_used2, zero STOP and unpublished/ununcertain C3.",
+    "third_arm_clean0": "Exact PENDING; once-only C3 row remains consumed at pair_used3 and positively quiet; no automatic rearm.",
+    "unknown_reentrant": "Exact BACKEND with retained live uncertain ownership.",
+    "current_candidate_compile": "PASS_PRIVATE_HOST_RC0",
+    "current_candidate_fixture": "PASS_EXACT_17_CASE_PRIVATE_HOST_RC0"
+  },
+  "source_reviews": [
+    {
+      "scope": "finite-provider-source",
+      "status": "READY_SOURCE_FOR_SEPARATELY_REVIEWED_BOUNDED_HOST_MATRIX",
+      "bytes": 3545,
+      "sha256": "5b189f8ce2cd339882d9acdffa275010dbc540c275236f0318b4b642c25a6dde"
+    },
+    {
+      "scope": "fixture-v3-and-matrix-v4-source",
+      "status": "READY_SOURCE_ONLY_FOR_BOUNDED_PRIVATE_HOST_CHANGED_CONTEXT",
+      "bytes": 15591,
+      "sha256": "f1c921fd5208aaad8909465571ada5c6ed42c1825310b9c847b146e1f644900f"
+    },
+    {
+      "scope": "own7-integration-v3-source",
+      "status": "READY_SOURCE_ONLY_OWN7_V3_INTEGRATION_AFTER_EXACT_RESULTS",
+      "bytes": 27130,
+      "sha256": "32e04a6c46ac978d8ff46923127f441bf7dc074e991b3ad8956a61628e9ab78c"
+    }
+  ],
+  "standalone_repository_entry_result": {
+    "independent_result_audit": {
+      "bytes": 3539,
+      "sha256": "4da48b73decc85c08be99f4f7e9cf9215b156c67d929d0a33f07f09417d9b2f5"
+    },
+    "audited_data": {
+      "decision": "PASS_SAVED_REPOSITORY_FINITE17_ENTRY_HOST_DATA",
+      "actual_status": "PASS_REPOSITORY_FINITE17_DRIVER_HOST_ASAN_UBSAN",
+      "actual_receipt_pin": [
+        3736144,
+        "eec11412aa850c435862c739d4303e19f21dd54ba521863d3fac16f86eb0e407"
+      ],
+      "bound_entry_source_pin": [
+        9152,
+        "57eb7cd496cd7216bcea3d37f14086956c8900e031453b34b4983aba5b187606"
+      ],
+      "bound_guard_pin": [
+        22465,
+        "a1add4726f0de8b94761c8cd5e35a0577d72cb87dada44e91c005fed0bec974d"
+      ],
+      "bound_Source_review_pin": [
+        7319,
+        "995834f30e2aa06fe8d4caf1d3c889394c80758a4d7918e19c158c1cd0f72562"
+      ],
+      "command": {
+        "count": 1,
+        "label": "repository-driver",
+        "actual_RC": 0,
+        "elapsed_seconds": 25.594833499999368,
+        "immutable_outer_command_limit_seconds": 180,
+        "direct_child_reaped": true,
+        "owned_group_absent": true,
+        "errors": [],
+        "signals": [],
+        "stdout_pin": [
+          0,
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        "stderr_pin": [
+          97,
+          "3396725dac4787f273c0be7a6404a9df809fa0938c9313551549605d0020620e"
+        ],
+        "stderr_exact_single_unittest_OK": true
+      },
+      "source_bound_internal_assertions": {
+        "finite_fixture": "complete514-byte 17-case oracle asserted internally; individual inner case counts/streams/RC rows are not separately exported by this outer receipt",
+        "genuine_TU_vector": 85,
+        "strict_Werror_UNDEBUG_ASan_UBSan": true,
+        "inner_compile_limit_seconds": 120,
+        "inner_fixture_limit_seconds": 30,
+        "classic51": "driver preservation_snapshot before==after asserted internally; ordinary leaves checked against historical SHA, dataless leaves metadata-only; individual snapshots not exported",
+        "actual_split": "fresh metadata observes47 ordinary and4 dataless; this does not export historical internal snapshots",
+        "protected16": "internal preservation equality plus independent complete outer paired before-after records",
+        "inner_temp_cleanup": "normal TemporaryDirectory context exit in pinned Source; inner directory path/cleanup observations not separately exported"
+      },
+      "saved_read_evidence": {
+        "pair_calls": 771,
+        "literal_EOF_real_close_count": 1542,
+        "bootstrap_EOF_real_close_count_additional": 2,
+        "all_full10_within_pairs_equal": true,
+        "all_unique_read_leaf_first_final_pins_full10_equal": true,
+        "all_timer_handler_restoration_observations": true,
+        "file5_timing": "immutable bound verified in pinned guard Source; individual read durations not exported"
+      },
+      "whole_elapsed_seconds": 25.828969375012093,
+      "immutable_overall_limit_seconds": 200,
+      "fresh_own7_full10_matches_saved_entry_final": true,
+      "fresh_protected16_full10_matches_saved_entry_final": true,
+      "OFF_before_body_admission_and_policy0_restoration": true,
+      "failures_preserved": [
+        "exact7 adoption custody failure remains failed",
+        "earlier finite17 compile refusal and V3 runtime refusal remain separate immutable failed records"
+      ],
+      "escaped_descendant_absence": "NOT_ESTABLISHED beyond owned process-group absence",
+      "full_host_runtime_or_SDK_custody": "NOT_CLAIMED",
+      "current_captured_repository355_plus_generated_font1_saved_body_full10_before_after": true,
+      "protected16_saved_body_mode_full10_before_after": true,
+      "native_activation_or_target_evidence": false,
+      "review_actions": "Saved DATA/Source parsing, fresh paired ordinary own7/protected16/original2-backup/control/stream reads and exact classic51 metadata only; no compiler, runtime, Git, mutation, hydration or targets."
+    }
+  },
+  "original_guard_limits_seconds": {
+    "compile": 120,
+    "file_pair": 5,
+    "fixture": 30,
+    "overall": 200
+  },
+  "repository_copy_custody": {
+    "initial_receipt": "FAILED_METADATA_DRIFT_PRESERVED",
+    "new_files_affected": 5,
+    "retrospective_PASS": false,
+    "reason": "New-file metadata changed after copy; the initial complete metadata comparison failed. Current stable-custody qualification is separate.",
+    "independent_failure_audit": {
+      "bytes": 4540,
+      "sha256": "63bb1a5f69d6c715321f778e5c1dfcee4bb3e18b3bb897dae924694172359848"
+    },
+    "actual_receipt": {
+      "bytes": 3809085,
+      "sha256": "46f4dce760d88bbb61f0858016858db7b68b8318870bf3c8b4ce9defbfd51367"
+    },
+    "current_stable_custody": "PASS_DISTINCT_ENTRY_FINAL_AND_FRESH_PAIRED_SEVEN_AND_PROTECTED16",
+    "filesystem_cause": "NOT_ESTABLISHED"
+  },
+  "evidence_limits": [
+    "Completion36 includes baseline34 again;219 are checks. No aggregate unique-case total is claimed.",
+    "Timer10 is a HOST resource model; native IRQ, device timing and physical timer behavior remain unqualified.",
+    "Software960/1920/2880 clock assertions and the17-case marker do not prove native execution, ABI, allocation, hardware timing, emulator/physical targets, audio/listening or release acceptance.",
+    "File5 is established by the reviewed guard; individual per-read durations were not exported as measurements.",
+    "Five prior positive audits are reused; their binaries and source corpus were not reopened for this closure. Their unchanged groups do not depend on the revised finite17 fixture.",
+    "Both earlier failures remain separate immutable evidence. The later pass does not reclassify them."
+  ]
+}

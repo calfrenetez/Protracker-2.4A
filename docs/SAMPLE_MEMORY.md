@@ -7036,3 +7036,28 @@ completion/stop, audio or listening acceptance is inferred. Authoritative Fast
 masters, bounded selective caches, master-preserving save, direct 24-bit Studio
 mixing, the classic layout and all sixteen unrelated display/editor paths retain
 their existing architecture. No deferred ZooperTracker feature is introduced.
+
+### Constructor-issued command registration
+
+Captured registration observations now distinguish constructor-issued TRIGGER,
+CONTROL and STOP commands by their original slot and serial. CONTROL/STOP acquire
+no new reader; their zero-reader captured rows are valid only with the matching
+issued kind, live handle and transfer state. Malformed or unknown rows refuse
+registration. This observation calls no backend and follows no nested pointer.
+The metadata clears only with actual NULL command disposal and cannot authorise
+queue activation or retirement. The shared command record layout is unchanged;
+the private controller owner grows and requires a coherent rebuild.
+
+The focused 19-case fixture passed assertions/ASan/UBSan with 79 observed
+dependency rules and its exact oracle. Following adoption, seven affected
+ordinary drivers passed their original 287 asserted cases against the same
+product. Separate strict 68000/soft-float dependency/object/assembly checks passed
+for the changed controller with 73 non-system dependencies; no native artifact
+ran. See [command-registration evidence](../evidence/enhanced-editor/command-registration/README.md).
+
+The finite complete-song extension remains separate unfinished work. These
+checks do not establish native runtime/ABI, aggregate stack/IRQ/WCET, exact live
+activation, Amiberry, real A1200/AmiGUS, device capacity/order/completion/stop or
+listening acceptance. Master, cache, save, Studio-mixing and classic-layout
+architecture remain unchanged; all sixteen unrelated display/editor paths were
+preserved.

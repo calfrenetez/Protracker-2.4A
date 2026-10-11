@@ -74,6 +74,18 @@ struct pt_editor_mixed_causal_callback {struct pt_editor_mixed_causal_prepare *o
  * Host software proof is not native/IRQ/placement/WCET/stack/timing/device/voice
  * stop/audio/listening acceptance. No raw underlying ownership calls while bound.
  */
+/* Constructor-issued captured metadata only. These values cannot authorize
+ * queue activation, publication, retirement, ownership or a callback. */
+enum pt_editor_mixed_causal_command_kind {
+    PT_EDITOR_MIXED_CAUSAL_COMMAND_NONE=0,
+    PT_EDITOR_MIXED_CAUSAL_COMMAND_TRIGGER,
+    PT_EDITOR_MIXED_CAUSAL_COMMAND_CONTROL,
+    PT_EDITOR_MIXED_CAUSAL_COMMAND_STOP
+};
+struct pt_editor_mixed_causal_command_registration {
+    uint64_t serial;
+    enum pt_editor_mixed_causal_command_kind kind;
+};
 struct pt_editor_mixed_causal_prepare {
     const struct pt_editor_mixed_causal_prepare_inputs *inputs;
     struct pt_editor_mixed_causal_prepare_inputs saved;
@@ -92,6 +104,10 @@ struct pt_editor_mixed_causal_prepare {
     struct pt_sampler_storage_span ordinary[PT_EDITOR_MIXED_READERS_ORDINARY];
     struct pt_sampler_storage_span chip[PT_EDITOR_MIXED_READERS_CHIP];
     struct pt_editor_mixed_command_record command[PT_SAMPLER_MIXED_COMMANDS];
+    /* Bound to the original admitted handle's serial; clear only when actual
+     * NULL disposal consumes that original command slot. Shared default record
+     * layout remains unchanged. No copied capability or lower queue query. */
+    struct pt_editor_mixed_causal_command_registration command_registration[PT_SAMPLER_MIXED_COMMANDS];
     struct pt_editor_mixed_reader_record reader[PT_SAMPLER_MIXED_READERS];
     uint64_t serial;uint32_t revision,generation;
     unsigned phase,busy,closing,close_call,reentries,hook;

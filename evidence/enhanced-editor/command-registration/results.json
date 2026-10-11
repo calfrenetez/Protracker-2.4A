@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "date": "2026-10-11",
+  "scope": "Constructor-issued command registration; HOST models and controller compiler only",
+  "implementation": {
+    "source_pins": {
+      "src/editor/editor_mixed_causal_prepare.c": {
+        "bytes": 128425,
+        "sha256": "8dc2acbe5c663d0d4e2535c37926fda86892ef1ef794fa44f5a1864c5133017e"
+      },
+      "src/editor/editor_mixed_causal_prepare.h": {
+        "bytes": 11632,
+        "sha256": "14c0dbe052a0def7cf4fb8ad531b7fada127626d2cbf99340f9451f877dffb39"
+      },
+      "tests/command_registration_joint_fixture_support.inc": {
+        "bytes": 34548,
+        "sha256": "75561446791dcfbfebc9e1d11b386ee791b6b142a21e10c2f691691aec7e59c8"
+      },
+      "tests/editor_mixed_causal_command_registration_test.c": {
+        "bytes": 7847,
+        "sha256": "3b4b178c32dd41101323b7761bad7367a0416412e66d82953e870cd9dea0f2a7"
+      },
+      "tests/test_editor_mixed_causal_command_registration.py": {
+        "bytes": 5495,
+        "sha256": "303ba25b0ee81af4e1c6c8116398b3ba191fc95b42961e220f6021c2d08ffd7c"
+      }
+    },
+    "constructor_issued_kind_and_serial": true,
+    "registration_query_is_capture_only": true,
+    "actual_NULL_disposal_clears_metadata": true,
+    "shared_command_record_layout_changed": false,
+    "private_controller_owner_layout_changed": true,
+    "coherent_rebuild_required": true,
+    "producer_extension_adopted": false
+  },
+  "focused_registration": {
+    "status": "PASS_HOST_FIXED_CAUSAL_COMMAND_REGISTRATION_19",
+    "genuine_cases": 19,
+    "actual_MM_rules": 79,
+    "compile_returncode": 0,
+    "fixture_returncode": 0,
+    "stdout_bytes": 324,
+    "stdout_sha256": "008a9da09feeb710a4611df0e99b89eecc0c5c36638ae707b3c9589fce1f6bff",
+    "assertions_ASan_UBSan": true,
+    "focused_assessment_sha256": "25e8c859fb6c2b7160d7e5ab5c959ba223db87236a6ca6346350c2f39f728ec0"
+  },
+  "ordinary_regressions": {
+    "status": "PASS_SEVEN_AFFECTED_ORDINARY_HOST_DRIVERS",
+    "total_fixture_oracle_asserted_cases": 287,
+    "rows": [
+      {
+        "role": "matching-repository19",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 19,
+        "source_receipt_sha256": "df6ce37c7e9f3f4fb7397ace5293ec2aa4abe5e3e6cc3466375ba613488dfd0e",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "controller-default43",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 43,
+        "source_receipt_sha256": "cc3c25316a8bd355f51db811045defbec766d320855d83a66415e42f0feb16a0",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "controller-stop52",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 52,
+        "source_receipt_sha256": "4667c15659bb9b2725edd4e9bcc0184c0b8de13d5fe8829e1e7fb63f1d17ecd7",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "controller-lineage55",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 55,
+        "source_receipt_sha256": "a05d6067f71d4793b2eda65f673ea440dd4e768fd5a1b95b6497f08cdc1ea65b",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "controller-control25",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 25,
+        "source_receipt_sha256": "ecf0184a91cfa1f52a0b1324271338979d62c308d258b693c996afc2defc3ea5",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "matching-repository31",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 31,
+        "source_receipt_sha256": "01912e0076f84ec4635dce6f40f598f69d96024c00a13328b58e5c7724d02460",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      },
+      {
+        "role": "producer62",
+        "status": "PASS_ORDINARY_HOST",
+        "fixture_oracle_asserted_cases": 62,
+        "source_receipt_sha256": "718254680d9b19bf2f94826563271b09069bb0ad8ec117a0a4b8a6374ffa449b",
+        "direct_child_returncode": 0,
+        "direct_child_wait_and_both_EOF": true,
+        "stream_closes": true,
+        "timer_and_handler_restored": true,
+        "source_tool_protected_before_after_equal": true
+      }
+    ],
+    "independent_saved_audit_sha256": "f7e1c1d659df098a0d787d6c4d909d291eac2d294df75981b766e360708c0a92",
+    "nested_raw_counter_exports": "NOT_QUALIFIED",
+    "actual_MM": "NOT_QUALIFIED_BY_ORDINARY_ROUTE",
+    "process_group_absence": "NOT_QUALIFIED_BY_ORDINARY_ROUTE"
+  },
+  "native_controller_compiler": {
+    "status": "PASS_NATIVE73_COMPILER_ONLY_REGISTRATION_KIND_CONTROLLER_LIMITED",
+    "actual_non_system_dependencies": 73,
+    "actual_MM_rules": 1,
+    "dependency_object_assembly_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "strict_m68000_soft_float_nix20_Os_Werror": true,
+    "linked": false,
+    "artifact_executed": false,
+    "focused_assessment_sha256": "9ddff1bcb884cb8c5d473e2940f87c5e8624217d6ab985b25340635d7ae9e2b9",
+    "aggregate_stack_ABI_IRQ_residency_WCET_timing": "NOT_QUALIFIED"
+  },
+  "preservation": {
+    "unrelated_display_editor_paths_and_modes": 16,
+    "authoritative_masters_selective_caches_save_Studio_architecture": true,
+    "classic_layout": true,
+    "failed_private_producer_candidates_preserved": true
+  },
+  "acceptance": {
+    "host_registration_model": "PASS",
+    "affected_ordinary_host_regressions": "PASS",
+    "controller_native_compiler_only": "PASS",
+    "complete_song_extension": "SEPARATE_PRIVATE_WORK",
+    "native_runtime_ABI_exact_activation": "NOT_QUALIFIED",
+    "amiberry": "NOT_RUN_FOR_THIS_MILESTONE",
+    "real_A1200_AmiGUS": "NOT_RUN_FOR_THIS_MILESTONE",
+    "device_capacity_ordering_completion_voice_stop": "NOT_QUALIFIED",
+    "audio_listening": "NOT_QUALIFIED"
+  },
+  "privacy": "Compact redacted result; raw local filesystem/process/environment observations are excluded"
+}

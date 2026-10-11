@@ -581,7 +581,8 @@ static int source_fixed(struct pt_editor_mixed_causal_prepare *s)
 static int source_empty(struct pt_editor_mixed_causal_prepare *s)
 {
  unsigned i;if(s->causal||s->queue||s->pool)return 0;
- for(i=0;i<PT_SAMPLER_MIXED_COMMANDS;++i)if(s->command[i].handle.address||s->command[i].handle.token)return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_COMMANDS;++i)if(s->command[i].handle.address||s->command[i].handle.token||
+    s->command_registration[i].serial||s->command_registration[i].kind!=PT_EDITOR_MIXED_CAUSAL_COMMAND_NONE)return 0;
  for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(s->reader[i].handle.address||s->reader[i].handle.token)return 0;
  for(i=0;i<PT_EDITOR_MIXED_READERS_ORDINARY;++i)if(s->ordinary[i].data||s->ordinary[i].bytes)return 0;
  for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)if(s->chip[i].data||s->chip[i].bytes)return 0;
@@ -950,14 +951,27 @@ enum pt_editor_mixed_source_registration_observation pt_editor_mixed_causal_sour
  struct pt_editor_mixed_causal_prepare *s,const struct pt_editor_mixed_causal_source_borrow *b,
  struct pt_editor_mixed_command_ref ref)
 {
- const struct pt_editor_mixed_command_record *c;unsigned i;int empty;
+ const struct pt_editor_mixed_command_record *c;
+ const struct pt_editor_mixed_causal_command_registration *issued;unsigned i;int empty;
  if(source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||
     ref.slot>=PT_SAMPLER_MIXED_COMMANDS||!ref.serial||ref.serial>s->serial)
     return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
- c=s->command+ref.slot;empty=source_query_command_zero(c);
- if(!empty){
-    if(!c->count||c->count>PT_SAMPLER_MIXED_ACTIONS||c->transferred>1||
+ c=s->command+ref.slot;issued=s->command_registration+ref.slot;empty=source_query_command_zero(c);
+ if(empty){
+    if(issued->serial||issued->kind!=PT_EDITOR_MIXED_CAUSAL_COMMAND_NONE)
+       return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ }else{
+    if(!issued->serial||issued->serial!=c->serial||c->count>PT_SAMPLER_MIXED_ACTIONS||c->transferred>1||
        (c->transferred?!c->ticket:c->ticket!=0))return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+    if(issued->kind==PT_EDITOR_MIXED_CAUSAL_COMMAND_TRIGGER){
+       if(!c->count)return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+    }else if(issued->kind==PT_EDITOR_MIXED_CAUSAL_COMMAND_CONTROL||issued->kind==PT_EDITOR_MIXED_CAUSAL_COMMAND_STOP){
+       /* These constructors acquire one C and no NEW R. Original selected
+        * dependencies remain in the genuine lower owner, not this row. */
+       if(c->count)return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+       for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i)if(c->reader[i])
+          return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+    }else return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
     for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i)if(c->reader[i]>NO_READER)
        return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
  }
@@ -1360,7 +1374,8 @@ static int command_close(struct pt_editor_mixed_causal_prepare *s,unsigned index
  if(!output_apart(s,&h,sizeof(h)))return 0;
  r=pt_sampler_mixed_command_close(s->pool,&h);
  memcpy(&s->command[index].handle,&h,sizeof(h));
- if(!h.address&&!h.token){if(root)w->root_closed=1;memset(s->command+index,0,sizeof(s->command[index]));}
+ if(!h.address&&!h.token){if(root)w->root_closed=1;memset(s->command+index,0,sizeof(s->command[index]));
+    memset(s->command_registration+index,0,sizeof(s->command_registration[index]));}
  return r&&!h.address&&!h.token;
 }
 /* The two original external spans survive all callbacks, not just admission.
@@ -1532,6 +1547,7 @@ static enum pt_editor_mixed_readers_result batch_begin_private(
  else fr=pt_sampler_mixed_begin(s->pool,s->revision,frame,b.lower.action,count,&b.handle);
  /* Actual admitted handles remain registered after an outer callback fault. */
  if(b.handle.address){++s->prepared_batches;c=s->command+ci;memset(c,0,sizeof(*c));c->handle=b.handle;c->serial=++s->serial;c->count=count;
+    s->command_registration[ci]=(struct pt_editor_mixed_causal_command_registration){c->serial,PT_EDITOR_MIXED_CAUSAL_COMMAND_TRIGGER};
     if(w){w->stage=1;w->root=(struct pt_editor_mixed_command_ref){ci,c->serial};}
     for(i=0;i<count;++i)c->reader[i]=NO_READER;
     for(i=0;i<count;++i)if(b.lower.action[i].kind==PT_MIXED_READERS_TRIGGER){unsigned ri;
@@ -1623,6 +1639,7 @@ enum pt_editor_mixed_readers_result pt_editor_mixed_causal_stop_prepare_batch_be
  if(b.handle.address){
     ++s->prepared_batches;c=s->command+ci;memset(c,0,sizeof(*c));
     memcpy(&c->handle,&b.handle,sizeof(c->handle));c->serial=++s->serial;
+    s->command_registration[ci]=(struct pt_editor_mixed_causal_command_registration){c->serial,PT_EDITOR_MIXED_CAUSAL_COMMAND_STOP};
     /* count=0 is intentional: command.reader[] denotes NEW TRIGGER children,
      * never the independent original reader dependencies retained by STOP. */
  }
@@ -1735,6 +1752,8 @@ static enum pt_editor_mixed_readers_result lineage_batch_begin(
  if(b.handle.address){
     w->stage=is_stop?3U:2U;++s->prepared_batches;c=s->command+ci;memset(c,0,sizeof(*c));
     memcpy(&c->handle,&b.handle,sizeof(c->handle));c->serial=++s->serial;
+    s->command_registration[ci]=(struct pt_editor_mixed_causal_command_registration){c->serial,
+       is_stop?PT_EDITOR_MIXED_CAUSAL_COMMAND_STOP:PT_EDITOR_MIXED_CAUSAL_COMMAND_CONTROL};
     if(!is_stop){w->control=(struct pt_editor_mixed_command_ref){ci,c->serial};w->control_frame=frame;}
  }
  if(memcmp(input,&b.saved,bytes))fail(s,PT_EDITOR_MIXED_READERS_FAULT);
@@ -1851,6 +1870,8 @@ static enum pt_editor_mixed_readers_result lineage_control16_batch_begin(
  if(b.handle.address){
     w->stage=is_stop?3U:2U;++s->prepared_batches;c=s->command+ci;memset(c,0,sizeof(*c));
     memcpy(&c->handle,&b.handle,sizeof(c->handle));c->serial=++s->serial;
+    s->command_registration[ci]=(struct pt_editor_mixed_causal_command_registration){c->serial,
+       is_stop?PT_EDITOR_MIXED_CAUSAL_COMMAND_STOP:PT_EDITOR_MIXED_CAUSAL_COMMAND_CONTROL};
     if(!is_stop){w->control=(struct pt_editor_mixed_command_ref){ci,c->serial};w->control_frame=frame;}
  }
  if(memcmp(input,&b.saved,bytes))fail(s,PT_EDITOR_MIXED_READERS_FAULT);

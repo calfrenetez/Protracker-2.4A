@@ -45,8 +45,10 @@ classification or ownership rule.
 
 Default two-TRIGGER and separate STOP-only bindings remain separate. The typed
 controller third-stage wrapper and producer/native frontend integration remain
-unadopted. Full 32-reader occupancy and quantized-first composite runtime were
-not exercised. A separate strict m68000/soft-float compiler check passed for this current
+unadopted. The original74-case run did not exercise full32-reader occupancy or
+quantized-first composite runtime. A separate [39-case quantized-first host
+regression](quantized-first/README.md) now covers the latter; full32 occupancy
+remains unqualified. A separate strict m68000/soft-float compiler check passed for this current
 sampler C unit, including actual dependency admission, object, assembly and
 individual stack rows. See [compiler results](compiler-results.json). No linked
 native executable, aggregate stack/IRQ/WCET, exact live scheduling, Amiberry,

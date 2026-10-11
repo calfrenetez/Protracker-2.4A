@@ -1,0 +1,658 @@
+{
+  "MM_distinct_paths": 83,
+  "MM_rules": 29,
+  "actual_cases": {
+    "actual_own_fixture_asserted_count": 39,
+    "independently_instrumented_extra_counter": false,
+    "inherited_mains_invoked": false,
+    "source": "actual exact original stdout and RC0"
+  },
+  "anchor": {
+    "cleanup": [],
+    "label": "anchor",
+    "original_end": 33536.181457625,
+    "pid": 63805,
+    "ready": {
+      "nonce": "c7ed8182a97cee62b29477a02cc0eb1b",
+      "parent": 63804,
+      "pgid": 63805,
+      "pid": 63805,
+      "sid": 63804
+    },
+    "returncode": 0,
+    "stderr_eof": true,
+    "stdout_eof": true,
+    "wait": true,
+    "wait_returned": 33357.750097291
+  },
+  "audits": [
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33346.316269916,
+      "started": 33346.316221791,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33346.634787041,
+      "started": 33346.634663125,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33346.634877833,
+      "started": 33346.634844833,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.289397833,
+      "started": 33357.2892585,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.289489916,
+      "started": 33357.289459125,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.730687416,
+      "started": 33357.73055,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.730796416,
+      "started": 33357.730765708,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.742643291,
+      "started": 33357.742589541,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [
+        63805
+      ],
+      "returned": 33357.742688666,
+      "started": 33357.742677333,
+      "words": [
+        1,
+        2,
+        63805,
+        4096,
+        4,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [],
+      "returned": 33357.750155583,
+      "started": 33357.750119541,
+      "words": [
+        1,
+        1,
+        63805,
+        4096,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "members": [],
+      "returned": 33357.750206208,
+      "started": 33357.750196625,
+      "words": [
+        1,
+        1,
+        63805,
+        4096,
+        0,
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "cleanup": {
+    "child": [
+      [
+        "normal original anchor release",
+        true
+      ],
+      [
+        "dependency independent original wait",
+        true
+      ],
+      [
+        "dependency selector close",
+        true
+      ],
+      [
+        "dependency stdout close",
+        true
+      ],
+      [
+        "dependency stderr close",
+        true
+      ],
+      [
+        "compile independent original wait",
+        true
+      ],
+      [
+        "compile selector close",
+        true
+      ],
+      [
+        "compile stdout close",
+        true
+      ],
+      [
+        "compile stderr close",
+        true
+      ],
+      [
+        "fixture independent original wait",
+        true
+      ],
+      [
+        "fixture selector close",
+        true
+      ],
+      [
+        "fixture stdout close",
+        true
+      ],
+      [
+        "fixture stderr close",
+        true
+      ],
+      [
+        "anchor independent original wait",
+        true
+      ],
+      [
+        "anchor both EOF drain",
+        true
+      ],
+      [
+        "anchor selector close",
+        true
+      ],
+      [
+        "anchor stdout close",
+        true
+      ],
+      [
+        "anchor stderr close",
+        true
+      ],
+      [
+        "anchor stdin close",
+        true
+      ],
+      [
+        "post-wait original group EMPTY",
+        true
+      ],
+      [
+        "post-wait original group EMPTY",
+        true
+      ]
+    ],
+    "outer": [
+      [
+        "selector",
+        true
+      ],
+      [
+        "stdout",
+        true
+      ],
+      [
+        "stderr",
+        true
+      ]
+    ]
+  },
+  "commands": [
+    {
+      "label": "dependency",
+      "pid": 63806,
+      "returncode": 0,
+      "stderr_eof": true,
+      "stdout_eof": true,
+      "wait": true
+    },
+    {
+      "label": "compile",
+      "pid": 63836,
+      "returncode": 0,
+      "stderr_eof": true,
+      "stdout_eof": true,
+      "wait": true
+    },
+    {
+      "label": "fixture",
+      "pid": 63897,
+      "returncode": 0,
+      "stderr_eof": true,
+      "stdout_eof": true,
+      "wait": true
+    }
+  ],
+  "configured_reader_limit": 32,
+  "elapsed": 0.004520666996540967,
+  "fixed_route": "samplerquantized39",
+  "full32_occupancy_qualified": false,
+  "native_link_runtime_emulator_hardware_timing_audio_listening": "NOT_RUN",
+  "outer_child": {
+    "EOF": {
+      "stderr": true,
+      "stdout": true
+    },
+    "pid": 63804,
+    "returncode": 0,
+    "wait": true,
+    "wait_returned": 33357.879487416
+  },
+  "paired_sources": {
+    "all_equal": true,
+    "child": 195,
+    "outer": 25
+  },
+  "raw_exports": [
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/dependency-returned.stdout",
+      "phase": "returned",
+      "pin": {
+        "bytes": 49024,
+        "identity": {
+          "st_ctime_ns": 1791686599762056057,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212049274,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686599762056057,
+          "st_nlink": 1,
+          "st_size": 49024,
+          "st_uid": 502
+        },
+        "sha256": "8978ca9eea4386a1660a285a3dc8faccc523495d43000b8dbab8824539e29ef6"
+      },
+      "stage": "dependency",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/dependency-returned.stderr",
+      "phase": "returned",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686599763835811,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212049275,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686599763814311,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "dependency",
+      "stream": "stderr"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/compile-returned.stdout",
+      "phase": "returned",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610416632593,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212050903,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610416602468,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "compile",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/compile-returned.stderr",
+      "phase": "returned",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610416880135,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212050904,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610416857594,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "compile",
+      "stream": "stderr"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/fixture-returned.stdout",
+      "phase": "returned",
+      "pin": {
+        "bytes": 500,
+        "identity": {
+          "st_ctime_ns": 1791686610857980628,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051008,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610857980628,
+          "st_nlink": 1,
+          "st_size": 500,
+          "st_uid": 502
+        },
+        "sha256": "2fd232c6c806a496ac421c144b1883211c419a152bee7f8279a9c2bfdfabbd17"
+      },
+      "stage": "fixture",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/fixture-returned.stderr",
+      "phase": "returned",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610860164966,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051010,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610860135925,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "fixture",
+      "stream": "stderr"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/dependency-final.stdout",
+      "phase": "final",
+      "pin": {
+        "bytes": 49024,
+        "identity": {
+          "st_ctime_ns": 1791686610877295881,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051013,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610877295881,
+          "st_nlink": 1,
+          "st_size": 49024,
+          "st_uid": 502
+        },
+        "sha256": "8978ca9eea4386a1660a285a3dc8faccc523495d43000b8dbab8824539e29ef6"
+      },
+      "stage": "dependency",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/dependency-final.stderr",
+      "phase": "final",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610879930929,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051016,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610879908638,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "dependency",
+      "stream": "stderr"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/compile-final.stdout",
+      "phase": "final",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610880137013,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051017,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610880113722,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "compile",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/compile-final.stderr",
+      "phase": "final",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610880330680,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051018,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610880306430,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "compile",
+      "stream": "stderr"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/fixture-final.stdout",
+      "phase": "final",
+      "pin": {
+        "bytes": 500,
+        "identity": {
+          "st_ctime_ns": 1791686610880605514,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051019,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610880605514,
+          "st_nlink": 1,
+          "st_size": 500,
+          "st_uid": 502
+        },
+        "sha256": "2fd232c6c806a496ac421c144b1883211c419a152bee7f8279a9c2bfdfabbd17"
+      },
+      "stage": "fixture",
+      "stream": "stdout"
+    },
+    {
+      "path": "/private/tmp/pt24g-sampler-quantized39-host-attempt-20261011-v1/fixture-final.stderr",
+      "phase": "final",
+      "pin": {
+        "bytes": 0,
+        "identity": {
+          "st_ctime_ns": 1791686610881564183,
+          "st_dev": 16777233,
+          "st_flags": 0,
+          "st_gid": 0,
+          "st_ino": 212051020,
+          "st_mode": 33024,
+          "st_mtime_ns": 1791686610881544058,
+          "st_nlink": 1,
+          "st_size": 0,
+          "st_uid": 502
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stage": "fixture",
+      "stream": "stderr"
+    }
+  ],
+  "reachable_readers": 16,
+  "receipt": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/root-sampler-quantized39-fixed-suite-first-20261011-v1.json",
+  "receipt_pin": {
+    "bytes": 629299,
+    "identity": {
+      "st_ctime_ns": 1791686611186893316,
+      "st_dev": 16777233,
+      "st_flags": 64,
+      "st_gid": 20,
+      "st_ino": 212051023,
+      "st_mode": 33024,
+      "st_mtime_ns": 1791686611011840781,
+      "st_nlink": 1,
+      "st_size": 629299,
+      "st_uid": 502
+    },
+    "sha256": "6352cccfbaa3a7e8b374f90adb89928fedc0b6dee07300ac2e3042ce59af0bd0"
+  },
+  "restoration": {
+    "ambiguous": false,
+    "disarm_attempted": true,
+    "disarm_failure": null,
+    "disarm_ok": true,
+    "handler_attempted": true,
+    "handler_failure": null,
+    "handler_ok": true
+  },
+  "scope": "Root independently read saved exact samplerquantized39 HOST pass and all12 raw streams; no rerun",
+  "signals": 0,
+  "source_changed": false,
+  "targets": 0
+}

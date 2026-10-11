@@ -6926,3 +6926,27 @@ linked compiler evidence. No native runtime, aggregate stack/IRQ/WCET, exact liv
 hardware voice stop/quiet/order/completion, Amiberry, A1200/AmiGUS or listening
 acceptance is inferred. The accepted classic layout and sixteen unrelated
 display/editor paths are preserved.
+
+
+### Quantized first TRIGGER in the finite sampler lifetime
+
+The separate quantized-first fixture passed39 genuine host cases against the
+unchanged sampler factory:24 positive mixed four-Paula/twelve-card or sixteen-card
+lifetimes across8/16/24-bit masters and8/16-bit card caches,12 refusals before
+admission, and3 consumed first attempts. It checks copied first-batch lifetime,
+final trigger geometry, original960/1920/2880 frames, genuine first-command
+service/NULL closure, opaque slot/token reuse and independent retirement.
+Typed later CONTROL/STOP retain zero new readers, pins, cache conversions or
+uploads and preserve full master/version/cache/Chip/RAM/save beforeimages.
+The configured32-reader bound is unchanged; these cases reach16 live readers.
+
+Actual fixed host qualification records29 dependency rules/83 observed paths,
+strict assertions/ASan/UBSan, the exact500-byte stdout/RC0/empty stderr, original
+child and anchor waits/both EOFs, source equality and independent cleanup.
+The matching ordinary repository driver also passed once with the same strict
+flags, private TMPDIR and compile120/fixture30 limits. Its original direct-child
+wait, both EOFs, closed streams and99 unchanged source/protected pairs were
+recorded separately; this ordinary route makes no process-group absence claim.
+Full32-reader occupancy, controller integration, native
+runtime, Amiberry, A1200/AmiGUS, device ordering/stop/completion, exact live timing
+and listening remain separate. See [quantized-first host evidence](../evidence/enhanced-editor/sampler-causal-lineage/quantized-first/README.md).

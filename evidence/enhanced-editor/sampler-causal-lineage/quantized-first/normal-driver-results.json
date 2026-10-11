@@ -1,0 +1,36 @@
+{
+  "both_EOF": true,
+  "compile_cap_seconds": 120,
+  "elapsed_seconds": 11.087430958999903,
+  "fixture_cap_seconds": 30,
+  "fixture_cases": 39,
+  "fixture_stdout": "Exact500-byte oracle asserted by the driver; not separately exported by ordinary parent",
+  "group_absence": "NOT_QUALIFIED",
+  "outer_cap_seconds": 160,
+  "production_changes": 0,
+  "protected_paths": 16,
+  "returncode": 0,
+  "root_receipt": {
+    "bytes": 101215,
+    "sha256": "a7345e8cdfc6166b4d19abaf1812da43ca166fb63d065cfcd48d85681c2f999b"
+  },
+  "scope": "ORDINARY_REPOSITORY_DRIVER_HOST_ONLY",
+  "signals": 0,
+  "source_pairs": 99,
+  "source_pairs_equal": true,
+  "status": "PASS",
+  "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 11.030s\n\nOK\n",
+  "stdout": "",
+  "streams_closed": [
+    [
+      "stdout",
+      true
+    ],
+    [
+      "stderr",
+      true
+    ]
+  ],
+  "targets": 0,
+  "wait": true
+}

@@ -1,0 +1,390 @@
+{
+  "Amiberry": "NOT_RUN",
+  "focused": {
+    "actual_dependency_rules": 79,
+    "actual_distinct_admitted_paths": 203,
+    "anchor_wait_RC0_both_EOF": true,
+    "assessment_pin": {
+      "bytes": 78660,
+      "sha256": "e8ab7369105dc80a986464a8a1551552e9c93637bdb879d39fdceddc56bb2511"
+    },
+    "caller_timer_handler_restoration": {
+      "ambiguous": false,
+      "disarm_attempted": true,
+      "disarm_failure": null,
+      "disarm_ok": true,
+      "handler_attempted": true,
+      "handler_failure": null,
+      "handler_ok": true
+    },
+    "child_source_pairs": 694,
+    "configured_readers": 32,
+    "controller_cases": 23,
+    "core_cases": 2,
+    "finite_inventory_inputs": 333,
+    "jobs": [
+      {
+        "original_seconds": 10,
+        "stage": "dependency",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 163079,
+          "sha256": "8a0d4bfaa4d07a831597cfb3c83292c11bfd4d253ac64c1abca132509844472c"
+        },
+        "wait_RC0_both_EOF": true
+      },
+      {
+        "original_seconds": 120,
+        "stage": "compile",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "wait_RC0_both_EOF": true
+      },
+      {
+        "original_seconds": 30,
+        "stage": "fixture",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 585,
+          "sha256": "3a1137add6b538b2e87e11a05c665cfef1b58713ca3bde78867e8a5d951ec142"
+        },
+        "wait_RC0_both_EOF": true
+      }
+    ],
+    "outer_restoration": "explicit terminal5a4aa9 only; no independent saved fields",
+    "outer_source_pairs": 26,
+    "own_cases": 25,
+    "private_group_snapshots": {
+      "after_wait_empty": 2,
+      "anchor_only": 9,
+      "escaped_descendants": "NOT_QUALIFIED",
+      "shared_target_ownership": "NOT_QUALIFIED"
+    },
+    "raw_exports": 12,
+    "reached_readers": 16,
+    "signals": 0,
+    "status": "PASS_HOST_FIXED_CONTROL16_25",
+    "stdout": {
+      "bytes": 585,
+      "sha256": "3a1137add6b538b2e87e11a05c665cfef1b58713ca3bde78867e8a5d951ec142"
+    },
+    "targets": 0
+  },
+  "listening": "NOT_RUN",
+  "native_runtime": "NOT_RUN",
+  "normal_assessment_pin": {
+    "bytes": 3566991,
+    "sha256": "eba76ceb69dc488a41675acd28027b1bd8cea083c587f9e96ab1bf79f95f27cf"
+  },
+  "ordinary": {
+    "controller-default43": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 43,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-controller-default43-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727620,
+        "sha256": "a8d753afd76dce54680ad190ca98a7565ed7c21ba1ee8b9e00d23f82326701fb"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "controller-lineage55": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 55,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-controller-lineage55-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727715,
+        "sha256": "a5a42a04384fbce41d2e34f515d4bb522de338f568343bc0b0f8a9fce09abfe9"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "controller-stop52": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 52,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-controller-stop52-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727690,
+        "sha256": "8637a38a8e0ffcee104b042a2f9e83d5b9a71373c49cd34261388508d13a7e28"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "core-control34": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 34,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-core-control34-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727687,
+        "sha256": "519a9a2a8c4aabe2be8c315c6562464420f271c70170a8b0b75f74724bcbe6c6"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "matching25": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 25,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-matching-normal-host-20261011-v1.json",
+      "receipt_pin": {
+        "bytes": 7962577,
+        "sha256": "d47334479d500c2dea69ebd7545281a30705c08c5bf45f92c43fa6eaa1b4cecb"
+      },
+      "signals": 0,
+      "source_pairs": 608,
+      "status": "PASS_MATCHING_REPOSITORY_CONTROL16_25_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "producer62": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 62,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-producer62-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727561,
+        "sha256": "43ccf99ed5d06c7896c82855dcccbcd0deef66b1567e83fa6fd8127fd055a693"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "sampler-default24": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 24,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-sampler-default24-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727717,
+        "sha256": "98aa18e0d6402eb0a3cd0aa93ecbe27cb9f0374f5732dcd88ccb6637d60f8371"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "sampler-lineage74": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 74,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-sampler-lineage74-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727709,
+        "sha256": "9cee2332d6b9449d40d5de78ac0f30d94294a76e57f97f731498107d4315b0e3"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "sampler-quantized39": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 39,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-sampler-quantized39-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727783,
+        "sha256": "2b1003c18478baff6481fccaf4db766d77f2bc9ebc40fe6c13379952debd21a8"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    },
+    "sampler-stop55": {
+      "actual_MM": "NOT_OBSERVED_BY_ORDINARY_DRIVER",
+      "automatic_retry": false,
+      "case_label": 55,
+      "direct_wait_RC0_both_EOF": true,
+      "exact_original_fixture_oracle_asserted": true,
+      "group_absence": "NOT_QUALIFIED",
+      "nested_raw_job_exports": "NOT_EXPORTED_BY_ORDINARY_DRIVER",
+      "original_compile_fixture_seconds": [
+        120,
+        30
+      ],
+      "original_parent_seconds": 200,
+      "receipt": "root-control16-sampler-stop55-ordinary-normal-host-20261011-v2.json",
+      "receipt_pin": {
+        "bytes": 3727676,
+        "sha256": "2ddafb536a41abe1e6eba02345498b392525c7f5dc35d12fdedb3549f894438e"
+      },
+      "signals": 0,
+      "source_pairs": 357,
+      "status": "PASS_AFFECTED_ORDINARY_NORMAL_HOST",
+      "streams_closed": true,
+      "targets": 0,
+      "timer_handler_restored": true
+    }
+  },
+  "ordinary_scope_limits": [
+    "No independently exported nested compiler/fixture IDs or raw streams",
+    "No ordinary actual-MM or process-group/escaped-descendant absence",
+    "Inherited sequential failure close/restoration and final-output limits remain"
+  ],
+  "protected16_body_mode_preserved": true,
+  "real_A1200_AmiGUS": "NOT_RUN",
+  "scope": "HOST_MODEL_ONLY",
+  "shared_operations": 0,
+  "source_and_test_pins": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 99293,
+      "sha256": "48e2af0bb87065987f2ed7f3a04975fce2f5e4da9b94f844828fe4e1c6e9e212"
+    },
+    "src/core/mixed_readers_causal_control16_internal.h": {
+      "bytes": 1470,
+      "sha256": "f15b15e8ec56cb94cabd2b3591dff5854513f409f58a3ef980b34265a4e51848"
+    },
+    "src/editor/editor_mixed_causal_lineage_control16_prepare_internal.h": {
+      "bytes": 1591,
+      "sha256": "57457bb89cb5c08f887e615df635e2ce12b04c85fe4949e15e5e36668e425e81"
+    },
+    "src/editor/editor_mixed_causal_prepare.c": {
+      "bytes": 112954,
+      "sha256": "e59c31ded14bae62ffff5a45f336969451f807809246f4e7562fd263889b59b6"
+    },
+    "src/editor/sampler_mixed_causal_lineage_control16_internal.h": {
+      "bytes": 1579,
+      "sha256": "499635805d971ae7edf5ee6c990aa08b20e55b20911fabc8d103abce000fb794"
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 90136,
+      "sha256": "e0596d40228895fd282ebed248cab68b1e214c70ed3893419889a4595f9ec930"
+    },
+    "tests/control16_lineage_fixture_support.inc": {
+      "bytes": 46930,
+      "sha256": "274879bc0d95b6229657dd20673834b402f8b903a3f6404f4cbbef2dd771cdec"
+    },
+    "tests/editor_mixed_causal_control16_prepare_test.c": {
+      "bytes": 37874,
+      "sha256": "11d3fdf6bbadbaa992def06d45816fabd9fc318eb21554c0410341c0694be276"
+    },
+    "tests/test_editor_mixed_causal_control16.py": {
+      "bytes": 5565,
+      "sha256": "4f257af53d9044b4fcaa9d381f3a7f1b554a8f67ff717400ad549aff9a6cf10d"
+    }
+  }
+}

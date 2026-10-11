@@ -1,0 +1,3529 @@
+{
+  "actual_dependency_discovery_observed": true,
+  "assessment_pin": {
+    "bytes": 292946,
+    "sha256": "4a854fbc6c22e68beaf4c883ea768f458cdacf9054b73baed4e622f91090a335"
+  },
+  "exact_two_link_compiler_exception": true,
+  "flags": [
+    "C99",
+    "m68000",
+    "soft-float",
+    "nix20",
+    "Os",
+    "Werror",
+    "fbbb=-",
+    "fstack-usage"
+  ],
+  "individual_rows_not_aggregate_stack": true,
+  "native_ABI_runtime_IRQ_WCET_exact_timing_device_listening": "NOT_QUALIFIED",
+  "original_limits_seconds": {
+    "command": 10,
+    "named_file": 5,
+    "operator": 40,
+    "parent": 55
+  },
+  "roles": {
+    "controller": {
+      "actual_non_system_dependencies": 72,
+      "artifact_pairs": 4,
+      "artifact_pins": {
+        "assembly/editor_mixed_causal_prepare.s": {
+          "bytes": 167670,
+          "sha256": "d7ae3e7764688f3247f62d79188624d4b4f145b2c75a7c086987deb4cc8e7e23"
+        },
+        "assembly/editor_mixed_causal_prepare.su": {
+          "bytes": 7727,
+          "sha256": "8cef83ad1982151ccd225828b636eef0338d174800b0a985d5c19444e7544d2c"
+        },
+        "object/editor_mixed_causal_prepare.o": {
+          "bytes": 37192,
+          "sha256": "a5083d4cbd4366fbc10fcfbf76d45d25b1f54356dab2aee3da41c97ae5ae4fa6"
+        },
+        "object/editor_mixed_causal_prepare.su": {
+          "bytes": 7727,
+          "sha256": "8cef83ad1982151ccd225828b636eef0338d174800b0a985d5c19444e7544d2c"
+        }
+      },
+      "child_restoration": {
+        "handler_restore_attempted": true,
+        "handler_restored": true,
+        "timer_disarm_attempted": true,
+        "timer_disarmed": true
+      },
+      "object_and_assembly_individual_stack_rows": {
+        "assembly/editor_mixed_causal_prepare.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_project_snapshot_equal",
+            "qualifier": "static",
+            "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "span",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:18:12:span\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:20:12:apart\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "inside",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:23:12:inside\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "zero",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:26:12:zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "fail",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:37:44:fail\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reentry",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:46:12:reentry\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "idle",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:48:12:idle\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "stop_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:54:52:stop_scope\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "lineage_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:74:55:lineage_scope\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "fixed_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:95:12:fixed_current\t1540\tdynamic,bounded",
+            "reported_individual_bytes": 1540
+          },
+          {
+            "function": "source_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:110:12:source_apart\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "callback_covered",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:114:12:callback_covered\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "add",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:117:12:add\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "capture_sources",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:127:12:capture_sources\t108\tdynamic,bounded",
+            "reported_individual_bytes": 108
+          },
+          {
+            "function": "capture",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:147:12:capture\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "output_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:161:12:output_apart\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "allocation_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:171:12:allocation_apart\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "retire",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:185:12:retire\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "guard_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:191:14:guard_allocate\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "guard_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:216:13:guard_release\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "guard_chip_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:230:14:guard_chip_allocate\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "guard_chip_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:244:13:guard_chip_release\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "hook_owned",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:252:12:hook_owned\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "post",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:256:12:post\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "snapshot",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:268:13:snapshot\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "callback_fault",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:279:13:callback_fault\t3188\tdynamic,bounded",
+            "reported_individual_bytes": 3188
+          },
+          {
+            "function": "guard_port_clock",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:291:12:guard_port_clock\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "guard_port_commit",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:296:12:guard_port_commit\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "guard_port_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:301:12:guard_port_publish\t3216\tdynamic,bounded",
+            "reported_individual_bytes": 3216
+          },
+          {
+            "function": "guard_original_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:310:12:guard_original_bind\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "guard_port_publish_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:320:12:guard_port_publish_successor\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_publish_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:331:12:guard_port_publish_stop\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_publish_control",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:342:12:guard_port_publish_control\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_publish_stop_after_control",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:352:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:362:12:guard_port_command\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:369:12:guard_port_reader\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_source_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:376:12:guard_port_source_close\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "guard_port_source_quiet",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:383:12:guard_port_source_quiet\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "factory_result",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:390:44:factory_result\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "prepare_admit",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:399:12:prepare_admit\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "source_identity",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:466:12:source_identity\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "source_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:473:12:source_original\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "source_descriptor",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:476:12:source_descriptor\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "source_fixed",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:494:12:source_fixed\t2620\tdynamic,bounded",
+            "reported_individual_bytes": 2620
+          },
+          {
+            "function": "source_role_declared",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:527:12:source_role_declared\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "source_role_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:534:12:source_role_apart\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:565:37:pt_editor_mixed_causal_source_begin\t504\tdynamic,bounded",
+            "reported_individual_bytes": 504
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_activate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:640:37:pt_editor_mixed_causal_source_activate\t212\tdynamic,bounded",
+            "reported_individual_bytes": 212
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_children_closed",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:663:5:pt_editor_mixed_causal_source_children_closed\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:666:5:pt_editor_mixed_causal_source_enter\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_leave",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:674:5:pt_editor_mixed_causal_source_leave\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_borrow_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:683:5:pt_editor_mixed_causal_source_borrow_close\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "source_query_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:707:54:source_query_scope\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_observe",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:723:43:pt_editor_mixed_causal_source_observe\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "source_query_extent",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:735:12:source_query_extent\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:741:5:pt_editor_mixed_causal_source_allocation_disjoint\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_command_registration",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:785:54:pt_editor_mixed_causal_source_command_registration\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_reader_registration",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:802:54:pt_editor_mixed_causal_source_reader_registration\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:816:37:pt_editor_mixed_causal_prepare_begin\t216\tdynamic,bounded",
+            "reported_individual_bytes": 216
+          },
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:879:37:pt_editor_mixed_causal_stop_prepare_begin\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_get",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:908:37:pt_editor_mixed_causal_prepare_get\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:944:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_advance_validation",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:998:37:pt_editor_mixed_causal_prepare_advance_validation\t460\tdynamic,bounded",
+            "reported_individual_bytes": 460
+          },
+          {
+            "function": "command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1081:47:command\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1086:46:reader\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1091:30:pt_editor_mixed_causal_source_reader_readiness\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "reader_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1112:12:reader_close\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_retire_original_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1122:35:pt_editor_mixed_causal_source_retire_original_reader\t68\tdynamic,bounded",
+            "reported_individual_bytes": 68
+          },
+          {
+            "function": "command_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1150:12:command_close\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "batch_spans",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1174:12:batch_spans\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "batch_pair_end",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1194:12:batch_pair_end\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "batch_voice_zero",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1209:12:batch_voice_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "batch_begin_private",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1273:44:batch_begin_private\t36\tstatic",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1353:37:pt_editor_mixed_causal_prepare_batch_begin\t56\tdynamic,bounded",
+            "reported_individual_bytes": 56
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1361:37:pt_editor_mixed_causal_prepare_batch_begin_quantized\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1380:37:pt_editor_mixed_causal_stop_prepare_batch_begin\t520\tdynamic,bounded",
+            "reported_individual_bytes": 520
+          },
+          {
+            "function": "lineage_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1448:44:lineage_batch_begin\t916\tdynamic,bounded",
+            "reported_individual_bytes": 916
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1669:37:pt_editor_mixed_causal_lineage_control16_prepare_batch_begin\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1673:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1677:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_advance",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1682:37:pt_editor_mixed_causal_prepare_batch_advance\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_reader_reference",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1691:37:pt_editor_mixed_causal_prepare_reader_reference\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1701:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1723:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "service_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1732:12:service_enter\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1742:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+            "reported_individual_bytes": 1456
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1762:30:pt_editor_mixed_causal_prepare_service_reader\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "local_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1774:12:local_cancel\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1781:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "finish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1791:12:finish\t76\tdynamic,bounded",
+            "reported_individual_bytes": 76
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1825:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "span.part.0",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:18:12:span.part.0\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "prepare_admit.part.15",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:399:12:prepare_admit.part.15\t332\tdynamic,bounded",
+            "reported_individual_bytes": 332
+          },
+          {
+            "function": "batch_begin_private.part.20",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1273:44:batch_begin_private.part.20\t2500\tdynamic,bounded",
+            "reported_individual_bytes": 2500
+          },
+          {
+            "function": "lineage_control16_batch_begin.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1564:44:lineage_control16_batch_begin.constprop\t960\tdynamic,bounded",
+            "reported_individual_bytes": 960
+          }
+        ],
+        "object/editor_mixed_causal_prepare.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_project_snapshot_equal",
+            "qualifier": "static",
+            "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "span",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:18:12:span\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:20:12:apart\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "inside",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:23:12:inside\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "zero",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:26:12:zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "fail",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:37:44:fail\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reentry",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:46:12:reentry\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "idle",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:48:12:idle\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "stop_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:54:52:stop_scope\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "lineage_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:74:55:lineage_scope\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "fixed_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:95:12:fixed_current\t1540\tdynamic,bounded",
+            "reported_individual_bytes": 1540
+          },
+          {
+            "function": "source_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:110:12:source_apart\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "callback_covered",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:114:12:callback_covered\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "add",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:117:12:add\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "capture_sources",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:127:12:capture_sources\t108\tdynamic,bounded",
+            "reported_individual_bytes": 108
+          },
+          {
+            "function": "capture",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:147:12:capture\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "output_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:161:12:output_apart\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "allocation_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:171:12:allocation_apart\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "retire",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:185:12:retire\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "guard_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:191:14:guard_allocate\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "guard_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:216:13:guard_release\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "guard_chip_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:230:14:guard_chip_allocate\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "guard_chip_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:244:13:guard_chip_release\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "hook_owned",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:252:12:hook_owned\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "post",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:256:12:post\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "snapshot",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:268:13:snapshot\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "callback_fault",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:279:13:callback_fault\t3188\tdynamic,bounded",
+            "reported_individual_bytes": 3188
+          },
+          {
+            "function": "guard_port_clock",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:291:12:guard_port_clock\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "guard_port_commit",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:296:12:guard_port_commit\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "guard_port_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:301:12:guard_port_publish\t3216\tdynamic,bounded",
+            "reported_individual_bytes": 3216
+          },
+          {
+            "function": "guard_original_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:310:12:guard_original_bind\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "guard_port_publish_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:320:12:guard_port_publish_successor\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_publish_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:331:12:guard_port_publish_stop\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_publish_control",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:342:12:guard_port_publish_control\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_publish_stop_after_control",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:352:12:guard_port_publish_stop_after_control\t3204\tdynamic,bounded",
+            "reported_individual_bytes": 3204
+          },
+          {
+            "function": "guard_port_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:362:12:guard_port_command\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:369:12:guard_port_reader\t3200\tdynamic,bounded",
+            "reported_individual_bytes": 3200
+          },
+          {
+            "function": "guard_port_source_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:376:12:guard_port_source_close\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "guard_port_source_quiet",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:383:12:guard_port_source_quiet\t3196\tdynamic,bounded",
+            "reported_individual_bytes": 3196
+          },
+          {
+            "function": "factory_result",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:390:44:factory_result\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "prepare_admit",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:399:12:prepare_admit\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "source_identity",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:466:12:source_identity\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "source_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:473:12:source_original\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "source_descriptor",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:476:12:source_descriptor\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "source_fixed",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:494:12:source_fixed\t2620\tdynamic,bounded",
+            "reported_individual_bytes": 2620
+          },
+          {
+            "function": "source_role_declared",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:527:12:source_role_declared\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "source_role_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:534:12:source_role_apart\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:565:37:pt_editor_mixed_causal_source_begin\t504\tdynamic,bounded",
+            "reported_individual_bytes": 504
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_activate",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:640:37:pt_editor_mixed_causal_source_activate\t212\tdynamic,bounded",
+            "reported_individual_bytes": 212
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_children_closed",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:663:5:pt_editor_mixed_causal_source_children_closed\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:666:5:pt_editor_mixed_causal_source_enter\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_leave",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:674:5:pt_editor_mixed_causal_source_leave\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_borrow_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:683:5:pt_editor_mixed_causal_source_borrow_close\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "source_query_scope",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:707:54:source_query_scope\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_observe",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:723:43:pt_editor_mixed_causal_source_observe\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "source_query_extent",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:735:12:source_query_extent\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_allocation_disjoint",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:741:5:pt_editor_mixed_causal_source_allocation_disjoint\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_command_registration",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:785:54:pt_editor_mixed_causal_source_command_registration\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_reader_registration",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:802:54:pt_editor_mixed_causal_source_reader_registration\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:816:37:pt_editor_mixed_causal_prepare_begin\t216\tdynamic,bounded",
+            "reported_individual_bytes": 216
+          },
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:879:37:pt_editor_mixed_causal_stop_prepare_begin\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_get",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:908:37:pt_editor_mixed_causal_prepare_get\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:944:37:pt_editor_mixed_causal_lineage_prepare_begin\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_advance_validation",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:998:37:pt_editor_mixed_causal_prepare_advance_validation\t460\tdynamic,bounded",
+            "reported_individual_bytes": 460
+          },
+          {
+            "function": "command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1081:47:command\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1086:46:reader\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1091:30:pt_editor_mixed_causal_source_reader_readiness\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "reader_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1112:12:reader_close\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_editor_mixed_causal_source_retire_original_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1122:35:pt_editor_mixed_causal_source_retire_original_reader\t68\tdynamic,bounded",
+            "reported_individual_bytes": 68
+          },
+          {
+            "function": "command_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1150:12:command_close\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "batch_spans",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1174:12:batch_spans\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "batch_pair_end",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1194:12:batch_pair_end\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "batch_voice_zero",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1209:12:batch_voice_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "batch_begin_private",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1273:44:batch_begin_private\t36\tstatic",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1353:37:pt_editor_mixed_causal_prepare_batch_begin\t56\tdynamic,bounded",
+            "reported_individual_bytes": 56
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_begin_quantized",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1361:37:pt_editor_mixed_causal_prepare_batch_begin_quantized\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1380:37:pt_editor_mixed_causal_stop_prepare_batch_begin\t520\tdynamic,bounded",
+            "reported_individual_bytes": 520
+          },
+          {
+            "function": "lineage_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1448:44:lineage_batch_begin\t916\tdynamic,bounded",
+            "reported_individual_bytes": 916
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:1669:37:pt_editor_mixed_causal_lineage_control16_prepare_batch_begin\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_control_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1673:37:pt_editor_mixed_causal_lineage_control_prepare_batch_begin\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_lineage_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1677:37:pt_editor_mixed_causal_lineage_stop_prepare_batch_begin\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_batch_advance",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1682:37:pt_editor_mixed_causal_prepare_batch_advance\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_reader_reference",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1691:37:pt_editor_mixed_causal_prepare_reader_reference\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1701:30:pt_editor_mixed_causal_prepare_enqueue\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1723:30:pt_editor_mixed_causal_prepare_publish\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "service_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1732:12:service_enter\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1742:30:pt_editor_mixed_causal_prepare_service_command\t1456\tdynamic,bounded",
+            "reported_individual_bytes": 1456
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1762:30:pt_editor_mixed_causal_prepare_service_reader\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "local_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1774:12:local_cancel\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1781:37:pt_editor_mixed_causal_prepare_cancel\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "finish",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1791:12:finish\t76\tdynamic,bounded",
+            "reported_individual_bytes": 76
+          },
+          {
+            "function": "pt_editor_mixed_causal_prepare_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1825:5:pt_editor_mixed_causal_prepare_close\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "span.part.0",
+            "qualifier": "static",
+            "raw": "editor_mixed_causal_prepare.c:18:12:span.part.0\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "prepare_admit.part.15",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:399:12:prepare_admit.part.15\t332\tdynamic,bounded",
+            "reported_individual_bytes": 332
+          },
+          {
+            "function": "batch_begin_private.part.20",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1273:44:batch_begin_private.part.20\t2500\tdynamic,bounded",
+            "reported_individual_bytes": 2500
+          },
+          {
+            "function": "lineage_control16_batch_begin.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "editor_mixed_causal_prepare.c:1564:44:lineage_control16_batch_begin.constprop\t960\tdynamic,bounded",
+            "reported_individual_bytes": 960
+          }
+        ]
+      },
+      "original_source_pairs": 78,
+      "outer_restoration": "unchanged accepted finally; no independent saved restoration fields",
+      "outer_wait_both_EOF": true,
+      "private_source_pairs": 72,
+      "receipt_pin": {
+        "bytes": 272166,
+        "sha256": "01f84dbf6475e4f1209331b7fda67d480bcef5891ae47b5bc701667dccd4151f"
+      },
+      "selected_individual_stack_rows": {
+        "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+            "qualifier": "static",
+            "reported_individual_bytes": 0
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_lineage_control16_prepare_batch_begin",
+            "qualifier": "static",
+            "reported_individual_bytes": 0
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_cancel": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_cancel",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_cancel",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_close": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_enqueue": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 72
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_publish": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_publish",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_publish",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          }
+        ],
+        "pt_editor_mixed_causal_prepare_service_command": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1456
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_prepare_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1456
+          }
+        ],
+        "pt_editor_mixed_causal_stop_prepare_batch_begin": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 520
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_stop_prepare_batch_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 520
+          }
+        ],
+        "pt_editor_mixed_causal_stop_prepare_begin": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_stop_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "pt_editor_mixed_causal_stop_prepare_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 88
+          }
+        ],
+        "stop_current": [],
+        "stop_scope": [
+          {
+            "artifact": "object/editor_mixed_causal_prepare.su",
+            "function": "stop_scope",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "artifact": "assembly/editor_mixed_causal_prepare.su",
+            "function": "stop_scope",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 48
+          }
+        ]
+      },
+      "status": "PASS_COMPILER_ONLY_CONTROLLER_STOP_LIMITED"
+    },
+    "query": {
+      "actual_non_system_dependencies": 20,
+      "artifact_pairs": 4,
+      "artifact_pins": {
+        "assembly/mixed_readers_causal.s": {
+          "bytes": 160579,
+          "sha256": "e64dea0aff364297dc6292028b3a163656f6459f581435ba885222cd871c3363"
+        },
+        "assembly/mixed_readers_causal.su": {
+          "bytes": 5397,
+          "sha256": "1b0d5236000d75128ed5e721eb638a8efdeba844c2965ed6545e9dd9b5fedcf1"
+        },
+        "object/mixed_readers_causal.o": {
+          "bytes": 34080,
+          "sha256": "982cda35d4c6fc58b1c999dd63196dc662e6786ec6ff01d709b3923de040c6f1"
+        },
+        "object/mixed_readers_causal.su": {
+          "bytes": 5397,
+          "sha256": "1b0d5236000d75128ed5e721eb638a8efdeba844c2965ed6545e9dd9b5fedcf1"
+        }
+      },
+      "child_restoration": {
+        "handler_restore_attempted": true,
+        "handler_restored": true,
+        "timer_disarm_attempted": true,
+        "timer_disarmed": true
+      },
+      "object_and_assembly_individual_stack_rows": {
+        "assembly/mixed_readers_causal.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "extent",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:79:12:extent\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "addresses_apart",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:81:12:addresses_apart\t12\tstatic",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "queue_offset",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:90:15:queue_offset\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_mixed_causal_workspace_size",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:92:8:pt_mixed_causal_workspace_size\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_mixed_causal_workspace_alignment",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:94:8:pt_mixed_causal_workspace_alignment\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_control_size",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:96:8:pt_mixed_causal_control_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "key_equal",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:97:12:key_equal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "key_zero",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:99:12:key_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "slot_index",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:101:12:slot_index\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "fault",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:104:13:fault\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_fail_closed",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:106:6:pt_mixed_causal_fail_closed\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:108:12:enter\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "task_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:110:12:task_enter\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "source_apart",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:132:12:source_apart\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "find_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:138:35:find_command\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "find_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:140:34:find_reader\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "clock_read",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:142:12:clock_read\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "backend_clock",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:148:12:backend_clock\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "staged_clear",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:235:13:staged_clear\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "control_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:254:12:control_first_current\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "stop_first_current",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:277:12:stop_first_current\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "lineage_control_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:324:12:lineage_control_current\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "backend_submit",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:376:12:backend_submit\t296\tdynamic,bounded",
+            "reported_individual_bytes": 296
+          },
+          {
+            "function": "current_packet",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:486:12:current_packet\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "geometry_drop",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:496:13:geometry_drop\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "reader_closed",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:498:13:reader_closed\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "causal_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:504:12:causal_current\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_fire",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:518:29:pt_mixed_causal_fire\t1228\tdynamic,bounded",
+            "reported_individual_bytes": 1228
+          },
+          {
+            "function": "backend_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:607:36:backend_command\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "backend_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:639:36:backend_reader\t264\tdynamic,bounded",
+            "reported_individual_bytes": 264
+          },
+          {
+            "function": "queue_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:690:14:queue_allocate\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "queue_release",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:699:13:queue_release\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:707:30:pt_mixed_causal_open\t196\tdynamic,bounded",
+            "reported_individual_bytes": 196
+          },
+          {
+            "function": "pt_mixed_causal_borrow_queue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:765:30:pt_mixed_causal_borrow_queue\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "input_guard",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:772:12:input_guard\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "trigger_input_only",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:785:12:trigger_input_only\t80\tdynamic,bounded",
+            "reported_individual_bytes": 80
+          },
+          {
+            "function": "causal_basis",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:797:12:causal_basis\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_mixed_causal_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:829:30:pt_mixed_causal_enqueue\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:843:30:pt_mixed_causal_publish\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "pt_mixed_causal_control_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:851:30:pt_mixed_causal_control_bind\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:880:30:pt_mixed_causal_control_enqueue\t3368\tdynamic,bounded",
+            "reported_individual_bytes": 3368
+          },
+          {
+            "function": "pt_mixed_causal_control16_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:947:30:pt_mixed_causal_control16_enqueue\t3400\tdynamic,bounded",
+            "reported_individual_bytes": 3400
+          },
+          {
+            "function": "pt_mixed_causal_control_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:996:30:pt_mixed_causal_control_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1005:30:pt_mixed_causal_stop_bind\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "stop_request_valid",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1020:12:stop_request_valid\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_mixed_causal_stop_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1032:30:pt_mixed_causal_stop_enqueue\t3208\tdynamic,bounded",
+            "reported_individual_bytes": 3208
+          },
+          {
+            "function": "pt_mixed_causal_stop_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1080:30:pt_mixed_causal_stop_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_control_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1089:30:pt_mixed_causal_control_stop_bind\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_mixed_causal_stop_after_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1109:30:pt_mixed_causal_stop_after_control_enqueue\t3208\tdynamic,bounded",
+            "reported_individual_bytes": 3208
+          },
+          {
+            "function": "pt_mixed_causal_stop_after_control_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1153:30:pt_mixed_causal_stop_after_control_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_enqueue_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1162:30:pt_mixed_causal_enqueue_successor\t4008\tdynamic,bounded",
+            "reported_individual_bytes": 4008
+          },
+          {
+            "function": "pt_mixed_causal_publish_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1186:30:pt_mixed_causal_publish_successor\t4012\tdynamic,bounded",
+            "reported_individual_bytes": 4012
+          },
+          {
+            "function": "completion_identity_same",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:1204:12:completion_identity_same\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_mixed_causal_first_completion_matches",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1212:5:pt_mixed_causal_first_completion_matches\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "pt_mixed_causal_diagnostic",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1241:5:pt_mixed_causal_diagnostic\t84\tdynamic,bounded",
+            "reported_individual_bytes": 84
+          },
+          {
+            "function": "pt_mixed_causal_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1251:30:pt_mixed_causal_service_command\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1264:30:pt_mixed_causal_service_reader\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_mixed_causal_reader_key",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1272:30:pt_mixed_causal_reader_key\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1280:30:pt_mixed_causal_stop\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_mixed_causal_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1287:5:pt_mixed_causal_close\t68\tdynamic,bounded",
+            "reported_individual_bytes": 68
+          },
+          {
+            "function": "factory_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1315:12:factory_empty\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "pt_mixed_causal_factory_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1328:5:pt_mixed_causal_factory_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_stop_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1336:5:pt_mixed_causal_factory_stop_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1349:5:pt_mixed_causal_factory_stop_first_current\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "factory_control_stop_bound",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:1362:12:factory_control_stop_bound\t12\tstatic",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1377:5:pt_mixed_causal_factory_control_stop_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1387:5:pt_mixed_causal_factory_control_stop_first_current\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_control_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1397:5:pt_mixed_causal_factory_control_stop_control_current\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_mixed_causal_factory_bind_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1407:44:pt_mixed_causal_factory_bind_original\t76\tdynamic,bounded",
+            "reported_individual_bytes": 76
+          },
+          {
+            "function": "pt_mixed_causal_factory_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1427:30:pt_mixed_causal_factory_reader_readiness\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_factory_retire_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1437:35:pt_mixed_causal_factory_retire_original\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "source_apart.part.1",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:132:12:source_apart.part.1\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "stop_first_current.part.3",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:277:12:stop_first_current.part.3\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "output_apart.part.10",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:113:12:output_apart.part.10\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "backend_command.part.12",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:607:36:backend_command.part.12\t1504\tdynamic,bounded",
+            "reported_individual_bytes": 1504
+          }
+        ],
+        "object/mixed_readers_causal.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "extent",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:79:12:extent\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "addresses_apart",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:81:12:addresses_apart\t12\tstatic",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "queue_offset",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:90:15:queue_offset\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_mixed_causal_workspace_size",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:92:8:pt_mixed_causal_workspace_size\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_mixed_causal_workspace_alignment",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:94:8:pt_mixed_causal_workspace_alignment\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_control_size",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:96:8:pt_mixed_causal_control_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "key_equal",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:97:12:key_equal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "key_zero",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:99:12:key_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "slot_index",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:101:12:slot_index\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "fault",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:104:13:fault\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_fail_closed",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:106:6:pt_mixed_causal_fail_closed\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:108:12:enter\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "task_enter",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:110:12:task_enter\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "source_apart",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:132:12:source_apart\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "find_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:138:35:find_command\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "find_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:140:34:find_reader\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "clock_read",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:142:12:clock_read\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "backend_clock",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:148:12:backend_clock\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "staged_clear",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:235:13:staged_clear\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "control_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:254:12:control_first_current\t4\tdynamic,bounded",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "stop_first_current",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:277:12:stop_first_current\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "lineage_control_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:324:12:lineage_control_current\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "backend_submit",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:376:12:backend_submit\t296\tdynamic,bounded",
+            "reported_individual_bytes": 296
+          },
+          {
+            "function": "current_packet",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:486:12:current_packet\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "geometry_drop",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:496:13:geometry_drop\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "reader_closed",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:498:13:reader_closed\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "causal_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:504:12:causal_current\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_fire",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:518:29:pt_mixed_causal_fire\t1228\tdynamic,bounded",
+            "reported_individual_bytes": 1228
+          },
+          {
+            "function": "backend_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:607:36:backend_command\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "backend_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:639:36:backend_reader\t264\tdynamic,bounded",
+            "reported_individual_bytes": 264
+          },
+          {
+            "function": "queue_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:690:14:queue_allocate\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "queue_release",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:699:13:queue_release\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_mixed_causal_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:707:30:pt_mixed_causal_open\t196\tdynamic,bounded",
+            "reported_individual_bytes": 196
+          },
+          {
+            "function": "pt_mixed_causal_borrow_queue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:765:30:pt_mixed_causal_borrow_queue\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "input_guard",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:772:12:input_guard\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "trigger_input_only",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:785:12:trigger_input_only\t80\tdynamic,bounded",
+            "reported_individual_bytes": 80
+          },
+          {
+            "function": "causal_basis",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:797:12:causal_basis\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_mixed_causal_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:829:30:pt_mixed_causal_enqueue\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:843:30:pt_mixed_causal_publish\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "pt_mixed_causal_control_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:851:30:pt_mixed_causal_control_bind\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:880:30:pt_mixed_causal_control_enqueue\t3368\tdynamic,bounded",
+            "reported_individual_bytes": 3368
+          },
+          {
+            "function": "pt_mixed_causal_control16_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:947:30:pt_mixed_causal_control16_enqueue\t3400\tdynamic,bounded",
+            "reported_individual_bytes": 3400
+          },
+          {
+            "function": "pt_mixed_causal_control_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:996:30:pt_mixed_causal_control_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1005:30:pt_mixed_causal_stop_bind\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "stop_request_valid",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1020:12:stop_request_valid\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_mixed_causal_stop_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1032:30:pt_mixed_causal_stop_enqueue\t3208\tdynamic,bounded",
+            "reported_individual_bytes": 3208
+          },
+          {
+            "function": "pt_mixed_causal_stop_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1080:30:pt_mixed_causal_stop_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_control_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1089:30:pt_mixed_causal_control_stop_bind\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_mixed_causal_stop_after_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1109:30:pt_mixed_causal_stop_after_control_enqueue\t3208\tdynamic,bounded",
+            "reported_individual_bytes": 3208
+          },
+          {
+            "function": "pt_mixed_causal_stop_after_control_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1153:30:pt_mixed_causal_stop_after_control_publish\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_mixed_causal_enqueue_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1162:30:pt_mixed_causal_enqueue_successor\t4008\tdynamic,bounded",
+            "reported_individual_bytes": 4008
+          },
+          {
+            "function": "pt_mixed_causal_publish_successor",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1186:30:pt_mixed_causal_publish_successor\t4012\tdynamic,bounded",
+            "reported_individual_bytes": 4012
+          },
+          {
+            "function": "completion_identity_same",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:1204:12:completion_identity_same\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_mixed_causal_first_completion_matches",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1212:5:pt_mixed_causal_first_completion_matches\t60\tdynamic,bounded",
+            "reported_individual_bytes": 60
+          },
+          {
+            "function": "pt_mixed_causal_diagnostic",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1241:5:pt_mixed_causal_diagnostic\t84\tdynamic,bounded",
+            "reported_individual_bytes": 84
+          },
+          {
+            "function": "pt_mixed_causal_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1251:30:pt_mixed_causal_service_command\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1264:30:pt_mixed_causal_service_reader\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_mixed_causal_reader_key",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1272:30:pt_mixed_causal_reader_key\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1280:30:pt_mixed_causal_stop\t8\tdynamic,bounded",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_mixed_causal_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1287:5:pt_mixed_causal_close\t68\tdynamic,bounded",
+            "reported_individual_bytes": 68
+          },
+          {
+            "function": "factory_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1315:12:factory_empty\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "pt_mixed_causal_factory_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1328:5:pt_mixed_causal_factory_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_stop_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1336:5:pt_mixed_causal_factory_stop_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1349:5:pt_mixed_causal_factory_stop_first_current\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "factory_control_stop_bound",
+            "qualifier": "static",
+            "raw": "mixed_readers_causal.c:1362:12:factory_control_stop_bound\t12\tstatic",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_original_empty",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1377:5:pt_mixed_causal_factory_control_stop_original_empty\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1387:5:pt_mixed_causal_factory_control_stop_first_current\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "pt_mixed_causal_factory_control_stop_control_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1397:5:pt_mixed_causal_factory_control_stop_control_current\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_mixed_causal_factory_bind_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1407:44:pt_mixed_causal_factory_bind_original\t76\tdynamic,bounded",
+            "reported_individual_bytes": 76
+          },
+          {
+            "function": "pt_mixed_causal_factory_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1427:30:pt_mixed_causal_factory_reader_readiness\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_mixed_causal_factory_retire_original",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:1437:35:pt_mixed_causal_factory_retire_original\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "source_apart.part.1",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:132:12:source_apart.part.1\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "stop_first_current.part.3",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:277:12:stop_first_current.part.3\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "output_apart.part.10",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:113:12:output_apart.part.10\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "backend_command.part.12",
+            "qualifier": "dynamic,bounded",
+            "raw": "mixed_readers_causal.c:607:36:backend_command.part.12\t1504\tdynamic,bounded",
+            "reported_individual_bytes": 1504
+          }
+        ]
+      },
+      "original_source_pairs": 26,
+      "outer_restoration": "unchanged accepted finally; no independent saved restoration fields",
+      "outer_wait_both_EOF": true,
+      "private_source_pairs": 20,
+      "receipt_pin": {
+        "bytes": 119335,
+        "sha256": "0f5b64e7df6e20a8fa43660e6f14716f32d9f1f9eec0767448950e66fc624aff"
+      },
+      "selected_individual_stack_rows": {
+        "lineage_control_current": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "lineage_control_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "lineage_control_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 88
+          }
+        ],
+        "pt_mixed_causal_control16_enqueue": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_control16_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 3400
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_control16_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 3400
+          }
+        ],
+        "pt_mixed_causal_control_stop_bind": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_control_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_control_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          }
+        ],
+        "pt_mixed_causal_factory_control_stop_control_current": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_factory_control_stop_control_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_factory_control_stop_control_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          }
+        ],
+        "pt_mixed_causal_factory_control_stop_first_current": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_factory_control_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_factory_control_stop_first_current",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 16
+          }
+        ],
+        "pt_mixed_causal_fire": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_fire",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1228
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_fire",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1228
+          }
+        ],
+        "pt_mixed_causal_service_command": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 40
+          }
+        ],
+        "pt_mixed_causal_stop_after_control_enqueue": [
+          {
+            "artifact": "object/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_stop_after_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 3208
+          },
+          {
+            "artifact": "assembly/mixed_readers_causal.su",
+            "function": "pt_mixed_causal_stop_after_control_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 3208
+          }
+        ]
+      },
+      "status": "PASS_COMPILER_ONLY_QUERY_CORE_LIMITED"
+    },
+    "sampler": {
+      "actual_non_system_dependencies": 40,
+      "artifact_pairs": 4,
+      "artifact_pins": {
+        "assembly/sampler_mixed_readers.s": {
+          "bytes": 148474,
+          "sha256": "d599a96dc1db16452312926ee9ef434f3e1a99bf9acd4df919814afa95e8da98"
+        },
+        "assembly/sampler_mixed_readers.su": {
+          "bytes": 5010,
+          "sha256": "023358df8a4b827e4c85cabc5ff0b7a314a12eae3b19d13540a64c11d2b62ca1"
+        },
+        "object/sampler_mixed_readers.o": {
+          "bytes": 33580,
+          "sha256": "97413c967d2eff6838863411541572daa91ff3ffe7a3bcc7a3c1959564cc66f1"
+        },
+        "object/sampler_mixed_readers.su": {
+          "bytes": 5010,
+          "sha256": "023358df8a4b827e4c85cabc5ff0b7a314a12eae3b19d13540a64c11d2b62ca1"
+        }
+      },
+      "child_restoration": {
+        "handler_restore_attempted": true,
+        "handler_restored": true,
+        "timer_disarm_attempted": true,
+        "timer_disarmed": true
+      },
+      "object_and_assembly_individual_stack_rows": {
+        "assembly/sampler_mixed_readers.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_project_snapshot_equal",
+            "qualifier": "static",
+            "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "span",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:96:12:span\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:98:12:apart\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "add",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:102:12:add\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "initial_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:112:12:initial_apart\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "output_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:128:12:output_apart\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "context_covered",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:142:12:context_covered\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "causal_inside",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:152:12:causal_inside\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_sampler_mixed_causal_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:170:5:pt_sampler_mixed_causal_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:186:5:pt_sampler_mixed_causal_stop_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:203:5:pt_sampler_mixed_causal_lineage_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "fixed_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:260:12:fixed_current\t1544\tdynamic,bounded",
+            "reported_individual_bytes": 1544
+          },
+          {
+            "function": "backend_fixed",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:272:12:backend_fixed\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:280:12:current\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reentry",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:285:12:reentry\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_workspace_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:312:8:pt_sampler_mixed_workspace_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_workspace_alignment",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:314:8:pt_sampler_mixed_workspace_alignment\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_pool_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:316:8:pt_sampler_mixed_pool_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_command_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:318:8:pt_sampler_mixed_command_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_reader_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:320:8:pt_sampler_mixed_reader_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "mixed_open_private",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:334:37:mixed_open_private\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "pt_sampler_mixed_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:387:30:pt_sampler_mixed_open\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_sampler_mixed_causal_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:390:30:pt_sampler_mixed_causal_open\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:395:30:pt_sampler_mixed_causal_stop_open\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:401:30:pt_sampler_mixed_causal_lineage_open\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "chip_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:407:14:chip_allocate\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "chip_release",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:425:13:chip_release\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_sampler_mixed_advance_validation",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:438:30:pt_sampler_mixed_advance_validation\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "command",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:485:41:command\t20\tstatic",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "reader",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:490:40:reader\t20\tstatic",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "key_zero",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:498:12:key_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "voice_zero",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:504:12:voice_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "resources",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:573:13:resources\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reader_free",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:587:13:reader_free\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "command_free",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:594:13:command_free\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "partial",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:600:13:partial\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:682:30:pt_sampler_mixed_begin\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_begin_quantized",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:688:30:pt_sampler_mixed_begin_quantized\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:697:30:pt_sampler_mixed_causal_stop_begin\t2160\tdynamic,bounded",
+            "reported_individual_bytes": 2160
+          },
+          {
+            "function": "lineage_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:771:37:lineage_begin\t2368\tdynamic,bounded",
+            "reported_individual_bytes": 2368
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_control16_begin",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:968:30:pt_sampler_mixed_causal_lineage_control16_begin\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_control_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:972:30:pt_sampler_mixed_causal_lineage_control_begin\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:976:30:pt_sampler_mixed_causal_lineage_stop_begin\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "holder_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:997:12:holder_current\t80\tdynamic,bounded",
+            "reported_individual_bytes": 80
+          },
+          {
+            "function": "command_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1006:12:command_current\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "command_terminal",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1011:13:command_terminal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "command_release",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1019:13:command_release\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "reader_terminal",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1026:13:reader_terminal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "reader_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1033:13:reader_release\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "build_action",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1062:12:build_action\t156\tdynamic,bounded",
+            "reported_individual_bytes": 156
+          },
+          {
+            "function": "pt_sampler_mixed_advance",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1140:30:pt_sampler_mixed_advance\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1220:30:pt_sampler_mixed_enqueue\t944\tdynamic,bounded",
+            "reported_individual_bytes": 944
+          },
+          {
+            "function": "pt_sampler_mixed_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1307:30:pt_sampler_mixed_reader\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "pt_sampler_mixed_reader_key",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1316:30:pt_sampler_mixed_reader_key\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_sampler_mixed_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1335:30:pt_sampler_mixed_reader_readiness\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "service_ready",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1357:12:service_ready\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_sampler_mixed_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1366:30:pt_sampler_mixed_publish\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_sampler_mixed_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1387:30:pt_sampler_mixed_service_command\t1444\tdynamic,bounded",
+            "reported_individual_bytes": 1444
+          },
+          {
+            "function": "pt_sampler_mixed_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1400:30:pt_sampler_mixed_service_reader\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "pt_sampler_mixed_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1411:30:pt_sampler_mixed_cancel\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "pt_sampler_mixed_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1423:30:pt_sampler_mixed_stop\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_sampler_mixed_reader_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1436:5:pt_sampler_mixed_reader_close\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "retirement_guard_has",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1449:12:retirement_guard_has\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "retirement_headers_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1513:12:retirement_headers_current\t1540\tdynamic,bounded",
+            "reported_individual_bytes": 1540
+          },
+          {
+            "function": "pt_sampler_mixed_retire_original_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1524:35:pt_sampler_mixed_retire_original_reader\t84\tdynamic,bounded",
+            "reported_individual_bytes": 84
+          },
+          {
+            "function": "pt_sampler_mixed_command_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1557:5:pt_sampler_mixed_command_close\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1580:5:pt_sampler_mixed_close\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "begin_private.part.9",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:611:37:begin_private.part.9\t124\tdynamic,bounded",
+            "reported_individual_bytes": 124
+          },
+          {
+            "function": "retirement_extent_apart.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1457:12:retirement_extent_apart.constprop\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "lineage_control16_begin.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:871:37:lineage_control16_begin.constprop\t2380\tdynamic,bounded",
+            "reported_individual_bytes": 2380
+          },
+          {
+            "function": "allocate.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:560:14:allocate.constprop\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          }
+        ],
+        "object/sampler_mixed_readers.su": [
+          {
+            "function": "memcmp",
+            "qualifier": "static",
+            "raw": "strsup.h:20:29:memcmp\t4\tstatic",
+            "reported_individual_bytes": 4
+          },
+          {
+            "function": "pt_project_snapshot_equal",
+            "qualifier": "static",
+            "raw": "project_snapshot.h:11:19:pt_project_snapshot_equal\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "span",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:96:12:span\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:98:12:apart\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "add",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:102:12:add\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "initial_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:112:12:initial_apart\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "output_apart",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:128:12:output_apart\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "context_covered",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:142:12:context_covered\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "causal_inside",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:152:12:causal_inside\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_sampler_mixed_causal_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:170:5:pt_sampler_mixed_causal_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:186:5:pt_sampler_mixed_causal_stop_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_bind",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:203:5:pt_sampler_mixed_causal_lineage_bind\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "fixed_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:260:12:fixed_current\t1544\tdynamic,bounded",
+            "reported_individual_bytes": 1544
+          },
+          {
+            "function": "backend_fixed",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:272:12:backend_fixed\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:280:12:current\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reentry",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:285:12:reentry\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_workspace_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:312:8:pt_sampler_mixed_workspace_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_workspace_alignment",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:314:8:pt_sampler_mixed_workspace_alignment\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_pool_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:316:8:pt_sampler_mixed_pool_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_command_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:318:8:pt_sampler_mixed_command_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_reader_size",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:320:8:pt_sampler_mixed_reader_size\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "mixed_open_private",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:334:37:mixed_open_private\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "pt_sampler_mixed_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:387:30:pt_sampler_mixed_open\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "pt_sampler_mixed_causal_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:390:30:pt_sampler_mixed_causal_open\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:395:30:pt_sampler_mixed_causal_stop_open\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_open",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:401:30:pt_sampler_mixed_causal_lineage_open\t48\tdynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "function": "chip_allocate",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:407:14:chip_allocate\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "chip_release",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:425:13:chip_release\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "pt_sampler_mixed_advance_validation",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:438:30:pt_sampler_mixed_advance_validation\t52\tdynamic,bounded",
+            "reported_individual_bytes": 52
+          },
+          {
+            "function": "command",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:485:41:command\t20\tstatic",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "reader",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:490:40:reader\t20\tstatic",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "key_zero",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:498:12:key_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "voice_zero",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:504:12:voice_zero\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "resources",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:573:13:resources\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "reader_free",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:587:13:reader_free\t12\tdynamic,bounded",
+            "reported_individual_bytes": 12
+          },
+          {
+            "function": "command_free",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:594:13:command_free\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "partial",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:600:13:partial\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:682:30:pt_sampler_mixed_begin\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_begin_quantized",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:688:30:pt_sampler_mixed_begin_quantized\t72\tdynamic,bounded",
+            "reported_individual_bytes": 72
+          },
+          {
+            "function": "pt_sampler_mixed_causal_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:697:30:pt_sampler_mixed_causal_stop_begin\t2160\tdynamic,bounded",
+            "reported_individual_bytes": 2160
+          },
+          {
+            "function": "lineage_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:771:37:lineage_begin\t2368\tdynamic,bounded",
+            "reported_individual_bytes": 2368
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_control16_begin",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:968:30:pt_sampler_mixed_causal_lineage_control16_begin\t0\tstatic",
+            "reported_individual_bytes": 0
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_control_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:972:30:pt_sampler_mixed_causal_lineage_control_begin\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_sampler_mixed_causal_lineage_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:976:30:pt_sampler_mixed_causal_lineage_stop_begin\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "holder_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:997:12:holder_current\t80\tdynamic,bounded",
+            "reported_individual_bytes": 80
+          },
+          {
+            "function": "command_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1006:12:command_current\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "command_terminal",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1011:13:command_terminal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "command_release",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1019:13:command_release\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "reader_terminal",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1026:13:reader_terminal\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "reader_release",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1033:13:reader_release\t16\tdynamic,bounded",
+            "reported_individual_bytes": 16
+          },
+          {
+            "function": "build_action",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1062:12:build_action\t156\tdynamic,bounded",
+            "reported_individual_bytes": 156
+          },
+          {
+            "function": "pt_sampler_mixed_advance",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1140:30:pt_sampler_mixed_advance\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_enqueue",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1220:30:pt_sampler_mixed_enqueue\t944\tdynamic,bounded",
+            "reported_individual_bytes": 944
+          },
+          {
+            "function": "pt_sampler_mixed_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1307:30:pt_sampler_mixed_reader\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          },
+          {
+            "function": "pt_sampler_mixed_reader_key",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1316:30:pt_sampler_mixed_reader_key\t88\tdynamic,bounded",
+            "reported_individual_bytes": 88
+          },
+          {
+            "function": "pt_sampler_mixed_reader_readiness",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1335:30:pt_sampler_mixed_reader_readiness\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "service_ready",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1357:12:service_ready\t20\tdynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "function": "pt_sampler_mixed_publish",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1366:30:pt_sampler_mixed_publish\t40\tdynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "function": "pt_sampler_mixed_service_command",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1387:30:pt_sampler_mixed_service_command\t1444\tdynamic,bounded",
+            "reported_individual_bytes": 1444
+          },
+          {
+            "function": "pt_sampler_mixed_service_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1400:30:pt_sampler_mixed_service_reader\t144\tdynamic,bounded",
+            "reported_individual_bytes": 144
+          },
+          {
+            "function": "pt_sampler_mixed_cancel",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1411:30:pt_sampler_mixed_cancel\t28\tdynamic,bounded",
+            "reported_individual_bytes": 28
+          },
+          {
+            "function": "pt_sampler_mixed_stop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1423:30:pt_sampler_mixed_stop\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "pt_sampler_mixed_reader_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1436:5:pt_sampler_mixed_reader_close\t32\tdynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "function": "retirement_guard_has",
+            "qualifier": "static",
+            "raw": "sampler_mixed_readers.c:1449:12:retirement_guard_has\t8\tstatic",
+            "reported_individual_bytes": 8
+          },
+          {
+            "function": "retirement_headers_current",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1513:12:retirement_headers_current\t1540\tdynamic,bounded",
+            "reported_individual_bytes": 1540
+          },
+          {
+            "function": "pt_sampler_mixed_retire_original_reader",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1524:35:pt_sampler_mixed_retire_original_reader\t84\tdynamic,bounded",
+            "reported_individual_bytes": 84
+          },
+          {
+            "function": "pt_sampler_mixed_command_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1557:5:pt_sampler_mixed_command_close\t64\tdynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "function": "pt_sampler_mixed_close",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1580:5:pt_sampler_mixed_close\t36\tdynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "function": "begin_private.part.9",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:611:37:begin_private.part.9\t124\tdynamic,bounded",
+            "reported_individual_bytes": 124
+          },
+          {
+            "function": "retirement_extent_apart.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:1457:12:retirement_extent_apart.constprop\t24\tdynamic,bounded",
+            "reported_individual_bytes": 24
+          },
+          {
+            "function": "lineage_control16_begin.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:871:37:lineage_control16_begin.constprop\t2380\tdynamic,bounded",
+            "reported_individual_bytes": 2380
+          },
+          {
+            "function": "allocate.constprop",
+            "qualifier": "dynamic,bounded",
+            "raw": "sampler_mixed_readers.c:560:14:allocate.constprop\t44\tdynamic,bounded",
+            "reported_individual_bytes": 44
+          }
+        ]
+      },
+      "original_source_pairs": 46,
+      "outer_restoration": "unchanged accepted finally; no independent saved restoration fields",
+      "outer_wait_both_EOF": true,
+      "private_source_pairs": 40,
+      "receipt_pin": {
+        "bytes": 177920,
+        "sha256": "250434958cfa9e3c511c3b8cb5cacb3ba07e5777407d0abf82190d74ef44b0c6"
+      },
+      "selected_individual_stack_rows": {
+        "lineage_begin": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "lineage_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 2368
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "lineage_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 2368
+          }
+        ],
+        "lineage_control16_enqueue": [],
+        "pt_sampler_mixed_advance": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_advance",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_advance",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_bind": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_bind",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_bind",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_control16_begin": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_control16_begin",
+            "qualifier": "static",
+            "reported_individual_bytes": 0
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_control16_begin",
+            "qualifier": "static",
+            "reported_individual_bytes": 0
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_control_begin": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_control_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_control_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_open": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_open",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 48
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_open",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 48
+          }
+        ],
+        "pt_sampler_mixed_causal_lineage_stop_begin": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_causal_lineage_stop_begin",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 20
+          }
+        ],
+        "pt_sampler_mixed_close": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 36
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 36
+          }
+        ],
+        "pt_sampler_mixed_command_close": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_command_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_command_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 64
+          }
+        ],
+        "pt_sampler_mixed_enqueue": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 944
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_enqueue",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 944
+          }
+        ],
+        "pt_sampler_mixed_publish": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_publish",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 40
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_publish",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 40
+          }
+        ],
+        "pt_sampler_mixed_reader_close": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_reader_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_reader_close",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 32
+          }
+        ],
+        "pt_sampler_mixed_service_command": [
+          {
+            "artifact": "object/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1444
+          },
+          {
+            "artifact": "assembly/sampler_mixed_readers.su",
+            "function": "pt_sampler_mixed_service_command",
+            "qualifier": "dynamic,bounded",
+            "reported_individual_bytes": 1444
+          }
+        ]
+      },
+      "status": "PASS_COMPILER_ONLY_SAMPLER_LINEAGE_LIMITED"
+    }
+  },
+  "scope": "COMPILER_ONLY_NO_LINK_NO_EXECUTION",
+  "signals": 0,
+  "targets": 0,
+  "unemitted_row_not_zero": true
+}

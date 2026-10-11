@@ -1,0 +1,71 @@
+{
+  "independent_reviews": [
+    {
+      "label": "conventional-nine-path-source",
+      "review_pin": {
+        "bytes": 2362,
+        "sha256": "8aa09c7c205495204bfabf29e073c3b6ebc1246f69b1d212d6485f51393f925c"
+      },
+      "scope": "Nine exact candidate bodies, original product/driver inverses and protected sixteen.",
+      "status": "READY_SOURCE"
+    },
+    {
+      "label": "focused25-saved-evidence",
+      "review_pin": {
+        "bytes": 2125,
+        "sha256": "ae2da549e4995ed0470adc3fb0d171c5865b2833c029e70a73e5631a27aca34a"
+      },
+      "scope": "Original first focused25 result; actual MM79/203, waits/EOF/anchor/source equality and original outer restoration boundary.",
+      "status": "PASS_HOST_ONLY"
+    },
+    {
+      "label": "three-native-compiler-saved-evidence",
+      "review_pin": {
+        "bytes": 2744,
+        "sha256": "3832c9883a0b6a9a691fe80f27bed3a98670a9c85527d3bb35fe2ac89df46967"
+      },
+      "scope": "Actual MM20/40/72, object/assembly and twelve separate artifacts; individual stack rows only.",
+      "status": "PASS_COMPILER_ONLY"
+    },
+    {
+      "label": "matching25-saved-evidence",
+      "review_pin": {
+        "bytes": 1543,
+        "sha256": "9b166e90b71402453e7b33300e1d4c7085654fbc6e795621c48e1715bff91414"
+      },
+      "scope": "Actual adopted matching25 normal route; original direct wait/EOF/closes/restoration and source equality.",
+      "status": "PASS_HOST_ONLY"
+    },
+    {
+      "label": "nine-ordinary-source",
+      "review_pin": {
+        "bytes": 2076,
+        "sha256": "8e9a3f148ac9b7e4a8b929db387667db872349c6704a02e50e3579d46a64d497"
+      },
+      "scope": "Nine exact original ordinary oracles, finite341 inputs and driver/parent inverses; not actual MM.",
+      "status": "READY_SOURCE"
+    },
+    {
+      "label": "matching25-and-nine-saved-evidence",
+      "review_pin": {
+        "bytes": 1655,
+        "sha256": "1da67f05df74adcf0608bcf026c82de3f2214dc745b0f159f576e35fe695c57c"
+      },
+      "scope": "Ten separate original results; 705 current full source/body pairs and protected sixteen; no rerun.",
+      "status": "PASS_HOST_ONLY"
+    }
+  ],
+  "limits": [
+    "Ordinary nested raw compiler/fixture identities and actual MM are not independently exported.",
+    "No escaped-descendant, installed/shared service or target ownership qualification.",
+    "Compiler rows are individual reports, not aggregate stack, ABI or runtime.",
+    "Native runtime, exact live timing, Amiberry, A1200/AmiGUS, device and listening remain unqualified."
+  ],
+  "preserved_history": [
+    "Uncalled historical failed controller55 donor remains distinct from the genuine published55 regression fixture.",
+    "Initial native document-metadata binding refusal preserved before later separately bound first compiler attempts.",
+    "Source-only ordinary V1 missing inventory leaves and data-review syntax/schema refusals preserved; no product run or retry inferred."
+  ],
+  "shared_operations": 0,
+  "targets": 0
+}

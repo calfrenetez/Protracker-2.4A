@@ -2,6 +2,7 @@
 #include "editor_mixed_causal_source_internal.h"
 #include "editor_mixed_causal_stop_prepare_internal.h"
 #include "editor_mixed_causal_lineage_prepare_internal.h"
+#include "editor_mixed_causal_lineage_control16_prepare_internal.h"
 #include "editor_mixed_internal.h"
 #include "project_snapshot.h"
 #include "sampler_internal.h"
@@ -1549,6 +1550,126 @@ complete_lineage:
  }
  s->busy=0;return r;
 }
+/* Separate wide typed request/local aggregates keep original uint8 caller
+ * extents and layouts unchanged. Only the new public entry calls this clone,
+ * always CONTROL; no caller-selected mode or additional capability. */
+struct lineage_control16_batch_scratch {
+ union {struct pt_editor_mixed_causal_lineage_control16_batch control;
+        struct pt_editor_mixed_causal_lineage_stop_batch stop;} saved;
+ union {struct pt_sampler_mixed_causal_lineage_control16_batch control;
+        struct pt_sampler_mixed_causal_lineage_stop_batch stop;} lower;
+ struct pt_sampler_mixed_command_handle handle;
+ struct batch_pair pair;
+};
+static enum pt_editor_mixed_readers_result lineage_control16_batch_begin(
+ struct pt_editor_mixed_causal_lineage_prepare *w,const void *input,unsigned is_stop,
+ struct pt_editor_mixed_command_ref *out)
+{
+ struct pt_editor_mixed_causal_prepare *s;struct lineage_control16_batch_scratch b;
+ struct pt_editor_mixed_reader_record *rr;struct pt_editor_mixed_command_record *c;
+ enum pt_editor_mixed_readers_result r;enum pt_sampler_mixed_result fr;
+ size_t bytes=is_stop?sizeof(b.saved.stop):sizeof(b.saved.control);
+ size_t alignment=is_stop?ALIGN_OF(struct pt_editor_mixed_causal_lineage_stop_batch):
+    ALIGN_OF(struct pt_editor_mixed_causal_lineage_control16_batch);
+ uint64_t frame;unsigned count,i,j,ci,current;
+ if(!span(w,sizeof(*w))||!w||(uintptr_t)w%ALIGN_OF(struct pt_editor_mixed_causal_lineage_prepare)||
+    !span(input,bytes)||!input||(uintptr_t)input%alignment)return PT_EDITOR_MIXED_READERS_INVALID;
+ s=&w->original;
+ if(!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||lineage_scope(s)!=w||
+    !batch_spans(s,input,bytes,out,(uintptr_t)&b,sizeof(b)))return PT_EDITOR_MIXED_READERS_INVALID;
+ if(w->stage>=3)return PT_EDITOR_MIXED_READERS_CAPACITY;
+ if(w->stage!=(is_stop?2U:1U)||!w->root.serial||!w->root_ticket||
+    (is_stop&&(!w->control.serial||!w->control_ticket||!w->root_detached||!w->root_closed)))
+    return PT_EDITOR_MIXED_READERS_INVALID;
+ if(s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS-3||s->serial==UINT64_MAX)
+    return PT_EDITOR_MIXED_READERS_CAPACITY;
+ /* Only admitted fixed original request fields and captured controller records
+  * are read here. Genuine callbacks/getters follow full guard installation. */
+ if(is_stop){const struct pt_editor_mixed_causal_lineage_stop_batch *in=input;
+    frame=in->frame;count=in->count;
+ }else{const struct pt_editor_mixed_causal_lineage_control16_batch *in=input;
+    frame=in->frame;count=in->count;
+ }
+ if(!count||count>PT_SAMPLER_MIXED_ACTIONS||frame==UINT64_MAX||
+    (is_stop&&frame<=w->control_frame))return PT_EDITOR_MIXED_READERS_INVALID;
+ for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i){
+    const struct pt_editor_mixed_causal_lineage_control16_action *a=is_stop?NULL:
+       ((const struct pt_editor_mixed_causal_lineage_control16_batch *)input)->action+i;
+    struct pt_editor_mixed_reader_ref ref=is_stop?
+       ((const struct pt_editor_mixed_causal_lineage_stop_batch *)input)->reader[i]:a->reader;
+    if(i>=count){if(ref.slot||ref.serial||(!is_stop&&(a->period||a->volume||a->rate||a->left||a->right)))
+          return PT_EDITOR_MIXED_READERS_INVALID;
+       continue;
+    }
+    if(!(rr=reader(s,ref))||rr->ticket!=w->root_ticket)return PT_EDITOR_MIXED_READERS_INVALID;
+    for(j=0;j<i;++j){struct pt_editor_mixed_reader_ref old=is_stop?
+       ((const struct pt_editor_mixed_causal_lineage_stop_batch *)input)->reader[j]:
+       ((const struct pt_editor_mixed_causal_lineage_control16_batch *)input)->action[j].reader;
+       if(old.slot==ref.slot&&old.serial==ref.serial)return PT_EDITOR_MIXED_READERS_INVALID;
+    }
+    if(!is_stop){unsigned route;
+       if(rr->track>=s->project_header.channels.count)return PT_EDITOR_MIXED_READERS_INVALID;
+       route=s->project_header.channels.track[rr->track].route;
+       if(route==PT_PAULA){if(!a->period||a->volume>64||a->rate||a->left||a->right)return PT_EDITOR_MIXED_READERS_INVALID;}
+       else if(route!=PT_AMIGUS||a->period||a->volume||!a->rate||a->rate>0x40000000UL)
+          return PT_EDITOR_MIXED_READERS_INVALID;
+    }
+ }
+ r=pt_editor_mixed_causal_prepare_get(s);
+ if(r!=PT_EDITOR_MIXED_READERS_OPEN||s->first_error)return r;
+ for(ci=0;ci<PT_SAMPLER_MIXED_COMMANDS&&s->command[ci].handle.address;++ci){}
+ if(ci==PT_SAMPLER_MIXED_COMMANDS)return PT_EDITOR_MIXED_READERS_CAPACITY;
+ memset(&b,0,sizeof(b));memcpy(&b.saved,input,bytes);
+ if(is_stop){b.lower.stop.frame=frame;b.lower.stop.count=count;}
+ else{b.lower.control.frame=frame;b.lower.control.count=count;}
+ for(i=0;i<count;++i){struct pt_editor_mixed_reader_ref ref=is_stop?b.saved.stop.reader[i]:b.saved.control.action[i].reader;
+    rr=reader(s,ref);if(!rr)return PT_EDITOR_MIXED_READERS_INVALID;
+    if(is_stop)memcpy(b.lower.stop.reader+i,&rr->handle,sizeof(rr->handle));
+    else{struct pt_sampler_mixed_causal_lineage_control16_action *a=b.lower.control.action+i;
+       memcpy(&a->reader,&rr->handle,sizeof(rr->handle));a->period=b.saved.control.action[i].period;
+       a->volume=b.saved.control.action[i].volume;a->rate=b.saved.control.action[i].rate;
+       a->left=b.saved.control.action[i].left;a->right=b.saved.control.action[i].right;
+    }
+ }
+ s->busy=1;batch_pair_begin(s,input,bytes,out,&b.pair);
+ s->guards[s->guard_count++]=(struct pt_sampler_storage_span){&b,sizeof(b)};
+ /* Query actual completed predecessor before any fresh C allocation. The
+  * genuine factory repeats this predicate and every ACTIVE original getter;
+  * controller booleans never replace those lower checks or authorize fire. */
+ current=is_stop?pt_mixed_causal_factory_control_stop_control_current(s->causal,w->control_ticket):
+    pt_mixed_causal_factory_control_stop_first_current(s->causal,w->root_ticket);
+ if(memcmp(input,&b.saved,bytes))fail(s,PT_EDITOR_MIXED_READERS_FAULT);
+ if(!post(s)||!current){r=s->first_error?s->result:PT_EDITOR_MIXED_READERS_INVALID;goto complete_lineage;}
+ w->constructing=is_stop?3U:2U;
+ fr=is_stop?pt_sampler_mixed_causal_lineage_stop_begin(s->pool,s->revision,&b.lower.stop,&b.handle):
+    pt_sampler_mixed_causal_lineage_control16_begin(s->pool,s->revision,&b.lower.control,&b.handle);
+ /* Actual admitted lower handle remains registered amid outer faults. No
+  * old R record, ticket, child index, source or cache is modified here. */
+ if(b.handle.address){
+    w->stage=is_stop?3U:2U;++s->prepared_batches;c=s->command+ci;memset(c,0,sizeof(*c));
+    memcpy(&c->handle,&b.handle,sizeof(c->handle));c->serial=++s->serial;
+    if(!is_stop){w->control=(struct pt_editor_mixed_command_ref){ci,c->serial};w->control_frame=frame;}
+ }
+ if(memcmp(input,&b.saved,bytes))fail(s,PT_EDITOR_MIXED_READERS_FAULT);
+ r=post(s)?factory_result(s,fr):s->result;
+complete_lineage:
+ w->constructing=0;
+ if(b.pair.index>PT_EDITOR_MIXED_READERS_GUARDS-3||
+    s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||s->guard_count!=b.pair.index+3||
+    s->guards[b.pair.index+2].data!=&b||s->guards[b.pair.index+2].bytes!=sizeof(b))
+    r=fail(s,PT_EDITOR_MIXED_READERS_FAULT);
+ else{--s->guard_count;s->guards[s->guard_count]=(struct pt_sampler_storage_span){NULL,0};}
+ if(!batch_pair_end(s,&b.pair))r=s->result;
+ if(b.handle.address&&!s->first_error&&r==PT_EDITOR_MIXED_READERS_PENDING){
+    if(output_apart(s,out,sizeof(*out)))*out=(struct pt_editor_mixed_command_ref){ci,s->command[ci].serial};
+    else r=fail(s,PT_EDITOR_MIXED_READERS_FAULT);
+ }
+ s->busy=0;return r;
+}
+enum pt_editor_mixed_readers_result pt_editor_mixed_causal_lineage_control16_prepare_batch_begin(
+ struct pt_editor_mixed_causal_lineage_prepare *w,const struct pt_editor_mixed_causal_lineage_control16_batch *in,
+ struct pt_editor_mixed_command_ref *out)
+{return lineage_control16_batch_begin(w,in,0,out);}
 enum pt_editor_mixed_readers_result pt_editor_mixed_causal_lineage_control_prepare_batch_begin(
  struct pt_editor_mixed_causal_lineage_prepare *w,const struct pt_editor_mixed_causal_lineage_control_batch *in,
  struct pt_editor_mixed_command_ref *out)

@@ -2,6 +2,7 @@
 #include "mixed_readers_causal_queue_internal.h"
 #include "mixed_readers_causal_factory_internal.h"
 #include "mixed_readers_causal_control_internal.h"
+#include "mixed_readers_causal_control16_internal.h"
 #include "mixed_readers_causal_stop_internal.h"
 #include "mixed_readers_causal_lineage_internal.h"
 #include <stddef.h>
@@ -906,6 +907,73 @@ enum pt_mixed_readers_result pt_mixed_causal_control_enqueue(struct pt_mixed_cau
     memcpy(&saved,request,sizeof(saved));memset(&input,0,sizeof(input));
     input.batch.generation=b->grid.generation;input.batch.frame=saved.frame;input.batch.count=saved.count;input.command=saved.command;
     for(i=0;i<saved.count;++i){const struct pt_mixed_causal_control_action *a=saved.action+i;
+        struct pt_mixed_readers_action *d=input.batch.action+i;
+        if(!slot_index(a->route,a->slot,&index)||!(b->mask&(1U<<index))){b->task_busy=0;return PT_MIXED_READERS_STALE;}
+        key=b->causal.completed_post.slot[index];
+        result=pt_mixed_readers_reader_key(b->queue,key.trigger,key.action,input.target+i);
+        if(memcmp(request,&saved,sizeof(saved)))fault(b);
+        if(result!=PT_MIXED_READERS_OK||!key_equal(&key,input.target+i)||!control_first_current(b)){
+            b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:result==PT_MIXED_READERS_OK?PT_MIXED_READERS_STALE:result;
+        }
+        d->route=a->route;d->slot=a->slot;d->kind=PT_MIXED_READERS_CONTROL;
+        if(a->route==PT_MIXED_READERS_PAULA){d->geometry.paula.period=a->period;d->geometry.paula.volume=a->volume;}
+        else{d->geometry.amigus.rate=a->rate;d->geometry.amigus.left=a->left;d->geometry.amigus.right=a->right;}
+    }
+    /* Genuine enqueue alone transfers ownership. Use the ACTUAL caller slot. */
+    result=pt_mixed_readers_enqueue(b->queue,&input,out);
+    if(memcmp(request,&saved,sizeof(saved)))fault(b);
+    if(result==PT_MIXED_READERS_OK){b->causal.successor=*out;b->causal.serial=1;b->causal.admitted=1;}
+    b->task_busy=0;
+    return result==PT_MIXED_READERS_OK?result:b->failed?PT_MIXED_READERS_BACKEND:result;
+}
+/* Additive register-width CONTROL admission. The existing copied port packet
+ * already carries uint16 levels; this typed request avoids the old uint8 hop.
+ * Its complete original extent is guarded directly, before owner writes or any
+ * genuine ACTIVE getter. No new bind, resource or publication authority. */
+static int control16_request_valid(const struct pt_mixed_causal_control16_request *r)
+{
+    unsigned i,index,mask=0;
+    if(!r->predecessor||!r->count||r->count>PT_MIXED_READERS_ACTIONS||!r->command.context||
+       !r->command.context_bytes||!r->command.token||!r->command.current||!r->command.terminal||!r->command.release)return 0;
+    for(i=0;i<PT_MIXED_READERS_ACTIONS;++i){const struct pt_mixed_causal_control16_action *a=r->action+i;
+        if(i>=r->count){if(a->route||a->slot||a->period||a->volume||a->rate||a->left||a->right)return 0;continue;}
+        if(!slot_index(a->route,a->slot,&index)||(mask&(1U<<index)))return 0;
+        mask|=1U<<index;
+        if(a->route==PT_MIXED_READERS_PAULA){if(!a->period||a->volume>64||a->rate||a->left||a->right)return 0;}
+        else if(!a->rate||a->rate>0x40000000UL||a->period||a->volume)return 0;
+    }
+    return 1;
+}
+enum pt_mixed_readers_result pt_mixed_causal_control16_enqueue(struct pt_mixed_causal_owner *b,
+    const struct pt_mixed_causal_control16_request *request,uint64_t *out)
+{
+    struct pt_mixed_causal_control16_request saved;
+    struct pt_mixed_readers_inputs input;
+    struct pt_mixed_readers_key key;
+    enum pt_mixed_readers_result result;unsigned i,index;
+    /* Guard the complete original and transformed capacities before ANY owner
+     * write, copying or callback. In particular, a local lower-level input must
+     * never hide caller output aliasing the original typed request/holder. */
+    if(!b||!request||!out||!output_apart(b,request,sizeof(*request))||!output_apart(b,out,sizeof(*out))||
+       !output_apart(b,request->command.context,request->command.context_bytes)||
+       !apart(request,sizeof(*request),out,sizeof(*out))||
+       !apart(request,sizeof(*request),request->command.context,request->command.context_bytes)||
+       !apart(out,sizeof(*out),request->command.context,request->command.context_bytes)||
+       !output_address_apart(b,(uintptr_t)&saved,sizeof(saved))||
+       !output_address_apart(b,(uintptr_t)&input,sizeof(input))||
+       !output_address_apart(b,(uintptr_t)&key,sizeof(key))||
+       !apart(&saved,sizeof(saved),request,sizeof(*request))||!apart(&input,sizeof(input),request,sizeof(*request))||
+       !apart(&key,sizeof(key),request,sizeof(*request))||!apart(&saved,sizeof(saved),out,sizeof(*out))||
+       !apart(&input,sizeof(input),out,sizeof(*out))||!apart(&key,sizeof(key),out,sizeof(*out))||
+       !apart(&saved,sizeof(saved),request->command.context,request->command.context_bytes)||
+       !apart(&input,sizeof(input),request->command.context,request->command.context_bytes)||
+       !apart(&key,sizeof(key),request->command.context,request->command.context_bytes)||
+       !control16_request_valid(request)||!b->queue||!control_first_current(b)||b->causal.admitted||b->causal.published||
+       request->predecessor!=b->causal.first||request->frame<=b->last_frame)return PT_MIXED_READERS_INVALID;
+    if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
+    memcpy(&saved,request,sizeof(saved));memset(&input,0,sizeof(input));
+    input.batch.generation=b->grid.generation;input.batch.frame=saved.frame;input.batch.count=saved.count;input.command=saved.command;
+    for(i=0;i<saved.count;++i){const struct pt_mixed_causal_control16_action *a=saved.action+i;
         struct pt_mixed_readers_action *d=input.batch.action+i;
         if(!slot_index(a->route,a->slot,&index)||!(b->mask&(1U<<index))){b->task_busy=0;return PT_MIXED_READERS_STALE;}
         key=b->causal.completed_post.slot[index];

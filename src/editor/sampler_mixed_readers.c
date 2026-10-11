@@ -4,6 +4,8 @@
 #include "sampler_mixed_causal_internal.h"
 #include "sampler_mixed_causal_stop_internal.h"
 #include "sampler_mixed_causal_lineage_internal.h"
+#include "sampler_mixed_causal_lineage_control16_internal.h"
+#include "../core/mixed_readers_causal_control16_internal.h"
 #include "../core/mixed_readers_causal_lineage_internal.h"
 #include "../core/mixed_readers_causal_stop_internal.h"
 #include "../core/mixed_readers_causal_factory_internal.h"
@@ -863,6 +865,110 @@ static enum pt_sampler_mixed_result lineage_begin(struct pt_sampler_mixed_pool *
  for(i=0;i<count;++i)memcpy(&c->source[i].request,request+i,sizeof(request[i]));
  p->commands[ci]=c;out->address=c;out->token=c->token;p->busy=0;return PT_SAMPLER_MIXED_PENDING;
 }
+/* Additive typed wide constructor: only this private entry selects value 2
+ * in the already-existing unsigned causal_control field. No new layout or
+ * caller mode flag. The retained stop branch has no public caller here. */
+static enum pt_sampler_mixed_result lineage_control16_begin(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const void *input,unsigned is_stop,struct pt_sampler_mixed_command_handle *out)
+{
+ union {struct pt_sampler_mixed_causal_lineage_control16_batch control;
+        struct pt_sampler_mixed_causal_lineage_stop_batch stop;} saved;
+ struct pt_sampler_mixed_request request[PT_SAMPLER_MIXED_ACTIONS];
+ struct pt_mixed_readers_key key;
+ struct pt_sampler_mixed_reader *r;
+ struct pt_sampler_mixed_command *c;
+ size_t input_bytes=is_stop?sizeof(saved.stop):sizeof(saved.control);
+ size_t alignment=is_stop?_Alignof(struct pt_sampler_mixed_causal_lineage_stop_batch):
+    _Alignof(struct pt_sampler_mixed_causal_lineage_control16_batch);
+ uint64_t frame;unsigned count,i,j,ci,index,mask=0;enum pt_mixed_readers_result result;
+ if(!p||(uintptr_t)input%alignment||(uintptr_t)out%_Alignof(struct pt_sampler_mixed_command_handle)||
+    !output_apart(p,input,input_bytes)||!output_apart(p,out,sizeof(*out))||
+    !apart(input,input_bytes,out,sizeof(*out))||
+    !output_address_apart(p,(uintptr_t)&saved,sizeof(saved))||
+    !output_address_apart(p,(uintptr_t)request,sizeof(request))||
+    !output_address_apart(p,(uintptr_t)&key,sizeof(key))||
+    !apart(&saved,sizeof(saved),input,input_bytes)||!apart(request,sizeof(request),input,input_bytes)||
+    !apart(&key,sizeof(key),input,input_bytes)||!apart(&saved,sizeof(saved),out,sizeof(*out))||
+    !apart(request,sizeof(request),out,sizeof(*out))||!apart(&key,sizeof(key),out,sizeof(*out))||
+    !apart(&saved,sizeof(saved),request,sizeof(request))||!apart(&saved,sizeof(saved),&key,sizeof(key))||
+    !apart(request,sizeof(request),&key,sizeof(key))||!fixed_current(p,revision)||p->state!=OPEN||
+    !p->lineage_binding||!p->causal_first||p->lineage_stop||
+    p->lineage_stage!=(is_stop?2U:1U)||
+    (is_stop&&(!p->lineage_control||!p->lineage_root_detached||!p->lineage_root_closed)))
+    return PT_SAMPLER_MIXED_INVALID;
+ memcpy(&saved,input,input_bytes);memset(request,0,sizeof(request));
+ frame=is_stop?saved.stop.frame:saved.control.frame;count=is_stop?saved.stop.count:saved.control.count;
+ if(!count||count>PT_SAMPLER_MIXED_ACTIONS||frame==UINT64_MAX||
+ (is_stop&&frame<=p->lineage_control_frame))return PT_SAMPLER_MIXED_INVALID;
+ for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i){
+  struct pt_sampler_mixed_reader_handle h=is_stop?saved.stop.reader[i]:saved.control.action[i].reader;
+  const struct pt_sampler_mixed_causal_lineage_control16_action *a=is_stop?NULL:saved.control.action+i;
+  if(i>=count){
+   if(h.address||h.token||(!is_stop&&(a->period||a->volume||a->rate||a->left||a->right))){
+    return PT_SAMPLER_MIXED_INVALID;
+   }
+   continue;
+  }
+  r=reader(p,h);
+  if(!r||r->state!=LIVE||r->ticket!=p->causal_first||r->frame>=frame)return PT_SAMPLER_MIXED_INVALID;
+  index=r->route==PT_MIXED_READERS_PAULA?r->slot:r->slot+4;
+  if(index>=20||(mask&(1U<<index)))return PT_SAMPLER_MIXED_INVALID;
+  mask|=1U<<index;
+  if(!is_stop){
+   if(r->route==PT_MIXED_READERS_PAULA){if(!a->period||a->volume>64||a->rate||a->left||a->right)return PT_SAMPLER_MIXED_INVALID;}
+   else if(a->period||a->volume||!a->rate||a->rate>0x40000000UL)return PT_SAMPLER_MIXED_INVALID;
+  }
+ }
+ for(ci=0;ci<p->config.maximum_commands&&p->commands[ci];++ci){}
+ if(ci==p->config.maximum_commands||p->serial==UINT64_MAX||sizeof(*c)>p->config.control_budget-p->bytes)
+    return PT_SAMPLER_MIXED_CAPACITY;
+ if(reentry(p))return PT_SAMPLER_MIXED_BUSY;
+ p->busy=1;p->queue_call=1;
+ j=is_stop?pt_mixed_causal_factory_control_stop_control_current(p->causal_original.owner,p->lineage_control):
+    pt_mixed_causal_factory_control_stop_first_current(p->causal_original.owner,p->causal_first);
+ if(memcmp(input,&saved,input_bytes))p->failed=1;
+ if(!j||p->failed||!fixed_current(p,revision)||!backend_fixed(p)){
+  p->queue_call=0;p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_INVALID;}
+ for(i=0;i<count;++i){
+  struct pt_sampler_mixed_reader_handle h=is_stop?saved.stop.reader[i]:saved.control.action[i].reader;
+  r=reader(p,h);
+  if(!r||r->state!=LIVE||r->ticket!=p->causal_first){p->queue_call=0;p->busy=0;return PT_SAMPLER_MIXED_INVALID;}
+  result=pt_mixed_causal_reader_key(p->causal_original.owner,r->ticket,r->action,&key);
+  if(memcmp(input,&saved,input_bytes))p->failed=1;
+  if(result!=PT_MIXED_READERS_OK||p->failed||!fixed_current(p,revision)||!backend_fixed(p)||
+     reader(p,h)!=r||r->state!=LIVE||key.trigger!=p->causal_first||key.action!=r->action||
+     key.owner!=r->token||key.session!=p->causal_original.session||key.generation!=p->config.generation||
+     key.queue!=p->config.queue||key.route!=r->route||key.slot!=r->slot){
+   p->queue_call=0;p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_INVALID;}
+  r->key=key;r->key_seen=1;request[i].kind=is_stop?PT_MIXED_READERS_STOP:PT_MIXED_READERS_CONTROL;
+  request[i].track=r->track;request[i].sample=r->sample;request[i].channel=r->channel;request[i].key=key;
+  if(!is_stop){const struct pt_sampler_mixed_causal_lineage_control16_action *a=saved.control.action+i;
+   if(r->route==PT_MIXED_READERS_PAULA){request[i].geometry.paula.period=a->period;request[i].geometry.paula.volume=a->volume;}
+   else{request[i].geometry.amigus.rate=a->rate;request[i].geometry.amigus.left=a->left;request[i].geometry.amigus.right=a->right;}}
+ }
+ p->queue_call=0;
+ if(!current(p,revision,1)||memcmp(input,&saved,input_bytes)){p->failed=1;p->busy=0;return PT_SAMPLER_MIXED_STALE;}
+ /* Monotonic attempt boundary. A NULL/alias/mutation/cancel cannot reconstruct
+  * this stage. The pool separately consumes each actual lower enqueue attempt. */
+ p->lineage_stage=is_stop?3U:2U;
+ c=p->config.allocator.allocate(p->config.allocator.context,sizeof(*c));
+ if(!c){p->busy=0;return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_CAPACITY;}
+ if(!output_apart(p,c,sizeof(*c))||!apart(c,sizeof(*c),input,input_bytes)||
+    !apart(c,sizeof(*c),out,sizeof(*out))||!apart(c,sizeof(*c),&saved,sizeof(saved))||
+    !apart(c,sizeof(*c),request,sizeof(request))||!apart(c,sizeof(*c),&key,sizeof(key))){
+  p->busy=0;return PT_SAMPLER_MIXED_INVALID;}
+ if((uintptr_t)c%_Alignof(struct pt_sampler_mixed_command)||memcmp(input,&saved,input_bytes)||
+    !fixed_current(p,revision)||!backend_fixed(p)){
+  p->failed=1;p->config.allocator.release(p->config.allocator.context,c);p->busy=0;return PT_SAMPLER_MIXED_STALE;}
+ p->bytes+=sizeof(*c);memset(c,0,sizeof(*c));c->pool=p;c->token=++p->serial;c->state=PREPARING;
+ c->causal_stop=is_stop;c->causal_control=is_stop?0U:2U;c->frame=frame;c->count=count;
+ for(i=0;i<count;++i)memcpy(&c->source[i].request,request+i,sizeof(request[i]));
+ p->commands[ci]=c;out->address=c;out->token=c->token;p->busy=0;return PT_SAMPLER_MIXED_PENDING;
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_control16_begin(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_sampler_mixed_causal_lineage_control16_batch *batch,
+ struct pt_sampler_mixed_command_handle *out)
+{return lineage_control16_begin(p,revision,batch,0,out);}
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_lineage_control_begin(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_causal_lineage_control_batch *batch,
  struct pt_sampler_mixed_command_handle *out)
@@ -1092,6 +1198,25 @@ p->failed=1;
 p->busy=0;
 return PT_SAMPLER_MIXED_STALE;
 }
+/* The actual full wide aggregate is admitted in the outer enqueue BEFORE
+ * current/getters/reentry/owner writes. Repeat its disjointness check here
+ * before initialization; no narrower local hides the retained actual extent. */
+static enum pt_mixed_readers_result lineage_control16_enqueue(struct pt_sampler_mixed_pool *p,
+ struct pt_sampler_mixed_command *c,struct pt_mixed_causal_control16_request *control,uint64_t *out)
+{
+ unsigned i;
+ if((uintptr_t)out%_Alignof(uint64_t)||
+    !output_address_apart(p,(uintptr_t)control,sizeof(*control))||
+    !apart(control,sizeof(*control),out,sizeof(*out)))return PT_MIXED_READERS_INVALID;
+ memset(control,0,sizeof(*control));control->predecessor=p->causal_first;control->frame=c->frame;
+ control->count=c->count;memcpy(&control->command,&c->inputs.command,sizeof(control->command));
+ for(i=0;i<c->count;++i){struct pt_mixed_causal_control16_action *a=control->action+i;
+    const struct pt_mixed_readers_action *source=c->inputs.batch.action+i;
+    a->route=source->route;a->slot=source->slot;
+    if(a->route==PT_MIXED_READERS_PAULA){a->period=source->geometry.paula.period;a->volume=source->geometry.paula.volume;}
+    else{a->rate=source->geometry.amigus.rate;a->left=source->geometry.amigus.left;a->right=source->geometry.amigus.right;}}
+ return pt_mixed_causal_control16_enqueue(p->causal_original.owner,control,out);
+}
 enum pt_mixed_readers_result pt_sampler_mixed_enqueue(struct pt_sampler_mixed_pool *p,uint32_t revision,struct pt_sampler_mixed_command_handle h,uint64_t *out)
 {
  struct pt_sampler_mixed_command *c;
@@ -1100,13 +1225,20 @@ uint64_t ticket;
 unsigned i;
 struct pt_mixed_causal_stop_request stop;
 struct pt_mixed_causal_control_request control;
+struct pt_mixed_causal_control16_request control16;
  if(!p||!output_apart(p,out,sizeof(*out))||!(c=command(p,h))||c->state!=READY)return PT_MIXED_READERS_INVALID;
  if(c->causal_stop&&((uintptr_t)out%_Alignof(uint64_t)||
  !output_address_apart(p,(uintptr_t)&stop,sizeof(stop))||
  !apart(&stop,sizeof(stop),out,sizeof(*out))))return PT_MIXED_READERS_INVALID;
- if(c->causal_control&&((uintptr_t)out%_Alignof(uint64_t)||
+ if(c->causal_control&&c->causal_control!=2U&&((uintptr_t)out%_Alignof(uint64_t)||
  !output_address_apart(p,(uintptr_t)&control,sizeof(control))||
  !apart(&control,sizeof(control),out,sizeof(*out))))return PT_MIXED_READERS_INVALID;
+ /* Only the genuine new constructor marks 2. Guard the actual full wide
+  * aggregate before reentry/current callbacks, owner/command writes and the
+  * monotonic lower enqueue attempt. Legacy route 1 keeps its original guard. */
+ if(c->causal_control==2U&&((uintptr_t)out%_Alignof(uint64_t)||
+ !output_address_apart(p,(uintptr_t)&control16,sizeof(control16))||
+ !apart(&control16,sizeof(control16),out,sizeof(*out))))return PT_MIXED_READERS_INVALID;
  if(reentry(p))return PT_MIXED_READERS_BACKEND;
 if(!current(p,revision,0))return PT_MIXED_READERS_STALE;
  p->busy=1;
@@ -1124,7 +1256,9 @@ c->inputs.command.release=command_release;
     if(!p->causal_first&&!c->causal_control&&!c->causal_stop&&c->token==p->lineage_root_token&&!p->lineage_enqueue_attempt){
        p->lineage_enqueue_attempt=1;result=pt_mixed_causal_enqueue(p->causal_original.owner,&c->inputs,out);}
     else if(p->causal_first&&c->causal_control&&!p->lineage_control&&!p->lineage_stop&&p->lineage_enqueue_attempt==1){
-       p->lineage_enqueue_attempt=2;memset(&control,0,sizeof(control));control.predecessor=p->causal_first;control.frame=c->frame;
+       p->lineage_enqueue_attempt=2;
+       if(c->causal_control==2U)result=lineage_control16_enqueue(p,c,&control16,out);
+       else{memset(&control,0,sizeof(control));control.predecessor=p->causal_first;control.frame=c->frame;
        control.count=c->count;memcpy(&control.command,&c->inputs.command,sizeof(control.command));
        for(i=0;i<c->count;++i){struct pt_mixed_causal_control_action *a=control.action+i;
           const struct pt_mixed_readers_action *source=c->inputs.batch.action+i;
@@ -1132,6 +1266,7 @@ c->inputs.command.release=command_release;
           if(a->route==PT_MIXED_READERS_PAULA){a->period=source->geometry.paula.period;a->volume=source->geometry.paula.volume;}
           else{a->rate=source->geometry.amigus.rate;a->left=source->geometry.amigus.left;a->right=source->geometry.amigus.right;}}
        result=pt_mixed_causal_control_enqueue(p->causal_original.owner,&control,out);
+       }
     }else if(p->lineage_control&&c->causal_stop&&!p->lineage_stop&&p->lineage_root_closed&&p->lineage_root_detached&&p->lineage_enqueue_attempt==2){
        p->lineage_enqueue_attempt=3;memset(&stop,0,sizeof(stop));stop.predecessor=p->lineage_control;stop.frame=c->frame;
        stop.count=c->count;memcpy(&stop.command,&c->inputs.command,sizeof(stop.command));

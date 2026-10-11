@@ -6971,7 +6971,41 @@ The constructor/header extension requires a coherent rebuild; compiler success
 does not establish native ABI or runtime. See
 [controller lineage evidence](../evidence/enhanced-editor/controller-causal-lineage/README.md).
 
-The finite song producer, early SOURCE bridge, wide CONTROL16 adoption and native
+The finite song producer, early SOURCE bridge and native
 frontend are still separate unfinished work. Native runtime, aggregate stack/IRQ/
 WCET, exact live activation, Amiberry, A1200/AmiGUS, hardware stop/order/completion
 and listening remain unqualified. The accepted classic layout is preserved.
+
+
+### Full 16-bit CONTROL through core, sampler and controller
+
+The additive internal CONTROL16 route preserves full uint16 AmiGUS left/right
+levels, including 0, 255, 256 and 65535, while retaining existing uint8 CONTROL
+APIs and layouts. Genuine original reader handles supply route, slot, keys and
+authoritative sample identity. Later CONTROL and STOP create no reader, master
+version, pin, cache conversion or upload. Common sampler enqueue guards the
+actual wide request before callbacks or owner writes and selects the capability
+internally. The finite lifetime still admits two live commands and no fourth
+event; original absolute frames never rebase.
+
+The adopted nine source/test paths passed the matching 25-case repository
+driver. A separate focused 25-case fixture and all nine affected compatibility
+suites also passed strict assertions-enabled ASan/UBSan checks: core CONTROL34;
+sampler default24, STOP55, lineage74 and quantized39; controller default43,
+STOP52 and lineage55; and producer62. Complete master/save/resource beforeimages,
+copied wide packets, refused aliases, consumed attempts and independent
+retirement are asserted within the finite fixture. Cases reach sixteen live
+readers; the configured 32-reader bound is not a full-occupancy result. The
+accepted classic layout and all sixteen unrelated display/editor paths remain
+unchanged. See [CONTROL16 evidence](../evidence/enhanced-editor/control16/README.md).
+
+Separate strict m68000/soft-float checks passed dependency discovery, object
+compilation and assembly generation for the three changed C units, observing
+20/40/72 non-system dependencies. Individual stack reports are retained separately
+and do not establish aggregate task/interrupt stack or WCET. No linked native
+fixture ran. Finite song producer and early SOURCE integration remain unfinished;
+native frontend/ABI/runtime, exact live activation, Amiberry, real A1200/AmiGUS,
+device capacity/order/completion/voice stop and listening remain unqualified.
+Authoritative masters, selective caches, master-preserving save and direct
+24-bit mixing retain their existing architecture. No deferred ZooperTracker
+feature is introduced.

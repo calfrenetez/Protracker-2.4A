@@ -1,0 +1,215 @@
+{
+  "canonical_HOST35": {
+    "Root_typed_final_outcome_observations": {
+      "actual_outcome_file_closes": 6,
+      "caller_arguments_and_original_timer_handler_restored": true,
+      "caller_policy_transition": [
+        0,
+        1,
+        0
+      ],
+      "original_writer_arrays_not_reconstructed": true,
+      "outcome_complete": true,
+      "outcome_timer_handler_restored": true,
+      "provenance": "ROOT_SAME_THREAD_ACTUAL_FINAL_OBSERVATIONS_NOT_SAVED_RAW_REPLAY",
+      "reported_errors": []
+    },
+    "bounds_seconds": {
+      "candidate": 190,
+      "compile": 120,
+      "first_file": 5,
+      "fixture": 30,
+      "whole": 200
+    },
+    "cases": 35,
+    "compile_returncode": 0,
+    "complete_oracle": {
+      "bytes": 724,
+      "sha256": "0a6c55edf97c9999b5925f07a69a05bfb87fefec3e32c8e5b2e467dba389187f"
+    },
+    "complete_oracle_text": "PAULA SEGMENT SEQUENCE HOST FIXTURE PASS:35 cases;genuine measured sequence and same-owner rewind;silent normal-row preroll;actual960-1920-2880-3840 plans;original3 current masters and selective Chip leases;positive original reader key;explicit pressure preserves original plan-ticket-deadline;independent command-reader retirement both orders;incremental cancellation-stale-shape-work-late refusers;genuine held-cache workspace-output refusers;five borrowed-argument allocation aliases refused before ownership;close release reentry retains owner without child resurrection;exact LATE-CLOCK refusals and submit reentry retained until independent proofs both orders;legacy producer unchanged;HOST_ONLY_NATIVE_OUTPUT_NOT_RUN\n",
+    "cross_operation_continuous_custody": false,
+    "elapsed_seconds": {
+      "candidate": 9.31890937499702,
+      "compile": 8.686869208002463,
+      "fixture": 0.4130567499960307
+    },
+    "fixture_returncode": 0,
+    "guarded_pin_call_count": 466,
+    "guarded_pin_calls_are_not_unique_Source_or_baseline_category_proof": true,
+    "independent_saved_DATA_audit": {
+      "bytes": 7265,
+      "sha256": "8a4161b550a0954db209aee6041bbe6b278d072f1528026e5cdb03829da70cc8",
+      "status": "PASS"
+    },
+    "receipt_pin": {
+      "bytes": 3912,
+      "sha256": "79e75efb7a2839eb637c61b68fb03407f1568c8960c452cef59d3e55bd98e92c"
+    },
+    "saved_candidate_restoration": {
+      "errors": [],
+      "handler_restored": true,
+      "timer_disarmed": true
+    },
+    "saved_child_custody": {
+      "actual_direct_waits": 2,
+      "both_streams_EOF": true,
+      "close_and_cleanup_errors": [],
+      "escaped_or_group_absence": "NOT_QUALIFIED",
+      "separate_stdout_stderr_selector_closes": true,
+      "signals_attempted": 0
+    },
+    "saved_driver_custody": {
+      "before_after_equal": true,
+      "body_pin": {
+        "bytes": 20927,
+        "sha256": "bfb5741883d7b108d7c709b7ed82f61e293bc763dc1e53171a63c75bae620059"
+      },
+      "canonical_driver_has_no_invented_admission_gate": true,
+      "paired_EOF_actual_close": true,
+      "subprocess_run_restored": true
+    },
+    "selected_units": 33,
+    "status": "PASS_INDEPENDENTLY_AUDITED",
+    "strict_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-Itests",
+      "-I."
+    ],
+    "successful_child_diagnostics": "EMPTY_INDEPENDENTLY_AUDITED",
+    "tests_run": 1,
+    "unittest_output_pin": {
+      "bytes": 246,
+      "sha256": "b4e3d1cecf9a5887c04c144821f00ad284ccdc31f183c40f05ec9e6692d3549a"
+    },
+    "unsaved_Source_or_baseline_category_snapshots": "NOT_RECONSTRUCTED"
+  },
+  "canonical_Source_review": {
+    "bytes": 6397,
+    "sha256": "8f93e151591b68720e9799be5e5e8e650026e000bfbd399e24e305f3374360a1",
+    "status": "READY_SOURCE_ONLY"
+  },
+  "canonical_entry_admission": {
+    "enabled_wrapper_pin": {
+      "bytes": 31438,
+      "sha256": "785c0ce6bfef110effe480624e02bbb5f3a2231ea030d397e37edab80613b320"
+    },
+    "historical_pre_run_NOT_RUN_packets_preserved": true,
+    "inactive_wrapper_pin": {
+      "bytes": 31439,
+      "sha256": "673129cd82d148f232bf372d3d43ab7fdf937e0381f8c1ed02196498c2cb29e3"
+    },
+    "own7_adoption_receipt_pin": {
+      "bytes": 104457,
+      "sha256": "1c07a00a53de63c3c35a4b740754dfa6e02d532f4ef3fa35320ce7d733b57682"
+    },
+    "wrapper_gate_only_inverse_verified": true
+  },
+  "implementation_Source": {
+    "src/editor/paula_segment_sequence.c": {
+      "bytes": 28673,
+      "sha256": "24f7852fd71cc174274a80e6a5856fe6c8af203328657df91d68212d159734e2"
+    },
+    "src/editor/paula_segment_sequence.h": {
+      "bytes": 6254,
+      "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+    },
+    "tests/paula_segment_sequence_test.c": {
+      "bytes": 30059,
+      "sha256": "c6e44c25a4e105d6ea7172531abf5a14fa0148cdac61fa40fb850404f631b344"
+    }
+  },
+  "independent_Source_review": {
+    "bytes": 17375,
+    "sha256": "180d6d4ae100a847876f0e687538142477dc9b07e250af123101b00ce14736f7",
+    "status": "READY_SOURCE_ONLY"
+  },
+  "legacy_sampler_song_refusals": "UNCHANGED",
+  "native_compilation": "INHIBITED",
+  "not_qualified": {
+    "Amiberry": "NOT_RUN",
+    "IRQ_MMIO": "NOT_RUN",
+    "audio": "NOT_RUN",
+    "device_fetch_stop_order": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "frontend": "NOT_RUN",
+    "general_song": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "native": "NOT_RUN",
+    "native_ABI": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "physical_A1200_AmiGUS": "NOT_RUN",
+    "timing": "NOT_RUN"
+  },
+  "ordinary_freshness_author_refusal": "PRESERVED_SOURCE_ONLY_HISTORICAL_METADATA_COMPARISON_REFUSAL_NO_CANDIDATE_RUN_NO_CAUSE_INFERENCE",
+  "overall": "PRIVATE_AND_CANONICAL_HOST35_PASS_INDEPENDENTLY_AUDITED_SEPARATE_RUNS",
+  "predecessor_results_are_producer_acceptance": false,
+  "preserved_negatives": {
+    "V1": "UNRUN_SOURCE_NEGATIVE",
+    "V2": "UNRUN_SOURCE_NEGATIVE",
+    "V3": "ACTUAL_PRIVATE_FAILED_GEOMETRY_ASSERTION_RICHER_ATOMS_NOT_EXPORTED",
+    "V4": "ACTUAL_PRIVATE_FAILED_LATE_ASSERTION_ACTUAL_RETURN_NOT_EXPORTED",
+    "V5": "UNRUN_SOURCE_NEGATIVE_READER_FIRST_FIXTURE_SNAPSHOT",
+    "V6": "DISTINCT_FIXTURE_ONLY_REPAIR_PRODUCT_C_H_EXACT_V5"
+  },
+  "private_HOST35": {
+    "cases": 35,
+    "compiler_fixture_returncodes": [
+      0,
+      0
+    ],
+    "complete_oracle": {
+      "bytes": 724,
+      "sha256": "0a6c55edf97c9999b5925f07a69a05bfb87fefec3e32c8e5b2e467dba389187f"
+    },
+    "final_outcome_closes_policy_restore": "ROOT_TYPED_ACTUAL_OBSERVATIONS_SEPARATE_FROM_SAVED_STREAM_REPLAY",
+    "independent_saved_DATA_audit": {
+      "bytes": 4977,
+      "sha256": "18734720c3c630edbf3a25c6e2e67da67cda3478ae19297952d6eeeb376c39bc",
+      "status": "PASS"
+    },
+    "receipt_pin": {
+      "bytes": 3904,
+      "sha256": "03fc2041de4bfbe53acb2a34ca4d434a8145aaacd6d70c707d14d9435af02014"
+    },
+    "selected_units": 33,
+    "status": "PASS_INDEPENDENTLY_AUDITED",
+    "successful_child_diagnostics": "EMPTY_INDEPENDENTLY_AUDITED",
+    "unsaved_runtime_snapshot_and_group_absence": "NOT_INFERRED"
+  },
+  "recipe": {
+    "baseline51_protected16_font_original_lowerer_song_guards": "RETAINED",
+    "bounds_seconds": {
+      "candidate": 190,
+      "compile": 120,
+      "first_file": 5,
+      "fixture": 30,
+      "whole": 200
+    },
+    "dataless_baseline_placeholders": "METADATA_ONLY_NO_HYDRATION_NO_BYTE_EQUIVALENCE",
+    "full_oracle_required": {
+      "bytes": 724,
+      "sha256": "0a6c55edf97c9999b5925f07a69a05bfb87fefec3e32c8e5b2e467dba389187f"
+    },
+    "literal_sources": 82,
+    "quoted_include_edges": 136,
+    "strict_C99_Werror_assertions_ASan_UBSan": true
+  },
+  "release_acceptance": false,
+  "schema": "PT24G_PAULA_SEGMENT_SEQUENCE_HOST_QUALIFICATION_V3",
+  "scope": "Fixed genuine renderer SEGMENT/REPEAT/REPEAT/STOP HOST producer; private and canonical runs separately audited",
+  "standalone_canonical_driver": {
+    "bytes": 20927,
+    "path": "tests/test_paula_segment_sequence.py",
+    "sha256": "bfb5741883d7b108d7c709b7ed82f61e293bc763dc1e53171a63c75bae620059",
+    "status": "PASS_INDEPENDENTLY_AUDITED"
+  }
+}

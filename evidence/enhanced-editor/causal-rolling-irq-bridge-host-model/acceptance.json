@@ -1,0 +1,147 @@
+{
+  "acceptance_basis": {
+    "actual_private_receipt_pin": {
+      "bytes": 3817,
+      "sha256": "da8a1bef38c19a235d7c67d5313cb7100001973e9e67c6a90c1b450781cb04cf"
+    },
+    "canonical_actual_receipt_pin": {
+      "bytes": 3829,
+      "sha256": "bc902edde62129197e45f9d766511bf1ddbfad7a6abe5b7a1f88abe8ee56965f"
+    },
+    "canonical_final_observation_pin": {
+      "bytes": 831,
+      "sha256": "a2e75c4fe79edfa4204c60199f924a4fbf9706090a74bb47fd6acce98cf505e3"
+    },
+    "canonical_independent_saved_data_audit_pin": {
+      "bytes": 5185,
+      "sha256": "a0c7bb43b2444e315d1eb34e4a26a531bb364f2ef570ab7d575d3b28eb11ba8b"
+    },
+    "final_observation_pin": {
+      "bytes": 788,
+      "sha256": "228924db3a65febcfd4eb49faaa600577edf12df20a1ab60619e7b2b3df084b2"
+    },
+    "final_observation_provenance": "Saved honest Root-transcribed tool observation; not raw stdout replay.",
+    "independent_saved_data_audit_pin": {
+      "bytes": 7101,
+      "sha256": "70ba70821ea20769f07f93c269fc0c4b4c49ae799d4365344eda611187abfbd9"
+    }
+  },
+  "accepted_source_pins": {
+    "src/native/readers_ram/native_mixed_causal_rolling_irq.s": {
+      "bytes": 1126,
+      "sha256": "8dd84bb4d1bd4fedca94b9584f5ca3071e48065df842eee5f23ebcc48d2bd217"
+    },
+    "src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.c": {
+      "bytes": 16451,
+      "sha256": "e9266976fe1a1852378248eaef24814f14095de5eb8b3df8368a2cfb64576ca2"
+    },
+    "src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.h": {
+      "bytes": 4887,
+      "sha256": "00f56f05a9d030718765afd74dae05ebd3336e1949429b76f6c8dcd34bf86450"
+    },
+    "src/native/readers_ram/native_mixed_causal_rolling_irq_layout.h": {
+      "bytes": 3065,
+      "sha256": "c49ca938fb279fccf4b16bc869966e48ca52525fb21a5f65e87798531762bdaf"
+    },
+    "tests/native_mixed_causal_rolling_irq_bridge_test.c": {
+      "bytes": 25294,
+      "sha256": "8cce4a644b29a7fc4057806a442a8fc4ef8bb8ce5757c92082ea3c0dc4dda362"
+    }
+  },
+  "actual_output_repeat_timing_DMA_voice_stop": "NOT_RUN",
+  "amiberry": "NOT_RUN",
+  "audio_listening": "NOT_RUN",
+  "canonical_driver_proposed_pin": {
+    "bytes": 12851,
+    "sha256": "3afddc64bfa388b9518406c01985151efa257b156c95482fed576461fd876441"
+  },
+  "canonical_host": {
+    "both_streams_EOF_and_separate_closes": true,
+    "candidate_restoration_positive": true,
+    "cleanup_close_errors": 0,
+    "compiler_diagnostics": "EMPTY",
+    "compiler_returncode": 0,
+    "compiler_translation_units": 86,
+    "complete_oracle": "ROLLING IRQ BRIDGE HOST FIXTURE PASS:25 cases;genuine producer-factory-controller-core;fixed80-byte envelope with explicit HOST address tags;four original identities and absolute windows;actual quiet-service-retirement before continuation;full20 and original16 leases;EARLY unchanged original deadline;whole exclusion and outer-leave lifetime;stale-alias-alignment refusal;clock-exclusion-selector mutation-reentry and fault-rewind refusal retain adoption and ownership;clean0 and unknown arm separate;native entry inhibited before payload reads;exact960-1920-2880-3840;HOST_CONTRACT_MODEL_ONLY\n",
+    "final_outcome_boundary": "Original final closes and restoration are supported by an honest Root-transcribed tool observation, not raw stdout replay.",
+    "fixture_cases": 25,
+    "fixture_returncode": 0,
+    "fixture_stderr": "EMPTY",
+    "fixture_stdout_pin": {
+      "bytes": 595,
+      "sha256": "3107bc2a160a4ead451d7f1282df421122d67941299377b3dc3d040edcc29db3"
+    },
+    "metadata_boundary": "Adoption and the canonical trial each passed their own admitted before/after guards; equality of metadata across these distinct operations is not claimed.",
+    "original_caps": {
+      "candidate190": 190,
+      "compile120": 120,
+      "file5": 5,
+      "fixture30": 30,
+      "whole200": 200
+    },
+    "outer_unittest_tests": 1,
+    "recorded_direct_waits": 2,
+    "recorded_driver_body_pin": {
+      "bytes": 12851,
+      "sha256": "3afddc64bfa388b9518406c01985151efa257b156c95482fed576461fd876441"
+    },
+    "signals_attempted": 0,
+    "source_and_preservation_boundary": "The exact canonical driver and successful unittest supply internal selected-source, protected16, baseline51 and deterministic font assertions. Unsaved raw snapshots or child argv/environment are not reconstructed.",
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true,
+    "subprocess_hook_restored": true
+  },
+  "canonical_repository_entry": "PASS_SAVED_DATA_INDEPENDENTLY_AUDITED_ONCE_HOST25",
+  "escaped_or_process_group_absence": "NOT_QUALIFIED",
+  "native_030_ABI_build_IRQ_stack_WCET": "NOT_RUN",
+  "native_dispatch": "LITERALLY_INHIBITED_BEFORE_PAYLOAD_READ",
+  "preservation_boundary": "Exact reviewed driver guards selected source bodies, protected16, baseline51 and deterministic font. Adoption and trial custody are separate admitted before/after checks; cross-operation metadata equivalence and unsaved raw snapshots are not inferred.",
+  "prior_negative_evidence": {
+    "V3": {
+      "cause": "Root-only service flag was wrongly required for CONTROL in the helper compound assertion; actual failed atom was not individually exported.",
+      "compiler_returncode": 0,
+      "disposition": "PRESERVED_FAILED_NO_RECLASSIFICATION",
+      "fixture_returncode": -6,
+      "receipt_pin": {
+        "bytes": 4225,
+        "sha256": "b5d9f100698e301dd8ba6df44afc988f32b8629bef2ce9d24274742ded2a87f9"
+      }
+    },
+    "V4": {
+      "cause": "Fixture used two nonexistent RAM command member names; Source correction also replaced reader snapshots with exact-size memcpy.",
+      "compiler_returncode": 1,
+      "disposition": "PRESERVED_FAILED_NO_RECLASSIFICATION",
+      "fixture": "NOT_RUN",
+      "receipt_pin": {
+        "bytes": 6224,
+        "sha256": "e9eaba923182e19e6db00a3fe7b6a383b0a4a95d149a98d7388eecefffe7d424"
+      }
+    }
+  },
+  "private_host": {
+    "both_streams_EOF_and_separate_closes": true,
+    "candidate_restoration_positive": true,
+    "cleanup_close_errors": 0,
+    "compiler_diagnostics": "EMPTY",
+    "compiler_returncode": 0,
+    "compiler_translation_units": 86,
+    "complete_oracle": "ROLLING IRQ BRIDGE HOST FIXTURE PASS:25 cases;genuine producer-factory-controller-core;fixed80-byte envelope with explicit HOST address tags;four original identities and absolute windows;actual quiet-service-retirement before continuation;full20 and original16 leases;EARLY unchanged original deadline;whole exclusion and outer-leave lifetime;stale-alias-alignment refusal;clock-exclusion-selector mutation-reentry and fault-rewind refusal retain adoption and ownership;clean0 and unknown arm separate;native entry inhibited before payload reads;exact960-1920-2880-3840;HOST_CONTRACT_MODEL_ONLY\n",
+    "fixture_cases": 25,
+    "fixture_returncode": 0,
+    "fixture_stderr": "EMPTY",
+    "fixture_stdout_pin": {
+      "bytes": 595,
+      "sha256": "3107bc2a160a4ead451d7f1282df421122d67941299377b3dc3d040edcc29db3"
+    },
+    "recorded_direct_waits": 2,
+    "recorded_driver_body_pin": {
+      "bytes": 13272,
+      "sha256": "3dd4d2d93880aa6c6558e09a24d52df88717a297b396904e3ac514fed2367e47"
+    },
+    "signals_attempted": 0,
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true
+  },
+  "real_A1200_AmiGUS": "NOT_RUN",
+  "schema": "pt24g-rolling-irq-bridge-adoption-evidence-v2",
+  "scope": "HOST_CONTRACT_MODEL_ONLY_NATIVE_ENTRY_INHIBITED",
+  "status": "PRIVATE_AND_CANONICAL_HOST25_ACCEPTED_TARGETS_NOT_RUN"
+}

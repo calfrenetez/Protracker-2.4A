@@ -1,0 +1,155 @@
+{
+  "boundaries": {
+    "HOST_addresses_are_explicit_labels": true,
+    "future_C_compilation": false,
+    "native_build_inhibited": true,
+    "typed_provider_or_combined_chain_acceptance": false,
+    "unsaved_runtime_custody_reconstructed": false
+  },
+  "cleanup": {
+    "cleanup_close_errors": [],
+    "direct_wait_bothEOF_stream_selector_closes": true,
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "signals_attempted": 0
+  },
+  "private_saved_qualification": {
+    "bytes": 5469,
+    "sha256": "947c8acf10a57e865d5abcfe9bbbef56aa8468b4ce39cd4e92ac855b366a936a"
+  },
+  "qualification": {
+    "canonical_HOST": "QUALIFIED_SEPARATE_SAVED_RESULT",
+    "group_absence": "NOT_QUALIFIED",
+    "native_emulator_physical_AmiGUS_audio_timing_listening": "NOT_RUN_OR_NOT_INFERRED",
+    "private_packet46_HOST": "QUALIFIED_SAVED_RESULT"
+  },
+  "restoration": {
+    "driver_before_after_equal": true,
+    "errors": [],
+    "future_qualification_before_after_equal": true,
+    "handler_restored": true,
+    "subprocess_run_restored": true,
+    "timer_disarmed": true
+  },
+  "result": {
+    "case_count": 46,
+    "compiler": {
+      "cap_seconds": 120,
+      "elapsed_seconds": 9.763860291999663,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_bytes": 0
+    },
+    "first_failure": null,
+    "fixture": {
+      "cap_seconds": 30,
+      "elapsed_seconds": 0.40303599999970174,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stdout_bytes": 266
+    },
+    "fixture_oracle": {
+      "bytes": 266,
+      "sha256": "1fdcf9b22240d379f80a9f24dfce83b3161731d7e6726349dd168902b83858f9"
+    },
+    "limits": {
+      "candidate190": 190,
+      "compile120": 120,
+      "file5": 5,
+      "fixture30": 30,
+      "whole200": 200
+    },
+    "physical_LF_include_edges": 141,
+    "private_copies": 87,
+    "source_closure": 86,
+    "strict_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-Itests",
+      "-I."
+    ],
+    "tests_run": 1,
+    "translation_units": 34,
+    "wrapper_status": "PASS"
+  },
+  "status": "PRIVATE_AND_CANONICAL_PACKET46_HOST_PASS_NATIVE_INHIBITED",
+  "canonical_saved_qualification": {
+    "bytes": 5747,
+    "sha256": "fb6ec9a65c5ce7d4ee5c78f327bb926b55c5d366393dbac4452fa1935117f918"
+  },
+  "canonical_result": {
+    "case_count": 46,
+    "translation_units": 34,
+    "source_closure": 86,
+    "physical_LF_include_edges": 141,
+    "fixture_oracle": {
+      "bytes": 266,
+      "sha256": "1fdcf9b22240d379f80a9f24dfce83b3161731d7e6726349dd168902b83858f9"
+    },
+    "limits": {
+      "candidate190": 190,
+      "compile120": 120,
+      "file5": 5,
+      "fixture30": 30,
+      "whole200": 200
+    },
+    "strict_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-Itests",
+      "-I."
+    ],
+    "tests_run": 1,
+    "wrapper_status": "PASS",
+    "first_failure": null,
+    "elapsed_candidate_seconds": 10.739706458,
+    "compiler": {
+      "cap_seconds": 120,
+      "elapsed_seconds": 9.645270624998375,
+      "returncode": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    "fixture": {
+      "cap_seconds": 30,
+      "elapsed_seconds": 0.46123862500098767,
+      "returncode": 0,
+      "stdout_bytes": 266,
+      "stderr_bytes": 0
+    },
+    "cleanup": {
+      "direct_wait_bothEOF_stream_selector_closes": true,
+      "cleanup_close_errors": [],
+      "signals_attempted": 0,
+      "escaped_or_group_absence": "NOT_QUALIFIED"
+    },
+    "restoration": {
+      "driver_before_after_equal": true,
+      "subprocess_run_restored": true,
+      "handler_restored": true,
+      "timer_disarmed": true,
+      "errors": []
+    },
+    "actual_outcome_and_caller_final_stdout": {
+      "six_saved_DATA_closes": true,
+      "OFF_policy_restored": true,
+      "argv_timer_handler_restored": true,
+      "source_guard_retired": true,
+      "errors": [],
+      "custody_not_reconstructed_from_saved_receipt": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Paula geometry packet32 acceptance
+
+The exact private and standalone canonical HOST compiler and 46-case fixtures passed separately. Their independently audited saved qualifications are bound by SHA-256 947c8acf10a57e865d5abcfe9bbbef56aa8468b4ce39cd4e92ac855b366a936a (5469 bytes, private) and fb6ec9a65c5ce7d4ee5c78f327bb926b55c5d366393dbac4452fa1935117f918 (5747 bytes, canonical). Both compiled 34 strict units with warnings as errors and AddressSanitizer/UndefinedBehaviorSanitizer and produced the exact 266-byte, four-line oracle with no stderr.
+
+Canonical compilation took 9.6453 seconds and its fixture took 0.4612 seconds. The original caps remained 200 seconds overall, 190 seconds for the candidate, 120 seconds for compilation, 30 seconds for the fixture and 5 seconds per guarded file. Both saved child direct waits, pipe EOF/close checks and restoration checks passed. Root also observed the actual final six outcome-file closes and caller OFF-policy, argv, timer and handler restoration. The saved receipt does not reconstruct that final runtime custody. Escaped-process/group absence remains unqualified.
+
+Canonical adoption preserved the existing 82 source bodies, 16 unrelated work paths, seven producer bodies, sample-memory documentation and classic baseline. Four dataless classic files were checked through metadata without hydration. The separate private report and earlier Source-only proposals remain historical evidence.
+
+Native, emulator, real A1200, AmiGUS, live output, scheduling, device timing, hardware quiet and human listening are not qualified by these HOST results. No future backend C compilation or typed-provider/combined-chain acceptance is inferred. The converter remains an inhibited HOST address model; source readiness, execution admission and acceptance tiers remain distinct.

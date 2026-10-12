@@ -7266,3 +7266,14 @@ The genuine measured sequence fixture covers 46 packet cases and both real retir
 Both child RC0/direct-wait/EOF/stream-selector-close checks passed without signals. Root observed six final outcome-file closes and caller OFF-policy/argv/timer/handler restoration; that custody is not reconstructed from the saved receipt. Group absence remains unqualified. Current canonical/protected/producer bodies and the classic baseline were preserved; four dataless classic endpoints stayed unopened.
 
 This advances the finite HOST preparation chain only. Future C compilation, typed-provider and combined-chain acceptance are not inferred from these packet results. Native build inhibition remains; emulator, real A1200/AmiGUS, hardware timing/quiet, exact live scheduling and listening acceptance remain untested here.
+
+
+### 12 October 2026 — canonical typed Paula provider and delivery snapshot utility
+
+The typed provider owns four big-endian model records and preserves their original tickets, frame windows and independent packet/reader/source retirement obligations. Its injected callbacks serialize the whole entry, including restoration; uncertain restoration retains genuine ownership. Known master, cache, descriptor and resource-control extents are excluded from caller outputs, including before first publication and after record retirement. Model addresses remain numeric labels and are never converted into host pointers.
+
+The four-channel TASK utility now produces ordinary metadata snapshots from genuine held packets, including superseded source versions. Temporary pins are balanced, and copying a snapshot transfers no sample pin, cache lease, command, timer reference or activation authority. Its pure window comparator observes supplied metadata without acquiring a clock or scheduling playback.
+
+Separate exact canonical host sanitizer trials passed 75 typed-provider cases (45 output-alias refusals) and 85 delivery cases (71 snapshots plus 14 observer comparisons). Both compiled and ran with C99, assertions, warnings as errors, AddressSanitizer and UndefinedBehaviorSanitizer, without diagnostics. The corresponding private trials remain separate evidence. Compact canonical results and product pins are recorded in evidence/enhanced-editor/paula-segment-provider-host and evidence/enhanced-editor/paula-delivery4-task-host.
+
+The on-disk drivers remain disabled by default; the canonical trials used reviewed ephemeral admission. Native builds remain inhibited. All-path mutation protection, authenticated exact event activation and native IRQ restoration still require implementation and qualification. These host results establish no Amiberry, A1200, DMA/voice-stop, AmiGUS RAM capacity/ordering/completion, musical timing, audio or listening acceptance. The accepted exact scheduling policy is unchanged.

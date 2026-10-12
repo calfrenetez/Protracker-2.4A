@@ -1,0 +1,146 @@
+{
+  "Source_readiness": "Exact canonical product installed and separately qualified by saved/current HOST compile and fixture",
+  "canonical_HOST85": "PASS_CANONICAL_HOST_ONLY",
+  "emulator": "NOT_RUN",
+  "native": "INHIBITED_BY_HEADER",
+  "physical_A1200": "NOT_RUN",
+  "private_genuine85": {
+    "actual_saved_qualification": {
+      "bytes": 8359,
+      "sha256": "e06a6694e841e0a35c4441649cb6b3cd90f8b2d9ac5b976fbe6073c56338f0d8"
+    },
+    "added_pure_observer_cases": 14,
+    "fixture_body_pin": {
+      "bytes": 24715,
+      "sha256": "ff22a764e4621873130d7d85ded2509f0706f56e5829f4035b92acdc2a120f56"
+    },
+    "oracle": {
+      "bytes": 63,
+      "sha256": "7698ea44e6b7e7d0786ee5c27a97fae4baa2e2494ae12f1b3686a2a113f5d952"
+    },
+    "original_cases": 71,
+    "physical_LF_include_edges": 120,
+    "proposed_cases": 85,
+    "result": {
+      "caps": {
+        "candidate190": 190,
+        "compile120": 120,
+        "file5": 5,
+        "fixture30": 30,
+        "whole200": 200
+      },
+      "case_count": 85,
+      "closure": 73,
+      "compiler": {
+        "cap_seconds": 120,
+        "returncode": 0,
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "first_failure": null,
+      "fixture": {
+        "cap_seconds": 30,
+        "returncode": 0,
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 63,
+          "sha256": "7698ea44e6b7e7d0786ee5c27a97fae4baa2e2494ae12f1b3686a2a113f5d952"
+        }
+      },
+      "include_edges": 120,
+      "new_pure_observer_cases": 14,
+      "oracle_bytes": 63,
+      "original71_separate": 71,
+      "private_copies": 74,
+      "strict_flags": [
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-Itests",
+        "-I."
+      ],
+      "strict_units": 27,
+      "test_status": "PASS",
+      "tests_run": 1
+    },
+    "source_bodies": 73,
+    "status": "QUALIFIED_SAVED_DATA_ONLY",
+    "translation_units": 27
+  },
+  "private_original71": {
+    "case_count": 71,
+    "fixture_body_pin": {
+      "bytes": 21896,
+      "sha256": "92bcaa903306d742e8f13aa09a1b8f2033ee76c296a633317418d847bcbaa60d"
+    },
+    "saved_qualification_body_pin": {
+      "bytes": 8643,
+      "sha256": "d0c17ca7777e91082c6a828bb40d38fea587ed368b8a4a23ff7264f80f98bfa3"
+    },
+    "scope": "Only the earlier exact genuine71 fixture; not the added14 pure observer cases.",
+    "status": "QUALIFIED_SAVED_DATA_ONLY"
+  },
+  "product": "Delivery4 serialized TASK snapshot and pure window comparison",
+  "product_body_pins": {
+    "src/editor/paula_delivery4_task.c": {
+      "bytes": 11643,
+      "sha256": "5ca1f0dde2f20a71b64e4f1aee78e062387908ef85434834e8b10740694afa4c"
+    },
+    "src/editor/paula_delivery4_task.h": {
+      "bytes": 4618,
+      "sha256": "47b12c62de27064f4d1425b039cd1d79a1a2482f26cd2525779dfc6079d59866"
+    },
+    "tests/paula_delivery4_genuine_owner_test.c": {
+      "bytes": 24715,
+      "sha256": "ff22a764e4621873130d7d85ded2509f0706f56e5829f4035b92acdc2a120f56"
+    }
+  },
+  "runtime_gates": {
+    "ROOT_ADMITTED": false
+  },
+  "status": "QUALIFIED_CANONICAL_HOST_ONLY",
+  "timing_audio_listening": "NOT_RUN",
+  "canonical_result": {
+    "date": "2026-10-12",
+    "case_count": 85,
+    "translation_units": 27,
+    "source_closure": 73,
+    "physical_LF_include_edges": 120,
+    "compiler": {
+      "returncode": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    "fixture": {
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "oracle": {
+        "bytes": 63,
+        "sha256": "7698ea44e6b7e7d0786ee5c27a97fae4baa2e2494ae12f1b3686a2a113f5d952"
+      }
+    },
+    "saved_current_qualification": {
+      "bytes": 12453,
+      "sha256": "266e02bfaf0e80be191e4f98a53575e25531595df9b8f1420c74cd58eab9d009"
+    },
+    "admission": "Separate reviewed ephemeral driver admission; on-disk gates stay disabled",
+    "ownership": "Genuine source and cache obligations retained; no activation or quiet inferred",
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "scope": "Exact canonical HOST fixture only; no native, emulator, physical, IRQ, MMIO, timing, audio or listening acceptance"
+  }
+}

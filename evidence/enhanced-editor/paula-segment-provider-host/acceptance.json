@@ -1,0 +1,113 @@
+{
+  "Source_readiness": "Exact canonical product installed and separately qualified by saved/current HOST compile and fixture",
+  "canonical_HOST75": "PASS_CANONICAL_HOST_ONLY",
+  "emulator": "NOT_RUN",
+  "native": "INHIBITED_BY_HEADER",
+  "physical_A1200": "NOT_RUN",
+  "private_HOST75": {
+    "limits": {
+      "candidate190": 190,
+      "compile120": 120,
+      "file5": 5,
+      "fixture30": 30,
+      "whole200": 200
+    },
+    "result": {
+      "caller_output_alias_cases": 45,
+      "case_count": 75,
+      "compiler": {
+        "cap_seconds": 120,
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stdout_bytes": 0
+      },
+      "fixture": {
+        "cap_seconds": 30,
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stdout_bytes": 428
+      },
+      "fixture_oracle": {
+        "bytes": 428,
+        "sha256": "c14be7d96baa5b12daad112d661920a6a7faa0687ec636c601c12083bc3b06cf"
+      },
+      "physical_LF_include_edges": 145,
+      "private_copies": 90,
+      "source_closure": 89,
+      "strict_flags": [
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-Itests",
+        "-I."
+      ],
+      "translation_units": 35
+    },
+    "saved_qualification_body_pin": {
+      "bytes": 7439,
+      "sha256": "961939fa6356a9d5e53653f5404686eedf30c69bea4b98e4f27fbed3abce17d8"
+    },
+    "scope": "Exact private resource model75; no dormant donor46 or separate future60 suite execution inferred.",
+    "status": "QUALIFIED_SAVED_DATA_ONLY"
+  },
+  "product": "Typed serialized HOST provider",
+  "product_body_pins": {
+    "src/editor/paula_segment_provider.c": {
+      "bytes": 17666,
+      "sha256": "721ec54c5003ad7e31cb18cf89f52341bc9dbaa8dad3ecc4f9609c41633b85a3"
+    },
+    "src/editor/paula_segment_provider.h": {
+      "bytes": 5143,
+      "sha256": "a5ecb093186b4bf05ce96ba5b8d848de7ff37ffaf6b8e7cf6c8e7e00d1663f78"
+    },
+    "tests/paula_segment_packet32_provider_basis.c": {
+      "bytes": 12972,
+      "sha256": "fb423ba4d53c9ad3b812adc443314b0234b6c9865f458ce01132daf11941b55a"
+    },
+    "tests/paula_segment_provider_test.c": {
+      "bytes": 24573,
+      "sha256": "30a631a3a76b7c9f610e88294ad453b9278b8bfa35b906521b6b22ebb13569c8"
+    }
+  },
+  "runtime_gates": {
+    "FUTURE_HOST_ACCEPTANCE_PIN": null,
+    "FUTURE_HOST_QUALIFIED": false,
+    "ROOT_ADMITTED": false
+  },
+  "status": "QUALIFIED_CANONICAL_HOST_ONLY",
+  "timing_audio_listening": "NOT_RUN",
+  "canonical_result": {
+    "date": "2026-10-12",
+    "case_count": 75,
+    "translation_units": 35,
+    "source_closure": 89,
+    "physical_LF_include_edges": 145,
+    "compiler": {
+      "returncode": 0,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0
+    },
+    "fixture": {
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "oracle": {
+        "bytes": 428,
+        "sha256": "c14be7d96baa5b12daad112d661920a6a7faa0687ec636c601c12083bc3b06cf"
+      }
+    },
+    "saved_current_qualification": {
+      "bytes": 12453,
+      "sha256": "266e02bfaf0e80be191e4f98a53575e25531595df9b8f1420c74cd58eab9d009"
+    },
+    "admission": "Separate reviewed ephemeral driver admission; on-disk gates stay disabled",
+    "ownership": "Genuine source and cache obligations retained; no activation or quiet inferred",
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "scope": "Exact canonical HOST fixture only; no native, emulator, physical, IRQ, MMIO, timing, audio or listening acceptance"
+  }
+}

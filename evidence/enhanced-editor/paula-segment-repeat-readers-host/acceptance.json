@@ -1,0 +1,155 @@
+{
+  "audit_pins": {
+    "canonical_receipt": {
+      "bytes": 3815,
+      "sha256": "d38e2b1db4a3feb0b3e3f1456a676d7b741d7e46f86c131d58d564bb11bfd838"
+    },
+    "independent_V10_Source_review": {
+      "bytes": 3673,
+      "sha256": "f76bebb2a4d578dd0e2b275eebd0bb584104c2fc32c4c0cd4fd20b94fcfcea83"
+    },
+    "independent_canonical_DATA_audit": {
+      "bytes": 20696,
+      "sha256": "17c0d5d7b73eb023eaad67ebb1b3e5091cfabcec3923e32f56587e9bc8a2963f"
+    },
+    "independent_private_DATA_audit": {
+      "bytes": 3915,
+      "sha256": "67d756316442e5347a1b6ab56feaa8708cc27e930872e7cf4fc7c0443906a8f0"
+    },
+    "private_receipt": {
+      "bytes": 3808,
+      "sha256": "43b3d98c62807b07f64ffcf5f3324993de481f6f773f04ba1c5aae6770210762"
+    },
+    "typed_Root_completion_observation": {
+      "bytes": 3121,
+      "sha256": "91166b44838395fb0460bb2e71b8fc3e84af470f0fe6f9912d402726f96e0860"
+    },
+    "typed_canonical_Root_completion_observation": {
+      "bytes": 3143,
+      "sha256": "48962ddfba4f47f493a81ff507a9010cc9f495a52686ace85e77423798c1af66"
+    }
+  },
+  "candidate_pins": {
+    "src/editor/sampler_paula_segment_readers.c": {
+      "bytes": 39911,
+      "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+    },
+    "src/editor/sampler_paula_segment_readers.h": {
+      "bytes": 6700,
+      "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+    },
+    "tests/paula_segment_repeat_readers_test.c": {
+      "bytes": 37450,
+      "sha256": "66bb1deed3d2f56393eccf6f6657289d29fa26f899de16e64c94dd58b749998e"
+    }
+  },
+  "canonical_HOST97": {
+    "baseline_category_counts_reconstructed": false,
+    "candidate_limit_seconds": 190,
+    "candidate_seconds": 6.6336013749969425,
+    "cases": 97,
+    "compiler_RC": 0,
+    "compiler_limit_seconds": 120,
+    "compiler_seconds": 6.192260666008224,
+    "compiler_stderr_bytes": 0,
+    "compiler_stdout_bytes": 0,
+    "continuous_cross_operation_custody": false,
+    "direct_wait_EOF_separate_resource_closes": true,
+    "driver_saved_before_after_equal": true,
+    "final_driver_full10_exported": false,
+    "fixture_RC": 0,
+    "fixture_limit_seconds": 30,
+    "fixture_seconds": 0.28448595899681095,
+    "fixture_stderr_bytes": 0,
+    "guarded_pin_call_count": 414,
+    "individual_case_traces_exported": false,
+    "oracle_bytes": 619,
+    "oracle_sha256": "58e1d3022c0de36d55f204bc62628a2963c431882c64972de9cf70475e226846",
+    "outcome_DATA_limit_seconds": 5,
+    "per_source_runtime_arrays_exported": false,
+    "selected_units": 26,
+    "signals_attempted": 0,
+    "status": "PASS_AUDITED",
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true,
+    "subprocess_timer_handler_restored": true,
+    "unittest_count": 1,
+    "whole_limit_seconds": 200
+  },
+  "canonical_completion_observation": {
+    "actual_tool_final": "0b2b67",
+    "errors": [],
+    "handler_restored": true,
+    "outcome_files_closed": 6,
+    "scope": "Typed actual final observation; supplemental current saved-DATA pins independently checked, not raw replay or original writer metadata.",
+    "timer_disarmed": true
+  },
+  "completion_observation_scope": "Honest typed actual Root final-tool observation of6 outcome closes/restoration. Supplemental saved DATA pins checked independently; not raw stdout replay or original writer metadata.",
+  "direct_owner_callback_phase_refusal": "SOURCE_REVIEW_ONLY_UNEXPOSED_NOT_INVOKED_BY_HOST97",
+  "historical_V9_negative": {
+    "compiler_RC": 1,
+    "correction": "Distinct V10 unsigned failure witnesses and checked table-byte multiplication only; header/entire fixture unchanged.",
+    "diagnostic_count": 2,
+    "failure_receipt": {
+      "bytes": 4302,
+      "sha256": "52c95f6f9984a2dbb8e452dd794fe9d684dbc3054e1f478b45c227015097229f"
+    },
+    "fixture": "NOT_RUN",
+    "independent_negative_audit": {
+      "bytes": 3318,
+      "sha256": "3e0d404917d19ffbd04b74a88f63cfc628ba9282b8432e7847fab83a0a102c61"
+    },
+    "status": "FAILED_COMPILE",
+    "stderr_bytes": 709,
+    "stderr_sha256": "f630b978380901c24a666b17b7f8ecfdf5d80141724ddaefef38926c215a2219"
+  },
+  "not_qualified": {
+    "DMA_fetch_boundary_voice_stop_order_completion": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "frontend_general_song": "NOT_IMPLEMENTED_BY_THIS_ADDITION",
+    "live_output_timing_audio_listening": "NOT_RUN",
+    "native": "INHIBITED_NOT_RUN",
+    "native_output_provider_backend": "NOT_IMPLEMENTED_BY_THIS_ADDITION",
+    "physical": "NOT_RUN"
+  },
+  "ownership_boundary": "Genuine HOST sampler versions/selective cache leases and core command/reader ownership only; quiet or absence never promotes device, DMA or hardware stop acceptance.",
+  "private_HOST97": {
+    "candidate_timer_handler_restored": true,
+    "cases": 97,
+    "compiler_RC": 0,
+    "compiler_limit_seconds": 120,
+    "compiler_stderr_bytes": 0,
+    "compiler_stdout_bytes": 0,
+    "direct_wait_EOF_separate_stream_closes": true,
+    "fixture_RC": 0,
+    "fixture_limit_seconds": 30,
+    "fixture_stderr_bytes": 0,
+    "literal_include_edges": 111,
+    "oracle_bytes": 619,
+    "oracle_sha256": "58e1d3022c0de36d55f204bc62628a2963c431882c64972de9cf70475e226846",
+    "reviewed_literal_closure_files": 69,
+    "selected_units": 26,
+    "signals_attempted": 0,
+    "status": "PASS_AUDITED",
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true
+  },
+  "publication_state": "PRIVATE_AND_CANONICAL_HOST_ACCEPTED_NATIVE_NOT_RUN",
+  "schema": "PT24G_FINITE_SEGMENT_REPEAT_READERS_HOST_ACCEPTANCE_V1",
+  "scope": "Optional finite one-track HOST resource model: at most3 predeclared dependencies,4 original events and1 persistent reader domain; no live output proof.",
+  "source_and_preservation": "Original43 assertion-function bodies plus54 custody cases remain Source-accounted. Baseline51/protected16/font/original-source guards passed in the bound driver. Unsaved per-source/full10 preservation arrays, final driver full10, per-case traces and baseline category counts are not independently reconstructed.",
+  "source_authoring": "Documentation Source derivative only: no candidate execution, repository edits/adoption, Git or shared-target operation by this author.",
+  "standalone_canonical_driver": {
+    "audit_pin": {
+      "bytes": 20696,
+      "sha256": "17c0d5d7b73eb023eaad67ebb1b3e5091cfabcec3923e32f56587e9bc8a2963f"
+    },
+    "bytes": 11130,
+    "path": "tests/test_paula_segment_repeat_readers.py",
+    "receipt_pin": {
+      "bytes": 3815,
+      "sha256": "d38e2b1db4a3feb0b3e3f1456a676d7b741d7e46f86c131d58d564bb11bfd838"
+    },
+    "sha256": "65437fbe08e678fb37e68ca66a41400a82cef8088c0ca975de1f43c0eefd45ef",
+    "status": "PASS_AUDITED"
+  }
+}

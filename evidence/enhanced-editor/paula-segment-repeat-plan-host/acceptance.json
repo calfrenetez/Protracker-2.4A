@@ -1,0 +1,148 @@
+{
+  "canonical_repository_host52": {
+    "actual_receipt_sha256": "7e1b65324791bcf738e9ea481890215a0cf282f3fcff871556da380719733a97",
+    "candidate_seconds": 5.130005457991501,
+    "cases": 52,
+    "compile_returncode": 0,
+    "compile_seconds": 4.611708208991331,
+    "compile_stderr": "EMPTY",
+    "compile_stdout": "EMPTY",
+    "complete_oracle": "PAULA SEGMENT REPEAT PLAN HOST FIXTURE PASS:52 cases;exact mono8-16-24 initial geometry;even frame-byte-word ranges1-65535;original960-1920-2880-3840;overlap-disjoint loops;genuine voice pending-source handoff;fractional current phase retained;no restart or silent-word inference;full identity and alias refusals;genuine pins and Chip leases retained across stale edits and declarative STOP;OWNERSHIP_READER_NATIVE_INTEGRATION_NOT_RUN\n",
+    "complete_oracle_bytes": 435,
+    "complete_oracle_sha256": "d6d44c693fade13e161da20759a6514ba0c9760b0c6894845748139233aa3c47",
+    "fixture_returncode": 0,
+    "fixture_seconds": 0.35883058299077675,
+    "fixture_stderr": "EMPTY",
+    "independent_DATA_review_sha256": "8c3c7ed1f04e60127ff03141c7e931cbbf45a5554f29324fd6503b9eee3ad8e4",
+    "once_only_current_trial": true,
+    "status": "PASS_SECOND_INSTRUMENTED_CANONICAL_INDEPENDENT_SAVED_DATA",
+    "tests_run": 1,
+    "translation_units": 22,
+    "typed_actual_Root_final_observation_sha256": "868ca4d0d922bf77d744d0b3b7505c6735441ae2a46d33fd834e82a5d9e74150"
+  },
+  "evidence_boundary": "Current instrumented canonical saved receipt and child streams independently read; 370 actual bounded observations exported and independently audited. Final six writer closes and timer/handler restoration are an explicit typed observation of the actual final result, not raw stdout replay or original writer metadata. Separate reads do not prove continuous custody. No local paths, host identities, process/environment metadata or audit arrays are published.",
+  "historical_first_canonical_host52": {
+    "compile_diagnostics": "EMPTY",
+    "compile_returncode": 0,
+    "complete52_oracle": "MATCHED_BUT_NOT_CANONICAL_ACCEPTANCE",
+    "fixture_returncode": 0,
+    "fixture_stderr": "EMPTY",
+    "independent_negative_review_sha256": "54ff99abf46cc3d47dd9963e4b4c693ce19f546911ae4607ccad40e73dd9034e",
+    "overall_returncode": 1,
+    "runtime_cause": "NOT_ESTABLISHED",
+    "source_preservation": "FAILED",
+    "status": "FAILED_SOURCE_PRESERVATION",
+    "unchanged": true
+  },
+  "historical_v2_first_trial": {
+    "compile_returncode": 0,
+    "complete52_oracle": "NOT_REACHED",
+    "failure": "ASan heap-buffer-overflow in capacity-alias fixture beyond actual compacted allocation",
+    "fixture_returncode": -6,
+    "fixture_stderr_bytes": 5147,
+    "fixture_stderr_sha256": "43f28ef48a349633f616d82b7a0b768ff01ce31ee16b7f460a9b60b101bd5236",
+    "independent_negative_review_sha256": "5a3354d994d0de507411b4812adb23b5e46ec53ea6b86291c0363355fab7ea8c",
+    "status": "FAILED",
+    "unchanged": true
+  },
+  "lifetime_boundary": "Real pins and leases retained through software geometry, stale edits and declarative STOP; explicit disposal of never-dispatched resources does not prove active reader quiet or retirement.",
+  "not_qualified": {
+    "emulator": "NOT_RUN",
+    "escaped_group_absence": "NOT_QUALIFIED",
+    "listening": "NOT_RUN",
+    "native_ABI_stack_IRQ_DMA": "NOT_RUN",
+    "native_compile": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "reader_backend_integration": "PENDING_SEPARATE_PROPOSAL",
+    "repeat_timing": "NOT_RUN",
+    "whole_song": "NOT_RUN"
+  },
+  "original_child_bounds_seconds": {
+    "compile": 120,
+    "fixture": 30
+  },
+  "outcome_boundary": {
+    "direct_child_waits": "CONFIRMED_BY_SAVED_RECEIPT",
+    "escaped_group_absence": "NOT_QUALIFIED",
+    "original_writer_metadata": "NOT_RECONSTRUCTED",
+    "raw_tool_stdout_replay": "NOT_CLAIMED",
+    "six_final_outcome_file_closes": "TYPED_ACTUAL_ROOT_OBSERVATION_INDEPENDENTLY_CHECKED",
+    "stream_EOF_and_separate_closes": "CONFIRMED_BY_SAVED_RECEIPT",
+    "timer_disarmed_and_handler_restored": "TYPED_ACTUAL_ROOT_OBSERVATION_INDEPENDENTLY_CHECKED"
+  },
+  "preservation": {
+    "actual_bounded_observation_returns": 370,
+    "classic_manifest_entries": 51,
+    "continuous_custody": "NOT_INFERRED",
+    "dataless_baseline_entries": 4,
+    "dataless_classic_leaves": "METADATA_ONLY",
+    "four_dataless_runtime_metadata_arrays": "NOT_EXPORTED_DRIVER_METADATA_ONLY_CHECKS",
+    "generated_font_bytes": 1630,
+    "generated_font_sha256": "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0",
+    "master_and_cache_contents": "UNCHANGED_BY_GENUINE_FIXTURE_ASSERTIONS",
+    "ordinary_baseline_body_entries": 47,
+    "per_input_runtime_arrays": "370_EXPORTED_ACTUAL_OBSERVATIONS_INDEPENDENTLY_AUDITED",
+    "private_readonly_source_body_copies": 60,
+    "protected16": "UNCHANGED_WITHIN_CURRENT_CANONICAL_TRIAL_INDEPENDENTLY_AUDITED",
+    "raw_font_bytes": 580,
+    "raw_font_sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+    "source_closure_paths": 60,
+    "within_trial_source_and_preservation_metadata_equality": true
+  },
+  "private_v3_host52": {
+    "actual_receipt_sha256": "1e2d7786338713018944e7678f4016e5135916ba38a4fa9621c1d73cb7969fb1",
+    "candidate_seconds": 12.704520667000907,
+    "cases": 52,
+    "compile_returncode": 0,
+    "compile_seconds": 11.83122325000295,
+    "compile_stderr": "EMPTY",
+    "compile_stdout": "EMPTY",
+    "complete_oracle": "PAULA SEGMENT REPEAT PLAN HOST FIXTURE PASS:52 cases;exact mono8-16-24 initial geometry;even frame-byte-word ranges1-65535;original960-1920-2880-3840;overlap-disjoint loops;genuine voice pending-source handoff;fractional current phase retained;no restart or silent-word inference;full identity and alias refusals;genuine pins and Chip leases retained across stale edits and declarative STOP;OWNERSHIP_READER_NATIVE_INTEGRATION_NOT_RUN\n",
+    "fixture_returncode": 0,
+    "fixture_seconds": 0.3632327919913223,
+    "fixture_stderr": "EMPTY",
+    "independent_DATA_review_sha256": "2e2b2432aaa3551b96fd1f0aaac1eb929fa5fc89a330b420c036f0559e5ab136",
+    "once_only": true,
+    "status": "PASS_INDEPENDENT_SAVED_DATA",
+    "tests_run": 1,
+    "translation_units": 22
+  },
+  "private_wrapper_bounds_seconds": {
+    "candidate": 190,
+    "file": 5,
+    "whole": 200
+  },
+  "schema": "PT24G_PAULA_SEGMENT_REPEAT_PLAN_HOST_ACCEPTANCE_V2",
+  "scope": "ALLOCATION_FREE_GEOMETRY_IDENTITY_ALIAS_AND_GENUINE_SOURCE_RETENTION_ONLY",
+  "strict_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-Itests",
+    "-I."
+  ],
+  "unchanged_v3_C_H_fixture_and_canonical_driver_body_pins": {
+    "src/core/paula_segment_repeat_plan.c": {
+      "bytes": 8911,
+      "sha256": "06ca2e445a951d14960d4f9cd64efd5041ffb451a7829fcb1cfa7cf3efddd576"
+    },
+    "src/core/paula_segment_repeat_plan.h": {
+      "bytes": 6230,
+      "sha256": "79c93ad567cbe0f811023c7af751a3cd01405108d3b7a6c81ef3f50df3ef218d"
+    },
+    "tests/paula_segment_repeat_plan_test.c": {
+      "bytes": 23338,
+      "sha256": "a2d4ba2206b27bfdf9d6ee03a7de5ce4ed4c96c57c702b6c4eab57e7efa5e722"
+    },
+    "tests/test_paula_segment_repeat_plan.py": {
+      "bytes": 10193,
+      "sha256": "ffeebe01abbb74079a12f4c8156a61763b392a773502c76aed90c132b79984ce"
+    }
+  }
+}

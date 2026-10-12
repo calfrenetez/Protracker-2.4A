@@ -1,0 +1,13 @@
+# Finite SEGMENT/REPEAT reader HOST evidence
+
+Private V10 and the distinct, separately admitted canonical repository HOST qualification each passed 97 cases: strict 26-unit C99/Werror/UNDEBUG compilation with ASan/UBSan, the exact complete 619-byte oracle and empty successful diagnostics. Both independently audited outcomes are recorded separately in `acceptance.json`.
+
+The scope remains one fixed sequence of four original events, one persistent reader domain and at most three predeclared dependencies. The fixture uses genuine sampler version pins, selective 8-bit cache leases and the scheduled-readers core. It checks retained original and superseded sources, partial cancellation, stale edits, exact reader keys, split command/reader retirement, malformed/unknown/refused callbacks and descriptor/holder recovery. Direct-owner callback phase refusal remains Source-reviewed only; no owner API was exposed to the backend or executed by HOST97. Quiet/absence checks concern HOST memory references.
+
+The canonical compiler took 6.192260666008224 seconds, fixture 0.28448595899681095 seconds and candidate phase 6.6336013749969425 seconds; its receipt records 414 guarded ordinary Source-pin calls. Both actual children completed RC0 with direct waits, EOF and separate resource closes, zero cleanup signals and positive subprocess/timer/handler restoration. Independent saved-DATA checks accepted the exact recipe, full oracle and reported driver-before/after equality. Per-case traces, per-source/full10 arrays, final driver full10, baseline category counts and escaped/group absence were not exported or reconstructed.
+
+Typed actual Root final observation 0b2b67 positively records six outcome-file closes and DATA timer/handler restoration. Its supplemental saved-DATA pins were independently checked as current observations. This is not raw stdout replay, original writer metadata or continuous custody across operations.
+
+V9 remains a preserved strict compile failure with two diagnostics and no fixture invocation. V10's distinct repair changed unsigned callback snapshots and checked table-size multiplication; the accepted C/H/fixture bodies remain unchanged. The ordinary Paula lowerer and song producer still reject SEGMENT/REPEAT. Native compilation remains inhibited; native provider/backend, frontend/general-song, emulator, physical A1200/AmiGUS, DMA/fetch-boundary/voice-stop, timing, audio and listening acceptance remain separate and unqualified for this addition. The geometry planner keeps its own evidence scope.
+
+This public evidence contains no raw local filesystem, process, environment or device metadata.

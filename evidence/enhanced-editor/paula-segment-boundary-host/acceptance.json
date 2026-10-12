@@ -1,0 +1,144 @@
+{
+  "Source_recipe": {
+    "continuous_cross_operation_custody": false,
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "include_edges": 130,
+    "literal_closure_files": 80,
+    "ordinary_driver_guards": "baseline51,protected16,raw/generated font,own/current Source preservation",
+    "outcome_provenance": "Honest typed actual Root observation; supplemental current DATA pins remain distinct from raw stdout replay and original writer metadata",
+    "runtime_baseline_category_counts_reconstructed": false,
+    "runtime_per_source_snapshots_reconstructed": false
+  },
+  "canonical_HOST72": {
+    "candidate_limit_seconds": 190,
+    "candidate_seconds": 8.991801999989548,
+    "cases": 72,
+    "compiler_RC": 0,
+    "compiler_limit_seconds": 120,
+    "compiler_seconds": 8.480078458000207,
+    "compiler_stderr_bytes": 0,
+    "compiler_stdout_bytes": 0,
+    "continuous_cross_operation_custody": false,
+    "direct_wait_EOF_separate_closes_restoration": true,
+    "escaped_or_group_absence": "NOT_QUALIFIED",
+    "fixture_RC": 0,
+    "fixture_limit_seconds": 30,
+    "fixture_seconds": 0.3134338329982711,
+    "fixture_stderr_bytes": 0,
+    "guarded_pin_call_count": 458,
+    "independent_audit_pin": {
+      "bytes": 5192,
+      "sha256": "2b0abfb6a8e80e830a81a2addecb0d2856b5320c56c0743deb6541508fbffc3c"
+    },
+    "oracle_bytes": 693,
+    "oracle_sha256": "37a114259a0dbe3ad0f643ec04c4707011a5766014a280f64714567f36fcb1c2",
+    "receipt_pin": {
+      "bytes": 3879,
+      "sha256": "075132e9cdc583b5e34c0513746ea8a5d030b944a364191e977c0d639e6633bb"
+    },
+    "runtime_baseline_category_counts_reconstructed": false,
+    "runtime_per_source_snapshots_reconstructed": false,
+    "selected_units": 32,
+    "status": "PASS_INDEPENDENTLY_AUDITED",
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true,
+    "typed_Root_final_observation_pin": {
+      "bytes": 3405,
+      "sha256": "fa488388040505410e90f0bcadd0bca14cbe0a798b46b2c7398bd08b4fa175ad"
+    },
+    "unittest_count": 1,
+    "whole_limit_seconds": 200
+  },
+  "code_pins": {
+    "src/core/paula_segment_boundary.c": {
+      "bytes": 5336,
+      "sha256": "3f639f4e7a9936d420f7f6fe79c592bb44bf29a279605500592e7b104b0872d6"
+    },
+    "src/core/paula_segment_boundary.h": {
+      "bytes": 3210,
+      "sha256": "9dc4d6e92812885cde609f7b3f9fe9aacb0d19110f592d7e3ccfa22ce779a2f5"
+    },
+    "tests/paula_segment_boundary_test.c": {
+      "bytes": 26471,
+      "sha256": "24bb13a404971762f64686b5af0b84e7290c71acf390e530b6e681de97973aba"
+    }
+  },
+  "not_qualified": {
+    "Amiberry": "NOT_RUN",
+    "device_quiet_stop_order_completion": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "fetch_boundary_timing_audio_listening": "NOT_RUN",
+    "frontend_general_song_provider": "NOT_IMPLEMENTED_BY_THIS_MODULE",
+    "native": "INHIBITED_NOT_RUN",
+    "native_ABI_stack_IRQ_DMA": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "physical_A1200_AmiGUS": "NOT_RUN"
+  },
+  "preserved_failures": {
+    "V1_V2": "UNINVOKED_SOURCE_FINDINGS_PRESERVED",
+    "V3": {
+      "Source_diagnosis": "Source-derived diagnosis supports incorrect fixture STOP OK expectation while independent reader remained held;actual unique compound atom not exported or reconstructed;no production quiet contract changed",
+      "compiler_RC": 0,
+      "fixture_RC": -6,
+      "fixture_stderr_pin": {
+        "bytes": 165,
+        "sha256": "5c67f7ce3f395c67a6348fe34c36ce3df9eef74ae15fce867ddf96986659d1e2"
+      },
+      "individual_compound_atom_exported": false,
+      "status": "FAILED_FIXTURE_AFTER_COMPILER_PASS"
+    },
+    "V4": {
+      "finding": "Struct assignment does not guarantee bytewise copied padding; no actual padding ABI cause asserted",
+      "independent_Source_review_pin": {
+        "bytes": 3629,
+        "sha256": "72307492812eb972d7bb5ef1aeda992675b9cf7f3e28ae3d67bea307aca876cf"
+      },
+      "status": "UNINVOKED_SOURCE_NEGATIVE"
+    },
+    "V5": "Distinct pass does not reclassify prior negatives; product C/H unchanged,all 72 cases retained,11 own snapshot byte copies repaired"
+  },
+  "private_HOST72": {
+    "candidate_limit_seconds": 190,
+    "candidate_seconds": 8.849952374992426,
+    "cases": 72,
+    "compiler_RC": 0,
+    "compiler_limit_seconds": 120,
+    "compiler_seconds": 8.350546916990425,
+    "compiler_stderr_bytes": 0,
+    "compiler_stdout_bytes": 0,
+    "direct_wait_EOF_separate_closes_restoration": true,
+    "fixture_RC": 0,
+    "fixture_limit_seconds": 30,
+    "fixture_seconds": 0.3273516670014942,
+    "fixture_stderr_bytes": 0,
+    "guarded_pin_call_count": 458,
+    "independent_audit_pin": {
+      "bytes": 5409,
+      "sha256": "89661021cb3dc0f323eaf58af3e1372adefd97faee5ab43aca8a9acaf963d076"
+    },
+    "oracle_bytes": 693,
+    "oracle_sha256": "37a114259a0dbe3ad0f643ec04c4707011a5766014a280f64714567f36fcb1c2",
+    "receipt_pin": {
+      "bytes": 3872,
+      "sha256": "374813cac578adf37090d31dc6aa5f527a9c9c1470cf9694aeee9867e9074427"
+    },
+    "selected_units": 32,
+    "signals_attempted": 0,
+    "status": "PASS_INDEPENDENTLY_AUDITED",
+    "strict_C99_Werror_UNDEBUG_ASan_UBSan": true,
+    "typed_Root_final_observation_pin": {
+      "bytes": 3405,
+      "sha256": "9af2a1968ee4fd2ace55b66cdf14602e369acf6c762a1222336fad20a8ba98d1"
+    },
+    "unittest_count": 1,
+    "whole_limit_seconds": 200
+  },
+  "publication_state": "PRIVATE_AND_CANONICAL_HOST72_ACCEPTED_TARGETS_NOT_RUN",
+  "schema": "PT24G_PAULA_SEGMENT_BOUNDARY_HOST_ACCEPTANCE_V1",
+  "scope": "Allocation-free finite one-track ordered SEGMENT-REPEAT-REPEAT-STOP renderer boundary normalizer; bounded three predeclared descriptors; no resource ownership or output proof.",
+  "standalone_canonical_driver": {
+    "bytes": 11717,
+    "path": "tests/test_paula_segment_boundary.py",
+    "sha256": "386adc1205871f71aaede65e23ea32d4a16fd9c50ad0adad8bb44a9e320c47bf",
+    "status": "PASS_INDEPENDENTLY_AUDITED"
+  }
+}

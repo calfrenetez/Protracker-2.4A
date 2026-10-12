@@ -7172,3 +7172,67 @@ are not qualified. Earlier rolling RAM HOST evidence cannot qualify this
 resource model or peripheral behavior. Master/cache/save/direct24-bit Studio
 mixing, the accepted classic layout and protected16 remain preserved; no
 frontend, arbitrary songs or deferred ZooperTracker features are added.
+
+
+### 12 October — Paula SEGMENT/REPEAT geometry and retained readers
+
+Two separate opt-in HOST additions now describe an initial Paula SEGMENT and
+forward REPEAT geometry and retain genuine sampler resources for one fixed
+SEGMENT -> REPEAT -> REPEAT -> STOP lifetime. The geometry planner preserves
+the exact initial fetch and current Q32 phase; a repeat changes the pending
+range without restarting, rounding or rebasing the active fetch. Its
+cross-source repeats use classic mono8 within the same rate and sampler/cache
+domain. A musical frame does not prove a physical fetch boundary.
+
+The retained-reader profile admits at most three predeclared sources, four
+once-only command holders and one persistent original reader domain. Before
+the first transfer it acquires independent Fast-master version pins and
+selective signed8 Chip-cache leases. Each preparation step performs one
+metadata/pin transition or at most 256 conversion bytes. Original frames and
+the full genuine reader key remain fixed. All original, pending and superseded
+dependencies stay held until independent exact reader retirement AND zero
+command references permit genuine owner disposal. STOP admission, command
+detachment, source replacement and numerical phase alone release no dependency.
+
+The planner's 52-case and reader profile's 97-case private and separately
+admitted repository HOST qualifications passed with strict C99, warnings as
+errors, assertions, ASan and UBSan; the saved canonical results were independently
+audited. Earlier failed candidates remain preserved. See the
+[geometry contract](PAULA_SEGMENT_REPEAT_PLAN.md),
+[planner evidence](../evidence/enhanced-editor/paula-segment-repeat-plan-host/README.md),
+[reader contract](PAULA_SEGMENT_REPEAT_READERS.md) and
+[reader evidence](../evidence/enhanced-editor/paula-segment-repeat-readers-host/README.md).
+
+These are HOST geometry and ownership models. Frontend/general-song integration
+and a native output provider are not supplied by these additions; reader-profile
+native compilation remains inhibited. Amiberry, real A1200/AmiGUS, physical
+fetch-boundary handoff, voice stop/ordering/completion, exact live timing, audio
+and listening remain NOT_RUN. The ordinary Paula lowerer still rejects
+SEGMENT/REPEAT. Authoritative masters, bounded selective caches, master-preserving
+save, direct 24-bit Studio mixing, the classic baseline and accepted layout
+retain their existing architecture; no deferred ZooperTracker feature is added.
+
+
+### Finite Paula renderer-boundary admission
+
+The allocation-free opt-in normalizer now admits the complete ordered renderer
+SEGMENT -> REPEAT -> REPEAT -> STOP plans for one track and at most three declared
+sources. It preserves original frames, the full reader key, current/pending
+source geometry and fractional phase, folding only the final CONTROL step and
+gains. Checked metadata protects full int32-element master capacities, including
+unused tails, before output publication; no sample payload is read. Success
+allocates no resource and changes no queue. The retained-reader API still requires
+genuine current pins/Chip leases and independent reader retirement AND zero
+command references before original or superseded dependency disposal.
+
+Distinct private and canonical HOST entries each passed 72 cases with 32 strict
+units, assertions, ASan/UBSan and the complete oracle; independent saved-DATA
+audits passed. Earlier failures remain preserved with Source-derived diagnoses
+kept separate from unexported actual compound atoms. See the
+[boundary contract](PAULA_SEGMENT_BOUNDARY.md) and
+[HOST evidence](../evidence/enhanced-editor/paula-segment-boundary-host/README.md).
+Native compilation remains inhibited. Frontend/general-song/native provider
+integration is not supplied; Amiberry, real A1200/AmiGUS, DMA boundaries, device
+stop/order/completion, exact live timing, audio and listening remain NOT_RUN.
+The classic baseline, accepted layout and existing master/cache/save architecture
+are preserved; no deferred ZooperTracker feature is added.

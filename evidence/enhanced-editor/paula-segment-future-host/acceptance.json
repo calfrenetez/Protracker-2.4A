@@ -1,0 +1,117 @@
+{
+  "canonical_HOST60": {
+    "Root_final_outcome_closes_and_caller_restoration": "SEPARATELY_OBSERVED_POSITIVE",
+    "compiler": "RC0",
+    "date": "2026-10-12",
+    "diagnostics": "EMPTY",
+    "fixture": "RC0",
+    "independent_saved_DATA_audit": {
+      "bytes": 6997,
+      "sha256": "df45ca5e9e79053c000e24d2893acab38d777fbda4d96860a0b6cd4a357e9d4a",
+      "status": "QUALIFIED_CANONICAL_HOST60_SAVED_DATA_AND_CURRENT_PRESERVATION_ONLY"
+    },
+    "oracle": "COMPLETE_1031_BYTES",
+    "saved_waits_EOF_stream_selector_closes_and_candidate_restoration": "POSITIVE",
+    "status": "QUALIFIED_CANONICAL_HOST60_SAVED_DATA_AND_CURRENT_PRESERVATION_ONLY"
+  },
+  "implementation_Source": {
+    "fixture": "EXACT_V11_LATE_RETIREMENT",
+    "initial_generation_zero": "Legitimate original sample edit generation; independent nonzero identifiers unchanged.",
+    "own_product_fixture_pins": {
+      "src/editor/paula_segment_future.c": {
+        "bytes": 32911,
+        "sha256": "f62e8f25b9e92f5d809958976e99db5f9686521f14344bba1c82d280c736ab71"
+      },
+      "src/editor/paula_segment_future.h": {
+        "bytes": 4994,
+        "sha256": "5a0927d1c787151e58083b1d19f1f7d884293f8e88a5c1e6e41a18712ee57897"
+      },
+      "tests/paula_segment_future_test.c": {
+        "bytes": 46419,
+        "sha256": "d45c45d2987eafa81fc70ea94128f17a949d515a2d33750c1f3868bd64771640"
+      }
+    },
+    "product_c_h": "EXACT_V11",
+    "version": "V11"
+  },
+  "independent_Source_review": {
+    "findings": [],
+    "status": "READY_SOURCE_ONLY"
+  },
+  "legacy_sampler_song_refusals": "UNCHANGED",
+  "native_compilation": "NOT_RUN_INHIBITED",
+  "not_qualified": [
+    "Native IRQ/source ownership, ABI/SR/register rules and deferred-restoration serialization.",
+    "Publication ordering, cancellation/drain and resident callgraph/aggregate stack.",
+    "Fetch-boundary activation, DMA quiet and exact live timing.",
+    "Amiberry, physical A1200/AmiGUS, audio and human listening.",
+    "Frontend/default PLAY and arbitrary song playback."
+  ],
+  "overall": "CANONICAL_AND_PRIVATE_HOST_QUALIFIED_NATIVE_NOT_RUN",
+  "preserved_negatives": {
+    "V10": "Actual late-case final expected-OK assertion failed; returned reader integer and completed retirement NOT_EXPORTED.",
+    "V11": "Fixture expects preserved BACKEND and independently asserts genuine retirement, owner release, zero effects and matching exclusion restoration."
+  },
+  "private_HOST60": {
+    "Root_final_outcome_closes_and_caller_restoration": "SEPARATELY_REPORTED_POSITIVE",
+    "compiler": "RC0",
+    "diagnostics": "EMPTY",
+    "fixture": "RC0",
+    "independent_saved_DATA_audit": {
+      "bytes": 7437,
+      "sha256": "397fe0266056a71131795df6a62b15e8b8684ba93d304e192fd58235da9cf10b",
+      "status": "QUALIFIED_PRIVATE_HOST_RESULT_SAVED_DATA_ONLY"
+    },
+    "limitations": [
+      "Private pass is separate from canonical validation.",
+      "Unsaved runtime snapshots, continuous custody and process-group absence are not inferred."
+    ],
+    "oracle": "COMPLETE_1031_BYTES",
+    "saved_waits_EOF_stream_selector_closes_and_candidate_restoration": "POSITIVE",
+    "status": "QUALIFIED_PRIVATE_HOST_RESULT_SAVED_DATA_ONLY"
+  },
+  "recipe": {
+    "baseline_files": 51,
+    "cases": 60,
+    "cleanup_outcomes": 55,
+    "deliberate_process_lifetime_HOLD_owners": 5,
+    "flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined"
+    ],
+    "limits": {
+      "candidate": 190,
+      "compile": 120,
+      "file": 5,
+      "fixture": 30,
+      "whole": 200
+    },
+    "oracle_bytes": 1031,
+    "oracle_sha256": "190df80074f1b6648d9615eb8abe8f124d175def6585ad41a0d0d04d753ff5c7",
+    "physical_LF_quoted_include_edges": 140,
+    "protected_paths": 16,
+    "source_body_pins": 84,
+    "translation_units": 34
+  },
+  "release_acceptance": "NOT_QUALIFIED",
+  "schema": 1,
+  "scope": "Finite four-publication Paula geometry future HOST backend; exact V11 product/fixture and separately validated standalone repository driver.",
+  "standalone_canonical_driver": {
+    "layout_changes": [
+      "Descriptive HOST standalone docstring.",
+      "PRESERVATION_ROOT = ROOT.",
+      "Remove private ROOT_ADMITTED assignment and its test assertion."
+    ],
+    "path": "tests/test_paula_segment_future.py",
+    "pin": {
+      "bytes": 21592,
+      "sha256": "e5e8ff90428dfded3475d7d4b8f4929c6b9400bb2e4107bdd3278f70934ef92f"
+    }
+  }
+}

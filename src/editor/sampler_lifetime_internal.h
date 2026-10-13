@@ -46,5 +46,12 @@ int pt_sampler_pending_transfer(struct pt_sampler_pending *,struct pt_sampler_pe
  * Every named owner/context and original live node must remain alive/immutable
  * for the call. No values or replacement pointers are followed. */
 int pt_sampler_lifetime_idle(const struct pt_sampler *);
+/* Intrinsic storage inventory status only: fault-free empty live/pending
+ * bookkeeping, no charged bytes, current versions or table obligations.
+ * Idle alone is insufficient: pins may retain versions after sampler_release.
+ * This is side-effect-free owner-thread metadata, not document release authority
+ * or owner-factory membership. The sampler must stay alive and immutable for
+ * this call; no pointed-to storage is followed and no readiness is retained. */
+int pt_sampler_lifetime_storage_retired(const struct pt_sampler *);
 int pt_sampler_lifetime_output_disjoint(const struct pt_sampler *,const void *,size_t);
 #endif

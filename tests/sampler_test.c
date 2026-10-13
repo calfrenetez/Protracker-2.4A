@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../src/editor/sampler.h"
+#include "../src/editor/sampler_internal.h"
 #include "wav.h"
 static size_t live,calls,fail;
 static void *allocate(void *c,size_t n) {(void)c;if(++calls==fail)return NULL;void *p=malloc(n);if(p)++live;return p;}
@@ -339,6 +340,152 @@ static void journal_budget(void)
     }
     puts("SAMPLER BUDGET PASS: actual version and journal bytes, one-byte-short refusal, rollback, eviction and redo truncation");
 }
+/* Inventory is observational; it neither releases storage nor grants release
+ * authority. Compare the complete sampler and allocator observations per call. */
+static size_t retirement_observations;
+static void retirement_expect(const struct pt_sampler *s,int expected)
+{
+    struct pt_sampler before;size_t allocations=calls,owned=live;
+    if(s)memcpy(&before,s,sizeof(before));
+    assert(pt_sampler_lifetime_storage_retired(s)==expected);
+    if(s)assert(!memcmp(s,&before,sizeof(before)));
+    assert(calls==allocations && live==owned);
+    ++retirement_observations;
+}
+static void retirement_metadata_obligations(struct pt_sample_version *pin,
+    struct pt_sample *table)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_sampler s;
+    struct pt_sampler_live record={0},saved;struct pt_sampler_pending pending={0};
+    unsigned i,mask;
+    pt_sampler_init(&s,&a,0);s.generation=9;
+    retirement_expect(&s,1);
+    s.lifetime_fault=1;retirement_expect(&s,0);s.lifetime_fault=0;
+    s.live_head=&record;retirement_expect(&s,0);s.live_head=NULL;
+    s.live_count=1;retirement_expect(&s,0);
+    s.live_count=SIZE_MAX;retirement_expect(&s,0);
+    s.live_head=&record;s.live_count=1;retirement_expect(&s,0);
+    s.live_head=NULL;s.live_count=0;
+    s.pending_head=&pending;retirement_expect(&s,0);s.pending_head=NULL;
+    s.pending_count=1;retirement_expect(&s,0);
+    s.pending_count=SIZE_MAX;retirement_expect(&s,0);
+    s.pending_head=&pending;s.pending_count=1;retirement_expect(&s,0);
+    s.pending_head=NULL;s.pending_count=0;
+    s.bytes=1;retirement_expect(&s,0);
+    s.bytes=SIZE_MAX;retirement_expect(&s,0);s.bytes=0;
+    /* Borrow a genuine opaque pin only as a non-NULL metadata obligation.
+     * This synthetic inventory does not enroll or claim ownership of it. */
+    for(i=0;i<PT_PROJECT_SAMPLES;++i) {
+        s.current[i]=pin;retirement_expect(&s,0);s.current[i]=NULL;
+    }
+    for(mask=1;mask<8;++mask) {
+        s.table=(mask&1)?table:NULL;s.table_original=(mask&2)?table:NULL;
+        s.table_bytes=(mask&4)?sizeof(*table):0;
+        retirement_expect(&s,0);
+    }
+    s.table=NULL;s.table_original=NULL;s.table_bytes=0;
+    assert(pt_sampler_live_add(&s,&record,PT_LIVE_ESTABLISH,
+        &record,sizeof(record),NULL,0,NULL,0));
+    memcpy(&saved,&record,sizeof(saved));
+    assert(pt_sampler_lifetime_idle(&s));
+    retirement_expect(&s,0);
+    assert(!memcmp(&record,&saved,sizeof(saved)));
+    assert(pt_sampler_live_remove(&record));
+    retirement_expect(&s,1);
+}
+static void retirement_retained_pins(void)
+{
+    struct pt_allocator a={NULL,allocate,release};unsigned pins;
+    retirement_expect(NULL,0);
+    for(pins=1;pins<=2;++pins) {
+        struct pt_document d;struct pt_sampler s;struct pt_sample original;
+        struct pt_sample_version *first=NULL,*second=NULL;
+        struct pt_pcm pcm={0},other={0};int32_t source[4]={-128,-7,0,127};
+        size_t baseline,charged,allocated;
+        pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+        d.project.samples[0].pcm=(struct pt_pcm){source,4,4,8287,1,8};
+        original=d.project.samples[0];baseline=live;
+        pt_sampler_init(&s,&a,SIZE_MAX);retirement_expect(&s,1);
+        assert(pt_sampler_pin(&s,&d.project,0,s.generation,&pcm,&first)==PT_EDIT_OK);
+        assert(first && s.current[0]==first && s.live_count==1 && !s.pending_count);
+        assert(pcm.data!=source && !memcmp(pcm.data,source,sizeof(source)));
+        charged=s.bytes;allocated=live;assert(charged && allocated==baseline+1);
+        if(pins==2) {
+            assert(pt_sampler_pin(&s,&d.project,0,s.generation,&other,&second)==PT_EDIT_OK);
+            assert(second==first && other.data==pcm.data && live==allocated && s.bytes==charged);
+        } else retirement_metadata_obligations(first,d.project.samples);
+        assert(pt_sampler_lifetime_idle(&s));retirement_expect(&s,0);
+        pt_sampler_release(&s);
+        assert(!s.current[0] && s.live_count==1 && s.bytes==charged && live==allocated);
+        assert(pt_sampler_lifetime_idle(&s));retirement_expect(&s,0);
+        assert(!memcmp(pcm.data,source,sizeof(source)));
+        d.project.samples[0]=original; /* No dangling project descriptor after final unpin. */
+        if(pins==2) {
+            pt_sampler_unpin(first);first=NULL;
+            assert(s.live_count==1 && s.bytes==charged && live==allocated);
+            assert(!memcmp(other.data,source,sizeof(source)));
+            retirement_expect(&s,0);pt_sampler_unpin(second);second=NULL;
+        } else {pt_sampler_unpin(first);first=NULL;}
+        assert(live==baseline && !s.bytes && !s.live_head && !s.live_count);
+        retirement_expect(&s,1);pt_sampler_release(&s);retirement_expect(&s,1);
+        /* Existing byte budget and allocator failure leave no retained inventory. */
+        {
+            struct pt_pcm before;size_t before_live=live;
+            pt_sampler_init(&s,&a,charged-1);memset(&pcm,0x55,sizeof(pcm));memcpy(&before,&pcm,sizeof(before));
+            assert(pt_sampler_pin(&s,&d.project,0,s.generation,&pcm,&first)==PT_EDIT_CAPACITY);
+            assert(!first && !memcmp(&pcm,&before,sizeof(pcm)) && live==before_live);
+            retirement_expect(&s,1);
+            s.budget=SIZE_MAX;fail=calls+1;
+            assert(pt_sampler_pin(&s,&d.project,0,s.generation,&pcm,&first)==PT_EDIT_CAPACITY);
+            fail=0;assert(!first && !memcmp(&pcm,&before,sizeof(pcm)) && live==before_live);
+            retirement_expect(&s,1);
+        }
+        pt_document_release(&d);assert(!live);
+    }
+}
+static void retirement_pending_and_table(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_document d;
+    struct pt_sampler s;struct pt_sampler_pin_job job={0},saved_job;
+    struct pt_sampler_pending first={0},second={0},saved_first,saved_second;
+    struct pt_pattern_history history;struct pt_pattern_command commands[2];
+    struct pt_event_change changes[2];struct pt_sample *original_table;
+    unsigned original_count;
+    pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    pt_sampler_init(&s,&a,SIZE_MAX);
+    assert(pt_sampler_pin_job_reserve(&job,&s,&d.project,0,s.generation)==PT_EDIT_OK);
+    assert(s.pending_count==1 && !s.bytes && !s.live_head);
+    memcpy(&saved_job,&job,sizeof(job));retirement_expect(&s,0);
+    assert(!memcmp(&job,&saved_job,sizeof(job)));
+    pt_sampler_release(&s);retirement_expect(&s,0);
+    assert(s.pending_count==1 && !pt_sampler_lifetime_idle(&s));
+    pt_sampler_pin_job_cancel(&job);retirement_expect(&s,1);
+    assert(pt_sampler_pending_add(&s,&first,PT_PENDING_CALL,&first,sizeof(first),NULL,0,s.generation));
+    assert(pt_sampler_pending_add(&s,&second,PT_PENDING_WORKFLOW,&second,sizeof(second),NULL,0,s.generation));
+    memcpy(&saved_first,&first,sizeof(first));memcpy(&saved_second,&second,sizeof(second));
+    assert(s.pending_count==2);retirement_expect(&s,0);
+    assert(!memcmp(&first,&saved_first,sizeof(first)) && !memcmp(&second,&saved_second,sizeof(second)));
+    assert(pt_sampler_pending_remove(&first));retirement_expect(&s,0);
+    assert(s.pending_count==1 && s.pending_head==&second);
+    assert(pt_sampler_pending_remove(&second));retirement_expect(&s,1);
+    original_table=d.project.samples;original_count=d.project.sample_count;
+    assert(pt_pattern_history_init(&history,&d.project,commands,2,changes,2)==PT_EDIT_OK);
+    assert(pt_sampler_add_slot(&s,&d.project,&history)==PT_EDIT_OK);
+    assert(s.table && s.table_original==original_table && s.table_bytes && s.bytes);
+    retirement_expect(&s,0);pt_pattern_history_release(&history);
+    assert(pt_sampler_lifetime_idle(&s));retirement_expect(&s,0);
+    pt_sampler_release(&s);assert(!s.table && !s.table_original && !s.table_bytes);
+    retirement_expect(&s,1);
+    d.project.samples=original_table;d.project.sample_count=(uint16_t)original_count;
+    pt_document_release(&d);assert(!live);
+}
+static void storage_retirement_inventory(void)
+{
+    retirement_retained_pins();retirement_pending_and_table();
+    assert(retirement_observations==PT_PROJECT_SAMPLES+46U);
+    puts("SAMPLER RETIREMENT INVENTORY PASS: retained pins, final unpin, pending records, fault/head/count, bytes/current/table obligations and observation without release authority");
+}
+
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
@@ -418,6 +565,6 @@ int main(void)
         pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);
     }
     pt_document_release(&d);pt_document_release(&reopened);assert(!live);
-    loops_and_slices();conversion();iff_samples();raw_samples();stereo24_gain_history();journal_budget();
+    loops_and_slices();conversion();iff_samples();raw_samples();stereo24_gain_history();journal_budget();storage_retirement_inventory();
     puts("SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release");return 0;
 }

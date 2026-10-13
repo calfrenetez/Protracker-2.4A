@@ -97,6 +97,16 @@ int pt_sampler_pending_transfer(struct pt_sampler_pending *old,struct pt_sampler
 }
 int pt_sampler_lifetime_idle(const struct pt_sampler *s)
 {return s&&!s->lifetime_fault&&!s->pending_head&&!s->pending_count;}
+int pt_sampler_lifetime_storage_retired(const struct pt_sampler *s)
+{
+    unsigned i;
+    if(!s||s->lifetime_fault||(!s->live_head != !s->live_count)||
+       (!s->pending_head != !s->pending_count)||s->live_head||s->live_count||
+       s->pending_head||s->pending_count||s->bytes||
+       s->table||s->table_original||s->table_bytes)return 0;
+    for(i=0;i<PT_PROJECT_SAMPLES;++i)if(s->current[i])return 0;
+    return 1;
+}
 int pt_sampler_lifetime_output_disjoint(const struct pt_sampler *s,const void *out,size_t bytes)
 {
     const struct pt_sampler_live *n,*previous=NULL;

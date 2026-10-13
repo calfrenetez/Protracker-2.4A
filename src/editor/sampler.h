@@ -6,6 +6,8 @@
 #include "svx.h"
 #include "raw.h"
 struct pt_sample_version;
+struct pt_sampler_live;
+struct pt_sampler_pending;
 struct pt_sampler {
     struct pt_sample_version *current[PT_PROJECT_SAMPLES];
     struct pt_sample *table,*table_original;
@@ -15,6 +17,10 @@ struct pt_sampler {
     unsigned generation;
     pt_pcm_progress progress;
     void *progress_context;
+    /* Intrinsic lifetimes, not playback/registry authority. */
+    struct pt_sampler_live *live_head;size_t live_count;
+    struct pt_sampler_pending *pending_head;size_t pending_count;
+    unsigned lifetime_fault;
 };
 /* Fill a newly allocated PCM buffer without changing the borrowed project.
  * Appending the filled sample is one undo resource. Format.data/capacity are

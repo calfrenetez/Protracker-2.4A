@@ -88,7 +88,7 @@ SOURCES = (
     'src/platform/raw_import.c',
     'src/platform/mod_import.c',
     'src/platform/pp20_import.c',
-)
+ 'src/editor/sampler_lifetime.c')
 ORACLE = 'EDITOR MIXED CAUSAL COMMAND REGISTRATION PASS:19 genuine SOURCE instances;2 wide/old8 TRIGGER-CONTROL-STOP sequences with actual C1/C2/C3 issuance and NULL disposal/slot reuse;16 captured-metadata/identity refusals and1 captured-only nested-pointer exclusion;no callbacks/writes from registration observations;SOFTWARE_ONLY\n'
 RAW_FONT_SHA256 = "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
 FONT_HEADER_SHA256 = "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0"

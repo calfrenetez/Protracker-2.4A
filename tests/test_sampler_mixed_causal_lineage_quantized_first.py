@@ -21,7 +21,7 @@ SOURCES = ['tests/sampler_mixed_causal_lineage_quantized_first_test.c',
            'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = ('SAMPLER CAUSAL LINEAGE QUANTIZED FIRST HOST COMPLETE cases=39;'
           '24 genuine mixed4/12 or16card 8/16/24-master cache8/16 lifetimes;'
           'copied expired first batch and seven-field final-level geometry;'

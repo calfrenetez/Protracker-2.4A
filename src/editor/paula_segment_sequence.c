@@ -353,12 +353,51 @@ enum pt_scheduled_result pt_paula_segment_sequence_service_reader(struct pt_paul
     if(r!=PT_SCHEDULED_OK&&r!=PT_SCHEDULED_PENDING)fail(s,PT_PAULA_SEQUENCE_FAILED);
     s->busy=0;return r;
 }
+/* Genuine local cancellation returns no backend envelope or activation proof.
+ * Validate only the exact original command/reader identities from that real
+ * queue operation; never infer detach from future accepted counts. */
+static int local_cancelled(const struct pt_paula_segment_sequence *s,unsigned index,
+    const struct pt_readers_command_receipt *receipt)
+{
+    int8_t map[PT_CHANNEL_LIMIT];
+    const struct pt_readers_action_receipt *a=receipt->action;
+    const struct pt_readers_key *k=&a->key;
+    if(pt_channels_paula_map(&s->header.channels,NULL,map)!=PT_CHANNEL_OK||
+       s->config.readers.track>=PT_CHANNEL_LIMIT||map[s->config.readers.track]<0)return 0;
+    if(receipt->domain!=PT_READERS_COMMAND_DOMAIN||receipt->origin!=PT_READERS_LOCAL_UNSUBMITTED||
+       !receipt->queue||receipt->session!=s->config.readers.session||
+       receipt->generation!=s->config.readers.grid.generation||receipt->ticket!=s->ticket[index]||
+       receipt->owner!=index+1U||receipt->count!=1||receipt->event||receipt->context||receipt->context_bytes||
+       a->command!=PT_READERS_CANCELLED_BEFORE||a->reader!=PT_READERS_STATE_UNKNOWN||
+       a->adoption!=PT_READERS_UNADOPTED||a->observed||a->issued||
+       k->queue!=receipt->queue||k->session!=receipt->session||k->generation!=receipt->generation||
+       k->trigger!=s->ticket[0]||k->owner!=5||!k->serial||k->action||k->slot!=(unsigned)map[s->config.readers.track])return 0;
+    /* Continuing commands must use the full key previously exposed by the
+     * genuine positive ACTIVE getter. A never-published first trigger has no
+     * ACTIVE key and the local receipt grants none. */
+    return !index||(s->original_seen&&same_key(k,&s->original));
+}
 enum pt_paula_segment_sequence_result pt_paula_segment_sequence_cancel(struct pt_paula_segment_sequence *s)
 {
+    unsigned i,faults_before,failed_before;struct pt_readers_command_receipt receipt;
+    enum pt_scheduled_result result;
     if(!enter(s))return PT_PAULA_SEQUENCE_INVALID;
+    faults_before=s->callback_faults;failed_before=s->failed;
     s->cancelled=1;s->phase=PT_PAULA_SEQUENCE_CANCELLED;s->result=PT_PAULA_SEQUENCE_FAILED;pt_render_lookahead_cancel(&s->lookahead);
-    if(s->pool){s->scheduled_result=pt_paula_segment_readers_stop(s->pool);
-        if(s->scheduled_result!=PT_SCHEDULED_OK&&s->scheduled_result!=PT_SCHEDULED_PENDING)s->failed=1;}
+    if(s->pool){
+        /* Collect actual local proofs BEFORE whole stop consumes the holders.
+         * Published or uncertain submits retain their external proof duties. */
+        for(i=0;i<4;++i)if(s->ticket[i]&&!(s->published&(1U<<i))&&!(s->detached&(1U<<i))){
+            memset(&receipt,0,sizeof(receipt));
+            result=pt_paula_segment_readers_poll_command(s->pool,i,1,&receipt);
+            if(result!=PT_SCHEDULED_OK||!local_cancelled(s,i,&receipt)||
+               s->callback_faults!=faults_before||s->failed!=failed_before){
+                s->scheduled_result=PT_SCHEDULED_BACKEND;s->failed=1;s->busy=0;return s->result;}
+            s->detached|=1U<<i;
+        }
+        s->scheduled_result=pt_paula_segment_readers_stop(s->pool);
+        if(s->scheduled_result!=PT_SCHEDULED_OK&&s->scheduled_result!=PT_SCHEDULED_PENDING)s->failed=1;
+    }
     s->busy=0;return s->result;
 }
 int pt_paula_segment_sequence_close(struct pt_paula_segment_sequence **owner)

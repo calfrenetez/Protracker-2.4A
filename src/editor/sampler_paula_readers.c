@@ -1,9 +1,11 @@
 #include "sampler_paula_readers.h"
+#include "sampler_paula_readers_inventory_internal.h"
 #include "sampler_internal.h"
 #include "sampler_paula_internal.h"
 #include "project_snapshot.h"
 #include <string.h>
 #include <limits.h>
+#include <stddef.h>
 enum {PREPARING=1,READY,LIVE,RETIRED,CANCELLED,FAILED};
 enum {PIN_BEGIN,PIN_STEP,CHIP_BEGIN,CHIP_STEP};
 struct pt_paula_readers_reader {
@@ -169,6 +171,119 @@ static void partial_resources(struct pt_paula_readers_command *c)
 }
 static struct pt_paula_readers_reader *trigger_reader(struct pt_paula_readers_command *c,unsigned i)
 {struct pt_paula_readers_reader *r=c->source[i].reader;return r&&reader_registered(c->pool,r)&&r->token==c->source[i].reader_token?r:NULL;}
+
+/* The song retains every captured current master. Its preparing trigger pin
+ * job therefore adds only its own intrinsic pending node, never a new version. */
+static int readers_inventory_header_equal(const struct pt_sampler *s,
+ const struct pt_sampler *original)
+{
+ const unsigned char *a=(const unsigned char *)s,*b=(const unsigned char *)original;
+ size_t i;
+ for(i=0;i<sizeof(*s);++i) {
+   if((i>=offsetof(struct pt_sampler,pending_head)&&
+       i-offsetof(struct pt_sampler,pending_head)<sizeof(s->pending_head))||
+      (i>=offsetof(struct pt_sampler,pending_count)&&
+       i-offsetof(struct pt_sampler,pending_count)<sizeof(s->pending_count)))continue;
+   if(a[i]!=b[i])return 0;
+ }
+ return 1;
+}
+static int readers_inventory_job_registered(const struct pt_paula_readers_pool *p,
+ const struct pt_paula_readers_reader *r)
+{
+ unsigned i,matches=0;
+ for(i=0;i<p->config.maximum_commands;++i)if(p->commands[i]) {
+   const struct pt_paula_readers_command *c=p->commands[i];
+   const struct command_source *x;
+   if(c->pool!=p||!c->token||c->token>p->serial||!c->count||
+      c->count>PT_PAULA_READERS_ACTIONS||c->index>c->count)return 0;
+   if(c->state!=PREPARING||c->phase!=PIN_STEP||c->index==c->count)continue;
+   x=c->source+c->index;
+   if(x->reader==r) {
+     if(x->request.kind!=PT_SCHEDULED_TRIGGER||x->reader_token!=r->token||
+        c->queue!=r->queue||c->frame!=r->frame||x->request.track!=r->track||
+        x->request.sample!=r->sample||x->request.channel!=r->channel)return 0;
+     ++matches;
+   }
+ }
+ return matches==1;
+}
+int pt_paula_readers_inventory_current(const struct pt_paula_readers_pool *p,
+ const struct pt_sampler *s,const struct pt_project *project,
+ const struct pt_sampler *original)
+{
+ const struct pt_sampler_pending *known[PT_PAULA_READERS_PERSISTENT];
+ const struct pt_sampler_pending *pending,*before=NULL;
+ const struct pt_sampler_live *live,*previous=NULL;
+ unsigned i,j,expected=0,seen=0;size_t k;
+ if(!p||!s||!project||!original||p->sampler!=s||p->project!=project||
+    p->generation!=original->generation||!p->config.maximum_commands||
+    p->config.maximum_commands>PT_PAULA_READERS_COMMANDS||
+    !p->config.maximum_readers||p->config.maximum_readers>PT_PAULA_READERS_PERSISTENT||
+    project->samples!=p->header.samples||project->sample_count!=p->header.sample_count||
+    project->sample_count>PT_PROJECT_SAMPLES||s->lifetime_fault||original->lifetime_fault||
+    s->live_count>PT_SAMPLER_LIVE_CHECK_LIMIT||
+    s->pending_count>PT_SAMPLER_LIVE_CHECK_LIMIT-s->live_count||
+    original->live_count>PT_SAMPLER_LIVE_CHECK_LIMIT||
+    original->pending_count>PT_SAMPLER_LIVE_CHECK_LIMIT-original->live_count||
+    (!s->live_head!=!s->live_count)||
+    (!original->live_head!=!original->live_count)||
+    (!s->pending_head!=!s->pending_count)||
+    (!original->pending_head!=!original->pending_count)||
+    s->pending_count<original->pending_count||
+    !readers_inventory_header_equal(s,original))return 0;
+ live=s->live_head;
+ for(k=0;k<original->live_count;++k) {
+   unsigned n;
+   if(!live||!valid_span(live,sizeof(*live))||
+      (uintptr_t)live%offsetof(struct {char byte;struct pt_sampler_live value;},value)||
+      live->owner!=s||live->previous!=previous||!live->count||live->count>3||
+      !live->kind||live->kind>PT_LIVE_ESTABLISH)return 0;
+   for(n=0;n<live->count;++n)
+     if(!live->spans[n].bytes||!valid_span(live->spans[n].data,live->spans[n].bytes))return 0;
+   previous=live;live=live->next;
+ }
+ if(live)return 0;
+ for(i=0;i<p->config.maximum_readers;++i)if(p->readers[i]) {
+   const struct pt_paula_readers_reader *r=p->readers[i];
+   const struct pt_sampler_pin_job *job=&r->pin_job;
+   if(r->pool!=p||!r->token||r->token>p->serial||r->sample>=project->sample_count||
+      !pt_sampler_pin_job_inventory_current(job,s,project,p->generation,r->sample))return 0;
+   if(!job->reservation.owner)continue;
+   if(r->state!=PREPARING||r->released||r->track>=p->header.channels.count||
+      r->track>=PT_CHANNEL_LIMIT||p->map[r->track]<0||p->map[r->track]>=4||
+      r->slot!=(unsigned)p->map[r->track]||
+      r->channel>=project->samples[r->sample].pcm.channels||!original->current[r->sample]||
+      job->value!=job->previous||job->previous!=original->current[r->sample]||
+      !same_sample(&r->original,project->samples+r->sample)||
+      !readers_inventory_job_registered(p,r))return 0;
+   for(j=0;j<expected;++j)if(known[j]==&job->reservation)return 0;
+   known[expected++]=&job->reservation;
+ }
+ if(s->pending_count-original->pending_count!=expected)return 0;
+ pending=s->pending_head;
+ for(i=0;i<expected;++i) {
+   /* Match an actual registered embedded node before following its links. */
+   for(j=0;j<expected;++j)if(pending==known[j])break;
+   if(j==expected||(seen&(1U<<j))||pending->previous!=before)return 0;
+   seen|=1U<<j;before=pending;pending=pending->next;
+ }
+ if(pending!=original->pending_head)return 0;
+ for(k=0;k<original->pending_count;++k) {
+   unsigned n;
+   if(!pending||!valid_span(pending,sizeof(*pending))||
+      (uintptr_t)pending%offsetof(struct {char byte;struct pt_sampler_pending value;},value)||
+      pending->owner!=s||pending->previous!=before||
+      !pending->kind||pending->kind>PT_PENDING_CALL||!pending->bytes||
+      !valid_span(pending->control,pending->bytes)||pending->retiring_count>3)return 0;
+   for(n=0;n<pending->retiring_count;++n)
+     if(!pending->retiring[n].bytes||
+        !valid_span(pending->retiring[n].data,pending->retiring[n].bytes))return 0;
+   before=pending;pending=pending->next;
+ }
+ return !pending;
+}
+
 static int batch_valid(struct pt_paula_readers_command *c,const struct pt_scheduled_batch *b)
 {
  unsigned i,j,seen=0;struct pt_paula_readers_pool *p=c->pool;

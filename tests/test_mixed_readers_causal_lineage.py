@@ -20,7 +20,7 @@ SOURCES = ['tests/mixed_readers_causal_lineage_test.c', 'src/core/mixed_readers_
            'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = ('MIXED CAUSAL THREE STAGE HOST COMPLETE cases=25;two live C slots;'
           'original R/master/cache;actual root detach;actual CONTROL;opaque retired C;'
           'original frames;independent C/R/SOURCE;NOT_NATIVE_TIMING_DEVICE_AUDIO\n')

@@ -328,7 +328,10 @@ enum pt_editor_mixed_song_result pt_editor_mixed_song_begin(struct pt_editor_mix
  for(i=0;i<8;++i)p->establish_parents[i+3]=p->extent[i];
  p->revision=s->binding->editor->history.revision;p->generation=s->binding->editor->sampler.generation;
  p->working_command=NO_COMMAND;p->phase=PT_EDITOR_MIXED_SONG_ESTABLISH_BEGIN;
- p->result=PT_EDITOR_MIXED_SONG_PENDING;return p->result;
+ p->result=PT_EDITOR_MIXED_SONG_PENDING;
+ if(!pt_editor_mixed_source_bind_inventory(p->controller,p->borrow,p))
+    return fail(p,PT_EDITOR_MIXED_SONG_REFUSED);
+ return p->result;
 }
 
 enum pt_editor_mixed_song_result pt_editor_mixed_song_step(struct pt_editor_mixed_song *p,unsigned work)

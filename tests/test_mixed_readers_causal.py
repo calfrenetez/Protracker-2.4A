@@ -21,7 +21,7 @@ SOURCES = ['tests/mixed_readers_causal_test.c', 'src/core/mixed_readers_causal.c
            'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = ('MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 '
           '8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;'
           'early successor before/after completion;actual original clocks/adoption/tombstone;'

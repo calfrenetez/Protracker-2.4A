@@ -8,6 +8,9 @@
 #include "editor_mixed_internal.h"
 #include "project_snapshot.h"
 #include "sampler_internal.h"
+#include "sampler_establish_inventory_internal.h"
+#include "editor_mixed_causal_song_lineage_internal.h"
+#include "editor_mixed_causal_song_pair_internal.h"
 #include "sampler_mixed_readers_internal.h"
 #include "sampler_mixed_causal_internal.h"
 #include "../core/mixed_readers_causal_factory_internal.h"
@@ -605,6 +608,151 @@ static int source_descriptor(struct pt_editor_mixed_causal_prepare *s)
     memcmp(v->mutable,s->source_mutable,sizeof(s->source_mutable)))return 0;
  return 1;
 }
+static int source_inventory_owner_current(struct pt_editor_mixed_causal_prepare *s,
+ const struct pt_editor_mixed_causal_song_lineage *p)
+{
+ return p&&inside(s->source_contexts,p,sizeof(*p))&&
+    !((uintptr_t)p%ALIGN_OF(struct pt_editor_mixed_causal_song_lineage))&&
+    apart(p,sizeof(*p),s,sizeof(*s))&&
+    p->original==p&&p->adopted&&p->controller==s&&p->joint&&
+    inside(s->source_contexts,p->joint,sizeof(*p->joint))&&
+    !((uintptr_t)p->joint%ALIGN_OF(struct pt_editor_mixed_causal_lineage_source_prepare))&&
+    p->joint->self==p->joint&&p->joint->inputs==p->source&&
+    &p->joint->original.original==s&&p->source&&
+    &p->source->original==s->source_inputs&&p->borrow==s->source_publisher&&
+    p->parent.data==s->source_contexts.data&&p->parent.bytes==s->source_contexts.bytes&&
+    p->revision==s->revision&&p->generation==s->generation&&
+    !p->first_error&&!p->cancelled&&!p->borrow_closed&&!p->hook_closed&&
+    !memcmp(&p->configuration,&p->saved,sizeof(p->saved));
+}
+int pt_editor_mixed_causal_source_bind_inventory(
+ struct pt_editor_mixed_causal_prepare *s,
+ const struct pt_editor_mixed_causal_source_borrow *b,
+ struct pt_editor_mixed_causal_song_lineage *p)
+{
+ if(!source_original(s,b)||!source_descriptor(s)||s->source_inventory_owner||
+     s->source_pair_inventory_owner||
+    s->source_activated||s->source_busy||s->busy||s->closing||
+    s->source_cancel_requested||s->first_error||(s->source_mode!=2&&s->source_mode!=3)||
+    !source_inventory_owner_current(s,p)||
+    p->phase!=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_ESTABLISH_BEGIN||
+    p->busy||p->requests||p->pin_count||p->pin_slot||p->activated||
+    !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,
+        p->pin_slot,&s->editor->sampler,s->project,&s->sampler_header))return 0;
+ s->source_inventory_owner=p;return 1;
+}
+
+static int source_pair_inventory_owner_current(struct pt_editor_mixed_causal_prepare *s,
+ const struct pt_editor_mixed_causal_song_pair *p)
+{
+ return p&&inside(s->source_contexts,p,sizeof(*p))&&
+    !((uintptr_t)p%ALIGN_OF(struct pt_editor_mixed_causal_song_pair))&&
+    apart(p,sizeof(*p),s,sizeof(*s))&&
+    p->original==p&&p->adopted&&p->controller==s&&
+    p->source&&p->source==s->source_inputs&&
+    p->source->preparation==&p->preparation&&
+    p->borrow==s->source_publisher&&s->source_mutable_count==2&&
+    p->outputs==s->source_mutable[1].data&&
+    p->parent.data==s->source_contexts.data&&p->parent.bytes==s->source_contexts.bytes&&
+    p->revision==s->revision&&p->generation==s->generation&&
+    !p->first_error&&!p->cancelled&&!p->borrow_closed&&!p->hook_closed&&
+    !memcmp(&p->configuration,&p->saved,sizeof(p->saved));
+}
+int pt_editor_mixed_causal_source_bind_pair_inventory(
+ struct pt_editor_mixed_causal_prepare *s,
+ const struct pt_editor_mixed_causal_source_borrow *b,
+ struct pt_editor_mixed_causal_song_pair *p)
+{
+ if(!source_original(s,b)||!source_descriptor(s)||s->source_inventory_owner||
+    s->source_pair_inventory_owner||s->source_mode!=1||
+    s->source_activated||s->source_busy||s->busy||s->closing||
+    s->source_cancel_requested||s->first_error||
+    !source_pair_inventory_owner_current(s,p)||
+    p->phase!=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_BEGIN||
+    p->busy||p->requests||p->pin_count||p->pin_slot||p->activated||
+    !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,
+        p->pin_slot,&s->editor->sampler,s->project,&s->sampler_header))return 0;
+ s->source_pair_inventory_owner=p;return 1;
+}
+
+/* Compatibility for completed generic SOURCE pin promotions, not a source-to-job
+ * binding. No pending inventory changes are admitted. Every added live node must
+ * be one distinct, genuinely current contiguous version in an originally empty
+ * slot. The old living immutable suffix keeps its exact head/count, with bounded
+ * links/numeric checks; this does not freeze every old node payload byte. */
+static int source_completed_inventory_current(const struct pt_sampler *now,
+    const struct pt_project *project,const struct pt_sampler *original)
+{
+ const struct pt_sampler_live *live,*previous=NULL;
+ const struct pt_sampler_pending *pending,*before=NULL;
+ size_t i,k,prefix=0,expected=0,charged=0,bytes;unsigned slot,prior;
+ if(!now||!project||!original||now->lifetime_fault||original->lifetime_fault||
+    project->sample_count>PT_PROJECT_SAMPLES||
+    (project->sample_count&&!project->samples)||
+    now->live_count>PT_SAMPLER_LIVE_CHECK_LIMIT||
+    now->pending_count>PT_SAMPLER_LIVE_CHECK_LIMIT-now->live_count||
+    (!now->live_head!=!now->live_count)||
+    (!original->live_head!=!original->live_count)||
+    (!original->pending_head!=!original->pending_count)||
+    now->pending_head!=original->pending_head||
+    now->pending_count!=original->pending_count||
+    original->live_count>now->live_count||
+    now->bytes<original->bytes||now->bytes>now->budget)return 0;
+ for(slot=0;slot<PT_PROJECT_SAMPLES;++slot){
+    if(original->current[slot]){
+       if(now->current[slot]!=original->current[slot])return 0;
+    }else if(now->current[slot]){
+       if(slot>=project->sample_count)return 0;
+       /* One issued version cannot account for two newly populated slots. */
+       for(prior=0;prior<slot;++prior)
+          if(!original->current[prior]&&now->current[prior]==now->current[slot])return 0;
+       ++expected;
+    }
+ }
+ live=now->live_head;
+ while(live!=original->live_head){
+    if(!live||!pt_establish_inventory_span(live,sizeof(*live))||
+       (uintptr_t)live%ALIGN_OF(struct pt_sampler_live)||
+       prefix>=expected||live->owner!=now||live->previous!=previous)return 0;
+    bytes=0;
+    for(slot=0;slot<PT_PROJECT_SAMPLES;++slot)
+       if(!original->current[slot]&&now->current[slot]){
+          bytes=pt_sampler_current_version_inventory_bytes(now->current[slot],
+              now,project,slot,live);
+          if(bytes)break;
+       }
+    if(!bytes||bytes>SIZE_MAX-charged)return 0;
+    charged+=bytes;previous=live;live=live->next;++prefix;
+ }
+ if(prefix!=expected||now->live_count-original->live_count!=prefix)return 0;
+ for(i=0;i<original->live_count;++i){
+    if(!live||!pt_establish_inventory_span(live,sizeof(*live))||
+       (uintptr_t)live%ALIGN_OF(struct pt_sampler_live)||
+       live->owner!=now||live->previous!=previous||!live->count||
+       live->count>3||!live->kind||live->kind>PT_LIVE_ESTABLISH)return 0;
+    for(k=0;k<live->count;++k)
+       if(!live->spans[k].bytes||!pt_establish_inventory_span(
+          live->spans[k].data,live->spans[k].bytes))return 0;
+    previous=live;live=live->next;
+ }
+ if(live||charged>SIZE_MAX-original->bytes||
+    now->bytes!=original->bytes+charged)return 0;
+ pending=now->pending_head;
+ for(i=0;i<original->pending_count;++i){
+    if(!pending||!pt_establish_inventory_span(pending,sizeof(*pending))||
+       (uintptr_t)pending%ALIGN_OF(struct pt_sampler_pending)||
+       pending->owner!=now||pending->previous!=before||
+       !pending->kind||pending->kind>PT_PENDING_CALL||!pending->bytes||
+       !pt_establish_inventory_span(pending->control,pending->bytes)||
+       pending->retiring_count>3)return 0;
+    for(k=0;k<pending->retiring_count;++k)
+       if(!pending->retiring[k].bytes||!pt_establish_inventory_span(
+          pending->retiring[k].data,pending->retiring[k].bytes))return 0;
+    before=pending;pending=pending->next;
+ }
+ return !pending;
+}
+
 static int source_fixed(struct pt_editor_mixed_causal_prepare *s)
 {
  struct pt_editor_mixed *o=s->source_binding;struct pt_sampler m;struct pt_project h;unsigned i;
@@ -617,13 +765,28 @@ static int source_fixed(struct pt_editor_mixed_causal_prepare *s)
   * The seam permits their header changes; it does not certify their semantics.
   * Existing current identities and all fixed allocator/table/budget fields stay.
   * No former descriptor table or value is traversed by this fixed check. */
- memcpy(&m,&s->editor->sampler,sizeof(m));
- if(m.bytes<s->sampler_header.bytes||m.bytes>m.budget)return 0;
- for(i=0;i<PT_PROJECT_SAMPLES;++i){
-    if(s->sampler_header.current[i]&&m.current[i]!=s->sampler_header.current[i])return 0;
-    m.current[i]=s->sampler_header.current[i];}
- m.bytes=s->sampler_header.bytes;
- if(memcmp(&m,&s->sampler_header,sizeof(m)))return 0;
+  if(s->source_inventory_owner&&s->source_pair_inventory_owner)return 0;
+  if(s->source_pair_inventory_owner){
+     struct pt_editor_mixed_causal_song_pair *p=s->source_pair_inventory_owner;
+     if(!source_pair_inventory_owner_current(s,p)||
+        !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,p->pin_slot,
+         &s->editor->sampler,s->project,&s->sampler_header))return 0;
+  }else if(s->source_inventory_owner){
+     struct pt_editor_mixed_causal_song_lineage *p=s->source_inventory_owner;
+    if(!source_inventory_owner_current(s,p)||
+       !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,p->pin_slot,
+        &s->editor->sampler,s->project,&s->sampler_header))return 0;
+ }else{
+  memcpy(&m,&s->editor->sampler,sizeof(m));
+  if(!source_completed_inventory_current(&s->editor->sampler,s->project,
+      &s->sampler_header))return 0;
+  /* Normalize only the exact, independently accounted completed prefix above;
+   * pending nodes and every other captured sampler byte remain unchanged. */
+  for(i=0;i<PT_PROJECT_SAMPLES;++i)m.current[i]=s->sampler_header.current[i];
+  m.bytes=s->sampler_header.bytes;
+  m.live_head=s->sampler_header.live_head;m.live_count=s->sampler_header.live_count;
+  if(memcmp(&m,&s->sampler_header,sizeof(m)))return 0;
+ }
  memcpy(&h,&s->project_header,sizeof(h));h.channels.selected=s->project->channels.selected;
  return pt_project_snapshot_equal(s->project,&h);
 }

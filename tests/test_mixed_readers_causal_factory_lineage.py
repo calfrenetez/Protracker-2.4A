@@ -20,7 +20,7 @@ SOURCES = ['tests/mixed_readers_causal_factory_lineage_test.c',
            'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = ('MIXED CAUSAL COMPOSITE FACTORY QUERIES HOST PASS;actual installed capability;'
           'actual first and CONTROL completion;clean C1 detach;'
           'wrong capability/context/registration/reentry/fault refusal;'

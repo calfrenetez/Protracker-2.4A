@@ -1,4 +1,5 @@
 #include "paula_readers_song.h"
+#include "sampler_paula_readers_inventory_internal.h"
 #include "sampler_internal.h"
 #include "project_snapshot.h"
 #include <limits.h>
@@ -150,7 +151,8 @@ static int song_current(struct pt_paula_readers_song *s,uint32_t revision)
 {
     struct pt_project header;
     if(revision!=s->revision||s->sampler->generation!=s->generation||
-       memcmp(s->sampler,&s->sampler_header,sizeof(s->sampler_header))||
+       (memcmp(s->sampler,&s->sampler_header,sizeof(s->sampler_header))&&
+        (!s->pool||!pt_paula_readers_inventory_current(s->pool,s->sampler,s->project,&s->sampler_header)))||
        s->project->channels.selected>=s->header.channels.count)return 0;
     memcpy(&header,&s->header,sizeof(header));header.channels.selected=s->project->channels.selected;
     if(!pt_project_snapshot_equal(s->project,&header))return 0;

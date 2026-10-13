@@ -126,4 +126,18 @@ struct pt_mixed_reader_retirement pt_editor_mixed_causal_source_retire_original_
     struct pt_editor_mixed_causal_prepare *,
     const struct pt_editor_mixed_causal_source_borrow *original,
     struct pt_editor_mixed_reader_ref original_reader,unsigned cancel);
+/* Callback-free one-shot matching of the genuine original producer to its
+ * original SOURCE hook/publisher/context. Called only by its constructor;
+ * no getter/copy/boolean witness can enroll an arbitrary child job. */
+int pt_editor_mixed_causal_source_bind_inventory(
+    struct pt_editor_mixed_causal_prepare *,
+    const struct pt_editor_mixed_causal_source_borrow *,
+    struct pt_editor_mixed_causal_song_lineage *);
+/* Separate original two-boundary producer only, bound callback-free by its
+ * genuine constructor before any establishment allocation. No public capability,
+ * copied header/owner, READY or native permission; full parent survives close. */
+int pt_editor_mixed_causal_source_bind_pair_inventory(
+    struct pt_editor_mixed_causal_prepare *,
+    const struct pt_editor_mixed_causal_source_borrow *,
+    struct pt_editor_mixed_causal_song_pair *);
 #endif

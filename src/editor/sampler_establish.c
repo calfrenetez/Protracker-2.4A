@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <string.h>
 struct pt_establish_metadata {
+    struct pt_sampler_live live;
     struct pt_project original;
     struct pt_sample *initial,*expected;
     struct pt_extension *extensions;
@@ -59,6 +60,8 @@ static void *guard_allocate(void *context,const struct pt_allocator *a,size_t n)
     p=base.allocate(base.context,n);
     /* Never initialize/release a known or ambiguous source/control alias. */
     if(p&&!fresh(c,p,n)){c->faulted=1;c->result=PT_ESTABLISH_ALIAS;return NULL;}
+    if(p){c->reservation.retiring[1]=(struct pt_sampler_live_span){p,n};c->reservation.retiring_count=2;
+        c->master_extent=(struct pt_sampler_storage_span){p,n};}
     if(!current(c)){c->faulted=1;c->result=PT_ESTABLISH_STALE;}
     if(c->faulted){if(p)base.release(base.context,p);return NULL;}
     return p;
@@ -81,22 +84,30 @@ enum pt_establish_result pt_sampler_establish_begin(struct pt_sampler_establish 
     if(!append(&bytes,ALIGN_OF(struct pt_sample),p->sample_count*sizeof(struct pt_sample),&first)||
        !append(&bytes,ALIGN_OF(struct pt_sample),p->sample_count*sizeof(struct pt_sample),&second)||
        !append(&bytes,ALIGN_OF(struct pt_extension),p->extension_count*sizeof(struct pt_extension),&extensions))return PT_ESTABLISH_INVALID;
-    base=*a;memset(c,0,sizeof(*c));c->sampler=s;c->project=p;memcpy(&c->snapshot,p,sizeof(*p));
+    base=*a;memset(c,0,sizeof(*c));c->sampler=s;c->project=p;c->self=c;memcpy(&c->snapshot,p,sizeof(*p));
+    if(!pt_sampler_pending_add(s,&c->reservation,PT_PENDING_ESTABLISH,c,sizeof(*c),p,0,s->generation))return PT_ESTABLISH_CAPACITY;
     memcpy(&c->initial_sampler,s,sizeof(*s));memcpy(&c->expected_sampler,s,sizeof(*s));
     c->control_allocator=base;c->parent_count=count+2;memcpy(c->parents,saved,c->parent_count*sizeof(*saved));
     c->revision=revision;c->generation=s->generation;c->active=c->busy=1;c->phase=COPY_METADATA;c->result=PT_ESTABLISH_PENDING;
     m=base.allocate(base.context,bytes);
     if(m&&!fresh(c,m,bytes)){c->faulted=1;c->phase=ESTABLISH_FAILED;c->result=PT_ESTABLISH_ALIAS;c->busy=0;return c->result;}
+    if(m){c->reservation.retiring[0]=(struct pt_sampler_live_span){m,bytes};c->reservation.retiring_count=1;
+        c->metadata_extent=(struct pt_sampler_storage_span){m,bytes};}
     if(!current(c)){c->faulted=1;c->result=PT_ESTABLISH_STALE;}
     if(c->faulted||!m){if(m)base.release(base.context,m);c->phase=ESTABLISH_FAILED;
         if(!c->faulted)c->result=PT_ESTABLISH_CAPACITY;
         c->busy=0;return c->result;}
-    memset(m,0,sizeof(*m));memcpy(&m->original,&c->snapshot,sizeof(m->original));
+    memset(m,0,sizeof(*m));
+    if(!pt_sampler_live_add(s,&m->live,PT_LIVE_ESTABLISH,m,bytes,NULL,0,NULL,0)){
+        base.release(base.context,m);c->phase=ESTABLISH_FAILED;c->result=PT_ESTABLISH_CAPACITY;c->busy=0;return c->result;
+    }
+    memcpy(&m->original,&c->snapshot,sizeof(m->original));
     m->initial=(struct pt_sample *)((unsigned char *)m+first);
     m->expected=(struct pt_sample *)((unsigned char *)m+second);
     m->extensions=(struct pt_extension *)((unsigned char *)m+extensions);
     m->original.samples=m->initial;m->original.extensions=m->extensions;
-    c->metadata=m;c->metadata_bytes=bytes;c->busy=0;return PT_ESTABLISH_PENDING;
+    c->metadata=m;c->metadata_bytes=bytes;c->metadata_live=&m->live;
+    memcpy(&c->expected_sampler,s,sizeof(*s));c->busy=0;return PT_ESTABLISH_PENDING;
 }
 enum pt_establish_result pt_sampler_establish_get(struct pt_sampler_establish *c,uint32_t revision,uint32_t generation)
 {
@@ -137,7 +148,12 @@ enum pt_establish_result pt_sampler_establish_step(struct pt_sampler_establish *
         }else if(valid!=PT_PROJECT_PENDING)failure(c,PT_ESTABLISH_SEMANTIC);
     }else if(c->slot==c->snapshot.sample_count){c->phase=ESTABLISH_DONE;c->result=PT_ESTABLISH_READY;}
     else if(!c->job.owner){
-        edit=pt_sampler_pin_job_begin_guarded(&c->job,c->sampler,c->project,c->slot,c->generation,guard_allocate,c);
+        edit=pt_sampler_pin_job_reserve(&c->job,c->sampler,c->project,c->slot,c->generation);
+        if(edit==PT_EDIT_OK){
+            /* Snapshot only the genuine pre-reserve transition, before callback. */
+            memcpy(&c->expected_sampler,c->sampler,sizeof(*c->sampler));
+            edit=pt_sampler_pin_job_begin_guarded(&c->job,c->sampler,c->project,c->slot,c->generation,guard_allocate,c);
+        }
         if(edit!=PT_EDIT_OK)failure(c,c->faulted?c->result:edit==PT_EDIT_CAPACITY?PT_ESTABLISH_CAPACITY:PT_ESTABLISH_STALE);
         memcpy(&c->expected_sampler,c->sampler,sizeof(*c->sampler));
     }else {
@@ -145,6 +161,9 @@ enum pt_establish_result pt_sampler_establish_step(struct pt_sampler_establish *
         if(edit!=PT_EDIT_OK)failure(c,PT_ESTABLISH_STALE);
         else if(ready){
             memcpy(c->metadata->expected+c->slot,c->project->samples+c->slot,sizeof(struct pt_sample));
+            /* Record only this genuine atomic publication before any later
+             * external callback. Existing current[] is never provenance. */
+            if(!c->initial_sampler.current[c->slot])c->issued[c->slot]=pin;
             ++c->slot;pt_sampler_unpin(pin);
             memcpy(&c->expected_sampler,c->sampler,sizeof(*c->sampler));
         }
@@ -159,7 +178,22 @@ int pt_sampler_establish_cancel(struct pt_sampler_establish *c)
     if(c->busy){c->faulted=1;c->result=PT_ESTABLISH_FAULT;return 0;}
     if(!c->active)return 1;
     c->busy=1;pt_project_validation_cancel(&c->validation);pt_sampler_pin_job_cancel(&c->job);
-    m=c->metadata;a=c->control_allocator;c->metadata=NULL;c->metadata_bytes=0;
-    if(m)a.release(a.context,m);
+    m=c->metadata;a=c->control_allocator;c->metadata=NULL;c->metadata_bytes=0;c->metadata_live=NULL;
+    if(m){
+        c->retiring=1;
+        if(!pt_sampler_pending_add(c->sampler,&c->retirement,PT_PENDING_CALL,
+            &c->retirement,sizeof(c->retirement),NULL,0,c->sampler->generation)){
+            c->faulted=1;c->busy=0;return 0;
+        }
+        if(!pt_sampler_pending_retire(&c->retirement,&m->live)||
+           !pt_sampler_live_remove(&m->live)){
+            /* Retain uncertain intrinsic retirement anchors. No recovery grant. */
+            c->faulted=1;c->busy=0;return 0;
+        }
+        a.release(a.context,m);
+        if(!pt_sampler_pending_remove(&c->retirement)){c->faulted=1;c->busy=0;return 0;}
+        c->retiring=0;
+    }
+    if(!pt_sampler_pending_remove(&c->reservation)){c->faulted=1;c->busy=0;return 0;}
     c->active=0;c->busy=0;return 1;
 }

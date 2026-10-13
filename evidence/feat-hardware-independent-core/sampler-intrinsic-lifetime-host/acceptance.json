@@ -1,0 +1,1707 @@
+{
+  "component": "sampler intrinsic allocation lifetimes",
+  "current_combined_software_regression": {
+    "actual_compiler_roles": 36,
+    "actual_fixture_roles": 36,
+    "candidate_paths": 78,
+    "candidate_paths_reached": 53,
+    "candidate_paths_unreached": 25,
+    "cleanup_boundary": "Owned direct-child completion and recorded stream retirement positive. Five original mains retain their own local group-absence observations; no universal or current process-group absence acceptance.",
+    "common_compiler_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fsanitize=address,undefined"
+    ],
+    "compiler_and_fixture_returncodes": "ALL_ZERO",
+    "current_reached_product_body_pins": {
+      "src/editor/editor_mixed_readers_prepare.c": {
+        "bytes": 77368,
+        "sha256": "99509d67990dbd9c4b3bbe79851dbfe83aecc11af5c9c72bb9c51f14cd6f6f0e"
+      },
+      "src/editor/editor_mixed_readers_prepare.h": {
+        "bytes": 12173,
+        "sha256": "2caa46a4022ff10f7248ab7db9526b9683bbf713a7d1c62353a660c107cb9e91"
+      },
+      "src/editor/editor_mixed_readers_source_internal.h": {
+        "bytes": 10160,
+        "sha256": "ac14aa806a2a5a587f778994845553abcc081be28e4d637b99298d2958c23083"
+      },
+      "src/editor/editor_mixed_song.c": {
+        "bytes": 43676,
+        "sha256": "ea9864b04ed515df1e32a51fd6ab64f792ea2627c245e66ed95ac7310bc3b59c"
+      },
+      "src/editor/sampler.c": {
+        "bytes": 82424,
+        "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+      },
+      "src/editor/sampler.h": {
+        "bytes": 6531,
+        "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+      },
+      "src/editor/sampler_establish.c": {
+        "bytes": 12180,
+        "sha256": "840c57fe64a1300d087f6cb465baf038ecd2ad75a98e737b4931185f64aab712"
+      },
+      "src/editor/sampler_establish.h": {
+        "bytes": 4067,
+        "sha256": "55ad8b5202a9100b3ee92bdde3cdd2eb1996de6bcca06bb9b42817208cd0ed88"
+      },
+      "src/editor/sampler_establish_inventory_internal.h": {
+        "bytes": 9848,
+        "sha256": "28f94c299d7217b08a72d6f826d92680a6e60054eafaa66c20041c7cd941ecb7"
+      },
+      "src/editor/sampler_internal.h": {
+        "bytes": 4851,
+        "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+      },
+      "src/editor/sampler_lifetime.c": {
+        "bytes": 8105,
+        "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+      },
+      "src/editor/sampler_lifetime_internal.h": {
+        "bytes": 2463,
+        "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+      },
+      "src/editor/sampler_paula_readers.c": {
+        "bytes": 50873,
+        "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+      },
+      "src/editor/sampler_paula_readers_inventory_internal.h": {
+        "bytes": 1179,
+        "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+      }
+    },
+    "dedicated_eleven_boundary": "PENDING_SEPARATE_CURRENT_GRAPH_HOST_QUALIFICATION; original32 results do not qualify unselected owner, intrinsic, rolling-timer, future or provider suites.",
+    "distinct_current_producer_C_compositions": 1,
+    "each_selected_group_invoked_once": true,
+    "historical_Git_archive_producer_main": "NOT_RUN; genuine selected 85-unit current-tree C fixture and exact stdout tested through a separate current composition.",
+    "immutable_source_inputs": 321,
+    "limits_seconds": {
+      "mixed_song_candidate": 340,
+      "mixed_song_fixture": 180,
+      "mixed_song_whole": 350,
+      "multi_group_current_regressions_candidate": 1090,
+      "multi_group_current_regressions_whole": 1100,
+      "single_group_candidate": 190,
+      "single_group_compiler": 120,
+      "single_group_fixture": 30,
+      "single_group_whole": 200
+    },
+    "original_current_procedural_mains": 5,
+    "original_flags_oracles_assertions": "PRESERVED; exact declared stdout oracles compared, no fabricated oracle for original print-only cases.",
+    "original_selections": 32,
+    "original_whole_unittest_selections": 26,
+    "physical_LF_include_edges": 596,
+    "quoted_C_H_bodies": 285,
+    "saved_qualification_digest": {
+      "bytes": 124526,
+      "sha256": "ee09ae04d7da27d9288c36f6eff50ead6a065d710126031dc990a944670a1366"
+    },
+    "status": "PASS_PRIVATE_HOST_CURRENT_SELECTED_SOFTWARE",
+    "translation_unit_union": 128,
+    "unreached_candidate_paths_no_runtime_transfer": [
+      "docs/PAULA_CHECKED_STOP_OWNER.md",
+      "docs/PAULA_CHECKED_STOP_OWNER_HOST_EVIDENCE.json",
+      "docs/SAMPLER_LIFETIME.md",
+      "evidence/feat-hardware-independent-core/sampler-intrinsic-lifetime-host/README.md",
+      "evidence/feat-hardware-independent-core/sampler-intrinsic-lifetime-host/acceptance.json",
+      "src/editor/paula_owner4.c",
+      "src/editor/paula_owner4.h",
+      "src/editor/paula_segment_sequence.c",
+      "tests/paula_owner4_genuine_owner_proposal.c",
+      "tests/sampler_intrinsic_lifetime_fixture.c",
+      "tests/test_native_mixed_causal_rolling_timer_source.py",
+      "tests/test_paula_delivery4_genuine_owner.py",
+      "tests/test_paula_owner4_checked_stop.py",
+      "tests/test_paula_segment_boundary.py",
+      "tests/test_paula_segment_future.py",
+      "tests/test_paula_segment_packet32.py",
+      "tests/test_paula_segment_provider.py",
+      "tests/test_paula_segment_repeat_plan.py",
+      "tests/test_paula_segment_repeat_readers.py",
+      "tests/test_paula_segment_sequence.py",
+      "tests/test_sampler_intrinsic_lifetime.py",
+      "tools/build_core_tests.py",
+      "tools/build_paula_future_test.py",
+      "tools/build_paula_lineage_test.py",
+      "tools/build_paula_readers_test.py"
+    ]
+  },
+  "current_combined_software_regression_record_boundary": "The earlier exact32-group observation is retained verbatim, including its then-pending dedicated marker; subsequent current eleven qualification is a separate record below.",
+  "current_dedicated_eleven_HOST": {
+    "actual_compiler_fixture_roles": 22,
+    "coverage_boundary": "Only the exact eleven selected software graphs and original assertions/oracles; no universal candidate-path runtime or canonical/device acceptance.",
+    "future_HOLD_boundary": {
+      "cases": 60,
+      "deliberate_process_lifetime_HOLD": 5,
+      "meaning": "Retained ownership; completed host assertions do not turn these holders into successful release or physical quiet.",
+      "restored": 55
+    },
+    "historical_Git_archive_producer_main": "NOT_RUN",
+    "meaningful_original_assertions_flags_oracles": "PRESERVED. Independently reviewed mechanical Source pin/count and genuine link-vector corrections are disclosed separately from original case behavior.",
+    "native_emulator_physical_timing_audio_listening": "NOT_QUALIFIED",
+    "owner_HOLD_boundary": {
+      "cases": 21,
+      "deliberate_HOLD": 6,
+      "meaning": "Anchored retained ownership, not successful release or device quiet.",
+      "restored": 15
+    },
+    "provider_fixed_actual_future_prerequisite_digest": {
+      "bytes": 9786,
+      "sha256": "9216c33d0c377e585f62119cd3069eb14c3f0c80872e77912a6f9879da4d2edb"
+    },
+    "provider_separate_qualification_digest": {
+      "bytes": 10417,
+      "sha256": "b2aab4bc70190240c3bb3154d60f2ea6843c745bb160be67ed2f3723f6be14d4"
+    },
+    "selected_graph_each_invoked_once": true,
+    "selected_graphs": {
+      "tests/test_native_mixed_causal_rolling_timer_source.py": {
+        "cases": 36,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I.",
+          "-DPT_PRIVATE_PAIR_TIMER_HOST_RESOURCE_MODEL=1",
+          "-DPT_PRIVATE_ROLLING_TIMER_HOST_RESOURCE_MODEL=1"
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "ROLLING TIMER T16-C16-C16-S16 HOST FIXTURE PASS:36 cases;genuine rolling producer;actual task service and retirement before continuation;two independently quiet recycled slots;four retained original identities;ticket-free vectors;all4 EARLY original deadlines;stale delivery refusal;callback custody;clean-unknown-mutated acquisition;release mutation retained obligations and read-only quiet;aligned disjoint constructors and bind refusers;whole exclusion and primitive reentry;once-only source close and read-only later quiet;exact960-1920-2880-3840;HOST_RESOURCE_MODEL_ONLY\n",
+        "current_product_body_pins": {
+          "src/editor/editor_mixed_readers_prepare.h": {
+            "bytes": 12173,
+            "sha256": "2caa46a4022ff10f7248ab7db9526b9683bbf713a7d1c62353a660c107cb9e91"
+          },
+          "src/editor/editor_mixed_readers_source_internal.h": {
+            "bytes": 10160,
+            "sha256": "ac14aa806a2a5a587f778994845553abcc081be28e4d637b99298d2958c23083"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_establish.c": {
+            "bytes": 12180,
+            "sha256": "840c57fe64a1300d087f6cb465baf038ecd2ad75a98e737b4931185f64aab712"
+          },
+          "src/editor/sampler_establish.h": {
+            "bytes": 4067,
+            "sha256": "55ad8b5202a9100b3ee92bdde3cdd2eb1996de6bcca06bb9b42817208cd0ed88"
+          },
+          "src/editor/sampler_establish_inventory_internal.h": {
+            "bytes": 9848,
+            "sha256": "28f94c299d7217b08a72d6f826d92680a6e60054eafaa66c20041c7cd941ecb7"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_invert_song.c": {
+            "bytes": 5941,
+            "sha256": "5aef31d4ea1bef6f122712702234469527b403ad724afa1822588c39101ca5a9"
+          },
+          "src/editor/sampler_invert_song.h": {
+            "bytes": 3150,
+            "sha256": "2d6fad60faf1803755adf91b1952df41ab9b7367a73514038337767f7a3aac14"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_mixed_causal_internal.h": {
+            "bytes": 2546,
+            "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20"
+          },
+          "src/editor/sampler_mixed_causal_lineage_control16_internal.h": {
+            "bytes": 1579,
+            "sha256": "499635805d971ae7edf5ee6c990aa08b20e55b20911fabc8d103abce000fb794"
+          },
+          "src/editor/sampler_mixed_causal_lineage_internal.h": {
+            "bytes": 3258,
+            "sha256": "98276153f5f8d36c8381e92082584bf68f583d5e4fdf649c3e7540b429e46871"
+          },
+          "src/editor/sampler_mixed_causal_rolling_internal.h": {
+            "bytes": 1449,
+            "sha256": "a61b4a38eeca104866dfb3f9ee64d763d270afba775b04e6f2e616afd33ae81d"
+          },
+          "src/editor/sampler_mixed_causal_stop_internal.h": {
+            "bytes": 2371,
+            "sha256": "c3cd1056ff502b21d5f85044e24020c6aabcbc40e7b418234af1f26877533ddf"
+          },
+          "src/editor/sampler_mixed_readers.c": {
+            "bytes": 97479,
+            "sha256": "05e7ade5701e13ae3acd64877365af49b9556a63277ba6a62633f74eaae3ba39"
+          },
+          "src/editor/sampler_mixed_readers.h": {
+            "bytes": 11621,
+            "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e"
+          },
+          "src/editor/sampler_mixed_readers_internal.h": {
+            "bytes": 1535,
+            "sha256": "b4fa697ba6ca17f6be591ee901b1e44ea632c5244dc084c357d72505e3c86edf"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_song.c": {
+            "bytes": 8188,
+            "sha256": "ebba4a380a76b9a367fe28d84c5854de765e89b527c4220c48906946b681d0aa"
+          },
+          "src/editor/sampler_song.h": {
+            "bytes": 3043,
+            "sha256": "0e74dbc5cfc6a5371420ad789f551f2e8d1e9f1ef48424efa768059f57281d26"
+          },
+          "src/editor/sampler_studio.c": {
+            "bytes": 679,
+            "sha256": "33849a9ebd51025135c25f0e96f5d31a3f5a9d507176e343a02dbe973439fbab"
+          },
+          "src/editor/sampler_studio.h": {
+            "bytes": 508,
+            "sha256": "894dc0198f7c1f01f1be82eae671efb6e2f6abaeeb6bd1bb25415b6114108874"
+          },
+          "src/editor/sampler_wavetable.c": {
+            "bytes": 6727,
+            "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b"
+          },
+          "src/editor/sampler_wavetable.h": {
+            "bytes": 4278,
+            "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d"
+          },
+          "src/editor/sampler_wavetable_internal.h": {
+            "bytes": 1671,
+            "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 41792,
+          "project_path": "tests/test_native_mixed_causal_rolling_timer_source.py",
+          "sha256": "5d2321d652bf74625f937bf53ce9c696c85015ea45d7480509a1a9720165f0da"
+        },
+        "fixture": {
+          "bytes": 41263,
+          "project_path": "tests/native_mixed_causal_rolling_timer_source_test.c",
+          "sha256": "b1d2cfc34c34bf755ec511603ead5ce54892a27fb819c74e806e51f235baef7c"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "c44abd50bbe60748ff8ec59b62140df85349ff4e95e9f4cd98c3abed304f1cc9",
+        "source_counts": {
+          "after_bodies": 227,
+          "before_bodies": 226,
+          "generated_font_edges": 0,
+          "ordered_TU": 87,
+          "physical_LF_edges": 460
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 576,
+        "stdout_sha256": "112dc03fa8c4576888d9c28b1889c005c9157dfe544b2ec5524a9e974918c631",
+        "whole_original_class_sha256": "7ca33a8e65d867b08aed42bbc352e3e76bf1fb376dab6cc698242a06e3d683f7"
+      },
+      "tests/test_paula_delivery4_genuine_owner.py": {
+        "cases": 85,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "delivery4 genuine-owner snapshot and window proposal: 85 cases\n",
+        "current_product_body_pins": {
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 20756,
+          "project_path": "tests/test_paula_delivery4_genuine_owner.py",
+          "sha256": "3cc78d91c02b83390f8e1f6d9581354d8032650dd5304cda03bce5bb10f8b1a7"
+        },
+        "fixture": {
+          "bytes": 24715,
+          "project_path": "tests/paula_delivery4_genuine_owner_test.c",
+          "sha256": "ff22a764e4621873130d7d85ded2509f0706f56e5829f4035b92acdc2a120f56"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "fe886070f3d9f17c45bfe93ac730a6e7661281308b763bf7cc0d7a5d39cfe048",
+        "source_counts": {
+          "after_bodies": 77,
+          "before_bodies": 76,
+          "generated_font_edges": 0,
+          "ordered_TU": 29,
+          "physical_LF_edges": 130
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 63,
+        "stdout_sha256": "7698ea44e6b7e7d0786ee5c27a97fae4baa2e2494ae12f1b3686a2a113f5d952",
+        "whole_original_class_sha256": "74b55655533a726011ce6eab43f94f2542bc3cd831d8f0857725a71378b41430"
+      },
+      "tests/test_paula_owner4_checked_stop.py": {
+        "cases": 21,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "paula owner4 proposal cases=21 restored=15 deliberate_HOLD=6\n",
+        "current_product_body_pins": {
+          "src/editor/paula_owner4.c": {
+            "bytes": 17696,
+            "sha256": "016c4aedccbc6470e9e830b8822051c1b7f52574ba834ec242f359118e555eb2"
+          },
+          "src/editor/paula_owner4.h": {
+            "bytes": 3524,
+            "sha256": "f6fbcb793eea531abd877e51c99e02ff6be696bd1292b596761cd65429f1e108"
+          },
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 21750,
+          "project_path": "tests/test_paula_owner4_checked_stop.py",
+          "sha256": "5ece9b6232407d6e0568b65e05f8971d288f721d9512d0eef83e83dcb9148d6a"
+        },
+        "fixture": {
+          "bytes": 19789,
+          "project_path": "tests/paula_owner4_genuine_owner_proposal.c",
+          "sha256": "45f2514daadc9253b54ad0a99477b04a24aef5232bc71ceb03e410b7b258fce3"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "47a098262d978bb87afa4f6812a6aa7db173c972572231355250d83fef2871c6",
+        "source_counts": {
+          "after_bodies": 91,
+          "before_bodies": 90,
+          "generated_font_edges": 0,
+          "ordered_TU": 37,
+          "physical_LF_edges": 157
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 61,
+        "stdout_sha256": "d86bde4ced5e2a1aaabb6431463b4633d5c6f5bb183af53d0d9a76fb7b5c3c67",
+        "whole_original_class_sha256": "d6a0897a615095fc931cdbf71ece2d0b751e7269d00caa0ec7b6153852a0f634"
+      },
+      "tests/test_paula_segment_boundary.py": {
+        "cases": 72,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "PAULA SEGMENT BOUNDARY HOST FIXTURE PASS:72 cases;genuine renderer primary-CONTROL plans;final step-gain normalization;all voice geometry and pending dependencies preserved;exact960-1920-2880-3840;full original-reader key comparisons;genuine3 master pins and selective Chip leases through both retirement orders;scope-ordered-plan-geometry-key-alias refusers;full int32 element capacities and genuine unused-tail protection;mono8-16-24 master and stereo-capacity aliases;metadata overflow-missing-misaligned-wrapped refusers;zero-capacity pointer-frame refusers;genuine empty unused dependency storage shape only;ordinary song and preflight rejection unchanged;HOST_ONLY_NATIVE_OUTPUT_NOT_RUN\n",
+        "current_product_body_pins": {
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 21606,
+          "project_path": "tests/test_paula_segment_boundary.py",
+          "sha256": "a1cd8c1ccce71d9b04c5a86f9e1bef558b8a03eae8fb9e5a14e5b1c5990e3f2b"
+        },
+        "fixture": {
+          "bytes": 26471,
+          "project_path": "tests/paula_segment_boundary_test.c",
+          "sha256": "24bb13a404971762f64686b5af0b84e7290c71acf390e530b6e681de97973aba"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "10600a7a35c0fef86e24eb86383dd7fc735beb47e8b2403e35daa8dd46cc056e",
+        "source_counts": {
+          "after_bodies": 84,
+          "before_bodies": 83,
+          "generated_font_edges": 0,
+          "ordered_TU": 34,
+          "physical_LF_edges": 140
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 693,
+        "stdout_sha256": "37a114259a0dbe3ad0f643ec04c4707011a5766014a280f64714567f36fcb1c2",
+        "whole_original_class_sha256": "7d764930b57694513950dee860dfa436be2b800fed49ae654cbefa3868a5d005"
+      },
+      "tests/test_paula_segment_future.py": {
+        "cases": 60,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "PAULA GEOMETRY FUTURE HOST FIXTURE PASS:60 cases;genuine measured renderer-fixed4 and finite3 ownership;original960-1920-2880-3840 windows;whole task-delivery exclusion;positive original-window ACTIVE before continuation;EARLY same-window rearm and stale refusal;clean pressure preserves original admission;late-no-effect and unknown-arm-apply-crossed-cancel-mutation-reentry retain actual obligations;independent timer-command-reader-source quiet and both retirement orders;once-only source shutdown;constructor and borrowed fixed/output aliases refused before callbacks;enter-clock-arm-leave original descriptor custody;undelivered CONTROL-STOP cancellation preserves independent adopted reader;quiet anchors commit only after positive outer leave;reader-live three-source PCM custody after all command detachment;55 restored cases and5 deliberate process-lifetime HOLD holders(2 restoration and3 Source PCM custody);initial sampler generation0 accepted and genuine sampler edits refused as stale;HOST_ONLY_NATIVE_OUTPUT_NOT_RUN\n",
+        "current_product_body_pins": {
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 22541,
+          "project_path": "tests/test_paula_segment_future.py",
+          "sha256": "ab04b6a396d86b9bfd69cedb8fefaf6e7ce1da2dff44cc234a91a076924dad36"
+        },
+        "fixture": {
+          "bytes": 46419,
+          "project_path": "tests/paula_segment_future_test.c",
+          "sha256": "d45c45d2987eafa81fc70ea94128f17a949d515a2d33750c1f3868bd64771640"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "83009c930a8aef0a51736d6593fe2dcb9fd1c8be39919f55b1b31d760cf0fe11",
+        "source_counts": {
+          "after_bodies": 88,
+          "before_bodies": 87,
+          "generated_font_edges": 0,
+          "ordered_TU": 36,
+          "physical_LF_edges": 150
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 1031,
+        "stdout_sha256": "190df80074f1b6648d9615eb8abe8f124d175def6585ad41a0d0d04d753ff5c7",
+        "whole_original_class_sha256": "1df87b7580387c6d9c03fb1a592b4af32afb2967b435e7ae9c104bbc5bd6c7c0"
+      },
+      "tests/test_paula_segment_packet32.py": {
+        "cases": 46,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "paula geometry packet32: 46 cases passed\ngenuine measured frames: 960,1920,2880,3840; initial offset256 length512\nrepeat preserves current Q32 fetch phase; both genuine retirement orders\npure big-endian explicit HOST labels; native/output/timing/quiet NOT QUALIFIED\n",
+        "current_product_body_pins": {
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 22064,
+          "project_path": "tests/test_paula_segment_packet32.py",
+          "sha256": "3a647727082552e2b6f5cbd7b3bc38267b7130045d78a27386bce4347dd9cd8b"
+        },
+        "fixture": {
+          "bytes": 12940,
+          "project_path": "tests/paula_segment_packet32_test.c",
+          "sha256": "2b54d596fa65461ed6d8d18518c220938189712c0afc759fbfd866c56a7684ef"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "270a7c975fc0a6a5fcf876f2033671e37c8dc8060860fb8e72355676c1fa80ee",
+        "source_counts": {
+          "after_bodies": 90,
+          "before_bodies": 89,
+          "generated_font_edges": 0,
+          "ordered_TU": 36,
+          "physical_LF_edges": 151
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 266,
+        "stdout_sha256": "1fdcf9b22240d379f80a9f24dfce83b3161731d7e6726349dd168902b83858f9",
+        "whole_original_class_sha256": "013ec8bbcd14623380d1f5271b1115ae69629a290d2da795e75ee36de48e5651"
+      },
+      "tests/test_paula_segment_provider.py": {
+        "cases": 75,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "typed Paula geometry provider: 75 cases passed\ngenuine measured four boundaries; both genuine retirement orders\n45 caller-output alias refusals preserve context, retained/retired sources and ownership\nowned BE records; exact entry token/window; independent quiet and final restore\nunknown restoration retains genuine source owner; no forced retirement\nHOST injectable resource model; future/native/IRQ/MMIO/timing NOT QUALIFIED\n",
+        "current_product_body_pins": {
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 23093,
+          "project_path": "tests/test_paula_segment_provider.py",
+          "sha256": "324bafefe31121713721149da95c994c1496ba25545233d2e2134ab9c7ff8569"
+        },
+        "fixture": {
+          "bytes": 24573,
+          "project_path": "tests/paula_segment_provider_test.c",
+          "sha256": "30a631a3a76b7c9f610e88294ad453b9278b8bfa35b906521b6b22ebb13569c8"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "00bdf1c2b5c6b856f6fb07f4c033a37899c9184e7da07c1bcabbfe1788e58562",
+        "source_counts": {
+          "after_bodies": 93,
+          "before_bodies": 92,
+          "generated_font_edges": 0,
+          "ordered_TU": 37,
+          "physical_LF_edges": 155
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 428,
+        "stdout_sha256": "c14be7d96baa5b12daad112d661920a6a7faa0687ec636c601c12083bc3b06cf",
+        "whole_original_class_sha256": "f536770a4012d207e8809af845f6b7810ae584c8e635a396dc265d33f51d698c"
+      },
+      "tests/test_paula_segment_repeat_plan.py": {
+        "cases": 52,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "PAULA SEGMENT REPEAT PLAN HOST FIXTURE PASS:52 cases;exact mono8-16-24 initial geometry;even frame-byte-word ranges1-65535;original960-1920-2880-3840;overlap-disjoint loops;genuine voice pending-source handoff;fractional current phase retained;no restart or silent-word inference;full identity and alias refusals;genuine pins and Chip leases retained across stale edits and declarative STOP;OWNERSHIP_READER_NATIVE_INTEGRATION_NOT_RUN\n",
+        "current_product_body_pins": {
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 18063,
+          "project_path": "tests/test_paula_segment_repeat_plan.py",
+          "sha256": "55dee245f86861c3e45b1e8347947ddd8c3759e760f926887cae3dd45f3b823d"
+        },
+        "fixture": {
+          "bytes": 23338,
+          "project_path": "tests/paula_segment_repeat_plan_test.c",
+          "sha256": "a2d4ba2206b27bfdf9d6ee03a7de5ce4ed4c96c57c702b6c4eab57e7efa5e722"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "304c62db1f6b363e70f975b01319ea5c18b2efb8a739b9f0f4bae3debb28608f",
+        "source_counts": {
+          "after_bodies": 63,
+          "before_bodies": 63,
+          "generated_font_edges": 0,
+          "ordered_TU": 24,
+          "physical_LF_edges": 99
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 435,
+        "stdout_sha256": "d6d44c693fade13e161da20759a6514ba0c9760b0c6894845748139233aa3c47",
+        "whole_original_class_sha256": "635de2e2b3b259e1a1e5b23fffeb6a959f3dc1e179050227535a7fa2acdcf408"
+      },
+      "tests/test_paula_segment_repeat_readers.py": {
+        "cases": 97,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "PAULA SEGMENT REPEAT READERS HOST FIXTURE PASS:97 cases;genuine3 current pins and selective Chip leases;immutable original reader domain;exact960-1920-2880-3840;sealed geometry-aware trigger-repeat-repeat-stop;fractional fetch phase and superseded source retained;independent command-reader retirement both orders;stale-unknown-unadopted-malformed-alias-constructor-custody refusers;raw0-raw1 event-domain-span-holder recovery;nonzero poisoned holder pool refusal;clock-submit-poll-cancel retained custody;genuine release ends anchors;legacy SEGMENT REPEAT rejection preserved;HOST_RESOURCE_MODEL_NATIVE_OUTPUT_NOT_RUN\n",
+        "current_product_body_pins": {
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 20043,
+          "project_path": "tests/test_paula_segment_repeat_readers.py",
+          "sha256": "7cde2be600f909d6fb9527cefb84e19f72e536e4b8db10fa9f643499a6d75388"
+        },
+        "fixture": {
+          "bytes": 37450,
+          "project_path": "tests/paula_segment_repeat_readers_test.c",
+          "sha256": "66bb1deed3d2f56393eccf6f6657289d29fa26f899de16e64c94dd58b749998e"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "0dd92ef0b1d4fa2a4595b2ccb17633233ae6087548d9213a8f369ab5d428d8a3",
+        "source_counts": {
+          "after_bodies": 73,
+          "before_bodies": 72,
+          "generated_font_edges": 0,
+          "ordered_TU": 28,
+          "physical_LF_edges": 121
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 619,
+        "stdout_sha256": "58e1d3022c0de36d55f204bc62628a2963c431882c64972de9cf70475e226846",
+        "whole_original_class_sha256": "64e06f68e5de824431914a16d57ba5b69953199c00910ccbec4b4daf30c0c2cc"
+      },
+      "tests/test_paula_segment_sequence.py": {
+        "cases": 35,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "PAULA SEGMENT SEQUENCE HOST FIXTURE PASS:35 cases;genuine measured sequence and same-owner rewind;silent normal-row preroll;actual960-1920-2880-3840 plans;original3 current masters and selective Chip leases;positive original reader key;explicit pressure preserves original plan-ticket-deadline;independent command-reader retirement both orders;incremental cancellation-stale-shape-work-late refusers;genuine held-cache workspace-output refusers;five borrowed-argument allocation aliases refused before ownership;close release reentry retains owner without child resurrection;exact LATE-CLOCK refusals and submit reentry retained until independent proofs both orders;legacy producer unchanged;HOST_ONLY_NATIVE_OUTPUT_NOT_RUN\n",
+        "current_product_body_pins": {
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 21943,
+          "project_path": "tests/test_paula_segment_sequence.py",
+          "sha256": "629d2edd80055686daf4a6f772993adf16fe3100275c0a8e18470e50930cfa87"
+        },
+        "fixture": {
+          "bytes": 30059,
+          "project_path": "tests/paula_segment_sequence_test.c",
+          "sha256": "c6e44c25a4e105d6ea7172531abf5a14fa0148cdac61fa40fb850404f631b344"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "b31b9497802aa5ebef859973fde862af59d8f52857463ffaf1256882493dc104",
+        "source_counts": {
+          "after_bodies": 86,
+          "before_bodies": 85,
+          "generated_font_edges": 0,
+          "ordered_TU": 35,
+          "physical_LF_edges": 146
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 724,
+        "stdout_sha256": "0a6c55edf97c9999b5925f07a69a05bfb87fefec3e32c8e5b2e467dba389187f",
+        "whole_original_class_sha256": "fb25f48e6f0eb2c040ddd8d5a1dc457843835e6d5b600c763a616e9a91fefdd0"
+      },
+      "tests/test_sampler_intrinsic_lifetime.py": {
+        "cases": 16,
+        "compiler_diagnostics": "EMPTY",
+        "compiler_flags": [
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-Itests",
+          "-I."
+        ],
+        "compiler_returncode": 0,
+        "complete_stdout_oracle": "sampler lifetime16 genuine owner cases\n",
+        "current_product_body_pins": {
+          "src/editor/paula_segment_sequence.c": {
+            "bytes": 31252,
+            "sha256": "c1920acc24d3ac4661d6dc6e4eaa6010ccd0f60b5c5b41aec3235ec8b100d1b1"
+          },
+          "src/editor/paula_segment_sequence.h": {
+            "bytes": 6254,
+            "sha256": "c5206980afc39ee46964899b10fe56e3c4dba9ddc2a96a4416e6b1efc10672fe"
+          },
+          "src/editor/sampler.c": {
+            "bytes": 82424,
+            "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+          },
+          "src/editor/sampler.h": {
+            "bytes": 6531,
+            "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+          },
+          "src/editor/sampler_establish.c": {
+            "bytes": 12180,
+            "sha256": "840c57fe64a1300d087f6cb465baf038ecd2ad75a98e737b4931185f64aab712"
+          },
+          "src/editor/sampler_establish.h": {
+            "bytes": 4067,
+            "sha256": "55ad8b5202a9100b3ee92bdde3cdd2eb1996de6bcca06bb9b42817208cd0ed88"
+          },
+          "src/editor/sampler_internal.h": {
+            "bytes": 4851,
+            "sha256": "557dc012f010b66ee8dc2ff87b2fe1d906b3d7d9fbb6685134ae87302dd00f1f"
+          },
+          "src/editor/sampler_lifetime.c": {
+            "bytes": 8105,
+            "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+          },
+          "src/editor/sampler_lifetime_internal.h": {
+            "bytes": 2463,
+            "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+          },
+          "src/editor/sampler_master_guard_internal.h": {
+            "bytes": 1059,
+            "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+          },
+          "src/editor/sampler_paula.c": {
+            "bytes": 7401,
+            "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+          },
+          "src/editor/sampler_paula.h": {
+            "bytes": 2718,
+            "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+          },
+          "src/editor/sampler_paula_internal.h": {
+            "bytes": 3013,
+            "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+          },
+          "src/editor/sampler_paula_readers.c": {
+            "bytes": 50873,
+            "sha256": "90d2996276422d8bd1eb090fb4442e9580f3aff482a95715a10dac3f2e4b35d7"
+          },
+          "src/editor/sampler_paula_readers.h": {
+            "bytes": 9761,
+            "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c"
+          },
+          "src/editor/sampler_paula_readers_inventory_internal.h": {
+            "bytes": 1179,
+            "sha256": "e57a556e6d33a267db056ed4ab0bb6ce8b1b9a1584dd276e27745fac4dbb9695"
+          },
+          "src/editor/sampler_paula_segment_readers.c": {
+            "bytes": 39911,
+            "sha256": "0b1426e14c98231cf5554c275305121d542b0940cc3a0e4c3209225312c9114d"
+          },
+          "src/editor/sampler_paula_segment_readers.h": {
+            "bytes": 6700,
+            "sha256": "0783ffb4597286e162426d86832c0777b30df0944fa14594c28c57adf8e3a837"
+          },
+          "src/editor/sampler_workflow.h": {
+            "bytes": 4356,
+            "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+          }
+        },
+        "driver": {
+          "bytes": 21415,
+          "project_path": "tests/test_sampler_intrinsic_lifetime.py",
+          "sha256": "8823d675a465f623c434d083fd2ee4c74013a75e4f7156bc32f49ca79aef4d6d"
+        },
+        "fixture": {
+          "bytes": 19313,
+          "project_path": "tests/sampler_intrinsic_lifetime_fixture.c",
+          "sha256": "b289f04733aa383196eaac891db23fd0d7791f7d4057d02f4ecf398392fa3f12"
+        },
+        "fixture_diagnostics": "EMPTY",
+        "fixture_returncode": 0,
+        "gate_and_namespace_restoration": "POSITIVE_RECORDED_AND_CURRENT_PAIRED",
+        "limits_seconds": {
+          "candidate": 190,
+          "compiler": 120,
+          "fixture": 30,
+          "whole": 200
+        },
+        "owned_child_retirement": "RECORDED_DIRECT_WAIT_BOTH_STREAM_EOF_SELECTOR_PIPE_CLOSE_POSITIVE",
+        "process_group_absence": "NOT_QUALIFIED",
+        "selected_C_H_pin_map_sha256": "8938a33a0db7a36b46fd7174a653ab5f1488c31b1f164e4899ba9188a17c3e70",
+        "source_counts": {
+          "after_bodies": 89,
+          "before_bodies": 88,
+          "generated_font_edges": 0,
+          "ordered_TU": 37,
+          "physical_LF_edges": 154
+        },
+        "status": "PASS_PRIVATE_HOST_EXACT_SELECTED_GRAPH",
+        "stdout_bytes": 39,
+        "stdout_sha256": "0893deaf8d9faa08c2012ee4d7c50d0dfae78712c24082a40cebf25603f5fd12",
+        "whole_original_class_sha256": "b6f932489b38152b346f064ba38070a15142d8d02eec9d4e5124e191b61f40bb"
+      }
+    },
+    "selected_groups": 11,
+    "source_candidate": {
+      "immutable_inputs": 276,
+      "original_driver_modules": 11,
+      "physical_LF_include_edge_union": 547,
+      "quoted_C_H_union": 264,
+      "raw_font_inputs": 1,
+      "translation_unit_union": 108
+    },
+    "source_preservation": "Same exact origin body pins; ten groups used one immutable private copy set, provider used its separate fresh immutable copy set after the fixed genuine future qualification.",
+    "status": "PASS_PRIVATE_HOST_ELEVEN_SEPARATELY_QUALIFIED_ORIGINAL_SELECTIONS",
+    "ten_selection_qualification_digest": {
+      "bytes": 44702,
+      "sha256": "b9a02585d19d228a1f7803164c87fdb33f3e182347801b76e88d6c934d0bcdf8"
+    }
+  },
+  "historical_intrinsic_HOST_evidence": {
+    "component": "sampler intrinsic allocation lifetimes",
+    "history": "Old pin expectation failure, establish-progress preservation refusal and earlier source/link proposals remain separate; new positive outcomes do not repair their evidence.",
+    "host": {
+      "flags": [
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined"
+      ],
+      "lifetime_cases": 16,
+      "original_regression_groups": [
+        "sampler",
+        "slots",
+        "workflow",
+        "copy_boundaries",
+        "pin_job",
+        "establish",
+        "establish_progress"
+      ],
+      "saved_qualification_digests": {
+        "current_lifetime16": {
+          "bytes": 3081,
+          "sha256": "efafe004bf1ec41e5c9bbaf5e9bb8649134d1e7799642c7fc32bdef4fa406cc5"
+        },
+        "original_seven": {
+          "bytes": 4140,
+          "sha256": "d5dc5987fb9daa5009cf9286c1c23e9b0da60983477e197dc4841423175783a5"
+        }
+      },
+      "status": "PASS_PRIVATE_CURRENT"
+    },
+    "inventory_contract": {
+      "allocator_callbacks_and_pcm_scans_in_queries": false,
+      "enhanced_numeric_check_limit": 4096,
+      "live_and_pending_combined": true,
+      "ordinary_fixed_node_limit": false,
+      "owner_thread_alive_immutable_required": true
+    },
+    "product_body_pins": {
+      "src/editor/sampler.c": {
+        "bytes": 79140,
+        "sha256": "7ac992594ad71bb02b0f69948a60b8b07de133e81d64351cf6512bafcafc208a"
+      },
+      "src/editor/sampler.h": {
+        "bytes": 6531,
+        "sha256": "c641ee916de9b292c529bf558ce34ea96d3449d4255510a0122cf67e5822fae9"
+      },
+      "src/editor/sampler_establish.c": {
+        "bytes": 11620,
+        "sha256": "fd01739e88911fb79911ef7ec934e51ccfa7095f8de60c3638755a3443c11f33"
+      },
+      "src/editor/sampler_establish.h": {
+        "bytes": 3561,
+        "sha256": "6c98d7a4e49832e9ff28105218a3034d7a9d835c1d6c7383bb6071954b87596f"
+      },
+      "src/editor/sampler_internal.h": {
+        "bytes": 4054,
+        "sha256": "956e9f2d7e5abd12d3c459fe6b8663efea4c61a44f6fe530fa8bb94f92d9839e"
+      },
+      "src/editor/sampler_lifetime.c": {
+        "bytes": 8105,
+        "sha256": "5a76953c7cae9e246f608883b91709f87cd9996135237057795dba0fc4a15ac1"
+      },
+      "src/editor/sampler_lifetime_internal.h": {
+        "bytes": 2463,
+        "sha256": "3e93926831670f4f313b9f8fec08da3e6cd70b494de4d0e6610d0f681945cdcf"
+      },
+      "src/editor/slots.c": {
+        "bytes": 4237,
+        "sha256": "ac9e10cdf165688b98d4a5562966fb7eee8e8a52376de065e3c61251f57045f8"
+      },
+      "tests/sampler_intrinsic_lifetime_fixture.c": {
+        "bytes": 19313,
+        "sha256": "b289f04733aa383196eaac891db23fd0d7791f7d4057d02f4ecf398392fa3f12"
+      }
+    },
+    "qualification": {
+      "all_path_mutation": "NOT_IMPLEMENTED",
+      "canonical": "NOT_ADOPTED_NOT_RUN",
+      "emulator": "NOT_RUN",
+      "global_writable_output_guards": "NOT_IMPLEMENTED",
+      "native_IRQ": "NOT_IMPLEMENTED",
+      "owner_enrollment": "NOT_IMPLEMENTED",
+      "physical": "NOT_RUN",
+      "placement_stack_deadline_audio_listening": "NOT_QUALIFIED"
+    },
+    "source_revision": "V3 construction spans"
+  },
+  "historical_intrinsic_boundary": "Earlier V3 construction-spans sampler79140/internal4054 standalone16/seven-original qualifications remain exact historical evidence, not current dedicated11 acceptance.",
+  "inventory_contract": {
+    "allocator_callbacks_and_pcm_scans_in_queries": false,
+    "enhanced_numeric_check_limit": 4096,
+    "live_and_pending_combined": true,
+    "ordinary_fixed_node_limit": false,
+    "owner_thread_alive_immutable_required": true
+  },
+  "preserved_historical_negative_digests": {
+    "earlier_original32_partial_paula_compact_failure": {
+      "bytes": 67740,
+      "sha256": "dddb72b965d28565c29ef6dc219022a94535e974ea29742afa7fd9a6d7ee8512"
+    },
+    "legacy_focused_prior_complete_stdout_oracle_failure": {
+      "bytes": 14762,
+      "sha256": "ca1865a9a72c0d1201ee50789fd6d92320bfdb7a74aa8da5d768bb390121d6a1"
+    },
+    "legacy_focused_prior_registry_copy_refusal": {
+      "bytes": 3880,
+      "sha256": "a4a7cb0d450909e411494f06f14c38f1c441df675f4024f1bcee1b431466a8dc"
+    },
+    "provider_V2_once_pre_mutation_copy_refusal": {
+      "bytes": 4570,
+      "sha256": "7931acbbd3fbd6845b8a85c90e81663177a63bd668cbed53cec45de22c9f47d2"
+    }
+  },
+  "qualification": {
+    "canonical_adoption": "NOT_DONE",
+    "canonical_runtime": "NOT_RUN",
+    "current_dedicated_eleven_HOST": "PASS_EXACT_ELEVEN_SELECTED_HOST_GRAPHS",
+    "current_future_HOST": "PASS_60_CASE_GRAPH_WITH_5_PROCESS_LIFETIME_HOLD",
+    "current_provider_HOST": "PASS_SEPARATE_75_CASE_GRAPH_AFTER_FIXED_GENUINE_FUTURE_QUALIFICATION",
+    "current_standalone_checked_stop_owner_HOST": "PASS_EXACT_CURRENT_21_CASE_GRAPH_WITH_6_DELIBERATE_HOLD",
+    "current_standalone_intrinsic_lifetime_HOST": "PASS_EXACT_CURRENT_16_CASE_GRAPH",
+    "emulator": "NOT_RUN_FOR_THIS_CANDIDATE",
+    "exact_musical_timing_audio_listening": "NOT_QUALIFIED",
+    "native_compiler_ABI_placement_stack": "NOT_QUALIFIED_BY_THESE_HOST_RESULTS",
+    "owner_enrollment_global_mutation_reinitialization_teardown": "NOT_GRANTED_BY_THESE_RESULTS",
+    "physical_A1200_AmiGUS": "NOT_RUN_FOR_THIS_CANDIDATE"
+  },
+  "separate_legacy_inventory_focused_HOST": {
+    "boundary": "Separate exact legacy inventory binding and cancellation/refusal fixture; no transfer to dedicated eleven, owner enrollment, native or device acceptance.",
+    "cases": 16,
+    "compiler_diagnostics": "EMPTY",
+    "compiler_returncode": 0,
+    "fixture_project_path": "tests/editor_mixed_song_inventory16_test.c",
+    "fixture_returncode": 0,
+    "fixture_stderr": "EMPTY",
+    "group_absence": "NOT_QUALIFIED",
+    "limits_seconds": {
+      "candidate": 190,
+      "compiler": 120,
+      "fixture": 30,
+      "whole": 200
+    },
+    "physical_LF_include_edges": 407,
+    "quoted_C_H_bodies": 213,
+    "saved_qualification_digest": {
+      "bytes": 9166,
+      "sha256": "07e6bf9f27ee09c1b4c472d7119d5b54808e6639bf143a5b26cb31c90239c3c4"
+    },
+    "status": "PASS_PRIVATE_HOST_SEPARATE_LEGACY_INVENTORY_GRAPH",
+    "stdout_bytes": 1177,
+    "stdout_sha256": "bee4b9e81abef73494901fd4b5284299e206716df7399c8605c25979434ca1f2",
+    "translation_units": 85
+  }
+}

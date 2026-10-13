@@ -39,6 +39,17 @@ struct pt_editor_mixed_source_borrow {
 enum pt_editor_mixed_readers_result pt_editor_mixed_source_begin(
     struct pt_editor_mixed_readers_prepare *,const struct pt_editor_mixed_source_inputs *,
     struct pt_editor_mixed_source_borrow *original);
+/* Bind ONE genuine original preactivation song producer after its constructor
+ * has adopted the exact SOURCE publisher, complete context and outputs, before
+ * its first establishment/pin callback. Queries reuse genuine owned-job/prefix
+ * accounting; no pending-head normalization or caller READY flag. Neither this
+ * private leaf nor a copied struct is a public capability. Keep original owner,
+ * establishment, pin job and every captured suffix alive and immutable through
+ * positive SOURCE/hook closure; descriptor snapshots remain child get/step work.
+ * Callback/allocation-free. Refusal leaves the original early adoption held. */
+int pt_editor_mixed_source_bind_inventory(struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,struct pt_editor_mixed_song *);
+
 /* Require actual producer establishment/cancellation and independent current
  * pins before activate; no argument claims them and this seam does not certify
  * them. Genuine factory validation follows. No callback/allocation here.

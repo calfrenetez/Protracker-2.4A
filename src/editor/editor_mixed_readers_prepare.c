@@ -3,6 +3,8 @@
 #include "editor_mixed_internal.h"
 #include "project_snapshot.h"
 #include "sampler_internal.h"
+#include "sampler_establish_inventory_internal.h"
+#include "editor_mixed_song_internal.h"
 #include "sampler_mixed_readers_internal.h"
 #include "../core/render_storage_internal.h"
 #include <string.h>
@@ -373,6 +375,36 @@ static int source_descriptor(struct pt_editor_mixed_readers_prepare *s)
     memcmp(v->mutable,s->source_mutable,sizeof(s->source_mutable)))return 0;
  return 1;
 }
+static int source_inventory_owner_current(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_song *p)
+{
+ return p&&inside(s->source_contexts,p,sizeof(*p))&&
+    !((uintptr_t)p%ALIGN_OF(struct pt_editor_mixed_song))&&
+    apart(p,sizeof(*p),s,sizeof(*s))&&
+    p->original==p&&p->adopted&&p->controller==s&&
+    p->source&&p->source==s->source_inputs&&
+    p->source->preparation==&p->preparation&&
+    p->borrow==s->source_publisher&&s->source_mutable_count==2&&
+    p->outputs==s->source_mutable[1].data&&
+    p->parent.data==s->source_contexts.data&&p->parent.bytes==s->source_contexts.bytes&&
+    p->revision==s->revision&&p->generation==s->generation&&
+    !p->first_error&&!p->cancelled&&!p->borrow_closed&&!p->hook_closed&&
+    !memcmp(&p->configuration,&p->saved,sizeof(p->saved));
+}
+int pt_editor_mixed_source_bind_inventory(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_source_borrow *b,struct pt_editor_mixed_song *p)
+{
+ if(!source_original(s,b)||!source_descriptor(s)||s->source_inventory_owner||
+    s->source_mode!=1||s->source_activated||s->source_busy||s->busy||s->closing||
+    s->source_cancel_requested||s->first_error||
+    !source_inventory_owner_current(s,p)||
+    p->phase!=PT_EDITOR_MIXED_SONG_ESTABLISH_BEGIN||
+    p->busy||p->requests||p->pin_count||p->pin_slot||p->activated||
+    !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,p->pin_slot,
+        &s->editor->sampler,s->project,&s->sampler_header))return 0;
+ s->source_inventory_owner=p;return 1;
+}
+
 static int source_fixed(struct pt_editor_mixed_readers_prepare *s)
 {
  struct pt_editor_mixed *o=s->source_binding;struct pt_sampler m;struct pt_project h;unsigned i;
@@ -384,6 +416,12 @@ static int source_fixed(struct pt_editor_mixed_readers_prepare *s)
   * The seam permits their header changes; it does not certify their semantics.
   * Existing current identities and all fixed allocator/table/budget fields stay.
   * No former descriptor table or value is traversed by this fixed check. */
+ if(s->source_inventory_owner){
+    const struct pt_editor_mixed_song *p=s->source_inventory_owner;
+    if(!source_inventory_owner_current(s,p)||
+       !pt_sampler_establish_inventory_current(&p->establish,&p->pin_job,p->pin_slot,
+           &s->editor->sampler,s->project,&s->sampler_header))return 0;
+ }else{
  memcpy(&m,&s->editor->sampler,sizeof(m));
  if(m.bytes<s->sampler_header.bytes||m.bytes>m.budget)return 0;
  for(i=0;i<PT_PROJECT_SAMPLES;++i){
@@ -391,6 +429,7 @@ static int source_fixed(struct pt_editor_mixed_readers_prepare *s)
     m.current[i]=s->sampler_header.current[i];}
  m.bytes=s->sampler_header.bytes;
  if(memcmp(&m,&s->sampler_header,sizeof(m)))return 0;
+ }
  memcpy(&h,&s->project_header,sizeof(h));h.channels.selected=s->project->channels.selected;
  return pt_project_snapshot_equal(s->project,&h);
 }

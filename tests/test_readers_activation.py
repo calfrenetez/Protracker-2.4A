@@ -39,7 +39,7 @@ ACTIVATION_SOURCES = [
     'src/core/voice.c',
     'src/editor/sampler_paula_readers.c',
     'src/editor/paula_readers_song.c',
-]
+ 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 
 
 

@@ -2,7 +2,7 @@ from pathlib import Path
 import subprocess,tempfile,unittest
 from test_sampler import SOURCES as SAMPLER_SOURCES
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES=['tests/sampler_workflow_test.c','src/core/sample_usage.c',*SAMPLER_SOURCES[1:],'src/editor/sampler_paula.c','src/core/sample_cache.c','src/core/playback_pcm.c']
+SOURCES=['tests/sampler_workflow_test.c',*SAMPLER_SOURCES[1:],'src/editor/sampler_paula.c','src/core/sample_cache.c','src/core/playback_pcm.c']
 class SamplerWorkflow(unittest.TestCase):
     def test_atomic_cleanup_and_range_copy(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -29,6 +29,16 @@ struct pt_establish_metadata;
  * schedule changes, native placement/aggregate-stack/latency/IRQ/device acceptance.
  */
 struct pt_sampler_establish {
+    struct pt_sampler_pending reservation;
+    /* Constructor-issued metadata only, not a pin/quiet/READY certificate.
+     * Issued versions remain genuinely current/held until the borrowing Source
+     * ends. Numeric returned extents survive healthy retirement callbacks. */
+    struct pt_sampler_establish *self;
+    struct pt_sampler_live *metadata_live;
+    struct pt_sampler_storage_span metadata_extent,master_extent;
+    struct pt_sample_version *issued[PT_PROJECT_SAMPLES];
+    struct pt_sampler_pending retirement;
+    unsigned retiring;
     struct pt_sampler *sampler;
     struct pt_project *project,snapshot;
     struct pt_sampler initial_sampler,expected_sampler;

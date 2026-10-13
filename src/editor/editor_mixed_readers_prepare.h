@@ -11,6 +11,7 @@
 struct pt_editor_mixed_readers_prepare;
 struct pt_editor_mixed_source_inputs;
 struct pt_editor_mixed_source_borrow;
+struct pt_editor_mixed_song;
 #define PT_EDITOR_MIXED_SOURCE_SPANS 14U
 /* Controller-issued identity, never a factory handle, queue key or ACTIVE
  * certificate. A consumed registration cannot authorize a reused slot. */
@@ -150,6 +151,9 @@ struct pt_editor_mixed_readers_prepare {
     unsigned source_mode,source_held,source_released,source_activated,source_busy;
     unsigned source_cancel_requested,source_drained,source_publisher_guard;
     unsigned source_immutable_count,source_mutable_count;
+    /* Private constructor-bound original producer; never a public capability.
+     * Whole producer/context and original publisher survive final hook close. */
+    struct pt_editor_mixed_song *source_inventory_owner;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
     struct pt_editor_mixed_readers_prepare *,const struct pt_editor_mixed_readers_prepare_inputs *);

@@ -21,7 +21,7 @@ SOURCES = ['tests/mixed_readers_causal_control_test.c', 'src/core/mixed_readers_
            'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = 'MIXED CAUSAL AFTER FIRST CONTROL HOST PASS:34 genuine heap cases;18 mixed4/12 or subset 8/16/24-master cache8/16 same-reader lifetimes;actual first and queue ACTIVE C/R observations;disposed poisoned first C;typed guarded internally derived keys;distinct capability and port completion;expected-only quiet;partial/zero/malformed/late/reentry/uncertain retention;actual enqueue transfer authority;master beforeimages;NO_NATIVE_APERTURE_QUALIFICATION\n'
 
 

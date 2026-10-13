@@ -88,7 +88,7 @@ SOURCES = (
     'src/platform/raw_import.c',
     'src/platform/mod_import.c',
     'src/platform/pp20_import.c',
-)
+ 'src/editor/sampler_lifetime.c')
 ORACLE = 'EDITOR MIXED JOINT SOURCE LINEAGE PASS:31 genuine bridge instances;4 wide/old8 exact960/1920/2880 schedules and both retirement orders;2 early cancellation;2 original publisher/wrapper identity;6 complete containing admission guards;4 malformed composite activation;3 immutable/current staleness;4 consumed allocator/reentry/input/scratch outcomes;2 actual publication pending/unknown;2 independent SOURCE pending/unknown quiet;1 real master allocation reentry;1 exact mutable-capacity receipt refusal before callbacks;SOFTWARE_ONLY\n'
 RAW_FONT_SHA256 = "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
 FONT_HEADER_SHA256 = "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0"

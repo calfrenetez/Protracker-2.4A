@@ -365,7 +365,10 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_be
  for(i=0;i<8;++i)p->establish_parents[i+3]=p->extent[i];
  p->revision=s->binding->editor->history.revision;p->generation=s->binding->editor->sampler.generation;
  p->working_command=NO_COMMAND;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_BEGIN;
- p->result=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PENDING;return p->result;
+ p->result=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PENDING;
+ if(!pt_editor_mixed_causal_source_bind_pair_inventory(p->controller,p->borrow,p))
+    return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
+ return p->result;
 }
 
 enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_step(struct pt_editor_mixed_causal_song_pair *p,unsigned work)

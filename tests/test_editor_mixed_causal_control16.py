@@ -87,7 +87,7 @@ SOURCES = (
     'src/platform/raw_import.c',
     'src/platform/mod_import.c',
     'src/platform/pp20_import.c',
-)
+ 'src/editor/sampler_lifetime.c')
 ORACLE = 'EDITOR MIXED CAUSAL CONTROL16 PREPARE PASS:25 genuine instances;6 mixed/card8/16/24master8/16cache schedules exact0/255/256/65535 copied levels;2 unchanged uint8 schedules;6 full-input/workspace/reader/master output aliases;3 actual-first/stale/duplicate authority refusals;5 consumed allocator/reentry/input/transformed-scratch outcomes;1 lower enqueue OK amid outer fault;2 direct core whole-input/holder aliases;original960/1920/2880 windows,genuine C1 service/NULL close,C3 old STOP,zero later readers/pins/cache/upload,independent quiet,complete master/save custody;SOFTWARE_ONLY\n'
 RAW_FONT_SHA256 = "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
 FONT_HEADER_SHA256 = "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0"

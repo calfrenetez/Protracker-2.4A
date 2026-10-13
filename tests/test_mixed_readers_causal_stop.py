@@ -21,7 +21,7 @@ SOURCES = ['tests/mixed_readers_causal_stop_test.c', 'src/core/mixed_readers_cau
            'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
-           'src/core/playback_pcm.c']
+           'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 ORACLE = 'MIXED CAUSAL AFTER FIRST STOP HOST PASS:45 genuine heap cases;24 mixed4/12 subset or16card 8/16/24-master cache8/16 lifetimes;distinct empty-owner capability;actual completed first and ACTIVE C/R observations;poisoned disposed C;zero new reader/cache/upload;selected slots clear and untargeted unchanged;independent DRAINING R/C/source quiet;exact EARLY/original frames;expected-only pending C;partial/zero/malformed/late/reentry/uncertain retention;actual enqueue transfer;master beforeimages;NO_NATIVE_APERTURE_OR_DEVICE_STOP_QUALIFICATION\n'
 
 

@@ -35,6 +35,7 @@ struct pt_editor_mixed_causal_prepare_inputs {
     void *causal_workspace;size_t causal_capacity;
     void *factory_workspace;size_t factory_capacity;
 };
+struct pt_editor_mixed_causal_song_lineage;
 struct pt_editor_mixed_causal_callback {struct pt_editor_mixed_causal_prepare *owner;};
 /* Private opt-in exactly-one pure-TRIGGER pair task-side editor barrier, not whole-song or live
  * backend. Require genuine already-established immutable 8/16/24 masters and
@@ -137,6 +138,11 @@ struct pt_editor_mixed_causal_prepare {
      * STOP-only and SOURCE paths leave it zero. Never a caller capability. */
     struct pt_editor_mixed_causal_lineage_prepare *lineage_owner;
     struct pt_editor_mixed_causal_rolling_state *rolling_owner;
+    /* Bound only by the genuine original producer constructor before callbacks.
+     * Private active fields are noncopyable/immutable; never a caller certificate. */
+    struct pt_editor_mixed_causal_song_lineage *source_inventory_owner;
+    /* Distinct original two-boundary producer; mutually exclusive with lineage. */
+    struct pt_editor_mixed_causal_song_pair *source_pair_inventory_owner;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_causal_prepare_begin(
     struct pt_editor_mixed_causal_prepare *,const struct pt_editor_mixed_causal_prepare_inputs *);

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "sampler.h"
 #include "sampler_internal.h"
+#include "../core/sample_usage.h"
 #include "../core/pcm_internal.h"
 #include "wav.h"
 #include "svx.h"
@@ -13,8 +14,9 @@ struct pt_sample_version {
     size_t bytes;
     int32_t *owned_pcm; /* Separate allocation adopted only after publication. */
     unsigned references;
+    struct pt_sampler_live live;
 };
-struct sample_change {struct pt_sampler *owner;unsigned slot,resampled;struct pt_sample_version *before,*after;};
+struct sample_change {struct pt_sampler *owner;unsigned slot,resampled;struct pt_sample_version *before,*after;struct pt_sampler_live live;};
 
 static int output_overlap(const void *out,size_t bytes,const void *owner,size_t size)
 {
@@ -92,20 +94,35 @@ int pt_sampler_pin_job_output_disjoint(const struct pt_sampler_pin_job *j,const 
 
 void pt_sampler_init(struct pt_sampler *s,const struct pt_allocator *a,size_t budget)
 {memset(s,0,sizeof(*s));s->allocator=*a;s->budget=budget;}
+static int lifetime_version(struct pt_sample_version *v,size_t allocated)
+{
+    if(v->sample.pcm.capacity>SIZE_MAX/sizeof(int32_t))return 0;
+    return pt_sampler_live_add(v->owner,&v->live,PT_LIVE_VERSION,v,allocated,
+        v->sample.pcm.data,v->sample.pcm.capacity*sizeof(int32_t),
+        v->sample.slices,(size_t)v->sample.slice_count*sizeof(uint32_t));
+}
 static void retain(struct pt_sample_version *v) {++v->references;}
 static void release_version(struct pt_sample_version *v)
 {
-    if(v && !--v->references) {
-        struct pt_sampler *s=v->owner;struct pt_sample_version *backing=v->backing;
-        s->bytes-=v->bytes;
+    if(v) {
+        struct pt_sampler *s=v->owner;struct pt_sample_version *backing;
+        struct pt_sampler_pending call={0};
+        if(v->references>1){--v->references;return;}
+        if(!v->references || !pt_sampler_pending_add(s,&call,PT_PENDING_CALL,
+            &call,sizeof(call),NULL,0,s->generation)){s->lifetime_fault=1;return;}
+        if(!pt_sampler_pending_retire(&call,&v->live)||!pt_sampler_live_remove(&v->live)){
+            pt_sampler_pending_remove(&call);return;
+        }
+        --v->references;backing=v->backing;s->bytes-=v->bytes;
         if(v->owned_pcm)s->allocator.release(s->allocator.context,v->owned_pcm);
         s->allocator.release(s->allocator.context,v);release_version(backing);
+        pt_sampler_pending_remove(&call);
     }
 }
 void pt_sampler_release(struct pt_sampler *s)
 {
     unsigned i;for(i=0;i<PT_PROJECT_SAMPLES;++i) {release_version(s->current[i]);s->current[i]=NULL;}
-    if(s->table) {s->bytes-=s->table_bytes;s->allocator.release(s->allocator.context,s->table);s->table=NULL;s->table_original=NULL;s->table_bytes=0;}
+    if(s->table) {pt_sampler_table_release(s,s->table);s->table=NULL;s->table_original=NULL;s->table_bytes=0;}
 }
 static struct pt_sample_version *version_allocate(struct pt_sampler *s,const struct pt_sample *sample)
 {
@@ -119,6 +136,7 @@ static struct pt_sample_version *version_allocate(struct pt_sampler *s,const str
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     v->sample.pcm.data=(int32_t *)(v+1);v->sample.pcm.capacity=values;
     v->sample.slices=(uint32_t *)(v->sample.pcm.data+values);
+    if(!lifetime_version(v,bytes)){s->allocator.release(s->allocator.context,v);return NULL;}
     s->bytes+=bytes;return v;
 }
 /* Charge the full allocation, including unused recording capacity. Until the
@@ -131,6 +149,7 @@ static struct pt_sample_version *version_borrow_owned(struct pt_sampler *s,const
     if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
     v=s->allocator.allocate(s->allocator.context,sizeof(*v));if(!v)return NULL;
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
+    if(!lifetime_version(v,sizeof(*v))){s->allocator.release(s->allocator.context,v);return NULL;}
     s->bytes+=bytes;return v;
 }
 static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sample *sample)
@@ -151,13 +170,16 @@ static int same(const struct pt_sample *a,const struct pt_sample *b)
         (!a->pcm.frames || a->pcm.data==b->pcm.data || !memcmp(a->pcm.data,b->pcm.data,(size_t)a->pcm.frames*a->pcm.channels*sizeof(int32_t))) &&
         (!a->slice_count || a->slices==b->slices || !memcmp(a->slices,b->slices,(size_t)a->slice_count*sizeof(uint32_t)));
 }
-enum pt_edit_result pt_sampler_pin(struct pt_sampler *s,struct pt_project *p,unsigned slot,
+static enum pt_edit_result pt_sampler_pin_lifetime_body(struct pt_sampler *s,struct pt_project *p,unsigned slot,
     unsigned generation,struct pt_pcm *pcm,struct pt_sample_version **token)
 {
     struct pt_sample_version *v;
     if(!s || !pcm || !token || !s->allocator.allocate || !s->allocator.release ||
        pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
     if(generation!=s->generation)return PT_EDIT_CONFLICT;
+    if(!pt_sampler_output_disjoint(s,pcm,sizeof(*pcm)) || !pt_sampler_output_disjoint(s,token,sizeof(*token)) ||
+       !pt_sample_usage_output_disjoint(p,pcm,sizeof(*pcm)) || !pt_sample_usage_output_disjoint(p,token,sizeof(*token)) ||
+       output_overlap(pcm,sizeof(*pcm),token,sizeof(*token)))return PT_EDIT_ALIAS;
     v=s->current[slot];
     if(v && (!same(&v->sample,&p->samples[slot]) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
     if(!v) {
@@ -180,12 +202,43 @@ enum pt_edit_result pt_sampler_pin_current(struct pt_sampler *s,struct pt_projec
        p->sample_count>PT_PROJECT_SAMPLES || slot>=p->sample_count)return PT_EDIT_INVALID;
     if(generation!=s->generation || s->current[slot]!=expected || expected->owner!=s ||
        expected->references==UINT_MAX || !same_storage(&expected->sample,p->samples+slot))return PT_EDIT_CONFLICT;
+    if(!pt_sampler_output_disjoint(s,pcm,sizeof(*pcm)) || !pt_sampler_output_disjoint(s,token,sizeof(*token)) ||
+       !pt_sampler_version_output_disjoint(expected,pcm,sizeof(*pcm)) || !pt_sampler_version_output_disjoint(expected,token,sizeof(*token)) ||
+       !pt_sample_usage_output_disjoint(p,pcm,sizeof(*pcm)) || !pt_sample_usage_output_disjoint(p,token,sizeof(*token)) ||
+       output_overlap(pcm,sizeof(*pcm),token,sizeof(*token)))return PT_EDIT_ALIAS;
     retain(expected);*pcm=expected->sample.pcm;*token=expected;return PT_EDIT_OK;
 }
 void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *j)
 {
     if(!j)return;
-    release_version(j->value);memset(j,0,sizeof(*j));
+    release_version(j->value);
+    if(!pt_sampler_pending_remove(&j->reservation))return;
+    memset(j,0,sizeof(*j));
+}
+enum pt_edit_result pt_sampler_pin_job_reserve(struct pt_sampler_pin_job *j,struct pt_sampler *s,
+    struct pt_project *p,unsigned slot,unsigned generation)
+{
+    const struct pt_sample *source;
+    if(!j||j->value||!s||!p||!p->samples||p->sample_count>PT_PROJECT_SAMPLES||
+       slot>=p->sample_count||!pt_sampler_output_disjoint(s,j,sizeof(*j)))return PT_EDIT_INVALID;
+    if(generation!=s->generation)return PT_EDIT_CONFLICT;
+    if(!pt_sample_usage_output_disjoint(p,j,sizeof(*j)))return PT_EDIT_ALIAS;
+    source=p->samples+slot;
+    if(pt_pcm_shape(&source->pcm)!=PT_PCM_OK||source->slice_count>PT_PROJECT_SLICES||
+       (source->slice_count&&!source->slices))return PT_EDIT_INVALID;
+    if(j->reservation.owner)
+        return j->reservation.owner==s&&j->reservation.kind==PT_PENDING_PIN&&
+            j->reservation.control==j&&j->reservation.bytes==sizeof(*j)&&
+            j->reservation.project==p&&j->reservation.slot==slot&&
+            j->reservation.generation==generation?PT_EDIT_OK:PT_EDIT_CONFLICT;
+    return pt_sampler_pending_add(s,&j->reservation,PT_PENDING_PIN,j,sizeof(*j),p,slot,generation)?
+        PT_EDIT_OK:PT_EDIT_CAPACITY;
+}
+static void pin_job_initialize(struct pt_sampler_pin_job *j)
+{
+    struct pt_sampler_pending saved;
+    memcpy(&saved,&j->reservation,sizeof(saved));memset(j,0,sizeof(*j));
+    memcpy(&j->reservation,&saved,sizeof(saved));
 }
 enum pt_edit_result pt_sampler_pin_job_begin(struct pt_sampler_pin_job *j,struct pt_sampler *s,
     struct pt_project *p,unsigned slot,unsigned generation)
@@ -199,9 +252,11 @@ enum pt_edit_result pt_sampler_pin_job_begin(struct pt_sampler_pin_job *j,struct
        (source->slice_count && !source->slices))return PT_EDIT_INVALID;
     v=s->current[slot];
     if(v && (!same_storage(&v->sample,source) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
+    {enum pt_edit_result reserved=pt_sampler_pin_job_reserve(j,s,p,slot,generation);
+     if(reserved!=PT_EDIT_OK)return reserved;}
     if(v)retain(v);
-    else {v=version_allocate(s,source);if(!v)return PT_EDIT_CAPACITY;}
-    memset(j,0,sizeof(*j));j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
+    else {v=version_allocate(s,source);if(!v){pt_sampler_pending_remove(&j->reservation);return PT_EDIT_CAPACITY;}}
+    pin_job_initialize(j);j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
     j->slot=slot;j->generation=generation;j->source=*source;j->previous=s->current[slot];j->value=v;
     j->values=(size_t)source->pcm.frames*source->pcm.channels*sizeof(int32_t);
     return PT_EDIT_OK;
@@ -211,6 +266,15 @@ enum pt_edit_result pt_sampler_pin_job_step(struct pt_sampler_pin_job *j,size_t 
 {
     struct pt_sample_version *v;size_t n,slices;
     if(!j || !j->value || !bytes || bytes>PT_SAMPLER_PIN_CHUNK || !pcm || !token || !ready)return PT_EDIT_INVALID;
+    if(!pt_sampler_pin_job_output_disjoint(j,pcm,sizeof(*pcm)) ||
+       !pt_sampler_pin_job_output_disjoint(j,token,sizeof(*token)) ||
+       !pt_sampler_pin_job_output_disjoint(j,ready,sizeof(*ready)) ||
+       !pt_sampler_output_disjoint(j->owner,pcm,sizeof(*pcm)) ||
+       !pt_sampler_output_disjoint(j->owner,token,sizeof(*token)) ||
+       !pt_sampler_output_disjoint(j->owner,ready,sizeof(*ready)) ||
+       output_overlap(pcm,sizeof(*pcm),token,sizeof(*token)) ||
+       output_overlap(pcm,sizeof(*pcm),ready,sizeof(*ready)) ||
+       output_overlap(token,sizeof(*token),ready,sizeof(*ready)))return PT_EDIT_ALIAS;
     if(j->failure)return j->failure;
     if(j->owner->generation!=j->generation || j->project->samples!=j->table ||
        j->project->sample_count!=j->count || j->owner->current[j->slot]!=j->previous ||
@@ -228,6 +292,7 @@ enum pt_edit_result pt_sampler_pin_job_step(struct pt_sampler_pin_job *j,size_t 
          * the caller pin; one new reference belongs to sampler.current. */
         retain(v);j->owner->current[j->slot]=v;j->table[j->slot]=v->sample;
     }
+    if(!pt_sampler_pending_remove(&j->reservation))return PT_EDIT_CONFLICT;
     *pcm=v->sample.pcm;*token=v;*ready=1;memset(j,0,sizeof(*j));return PT_EDIT_OK;
 }
 
@@ -236,6 +301,7 @@ struct appended_sample {
     struct pt_sample *before,*after;
     struct pt_sample_version *value;
     unsigned count;
+    struct pt_sampler_live live;
 };
 static int append_apply(void *context,struct pt_project *p,int direction)
 {
@@ -257,7 +323,11 @@ static int append_apply(void *context,struct pt_project *p,int direction)
 static void append_discard(void *context)
 {
     struct appended_sample *c=context;struct pt_sampler *s=c->owner;
-    release_version(c->value);s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);
+    struct pt_sampler_pending call={0};
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),NULL,0,s->generation))return;
+    release_version(c->value);
+    if(!pt_sampler_pending_retire(&call,&c->live)||!pt_sampler_live_remove(&c->live)){pt_sampler_pending_remove(&call);return;}
+    s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);pt_sampler_pending_remove(&call);
 }
 static enum pt_edit_result append_sample(struct pt_sampler *s,struct pt_project *p,
     struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context,struct pt_pcm *owned)
@@ -272,15 +342,17 @@ static enum pt_edit_result append_sample(struct pt_sampler *s,struct pt_project 
     if(length==PT_PROJECT_NAME)return PT_EDIT_INVALID;
     if(p->sample_count==PT_PROJECT_SAMPLES)return PT_EDIT_CAPACITY;
     if(s->table && p->samples!=s->table && p->samples!=s->table_original)return PT_EDIT_CONFLICT;
-    table_bytes=s->table?0:PT_PROJECT_SAMPLES*sizeof(struct pt_sample);needed=sizeof(*c)+table_bytes;
+    table_bytes=s->table?0:pt_sampler_table_allocation_bytes();needed=sizeof(*c)+table_bytes;
     if(s->bytes>s->budget || needed>s->budget-s->bytes)return PT_EDIT_CAPACITY;
     c=s->allocator.allocate(s->allocator.context,sizeof(*c));if(!c)return PT_EDIT_CAPACITY;
-    memset(c,0,sizeof(*c));c->owner=s;s->bytes+=sizeof(*c);
+    memset(c,0,sizeof(*c));c->owner=s;
+    if(!pt_sampler_live_add(s,&c->live,PT_LIVE_APPEND,c,sizeof(*c),NULL,0,NULL,0)){s->allocator.release(s->allocator.context,c);return PT_EDIT_CAPACITY;}
+    s->bytes+=sizeof(*c);
     table=s->table;
     if(!table) {
-        table=s->allocator.allocate(s->allocator.context,table_bytes);
+        table=pt_sampler_table_allocate(s);
         if(!table) {append_discard(c);return PT_EDIT_CAPACITY;}
-        s->bytes+=table_bytes;
+        /* Table helper charges its real header plus complete table allocation. */
     }
     memset(&sample,0,sizeof(sample));sample.pcm=*format;sample.pcm.data=NULL;sample.pcm.capacity=0;
     sample.volume=64;memcpy(sample.name,name,length);
@@ -301,13 +373,13 @@ static enum pt_edit_result append_sample(struct pt_sampler *s,struct pt_project 
     }
 fail:
     append_discard(c);
-    if(table_bytes) {s->bytes-=table_bytes;s->allocator.release(s->allocator.context,table);}
+    if(table_bytes)pt_sampler_table_release(s,table);
     return result;
 }
-enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_project *p,
+static enum pt_edit_result pt_sampler_append_generated_lifetime_body(struct pt_sampler *s,struct pt_project *p,
     struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context)
 {return append_sample(s,p,h,format,name,fill,context,NULL);}
-enum pt_edit_result pt_sampler_append_owned(struct pt_sampler *s,struct pt_project *p,
+static enum pt_edit_result pt_sampler_append_owned_lifetime_body(struct pt_sampler *s,struct pt_project *p,
     struct pt_pattern_history *h,struct pt_pcm *pcm,const struct pt_allocator *allocator,const char *name)
 {
     if(!s || !allocator || allocator->context!=s->allocator.context ||
@@ -331,7 +403,11 @@ static int apply(void *context,struct pt_project *p,int direction)
 static void discard(void *context)
 {
     struct sample_change *c=context;struct pt_sampler *s=c->owner;
-    release_version(c->before);release_version(c->after);s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);
+    struct pt_sampler_pending call={0};
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),NULL,0,s->generation))return;
+    release_version(c->before);release_version(c->after);
+    if(!pt_sampler_pending_retire(&call,&c->live)||!pt_sampler_live_remove(&c->live)){pt_sampler_pending_remove(&call);return;}
+    s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);pt_sampler_pending_remove(&call);
 }
 static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after,unsigned resampled)
 {
@@ -340,6 +416,8 @@ static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p
     if(s->bytes>s->budget || sizeof(*c)>s->budget-s->bytes) {release_version(after);return PT_EDIT_CAPACITY;}
     c=s->allocator.allocate(s->allocator.context,sizeof(*c));
     if(!c) {release_version(after);return PT_EDIT_CAPACITY;}
+    memset(c,0,sizeof(*c));
+    if(!pt_sampler_live_add(s,&c->live,PT_LIVE_CHANGE,c,sizeof(*c),NULL,0,NULL,0)){s->allocator.release(s->allocator.context,c);release_version(after);return PT_EDIT_CAPACITY;}
     s->bytes+=sizeof(*c);
     c->owner=s;c->slot=slot;c->resampled=resampled;c->after=after;c->before=s->current[slot];
     if(c->before)retain(c->before);
@@ -352,7 +430,7 @@ static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p
 }
 static enum pt_edit_result commit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after)
 {return commit_kind(s,p,h,slot,after,0);}
-enum pt_edit_result pt_sampler_attributes(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const char *name,unsigned volume,int finetune)
+static enum pt_edit_result pt_sampler_attributes_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const char *name,unsigned volume,int finetune)
 {
     struct pt_sample_version *base,*v;size_t length=0;int owned;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count || !name || volume>64 || finetune< -8 || finetune>7)return PT_EDIT_INVALID;
@@ -367,14 +445,16 @@ enum pt_edit_result pt_sampler_attributes(struct pt_sampler *s,struct pt_project
     v=s->allocator.allocate(s->allocator.context,sizeof(*v));
     if(!v) {if(owned)release_version(base);return PT_EDIT_CAPACITY;}
     memset(v,0,sizeof(*v));v->sample=base->sample;v->owner=s;v->bytes=sizeof(*v);v->references=1;
-    v->backing=base->backing?base->backing:base;retain(v->backing);s->bytes+=v->bytes;
+    v->backing=base->backing?base->backing:base;
+    if(!lifetime_version(v,sizeof(*v))){s->allocator.release(s->allocator.context,v);if(owned)release_version(base);return PT_EDIT_CAPACITY;}
+    retain(v->backing);s->bytes+=v->bytes;
     /* Copy possibly aliased input before releasing the temporary source owner. */
     memset(v->sample.name,0,sizeof(v->sample.name));memcpy(v->sample.name,name,length);
     v->sample.volume=(uint8_t)volume;v->sample.finetune=(int8_t)finetune;
     if(owned)release_version(base);
     return commit(s,p,h,slot,v);
 }
-enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_pcm_edit op,uint32_t start,uint32_t end,unsigned gain)
+static enum pt_edit_result pt_sampler_edit_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_pcm_edit op,uint32_t start,uint32_t end,unsigned gain)
 {
     struct pt_sample_version *v;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -383,7 +463,7 @@ enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,st
     if(pt_pcm_edit(&v->sample.pcm,op,start,end,gain)!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
     return commit(s,p,h,slot,v);
 }
-enum pt_edit_result pt_sampler_import(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint8_t *bytes,size_t length,const char *name)
+static enum pt_edit_result pt_sampler_import_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint8_t *bytes,size_t length,const char *name)
 {
     struct pt_wav_info info;struct pt_svx_info svx;int iff;struct pt_sample sample;struct pt_sample_version *v;size_t i,count;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -407,7 +487,7 @@ enum pt_edit_result pt_sampler_import(struct pt_sampler *s,struct pt_project *p,
     if(iff?pt_svx_decode(bytes,length,&v->sample.pcm)!=PT_SVX_OK:pt_wav_decode(bytes,length,&v->sample.pcm)!=PT_WAV_OK) {release_version(v);return PT_EDIT_INVALID;}
     return commit(s,p,h,slot,v);
 }
-enum pt_edit_result pt_sampler_loop(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_loop_kind kind,uint32_t start,uint32_t end,uint32_t fade)
+static enum pt_edit_result pt_sampler_loop_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_loop_kind kind,uint32_t start,uint32_t end,uint32_t fade)
 {
     struct pt_sample_version *v;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -423,7 +503,7 @@ enum pt_edit_result pt_sampler_loop(struct pt_sampler *s,struct pt_project *p,st
     v->sample.loop=(uint8_t)kind;v->sample.loop_start=start;v->sample.loop_end=end;v->sample.crossfade=0;
     return commit(s,p,h,slot,v);
 }
-enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint32_t *markers,size_t count)
+static enum pt_edit_result pt_sampler_slices_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint32_t *markers,size_t count)
 {
     struct pt_sample sample;struct pt_sample_version *v;size_t i,events;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -441,7 +521,7 @@ enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,
 
 static uint32_t scale_frame(uint32_t frame,uint32_t rate,uint32_t old_rate,int ceil)
 {return (uint32_t)(((uint64_t)frame*rate+(ceil?old_rate-1:0))/old_rate);}
-enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate,unsigned filtered)
+static enum pt_edit_result pt_sampler_convert_quality_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate,unsigned filtered)
 {
     struct pt_sample sample;const struct pt_sample *source;struct pt_sample_version *v;struct pt_pcm from;uint32_t frames;unsigned i,resampled;enum pt_pcm_result result;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count ||
@@ -503,7 +583,7 @@ enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *sample,uint8_t 
     return pt_svx_encode(&sample->pcm,&info,bytes,capacity,written);
 }
 
-enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,size_t length,const char *name,const struct pt_raw_format *format,pt_sampler_raw_fill fill,void *context)
+static enum pt_edit_result pt_sampler_import_raw_fill_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,size_t length,const char *name,const struct pt_raw_format *format,pt_sampler_raw_fill fill,void *context)
 {
     struct pt_sample sample={0};struct pt_sample_version *v;size_t i,count;uint32_t frames;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -517,7 +597,7 @@ enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *s,struct pt_pr
     return commit(s,p,h,slot,v);
 }
 
-enum pt_edit_result pt_sampler_import_svx_fill(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_svx_info *info,const char *name,pt_sampler_raw_fill fill,void *context)
+static enum pt_edit_result pt_sampler_import_svx_fill_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_svx_info *info,const char *name,pt_sampler_raw_fill fill,void *context)
 {
     struct pt_sample sample={0};struct pt_sample_version *v;struct pt_raw_format format;size_t i,count;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
@@ -547,7 +627,7 @@ enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *s,struct pt_project
     return pt_sampler_import_raw_fill(s,p,h,slot,length,name,format,raw_memory_fill,&r);
 }
 
-enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_project *source,unsigned selected)
+static enum pt_edit_result pt_sampler_import_slot_lifetime_body(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_project *source,unsigned selected)
 {
     struct pt_sample_version *v;size_t i,count;const struct pt_sample *sample;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || pt_project_validate(source,NULL)!=PT_PROJECT_OK || slot>=p->sample_count || selected>=source->sample_count)return PT_EDIT_INVALID;
@@ -570,6 +650,7 @@ struct workflow_entry {
 };
 struct workflow_span {const void *data;size_t bytes;};
 struct pt_sampler_workflow {
+    struct pt_sampler_live live;struct pt_sampler_pending reservation;
     struct pt_sampler *owner;struct pt_project *project;struct pt_pattern_history *history;
     struct pt_project snapshot;struct pt_pattern_history history_snapshot;
     struct pt_project_validation validation;
@@ -666,34 +747,51 @@ static int workflow_current(const struct pt_sampler_workflow *c)
     if(c->kind==2 && memcmp(c->project->samples+c->source_slot,&c->copy_source,sizeof(c->copy_source)))return 0;
     return 1;
 }
-static struct pt_sample_version *workflow_version_allocate(struct pt_sampler *s,const struct pt_sample *sample,
-    struct pt_sampler_workflow *c,struct pt_sampler_workflow **out,enum pt_edit_result *result)
+static struct pt_sample_version *workflow_version_allocate_body(struct pt_sampler *s,const struct pt_sample *sample,
+    struct pt_sampler_workflow *c,struct pt_sampler_workflow **out,enum pt_edit_result *result,
+    struct pt_sampler_pending *call)
 {
     struct pt_sample_version *v;size_t capacity=sample->pcm.capacity,slices,bytes;
+    struct pt_allocator allocator=s->allocator;
     slices=(size_t)sample->slice_count*sizeof(uint32_t);
     if(capacity>(SIZE_MAX-sizeof(*v)-slices)/sizeof(int32_t))return NULL;
     bytes=sizeof(*v)+capacity*sizeof(int32_t)+slices;
     if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
-    v=s->allocator.allocate(s->allocator.context,bytes);if(!v)return NULL;
-    if(!workflow_current(c)) {s->allocator.release(s->allocator.context,v);*result=PT_EDIT_CONFLICT;return NULL;}
+    v=allocator.allocate(allocator.context,bytes);if(!v)return NULL;
+    /* Genuine returned construction block remains excluded through refusal release. */
+    call->retiring[0]=(struct pt_sampler_live_span){v,bytes};call->retiring_count=1;
+    if(!workflow_current(c)) {allocator.release(allocator.context,v);*result=PT_EDIT_CONFLICT;return NULL;}
     if(!workflow_apart(c,v,bytes) || output_overlap(v,bytes,out,sizeof(*out))) {
-        s->allocator.release(s->allocator.context,v);*result=PT_EDIT_ALIAS;return NULL;
+        allocator.release(allocator.context,v);*result=PT_EDIT_ALIAS;return NULL;
     }
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     v->sample.pcm.data=capacity?(int32_t *)(v+1):NULL;
     v->sample.slices=sample->slice_count?(uint32_t *)((uint8_t *)(v+1)+capacity*sizeof(int32_t)):NULL;
+    if(!lifetime_version(v,bytes)){allocator.release(allocator.context,v);return NULL;}
     s->bytes+=bytes;return v;
+}
+static struct pt_sample_version *workflow_version_allocate(struct pt_sampler *s,const struct pt_sample *sample,
+    struct pt_sampler_workflow *c,struct pt_sampler_workflow **out,enum pt_edit_result *result)
+{
+    struct pt_sampler_pending call={0};struct pt_sample_version *v;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),NULL,0,s->generation))return NULL;
+    v=workflow_version_allocate_body(s,sample,c,out,result,&call);
+    if(!pt_sampler_pending_remove(&call))return NULL;
+    return v;
 }
 static void workflow_discard(void *context)
 {
     struct pt_sampler_workflow *c=context;struct pt_sampler *s=c->owner;unsigned i;
+    struct pt_sampler_pending call={0};
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),NULL,0,s->generation))return;
     pt_project_validation_cancel(&c->validation);
     for(i=0;i<c->count;++i) {release_version(c->entries[i].before);release_version(c->entries[i].after);}
     if(c->table_owned) {
         size_t n=PT_PROJECT_SAMPLES*sizeof(*c->table_after);
-        s->bytes-=n;s->allocator.release(s->allocator.context,c->table_after);
+        (void)n;pt_sampler_table_release(s,c->table_after);
     }
-    s->bytes-=c->bytes;s->allocator.release(s->allocator.context,c);
+    if(!pt_sampler_pending_retire(&call,&c->live)||!pt_sampler_pending_remove(&c->reservation)||!pt_sampler_live_remove(&c->live)){pt_sampler_pending_remove(&call);return;}
+    s->bytes-=c->bytes;s->allocator.release(s->allocator.context,c);pt_sampler_pending_remove(&call);
 }
 void pt_sampler_workflow_cancel(struct pt_sampler_workflow **job)
 {
@@ -703,9 +801,9 @@ void pt_sampler_workflow_cancel(struct pt_sampler_workflow **job)
 }
 static void workflow_span_add(struct pt_sampler_workflow *c,const void *data,size_t bytes)
 {if(bytes)c->spans[c->span_count++]=(struct workflow_span){data,bytes};}
-static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct pt_project *p,
+static struct pt_sampler_workflow *workflow_allocate_body(struct pt_sampler *s,struct pt_project *p,
     struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,unsigned count,unsigned kind,
-    struct pt_sampler_workflow **out,enum pt_edit_result *result)
+    struct pt_sampler_workflow **out,enum pt_edit_result *result,struct pt_sampler_pending *call)
 {
     struct pt_sampler_workflow *c;unsigned i,generation=s->generation;
     struct pt_project snapshot=*p;struct pt_pattern_history history_snapshot=*h;struct pt_allocator allocator=s->allocator;
@@ -715,6 +813,7 @@ static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct
     bytes+=maximum*sizeof(struct workflow_span);
     if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
     c=allocator.allocate(allocator.context,bytes);if(!c)return NULL;
+    call->retiring[0]=(struct pt_sampler_live_span){c,bytes};call->retiring_count=1;
     if(s->generation!=generation || !workflow_same_project(p,&snapshot) || memcmp(h,&history_snapshot,sizeof(*h)) ||
        !workflow_preview_current(v,p,h,s)) {allocator.release(allocator.context,c);*result=PT_EDIT_CONFLICT;return NULL;}
     if(s->bytes>s->budget || bytes>s->budget-s->bytes) {allocator.release(allocator.context,c);return NULL;}
@@ -734,6 +833,7 @@ static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct
         workflow_span_add(c,p->samples[i].slices,p->samples[i].slice_count*sizeof(uint32_t));
     }
     for(i=0;i<p->extension_count;++i)workflow_span_add(c,p->extensions[i].data,p->extensions[i].length);
+    if(!pt_sampler_live_add(s,&c->live,PT_LIVE_WORKFLOW,c,bytes,NULL,0,NULL,0)){allocator.release(allocator.context,c);return NULL;}
     c->reserved_bytes=s->bytes;s->bytes+=bytes;
     {
         enum pt_project_result validation=pt_project_validation_begin(&c->validation,p,h->revision,generation);
@@ -742,6 +842,22 @@ static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct
             workflow_discard(c);return NULL;
         }
     }
+    return c;
+}
+static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,unsigned count,unsigned kind,
+    struct pt_sampler_workflow **out,enum pt_edit_result *result)
+{
+    struct pt_sampler_pending call={0};struct pt_sampler_workflow *c;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_WORKFLOW,&call,sizeof(call),p,0,s->generation))return NULL;
+    c=workflow_allocate_body(s,p,h,v,count,kind,out,result,&call);
+    if(c){
+        /* The exact block is now a genuine live node; transfer only control lifetime. */
+        call.retiring_count=0;
+        if(!pt_sampler_pending_transfer(&call,&c->reservation,c,c->bytes)){
+            s->lifetime_fault=1;pt_sampler_pending_remove(&call);return NULL;
+        }
+    }else pt_sampler_pending_remove(&call);
     return c;
 }
 static int workflow_before(struct pt_sampler_workflow *c,unsigned i,unsigned slot,
@@ -835,15 +951,15 @@ enum pt_edit_result pt_sampler_copy_begin(struct pt_sampler *s,struct pt_project
     if(c->append) {
         c->table_after=s->table;
         if(!c->table_after) {
-            size_t bytes=PT_PROJECT_SAMPLES*sizeof(*c->table_after);
+            size_t bytes=pt_sampler_table_allocation_bytes();
             if(s->bytes>s->budget || bytes>s->budget-s->bytes) {workflow_discard(c);return PT_EDIT_CAPACITY;}
-            c->table_after=s->allocator.allocate(s->allocator.context,bytes);
+            c->table_after=pt_sampler_table_allocate(s);
             if(!c->table_after) {workflow_discard(c);return PT_EDIT_CAPACITY;}
-            if(!workflow_current(c)) {s->allocator.release(s->allocator.context,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_CONFLICT;}
-            if(!workflow_apart(c,c->table_after,bytes) || output_overlap(c->table_after,bytes,out,sizeof(*out))) {
-                s->allocator.release(s->allocator.context,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_ALIAS;
+            if(!workflow_current(c)) {pt_sampler_table_release(s,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_CONFLICT;}
+            if(!workflow_apart(c,c->table_after,PT_PROJECT_SAMPLES*sizeof(*c->table_after)) || output_overlap(c->table_after,PT_PROJECT_SAMPLES*sizeof(*c->table_after),out,sizeof(*out))) {
+                pt_sampler_table_release(s,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_ALIAS;
             }
-            s->bytes+=bytes;c->table_owned=1;
+            c->table_owned=1;
         }
     }
     sample=c->copy_source;sample.pcm.frames=end-start;sample.pcm.capacity=(size_t)(end-start)*sample.pcm.channels;
@@ -995,6 +1111,7 @@ enum pt_edit_result pt_sampler_workflow_commit(struct pt_sampler_workflow **job,
     resource=(struct pt_edit_resource){c,workflow_apply,workflow_discard};
     result=pt_pattern_resource_apply(c->project,c->history,&resource);
     if(result!=PT_EDIT_OK)return result;
+    if(!pt_sampler_pending_remove(&c->reservation))return PT_EDIT_CONFLICT;
     *stats=c->stats;*job=NULL;return PT_EDIT_OK;
 }
 
@@ -1013,6 +1130,7 @@ static struct pt_sample_version *master_guard_version_allocate(struct pt_sampler
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     v->sample.pcm.data=(int32_t *)(v+1);v->sample.pcm.capacity=values;
     v->sample.slices=(uint32_t *)(v->sample.pcm.data+values);
+    if(!lifetime_version(v,bytes)){s->allocator.release(s->allocator.context,v);return NULL;}
     s->bytes+=bytes;return v;
 }
 enum pt_edit_result pt_sampler_pin_job_begin_guarded(struct pt_sampler_pin_job *j,struct pt_sampler *s,
@@ -1028,10 +1146,198 @@ enum pt_edit_result pt_sampler_pin_job_begin_guarded(struct pt_sampler_pin_job *
        (source->slice_count && !source->slices))return PT_EDIT_INVALID;
     v=s->current[slot];
     if(v && (!same_storage(&v->sample,source) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
+    {enum pt_edit_result reserved=pt_sampler_pin_job_reserve(j,s,p,slot,generation);
+     if(reserved!=PT_EDIT_OK)return reserved;}
     if(v)retain(v);
-    else {v=master_guard_version_allocate(s,source,guard,context);if(!v)return PT_EDIT_CAPACITY;}
-    memset(j,0,sizeof(*j));j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
+    else {v=master_guard_version_allocate(s,source,guard,context);if(!v){pt_sampler_pending_remove(&j->reservation);return PT_EDIT_CAPACITY;}}
+    pin_job_initialize(j);j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
     j->slot=slot;j->generation=generation;j->source=*source;j->previous=s->current[slot];j->value=v;
     j->values=(size_t)source->pcm.frames*source->pcm.channels*sizeof(int32_t);
     return PT_EDIT_OK;
+}
+
+enum pt_edit_result pt_sampler_pin(struct pt_sampler *s,struct pt_project *p,unsigned slot,unsigned generation,struct pt_pcm *pcm,struct pt_sample_version **token)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_pin_lifetime_body(s,p,slot,generation,pcm,token);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_attributes(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const char *name,unsigned volume,int finetune)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_attributes_lifetime_body(s,p,h,slot,name,volume,finetune);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_pcm_edit op,uint32_t start,uint32_t end,unsigned gain)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_edit_lifetime_body(s,p,h,slot,op,start,end,gain);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_import(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint8_t *bytes,size_t length,const char *name)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_import_lifetime_body(s,p,h,slot,bytes,length,name);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_loop(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_loop_kind kind,uint32_t start,uint32_t end,uint32_t fade)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_loop_lifetime_body(s,p,h,slot,kind,start,end,fade);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint32_t *markers,size_t count)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_slices_lifetime_body(s,p,h,slot,markers,count);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate,unsigned quality)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_convert_quality_lifetime_body(s,p,h,slot,bits,rate,quality);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_append_generated_lifetime_body(s,p,h,format,name,fill,context);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_append_owned(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,struct pt_pcm *pcm,const struct pt_allocator *allocator,const char *name)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_append_owned_lifetime_body(s,p,h,pcm,allocator,name);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,size_t length,const char *name,const struct pt_raw_format *format,pt_sampler_raw_fill fill,void *context)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_import_raw_fill_lifetime_body(s,p,h,slot,length,name,format,fill,context);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_import_svx_fill(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_svx_info *info,const char *name,pt_sampler_raw_fill fill,void *context)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_import_svx_fill_lifetime_body(s,p,h,slot,info,name,fill,context);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_project *source,unsigned selected)
+{
+    struct pt_sampler_pending call={0};enum pt_edit_result r;
+    if(!s)return PT_EDIT_INVALID;
+    if(!pt_sampler_pending_add(s,&call,PT_PENDING_CALL,&call,sizeof(call),p,0,s->generation))return PT_EDIT_CAPACITY;
+    r=pt_sampler_import_slot_lifetime_body(s,p,h,slot,source,selected);
+    if(!pt_sampler_pending_remove(&call))return PT_EDIT_CONFLICT;
+    return r;
+}
+
+/* Private intrinsic observation of a genuinely held contiguous promotion.
+ * This is numeric accounting/currentness metadata, never a pin or READY grant. */
+size_t pt_sampler_version_inventory_bytes(const struct pt_sample_version *v,
+    const struct pt_sampler *s,const struct pt_sampler_live *node)
+{
+    size_t values,slices,total;unsigned count=1;
+    if(!v||!s||node!=&v->live||v->owner!=s||!v->references||
+       v->backing||v->owned_pcm||v->sample.pcm.channels<1||
+       v->sample.pcm.channels>2||v->sample.pcm.frames>SIZE_MAX/
+       sizeof(int32_t)/v->sample.pcm.channels)return 0;
+    values=(size_t)v->sample.pcm.frames*v->sample.pcm.channels;
+    slices=(size_t)v->sample.slice_count*sizeof(uint32_t);
+    if(v->sample.slice_count>PT_PROJECT_SLICES||
+       values>(SIZE_MAX-sizeof(*v)-slices)/sizeof(int32_t))return 0;
+    total=sizeof(*v)+values*sizeof(int32_t)+slices;
+    if(v->bytes!=total||v->sample.pcm.capacity!=values||
+       v->sample.pcm.data!=(const int32_t *)(v+1)||
+       v->sample.slices!=(const uint32_t *)(v->sample.pcm.data+values)||
+       node->owner!=s||node->kind!=PT_LIVE_VERSION||
+       node->spans[0].data!=v||node->spans[0].bytes!=total)return 0;
+    if(values){
+        if(node->spans[count].data!=v->sample.pcm.data||
+           node->spans[count].bytes!=values*sizeof(int32_t))return 0;
+        ++count;
+    }
+    if(slices){
+        if(node->spans[count].data!=v->sample.slices||
+           node->spans[count].bytes!=slices)return 0;
+        ++count;
+    }
+    return node->count==count?total:0;
+}
+
+/* Completed generic SOURCE promotion: exact genuine current descriptor only.
+ * This pure observation neither owns a job nor grants producer/READY authority.
+ * Caller retains the original sampler/project/current owners and their storage. */
+size_t pt_sampler_current_version_inventory_bytes(const struct pt_sample_version *v,
+    const struct pt_sampler *s,const struct pt_project *p,unsigned slot,
+    const struct pt_sampler_live *node)
+{
+    size_t bytes;
+    if(!s||!p||!p->samples||p->sample_count>PT_PROJECT_SAMPLES||
+       slot>=p->sample_count||s->current[slot]!=v)return 0;
+    bytes=pt_sampler_version_inventory_bytes(v,s,node);
+    return bytes&&same_storage(&v->sample,p->samples+slot)?bytes:0;
+}
+
+int pt_sampler_pin_job_inventory_current(const struct pt_sampler_pin_job *j,
+    const struct pt_sampler *s,const struct pt_project *p,unsigned generation,
+    unsigned slot)
+{
+    if(!j||!s||!p)return 0;
+    if(!j->reservation.owner)return !j->owner&&!j->value;
+    if(slot>=p->sample_count||j->reservation.owner!=s||
+       j->reservation.kind!=PT_PENDING_PIN||j->reservation.control!=j||
+       j->reservation.bytes!=sizeof(*j)||j->reservation.project!=p||
+       j->reservation.slot!=slot||j->reservation.generation!=generation||
+       j->reservation.retiring_count)return 0;
+    if(!j->owner)return !j->value&&!j->previous&&!j->project&&!j->table&&
+        !j->values&&!j->copied_values&&!j->copied_slices&&!j->failure;
+    return j->owner==s&&j->project==p&&j->table==p->samples&&
+        j->count==p->sample_count&&j->slot==slot&&j->generation==generation&&
+        !j->failure&&j->value&&j->value->owner==s&&j->value->references&&
+        j->previous==s->current[slot]&&same_storage(&j->source,p->samples+slot);
 }

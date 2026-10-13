@@ -261,6 +261,10 @@ def main():
     subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_volume.o'), str(volume_source)], check=True)
     workflow_sources = ['src/editor/workflow.c', 'src/editor/sample_range.c', 'src/editor/wave_summary.c', 'src/core/sample_usage.c', 'src/core/event_resource.c', 'src/core/flow.c', 'src/core/pitch.c']
     for sources in inputs.values():
+        if 'src/editor/sampler.c' in sources or 'src/editor/slots.c' in sources:
+            for dependency in ('src/editor/sampler_lifetime.c', 'src/core/sample_usage.c'):
+                if dependency not in sources:
+                    sources.append(dependency)
         if 'src/editor/editor.c' in sources:
             sources += [s for s in workflow_sources if s not in sources]
     for name, sources in inputs.items():

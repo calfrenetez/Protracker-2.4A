@@ -93,7 +93,7 @@ SOURCES = (
     'src/editor/sampler_establish.c',
     'src/editor/mixed_quantized_audit.c',
     'src/editor/mixed_readers_plan_normalize.c',
-)
+ 'src/editor/sampler_lifetime.c')
 ORACLE = 'EDITOR MIXED CAUSAL SONG LINEAGE PASS:38 genuine three-boundary cases;8 mixed4Paula+12card/16card TRIGGER-CONTROL16-STOP sequences with16/24-bit masters/cache16,exact960/1920/2880 frames,two live C slots and actual C1 service/disposal before C3 reuse,both C/R retirement orders,1 strict CONTROL6/STOP2 subset of original16,real audit/take-once/EOF,WAIT_ACTIVE without rebase,full16-bit card levels,29 source/cancel/shape/budget/alias/stale/reentry/retained-lower-OK/unknown-source cases,original master/save/cache/full-capacity tails;WAIT_CAPACITY source-arithmetic only; SOFTWARE_ONLY\n'
 RAW_FONT_SHA256 = "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
 FONT_HEADER_SHA256 = "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0"

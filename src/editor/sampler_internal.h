@@ -1,6 +1,7 @@
 #ifndef PT_SAMPLER_INTERNAL_H
 #define PT_SAMPLER_INTERNAL_H
 #include "sampler.h"
+#include "sampler_lifetime_internal.h"
 /* Retain a genuine already-held immutable pin for another voice. The session
  * has fully validated its project and keeps source arrays immutable. This checks
  * generation, current-token/owner and exact descriptor identity without scanning
@@ -23,11 +24,15 @@ enum pt_edit_result pt_sampler_pin_current(struct pt_sampler *,struct pt_project
  * one pin to caller; unpin exactly once. Public sampler_pin remains validating.
  * Job storage must not alias inputs/outputs; no copying or reinitializing a job. */
 struct pt_sampler_pin_job {
+    struct pt_sampler_pending reservation;
     struct pt_sampler *owner;struct pt_project *project;struct pt_sample *table;
     struct pt_sample_version *value,*previous;struct pt_sample source;
     size_t values,copied_values,copied_slices;
     unsigned slot,count,generation;enum pt_edit_result failure;
 };
+/* Establishment uses this exact private pre-reserve before snapshot/callback.
+ * It allocates/publishes nothing and is not a readiness or mutation grant. */
+enum pt_edit_result pt_sampler_pin_job_reserve(struct pt_sampler_pin_job *,struct pt_sampler *,struct pt_project *,unsigned,unsigned);
 enum pt_edit_result pt_sampler_pin_job_begin(struct pt_sampler_pin_job *,struct pt_sampler *,struct pt_project *,unsigned,unsigned);
 enum pt_edit_result pt_sampler_pin_job_step(struct pt_sampler_pin_job *,size_t,struct pt_pcm *,struct pt_sample_version **,unsigned *ready);
 void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *);
@@ -48,4 +53,15 @@ int pt_sampler_pin_job_output_disjoint(const struct pt_sampler_pin_job *,const v
 struct pt_sampler_storage_span {const void *data;size_t bytes;};
 int pt_sampler_version_spans(const struct pt_sample_version *,
     struct pt_sampler_storage_span *,unsigned,unsigned *);
+/* Pure metadata observations of genuine already-held intrinsic owners.
+ * Neither leaf retains/releases, allocates, writes an output or grants readiness. */
+size_t pt_sampler_version_inventory_bytes(const struct pt_sample_version *,
+    const struct pt_sampler *,const struct pt_sampler_live *);
+/* Completed contiguous current promotion only; no pending-job authentication or
+ * retention. Project descriptors and genuine current owners stay immutable. */
+size_t pt_sampler_current_version_inventory_bytes(const struct pt_sample_version *,
+    const struct pt_sampler *,const struct pt_project *,unsigned,
+    const struct pt_sampler_live *);
+int pt_sampler_pin_job_inventory_current(const struct pt_sampler_pin_job *,
+    const struct pt_sampler *,const struct pt_project *,unsigned,unsigned);
 #endif

@@ -1,3 +1,4 @@
+#include "../core/document_retirement_internal.h"
 #include "mixed_owner_established.h"
 #include "mixed_owner_established_internal.h"
 #include "mixed_owner_state_internal.h"
@@ -106,6 +107,11 @@ static enum pt_mixed_owner_result begin(struct pt_mixed_established *c,
     struct pt_sampler_paula pb;struct pt_sampler_wavetable ab;
     struct pt_render_options options;struct pt_paula_render_caps limits;struct pt_playback_format format;
     struct pt_amigus_reservation reservation;struct pt_mixed_owner *s;unsigned i,total=12;
+#if defined(PT_DOCUMENT_TYPED_REPLACEMENT)
+    /* An arbitrary core callback cannot admit a new source borrow before
+     * its own document retirement/staging operation has positively ended. */
+    if(pt_document_retirement_callback_active())return PT_MIXED_OWNER_INVALID;
+#endif
     if(!c||!p||!w||!p->bridge||!w->bridge||!w->bridge->backend||!w->bridge->backend->reservation||
        !o||!caps||!f||!a||!a->allocate||!a->release||!out||*out||
        c->storage.memory.active||c->startup||c->starting||count>(container?2U:3U)||!span(extra,count*sizeof(*extra))||
@@ -188,4 +194,30 @@ int pt_mixed_owner_established_finish(struct pt_mixed_established *c)
     if(c->starting){c->faulted=1;c->storage.memory.faulted=1;return 0;}
     if(c->startup)return 0;
     return pt_sampler_prepare_project_finish(&c->storage);
+}
+
+int pt_mixed_owner_established_binding_current(const struct pt_mixed_established *c,
+    struct pt_mixed_owner *s,const struct pt_sampler *sampler,
+    const struct pt_project *project,struct pt_mixed_owner *const *publisher,
+    const struct pt_paula_voices *p,const struct pt_wavetable_voices *w)
+{
+    unsigned i,issued=0;
+    if(!(c&&s&&sampler&&project&&p&&w&&publisher&&c->publisher==publisher&&*publisher==s&&
+        !c->starting&&!c->faulted&&c->storage.memory.active&&!c->storage.memory.busy&&!c->storage.memory.faulted&&
+        c->storage.memory.parent_count<=PT_SAMPLER_PREPARE_PARENTS&&
+        c->storage.project==project&&c->storage.memory.sampler==sampler&&!s->closing&&
+        !s->checked_busy&&!s->checked_faulted&&s->checked_context==c&&
+        s->checked_prepare==prepare&&s->checked_current==source_current&&
+        s->checked_output==output_apart&&s->checked_cancel==cancel&&
+        s->allocator.context==c->storage.memory.allocator.context&&
+        s->allocator.allocate==c->storage.memory.allocator.allocate&&
+        s->allocator.release==c->storage.memory.allocator.release&&
+        s->sampler==sampler&&s->project==project&&s->paula==p&&s->amigus==w&&s->pb&&s->ab&&
+        s->paula->song_owner==s&&s->amigus->song_owner==s&&
+        s->paula->bridge==s->pb&&s->amigus->bridge==s->ab))return 0;
+    for(i=0;i<PT_SAMPLER_PREPARE_BLOCKS;++i)if(c->storage.memory.block[i].data==s){
+        if(c->storage.memory.block[i].bytes!=sizeof(*s))return 0;
+        ++issued;
+    }
+    return issued==1&&source_current(s);
 }

@@ -24,4 +24,8 @@ enum pt_mixed_owner_result pt_editor_mixed_checked_begin(struct pt_editor_mixed 
     struct pt_mixed_established *,struct pt_paula_voices *,struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_paula_render_caps *,const struct pt_playback_format *,
     struct pt_sampler_storage_span contexts,unsigned work);
+/* Pure genuine checked adapter identity, including its private finish hook. */
+int pt_editor_mixed_checked_binding_current(const struct pt_editor_mixed *,
+    const struct pt_mixed_established *,const struct pt_paula_voices *,
+    const struct pt_wavetable_voices *);
 #endif

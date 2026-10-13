@@ -43,3 +43,13 @@ enum pt_mixed_owner_result pt_editor_mixed_checked_begin(struct pt_editor_mixed 
     return pt_mixed_owner_established_begin_bound(c,p,w,options,caps,format,&e->sampler.allocator,
         o,sizeof(*o),parents,count,e->history.revision,work,&o->owner);
 }
+
+int pt_editor_mixed_checked_binding_current(const struct pt_editor_mixed *o,
+    const struct pt_mixed_established *c,const struct pt_paula_voices *p,
+    const struct pt_wavetable_voices *w)
+{
+    return pt_editor_mixed_attached(o)&&c&&o->owner_finish==finish&&
+        o->owner_finish_context==c&&!o->preparation_context&&!o->preparation_close&&
+        pt_mixed_owner_established_binding_current(c,o->owner,&o->editor->sampler,
+            o->editor->project,&o->owner,p,w);
+}

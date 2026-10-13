@@ -13,4 +13,9 @@ enum pt_mixed_owner_result pt_mixed_owner_established_begin_bound(struct pt_mixe
     const struct pt_render_options *,const struct pt_paula_render_caps *,const struct pt_playback_format *,
     const struct pt_allocator *,const void *,size_t,const struct pt_sampler_storage_span *,unsigned,
     uint32_t,unsigned,struct pt_mixed_owner **);
+/* Pure exact existing factory/controller/publisher/engine/source identity.
+ * This observation does not retain, close or authorize document retirement. */
+int pt_mixed_owner_established_binding_current(const struct pt_mixed_established *,
+    struct pt_mixed_owner *,const struct pt_sampler *,const struct pt_project *,
+    struct pt_mixed_owner *const *,const struct pt_paula_voices *,const struct pt_wavetable_voices *);
 #endif

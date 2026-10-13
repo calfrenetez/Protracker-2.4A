@@ -26,6 +26,15 @@ assertion observations covering pins across release/final unpin, pending
 records, faults and malformed inventory, all current slots, tables and budget
 rollback. Allocation, budget, release and idle implementations are unchanged.
 
-The three integrated code files match the tested private bytes. This is host
-validation. Native compilation, Amiberry, physical A1200/AmiGUS and listening
-acceptance for this addition remain untested.
+The three integrated code files match the tested private bytes. The retirement
+module also compiled with the native Amiga toolchain using the original
+68000, soft-float and nix20 settings and strict warnings, with ten private SDK
+include directories and watched stock headers. It produced a 3,292-byte object without
+diagnostics. Read-only object inspection identifies format `amiga`, architecture
+`m68k:68000`, a code section, and the global export
+`_pt_sampler_lifetime_storage_retired`. It also records unresolved `memcpy` and
+`memset` references and relocation entries.
+
+This establishes compilation and object inspection for one module. The complete
+sampler fixture has not yet been linked or run in Amiberry or on the physical
+A1200/AmiGUS; ABI, library startup and listening acceptance remain untested.

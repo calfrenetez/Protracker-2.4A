@@ -37,5 +37,7 @@ python3 -m unittest discover -s tests -p test_native_fixture_capture.py
 
 Six test groups cover script admission, same-Shell controls, negative Stack/RC
 cases, bounded path/checksum validation, malformed chunk rejection and separate
-native marker validation. Corrected emulator and real-A1200 integration are not
-qualified by these host tests.
+native marker validation. The corrected sampler integration subsequently passed one guarded 68030
+Amiberry run with independent cleanup and release; see
+[the scoped native evidence](../evidence/harness/native-capture-20261014/README.md).
+Real-A1200 integration of this exact candidate remains untested.

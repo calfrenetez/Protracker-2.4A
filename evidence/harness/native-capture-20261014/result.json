@@ -1,0 +1,66 @@
+{
+  "candidate": {
+    "crc32": "A0A3172B",
+    "sha256": "84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769",
+    "size": 166396
+  },
+  "candidateSource": {
+    "commit": "78d6871582fadc46dcca671791f8e0522f772cec",
+    "coreBytes": 33545,
+    "hardwareMacro": false,
+    "samplerUnits": 18,
+    "typedReplacement": "OFF"
+  },
+  "captureContractCommit": "8d5ee24deaf3648ad4209b05978ac245db0ed222",
+  "cleanup": {
+    "exactGuestExecutableAndCaptureRemoved": true,
+    "exactSharedCopyRemoved": true,
+    "originalLauncherFilesAndConfigurationsVerified": true,
+    "ownedEmulatorStopped": true,
+    "ownedServiceStopped": true,
+    "reservationExplicitlyReleased": true,
+    "separateFinalIdleObservationPassed": true
+  },
+  "date": "2026-10-14",
+  "limitsSeconds": {
+    "guest": 140,
+    "native": 90,
+    "overall": 250
+  },
+  "native": {
+    "nativeMarkers": [
+      "LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence",
+      "CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence",
+      "IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence",
+      "RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence",
+      "STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity",
+      "SAMPLER BUDGET PASS: actual version and journal bytes, one-byte-short refusal, rollback, eviction and redo truncation",
+      "SAMPLER RETIREMENT INVENTORY PASS: retained pins, final unpin, pending records, fault/head/count, bytes/current/table obligations and observation without release authority",
+      "SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release"
+    ],
+    "observedStackBytes": 262144,
+    "outputBytes": 1159,
+    "outputCRC32": "808D90D6",
+    "rawStackQuery": "Current stack size is 262144 bytes",
+    "returnCode": 0
+  },
+  "notQualified": [
+    "Newer typed New/Load composition or frontend integration",
+    "Physical A1200 execution of this exact candidate",
+    "Chip/Fast placement beyond this portable memory fixture",
+    "Paula DMA or AmiGUS output, voice stop, sample RAM capacity or ordering",
+    "Exact musical timing, Studio throughput or listening"
+  ],
+  "priorAttempt": "Preserved output-order qualification failure; not retroactively marked PASS. Its approved recovery completed before this separate run.",
+  "rawEvidenceDisposition": "Retained locally; private paths, process details and ownership metadata omitted from publication",
+  "schema": 1,
+  "status": "PASS_EMULATOR_RAM_FIXTURE",
+  "target": {
+    "chipKiB": 2048,
+    "cpu": "68030",
+    "cpuCycleExactReported": true,
+    "fpu": false,
+    "physicalTimingMeasured": false,
+    "z3KiB": 131072
+  }
+}

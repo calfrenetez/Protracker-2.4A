@@ -99,3 +99,19 @@ Three additional isolated sanitizer cases corrupt a captured editor field or
 input field between delegated steps, or corrupt the snapshot from an old-storage
 release callback. All must retain HOLD without granting cleanup. These supplement
 the existing preparation reentry, source-staleness and ownership regressions.
+
+The candidate containing only the snapshot-copy reduction also reported
+`STILL RUNNING` at 90 seconds. Its native result remains unconfirmed; its separate
+recovery approval is pending. The time limit has not been widened.
+
+The separately inspected runtime archive contains an unoptimized `memcmp`, but
+the original action translation unit already emits its own optimized local
+comparison. The archive alone therefore does not explain this failure. A private
+byte-equality experiment passed host checks but was withdrawn without a native
+run or product change because a performance benefit was not established.
+The next separate diagnostic is `cancel-load`: prepare and cancel before STOP,
+excluding final publication and incremental owner construction.
+
+The fixed `cancel-load` executable has cross-built successfully and its 91 link
+inputs were verified. It is **native NOT RUN** while recovery is pending; build
+success does not qualify Load preparation or cancellation in Amiberry.

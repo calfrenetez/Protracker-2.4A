@@ -77,5 +77,25 @@
     "exact live scheduling",
     "performance and listening"
   ],
-  "prior_incomplete_runs": "Combined and thirteen-case component runs remain unconfirmed after their original bounded completion failures; separate recovery does not convert either to PASS."
+  "prior_incomplete_runs": "Combined and thirteen-case component runs remain unconfirmed after their original bounded completion failures; separate recovery does not convert either to PASS.",
+  "unconfirmed_copy_optimized_load": {
+    "state": "UNCONFIRMED",
+    "candidate_sha256": "0361e2cd1daa818c499df1e4352937f3452705e653996bdfb551239d9dd278f5",
+    "candidate_bytes": 424228,
+    "native_limit_seconds": 90,
+    "observed_reply_class": "STILL RUNNING",
+    "native_rc": null,
+    "cleanup_or_release": false,
+    "recovery": "Separate scoped recovery decision pending. No automatic retry or time-limit widening."
+  },
+  "prepared_load_cancel": {
+    "state": "BUILD_PASS_NATIVE_NOT_RUN",
+    "case": "cancel-load",
+    "candidate_sha256": "4e7e9fa49fa764e459f2d0b9124d27e3ab9c465b0a98eb0d4ec06596efa1f039",
+    "candidate_bytes": 424344,
+    "candidate_crc32": "7A2C32C2",
+    "link_inputs_verified": 91,
+    "purpose": "Separate detached load preparation/cancellation before STOP from positive publication and incremental owner construction.",
+    "target_execution": false
+  }
 }

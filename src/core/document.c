@@ -43,6 +43,9 @@ static int document_numeric_span(const void *p,size_t bytes)
 {return p&&bytes&&bytes<=UINTPTR_MAX-(uintptr_t)p;}
 static int document_project_allowed(const struct pt_document *d)
 {
+#if defined(PT_DOCUMENT_TYPED_ACTION)
+    if(!pt_document_typed_action_project_allowed(&d->project))return 0;
+#endif
 #if defined(PT_DOCUMENT_TYPED_REPLACEMENT)
     if(!pt_document_typed_replacement_project_allowed(&d->project))return 0;
 #endif
@@ -54,6 +57,9 @@ static int document_project_allowed(const struct pt_document *d)
 }
 static int document_output_apart(const void *p,size_t bytes)
 {
+#if defined(PT_DOCUMENT_TYPED_ACTION)
+    if(!pt_document_typed_action_output_disjoint(p,bytes))return 0;
+#endif
 #if defined(PT_DOCUMENT_TYPED_REPLACEMENT)
     if(!pt_document_typed_replacement_output_disjoint(p,bytes))return 0;
 #endif

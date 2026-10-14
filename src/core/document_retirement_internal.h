@@ -26,4 +26,11 @@ int pt_document_retirement_callback_active(void);
 int pt_document_typed_replacement_project_allowed(const struct pt_project *);
 int pt_document_typed_replacement_output_disjoint(const void *,size_t);
 #endif
+#if defined(PT_DOCUMENT_TYPED_ACTION)
+#if !defined(PT_DOCUMENT_TYPED_REPLACEMENT)
+#error Typed document action requires typed replacement
+#endif
+int pt_document_typed_action_project_allowed(const struct pt_project *);
+int pt_document_typed_action_output_disjoint(const void *,size_t);
+#endif
 #endif

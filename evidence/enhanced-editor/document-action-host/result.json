@@ -1,0 +1,72 @@
+{
+  "scope": "opt-in serialized document action HOST software qualification",
+  "baseline": "78d6871582fadc46dcca671791f8e0522f772cec",
+  "date": "2026-10-14",
+  "canonical": {
+    "status": "PASS",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_editor_document_action.py"
+    ],
+    "unittest_seconds": 44.572,
+    "outer_seconds": 44.653,
+    "returncode": 0,
+    "timeout": false,
+    "case_assertions": {
+      "action_default_groups": 13,
+      "allocator_alias_subprocesses": 19,
+      "action_uncertain_subprocesses": 3,
+      "private_zero_self_reset_exclusions": 2,
+      "original_mixed_regressions": 15,
+      "original_checked_lifecycle_cases": 39,
+      "original_checked_allocator_alias_cases": 18,
+      "original_typed_replacement_groups": 10
+    },
+    "source_hashes_unchanged": true
+  },
+  "private": {
+    "matrix_status": "PASS",
+    "matrix_seconds": 44.267,
+    "compatibility_status": "PASS",
+    "compatibility_seconds": 19.58,
+    "macro_off_sampler_units": 18,
+    "typed_only_replacement_units": 83,
+    "action_object_in_compatibility_linkages": false
+  },
+  "compiler": [
+    "C99",
+    "warnings as errors",
+    "assertions",
+    "ASan",
+    "UBSan"
+  ],
+  "current_sources": {
+    "src/core/document.c": "64973ff3b3f2b2806ea523c752244689d3275aa9ec66b964bf4db74fea72e2b6",
+    "src/core/document_retirement_internal.h": "eb033fe27358b69706b2772ff72abc6d9910e654a30b73e3725b697f232c65f1",
+    "src/editor/editor_document_action.c": "86f2610197d1ce6a334e10c41618cb461dcb00620fa7caba7c28f916a3d096e4",
+    "src/editor/editor_document_action.h": "9e0e964618f154261fd7b4454a7c7e2e21b73dd341a81b513388556ec25408a7",
+    "tests/editor_document_action_focus_test.c": "5922715ec043229eb9b244fdea1cda9e88436473eebc2f61fb7313ba55b8b631",
+    "tests/test_editor_document_action.py": "d38f34c3d77af739454aa2d3f9fa373b3c3d768aeedaef8423fa46b3713473bc",
+    "docs/TYPED_DOCUMENT_ACTION.md": "4d2a42037e827f48aed032b02c71fc6bfbde907c628b3017383cefa62c041e63"
+  },
+  "protected_work": {
+    "metadata_records_unchanged": 16,
+    "resident_body_hashes_unchanged": 15,
+    "offloaded_header_body": "unpaired and unopened"
+  },
+  "acceptance": {
+    "HOST": "PASS",
+    "native_build": "NOT_RUN",
+    "Amiberry": "NOT_RUN",
+    "real_A1200": "NOT_RUN",
+    "frontend_integration": "NOT_RUN",
+    "output_timing": "NOT_RUN",
+    "audio_listening": "NOT_RUN"
+  }
+}

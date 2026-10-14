@@ -182,6 +182,33 @@ static void replacement_prepare_failure(void)
     assert(replacement_begin(f)==PT_DOCUMENT_REPLACE_INVALID&&!f->control.self);
     replacement_drop(f);
 }
+static void replacement_finish_requires_closed_bridges(void)
+{
+    struct replace_fixture *f=replacement_make(2);unsigned calls,releases;
+    assert(replacement_begin(f)==PT_DOCUMENT_REPLACE_PREPARED);
+    assert(replacement_until(f)==PT_DOCUMENT_REPLACE_COMMITTED_NO_OWNER);
+    assert(f->bridges.paula.bridge==&f->bridges.paula_cache&&
+        f->bridges.amigus.bridge==&f->bridges.amigus_cache);
+    assert(f->bridges.paula_cache.sampler==&f->g->editor->sampler&&
+        f->bridges.amigus_cache.sampler==&f->g->editor->sampler);
+    assert(pt_editor_mixed_stop(f->g->binding));
+    assert(pt_editor_dispose(f->g->editor)&&
+        pt_sampler_lifetime_storage_retired(&f->g->editor->sampler));
+    calls=f->g->calls;releases=f->new_releases;
+    assert(!pt_editor_document_replacement_finish(&f->control)&&f->control.self);
+    assert(pt_document_release_checked(&f->g->doc)==PT_DOCUMENT_RELEASE_REFUSED);
+    assert(f->g->calls==calls&&f->new_releases==releases&&f->old_releases==3);
+    assert(pt_paula_voices_close(&f->bridges.paula));
+    assert(!f->bridges.paula.bridge&&!f->bridges.paula_cache.sampler&&
+        f->bridges.amigus.bridge);
+    assert(!pt_editor_document_replacement_finish(&f->control)&&f->control.self);
+    assert(pt_document_release_checked(&f->g->doc)==PT_DOCUMENT_RELEASE_REFUSED);
+    assert(pt_wavetable_voices_close(&f->bridges.amigus));
+    assert(!f->bridges.amigus.bridge&&!f->bridges.amigus_cache.sampler&&
+        !f->bridges.amigus_cache.backend);
+    assert(pt_editor_document_replacement_finish(&f->control)&&!f->control.self);
+    replacement_drop(f);
+}
 static void replacement_uncertain_last(void)
 {
     struct replace_fixture *f=replacement_make(9);struct pt_document prepared;
@@ -201,6 +228,7 @@ int main(void)
     assert(!editor_checked_fixture());
     replacement_refusals();replacement_prepare_failure();replacement_waiting();
     replacement_positive(0);replacement_positive(1);replacement_positive(2);
-    replacement_positive(3);replacement_positive(4);replacement_uncertain_last();
-    puts("TYPED DOCUMENT REPLACEMENT PASS:9 focused lifecycle groups; HOST only; final uncertain group retained");return 0;
+    replacement_positive(3);replacement_positive(4);
+    replacement_finish_requires_closed_bridges();replacement_uncertain_last();
+    puts("TYPED DOCUMENT REPLACEMENT PASS:10 focused lifecycle groups; HOST only; final uncertain group retained");return 0;
 }

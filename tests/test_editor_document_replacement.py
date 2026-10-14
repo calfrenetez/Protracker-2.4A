@@ -32,7 +32,7 @@ CHECKED_TERMINAL = (
     b"15 legacy transport regressions; host injected clocks/voices only\n"
 )
 TYPED_TERMINAL = (
-    b"TYPED DOCUMENT REPLACEMENT PASS:9 focused lifecycle groups; HOST only;"
+    b"TYPED DOCUMENT REPLACEMENT PASS:10 focused lifecycle groups; HOST only;"
     b" final uncertain group retained\n"
 )
 

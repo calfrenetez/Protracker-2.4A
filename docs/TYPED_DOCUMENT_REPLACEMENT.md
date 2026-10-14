@@ -12,7 +12,7 @@ Enable `PT_DOCUMENT_TYPED_REPLACEMENT=1` only in a build that includes the typed
 
 After storage retirement, checked release frees the old document's known storage and moves the candidate exactly once. The new editor and owner use the final project address. `COMMITTED` reports the new genuine owner. `COMMITTED_NO_OWNER` reports a published document with confirmed quiet after owner construction failed. It preserves the new document and does not pretend to roll back the old one.
 
-`HOLD` preserves uncertain controls and allocations. It permits no forced cleanup or second release. Keep the control, documents, engines, contexts and allocators alive until confirmed completion. `finish` also requires confirmed owner/cache close, editor disposal and final sampler storage retirement. Inventory retirement is necessary here; it is not factory membership or document release authority.
+`HOLD` preserves uncertain controls and allocations. It permits no forced cleanup or second release. Keep the control, documents, engines, contexts and allocators alive until confirmed completion. `finish` also requires confirmed owner/cache close, editor disposal and final sampler storage retirement. Both new engine/cache controls must complete genuine closure. The all-zero bridge check keeps the document veto active; it cannot grant closure or release authority. Inventory retirement is necessary here; it is not factory membership or document release authority.
 
 ## Core document guards
 
@@ -22,7 +22,7 @@ These checks retain the existing ordinary document API signatures and result con
 
 ## HOST checks
 
-The 83-unit portable HOST fixture passed with ASan and UBSan. It retains the original 15 mixed regressions, 39 checked lifecycle cases and 18 allocator-alias cases, and adds nine replacement groups. They cover detached preparation failure, copied-control refusals, real expanded sampler storage with retained pins through disposal and final unpin, final-address owner construction, post-publication establishment/factory refusal, and release callback reentry.
+The 83-unit portable HOST fixture passed with ASan and UBSan. It retains the original 15 mixed regressions, 39 checked lifecycle cases and 18 allocator-alias cases, and adds ten replacement groups. They cover detached preparation failure, copied-control refusals, real expanded sampler storage with retained pins through disposal and final unpin, final-address owner construction, post-publication establishment/factory refusal, finish refusals with open or partly closed engine/cache controls, and release callback reentry.
 
 The final uncertain group deliberately retains reachable state for the process lifetime. Its success means the refusal and retention contract held; it is not a quiet or complete-release result.
 

@@ -180,6 +180,7 @@ int pt_editor_document_replacement_finish(struct pt_editor_document_replacement 
        c->binding->owner||c->binding->transport||c->binding->preparation_context||c->binding->preparation_close||
        c->binding->owner_finish||c->binding->owner_finish_context||c->new_control->storage.memory.active||
        c->establish->binding||c->establish->job.active||c->establish->job.busy||
+       !zero(c->new_bridges,sizeof(*c->new_bridges))||
        !pt_sampler_lifetime_storage_retired(&c->editor->sampler))return 0;
     active=NULL;memset(c,0,sizeof(*c));return 1;
 }

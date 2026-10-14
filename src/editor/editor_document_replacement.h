@@ -13,13 +13,20 @@
  * backend/reservation and allocators remain alive until confirmed completion.
  * Never copy/edit the control or source arrays while adopted.
  *
- * Stop/disposal are irreversible. RETIRING is an uncommitted storage HOLD: it\n * retains old document allocations and candidate ownership, allows only later\n * retirement observation after real pin release, and does not permit use of a\n * potentially retired expanded project table. WAITING retains old allocations but
+ * Stop/disposal are irreversible. RETIRING is an uncommitted storage HOLD: it
+ * retains old document allocations and candidate ownership, allows only later
+ * retirement observation after real pin release, and does not permit use of a
+ * potentially retired expanded project table. WAITING retains old allocations but
  * does not promise the old editor remains playable. Once PUBLISHED is reached,
  * the new document is retained even if establishing masters or creating its
  * final-address owner fails. COMMITTED_NO_OWNER means confirmed quiet; HOLD
  * keeps the exact controls/allocations alive and never authorizes forced cleanup.
  * This opt-in path does not change automatic load/new/release or editor PLAY.
- * Finish also requires the final sampler storage retired, after confirmed new\n * owner/cache close and editor disposal. HOLD has no forced finish/retry grant.\n * It is not native, device, placement, latency or factory-membership authority.
+ * Finish also requires the final sampler storage retired, after confirmed new
+ * owner/cache close and editor disposal. HOLD has no forced finish/retry grant.
+ * Finish also keeps the document veto until the complete four-control bridge
+ * object is zero. This negative check is not independent closure authority.
+ * It is not native, device, placement, latency or factory-membership authority.
  */
 enum pt_document_replace_result {
     PT_DOCUMENT_REPLACE_INVALID,PT_DOCUMENT_REPLACE_PREPARED,

@@ -310,22 +310,31 @@ static void action_case(unsigned n)
     default:assert(0);break;
     }
 }
+static void action_report_case(unsigned n)
+{
+    assert(printf("DOCUMENT ACTION CASE BEGIN:%s\n",action_case_names[n])>0);
+    assert(!fflush(stdout));
+    action_case(n);
+    assert(printf("DOCUMENT ACTION CASE PASS:%s\n",action_case_names[n])>0);
+    assert(!fflush(stdout));
+}
 #ifndef PT_DOCUMENT_ACTION_TEST_ENTRY
 #define PT_DOCUMENT_ACTION_TEST_ENTRY main
 #endif
 int PT_DOCUMENT_ACTION_TEST_ENTRY(int argc,char **argv)
 {
     unsigned n;
+    if(argc==2&&!strcmp(argv[1],"actions")){
+        for(n=0;n<sizeof(action_case_names)/sizeof(action_case_names[0]);++n)action_report_case(n);
+        puts("DOCUMENT ACTION COMPONENT PASS:13 action cases; prerequisites excluded");
+        assert(!fflush(stdout));return 0;
+    }
     /* One normally cleaned-up case can be diagnosed without first running
      * the mixed/checked suites. Never label this as a complete suite pass. */
     if(argc==3&&!strcmp(argv[1],"case")){
         for(n=0;n<sizeof(action_case_names)/sizeof(action_case_names[0]);++n){
             if(strcmp(argv[2],action_case_names[n]))continue;
-            assert(printf("DOCUMENT ACTION CASE BEGIN:%s\n",action_case_names[n])>0);
-            assert(!fflush(stdout));
-            action_case(n);
-            assert(printf("DOCUMENT ACTION CASE PASS:%s\n",action_case_names[n])>0);
-            assert(!fflush(stdout));return 0;
+            action_report_case(n);return 0;
         }
         return 20;
     }

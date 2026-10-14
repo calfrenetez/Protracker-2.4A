@@ -13,7 +13,7 @@ from test_editor_document_replacement import (
 ROOT = Path(__file__).resolve().parents[1]
 ACTION_OVERLAYS = (*OVERLAYS, "src/editor/editor_document_action.c",
                    "src/editor/editor_document_action.h", "tests/editor_document_action_focus_test.c",
-                   "tests/editor_document_action_case_test.c")
+                   "tests/editor_document_action_case_test.c", "tests/editor_document_actions_test.c")
 ACTION_TERMINAL = (b"DOCUMENT ACTION PASS:13 prewrite admission/reset, NEW/load preservation, cancel,"
                    b" WAITING and final-address publication groups; HOST only\n")
 ACTION_CASES = (
@@ -97,13 +97,19 @@ class TypedDocumentAction(unittest.TestCase):
             body = run([str(executable)], 30)
             self.assertEqual(body.count(CHECKED_TERMINAL), 1)
             self.assertTrue(body.endswith(ACTION_TERMINAL))
+            component = b"".join((f"DOCUMENT ACTION CASE BEGIN:{case}\n"
+                                  f"DOCUMENT ACTION CASE PASS:{case}\n").encode()
+                                 for case in ACTION_CASES)
+            component += b"DOCUMENT ACTION COMPONENT PASS:13 action cases; prerequisites excluded\n"
+            self.assertEqual(run([str(executable), "actions"], 30), component)
             for case in ACTION_CASES:
                 with self.subTest(diagnostic=case):
                     self.assertEqual(run([str(executable), "case", case], 30),
                                      (f"DOCUMENT ACTION CASE BEGIN:{case}\n"
                                       f"DOCUMENT ACTION CASE PASS:{case}\n").encode())
             for arguments in (["case"], ["case", "unknown"], ["case", "0"],
-                              ["case", "publish-new", "extra"], ["unexpected"]):
+                              ["case", "publish-new", "extra"], ["unexpected"],
+                              ["actions", "extra"]):
                 with self.subTest(invalid_diagnostic=arguments):
                     refused = subprocess.run([str(executable), *arguments], cwd=private,
                                              env=environment, timeout=30, capture_output=True)
@@ -113,6 +119,8 @@ class TypedDocumentAction(unittest.TestCase):
             self.assertEqual(run([str(fixed)], 30),
                              b"DOCUMENT ACTION CASE BEGIN:admit-candidate-overlap\n"
                              b"DOCUMENT ACTION CASE PASS:admit-candidate-overlap\n")
+            actions = build("document-actions-test", "tests/editor_document_actions_test.c")
+            self.assertEqual(run([str(actions)], 30), component)
             for case in range(19):
                 with self.subTest(alias=case):
                     self.assertEqual(run([str(executable), "alias", str(case)], 30),

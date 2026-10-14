@@ -12,6 +12,12 @@ an individual case never prints the full-suite completion line. Alias and
 uncertain-state modes still deliberately retain their quarantined allocations
 and are separate host subprocess tests.
 
+The `actions` selector and separate `editor_document_actions_test.c` executable
+run all thirteen normal-cleanup action cases with individual flushed markers
+and a distinct component completion line. They exclude prerequisite suites and
+the deliberately retained alias/uncertainty cases. Component completion must
+not be reported as a pass of the original combined suite.
+
 These selectors prepare bounded native diagnostics; host success does not
 qualify native execution. The earlier combined New/Load native invocation
 returned no confirmed completion. Its approved recovery restored the launcher

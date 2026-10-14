@@ -5,8 +5,12 @@ cleaned-up action cases without the mixed/checked prerequisite suites. Names are
 listed in `ACTION_CASES` in the Python driver. It flushes a case-specific BEGIN
 line before entering the case and a PASS line only after assertions and cleanup
 return. Invalid or incomplete diagnostic arguments return 20 with no markers.
-The separate `editor_document_action_case_test.c` executable always selects
-`admit-candidate-overlap`, for launchers that take no fixture arguments. The
+The separate `editor_document_action_case_test.c` executable defaults to
+`admit-candidate-overlap`, for launchers that take no fixture arguments. Build
+it with `PT_DOCUMENT_ACTION_CASE` defined as a quoted case name to select one
+other case. The host recipe also checks separate `publish-new` and
+`publish-load` executables, each requiring its exact two markers. Keep these
+as distinct candidate binaries and qualify each one independently. The
 original focused fixture's no-argument invocation still runs the complete prerequisite/action suite;
 an individual case never prints the full-suite completion line. Alias and
 uncertain-state modes still deliberately retain their quarantined allocations

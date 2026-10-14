@@ -80,9 +80,9 @@ class TypedDocumentAction(unittest.TestCase):
                 self.assertEqual(result.stderr, b"")
                 return result.stdout
 
-            def build(name, fixture, linkage=None):
+            def build(name, fixture, linkage=None, definitions=()):
                 executable = private / name
-                self.assertEqual(run(["cc", *FLAGS, "-DPT_DOCUMENT_TYPED_ACTION=1",
+                self.assertEqual(run(["cc", *FLAGS, "-DPT_DOCUMENT_TYPED_ACTION=1", *definitions,
                                       fixture, *(common if linkage is None else linkage), "-o", str(executable)], 120), b"")
                 return executable
 
@@ -119,6 +119,14 @@ class TypedDocumentAction(unittest.TestCase):
             self.assertEqual(run([str(fixed)], 30),
                              b"DOCUMENT ACTION CASE BEGIN:admit-candidate-overlap\n"
                              b"DOCUMENT ACTION CASE PASS:admit-candidate-overlap\n")
+            for case in ("publish-new", "publish-load"):
+                with self.subTest(fixed_publication=case):
+                    fixed = build("document-action-" + case,
+                                  "tests/editor_document_action_case_test.c",
+                                  definitions=[f'-DPT_DOCUMENT_ACTION_CASE="{case}"'])
+                    self.assertEqual(run([str(fixed)], 30),
+                                     (f"DOCUMENT ACTION CASE BEGIN:{case}\n"
+                                      f"DOCUMENT ACTION CASE PASS:{case}\n").encode())
             actions = build("document-actions-test", "tests/editor_document_actions_test.c")
             self.assertEqual(run([str(actions)], 30), component)
             for case in range(19):

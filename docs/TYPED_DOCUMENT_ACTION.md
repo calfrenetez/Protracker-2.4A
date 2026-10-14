@@ -19,3 +19,20 @@ python3 -m unittest discover -s tests -p test_editor_document_action.py
 ```
 
 The private HOST fixture compiles 84 units with assertions, ASan and UBSan. It covers thirteen prewrite-admission/reset, NEW/load failure and preservation, cancel, WAITING and final-address publication groups; nineteen allocation-alias cases, including expanded sampler table metadata and an unrepresentable return after one accepted child; three isolated reentry/stale-state HOLD cases; and two private zero-self reset exclusions. It retains the original fifteen mixed regressions, thirty-nine checked lifecycle cases, eighteen checked allocator-alias cases and ten typed replacement groups. HOLD subprocesses deliberately keep reachable obligations for process lifetime. This evidence does not qualify native ABI, device output, memory placement, scheduling, physical hardware or listening.
+
+
+Native build preparation on 14 October found a 238,220-byte compiler-reported
+local stack requirement in the admission helper. Admission now builds only its
+span inventory locally and captures the full editor/owner snapshots directly
+into the already-validated output. Every prewrite check completes first; no
+allocator callback, allocation or additional global workspace is introduced.
+The selected m68000/soft-float/libnix build reports 2,236 bytes for that helper
+after this change. These individual compiler records do not establish a complete
+call-chain stack bound or a minimum safe task Stack.
+
+The public HOST recipe also compiles the action translation unit with
+`-Wframe-larger-than=4096` under its existing warnings-as-errors and sanitizer
+flags, so an accidental large automatic snapshot fails the check. All functional
+and negative lifecycle groups still pass. The 84-unit native fixture links with
+both typed-action and typed-replacement options enabled; native execution and
+frontend/device acceptance remain pending for this candidate.

@@ -79,6 +79,13 @@ class TypedDocumentAction(unittest.TestCase):
                                       fixture, *(common if linkage is None else linkage), "-o", str(executable)], 120), b"")
                 return executable
 
+            # Admission must not put a complete editor/owner snapshot on the
+            # task stack. This compiler gate catches a large local copy even
+            # when the functional fixture passes with the host's roomy stack.
+            self.assertEqual(run(["cc", *FLAGS, "-DPT_DOCUMENT_TYPED_ACTION=1",
+                                  "-Wframe-larger-than=4096", "-c",
+                                  "src/editor/editor_document_action.c", "-o",
+                                  str(private / "action-frame-check.o")], 30), b"")
             executable = build("document-action-test", "tests/editor_document_action_focus_test.c")
             body = run([str(executable)], 30)
             self.assertEqual(body.count(CHECKED_TERMINAL), 1)

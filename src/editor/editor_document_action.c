@@ -19,7 +19,11 @@ static int contains(struct pt_sampler_storage_span s,const void *p,size_t n)
     (uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
 static int zero(const void *p,size_t n)
 {const unsigned char *b=p;size_t i;for(i=0;i<n;++i)if(b[i])return 0;return 1;}
-static int add(struct pt_editor_document_action *c,const void *p,size_t n)
+struct action_admission {
+    struct pt_sampler_storage_span protected[PT_DOCUMENT_ACTION_SPANS];
+    unsigned protected_count;
+};
+static int add(struct action_admission *c,const void *p,size_t n)
 {
     if(!span(p,n)||c->protected_count==PT_DOCUMENT_ACTION_SPANS)return 0;
     c->protected[c->protected_count++]=(struct pt_sampler_storage_span){p,n};return 1;
@@ -53,19 +57,24 @@ static int source_current(const struct pt_editor_document_action *c)
 }
 static enum pt_document_action_result hold(struct pt_editor_document_action *c)
 {c->fault=1;c->busy=0;c->result=PT_DOCUMENT_ACTION_HOLD;return c->result;}
-static int protected_apart(const struct pt_editor_document_action *c,const void *p,size_t n)
+static int protection_apart(const struct pt_sampler_storage_span *protected,unsigned count,
+    const struct pt_editor_document_action_inputs *i,const struct pt_project *project,const void *p,size_t n)
 {
     unsigned j;
     if(!span(p,n)||!p||!n)return 0;
-    for(j=0;j<c->protected_count;++j)
-        if(!apart(p,n,c->protected[j].data,c->protected[j].bytes))return 0;
-    return pt_sampler_lifetime_output_disjoint(&c->inputs.binding->editor->sampler,p,n)&&
-        pt_render_project_storage_output_disjoint(&c->old_document.project,p,n);
+    for(j=0;j<count;++j)
+        if(!apart(p,n,protected[j].data,protected[j].bytes))return 0;
+    return pt_sampler_lifetime_output_disjoint(&i->binding->editor->sampler,p,n)&&
+        pt_render_project_storage_output_disjoint(project,p,n);
 }
+static int protected_apart(const struct pt_editor_document_action *c,const void *p,size_t n)
+{return protection_apart(c->protected,c->protected_count,&c->inputs,&c->old_document.project,p,n);}
 static int admit(struct pt_editor_document_action *out,const struct pt_editor_document_action_inputs *i,
     const uint8_t *source,size_t bytes)
 {
-    struct pt_editor_document_action c;struct pt_document empty;void *owned[7];size_t sizes[7];unsigned j;
+    /* Admission is callback-free. Keep only the span inventory on the stack;
+     * snapshot the large editor/owner state directly after every prewrite check. */
+    struct action_admission c;struct pt_document empty;void *owned[7];size_t sizes[7];unsigned j;
     struct pt_editor *e;struct pt_sampler_prepare_memory *m;
     if(active){if(active->busy)active->fault=1;return 0;}
     if(!out||!i||!span(out,sizeof(*out))||!apart(out,sizeof(*out),i,sizeof(*i))||
@@ -80,12 +89,6 @@ static int admit(struct pt_editor_document_action *out,const struct pt_editor_do
        i->bridge_inputs.backend==i->old_amigus->bridge->backend)return 0;
     memset(&c,0,sizeof(c));
     if(!add(&c,&expected,sizeof(expected))||!add(&c,&active,sizeof(active)))return 0;
-    c.self=out;c.inputs=*i;c.source=source;c.source_bytes=bytes;
-    c.old_document=*i->document;c.old_editor=*e;c.old_binding=*i->binding;c.old_control=*i->old_control;
-    c.old_paula=*i->old_paula;c.old_amigus=*i->old_amigus;
-    c.old_paula_cache=*i->old_paula->bridge;c.old_amigus_cache=*i->old_amigus->bridge;
-    c.old_owner=*i->binding->owner;c.old_backend=*i->old_amigus->bridge->backend;
-    c.old_reservation=*i->old_amigus->bridge->backend->reservation;
 #define KEEP(p) if(!add(&c,(p),sizeof(*(p))))return 0
     KEEP(i->document);KEEP(e);KEEP(i->binding);KEEP(i->old_control);
     KEEP(i->old_paula);KEEP(i->old_amigus);KEEP(i->old_paula->bridge);KEEP(i->old_amigus->bridge);
@@ -99,8 +102,8 @@ static int admit(struct pt_editor_document_action *out,const struct pt_editor_do
     if(m->parent_count>PT_SAMPLER_PREPARE_PARENTS)return 0;
     for(j=0;j<m->parent_count;++j)if(!add(&c,m->parents[j].data,m->parents[j].bytes))return 0;
     for(j=0;j<PT_SAMPLER_PREPARE_BLOCKS;++j)if(!add(&c,m->block[j].data,m->block[j].bytes))return 0;
-    if(!protected_apart(&c,out,sizeof(*out))||
-       !protected_apart(&c,i->candidate,sizeof(*i->candidate))||
+    if(!protection_apart(c.protected,c.protected_count,i,&i->document->project,out,sizeof(*out))||
+       !protection_apart(c.protected,c.protected_count,i,&i->document->project,i->candidate,sizeof(*i->candidate))||
        !apart(out,sizeof(*out),i->candidate,sizeof(*i->candidate))||
        !apart(out,sizeof(*out),i->allocator.context,i->allocator.context?1:0))return 0;
     for(j=0;j<i->context_count;++j){
@@ -121,8 +124,15 @@ static int admit(struct pt_editor_document_action *out,const struct pt_editor_do
        !apart(i->candidate,sizeof(*i->candidate),i,sizeof(*i))||
        !apart(i->candidate,sizeof(*i->candidate),source,bytes)||
        !add(&c,out,sizeof(*out))||!add(&c,source,bytes))return 0;
-    c.phase=ACTION_PREPARING;c.busy=1;c.result=PT_DOCUMENT_ACTION_PREPARED;
-    memcpy(out,&c,sizeof(c));active=out;expected=*out;return 1;
+    out->self=out;out->inputs=*i;out->source=source;out->source_bytes=bytes;
+    out->old_document=*i->document;out->old_editor=*e;out->old_binding=*i->binding;out->old_control=*i->old_control;
+    out->old_paula=*i->old_paula;out->old_amigus=*i->old_amigus;
+    out->old_paula_cache=*i->old_paula->bridge;out->old_amigus_cache=*i->old_amigus->bridge;
+    out->old_owner=*i->binding->owner;out->old_backend=*i->old_amigus->bridge->backend;
+    out->old_reservation=*i->old_amigus->bridge->backend->reservation;
+    memcpy(out->protected,c.protected,sizeof(c.protected));out->protected_count=c.protected_count;
+    out->phase=ACTION_PREPARING;out->busy=1;out->result=PT_DOCUMENT_ACTION_PREPARED;
+    active=out;expected=*out;return 1;
 }
 static enum pt_document_action_result cleanup(struct pt_editor_document_action *c,enum pt_document_action_result done)
 {

@@ -197,10 +197,16 @@ enum pt_document_action_result pt_editor_document_action_step(struct pt_editor_d
     if(c->busy)return hold(c);
     if(c->result==PT_DOCUMENT_ACTION_HOLD)return c->result;
     if(!source_current(c))return hold(c);
-    c->phase=ACTION_DELEGATED;c->busy=1;expected=*c;
+    /* source_current has verified the complete immutable snapshot. Delegation
+     * changes only these scalars; replacement owns its separately checked
+     * mutable subobject. Retain the original snapshot instead of copying the
+     * entire editor/owner history on every bounded preparation step. */
+    c->phase=ACTION_DELEGATED;c->busy=1;
+    expected.phase=ACTION_DELEGATED;expected.busy=1;
     r=pt_editor_document_replacement_step(&c->replacement);
     if(!metadata_current(c))return hold(c);
-    c->busy=0;c->result=translate(r);expected=*c;return c->result;
+    c->busy=0;c->result=translate(r);
+    expected.busy=0;expected.result=c->result;return c->result;
 }
 enum pt_document_action_result pt_editor_document_action_cancel(struct pt_editor_document_action *c)
 {

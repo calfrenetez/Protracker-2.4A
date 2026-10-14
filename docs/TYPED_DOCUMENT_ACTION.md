@@ -76,10 +76,26 @@ were independently verified. See the scoped
 This qualifies that single lifecycle case; it does not activate the frontend
 or qualify physical memory placement, device output, scheduling or listening.
 
-The separately built `publish-load` candidate passed its host checks but its
+The separately built original `publish-load` candidate passed its host checks but its
 native invocation reported `STILL RUNNING` at the unchanged 90-second limit.
-It has no confirmed native RC or completion markers. Its retained HOLD and
-pending recovery are separate from the successful, released New run. This
+It has no confirmed native RC or completion markers. Its subsequent scoped
+recovery restored the saved launcher files, removed the exact staging copy,
+independently verified process/endpoint absence and released ownership. This
 observation alone does not establish a hang, assertion failure or eventual
 completion. The earlier thirteen-case native component also remains
 unconfirmed; its recovery did not convert it to a pass.
+
+Incremental action steps now retain the original comparison snapshot and update
+only the expected phase, busy and result fields. The complete before/after
+metadata comparisons remain; the replacement subobject continues to use its own
+typed guard. Recopying unchanged editor/history/owner snapshots at both edges
+of every step added substantial memory traffic. An instrumented host fixture
+observed 502 steps for Load and 73 for New. The selected m68000 layout is
+236,504 bytes, so removing those two copies eliminates 237,450,016 bytes of
+snapshot copying over 502 steps. This calculation is not a native timing
+measurement or proof of the earlier timeout's cause.
+
+Three additional isolated sanitizer cases corrupt a captured editor field or
+input field between delegated steps, or corrupt the snapshot from an old-storage
+release callback. All must retain HOLD without granting cleanup. These supplement
+the existing preparation reentry, source-staleness and ownership regressions.

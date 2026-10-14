@@ -63,7 +63,8 @@
     "observed_reply_class": "STILL RUNNING",
     "candidate_sha256": "55051b1de6f5f9b30c5a15128526520e271df776b1bedb814cd9e12ed2b56fa3",
     "native_rc": null,
-    "cleanup_or_release": false
+    "cleanup_or_release": true,
+    "recovery": "Separate scoped teardown and saved launcher restoration; independent absence and public release verified. Original native result remains unconfirmed."
   },
   "unqualified": [
     "native Load publication",

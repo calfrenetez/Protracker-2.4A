@@ -137,6 +137,10 @@ class TypedDocumentAction(unittest.TestCase):
                 with self.subTest(uncertain=case):
                     self.assertEqual(run([str(executable), "uncertain", str(case)], 30),
                                      b"DOCUMENT ACTION UNCERTAIN HOLD PASS\n")
+            for case in range(3):
+                with self.subTest(delegated_stale=case):
+                    self.assertEqual(run([str(executable), "delegated-stale", str(case)], 30),
+                                     b"DOCUMENT ACTION DELEGATED STALE HOLD PASS\n")
             baseline = build("typed-replacement-test", "tests/editor_document_replacement_focus_test.c")
             body = run([str(baseline)], 30)
             self.assertEqual(body.count(CHECKED_TERMINAL), 1)

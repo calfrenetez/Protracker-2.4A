@@ -12,10 +12,12 @@ struct replace_fixture {
     struct pt_playback_format future_format;
     struct fixture bus;
     struct editor_checked_fixture *g;
+    struct pt_editor_document_action *corrupt_on_release;
     unsigned old_releases;
 };
 static void action_old_release(void *context,void *p)
-{struct replace_fixture *f=context;assert(p);++f->old_releases;free(p);}
+{struct replace_fixture *f=context;assert(p);++f->old_releases;free(p);
+ if(f->corrupt_on_release)++f->corrupt_on_release->old_editor.row;}
 static struct replace_fixture *replacement_make(unsigned mode)
 {
     struct replace_fixture *f=calloc(1,sizeof(*f));assert(f&&mode<=1);
@@ -290,6 +292,24 @@ static void action_uncertain(unsigned hook)
         pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_HOLD&&!pt_editor_document_action_finish(&a->action));
     /* No forced cleanup or retry: original controls and known obligations live. */
 }
+static void action_delegated_stale(unsigned mode)
+{
+    struct action_fixture *a=action_make(0);unsigned released;
+    assert(mode<3);
+    assert(pt_editor_document_action_load(&a->action,&a->inputs,a->encoded,a->bytes,SIZE_MAX)==PT_DOCUMENT_ACTION_PREPARED);
+    if(mode==2)a->f->corrupt_on_release=&a->action;
+    else {
+        assert(pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_PUBLISHED);
+        if(mode==0)++a->action.old_editor.row;
+        else ++a->action.inputs.work;
+    }
+    assert(pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_HOLD);
+    released=a->releases;
+    assert(pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_HOLD&&
+        pt_editor_document_action_cancel(&a->action)==PT_DOCUMENT_ACTION_HOLD&&
+        !pt_editor_document_action_finish(&a->action)&&a->releases==released);
+    /* The changed action remains quarantined, including any published masters. */
+}
 static const char *const action_case_names[]={
     "admit-candidate-overlap","admit-context-overlap","reset-overlap",
     "new-no-memory","load-invalid","new-budget","new-channel-limit",
@@ -340,6 +360,7 @@ int PT_DOCUMENT_ACTION_TEST_ENTRY(int argc,char **argv)
     }
     if(argc==3&&!strcmp(argv[1],"alias")){action_alias((unsigned)atoi(argv[2]));puts("DOCUMENT ACTION ALIAS REFUSAL PASS");return 0;}
     if(argc==3&&!strcmp(argv[1],"uncertain")){action_uncertain((unsigned)atoi(argv[2]));puts("DOCUMENT ACTION UNCERTAIN HOLD PASS");return 0;}
+    if(argc==3&&!strcmp(argv[1],"delegated-stale")){action_delegated_stale((unsigned)atoi(argv[2]));puts("DOCUMENT ACTION DELEGATED STALE HOLD PASS");return 0;}
     if(argc!=1)return 20;
     assert(!editor_checked_fixture());
     for(n=0;n<sizeof(action_case_names)/sizeof(action_case_names[0]);++n)action_case(n);

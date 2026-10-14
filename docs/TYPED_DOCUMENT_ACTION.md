@@ -102,16 +102,32 @@ the existing preparation reentry, source-staleness and ownership regressions.
 
 The candidate containing only the snapshot-copy reduction also reported
 `STILL RUNNING` at 90 seconds. Its native result remains unconfirmed; its separate
-recovery approval is pending. The time limit has not been widened.
+approved recovery restored the launcher and independently released ownership. The time limit has not been widened.
 
 The separately inspected runtime archive contains an unoptimized `memcmp`, but
 the original action translation unit already emits its own optimized local
 comparison. The archive alone therefore does not explain this failure. A private
 byte-equality experiment passed host checks but was withdrawn without a native
 run or product change because a performance benefit was not established.
-The next separate diagnostic is `cancel-load`: prepare and cancel before STOP,
+The separate `cancel-load` diagnostic prepares and cancels before STOP,
 excluding final publication and incremental owner construction.
 
-The fixed `cancel-load` executable has cross-built successfully and its 91 link
-inputs were verified. It is **native NOT RUN** while recovery is pending; build
-success does not qualify Load preparation or cancellation in Amiberry.
+On 15 October, the exact fixed `cancel-load` candidate passed on Amiberry 68030
+with both expected markers, RC0 and a queried 524288-byte Stack. Exact staging
+cleanup, launcher restoration, process/transport absence and ownership release
+were independently verified. Preparation/cancellation is qualified for that
+fixture; positive Load publication and its later owner construction still lack
+confirmed completion. Physical hardware and full frontend acceptance remain open.
+
+Metadata equality now checks even-addressed snapshots in four-byte chunks,
+with exact byte comparisons for odd addresses and the tail. Every byte and
+padding byte remains checked; the replacement subobject exclusion and all
+ownership checks are unchanged. Loads use `memcpy` for aliasing safety. The
+68000 alignment hint follows `project_snapshot.h` and is used only after a
+runtime even-address check. The target compiler emits longword loads/comparisons.
+
+The complete host sanitizer recipe passes with comparison tests for all paired
+input alignments 0–3, exact allocation lengths 0–73 and 65535/65536/65537/236504,
+and mismatches at small-buffer positions and large-buffer boundaries. The
+new comparison candidate is cross-built; native completion is not inferred
+from these host or assembly checks.

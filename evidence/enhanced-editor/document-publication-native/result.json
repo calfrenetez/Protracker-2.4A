@@ -85,17 +85,43 @@
     "native_limit_seconds": 90,
     "observed_reply_class": "STILL RUNNING",
     "native_rc": null,
-    "cleanup_or_release": false,
-    "recovery": "Separate scoped recovery decision pending. No automatic retry or time-limit widening."
+    "cleanup_or_release": true,
+    "recovery": "Separately approved scoped recovery completed and independently released. Original native outcome remains unconfirmed."
   },
   "prepared_load_cancel": {
-    "state": "BUILD_PASS_NATIVE_NOT_RUN",
+    "state": "SCOPED_NATIVE_PASS",
     "case": "cancel-load",
     "candidate_sha256": "4e7e9fa49fa764e459f2d0b9124d27e3ab9c465b0a98eb0d4ec06596efa1f039",
     "candidate_bytes": 424344,
     "candidate_crc32": "7A2C32C2",
     "link_inputs_verified": 91,
     "purpose": "Separate detached load preparation/cancellation before STOP from positive publication and incremental owner construction.",
-    "target_execution": false
+    "target_execution": true,
+    "return_code": 0,
+    "observed_stack_bytes": 524288,
+    "output_bytes": 77,
+    "output_crc32": "2E0B641B",
+    "markers": [
+      "DOCUMENT ACTION CASE BEGIN:cancel-load",
+      "DOCUMENT ACTION CASE PASS:cancel-load"
+    ],
+    "exact_cleanup_and_independent_idle": true,
+    "ownership_released": true,
+    "scope": "Only detached Load preparation and cancellation before STOP. Does not qualify positive publication, owner construction, frontend, device output, physical hardware or timing."
+  },
+  "longword_snapshot_comparison": {
+    "host_state": "PASS",
+    "host_seconds": 108.03145799999766,
+    "source_sha256": {
+      "src/editor/editor_document_action.c": "6ee430e2fa820a31f28abd30b334f87e23f3fa067c84f77f7f68ff38779b3f5e",
+      "tests/test_editor_document_action.py": "d365d6f9c063724addc9601cb3eb96524d392a8efdec02f0f358679bf57206c3"
+    },
+    "comparison": "Every byte and padding byte preserved; runtime even-address guard, uint32_t memcpy chunks, byte fallback and tail",
+    "native_build": "PASS",
+    "candidate_sha256": "392206fc34d48a549bb8a069b7d4f4bf039cfe463acdafd4a0403774f6839d3e",
+    "candidate_bytes": 424368,
+    "candidate_crc32": "817CC9DE",
+    "native_execution": "NOT_RUN",
+    "native_timing_qualified": false
   }
 }

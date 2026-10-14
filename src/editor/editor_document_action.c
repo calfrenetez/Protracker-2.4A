@@ -19,6 +19,30 @@ static int contains(struct pt_sampler_storage_span s,const void *p,size_t n)
     (uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
 static int zero(const void *p,size_t n)
 {const unsigned char *b=p;size_t i;for(i=0;i<n;++i)if(b[i])return 0;return 1;}
+/* Compare the complete snapshot, including padding. Even-addressed four-byte
+ * chunks avoid the native byte-at-a-time memcmp loop. memcpy preserves aliasing
+ * rules; odd inputs and the final partial chunk use bounded character reads. */
+static int snapshot_equal(const void *left,const void *right,size_t bytes)
+{
+    const unsigned char *a=left,*b=right;
+    if(!(((uintptr_t)a|(uintptr_t)b)&1U)){
+        while(bytes>=sizeof(uint32_t)){
+            uint32_t x,y;
+#if defined(__GNUC__) && defined(__m68k__)
+            /* The runtime check proves the 68000 longword alignment, as in
+             * project_snapshot.h. Four-byte advances preserve that alignment. */
+            memcpy(&x,__builtin_assume_aligned(a,2),sizeof(x));
+            memcpy(&y,__builtin_assume_aligned(b,2),sizeof(y));
+#else
+            memcpy(&x,a,sizeof(x));memcpy(&y,b,sizeof(y));
+#endif
+            if(x!=y)return 0;
+            a+=sizeof(x);b+=sizeof(y);bytes-=sizeof(x);
+        }
+    }
+    while(bytes--){if(*a++!=*b++)return 0;}
+    return 1;
+}
 struct action_admission {
     struct pt_sampler_storage_span protected[PT_DOCUMENT_ACTION_SPANS];
     unsigned protected_count;
@@ -33,8 +57,8 @@ static int metadata_current(const struct pt_editor_document_action *c)
     size_t start=offsetof(struct pt_editor_document_action,replacement);
     size_t end=start+sizeof(c->replacement);
     if(!c||active!=c||c->self!=c||c->fault)return 0;
-    if(expected.phase!=ACTION_DELEGATED)return !memcmp(c,&expected,sizeof(*c));
-    return !memcmp(c,&expected,start)&&!memcmp((const unsigned char *)c+end,
+    if(expected.phase!=ACTION_DELEGATED)return snapshot_equal(c,&expected,sizeof(*c));
+    return snapshot_equal(c,&expected,start)&&snapshot_equal((const unsigned char *)c+end,
         (const unsigned char *)&expected+end,sizeof(*c)-end);
 }
 static int source_current(const struct pt_editor_document_action *c)

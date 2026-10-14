@@ -131,3 +131,16 @@ input alignments 0–3, exact allocation lengths 0–73 and 65535/65536/65537/23
 and mismatches at small-buffer positions and large-buffer boundaries. The
 new comparison candidate is cross-built; native completion is not inferred
 from these host or assembly checks.
+
+The changed longword-comparison candidate reached a guarded native SCRIPT call,
+but the harness returned an error and its saved exception chain includes lock
+contention. No native return code or completion markers were accepted. This
+run has no `STILL RUNNING` classification, so it is not evidence of another
+90-second timeout. Dispatch and completion remain uncertain. Interrupted
+ownership is retained pending separately approved cleanup and release.
+
+A separate `publish-no-owner` diagnostic is cross-built to check successful
+Load publication followed by a rejected output format during owner creation.
+Its expected `COMMITTED_NO_OWNER` result keeps the published document usable
+without granting playback ownership. The existing host case passes; this
+exact diagnostic has not run natively.

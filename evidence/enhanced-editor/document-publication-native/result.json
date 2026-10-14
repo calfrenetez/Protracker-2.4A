@@ -121,7 +121,22 @@
     "candidate_sha256": "392206fc34d48a549bb8a069b7d4f4bf039cfe463acdafd4a0403774f6839d3e",
     "candidate_bytes": 424368,
     "candidate_crc32": "817CC9DE",
-    "native_execution": "NOT_RUN",
-    "native_timing_qualified": false
+    "native_execution": "UNCONFIRMED",
+    "native_timing_qualified": false,
+    "native_return_code": null,
+    "observed_reply_class": "GUARDED_TOOL_ERROR",
+    "observed_guard_error": "Lock unavailable; original cause chain includes BlockingIOError. No accepted STILL RUNNING classification.",
+    "cleanup_or_release": false,
+    "recovery": "New separately scoped recovery prepared; human approval pending. Retained interrupted ownership is not release.",
+    "native_result_sha256": "b727983b616501a6ede6f3062192631401efb34810f1300e7b5e4d34e02c712f"
+  },
+  "prepared_load_no_owner": {
+    "case": "publish-no-owner",
+    "state": "NATIVE_NOT_RUN",
+    "candidate_sha256": "3d70789397a594b352dddc3241d16e812b80bf4e1a56af1663139b6e0088cf9f",
+    "candidate_bytes": 424416,
+    "candidate_crc32": "E33BF3E2",
+    "link_inputs_verified": 91,
+    "scope": "Load publication followed by rejected new-owner format; preserve the published document and complete normal cleanup. Host case passes; cross-build does not establish native completion."
   }
 }

@@ -290,16 +290,50 @@ static void action_uncertain(unsigned hook)
         pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_HOLD&&!pt_editor_document_action_finish(&a->action));
     /* No forced cleanup or retry: original controls and known obligations live. */
 }
-int main(int argc,char **argv)
+static const char *const action_case_names[]={
+    "admit-candidate-overlap","admit-context-overlap","reset-overlap",
+    "new-no-memory","load-invalid","new-budget","new-channel-limit",
+    "cancel-new","cancel-load","publish-new","publish-load",
+    "publish-waiting","publish-no-owner"
+};
+static void action_case(unsigned n)
+{
+    switch(n){
+    case 0:case 1:action_admission_alias(n);break;
+    case 2:action_reset_alias();break;
+    case 3:case 4:case 5:case 6:action_preservation(n-3);break;
+    case 7:case 8:action_cancel_case(n-7);break;
+    case 9:action_publish(0,0,0);break;
+    case 10:action_publish(1,0,0);break;
+    case 11:action_publish(0,1,0);break;
+    case 12:action_publish(1,0,1);break;
+    default:assert(0);break;
+    }
+}
+#ifndef PT_DOCUMENT_ACTION_TEST_ENTRY
+#define PT_DOCUMENT_ACTION_TEST_ENTRY main
+#endif
+int PT_DOCUMENT_ACTION_TEST_ENTRY(int argc,char **argv)
 {
     unsigned n;
+    /* One normally cleaned-up case can be diagnosed without first running
+     * the mixed/checked suites. Never label this as a complete suite pass. */
+    if(argc==3&&!strcmp(argv[1],"case")){
+        for(n=0;n<sizeof(action_case_names)/sizeof(action_case_names[0]);++n){
+            if(strcmp(argv[2],action_case_names[n]))continue;
+            assert(printf("DOCUMENT ACTION CASE BEGIN:%s\n",action_case_names[n])>0);
+            assert(!fflush(stdout));
+            action_case(n);
+            assert(printf("DOCUMENT ACTION CASE PASS:%s\n",action_case_names[n])>0);
+            assert(!fflush(stdout));return 0;
+        }
+        return 20;
+    }
     if(argc==3&&!strcmp(argv[1],"alias")){action_alias((unsigned)atoi(argv[2]));puts("DOCUMENT ACTION ALIAS REFUSAL PASS");return 0;}
     if(argc==3&&!strcmp(argv[1],"uncertain")){action_uncertain((unsigned)atoi(argv[2]));puts("DOCUMENT ACTION UNCERTAIN HOLD PASS");return 0;}
+    if(argc!=1)return 20;
     assert(!editor_checked_fixture());
-    action_admission_alias(0);action_admission_alias(1);action_reset_alias();
-    for(n=0;n<4;++n)action_preservation(n);
-    action_cancel_case(0);action_cancel_case(1);
-    action_publish(0,0,0);action_publish(1,0,0);action_publish(0,1,0);action_publish(1,0,1);
+    for(n=0;n<sizeof(action_case_names)/sizeof(action_case_names[0]);++n)action_case(n);
     puts("DOCUMENT ACTION PASS:13 prewrite admission/reset, NEW/load preservation, cancel, WAITING and final-address publication groups; HOST only");
     return 0;
 }

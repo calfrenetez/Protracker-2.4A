@@ -1,5 +1,23 @@
 # Opt-in typed document actions
 
+The focused fixture accepts `case <name>` to run one of its thirteen normally
+cleaned-up action cases without the mixed/checked prerequisite suites. Names are
+listed in `ACTION_CASES` in the Python driver. It flushes a case-specific BEGIN
+line before entering the case and a PASS line only after assertions and cleanup
+return. Invalid or incomplete diagnostic arguments return 20 with no markers.
+The separate `editor_document_action_case_test.c` executable always selects
+`admit-candidate-overlap`, for launchers that take no fixture arguments. The
+original focused fixture's no-argument invocation still runs the complete prerequisite/action suite;
+an individual case never prints the full-suite completion line. Alias and
+uncertain-state modes still deliberately retain their quarantined allocations
+and are separate host subprocess tests.
+
+These selectors prepare bounded native diagnostics; host success does not
+qualify native execution. The earlier combined New/Load native invocation
+returned no confirmed completion. Its approved recovery restored the launcher
+and released ownership, but did not establish a fixture pass or its failure
+cause. Retain that evidence separately from later diagnostic results.
+
 Enable `PT_DOCUMENT_TYPED_ACTION=1` together with `PT_DOCUMENT_TYPED_REPLACEMENT=1` and include `editor_document_action.c`. This private serialized HOST composition adds detached NEW and byte-load actions. Ordinary editor NEW/load/PLAY behavior is unchanged.
 
 Provide a zero action, an empty detached candidate, the genuine current checked owner/binding, zero future establishment/owner/bridge controls, allocator callbacks, and full living spans for named opaque contexts. An empty candidate may retain its allocator after a previous checked release. The candidate header must be disjoint from the complete action, old storage/controls, input bytes and every named context. The action may lie wholly inside a named parent span, but its allocator context pointer must lie outside the action. Admission rejects overlap before publishing the action or initializing the candidate.

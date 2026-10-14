@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "One positive New publication fixture with injected voices and ordinary RAM allocations. No frontend or device activation.",
+  "target": {
+    "emulator": "Amiberry",
+    "cpu": "68030",
+    "fpu": false,
+    "chip_mib": 2,
+    "fast_mib": 128
+  },
+  "host": {
+    "state": "PASS",
+    "asan": true,
+    "ubsan": true,
+    "assertions": true,
+    "all_thirteen_action_cases": true,
+    "fixed_publication_wrappers": [
+      "publish-new",
+      "publish-load"
+    ]
+  },
+  "cases": [
+    {
+      "case": "publish-new",
+      "source_commit": "0bf2d0a54f0aeb3f9676997b4dc990d3299b852b",
+      "candidate": {
+        "size": 423436,
+        "sha256": "41a7308b0ca2ffe1eba4d2e92139eaba8625c874ef662f64f6d2c420764d677c",
+        "crc32": "6A2C343C"
+      },
+      "build": {
+        "units": 84,
+        "link_inputs": 91,
+        "typed_action": true,
+        "typed_replacement": true,
+        "hardware_macros": false
+      },
+      "native": {
+        "nativeMarkers": [
+          "DOCUMENT ACTION CASE BEGIN:publish-new",
+          "DOCUMENT ACTION CASE PASS:publish-new"
+        ],
+        "observedStackBytes": 524288,
+        "outputBytes": 77,
+        "outputCRC32": "93CD0C9A",
+        "rawStackQuery": "Current stack size is 524288 bytes",
+        "returnCode": 0
+      },
+      "verification": {
+        "state": "PASS",
+        "independent_cleanup_and_idle": true,
+        "original_launcher_files_restored": true,
+        "ownership_released": true,
+        "result_sha256": "cc3af73d2134b12167c0368aad5c388703582b5418a06994e39fe7bc15a9e4b7",
+        "independent_final_sha256": "86c8f91403a6705073c037337cce352d017d2c525c8e427d99b30e60d6b6b4c8"
+      }
+    }
+  ],
+  "unconfirmed_load": {
+    "state": "UNCONFIRMED",
+    "native_limit_seconds": 90,
+    "observed_reply_class": "STILL RUNNING",
+    "candidate_sha256": "55051b1de6f5f9b30c5a15128526520e271df776b1bedb814cd9e12ed2b56fa3",
+    "native_rc": null,
+    "cleanup_or_release": false
+  },
+  "unqualified": [
+    "native Load publication",
+    "original combined prerequisite/action suite",
+    "thirteen-case native component",
+    "other native lifecycle cases",
+    "frontend New/Load activation",
+    "physical A1200 or AmiGUS",
+    "device output and voice-stop",
+    "exact live scheduling",
+    "performance and listening"
+  ],
+  "prior_incomplete_runs": "Combined and thirteen-case component runs remain unconfirmed after their original bounded completion failures; separate recovery does not convert either to PASS."
+}

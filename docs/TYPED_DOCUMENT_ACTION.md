@@ -62,5 +62,24 @@ The public HOST recipe also compiles the action translation unit with
 `-Wframe-larger-than=4096` under its existing warnings-as-errors and sanitizer
 flags, so an accidental large automatic snapshot fails the check. All functional
 and negative lifecycle groups still pass. The 84-unit native fixture links with
-both typed-action and typed-replacement options enabled; native execution and
-frontend/device acceptance remain pending for this candidate.
+both typed-action and typed-replacement options enabled. The original combined
+fixture still has no confirmed native completion; frontend/device acceptance
+remains pending.
+
+On 14 October, the separate `publish-new` candidate passed on Amiberry 68030
+with both exact markers, RC0 and the queried 524288-byte Stack. It exercised
+successful New publication at the final document address, owner construction
+and cleanup using injected voices and ordinary RAM allocations. Exact staging
+cleanup, launcher restoration, process/transport absence and ownership release
+were independently verified. See the scoped
+[native evidence](../evidence/enhanced-editor/document-publication-native/result.json).
+This qualifies that single lifecycle case; it does not activate the frontend
+or qualify physical memory placement, device output, scheduling or listening.
+
+The separately built `publish-load` candidate passed its host checks but its
+native invocation reported `STILL RUNNING` at the unchanged 90-second limit.
+It has no confirmed native RC or completion markers. Its retained HOLD and
+pending recovery are separate from the successful, released New run. This
+observation alone does not establish a hang, assertion failure or eventual
+completion. The earlier thirteen-case native component also remains
+unconfirmed; its recovery did not convert it to a pass.

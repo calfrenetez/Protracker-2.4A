@@ -643,10 +643,11 @@ Load is 224,436 bytes, SHA-256
 `32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a`;
 New is 216,424 bytes, SHA-256
 `81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac`.
-Both are **Amiberry/A1200 NOT RUN**. Historical candidate evidence remains bound
-to its original bytes. The inactive owned-input packet still pins the previous
-Load; a new packet must bind the revised candidate before qualification. The
-existing physical recovery hold remains unchanged.
+Both revised candidates subsequently passed their separate Amiberry fixtures
+through the owned RAM input path. Exact revised A1200 runs remain NOT RUN.
+Historical candidate evidence stays bound to its original bytes; the old
+physical timeout remains a failure despite late recovery observations. Its
+cleanup and independent ownership release are complete.
 
 ## Separate single-file input upload — 15 October 2026
 
@@ -663,12 +664,42 @@ an explicit ceiling up to120 seconds. That is bounded within the same original
 stage lifetime (at most250 seconds); ready state, reader waiting and settlement
 never reset it. This does not extend any native90, guest140 or whole250 execution
 budget. A caller must account for the separate transfer and retained source
-before admitting execution and refuse insufficient time. Live service/runner
-integration is still required; the helper alone opens no connection.
+before admitting execution and refuse insufficient time. The guarded integration below accounts for preparation before execution;
+the helper alone opens no connection.
 
 Independent execution-idle and saved-custody proof are required before exact
 input deletion. Source mutation, extra files/directories, failed acknowledgments,
 expiry and uncertain readers retain ownership without retry. Ten new host groups
 pass, including every one of151 combined-model exchange failures, maximum-size
 accounting and explicit deadlines;19 copied-input and33 execution regression
-groups also pass. Native staging and physical transfer are NOT RUN for this mode.
+groups also pass. The subsequent emulator qualification below covers native staging; physical
+transfer remains NOT RUN for this mode.
+
+
+### Guarded upload integration and Amiberry qualification
+
+A separate upload preparation call now runs before the guest execution phase,
+inside the same owner operation and original250-second overall budget. Upload
+preparation is bounded by120 seconds; native90 and execution/settlement140 are
+unchanged. The service creates input and execution transactions together, retains
+the same deadlines and refuses repeated input preparation. The execution phase
+requires the exact saved ready result and custody, then checks the RAM source
+before copying. Separate task, custody and execution-absence proofs precede
+one-file input cleanup and independent absence of both RAM namespaces.
+
+Fifty-five host groups pass across lifecycle, full guest, service and factory
+models. They cover all14 upload-route outer-call timeout positions, existing
+13-call copy behavior, changed owner/custody, missing or repeated preparation,
+and cancellation by the original overall timeout across the stage boundary.
+One initial test used an overly short wall-clock delay and expired at the wrong
+boundary under load; the corrected test deliberately expires the same original
+timeout context after execution starts. Earlier failure logs remain separate.
+
+The exact216,424-byte New fixture passed once in Amiberry through this route:
+RC0, Stack262144, all19 expected lines,767 captured bytes/CRC1B45D25F. Exact
+one-file input and nine-file execution cleanup, saved launcher restoration,
+separate observation, public release and final idle check passed. No owned
+emulator/service, locks, reservation or recovery hold remain.
+See [compact evidence](../evidence/enhanced-editor/document-upload-input-emulator/result.json).
+This qualifies the emulator RAM transfer and synthetic New publication flow.
+The real-A1200 route, full frontend, playback, timing and listening remain separate.

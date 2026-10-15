@@ -1,0 +1,109 @@
+{
+  "acceptance": {
+    "audio": false,
+    "devicePlayback": false,
+    "exactLiveTiming": false,
+    "frontend": false,
+    "listening": false,
+    "physicalRevisedCandidate": false,
+    "singleFileUploadAndRAMCopyRoute": true,
+    "syntheticNewPublication": true
+  },
+  "candidate": {
+    "crc32": "74D8A3F1",
+    "sha256": "81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac",
+    "size": 216424
+  },
+  "cleanup": {
+    "archives": 77,
+    "exactInputAndExecutionNamespacesAbsent": true,
+    "hostStagingAbsent": true,
+    "independentFinalIdle": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "publicReleaseFence": 1651,
+    "savedLauncherFilesRestored": true,
+    "testPortsAndIPCAbsent": true
+  },
+  "executionFiles": 9,
+  "hostQualification": {
+    "cases": [
+      "separate upload boundary",
+      "no repeated input preparation",
+      "changed input custody refusal",
+      "owner-change refusal",
+      "input timeout retains ownership without execution",
+      "execution timeout retains ownership",
+      "same outer budget expires across stage boundary",
+      "independent both-namespace absence"
+    ],
+    "groups": 55,
+    "outerCallTimeoutPositions": {
+      "copy": 13,
+      "upload": 14
+    },
+    "priorHostFailures": "Stale private source pins refused two factory checks before refresh. Initial short wall-clock cancellation model expired before the intended boundary under load; corrected model expires the same original timeout context after entering execution. Failed host logs preserved separately.",
+    "runnerLifecycleAndGuest": 28,
+    "serviceAndFactory": 27
+  },
+  "inputFiles": 1,
+  "limits": {
+    "guestExecutionSeconds": 140,
+    "nativeSeconds": 90,
+    "sameOriginalInputAndTransactionLifetime": true,
+    "uploadPreparationSeconds": 120,
+    "wholeSeconds": 250
+  },
+  "nativeObserved": {
+    "nativeMarkers": [
+      "DOCUMENT PUBLICATION BEGIN:new",
+      "DOCUMENT ACTION TRACE:entered",
+      "DOCUMENT ACTION TRACE:fixture-allocated",
+      "DOCUMENT ACTION TRACE:initial-document-created",
+      "DOCUMENT ACTION TRACE:initial-editor-created",
+      "DOCUMENT ACTION TRACE:initial-masters-begun",
+      "DOCUMENT ACTION TRACE:initial-masters-ready",
+      "DOCUMENT ACTION TRACE:checked-editor-ready",
+      "DOCUMENT ACTION TRACE:checked-owner-begun",
+      "DOCUMENT ACTION TRACE:source-encoded",
+      "DOCUMENT ACTION TRACE:fixture-ready",
+      "DOCUMENT ACTION TRACE:prepared",
+      "DOCUMENT ACTION TRACE:published",
+      "DOCUMENT ACTION TRACE:committed",
+      "DOCUMENT ACTION TRACE:stopped-and-disposed",
+      "DOCUMENT ACTION TRACE:paula-closed",
+      "DOCUMENT ACTION TRACE:amigus-closed",
+      "DOCUMENT ACTION TRACE:finished",
+      "DOCUMENT PUBLICATION PASS:new; final-address owner and checked cleanup; injected voices"
+    ],
+    "observedStackBytes": 262144,
+    "outputBytes": 767,
+    "outputCRC32": "1B45D25F",
+    "rawStackQuery": "Current stack size is 262144 bytes",
+    "returnCode": 0
+  },
+  "protocolRecords": 367,
+  "recordsSHA256": {
+    "admission": "5bd499cca04fe78c110d7ea245b5347bd9b0d991cfbf29f520ace2ec9939a84b",
+    "buildVerification": "3dc6cee90e349bffb8f1f285b1bf5d8e2c558b112d65ba6d91d22d9722b2e63d",
+    "finalIdle": "f9a6653e62a396178fd587ee8d98583c5c1f57c409c622a2a6d5c396ffb2f39e",
+    "independentPass": "c716994f575547aed0a45a6b92c99340d506e1e07c0489da3e8c78e77933aea3",
+    "ownedServiceStop": "956ba6fe0f43dee6db4a40f45c871789288363e9d57c654ce8baa76bc11e63fe",
+    "publicRelease": "282aa4032f809fd9fbc57888d607b7e574f84bb1fa37f4cd9933fb41413a2ecd",
+    "runResult": "20e02d4570e2608a958797c693287a2b3fc5afacf9cf73138387bf3316a771fc",
+    "runnerHostLog": "7289cfcc147d088ac7120baa1868b9f1930fcd0f75e577d7b560b22e7fb83497",
+    "serviceHostLog": "f5532dd3452ea1400e7eb75c90e8597357e96927199954c78138103435cd9210"
+  },
+  "runnerSourceHead": "594b14205ccbb74868749fefe223b0795f987ef0",
+  "selectedSourcesSHA256": {
+    "run/source/ram_fixture_runner.py": "0f7d8ab69ed5c0f8499dacc4fa0126dfd9985f35a2c6b9da4838a3729ec86936",
+    "run/source/saved_input_observer.py": "b08dc909f899ca169e861b7bb00ed4b1375037f68300e8623411a15294068d9c",
+    "run/source/test_guest_phase.py": "a2ec6fd22aab62c9acbd8d6ef8ee7f22eba0798c75e2eedd062def9e879ff344",
+    "run/source/test_lifecycle.py": "a70a23e5f86308704743eab814b0b956b1431b9fc9135e05e4a921ee2affd16d",
+    "service/source/owned_native_input.py": "09376155e8c2e26816fa56f625935d7cb76f9db247a8ebe6c78b78b84aff2650",
+    "service/source/owned_native_service.py": "bab95cd6eef760cd05824bc7501d7392d60dc213845eda69cf8ba1b6907ceded",
+    "service/source/test_input_service.py": "b48dd2b7f529298d234298af6f2e459fcb25142387a267a2c60e66bd765fe551"
+  },
+  "sourceHead": "ad33205d4baa72c38e56e1610069116090c8f8fd",
+  "state": "EMULATOR_PASS_INDEPENDENTLY_RELEASED",
+  "verifiedBuildInputs": 91
+}

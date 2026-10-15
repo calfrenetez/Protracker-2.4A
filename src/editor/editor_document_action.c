@@ -19,26 +19,32 @@ static int contains(struct pt_sampler_storage_span s,const void *p,size_t n)
     (uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
 static int zero(const void *p,size_t n)
 {const unsigned char *b=p;size_t i;for(i=0;i<n;++i)if(b[i])return 0;return 1;}
-/* Compare the complete snapshot, including padding. Even-addressed four-byte
- * chunks avoid the native byte-at-a-time memcmp loop. memcpy preserves aliasing
- * rules; odd inputs and the final partial chunk use bounded character reads. */
+/* Compare the complete snapshot, including padding. Even-addressed longword
+ * blocks reduce loop overhead without omitting any byte. memcpy preserves
+ * aliasing rules; odd inputs and the final partial word use character reads. */
 static int snapshot_equal(const void *left,const void *right,size_t bytes)
 {
     const unsigned char *a=left,*b=right;
     if(!(((uintptr_t)a|(uintptr_t)b)&1U)){
-        while(bytes>=sizeof(uint32_t)){
-            uint32_t x,y;
 #if defined(__GNUC__) && defined(__m68k__)
-            /* The runtime check proves the 68000 longword alignment, as in
-             * project_snapshot.h. Four-byte advances preserve that alignment. */
-            memcpy(&x,__builtin_assume_aligned(a,2),sizeof(x));
-            memcpy(&y,__builtin_assume_aligned(b,2),sizeof(y));
+#define SNAPSHOT_WORD(offset) do {uint32_t x,y; \
+        memcpy(&x,__builtin_assume_aligned(a+(offset),2),sizeof(x)); \
+        memcpy(&y,__builtin_assume_aligned(b+(offset),2),sizeof(y)); \
+        if(x!=y)return 0;}while(0)
 #else
-            memcpy(&x,a,sizeof(x));memcpy(&y,b,sizeof(y));
+#define SNAPSHOT_WORD(offset) do {uint32_t x,y; \
+        memcpy(&x,a+(offset),sizeof(x));memcpy(&y,b+(offset),sizeof(y)); \
+        if(x!=y)return 0;}while(0)
 #endif
-            if(x!=y)return 0;
-            a+=sizeof(x);b+=sizeof(y);bytes-=sizeof(x);
+        while(bytes>=4U*sizeof(uint32_t)){
+            SNAPSHOT_WORD(0);SNAPSHOT_WORD(4);SNAPSHOT_WORD(8);SNAPSHOT_WORD(12);
+            a+=4U*sizeof(uint32_t);b+=4U*sizeof(uint32_t);bytes-=4U*sizeof(uint32_t);
         }
+        while(bytes>=sizeof(uint32_t)){
+            SNAPSHOT_WORD(0);
+            a+=sizeof(uint32_t);b+=sizeof(uint32_t);bytes-=sizeof(uint32_t);
+        }
+#undef SNAPSHOT_WORD
     }
     while(bytes--){if(*a++!=*b++)return 0;}
     return 1;

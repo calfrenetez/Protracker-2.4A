@@ -135,7 +135,11 @@ class TypedDocumentAction(unittest.TestCase):
             self.assertEqual(run([str(trace)], 30),
                              b"DOCUMENT ACTION CASE BEGIN:publish-load\n" +
                              b"".join((f"DOCUMENT ACTION TRACE:{stage}\n").encode()
-                                      for stage in ("fixture-ready", "prepared", "published",
+                                      for stage in ("fixture-allocated", "initial-document-created",
+                                                    "initial-editor-created", "initial-masters-begun",
+                                                    "initial-masters-ready", "checked-editor-ready",
+                                                    "checked-owner-begun", "source-encoded",
+                                                    "fixture-ready", "prepared", "published",
                                                     "committed", "stopped-and-disposed",
                                                     "paula-closed", "amigus-closed", "finished")) +
                              b"DOCUMENT ACTION CASE PASS:publish-load\n")
@@ -160,15 +164,16 @@ class TypedDocumentAction(unittest.TestCase):
                 '#include "src/editor/editor_document_action.c"\n'
                 '#include <assert.h>\n#include <stdio.h>\n#include <stdlib.h>\n'
                 'static void equality_edges(void){size_t left,right,k,n,j;\n'
-                'const size_t large[]={65535,65536,65537,236504};\n'
+                'const size_t large[]={65535,65536,65537,236504,1048575,1048576,1048577};\n'
                 'assert(snapshot_equal(NULL,NULL,0));\n'
                 'for(left=0;left<4;++left)for(right=0;right<4;++right)\n'
-                'for(k=0;k<78;++k){unsigned char *a,*b,*x,*y;\n'
+                'for(k=0;k<74+sizeof(large)/sizeof(large[0]);++k){unsigned char *a,*b,*x,*y;\n'
                 'n=k<74?k:large[k-74];\n'
                 'a=malloc(n+left?n+left:1);b=malloc(n+right?n+right:1);assert(a&&b);\n'
                 'x=a+left;y=b+right;for(j=0;j<n;++j)x[j]=y[j]=(unsigned char)(j*37);\n'
                 'assert(snapshot_equal(x,y,n)&&!memcmp(x,y,n));\n'
-                'for(j=0;j<n;++j){if(n>74&&j!=0&&j!=n/2&&j!=n-1&&j!=65535)continue;\n'
+                'for(j=0;j<n;++j){if(n>74&&j!=0&&j!=n/2&&j!=n-1&&j!=15&&j!=16&&j!=17&&\n'
+                'j!=65535&&j!=65536&&j!=65537&&j!=1048575&&j!=1048576)continue;\n'
                 'y[j]^=1;assert(!snapshot_equal(x,y,n)&&memcmp(x,y,n));y[j]^=1;}\n'
                 'free(a);free(b);}}\n'
                 'int main(void){struct pt_editor_document_action saved=expected;\n'

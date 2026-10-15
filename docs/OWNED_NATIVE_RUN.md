@@ -592,3 +592,37 @@ pending the existing physical recovery and independent release, fresh live
 checks and service identity/admission. Its private disk pin must be refreshed
 from current evidence before admission. Amiberry and A1200 qualification of
 this new input route, plus physical MiniFTP/archive staging, remain NOT RUN.
+
+### Document snapshot comparison — HOST and native build
+
+The document-action snapshot comparator now checks four longwords per loop.
+It still compares the complete object representation, including padding, with
+bounded word and byte tails and a byte fallback for odd addresses. Ownership,
+mutation detection, preparation work64 and native90/guest140/whole250 limits are
+unchanged. This reduces loop bookkeeping; no target speedup is claimed yet.
+
+A private instrumented HOST Load diagnostic counted 501 replacement phase3
+steps. Its action phase4 comparator counters reached 2,044 calls and 266,807,408
+requested bytes by commit (40 calls and 5,221,280 bytes were already recorded at
+publication). These are cumulative requested spans in the host layout, not bus
+traffic or Amiga timings. The instrumentation is absent from production code.
+
+The complete document-action sanitizer regression passes, including cancellation,
+alias refusals, changed delegated snapshots and final-address publication. The
+actual comparator also passes a memcmp oracle over 1,296 length/alignment pairs
+and 44,112 single-byte differences, with exact allocation tails and boundaries
+around 16 bytes, 64 KiB and 1 MiB. The test's stale short trace expectation was
+updated to the already-existing diagnostic stages. All four focused New/Load
+forms pass separately with ASan/UBSan and strict compiler warnings.
+
+The pinned 68000 compiler emits four inline longword comparisons per full block
+and reports the same four-byte snapshot-function stack use. Both complete native
+fixtures link with 83 production units and 91 audited link inputs. The revised
+Load is 224,436 bytes, SHA-256
+`32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a`;
+New is 216,424 bytes, SHA-256
+`81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac`.
+Both are **Amiberry/A1200 NOT RUN**. Historical candidate evidence remains bound
+to its original bytes. The inactive owned-input packet still pins the previous
+Load; a new packet must bind the revised candidate before qualification. The
+existing physical recovery hold remains unchanged.

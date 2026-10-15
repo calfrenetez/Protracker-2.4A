@@ -1,0 +1,97 @@
+{
+  "status": "HOST_AND_NATIVE_BUILD_PASS_TARGET_NOT_RUN",
+  "change": "Complete snapshot comparison in four-longword blocks; unchanged byte coverage and ownership checks",
+  "sourceSha256": {
+    "src/editor/editor_document_action.c": "c12fab0cd8f8df42412c5d9b875508119bd59310c3ca6a4638f1efd1360e8bbe",
+    "tests/test_editor_document_action.py": "c23e713b890cf218e7cb9a036a281afaf1cea3a3da3291f796bac20bd8d3e3e5"
+  },
+  "host": {
+    "strictWarnings": true,
+    "addressSanitizer": true,
+    "undefinedBehaviorSanitizer": true,
+    "actionRegression": "PASS",
+    "actionSeconds": 127.019,
+    "publicationForms": [
+      "new",
+      "load",
+      "new-traced",
+      "load-traced"
+    ],
+    "publicationSeconds": 61.745,
+    "comparatorLengthAlignmentPairs": 1296,
+    "singleByteMismatchComparisons": 44112,
+    "zeroNullCase": true,
+    "exactAllocationTails": true,
+    "firstAttempt": "FAIL: old trace expectation omitted existing stages; expectation corrected, original log preserved"
+  },
+  "hostBaselineProfile": {
+    "privateInstrumentationOnly": true,
+    "preparationWork": 64,
+    "replacementPhase3Steps": 501,
+    "actionPhase4AtPublication": {
+      "calls": 40,
+      "requestedBytes": 5221280
+    },
+    "actionPhase4AtCommit": {
+      "calls": 2044,
+      "requestedBytes": 266807408
+    },
+    "scope": "Cumulative requested comparison spans in HOST layout; no device traffic or timing measurement"
+  },
+  "nativeBuild": {
+    "cpu": "68000",
+    "productionUnits": 83,
+    "reusedUnchangedProductionUnits": 82,
+    "snapshotCompilerReportedStackBytes": 4,
+    "loadInputsEach": 91,
+    "inlineLongwordComparisonsPerFullBlock": 4,
+    "binarySizeIncreaseEach": 64,
+    "candidates": [
+      {
+        "kind": "load",
+        "binary": {
+          "bytes": 224436,
+          "sha256": "32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a"
+        },
+        "crc32": "0E07E5AC"
+      },
+      {
+        "kind": "new",
+        "binary": {
+          "bytes": 216424,
+          "sha256": "81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac"
+        },
+        "crc32": "74D8A3F1"
+      }
+    ]
+  },
+  "limits": {
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "changed": false
+  },
+  "acceptance": {
+    "host": true,
+    "nativeBuild": true,
+    "amiberry": false,
+    "physicalA1200": false,
+    "timing": false,
+    "audio": false,
+    "listening": false
+  },
+  "preservation": {
+    "unrelatedPaths": 16,
+    "contentAndStableMetadataVerified": true,
+    "priorCandidatesAndFailedEvidencePreserved": true,
+    "existingRecoveryHoldUnchanged": true
+  },
+  "privateEvidenceSha256": {
+    "profile.json": "e0583dfea7a19bf8656e25488c4b4d7af1c556111d83850d47f83a7fde5ba966",
+    "run.stdout": "5bec4ba0938be813dddbcc6fc33ec8c5a4a6f97bc5492f29915ac178b46e4302",
+    "action-regression.log": "770da3dd6c1de30376196200f94f83bba8a49ed1f05886aa619df03948f8464b",
+    "action-regression-fixed.log": "2d2dd17e95d7f12d5d28feebdb7f92c6b733aa0a9efe90740984702133ddf42c",
+    "publication-regression.log": "f33776a30f45dc93e877e9252e30a9eb311fbd3754a9a1aa7862514a13780648",
+    "native/manifest.json": "fc3dc141c61681b5e0e07729adc5da2938e88b64b3d74f62a129761aa950e049"
+  }
+}

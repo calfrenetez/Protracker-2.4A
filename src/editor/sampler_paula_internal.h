@@ -40,4 +40,11 @@ int pt_sampler_paula_prepared_location(struct pt_sampler_paula *,unsigned,struct
  * callers use prepared_location above, which validates metadata every time. */
 int pt_sampler_paula_prepared_location_validated(struct pt_sampler_paula *,unsigned,struct pt_cache_lease,
     const uint8_t **,size_t *);
+/* Same serialized already-current precondition, plus the exact claimed sample
+ * and explicit source side. Checks the actual signed8/padded representation key
+ * before publishing location; no lease acquisition, pin change or PCM scan.
+ * This does not authenticate a master pin or retain validity across calls. */
+int pt_sampler_paula_prepared_source_location_validated(struct pt_sampler_paula *,
+    unsigned track,unsigned sample,unsigned source_channel,struct pt_cache_lease,
+    const uint8_t **,size_t *);
 #endif

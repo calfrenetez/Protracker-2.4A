@@ -5,6 +5,24 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Prepared Paula cache source binding — 15 October 2026
+
+The serialized TASK snapshot now checks the actual sample and signed8/selected
+side/padding key of every original dependency's retained cache lease, including
+unselected and superseded sources. A live lease with matching size/revision is
+insufficient when it belongs to another sample. The internal lookup is read-only,
+uses the existing packing key, and changes no pin, allocation, cache recency or
+caller output on refusal. Genuine master currentness/guard checks remain separate.
+
+The baseline regression records a wrong-source live cache being accepted. The
+fixed94-case snapshot suite passes; separate57 source/lease and36 representation
+checks preserve8/16/24-bit masters, explicit stereo choice and genuine cleanup.
+Five ordinary sanitizer groups and343 provider cases pass. A59,756-byte portable
+68000 sampler HUNK builds but is Amiberry/physical NOT_RUN; inhibited TASK/provider
+units are excluded. Existing native candidates and historical results remain
+separate. No native activation, DMA/voice-stop, live timing or listening is proved.
+See [contract and validation details](PAULA_DELIVERY4_TASK.md#bind-a-live-cache-to-its-actual-source).
+
 ## Playback conversion master protection — 3 October 2026
 
 Playback size, packed bytes and cache lease outputs now protect the borrowed

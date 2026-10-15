@@ -141,3 +141,13 @@ int pt_sampler_paula_prepared_location(struct pt_sampler_paula *s,unsigned track
     return data && bytes && pt_sampler_paula_prepared_current(s) &&
         pt_sampler_paula_prepared_location_validated(s,track,lease,data,bytes);
 }
+int pt_sampler_paula_prepared_source_location_validated(struct pt_sampler_paula *s,
+    unsigned track,unsigned sample,unsigned source_channel,struct pt_cache_lease lease,
+    const uint8_t **data,size_t *bytes)
+{
+    struct pt_playback_format format={8,source_channel,0,1};
+    if(!s || !data || !bytes || !s->project || sample>=s->count ||
+       source_channel>=s->project->samples[sample].pcm.channels ||
+       !pt_playback_pcm_lease_matches(&s->cache,sample+1,s->version,&format,lease))return 0;
+    return pt_sampler_paula_prepared_location_validated(s,track,lease,data,bytes);
+}

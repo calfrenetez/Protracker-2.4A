@@ -72,7 +72,7 @@ static int source_current(struct pt_sampler_paula *b,unsigned track,
     if(pt_sampler_pin_current(b->sampler,b->project,s->sample,s->generation,
        expected,&pcm,&pin)!=PT_EDIT_OK)return 0;
     same=pin==expected&&pcm_equal(&pcm,&s->master)&&pcm_equal(s->descriptor,&s->master)&&
-       pt_sampler_paula_prepared_location_validated(b,track,s->lease,&data,&bytes)&&
+       pt_sampler_paula_prepared_source_location_validated(b,track,s->sample,0,s->lease,&data,&bytes)&&
        data==s->cache_data&&bytes==s->cache_bytes&&source_guards_current(b,s,pin);
     /* The caller's original pin remains held, so this temporary unpin cannot
      * end the immutable master lifetime or stand in for reader retirement. */

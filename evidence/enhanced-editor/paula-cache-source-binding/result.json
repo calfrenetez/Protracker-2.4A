@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "state": "HOST_PASS_BUILD_PASS_TARGET_NOT_RUN",
+  "scope": "Read-only prepared Paula sample/representation-to-lease pairing; serialized TASK snapshot.",
+  "failurePreserved": {
+    "observed": "master=0 cache=1 result=0 (SNAPSHOT_OK); expected STALE",
+    "rawStderrSHA256": "195bd829397890f34c6bace1d30bfadb6c6e723d3bdcb97242285193549ce409",
+    "resultSHA256": "da917a2152c27dfc9e822f6e30585451406555a7b38f077500a27d3f0f7bae85"
+  },
+  "host": {
+    "snapshotCases": 94,
+    "snapshotControls": 85,
+    "sourcePairControls": 3,
+    "wrongSourceLeaseRefusals": 6,
+    "strictC99Units": 29,
+    "pinnedBodies": 79,
+    "sourceManifestSHA256": "37f195a644bca430721d2c1582b9df05c1dbfafeb689f10a3b0414cedfae5c33",
+    "privateCommittedExport": true,
+    "privateClassicBaselineVerified": true,
+    "livePlaceholderBodiesRead": false,
+    "samplerSourceChecks": 57,
+    "representationChecks": 36,
+    "originalSamplerPrecisionJobScenarios": 6,
+    "ordinarySanitizerGroups": [
+      "test_playback_pcm",
+      "test_playback_upload",
+      "test_sampler_paula_source_binding",
+      "test_sampler_wavetable",
+      "test_amigus_wavetable_cache"
+    ],
+    "providerRegressionCases": 343,
+    "providerStrictUnits": 37,
+    "providerPinnedBodies": 95,
+    "assertions": true,
+    "warningsAsErrors": true,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "protectedUnrelatedPaths": 16,
+    "guardBytesUnchangedDuringPrivateChecks": true
+  },
+  "nativeBuild": {
+    "state": "BUILD_PASS_TARGET_NOT_RUN",
+    "binary": {
+      "bytes": 59756,
+      "sha256": "31a129f0b2df2f8dac23ba0fa4e337f5d0ba0b085c5b6a8fe2a8765dd950888c"
+    },
+    "crc32": "3EC2D86D",
+    "productionUnits": 20,
+    "fixtureUnits": 1,
+    "recompiledUnits": 4,
+    "reusedUnits": 17,
+    "linkInputs": 28,
+    "flags": [
+      "-mcpu=68000",
+      "-msoft-float",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "assertions enabled"
+    ],
+    "ordinarySamplerProfile": true,
+    "typedDocumentHooksOutsideProfile": true,
+    "priorTypedDocumentLinkFailurePreserved": true,
+    "canonicalBuildFlagsChanged": false,
+    "inhibitedTaskProviderIncluded": false,
+    "nativeExecution": false,
+    "stackQualified": false,
+    "memoryPlacementQualified": false
+  },
+  "resultPins": {
+    "final.json": "437aa5062363121a3d4c62d3952a06805cb6c57eb980ca9988bbc6819a2ecf51",
+    "final.stdout": "be50058f9c4a4b3352239d0fcec708fdfd4e0faaf443735a1f305e4a61b225d1",
+    "final.stderr": "368885c583c811eac3e5f0417475f8b7df27449803489e2fcfbd9839ca3ecaec",
+    "provider-regression.json": "6b5268fd6563fb4315613c178a473623dec1c95a4e358ea75ebc19e8b6bee5c0",
+    "provider-regression.stdout": "05726b666306c6ab3b494eea1a482b7bfb080ce0654a7a00c50d962bf7fec0a0",
+    "provider-regression.stderr": "d0e5df08b566a198d320215aca6cf8ad24bc9c46ed6a57f36666848c4eaa26ad",
+    "regressions.json": "a9d427cec3a32356c16c2ca75183b0727286ba60a0db6056a284f95f065f8463",
+    "regressions.stdout": "fd256e39445be324ccd5a7144b350124e9d7879d9c8578c0e3428463570e7dab",
+    "regressions.stderr": "5f5334e3cf835e1ff091d73b8c2df34ef677f4c4e19be9fd1e9b9eb9b921f088",
+    "native/manifest.json": "ff883b4ec376a45874f4c87478bd23ba01802e2e3ac72845af3b0c7a9d9bc3a3",
+    "native-failed-link-v1/failure.json": "353d265bb6a948c7f20ed6ce86a84b9a6f6a2eb7e7773314a9649ff3f4c9b1b5"
+  },
+  "selectedSourcePins": {
+    "src/core/playback_pcm.c": {
+      "bytes": 11794,
+      "sha256": "07864bd87f23b5ac9b92de376725f80abcf58b2d3bb196161d0aa7e5b99a25a5"
+    },
+    "src/core/playback_internal.h": {
+      "bytes": 2349,
+      "sha256": "ad56c7627df8e3f9e663edf3f1ce80523fd6505617a2c3b0952dce783b1f5430"
+    },
+    "src/editor/sampler_paula.c": {
+      "bytes": 7988,
+      "sha256": "f0bd08c0c8fb1a9fd46dbf6f813ea1ebf8e769aa55b6b5425c9b875c77fc035d"
+    },
+    "src/editor/sampler_paula_internal.h": {
+      "bytes": 3526,
+      "sha256": "18f67906cfc939dfd124c5513864bd4d84185fe913464d2024577af072cfad8d"
+    },
+    "src/editor/paula_delivery4_task.c": {
+      "bytes": 11662,
+      "sha256": "3b7298f8a5588ff24e5fb609b56c898e9e4901095cb12ba8fce72b14bfdf7264"
+    },
+    "tests/paula_delivery4_genuine_owner_test.c": {
+      "bytes": 24805,
+      "sha256": "d2f7fccbda7d450a61196fbf7a495e1e0235e59aebb399f84863bfe8f45f397d"
+    },
+    "tests/paula_delivery4_cache_binding_test.c": {
+      "bytes": 2356,
+      "sha256": "c76505e822bc34da0773cc064725030bc2bb8c88bbd322327629c012750efe59"
+    },
+    "tests/test_paula_delivery4_cache_binding.py": {
+      "bytes": 4975,
+      "sha256": "8a6914000c8f433d5ab0d9c9bdce68206dab9db0d12f507f899d2cab1e9f184b"
+    },
+    "tests/sampler_paula_source_binding_test.c": {
+      "bytes": 4883,
+      "sha256": "caf49abf89111dce93fd6f64e8b68bfaf3d84504fb972112292a199856150e82"
+    },
+    "tests/test_sampler_paula_source_binding.py": {
+      "bytes": 1408,
+      "sha256": "14797216a5e3c574728fa23bc89ad59c1d61098b9541d735439d7866328e7b77"
+    },
+    "tests/test_paula_provider_callbacks.py": {
+      "bytes": 5681,
+      "sha256": "c40b65b22314ee0784f94e57a6d658e26cdaea106899780e08ef1cb3b9570605"
+    }
+  },
+  "acceptance": {
+    "hostSourcePairing": true,
+    "portableNativeBuild": true,
+    "emulatorExecution": false,
+    "physicalExecution": false,
+    "arbitraryInputOwnershipAuthentication": false,
+    "persistentCurrentness": false,
+    "nativeTaskProvider": false,
+    "irqSerialization": false,
+    "dmaQuiet": false,
+    "liveTiming": false,
+    "audioListening": false
+  }
+}

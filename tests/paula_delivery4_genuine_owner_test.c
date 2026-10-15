@@ -428,7 +428,11 @@ static void d4_window_observer_refusals(void)
     d4_finish(&x,0);
 }
 
+#ifdef PT_DELIVERY4_EXTERNAL_MAIN
+static int pt_delivery4_fixture_main(void)
+#else
 int main(void)
+#endif
 {
     d4_authentic();d4_genuine_edits();d4_genuine_cache_invalidation();d4_dependency_refusals();
     d4_domain_and_windows();d4_aliases();d4_window_observer_refusals();

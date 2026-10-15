@@ -1,0 +1,99 @@
+{
+  "cases": {
+    "combined": 135,
+    "existingCallbackFaults": 36,
+    "existingProvider": 75,
+    "newPreEntryPacketChanges": 24
+  },
+  "dependencyBodyCount": 94,
+  "dependencyManifestEncoding": "UTF-8 JSON sorted keys, compact separators, no trailing newline; exact current driver retains pins",
+  "dependencyManifestSHA256": "f663aa6db28db929ec7d55a5d39f4a26c70b63eefe869500b44310efe44d26e4",
+  "driverSHA256": "790bfa4946802faaba85ee041513b0a94aa1af850803bcbc12a5e41bc04137c8",
+  "executionOracle": "typed Paula geometry provider: 75 cases passed\ngenuine measured four boundaries; both genuine retirement orders\n45 caller-output alias refusals preserve context, retained/retired sources and ownership\nowned BE records; exact entry token/window; independent quiet and final restore\nunknown restoration retains genuine source owner; no forced retirement\nHOST injectable resource model; future/native/IRQ/MMIO/timing NOT QUALIFIED\nprovider callback matrix: 36 cases; 12 seams x holder/original/reentry faults\n20 independently drained providers; 16 process-lifetime HOLD providers; source owner retained\nHOST callback and borrowed-packet checks only; holder/source mutation/native/IRQ/timing NOT QUALIFIED\nprovider stale-entry matrix: 24 cases; 12 packet changes x TASK/delivery\nno resource enter, token write or source release after observed stale packet\n",
+  "flags": [
+    "C99",
+    "O1",
+    "Wall",
+    "Wextra",
+    "Werror",
+    "UNDEBUG",
+    "ASan",
+    "UBSan"
+  ],
+  "guardBytesUnchanged": true,
+  "liveClassicPlaceholderBodiesRead": false,
+  "nativeExecuted": false,
+  "newMatrix": {
+    "backendLockAndTokenUnchanged": true,
+    "callerPacketUnchangedByRefusal": true,
+    "entries": [
+      "TASK",
+      "delivery"
+    ],
+    "extensionOwnerChipBytesRetained": 2304,
+    "extensionOwnerPinsRetained": 3,
+    "noNewResourceCallbacks": true,
+    "originalRecordsHeld": 24,
+    "packetChanges": [
+      "ticket",
+      "first frame window",
+      "last frame window",
+      "musical frame",
+      "track",
+      "invalid source count",
+      "source generation",
+      "master capacity",
+      "cache bytes",
+      "null descriptor",
+      "guard count",
+      "cache version"
+    ],
+    "tokenOutputUnchanged": true
+  },
+  "notQualified": [
+    "arbitrary provider holder mutation",
+    "current master/cache authenticity",
+    "sample/cache payload mutation",
+    "real serialization and IRQ restore",
+    "frontend/general-song integration",
+    "Amiberry provider execution",
+    "physical A1200/AmiGUS provider execution",
+    "exact timing",
+    "audio",
+    "human listening"
+  ],
+  "parentCommit": "232fa66ee1b78793890e521c80762ba6b176903c",
+  "privateClassicBaselinePreserved": true,
+  "privateCommittedExport": true,
+  "protectedUnrelatedPathsVerified": 16,
+  "recordsSHA256": {
+    "finalStderr": "a5a5b7a34790b94dbc1ca88856df5e07f52b1c769e4b9aee4b3cf0b1891095af",
+    "finalStdout": "5064100ea628e8442107331f7d508b51f24d0aaca536e3091b05d2354d4aa6fa",
+    "priorPassingRun": "ae01b0bdbc210c9605ba9124db7be461d56f999bd5e54e7658cd08f0395e7491",
+    "privateFinal": "692de2dfff87d00199f4747163f67a5eec53ca4e7c6555c924417f211df3de53"
+  },
+  "reproduction": {
+    "baseline": "Resource enter callback/lock/token changed after the accepted packet had already mutated; assertion failed before new-case oracle. Original75 cases had completed.",
+    "baselineLogSHA256": "36666b8b5afa745c1e79020abfb2b4cd80087f00507b7fc2c6b8fc0f08fa5263",
+    "baselineReturnCode": 1,
+    "initialTruncatedFailureLogPreserved": "98b647d38532c1a101108711efb756a57e0191734fd639d52ae706f92940ca36"
+  },
+  "selectedSourcePins": {
+    "src/editor/paula_segment_provider.c": {
+      "bytes": 17870,
+      "sha256": "2ca71dbf9de02f3f37ea78ecedaed503d5e42c4590f0a8b62f2ce3a7a73a8d76"
+    },
+    "src/editor/paula_segment_provider.h": {
+      "bytes": 5143,
+      "sha256": "a5ecb093186b4bf05ce96ba5b8d848de7ff37ffaf6b8e7cf6c8e7e00d1663f78"
+    },
+    "tests/paula_provider_callback_test.c": {
+      "bytes": 12272,
+      "sha256": "5289605617e7dfbb2fce2e10deeabe370a27fcc460500b0939bae2c3d0762b15"
+    }
+  },
+  "sourceBodies": 95,
+  "state": "HOST_PASS",
+  "targetOperations": 0,
+  "translationUnits": 37
+}

@@ -7277,3 +7277,22 @@ The four-channel TASK utility now produces ordinary metadata snapshots from genu
 Separate exact canonical host sanitizer trials passed 75 typed-provider cases (45 output-alias refusals) and 85 delivery cases (71 snapshots plus 14 observer comparisons). Both compiled and ran with C99, assertions, warnings as errors, AddressSanitizer and UndefinedBehaviorSanitizer, without diagnostics. The corresponding private trials remain separate evidence. Compact canonical results and product pins are recorded in evidence/enhanced-editor/paula-segment-provider-host and evidence/enhanced-editor/paula-delivery4-task-host.
 
 The on-disk drivers remain disabled by default; the canonical trials used reviewed ephemeral admission. Native builds remain inhibited. All-path mutation protection, authenticated exact event activation and native IRQ restoration still require implementation and qualification. These host results establish no Amiberry, A1200, DMA/voice-stop, AmiGUS RAM capacity/ordering/completion, musical timing, audio or listening acceptance. The accepted exact scheduling policy is unchanged.
+
+
+### Stale queued packet refusal before resource entry — 15 October
+
+The serialized HOST Paula provider now refuses an observed changed borrowed
+packet before calling the injected resource's next TASK/delivery entry. It
+retains original records, packet lifetime and genuine master/cache pins; the
+refusal supplies neither quiet proof nor release authority. Twenty-four new
+negative cases plus the original111 cases pass under C99/assertions/ASan/UBSan
+in a pinned private committed export. Callback counts, output tokens and caller
+packet bytes stay unchanged at refusal. All three source-owner pins and2304
+Chip-cache bytes remain retained in the extension fixture. This check compares
+at most four packet snapshots, without reading sample/cache payloads.
+
+Arbitrary holder/source mutation and real serialization remain separate work.
+The provider stays native-inhibited; no frontend, IRQ, Amiberry, physical,
+timing, audio or listening qualification follows. See
+[contract](PAULA_SEGMENT_PROVIDER.md#refuse-stale-borrowed-packets-before-resource-entry)
+and [HOST evidence](../evidence/enhanced-editor/paula-provider-stale-entry-host/result.json).

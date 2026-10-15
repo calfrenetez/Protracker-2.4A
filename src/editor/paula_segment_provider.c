@@ -94,6 +94,9 @@ static int enter_adapter(void *v,enum pt_paula_future_entry e,uint64_t *token)
     struct pt_paula_segment_provider *p=v,saved;uint64_t t=0;int raw,clean;
     if(!gate(p)||p->entered||(e!=PT_PAULA_FUTURE_TASK&&e!=PT_PAULA_FUTURE_DELIVERY)||
        !object(token,sizeof(*token),ALIGNMENT(uint64_t))||!output_apart(p,token,sizeof(*token)))return -1;
+    /* An already stale borrowed packet cannot justify a new resource entry.
+     * Keep its original record/source obligations; no callback or token write. */
+    if(!current(p)){p->failed=1;return -1;}
     begin(p,&saved);raw=p->ops.enter(p->ops.context,e,&t);clean=finish(p,&saved);p->enter_raw=raw;
     if(raw==1){p->entered=1;p->entry=e;p->token=t;p->clock_seen=0;if(clean){*token=t;return 1;}}
     if(raw!=0||!clean){p->entry=e;p->token=t;p->restore_hold=1;p->failed=1;return -1;}return 0;

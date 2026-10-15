@@ -9,8 +9,9 @@ struct callback_case {
     unsigned target,fault,enabled,fired,calls[CB_COUNT];
 };
 static struct callback_case callback_cases[CB_COUNT][3];
+static struct callback_case entry_cases[12][2];
 static struct sequence_fixture callback_owner;
-static unsigned callback_count,callback_disposed,callback_retained;
+static unsigned callback_count,callback_disposed,callback_retained,entry_count;
 static struct callback_case *callback_context(void *v)
 {return (struct callback_case *)(void *)provider_model_context(v);}
 static void callback_fault(struct callback_case *c,unsigned phase)
@@ -119,12 +120,55 @@ static void callback_case_run(const struct pt_paula_future_packet *q,unsigned ta
     assert(pinned(&provider_owner->f)==3&&provider_owner->f.chip.bytes==2304);
     storage(&provider_owner->f);++callback_count;
 }
+/* These packets were accepted and restored positively before caller mutation.
+ * Refuse the next whole entry without even asking the injected resource to
+ * enter. Changed source identities are never followed or repaired here. */
+static void entry_case_run(const struct pt_paula_future_packet *q,unsigned field,
+    unsigned delivery)
+{
+    struct callback_case *c=&entry_cases[field][delivery];struct provider_model *m=&c->model;
+    struct pt_paula_provider_status status;struct pt_paula_provider_row_status row;
+    struct pt_paula_future_packet changed;unsigned calls[CB_COUNT];uint64_t token,prior_token;
+    callback_init(c,CB_COUNT,0,q);token=provider_entry(m,PT_PAULA_FUTURE_TASK);
+    assert(m->adapter.arm(m->adapter.context,&m->original)==1);
+    provider_exit(m,PT_PAULA_FUTURE_TASK,token);
+    switch(field){
+    case 0:++m->original.ticket;break;
+    case 1:--m->original.first;break;
+    case 2:++m->original.last;break;
+    case 3:++m->original.geometry.frame;break;
+    case 4:++m->original.geometry.track;break;
+    case 5:m->original.geometry.source_count=3;break;
+    case 6:++m->original.geometry.source[0].generation;break;
+    case 7:++m->original.geometry.source[0].master.capacity;break;
+    case 8:--m->original.geometry.source[0].cache_bytes;break;
+    case 9:m->original.geometry.source[0].descriptor=NULL;break;
+    case 10:++m->original.geometry.source[0].guard_count;break;
+    case 11:++m->original.geometry.source[0].cache_version;break;
+    default:assert(0);
+    }
+    memcpy(&changed,&m->original,sizeof(changed));memcpy(calls,c->calls,sizeof(calls));
+    prior_token=m->token;token=UINT64_MAX;
+    assert(m->adapter.enter(m->adapter.context,delivery?PT_PAULA_FUTURE_DELIVERY:
+        PT_PAULA_FUTURE_TASK,&token)==-1&&token==UINT64_MAX);
+    assert(!memcmp(calls,c->calls,sizeof(calls))&&!m->locked&&m->token==prior_token);
+    assert(!memcmp(&changed,&m->original,sizeof(changed)));
+    assert(pt_paula_segment_provider_get(m->adapter.context,&status)&&status.failed&&
+        !status.entered&&!status.restore_hold&&status.retained==1&&!status.quiet);
+    assert(pt_paula_segment_provider_row(m->adapter.context,0,&row)&&row.present&&
+        !row.quiet&&!row.original_released);
+    assert(m->borrowed[0]&&!memcmp(m->borrowed[0],m->observed,sizeof(m->observed[0])));
+    assert(!pt_paula_segment_provider_dispose(m->adapter.context));
+    assert(pinned(&provider_owner->f)==3&&provider_owner->f.chip.bytes==2304);
+    storage(&provider_owner->f);++entry_count;
+}
 static int callback_submit(void *v,const struct pt_readers_event *event,const struct pt_paula_segment_plan *plan)
 {
     struct pt_paula_future_packet q;unsigned i,j;memset(&q,0,sizeof(q));
     q.ticket=event->scheduled.ticket;q.first=event->scheduled.first;q.last=event->scheduled.last;
     memcpy(&q.geometry,plan,sizeof(*plan));
     for(i=0;i<CB_COUNT;++i)for(j=0;j<3;++j)callback_case_run(&q,i,j);
+    for(i=0;i<12;++i)for(j=0;j<2;++j)entry_case_run(&q,i,j);
     return sequence_submit(v,event,plan);
 }
 int main(void)
@@ -135,9 +179,12 @@ int main(void)
     assert(sequence_until(&callback_owner,PT_PAULA_SEQUENCE_READY)==PT_PAULA_SEQUENCE_READY);
     sequence_activate(&callback_owner,0,1);
     assert(callback_count==36&&callback_disposed==20&&callback_retained==16);
+    assert(entry_count==24);
     assert(pinned(&callback_owner.f)==3&&callback_owner.f.chip.bytes==2304);
     puts("provider callback matrix: 36 cases; 12 seams x holder/original/reentry faults");
     puts("20 independently drained providers; 16 process-lifetime HOLD providers; source owner retained");
-    puts("HOST callback mutation detection only; between-entry mutation/native/IRQ/timing NOT QUALIFIED");
+    puts("HOST callback and borrowed-packet checks only; holder/source mutation/native/IRQ/timing NOT QUALIFIED");
+    puts("provider stale-entry matrix: 24 cases; 12 packet changes x TASK/delivery");
+    puts("no resource enter, token write or source release after observed stale packet");
     return 0;
 }

@@ -647,3 +647,28 @@ Both are **Amiberry/A1200 NOT RUN**. Historical candidate evidence remains bound
 to its original bytes. The inactive owned-input packet still pins the previous
 Load; a new packet must bind the revised candidate before qualification. The
 existing physical recovery hold remains unchanged.
+
+## Separate single-file input upload — 15 October 2026
+
+`InputPlan(execution, None, None)` prepares the same run's fresh RAM input
+namespace directly from the frozen candidate bytes. It refuses an existing
+directory, uploads only `NativeTest`, checks its checksum/size and exact one-file
+inventory, then retains custody through execution. This path has no preparation
+script, launch command, FTP server or archive extractor. Its maximum candidate
+size is 512 KiB so upload, custody and settlement fit the fixed256-exchange bound.
+The existing Dev-copy plan and four-file inventory remain unchanged.
+
+The default preparation ceiling remains60 seconds. Only upload mode can select
+an explicit ceiling up to120 seconds. That is bounded within the same original
+stage lifetime (at most250 seconds); ready state, reader waiting and settlement
+never reset it. This does not extend any native90, guest140 or whole250 execution
+budget. A caller must account for the separate transfer and retained source
+before admitting execution and refuse insufficient time. Live service/runner
+integration is still required; the helper alone opens no connection.
+
+Independent execution-idle and saved-custody proof are required before exact
+input deletion. Source mutation, extra files/directories, failed acknowledgments,
+expiry and uncertain readers retain ownership without retry. Ten new host groups
+pass, including every one of151 combined-model exchange failures, maximum-size
+accounting and explicit deadlines;19 copied-input and33 execution regression
+groups also pass. Native staging and physical transfer are NOT RUN for this mode.

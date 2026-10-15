@@ -1,0 +1,45 @@
+{
+  "acceptance": {
+    "audio": false,
+    "emulatorUploadMode": false,
+    "host": true,
+    "physicalUploadMode": false,
+    "timing": false
+  },
+  "allCombinedExchangeFaults": 151,
+  "deadlineReset": false,
+  "executionLimitsChanged": false,
+  "fixedInputExchangeLimit": 256,
+  "groups": {
+    "copiedInput": 19,
+    "execution": 33,
+    "upload": 10
+  },
+  "inputInventory": [
+    "NativeTest"
+  ],
+  "inputLaunches": 0,
+  "logSHA256": {
+    "copied.stderr": "2e5ad828f419c80efbbb182db3338628645af6175939b2125b4ee6e860f16b54",
+    "execution.stderr": "d49272602781bbbbc0aaacb1ad6968770eb08613f9a812a285666e54b3bb32ad",
+    "upload.stderr": "529a63786d36bbab48e63416912eba5e996600e9b9b5bb19dc5fcd4c3dd9e4b5"
+  },
+  "maximumCandidateBytes": 524288,
+  "preparationSeconds": {
+    "default": 60,
+    "existingCopyMaximum": 60,
+    "explicitUploadMaximum": 120
+  },
+  "remaining": [
+    "Fresh service/runner integration with separate transfer accounting",
+    "Exact Amiberry route qualification",
+    "Real A1200 qualification"
+  ],
+  "representativeInputExchangeCount": 66,
+  "sourceSHA256": {
+    "tests/test_owned_native_upload_input.py": "08cb9d36dbebcd7f8752d52e5033ba6cc7b5886328f37071b5909e2c627a7f05",
+    "tools/owned_native_input.py": "09376155e8c2e26816fa56f625935d7cb76f9db247a8ebe6c78b78b84aff2650"
+  },
+  "state": "HOST_PASS_UPLOAD_MODE_TARGET_NOT_RUN",
+  "wholeStageMaximumSeconds": 250
+}

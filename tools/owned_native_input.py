@@ -1,14 +1,17 @@
-"""Bounded Dev-to-RAM input preparation for a separately owned native run.
+"""Bounded RAM input preparation for a separately owned native run.
 
 This opt-in helper opens no transport and launches no native executable. It
-creates a fresh input directory, copies the exact caller-owned Dev file once,
+creates a fresh input directory, copies the exact caller-owned Dev file once
+or uploads the frozen candidate without a Shell command,
 and retains custody until the caller positively proves that all readers and
 the execution transaction have finished. Its deadline is additional accounting,
 not permission to reset or extend the caller's overall guest deadline.
 
 The caller supplies live shared guards, durable per-exchange records, exact Dev
-source ownership and independent settlement. Failures retain ownership. This
-does not implement MiniFTP/archive transfer or grant ownership of existing RAM.
+source ownership when copying, and independent settlement. Upload mode creates
+one file in a new namespace and never launches a command. Failures retain
+ownership. This does not implement MiniFTP/archive transfer or grant ownership
+of existing RAM.
 """
 import asyncio
 from dataclasses import dataclass
@@ -25,14 +28,21 @@ from owned_native_run import Plan, require
 @dataclass(frozen=True)
 class InputPlan:
     execution: Plan
-    source: str
-    command_id: int
+    source: str | None
+    command_id: int | None
 
     def __post_init__(self):
         require(type(self.execution) is Plan, "Exact execution plan required")
         require(self.execution.copy_source ==
                 "RAM:PT24G-" + self.execution.run_id[:16] + "-in/NativeTest",
                 "Execution must select its exact separate RAM input")
+        if self.source is None:
+            require(self.command_id is None, "Upload input has no command identity")
+            # Keep upload frames, custody and settlement inside the fixed
+            # 256-exchange bound even at the maximum permitted pathname.
+            require(len(self.execution.binary) <= 512 * 1024,
+                    "Uploaded input exceeds bounded staging capacity")
+            return
         require(isinstance(self.source, str) and re.fullmatch(
                 re.escape("Dev:Tests/PT24G-" + self.execution.run_id[:16] + "/")
                 + r"[A-Za-z0-9_-]+", self.source), "Exact run-owned Dev input required")
@@ -47,6 +57,8 @@ class InputPlan:
 
     @property
     def names(self):
+        if self.source is None:
+            return ("NativeTest",)
         return ("NativeTest", "Prepare-input", "ready.flag", "prepare.log")
 
     def path(self, name):
@@ -55,6 +67,7 @@ class InputPlan:
 
     @property
     def script(self):
+        require(self.source is not None, "Uploaded input has no preparation script")
         failed = f"If WARN\n Echo FAILED >{self.path('ready.flag')}\n Quit 20\nEndIf\n"
         return (f"FailAt 255\nC:Copy {self.source} {self.path('NativeTest')} QUIET\n" + failed
                 + f"C:Protect {self.path('NativeTest')} +rwed\n" + failed
@@ -63,14 +76,22 @@ class InputPlan:
 
     @property
     def command(self):
+        require(self.source is not None, "Uploaded input launches no command")
         return "C:Execute " + self.path("Prepare-input")
 
     def files(self):
+        if self.source is None:
+            return {"NativeTest": self.execution.binary}
         return {"NativeTest": self.execution.binary, "Prepare-input": self.script,
                 "ready.flag": b"READY\n",
                 "prepare.log": (self.execution.prefix + "INPUT-DONE\n").encode("ascii")}
 
     def description(self):
+        if self.source is None:
+            return {"runID": self.execution.run_id, "transfer": "upload",
+                    "directory": self.directory, "copySource": self.execution.copy_source,
+                    "files": list(self.names), "candidateBytes": len(self.execution.binary),
+                    "candidateSHA256": hashlib.sha256(self.execution.binary).hexdigest()}
         return {"runID": self.execution.run_id, "commandID": self.command_id,
                 "source": self.source, "directory": self.directory,
                 "copySource": self.execution.copy_source, "command": self.command,
@@ -82,15 +103,18 @@ class InputPlan:
 
 class InputStage:
     def __init__(self, plan, exchange, record, *, seconds=250,
-                 clock=time.monotonic, sleep=asyncio.sleep):
+                 clock=time.monotonic, sleep=asyncio.sleep, preparation_seconds=60):
         require(type(plan) is InputPlan and callable(exchange) and callable(record)
                 and callable(clock) and callable(sleep) and type(seconds) in (int, float)
                 and math.isfinite(seconds) and 0 < seconds <= 250, "Bounded input stage required")
+        require(type(preparation_seconds) in (int, float) and math.isfinite(preparation_seconds)
+                and 0 < preparation_seconds <= (120 if plan.source is None else 60),
+                "Bounded separate input preparation budget required")
         self.plan, self.exchange, self.record = plan, exchange, record
         self.clock, self.sleep = clock, sleep
         started = clock()
         self.deadline = started + seconds
-        self.prepare_deadline = min(self.deadline, started + 60)
+        self.prepare_deadline = min(self.deadline, started + preparation_seconds)
         self.phase, self.calls = "NEW", 0
 
     def remaining(self):
@@ -144,21 +168,31 @@ class InputStage:
                 "Input namespace contains changed, missing or unowned files")
         for name, data in files.items():
             await self._checksum(self.plan.path(name), data)
-        await self._checksum(self.plan.source, self.plan.execution.binary)
+        if self.plan.source is not None:
+            await self._checksum(self.plan.source, self.plan.execution.binary)
 
     async def prepare(self):
         require(self.phase == "NEW", "Input stage cannot be replayed")
         self.phase = "PREPARING"
         try:
             self.record({"event": "input_plan", "plan": self.plan.description()})
-            # Check the caller's source before any mutation; its checksum is not
-            # an ownership grant. The caller must keep its Dev copy pinned.
-            await self._checksum(self.plan.source, self.plan.execution.binary)
+            # Check a copied source before mutation; its checksum is not an
+            # ownership grant. Upload instead uses the frozen plan's bytes.
+            if self.plan.source is not None:
+                await self._checksum(self.plan.source, self.plan.execution.binary)
             raw = await self._ask({"type": "MAKEDIR", "path": self.plan.directory}, "OK")
             require(raw == "OK|MAKEDIR|" + self.plan.directory,
                     "Fresh input directory creation unconfirmed")
             require(await self._observer().directory(self.plan.directory) == (),
                     "Fresh input directory is not empty")
+            if self.plan.source is None:
+                await self._upload("NativeTest", self.plan.execution.binary)
+                await self._custody()
+                result = {"status": "INPUT_READY_CUSTODY_RETAINED", "plan": self.plan.description(),
+                          "files": self.manifest()}
+                self.record({"event": "input_ready", **result})
+                self.phase = "READY"
+                return result
             await self._upload("Prepare-input", self.plan.script)
             await self._upload("ready.flag", b"")
             require(await self._observer().file(self.plan.path("Prepare-input")) == self.plan.script,

@@ -1,0 +1,81 @@
+{
+  "acceptance": {
+    "audio": false,
+    "devicePlayback": false,
+    "exactLiveTiming": false,
+    "frontend": false,
+    "listening": false,
+    "ownedRAMInputRoute": true,
+    "physicalRevisedCandidate": false,
+    "syntheticNewPublication": true
+  },
+  "candidate": {
+    "crc32": "74D8A3F1",
+    "sha256": "81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac",
+    "size": 216424
+  },
+  "cleanup": {
+    "archives": 76,
+    "exactInputAndExecutionNamespacesAbsent": true,
+    "hostStagingAbsent": true,
+    "independentFinalIdle": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "publicReleaseFence": 1647,
+    "savedLauncherFilesRestored": true,
+    "testPortsAndIPCAbsent": true
+  },
+  "executionFiles": 9,
+  "inputFiles": 4,
+  "limits": {
+    "guestSeconds": 140,
+    "nativeSeconds": 90,
+    "wholeSeconds": 250
+  },
+  "nativeObserved": {
+    "nativeMarkers": [
+      "DOCUMENT PUBLICATION BEGIN:new",
+      "DOCUMENT ACTION TRACE:entered",
+      "DOCUMENT ACTION TRACE:fixture-allocated",
+      "DOCUMENT ACTION TRACE:initial-document-created",
+      "DOCUMENT ACTION TRACE:initial-editor-created",
+      "DOCUMENT ACTION TRACE:initial-masters-begun",
+      "DOCUMENT ACTION TRACE:initial-masters-ready",
+      "DOCUMENT ACTION TRACE:checked-editor-ready",
+      "DOCUMENT ACTION TRACE:checked-owner-begun",
+      "DOCUMENT ACTION TRACE:source-encoded",
+      "DOCUMENT ACTION TRACE:fixture-ready",
+      "DOCUMENT ACTION TRACE:prepared",
+      "DOCUMENT ACTION TRACE:published",
+      "DOCUMENT ACTION TRACE:committed",
+      "DOCUMENT ACTION TRACE:stopped-and-disposed",
+      "DOCUMENT ACTION TRACE:paula-closed",
+      "DOCUMENT ACTION TRACE:amigus-closed",
+      "DOCUMENT ACTION TRACE:finished",
+      "DOCUMENT PUBLICATION PASS:new; final-address owner and checked cleanup; injected voices"
+    ],
+    "observedStackBytes": 262144,
+    "outputBytes": 767,
+    "outputCRC32": "1B45D25F",
+    "rawStackQuery": "Current stack size is 262144 bytes",
+    "returnCode": 0
+  },
+  "protocolRecords": 319,
+  "recordsSHA256": {
+    "admission": "0d75428ebef9057dfc32519bdf568b2bb350158ef3aeac62d32ff75ed40917af",
+    "buildVerification": "a2ba475051835424d40c474c4b3fd54659a8be8c5806a78b75e5cef5eb64a485",
+    "finalIdle": "3f76bdcc4f4ca16b49aa658a4cf194eac65bfda1717b653da0978944e10c2225",
+    "independentPass": "3c5f7ad136d0019a64220c2864477c73814947dc41fb05888d3c710dd6a718cf",
+    "ownedServiceStop": "f205f5f239c83d43cf2dc9ac986586bcae2796bbfc4c1331d30a85611e221132",
+    "publicRelease": "ffffe937fc6cca51e1e9de50845f6f94f78d3e881e476dc4fb7dfd54a5819ce1",
+    "runResult": "e7625ce43c1b03ad15f46413530774260d922b3134dbf0927ad57626df3bfe07"
+  },
+  "runnerSourceHead": "bbef600be689fabebe95f5ad5770a9197bd3086c",
+  "sourceHead": "ad33205d4baa72c38e56e1610069116090c8f8fd",
+  "sourceMetadataCorrection": {
+    "currentActionBytes": 16464,
+    "currentActionSHA256": "c12fab0cd8f8df42412c5d9b875508119bd59310c3ca6a4638f1efd1360e8bbe",
+    "priorLoadRawFields": "Prior Load runner retained stale action-source descriptor16192/6ee430e2. Its candidate bytes and build manifest/sourceHead were current and remain verified; raw evidence is preserved."
+  },
+  "state": "EMULATOR_PASS_INDEPENDENTLY_RELEASED",
+  "verifiedBuildInputs": 91
+}

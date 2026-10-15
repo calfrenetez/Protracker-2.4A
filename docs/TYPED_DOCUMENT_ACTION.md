@@ -186,3 +186,9 @@ remain archived. See the [recovery evidence](../evidence/enhanced-editor/documen
 The 224,436-byte revised Load fixture (SHA-256 `32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a`) passes one fresh 030 emulator run: RC0, Stack262144 and all 19 exact diagnostic lines, 769 output bytes/CRC4EC504EA. The four-file input copy and nine-file execution copy have separate custody and exact settlement. Independent absence, saved launcher restoration, public release and final idle checks pass. Native90/guest140/whole250 limits are unchanged.
 
 The earlier bridge failure is retained separately; it did not recur, so its original cause remains unproven. This qualifies synthetic Load publication and the RAM staging route on the emulator. The revised New fixture, physical execution of these exact bytes, full frontend, device output and timing/listening remain separate. See [compact emulator record](../evidence/enhanced-editor/document-load-owned-input-emulator/result.json).
+
+### Revised New publication — 15 October 2026
+
+The separate 216,424-byte New fixture (SHA-256 `81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac`) also passes one fresh 030 run: RC0, Stack262144 and all 19 exact lines. All 91 linker inputs were reverified. Exact input/execution custody, separate cleanup, original-file restoration, public release and independent final idle pass at unchanged90/140/250 limits. Physical New execution, frontend and device/timing/listening acceptance remain unqualified. See [New record](../evidence/enhanced-editor/document-new-owned-input-emulator/result.json).
+
+Metadata correction: the earlier revised Load runner retained old action-source descriptor fields16192/6ee430e2. Its exact binary and build manifest/sourceHead were current. The New packet explicitly pins the current16464-byte/c12fab0c source; historical Load records are preserved, with no binary change or inferred extra acceptance.

@@ -13,11 +13,16 @@ class Bridge:
     def __init__(self, plan):
         self.plan = plan
         self.files = {"RAM:original": b"preserve", "T:ab_script_1": b"old script"}
+        if plan.copy_source:
+            self.files[plan.copy_source] = plan.binary
         self.directories = {"RAM:", "T:"}
         self.calls = []
         self.fail_at = None
         self.native_rc = 0
         self.launches = 0
+        self.copy_launches = 0
+        self.copy_complete = True
+        self.copy_failed = False
         self.complete = True
         self.change_reply = lambda command, reply: reply
 
@@ -56,6 +61,14 @@ class Bridge:
             data = self.files[path][command["offset"]:command["offset"] + command["size"]]
             reply = f"FILE|{path}|{command['offset']}|{len(data)}|{data.hex()}"
         elif typ == "LAUNCH":
+            if self.plan.copy_source and command['id'] == self.plan.command_id + 1:
+                assert command['command'] == self.plan.staging_command
+                self.copy_launches += 1
+                self.files[self.plan.path('NativeTest')] = self.files[self.plan.copy_source]
+                self.files[self.plan.path('stage.log')] = (self.plan.prefix + 'STAGE-DONE\n').encode()
+                if self.copy_complete:
+                    self.files[self.plan.path('staged.flag')] = b'FAILED\n' if self.copy_failed else b'STAGED\n'
+                return self.change_reply(command, f"CMD|{command['id']}|OK|Started: {command['command']}")
             assert command == {"type": "LAUNCH", "id": self.plan.command_id, "command": self.plan.command}
             self.launches += 1
             prefix = self.plan.prefix
@@ -80,8 +93,9 @@ class Bridge:
 
 
 class TransactionTests(unittest.IsolatedAsyncioTestCase):
-    def new(self, **kwargs):
-        self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 36, ("native first PASS", "native final PASS"))
+    def new(self, *, copy=False, **kwargs):
+        self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 36, ("native first PASS", "native final PASS"),
+                         copy_source='Dev:Tests/PT24G-' + 'a1' * 8 + '/Fixture' if copy else None)
         self.bridge = Bridge(self.plan)
         self.events = []
         return Transaction(self.plan, self.bridge.exchange, self.events.append, **kwargs)
@@ -125,6 +139,79 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.bridge.calls), 1)
         self.assertEqual(self.bridge.files, before)
         self.assertEqual(transaction.phase, "FAILED")
+
+    async def test_copy_mode_keeps_source_and_settles_only_eight_owned_files(self):
+        transaction = self.new(copy=True)
+        original = dict(self.bridge.files)
+        self.idle_calls = 0
+        await self.complete(transaction)
+        self.assertEqual(self.bridge.copy_launches, 1)
+        self.assertEqual(len(self.plan.names), 8)
+        self.assertEqual(len(transaction.custody), 8)
+        self.assertFalse(any(c['type'] == 'WRITEFILE' and c['path'] == self.plan.path('NativeTest')
+                             for c in self.bridge.calls))
+        self.assertFalse(any(c['type'] != 'CHECKSUM' and c.get('path') == self.plan.copy_source
+                             for c in self.bridge.calls))
+        await transaction.settle(self.idle)
+        self.assertEqual(self.bridge.files, original)
+        self.assertEqual(self.bridge.launches, 1)
+
+    async def test_copy_mode_each_exchange_failure_retains_without_followup(self):
+        transaction = self.new(copy=True)
+        self.idle_calls = 0
+        await self.complete(transaction)
+        await transaction.settle(self.idle)
+        for failure in range(1, len(self.bridge.calls) + 1):
+            with self.subTest(exchange=failure):
+                transaction = self.new(copy=True)
+                self.bridge.fail_at = failure
+                with self.assertRaises(TimeoutError):
+                    await transaction.prepare()
+                    await transaction.execute()
+                    await transaction.settle(self.idle)
+                self.assertEqual(transaction.phase, 'FAILED')
+                self.assertEqual(len(self.bridge.calls), failure)
+                self.assertEqual(self.bridge.files[self.plan.copy_source], self.plan.binary)
+                with self.assertRaises(ValueError):
+                    await transaction.prepare()
+                self.assertEqual(len(self.bridge.calls), failure)
+
+    async def test_copy_failure_flag_stops_before_native_launch(self):
+        transaction = self.new(copy=True)
+        self.bridge.copy_failed = True
+        with self.assertRaisesRegex(ValueError, 'staging success absent'):
+            await transaction.prepare()
+        self.assertEqual(self.bridge.copy_launches, 1)
+        self.assertEqual(self.bridge.launches, 0)
+        self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
+    async def test_changed_copy_source_blocks_any_launch(self):
+        transaction = self.new(copy=True)
+        self.bridge.files[self.plan.copy_source] = b'changed'
+        with self.assertRaisesRegex(ValueError, 'Guest bytes/CRC differ'):
+            await transaction.prepare()
+        self.assertEqual(self.bridge.launches + self.bridge.copy_launches, 0)
+
+    async def test_copy_source_requires_exact_run_namespace_and_command_id(self):
+        self.new(copy=True)
+        for source in ('Dev:Tests/PT24G-' + 'b2' * 8 + '/Fixture',
+                       'RAM:foreign/Fixture', self.plan.copy_source + ';Delete',
+                       self.plan.copy_source + '/../Fixture'):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                Plan(self.plan.run_id, 17, b'x', ('PASS',), copy_source=source)
+        with self.assertRaises(ValueError):
+            Plan(self.plan.run_id, 0xffffffff, b'x', ('PASS',), copy_source=self.plan.copy_source)
+
+    async def test_copy_wait_has_separate_bounded_deadline(self):
+        now = [0]
+        async def sleep(seconds):
+            now[0] += seconds
+        transaction = self.new(copy=True, clock=lambda: now[0], sleep=sleep)
+        self.bridge.copy_complete = False
+        with self.assertRaisesRegex(ValueError, 'Staging completion deadline expired'):
+            await transaction.prepare()
+        self.assertEqual(now[0], 30)
+        self.assertEqual(self.bridge.launches, 0)
 
     async def test_timeout_at_every_exchange_stops_without_followup(self):
         transaction = self.new()

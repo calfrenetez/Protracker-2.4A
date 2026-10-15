@@ -35,7 +35,7 @@ def require(ok, message):
 
 def path(value):
     require(isinstance(value, str) and 0 < len(value) <= 192
-            and re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*:(?:[A-Za-z0-9_.-]+/?)*", value),
+            and re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*:(?:[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*/?)?", value),
             "Exact ordinary Amiga pathname required")
     require(all(x not in (".", "..") for x in value.split(":")[1].split("/")),
             "Parent/current-directory aliases are not supported")

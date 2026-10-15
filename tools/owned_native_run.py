@@ -34,6 +34,7 @@ class Plan:
     binary: bytes
     markers: tuple
     stack: int = 524288
+    copy_source: str | None = None
 
     def __post_init__(self):
         require(isinstance(self.run_id, str) and re.fullmatch(r"[0-9a-f]{32}", self.run_id),
@@ -48,6 +49,12 @@ class Plan:
                 and all(isinstance(x, str) and x and len(x) <= 256 and x.isascii()
                         and x.isprintable() for x in self.markers), "Exact native marker contract required")
         require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
+        if self.copy_source is not None:
+            wire.path(self.copy_source)
+            require(re.fullmatch(re.escape("Dev:Tests/PT24G-" + self.run_id[:16] + "/")
+                                 + r"[A-Za-z0-9_-]+", self.copy_source)
+                    and self.command_id < 0xffffffff,
+                    "Exact run-owned emulator staging source and distinct copy identity required")
 
     @property
     def directory(self):
@@ -61,7 +68,8 @@ class Plan:
 
     @property
     def names(self):
-        return ("NativeTest", "Run-once", "complete.flag", "control.log", "native.log")
+        names = ("NativeTest", "Run-once", "complete.flag", "control.log", "native.log")
+        return names + (("Stage-once", "staged.flag", "stage.log") if self.copy_source else ())
 
     @property
     def prefix(self):
@@ -81,12 +89,36 @@ class Plan:
     def expected_output(self):
         return ("\n".join(self.markers) + "\n").encode("ascii")
 
+    @property
+    def staging_script(self):
+        require(self.copy_source is not None, "No emulator copy source selected")
+        failure = f"If WARN\n Echo FAILED >{self.path('staged.flag')}\n Quit 20\nEndIf\n"
+        return (f"FailAt 255\nC:Copy {self.copy_source} {self.path('NativeTest')} QUIET\n"
+                + failure + f"C:Protect {self.path('NativeTest')} +rwed\n" + failure
+                + f"Echo {self.prefix}STAGE-DONE\nEcho STAGED >{self.path('staged.flag')}\n").encode('ascii')
+
+    @property
+    def staging_command(self):
+        return f"C:Execute {self.path('Stage-once')} >{self.path('stage.log')}"
+
+    def prepared_files(self):
+        files = {"NativeTest": self.binary, "Run-once": self.script, "complete.flag": b""}
+        if self.copy_source:
+            files.update({"Stage-once": self.staging_script, "staged.flag": b"STAGED\n",
+                          "stage.log": (self.prefix + "STAGE-DONE\n").encode('ascii')})
+        return files
+
     def description(self):
-        return {"runID": self.run_id, "commandID": self.command_id,
+        result = {"runID": self.run_id, "commandID": self.command_id,
                 "directory": self.directory, "files": list(self.names),
                 "candidateBytes": len(self.binary), "candidateSHA256": hashlib.sha256(self.binary).hexdigest(),
                 "scriptSHA256": hashlib.sha256(self.script).hexdigest(), "command": self.command,
                 "stackBytes": self.stack, "expectedMarkers": list(self.markers)}
+        if self.copy_source:
+            result.update(copySource=self.copy_source, copyCommandID=self.command_id + 1,
+                          stagingScriptSHA256=hashlib.sha256(self.staging_script).hexdigest(),
+                          stagingCommand=self.staging_command)
+        return result
 
 
 class Transaction:
@@ -134,7 +166,10 @@ class Transaction:
             raise
 
     async def checksum(self, name, data):
-        remote = self.plan.path(name)
+        await self.checksum_path(self.plan.path(name), data)
+
+    async def checksum_path(self, remote, data):
+        wire.path(remote)
         raw = await self.ask({"type": "CHECKSUM", "path": remote}, "CHECKSUM")
         match = re.fullmatch(re.escape("CHECKSUM|" + remote + "|") + r"([0-9a-fA-F]{8})\|(0|[1-9][0-9]*)", raw)
         require(match and int(match[1], 16) == zlib.crc32(data) and int(match[2]) == len(data),
@@ -150,13 +185,50 @@ class Transaction:
     def observer(self, seconds=60):
         return wire.Observation(self.ask, seconds=min(seconds, 60, self.remaining()), clock=self.clock)
 
+    async def copy_candidate(self):
+        """Emulator-only copy from caller-pinned shared staging; never alters source."""
+        await self.checksum_path(self.plan.copy_source, self.plan.binary)
+        await self.upload("Stage-once", self.plan.staging_script)
+        await self.upload("staged.flag", b"")
+        require(await self.observer().file(self.plan.path("Stage-once")) == self.plan.staging_script,
+                "Uploaded staging script differs")
+        deadline = min(self.deadline, self.clock() + 30)
+        ident, command = self.plan.command_id + 1, self.plan.staging_command
+        raw = await self.ask({"type": "LAUNCH", "id": ident, "command": command}, "CMD", 10)
+        require(re.fullmatch(re.escape(f"CMD|{ident}|OK|Started") +
+                             r"(?: \(proc [1-9][0-9]*\))?: " + re.escape(command), raw),
+                "Exact staging launch acknowledgement absent")
+        for _ in range(80):
+            remaining = deadline - self.clock()
+            require(remaining > 0, "Staging completion deadline expired")
+            path = self.plan.path("staged.flag")
+            raw = await self.ask({"type": "FILEINFO", "path": path}, "FILEINFO", min(4, remaining))
+            require(self.clock() < deadline, "Staging completion deadline expired")
+            size = wire.file_info(raw, path, 7)[0]
+            require(size in (0, 7), "Unexpected staging flag length")
+            if size:
+                flag = await self.observer(deadline - self.clock()).file(path, 7)
+                require(self.clock() < deadline and flag == b"STAGED\n", "Exact timely staging success absent")
+                break
+            await self.sleep(min(.5, max(0, deadline - self.clock())))
+        else:
+            raise ValueError("Staging observation count exceeded")
+        require(await self.observer().file(self.plan.path("stage.log")) ==
+                self.plan.prepared_files()["stage.log"], "Staging output differs")
+        await self.checksum("NativeTest", self.plan.binary)
+        await self.checksum_path(self.plan.copy_source, self.plan.binary)
+
     async def prepare(self):
         async def perform():
             self.record({"event": "plan", "plan": self.plan.description()})
             raw = await self.ask({"type": "MAKEDIR", "path": self.plan.directory}, "OK")
             require(raw == "OK|MAKEDIR|" + self.plan.directory, "Fresh directory creation unconfirmed")
             require(await self.observer().directory(self.plan.directory) == (), "New directory is not empty")
-            for name, data in (("NativeTest", self.plan.binary), ("Run-once", self.plan.script), ("complete.flag", b"")):
+            if self.plan.copy_source:
+                await self.copy_candidate()
+            else:
+                await self.upload("NativeTest", self.plan.binary)
+            for name, data in (("Run-once", self.plan.script), ("complete.flag", b"")):
                 await self.upload(name, data)
             require(await self.observer().file(self.plan.path("Run-once")) == self.plan.script,
                     "Uploaded script bytes differ")
@@ -168,10 +240,10 @@ class Transaction:
         async def perform():
             require(type(native_seconds) in (int, float) and math.isfinite(native_seconds)
                     and 0 < native_seconds <= 90, "Native deadline may not be widened")
-            for name, data in (("NativeTest", self.plan.binary), ("Run-once", self.plan.script), ("complete.flag", b"")):
+            for name, data in self.plan.prepared_files().items():
                 await self.checksum(name, data)
             entries = await self.observer().directory(self.plan.directory)
-            require({e.name for e in entries} == {"NativeTest", "Run-once", "complete.flag"}
+            require({e.name for e in entries} == set(self.plan.prepared_files())
                     and all(e.kind == "F" for e in entries), "Prepared namespace changed")
             started = self.clock()
             native_deadline = min(self.deadline, started + native_seconds)
@@ -195,7 +267,7 @@ class Transaction:
                 await self.sleep(min(0.5, max(0, native_deadline - self.clock())))
             else:
                 raise ValueError("Completion observation count exceeded")
-            files = {"NativeTest": self.plan.binary, "Run-once": self.plan.script, "complete.flag": flag}
+            files = dict(self.plan.prepared_files(), **{"complete.flag": flag})
             for name in ("control.log", "native.log"):
                 files[name] = await self.observer().file(self.plan.path(name), capture.MAX_OUTPUT)
             control = files["control.log"].decode("ascii")

@@ -3,12 +3,27 @@ import asyncio
 from pathlib import Path
 import sys
 import unittest
+import subprocess
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import native_file_protocol as p
 
 
 class WireTests(unittest.TestCase):
+    def test_long_malformed_path_validation_is_bounded(self):
+        code = """import native_file_protocol as p
+for tail in (';', '|', '//x', '/..', '\\n'):
+    try:
+        p.path('RAM:' + 'a' * 180 + tail)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Malformed pathname accepted')
+"""
+        subprocess.run([sys.executable, '-c', code],
+                       cwd=Path(__file__).resolve().parents[1] / 'tools',
+                       timeout=3, check=True, capture_output=True, text=True)
+
     def test_write_frames_fit_daemon_arrays_and_reconstruct_exact_bytes(self):
         for requested in ("RAM:x", "RAM:PT24G-" + "ab" * 8 + "/NativeTest",
                           "RAM:" + "a" * 188):

@@ -13,7 +13,7 @@ unsuitable for proving exact temporary-file ownership on the real machine.
 `owned_native_run.py` prepares an alternative using the existing bridge commands:
 
 1. Record the full run identity, candidate hash, script hash and five exact file
-   names before dispatch. Require a successful `MAKEDIR`/`CreateDir` for a fresh
+   names before dispatch (eight for emulator copy mode). Require a successful `MAKEDIR`/`CreateDir` for a fresh
    RAM directory; never adopt a directory that already exists.
 2. Upload frozen candidate/script bytes and an empty completion flag. Check
    guest CRC/length and read back the script exactly. The classic directory
@@ -54,7 +54,7 @@ transport or a substitute for shared reservations and live target checks.
 
 ## Evidence and limits
 
-58 host tests pass across raw protocol parsing, transaction fault injection,
+65 host tests pass across raw protocol parsing, transaction fault injection,
 guarded exchange observation and the existing native capture contract. The
 transaction tests fail every exchange in turn and verify no subsequent request,
 retry or automatic cleanup; unrelated model files remain unchanged. These are
@@ -79,7 +79,31 @@ longest permitted path and offset digit boundaries, and fail each exchange in
 turn without further requests or cleanup. A short write acknowledgement is
 rejected immediately. Fewer requests do not establish throughput or completion
 within the preparation deadline; this changed uploader is Amiberry NOT RUN.
-The held service still uses its original frozen source copies.
+The original service used its frozen source copies throughout that run and its
+approved recovery. Recovery subsequently stopped only the two owned processes,
+restored the saved launcher files and removed the exact staging copy. Independent
+checks and public release archived the interrupted operation and both HOLDs.
+This does not convert the failed transfer into a pass.
+
+An optional **emulator-only copy mode** avoids uploading the executable over the
+command channel. Its source must be the caller-pinned file under the exact run's
+`Dev:Tests/PT24G-<identity>/` directory. The caller must still verify the shared
+mount and host file identity. The transaction checks source CRC/length, uploads
+a small owned copy script, launches it once, verifies its bounded completion and
+exact output, and checks both the RAM copy and source again. The source is never
+changed or deleted by the transaction. Three additional RAM files belong to the
+same run and are included in custody and exact settlement. Native execution
+still uses the RAM copy and the original 90-second deadline. No SCRIPT helper,
+hidden `T:` file, second transport or deadline extension is introduced.
+
+Both upload and copy modes have host failure injection. Copy-specific tests
+cover every failed exchange, wrong source, failed copy, uncompleted copy and
+unchanged source after settlement. Malformed-path tests also found a redundant
+nested repetition in the original path expression that could stall rejection.
+The equivalent segment-based expression now completes a separately timed
+malformed-input regression. Copy mode is **Amiberry NOT RUN; physical unsupported**
+until a separately admitted run qualifies it. This mode does not assume the real
+A1200 has the emulator's shared mount.
 
 Directory replies are not atomic snapshots. The historical daemon does not check
 `IoErr()` after `ExNext()`, so even a syntactically complete response cannot prove

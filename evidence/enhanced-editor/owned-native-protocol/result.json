@@ -63,12 +63,40 @@
     "exactPartialGuestFileSizeKnown": false,
     "nativeAcceptance": false,
     "guardState": "HOLD_WITH_INFLIGHT_AND_TWO_HOLDS",
-    "recovery": "PENDING_SEPARATE_APPROVAL",
+    "recovery": "APPROVED_EXACT_RECOVERY_INDEPENDENTLY_RELEASED",
     "errorJournalLockRefusal": true,
     "nativeSeconds": 90,
     "guestSeconds": 140,
     "wholeSeconds": 250,
     "rerun": false,
-    "heldServiceSourceChanged": false
+    "heldServiceSourceChanged": false,
+    "recoveryTestRuns": 0,
+    "originalHoldsArchived": 2
+  },
+  "currentCopyModeHost": {
+    "status": "PASS",
+    "exitCode": 0,
+    "testCount": 65,
+    "sourceSHA256": {
+      "tools/native_file_protocol.py": "aa2dbfcdd1f5ee1974c19a4975bf23ba0f472b04ec1a0ba04ad89ef59308c0e8",
+      "tools/owned_native_run.py": "fde6358daa144a9ad4b6afba034f4fe93ec134c12fe0134cc21d04efa42b8597",
+      "tools/native_guarded_exchange.py": "24488097cf69d278b27866e2c816b50ee26e040cf1e962eeafd18d1bcfa970d9",
+      "tools/native_fixture_capture.py": "1ee1e1a775bbf6690ec4770d736fa0b2d09e1dc891fae2cd8678cb5c22eb0569",
+      "tests/test_native_file_protocol.py": "4bcc8553f26202af7ba12f807284c97fde0fe64c3d124a6907f7eb663f0b64a3",
+      "tests/test_owned_native_run.py": "17b6caf9ecbb85dfbb3dfd6bfcdb255aa5a04fab9587a36d5d584def309c7f90",
+      "tests/test_native_guarded_exchange.py": "08f4c8e35e9337169b7dfb209a05172f47bd5098d756fca3075b9bb1953924b6",
+      "tests/test_native_fixture_capture.py": "46582a77ab22db0cc916fd72808acb54c21badf248be99ca20af0f7f3b03a7ff"
+    },
+    "scope": "Host models only; no target or service operations",
+    "amiberry": "NOT_RUN",
+    "physical": "UNSUPPORTED_COPY_MODE",
+    "nativeSeconds": 90,
+    "copySeconds": 30,
+    "wholeSeconds": 250
+  },
+  "malformedPathRegression": {
+    "originalOneSecondChildTimeout": true,
+    "currentSeparateThreeSecondBound": "PASS",
+    "targetOperations": 0
   }
 }

@@ -356,7 +356,7 @@
       "test_guest_phase.py": "c589c7dfaf16d2932be5668b5ac7151520721bf7928b9998e1178fc52d471ba3"
     },
     "amiberry": "SEPARATE_EXACT_INCREMENTAL_INTEGRATION_PASS",
-    "physical": "NOT_RUN_INCREMENTAL_INTEGRATION"
+    "physical": "SEPARATE_EXACT_INCREMENTAL_SAMPLER_PASS"
   },
   "incrementalSamplerAmiberry": {
     "status": "PASS_COMPLETE_RUN_INDEPENDENTLY_RELEASED",
@@ -375,6 +375,52 @@
     "nativeSeconds": 90,
     "guestSeconds": 140,
     "wholeSeconds": 250,
-    "physical": "NOT_RUN_INCREMENTAL_ROUTE"
+    "physical": "SEPARATE_EXACT_INCREMENTAL_SAMPLER_PASS"
+  },
+  "incrementalSamplerPhysical": {
+    "status": "PASS_COMPLETE_RUN_INDEPENDENTLY_RELEASED",
+    "candidateBytes": 166396,
+    "candidateSHA256": "84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769",
+    "candidateCRC32": "A0A3172B",
+    "sourceRevision": "78d6871",
+    "typedReplacementAndActionEnabled": false,
+    "CPU": "68030",
+    "execVersion": "47.13",
+    "video": "PAL",
+    "returnCode": 0,
+    "observedStackBytes": 262144,
+    "nativeOutputBytes": 1159,
+    "nativeOutputCRC32": "808D90D6",
+    "nativeOutputSHA256": "f4f874aad4ba32bc485b37da7af41488528f7b00a0eedab321ac1cf5a8465a76",
+    "expectedLines": 8,
+    "uploadBatches": 11,
+    "outerCalls": 23,
+    "nativeLaunches": 1,
+    "candidateAndScriptVerifiedBeforeLaunch": true,
+    "custodyFiles": 5,
+    "exactCleanup": true,
+    "separateRAMParentAbsence": true,
+    "independentRelease": true,
+    "ownedServiceStopped": true,
+    "independentFinalIdle": true,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "viewOnlyObservedBeforeAndAfter": true,
+    "browserControlAcquired": false,
+    "audioOrDeviceOperations": false,
+    "recoveryRequired": false,
+    "retry": false,
+    "acceptance": "Ordinary-memory sampler18 functional checks only",
+    "notQualified": [
+      "newer typed New/Load integration",
+      "full editor frontend",
+      "physical Fast/Chip placement",
+      "DMA or device voice-stop",
+      "AmiGUS capacity or upload ordering/completion",
+      "exact musical scheduling",
+      "listening quality"
+    ],
+    "archiveCapacity": "FULL_64_RECORDS_PRESERVED_NO_AUTOMATIC_MAINTENANCE"
   }
 }

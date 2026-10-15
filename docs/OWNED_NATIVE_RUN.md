@@ -2,7 +2,8 @@
 
 Status: **Exact Load fixture and full owned-RAM copy/capture/cleanup route pass
 in Amiberry. Independent restoration, release and final idle checks pass.
-Physical execution NOT RUN; the real-machine upload route is still separate.**
+The exact sampler18 fixture also passes the incremental direct-upload route on
+the real A1200, with independent cleanup and release.**
 These helpers do not activate or unblock the older physical runner by themselves.
 Product architecture, timing policy and editor layout are unchanged.
 
@@ -205,7 +206,8 @@ is not qualified by this fixture.
 
 This establishes direct upload for the smaller candidate only; the larger Load
 candidate's upload deadline is not qualified. The separately tested physical binding and its first transfer attempt are
-recorded below; physical native execution remains unqualified.
+recorded below. That attempt did not launch the native fixture; the later
+incremental physical pass is recorded separately at the end.
 
 
 ## Physical sampler transfer attempt
@@ -234,7 +236,7 @@ both original HOLDs and the interrupted operation; final idle verification passe
 No rerun or reboot occurred. A reporting check initially looked in the wrong
 archive directory after release; the actual history archive was independently
 verified without repeating release. That failed check is preserved.
-The physical sampler result is NOT RUN, with transfer INCOMPLETE.
+This original physical sampler attempt remains NOT RUN, with transfer INCOMPLETE.
 
 This failure does not invalidate the completed Amiberry evidence, but that
 evidence cannot qualify physical upload throughput. No audio, timing or AmiGUS
@@ -257,8 +259,8 @@ The complete host model covers all 23 outer call failures and incorrect progress
 replies. A synthetic slow transfer exercises a total above 60 seconds without
 resetting its 140-second deadline; this is not measured hardware throughput.
 The prepared runner retains native90/guest140/whole250 limits, using 20-second
-begin/chunk calls and a 60-second final verification call. These host results do
-not yet qualify the incremental integration in Amiberry or on the real A1200.
+begin/chunk calls and a 60-second final verification call. Host models alone
+do not qualify the target integrations recorded below.
 
 
 The incremental integration subsequently passed one exact 68030 Amiberry run:
@@ -268,4 +270,36 @@ five-file custody and settlement, independent RAM absence, staging removal,
 disconnect, emulator shutdown and original launcher restoration passed under
 the unchanged limits. A separate observer, public release, owned service stop
 and final independent idle check also passed. This qualifies the changed
-transfer route in Amiberry only; the incremental physical run is still NOT RUN.
+transfer route in Amiberry; physical acceptance is recorded separately below.
+
+
+## Incremental sampler physical acceptance
+
+The exact Amiberry-qualified sampler18 candidate passed once on the real A1200:
+166,396 bytes, SHA256
+`84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769`,
+CRC A0A3172B. Fresh identity reported CPU68030, Exec47.13 and PAL; the installed
+bridge matched the pinned reference. All eleven upload batches and final
+candidate/script verification passed before the single native launch.
+
+Native RC0, Stack262144 and all eight expected lines were confirmed (1,159
+output bytes, CRC808D90D6). The fixture covers ordinary-memory 24-bit sample
+editing and history, conversion, loop/slice edits, IFF/RAW import/export,
+budgets, retirement inventory and serialized save/reopen behavior. Its existing
+source/configuration limits above remain in force: this is sampler functional
+acceptance, not newer typed New/Load integration or the complete editor.
+
+All 23 outer calls completed with the original native90/guest140/whole250 limits.
+Five-file custody, exact file/directory settlement, a separate RAM parent
+listing, host staging removal and disconnect passed. An independent observer
+verified the result before public release; the exact disconnected local service
+then stopped normally and a separate final idle check passed. Safari remained
+authenticated View Only throughout; browser control was never acquired. No
+recovery, retry, reboot, audio or AmiGUS operation was performed in this run.
+
+Physical Fast/Chip placement, DMA or device voice-stop, AmiGUS RAM capacity and
+upload ordering/completion, exact musical scheduling and listening quality are
+not established. The earlier incomplete physical transfer and its approved
+recovery retain their original outcomes. All release evidence is preserved;
+the shared guard has now reached its 64-archive bound and refuses a further
+reservation until separately reviewed maintenance is complete.

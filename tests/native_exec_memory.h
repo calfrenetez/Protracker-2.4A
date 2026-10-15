@@ -16,8 +16,13 @@ static void native_memory_start(void)
     assert(!pt_master_allocate(&native_pool,1) && !native_pool.used);
     assert(native_pool.flags==MEMF_FAST);
     native_pool.limit=limit;native_started=1;
+#if defined(PT_TEST_NATIVE_MEMORY_FIXED_MARKERS) && PT_TEST_NATIVE_MEMORY_FIXED_MARKERS
+    assert(native_pool.reserve==256UL*1024);
+    puts("EXEC MEMORY POOL PASS: Fast-only pool, reserve and zero-budget refusal");
+#else
     printf("EXEC MEMORY pool_limit=%lu reserve=%lu flags=%lu\n",
         (unsigned long)limit,(unsigned long)native_pool.reserve,(unsigned long)native_pool.flags);
+#endif
 }
 static void *native_allocate(size_t bytes)
 {
@@ -34,6 +39,10 @@ static void native_release(void *p)
 static void native_memory_finish(void)
 {
     assert(native_allocations && !native_pool.used);
+#if defined(PT_TEST_NATIVE_MEMORY_FIXED_MARKERS) && PT_TEST_NATIVE_MEMORY_FIXED_MARKERS
+    puts("EXEC MEMORY PASS: Fast allocations, zero owned bytes, budget refusal without Chip fallback");
+#else
     printf("EXEC MEMORY PASS: %u Fast allocations, zero owned bytes, budget refusal without Chip fallback\n",native_allocations);
+#endif
 }
 #endif

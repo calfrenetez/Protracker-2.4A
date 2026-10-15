@@ -1,0 +1,34 @@
+{
+  "status": "HOST_PASS_NATIVE_COMPILE_LINK_PASS_TARGET_NOT_RUN",
+  "scope": "Existing selective Paula cache fixture with genuine native Exec allocator wrapper; stable output opt-in only",
+  "productionSourcesChanged": false,
+  "hostChecks": {
+    "samplerCacheSanitizers": "PASS",
+    "masterAndChipAllocatorModels": "PASS",
+    "actualNativeWrapperWithInjectedExecDefaultAndFixedOutput": "PASS"
+  },
+  "compiler": {
+    "units": 21,
+    "commands": 64,
+    "allReturnCodesZero": true,
+    "allErrorStreamsEmpty": true,
+    "loadInputs": 28,
+    "loadAudit": true,
+    "binaryBytes": 150436,
+    "binarySHA256": "b12aee9adfa2218bae4b7c5bd3dc3e91aa1d0ff9af3d139f03b43e08fb61f121",
+    "binaryCRC32": "85169D7D",
+    "nativeExecution": false
+  },
+  "priorAttempts": {
+    "originalSDKRead": "PREPROCESSOR_TIMEOUT_RETAINED_BEFORE_PRODUCT",
+    "residentConfiguredHeaderCopy": "18 exact configured NDK headers; no reconstructed or alternate SDK",
+    "variableOutputCandidate": "COMPILE_LINK_PASS_NEVER_EXECUTED"
+  },
+  "amiberry": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "audio": "NOT_RUN",
+  "sourceSHA256": {
+    "tests/native_exec_memory.h": "2d400f8b2730450906ed34b6d9b76fc3e5c55cd0eafa53abbb9a73b6c7761c53",
+    "tests/test_native_exec_memory_markers.py": "ffd8d6b792390772c37b38842cc14cc548c559e7658215a367d38d842218327f"
+  }
+}

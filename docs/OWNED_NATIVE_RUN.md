@@ -319,3 +319,23 @@ capacity checks). The first invocation retained one missing copied-wrapper error
 that one test passed after copying the unchanged fixture. New tests must load
 freshly qualified services; existing loaded adapters are not treated as updated.
 The 128-record bound, 64 KiB state bound and 32-HOLD bound remain finite.
+
+
+## Exec Fast/Chip cache fixture preparation
+
+The existing native selective Paula cache wrapper can now select fixed result
+lines with `PT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1`. It still checks the real
+Fast-only pool, zero-budget refusal, TypeOfMem on allocations/releases, zero
+remaining owned bytes, and the 256 KiB Fast reserve. Default diagnostic output
+retains its memory totals and allocation count. This changes test reporting only.
+
+Host checks exercise both output modes through the actual cache wrapper with
+injected Exec memory calls under ASan/UBSan. Existing sampler/cache and separate
+allocator models also pass. These models do not establish physical placement.
+A fresh 21-unit native build and exact 28-input linker-map audit pass; the fixed
+150,436-byte candidate is target NOT RUN. The initial preprocessor timeout on
+iCloud-backed configured SDK headers is preserved separately. The successful
+build uses an unchanged resident copy of 18 configured NDK headers, without
+reconstructed headers or another SDK. Amiberry must qualify the exact candidate
+before a separate physical memory-placement run. No DMA or audio output is
+part of this fixture.

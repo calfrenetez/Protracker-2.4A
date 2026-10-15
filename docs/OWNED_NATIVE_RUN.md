@@ -1,8 +1,8 @@
 # Prepared RAM-only native test route
 
-Status: **HOST-qualified components; two private Amiberry integrations stopped
-during preparation before native launch. Changed capture NOT RUN in Amiberry;
-physical execution NOT RUN.**
+Status: **Exact Load fixture and full owned-RAM copy/capture/cleanup route pass
+in Amiberry. Independent restoration, release and final idle checks pass.
+Physical execution NOT RUN; the real-machine upload route is still separate.**
 These helpers do not activate or unblock the older physical runner by themselves.
 Product architecture, timing policy and editor layout are unchanged.
 
@@ -112,9 +112,12 @@ the exact STAGED flag, but declared the expected progress log empty in both file
 metadata observations and its read/EOF replies. It stopped before the post-copy
 candidate checksums or native launch. Copy integrity and native execution are
 therefore unqualified. Its ledger contains 22 dispatches and 22 replies; the only
-LAUNCH was the staging script. A new HOLD retains the two owned processes and
-three obligations pending separately approved recovery. The earlier transfer
-recovery approval does not cover this new run.
+LAUNCH was the staging script. Its separately approved recovery stopped the two
+owned processes once, restored the saved launcher files and removed the exact
+staging copy. A transient Darwin
+exiting state was initially refused; separate positive process absence preceded
+completion of restoration with no repeated signals. Independent checks and public
+release preserved all three HOLDs in the archive. No test ran during recovery.
 
 The changed scripts now redirect each Echo and Stack query directly to its own
 control file, closing each command's file before the terminal flag. The host
@@ -122,9 +125,9 @@ bridge model reads the uploaded scripts and discards inherited stdout, rather
 than manufacturing expected logs. It reproduces the former empty-log/valid-flag
 combination, passes the direct captures and rejects an injected empty stage log
 before native launch. This model is not a Shell interpreter and does not establish
-why the live log was empty. **Changed copy/capture code remains Amiberry NOT RUN.**
-Frozen sources in the held service remain unchanged; no retry or recovery is
-included in this host change.
+why the live log was empty. That historical host result preceded the separate
+direct-capture run below. The original service sources were preserved throughout
+its failure and recovery.
 
 Directory replies are not atomic snapshots. The historical daemon does not check
 `IoErr()` after `ExNext()`, so even a syntactically complete response cannot prove
@@ -139,3 +142,45 @@ test the exact candidate and adapter in the shared 030 emulator; verify normal
 cleanup and independent release; then obtain fresh physical identity/ownership
 and an accessible AmiConnect session. Device/audio/timing/listening acceptance
 remain separate from this CPU/software test route.
+
+## Direct capture and host cleanup correction
+
+The direct-capture Amiberry run completed staging and the exact 424,732-byte
+Load fixture: RC0, Stack524288, all ten expected lines, 355 native-output bytes
+and CRC059CB441. All eight files were backed up with verified checksums. The
+host runner then overwrote its nested safety-check function with a checksum
+dictionary. The next call raised TypeError before the task observation,
+settlement or disconnect. This qualifies the observed native completion, not
+a successful complete run or physical execution.
+
+Separately approved recovery stopped only the two verified owned processes,
+removed the exact staging copy and restored the saved launcher files. Independent
+absence/restoration checks and public release archived the original HOLD. The
+failed source, output, custody records and failure remain preserved. No test
+was rerun as part of recovery.
+
+A separate runner correction names the dictionary `native_checksum`, preserving
+the callable safety check through cleanup. The full guest-phase host model now
+runs the actual runner, registered private service and raw bridge transaction
+together. It reproduces the old failure, exercises successful eight-file
+settlement, namespace absence, staging removal and disconnect, and fails each
+of the nine outer calls in turn without follow-up. Active-task, altered-custody
+and nonzero-native-result cases retain the required files. Six test methods
+cover fourteen scenarios; four service tests and the offline admission checks
+also pass. Network, process and guard effects are forbidden in these models.
+This is host integration evidence, with unchanged 90/140/250-second limits.
+
+The separately prepared corrected runner then passed once in Amiberry with the
+same candidate bytes and all ten native lines. Exact eight-file settlement,
+independent RAM namespace absence, host staging removal, task observations and
+disconnect completed. The owned emulator stopped, saved launcher files were
+restored, and a separate observer verified capture/custody/settlement and current
+absence before public release. The disconnected local service was then stopped
+and an independent final idle check passed. No HOLD or ownership remains.
+
+This completes the emulator copy route only. The physical upload path, full
+editor frontend, hardware audio and timing acceptance remain separate. The
+original failed runs retain their outcomes; recovery is not counted as a test.
+The first read-only post-run observer used the wrong saved absence-record shape
+and stopped before process checks or release. Its evidence is preserved; the
+corrected schema was checked offline before completing observation.

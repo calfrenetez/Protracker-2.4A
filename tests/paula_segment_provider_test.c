@@ -302,7 +302,7 @@ static int provider_retain_submit(void *v,const struct pt_readers_event *event,c
     memcpy(&p.geometry,plan,sizeof(p.geometry));for(i=0;i<28;++i)provider_negative(&p,i);provider_genuine_aliases(&p);ran_negatives=1;
     return sequence_submit(v,event,plan);
 }
-int main(void)
+int pt_provider_fixture_main(void)
 {
     /* Unknown entry/restore obligations keep their real source owner and copied
      * original packet storage live for the whole qualifier. No fake retirement,
@@ -320,3 +320,6 @@ int main(void)
     puts("HOST injectable resource model; future/native/IRQ/MMIO/timing NOT QUALIFIED");
     return 0;
 }
+#ifndef PT_PROVIDER_EXTERNAL_MAIN
+int main(void){return pt_provider_fixture_main();}
+#endif

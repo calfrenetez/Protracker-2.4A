@@ -1,0 +1,100 @@
+{
+  "state": "HOST_PASS",
+  "baselineCommit": "ad33205d4baa72c38e56e1610069116090c8f8fd",
+  "testSourceSha256": {
+    "tests/paula_segment_provider_test.c": "f37ba517e9d0850c9a7b74e7736d0cde691ad7b43e5c997cfcf55f0ecea62b9a",
+    "tests/test_paula_segment_provider.py": "65652b2c21d4c3d6ccef69464aea9ab85eac77e283029ce8dfcdb4ecafdcd233",
+    "tests/paula_provider_callback_test.c": "fa274ea88cd85061ae8e8128d4b6c1717890b18b24e4e237f8b1ce51de1279df",
+    "tests/test_paula_provider_callbacks.py": "934c18c3f8500de7159f93ec5fcf3a878a8c82439bfc85f5bd16ec01483ab057"
+  },
+  "translationUnits": 37,
+  "sourceBodies": 95,
+  "existingProviderCases": 75,
+  "newCallbackCases": 36,
+  "callbackSeams": [
+    "enter",
+    "restore",
+    "clock",
+    "arm",
+    "rearm",
+    "apply",
+    "ack",
+    "cancel",
+    "ticket quiet",
+    "reader quiet",
+    "source close",
+    "source quiet"
+  ],
+  "faults": [
+    "holder erasure",
+    "original packet mutation",
+    "callback reentry"
+  ],
+  "independentlyDrainedProviders": 20,
+  "retainedProviderHolds": 16,
+  "retainedSourcePins": 3,
+  "retainedChipBytes": 2304,
+  "flags": [
+    "C99",
+    "O1",
+    "Wall",
+    "Wextra",
+    "Werror",
+    "UNDEBUG",
+    "ASan",
+    "UBSan"
+  ],
+  "executionOracle": "typed Paula geometry provider: 75 cases passed\ngenuine measured four boundaries; both genuine retirement orders\n45 caller-output alias refusals preserve context, retained/retired sources and ownership\nowned BE records; exact entry token/window; independent quiet and final restore\nunknown restoration retains genuine source owner; no forced retirement\nHOST injectable resource model; future/native/IRQ/MMIO/timing NOT QUALIFIED\nprovider callback matrix: 36 cases; 12 seams x holder/original/reentry faults\n20 independently drained providers; 16 process-lifetime HOLD providers; source owner retained\nHOST callback mutation detection only; between-entry mutation/native/IRQ/timing NOT QUALIFIED\n",
+  "privateCommittedExport": true,
+  "privateClassicBaselinePreserved": true,
+  "liveClassicPlaceholdersRead": false,
+  "productionProviderChanged": false,
+  "nativeExecuted": false,
+  "notQualified": [
+    "between-entry mutation",
+    "native IRQ integration",
+    "timing",
+    "audio",
+    "human listening"
+  ],
+  "preservedFailures": [
+    "live preflight dataless baseline refusal before compilation",
+    "initial old dependency pin refusal",
+    "earlier private source metadata verification failure after fixture completion"
+  ],
+  "dependencyBodyCount": 94,
+  "dependencyManifestSHA256": "c944a9f72890119ed9564b5b1559f73af032798681d710dce1315f03b55e36a6",
+  "dependencyManifestEncoding": "UTF-8 JSON, sorted keys, compact separators, no trailing newline; current strict driver retains all body pins",
+  "providerProductionPins": {
+    "src/editor/paula_segment_provider.c": {
+      "bytes": 17666,
+      "sha256": "721ec54c5003ad7e31cb18cf89f52341bc9dbaa8dad3ecc4f9609c41633b85a3"
+    },
+    "src/editor/paula_segment_provider.h": {
+      "bytes": 5143,
+      "sha256": "a5ecb093186b4bf05ce96ba5b8d848de7ff37ffaf6b8e7cf6c8e7e00d1663f78"
+    }
+  },
+  "currentDependencyPins": {
+    "src/core/document.c": {
+      "bytes": 33775,
+      "sha256": "64973ff3b3f2b2806ea523c752244689d3275aa9ec66b964bf4db74fea72e2b6"
+    },
+    "src/core/document.h": {
+      "bytes": 3706,
+      "sha256": "9b6613ca8109c59599635ef1fef3b36a90b30703b3e7e3aa4f2674722e69316a"
+    },
+    "src/editor/sampler_lifetime.c": {
+      "bytes": 8529,
+      "sha256": "975e50324af6d280b7d4c82a75a41d56d1bc940412a14ff2ba89a676887700bb"
+    },
+    "src/editor/sampler_lifetime_internal.h": {
+      "bytes": 2998,
+      "sha256": "489b613ba9d848708948bda0a956f79bff249434740a466bc77786f659c7479d"
+    },
+    "src/core/document_retirement_internal.h": {
+      "bytes": 1949,
+      "sha256": "eb033fe27358b69706b2772ff72abc6d9910e654a30b73e3725b697f232c65f1"
+    }
+  }
+}

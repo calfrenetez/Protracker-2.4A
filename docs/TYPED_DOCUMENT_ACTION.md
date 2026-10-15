@@ -180,3 +180,9 @@ directory were removed after task absence was established; a separate observatio
 confirmed absence, original files were preserved, Safari returned to View Only,
 and ownership was independently released. The timeout and all three HOLD records
 remain archived. See the [recovery evidence](../evidence/enhanced-editor/document-publication-physical-recovery/result.json).
+
+### Revised Load publication and owned RAM input — 15 October 2026
+
+The 224,436-byte revised Load fixture (SHA-256 `32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a`) passes one fresh 030 emulator run: RC0, Stack262144 and all 19 exact diagnostic lines, 769 output bytes/CRC4EC504EA. The four-file input copy and nine-file execution copy have separate custody and exact settlement. Independent absence, saved launcher restoration, public release and final idle checks pass. Native90/guest140/whole250 limits are unchanged.
+
+The earlier bridge failure is retained separately; it did not recur, so its original cause remains unproven. This qualifies synthetic Load publication and the RAM staging route on the emulator. The revised New fixture, physical execution of these exact bytes, full frontend, device output and timing/listening remain separate. See [compact emulator record](../evidence/enhanced-editor/document-load-owned-input-emulator/result.json).

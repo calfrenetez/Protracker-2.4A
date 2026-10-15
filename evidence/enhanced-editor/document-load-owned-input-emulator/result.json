@@ -1,0 +1,75 @@
+{
+  "acceptance": {
+    "audio": false,
+    "devicePlayback": false,
+    "exactLiveTiming": false,
+    "frontend": false,
+    "listening": false,
+    "ownedRAMInputRoute": true,
+    "physicalRevisedCandidate": false,
+    "syntheticLoadPublication": true
+  },
+  "candidate": {
+    "crc32": "0E07E5AC",
+    "sha256": "32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a",
+    "size": 224436
+  },
+  "cleanup": {
+    "archives": 75,
+    "exactInputAndExecutionNamespacesAbsent": true,
+    "hostStagingAbsent": true,
+    "independentFinalIdle": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "publicReleaseFence": 1643,
+    "savedLauncherFilesRestored": true,
+    "testPortsAndIPCAbsent": true
+  },
+  "earlierFailure": "Earlier completion bridge error and exact cleanup/release remain separately preserved; this was a fresh diagnostic packet, not a replay. Error did not recur; its original root cause remains unproven.",
+  "executionFiles": 9,
+  "inputFiles": 4,
+  "limits": {
+    "guestSeconds": 140,
+    "nativeSeconds": 90,
+    "wholeSeconds": 250
+  },
+  "nativeObserved": {
+    "nativeMarkers": [
+      "DOCUMENT PUBLICATION BEGIN:load",
+      "DOCUMENT ACTION TRACE:entered",
+      "DOCUMENT ACTION TRACE:fixture-allocated",
+      "DOCUMENT ACTION TRACE:initial-document-created",
+      "DOCUMENT ACTION TRACE:initial-editor-created",
+      "DOCUMENT ACTION TRACE:initial-masters-begun",
+      "DOCUMENT ACTION TRACE:initial-masters-ready",
+      "DOCUMENT ACTION TRACE:checked-editor-ready",
+      "DOCUMENT ACTION TRACE:checked-owner-begun",
+      "DOCUMENT ACTION TRACE:source-encoded",
+      "DOCUMENT ACTION TRACE:fixture-ready",
+      "DOCUMENT ACTION TRACE:prepared",
+      "DOCUMENT ACTION TRACE:published",
+      "DOCUMENT ACTION TRACE:committed",
+      "DOCUMENT ACTION TRACE:stopped-and-disposed",
+      "DOCUMENT ACTION TRACE:paula-closed",
+      "DOCUMENT ACTION TRACE:amigus-closed",
+      "DOCUMENT ACTION TRACE:finished",
+      "DOCUMENT PUBLICATION PASS:load; final-address owner and checked cleanup; injected voices"
+    ],
+    "observedStackBytes": 262144,
+    "outputBytes": 769,
+    "outputCRC32": "4EC504EA",
+    "rawStackQuery": "Current stack size is 262144 bytes",
+    "returnCode": 0
+  },
+  "protocolRecords": 433,
+  "recordsSHA256": {
+    "admission": "feeb3ff563f12bd86074549b5a04b300d1fae5f4a60dcc789c22d844bd5611f7",
+    "finalIdle": "2800948638b629d57c5456257ce7cbd2fc15e7683b3b1fa3e91ffa219e640c36",
+    "independentPass": "575bf8fd3afd3fcdde3946386c1975b28670e43dfc770221f6e2d7a6bbc2ff97",
+    "ownedServiceStop": "05b91696ee61fb684a69c4fbd0e6ba35821f92ae4c8047f2bcd5b34ed28df8cd",
+    "publicRelease": "14ab13a00e0a744b4c59043d48e465a55903bc1f8045563c7bea2e414e842000",
+    "runResult": "285bb185c9314515b0079339b310e500301ee4ccbecefd8986c626b200cdb727"
+  },
+  "runnerSourceHead": "587adb8794fb8f32c9500d20bbd4e36eaa617016",
+  "sourceHead": "ad33205d4baa72c38e56e1610069116090c8f8fd",
+  "state": "EMULATOR_PASS_INDEPENDENTLY_RELEASED"
+}

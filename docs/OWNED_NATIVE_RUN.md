@@ -184,3 +184,47 @@ original failed runs retain their outcomes; recovery is not counted as a test.
 The first read-only post-run observer used the wrong saved absence-record shape
 and stopped before process checks or release. Its evidence is preserved; the
 corrected schema was checked offline before completing observation.
+
+## Smaller sampler direct-upload qualification
+
+A separate 166,396-byte sampler18 fixture now passes the direct-upload route in
+Amiberry with RC0, Stack262144 and eight expected lines (1,159 bytes, CRC808D90D6).
+It uses five declared RAM files, without a shared-mounted copy. Exact settlement,
+independent namespace absence, staging cleanup, disconnect, emulator shutdown,
+restoration, separate public release and final local-service absence all passed.
+The 90/140/250-second limits are unchanged.
+
+The fixture tests ordinary-memory sample editing, import/export, 24-bit history,
+budgets, retention and serialized persistence. Its source is the existing
+sampler18 configuration at 78d6871, with typed replacement/action disabled.
+Seventeen primary source files still match current code; the core difference
+contains two checks gated by the disabled typed-action macro. This is a primary
+source audit, not a complete transitive preprocessing equivalence claim. The
+current sampler separately passes ASan/UBSan. Newer document-action integration
+is not qualified by this fixture.
+
+This establishes direct upload for the smaller candidate only; the larger Load
+candidate's upload deadline is not qualified. The separately tested physical binding and its first transfer attempt are
+recorded below; physical native execution remains unqualified.
+
+
+## Physical sampler transfer attempt
+
+The same sampler candidate was admitted through a physical-profile service after
+18 full-phase host scenarios, four service tests, two orchestration tests and
+offline construction/refusal checks passed. The real A1200 reported a 68030,
+Exec 47.13, PAL and sufficient free Fast memory. Its installed bridge matched
+the pinned 150,192-byte reference (CRC D75C2355). Safari was authenticated and
+remained View Only.
+
+Preparation hit the unchanged 60-second upload limit before any native launch.
+The saved exchange ledger confirms 142,380 payload bytes acknowledged; the next
+4,068-byte write has no confirmed reply. No executable checksum, native result,
+settlement or cleanup is inferred. The run retained HOLD and its operation;
+further physical calls stopped. The original failure and a separate, bounded
+recovery scope are preserved. Recovery needs new approval and does not include
+a rerun. The physical sampler result is NOT RUN, with transfer INCOMPLETE.
+
+This failure does not invalidate the completed Amiberry evidence, but that
+evidence cannot qualify physical upload throughput. No audio, timing or AmiGUS
+operation occurred.

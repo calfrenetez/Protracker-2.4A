@@ -224,9 +224,16 @@ settlement or cleanup is inferred. The run retained HOLD and its operation;
 further physical calls stopped. The original failure and a separate, bounded
 recovery scope are preserved. Recovery was subsequently approved: the exact
 owned local service was stopped, process/transport absence verified, and the
-exact host staging copy removed. The Mac is locked, blocking Safari inspection
-and cleanup of the physical RAM file. Ownership remains on HOLD until that
-cleanup and independent release are verified. No rerun or reboot is included.
+exact host staging copy removed. After the Mac was unlocked, authenticated
+Safari inspection found only the expected partial NativeTest, 146,448 bytes.
+That exact file was deleted, its directory was positively observed empty, and
+only that directory was then deleted. A separate RAM parent listing contained
+only Clipboards, T and ENV. The temporary Shell was closed and browser control
+returned to View Only. Independent local checks and one public release archived
+both original HOLDs and the interrupted operation; final idle verification passed.
+No rerun or reboot occurred. A reporting check initially looked in the wrong
+archive directory after release; the actual history archive was independently
+verified without repeating release. That failed check is preserved.
 The physical sampler result is NOT RUN, with transfer INCOMPLETE.
 
 This failure does not invalidate the completed Amiberry evidence, but that

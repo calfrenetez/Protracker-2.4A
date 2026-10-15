@@ -278,7 +278,7 @@
     "fullSizeHostModelScenarios": 14
   },
   "samplerDirectUploadPhysical": {
-    "status": "INCOMPLETE_TRANSFER_HOLD_RECOVERY_WAITING_FOR_MAC_UNLOCK",
+    "status": "INCOMPLETE_TRANSFER_NATIVE_NOT_RUN_RECOVERY_RELEASED",
     "candidateBytes": 166396,
     "candidateSHA256": "84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769",
     "candidateCRC32": "A0A3172B",
@@ -300,10 +300,10 @@
     },
     "nativeLaunchesDispatched": 0,
     "native": "NOT_RUN",
-    "physicalCleanup": "PENDING_AUTHENTICATED_SAFARI_ACCESS_MAC_LOCKED",
+    "physicalCleanup": "EXACT_FILE_AND_EMPTY_DIRECTORY_REMOVED_INDEPENDENT_PARENT_ABSENCE",
     "recoveryScopeSHA256": "918b80c9358a754b5b7a1106e5a01ed6c927f0745715fae2cff0750e2f98b6dc",
     "viewOnlyObserved": true,
-    "browserControlAcquired": false,
+    "browserControlAcquired": true,
     "audioOrDeviceOperations": false,
     "testRerunAfterFailure": false,
     "recovery": {
@@ -311,10 +311,23 @@
       "ownedLocalServiceStopped": true,
       "localProcessAndTransportAbsence": "VERIFIED",
       "exactHostStagingRemoved": true,
-      "physicalRAMCleanup": "PENDING_MAC_UNLOCK",
-      "ownershipReleased": false,
+      "physicalRAMCleanup": "VERIFIED_EXACT_FILE_AND_EMPTY_DIRECTORY",
+      "ownershipReleased": true,
       "testRerun": false,
-      "reboot": false
-    }
+      "reboot": false,
+      "observedPartialBytes": 146448,
+      "independentRAMParentDirectories": [
+        "Clipboards",
+        "T",
+        "ENV"
+      ],
+      "temporaryShellClosed": true,
+      "originalHoldsArchived": 2,
+      "originalInflightArchived": true,
+      "independentFinalIdle": true,
+      "publicReleaseCalls": 1,
+      "postReleaseReportingPathErrorPreserved": true
+    },
+    "browserControlReleasedToViewOnly": true
   }
 }

@@ -1,0 +1,248 @@
+"""Prepared RAM-only native fixture transaction over a caller-owned transport.
+
+No connection, process lifecycle, service hook or CLI entry point is provided.
+The caller must qualify these exact sources in Amiberry before physical use,
+hold the shared reservation/locks, verify the live target and record durable
+intent before every exchange. This draft does NOT activate the physical runner.
+
+MAKEDIR must mean successful CreateDir, never 'already exists'. That grants the
+cooperating run a new namespace without relying on a negative directory listing.
+LAUNCH executes an explicit uploaded file; SCRIPT and its hidden T: files are
+never used. All failure paths retain ownership and propagate without recovery.
+"""
+import asyncio
+from dataclasses import dataclass
+import hashlib
+import math
+import re
+import time
+import zlib
+
+import native_file_protocol as wire
+import native_fixture_capture as capture
+
+
+def require(value, message):
+    if not value:
+        raise ValueError(message)
+
+
+@dataclass(frozen=True)
+class Plan:
+    run_id: str
+    command_id: int
+    binary: bytes
+    markers: tuple
+    stack: int = 524288
+
+    def __post_init__(self):
+        require(isinstance(self.run_id, str) and re.fullmatch(r"[0-9a-f]{32}", self.run_id),
+                "Exact fresh run identity required")
+        require(type(self.command_id) is int and 1 <= self.command_id <= 0xffffffff,
+                "Explicit positive command identity required")
+        require(isinstance(self.binary, bytes) and 0 < len(self.binary) <= 2 * 1024 * 1024,
+                "Frozen bounded candidate required")
+        require(type(self.stack) is int and 65536 <= self.stack <= 1048576, "Qualified Stack required")
+        require(isinstance(self.markers, tuple) and 0 < len(self.markers) <= 256
+                and len(set(self.markers)) == len(self.markers)
+                and all(isinstance(x, str) and x and len(x) <= 256 and x.isascii()
+                        and x.isprintable() for x in self.markers), "Exact native marker contract required")
+        require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
+
+    @property
+    def directory(self):
+        # Keep the component within the classic 30-character name limit. The
+        # full identity remains in the record; CreateDir must reject collisions.
+        return "RAM:PT24G-" + self.run_id[:16]
+
+    def path(self, name):
+        require(name in self.names, "Not a declared run file")
+        return self.directory + "/" + name
+
+    @property
+    def names(self):
+        return ("NativeTest", "Run-once", "complete.flag", "control.log", "native.log")
+
+    @property
+    def prefix(self):
+        return "PT" + self.run_id[:16] + "-"
+
+    @property
+    def script(self):
+        return ("FailAt 255\n" + capture.run_script(self.path("NativeTest"), self.path("native.log"),
+                                                 self.stack, self.prefix)
+                + "Echo COMPLETE >" + self.path("complete.flag") + "\n").encode("ascii")
+
+    @property
+    def command(self):
+        return "C:Execute " + self.path("Run-once") + " >" + self.path("control.log")
+
+    @property
+    def expected_output(self):
+        return ("\n".join(self.markers) + "\n").encode("ascii")
+
+    def description(self):
+        return {"runID": self.run_id, "commandID": self.command_id,
+                "directory": self.directory, "files": list(self.names),
+                "candidateBytes": len(self.binary), "candidateSHA256": hashlib.sha256(self.binary).hexdigest(),
+                "scriptSHA256": hashlib.sha256(self.script).hexdigest(), "command": self.command,
+                "stackBytes": self.stack, "expectedMarkers": list(self.markers)}
+
+
+class Transaction:
+    def __init__(self, plan, exchange, record, *, seconds=250, clock=time.monotonic, sleep=asyncio.sleep):
+        require(type(plan) is Plan and callable(exchange) and callable(record) and callable(clock)
+                and callable(sleep) and type(seconds) in (float, int) and math.isfinite(seconds)
+                and 0 < seconds <= 420, "Invalid finite transaction")
+        self.plan, self.exchange, self.record = plan, exchange, record
+        self.clock, self.sleep = clock, sleep
+        self.deadline = clock() + seconds
+        self.phase = "NEW"
+        self.custody = None
+        self.calls = 0
+
+    def remaining(self):
+        value = self.deadline - self.clock()
+        require(value > 0, "Whole transaction deadline expired")
+        return value
+
+    async def ask(self, command, reply_type, seconds=4):
+        require(self.phase not in ("FAILED", "SETTLED"), "Transaction is closed or failed")
+        require(self.calls < 4096, "Exchange count bound reached")
+        timeout = min(seconds, self.remaining())
+        self.calls += 1
+        # The caller must fsync this record before returning. Payload bytes stay
+        # in the separately frozen input/custody file, not in the event ledger.
+        intent = {k: v for k, v in command.items() if k != "hexData"}
+        if "hexData" in command:
+            body = bytes.fromhex(command["hexData"])
+            intent.update(bytes=len(body), sha256=hashlib.sha256(body).hexdigest())
+        self.record({"event": "dispatch", "number": self.calls, "command": intent})
+        raw = await asyncio.wait_for(self.exchange(command, reply_type, timeout), timeout=timeout)
+        self.remaining()
+        wire.line(raw)
+        self.record({"event": "reply", "number": self.calls, "raw": raw})
+        return raw
+
+    async def _operation(self, expected, active, operation):
+        require(self.phase == expected, "Transaction phase does not permit this operation")
+        self.phase = active
+        try:
+            return await operation()
+        except BaseException:
+            self.phase = "FAILED"
+            raise
+
+    async def checksum(self, name, data):
+        remote = self.plan.path(name)
+        raw = await self.ask({"type": "CHECKSUM", "path": remote}, "CHECKSUM")
+        match = re.fullmatch(re.escape("CHECKSUM|" + remote + "|") + r"([0-9a-fA-F]{8})\|(0|[1-9][0-9]*)", raw)
+        require(match and int(match[1], 16) == zlib.crc32(data) and int(match[2]) == len(data),
+                "Guest bytes/CRC differ from frozen file")
+
+    async def upload(self, name, data):
+        for offset in range(0, max(1, len(data)), 2048):
+            chunk = data[offset:offset + 2048]
+            raw = await self.ask({"type": "WRITEFILE", "path": self.plan.path(name),
+                                  "offset": offset, "hexData": chunk.hex()}, "OK")
+            require(raw == f"OK|WRITEFILE|{len(chunk)}", "Exact write acknowledgement absent")
+        await self.checksum(name, data)
+
+    def observer(self, seconds=60):
+        return wire.Observation(self.ask, seconds=min(seconds, 60, self.remaining()), clock=self.clock)
+
+    async def prepare(self):
+        async def perform():
+            self.record({"event": "plan", "plan": self.plan.description()})
+            raw = await self.ask({"type": "MAKEDIR", "path": self.plan.directory}, "OK")
+            require(raw == "OK|MAKEDIR|" + self.plan.directory, "Fresh directory creation unconfirmed")
+            require(await self.observer().directory(self.plan.directory) == (), "New directory is not empty")
+            for name, data in (("NativeTest", self.plan.binary), ("Run-once", self.plan.script), ("complete.flag", b"")):
+                await self.upload(name, data)
+            require(await self.observer().file(self.plan.path("Run-once")) == self.plan.script,
+                    "Uploaded script bytes differ")
+            self.phase = "PREPARED"
+            return self.plan.description()
+        return await self._operation("NEW", "PREPARING", perform)
+
+    async def execute(self, *, native_seconds=90):
+        async def perform():
+            require(type(native_seconds) in (int, float) and math.isfinite(native_seconds)
+                    and 0 < native_seconds <= 90, "Native deadline may not be widened")
+            for name, data in (("NativeTest", self.plan.binary), ("Run-once", self.plan.script), ("complete.flag", b"")):
+                await self.checksum(name, data)
+            entries = await self.observer().directory(self.plan.directory)
+            require({e.name for e in entries} == {"NativeTest", "Run-once", "complete.flag"}
+                    and all(e.kind == "F" for e in entries), "Prepared namespace changed")
+            started = self.clock()
+            native_deadline = min(self.deadline, started + native_seconds)
+            ident, command = self.plan.command_id, self.plan.command
+            raw = await self.ask({"type": "LAUNCH", "id": ident, "command": command}, "CMD", min(10, native_seconds))
+            require(re.fullmatch(re.escape(f"CMD|{ident}|OK|Started") +
+                                 r"(?: \(proc [1-9][0-9]*\))?: " + re.escape(command), raw),
+                    "Exact launch acknowledgement absent")
+            for _ in range(240):
+                remaining = native_deadline - self.clock()
+                require(remaining > 0, "Native completion deadline expired")
+                name = self.plan.path("complete.flag")
+                raw = await self.ask({"type": "FILEINFO", "path": name}, "FILEINFO", min(4, remaining))
+                require(self.clock() < native_deadline, "Native completion deadline expired")
+                size = wire.file_info(raw, name, 9)[0]
+                require(size in (0, 9), "Unexpected completion flag length")
+                if size == 9:
+                    flag = await self.observer(native_deadline - self.clock()).file(name, 9)
+                    require(self.clock() < native_deadline and flag == b"COMPLETE\n", "Exact timely completion flag absent")
+                    break
+                await self.sleep(min(0.5, max(0, native_deadline - self.clock())))
+            else:
+                raise ValueError("Completion observation count exceeded")
+            files = {"NativeTest": self.plan.binary, "Run-once": self.plan.script, "complete.flag": flag}
+            for name in ("control.log", "native.log"):
+                files[name] = await self.observer().file(self.plan.path(name), capture.MAX_OUTPUT)
+            control = files["control.log"].decode("ascii")
+            observed = capture.parse_control("[OK]\n" + control, self.plan.stack, self.plan.prefix)
+            require(files["native.log"] == self.plan.expected_output, "Native output differs from exact marker contract")
+            for name, data in files.items():
+                await self.checksum(name, data)
+            await self._exact_directory(files)
+            self.custody = files
+            self.record({"event": "completed", "files": self.manifest(), "observed": observed})
+            self.phase = "COMPLETED"
+            return {"status": "COMPLETED_CUSTODY_PENDING_SETTLEMENT", "plan": self.plan.description(),
+                    "files": self.manifest(), "observed": observed, "launches": 1}
+        return await self._operation("PREPARED", "EXECUTING", perform)
+
+    async def _exact_directory(self, files):
+        entries = await self.observer().directory(self.plan.directory)
+        require({(e.name, e.size, e.kind) for e in entries} == {(n, len(b), "F") for n, b in files.items()},
+                "Namespace contains changed, missing or unowned files")
+
+    def manifest(self):
+        return {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                for name, data in self.custody.items()}
+
+    async def settle(self, verify_idle_and_custody):
+        """Separate normal settlement; callback must verify idle and durable backup.
+
+        The callback's assertion is not independently authenticated by this
+        helper. It must be provided by the reviewed caller, never a test result.
+        Guard release and independent final absence remain caller operations.
+        """
+        async def perform():
+            require(callable(verify_idle_and_custody), "Independent settlement observer required")
+            require(await verify_idle_and_custody(self.plan.description(), self.manifest()) is True,
+                    "Independent idle/custody verification absent")
+            self.remaining()
+            await self._exact_directory(self.custody)
+            for name, data in self.custody.items():
+                await self.checksum(name, data)
+            for name in self.plan.names:
+                remote = self.plan.path(name)
+                raw = await self.ask({"type": "DELETEFILE", "path": remote}, "OK")
+                require(raw == "OK|DELETE|" + remote, "Exact file deletion unconfirmed")
+            require(await self.observer().directory(self.plan.directory) == (), "Owned directory is not empty")
+            raw = await self.ask({"type": "DELETEFILE", "path": self.plan.directory}, "OK")
+            require(raw == "OK|DELETE|" + self.plan.directory, "Exact directory deletion unconfirmed")
+            self.phase = "SETTLED"
+            return {"status": "EXACT_FILES_DELETED_INDEPENDENT_RELEASE_PENDING", "files": self.manifest()}
+        return await self._operation("COMPLETED", "SETTLING", perform)

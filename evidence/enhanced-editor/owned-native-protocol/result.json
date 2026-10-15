@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "exitCode": 0,
+  "sourceSHA256": {
+    "tools/native_file_protocol.py": "00687ea4f06096434dddba2bef597438bc96c29343c895ea3955aaee37d6c2c9",
+    "tools/owned_native_run.py": "a18209a6d3993d3044d04eeab4d4890711a1aa45c09241c1029162965356830d",
+    "tools/native_guarded_exchange.py": "24488097cf69d278b27866e2c816b50ee26e040cf1e962eeafd18d1bcfa970d9",
+    "tools/native_fixture_capture.py": "1ee1e1a775bbf6690ec4770d736fa0b2d09e1dc891fae2cd8678cb5c22eb0569",
+    "tests/test_native_file_protocol.py": "8ac62cd42bd62829e0144c11a0dfdd667a77d8fe6a933a153c68d3ff8d002caf",
+    "tests/test_owned_native_run.py": "9d384fab85867a945fa91c83aa2b5671ecc0ad856a139dd02dd183e4128e4947",
+    "tests/test_native_guarded_exchange.py": "08f4c8e35e9337169b7dfb209a05172f47bd5098d756fca3075b9bb1953924b6",
+    "tests/test_native_fixture_capture.py": "46582a77ab22db0cc916fd72808acb54c21badf248be99ca20af0f7f3b03a7ff"
+  },
+  "scope": "Host models and existing capture parser only; no target or service operations.",
+  "testCount": 52,
+  "amiberry": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "activation": "NONE",
+  "installedSharedSourceChanged": false,
+  "productArchitectureChanged": false
+}

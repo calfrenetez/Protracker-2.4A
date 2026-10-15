@@ -539,10 +539,16 @@ timed-out settlement proof and unchanged deadlines.
 A private service integration also passed eight input cases and seven existing
 service cases. It binds both transactions to the same lease and lifetime, saves
 the input custody, and checks a separate execution-absence record plus fresh
-task/custody proof before input deletion. It has no live admission, launcher or
-target connection. Shared-runner integration and exact target qualification
-remain unfinished. This helper implements neither MiniFTP nor archive
-extraction; those need separately verified physical staging and cleanup.
+task/custody proof before input deletion. Six further private guest-phase groups
+passed with a 224,372-byte model payload, including interruption at all 13 outer
+call boundaries. The guest phase independently checks the four input custody
+files, obtains a fresh task observation, settles execution before input and
+confirms both RAM namespaces absent before removing the Dev source. The full
+run entry remains unconditionally inhibited. Original lifecycle source is
+unchanged; its qualification and fresh exact-candidate admission are still
+required. No service process or target connection was used by these tests.
+This helper implements neither MiniFTP nor archive extraction; those need
+separately verified physical staging and cleanup.
 
 **Amiberry and real-A1200 results for this new input helper remain NOT RUN.**
 The earlier physical Load run still requires scoped recovery and independent

@@ -6,7 +6,7 @@
     "host": "PASS",
     "physicalA1200": "NOT_RUN",
     "physicalRecovery": "PENDING",
-    "sharedRunnerIntegration": "NOT_RUN"
+    "sharedRunnerIntegration": "HOST_GUEST_PHASE_PASS_LIFECYCLE_NOT_RUN"
   },
   "limitations": [
     "Bridge replies and Shell completion are host models, not actual native execution.",
@@ -34,6 +34,8 @@
     "sourceAndUnrelatedModelFilesPreserved": true,
     "unrelatedPathsVerified": 16
   },
+  "privateGuestSHA256": "ff5e31f9ef485d0760bf50e44fe02ccc8e47e110eab1041ba294df1a7b08d605",
+  "privateGuestTestsSHA256": "d6e12766bbfebaa70780bca13ca92d8cbfd9c064c806377265c393f6b85ddbaa",
   "privateServiceSHA256": "213b69779089d896da9da8297e3dbf41184b9039eafa2ef621c99ea4bc63b709",
   "qualificationDate": "2026-10-15",
   "schemaVersion": 1,
@@ -53,6 +55,8 @@
     "existingServiceGroups": 7,
     "failureInjectedAtEveryCombinedExchange": true,
     "inputGroups": 17,
+    "outerCallTimeoutPositions": 13,
+    "privateGuestPhaseGroups": 6,
     "privateInputServiceGroups": 8
   }
 }

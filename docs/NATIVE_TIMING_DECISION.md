@@ -136,3 +136,22 @@ build passes. The diagnostic remains native NOT RUN. Timer/register ownership, a
 window feasibility, stack adequacy, DMA and physical/audio/listening remain unqualified.
 See [diagnostic contract](CIA_APERTURE_DIAGNOSTIC.md) and
 [saved host/compiler records](../evidence/enhanced-editor/cia-aperture-diagnostic/README.md).
+
+## First aperture emulator observation — 16 October 2026
+
+The separately built current aperture experiment completed16 attempts at the
+original epoch/windows and retained RC20/FAILED. All12 positive attempts made
+zero RAM commits: their first samples were8..11 ticks early, but the next actual
+reads came51..53 ticks later and missed the14/15-tick window. Four deliberate
+negative attempts passed. Dispatcher brackets166..171 ticks meet the separate
+residency policy, not the original musical gate. Full custody, independent cleanup,
+public release, owned service shutdown and separate final idle verification pass.
+No timing failure is converted to success by cleanup.
+
+The next feasibility work is a shorter prepared interrupt path that avoids the
+measured generic inter-read work while retaining genuine ownership, fixed clock
+semantics, cancellation, the original window, bounded work and complete actual
+observations. No calibrated deadline subtraction, jitter tolerance or immediate
+late fallback is selected. This emulator result does not establish universal CIA
+infeasibility or physical first-sample timing. Exact output/provider/native PLAY
+integration remains unfinished. See [the diagnostic details](CIA_APERTURE_DIAGNOSTIC.md#first-bounded-aperture-observation-in-amiberry--failed).

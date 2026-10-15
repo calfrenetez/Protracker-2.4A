@@ -1,0 +1,104 @@
+{
+  "admissionSHA256": "d21a4a007ca393a0328bfc47127b463add2e064ce0eb356e9142e823dd20d4af",
+  "candidate": {
+    "bytes": 47576,
+    "crc32": "2C1FAB49",
+    "sha256": "a665fd9112f41970cdf6704982d9dd4258217f127ac68bd95b878e2e2cf78a4c"
+  },
+  "closure": {
+    "custodySettlementAndTaskNamespaceAbsence": true,
+    "emulatorStopped": true,
+    "exactDisconnectedServiceStopped": true,
+    "finalFence": 1663,
+    "finalReleaseArchives": 80,
+    "holdsRetained": false,
+    "independentFinalIdleVerified": true,
+    "originalLauncherAndConfigurationRestored": true,
+    "ownedProcessesEndpointsStagingRetained": false,
+    "protectedPathsVerified": 16,
+    "publicOwnershipReleaseVerified": true
+  },
+  "interpretation": "First sampled entry was early; measured generic inter-read interval skipped original windows. Investigate a shorter prepared native clock path. No epoch shift, calibrated subtraction, timing tolerance or immediate fallback. No universal CIA infeasibility inferred.",
+  "observation": {
+    "attempted": 16,
+    "completed": 16,
+    "firstReadBeforeWindowTicks": [
+      8,
+      11
+    ],
+    "frequency": 709379,
+    "interReadTicks": [
+      51,
+      53
+    ],
+    "negativePassed": 4,
+    "normalDispatcherSpanTicks": [
+      166,
+      171
+    ],
+    "observedTaskStackBytes": 262144,
+    "outputBytes": 10908,
+    "outputCRC32": "7EB32183",
+    "positiveFailed": 12,
+    "positivePassed": 0,
+    "qualification": "FAILED",
+    "ramCommits": 0,
+    "residencyPolicyTicks": 256,
+    "returnCode": 20,
+    "secondReadPastExclusiveEndTicks": [
+      26,
+      30
+    ],
+    "wholeStackQualified": false,
+    "windowWidthTicks": [
+      14,
+      15
+    ]
+  },
+  "preservedHostRefusals": [
+    "Preflight rejected installed Python symlink before service/target; only a separate read-only tool alias binding was corrected",
+    "Incorrect entry-helper relative path before admission; inhibited lifecycle log preserved separately",
+    "Initial observer binder used system Python lacking harness dependency, then unbound observer refused before locks; corrected harness runtime succeeded without target replay"
+  ],
+  "runtime": {
+    "automaticNativeRetries": 0,
+    "configuredChipKB": 2048,
+    "configuredZ3KB": 131072,
+    "cpu": "68030",
+    "executionFiles": 8,
+    "executionSeconds": 140,
+    "fpu": "0",
+    "inputFiles": 1,
+    "nativeFastAllocationsReported": 2,
+    "nativeOwnedBytesReportedAtClose": 0,
+    "nativeSeconds": 90,
+    "observedCpuCycleExact": true,
+    "ownedTimerVectorReportedClosed": true,
+    "protocolRecords": 309,
+    "signalAllocationReportedRestored": true,
+    "taskPriorityUnchanged": true,
+    "uploadSeconds": 120,
+    "wholeSeconds": 250
+  },
+  "savedRecords": {
+    "native-capture.bin": "511f1618f2c29894aac026753750a0cbb1f6e33252fc2ccfa723c7d6630cdcea",
+    "native-output.txt": "ae2636cc9e29d35ae3292af9f8280054c1fefead04f0009543edef42a63f2a1b",
+    "release/independent-collection-observation.json": "919e03f5204c8b80c9906d424397d0c78d19740bf4cb802fd3db3acfa79dd934",
+    "release/independent-final-idle.json": "80096725ee82f2cf29ba7d00b02d7773f2669d147e8640eadca4d6899585468e",
+    "release/release-result.json": "7b2e58658c31428fabbd7e6d312c731641f68b06aee44c4a378cced79c4077c4",
+    "release/service-stop-result.json": "ca0db980b2bb403c71bfab257cee1e459d9c732e7135ad2e9aaa88eddee2a46d",
+    "result.json": "61715b3442d88855356312e0b3bce22223e8cf85dd82425415d94ca048c7a04b"
+  },
+  "schema": 1,
+  "specSHA256": "b60d1bca0907d51c66a06370fd8b163dfc631a092684159764786c1aad241d2b",
+  "state": "EMULATOR_TIMING_FAILED_COLLECTION_AND_CLEANUP_VERIFIED",
+  "unqualified": [
+    "physical A1200/AmiGUS",
+    "Paula or AmiGUS output and DMA",
+    "live musical timing acceptance",
+    "whole stack and interrupt WCET",
+    "genuine sample-reader transfer/stop",
+    "native frontend PLAY",
+    "audio and human listening"
+  ]
+}

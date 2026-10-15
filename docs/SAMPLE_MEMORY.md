@@ -7272,6 +7272,16 @@ aggregate stack/WCET or audio acceptance. Authoritative Fast masters, selective
 caches, save/export and direct24-bit mixing are unchanged. See
 [the diagnostic contract](CIA_APERTURE_DIAGNOSTIC.md#bounded-observation-collection--16-october-2026).
 
+The exact candidate subsequently ran once in Amiberry and FAILED its original
+timing gates: zero of12 positive attempts, four correct negatives, no RAM commits.
+The first samples arrived early, but the51..53-tick inter-read gaps skipped the
+14/15-tick windows. RC20 remains failed. Independent custody/cleanup, restored
+launcher/configuration, public release and separate final idle checks pass;
+no owned resource remains. This measures an emulator timer/RAM experiment,
+not a sample-output backend or physical timing. A shorter prepared interrupt
+path is the next feasibility step; exact scheduling and all master/cache
+architecture remain unchanged. See [the separate native evidence](../evidence/enhanced-editor/cia-aperture-observation-native/result.json).
+
 
 ## Fixed measured Paula sequence producer — implemented HOST profile
 

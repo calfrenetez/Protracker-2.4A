@@ -189,3 +189,41 @@ NOT_RUN until a fresh guarded window completes; no timing, native output,
 aggregate stack, WCET, physical or listening acceptance is established here.
 The task Stack selection262144 is provisional, not a complete stack bound.
 See [HOST/build evidence](../evidence/enhanced-editor/cia-aperture-observation-host/result.json).
+
+## First bounded aperture observation in Amiberry — FAILED
+
+The exact new47,576-byte candidate ran once in the owned68030/no-FPU emulator.
+All16 attempts completed, with RC20: zero of12 positive attempts met the original
+window; all four negative attempts passed. There were no RAM shadow commits.
+At709379 counter ticks/second, the first actual samples preceded `first` by8..11
+ticks. The next samples followed51..53 ticks later, already26..30 ticks beyond
+`last`. The original windows were14/15 ticks wide. Normal dispatcher brackets
+were166..171 ticks, within the diagnostic256-tick policy, but that policy is not
+the musical deadline and does not establish total interrupt WCET.
+
+This separates the observed inter-read cost from merely waking too late. It
+supports investigating a shorter prepared interrupt path with a fixed native
+clock primitive; it neither isolates every instruction's cost nor proves that
+physical hardware or all CIA implementations are infeasible. The next experiment
+must preserve the original windows, explicit cancellation/key checks, bounded
+residency/read budget, irreversible-write accounting and owned restoration.
+It must not compensate by shifting the epoch or widening timing tolerance.
+
+The report recorded positive owned timer/vector/task/signal closure, two Fast
+allocations and zero owned bytes. The10908-byte output, CRC32`7EB32183`, and309
+protocol records were retained. One input and eight execution files received
+separate custody, settlement and task/namespace absence checks under unchanged
+upload120/native90/execution140/whole250 bounds. The owned emulator stopped and
+original launcher/configuration files were restored. An independent observer
+verified saved output, custody, restoration and absence; public release, exact
+disconnected service shutdown and a separate final idle observation passed at
+EMPTY1663/80archives. No ownership, hold, process, endpoint or staging remained.
+All16 unrelated paths were preserved. An initial observer invocation used the
+wrong host Python and refused at import before observation/release; corrected
+harness-runtime verification is recorded separately, without a native rerun.
+
+The original RC20/FAILED qualification remains in every collection/release
+record. This is an emulator timer/RAM diagnostic failure with verified cleanup,
+not native output, physical A1200/AmiGUS, DMA, live timing, aggregate stack/WCET,
+audio or listening acceptance. See
+[the separate native result](../evidence/enhanced-editor/cia-aperture-observation-native/result.json).

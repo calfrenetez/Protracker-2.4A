@@ -350,3 +350,21 @@ authenticated View Only. Earlier local preparation refusals are retained separat
 These results do not establish full-editor integration, DMA/audio, exact musical
 scheduling, AmiGUS sample-RAM behavior or listening acceptance. See the scoped
 exec-cache-native-preparation evidence for candidate and verification hashes.
+
+
+## Focused typed document publication diagnostics
+
+The isolated New/Load publication entry reuses the actual action, checked-owner
+and bridge fixture without its broader CLI. Load now checks byte-for-byte project
+encoding after final-address owner publication. Host sanitizer checks pass both
+New and Load and the full existing action regression suite. Production warnings
+remain strict; unused shared test helpers are suppressed only for the fixture.
+
+A fresh 84-unit native Load build passes all 253 compiler/link commands and the
+91-input map audit. Function/data sections and linker garbage collection reduce
+the candidate to 221,108 bytes; fixture-only whole-program localization removes
+uncalled test entry points. All production action code and assertions remain.
+The earlier missing-header failure and larger successful build are separate
+records. This candidate is target NOT RUN until exact Amiberry qualification,
+followed by a separately admitted A1200 test. It supplies no full frontend,
+actual output, IRQ, exact scheduling or listening acceptance.

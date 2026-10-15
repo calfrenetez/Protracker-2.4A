@@ -189,6 +189,14 @@ static void action_publish(unsigned load,unsigned waiting,unsigned no_owner)
     }
     action_trace(no_owner?"committed-no-owner":"committed");
     assert(f->g->doc.project.channels.count==(load?16:8));
+    if(load){
+        size_t bytes,used;uint8_t *encoded;
+        assert(pt_project_size(&f->g->doc.project,&bytes)==PT_PROJECT_OK&&bytes==a->bytes);
+        encoded=malloc(bytes);assert(encoded);
+        assert(pt_project_encode(&f->g->doc.project,encoded,bytes,&used)==PT_PROJECT_OK&&
+            used==bytes&&!memcmp(encoded,a->encoded,bytes));
+        free(encoded);
+    }
     assert(pt_editor_document_action_cancel(&a->action)==PT_DOCUMENT_ACTION_INVALID);
     assert(!pt_editor_document_action_finish(&a->action));
     assert(pt_editor_mixed_stop(f->g->binding)&&pt_editor_dispose(f->g->editor));
@@ -361,6 +369,7 @@ static void action_report_case(unsigned n)
 #ifndef PT_DOCUMENT_ACTION_TEST_ENTRY
 #define PT_DOCUMENT_ACTION_TEST_ENTRY main
 #endif
+#ifndef PT_DOCUMENT_ACTION_NO_ENTRY
 int PT_DOCUMENT_ACTION_TEST_ENTRY(int argc,char **argv)
 {
     unsigned n;
@@ -387,3 +396,4 @@ int PT_DOCUMENT_ACTION_TEST_ENTRY(int argc,char **argv)
     puts("DOCUMENT ACTION PASS:13 prewrite admission/reset, NEW/load preservation, cancel, WAITING and final-address publication groups; HOST only");
     return 0;
 }
+#endif

@@ -1,0 +1,34 @@
+{
+  "status": "HOST_AND_NATIVE_BUILD_PASS_TARGET_NOT_RUN",
+  "scope": "Focused actual typed Load publication; injected voices, no UI or hardware output",
+  "host": {
+    "newAndLoadSanitizers": "PASS",
+    "productionUnits": 83,
+    "productionWarnings": "Strict unchanged flags; unused-function suppression applies only to fixture TU",
+    "fullActionRegression": "PASS",
+    "loadPreservesEncodedProject": "Byte-for-byte after final-address publication"
+  },
+  "native": {
+    "units": 84,
+    "compilerCommands": 253,
+    "allRC0": true,
+    "allErrorStreamsEmpty": true,
+    "loadInputs": 91,
+    "binaryBytes": 221108,
+    "binarySHA256": "4225e6107a34901ed1002736877e3da6ea8441e4b7dc35ee2dc3d4088b8d784f",
+    "binaryCRC32": "D2822EFD",
+    "buildOptions": "Function/data sections in all units; section GC at link; whole-program localization only on fixture TU",
+    "assertions": "ON",
+    "cpu": "68000 softfloat; no FPU requirement",
+    "execution": false
+  },
+  "retainedAttempts": {
+    "initialBuild": "Missing fcntl.h in reduced SDK; no product",
+    "completeConfiguredSDKBuild": "PASS 384328-byte candidate, never executed",
+    "sectionFeasibilityProbe": "PASS compiler/link only, never executed"
+  },
+  "amiberry": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "fullFrontend": "NOT_TESTED",
+  "audioAndTiming": "NOT_TESTED"
+}

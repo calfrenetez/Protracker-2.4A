@@ -15,8 +15,8 @@ from test_owned_native_run import Bridge
 
 
 class InputBridge(Bridge):
-    def __init__(self, plan):
-        super().__init__(plan.execution)
+    def __init__(self, plan, *, native_output=None):
+        super().__init__(plan.execution, native_output=native_output)
         # A ready RAM file is deliberately not pre-seeded. Only the caller's
         # owned Dev source exists before the helper's genuine CreateDir/copy.
         self.files.pop(plan.execution.copy_source)

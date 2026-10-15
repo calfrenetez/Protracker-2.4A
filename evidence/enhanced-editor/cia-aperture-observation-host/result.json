@@ -1,0 +1,77 @@
+{
+  "host": {
+    "groups": 85,
+    "ordinaryRC0Unchanged": true,
+    "privateSourceBodies": 35,
+    "resultSHA256": "961eaf46904fc188927551403e777d462071b7e882faa2645abb622f4b584116",
+    "stderrSHA256": "8087c1315f8f32808b0c104b3942b1c6a329991e590e7a60c827285043d403de",
+    "stdoutSHA256": "78b740a4ede46eb60aa942754d01ff78e64a563eb8c4222ab1d690287f28661b"
+  },
+  "nativeBuild": {
+    "buildManifestSHA256": "2b6749b584008b39496ef979c7bee8d482a415160ad85ebb24945c3757139c9e",
+    "bytes": 47576,
+    "crc32": "2C1FAB49",
+    "executed": false,
+    "orderedUnits": 4,
+    "projectDependencies": 12,
+    "runtimeQueryPins": 7,
+    "sdkBodies": 70,
+    "sha256": "a665fd9112f41970cdf6704982d9dd4258217f127ac68bd95b878e2e2cf78a4c",
+    "sourceCommit": "cd5e7d2129f45f84b04e96751a4f2495e5f46814",
+    "totalStackQualified": false
+  },
+  "packet": {
+    "entryInhibited": true,
+    "executionSeconds": 140,
+    "groups": 78,
+    "inputPreparationSeconds": 120,
+    "nativeSeconds": 90,
+    "qualificationSHA256": "8d7d01a4699a42cc286b5fdafbdff53d57390c7b5da1fa9d1764b843fcba8979",
+    "runnerGroups": 51,
+    "serviceFactoryGroups": 27,
+    "targetOperation": false,
+    "wholeSeconds": 250
+  },
+  "preservation": {
+    "classicLayoutChanged": false,
+    "exactSchedulingUnchanged": true,
+    "nativeProductionCChanged": false,
+    "unrelatedPaths": 16
+  },
+  "preservedFailures": [
+    "Private export missing guarded exchange module",
+    "Private schema test missing native printf source",
+    "Initial packet preparation missing old noninventory release helpers",
+    "HOST packet JSON tuple/list comparison mismatch; corrected JSON-stable observation shape"
+  ],
+  "profile": "cia-aperture-v1",
+  "qualification": "Collection/closure report consistency only. RC20 stays FAILED. No native, emulator, physical, DMA, live activation, aggregate stack, WCET, audio or listening acceptance.",
+  "schema": 1,
+  "sources": {
+    "tests/test_cia_aperture_capture.py": {
+      "bytes": 8617,
+      "sha256": "b277b472ba5550f9da159a52f7e1ddb31ba215127f7a6f6a23bdff1087aec364"
+    },
+    "tests/test_owned_native_diagnostic.py": {
+      "bytes": 5779,
+      "sha256": "afc07f750e281aa74ed5b3805289b2b65bf4f7ddebf65f66b7843aecb252c8a1"
+    },
+    "tests/test_owned_native_input.py": {
+      "bytes": 20962,
+      "sha256": "2f1f32c1a77e10a129c97ff0a30e5b97dd7dc0dade3bc0f5dae0f45a964f70d6"
+    },
+    "tests/test_owned_native_run.py": {
+      "bytes": 30023,
+      "sha256": "3b13742c831c96e8ae9d0949365ac6c76cb5687823df15e7e555471479f3c6ba"
+    },
+    "tools/cia_aperture_capture.py": {
+      "bytes": 12839,
+      "sha256": "fcbb4a11807b47f65b7b453fe82f30358dd8cd4b9305c787b1f4a70a14d45b8e"
+    },
+    "tools/owned_native_run.py": {
+      "bytes": 24847,
+      "sha256": "2c68e6d3aaea392177bffffb0e1f50e821462f9065aeb6460740ea2d6e3c92e1"
+    }
+  },
+  "state": "HOST_AND_BUILD_ONLY"
+}

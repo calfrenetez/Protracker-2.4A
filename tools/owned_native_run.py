@@ -9,6 +9,11 @@ MAKEDIR must mean successful CreateDir, never 'already exists'. That grants the
 cooperating run a new namespace without relying on a negative directory listing.
 LAUNCH executes an explicit uploaded file; SCRIPT and its hidden T: files are
 never used. All failure paths retain ownership and propagate without recovery.
+
+The explicit cia-aperture-v1 observation profile is separate from fixed-output
+fixture acceptance: a consistent RC20 report retains qualification FAILED.
+Completion/custody/settlement cannot promote that measurement to PASS. It does
+not authorize a live run, resource closure or independent ownership release.
 """
 import asyncio
 from dataclasses import dataclass
@@ -20,6 +25,7 @@ import zlib
 
 import native_file_protocol as wire
 import native_fixture_capture as capture
+import cia_aperture_capture as aperture
 
 
 def require(value, message):
@@ -36,6 +42,7 @@ class Plan:
     stack: int = 524288
     copy_source: str | None = None
     progress_sidecar: bool = False
+    observation_profile: str | None = None
 
     def __post_init__(self):
         require(isinstance(self.run_id, str) and re.fullmatch(r"[0-9a-f]{32}", self.run_id),
@@ -50,7 +57,12 @@ class Plan:
                 and len(set(self.markers)) == len(self.markers)
                 and all(isinstance(x, str) and x and len(x) <= 256 and x.isascii()
                         and x.isprintable() for x in self.markers), "Exact native marker contract required")
-        require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
+        if self.observation_profile is None:
+            require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
+        else:
+            require(type(self.observation_profile) is str and self.observation_profile == aperture.PROFILE
+                    and self.markers == aperture.MARKERS and not self.progress_sidecar,
+                    "Exact separate CIA observation contract required")
         if self.copy_source is not None:
             wire.path(self.copy_source)
             shared = re.fullmatch(re.escape("Dev:Tests/PT24G-" + self.run_id[:16] + "/")
@@ -93,7 +105,21 @@ class Plan:
 
     @property
     def expected_output(self):
+        require(self.observation_profile is None, "Measured diagnostic has no fixed-output oracle")
         return ("\n".join(self.markers) + "\n").encode("ascii")
+
+    @property
+    def output_limit(self):
+        return aperture.MAX_OUTPUT if self.observation_profile == aperture.PROFILE else capture.MAX_OUTPUT
+
+    def observe(self, control, native):
+        if self.observation_profile == aperture.PROFILE:
+            observed = aperture.controls("[OK]\n" + control, self.stack, self.prefix)
+            observed["diagnostic"] = aperture.validate(native, observed["returnCode"])
+            return observed  # RC20/FAILED is retained, never converted into a fixture PASS.
+        observed = capture.parse_control("[OK]\n" + control, self.stack, self.prefix)
+        require(native == self.expected_output, "Native output differs from exact marker contract")
+        return observed
 
     @property
     def staging_script(self):
@@ -131,6 +157,9 @@ class Plan:
                 result['copySourceKind'] = 'ram-staged'
         if self.progress_sidecar:
             result['progressSidecar'] = self.path('progress.log')
+        if self.observation_profile is not None:
+            result['observationProfile'] = self.observation_profile
+            result['observationScope'] = 'Collection and reported closure only; diagnostic qualification/RC retained separately'
         return result
 
 
@@ -369,10 +398,10 @@ class Transaction:
                 raise ValueError("Completion observation count exceeded")
             files = dict(self.plan.prepared_files(), **{"complete.flag": flag})
             for name in ("control.log", "native.log") + (("progress.log",) if self.plan.progress_sidecar else ()):
-                files[name] = await self.observer().file(self.plan.path(name), capture.MAX_OUTPUT)
+                limit = self.plan.output_limit if name == "native.log" else capture.MAX_OUTPUT
+                files[name] = await self.observer().file(self.plan.path(name), limit)
             control = files["control.log"].decode("ascii")
-            observed = capture.parse_control("[OK]\n" + control, self.plan.stack, self.plan.prefix)
-            require(files["native.log"] == self.plan.expected_output, "Native output differs from exact marker contract")
+            observed = self.plan.observe(control, files["native.log"])
             for name, data in files.items():
                 await self.checksum(name, data)
             await self._exact_directory(files)

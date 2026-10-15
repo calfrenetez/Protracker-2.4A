@@ -150,3 +150,42 @@ do not execute it. The total interrupt span, window feasibility, stack adequacy,
 physical timing, DMA, audio and listening remain separate. Earlier late native
 measurements remain failed, and the exact musical gate is unchanged.
 See [saved host/compiler records](../evidence/enhanced-editor/cia-aperture-diagnostic/README.md).
+
+## Bounded observation collection — 16 October 2026
+
+The separate `cia-aperture-v1` contract can now collect the existing experiment's
+variable timestamps and its original RC0 or RC20. RC20 retains qualification
+FAILED even when report consistency and reported resource closure permit normal
+custody and later independent settlement. Collection, cleanup and release cannot
+turn a failed timing gate into PASS. Ordinary fixture mode still requires RC0
+and exact fixed stdout; its 8192-byte bound is unchanged.
+
+This named profile permits at most32768 bytes and16 ordered observations. The
+observer checks the complete field schema and native widths, one original epoch
+and frame windows, original arm targets/counts, reported clock spans, irreversible
+commit/shadow values, fixed policy, closure fields and summary consistency.
+Success needs all12 original positive gates and four zero-write negatives.
+A partial closed RC20 report stays incomplete/failed, preserving actual values
+and validity flags. The trace does not separately print entry_frequency; the
+observer does not invent it. Reported closure is not independently authenticated
+resource absence. HOLD, unknown codes, malformed/missing output, transport errors
+or uncertain custody still stop dispatch and retain ownership without replay.
+
+The private HOST85 run passes report/transaction and ordinary fixed-output
+regressions plus the existing CIA ownership/aperture sanitizer fixtures. The
+new private emulator packet separately passes78 lifecycle/guest/service/factory
+groups, including both successful and failed measurements through the same
+custody and cleanup path. Integration caught a tuple/list mismatch after service
+JSON serialization; returned observations now retain the same JSON shape on both
+sides, and a regression checks the exact roundtrip. Earlier failed private
+exports and packet preparation remain separate records.
+
+A fresh current-source standalone build passes with four ordered units,12
+project dependency bodies,70 SDK bodies and seven pinned runtime queries. Its
+47,576-byte HUNK has SHA256
+`a665fd9112f41970cdf6704982d9dd4258217f127ac68bd95b878e2e2cf78a4c`.
+The earlier compiler record remains historical. This new candidate is native
+NOT_RUN until a fresh guarded window completes; no timing, native output,
+aggregate stack, WCET, physical or listening acceptance is established here.
+The task Stack selection262144 is provisional, not a complete stack bound.
+See [HOST/build evidence](../evidence/enhanced-editor/cia-aperture-observation-host/result.json).

@@ -7259,6 +7259,19 @@ stop/order/completion, exact live timing, audio and listening remain NOT_RUN.
 The classic baseline, accepted layout and existing master/cache/save architecture
 are preserved; no deferred ZooperTracker feature is added.
 
+### Exact-schedule timer observation collection — 16 October
+
+The separate named CIA diagnostic collector preserves variable actual-clock
+reports and original RC20/FAILED outcomes through owned custody and independently
+checked cleanup. Ordinary native fixtures retain their exact RC0/output contract.
+HOST85 checks and78 separate packet lifecycle/service groups pass; a new pinned
+four-unit timer/RAM experiment builds. Native execution is still NOT_RUN at this
+source milestone. This is test preparation for the exact scheduling decision,
+not native activation, sample-reader ownership, DMA quiet, physical timing,
+aggregate stack/WCET or audio acceptance. Authoritative Fast masters, selective
+caches, save/export and direct24-bit mixing are unchanged. See
+[the diagnostic contract](CIA_APERTURE_DIAGNOSTIC.md#bounded-observation-collection--16-october-2026).
+
 
 ## Fixed measured Paula sequence producer — implemented HOST profile
 

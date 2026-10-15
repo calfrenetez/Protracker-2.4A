@@ -11,7 +11,7 @@ from owned_native_run import Plan, Transaction
 
 
 class Bridge:
-    def __init__(self, plan):
+    def __init__(self, plan, *, native_output=None):
         self.plan = plan
         self.files = {"RAM:original": b"preserve", "T:ab_script_1": b"old script"}
         if plan.copy_source:
@@ -26,7 +26,8 @@ class Bridge:
         self.copy_failed = False
         self.lose_stage_output = False
         self.complete = True
-        self.progress_output = plan.expected_output
+        self.native_output = plan.expected_output if native_output is None else native_output
+        self.progress_output = self.native_output
         self.change_reply = lambda command, reply: reply
 
     def successful_script_outputs(self, script):
@@ -52,7 +53,7 @@ class Bridge:
                     output = f'Current stack size is {self.plan.stack} bytes\n'.encode()
                 elif command == (self.plan.path('NativeTest') +
                                  (' ' + self.plan.path('progress.log') if self.plan.progress_sidecar else '')):
-                    output = self.plan.expected_output
+                    output = self.native_output
                     if self.plan.progress_sidecar:
                         self.files[self.plan.path('progress.log')] = self.progress_output
                 else:

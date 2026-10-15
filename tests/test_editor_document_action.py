@@ -129,6 +129,16 @@ class TypedDocumentAction(unittest.TestCase):
                                       f"DOCUMENT ACTION CASE PASS:{case}\n").encode())
             actions = build("document-actions-test", "tests/editor_document_actions_test.c")
             self.assertEqual(run([str(actions)], 30), component)
+            trace = build("document-load-trace-test", "tests/editor_document_action_case_test.c",
+                          definitions=['-DPT_DOCUMENT_ACTION_CASE="publish-load"',
+                                       '-DPT_DOCUMENT_ACTION_TRACE=1'])
+            self.assertEqual(run([str(trace)], 30),
+                             b"DOCUMENT ACTION CASE BEGIN:publish-load\n" +
+                             b"".join((f"DOCUMENT ACTION TRACE:{stage}\n").encode()
+                                      for stage in ("fixture-ready", "prepared", "published",
+                                                    "committed", "stopped-and-disposed",
+                                                    "paula-closed", "amigus-closed", "finished")) +
+                             b"DOCUMENT ACTION CASE PASS:publish-load\n")
             for case in range(19):
                 with self.subTest(alias=case):
                     self.assertEqual(run([str(executable), "alias", str(case)], 30),

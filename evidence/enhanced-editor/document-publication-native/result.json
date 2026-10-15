@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "date": "2026-10-14",
-  "scope": "One positive New publication fixture with injected voices and ordinary RAM allocations. No frontend or device activation.",
+  "date": "2026-10-15",
+  "scope": "Separate New publication and Load publication with deliberately rejected playback ownership, using injected voices and ordinary RAM allocations. No frontend or device activation.",
   "target": {
     "emulator": "Amiberry",
     "cpu": "68030",
@@ -67,7 +67,7 @@
     "recovery": "Separate scoped teardown and saved launcher restoration; independent absence and public release verified. Original native result remains unconfirmed."
   },
   "unqualified": [
-    "native Load publication",
+    "successful native Load publication with a new playback owner",
     "original combined prerequisite/action suite",
     "thirteen-case native component",
     "other native lifecycle cases",
@@ -126,17 +126,45 @@
     "native_return_code": null,
     "observed_reply_class": "GUARDED_TOOL_ERROR",
     "observed_guard_error": "Lock unavailable; original cause chain includes BlockingIOError. No accepted STILL RUNNING classification.",
-    "cleanup_or_release": false,
-    "recovery": "New separately scoped recovery prepared; human approval pending. Retained interrupted ownership is not release.",
+    "cleanup_or_release": true,
+    "recovery": "Separately authorized scoped recovery completed. Independent absence/restoration and public release archived the interrupted operation. Original native completion remains unconfirmed.",
     "native_result_sha256": "b727983b616501a6ede6f3062192631401efb34810f1300e7b5e4d34e02c712f"
   },
   "prepared_load_no_owner": {
     "case": "publish-no-owner",
-    "state": "NATIVE_NOT_RUN",
+    "state": "SCOPED_NATIVE_PASS",
     "candidate_sha256": "3d70789397a594b352dddc3241d16e812b80bf4e1a56af1663139b6e0088cf9f",
     "candidate_bytes": 424416,
     "candidate_crc32": "E33BF3E2",
     "link_inputs_verified": 91,
-    "scope": "Load publication followed by rejected new-owner format; preserve the published document and complete normal cleanup. Host case passes; cross-build does not establish native completion."
+    "scope": "Load publication, incremental master establishment and deliberate invalid-format rejection of playback ownership; COMMITTED_NO_OWNER preserves the published document and normal cleanup completes. No successful Load playback owner, frontend, devices, physical hardware, timing or listening acceptance.",
+    "target_execution": true,
+    "return_code": 0,
+    "observed_stack_bytes": 524288,
+    "output_bytes": 87,
+    "output_crc32": "4BE69F16",
+    "markers": [
+      "DOCUMENT ACTION CASE BEGIN:publish-no-owner",
+      "DOCUMENT ACTION CASE PASS:publish-no-owner"
+    ],
+    "exact_cleanup_and_independent_idle": true,
+    "ownership_released": true,
+    "result_sha256": "8546a4753e411bdcf51a4ca3831d872a4cae82a7ec4217d71fc9700108f17c73",
+    "independent_final_sha256": "da6894747cf3e7f40d9033f4a1447cf22f71735943b6a7db63a6d91ec1dd2af5"
+  },
+  "phase_marked_load": {
+    "state": "NATIVE_NOT_RUN",
+    "case": "publish-load",
+    "trace_enabled": true,
+    "production_changed": false,
+    "work_budget": 64,
+    "host_state": "PASS",
+    "host_seconds": 125.66970600000059,
+    "host_assertions_asan_ubsan": true,
+    "candidate_sha256": "97ecdb8b67b89ffc5f08e3cb47a456c5773ebbc1b3042e15fd99c7ad7e4cd0f9",
+    "candidate_bytes": 424732,
+    "candidate_crc32": "1A7D25E7",
+    "link_inputs_verified": 91,
+    "scope": "Separate fixture with eight flushed publication and cleanup boundaries; original semantic assertions, product source, work budget and time limits unchanged. No runtime result or performance inference."
   }
 }

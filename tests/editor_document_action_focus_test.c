@@ -3,6 +3,16 @@
 #include "../src/editor/editor_document_action.h"
 #include "../src/editor/sampler_lifetime_internal.h"
 #include "../src/core/document_retirement_internal.h"
+#if defined(PT_DOCUMENT_ACTION_TRACE) && PT_DOCUMENT_ACTION_TRACE
+/* Diagnostic fixture boundaries only. No product callback or timing claim. */
+static void action_trace(const char *stage)
+{
+    assert(printf("DOCUMENT ACTION TRACE:%s\n",stage)>0);
+    assert(!fflush(stdout));
+}
+#else
+#define action_trace(stage) ((void)0)
+#endif
 struct replace_fixture {
     struct pt_document *candidate;
     struct pt_editor_mixed_establish master;
@@ -152,9 +162,11 @@ static void action_publish(unsigned load,unsigned waiting,unsigned no_owner)
 {
     struct action_fixture *a=action_make(0);struct replace_fixture *f=a->f;
     enum pt_document_action_result r;unsigned n=0;
+    action_trace("fixture-ready");
     if(no_owner)a->inputs.format.bits=7;
     assert((load?pt_editor_document_action_load(&a->action,&a->inputs,a->encoded,a->bytes,SIZE_MAX):
         pt_editor_document_action_new(&a->action,&a->inputs,8,SIZE_MAX))==PT_DOCUMENT_ACTION_PREPARED);
+    action_trace("prepared");
     if(waiting){
         f->g->d.quiesce_result=f->g->wd.barrier_result=0;
         assert(pt_editor_document_action_step(&a->action)==PT_DOCUMENT_ACTION_WAITING);
@@ -163,7 +175,10 @@ static void action_publish(unsigned load,unsigned waiting,unsigned no_owner)
             !pt_editor_document_action_finish(&a->action));
         f->g->d.quiesce_result=f->g->wd.barrier_result=1;
     }
-    do{r=pt_editor_document_action_step(&a->action);assert(++n<10000);}while(r==PT_DOCUMENT_ACTION_PUBLISHED);
+    do{
+        r=pt_editor_document_action_step(&a->action);assert(++n<10000);
+        if(n==1&&r==PT_DOCUMENT_ACTION_PUBLISHED)action_trace("published");
+    }while(r==PT_DOCUMENT_ACTION_PUBLISHED);
     assert(f->old_releases==3&&!f->candidate->loaded);
     if(no_owner)assert(r==PT_DOCUMENT_ACTION_COMMITTED_NO_OWNER&&!f->g->binding->owner&&
         !f->g->binding->owner_finish&&!f->g->binding->preparation_context);
@@ -172,15 +187,20 @@ static void action_publish(unsigned load,unsigned waiting,unsigned no_owner)
             f->g->binding->owner->project==&f->g->doc.project);
         assert(f->fresh.storage.project==&f->g->doc.project&&f->fresh.publisher==&f->g->binding->owner);
     }
+    action_trace(no_owner?"committed-no-owner":"committed");
     assert(f->g->doc.project.channels.count==(load?16:8));
     assert(pt_editor_document_action_cancel(&a->action)==PT_DOCUMENT_ACTION_INVALID);
     assert(!pt_editor_document_action_finish(&a->action));
     assert(pt_editor_mixed_stop(f->g->binding)&&pt_editor_dispose(f->g->editor));
+    action_trace("stopped-and-disposed");
     assert(!pt_editor_document_action_finish(&a->action));
     assert(pt_paula_voices_close(&f->bridges.paula));
+    action_trace("paula-closed");
     assert(!pt_editor_document_action_finish(&a->action));
     assert(pt_wavetable_voices_close(&f->bridges.amigus));
+    action_trace("amigus-closed");
     assert(pt_editor_document_action_finish(&a->action));action_drop(a);
+    action_trace("finished");
 }
 static void action_alias(unsigned mode)
 {

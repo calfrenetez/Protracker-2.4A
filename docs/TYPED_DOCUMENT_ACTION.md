@@ -16,6 +16,14 @@ an individual case never prints the full-suite completion line. Alias and
 uncertain-state modes still deliberately retain their quarantined allocations
 and are separate host subprocess tests.
 
+For a separate publication diagnostic, also define `PT_DOCUMENT_ACTION_TRACE=1`.
+The fixture flushes boundaries after setup, preparation, first publication,
+commit, stop/disposal, each voice close and final cleanup. These observations
+leave production code, assertions, work budgets and time limits unchanged.
+The host recipe requires all eight trace lines in order for `publish-load`;
+default fixtures retain their original output. Trace lines are observations of
+fixture progress, not hardware acknowledgments or timing measurements.
+
 The `actions` selector and separate `editor_document_actions_test.c` executable
 run all thirteen normal-cleanup action cases with individual flushed markers
 and a distinct component completion line. They exclude prerequisite suites and
@@ -116,7 +124,7 @@ On 15 October, the exact fixed `cancel-load` candidate passed on Amiberry 68030
 with both expected markers, RC0 and a queried 524288-byte Stack. Exact staging
 cleanup, launcher restoration, process/transport absence and ownership release
 were independently verified. Preparation/cancellation is qualified for that
-fixture; positive Load publication and its later owner construction still lack
+fixture. Successful Load publication with a new playback owner still lacks
 confirmed completion. Physical hardware and full frontend acceptance remain open.
 
 Metadata equality now checks even-addressed snapshots in four-byte chunks,
@@ -137,10 +145,16 @@ but the harness returned an error and its saved exception chain includes lock
 contention. No native return code or completion markers were accepted. This
 run has no `STILL RUNNING` classification, so it is not evidence of another
 90-second timeout. Dispatch and completion remain uncertain. Interrupted
-ownership is retained pending separately approved cleanup and release.
+ownership was subsequently released after separately authorized exact cleanup,
+restoration and independent absence checks. The interrupted record was archived;
+the native completion result remains unconfirmed.
 
-A separate `publish-no-owner` diagnostic is cross-built to check successful
-Load publication followed by a rejected output format during owner creation.
-Its expected `COMMITTED_NO_OWNER` result keeps the published document usable
-without granting playback ownership. The existing host case passes; this
-exact diagnostic has not run natively.
+On 15 October, the separate `publish-no-owner` diagnostic passed on Amiberry
+68030 with RC0, both exact markers and the queried 524288-byte Stack. It
+completed Load publication and incremental master establishment, then rejected
+the deliberate invalid output format during playback-owner creation. The
+expected `COMMITTED_NO_OWNER` result retained the published document and normal
+cleanup completed. Separate observations verified restoration, endpoint and
+process absence, and ownership release. This qualifies that one failure-handling
+path; successful Load ownership, frontend activation, physical hardware and
+audio remain unqualified.

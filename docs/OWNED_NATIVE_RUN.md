@@ -401,3 +401,10 @@ requires a separately approved recovery. The earlier recovered direct-upload
 attempt remains separate, and no physical Load test has run. A transfer-only
 explanation is insufficient; the next native diagnostic must locate execution
 progress within the existing bounds, without treating a timeout as a pass.
+
+
+The corrected-copy run's separate human-approved recovery is complete. Exact
+owned processes and staging were removed, saved launcher files restored, and
+independent observation, public release and separate post-release checks passed.
+All three original HOLD records remain in the archive. The native timeout is
+still unconfirmed runtime acceptance; no rerun or physical test was performed.

@@ -1,5 +1,5 @@
 {
-  "status": "HOST_NATIVE_BUILD_PASS_CORRECTED_COPY_STAGE_PASS_NATIVE_TIMEOUT_NEW_HOLD",
+  "status": "HOST_NATIVE_BUILD_PASS_CORRECTED_COPY_STAGE_PASS_NATIVE_TIMEOUT_RECOVERED",
   "scope": "Focused actual typed Load publication; injected voices, no UI or hardware output",
   "host": {
     "newAndLoadSanitizers": "PASS",
@@ -71,7 +71,7 @@
     "narrativeErratum": "An inherited cleanup-fact label mentioned native RC0/custody and one HOLD. Preserved record has separate clarification: no confirmed native result, two HOLDs plus inflight; no runtime pass inferred."
   },
   "correctedCopyAmiberry": {
-    "status": "COPY_STAGE_PASS_NATIVE_COMPLETION_TIMEOUT_HOLD",
+    "status": "COPY_STAGE_PASS_NATIVE_COMPLETION_TIMEOUT_RECOVERED_RELEASED",
     "runID": "366d8fcdfc4974a3f02427365715cf5f",
     "binaryUnchanged": true,
     "copyStage": "PASS: exact explicit stage output, flag and before/after source/destination checksums",
@@ -84,13 +84,25 @@
     "savedResultSHA256": "4c8d136a4a86203f2532ac67b75f2a87adf8d5eff646dfb485b5a8461f63bc0c",
     "preparedCopySHA256": "e64c7a3ea71a560c2b77b7a4adbe8790899c0c14fea2c840cad9279083eb64e4",
     "recoveryScopeSHA256": "1ff6eac0eef0d0003c37ae525bfd2c1a6c5c45048b30c2e562ea311bdd0edc0a",
-    "recovery": "New scoped approval requested; no automatic recovery/retry",
+    "recovery": "Human-approved exact cleanup/restoration and one public release; all three HOLD records archived unchanged; no test rerun",
     "hostChecks": {
       "canonicalTransactionGroups": 24,
       "serviceGroups": 7,
       "guestGroups": 7,
       "guestOuterTimeoutPositions": 9,
       "factoryAndOfflineAdmission": "PASS"
+    },
+    "recoveryEvidence": {
+      "phase": "EMPTY",
+      "fence": 1611,
+      "archives": 68,
+      "sha256": {
+        "human-authorization.json": "35b6e69d9f14bc6c9c27559b59e9d54879d23e24bbfdf79ca5ca7386787f5fe9",
+        "restoration-result.json": "03639070ac7ee5c670da08fe86661d0122d3d272110cde7a3877a6b67bf80bf4",
+        "independent-observation.json": "7d78db14d7d5f2258edbe8160a48731371db0f18c045f79a105ccd421487b00e",
+        "release-result.json": "81681960e45cbb05c4de9bf48e9ead5a6f970e533e0f583eb3bd8357ffc6a7c0",
+        "independent-post-release.json": "3494b48bc167caf4f907a8c8e96d621a6406fd8809c42545ac74acbe74e83adf"
+      }
     }
   }
 }

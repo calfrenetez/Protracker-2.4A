@@ -163,7 +163,11 @@ class Transaction:
             body = bytes.fromhex(command["hexData"])
             intent.update(bytes=len(body), sha256=hashlib.sha256(body).hexdigest())
         self.record({"event": "dispatch", "number": self.calls, "command": intent})
-        raw = await asyncio.wait_for(self.exchange(command, reply_type, timeout), timeout=timeout)
+        try:
+            raw = await asyncio.wait_for(self.exchange(command, reply_type, timeout), timeout=timeout)
+        except wire.BridgeReplyError as error:
+            self.record({"event": "error_reply", "number": self.calls, "raw": error.raw})
+            raise
         self.remaining()
         wire.line(raw)
         self.record({"event": "reply", "number": self.calls, "raw": raw})

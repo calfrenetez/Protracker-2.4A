@@ -5,6 +5,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from native_guarded_exchange import Exchange
+from native_file_protocol import BridgeReplyError, MAX_LINE
 
 
 class Connection:
@@ -44,6 +45,34 @@ class Tests(unittest.IsolatedAsyncioTestCase):
                     await exchange(self.command, "DIR", 1)
                 self.assertEqual(connection.sent, [self.command])
                 self.assertIs(connection.on_rx, connection.original)
+
+    async def test_error_reply_is_bounded_evidence_and_not_a_success(self):
+        for raw in ("ERR|FILEINFO failed|RAM:fixture/complete.flag",
+                    "ERR|" + "x" * (MAX_LINE - 4)):
+            connection = Connection([raw])
+            exchange = Exchange(connection, lambda: True)
+            with self.assertRaises(BridgeReplyError) as failure:
+                await exchange(self.command, "DIR", 1)
+            self.assertEqual(failure.exception.raw, raw)
+            self.assertNotIn(raw, str(failure.exception))
+            self.assertTrue(exchange.failed)
+            self.assertFalse(exchange.busy)
+            self.assertIs(connection.on_rx, connection.original)
+            with self.assertRaises(ValueError):
+                await exchange(self.command, "DIR", 1)
+            self.assertEqual(connection.sent, [self.command])
+
+    async def test_ambiguous_or_invalid_error_is_not_promoted_to_exact_evidence(self):
+        for replies in (["ERR|a", "ERR|b"], ["ERR|x", "DIR|RAM:|0|"],
+                        ["ERR|bad\nline"], ["ERR|\u00e9"], ["ERR|" + "x" * MAX_LINE]):
+            connection = Connection(replies)
+            exchange = Exchange(connection, lambda: True)
+            with self.assertRaises(ValueError) as failure:
+                await exchange(self.command, "DIR", 1)
+            self.assertNotIsInstance(failure.exception, BridgeReplyError)
+            self.assertTrue(exchange.failed)
+            self.assertIs(connection.on_rx, connection.original)
+            self.assertEqual(connection.sent, [self.command])
 
     async def test_missing_reply_times_out_without_retry(self):
         connection = Connection([])

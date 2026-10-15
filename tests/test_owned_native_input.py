@@ -9,6 +9,8 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from owned_native_input import InputPlan, InputStage
 from owned_native_run import Plan, Transaction
+from native_file_protocol import BridgeReplyError
+from native_guarded_exchange import Exchange
 from test_owned_native_run import Bridge
 
 
@@ -145,6 +147,76 @@ class InputTests(unittest.IsolatedAsyncioTestCase):
                 with self.assertRaises(ValueError):
                     await self.input.prepare()
                 self.assertEqual(len(self.bridge.calls), index)
+
+    async def test_raw_error_at_every_input_execution_and_settlement_exchange(self):
+        self.new()
+        await self.lifecycle()
+        total = len(self.bridge.calls)
+        for index in range(1, total + 1):
+            with self.subTest(exchange=index):
+                self.new()
+                bridge, events = self.bridge, self.events
+                raw_error = f"ERR|injected-{index}|RAM:fixture"
+                bridge.change_reply = lambda command, reply: (
+                    raw_error if len(bridge.calls) == index else reply)
+
+                class Connection:
+                    connected = True
+                    on_rx = None
+                    def __init__(self):
+                        self.tasks = []
+                    def send(connection, command):
+                        async def deliver():
+                            # Use the real raw callback seam over the existing
+                            # file model. No socket, process or guard mutation.
+                            raw = await bridge.exchange(command, "MODEL", 1)
+                            connection.on_rx(raw)
+                        connection.tasks.append(asyncio.create_task(deliver()))
+
+                connection = Connection()
+                exchange = Exchange(connection, lambda: True)
+                self.input.exchange = self.transaction.exchange = exchange
+                with self.assertRaises(BridgeReplyError) as caught:
+                    await self.lifecycle()
+                await asyncio.gather(*connection.tasks)
+                self.assertEqual(caught.exception.raw, raw_error)
+                self.assertTrue(exchange.failed)
+                self.assertIsNone(connection.on_rx)
+                self.assertIn('FAILED', (self.input.phase, self.transaction.phase))
+                self.assertEqual(len(bridge.calls), index)
+                error = events[-1]
+                self.assertIn(error['event'], ('input_error_reply', 'error_reply'))
+                self.assertEqual(error['raw'], raw_error)
+                self.assertEqual(events[-2]['event'],
+                                 'input_dispatch' if error['event'].startswith('input_') else 'dispatch')
+                self.assertEqual(events[-2]['number'], error['number'])
+                self.assertEqual(bridge.files[self.plan.source], self.execution.binary)
+                self.assertEqual(bridge.files['RAM:original'], b'preserve')
+                with self.assertRaises(ValueError):
+                    await self.input.prepare()
+                self.assertEqual(len(bridge.calls), index)
+
+    async def test_error_evidence_write_failure_still_latches_ownership(self):
+        self.new()
+        for owner, operation in ((self.input, self.input.prepare),
+                                 (self.transaction, self.transaction.prepare)):
+            failure = BridgeReplyError('ERR|write failure model|RAM:fixture')
+            calls = []
+            async def exchange(command, kind, seconds):
+                calls.append(command)
+                raise failure
+            def record(event):
+                if event['event'].endswith('error_reply'):
+                    raise OSError('local evidence write failed')
+            owner.exchange, owner.record = exchange, record
+            with self.assertRaisesRegex(OSError, 'evidence write failed') as caught:
+                await operation()
+            self.assertIs(caught.exception.__context__, failure)
+            self.assertEqual(owner.phase, 'FAILED')
+            self.assertEqual(len(calls), 1)
+            with self.assertRaises(ValueError):
+                await operation()
+            self.assertEqual(len(calls), 1)
 
     async def test_existing_ram_namespace_is_never_adopted(self):
         self.new()

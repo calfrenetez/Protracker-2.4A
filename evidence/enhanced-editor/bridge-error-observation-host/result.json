@@ -1,0 +1,60 @@
+{
+  "acceptance": {
+    "audio": false,
+    "host": true,
+    "listening": false,
+    "revisedNativeEmulator": false,
+    "revisedNativePhysical": false,
+    "timing": false
+  },
+  "checks": {
+    "ambiguousMalformedErrorRefused": true,
+    "executionGroups": 33,
+    "injectedRawErrorExchanges": 135,
+    "inputGroups": 19,
+    "ledgerWriteFailureRetainsOwnership": true,
+    "protocolGroups": 28,
+    "rawExchangeGroups": 12,
+    "retryOrDeadlineExtension": false
+  },
+  "hostLogSHA256": {
+    "exchange.stderr": "dae5df9c483c968d87bd805d594f9fe43ab3cc286f623f039b3ccc4de067177a",
+    "input.stderr": "34fd709222d464c8b4ca46cafeb64846346051856177c1e115bd354b773a6409",
+    "protocol.stderr": "4e2752cabde272278c4f9bfa76cfc2f96d879e32ff101d33be34ece9994e0323",
+    "run.stderr": "0a238c4efc6f0c6fcb19c17ec7810e69933d16b9b2d8336ba0330ec351743152"
+  },
+  "limits": {
+    "guestSeconds": 140,
+    "nativeSeconds": 90,
+    "wholeSeconds": 250
+  },
+  "precedingEmulatorFailure": {
+    "archives": 74,
+    "candidateBytes": 224436,
+    "candidateSHA256": "32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a",
+    "cleanup": "Exact two owned processes absent; staging removed; saved launcher files restored; independent release passed",
+    "exactErrorRetained": false,
+    "finalFence": 1639,
+    "nativePass": false,
+    "originalHoldsArchived": 3,
+    "protocolRecords": 302,
+    "recordSHA256": {
+      "failedResult": "e867655ed387bc293311c96c4dd193fc72d3c363947288e20f8c54cbdddc2ca5",
+      "independentAfterRelease": "16a30bed6cc65c56459f1f94339d0deeb7f20d9bab3910d3088a2b4cd32115a0",
+      "independentBeforeRelease": "aaf0569141ab884973eafe3ee79250f745426eb78d3d093e3b6c34afdfeb5970",
+      "publicRelease": "a5ea0f46baf1c0e8d01b626fdba7547925ee00d72c982f5cd7346529d9a50613",
+      "restoration": "20cf236166181e3ff830b62e4039cb8877630bf015b7e2a6d9965fb23d365dcb"
+    },
+    "replayed": false,
+    "stage": "Completion FILEINFO bridge error before native limit"
+  },
+  "sourceSHA256": {
+    "tests/test_native_guarded_exchange.py": "0460c2cf028aec2aa12ef8e9435bb85e7eebfbbf185ab19d77373ae887361938",
+    "tests/test_owned_native_input.py": "9967e54f8e76ca753aa211ca291037cf3f1d8fdf3c123947de8e07155854eaf9",
+    "tools/native_file_protocol.py": "178c4078dedc93f1d36d34df1bbd94e71245d82462018454b93173d0ddb34344",
+    "tools/native_guarded_exchange.py": "200ef96080225bd1d8c5948420ad5210c5feeb2032508c6808b770491aca0aae",
+    "tools/owned_native_input.py": "7ede3db4351a26f84df47dd452ac937858908cfbf91cf5d3e24a42041e9558ea",
+    "tools/owned_native_run.py": "1b93ae3e22298abf2157ece014feda81a27570bf588e333b9ca7695d0f343d5c"
+  },
+  "state": "HOST_PASS_TARGET_NOT_RUN"
+}

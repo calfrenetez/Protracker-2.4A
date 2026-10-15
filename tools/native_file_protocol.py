@@ -48,6 +48,19 @@ def line(value):
     return value
 
 
+class BridgeReplyError(ValueError):
+    """One validated error reply, retained as evidence rather than success.
+
+    Keep raw target data out of the generic message. The transaction records
+    it only in its caller-owned local ledger; it grants no retry or cleanup.
+    """
+    def __init__(self, raw):
+        line(raw)
+        require(raw.startswith("ERR|"), "Bridge error reply required")
+        super().__init__("Bridge reported an error; retain ownership")
+        self.raw = raw
+
+
 def write_commands(requested, data):
     """Plan bounded WRITEFILE frames; this function does not send anything.
 

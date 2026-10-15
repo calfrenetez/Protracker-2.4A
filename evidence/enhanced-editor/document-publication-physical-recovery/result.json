@@ -1,0 +1,53 @@
+{
+  "state": "PHYSICAL_AUTOMATED_TIMEOUT_RECOVERED",
+  "candidate": {
+    "bytes": 224372,
+    "sha256": "20a9e71efd2a445e81ecc090917398e55b538539fb491e21187dc060dfa40fd3",
+    "crc32": "6556F8A1"
+  },
+  "lateRecoveryObservation": {
+    "completeFlag": "COMPLETE",
+    "returnCode": 0,
+    "stackBytes": 262144,
+    "progress": "finished",
+    "visibleNativePass": "DOCUMENT PUBLICATION PASS:load; final-address owner and checked cleanup; injected voices",
+    "completeNativeLogBytesCollected": false,
+    "exactTaskAbsent": true
+  },
+  "cleanup": {
+    "expectedFiles": 6,
+    "exactFilesDeleted": 6,
+    "emptyParentDeleted": true,
+    "independentNamespaceAndTaskAbsence": true,
+    "recoveryShellClosed": true,
+    "safariViewOnly": true,
+    "originalHostFilesPreserved": true,
+    "localServiceAndEndpointsAbsent": true,
+    "originalFailureLedgerPreserved": true,
+    "originalHoldsArchived": 3,
+    "guardFence": 1633,
+    "archiveCount": 73,
+    "independentPostRelease": "PASS"
+  },
+  "releaseProofCorrection": "Initial proof included an extraneous null nonce and was rejected before mutation; corrected schema had one successful public release. Refusal retained.",
+  "testReplay": false,
+  "acceptance": {
+    "boundedAutomatedTransaction": false,
+    "fullNativeLogCapture": false,
+    "devicePlayback": false,
+    "hardwareVoiceStop": false,
+    "timing": false,
+    "audio": false,
+    "humanListening": false
+  },
+  "recordsSHA256": {
+    "physical-before-cleanup.json": "42235c772b505007ddef544cb74e9828e7568aa5500f760698ea6c0192c19cbf",
+    "physical-cleanup.json": "1d55b622c6c012541a31c25b692e61b74489016f10b0ae7d861dbced5a658fa3",
+    "physical-independent-absence.json": "b5cbafe0aa5a8a180010548e73c94f82346251c856543d0f07869b5a700066da",
+    "safari-view-only-restoration.json": "43877b880fdf5c2a2b32e9b146d1658a140f353f498fcb651b9719ac76a0b6ff",
+    "independent-observation.json": "1f2e81bc5de2561bba38c9962e9017e75f78b2149f1a0e2e47db0435728d2fe5",
+    "release-schema-refusal.json": "3d6579785f9e3abe89130613bcfdaef23615455a167403bc6fb7779a58bc67a6",
+    "release-result.json": "d2946ba07e6785cc8927437fc53ab7cad3302e067575734c6a15302fe424c8ca",
+    "independent-post-release.json": "66a4a1b991835b883897f9980b211b869b9c804ae9bb99d01b7bd2510e5d886c"
+  }
+}

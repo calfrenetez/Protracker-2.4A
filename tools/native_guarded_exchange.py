@@ -9,7 +9,7 @@ on_rx is an observation callback in the pinned upstream SerialConnection.
 import asyncio
 import math
 
-from native_file_protocol import line, require
+from native_file_protocol import BridgeReplyError, line, require
 
 
 ALLOWED = {
@@ -64,7 +64,8 @@ class Exchange:
             raw = await asyncio.wait_for(queue.get(), timeout=seconds)
             require(not overflow and queue.empty(), "Ambiguous duplicate bridge response")
             line(raw)
-            require(not raw.startswith("ERR|"), "Bridge reported an error; retain ownership")
+            if raw.startswith("ERR|"):
+                raise BridgeReplyError(raw)
             require(self.admit() is True and self.connection.connected is True, "Admission changed before success")
             return raw
         except BaseException:

@@ -169,3 +169,14 @@ restoration, owned process/endpoint absence and explicit reservation release.
 The unchanged native 90-second limit was satisfied; this is not a timing or
 performance measurement and does not retroactively resolve earlier failures.
 Full-suite, frontend, physical-device and listening acceptance remain separate.
+
+
+A separate real-A1200 Load attempt on 15 October exceeded the automated guest
+time limit after transfer consumed most of the run budget. Recovery later found
+the completed marker, return code 0, finished progress and the visible native
+Load PASS tail. This is late completion evidence, not a passing bounded run or
+a complete captured native log. The six temporary RAM files and their empty
+directory were removed after task absence was established; a separate observation
+confirmed absence, original files were preserved, Safari returned to View Only,
+and ownership was independently released. The timeout and all three HOLD records
+remain archived. See the [recovery evidence](../evidence/enhanced-editor/document-publication-physical-recovery/result.json).

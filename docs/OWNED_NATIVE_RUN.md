@@ -56,6 +56,27 @@ replies, overlapping observers, lost admission and timeout. It must be installed
 only inside a newly reviewed private guarded service; it is not an independent
 transport or a substitute for shared reservations and live target checks.
 
+One bounded, printable ASCII `ERR|` reply now raises `BridgeReplyError` with
+the exact response attached. Input and execution transactions save it as a
+numbered `input_error_reply` or `error_reply` in the private local dispatch
+ledger before propagating failure. The generic message omits raw target data.
+Ambiguous, duplicate or malformed replies are not promoted to exact error
+evidence. Failure remains sticky: no retry, cleanup or deadline extension is
+granted. A ledger-write failure also leaves ownership retained.
+
+The new host matrix injects an error at each of all 135 exchanges across input
+preparation, execution and both settlements through the real raw callback
+adapter. Every case records the matching dispatch number, stops further sends
+and preserves unrelated files. All 92 relevant host groups pass (12 raw exchange,
+28 protocol, 33 execution, 19 input). This diagnostic change has not yet run on
+either target.
+
+The preceding revised Load emulator run completed both copy stages and reached
+publication, then failed on a completion-file bridge response whose exact text
+was lost. Its failure remains preserved. Exact owned-process cleanup, original
+launcher restoration, independent absence and public release passed, archiving
+all three holds. It does not qualify the revised native candidate.
+
 ## Evidence and limits
 
 70 host tests pass across raw protocol parsing, transaction fault injection,

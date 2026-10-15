@@ -1,0 +1,90 @@
+{
+  "qualification": "HOST_AND_COMPILE_ONLY",
+  "host": {
+    "groups": 93,
+    "runs": [
+      {
+        "groups": 15,
+        "returnCode": 0,
+        "elapsedSeconds": 1.565,
+        "logSHA256": "52731eb517e3e93f38cb7a047ddd2142488b378103b43d0486c6d2acfbb0fc61"
+      },
+      {
+        "groups": 70,
+        "returnCode": 0,
+        "elapsedSeconds": 9.186,
+        "logSHA256": "d5042ea7434fe0db885189c9c63018271279224a092aa9d0ee062d6bf009be95"
+      },
+      {
+        "groups": 8,
+        "returnCode": 0,
+        "elapsedSeconds": 0.059,
+        "logSHA256": "494048633539e791042ae7bf662e6e1145792cd3fcc13ccbc081d38d04faffbb"
+      }
+    ],
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "pairedStableKeyReferenceCases": 512
+  },
+  "candidate": {
+    "bytes": 49636,
+    "sha256": "9cbc7aa9994d7156c2d25056669c46d7bccec12e867f6f15845a06e5c15a5744",
+    "crc32": "A7926D22",
+    "format": "HUNK_HEADER0x3f3",
+    "executed": false
+  },
+  "build": {
+    "orderedUnits": [
+      "tests/native_exec_cia_prepared_aperture_test.c",
+      "tests/cia_prepared_aperture.c",
+      "tests/cia_aperture_model.c",
+      "src/core/elapsed_clock.c",
+      "tests/native_cia_prepared_aperture_irq.s"
+    ],
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "projectDependencies": 14,
+    "sdkDependencies": 70,
+    "runtimeQueries": 7,
+    "abiOffsetAssertions": 26,
+    "abiSizeAssertions": 3,
+    "commandRecords": 17,
+    "wholeLinkerLoadAudit": false
+  },
+  "defaultBuildRegression": {
+    "bytes": 47576,
+    "sha256": "a665fd9112f41970cdf6704982d9dd4258217f127ac68bd95b878e2e2cf78a4c",
+    "identicalToPreviousCandidate": true,
+    "executed": false
+  },
+  "collection": {
+    "profile": "cia-prepared-aperture-v1",
+    "maximumOutputBytes": 65536,
+    "completeObservations": 16,
+    "failedRC20RemainsFailed": true,
+    "ordinaryOutputBoundUnchanged": 8192,
+    "partialHoldReentryRemainSticky": true
+  },
+  "priorRefusalsPreserved": [
+    "HOST test input overflow corrected without changing clock policy",
+    "HOST frozen inventory refused Python bytecode additions; separate clean -B export used",
+    "First compiler refused misleading indentation; corrected source retains Werror"
+  ],
+  "protectedDirtyPathsUnchanged": 16,
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "scope": "Separate task-owned synthetic-key/direct-clock RAM diagnostic; no actual sample ownership, native provider enablement, output, total IRQ timing/WCET, aggregate stack, DMA, device, audio or listening acceptance"
+}

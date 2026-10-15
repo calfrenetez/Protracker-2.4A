@@ -7360,3 +7360,8 @@ authentication, native build/IRQ, frontend, Amiberry, physical and audio/timing
 acceptance remain unqualified. See the
 [contract](PAULA_SEGMENT_PROVIDER.md#retained-packet-checks-before-resource-calls-and-cached-replies)
 and [HOST evidence](../evidence/enhanced-editor/paula-provider-precall-host/result.json).
+
+
+### Prepared direct-clock CIA experiment — 16 October 2026
+
+A separate private immutable-descriptor/RAM-shadow path now passes93 HOST groups and a pinned five-unit 68k compile/link check. It moves complete synthetic-key admission into the serialized task phase and uses fixed OS clock reads in assembly, preserving original windows, full-width counter checks, bounded reads and irreversible post-store failure accounting. It is not an implementation of mutable scheduler/sample ownership or cancellation; existing native TASK/provider inhibition and exact scheduling remain unchanged. The49,636-byte candidate9cbc7aa9 is native NOT_RUN and physical NOT_RUN. A distinct complete-report collector retains original RC20/FAILED and raw read lists; ordinary RC0/fixed-output acceptance remains unchanged. The default compile regression reproduces the prior generic candidate exactly. Prior failed native measurements remain failed. See [prepared experiment and limits](CIA_PREPARED_APERTURE.md).

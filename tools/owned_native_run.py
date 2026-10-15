@@ -10,7 +10,7 @@ cooperating run a new namespace without relying on a negative directory listing.
 LAUNCH executes an explicit uploaded file; SCRIPT and its hidden T: files are
 never used. All failure paths retain ownership and propagate without recovery.
 
-The explicit cia-aperture-v1 observation profile is separate from fixed-output
+The explicit CIA observation profiles are separate from fixed-output
 fixture acceptance: a consistent RC20 report retains qualification FAILED.
 Completion/custody/settlement cannot promote that measurement to PASS. It does
 not authorize a live run, resource closure or independent ownership release.
@@ -26,6 +26,9 @@ import zlib
 import native_file_protocol as wire
 import native_fixture_capture as capture
 import cia_aperture_capture as aperture
+import cia_prepared_capture as prepared_aperture
+
+DIAGNOSTICS = {aperture.PROFILE: aperture, prepared_aperture.PROFILE: prepared_aperture}
 
 
 def require(value, message):
@@ -60,8 +63,8 @@ class Plan:
         if self.observation_profile is None:
             require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
         else:
-            require(type(self.observation_profile) is str and self.observation_profile == aperture.PROFILE
-                    and self.markers == aperture.MARKERS and not self.progress_sidecar,
+            require(type(self.observation_profile) is str and self.observation_profile in DIAGNOSTICS
+                    and self.markers == DIAGNOSTICS[self.observation_profile].MARKERS and not self.progress_sidecar,
                     "Exact separate CIA observation contract required")
         if self.copy_source is not None:
             wire.path(self.copy_source)
@@ -110,12 +113,13 @@ class Plan:
 
     @property
     def output_limit(self):
-        return aperture.MAX_OUTPUT if self.observation_profile == aperture.PROFILE else capture.MAX_OUTPUT
+        return DIAGNOSTICS[self.observation_profile].MAX_OUTPUT if self.observation_profile is not None else capture.MAX_OUTPUT
 
     def observe(self, control, native):
-        if self.observation_profile == aperture.PROFILE:
-            observed = aperture.controls("[OK]\n" + control, self.stack, self.prefix)
-            observed["diagnostic"] = aperture.validate(native, observed["returnCode"])
+        if self.observation_profile is not None:
+            diagnostic = DIAGNOSTICS[self.observation_profile]
+            observed = diagnostic.controls("[OK]\n" + control, self.stack, self.prefix)
+            observed["diagnostic"] = diagnostic.validate(native, observed["returnCode"])
             return observed  # RC20/FAILED is retained, never converted into a fixture PASS.
         observed = capture.parse_control("[OK]\n" + control, self.stack, self.prefix)
         require(native == self.expected_output, "Native output differs from exact marker contract")

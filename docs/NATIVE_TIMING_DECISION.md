@@ -155,3 +155,6 @@ observations. No calibrated deadline subtraction, jitter tolerance or immediate
 late fallback is selected. This emulator result does not establish universal CIA
 infeasibility or physical first-sample timing. Exact output/provider/native PLAY
 integration remains unfinished. See [the diagnostic details](CIA_APERTURE_DIAGNOSTIC.md#first-bounded-aperture-observation-in-amiberry--failed).
+
+
+The separate prepared direct-clock experiment now has HOST/reference and pinned 68k compile evidence, with original epoch/windows and a full recorded-read replay contract. Candidate9cbc7aa9 remains NOT_RUN. This experiment does not grant a scheduled-output capability, remove native TASK/provider inhibition or qualify mutable reader ownership. Its serialized stale-key/cancel gates are task admission tests. A fresh exact-candidate Amiberry observation is next; previous generic timing failure is unchanged. See [prepared experiment](CIA_PREPARED_APERTURE.md).

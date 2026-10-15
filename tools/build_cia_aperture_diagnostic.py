@@ -29,8 +29,24 @@ RUNTIMES = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
 TARGET = 'PTExecCiaApertureTest'
 MARKER = 'CIA APERTURE PASS: original-frame actual RAM commit brackets and zero-effect negative gates; timer/software diagnostic only, no DMA or audio proof'
 MODEL_MARKER = 'CIA APERTURE MODEL PASS: original windows, bounded actual reads, exact keys and irreversible postcommit failure; software diagnostic only'
+HOST_DECLARATION = 'tests/test_cia_aperture.py'
+FIXTURE = 'cia_aperture_test.c'
 SCOPE = ('Portable pinned 68k compile/link only; no HUNK execution, native/Exec '
          'allocator, Chip/DMA, device, song, IRQ, audio or hardware timing proof')
+
+
+def select_prepared_experiment():
+    """Explicit second recipe; default generic experiment is unchanged."""
+    global HOST_SOURCES, SOURCES, TARGET, MARKER, MODEL_MARKER, HOST_DECLARATION, FIXTURE
+    HOST_SOURCES = ['tests/cia_prepared_aperture_test.c', 'tests/cia_prepared_aperture.c',
+                    'tests/cia_aperture_model.c', 'src/core/elapsed_clock.c']
+    SOURCES = ['tests/native_exec_cia_prepared_aperture_test.c', *HOST_SOURCES[1:],
+               'tests/native_cia_prepared_aperture_irq.s']
+    TARGET = 'PTExecCiaPreparedApertureTest'
+    MARKER = 'CIA PREPARED PASS: original-frame direct-clock RAM brackets and serialized zero-effect negative gates; diagnostic only, no DMA or audio proof'
+    MODEL_MARKER = 'CIA PREPARED MODEL PASS: serialized exact-key admission, original windows, full-width recorded-clock replay and irreversible commit accounting; diagnostic only'
+    HOST_DECLARATION = 'tests/test_cia_prepared_aperture.py'
+    FIXTURE = 'cia_prepared_aperture_test.c'
 
 
 def digest(path):
@@ -107,24 +123,26 @@ def recipe_contract(source, expected, pins):
                     and any(isinstance(t, ast.Name) and t.id == 'names' for t in n.targets))
     if declared != RUNTIMES:
         raise ValueError('Committed seven-runtime convention changed')
-    host = source / 'tests/test_cia_aperture.py'
+    host = source / HOST_DECLARATION
     h = ast.parse(host.read_text())
     units = next(ast.literal_eval(n.value) for n in h.body if isinstance(n, ast.Assign)
                  and any(isinstance(t, ast.Name) and t.id == 'SOURCES' for t in n.targets))
     if units != HOST_SOURCES or len(units) != len(set(units)):
         raise ValueError('Host ordered source declaration changed')
     wrapper = (source / SOURCES[0]).read_text()
-    if wrapper.count('#include "cia_aperture_test.c"') != 1 or '#define PT_APERTURE_EMBEDDED' not in wrapper:
+    embedded = 'PT_PREPARED_APERTURE_EMBEDDED' if FIXTURE == 'cia_prepared_aperture_test.c' else 'PT_APERTURE_EMBEDDED'
+    if wrapper.count('#include "' + FIXTURE + '"') != 1 or '#define ' + embedded not in wrapper:
         raise ValueError('Shared fixture must be embedded exactly once without assertion reinclusion')
-    if SOURCES[:3] != ['tests/native_exec_cia_aperture_test.c', *HOST_SOURCES[1:]] or len(SOURCES) != len(set(SOURCES)):
+    wrapper_name = 'tests/native_exec_cia_prepared_aperture_test.c' if FIXTURE == 'cia_prepared_aperture_test.c' else 'tests/native_exec_cia_aperture_test.c'
+    if SOURCES[:-1] != [wrapper_name, *HOST_SOURCES[1:]] or len(SOURCES) != len(set(SOURCES)):
         raise ValueError('Explicit native wrapper substitution/order changed')
-    assembly = (source / SOURCES[3]).read_text()
+    assembly = (source / SOURCES[-1]).read_text()
     if re.search(r'^\s*(?:\.include|\.incbin|#\s*include)\b', assembly, re.MULTILINE):
         raise ValueError('Assembly must have no untracked external include/incbin')
     return {'committed_flag_recipe': record(recipe), 'committed_runtime_recipe': record(diagnostic),
             'host_declaration': record(host), 'exact_ordered_host_units': HOST_SOURCES,
-            'exact_ordered_translation_units': SOURCES, 'assembly': record(source / SOURCES[3]),
-            'wrapper_substitution': 'Shared C fixture embedded exactly once by native wrapper; GAS .s is a separate fourth unit',
+            'exact_ordered_translation_units': SOURCES, 'assembly': record(source / SOURCES[-1]),
+            'wrapper_substitution': 'Shared C fixture embedded exactly once by native wrapper; GAS .s is the separate final unit',
             'flags': FLAGS, 'runtime_names': RUNTIMES,
             'policy': 'Standalone one-target build, reusing committed flags/runtime conventions without executing or editing the shared recipe'}
 
@@ -132,12 +150,15 @@ def recipe_contract(source, expected, pins):
 def main():
     sys.dont_write_bytecode = True
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--prepared', action='store_true', help='Select the separate serialized direct-clock experiment')
     ap.add_argument('--source-manifest', type=Path, required=True)
     ap.add_argument('--source-manifest-sha256', required=True)
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
+    if args.prepared:
+        select_prepared_experiment()
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -278,7 +299,7 @@ def main():
             require_pin(manifest_input, args.source_manifest_sha256)
             require_pin(pin_input, args.pins_sha256)
             require_pin(builder['path'], builder['sha256'])
-            for name in ['tools/build_core_tests.py', 'tools/build_diagnostic.py', 'tests/test_cia_aperture.py']:
+            for name in ['tools/build_core_tests.py', 'tools/build_diagnostic.py', HOST_DECLARATION]:
                 require_pin(source / name, expected[name])
             result['source_files_after'] = len(expected)
         except Exception as error:

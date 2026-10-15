@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "state": "EXACT_EMULATOR_PASS_PHYSICAL_NOT_RUN",
+  "scope": "Portable ordinary sampler source/representation-to-cache-lease validation. Inhibited typed TASK/provider excluded.",
+  "sourceCommit": "df1700637c8736b369024e23eb28c7050d557dc9",
+  "runID": "efb5cd6003282f59e8db791631ca190e",
+  "candidate": {
+    "crc32": "3EC2D86D",
+    "sha256": "31a129f0b2df2f8dac23ba0fa4e337f5d0ba0b085c5b6a8fe2a8765dd950888c",
+    "size": 59756
+  },
+  "native": {
+    "target": "shared68030",
+    "cpuModel": "68030",
+    "fpu": "0",
+    "cpuCycleExactObserved": true,
+    "memoryGetterKB": {
+      "bogo": "0KB",
+      "chip": "2048KB",
+      "fast": "0KB",
+      "rtg": "0KB",
+      "z3": "131072KB"
+    },
+    "stackBytesObserved": 262144,
+    "returnCode": 0,
+    "expectedLines": [
+      "PAULA CHIP JOB PASS: bounded256-byte conversion, unpublished leases, exact master pins, cancellation and stale/pressure/close refusal",
+      "SAMPLER PAULA PASS: selected routed8-bit copies, explicit stereo side, odd padding, master preservation, revisions/undo/routes, pressure eviction and retained active leases; no DMA or mixed-backend playback",
+      "PAULA SOURCE BINDING PASS: 57 source/lease checks, 36 representation checks; 8/16/24 masters, explicit stereo side, no lookup mutation, zero owned resources"
+    ],
+    "outputBytes": 498,
+    "outputCRC32": "105F41F5",
+    "launches": 1,
+    "sourceLeaseChecks": 57,
+    "representationChecks": 36,
+    "originalSamplerPrecisionJobScenarios": 6,
+    "zeroFixtureOwnedResources": true,
+    "typeOfMemPlacementAssertions": false
+  },
+  "build": {
+    "productionUnits": 20,
+    "fixtureUnits": 1,
+    "linkInputsReverified": 28,
+    "currentUnitBodiesReverified": 21,
+    "ordinarySamplerProfile": true,
+    "typedDocumentHooksOutsideProfile": true
+  },
+  "host": {
+    "packetGroups": 62,
+    "entrySuccessorLifecycleGroups": 15,
+    "uploadOuterCallFailureBoundaries": 14,
+    "copiedOuterCallFailureBoundaries": 13,
+    "originalWholeDeadlineRetained": true,
+    "normalEntryForwardsOnce": true,
+    "protectedUnrelatedPaths": 16
+  },
+  "limitsSeconds": {
+    "inputPreparation": 120,
+    "native": 90,
+    "executionPhase": 140,
+    "whole": 250
+  },
+  "cleanup": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "progressSidecar": false,
+    "protocolRecords": 241,
+    "independentCustodyAndSettlement": true,
+    "exactNamespacesAbsent": true,
+    "independentTaskAbsence": true,
+    "originalLauncherFilesRestored": true,
+    "originalProfileAndConfigurationPreserved": true,
+    "independentPassObservation": true,
+    "publicRelease": true,
+    "ownedHostServiceAbsent": true,
+    "separateFinalIdleObservation": true,
+    "fence": 1659,
+    "releaseArchives": 79,
+    "holdsRetainedByThisRun": false,
+    "browserControlAcquired": false
+  },
+  "preservedRefusals": [
+    "Earlier HOST lifecycle expectation was9 files; portable plan has8. Corrected assertion, failed log retained.",
+    "Read-only preflight initially used single-link owned-artifact hashing for installed shared tools; refused before service/reservation/target. Dedicated stable read-only build verifier used; owned-artifact guards unchanged.",
+    "First separate final-idle process used system Python without harness dependencies; import refused before locks or actions. Qualified harness Python then observed final idle."
+  ],
+  "recordSHA256": {
+    "host/qualification-v2.json": "587b50810e73b163eaba92d3285f3b825c8a4f546f7f84e3ea79bdef5b78c84c",
+    "host/lifecycle-entry.stderr": "6bafddb62837598e5878ce1b3c747e043cef3297a92a198b9a72074b6b573451",
+    "host/fresh-preboot.json": "a58448bc26a050c250910f3d22178100df208f38f2c7ac9beb3a909a904f3412",
+    "run/evidence/root-run-admission.json": "ed4fd878f1eaa5ec70d3878c9ca3a1ab010ffbc8c9a31a94070f6bce2c422f3f",
+    "run/evidence/run-efb5cd6003282f59/result.json": "9ccef20fff029233ee00d9052709a306d2d5d8b269c5379e50509a2e1d53322d",
+    "run/evidence/run-efb5cd6003282f59/native-capture.bin": "20b900c3183b3dd59236e07abb58363f28e16af24bb59279a252534bd2c05432",
+    "run/evidence/run-efb5cd6003282f59/release/independent-pass-observation.json": "b7ec5cc827af710afc55d93c5991d5957896cc2485d1074fa9aae8d48cb9a56d",
+    "run/evidence/run-efb5cd6003282f59/release/release-result.json": "3cf2dd2dc73ba3699f84c538572576c9310013d390114bc0b5efb71f6f0060c3",
+    "run/evidence/run-efb5cd6003282f59/release/service-stop-result.json": "c863a4c24741eaaee3e5a3087c6b744c4aa2d8046a112975203e373a28301a1e",
+    "run/evidence/run-efb5cd6003282f59/release/independent-final-idle.json": "a79fe16cc5aec1a32af90a911d7bd0477b7734ee6011e6d052a03cff221ed971"
+  },
+  "acceptance": {
+    "hostSnapshot94Cases": true,
+    "emulatorPortableCacheLookup": true,
+    "physicalPortableCacheLookup": false,
+    "nativeTypedTaskSnapshot": false,
+    "nativeProviderOrIrqSerialization": false,
+    "fullFrontend": false,
+    "fastChipMemoryPlacement": false,
+    "dmaQuietOrVoiceStop": false,
+    "amigusTransfer": false,
+    "exactMusicalOutputTiming": false,
+    "audioListening": false,
+    "wholeProgramStackBound": false
+  },
+  "prerequisiteHostRecordSHA256": "96deb2037c54ac9e743ae79815a9b93d4e4f19a2e138b953bd0940908299842f"
+}

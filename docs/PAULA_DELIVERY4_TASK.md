@@ -47,12 +47,42 @@ Its ordinary sampler profile matches the HOST fixture and excludes typed documen
 action/replacement hooks. The first attempt reused a typed document object and
 failed to link those hooks; its diagnostics remain separate. The corrected build
 recompiles that document unit for the ordinary profile without changing canonical
-build flags. This is compiler/linker evidence only: the portable fixture has not
-run in Amiberry or on hardware, and stack/memory placement remain unqualified.
-It includes neither the inhibited TASK snapshot nor the typed provider.
+build flags. That record is compiler/linker evidence only; the subsequent
+emulator execution is recorded separately below. Stack bounds and memory
+placement remain unqualified. It includes neither the inhibited TASK snapshot
+nor the typed provider.
 
 This closes a specific cache-key pairing gap. It does not authenticate arbitrary
 input owners, scan PCM/cache values, provide persistent currentness, implement
 native serialization/activation or prove DMA quiet, exact musical output timing
 or listening acceptance. See the
 [scoped evidence](../evidence/enhanced-editor/paula-cache-source-binding/result.json).
+
+## Portable cache lookup fixture passes Amiberry
+
+The same59,756-byte `PTPaulaSourceBindingTest` passed once in the shared68030
+emulator, with no FPU and observed Stack262144. All three exact stdout lines
+returned RC0: the original sampler/job scenarios,57 source/lease checks and36
+representation checks. Captured output is498 bytes, CRC32`105F41F5`. This runs
+the portable sampler lookup and core key predicate; the inhibited TASK snapshot
+and typed provider remain excluded.
+
+The new packet passed62 HOST groups and its admitted entry passed15 lifecycle
+groups. All28 build LOAD inputs and21 current source units were reverified before
+the run. One uploaded input and eight execution files received separate custody,
+settlement and task/namespace absence checks; no progress sidecar was used.
+There are241 retained protocol records. Upload120/native90/execution140/whole250
+limits and the original ownership/deadline were unchanged.
+
+The owned emulator stopped, original launcher files/configuration were restored,
+and an independent observer verified PASS and cleanup. Public release, exact
+disconnected service shutdown and a separate final idle observation passed.
+Ownership ended at EMPTY1659 with79 release archives and no retained hold or
+owned process/endpoint/staging. All16 unrelated paths were preserved. See
+[the separate native evidence](../evidence/enhanced-editor/paula-cache-source-binding-native/result.json).
+
+This qualifies emulator software cache lookup and lifecycle behavior only. The
+fixture's allocators make no TypeOfMem placement assertion; neither Fast/Chip
+placement nor the native TASK/provider, DMA/voice stop, live scheduling, audio,
+listening or the full frontend is qualified. Physical execution of these exact
+bytes remains NOT_RUN. The earlier HOST/build-only record remains separate.

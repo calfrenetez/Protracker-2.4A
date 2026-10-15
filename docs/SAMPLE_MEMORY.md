@@ -18,9 +18,13 @@ The baseline regression records a wrong-source live cache being accepted. The
 fixed94-case snapshot suite passes; separate57 source/lease and36 representation
 checks preserve8/16/24-bit masters, explicit stereo choice and genuine cleanup.
 Five ordinary sanitizer groups and343 provider cases pass. A59,756-byte portable
-68000 sampler HUNK builds but is Amiberry/physical NOT_RUN; inhibited TASK/provider
-units are excluded. Existing native candidates and historical results remain
-separate. No native activation, DMA/voice-stop, live timing or listening is proved.
+68000 sampler HUNK builds and subsequently passes once in the shared68030 emulator:
+RC0, all3exact stdout lines, observed Stack262144 and independent cleanup/release.
+The separate final idle check confirms no owned service/emulator/endpoint/staging;
+all16 unrelated paths remain unchanged. Physical execution is NOT_RUN. Inhibited
+TASK/provider units are excluded, and allocators make no TypeOfMem placement
+assertion. Existing native candidates and historical results remain separate.
+No native activation, DMA/voice-stop, live timing or listening is proved.
 See [contract and validation details](PAULA_DELIVERY4_TASK.md#bind-a-live-cache-to-its-actual-source).
 
 ## Playback conversion master protection — 3 October 2026

@@ -278,7 +278,7 @@
     "fullSizeHostModelScenarios": 14
   },
   "samplerDirectUploadPhysical": {
-    "status": "INCOMPLETE_TRANSFER_HOLD_RECOVERY_DECISION_PENDING",
+    "status": "INCOMPLETE_TRANSFER_HOLD_RECOVERY_WAITING_FOR_MAC_UNLOCK",
     "candidateBytes": 166396,
     "candidateSHA256": "84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769",
     "candidateCRC32": "A0A3172B",
@@ -300,11 +300,21 @@
     },
     "nativeLaunchesDispatched": 0,
     "native": "NOT_RUN",
-    "physicalCleanup": "PENDING_SCOPED_RECOVERY_APPROVAL",
+    "physicalCleanup": "PENDING_AUTHENTICATED_SAFARI_ACCESS_MAC_LOCKED",
     "recoveryScopeSHA256": "918b80c9358a754b5b7a1106e5a01ed6c927f0745715fae2cff0750e2f98b6dc",
     "viewOnlyObserved": true,
     "browserControlAcquired": false,
     "audioOrDeviceOperations": false,
-    "testRerunAfterFailure": false
+    "testRerunAfterFailure": false,
+    "recovery": {
+      "approval": "GRANTED_FOR_RECORDED_SCOPE",
+      "ownedLocalServiceStopped": true,
+      "localProcessAndTransportAbsence": "VERIFIED",
+      "exactHostStagingRemoved": true,
+      "physicalRAMCleanup": "PENDING_MAC_UNLOCK",
+      "ownershipReleased": false,
+      "testRerun": false,
+      "reboot": false
+    }
   }
 }

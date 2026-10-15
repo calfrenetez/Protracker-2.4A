@@ -222,8 +222,12 @@ The saved exchange ledger confirms 142,380 payload bytes acknowledged; the next
 4,068-byte write has no confirmed reply. No executable checksum, native result,
 settlement or cleanup is inferred. The run retained HOLD and its operation;
 further physical calls stopped. The original failure and a separate, bounded
-recovery scope are preserved. Recovery needs new approval and does not include
-a rerun. The physical sampler result is NOT RUN, with transfer INCOMPLETE.
+recovery scope are preserved. Recovery was subsequently approved: the exact
+owned local service was stopped, process/transport absence verified, and the
+exact host staging copy removed. The Mac is locked, blocking Safari inspection
+and cleanup of the physical RAM file. Ownership remains on HOLD until that
+cleanup and independent release are verified. No rerun or reboot is included.
+The physical sampler result is NOT RUN, with transfer INCOMPLETE.
 
 This failure does not invalidate the completed Amiberry evidence, but that
 evidence cannot qualify physical upload throughput. No audio, timing or AmiGUS

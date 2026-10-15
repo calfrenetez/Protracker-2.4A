@@ -390,3 +390,14 @@ verification passed. Both original HOLD records and the in-flight obligation are
 preserved in the release archive. No test was rerun and native completion remains
 unconfirmed. A separate erratum corrects an inherited narrative label in a cleanup
 fact; it does not alter the failed result, signed records or acceptance boundary.
+
+
+A distinct corrected-copy qualification then used the unchanged Load binary.
+The current explicit-file progress script passed staging, including the exact
+flag, log and source/destination checksums. This qualifies the tested copy step
+only. Native execution subsequently reached its unchanged 90-second completion
+limit without confirmed output or cleanup. The new run retains three HOLDs and
+requires a separately approved recovery. The earlier recovered direct-upload
+attempt remains separate, and no physical Load test has run. A transfer-only
+explanation is insufficient; the next native diagnostic must locate execution
+progress within the existing bounds, without treating a timeout as a pass.

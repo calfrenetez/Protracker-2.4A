@@ -1,5 +1,5 @@
 {
-  "status": "HOST_NATIVE_BUILD_PASS_EMULATOR_TIMEOUT_RECOVERED_RELEASED",
+  "status": "HOST_NATIVE_BUILD_PASS_CORRECTED_COPY_STAGE_PASS_NATIVE_TIMEOUT_NEW_HOLD",
   "scope": "Focused actual typed Load publication; injected voices, no UI or hardware output",
   "host": {
     "newAndLoadSanitizers": "PASS",
@@ -69,5 +69,28 @@
       "evidence-clarification.json": "25c9e5fec928a28369ac31b3265c126090633cccf782f34ffff765b952e67afd"
     },
     "narrativeErratum": "An inherited cleanup-fact label mentioned native RC0/custody and one HOLD. Preserved record has separate clarification: no confirmed native result, two HOLDs plus inflight; no runtime pass inferred."
+  },
+  "correctedCopyAmiberry": {
+    "status": "COPY_STAGE_PASS_NATIVE_COMPLETION_TIMEOUT_HOLD",
+    "runID": "366d8fcdfc4974a3f02427365715cf5f",
+    "binaryUnchanged": true,
+    "copyStage": "PASS: exact explicit stage output, flag and before/after source/destination checksums",
+    "nativeCompletion": "UNCONFIRMED after unchanged native90 deadline",
+    "timeouts": {
+      "nativeSeconds": 90,
+      "guestPhaseSeconds": 140,
+      "wholeSeconds": 250
+    },
+    "savedResultSHA256": "4c8d136a4a86203f2532ac67b75f2a87adf8d5eff646dfb485b5a8461f63bc0c",
+    "preparedCopySHA256": "e64c7a3ea71a560c2b77b7a4adbe8790899c0c14fea2c840cad9279083eb64e4",
+    "recoveryScopeSHA256": "1ff6eac0eef0d0003c37ae525bfd2c1a6c5c45048b30c2e562ea311bdd0edc0a",
+    "recovery": "New scoped approval requested; no automatic recovery/retry",
+    "hostChecks": {
+      "canonicalTransactionGroups": 24,
+      "serviceGroups": 7,
+      "guestGroups": 7,
+      "guestOuterTimeoutPositions": 9,
+      "factoryAndOfflineAdmission": "PASS"
+    }
   }
 }

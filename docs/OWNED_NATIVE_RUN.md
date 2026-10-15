@@ -499,3 +499,52 @@ route in Amiberry, then admit a new physical operation. Transfer is a separately
 bounded preparation operation; execution retains native90/guest140/whole250.
 Host models and an archive extraction check do not establish physical transfer
 speed, native completion, frontend behavior or audio/timing acceptance.
+
+### Owned RAM input preparation — host implementation
+
+`tools/owned_native_input.py` now supplies the missing Dev-to-RAM preparation
+step for an emulator qualification of that route. It takes the exact execution
+plan, a separately owned same-run Dev source and a third distinct command ID.
+It creates the separate `-in` directory positively, refuses an existing directory,
+and performs one explicit copy. It checks the source before mutation and again
+after the copy, verifies the copied candidate, and retains four exact files:
+`NativeTest`, `Prepare-input`, `ready.flag` and `prepare.log`. It does not launch
+the native fixture, connect a service or modify its Dev source.
+
+The input remains owned throughout the execution transaction. Separate settlement
+requires the reviewed caller's positive execution-idle and saved-custody proof,
+then rechecks every input file and the source before deleting the four exact
+files and empty input directory. An unknown member, altered file, failed record,
+ambiguous reply, cancellation or timeout retains the failed stage for recovery;
+the failed operation cannot be replayed. Native RC0 or an input-ready flag alone
+does not permit input cleanup. Public guard release and independent final
+absence remain separate caller obligations.
+
+Preparation spends at most 60 seconds, with at most 30 seconds waiting for the
+copy to complete. The stage's entire lifetime, including reader use and
+settlement, is capped at 250 seconds from construction. No deadline restarts
+after preparation. These are ceilings within the caller's unchanged
+native90/guest140/whole250 limits, not extra time allowances. The staged route
+therefore requires the caller to start both transactions inside the same outer
+guest window and retain its original deadline.
+
+Host qualification passed 17 new input groups plus the 33 existing execution
+groups. The combined model creates RAM input through the real helper, runs the
+real execution transaction, settles execution first and then settles input.
+It injects failure at every exchange, including cleanup, and checks that the
+Dev source and unrelated files survive. Additional cases cover changed input,
+unexpected directories, stale ownership assumptions, cancellation, late or
+timed-out settlement proof and unchanged deadlines.
+
+A private service integration also passed eight input cases and seven existing
+service cases. It binds both transactions to the same lease and lifetime, saves
+the input custody, and checks a separate execution-absence record plus fresh
+task/custody proof before input deletion. It has no live admission, launcher or
+target connection. Shared-runner integration and exact target qualification
+remain unfinished. This helper implements neither MiniFTP nor archive
+extraction; those need separately verified physical staging and cleanup.
+
+**Amiberry and real-A1200 results for this new input helper remain NOT RUN.**
+The earlier physical Load run still requires scoped recovery and independent
+release. The latest Safari check confirms the Mac is locked. Host progress does
+not clear that recovery hold or establish native timing, audio or listening.

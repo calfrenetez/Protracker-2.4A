@@ -1,0 +1,58 @@
+{
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "audioTimingListening": "NOT_RUN",
+    "frontend": "NOT_RUN",
+    "host": "PASS",
+    "physicalA1200": "NOT_RUN",
+    "physicalRecovery": "PENDING",
+    "sharedRunnerIntegration": "NOT_RUN"
+  },
+  "limitations": [
+    "Bridge replies and Shell completion are host models, not actual native execution.",
+    "Caller must provide shared ownership, live identity, durable records, independent task/custody proof and public release.",
+    "The helper supplies no transport, launcher, physical upload or MiniFTP/archive extraction.",
+    "The current physical recovery hold remains; host qualification grants no target admission."
+  ],
+  "limitsSeconds": {
+    "copyCompletion": 30,
+    "guest": 140,
+    "inputLifetime": 250,
+    "inputPreparation": 60,
+    "native": 90,
+    "wholeRun": 250
+  },
+  "model": {
+    "combinedExchanges": 135,
+    "executionCopyLaunches": 1,
+    "executionExchanges": 95,
+    "inputCopyLaunches": 1,
+    "inputExchanges": 40,
+    "nativeLaunches": 1
+  },
+  "preservation": {
+    "sourceAndUnrelatedModelFilesPreserved": true,
+    "unrelatedPathsVerified": 16
+  },
+  "privateServiceSHA256": "213b69779089d896da9da8297e3dbf41184b9039eafa2ef621c99ea4bc63b709",
+  "qualificationDate": "2026-10-15",
+  "schemaVersion": 1,
+  "scope": "Owned Dev-to-RAM input helper and private service integration",
+  "sourceSHA256": {
+    "tests/test_owned_native_input.py": "298e7be76032eabcd0848fcd75240a0cb3a5a5e73c796505deade1930b5845bb",
+    "tests/test_owned_native_run.py": "01815050b48a5efa4bcde13c6e6404230841ea925cdcc01ca10a9de9473caa08",
+    "tools/native_file_protocol.py": "aa2dbfcdd1f5ee1974c19a4975bf23ba0f472b04ec1a0ba04ad89ef59308c0e8",
+    "tools/native_fixture_capture.py": "b14786bd77f93c2a947b66ad5bf3313cf7dd622fce150313d606d06793826b69",
+    "tools/owned_native_input.py": "2de539771603a220cd08259e4f98fef154b65e2f922c92e519617d67a6275e07",
+    "tools/owned_native_run.py": "710b4f835acaceaca87d9f3e499738eeda85d94d1e39587fbd626e2de73916c0"
+  },
+  "status": "HOST_PASS",
+  "tests": {
+    "allPassed": true,
+    "existingExecutionGroups": 33,
+    "existingServiceGroups": 7,
+    "failureInjectedAtEveryCombinedExchange": true,
+    "inputGroups": 17,
+    "privateInputServiceGroups": 8
+  }
+}

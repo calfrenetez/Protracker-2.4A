@@ -1,0 +1,109 @@
+{
+  "acceptance": {
+    "audio": false,
+    "devicePlayback": false,
+    "exactLiveTiming": false,
+    "frontend": false,
+    "listening": false,
+    "physicalRevisedCandidate": false,
+    "singleFileUploadAndRAMCopyRoute": true,
+    "syntheticLoadPublication": true
+  },
+  "candidate": {
+    "crc32": "0E07E5AC",
+    "sha256": "32e3c750f141c13baaa4dc115013ea8c9459dd009e8993e79fbf93d69322860a",
+    "size": 224436
+  },
+  "cleanup": {
+    "archives": 78,
+    "exactInputAndExecutionNamespacesAbsent": true,
+    "hostStagingAbsent": true,
+    "independentFinalIdle": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "publicReleaseFence": 1655,
+    "savedLauncherFilesRestored": true,
+    "testPortsAndIPCAbsent": true
+  },
+  "executionFiles": 9,
+  "hostQualification": {
+    "cases": [
+      "separate upload boundary",
+      "no repeated input preparation",
+      "changed input custody refusal",
+      "owner-change refusal",
+      "input timeout retains ownership without execution",
+      "execution timeout retains ownership",
+      "same outer budget expires across stage boundary",
+      "independent both-namespace absence"
+    ],
+    "groups": 55,
+    "outerCallTimeoutPositions": {
+      "copy": 13,
+      "upload": 14
+    },
+    "priorQualification": "Same separate-upload design as the independently released New emulator pass; all55 host groups rerun for this Load packet.",
+    "runnerLifecycleAndGuest": 28,
+    "serviceAndFactory": 27
+  },
+  "inputFiles": 1,
+  "limits": {
+    "guestExecutionSeconds": 140,
+    "nativeSeconds": 90,
+    "sameOriginalInputAndTransactionLifetime": true,
+    "uploadPreparationSeconds": 120,
+    "wholeSeconds": 250
+  },
+  "nativeObserved": {
+    "nativeMarkers": [
+      "DOCUMENT PUBLICATION BEGIN:load",
+      "DOCUMENT ACTION TRACE:entered",
+      "DOCUMENT ACTION TRACE:fixture-allocated",
+      "DOCUMENT ACTION TRACE:initial-document-created",
+      "DOCUMENT ACTION TRACE:initial-editor-created",
+      "DOCUMENT ACTION TRACE:initial-masters-begun",
+      "DOCUMENT ACTION TRACE:initial-masters-ready",
+      "DOCUMENT ACTION TRACE:checked-editor-ready",
+      "DOCUMENT ACTION TRACE:checked-owner-begun",
+      "DOCUMENT ACTION TRACE:source-encoded",
+      "DOCUMENT ACTION TRACE:fixture-ready",
+      "DOCUMENT ACTION TRACE:prepared",
+      "DOCUMENT ACTION TRACE:published",
+      "DOCUMENT ACTION TRACE:committed",
+      "DOCUMENT ACTION TRACE:stopped-and-disposed",
+      "DOCUMENT ACTION TRACE:paula-closed",
+      "DOCUMENT ACTION TRACE:amigus-closed",
+      "DOCUMENT ACTION TRACE:finished",
+      "DOCUMENT PUBLICATION PASS:load; final-address owner and checked cleanup; injected voices"
+    ],
+    "observedStackBytes": 262144,
+    "outputBytes": 769,
+    "outputCRC32": "4EC504EA",
+    "rawStackQuery": "Current stack size is 262144 bytes",
+    "returnCode": 0
+  },
+  "protocolRecords": 485,
+  "recordsSHA256": {
+    "admission": "97ac3dbdcb2e6b3ddb11df724780311c600f985cb5aa41f745c2d42541151dd1",
+    "buildVerification": "b4bee78a8467e3a5937acc2cd7234dcb7760de011c357205633753dabb45e604",
+    "finalIdle": "aa579527b4ac47d1a951639499932a52d1078e565eceb42fc49f4b731b0edc09",
+    "independentPass": "9fad2d50dab9b192bfbc060b2f75c183a2081fd4ef5c413cfadc71a1e965d3bc",
+    "ownedServiceStop": "3202c6589b24c2271375e48b7f00b0580aa844062c244699b3a0a333bc5435aa",
+    "publicRelease": "295ceeb5e6e420e1dd9ab31c869fa49ec658839132639ae95050a699557f2d05",
+    "runResult": "d910e8f578a4d0b3a1ecd7963d2571fbbff1df541848a77d046f48e22146064b",
+    "runnerHostLog": "4a13557dd493cbce866ef11237664558d012d6068343d695db24987cecaf687d",
+    "serviceHostLog": "2abbf10c689f468ac072de4aa0d6b21ddc01052b760cd2727dbffed8ad593fac"
+  },
+  "runnerSourceHead": "b49558e86163a1006965d7ac55fdcd9b73be2349",
+  "selectedSourcesSHA256": {
+    "run/source/ram_fixture_runner.py": "3203d4b9f03e732b240b16bb2475eea6ab0969483ae437fcb8e04d0f8fa9a6d2",
+    "run/source/saved_input_observer.py": "b08dc909f899ca169e861b7bb00ed4b1375037f68300e8623411a15294068d9c",
+    "run/source/test_guest_phase.py": "923eeed8d6b0a98405ebe593e52e173a431cbb0c653b62082510d6abe958a3a8",
+    "run/source/test_lifecycle.py": "2b8f5190659048d4e7eb94e698abd5ab005ea001ef26c21fa7b0a644ea0a8db3",
+    "service/source/owned_native_input.py": "09376155e8c2e26816fa56f625935d7cb76f9db247a8ebe6c78b78b84aff2650",
+    "service/source/owned_native_service.py": "624ad52115dc92cc3b685ccce91f68ba21cb577bb0f5784f5dcbba8c15bf85a1",
+    "service/source/test_input_service.py": "b48dd2b7f529298d234298af6f2e459fcb25142387a267a2c60e66bd765fe551"
+  },
+  "sourceHead": "ad33205d4baa72c38e56e1610069116090c8f8fd",
+  "state": "EMULATOR_PASS_INDEPENDENTLY_RELEASED",
+  "verifiedBuildInputs": 91
+}

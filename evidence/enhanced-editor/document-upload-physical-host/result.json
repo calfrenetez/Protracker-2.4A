@@ -1,0 +1,54 @@
+{
+  "acceptance": {
+    "audio": false,
+    "frontend": false,
+    "hardwareDevice": false,
+    "listening": false,
+    "physicalExecution": false,
+    "timing": false
+  },
+  "candidate": {
+    "crc32": "74D8A3F1",
+    "sha256": "81a828ccf65ec8dee84051be7e556a453b85f0035e22b954effee162b34345ac",
+    "size": 216424
+  },
+  "expectedFiles": {
+    "execution": 9,
+    "input": 1
+  },
+  "groups": {
+    "factory": 2,
+    "physicalLifecycleAndGuest": 17,
+    "service": 25
+  },
+  "hostGroups": 44,
+  "limits": {
+    "guestExecution": 140,
+    "inputPreparation": 120,
+    "native": 90,
+    "whole": 250
+  },
+  "notes": [
+    "Initial copied packet was missing its local stack-evidence file; model refused before reservation. The current packet binds the exact New emulator observed stack record, and tests pass.",
+    "No physical service, lease, transfer or executable launch is claimed."
+  ],
+  "outerCallTimeoutPositions": 18,
+  "qualification": [
+    "exact previously qualified New candidate and promotion checks",
+    "wrong physical CPU/bridge/available memory refusal before upload",
+    "same-owner input before execution",
+    "input and execution cancellation retain ownership",
+    "original whole deadline is not reset at stage boundary",
+    "custody/task/namespace checks before exact cleanup",
+    "missing admission refuses registered input tools",
+    "offline app construction with all target/network/process effects forbidden"
+  ],
+  "recordsSHA256": {
+    "factoryHost": "45830adc8bfdab95cbac1d5bbf3a40f7adf091594ff158c6c1c9ae418cc98e1d",
+    "offline": "1e6a613bfe84d873ec4f371f76213e799bcddafbcd3906059496d7451a6b238d",
+    "preparation": "9755c84ccb6a75e670a014dd162a75b4dda04612db393972bb552efb4f592af2",
+    "runnerHost": "adede777051ad4ac23f5fbd0a007820a27536a5af9f9e7e22b855227551c18c1",
+    "serviceHost": "215949f42cffc3667fabc26c50d0054018b781c98726fa00ab8baf2963fa9928"
+  },
+  "state": "HOST_PREPARED_PHYSICAL_NOT_RUN"
+}

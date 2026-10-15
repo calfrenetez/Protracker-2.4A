@@ -703,3 +703,19 @@ emulator/service, locks, reservation or recovery hold remain.
 See [compact evidence](../evidence/enhanced-editor/document-upload-input-emulator/result.json).
 This qualifies the emulator RAM transfer and synthetic New publication flow.
 The real-A1200 route, full frontend, playback, timing and listening remain separate.
+
+The separate224,436-byte Load fixture subsequently passed through the same
+upload route in a fresh emulator run: RC0, Stack262144, all19 lines and769 output
+bytes/CRC4EC504EA. All55 host groups were rerun for its exact packet. Exact input
+and execution cleanup, independent observation, public release and final idle
+checks passed; no test resources remain owned.
+See [Load upload evidence](../evidence/enhanced-editor/document-upload-load-emulator/result.json).
+
+The physical counterpart is prepared with44 passing host groups plus an offline
+construction check. Its18 outer-call timeout positions include connection,
+CPU/OS/memory and installed-bridge checks before upload; its original overall
+budget spans upload and execution without resetting. Exact physical New transfer,
+execution and cleanup remain NOT RUN, and entry stays inhibited pending fresh
+Safari access and live admission. No live service or lease was created for that
+prepared physical packet.
+See [physical preparation evidence](../evidence/enhanced-editor/document-upload-physical-host/result.json).

@@ -1,12 +1,22 @@
 #define PT_TEST_EDITOR_CHECKED_EXEC
+#if defined(PT_DOCUMENT_ACTION_TRACE) && PT_DOCUMENT_ACTION_TRACE
+static void action_trace(const char *stage);
+#define PT_CHECKED_TRACE(stage) action_trace(stage)
+#endif
 #include "editor_mixed_checked_test.c"
 #include "../src/editor/editor_document_action.h"
 #include "../src/editor/sampler_lifetime_internal.h"
 #include "../src/core/document_retirement_internal.h"
 #if defined(PT_DOCUMENT_ACTION_TRACE) && PT_DOCUMENT_ACTION_TRACE
 /* Diagnostic fixture boundaries only. No product callback or timing claim. */
+static const char *action_trace_path;
 static void action_trace(const char *stage)
 {
+    if(action_trace_path){
+        FILE *progress=fopen(action_trace_path,"w");assert(progress);
+        assert(fprintf(progress,"DOCUMENT ACTION TRACE:%s\n",stage)>0);
+        assert(!fclose(progress));
+    }
     assert(printf("DOCUMENT ACTION TRACE:%s\n",stage)>0);
     assert(!fflush(stdout));
 }
@@ -32,7 +42,9 @@ static struct replace_fixture *replacement_make(unsigned mode)
 {
     struct replace_fixture *f=calloc(1,sizeof(*f));assert(f&&mode<=1);
     f->candidate=calloc(1,sizeof(*f->candidate));assert(f->candidate);
+    action_trace("fixture-allocated");
     f->g=checked_editor_make(16);f->g->checked=0;
+    action_trace("checked-editor-ready");
     f->g->doc.allocator.context=f;f->g->doc.allocator.release=action_old_release;
     if(mode){
         assert(pt_sampler_add_slot(&f->g->editor->sampler,&f->g->doc.project,&f->g->editor->history)==PT_EDIT_OK);
@@ -40,6 +52,7 @@ static struct replace_fixture *replacement_make(unsigned mode)
         assert(f->g->editor->sampler.table&&f->g->doc.project.samples==f->g->editor->sampler.table);
     }
     assert(checked_editor_begin(f->g)==PT_MIXED_OWNER_PREPARING);
+    action_trace("checked-owner-begun");
     init(&f->bus,PT_AMIGUS_WAVETABLE);
     assert(pt_amigus_wavetable_cache_attach(&f->bus.cache,&f->bus.reservation,0,4096,4096,
         &f->bus,bus_owned,bus_write));
@@ -90,6 +103,7 @@ static struct action_fixture *action_make(unsigned expanded)
     assert(pt_project_size(&f->g->doc.project,&a->bytes)==PT_PROJECT_OK);
     a->encoded=malloc(a->bytes);assert(a->encoded);
     assert(pt_project_encode(&f->g->doc.project,a->encoded,a->bytes,&used)==PT_PROJECT_OK&&used==a->bytes);
+    action_trace("source-encoded");
     a->inputs=(struct pt_editor_document_action_inputs){
         .document=&f->g->doc,.candidate=f->candidate,.binding=f->g->binding,
         .old_control=f->g->control,.new_control=&f->fresh,.old_paula=&f->g->pv,.old_amigus=&f->g->av,

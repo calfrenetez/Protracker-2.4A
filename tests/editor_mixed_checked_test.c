@@ -4,6 +4,9 @@
 #include "../src/editor/editor_mixed_establish.h"
 #include "../src/editor/mixed_owner_established_internal.h"
 #include "../src/editor/mixed_owner_state_internal.h"
+#ifndef PT_CHECKED_TRACE
+#define PT_CHECKED_TRACE(stage) ((void)0)
+#endif
 struct editor_checked_fixture {
     struct pt_editor *editor;struct pt_editor_mixed *binding;struct pt_mixed_established *control;
     struct pt_document doc;struct fixture bus;
@@ -51,6 +54,7 @@ static struct editor_checked_fixture *checked_editor_make(unsigned bits)
     init(&g->bus,PT_AMIGUS_WAVETABLE);
     assert(pt_amigus_wavetable_cache_attach(&g->bus.cache,&g->bus.reservation,0,4096,4096,&g->bus,bus_owned,bus_write));
     pt_document_init(&g->doc,&a);assert(pt_document_new(&g->doc,16,SIZE_MAX)==PT_PROJECT_OK);
+    PT_CHECKED_TRACE("initial-document-created");
     g->doc.project.sample_count=3;
     for(i=0;i<16;++i)g->doc.project.channels.track[i].route=PT_AMIGUS;
     g->doc.project.channels.track[4].route=PT_PAULA;g->doc.project.channels.track[4].pan=0;
@@ -59,11 +63,14 @@ static struct editor_checked_fixture *checked_editor_make(unsigned bits)
     g->doc.project.events[7]=g->doc.project.events[4];g->doc.project.events[16+7]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,0,0,0,0};
     g->doc.project.events[32+15].effect=15;
     assert(pt_editor_init(g->editor,&g->doc.project));
+    PT_CHECKED_TRACE("initial-editor-created");
     g->editor->sampler.allocator=(struct pt_allocator){g,checked_editor_allocate,checked_editor_release};g->editor->sampler.budget=1024*1024;
     assert(pt_editor_mixed_attach(g->binding,g->editor));parent=(struct pt_sampler_storage_span){g,sizeof(*g)};
     assert(pt_editor_mixed_establish_begin(master,g->binding,&parent,1)==PT_ESTABLISH_PENDING);
+    PT_CHECKED_TRACE("initial-masters-begun");
     do{r=pt_editor_mixed_establish_step(master,256);assert(++n<10000);}while(r==PT_ESTABLISH_PENDING);
     assert(r==PT_ESTABLISH_READY&&g->live==4&&!g->binding->owner);
+    PT_CHECKED_TRACE("initial-masters-ready");
     assert(pt_editor_mixed_stop(g->binding)&&g->live==3);free(master);
     assert(pt_sampler_paula_bind(&g->pb,&g->editor->sampler,&g->doc.project,&g->d,chip_alloc,chip_free,4096));
     assert(pt_sampler_wavetable_bind(&g->ab,&g->editor->sampler,&g->doc.project,&g->bus.cache));

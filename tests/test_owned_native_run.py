@@ -26,6 +26,7 @@ class Bridge:
         self.copy_failed = False
         self.lose_stage_output = False
         self.complete = True
+        self.progress_output = plan.expected_output
         self.change_reply = lambda command, reply: reply
 
     def successful_script_outputs(self, script):
@@ -49,8 +50,11 @@ class Bridge:
                     output = (command[5:].replace('$RC', str(self.native_rc)) + '\n').encode()
                 elif command == 'Stack':
                     output = f'Current stack size is {self.plan.stack} bytes\n'.encode()
-                elif command == self.plan.path('NativeTest'):
+                elif command == (self.plan.path('NativeTest') +
+                                 (' ' + self.plan.path('progress.log') if self.plan.progress_sidecar else '')):
                     output = self.plan.expected_output
+                    if self.plan.progress_sidecar:
+                        self.files[self.plan.path('progress.log')] = self.progress_output
                 else:
                     continue
                 if match:
@@ -124,9 +128,10 @@ class Bridge:
 
 
 class TransactionTests(unittest.IsolatedAsyncioTestCase):
-    def new(self, *, copy=False, **kwargs):
+    def new(self, *, copy=False, progress=False, **kwargs):
         self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 36, ("native first PASS", "native final PASS"),
-                         copy_source='Dev:Tests/PT24G-' + 'a1' * 8 + '/Fixture' if copy else None)
+                         copy_source='Dev:Tests/PT24G-' + 'a1' * 8 + '/Fixture' if copy else None,
+                         progress_sidecar=progress)
         self.bridge = Bridge(self.plan)
         self.events = []
         return Transaction(self.plan, self.bridge.exchange, self.events.append, **kwargs)
@@ -413,6 +418,91 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(ValueError):
             await transaction.execute(native_seconds=91)
         self.assertEqual(len(self.bridge.calls), count)
+
+    async def test_progress_retained_without_claiming_completion_or_extending_deadline(self):
+        now = [0]
+        async def sleep(seconds):
+            now[0] += seconds
+        transaction = self.new(progress=True, clock=lambda: now[0], sleep=sleep)
+        self.bridge.complete = False
+        await transaction.prepare()
+        with self.assertRaisesRegex(ValueError, "Native completion deadline"):
+            await transaction.execute(diagnostic_progress=True)
+        progress = [e for e in self.events if e['event'] == 'native_progress_unconfirmed']
+        self.assertEqual([e['elapsed'] for e in progress], [20, 40, 60, 80])
+        self.assertTrue(all(bytes.fromhex(e['hexData']) == self.plan.expected_output for e in progress))
+        self.assertEqual((now[0], self.bridge.launches, transaction.phase, transaction.custody),
+                         (90, 1, 'FAILED', None))
+        self.assertFalse(any(e['event'] == 'completed' for e in self.events))
+        self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
+    async def test_progress_failure_permanently_stops_before_followup(self):
+        now = [0]
+        async def sleep(seconds):
+            now[0] += seconds
+        transaction = self.new(progress=True, clock=lambda: now[0], sleep=sleep)
+        self.bridge.complete = False
+        await transaction.prepare()
+        original = self.bridge.exchange
+        async def failed(command, kind, seconds):
+            if command['type'] == 'READFILE' and command['path'] == self.plan.path('progress.log'):
+                raise TimeoutError('progress read failed')
+            return await original(command, kind, seconds)
+        transaction.exchange = failed
+        with self.assertRaisesRegex(TimeoutError, 'progress read failed'):
+            await transaction.execute(diagnostic_progress=True)
+        count = len(self.events)
+        with self.assertRaises(ValueError):
+            await transaction.execute(diagnostic_progress=True)
+        self.assertEqual((len(self.events), transaction.phase, self.bridge.launches), (count, 'FAILED', 1))
+
+    async def test_progress_suffix_bound_and_malformed_reply(self):
+        for malformed in (False, True):
+            now = [0]
+            async def sleep(seconds):
+                now[0] += seconds
+            transaction = self.new(progress=True, clock=lambda: now[0], sleep=sleep)
+            self.bridge.complete = False
+            await transaction.prepare()
+            original = self.bridge.exchange
+            async def observed(command, kind, seconds):
+                raw = await original(command, kind, seconds)
+                if command['type'] == 'LAUNCH':
+                    self.bridge.files[self.plan.path('progress.log')] = b'a' * 4096 + b'z' * 256
+                if (malformed and command['type'] == 'READFILE' and
+                        command['path'] == self.plan.path('progress.log')):
+                    return raw.replace('|4096|', '|4095|', 1)
+                return raw
+            transaction.exchange = observed
+            with self.assertRaisesRegex(ValueError, 'offset differs' if malformed else 'Native completion deadline'):
+                await transaction.execute(native_seconds=21, diagnostic_progress=True)
+            reads = [c for c in self.bridge.calls if c['type'] == 'READFILE'
+                     and c['path'] == self.plan.path('progress.log')]
+            self.assertEqual([(c['offset'], c['size']) for c in reads], [(4096, 256)])
+            progress = [e for e in self.events if e['event'] == 'native_progress_unconfirmed']
+            self.assertEqual(len(progress), 0 if malformed else 1)
+            if progress:
+                self.assertEqual(bytes.fromhex(progress[0]['hexData']), b'z' * 256)
+            self.assertIsNone(transaction.custody)
+
+    async def test_sidecar_in_custody_and_exact_settlement(self):
+        transaction = self.new(copy=True, progress=True)
+        self.idle_calls = 0
+        await transaction.prepare()
+        self.assertEqual(self.bridge.files[self.plan.path('progress.log')], b'NOT STARTED\n')
+        await transaction.execute(diagnostic_progress=True)
+        self.assertEqual(len(transaction.custody), 9)
+        self.assertEqual(transaction.custody['progress.log'], self.plan.expected_output)
+        await transaction.settle(self.idle)
+        self.assertNotIn(self.plan.path('progress.log'), self.bridge.files)
+
+    async def test_live_native_stdout_observation_refused_before_launch(self):
+        transaction = self.new()
+        await transaction.prepare()
+        count = len(self.bridge.calls)
+        with self.assertRaisesRegex(ValueError, 'separately closed sidecar'):
+            await transaction.execute(diagnostic_progress=True)
+        self.assertEqual((len(self.bridge.calls), self.bridge.launches), (count, 0))
 
     async def test_wrong_phase_blocks_repeat_launch_and_early_settlement(self):
         transaction = self.new()

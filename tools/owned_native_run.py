@@ -35,6 +35,7 @@ class Plan:
     markers: tuple
     stack: int = 524288
     copy_source: str | None = None
+    progress_sidecar: bool = False
 
     def __post_init__(self):
         require(isinstance(self.run_id, str) and re.fullmatch(r"[0-9a-f]{32}", self.run_id),
@@ -44,6 +45,7 @@ class Plan:
         require(isinstance(self.binary, bytes) and 0 < len(self.binary) <= wire.MAX_UPLOAD_BYTES,
                 "Frozen bounded candidate required")
         require(type(self.stack) is int and 65536 <= self.stack <= 1048576, "Qualified Stack required")
+        require(type(self.progress_sidecar) is bool, "Explicit progress-sidecar flag required")
         require(isinstance(self.markers, tuple) and 0 < len(self.markers) <= 256
                 and len(set(self.markers)) == len(self.markers)
                 and all(isinstance(x, str) and x and len(x) <= 256 and x.isascii()
@@ -69,7 +71,8 @@ class Plan:
     @property
     def names(self):
         names = ("NativeTest", "Run-once", "complete.flag", "control.log", "native.log")
-        return names + (("Stage-once", "staged.flag", "stage.log") if self.copy_source else ())
+        return (names + (("Stage-once", "staged.flag", "stage.log") if self.copy_source else ())
+                + (("progress.log",) if self.progress_sidecar else ()))
 
     @property
     def prefix(self):
@@ -78,7 +81,8 @@ class Plan:
     @property
     def script(self):
         return ("FailAt 255\n" + capture.run_script(self.path("NativeTest"), self.path("native.log"),
-                                                 self.stack, self.prefix, control=self.path("control.log"))
+                                                 self.stack, self.prefix, control=self.path("control.log"),
+                                                 progress=self.path("progress.log") if self.progress_sidecar else None)
                 + "Echo COMPLETE >" + self.path("complete.flag") + "\n").encode("ascii")
 
     @property
@@ -107,6 +111,8 @@ class Plan:
         if self.copy_source:
             files.update({"Stage-once": self.staging_script, "staged.flag": b"STAGED\n",
                           "stage.log": (self.prefix + "STAGE-DONE\n").encode('ascii')})
+        if self.progress_sidecar:
+            files['progress.log'] = b'NOT STARTED\n'
         return files
 
     def description(self):
@@ -119,6 +125,8 @@ class Plan:
             result.update(copySource=self.copy_source, copyCommandID=self.command_id + 1,
                           stagingScriptSHA256=hashlib.sha256(self.staging_script).hexdigest(),
                           stagingCommand=self.staging_command)
+        if self.progress_sidecar:
+            result['progressSidecar'] = self.path('progress.log')
         return result
 
 
@@ -228,6 +236,8 @@ class Transaction:
     async def _prepare_controls(self):
         for name, data in (("Run-once", self.plan.script), ("complete.flag", b"")):
             await self.upload(name, data)
+        if self.plan.progress_sidecar:
+            await self.upload('progress.log', self.plan.prepared_files()['progress.log'])
         require(await self.observer().file(self.plan.path("Run-once")) == self.plan.script,
                 "Uploaded script bytes differ")
         self.phase = "PREPARED"
@@ -287,10 +297,13 @@ class Transaction:
             return await self._prepare_controls()
         return await self._operation("UPLOADED", "PREPARING", perform)
 
-    async def execute(self, *, native_seconds=90):
+    async def execute(self, *, native_seconds=90, diagnostic_progress=False):
         async def perform():
             require(type(native_seconds) in (int, float) and math.isfinite(native_seconds)
                     and 0 < native_seconds <= 90, "Native deadline may not be widened")
+            require(type(diagnostic_progress) is bool, "Explicit diagnostic progress flag required")
+            require(not diagnostic_progress or self.plan.progress_sidecar,
+                    "Live progress requires a separately closed sidecar")
             for name, data in self.plan.prepared_files().items():
                 await self.checksum(name, data)
             entries = await self.observer().directory(self.plan.directory)
@@ -298,6 +311,7 @@ class Transaction:
                     and all(e.kind == "F" for e in entries), "Prepared namespace changed")
             started = self.clock()
             native_deadline = min(self.deadline, started + native_seconds)
+            next_progress = started + 20
             ident, command = self.plan.command_id, self.plan.command
             raw = await self.ask({"type": "LAUNCH", "id": ident, "command": command}, "CMD", min(10, native_seconds))
             require(re.fullmatch(re.escape(f"CMD|{ident}|OK|Started") +
@@ -315,11 +329,33 @@ class Transaction:
                     flag = await self.observer(native_deadline - self.clock()).file(name, 9)
                     require(self.clock() < native_deadline and flag == b"COMPLETE\n", "Exact timely completion flag absent")
                     break
+                if diagnostic_progress and self.clock() >= next_progress:
+                    # A separately closed sidecar is diagnostic evidence only.
+                    # It cannot establish completion, RC, custody or settlement.
+                    # Both reads spend the original native budget; no reads are
+                    # attempted after a timeout or another failed exchange.
+                    path = self.plan.path("progress.log")
+                    raw = await self.ask({"type": "FILEINFO", "path": path}, "FILEINFO",
+                                         min(4, native_deadline - self.clock()))
+                    require(self.clock() < native_deadline, "Native completion deadline expired")
+                    length = wire.file_info(raw, path, capture.MAX_OUTPUT)[0]
+                    data, offset = b"", max(0, length - wire.READ_SIZE)
+                    if length:
+                        count = min(length, wire.READ_SIZE)
+                        raw = await self.ask({"type": "READFILE", "path": path,
+                                              "offset": offset, "size": count}, "FILE",
+                                             min(4, native_deadline - self.clock()))
+                        require(self.clock() < native_deadline, "Native completion deadline expired")
+                        data = wire.file_chunk(raw, path, offset, count)
+                        require(len(data) == count, "Diagnostic suffix shortened during observation")
+                    self.record({"event": "native_progress_unconfirmed", "elapsed": self.clock() - started,
+                                 "observedLength": length, "offset": offset, "hexData": data.hex()})
+                    next_progress = self.clock() + 20
                 await self.sleep(min(0.5, max(0, native_deadline - self.clock())))
             else:
                 raise ValueError("Completion observation count exceeded")
             files = dict(self.plan.prepared_files(), **{"complete.flag": flag})
-            for name in ("control.log", "native.log"):
+            for name in ("control.log", "native.log") + (("progress.log",) if self.plan.progress_sidecar else ()):
                 files[name] = await self.observer().file(self.plan.path(name), capture.MAX_OUTPUT)
             control = files["control.log"].decode("ascii")
             observed = capture.parse_control("[OK]\n" + control, self.plan.stack, self.plan.prefix)

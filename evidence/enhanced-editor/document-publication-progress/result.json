@@ -1,0 +1,117 @@
+{
+  "status": "HOST_AND_EXACT_AMIBERRY_PASS_PHYSICAL_NOT_RUN",
+  "candidate": {
+    "bytes": 224372,
+    "sha256": "20a9e71efd2a445e81ecc090917398e55b538539fb491e21187dc060dfa40fd3",
+    "crc32": "6556F8A1"
+  },
+  "nativeMarkers": [
+    "DOCUMENT PUBLICATION BEGIN:load",
+    "DOCUMENT ACTION TRACE:entered",
+    "DOCUMENT ACTION TRACE:fixture-allocated",
+    "DOCUMENT ACTION TRACE:initial-document-created",
+    "DOCUMENT ACTION TRACE:initial-editor-created",
+    "DOCUMENT ACTION TRACE:initial-masters-begun",
+    "DOCUMENT ACTION TRACE:initial-masters-ready",
+    "DOCUMENT ACTION TRACE:checked-editor-ready",
+    "DOCUMENT ACTION TRACE:checked-owner-begun",
+    "DOCUMENT ACTION TRACE:source-encoded",
+    "DOCUMENT ACTION TRACE:fixture-ready",
+    "DOCUMENT ACTION TRACE:prepared",
+    "DOCUMENT ACTION TRACE:published",
+    "DOCUMENT ACTION TRACE:committed",
+    "DOCUMENT ACTION TRACE:stopped-and-disposed",
+    "DOCUMENT ACTION TRACE:paula-closed",
+    "DOCUMENT ACTION TRACE:amigus-closed",
+    "DOCUMENT ACTION TRACE:finished",
+    "DOCUMENT PUBLICATION PASS:load; final-address owner and checked cleanup; injected voices"
+  ],
+  "build": {
+    "productionObjectsReused": 83,
+    "exactLinkInputs": 91,
+    "scope": "Fixture-only diagnostic boundaries; production objects unchanged"
+  },
+  "host": {
+    "transactionGroups": 29,
+    "captureGroups": 8,
+    "focusedNewLoadAndTracedLoad": "PASS with ASan and UBSan",
+    "privateServiceGroups": 7,
+    "privateGuestGroups": 7,
+    "sharedGuardAndAccessGroups": 67,
+    "newJournalContentionGroups": 6,
+    "unrelatedWorkingTreePathsPreserved": 16
+  },
+  "progress": {
+    "enabledByDefault": false,
+    "source": "Precreated separate closed progress sidecar",
+    "intervalSeconds": 20,
+    "maxSnapshotBytes": 256,
+    "nativeDeadlineSeconds": 90,
+    "completionProof": false,
+    "custodyProof": false
+  },
+  "preservedAttempts": [
+    {
+      "scope": "First trace staging",
+      "result": "Journal mutex collision; no native launch",
+      "recoveryFinalFence": 1614,
+      "archiveCount": 69
+    },
+    {
+      "scope": "Stdout progress",
+      "result": "Launched, first progress metadata request failed; no completion proof",
+      "recoveryFinalFence": 1620,
+      "archiveCount": 70
+    },
+    {
+      "scope": "First closed-sidecar staging",
+      "result": "Journal mutex collision; no native launch",
+      "recoveryFinalFence": 1623,
+      "archiveCount": 71
+    }
+  ],
+  "journalFix": {
+    "acquisitionWaitMaxSeconds": 0.5,
+    "operationRetries": 0,
+    "afterAcquire": "Revalidate inode, private lock properties, complete state, archives, owner, nonce and holds",
+    "commandAndTransportLocks": "Unchanged nonblocking",
+    "oldSourceSHA256": "7fc637c2ae0c1a47e1083b5d028efd6e0946428b2c7f08e5041b19812fcd2084",
+    "newSourceSHA256": "efa6c105b40570d078efd22d7086687d297119dcebb0b7350988eaad9a52d5ea",
+    "installedAtVerifiedIdle": true,
+    "idleServicesUntouched": true
+  },
+  "emulator": {
+    "returnCode": 0,
+    "stackBytes": 262144,
+    "expectedMarkers": 19,
+    "outputBytes": 769,
+    "outputCRC32": "4EC504EA",
+    "nativeSecondsLimit": 90,
+    "guestSecondsLimit": 140,
+    "wholeSecondsLimit": 250,
+    "custodyFiles": 9,
+    "progressObservations": [
+      "published at20.8817s",
+      "published at42.2822s"
+    ],
+    "exactCleanup": true,
+    "independentRelease": true,
+    "finalFence": 1627,
+    "archiveCount": 72,
+    "ownedResourcesAbsent": true,
+    "proofSHA256": {
+      "independent-pass-observation.json": "66e9da9bddf9ad606ec2addfcac05b744bd3f97f3324ad96da6ac989657a4221",
+      "release-result.json": "ff6d502200f859a1d4298d67f0252e80fe19a0b328db923fe682fdeb29c8f7ac",
+      "service-stop-result.json": "5f6fc6fc836ed7867ff8857dd7f5b232c67befd6c40fca9cc79edef4e088ab5d",
+      "independent-final-idle.json": "93d1c5ed47a9ecdbc40a9f87dfaffae325507119b62e44eb5b01783147695027"
+    }
+  },
+  "acceptance": {
+    "typedLoadFixture": true,
+    "fullFrontend": false,
+    "audio": false,
+    "exactLiveTiming": false,
+    "realA1200": false
+  },
+  "limits": "Post-publication owner preparation is localized but no function-level timing root cause or acceptance of earlier timed-out binaries is inferred."
+}

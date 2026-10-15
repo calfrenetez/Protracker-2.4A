@@ -15,7 +15,7 @@ def require(ok, message):
         raise ValueError(message)
 
 
-def run_script(remote, output, stack, prefix, *, control=None):
+def run_script(remote, output, stack, prefix, *, control=None, progress=None):
     """Build one same-Shell invocation, refusing an existing output file."""
     path = r"RAM:[A-Za-z0-9_-]+/[A-Za-z0-9_.-]+"
     require(isinstance(remote, str) and re.fullmatch(path, remote), "Invalid executable path")
@@ -24,10 +24,15 @@ def run_script(remote, output, stack, prefix, *, control=None):
             and remote.lower() != output.lower(), "Capture must be distinct in the owned RAM directory")
     require(type(stack) is int and 0 < stack <= 0x7fffffff, "Invalid Stack size")
     require(isinstance(prefix, str) and re.fullmatch(r"[A-Za-z0-9_-]+-", prefix), "Invalid marker prefix")
+    invocation = remote
+    if progress is not None:
+        require(progress == remote.rsplit('/', 1)[0] + '/progress.log',
+                "Progress must be the exact owned sidecar path")
+        invocation += ' ' + progress
     script = (f"If EXISTS {output}\n Echo {prefix}CAPTURE-EXISTS\n Quit 20\nEndIf\n"
             f"Echo {prefix}BEFORE\nStack {stack}\nIf WARN\n Echo {prefix}STACK-SET-WARN\n Quit 20\nEndIf\n"
             f"Echo {prefix}STACK-QUERY-BEGIN\nStack\nIf WARN\n Echo {prefix}STACK-QUERY-WARN\n Quit 20\nEndIf\n"
-            f"Echo {prefix}STACK-QUERY-END\nEcho {prefix}NATIVE-BEGIN\n{remote} >{output}\n"
+            f"Echo {prefix}STACK-QUERY-END\nEcho {prefix}NATIVE-BEGIN\n{invocation} >{output}\n"
             f"Echo {prefix}NATIVE-RC $RC\nEcho {prefix}NATIVE-END\n")
     if control is None:
         return script

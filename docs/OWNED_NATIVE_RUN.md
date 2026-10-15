@@ -408,3 +408,56 @@ owned processes and staging were removed, saved launcher files restored, and
 independent observation, public release and separate post-release checks passed.
 All three original HOLD records remain in the archive. The native timeout is
 still unconfirmed runtime acceptance; no rerun or physical test was performed.
+
+## Bounded diagnostic progress and continuing recovery authority — 15 October 2026
+
+`execute(diagnostic_progress=True)` requires a plan with `progress_sidecar=True`.
+It records at most the final 256 bytes of that run's separate `progress.log` every
+20 seconds while completion is pending. The file is created before launch and
+closed after each fixture update; the active stdout handle is never inspected.
+Every metadata/read request spends the original native deadline. These snapshots
+are unconfirmed observations, never a return code, completion, custody or cleanup
+proof. A failed read or malformed/short suffix ends the transaction. Even every
+PASS line cannot replace the completion gate. Copy mode accounts for all nine
+files, including final sidecar custody and exact cleanup; the default path is
+unchanged.
+
+The publication fixture reports 17 internal boundaries, plus BEGIN and final
+PASS, with `PT_DOCUMENT_ACTION_TRACE=1`. It reuses the typed New/Load assertions
+and byte-exact project roundtrip. The 224,372-byte trace build retains the same
+83 production objects. It adds no product output callback, DMA, device write,
+musical timing tolerance or frontend integration. Host sanitizer checks cover
+New, Load and the complete traced Load, including its final closed sidecar.
+
+The first trace attempt stopped during staging because the journal mutex was
+busy. A separate stdout-progress attempt launched but its first metadata request
+failed; no progress or completion was captured. The first sidecar attempt also
+stopped during staging on a proven journal-lock collision. All three runs were
+separately cleaned, independently observed and publicly released under the
+standing authority below; failed evidence remains preserved.
+
+A narrow shared-harness fix now waits at most 0.5 seconds to acquire its host
+journal mutex, then rechecks the lock inode and private-file properties before
+reading and validating current state. It never retries an operation. The command
+and transport locks remain nonblocking. All 67 existing guard/access tests and
+six new contention tests pass, including new HOLD visibility, sustained-lock
+refusal, replaced inode, changed permissions and non-contention I/O failure.
+Installation preserved originals at verified idle and left loaded idle services
+untouched. Exact native qualification remains a separate gate.
+
+The user's current instruction authorizes continuing development, testing and
+routine recovery of positively verified run-owned resources without repeated
+approval requests. Recovery still requires exact process identities, saved
+originals, exclusive ownership, bounded cleanup, an independent observer and
+public guard release. A failed transaction is never resumed or relabelled as a
+pass. Changed ownership or unverifiable restoration is outside routine recovery.
+
+
+The unchanged 224,372-byte sidecar candidate subsequently passed one fresh
+Amiberry run through the corrected harness: RC0, all 19 lines, byte-exact project
+roundtrip, nine-file custody and exact cleanup. Native90/guest140/whole250 limits
+were unchanged. Separate release and final idle observations passed; no owned
+resources remain. The progress snapshots localize the long phase after document
+publication but do not establish a function-level performance cause. Real-A1200
+qualification and full-frontend integration remain separate and untested for this
+candidate. The scoped evidence includes the exact shared-journal source patch.

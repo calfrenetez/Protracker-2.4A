@@ -303,3 +303,19 @@ not established. The earlier incomplete physical transfer and its approved
 recovery retain their original outcomes. All release evidence is preserved;
 the shared guard has now reached its 64-archive bound and refuses a further
 reservation until separately reviewed maintenance is complete.
+
+
+## Approved harness capacity maintenance
+
+After the physical sampler run, the shared guard reached its 64-record limit.
+The user approved a bounded increase to 128, including leaving dormant Codex
+tool adapters untouched. The exact guard constant and its matching documentation
+were installed after idle/ownership/hash checks. A separate verification confirmed
+all 64 original archive bodies, the state bytes and fence were unchanged. No
+target call, process signal, state reset or archive deletion was involved.
+
+The private candidate passed 88 distinct host checks (83 existing plus five
+capacity checks). The first invocation retained one missing copied-wrapper error;
+that one test passed after copying the unchanged fixture. New tests must load
+freshly qualified services; existing loaded adapters are not treated as updated.
+The 128-record bound, 64 KiB state bound and 32-HOLD bound remain finite.

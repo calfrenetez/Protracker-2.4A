@@ -422,5 +422,19 @@
       "listening quality"
     ],
     "archiveCapacity": "FULL_64_RECORDS_PRESERVED_NO_AUTOMATIC_MAINTENANCE"
+  },
+  "approvedHarnessCapacityMaintenance": {
+    "status": "INSTALLED_INDEPENDENTLY_VERIFIED",
+    "oldCapacity": 64,
+    "newCapacity": 128,
+    "preservedArchives": 64,
+    "stateBytesAndFenceUnchanged": true,
+    "privateHostTestsPassed": 88,
+    "idleAdaptersUntouched": true,
+    "targetOperations": 0,
+    "processSignals": 0,
+    "archiveDeletion": false,
+    "stateReset": false,
+    "freshServiceQualificationRequired": true
   }
 }

@@ -554,3 +554,41 @@ separately verified physical staging and cleanup.
 The earlier physical Load run still requires scoped recovery and independent
 release. The latest Safari check confirms the Mac is locked. Host progress does
 not clear that recovery hold or establish native timing, audio or listening.
+
+
+### Owned-input lifecycle and saved cleanup checks — HOST packet
+
+The next inactive emulator packet now validates the exact current Load candidate,
+its same-run RAM input path, distinct copy commands and both complete recovery
+inventories. It records the four input files separately from the nine execution
+files, including in the proposed cleanup witness. Selected service input pins
+now include the input helper. No old service identity, admission, process ID or
+release fence is inherited.
+
+Thirteen lifecycle/contract host groups pass using the actual orchestration
+with private files and modeled process/transport effects. They cover original
+file existence, bytes and metadata restoration; original absence restoration;
+changed-process refusal; changed restoration bytes; retained custody after guest
+failure; actual asynchronous cancellation; unchanged guest140/whole250 bounds;
+and rejection of altered input/execution/source inventories. The six guest
+integration groups also pass, including all 13 outer-call timeout positions.
+An independent saved-evidence observer checks input preparation, all four
+custody bodies, the separate execution-absence record, task/owner proof, input
+settlement and final absence of both RAM namespaces. It rejects either retained
+namespace, each altered custody file and an altered owner. It grants no public
+release or live ownership authority.
+
+Seventeen service/factory groups pass: eight input cases, seven existing service
+cases and two factory checks. Factory tests model admission and forbid process,
+network and guard-journal operations; the normal logging setup may append to the
+existing host log. They do not start a service or qualify a live connection.
+The independent observer is also inactive until current admission and actual
+fences are bound. Native90, guest140 and whole250 remain unchanged.
+
+These 36 host groups qualify separate lifecycle, guest and service models.
+They do not establish a complete live run. The exact Load candidate is unchanged;
+no production C or frontend behavior changed. The new packet remains inhibited
+pending the existing physical recovery and independent release, fresh live
+checks and service identity/admission. Its private disk pin must be refreshed
+from current evidence before admission. Amiberry and A1200 qualification of
+this new input route, plus physical MiniFTP/archive staging, remain NOT RUN.

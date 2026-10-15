@@ -6,7 +6,7 @@
     "host": "PASS",
     "physicalA1200": "NOT_RUN",
     "physicalRecovery": "PENDING",
-    "sharedRunnerIntegration": "HOST_GUEST_PHASE_PASS_LIFECYCLE_NOT_RUN"
+    "sharedRunnerIntegration": "HOST_LIFECYCLE_GUEST_SERVICE_MODELS_PASS_LIVE_NOT_RUN"
   },
   "limitations": [
     "Bridge replies and Shell completion are host models, not actual native execution.",
@@ -29,6 +29,39 @@
     "inputCopyLaunches": 1,
     "inputExchanges": 40,
     "nativeLaunches": 1
+  },
+  "packetQualification": {
+    "actualAsyncCancellationModeled": true,
+    "candidateUnchanged": true,
+    "exactExecutionFiles": 9,
+    "exactInputFiles": 4,
+    "guestGroups": 6,
+    "independentObserverInhibited": true,
+    "lifecycleAndContractGroups": 13,
+    "limitsSeconds": {
+      "guest": 140,
+      "native": 90,
+      "whole": 250
+    },
+    "logsSHA256": {
+      "runner-final.log": "1f6ea8d255dd0a07bc50e7dce732232d05ae8ea3ef5faa163475ef255256befa",
+      "service-first.log": "2e55e1e385994e3ff236ca392c4fe507dfc9cc1fa9f9a4202e5e4dbe2f5a1d1a"
+    },
+    "normalRunnerInhibited": true,
+    "privateSourceManifestSHA256": "3389635ed3af7cfad85b3b8e21fb369c2a5f656c7978a4b6382d63dabb1a64ba",
+    "productionCodeChanged": false,
+    "runnerGroups": 19,
+    "savedObserverNegativeCases": 7,
+    "selectedServicePins": 18,
+    "serviceFactoryGroups": 17,
+    "sourceSHA256": {
+      "ram_fixture_runner.py": "291e26f0626c5e121693f2479a4340b6a1f7fff458d4dcc82a58a6d697042395",
+      "saved_input_observer.py": "f5e1d1815514f9f67e465f0e3ccce30e97174f5d177f023a9e0b78b725088b4e",
+      "test_guest_phase.py": "484b8e7d2df2f8b694f21ad7f5e152904debbf477726495d97cb919bbc18341e",
+      "test_lifecycle.py": "e62444e7773793e7f288dd17f2c092317813b3333532bfb4609a314ac2953c5c"
+    },
+    "status": "HOST_PASS_NOT_ADMITTED",
+    "totalGroups": 36
   },
   "preservation": {
     "sourceAndUnrelatedModelFilesPreserved": true,

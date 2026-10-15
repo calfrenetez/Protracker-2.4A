@@ -1,0 +1,68 @@
+{
+  "acceptance": {
+    "LoadPhysical": false,
+    "NewNative": false,
+    "RAMCopyAmiberry": false,
+    "RAMCopyPhysical": false,
+    "audioOrTiming": false,
+    "frontend": false
+  },
+  "archiveVerifiedWithIndependentExtractor": true,
+  "archivedCandidate": {
+    "bytes": 224372,
+    "crc32": "6556F8A1",
+    "sha256": "20a9e71efd2a445e81ecc090917398e55b538539fb491e21187dc060dfa40fd3"
+  },
+  "host": {
+    "logs": {
+      "new-trace-publication.stderr": {
+        "bytes": 99,
+        "sha256": "5c8532939ef3440aecbcf28b7dbdb79f2e615051e4949e98d8f62c077a9e8515"
+      },
+      "new-trace-publication.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ram-staging-final.stderr": {
+        "bytes": 1362,
+        "sha256": "82e2703e105abad9ff4a0ac779904759ce88cc98884504bbec572598bddd7974"
+      },
+      "ram-staging-final.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "publicationSanitizerForms": [
+      "new",
+      "load",
+      "traced-new",
+      "traced-load"
+    ],
+    "transactionTests": 33
+  },
+  "loadArchive": {
+    "bytes": 124605,
+    "crc32": "6D104EB3",
+    "sha256": "8f6e321cbc87d6aeb0df28f719ac66d2fa5b1b8834fd2440fff7843aa93f3861"
+  },
+  "newCandidate": {
+    "bytes": 216360,
+    "crc32": "8D2698A3",
+    "linkInputs": 91,
+    "nativeExecution": false,
+    "productionUnitsReused": 83,
+    "sha256": "1ae5d1d28ef317c70761b1e0845e101ceaa591f9b3bc2ffeacbf219f94c3523d"
+  },
+  "physicalLoadAttempt": {
+    "guestSeconds": 140,
+    "localCleanup": "verified complete",
+    "nativeLaunchedOnce": true,
+    "nativeSeconds": 90,
+    "physicalCleanupAndRelease": "pending interactive Safari access",
+    "status": "GUEST_DEADLINE_EXPIRED_COMPLETION_UNCONFIRMED",
+    "wholeSeconds": 250
+  },
+  "sourceScope": "Only exact same-run RAM input namespace; unchanged Dev source/direct upload; staged source never adopted or deleted by execution transaction",
+  "status": "HOST_PASS_NATIVE_NOT_RUN",
+  "unrelatedPathsPreserved": 16
+}

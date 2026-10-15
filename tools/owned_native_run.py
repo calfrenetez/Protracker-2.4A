@@ -53,10 +53,12 @@ class Plan:
         require(len(self.expected_output) <= capture.MAX_OUTPUT, "Native output contract exceeds bound")
         if self.copy_source is not None:
             wire.path(self.copy_source)
-            require(re.fullmatch(re.escape("Dev:Tests/PT24G-" + self.run_id[:16] + "/")
-                                 + r"[A-Za-z0-9_-]+", self.copy_source)
+            shared = re.fullmatch(re.escape("Dev:Tests/PT24G-" + self.run_id[:16] + "/")
+                                  + r"[A-Za-z0-9_-]+", self.copy_source)
+            staged = self.copy_source == "RAM:PT24G-" + self.run_id[:16] + "-in/NativeTest"
+            require((shared or staged)
                     and self.command_id < 0xffffffff,
-                    "Exact run-owned emulator staging source and distinct copy identity required")
+                    "Exact run-owned staging source and distinct copy identity required")
 
     @property
     def directory(self):
@@ -95,7 +97,7 @@ class Plan:
 
     @property
     def staging_script(self):
-        require(self.copy_source is not None, "No emulator copy source selected")
+        require(self.copy_source is not None, "No staging copy source selected")
         failure = f"If WARN\n Echo FAILED >{self.path('staged.flag')}\n Quit 20\nEndIf\n"
         return (f"FailAt 255\nC:Copy {self.copy_source} {self.path('NativeTest')} QUIET\n"
                 + failure + f"C:Protect {self.path('NativeTest')} +rwed\n" + failure
@@ -125,6 +127,8 @@ class Plan:
             result.update(copySource=self.copy_source, copyCommandID=self.command_id + 1,
                           stagingScriptSHA256=hashlib.sha256(self.staging_script).hexdigest(),
                           stagingCommand=self.staging_command)
+            if self.copy_source.startswith("RAM:"):
+                result['copySourceKind'] = 'ram-staged'
         if self.progress_sidecar:
             result['progressSidecar'] = self.path('progress.log')
         return result
@@ -195,7 +199,12 @@ class Transaction:
         return wire.Observation(self.ask, seconds=min(seconds, 60, self.remaining()), clock=self.clock)
 
     async def copy_candidate(self):
-        """Emulator-only copy from caller-pinned shared staging; never alters source."""
+        """Copy caller-pinned shared or RAM staging; never alters its source.
+
+        A RAM source needs a separately qualified transfer, fresh namespace
+        ownership and eventual caller cleanup. This operation neither creates
+        that source nor grants ownership over an existing file by its name.
+        """
         await self.checksum_path(self.plan.copy_source, self.plan.binary)
         await self.upload("Stage-once", self.plan.staging_script)
         await self.upload("staged.flag", b"")

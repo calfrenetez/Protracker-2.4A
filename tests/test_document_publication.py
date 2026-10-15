@@ -27,7 +27,7 @@ class DocumentPublication(unittest.TestCase):
             environment = dict(os.environ, LC_ALL="C",
                                ASAN_OPTIONS="halt_on_error=1:abort_on_error=1",
                                UBSAN_OPTIONS="halt_on_error=1:print_stacktrace=1")
-            for load, name, trace in ((0, "new", 0), (1, "load", 0), (1, "load", 1)):
+            for load, name, trace in ((0, "new", 0), (1, "load", 0), (0, "new", 1), (1, "load", 1)):
                 executable = private / ("publication-" + name + str(trace))
                 # Only this fixture deliberately includes uncalled static helpers.
                 # Compile every production TU with the ordinary strict flags.
@@ -45,7 +45,7 @@ class DocumentPublication(unittest.TestCase):
                 ], cwd=private, env=environment, timeout=120, capture_output=True)
                 self.assertEqual((result.returncode, result.stdout, result.stderr), (0, b"", b""))
                 arguments = [str(executable)]
-                progress = private / ('RAM:PT24G-' + 'a1' * 8) / 'progress.log'
+                progress = private / ('RAM:PT24G-' + ('a1' if load else 'a0') * 8) / 'progress.log'
                 if trace:
                     progress.parent.mkdir()
                     progress.write_bytes(b'NOT STARTED\n')

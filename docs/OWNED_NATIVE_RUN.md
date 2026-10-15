@@ -461,3 +461,41 @@ resources remain. The progress snapshots localize the long phase after document
 publication but do not establish a function-level performance cause. Real-A1200
 qualification and full-frontend integration remain separate and untested for this
 candidate. The scoped evidence includes the exact shared-journal source patch.
+
+## RAM staging preparation and physical Load limit — 15 October 2026
+
+The same Load candidate subsequently transferred to the A1200 and launched once,
+but the outer 140-second guest deadline expired shortly afterwards. Its native
+completion and return code are unconfirmed. Saved host ledger file times show
+about 93 seconds between the 59 WRITEFILE dispatch/reply pairs; these times also
+include host validation and recording, so they are not a network benchmark.
+The failed transaction is preserved and cannot be resumed. Local service and
+host staging cleanup passed. Physical task/file observation and independent
+release remain pending because interactive Safari input is unavailable; Safari
+was returned to View Only. No physical Load pass is claimed.
+
+The copy helper now additionally accepts exactly
+`RAM:PT24G-<same first 16 run-id digits>-in/NativeTest`. This disjoint source
+namespace must already belong to the caller through a separately qualified,
+bounded transfer. A matching name or checksum alone grants no ownership.
+Shared `Dev:Tests` behavior and default direct upload remain unchanged.
+
+The source is checked before and after one copy into the fresh execution
+namespace. The helper only reads the source through checksums; it never writes,
+deletes or adopts it. The caller retains responsibility for exact staging and
+archive custody/cleanup after native execution. A source change, wrong run,
+destination alias, failed copy, ambiguous reply or timeout refuses progress.
+There is no implicit reconnect, retry, deadline reset or installation action.
+
+All 33 transaction host tests pass, including failure injection at every
+exchange of the RAM-copy route, source preservation, prelaunch wrong-byte
+refusal and exact namespace restrictions. The four publication sanitizer forms
+now include traced New and traced Load with separately closed progress files.
+The New trace cross-build is 216,360 bytes and remains native NOT RUN.
+
+The new RAM-copy route remains **Amiberry and physical NOT RUN**. Before use,
+finish the held physical recovery, qualify source transfer and the exact changed
+route in Amiberry, then admit a new physical operation. Transfer is a separately
+bounded preparation operation; execution retains native90/guest140/whole250.
+Host models and an archive extraction check do not establish physical transfer
+speed, native completion, frontend behavior or audio/timing acceptance.

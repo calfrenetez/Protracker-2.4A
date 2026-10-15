@@ -128,9 +128,11 @@ class Bridge:
 
 
 class TransactionTests(unittest.IsolatedAsyncioTestCase):
-    def new(self, *, copy=False, progress=False, **kwargs):
+    def new(self, *, copy=False, progress=False, ram=False, **kwargs):
+        source = ('RAM:PT24G-' + 'a1' * 8 + '-in/NativeTest' if ram else
+                  'Dev:Tests/PT24G-' + 'a1' * 8 + '/Fixture' if copy else None)
         self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 36, ("native first PASS", "native final PASS"),
-                         copy_source='Dev:Tests/PT24G-' + 'a1' * 8 + '/Fixture' if copy else None,
+                         copy_source=source,
                          progress_sidecar=progress)
         self.bridge = Bridge(self.plan)
         self.events = []
@@ -220,6 +222,62 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.bridge.copy_launches, 1)
         self.assertEqual(self.bridge.launches, 0)
         self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
+    async def test_ram_staging_source_is_verified_but_not_adopted_or_settled(self):
+        transaction = self.new(ram=True, progress=True)
+        original = dict(self.bridge.files)
+        self.idle_calls = 0
+        self.assertEqual(self.plan.description()['copySourceKind'], 'ram-staged')
+        await self.complete(transaction)
+        self.assertEqual((self.bridge.copy_launches, self.bridge.launches), (1, 1))
+        self.assertEqual(len(transaction.custody), 9)
+        await transaction.settle(self.idle)
+        self.assertEqual(self.bridge.files, original)
+        source_calls = [c for c in self.bridge.calls if c.get('path') == self.plan.copy_source]
+        self.assertEqual([c['type'] for c in source_calls], ['CHECKSUM', 'CHECKSUM'])
+        self.assertNotIn('NativeTest', [c['path'].rsplit('/', 1)[-1] for c in self.bridge.calls
+                                       if c['type'] == 'WRITEFILE'])
+
+    async def test_ram_staging_each_exchange_failure_retains_source_without_followup(self):
+        transaction = self.new(ram=True, progress=True)
+        self.idle_calls = 0
+        await self.complete(transaction)
+        await transaction.settle(self.idle)
+        for failure in range(1, len(self.bridge.calls) + 1):
+            with self.subTest(exchange=failure):
+                transaction = self.new(ram=True, progress=True)
+                self.bridge.fail_at = failure
+                with self.assertRaises(TimeoutError):
+                    await transaction.prepare()
+                    await transaction.execute()
+                    await transaction.settle(self.idle)
+                self.assertEqual((transaction.phase, len(self.bridge.calls)), ('FAILED', failure))
+                self.assertEqual(self.bridge.files[self.plan.copy_source], self.plan.binary)
+                with self.assertRaises(ValueError):
+                    await transaction.prepare()
+                self.assertEqual(len(self.bridge.calls), failure)
+
+    async def test_ram_staging_wrong_bytes_refused_before_any_launch(self):
+        transaction = self.new(ram=True)
+        self.bridge.files[self.plan.copy_source] = b'foreign candidate'
+        with self.assertRaisesRegex(ValueError, 'Guest bytes/CRC differ'):
+            await transaction.prepare()
+        self.assertEqual(self.bridge.launches + self.bridge.copy_launches, 0)
+        self.assertFalse(any(c['type'] in ('WRITEFILE', 'DELETEFILE') for c in self.bridge.calls))
+
+    async def test_ram_staging_requires_disjoint_exact_run_input_namespace(self):
+        self.new(ram=True)
+        for source in ('RAM:PT24G-' + 'b2' * 8 + '-in/NativeTest',
+                       self.plan.path('NativeTest'), self.plan.copy_source + '/extra',
+                       self.plan.copy_source.replace('-in/', '/'),
+                       self.plan.copy_source.replace('/NativeTest', '/Other'),
+                       self.plan.copy_source.replace('RAM:', 'Work:'),
+                       self.plan.copy_source.replace('-in/', '-in/../'),
+                       self.plan.copy_source + ';Delete'):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                Plan(self.plan.run_id, 17, b'x', ('PASS',), copy_source=source)
+        with self.assertRaises(ValueError):
+            Plan(self.plan.run_id, 0xffffffff, b'x', ('PASS',), copy_source=self.plan.copy_source)
 
     async def test_copy_completion_with_empty_log_retains_before_native_launch(self):
         transaction = self.new(copy=True)

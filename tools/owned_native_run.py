@@ -40,7 +40,7 @@ class Plan:
                 "Exact fresh run identity required")
         require(type(self.command_id) is int and 1 <= self.command_id <= 0xffffffff,
                 "Explicit positive command identity required")
-        require(isinstance(self.binary, bytes) and 0 < len(self.binary) <= 2 * 1024 * 1024,
+        require(isinstance(self.binary, bytes) and 0 < len(self.binary) <= wire.MAX_UPLOAD_BYTES,
                 "Frozen bounded candidate required")
         require(type(self.stack) is int and 65536 <= self.stack <= 1048576, "Qualified Stack required")
         require(isinstance(self.markers, tuple) and 0 < len(self.markers) <= 256
@@ -141,11 +141,10 @@ class Transaction:
                 "Guest bytes/CRC differ from frozen file")
 
     async def upload(self, name, data):
-        for offset in range(0, max(1, len(data)), 2048):
-            chunk = data[offset:offset + 2048]
-            raw = await self.ask({"type": "WRITEFILE", "path": self.plan.path(name),
-                                  "offset": offset, "hexData": chunk.hex()}, "OK")
-            require(raw == f"OK|WRITEFILE|{len(chunk)}", "Exact write acknowledgement absent")
+        for command in wire.write_commands(self.plan.path(name), data):
+            raw = await self.ask(command, "OK")
+            require(raw == f"OK|WRITEFILE|{len(command['hexData']) // 2}",
+                    "Exact write acknowledgement absent")
         await self.checksum(name, data)
 
     def observer(self, seconds=60):

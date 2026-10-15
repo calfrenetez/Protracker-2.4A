@@ -81,7 +81,7 @@ class Bridge:
 
 class TransactionTests(unittest.IsolatedAsyncioTestCase):
     def new(self, **kwargs):
-        self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 9, ("native first PASS", "native final PASS"))
+        self.plan = Plan("a1" * 16, 123456, bytes(range(256)) * 36, ("native first PASS", "native final PASS"))
         self.bridge = Bridge(self.plan)
         self.events = []
         return Transaction(self.plan, self.bridge.exchange, self.events.append, **kwargs)
@@ -196,6 +196,33 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
         self.bridge.files[self.plan.path("NativeTest")] = b"other"
         with self.assertRaises(ValueError):
             await transaction.execute()
+        self.assertEqual(self.bridge.launches, 0)
+
+    async def test_short_write_ack_stops_without_remaining_chunks_or_launch(self):
+        transaction = self.new()
+        self.bridge.change_reply = lambda c, r: 'OK|WRITEFILE|2048' if c['type'] == 'WRITEFILE' else r
+        with self.assertRaisesRegex(ValueError, 'Exact write acknowledgement absent'):
+            await transaction.prepare()
+        self.assertEqual(transaction.phase, 'FAILED')
+        self.assertEqual(sum(c['type'] == 'WRITEFILE' for c in self.bridge.calls), 1)
+        self.assertEqual(self.bridge.launches, 0)
+        self.assertFalse(any(c['type'] in ('DELETEFILE', 'CHECKSUM') for c in self.bridge.calls))
+
+    async def test_full_sized_candidate_preparation_keeps_original_checks(self):
+        transaction = self.new()
+        self.plan = Plan(self.plan.run_id, self.plan.command_id,
+                         (bytes(range(256)) * 1660)[:424732], self.plan.markers)
+        self.bridge = Bridge(self.plan)
+        transaction = Transaction(self.plan, self.bridge.exchange, self.events.append)
+        await transaction.prepare()
+        self.assertEqual(self.bridge.files[self.plan.path('NativeTest')], self.plan.binary)
+        writes = [c for c in self.bridge.calls if c['type'] == 'WRITEFILE'
+                  and c['path'] == self.plan.path('NativeTest')]
+        self.assertEqual(len(writes), 105)
+        self.assertEqual({c['path'] for c in self.bridge.calls if c['type'] == 'CHECKSUM'},
+                         {self.plan.path(n) for n in ('NativeTest', 'Run-once', 'complete.flag')})
+        self.assertTrue(any(c['type'] == 'READFILE' and c['path'] == self.plan.path('Run-once')
+                            for c in self.bridge.calls))
         self.assertEqual(self.bridge.launches, 0)
 
     async def test_ledger_failure_prevents_target_dispatch(self):

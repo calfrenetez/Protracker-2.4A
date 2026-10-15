@@ -9,6 +9,47 @@ import native_file_protocol as p
 
 
 class WireTests(unittest.TestCase):
+    def test_write_frames_fit_daemon_arrays_and_reconstruct_exact_bytes(self):
+        for requested in ("RAM:x", "RAM:PT24G-" + "ab" * 8 + "/NativeTest",
+                          "RAM:" + "a" * 188):
+            for size in (0, 1, 2048, 3980, 4095, 4096, 8191, 8192, 10000,
+                         99999, 100000, 424732, p.MAX_UPLOAD_BYTES):
+                with self.subTest(path=requested, size=size):
+                    data = (bytes(range(256)) * ((size + 255) // 256))[:size]
+                    assembled = bytearray()
+                    commands = list(p.write_commands(requested, data))
+                    self.assertTrue(commands)
+                    for command in commands:
+                        self.assertEqual(command['offset'], len(assembled))
+                        self.assertEqual(command['path'], requested)
+                        serialized = f"WRITEFILE|{requested}|{command['offset']}|{command['hexData']}"
+                        # The daemon needs one byte for the C-string terminator;
+                        # its transport appends a newline after this frame.
+                        self.assertLess(len(serialized.encode('ascii')), 8192)
+                        chunk = bytes.fromhex(command['hexData'])
+                        self.assertLessEqual(len(chunk), 4096)
+                        self.assertTrue(chunk or size == 0)
+                        assembled.extend(chunk)
+                    self.assertEqual(bytes(assembled), data)
+
+    def test_empty_upload_creates_one_explicit_zero_offset_frame(self):
+        self.assertEqual(list(p.write_commands('RAM:owned/empty', b'')), [
+            {'type': 'WRITEFILE', 'path': 'RAM:owned/empty', 'offset': 0, 'hexData': ''}])
+
+    def test_upload_rejects_aliases_and_mutable_or_unbounded_payload(self):
+        for requested, data in (('RAM:../foreign', b'x'), ('RAM:x\nDELETEFILE|RAM:y', b'x'),
+                                ('RAM:' + 'a' * 189, b'x'), ('RAM:x', bytearray(b'x')),
+                                ('RAM:x', memoryview(b'x')), ('RAM:x', 'x'),
+                                ('RAM:x', b'x' * (p.MAX_UPLOAD_BYTES + 1))):
+            with self.subTest(path=requested), self.assertRaises(ValueError):
+                next(p.write_commands(requested, data))
+
+    def test_candidate_transfer_request_count_reduced_without_changing_bytes(self):
+        commands = list(p.write_commands('RAM:PT24G-' + 'ab' * 8 + '/NativeTest',
+                                         b'x' * 424732))
+        self.assertEqual(len(commands), 105)
+        self.assertEqual(sum(len(c['hexData']) // 2 for c in commands), 424732)
+
     def test_directory(self):
         self.assertEqual(p.directory_page("DIR|T:|2|one(0,F),two(12,D)", "T:", 0),
                          (2, (p.Entry("one", 0, "F"), p.Entry("two", 12, "D"))))

@@ -1,9 +1,9 @@
 # Prepared RAM-only native test route
 
-Status: **HOST-qualified components; service integration and Amiberry/physical
-execution NOT RUN.** These helpers do not activate or unblock the older physical
-runner by themselves. Product architecture, timing policy and editor layout are
-unchanged.
+Status: **HOST-qualified components; the first private Amiberry integration
+stopped during preparation before native launch. Physical execution NOT RUN.**
+These helpers do not activate or unblock the older physical runner by themselves.
+Product architecture, timing policy and editor layout are unchanged.
 
 The installed SCRIPT helper chooses a short time-derived ID, creates two hidden
 `T:` files, and treats capture deletion as best effort. Its directory wrapper can
@@ -54,11 +54,32 @@ transport or a substitute for shared reservations and live target checks.
 
 ## Evidence and limits
 
-52 host tests pass across raw protocol parsing, transaction fault injection,
+58 host tests pass across raw protocol parsing, transaction fault injection,
 guarded exchange observation and the existing native capture contract. The
 transaction tests fail every exchange in turn and verify no subsequent request,
 retry or automatic cleanup; unrelated model files remain unchanged. These are
 models, not evidence of real bridge, DOS, native ABI or hardware behavior.
+
+The first private guarded-service integration timed out at its 60-second
+preparation call while uploading the 424,732-byte candidate in 2,048-byte pieces.
+The retained ledger has 104 dispatches and 103 replies, ending at an unconfirmed
+write at offset 206848; it contains no LAUNCH. Cancellation and a guard-journal
+lock refusal left the existing reservation, an interrupted operation and two
+HOLD entries. Recovery requires separate approval and verified release. This is
+a failed transport qualification, not a native fixture failure or pass. The
+same candidate's earlier successful Load test used a different transport route.
+
+Uploads now calculate their payload from the pinned daemon's 8,192-byte input
+array, its terminating NUL, the complete command header and its 4,096-byte decoded
+write array. The maximum offset is budgeted before chunking. For this candidate,
+the binary upload decreases from 208 requests to 105. Every acknowledgement,
+checksum, script readback, ownership check and time limit remains in place.
+Host tests reconstruct exact bytes through the 2 MiB input limit, include the
+longest permitted path and offset digit boundaries, and fail each exchange in
+turn without further requests or cleanup. A short write acknowledgement is
+rejected immediately. Fewer requests do not establish throughput or completion
+within the preparation deadline; this changed uploader is Amiberry NOT RUN.
+The held service still uses its original frozen source copies.
 
 Directory replies are not atomic snapshots. The historical daemon does not check
 `IoErr()` after `ExNext()`, so even a syntactically complete response cannot prove

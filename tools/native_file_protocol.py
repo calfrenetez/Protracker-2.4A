@@ -24,6 +24,8 @@ MAX_PAGES = 64
 MAX_BYTES = 65536
 READ_SIZE = 256
 MAX_READS = 512
+MAX_UPLOAD_BYTES = 2 * 1024 * 1024
+MAX_WRITE_BYTES = 4096
 
 
 def require(ok, message):
@@ -44,6 +46,26 @@ def line(value):
     require(isinstance(value, str) and 0 < len(value) <= MAX_LINE
             and value.isascii() and value.isprintable(), "Incomplete or invalid bridge line")
     return value
+
+
+def write_commands(requested, data):
+    """Plan bounded WRITEFILE frames; this function does not send anything.
+
+    The pinned daemon has an 8192-byte input array (including its terminating
+    NUL) and a 4096-byte decoded write array. Hex expansion, the full path and
+    the largest offset must all fit. An empty file still needs an offset-zero
+    write, which creates/truncates it in the fresh caller-owned namespace.
+    """
+    path(requested)
+    require(isinstance(data, bytes) and len(data) <= MAX_UPLOAD_BYTES,
+            "Frozen bounded upload required")
+    header = f"WRITEFILE|{requested}|{len(data)}|"
+    size = min(MAX_WRITE_BYTES, (MAX_LINE - 1 - len(header)) // 2)
+    require(size > 0, "Write header leaves no payload capacity")
+    for offset in range(0, max(1, len(data)), size):
+        chunk = data[offset:offset + size]
+        yield {"type": "WRITEFILE", "path": requested, "offset": offset,
+               "hexData": chunk.hex()}
 
 
 def decimal(value):

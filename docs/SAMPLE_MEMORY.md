@@ -7296,3 +7296,22 @@ The provider stays native-inhibited; no frontend, IRQ, Amiberry, physical,
 timing, audio or listening qualification follows. See
 [contract](PAULA_SEGMENT_PROVIDER.md#refuse-stale-borrowed-packets-before-resource-entry)
 and [HOST evidence](../evidence/enhanced-editor/paula-provider-stale-entry-host/result.json).
+
+
+### Retained packet checks inside an open HOST resource entry
+
+The typed HOST provider now checks still-borrowed packet metadata before all
+ten resource-operation paths and cached ACK/CANCEL/quiet/close answers. Stale
+metadata returns failure without the requested callback or new quiet claim.
+The original restoration attempt remains available once; its unchanged complete
+post-callback check retains HOLD for the mutated packet and refuses disposal.
+
+The private current343-case oracle passes: the earlier135 cases plus16 ready
+controls and192 stale operation/cached-reply cases. Genuine source pins and
+selective Chip-cache ownership remain retained, including all three pins and
+2304 Chip-cache bytes in the extension owner. This compares at most four packet
+snapshots, never sample/cache payloads. Real serialization, current source
+authentication, native build/IRQ, frontend, Amiberry, physical and audio/timing
+acceptance remain unqualified. See the
+[contract](PAULA_SEGMENT_PROVIDER.md#retained-packet-checks-before-resource-calls-and-cached-replies)
+and [HOST evidence](../evidence/enhanced-editor/paula-provider-precall-host/result.json).

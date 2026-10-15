@@ -41,6 +41,8 @@ static int current(const struct pt_paula_segment_provider *p)
         if(p->row[i].original&&memcmp(p->row[i].original,&p->row[i].copy,sizeof(p->row[i].copy)))return 0;
     return 1;
 }
+static int retained_current(struct pt_paula_segment_provider *p)
+{if(current(p))return 1;p->failed=1;return 0;}
 static void begin(struct pt_paula_segment_provider *p,struct pt_paula_segment_provider *saved)
 {p->busy=1;memcpy(saved,p,sizeof(*saved));active=p;reentered=0;}
 static int finish(struct pt_paula_segment_provider *p,const struct pt_paula_segment_provider *saved)
@@ -96,7 +98,7 @@ static int enter_adapter(void *v,enum pt_paula_future_entry e,uint64_t *token)
        !object(token,sizeof(*token),ALIGNMENT(uint64_t))||!output_apart(p,token,sizeof(*token)))return -1;
     /* An already stale borrowed packet cannot justify a new resource entry.
      * Keep its original record/source obligations; no callback or token write. */
-    if(!current(p)){p->failed=1;return -1;}
+    if(!retained_current(p))return -1;
     begin(p,&saved);raw=p->ops.enter(p->ops.context,e,&t);clean=finish(p,&saved);p->enter_raw=raw;
     if(raw==1){p->entered=1;p->entry=e;p->token=t;p->clock_seen=0;if(clean){*token=t;return 1;}}
     if(raw!=0||!clean){p->entry=e;p->token=t;p->restore_hold=1;p->failed=1;return -1;}return 0;
@@ -105,6 +107,8 @@ static int leave_adapter(void *v,enum pt_paula_future_entry e,uint64_t token)
 {
     struct pt_paula_segment_provider *p=v,saved;unsigned i;int raw,clean;
     if(!gate(p)||!p->entered||p->entry!=e||p->token!=token)return -1;
+    /* The original restoration remains owed after a precall refusal. Its
+     * result still passes the complete after-callback checks before release. */
     begin(p,&saved);raw=p->ops.restore(p->ops.context,e,token);clean=finish(p,&saved);p->restore_raw=raw;
     if(raw!=1||!clean){p->restore_hold=1;p->failed=1;return -1;}
     p->entered=0;p->entry=0;p->clock_seen=0;
@@ -119,6 +123,7 @@ static int clock_adapter(void *v,uint64_t *tick,uint32_t *frequency)
     if(!gate(p)||!p->entered||!object(tick,sizeof(*tick),ALIGNMENT(uint64_t))||
        !object(frequency,sizeof(*frequency),ALIGNMENT(uint32_t))||!apart(tick,sizeof(*tick),frequency,sizeof(*frequency))||
        !output_apart(p,tick,sizeof(*tick))||!output_apart(p,frequency,sizeof(*frequency)))return -1;
+    if(!retained_current(p))return -1;
     begin(p,&saved);raw=p->ops.clock(p->ops.context,&t,&f);clean=finish(p,&saved);
     if(raw!=1||!clean||f!=p->config.frequency){p->failed=1;return -1;}
     p->now=t;p->clock_seen=1;*tick=t;*frequency=f;return 1;
@@ -128,8 +133,10 @@ static int arm_adapter(void *v,const struct pt_paula_future_packet *q)
     struct pt_paula_segment_provider *p=v,saved;struct provider_row *r;
     struct pt_paula_packet32_mapping m;union pt_paula_packet32_record encoded;int raw,clean;
     if(!in_entry(p,PT_PAULA_FUTURE_TASK)||p->failed||p->closing||!p->clock_seen||p->count>=PT_PAULA_PROVIDER_RECORDS||
-       p->row[p->count].state.present||
-       !packet_apart(p,q)||!current(p)||q->geometry.frame!=p->config.frame[p->count]||find(p,q->ticket)||
+       p->row[p->count].state.present||!object(q,sizeof(*q),ALIGNMENT(struct pt_paula_future_packet))||
+       !apart(p,sizeof(*p),q,sizeof(*q)))return 0;
+    if(!retained_current(p))return -1;
+    if(!packet_apart(p,q)||q->geometry.frame!=p->config.frame[p->count]||find(p,q->ticket)||
        !mapping(p,q,&m)||pt_paula_segment_packet32_build(q,&m,&encoded)!=PT_PAULA_PACKET32_OK)return 0;
     if(p->now>=q->first)return 0;
     r=p->row+p->count;memset(r,0,sizeof(*r));memcpy(&r->copy,q,sizeof(r->copy));r->original=q;
@@ -146,8 +153,9 @@ static int packet_adapter(void *v,const struct pt_paula_future_packet *q,enum pt
 {
     struct pt_paula_segment_provider *p=v,saved;struct provider_row *r;unsigned index;int raw,clean;
     if(!in_entry(p,PT_PAULA_FUTURE_DELIVERY)||p->failed||!p->clock_seen||
-       !object(q,sizeof(*q),ALIGNMENT(struct pt_paula_future_packet))||!apart(p,sizeof(*p),q,sizeof(*q))||!(r=find(p,q->ticket))||
-       r->original!=q||r->state.quiet||r->state.applied||r->clean_refusal||!current(p)||
+       !object(q,sizeof(*q),ALIGNMENT(struct pt_paula_future_packet))||!apart(p,sizeof(*p),q,sizeof(*q)))return -1;
+    if(!retained_current(p))return -1;
+    if(!(r=find(p,q->ticket))||r->original!=q||r->state.quiet||r->state.applied||r->clean_refusal||
        (a==PT_PAULA_PROVIDER_REARM?p->now>=r->record.first:
         p->now<r->record.first||p->now>=r->record.last))return -1;
     index=(unsigned)(r-p->row);
@@ -165,6 +173,7 @@ static int ticket_adapter(void *v,uint64_t ticket,enum pt_paula_provider_ticket_
     struct pt_paula_segment_provider *p=v,saved;struct provider_row *r;int raw,clean;
     enum pt_paula_future_entry e=a==PT_PAULA_PROVIDER_ACK?PT_PAULA_FUTURE_DELIVERY:PT_PAULA_FUTURE_TASK;
     if(!in_entry(p,e)||!(r=find(p,ticket))||r->clean_refusal)return -1;
+    if(!retained_current(p))return -1;
     if(a==PT_PAULA_PROVIDER_TICKET_QUIET&&r->state.quiet)return 1;
     if(a==PT_PAULA_PROVIDER_CANCEL&&r->state.cancel_attempted)return r->cancel_result;
     if(a==PT_PAULA_PROVIDER_ACK&&r->ack_attempted)return r->ack_result;
@@ -200,7 +209,8 @@ static int output_apart(const struct pt_paula_segment_provider *p,const void *ou
 static int reader_adapter(void *v)
 {
     struct pt_paula_segment_provider *p=v,saved;int raw,clean;
-    if(!in_entry(p,PT_PAULA_FUTURE_TASK))return 0;p->closing=1;
+    if(!in_entry(p,PT_PAULA_FUTURE_TASK))return 0;
+    if(!retained_current(p))return -1;p->closing=1;
     if(!all_quiet(p))return 0;if(p->reader_quiet)return 1;
     begin(p,&saved);raw=p->ops.reader_quiet(p->ops.context);clean=finish(p,&saved);
     if(raw==1&&clean){p->reader_quiet=1;return 1;}if(raw!=0||!clean)p->failed=1;return raw==0&&clean?0:-1;
@@ -209,6 +219,7 @@ static int source_close_adapter(void *v)
 {
     struct pt_paula_segment_provider *p=v,saved;int raw,clean;
     if(!in_entry(p,PT_PAULA_FUTURE_TASK)||!all_quiet(p)||!p->reader_quiet)return 0;
+    if(!retained_current(p))return -1;
     if(p->source_attempted)return p->source_close_result;p->source_attempted=1;
     begin(p,&saved);raw=p->ops.source_close(p->ops.context);clean=finish(p,&saved);p->source_close_raw=raw;
     p->source_close_result=clean&&(raw==0||raw==1)?raw:-1;
@@ -218,6 +229,7 @@ static int source_quiet_adapter(void *v)
 {
     struct pt_paula_segment_provider *p=v,saved;int raw,clean;
     if(!in_entry(p,PT_PAULA_FUTURE_TASK)||!p->source_attempted||!p->reader_quiet||!all_quiet(p))return 0;
+    if(!retained_current(p))return -1;
     if(p->source_quiet)return 1;begin(p,&saved);raw=p->ops.source_quiet(p->ops.context);clean=finish(p,&saved);
     if(raw==1&&clean){p->source_quiet=1;return 1;}if(raw!=0||!clean)p->failed=1;return raw==0&&clean?0:-1;
 }

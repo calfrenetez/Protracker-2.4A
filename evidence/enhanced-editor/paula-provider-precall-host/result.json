@@ -1,0 +1,122 @@
+{
+  "cachedReplies": [
+    "ack",
+    "cancel",
+    "ticket quiet",
+    "reader quiet",
+    "source close",
+    "source quiet"
+  ],
+  "cases": {
+    "callbackFaults": 36,
+    "combined": 343,
+    "existingProvider": 75,
+    "newReadyControls": 16,
+    "newStaleCachedRefusals": 72,
+    "newStaleOperationRefusals": 120,
+    "preEntryStalePackets": 24
+  },
+  "dependencyBodyCount": 94,
+  "dependencyManifestEncoding": "UTF-8 JSON sorted keys, compact separators, no trailing newline; exact ordinary driver retains pins",
+  "dependencyManifestSHA256": "c31332def410fdf040dfc3239c66e71b6fef028603c41de04ca8599550b858b2",
+  "driverSHA256": "30bbf05b13e7811cfa962533c81c18ff4e50610e32dcb62d66b9fac18a79520c",
+  "executionOracle": "typed Paula geometry provider: 75 cases passed\ngenuine measured four boundaries; both genuine retirement orders\n45 caller-output alias refusals preserve context, retained/retired sources and ownership\nowned BE records; exact entry token/window; independent quiet and final restore\nunknown restoration retains genuine source owner; no forced retirement\nHOST injectable resource model; future/native/IRQ/MMIO/timing NOT QUALIFIED\nprovider callback matrix: 36 cases; 12 seams x holder/original/reentry faults\n20 independently drained providers; 16 process-lifetime HOLD providers; source owner retained\nHOST callback and borrowed-packet checks only; holder/source mutation/native/IRQ/timing NOT QUALIFIED\nprovider stale-entry matrix: 24 cases; 12 packet changes x TASK/delivery\nno resource enter, token write or source release after observed stale packet\nprovider precall matrix: 208 cases; 16 ready controls and 192 stale-packet refusals\nno extra callback or quiet claim; original restoration attempted once, then HOLD\n",
+  "flags": [
+    "C99",
+    "O1",
+    "Wall",
+    "Wextra",
+    "Werror",
+    "UNDEBUG",
+    "ASan",
+    "UBSan"
+  ],
+  "liveClassicPlaceholderBodiesRead": false,
+  "nativeExecuted": false,
+  "newMatrix": {
+    "armPositive": "Synthetic second future packet using genuine held sources; not arbitrary renderer/song/timing qualification",
+    "callerPacketAndOutputsPreserved": true,
+    "extensionOwnerChipBytesRetained": 2304,
+    "extensionOwnerPinsRetained": 3,
+    "metadataChanges": 12,
+    "negativeCasesRetainHold": 192,
+    "noRequestedResourceCallbackOnRefusal": true,
+    "oneOriginalRestoreAttemptPerNegativeCase": true,
+    "positiveControlsIndependentlyCleaned": 16,
+    "previousRowObservationsPreserved": true,
+    "secondRestoreRefusedWithoutCallback": true
+  },
+  "notQualified": [
+    "arbitrary holder/payload mutation",
+    "current master/cache authentication",
+    "real whole-entry serialization and IRQ restoration",
+    "native compilation",
+    "frontend/general-song integration",
+    "Amiberry provider execution",
+    "physical A1200/AmiGUS provider execution",
+    "timing",
+    "audio",
+    "listening"
+  ],
+  "parentCommit": "89d11832071c4e1f3f22f2d6377dbe9bf56f8d47",
+  "privateClassicBaselinePreserved": true,
+  "privateCommittedExport": true,
+  "protectedUnrelatedPathsVerified": 16,
+  "recordsSHA256": {
+    "finalPrivateRecord": "e3d949e8fdb839afc6807f89b3bbe5ad1e4c30661c225830280b498f86b21781",
+    "finalStderr": "e64cd37db52a9b8d076fe33a8b4d9c29684fce4e16af95f40124d56204ced474",
+    "finalStdout": "05726b666306c6ab3b494eea1a482b7bfb080ce0654a7a00c50d962bf7fec0a0",
+    "prior265CasePass": "ffe9d0bfda4f85bd88bcfdb711c9d72e3acfb7634cb79e0b2e00f73768007ad3"
+  },
+  "reproduction": {
+    "cachedBaseline": {
+      "logSHA256": "5a2ae640c2b5e00025eb442ff30d8fa36ee3482461f04d7acfd3ce93cf66cde6",
+      "privateAdmissionDelta": "Only the current provider source pin was replaced with the exact committed prior provider body. No production source or historical record was altered.",
+      "privateDriverSHA256": "82b47724d6c926d320f297103a82322e297c58a91ef7884e33227f377dce3a86",
+      "providerFromCommittedParent": true,
+      "providerPin": {
+        "bytes": 17870,
+        "sha256": "2ca71dbf9de02f3f37ea78ecedaed503d5e42c4590f0a8b62f2ce3a7a73a8d76"
+      },
+      "scenario": "Cached ACK inside an open entry after caller packet mutation",
+      "state": "HOST_FAIL"
+    },
+    "limits": "Recorded assertion detects unmet refusal contract. Attribution to old callback/cached branches is source-derived; no separate raw return/counter trace was exported.",
+    "noncachedBaseline": {
+      "logSHA256": "6979e50b05fc0896cb64157c8e44d573aa9e94c8e40a9ca9c0b349cc1a8d9dc7",
+      "scenario": "Clock operation inside an open entry after caller packet mutation",
+      "state": "HOST_FAIL"
+    }
+  },
+  "resourceOperations": [
+    "clock",
+    "arm",
+    "rearm",
+    "apply",
+    "ack",
+    "cancel",
+    "ticket quiet",
+    "reader quiet",
+    "source close",
+    "source quiet"
+  ],
+  "selectedSourcePins": {
+    "src/editor/paula_segment_provider.c": {
+      "bytes": 18503,
+      "sha256": "bcf502f0dad627bc01ef3717f1dbe496192994b90778156d3785815554fdd96d"
+    },
+    "src/editor/paula_segment_provider.h": {
+      "bytes": 5143,
+      "sha256": "a5ecb093186b4bf05ce96ba5b8d848de7ff37ffaf6b8e7cf6c8e7e00d1663f78"
+    },
+    "tests/paula_provider_callback_test.c": {
+      "bytes": 18077,
+      "sha256": "6e6833cc16cadb5b51c03d807ad53471f160f7428da3dac67c776719a8912295"
+    }
+  },
+  "sharedGuardBytesUnchanged": true,
+  "sourceBodies": 95,
+  "state": "HOST_PASS",
+  "targetOperations": 0,
+  "translationUnits": 37
+}

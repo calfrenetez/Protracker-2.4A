@@ -10,8 +10,9 @@ struct callback_case {
 };
 static struct callback_case callback_cases[CB_COUNT][3];
 static struct callback_case entry_cases[12][2];
+static struct callback_case precall_cases[CB_COUNT][13][2];
 static struct sequence_fixture callback_owner;
-static unsigned callback_count,callback_disposed,callback_retained,entry_count;
+static unsigned callback_count,callback_disposed,callback_retained,entry_count,precall_count,precall_positive,precall_retained;
 static struct callback_case *callback_context(void *v)
 {return (struct callback_case *)(void *)provider_model_context(v);}
 static void callback_fault(struct callback_case *c,unsigned phase)
@@ -120,18 +121,8 @@ static void callback_case_run(const struct pt_paula_future_packet *q,unsigned ta
     assert(pinned(&provider_owner->f)==3&&provider_owner->f.chip.bytes==2304);
     storage(&provider_owner->f);++callback_count;
 }
-/* These packets were accepted and restored positively before caller mutation.
- * Refuse the next whole entry without even asking the injected resource to
- * enter. Changed source identities are never followed or repaired here. */
-static void entry_case_run(const struct pt_paula_future_packet *q,unsigned field,
-    unsigned delivery)
+static void packet_mutate(struct provider_model *m,unsigned field)
 {
-    struct callback_case *c=&entry_cases[field][delivery];struct provider_model *m=&c->model;
-    struct pt_paula_provider_status status;struct pt_paula_provider_row_status row;
-    struct pt_paula_future_packet changed;unsigned calls[CB_COUNT];uint64_t token,prior_token;
-    callback_init(c,CB_COUNT,0,q);token=provider_entry(m,PT_PAULA_FUTURE_TASK);
-    assert(m->adapter.arm(m->adapter.context,&m->original)==1);
-    provider_exit(m,PT_PAULA_FUTURE_TASK,token);
     switch(field){
     case 0:++m->original.ticket;break;
     case 1:--m->original.first;break;
@@ -147,6 +138,20 @@ static void entry_case_run(const struct pt_paula_future_packet *q,unsigned field
     case 11:++m->original.geometry.source[0].cache_version;break;
     default:assert(0);
     }
+}
+/* These packets were accepted and restored positively before caller mutation.
+ * Refuse the next whole entry without even asking the injected resource to
+ * enter. Changed source identities are never followed or repaired here. */
+static void entry_case_run(const struct pt_paula_future_packet *q,unsigned field,
+    unsigned delivery)
+{
+    struct callback_case *c=&entry_cases[field][delivery];struct provider_model *m=&c->model;
+    struct pt_paula_provider_status status;struct pt_paula_provider_row_status row;
+    struct pt_paula_future_packet changed;unsigned calls[CB_COUNT];uint64_t token,prior_token;
+    callback_init(c,CB_COUNT,0,q);token=provider_entry(m,PT_PAULA_FUTURE_TASK);
+    assert(m->adapter.arm(m->adapter.context,&m->original)==1);
+    provider_exit(m,PT_PAULA_FUTURE_TASK,token);
+    packet_mutate(m,field);
     memcpy(&changed,&m->original,sizeof(changed));memcpy(calls,c->calls,sizeof(calls));
     prior_token=m->token;token=UINT64_MAX;
     assert(m->adapter.enter(m->adapter.context,delivery?PT_PAULA_FUTURE_DELIVERY:
@@ -162,6 +167,78 @@ static void entry_case_run(const struct pt_paula_future_packet *q,unsigned field
     assert(pinned(&provider_owner->f)==3&&provider_owner->f.chip.bytes==2304);
     storage(&provider_owner->f);++entry_count;
 }
+static int precall_invoke(struct provider_model *m,unsigned target,
+    const struct pt_paula_future_packet *next,uint64_t ticket,uint64_t *tick,uint32_t *frequency)
+{
+    switch(target){
+    case CB_CLOCK:return m->adapter.clock(m->adapter.context,tick,frequency);
+    case CB_ARM:return m->adapter.arm(m->adapter.context,next);
+    case CB_REARM:return m->adapter.rearm(m->adapter.context,&m->original);
+    case CB_APPLY:return m->adapter.apply(m->adapter.context,&m->original);
+    case CB_ACK:return m->adapter.ack(m->adapter.context,ticket);
+    case CB_CANCEL:return m->adapter.cancel(m->adapter.context,ticket);
+    case CB_TICKET:return m->adapter.ticket_quiet(m->adapter.context,ticket);
+    case CB_READER:return m->adapter.reader_quiet(m->adapter.context);
+    case CB_CLOSE:return m->adapter.source_close(m->adapter.context);
+    case CB_SOURCE:return m->adapter.source_quiet(m->adapter.context);
+    default:assert(0);return 0;
+    }
+}
+/* A positive control for every seam proves the requested operation was ready.
+ * Negative cases mutate a live accepted packet inside the existing entry;
+ * restoring that entry remains an independent once-only obligation. */
+static void precall_case_run(const struct pt_paula_future_packet *q,unsigned target,unsigned field,unsigned cached)
+{
+    struct callback_case *c=&precall_cases[target][field][cached];struct provider_model *m=&c->model;
+    struct pt_paula_provider_status before,status;struct pt_paula_provider_row_status row_before,row;
+    struct pt_paula_future_packet next,changed;unsigned calls[CB_COUNT],i;uint64_t token,tick=UINT64_MAX;
+    uint32_t frequency=UINT32_MAX;int r;enum pt_paula_future_entry entry=
+        target==CB_REARM||target==CB_APPLY||target==CB_ACK?PT_PAULA_FUTURE_DELIVERY:PT_PAULA_FUTURE_TASK;
+    callback_init(c,CB_COUNT,0,q);token=provider_entry(m,PT_PAULA_FUTURE_TASK);
+    assert(m->adapter.arm(m->adapter.context,&m->original)==1);
+    provider_exit(m,PT_PAULA_FUTURE_TASK,token);
+    if(target==CB_APPLY||target==CB_ACK)m->now=q->first;
+    token=provider_entry(m,entry);m->ticket_release=m->reader_release=m->source_release=1;
+    if(target==CB_ACK)assert(m->adapter.apply(m->adapter.context,&m->original)==1);
+    if(target>=CB_READER)assert(m->adapter.ticket_quiet(m->adapter.context,q->ticket)==1);
+    if(target>=CB_CLOSE)assert(m->adapter.reader_quiet(m->adapter.context)==1);
+    if(target==CB_SOURCE)assert(m->adapter.source_close(m->adapter.context)==1);
+    memcpy(&next,q,sizeof(next));next.ticket+=100;next.first+=100;next.last+=100;next.geometry.frame=1920;
+    if(cached)assert(precall_invoke(m,target,&next,q->ticket,&tick,&frequency)==1);
+    assert(pt_paula_segment_provider_get(m->adapter.context,&before));
+    assert(pt_paula_segment_provider_row(m->adapter.context,0,&row_before));
+    if(field<12)packet_mutate(m,field);
+    memcpy(&changed,&m->original,sizeof(changed));memcpy(calls,c->calls,sizeof(calls));
+    r=precall_invoke(m,target,&next,q->ticket,&tick,&frequency);
+    assert(!memcmp(&changed,&m->original,sizeof(changed)));
+    if(field<12){
+        assert(r==-1&&!memcmp(calls,c->calls,sizeof(calls))&&m->locked&&m->token==token);
+        if(target==CB_CLOCK)assert(tick==UINT64_MAX&&frequency==UINT32_MAX);
+        assert(pt_paula_segment_provider_get(m->adapter.context,&status));
+        before.failed=1;assert(!memcmp(&before,&status,sizeof(before)));
+        assert(pt_paula_segment_provider_row(m->adapter.context,0,&row)&&!memcmp(&row_before,&row,sizeof(row)));
+        for(i=0;i<4;++i)if(m->borrowed[i])assert(!memcmp(m->borrowed[i],m->observed+i,sizeof(m->observed[i])));
+        /* Refusal must still allow the one original restoration attempt. An
+         * unclean entry does not become certified quiet or disposable. */
+        assert(m->adapter.leave(m->adapter.context,entry,token)==-1&&!m->locked);
+        ++calls[CB_RESTORE];assert(!memcmp(calls,c->calls,sizeof(calls)));
+        assert(pt_paula_segment_provider_get(m->adapter.context,&status)&&status.failed&&status.restore_hold);
+        assert(m->adapter.leave(m->adapter.context,entry,token)==-1&&!memcmp(calls,c->calls,sizeof(calls)));
+        assert(!pt_paula_segment_provider_dispose(m->adapter.context));++precall_retained;
+    }else{
+        assert(r==1);if(!cached)++calls[target];assert(!memcmp(calls,c->calls,sizeof(calls)));
+        if(entry==PT_PAULA_FUTURE_DELIVERY){provider_exit(m,entry,token);token=provider_entry(m,PT_PAULA_FUTURE_TASK);}
+        assert(m->adapter.ticket_quiet(m->adapter.context,q->ticket)==1);
+        if(target==CB_ARM)assert(m->adapter.ticket_quiet(m->adapter.context,next.ticket)==1);
+        assert(m->adapter.reader_quiet(m->adapter.context)==1);
+        assert(m->adapter.source_close(m->adapter.context)==1);
+        assert(m->adapter.source_quiet(m->adapter.context)==1);
+        provider_exit(m,PT_PAULA_FUTURE_TASK,token);
+        assert(pt_paula_segment_provider_dispose(m->adapter.context));++precall_positive;
+    }
+    assert(pinned(&provider_owner->f)==3&&provider_owner->f.chip.bytes==2304);
+    storage(&provider_owner->f);++precall_count;
+}
 static int callback_submit(void *v,const struct pt_readers_event *event,const struct pt_paula_segment_plan *plan)
 {
     struct pt_paula_future_packet q;unsigned i,j;memset(&q,0,sizeof(q));
@@ -169,6 +246,10 @@ static int callback_submit(void *v,const struct pt_readers_event *event,const st
     memcpy(&q.geometry,plan,sizeof(*plan));
     for(i=0;i<CB_COUNT;++i)for(j=0;j<3;++j)callback_case_run(&q,i,j);
     for(i=0;i<12;++i)for(j=0;j<2;++j)entry_case_run(&q,i,j);
+    for(i=CB_ACK;i<CB_COUNT;++i){precall_case_run(&q,i,12,1);
+        for(j=0;j<12;++j)precall_case_run(&q,i,j,1);}
+    for(i=CB_CLOCK;i<CB_COUNT;++i){precall_case_run(&q,i,12,0);
+        for(j=0;j<12;++j)precall_case_run(&q,i,j,0);}
     return sequence_submit(v,event,plan);
 }
 int main(void)
@@ -180,11 +261,14 @@ int main(void)
     sequence_activate(&callback_owner,0,1);
     assert(callback_count==36&&callback_disposed==20&&callback_retained==16);
     assert(entry_count==24);
+    assert(precall_count==208&&precall_positive==16&&precall_retained==192);
     assert(pinned(&callback_owner.f)==3&&callback_owner.f.chip.bytes==2304);
     puts("provider callback matrix: 36 cases; 12 seams x holder/original/reentry faults");
     puts("20 independently drained providers; 16 process-lifetime HOLD providers; source owner retained");
     puts("HOST callback and borrowed-packet checks only; holder/source mutation/native/IRQ/timing NOT QUALIFIED");
     puts("provider stale-entry matrix: 24 cases; 12 packet changes x TASK/delivery");
     puts("no resource enter, token write or source release after observed stale packet");
+    puts("provider precall matrix: 208 cases; 16 ready controls and 192 stale-packet refusals");
+    puts("no extra callback or quiet claim; original restoration attempted once, then HOLD");
     return 0;
 }

@@ -59,3 +59,48 @@ holder/payload mutation, provide real IRQ serialization or remove native build
 inhibition. Amiberry, physical A1200/AmiGUS, timing, audio and listening remain
 unqualified for this provider. The existing exact New/Load document fixtures do
 not include this HOST-only provider and retain their separate qualification.
+
+
+## Retained packet checks before resource calls and cached replies
+
+The same retained-packet observation now runs before clock, ARM, REARM, APPLY,
+ACK, CANCEL, ticket quiet, reader quiet, source close and source quiet work. It
+also precedes cached ACK/CANCEL and quiet/close replies. An observed mismatch
+latches failure, performs no requested resource callback, preserves output
+arguments and leaves previous row observations intact. Ordinary numeric and
+output-alias admission retains its refusal precedence. PCM and cache payloads
+are not scanned, and packet equality is not proof of genuine version ownership.
+
+Restoration of an already-open entry remains owed. `leave` therefore retains its
+original callback path even after a precall refusal. The complete post-callback
+check still detects the changed packet, retaining restoration uncertainty and
+blocking disposal. A second `leave` is refused without another callback. This
+change neither skips an owed restoration nor treats it as a quiet certificate.
+
+The new fixture covers ten ready-operation controls and120 stale metadata cases,
+plus six valid cached replies and72 stale cached replies. Twelve packet changes
+include invalid counts and null descriptor pointers that are never followed.
+Positive controls prove each tested callback or cached path was actually ready;
+all16 complete independent model cleanup. The192 negative cases preserve all
+callback counters, the existing backend lock/token, caller packet and outputs
+and previous row observations. Each permits exactly one original restoration
+attempt and then retains HOLD. The enclosing genuine source owner retains its
+three pins and2304 Chip-cache bytes. The ARM positive control uses a second
+synthetic future packet with the same genuine held sources; it is not evidence
+of arbitrary-song timing or renderer emission.
+
+The complete343-case oracle passes with37 C99 units,95 pinned source bodies,
+assertions, warnings as errors, ASan and UBSan in a private committed export. The
+prior265-case passing stage is retained separately. Two earlier failing HOST
+regressions are preserved: the first exercises a clock callback after metadata
+mutation; the second tests a cached acknowledgement against the committed prior
+provider, with only its private driver pin changed to that exact prior body.
+Their recorded assertions detect the unmet refusal contract. Attribution to the
+old callback/cached branch is source-derived; the failure records do not contain
+a separate exported raw callback-return trace.
+See [HOST evidence](../evidence/enhanced-editor/paula-provider-precall-host/result.json).
+
+Native inhibition, real serialization/IRQ restore, arbitrary holder/payload
+mutation, current master/cache authentication, frontend integration, Amiberry,
+physical A1200/AmiGUS, musical timing, audio and listening remain separate. No
+service, target, shared ownership or layout was changed by these HOST checks.

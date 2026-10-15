@@ -355,7 +355,26 @@
       "ram_fixture_runner.py": "acfc6a15cd1561652ebafbd9e7fc5098e4e3e883a7ead0fa9fb722b672e60ac8",
       "test_guest_phase.py": "c589c7dfaf16d2932be5668b5ac7151520721bf7928b9998e1178fc52d471ba3"
     },
-    "amiberry": "NOT_RUN_INCREMENTAL_INTEGRATION",
+    "amiberry": "SEPARATE_EXACT_INCREMENTAL_INTEGRATION_PASS",
     "physical": "NOT_RUN_INCREMENTAL_INTEGRATION"
+  },
+  "incrementalSamplerAmiberry": {
+    "status": "PASS_COMPLETE_RUN_INDEPENDENTLY_RELEASED",
+    "candidateBytes": 166396,
+    "candidateSHA256": "84c405dfed6996a4c13f476eb5cf457b4036e9a603f46ad52b5df38b2900e769",
+    "candidateCRC32": "A0A3172B",
+    "returnCode": 0,
+    "observedStackBytes": 262144,
+    "nativeOutputBytes": 1159,
+    "nativeOutputCRC32": "808D90D6",
+    "expectedLines": 8,
+    "uploadBatches": 11,
+    "exactCleanup": true,
+    "independentRelease": true,
+    "finalIdle": true,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "physical": "NOT_RUN_INCREMENTAL_ROUTE"
   }
 }

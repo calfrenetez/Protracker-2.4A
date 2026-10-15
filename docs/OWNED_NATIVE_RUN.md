@@ -259,3 +259,13 @@ resetting its 140-second deadline; this is not measured hardware throughput.
 The prepared runner retains native90/guest140/whole250 limits, using 20-second
 begin/chunk calls and a 60-second final verification call. These host results do
 not yet qualify the incremental integration in Amiberry or on the real A1200.
+
+
+The incremental integration subsequently passed one exact 68030 Amiberry run:
+166,396-byte sampler18 candidate, Stack262144, RC0 and all eight native lines
+(1,159 bytes, CRC808D90D6). All eleven upload batches, full candidate verification,
+five-file custody and settlement, independent RAM absence, staging removal,
+disconnect, emulator shutdown and original launcher restoration passed under
+the unchanged limits. A separate observer, public release, owned service stop
+and final independent idle check also passed. This qualifies the changed
+transfer route in Amiberry only; the incremental physical run is still NOT RUN.

@@ -78,12 +78,12 @@ class Plan:
     @property
     def script(self):
         return ("FailAt 255\n" + capture.run_script(self.path("NativeTest"), self.path("native.log"),
-                                                 self.stack, self.prefix)
+                                                 self.stack, self.prefix, control=self.path("control.log"))
                 + "Echo COMPLETE >" + self.path("complete.flag") + "\n").encode("ascii")
 
     @property
     def command(self):
-        return "C:Execute " + self.path("Run-once") + " >" + self.path("control.log")
+        return "C:Execute " + self.path("Run-once")
 
     @property
     def expected_output(self):
@@ -95,11 +95,12 @@ class Plan:
         failure = f"If WARN\n Echo FAILED >{self.path('staged.flag')}\n Quit 20\nEndIf\n"
         return (f"FailAt 255\nC:Copy {self.copy_source} {self.path('NativeTest')} QUIET\n"
                 + failure + f"C:Protect {self.path('NativeTest')} +rwed\n" + failure
-                + f"Echo {self.prefix}STAGE-DONE\nEcho STAGED >{self.path('staged.flag')}\n").encode('ascii')
+                + f"Echo {self.prefix}STAGE-DONE >{self.path('stage.log')}\n"
+                + f"Echo STAGED >{self.path('staged.flag')}\n").encode('ascii')
 
     @property
     def staging_command(self):
-        return f"C:Execute {self.path('Stage-once')} >{self.path('stage.log')}"
+        return f"C:Execute {self.path('Stage-once')}"
 
     def prepared_files(self):
         files = {"NativeTest": self.binary, "Run-once": self.script, "complete.flag": b""}

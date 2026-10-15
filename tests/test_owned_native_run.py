@@ -1,6 +1,7 @@
 """Fault-injected host model for the prepared RAM-only native launch route."""
 import asyncio
 from pathlib import Path
+import re
 import sys
 import unittest
 import zlib
@@ -23,8 +24,39 @@ class Bridge:
         self.copy_launches = 0
         self.copy_complete = True
         self.copy_failed = False
+        self.lose_stage_output = False
         self.complete = True
         self.change_reply = lambda command, reply: reply
+
+    def successful_script_outputs(self, script):
+        """Model explicit file writes; Execute's inherited stdout is discarded.
+
+        Only the already-successful branch is modelled. This is not an Amiga
+        Shell interpreter or native proof; other failure injection stays below.
+        Read uploaded script bytes rather than manufacturing expected logs.
+        """
+        inside_if = False
+        for line in script.decode('ascii').splitlines():
+            line = line.strip()
+            if line.startswith('If '):
+                inside_if = True
+            elif line == 'EndIf':
+                inside_if = False
+            elif not inside_if:
+                match = re.fullmatch(r'(.*?) (>>?)(RAM:[A-Za-z0-9_./-]+)', line)
+                command = match[1] if match else line
+                if command.startswith('Echo '):
+                    output = (command[5:].replace('$RC', str(self.native_rc)) + '\n').encode()
+                elif command == 'Stack':
+                    output = f'Current stack size is {self.plan.stack} bytes\n'.encode()
+                elif command == self.plan.path('NativeTest'):
+                    output = self.plan.expected_output
+                else:
+                    continue
+                if match:
+                    path = match[3]
+                    previous = self.files.get(path, b'') if match[2] == '>>' else b''
+                    self.files[path] = previous + output
 
     async def exchange(self, command, kind, seconds):
         assert 0 < seconds <= 10
@@ -65,20 +97,19 @@ class Bridge:
                 assert command['command'] == self.plan.staging_command
                 self.copy_launches += 1
                 self.files[self.plan.path('NativeTest')] = self.files[self.plan.copy_source]
-                self.files[self.plan.path('stage.log')] = (self.plan.prefix + 'STAGE-DONE\n').encode()
+                self.successful_script_outputs(self.files[self.plan.path('Stage-once')])
+                if self.lose_stage_output:
+                    self.files[self.plan.path('stage.log')] = b''
                 if self.copy_complete:
                     self.files[self.plan.path('staged.flag')] = b'FAILED\n' if self.copy_failed else b'STAGED\n'
+                else:
+                    self.files[self.plan.path('staged.flag')] = b''
                 return self.change_reply(command, f"CMD|{command['id']}|OK|Started: {command['command']}")
             assert command == {"type": "LAUNCH", "id": self.plan.command_id, "command": self.plan.command}
             self.launches += 1
-            prefix = self.plan.prefix
-            lines = [prefix + "BEFORE", prefix + "STACK-QUERY-BEGIN", f"Current stack size is {self.plan.stack} bytes",
-                     prefix + "STACK-QUERY-END", prefix + "NATIVE-BEGIN", prefix + f"NATIVE-RC {self.native_rc}",
-                     prefix + "NATIVE-END"]
-            self.files[self.plan.path("control.log")] = ("\n".join(lines) + "\n").encode()
-            self.files[self.plan.path("native.log")] = self.plan.expected_output
-            if self.complete:
-                self.files[self.plan.path("complete.flag")] = b"COMPLETE\n"
+            self.successful_script_outputs(self.files[self.plan.path('Run-once')])
+            if not self.complete:
+                self.files[self.plan.path('complete.flag')] = b''
             reply = f"CMD|{self.plan.command_id}|OK|Started (proc 1): {self.plan.command}"
         elif typ == "DELETEFILE":
             if path in self.files:
@@ -184,6 +215,37 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.bridge.copy_launches, 1)
         self.assertEqual(self.bridge.launches, 0)
         self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
+    async def test_copy_completion_with_empty_log_retains_before_native_launch(self):
+        transaction = self.new(copy=True)
+        self.bridge.lose_stage_output = True
+        with self.assertRaises(ValueError):
+            await transaction.prepare()
+        self.assertEqual(transaction.phase, 'FAILED')
+        self.assertEqual(self.bridge.files[self.plan.path('staged.flag')], b'STAGED\n')
+        self.assertEqual(self.bridge.copy_launches, 1)
+        self.assertEqual(self.bridge.launches, 0)
+        self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
+    async def test_copy_and_native_logs_survive_discarded_inherited_stdout(self):
+        transaction = self.new(copy=True)
+        self.assertNotIn(' >', self.plan.command)
+        self.assertNotIn(' >', self.plan.staging_command)
+        await self.complete(transaction)
+        self.assertEqual(self.bridge.files[self.plan.path('stage.log')],
+                         (self.plan.prefix + 'STAGE-DONE\n').encode())
+        self.assertIn((self.plan.prefix + 'NATIVE-RC 0\n').encode(),
+                      self.bridge.files[self.plan.path('control.log')])
+        self.assertEqual(self.bridge.files[self.plan.path('native.log')], self.plan.expected_output)
+
+    async def test_model_reproduces_inherited_only_staging_output_loss(self):
+        self.new(copy=True)
+        old_script = self.plan.staging_script.replace(
+            (' >' + self.plan.path('stage.log')).encode(), b'')
+        self.bridge.files[self.plan.path('stage.log')] = b''
+        self.bridge.successful_script_outputs(old_script)
+        self.assertEqual(self.bridge.files[self.plan.path('stage.log')], b'')
+        self.assertEqual(self.bridge.files[self.plan.path('staged.flag')], b'STAGED\n')
 
     async def test_changed_copy_source_blocks_any_launch(self):
         transaction = self.new(copy=True)

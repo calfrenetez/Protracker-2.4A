@@ -1,7 +1,8 @@
 # Prepared RAM-only native test route
 
-Status: **HOST-qualified components; the first private Amiberry integration
-stopped during preparation before native launch. Physical execution NOT RUN.**
+Status: **HOST-qualified components; two private Amiberry integrations stopped
+during preparation before native launch. Changed capture NOT RUN in Amiberry;
+physical execution NOT RUN.**
 These helpers do not activate or unblock the older physical runner by themselves.
 Product architecture, timing policy and editor layout are unchanged.
 
@@ -20,6 +21,8 @@ unsuitable for proving exact temporary-file ownership on the real machine.
    component stays below 30 characters.
 3. Launch `C:Execute` on the uploaded script once through the guarded `LAUNCH`
    leaf. Native stdout and Shell controls have separate run-owned captures.
+   Each control-producing command redirects directly to its capture; Execute's
+   inherited stdout is not used. Completion flags follow those command writes.
    The selected Stack and native deadline remain explicit; the helper refuses
    native deadlines above 90 seconds. A launch acknowledgement is not completion.
 4. Require the terminal completion flag, exact native lines, RC0, Stack query,
@@ -54,7 +57,7 @@ transport or a substitute for shared reservations and live target checks.
 
 ## Evidence and limits
 
-65 host tests pass across raw protocol parsing, transaction fault injection,
+70 host tests pass across raw protocol parsing, transaction fault injection,
 guarded exchange observation and the existing native capture contract. The
 transaction tests fail every exchange in turn and verify no subsequent request,
 retry or automatic cleanup; unrelated model files remain unchanged. These are
@@ -101,9 +104,27 @@ cover every failed exchange, wrong source, failed copy, uncompleted copy and
 unchanged source after settlement. Malformed-path tests also found a redundant
 nested repetition in the original path expression that could stall rejection.
 The equivalent segment-based expression now completes a separately timed
-malformed-input regression. Copy mode is **Amiberry NOT RUN; physical unsupported**
-until a separately admitted run qualifies it. This mode does not assume the real
-A1200 has the emulator's shared mount.
+malformed-input regression. This mode does not assume the real A1200 has the
+emulator's shared mount and remains physical unsupported.
+
+The first copy-mode Amiberry attempt acknowledged the staging script and returned
+the exact STAGED flag, but declared the expected progress log empty in both file
+metadata observations and its read/EOF replies. It stopped before the post-copy
+candidate checksums or native launch. Copy integrity and native execution are
+therefore unqualified. Its ledger contains 22 dispatches and 22 replies; the only
+LAUNCH was the staging script. A new HOLD retains the two owned processes and
+three obligations pending separately approved recovery. The earlier transfer
+recovery approval does not cover this new run.
+
+The changed scripts now redirect each Echo and Stack query directly to its own
+control file, closing each command's file before the terminal flag. The host
+bridge model reads the uploaded scripts and discards inherited stdout, rather
+than manufacturing expected logs. It reproduces the former empty-log/valid-flag
+combination, passes the direct captures and rejects an injected empty stage log
+before native launch. This model is not a Shell interpreter and does not establish
+why the live log was empty. **Changed copy/capture code remains Amiberry NOT RUN.**
+Frozen sources in the held service remain unchanged; no retry or recovery is
+included in this host change.
 
 Directory replies are not atomic snapshots. The historical daemon does not check
 `IoErr()` after `ExNext()`, so even a syntactically complete response cannot prove

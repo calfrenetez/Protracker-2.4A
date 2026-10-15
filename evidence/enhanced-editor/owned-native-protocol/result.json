@@ -98,5 +98,68 @@
     "originalOneSecondChildTimeout": true,
     "currentSeparateThreeSecondBound": "PASS",
     "targetOperations": 0
+  },
+  "copyModeAmiberryIntegration": {
+    "status": "STAGING_OUTPUT_ABSENT_NATIVE_NOT_RUN",
+    "dispatchCount": 22,
+    "replyCount": 22,
+    "stagingLaunches": 1,
+    "nativeLaunches": 0,
+    "stagedFlag": "STAGED",
+    "stageLogBytesBeforeRead": 0,
+    "stageLogReadBytes": 0,
+    "stageLogEOFConfirmed": true,
+    "stageLogBytesAfterRead": 0,
+    "postCopyChecksumsReached": false,
+    "copyIntegrityQualified": false,
+    "nativeAcceptance": false,
+    "failureCauseEstablished": false,
+    "guardState": "HOLD_WITH_THREE_HOLDS_NO_INFLIGHT",
+    "recovery": "SEPARATE_APPROVAL_PENDING",
+    "heldServiceSourceChanged": false,
+    "retry": false,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250
+  },
+  "currentDirectCaptureHost": {
+    "status": "PASS",
+    "testCount": 70,
+    "sourceSHA256": {
+      "tools/native_file_protocol.py": "aa2dbfcdd1f5ee1974c19a4975bf23ba0f472b04ec1a0ba04ad89ef59308c0e8",
+      "tests/test_native_file_protocol.py": "4bcc8553f26202af7ba12f807284c97fde0fe64c3d124a6907f7eb663f0b64a3",
+      "tools/owned_native_run.py": "3133dd219967fba522064e443dfae96cc22ebdf9da4a1b6aaf7a19268c967c8e",
+      "tests/test_owned_native_run.py": "4fc7c50af8fa32559a9b51dcd39d0b07b7de550eb98bcd58b761b1a6f8d447a7",
+      "tools/native_guarded_exchange.py": "24488097cf69d278b27866e2c816b50ee26e040cf1e962eeafd18d1bcfa970d9",
+      "tests/test_native_guarded_exchange.py": "08f4c8e35e9337169b7dfb209a05172f47bd5098d756fca3075b9bb1953924b6",
+      "tools/native_fixture_capture.py": "07415bc28eec395d578159dda392bd7bafaed4bf6187085f0dbae08bf98ef8b5",
+      "tests/test_native_fixture_capture.py": "6ded29901fbc2fdc25324039fb0a227f0374f5a9a8adf8336c836ab7e9cd42d4"
+    },
+    "scope": "Host models only; direct per-command capture and discarded inherited stdout model, not a Shell interpreter or native qualification",
+    "targetOperations": 0,
+    "amiberry": "CHANGED_CAPTURE_NOT_RUN",
+    "physical": "NOT_RUN",
+    "groups": [
+      {
+        "group": "native_file_protocol",
+        "exitCode": 0,
+        "tests": 28
+      },
+      {
+        "group": "owned_native_run",
+        "exitCode": 0,
+        "tests": 24
+      },
+      {
+        "group": "native_guarded_exchange",
+        "exitCode": 0,
+        "tests": 10
+      },
+      {
+        "group": "native_fixture_capture",
+        "exitCode": 0,
+        "tests": 8
+      }
+    ]
   }
 }

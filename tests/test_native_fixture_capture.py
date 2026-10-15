@@ -40,6 +40,26 @@ class Capture(unittest.TestCase):
             with self.subTest(remote=remote, output=output, size=size, prefix=prefix), self.assertRaises(ValueError):
                 c.run_script(remote, output, size, prefix)
 
+    def test_explicit_control_closes_each_record_before_next_command(self):
+        script = c.run_script("RAM:run/test", "RAM:run/native.out", 262144,
+                              self.prefix, control="RAM:run/control.log")
+        self.assertTrue(script.startswith("If EXISTS RAM:run/control.log\n Quit 20\nEndIf\n"))
+        self.assertIn("Echo RUN-BEFORE >RAM:run/control.log\n", script)
+        self.assertIn("Stack >>RAM:run/control.log\nIf WARN\n", script)
+        self.assertIn("RAM:run/test >RAM:run/native.out\n"
+                      "Echo RUN-NATIVE-RC $RC >>RAM:run/control.log\n", script)
+        for line in script.splitlines():
+            if line.strip().startswith("Echo "):
+                self.assertTrue(line.endswith("RAM:run/control.log"), line)
+        self.assertTrue(script.endswith("Echo RUN-NATIVE-END >>RAM:run/control.log\n"))
+
+    def test_explicit_control_rejects_aliases_and_foreign_paths(self):
+        for control in ("RAM:run/TEST", "RAM:run/NATIVE.OUT", "RAM:other/control",
+                        "RAM:run/../control", "RAM:run/control\nDelete SYS:", True):
+            with self.subTest(control=control), self.assertRaises(ValueError):
+                c.run_script("RAM:run/test", "RAM:run/native.out", 262144,
+                             self.prefix, control=control)
+
     def test_shell_markers_stack_and_rc_remain_strict(self):
         self.assertEqual(c.parse_control(self.control, 262144, self.prefix)["returnCode"], 0)
         for bad in [self.control.replace("NATIVE-RC 0", "NATIVE-RC 5"),

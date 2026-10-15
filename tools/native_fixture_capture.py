@@ -15,7 +15,7 @@ def require(ok, message):
         raise ValueError(message)
 
 
-def run_script(remote, output, stack, prefix):
+def run_script(remote, output, stack, prefix, *, control=None):
     """Build one same-Shell invocation, refusing an existing output file."""
     path = r"RAM:[A-Za-z0-9_-]+/[A-Za-z0-9_.-]+"
     require(isinstance(remote, str) and re.fullmatch(path, remote), "Invalid executable path")
@@ -24,11 +24,30 @@ def run_script(remote, output, stack, prefix):
             and remote.lower() != output.lower(), "Capture must be distinct in the owned RAM directory")
     require(type(stack) is int and 0 < stack <= 0x7fffffff, "Invalid Stack size")
     require(isinstance(prefix, str) and re.fullmatch(r"[A-Za-z0-9_-]+-", prefix), "Invalid marker prefix")
-    return (f"If EXISTS {output}\n Echo {prefix}CAPTURE-EXISTS\n Quit 20\nEndIf\n"
+    script = (f"If EXISTS {output}\n Echo {prefix}CAPTURE-EXISTS\n Quit 20\nEndIf\n"
             f"Echo {prefix}BEFORE\nStack {stack}\nIf WARN\n Echo {prefix}STACK-SET-WARN\n Quit 20\nEndIf\n"
             f"Echo {prefix}STACK-QUERY-BEGIN\nStack\nIf WARN\n Echo {prefix}STACK-QUERY-WARN\n Quit 20\nEndIf\n"
             f"Echo {prefix}STACK-QUERY-END\nEcho {prefix}NATIVE-BEGIN\n{remote} >{output}\n"
             f"Echo {prefix}NATIVE-RC $RC\nEcho {prefix}NATIVE-END\n")
+    if control is None:
+        return script
+    require(isinstance(control, str) and re.fullmatch(path, control)
+            and control.rsplit('/', 1)[0] == remote.rsplit('/', 1)[0]
+            and control.lower() not in (remote.lower(), output.lower()),
+            "Distinct control capture in the owned RAM directory required")
+    # Execute's inherited output may differ from the invoking command's handle.
+    # Redirect each control-producing command itself. Each short-lived command
+    # closes its file before the script can publish the terminal flag.
+    lines = []
+    for text in script.splitlines():
+        bare = text.strip()
+        if bare.startswith('Echo '):
+            first = bare in (f'Echo {prefix}BEFORE', f'Echo {prefix}CAPTURE-EXISTS')
+            text += (' >' if first else ' >>') + control
+        elif bare == 'Stack':
+            text += ' >>' + control
+        lines.append(text)
+    return f"If EXISTS {control}\n Quit 20\nEndIf\n" + '\n'.join(lines) + '\n'
 
 
 def parse_control(raw, stack, prefix):

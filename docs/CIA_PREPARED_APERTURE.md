@@ -5,7 +5,7 @@ an immutable descriptor in the task and polls the fixed OS `ReadEClock` entry
 directly in assembly. It writes one private RAM shadow word. It does not connect
 a sample reader, queue, Paula, AmiGUS, audio.device or the editor's PLAY action.
 The existing arbitrary-callback aperture model and its failed native evidence
-remain unchanged. The native candidate described below is **NOT RUN**.
+remain unchanged. The first Amiberry observation **FAILED**. Physical testing remains unqualified.
 
 The caller's original epoch, 48 kHz frame grid, first/last window, early offset128,
 read cap64 and observed residency cap256 are retained. Preparation refuses if
@@ -91,8 +91,40 @@ The default builder regression reproduces the previous47,576-byte HUNK exactly.
 Initial HOST input-overflow and frozen-inventory mistakes, plus the first native
 compiler's indentation-warning refusal, remain separate local evidence.
 
-Next is a new guarded exact-candidate Amiberry observation, with fresh ownership,
+The HOST/build milestone required a new guarded exact-candidate Amiberry observation, with fresh ownership,
 unchanged finite lifetimes and independent cleanup/release. No native, physical,
 real-reader, scheduled output, first DMA fetch, voice-stop, device memory,
 ordering, audio or listening acceptance follows from these HOST/build results.
 See [compact evidence](../evidence/enhanced-editor/cia-prepared-aperture-host/result.json).
+
+
+## First prepared-clock Amiberry observation — FAILED
+
+The exact49,636-byte candidate ran once in the owned68030/no-FPU emulator with
+CPU cycle_exact observed. The report completed all16 attempts and all replay
+comparisons, but returned RC20: zero of12 exact timing gates and four of four
+negative gates passed. There were two irreversible shadow writes. Both had late
+postcommit samples and remain failures, with `commits=1` preserved.
+
+At709379 ticks/second, normal first samples preceded the original window by
+70..73 ticks. Adjacent actual readings were21..24 ticks apart, compared with
+51..53 in the earlier generic experiment. The original windows remain14/15 ticks.
+Ten normal attempts skipped the window without a write; two reached a precommit
+sample inside it but the following actual reading was late. This is combined
+code/clock-call cost, not an isolated library or interrupt-latency measurement.
+
+Native output7656 bytes/CRC514F181E, exact custody, both guest namespace/task
+absence and reported timer/vector/task/signal closure were retained. Separate
+Root observation verified emulator exit and original file restoration; public
+release, exact disconnected service stop and another fresh final idle check
+passed. Ownership is released with no HOLD. Cleanup did not promote timing.
+See [separate FAILED observation](../evidence/enhanced-editor/cia-prepared-aperture-native/result.json).
+
+Next is a distinct shorter in-window comparison path, retaining full high-word,
+rate, monotonicity, original-window and zero-before/irreversible-after semantics.
+The last accepted pre-window sample is below `first`, so a full-width sample
+inside `[first,last)` already exceeds it; this may permit some general polling
+work to occur outside the narrow store bracket. Low-word rollover still needs
+an explicit general path. This has not been implemented or qualified. No
+unchanged native retry, epoch shift, phase tuning, wider window, clock/priority
+change or native-provider enablement is authorized by the failed observation.

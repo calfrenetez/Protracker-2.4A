@@ -1,0 +1,365 @@
+{
+  "qualification": "FAILED",
+  "nativeReturnCode": 20,
+  "candidate": {
+    "bytes": 49636,
+    "sha256": "9cbc7aa9994d7156c2d25056669c46d7bccec12e867f6f15845a06e5c15a5744",
+    "crc32": "A7926D22"
+  },
+  "sourceCommit": "c23c6b3990c015e346ac041b72b27ce8e66d16ea",
+  "attempts": 1,
+  "nativeRetries": 0,
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "observedCPUCycleExact": true,
+    "observedChipKB": 2048,
+    "observedZ3KB": 131072,
+    "physicalTimingEquivalence": false
+  },
+  "timing": {
+    "positive": 0,
+    "requiredPositive": 12,
+    "negative": 4,
+    "requiredNegative": 4,
+    "irreversibleShadowWrites": 2,
+    "frequency": 709379,
+    "originalWindowTicks": [
+      14,
+      15
+    ],
+    "normalFirstSampleTicksBeforeFirst": [
+      70,
+      73
+    ],
+    "normalAdjacentSampleGapTicks": [
+      21,
+      24
+    ],
+    "previousGenericAdjacentGapTicks": [
+      51,
+      53
+    ],
+    "gapIsCombinedCodeAndClockCostNotIsolatedLibraryOrIRQCost": true
+  },
+  "observations": [
+    {
+      "index": 0,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -25,
+        -2,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 1,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -47,
+        -25,
+        -1,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 2,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -70,
+        -47,
+        -26,
+        -3,
+        19
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 3,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -25,
+        -2,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 4,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -49,
+        -26,
+        -3,
+        20
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 5,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -25,
+        -2,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 6,
+      "mode": 0,
+      "result": 9,
+      "reads": 6,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -73,
+        -50,
+        -29,
+        -7,
+        14,
+        35
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 6
+    },
+    {
+      "index": 7,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -25,
+        -2,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 8,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -47,
+        -24,
+        0,
+        23
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 9,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -47,
+        -24,
+        -1,
+        22
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 10,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -47,
+        -25,
+        -3,
+        19
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 11,
+      "mode": 0,
+      "result": 5,
+      "reads": 5,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -25,
+        -2,
+        21
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 5,
+      "afterIndex": 0
+    },
+    {
+      "index": 12,
+      "mode": 1,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 0,
+      "afterIndex": 0
+    },
+    {
+      "index": 13,
+      "mode": 2,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 0,
+      "afterIndex": 0
+    },
+    {
+      "index": 14,
+      "mode": 3,
+      "result": 5,
+      "reads": 1,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        199
+      ],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 1,
+      "afterIndex": 0
+    },
+    {
+      "index": 15,
+      "mode": 4,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [],
+      "allReturnedRatesExpected": true,
+      "beforeIndex": 0,
+      "afterIndex": 0
+    }
+  ],
+  "output": {
+    "bytes": 7656,
+    "crc32": "514F181E"
+  },
+  "reportedNativeClosure": {
+    "acquired": 1,
+    "attempted": 16,
+    "bit": 0,
+    "chip": 0,
+    "completed": 16,
+    "early_ticks": 128,
+    "failures": 12,
+    "frequency": 709379,
+    "negative": 4,
+    "positive": 0,
+    "priority": 0,
+    "reads_cap": 64,
+    "residency_ticks": 256,
+    "signals_restored": 1,
+    "task_identity": 1,
+    "timer_stopped": 1,
+    "unchanged": 1,
+    "vector_removed": 1
+  },
+  "cleanup": {
+    "independentlyVerified": true,
+    "guestTaskAndBothNamespacesObservedAbsent": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "exactStagingAbsent": true,
+    "originalLauncherFilesAndConfigurationRestored": true,
+    "publiclyReleased": true,
+    "releasedFence": 1667,
+    "releaseArchives": 81,
+    "holds": 0,
+    "independentEvidenceSHA256": {
+      "independent-collection-observation.json": "62e8a47d4f7aa582b88b13f25eeb2d4d5be369dc6c59d851c131c6dab67ceb79",
+      "release-result.json": "9cf9f3a1df74ce5b48f2406275b1d04a6bece8a28c71e108bca862808bfe0da8",
+      "service-stop-result.json": "edab7eb5f1c4d0636956c81ea583d0ad040532e3d01e2ff1f24cdba2233b71ef",
+      "independent-final-idle.json": "b43f8c59d6cd6506e346bab6808106dd7a315d58e1dd4e9c3d46dc6be04d9de9"
+    }
+  },
+  "physical": "NOT_RUN_NOT_PROMOTABLE_FROM_FAILED_TIMING",
+  "limits": {
+    "uploadSeconds": 120,
+    "nativeSeconds": 90,
+    "executionSeconds": 140,
+    "wholeSeconds": 250,
+    "taskStackBytes": 262144,
+    "aggregateStackOrIRQWCETQualified": false
+  },
+  "scope": "One complete timer/RAM diagnostic observation. RC20 remains failed despite collection/cleanup; no real sample-reader ownership, scheduling/output capability, device RAM, DMA, voice stop, hardware timing, audio or listening acceptance."
+}

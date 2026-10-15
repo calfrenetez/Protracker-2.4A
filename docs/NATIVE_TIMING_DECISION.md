@@ -158,3 +158,6 @@ integration remains unfinished. See [the diagnostic details](CIA_APERTURE_DIAGNO
 
 
 The separate prepared direct-clock experiment now has HOST/reference and pinned 68k compile evidence, with original epoch/windows and a full recorded-read replay contract. Candidate9cbc7aa9 remains NOT_RUN. This experiment does not grant a scheduled-output capability, remove native TASK/provider inhibition or qualify mutable reader ownership. Its serialized stale-key/cancel gates are task admission tests. A fresh exact-candidate Amiberry observation is next; previous generic timing failure is unchanged. See [prepared experiment](CIA_PREPARED_APERTURE.md).
+
+
+Prepared-clock native observation9cbc7aa9 also FAILED once:0/12 original positive gates,4/4 negatives, two irreversible writes followed by late samples. Adjacent actual readings21..24ticks remain wider than14/15-tick windows. All raw values and original RC20 are preserved; separate custody/restoration/ownership release/final idle passed. Next investigate a distinct in-window comparison path that retains the full high word and rate before the write, with monotonicity implied only where a prior pre-window sample and an actual in-window sample prove it. General carry/early/regression paths stay explicit. This is future work, not a timing capability, unchanged retry or relaxed exact-scheduling decision.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "scope": "Separate New publication and Load publication with deliberately rejected playback ownership, using injected voices and ordinary RAM allocations. No frontend or device activation.",
+  "scope": "Separate native New, Load and committed-without-owner lifecycle cases with injected voices and ordinary RAM; no frontend or device activation.",
   "target": {
     "emulator": "Amiberry",
     "cpu": "68030",
@@ -67,7 +67,6 @@
     "recovery": "Separate scoped teardown and saved launcher restoration; independent absence and public release verified. Original native result remains unconfirmed."
   },
   "unqualified": [
-    "successful native Load publication with a new playback owner",
     "original combined prerequisite/action suite",
     "thirteen-case native component",
     "other native lifecycle cases",
@@ -153,7 +152,7 @@
     "independent_final_sha256": "da6894747cf3e7f40d9033f4a1447cf22f71735943b6a7db63a6d91ec1dd2af5"
   },
   "phase_marked_load": {
-    "state": "NATIVE_NOT_RUN",
+    "state": "SCOPED_NATIVE_PASS",
     "case": "publish-load",
     "trace_enabled": true,
     "production_changed": false,
@@ -165,6 +164,30 @@
     "candidate_bytes": 424732,
     "candidate_crc32": "1A7D25E7",
     "link_inputs_verified": 91,
-    "scope": "Separate fixture with eight flushed publication and cleanup boundaries; original semantic assertions, product source, work budget and time limits unchanged. No runtime result or performance inference."
+    "scope": "Positive Load publication at the final document address, checked playback-owner construction and normal cleanup. Eight fixture progress observations plus BEGIN/PASS; product assertions/work budget/time limits unchanged. Injected ordinary-RAM lifecycle only; no frontend, physical, device timing or listening acceptance.",
+    "target_execution": true,
+    "native": {
+      "nativeMarkers": [
+        "DOCUMENT ACTION CASE BEGIN:publish-load",
+        "DOCUMENT ACTION TRACE:fixture-ready",
+        "DOCUMENT ACTION TRACE:prepared",
+        "DOCUMENT ACTION TRACE:published",
+        "DOCUMENT ACTION TRACE:committed",
+        "DOCUMENT ACTION TRACE:stopped-and-disposed",
+        "DOCUMENT ACTION TRACE:paula-closed",
+        "DOCUMENT ACTION TRACE:amigus-closed",
+        "DOCUMENT ACTION TRACE:finished",
+        "DOCUMENT ACTION CASE PASS:publish-load"
+      ],
+      "observedStackBytes": 524288,
+      "outputBytes": 355,
+      "outputCRC32": "059CB441",
+      "rawStackQuery": "Current stack size is 524288 bytes",
+      "returnCode": 0
+    },
+    "exact_cleanup_and_independent_idle": true,
+    "ownership_released": true,
+    "result_sha256": "c482e6a720c743a360aff6912c24bb7fe055dcbacea20c5f8a1b405b39f9c5d4",
+    "independent_final_sha256": "4f01050179758e8e1af2d7915e53f728d4325f5307ad350dcb8db76e34315cf4"
   }
 }

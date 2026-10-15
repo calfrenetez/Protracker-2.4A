@@ -124,8 +124,8 @@ On 15 October, the exact fixed `cancel-load` candidate passed on Amiberry 68030
 with both expected markers, RC0 and a queried 524288-byte Stack. Exact staging
 cleanup, launcher restoration, process/transport absence and ownership release
 were independently verified. Preparation/cancellation is qualified for that
-fixture. Successful Load publication with a new playback owner still lacks
-confirmed completion. Physical hardware and full frontend acceptance remain open.
+fixture. Successful Load publication with a new playback owner was qualified separately
+in the later phase-marked fixture below. Physical hardware and full frontend acceptance remain open.
 
 Metadata equality now checks even-addressed snapshots in four-byte chunks,
 with exact byte comparisons for odd addresses and the tail. Every byte and
@@ -156,5 +156,16 @@ the deliberate invalid output format during playback-owner creation. The
 expected `COMMITTED_NO_OWNER` result retained the published document and normal
 cleanup completed. Separate observations verified restoration, endpoint and
 process absence, and ownership release. This qualifies that one failure-handling
-path; successful Load ownership, frontend activation, physical hardware and
-audio remain unqualified.
+path; it does not qualify successful Load ownership. Frontend activation,
+physical hardware and audio remain unqualified.
+
+
+The separate phase-marked `publish-load` candidate subsequently passed once on
+Amiberry 68030 with all ten exact lines, RC0 and the queried 524288-byte Stack.
+It completed detached preparation, publication at the final document address,
+incremental master establishment, checked playback-owner construction, stop,
+voice closure and cleanup. Independent checks verified original launcher
+restoration, owned process/endpoint absence and explicit reservation release.
+The unchanged native 90-second limit was satisfied; this is not a timing or
+performance measurement and does not retroactively resolve earlier failures.
+Full-suite, frontend, physical-device and listening acceptance remain separate.

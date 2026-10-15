@@ -1,5 +1,5 @@
 {
-  "status": "HOST_AND_NATIVE_BUILD_PASS_TARGET_NOT_RUN",
+  "status": "HOST_NATIVE_BUILD_PASS_EMULATOR_TIMEOUT_OWNERSHIP_RETAINED",
   "scope": "Focused actual typed Load publication; injected voices, no UI or hardware output",
   "host": {
     "newAndLoadSanitizers": "PASS",
@@ -27,8 +27,30 @@
     "completeConfiguredSDKBuild": "PASS 384328-byte candidate, never executed",
     "sectionFeasibilityProbe": "PASS compiler/link only, never executed"
   },
-  "amiberry": "NOT_RUN",
+  "amiberry": {
+    "status": "TIMEOUT_COMPLETION_AND_CLEANUP_UNCONFIRMED_HOLD",
+    "runID": "6f43fdddfdf1db6fae78b589512e4276",
+    "confirmedOuterCalls": 17,
+    "uploadBatchesConfirmed": 14,
+    "lastDispatch": "pt24g_native_execute",
+    "nativeCompletion": "UNCONFIRMED",
+    "timeoutsUnchanged": {
+      "nativeSeconds": 90,
+      "guestPhaseSeconds": 140,
+      "wholeSeconds": 250
+    },
+    "recovery": "Prepared exact run-owned recovery; human decision pending; no automatic retry or release",
+    "savedResultSHA256": "79c7eaa04d5e22d2cd11069cbfc24bc3de50ed0f54a926c3787a57638c4709d6"
+  },
   "physical": "NOT_RUN",
   "fullFrontend": "NOT_TESTED",
-  "audioAndTiming": "NOT_TESTED"
+  "audioAndTiming": "NOT_TESTED",
+  "nativeNew": {
+    "status": "COMPILE_LINK_PASS_NEVER_EXECUTED",
+    "binaryBytes": 213052,
+    "binarySHA256": "d9d0769f27d742ad7af60d346bf443b24b7944381d3689ab701ffd12d8724405",
+    "binaryCRC32": "835F9053",
+    "verifiedProductionObjectsReused": 83,
+    "loadInputs": 91
+  }
 }

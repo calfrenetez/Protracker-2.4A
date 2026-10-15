@@ -368,3 +368,16 @@ The earlier missing-header failure and larger successful build are separate
 records. This candidate is target NOT RUN until exact Amiberry qualification,
 followed by a separately admitted A1200 test. It supplies no full frontend,
 actual output, IRQ, exact scheduling or listening acceptance.
+
+
+The exact 221,108-byte Load candidate was subsequently attempted once in
+Amiberry. Fourteen upload batches and final preparation verification completed,
+but the unchanged total guest-phase deadline expired during the execute request.
+Native completion, output capture and cleanup were not confirmed. Ownership,
+two cancellation HOLD records and the in-flight obligation remain retained.
+A concrete run-owned recovery is prepared and awaits human approval; no retry
+or deadline change occurred. Physical qualification remains NOT RUN.
+
+The separately linked New variant is 213,052 bytes and remains never executed.
+It reuses the exact verified 83 production objects with a separately compiled
+fixture selector; it inherits no runtime acceptance from the Load attempt.

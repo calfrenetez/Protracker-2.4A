@@ -1,5 +1,5 @@
 {
-  "status": "HOST_PASS_NATIVE_COMPILE_LINK_PASS_TARGET_NOT_RUN",
+  "status": "HOST_NATIVE_BUILD_AMIBERRY_PHYSICAL_FIXTURE_PASS",
   "scope": "Existing selective Paula cache fixture with genuine native Exec allocator wrapper; stable output opt-in only",
   "productionSourcesChanged": false,
   "hostChecks": {
@@ -17,18 +17,50 @@
     "binaryBytes": 150436,
     "binarySHA256": "b12aee9adfa2218bae4b7c5bd3dc3e91aa1d0ff9af3d139f03b43e08fb61f121",
     "binaryCRC32": "85169D7D",
-    "nativeExecution": false
+    "nativeExecution": true
   },
   "priorAttempts": {
     "originalSDKRead": "PREPROCESSOR_TIMEOUT_RETAINED_BEFORE_PRODUCT",
     "residentConfiguredHeaderCopy": "18 exact configured NDK headers; no reconstructed or alternate SDK",
-    "variableOutputCandidate": "COMPILE_LINK_PASS_NEVER_EXECUTED"
+    "variableOutputCandidate": "COMPILE_LINK_PASS_NEVER_EXECUTED",
+    "physicalPreparation": "Two local pre-reservation refusals preserved; no target dispatch or same-spec replay"
   },
-  "amiberry": "NOT_RUN",
-  "physical": "NOT_RUN",
+  "amiberry": {
+    "status": "PASS_RELEASED_INDEPENDENT_IDLE_VERIFIED",
+    "nativeRC": 0,
+    "stackBytes": 262144,
+    "exactOutputLines": 4,
+    "outputBytes": 503,
+    "outputCRC32": "BC3BDEA1",
+    "evidenceSHA256": {
+      "independent-pass-observation.json": "105cd69dbdc5c10e3507377602642a94ca258e4defa6f87d5741de23b1229e16",
+      "release-result.json": "8c5b8b31925294c84f81952b55a05cb008988d6707856168fe4a60ba50e57989",
+      "service-stop-result.json": "4d23761dd5112ebcdc2f3fcdd58aa5013b53782e521c56f18ddcf1b54710ba9c",
+      "independent-final-idle.json": "73776640e0fcac2238657d1fdba6c79bafd463b35e7409b5fb24826a154811d6"
+    }
+  },
+  "physical": {
+    "status": "PASS_RELEASED_INDEPENDENT_IDLE_VERIFIED",
+    "nativeRC": 0,
+    "stackBytes": 262144,
+    "exactOutputLines": 4,
+    "outputBytes": 503,
+    "outputCRC32": "BC3BDEA1",
+    "evidenceSHA256": {
+      "independent-pass-observation.json": "01c360bdf145b0864d6f4c81aa0a575e355844388526415a701a0796e5d2ea79",
+      "release-result.json": "3ab970736e06b4af2f28e088a2b802a33ee39e0f1577e0d7a796a0e9076ae3b6",
+      "service-stop-result.json": "f6380ba43b804aa8d79a76847eb118e7e5cd7880fa7e89e929a01675e093c158",
+      "independent-final-idle.json": "390451cb9ce6855123cc1d0d4f5e8f15fc258bb7127e5efa94bd611144cf7015"
+    }
+  },
   "audio": "NOT_RUN",
   "sourceSHA256": {
     "tests/native_exec_memory.h": "2d400f8b2730450906ed34b6d9b76fc3e5c55cd0eafa53abbb9a73b6c7761c53",
     "tests/test_native_exec_memory_markers.py": "ffd8d6b792390772c37b38842cc14cc548c559e7658215a367d38d842218327f"
-  }
+  },
+  "acceptanceLimits": [
+    "Scoped Exec Fast/Chip cache fixture only; not full editor integration",
+    "No Paula DMA, audio, IRQ timing, exact live scheduling or listening acceptance",
+    "No AmiGUS sample-RAM capacity, upload ordering/completion or voice-stop qualification"
+  ]
 }

@@ -333,9 +333,20 @@ Host checks exercise both output modes through the actual cache wrapper with
 injected Exec memory calls under ASan/UBSan. Existing sampler/cache and separate
 allocator models also pass. These models do not establish physical placement.
 A fresh 21-unit native build and exact 28-input linker-map audit pass; the fixed
-150,436-byte candidate is target NOT RUN. The initial preprocessor timeout on
+150,436-byte candidate subsequently passed exact Amiberry and real-A1200 qualification. The initial preprocessor timeout on
 iCloud-backed configured SDK headers is preserved separately. The successful
 build uses an unchanged resident copy of 18 configured NDK headers, without
 reconstructed headers or another SDK. Amiberry must qualify the exact candidate
 before a separate physical memory-placement run. No DMA or audio output is
 part of this fixture.
+
+
+The exact cache candidate exited RC0 on Amiberry and then on the real A1200,
+with all four expected lines and unchanged 90/140/250-second limits. Separate
+observers verified cleanup, ownership release and idle resources after each run.
+The physical fixture checks genuine Fast and Chip allocation placement, bounded
+cache conversion, stale versions, pressure and retained leases. Safari remained
+authenticated View Only. Earlier local preparation refusals are retained separately.
+These results do not establish full-editor integration, DMA/audio, exact musical
+scheduling, AmiGUS sample-RAM behavior or listening acceptance. See the scoped
+exec-cache-native-preparation evidence for candidate and verification hashes.

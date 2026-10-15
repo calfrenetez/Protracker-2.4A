@@ -239,3 +239,23 @@ The physical sampler result is NOT RUN, with transfer INCOMPLETE.
 This failure does not invalidate the completed Amiberry evidence, but that
 evidence cannot qualify physical upload throughput. No audio, timing or AmiGUS
 operation occurred.
+
+
+## Bounded incremental direct upload
+
+Direct upload can now use a single live transaction split into calls of at most
+four acknowledged frames (16,272 payload bytes). The caller supplies the exact
+next byte offset. A stale offset, failed acknowledgement, cancellation, lost
+ownership or failed evidence write stops the transaction without replay or
+resume. The transaction deadline includes time between calls. The complete
+candidate checksum and script readback still precede execution; native output,
+custody, exact settlement and independent absence checks are unchanged.
+
+Host checks pass: 11 focused incremental tests, the existing 70 protocol tests,
+seven private service tests, and seven full-phase tests covering 34 scenarios.
+The complete host model covers all 23 outer call failures and incorrect progress
+replies. A synthetic slow transfer exercises a total above 60 seconds without
+resetting its 140-second deadline; this is not measured hardware throughput.
+The prepared runner retains native90/guest140/whole250 limits, using 20-second
+begin/chunk calls and a 60-second final verification call. These host results do
+not yet qualify the incremental integration in Amiberry or on the real A1200.

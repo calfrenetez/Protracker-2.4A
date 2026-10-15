@@ -329,5 +329,33 @@
       "postReleaseReportingPathErrorPreserved": true
     },
     "browserControlReleasedToViewOnly": true
+  },
+  "incrementalPreparationHost": {
+    "status": "PASS_HOST_MODELS_ONLY",
+    "focusedTests": 11,
+    "existingProtocolTests": 70,
+    "privateServiceTests": 7,
+    "fullPhaseTests": 7,
+    "fullPhaseScenarios": 34,
+    "outerCallFailures": 23,
+    "maximumFramesPerChunk": 4,
+    "maximumChunkPayloadBytes": 16272,
+    "exactNextOffsetRequired": true,
+    "failedRunResume": false,
+    "deadlineResetBetweenCalls": false,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "targetOperations": 0,
+    "sourceSHA256": {
+      "owned_native_run.py": "e0bad454346395e1897c2305ac0751cf79c4153c6e6cdeba85903f1b637013a8",
+      "test_native_incremental_prepare.py": "e615cb6ee181cabe696704a9466b92ccb2ec7b49f8f4b24fe9719ecbb47933d8",
+      "owned_native_service.py": "8437140c983a0fc3ae58e0132a7c8af819093a9253d00ed0ca25ac5f205136de",
+      "test_owned_native_service.py": "3c25548017040a4b4dc6ff68beda54f1ef08204a63ada61773751cf6ae1f69f4",
+      "ram_fixture_runner.py": "acfc6a15cd1561652ebafbd9e7fc5098e4e3e883a7ead0fa9fb722b672e60ac8",
+      "test_guest_phase.py": "c589c7dfaf16d2932be5668b5ac7151520721bf7928b9998e1178fc52d471ba3"
+    },
+    "amiberry": "NOT_RUN_INCREMENTAL_INTEGRATION",
+    "physical": "NOT_RUN_INCREMENTAL_INTEGRATION"
   }
 }

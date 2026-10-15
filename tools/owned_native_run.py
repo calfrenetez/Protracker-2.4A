@@ -219,23 +219,73 @@ class Transaction:
         await self.checksum("NativeTest", self.plan.binary)
         await self.checksum_path(self.plan.copy_source, self.plan.binary)
 
+    async def _prepare_namespace(self):
+        self.record({"event": "plan", "plan": self.plan.description()})
+        raw = await self.ask({"type": "MAKEDIR", "path": self.plan.directory}, "OK")
+        require(raw == "OK|MAKEDIR|" + self.plan.directory, "Fresh directory creation unconfirmed")
+        require(await self.observer().directory(self.plan.directory) == (), "New directory is not empty")
+
+    async def _prepare_controls(self):
+        for name, data in (("Run-once", self.plan.script), ("complete.flag", b"")):
+            await self.upload(name, data)
+        require(await self.observer().file(self.plan.path("Run-once")) == self.plan.script,
+                "Uploaded script bytes differ")
+        self.phase = "PREPARED"
+        return self.plan.description()
+
     async def prepare(self):
         async def perform():
-            self.record({"event": "plan", "plan": self.plan.description()})
-            raw = await self.ask({"type": "MAKEDIR", "path": self.plan.directory}, "OK")
-            require(raw == "OK|MAKEDIR|" + self.plan.directory, "Fresh directory creation unconfirmed")
-            require(await self.observer().directory(self.plan.directory) == (), "New directory is not empty")
+            await self._prepare_namespace()
             if self.plan.copy_source:
                 await self.copy_candidate()
             else:
                 await self.upload("NativeTest", self.plan.binary)
-            for name, data in (("Run-once", self.plan.script), ("complete.flag", b"")):
-                await self.upload(name, data)
-            require(await self.observer().file(self.plan.path("Run-once")) == self.plan.script,
-                    "Uploaded script bytes differ")
-            self.phase = "PREPARED"
-            return self.plan.description()
+            return await self._prepare_controls()
         return await self._operation("NEW", "PREPARING", perform)
+
+    async def begin_prepare(self):
+        """Begin a direct upload split across bounded, separately guarded calls.
+
+        This is a single live transaction, never a failed-run resume. The caller
+        must keep the same lease/connection and qualify its outer-call sequence.
+        The original whole-transaction deadline continues across every step.
+        """
+        async def perform():
+            require(self.plan.copy_source is None, "Incremental preparation requires direct upload")
+            await self._prepare_namespace()
+            self._upload_commands = iter(wire.write_commands(self.plan.path("NativeTest"), self.plan.binary))
+            self._upload_offset = 0
+            self.phase = "UPLOADING"
+            return {"phase": self.phase, "nextOffset": 0, "candidateBytes": len(self.plan.binary)}
+        return await self._operation("NEW", "PREPARING", perform)
+
+    async def prepare_chunk(self, expected_offset):
+        """Send at most four acknowledged frames; stale offsets never replay."""
+        async def perform():
+            require(type(expected_offset) is int and expected_offset == self._upload_offset,
+                    "Exact next upload offset required; replay is forbidden")
+            for _ in range(4):
+                command = next(self._upload_commands, None)
+                if command is None:
+                    break
+                require(command["offset"] == self._upload_offset, "Upload sequence changed")
+                raw = await self.ask(command, "OK")
+                size = len(command["hexData"]) // 2
+                require(raw == f"OK|WRITEFILE|{size}", "Exact write acknowledgement absent")
+                self._upload_offset += size
+            self.phase = "UPLOADED" if self._upload_offset == len(self.plan.binary) else "UPLOADING"
+            progress = {"phase": self.phase, "nextOffset": self._upload_offset,
+                        "candidateBytes": len(self.plan.binary)}
+            self.record({"event": "upload_progress", **progress})
+            return progress
+        return await self._operation("UPLOADING", "SENDING", perform)
+
+    async def finish_prepare(self):
+        """Verify all candidate bytes and script before permitting execution."""
+        async def perform():
+            await self.checksum("NativeTest", self.plan.binary)
+            return await self._prepare_controls()
+        return await self._operation("UPLOADED", "PREPARING", perform)
 
     async def execute(self, *, native_seconds=90):
         async def perform():

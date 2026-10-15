@@ -1,5 +1,5 @@
 {
-  "status": "HOST_NATIVE_BUILD_PASS_EMULATOR_TIMEOUT_OWNERSHIP_RETAINED",
+  "status": "HOST_NATIVE_BUILD_PASS_EMULATOR_TIMEOUT_RECOVERED_RELEASED",
   "scope": "Focused actual typed Load publication; injected voices, no UI or hardware output",
   "host": {
     "newAndLoadSanitizers": "PASS",
@@ -28,7 +28,7 @@
     "sectionFeasibilityProbe": "PASS compiler/link only, never executed"
   },
   "amiberry": {
-    "status": "TIMEOUT_COMPLETION_AND_CLEANUP_UNCONFIRMED_HOLD",
+    "status": "TIMEOUT_COMPLETION_UNCONFIRMED_RECOVERY_INDEPENDENTLY_VERIFIED",
     "runID": "6f43fdddfdf1db6fae78b589512e4276",
     "confirmedOuterCalls": 17,
     "uploadBatchesConfirmed": 14,
@@ -39,7 +39,7 @@
       "guestPhaseSeconds": 140,
       "wholeSeconds": 250
     },
-    "recovery": "Prepared exact run-owned recovery; human decision pending; no automatic retry or release",
+    "recovery": "Human-approved exact host cleanup/restoration/public release; original two HOLDs and inflight preserved in archive; no rerun",
     "savedResultSHA256": "79c7eaa04d5e22d2cd11069cbfc24bc3de50ed0f54a926c3787a57638c4709d6"
   },
   "physical": "NOT_RUN",
@@ -52,5 +52,22 @@
     "binaryCRC32": "835F9053",
     "verifiedProductionObjectsReused": 83,
     "loadInputs": 91
+  },
+  "recovery": {
+    "status": "PASS_INDEPENDENT_POST_RELEASE",
+    "finalPhase": "EMPTY",
+    "fence": 1605,
+    "archives": 67,
+    "testReruns": 0,
+    "targetCalls": 0,
+    "evidenceSHA256": {
+      "human-authorization.json": "a8a8b29217a736088c5fb7a9fb3c2f2ddca5424e19f618db3cb41e818117b06c",
+      "restoration-result.json": "6e62fa22615a54a35d3b248c7dec6362e8924b4351d4454049bd73fb891d2ce7",
+      "independent-observation.json": "3f0373f6af1b6ad6ca4f0d81d60e2f3298037ee460be6047c49f11b382b1550c",
+      "release-result.json": "6bb5f0890c55aaef833a2039267d8a57440b64fcb9a320165274c7ea52b7b8a2",
+      "independent-post-release.json": "f41e529ab16342348faf7c9f74729b4e5d3d51df5f3aa67d11441cd9be8a0478",
+      "evidence-clarification.json": "25c9e5fec928a28369ac31b3265c126090633cccf782f34ffff765b952e67afd"
+    },
+    "narrativeErratum": "An inherited cleanup-fact label mentioned native RC0/custody and one HOLD. Preserved record has separate clarification: no confirmed native result, two HOLDs plus inflight; no runtime pass inferred."
   }
 }

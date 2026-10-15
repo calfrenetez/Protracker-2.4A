@@ -381,3 +381,12 @@ or deadline change occurred. Physical qualification remains NOT RUN.
 The separately linked New variant is 213,052 bytes and remains never executed.
 It reuses the exact verified 83 production objects with a separately compiled
 fixture selector; it inherits no runtime acceptance from the Load attempt.
+
+
+The human-approved recovery subsequently completed: only the two exact owned
+processes were stopped, matching staging was removed, and original launcher files
+were restored. Separate observation, one public release and independent final
+verification passed. Both original HOLD records and the in-flight obligation are
+preserved in the release archive. No test was rerun and native completion remains
+unconfirmed. A separate erratum corrects an inherited narrative label in a cleanup
+fact; it does not alter the failed result, signed records or acceptance boundary.

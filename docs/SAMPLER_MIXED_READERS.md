@@ -188,3 +188,13 @@ Amiberry and physical execution are NOT_RUN at preparation. Compiler local
 frames do not establish a whole-call-chain stack or timing bound. No native
 provider, device, voice-stop, output timing or listening acceptance is added.
 See [scoped host/build evidence](../evidence/enhanced-editor/mixed-source-binding/probe-host-build.json).
+
+The exact296,632-byte probe subsequently passes once in the shared68030 emulator:
+RC0, observed Stack1MiB, all16 stdout lines and the exact final closed sidecar.
+The one input/nine execution files, both guest namespaces, host staging and owned
+process cleanup pass; separate restoration/absence observation, public release,
+owned-service stop and a fresh final idle check complete. No owned resource or
+HOLD remains. This qualifies the one control path only. It neither establishes
+the cause of the earlier deadlines nor qualifies completion of the75/495-case
+candidates. Physical execution remains NOT_RUN. See
+[scoped emulator evidence](../evidence/enhanced-editor/mixed-source-binding/probe-emulator.json).

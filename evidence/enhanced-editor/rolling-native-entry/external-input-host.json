@@ -1,0 +1,34 @@
+{
+  "state": "HOST_EXTERNAL_TRANSFER_ADMISSION_QUALIFIED_NOT_TARGET_INTEGRATED",
+  "tests": {
+    "transferredInput": 12,
+    "existingUpload": 10,
+    "existingDevCopy": 19,
+    "total": 41
+  },
+  "sourceSHA256": {
+    "tools/owned_native_input.py": "0cfbf0e1a7ee9634de7dcbd3d2ae75b2fd72f3696feb237fa45a84d948cd1bb7",
+    "tests/test_owned_native_transferred_input.py": "c3fac31055d307ad1ddd311bfbbf2934902adac1240771b8b9a5d01f116e0906"
+  },
+  "scope": "Explicit externally transferred one-file input admission via independent fresh ownership/completion callback followed by read-only exact inventory/checksum; no FTP/network/process/native effects in model",
+  "guards": [
+    "Default upload refuses existing namespace unchanged",
+    "Explicit external mode required; ordinary prepare cannot adopt",
+    "Only literal True independent callback proof accepted before any transport",
+    "Same-run path, one-file inventory and frozen size/CRC required",
+    "No write, mkdir, launch or delete during external admission",
+    "Cancelled, false, late, expired or unwritable proof retains ownership",
+    "Normal separate execution-idle custody settlement remains mandatory",
+    "Original preparation/lifetime/256-exchange/512KiB limits remain"
+  ],
+  "records": {
+    "resultSHA256": "e2e78a7263136dedb419a348fe4ead4a1a4859cb646a3ff6a682ebfedaf2482e",
+    "stderrSHA256": "44a25d042204a658e7bef67cd86d62e041f38d8d5508ef500b9bf51f45414298"
+  },
+  "notYetTested": [
+    "A live MiniFTP or LHA transfer through this new admission seam",
+    "Exact owned-service/frontend integration",
+    "Amiberry integration of the new seam",
+    "Physical A1200 integration of the new seam"
+  ]
+}

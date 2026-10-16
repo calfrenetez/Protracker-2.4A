@@ -753,3 +753,31 @@ execution and cleanup remain NOT RUN, and entry stays inhibited pending fresh
 Safari access and live admission. No live service or lease was created for that
 prepared physical packet.
 See [physical preparation evidence](../evidence/enhanced-editor/document-upload-physical-host/result.json).
+
+
+## Explicit external-transfer admission — 16 October 2026
+
+`InputPlan(execution, None, None, external_transfer=True)` identifies a separate
+MiniFTP/archive handoff. `prepare_transferred(observer)` requires the trusted
+caller to independently record fresh exclusive namespace creation, exact transfer
+and extraction, completed transfer and current ownership. The callback receives
+the exact plan and manifest and must return literal `True` before any protocol
+read. A matching pathname or checksum alone never grants ownership. The helper
+then checks the exact one-file inventory and frozen candidate checksum/size,
+without writing, creating a directory, launching or deleting.
+
+Normal `prepare()` refuses this explicit mode; existing upload/copy behavior and
+refusal of pre-existing RAM remain unchanged. Missing, false, late, cancelled or
+unrecordable proof, changed contents, extra members and transport failures latch
+FAILED and retain files. Original preparation/lifetime deadlines, staging and
+exchange bounds remain. Execution-idle/custody settlement and independent release
+are still required before input deletion. Archive and extraction artifacts remain
+the caller's separate cleanup obligations. This callback is a caller contract,
+not authentication supplied by a checksum or this helper.
+
+All41 HOST groups pass:12 new external-admission groups,10 existing upload and19
+Dev-copy regression groups. Models forbid sockets, subprocesses and signals.
+The new seam has not yet been integrated into the live owned service or tested
+with MiniFTP, Amiberry or the A1200. Existing exact native component passes use
+the previous upload route and do not qualify this new route.
+See [external-admission HOST evidence](../evidence/enhanced-editor/rolling-native-entry/external-input-host.json).

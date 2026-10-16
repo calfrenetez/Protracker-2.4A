@@ -10,8 +10,10 @@ not permission to reset or extend the caller's overall guest deadline.
 The caller supplies live shared guards, durable per-exchange records, exact Dev
 source ownership when copying, and independent settlement. Upload mode creates
 one file in a new namespace and never launches a command. Failures retain
-ownership. This does not implement MiniFTP/archive transfer or grant ownership
-of existing RAM.
+ownership. Explicit external-transfer mode can verify a separately transferred
+file only after the caller proves fresh namespace ownership and completed
+transfer. This does not implement MiniFTP/archive transfer or grant ownership
+of existing RAM from a matching filename or checksum.
 """
 import asyncio
 from dataclasses import dataclass
@@ -30,9 +32,11 @@ class InputPlan:
     execution: Plan
     source: str | None
     command_id: int | None
+    external_transfer: bool = False
 
     def __post_init__(self):
         require(type(self.execution) is Plan, "Exact execution plan required")
+        require(type(self.external_transfer) is bool, "Explicit transfer mode required")
         require(self.execution.copy_source ==
                 "RAM:PT24G-" + self.execution.run_id[:16] + "-in/NativeTest",
                 "Execution must select its exact separate RAM input")
@@ -43,6 +47,7 @@ class InputPlan:
             require(len(self.execution.binary) <= 512 * 1024,
                     "Uploaded input exceeds bounded staging capacity")
             return
+        require(not self.external_transfer, "External transfer cannot select a Dev source")
         require(isinstance(self.source, str) and re.fullmatch(
                 re.escape("Dev:Tests/PT24G-" + self.execution.run_id[:16] + "/")
                 + r"[A-Za-z0-9_-]+", self.source), "Exact run-owned Dev input required")
@@ -88,7 +93,8 @@ class InputPlan:
 
     def description(self):
         if self.source is None:
-            return {"runID": self.execution.run_id, "transfer": "upload",
+            return {"runID": self.execution.run_id,
+                    "transfer": "external" if self.external_transfer else "upload",
                     "directory": self.directory, "copySource": self.execution.copy_source,
                     "files": list(self.names), "candidateBytes": len(self.execution.binary),
                     "candidateSHA256": hashlib.sha256(self.execution.binary).hexdigest()}
@@ -175,6 +181,8 @@ class InputStage:
         require(self.phase == "NEW", "Input stage cannot be replayed")
         self.phase = "PREPARING"
         try:
+            require(not self.plan.external_transfer,
+                    "External transfer requires independent ownership verification")
             self.record({"event": "input_plan", "plan": self.plan.description()})
             # Check a copied source before mutation; its checksum is not an
             # ownership grant. Upload instead uses the frozen plan's bytes.
@@ -220,6 +228,40 @@ class InputStage:
                 raise ValueError("Input-copy observation count exceeded")
             require(await self._observer().file(self.plan.path("prepare.log")) ==
                     self.plan.files()["prepare.log"], "Input-copy output differs")
+            await self._custody()
+            result = {"status": "INPUT_READY_CUSTODY_RETAINED", "plan": self.plan.description(),
+                      "files": self.manifest()}
+            self.record({"event": "input_ready", **result})
+            self.phase = "READY"
+            return result
+        except BaseException:
+            self.phase = "FAILED"
+            raise
+
+    async def prepare_transferred(self, verify_fresh_transfer):
+        """Verify one externally transferred file without writing or launching.
+
+        The trusted caller must independently record fresh exclusive namespace
+        creation, the exact transfer/extraction, its completion and live ownership.
+        Its callback receives this exact plan and manifest and must return True.
+        A file checksum is a content check, not an ownership or transfer receipt.
+        The callback is a caller obligation, not authentication from this helper.
+        Archive/extraction cleanup remains the caller's separate responsibility.
+        The existing preparation and lifetime deadlines are never restarted.
+        """
+        require(self.phase == "NEW", "Input stage cannot be replayed")
+        self.phase = "PREPARING"
+        try:
+            require(self.plan.external_transfer and self.plan.source is None,
+                    "Explicit external-transfer plan required")
+            require(callable(verify_fresh_transfer),
+                    "Independent fresh-transfer ownership verification required")
+            self.record({"event": "input_external_plan", "plan": self.plan.description()})
+            timeout = self.remaining()
+            verified = await asyncio.wait_for(
+                verify_fresh_transfer(self.plan.description(), self.manifest()), timeout)
+            require(verified is True, "Fresh-transfer ownership verification absent")
+            self.remaining()
             await self._custody()
             result = {"status": "INPUT_READY_CUSTODY_RETAINED", "plan": self.plan.description(),
                       "files": self.manifest()}

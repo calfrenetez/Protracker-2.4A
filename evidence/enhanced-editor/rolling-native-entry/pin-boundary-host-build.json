@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "state": "ORIGINAL17_ESTABLISHMENT_PIN_BOUNDARY_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Separate original17-unit establishment-to-semantic-PIN_BEGIN and cancellation component; not complete preflight or originalcase1/full68.",
+  "contract": {
+    "begin": "Original sl_make16/sl_begin and header/numeric controls",
+    "steps": "Original sl_step17 until genuine producer PIN_BEGIN; original100000 ceiling and all no-output guards. No fixed HOST step count imposed on native ABI.",
+    "cleanup": "Original sl_close/sl_same/sl_drop, preservation and zero accounting",
+    "stdout": "ROLLING PIN BOUNDARY NATIVE PASS:original17 establishment and cancellation;MODELED_ONLY",
+    "closedProgress": "ROLLING PIN BOUNDARY DONE phase=0\n",
+    "capture": "Owned nine-file final-only capture; no live progress reads",
+    "limits": "Original native90/guest140/whole250/Stack1MiB retained for subsequent exact run"
+  },
+  "sourceSHA256": {
+    "tests/native_exec_mixed_causal_rolling_preflight_test.c": "d6b650d0c4b8d47361806f5da9c41479b3119e495d2e50b5d21404f1aaf7b3bd",
+    "tests/test_native_mixed_causal_rolling_preflight.py": "d878aa49b8e218979bb2a12346786f50b41e536493a812e82383666a7949af86",
+    "tools/build_native_mixed_causal_rolling.py": "4727c052e6e6481d0d4311d7644c7314aaf8fc2fe9304c43dea3ac690a761c08"
+  },
+  "checks": {
+    "hostGroups": 7,
+    "allOriginalPreflightModes": "Original17, prefix64, trace17, work256 and work4096 stdout/closed-progress/cancellation guards PASS",
+    "newSemanticPinBoundary": "PASS",
+    "foreignMissingAbsentSidecarRefusals": "PASS",
+    "conflictingModesAndInvalidSelectorRefusals": 6,
+    "protected16AndBaselinePreserved": true,
+    "independentSourceReview": "No correctness finding; semantic boundary/single observer count/shared cleanup and flag-absent paths verified.",
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 252
+  },
+  "candidate": {
+    "size": 330852,
+    "sha256": "e7453ea5cf3930c5d5411ec3308267af5d494671543247daf588ff0883b60fdb",
+    "crc32": "10730610"
+  },
+  "hostResultSHA256": "03d64bc4f1b0874f426a539e7700afd2d3a628c74c269edbb120a67ed7ef1abc",
+  "buildManifestSHA256": "6bbc9e0e2d61a60278ceef1c8af0970b3c69ce88e2ba4496c65c83b842e3ff05",
+  "sourceManifestSHA256": "ad484cafc7709025c8bb96530666e6796fc86b6bf0280590afe7a92dd0de65bd",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "completePreflightCase1Full68": "UNQUALIFIED",
+    "speedDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "state": "DESCRIPTOR_LOCAL_ORIGINAL_CASE1_NATIVE_UNCONFIRMED_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "EB9BF416",
+    "sha256": "57335b39946684369b4b1ef71afe90c6a0ade413e3f226792338f7d85e7efe26",
+    "size": 339048
+  },
+  "host": {
+    "nineSanitizerGroups": "PASS",
+    "fullOriginal68AndJoint31And17And4096Oracles": "PASS",
+    "frozenSixFunctionDescriptorEquivalenceAndProtectedReadControls": "PASS",
+    "pinned86Unit228BodyBuild": "PASS",
+    "runner36Service27NormalEntry15AndValidate": "PASS",
+    "independentSourceReview": "No correctness finding"
+  },
+  "native": {
+    "result": "UNCONFIRMED",
+    "returnCode": null,
+    "terminalCapture": false,
+    "lastDirectoryObserved": {
+      "nativeOutputBytes": 103,
+      "completeFlagBytes": 0,
+      "controlBytes": 166
+    },
+    "interpretation": "No completion witness within original bound; output-size observations do not identify application phase, liveness, crash or timing cause.",
+    "limitsSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    },
+    "launches": 1,
+    "retries": 0,
+    "lastWireExchange": "Unconfirmed final directory request after last complete directory reply; preserved without retry",
+    "wireRecords": 450
+  },
+  "recovery": {
+    "verifiedOwnProcessesStoppedOrAlreadyAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "exactStagingRemoved": true,
+    "independentObserver": "PASS",
+    "publicRelease": "PASS",
+    "separateFinalIdle": "PASS",
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "65c7f20777a46d1052aa48c69f8d531572dfdc40c9244677b00e21522b6c1363",
+    "restoration-result.json": "7c1f5735b392c2623fc05d78b4a7b21fea70a35b737bed2c18f72bec8075cc5a",
+    "independent-observation.json": "14cb07e045e78a492548319afb3926e14f001045d8b837c50acde32ba79f35e3",
+    "release-result.json": "9d950508d05e10ee5e405dad3a459b58f2280909d27a8a82bf48d97101116e27",
+    "independent-final-idle.json": "3bd2fc1baea01c61df12ba7dc37a08ec08409a0829d2bb441571e89c4e31a926"
+  },
+  "separatePriorQualification": "Complete4096-unit preparation/cancellation a1ea3b20 passes Amiberry; not originalcase1/full68 or physical output acceptance",
+  "physical": "NOT_RUN"
+}

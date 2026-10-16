@@ -1,7 +1,7 @@
 /* Separate original preflight/cancellation component. The rolling68 entry is
  * retained but never invoked. All clocks/buses and allocations remain models.
  * Only an existing exact owned progress sidecar may be overwritten. */
-#if defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 struct sl_trial;
 static void pt_preflight_observe_step(struct sl_trial *,unsigned);
 #define PT_PRIVATE_ROLLING_STEP_OBSERVE pt_preflight_observe_step
@@ -10,7 +10,7 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #define PT_PRIVATE_ROLLING_NATIVE_ENTRY pt_preflight_full_native_not_called
 #include "native_exec_mixed_causal_rolling_test.c"
 #undef PT_PRIVATE_ROLLING_NATIVE_ENTRY
-#if defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 #undef PT_PRIVATE_ROLLING_STEP_OBSERVE
 #endif
 
@@ -19,6 +19,12 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #endif
 #if PT_ROLLING_PREFLIGHT_PREFIX != 0 && PT_ROLLING_PREFLIGHT_PREFIX != 64
 #error "Only the original preflight or the separately bounded64-step prefix is supported"
+#endif
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) && PT_ROLLING_PREFLIGHT_PIN_BOUNDARY != 1
+#error "Pin-boundary component must be selected with value1"
+#endif
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) && (PT_ROLLING_PREFLIGHT_PREFIX || defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#error "Pin-boundary and other preflight modes are separate components"
 #endif
 #if PT_ROLLING_PREFLIGHT_PREFIX && (defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096)))
 #error "Prefix and complete-preflight trace are separate components"
@@ -29,7 +35,9 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #if defined(PT_ROLLING_PREFLIGHT_WORK256) && defined(PT_ROLLING_PREFLIGHT_WORK4096)
 #error "Supported preparation budgets are separate components"
 #endif
-#ifdef PT_ROLLING_PREFLIGHT_WORK4096
+#ifdef PT_ROLLING_PREFLIGHT_PIN_BOUNDARY
+#define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING PIN BOUNDARY"
+#elif defined(PT_ROLLING_PREFLIGHT_WORK4096)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING WORK4096"
 #elif defined(PT_ROLLING_PREFLIGHT_WORK256)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING WORK256"
@@ -89,10 +97,27 @@ int main(int argc,char **argv)
     pt_rolling_header_byte_controls();pt_preflight_record("MAKE-BEGIN",NULL);
     e=sl_make(16,16,0,CS_MIXED,0);pt_preflight_record("MAKE-END",e);
     assert(sl_cases==1);sl_same(e);
-    /* Invoke the original bounded helper with every original preflight oracle:
-     * genuine source adoption/pins, four normalized events, complete audit,
-     * untouched ordinary/Chip/card output and no command publication. */
-#if PT_ROLLING_PREFLIGHT_PREFIX
+    /* Complete-preflight modes retain every original helper oracle: source
+     * adoption/pins, four normalized events and complete audit. Prefix/boundary
+     * modes qualify only their distinct staged component and cancellation. */
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
+    /* Stop at the genuine establishment transition, rather than a HOST step
+     * count: original17-unit work may cross this boundary at another call on
+     * the native ABI. This does not invoke the complete preflight helper. */
+    {
+        unsigned n=0;
+        pt_preflight_record("ADOPT-BEGIN",e);sl_begin(e);
+        pt_preflight_record("ADOPT-END",e);
+        while(e->producer.original.phase!=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PIN_BEGIN){
+            assert(sl_step(e,17)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING&&++n<100000);
+            assert(!e->base.ordinary.calls&&!e->port.binds&&!e->port.external.clocks&&!e->port.ram.publishes&&
+                   !e->base.chip.calls&&!e->base.card->writes&&!sl_s(e)->causal&&!sl_s(e)->pool);
+        }
+        assert(e->producer.original.phase==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PIN_BEGIN&&
+               n&&n==pt_preflight_steps);
+        pt_preflight_record("PIN-BOUNDARY",e);
+    }
+#elif PT_ROLLING_PREFLIGHT_PREFIX
     /* A distinct cancellation component, never a complete preflight oracle.
      * Keep the genuine begin,17-unit steps and every no-output prefix guard. */
     pt_preflight_record("ADOPT-BEGIN",e);sl_begin(e);
@@ -127,7 +152,9 @@ int main(int argc,char **argv)
     pt_preflight_record("DISPOSE-BEGIN",e);sl_drop(e);
     assert(!sl_current);pt_preflight_record("DONE",NULL);
     if(pt_preflight_io_failed)return 20;
-#if PT_ROLLING_PREFLIGHT_PREFIX
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
+    puts("ROLLING PIN BOUNDARY NATIVE PASS:original17 establishment and cancellation;MODELED_ONLY");
+#elif PT_ROLLING_PREFLIGHT_PREFIX
     puts("ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY");
 #elif defined(PT_ROLLING_PREFLIGHT_WORK4096)
     puts("ROLLING WORK4096 NATIVE PASS:complete preflight and cancellation;MODELED_ONLY");

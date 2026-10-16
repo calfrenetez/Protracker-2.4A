@@ -626,3 +626,39 @@ regression. The candidate is339048 bytes, SHA256
 CRC32 `EB9BF416`;228 project bodies,43 SDK bodies, seven runtimes,252 frozen
 source files. Exact new Amiberry/A1200 and native speed remain unqualified at
 preparation. See [HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/descriptor-local-proof-host-build.json).
+
+The exact339048-byte descriptor-local candidate subsequently runs once in
+Amiberry without confirmed completion inside the original limit. The last
+complete directory reply reports103 output bytes and an empty completion flag,
+followed by an unconfirmed directory exchange. No terminal body/RC, phase,
+liveness, crash or speed interpretation follows. Exact own recovery/restoration,
+independent observation/public release and separate final idle pass. The failed
+transaction is preserved without retry or physical promotion. See
+[scoped result](../evidence/enhanced-editor/rolling-native-entry/descriptor-local-case1-emulator.json).
+
+
+## Semantic establishment-to-pin component
+
+A distinct `--preflight-pin-boundary` fixture performs original adoption and
+17-unit steps until the producer actually reaches `PIN_BEGIN`, then uses original
+cancellation, preservation and disposal/zero-accounting checks. It retains the
+original100000-call ceiling and every no-output guard. Observation counts advance
+once per genuine step. HOST step positions depend on ABI/work layout and are
+not imposed on the native build. The fixed64-prefix and complete-preflight
+entries keep their original paths; conflicting selectors are refused.
+
+The component has distinct exact stdout and closed progress witnesses:
+`ROLLING PIN BOUNDARY NATIVE PASS:original17 establishment and cancellation;MODELED_ONLY`
+and `ROLLING PIN BOUNDARY DONE phase=0`. Capture stays final-only under the
+original90/140/250-second and1MiB Stack limits. A pass qualifies this staged
+establishment/cancellation only; it cannot become full-preflight, case1/full68,
+device, IRQ, audio, timing or listening acceptance.
+
+Seven HOST groups pass: all five previous preflight modes, new semantic boundary
+and six conflict/invalid-selector controls, including foreign/missing/absent
+sidecars and protected16/baseline preservation. The pinned86-unit/228-body build
+passes:330852 bytes SHA256
+`e7453ea5cf3930c5d5411ec3308267af5d494671543247daf588ff0883b60fdb`,
+CRC32 `10730610`,43 SDK bodies, seven runtimes and252 frozen source files.
+Exact new Amiberry and physical execution are NOT_RUN at preparation. See
+[HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/pin-boundary-host-build.json).

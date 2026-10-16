@@ -1,5 +1,13 @@
 # Sample memory and playback ownership
 
+## Semantic establishment boundary —16 October2026
+
+A separate diagnostic follows original17-unit steps to genuine `PIN_BEGIN`,
+then original cancellation/preservation/zero accounting. It avoids assuming the
+same HOST/native step count. Seven HOST groups and the pinned86-unit build pass;
+exact new native/physical execution is NOT_RUN at preparation. This is
+establishment/cancellation scope only. See [the component](NATIVE_ROLLING_ENTRY.md#semantic-establishment-to-pin-component).
+
 ## Descriptor-local joint proof —16 October2026
 
 A joint descriptor now reuses one fresh complete-parent proof within that same
@@ -8,7 +16,9 @@ remain in their original read/refusal order; no proof is retained across calls
 or callbacks. Frozen six-predicate reference and full beforeimage/protected-page
 regressions retain original68/31 oracles. Nine HOST sanitizer groups and the
 pinned86-unit build pass; exact new native/physical, speed and device acceptance
-remain unqualified at preparation. See [the contract](NATIVE_ROLLING_ENTRY.md#descriptor-local-joint-proof).
+remain unqualified at preparation. The subsequent exact Amiberry originalcase1
+attempt remains unconfirmed within unchanged bounds; independent recovery/release
+passes. See [the contract](NATIVE_ROLLING_ENTRY.md#descriptor-local-joint-proof).
 
 ## Reuse local numeric span facts —16 October2026
 

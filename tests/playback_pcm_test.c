@@ -3,8 +3,40 @@
 #include <string.h>
 #include <stdio.h>
 #include "playback_pcm.h"
+#include "playback_internal.h"
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p,size_t n) {(void)ctx;(void)n;free(p);}
+static void pinned_identity_checks(void)
+{
+    int32_t values[4]={-128,127,1,-1};struct pt_pcm p={values,4,4,8000,1,8};
+    struct pt_playback_format f={8,0,0,1},wrong={16,0,0,1};
+    struct pt_sample_cache c,before;struct pt_cache_lease lease;uint64_t key;
+    pt_cache_init(&c,NULL,allocate,release,64);
+    assert(pt_playback_pcm_acquire(&c,&p,7,9,&f,&lease)==PT_CACHE_LOAD);
+    key=c.entry[lease.slot].key;before=c;
+    assert(pt_playback_pcm_lease_matches(&c,7,9,&f,lease));
+    assert(pt_playback_pcm_pinned_lease_matches(&c,7,9,&f,lease));
+    assert(!pt_playback_pcm_pinned_lease_matches(&c,8,9,&f,lease));
+    assert(!pt_playback_pcm_pinned_lease_matches(&c,7,10,&f,lease));
+    assert(!pt_playback_pcm_pinned_lease_matches(&c,7,9,&wrong,lease));
+    assert(!memcmp(&before,&c,sizeof(c)));
+    pt_playback_pcm_invalidate(&c,7);assert(c.entry[lease.slot].valid==2);before=c;
+    assert(!pt_playback_pcm_lease_matches(&c,7,9,&f,lease));
+    assert(pt_playback_pcm_pinned_lease_matches(&c,7,9,&f,lease));
+    assert(!memcmp(&before,&c,sizeof(c)));
+    assert(pt_cache_unpin(&c,lease)&&!c.bytes);
+    assert(!pt_playback_pcm_pinned_lease_matches(&c,7,9,&f,lease));
+    /* Same genuine key, but newly reserved unpublished storage cannot be read. */
+    assert(pt_cache_take(&c,key,9,4,&lease)==PT_CACHE_LOAD&&c.entry[lease.slot].valid==0);before=c;
+    assert(!pt_playback_pcm_lease_matches(&c,7,9,&f,lease));
+    assert(!pt_playback_pcm_pinned_lease_matches(&c,7,9,&f,lease));
+    assert(!memcmp(&before,&c,sizeof(c)));
+    assert(pt_cache_publish(&c,lease));before=c;
+    assert(pt_playback_pcm_lease_matches(&c,7,9,&f,lease));
+    assert(pt_playback_pcm_pinned_lease_matches(&c,7,9,&f,lease));
+    assert(!memcmp(&before,&c,sizeof(c)));
+    assert(pt_cache_unpin(&c,lease)&&pt_cache_clear(&c)&&!c.bytes);
+}
 static void storage_guard_tests(void)
 {
     union master {int32_t values[32];size_t scalar;struct {int32_t prefix[8];size_t scalar;} padding;};
@@ -137,7 +169,7 @@ int main(void)
     n=123;assert(pt_playback_pcm_size(&p,&f,&n)==PT_PCM_ALIAS && n==123);
     assert(pt_playback_pcm_pack(&p,&f,NULL,0)==PT_PCM_OK);
     p.capacity=0;assert(pt_playback_pcm_size(&p,&f,&n)==PT_PCM_OK && !n);
-    storage_guard_tests();acquire_output_guards();
+    storage_guard_tests();acquire_output_guards();pinned_identity_checks();
     puts("PLAYBACK PCM PASS: true24 master preservation, signed rounding/clipping, 8/16 bit endian/channel/padding, coexistence, revision invalidation and refusal");
     return 0;
 }

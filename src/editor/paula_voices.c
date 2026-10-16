@@ -1,5 +1,17 @@
 #include <string.h>
 #include "paula_internal.h"
+#include "../core/playback_internal.h"
+int pt_paula_voice_source_matches(struct pt_paula_voices *v,const struct pt_paula_voice *voice)
+{
+    struct pt_playback_format format;
+    if(!v || !v->bridge || !voice || !voice->held || voice->sample>=PT_PROJECT_SAMPLES ||
+       voice->source_channel>1 || !voice->source_version)return 0;
+    format=(struct pt_playback_format){8,voice->source_channel,0,1};
+    return pt_playback_pcm_pinned_lease_matches(&v->bridge->cache,voice->sample+1,
+        voice->source_version,&format,voice->lease) &&
+        pt_cache_data(&v->bridge->cache,voice->lease)==voice->source_data &&
+        v->bridge->cache.entry[voice->lease.slot].bytes==voice->source_bytes;
+}
 static int stop_slot(struct pt_paula_voices *v,unsigned slot)
 {
     struct pt_paula_voice *voice=&v->voice[slot];int result;
@@ -62,6 +74,7 @@ enum pt_paula_voice_result pt_paula_voices_trigger(struct pt_paula_voices *v,uns
     loaded=pt_sampler_paula_acquire(v->bridge,track,sample,channel,&lease);
     if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)return PT_PAULA_VOICE_REFUSED;
     if(!pt_sampler_paula_location(v->bridge,track,lease,&data,&bytes) ||
+       !pt_sampler_paula_prepared_source_location_validated(v->bridge,track,sample,channel,lease,&data,&bytes) ||
        !geometry(&v->bridge->project->samples[sample].pcm,channel,&r) ||
        (uintptr_t)data&1 || (uint64_t)r.offset+r.length>bytes) {
         pt_sampler_paula_unpin(v->bridge,lease);return PT_PAULA_VOICE_REFUSED;
@@ -71,11 +84,14 @@ enum pt_paula_voice_result pt_paula_voices_trigger(struct pt_paula_voices *v,uns
         pt_sampler_paula_unpin(v->bridge,lease);
         return result==0?PT_PAULA_VOICE_STOP_PENDING:PT_PAULA_VOICE_STOP_FAILED;
     }
-    if(!pt_sampler_paula_location(v->bridge,track,lease,&data,&bytes)) {
+    if(!pt_sampler_paula_location(v->bridge,track,lease,&data,&bytes) ||
+       !pt_sampler_paula_prepared_source_location_validated(v->bridge,track,sample,channel,lease,&data,&bytes)) {
         pt_sampler_paula_unpin(v->bridge,lease);return PT_PAULA_VOICE_REFUSED;
     }
     plan.data=data+r.offset;plan.words=(uint16_t)(r.length/2);plan.period=r.period;plan.volume=r.volume;
     voice=&v->voice[slot];voice->lease=lease;voice->held=1;voice->uncertain=1;voice->track=(int8_t)track;
+    voice->sample=sample;voice->source_channel=channel;voice->source_version=v->bridge->version;
+    voice->source_data=data;voice->source_bytes=bytes;
     v->started=1;
     if(v->api.start(v->api.context,(unsigned)slot,&plan)==1) {voice->uncertain=0;return PT_PAULA_VOICE_ACTIVE;}
     return PT_PAULA_VOICE_UNCERTAIN;
@@ -87,7 +103,7 @@ enum pt_paula_voice_result pt_paula_voices_control(struct pt_paula_voices *v,uns
     result=pt_paula_voices_sync(v);
     if(result!=1)return result==0?PT_PAULA_VOICE_STOP_PENDING:result==-1?PT_PAULA_VOICE_STOP_FAILED:PT_PAULA_VOICE_REFUSED;
     slot=v->map[track];if(slot<0)return PT_PAULA_VOICE_REFUSED;
-    voice=&v->voice[slot];if(!voice->held || voice->uncertain)return PT_PAULA_VOICE_REFUSED;
+    voice=&v->voice[slot];if(!voice->held || voice->uncertain || !pt_paula_voice_source_matches(v,voice))return PT_PAULA_VOICE_REFUSED;
     if(v->api.control(v->api.context,(unsigned)slot,period,volume)==1)return PT_PAULA_VOICE_ACTIVE;
     voice->uncertain=1;return PT_PAULA_VOICE_UNCERTAIN;
 }

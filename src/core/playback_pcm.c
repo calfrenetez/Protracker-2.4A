@@ -73,13 +73,19 @@ enum pt_pcm_result pt_playback_pcm_pack(const struct pt_pcm *p,const struct pt_p
 }
 static uint64_t key(uint32_t identity,const struct pt_playback_format *f)
 {return ((uint64_t)identity<<8)|(f->bits==16?1:0)|(f->channel<<1)|(f->little_endian<<2)|(f->word_pad<<3);}
-int pt_playback_pcm_lease_matches(struct pt_sample_cache *c,uint32_t identity,uint64_t version,
+int pt_playback_pcm_pinned_lease_matches(struct pt_sample_cache *c,uint32_t identity,uint64_t version,
     const struct pt_playback_format *f,struct pt_cache_lease lease)
 {
     if(!c || !f || (f->bits!=8 && f->bits!=16) || f->channel>1 ||
        f->little_endian>1 || f->word_pad>1 || !pt_cache_data(c,lease))return 0;
-    return c->entry[lease.slot].valid==1 && c->entry[lease.slot].version==version &&
+    return (c->entry[lease.slot].valid==1 || c->entry[lease.slot].valid==2) && c->entry[lease.slot].version==version &&
         c->entry[lease.slot].key==key(identity,f);
+}
+int pt_playback_pcm_lease_matches(struct pt_sample_cache *c,uint32_t identity,uint64_t version,
+    const struct pt_playback_format *f,struct pt_cache_lease lease)
+{
+    return pt_playback_pcm_pinned_lease_matches(c,identity,version,f,lease) &&
+        c->entry[lease.slot].valid==1;
 }
 enum pt_cache_result pt_playback_pcm_acquire(struct pt_sample_cache *c,const struct pt_pcm *p,
     uint32_t identity,uint64_t version,const struct pt_playback_format *f,struct pt_cache_lease *out)

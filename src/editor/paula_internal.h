@@ -4,6 +4,9 @@
 /* Private exclusive-session entry points. Token must match song_owner exactly;
  * NULL is reserved for public direct calls when no song owns the controller. */
 int pt_paula_stop_owned(struct pt_paula_voices *,unsigned,void *);
+/* Captured original reader source, including an invalidated but pinned copy.
+ * Read-only; refusal never stops a reader or releases its lease. */
+int pt_paula_voice_source_matches(struct pt_paula_voices *,const struct pt_paula_voice *);
 /* Confirm readers/barrier while retaining cache and exclusive token. */
 int pt_paula_drain_owned(struct pt_paula_voices *,void *);
 int pt_paula_close_owned(struct pt_paula_voices *,void *);

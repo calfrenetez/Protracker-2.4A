@@ -23,7 +23,13 @@ struct pt_paula_voice_api {
     int (*stop)(void *,unsigned);
     int (*control)(void *,unsigned,uint16_t period,uint8_t volume);
 };
-struct pt_paula_voice {struct pt_cache_lease lease;unsigned held,uncertain;int8_t track;};
+/* Captured only from a validated trigger, before invoking start. Preserve the
+ * original source across edits and uncertain callbacks until confirmed stop. */
+struct pt_paula_voice {
+    struct pt_cache_lease lease;unsigned held,uncertain;int8_t track;
+    unsigned sample,source_channel;uint64_t source_version;
+    const uint8_t *source_data;size_t source_bytes;
+};
 struct pt_paula_voices {
     struct pt_sampler_paula *bridge;struct pt_paula_voice_api api;
     struct pt_paula_voice voice[PT_PAULA_VOICES];int8_t map[PT_CHANNEL_LIMIT];

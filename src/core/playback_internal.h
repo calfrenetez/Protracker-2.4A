@@ -7,6 +7,12 @@
  * live buffer of the right size. Cache/format stay immutable in this call. */
 int pt_playback_pcm_lease_matches(struct pt_sample_cache *,uint32_t,uint64_t,
     const struct pt_playback_format *,struct pt_cache_lease);
+/* An already started reader may keep an invalidated (state2) published copy
+ * pinned across edits. Compare its ORIGINAL identity/version/representation;
+ * state0 unpublished storage is never a reader. No new lease, currentness or
+ * stop/quiet authority follows from this read-only comparison. */
+int pt_playback_pcm_pinned_lease_matches(struct pt_sample_cache *,uint32_t,uint64_t,
+    const struct pt_playback_format *,struct pt_cache_lease);
 /* Private immutable prepared-song path ONLY. Caller has fully validated PCM,
  * checked exact current version/descriptor and retains its master pin through
  * the entire call. Values remain immutable; callbacks cannot edit or reenter.

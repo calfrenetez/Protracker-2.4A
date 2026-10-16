@@ -1,5 +1,38 @@
 # Sample memory and playback ownership
 
+## Active Paula original-source binding —16 October2026
+
+Active voices now retain their genuine original sample, selected stereo side,
+version, buffer base and extent when direct, public prepared or incremental
+starts transfer the lease. Controls and prepared snapshots check that captured
+source, rather than trusting only a live lease and track. A source mismatch
+refuses output while retaining the original voice and pin.
+
+Edits may invalidate an already published copy while a note still reads it.
+A private read-only predicate accepts that exact original pinned copy; it rejects
+unpublished storage and changes no lease, recency or ownership. The existing
+published-only predicate remains strict. Neither comparison supplies a stop or
+quiet receipt: pending and failed driver stops retain the complete voice, and
+confirmed stop alone permits release. Current candidate/master checks remain.
+
+The unchanged baseline accepts a wrong-sample key before an active control.
+The147-case regression passes27 genuine controls and120 source/representation
+refusals across8/16/24-bit mono/stereo, both selected stereo sides and all three
+start paths. Genuine edits preserve control of old invalidated copies. Master,
+cache and refused-output beforeimages survive; no corrupted key is repaired for
+cleanup. Ten additional actual/captured source-field mutations per format extend
+the existing prepared-readiness suite. Unpublished/published/invalidated/unpinned
+predicate checks preserve cache state.
+
+Fifteen sanitizer tests in thirteen modules pass from1,259 frozen inputs,
+including the complete previous mixed source matrix, song and established-owner
+integration. A pinned31-unit206,328-byte portable HUNK builds with enabled
+assertions; Amiberry and physical execution are NOT_RUN at preparation. This
+adds no device, DMA/stop, scheduled activation, timing, full-app or listening
+acceptance. Older prepared physical candidates sharing the changed source must
+be rebuilt and promoted from a fresh exact emulator pass. See
+[scoped host/build evidence](../evidence/enhanced-editor/active-source-binding/host-build.json).
+
 ## Prepared dispatcher trigger source binding —16 October2026
 
 The prepared dispatcher now checks each candidate's actual sample and signed8,

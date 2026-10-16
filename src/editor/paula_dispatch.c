@@ -17,7 +17,8 @@ static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held,voi
        memcmp(map,v->map,sizeof(map)))return 0;
     for(i=0;i<PT_PAULA_VOICES;++i)if(v->voice[i].held) {
         int track=v->voice[i].track;
-        if(v->voice[i].uncertain || track<0 || track>=PT_CHANNEL_LIMIT || map[track]!=(int8_t)i)return 0;
+        if(v->voice[i].uncertain || track<0 || track>=PT_CHANNEL_LIMIT || map[track]!=(int8_t)i ||
+           !pt_paula_voice_source_matches(v,&v->voice[i]))return 0;
         state|=(uint16_t)(1U<<track);
     }
     *held=state;return 1;
@@ -90,6 +91,8 @@ static int apply_batch(struct pt_paula_voices *v,const struct pt_render_plan *p,
         case PT_RENDER_TRIGGER:
             if(pt_paula_stop_owned(v,a->channel,owner)!=1)goto failed;
             voice=&v->voice[slot];voice->lease=e->lease;voice->held=voice->uncertain=1;
+            voice->sample=e->sample;voice->source_channel=0;voice->source_version=v->bridge->version;
+            voice->source_data=e->plan.data-e->offset;voice->source_bytes=v->bridge->cache.entry[e->lease.slot].bytes;
             voice->track=(int8_t)a->channel;e->held=0;v->started=1;
             if(v->api.start(v->api.context,(unsigned)slot,&e->plan)!=1)goto failed;
             voice->uncertain=0;break;
@@ -133,6 +136,8 @@ static int voices_unchanged(struct pt_paula_prepared *p)
     for(i=0;i<PT_PAULA_VOICES;++i) {
         const struct pt_paula_voice *a=&v->voice[i],*b=&p->voice[i];
         if(a->held!=b->held || a->uncertain!=b->uncertain || a->track!=b->track ||
+           a->sample!=b->sample || a->source_channel!=b->source_channel || a->source_version!=b->source_version ||
+           a->source_data!=b->source_data || a->source_bytes!=b->source_bytes ||
            a->lease.slot!=b->lease.slot || a->lease.serial!=b->lease.serial)return 0;
     }
     return 1;
@@ -292,12 +297,14 @@ int pt_paula_prepared_action_owned(struct pt_paula_prepared *p,unsigned index)
         if(!e->held)return 0;
         if(pt_paula_stop_owned(v,a->channel,p->owner)!=1)return -2;
         voice->lease=e->lease;voice->held=voice->uncertain=1;
+        voice->sample=e->sample;voice->source_channel=0;voice->source_version=p->version;
+        voice->source_data=e->plan.data-e->offset;voice->source_bytes=v->bridge->cache.entry[e->lease.slot].bytes;
         voice->track=(int8_t)a->channel;e->held=0;v->started=1;
         if(v->api.start(v->api.context,(unsigned)slot,&e->plan)!=1)return -1;
         voice->uncertain=0;return 1;
     case PT_RENDER_STOP:return pt_paula_stop_owned(v,a->channel,p->owner)==1?1:-2;
     case PT_RENDER_CONTROL:
-        if(!voice->held || voice->uncertain)return -1;
+        if(!voice->held || voice->uncertain || !pt_paula_voice_source_matches(v,voice))return -1;
         voice->uncertain=1;
         if(v->api.control(v->api.context,(unsigned)slot,e->plan.period,e->plan.volume)!=1)return -1;
         voice->uncertain=0;return 1;

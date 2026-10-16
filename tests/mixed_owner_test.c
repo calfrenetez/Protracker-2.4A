@@ -248,7 +248,7 @@ static void owner_fixture(unsigned bits,unsigned mode)
             calls=d.calls;
             /* Adversarial changes occur BETWEEN serialized calls, then restore
              * before cancellation. No copy/reinitialize of the active workspace. */
-            for(mutation=0;mutation<26;++mutation) {
+            for(mutation=0;mutation<36;++mutation) {
                 struct pt_paula_batch_entry *e=prepared->batch.entry+1;
                 struct pt_cache_entry *entry=pb.cache.entry+e->lease.slot;
                 void *field=NULL;size_t size=0;unsigned char saved[sizeof(struct pt_pcm)],fill=0;
@@ -281,6 +281,16 @@ static void owner_fixture(unsigned bits,unsigned mode)
                 case 23:READY_FIELD(prepared->batch.entry[2].sample);break;
                 case 24:READY_FIELD(prepared->batch.entry[2].source.data);break;
                 case 25:READY_FIELD(prepared->batch.entry[2].lease.serial);break;
+                case 26:READY_FIELD(pv.voice[0].sample);fill=255;break;
+                case 27:READY_FIELD(pv.voice[0].source_channel);fill=255;break;
+                case 28:READY_FIELD(pv.voice[0].source_version);break;
+                case 29:READY_FIELD(pv.voice[0].source_data);break;
+                case 30:READY_FIELD(pv.voice[0].source_bytes);break;
+                case 31:READY_FIELD(prepared->voice[0].sample);fill=255;break;
+                case 32:READY_FIELD(prepared->voice[0].source_channel);fill=255;break;
+                case 33:READY_FIELD(prepared->voice[0].source_version);break;
+                case 34:READY_FIELD(prepared->voice[0].source_data);break;
+                case 35:READY_FIELD(prepared->voice[0].source_bytes);break;
                 }
 #undef READY_FIELD
                 assert(field && size<=sizeof(saved));memcpy(saved,field,size);memset(field,fill,size);

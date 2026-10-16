@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Paula active voices capture actual sample,selected side,source version and buffer extent at all direct/public/private start paths. Existing controls and prepared snapshots check that original source.",
+  "retained_ownership": "Invalidated published copies remain pinned and controllable under the original identity/version. Unpublished storage is refused. Source mismatch does not confirm stop or release ownership; pending/failed driver stops retain original voice and exact lease.",
+  "private_predicate": "Shared packing key implementation; read-only match of an existing pin only, never master-currentness or ownership/quiet authentication. Published-only predicate still refuses invalidated copies.",
+  "baseline": {
+    "source_commit": "a050118ce2e56fa49101477657eb6a7005e826af",
+    "wrong_sample_control_accepted": true,
+    "raw_failure_sha256": "d86066b12ac6723a187254cb7d1d45ea8eeb55dd0312cf33c6d196e424a26830",
+    "initial_fixture_overread_preserved": "Initial fixed-size8-element snapshot exceeded promoted mono capacity; changed fixture to exact current declared capacity. Original baseline/current sanitizer failures remain separate."
+  },
+  "host": {
+    "tests": 15,
+    "modules": 13,
+    "primary_tests": 13,
+    "additional_song_and_established_owner_tests": 2,
+    "active_source_cases": 147,
+    "genuine_controls": 27,
+    "source_or_representation_refusals": 120,
+    "bits": [
+      8,
+      16,
+      24
+    ],
+    "mono_and_stereo_both_sides": true,
+    "start_paths": [
+      "direct voice",
+      "public prepared apply",
+      "incremental prepared action"
+    ],
+    "old_invalidated_copy_controls_preserved": true,
+    "no_wrong_source_output_or_premature_release": true,
+    "genuine_donor_packer_keys_no_key_repair": true,
+    "master_and_cache_beforeimages": true,
+    "explicit_owned_bytes_zero_after_confirmed_stop_and_close": true,
+    "existing_ready_mutation_cases_per_format": 36,
+    "assertions": true,
+    "asan": true,
+    "ubsan": true,
+    "frozen_files": 1259,
+    "inventory_unchanged": true,
+    "primary_result_sha256": "1ce7926f05eb85ef7cf6b5d04a15584d375e57654801887b8e73f0dc0d238b79",
+    "integration_result_sha256": "d45d3b03359140e85bcccd92a23bfc9cfdac73f159d6998fb828f01f3eaa10da"
+  },
+  "native_build": {
+    "candidate_bytes": 206328,
+    "candidate_sha256": "59adbfed71edc7dd4d8fb9068bc5b30b8f469f241df66b784c4c94b210a8d4d0",
+    "crc32": "6CA97739",
+    "translation_units": 31,
+    "project_dependencies": 79,
+    "sdk_inputs": 32,
+    "runtime_inputs": 7,
+    "assertions_enabled": true,
+    "selected_assembler_unchanged": true,
+    "private_builder_sha256": "d5b4a856446a783d6e7fa0f75f1dc4ce46839d0b9bc111b9cebd4e84be98f02c",
+    "manifest_sha256": "d53060f2c9fab73abd2de2778fe4aadc8574e1913f007d00b0c168ec3b80efa0",
+    "maximum_compiler_local_frame_bytes": 36932,
+    "total_stack_qualified": false,
+    "scope": "147-case main; inherited donor main and HOST-only unpublished predicate fixture uncalled"
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Exec Fast or Chip placement",
+    "Actual device/DMA/voice stop or IRQ behavior",
+    "Native scheduled output timing",
+    "Full application or listening"
+  ],
+  "earlier_builds": "Historical exact-byte qualifications unchanged; prior prepared physical candidates sharing changed dependencies require fresh builds and emulator promotion."
+}

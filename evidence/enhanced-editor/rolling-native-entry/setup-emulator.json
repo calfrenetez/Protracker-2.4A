@@ -1,0 +1,105 @@
+{
+  "state": "EXACT_CONSTRUCTOR_MODE0_AMIBERRY_PASS_RELEASED",
+  "sourceCommit": "0ad1ee94dc90ed47eeba55a0c82883ff51f5cce5",
+  "candidate": {
+    "size": 307636,
+    "sha256": "39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c",
+    "crc32": "A3BB63F3"
+  },
+  "scope": "One original sl_make16 mixed constructor and sl_drop, header-byte controls, zero accounting and no aliases; ordinary allocation, modeled clocks/buses",
+  "hostChecks": {
+    "runner": 36,
+    "service": 27,
+    "normalEntry": 15,
+    "wrongOrPartialProgressRefusalSubcases": 2
+  },
+  "native": {
+    "nativeMarkers": [
+      "ROLLING SETUP NATIVE PASS:mode=0;MODELED_ONLY"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 46,
+    "outputCRC32": "1573EF09",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "custody": {
+    "uploadedInputFiles": 1,
+    "executionFiles": 9,
+    "launches": 1,
+    "finalSidecar": "ROLLING SETUP DONE mode=0 steps=0 phase=0\n",
+    "files": {
+      "NativeTest": {
+        "bytes": 307636,
+        "sha256": "39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c"
+      },
+      "Run-once": {
+        "bytes": 1130,
+        "sha256": "79d3c24d85cf47973ac7ffc7c87e2d433467b9a1b2c0883a151aa6ff76aa41e3"
+      },
+      "Stage-once": {
+        "bytes": 434,
+        "sha256": "315a01df9ecfeedc1a0850d90dce5ed042a4e12fbf2175a5c4fd7496d882fc83"
+      },
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "control.log": {
+        "bytes": 227,
+        "sha256": "3ca53c5ae4dce5e300f8b8084760627f1ffc34d16c5fadf2ade54e0e48f457be"
+      },
+      "native.log": {
+        "bytes": 46,
+        "sha256": "f05f492dcc9643dc3c6f4832bc342b91afe42e744cc76febf54755b8530cff40"
+      },
+      "progress.log": {
+        "bytes": 42,
+        "sha256": "9e319d2b5276b3664e669f9607d3003fe117084c45236f715d98192356ddfb27"
+      },
+      "stage.log": {
+        "bytes": 30,
+        "sha256": "e4889345ac37bc67e2bd9020599c644e7ef05a8b9b7e8034d3e7543589ba8bd9"
+      },
+      "staged.flag": {
+        "bytes": 7,
+        "sha256": "0ebf65c7984364f0999b4b54018b582a0da08a145e4d88a228ce2438856e7b06"
+      }
+    }
+  },
+  "unchangedLimits": {
+    "inputSeconds": 120,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "overallSeconds": 250,
+    "stackBytes": 1048576
+  },
+  "independent": {
+    "restoredOriginals": true,
+    "exactStagingAbsent": true,
+    "ownedEmulatorAbsent": true,
+    "ownedServiceAbsent": true,
+    "tcpAndUnixIPCAbsent": true,
+    "publicRelease": true,
+    "separateFinalIdle": true,
+    "fence": 1908,
+    "retainedArchives": 138
+  },
+  "recordSHA256": {
+    "result.json": "87facad190e724cb034ee0eb962aec8e4cdd526d93fcc7a2f7dab78eeb2e7106",
+    "independent-pass-observation.json": "9da0c2590ea5b9d7f27bddb5c0956a0018ccb9f4983027d9e02ff81e1c92cb8e",
+    "release-result.json": "9eec89a325efa0997104e602007a38ebddca23c24acaa794a574c71344abb245",
+    "service-stop-result.json": "e0b8f7d12dd6b671f3c4ff570359038e4f5909c44506b438bf23d5fd44823284",
+    "independent-final-idle.json": "e4e00d98fd10fa7387e14bb6111c461c2ac83b2234a431f3ee103a40be0b5db5"
+  },
+  "unqualified": [
+    "Original rollingcase1/full68 native execution",
+    "Whole-call-chain Stack",
+    "Actual Exec Fast/Chip allocation class",
+    "Physical A1200 execution",
+    "AmiGUS or Paula device/voice-stop",
+    "IRQ and scheduled musical output",
+    "Frontend and listening"
+  ],
+  "failedTransactionsReplayed": false
+}

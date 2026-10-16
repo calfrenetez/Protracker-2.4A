@@ -2,16 +2,17 @@
 
 ## Four-event native entry —16 October2026
 
-The genuine68-case trigger/control/control/stop fixture now has an exact native
-entry, three passing sanitizer groups and a strict pinned68000 build. Native
-portability fixes retain all formatting tokens and the inventory range contract;
-additional controls check every sampler-header byte. The723832-byte HUNK is built,
-but its Amiberry/A1200 execution remains NOT_RUN. Native IRQ/PLAY and actual timing,
-device output and listening remain inhibited/unqualified. See
-[the entry and evidence](NATIVE_ROLLING_ENTRY.md). The full fixture now also
-has a343956-byte section-GC build below the unchanged512KiB input bound, without
-removing cases or assertions. Exact native execution remains NOT_RUN; see its
-[compact build record](../evidence/enhanced-editor/rolling-native-entry/gc-build.json).
+The genuine68-case trigger/control/control/stop fixture and selected originalcase1
+pass HOST and pinned compile/link checks, but their native attempts remain
+UNCONFIRMED. Both failed operations were independently cleaned and released;
+no failed transaction was replayed or physically promoted. A separate smaller
+constructor-close mode0 now passes exact Amiberry execution with RC0, strict
+stdout and closed-sidecar custody, original zero-accounting guards and independent
+cleanup/release/final idle. Adoption/cancellation and one-step components pass
+HOST but remain native NOT_RUN. A1200 execution of the constructor candidate is
+NOT_RUN. All clocks/buses in these fixtures are models; native IRQ/PLAY, actual
+scheduled output, device and listening remain inhibited/unqualified. See
+[the current entry and evidence](NATIVE_ROLLING_ENTRY.md).
 
 ## Native clock owner output protection —16 October2026
 

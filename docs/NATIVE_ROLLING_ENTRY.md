@@ -161,3 +161,20 @@ strict warnings and preserved baseline/display inputs. The separately pinned
 on the A1200 at this milestone, and qualifies neither the longer rolling case
 nor a native allocator class, hardware operation or musical output.
 See [early-component host/build evidence](../evidence/enhanced-editor/rolling-native-entry/setup-host-build.json).
+
+
+The exact307,636-byte constructor mode0 candidate subsequently passed once in
+Amiberry: RC0, its sole46-byte stdout marker and the exact separately closed
+42-byte final progress record. One input and all nine execution files passed
+custody checks. Original fixture disposal, zero accounting and no-alias assertions
+were enabled. Independent saved-file restoration, guest and host staging absence,
+public release, owned-service stop and a separate final idle observation passed
+(EMPTY1908/138archives). No failed transaction was replayed or limit widened.
+
+The private host packet also rejects wrong-mode or incomplete sidecars even when
+stdout reports PASS, retaining both copies and refusing settlement. An inherited
+host assertion expecting eight files correctly refused the initial nine-file
+packet before any service or target; that evidence remains preserved. The
+constructor pass does not identify the earlier stall or qualify adoption,
+preparation steps, original case1/full68, device, timing or audio. A1200 execution
+of this candidate remains NOT_RUN. See [exact emulator evidence](../evidence/enhanced-editor/rolling-native-entry/setup-emulator.json).

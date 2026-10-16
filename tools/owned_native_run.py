@@ -27,8 +27,10 @@ import native_file_protocol as wire
 import native_fixture_capture as capture
 import cia_aperture_capture as aperture
 import cia_prepared_capture as prepared_aperture
+import clock_pair_capture as clock_pair
 
-DIAGNOSTICS = {aperture.PROFILE: aperture, prepared_aperture.PROFILE: prepared_aperture}
+DIAGNOSTICS = {aperture.PROFILE: aperture, prepared_aperture.PROFILE: prepared_aperture,
+               clock_pair.PROFILE: clock_pair}
 
 
 def require(value, message):
@@ -65,7 +67,7 @@ class Plan:
         else:
             require(type(self.observation_profile) is str and self.observation_profile in DIAGNOSTICS
                     and self.markers == DIAGNOSTICS[self.observation_profile].MARKERS and not self.progress_sidecar,
-                    "Exact separate CIA observation contract required")
+                    "Exact separate diagnostic observation contract required")
         if self.copy_source is not None:
             wire.path(self.copy_source)
             shared = re.fullmatch(re.escape("Dev:Tests/PT24G-" + self.run_id[:16] + "/")

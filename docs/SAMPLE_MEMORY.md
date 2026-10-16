@@ -7371,3 +7371,6 @@ The separate prepared direct-clock candidate9cbc7aa9 has now run once in Amiberr
 
 
 Distinct shorter-comparison candidatefd407610 also ran once and FAILED/RC20:0/12 timing gates,4/4 negatives. All12 precommit readings were in-window(first+1..6); all12 following readings were late(first+25..29,22..24ticks later), so all12 irreversible shadow writes remain failed brackets. This does not establish that every actual write was late or isolate clock-library cost. Complete native replay/custody, independent restoration/absence, public release, exact service stop and fresh final idle passed separately. No physical or actual output/reader qualification follows; native provider stays inhibited and musical schedule unchanged.
+
+
+A separate task-only adjacent ReadEClock diagnostic is now implemented and crossbuilt. It records complete raw counter pairs under brief task exclusion, with no CIA vector, output commit or scheduling change. RC0 means observation completion only; finite min/max never establishes isolated call duration, WCET or a timed output capability. Native execution remains a separate gate. See [observation contract](CLOCK_READ_OBSERVATIONS.md).

@@ -49,6 +49,18 @@ def select_prepared_experiment():
     FIXTURE = 'cia_prepared_aperture_test.c'
 
 
+def select_clock_pair_observation():
+    """Separate task-only observation; no CIA timer/vector or output commit."""
+    global HOST_SOURCES, SOURCES, TARGET, MARKER, MODEL_MARKER, HOST_DECLARATION, FIXTURE
+    HOST_SOURCES = ['tests/clock_pair_test.c', 'tests/clock_pair.c']
+    SOURCES = ['tests/native_exec_clock_pair_test.c', 'tests/clock_pair.c', 'tests/native_clock_pair.s']
+    TARGET = 'PTExecClockPairTest'
+    MARKER = 'CLOCK PAIR COMPLETE: sixteen adjacent direct clock observations; no scheduling, IRQ WCET, audio or hardware timing acceptance'
+    MODEL_MARKER = 'CLOCK PAIR MODEL PASS: full-width saved counters, unchanged invalid outputs, rate and regression accounting; observation only'
+    HOST_DECLARATION = 'tests/test_clock_pair.py'
+    FIXTURE = 'clock_pair_test.c'
+
+
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -130,10 +142,14 @@ def recipe_contract(source, expected, pins):
     if units != HOST_SOURCES or len(units) != len(set(units)):
         raise ValueError('Host ordered source declaration changed')
     wrapper = (source / SOURCES[0]).read_text()
-    embedded = 'PT_PREPARED_APERTURE_EMBEDDED' if FIXTURE == 'cia_prepared_aperture_test.c' else 'PT_APERTURE_EMBEDDED'
+    embedded = {'cia_prepared_aperture_test.c': 'PT_PREPARED_APERTURE_EMBEDDED',
+                'cia_aperture_test.c': 'PT_APERTURE_EMBEDDED',
+                'clock_pair_test.c': 'PT_CLOCK_PAIR_EMBEDDED'}[FIXTURE]
     if wrapper.count('#include "' + FIXTURE + '"') != 1 or '#define ' + embedded not in wrapper:
         raise ValueError('Shared fixture must be embedded exactly once without assertion reinclusion')
-    wrapper_name = 'tests/native_exec_cia_prepared_aperture_test.c' if FIXTURE == 'cia_prepared_aperture_test.c' else 'tests/native_exec_cia_aperture_test.c'
+    wrapper_name = {'cia_prepared_aperture_test.c': 'tests/native_exec_cia_prepared_aperture_test.c',
+                    'cia_aperture_test.c': 'tests/native_exec_cia_aperture_test.c',
+                    'clock_pair_test.c': 'tests/native_exec_clock_pair_test.c'}[FIXTURE]
     if SOURCES[:-1] != [wrapper_name, *HOST_SOURCES[1:]] or len(SOURCES) != len(set(SOURCES)):
         raise ValueError('Explicit native wrapper substitution/order changed')
     assembly = (source / SOURCES[-1]).read_text()
@@ -150,7 +166,9 @@ def recipe_contract(source, expected, pins):
 def main():
     sys.dont_write_bytecode = True
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--prepared', action='store_true', help='Select the separate serialized direct-clock experiment')
+    selection = ap.add_mutually_exclusive_group()
+    selection.add_argument('--prepared', action='store_true', help='Select the separate serialized direct-clock experiment')
+    selection.add_argument('--clock-pair', action='store_true', help='Select the separate task-only adjacent-clock observation')
     ap.add_argument('--source-manifest', type=Path, required=True)
     ap.add_argument('--source-manifest-sha256', required=True)
     ap.add_argument('--pins', type=Path, required=True)
@@ -159,6 +177,8 @@ def main():
     args = ap.parse_args()
     if args.prepared:
         select_prepared_experiment()
+    elif args.clock_pair:
+        select_clock_pair_observation()
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()

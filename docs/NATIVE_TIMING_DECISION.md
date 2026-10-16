@@ -167,3 +167,6 @@ A distinct comparison-only assembly candidatefd407610 is implemented/crossbuilt,
 
 
 The distinctfd407610 comparison-only candidate completed once but FAILED the same timing gate: all12 precommit samples were inside, yet post samples22..24ticks later were outside. All12 irreversible RAM writes remain recorded as failed brackets; their actual time inside those brackets is unresolved, and these results do not isolate ReadEClock cost. All four negative gates and complete native reference replays passed. Independent release/restoration/final idle passed separately. Further work should establish the clock-observation baseline or a real queued-activation contract; no phase/rate/window change or native output capability follows.
+
+
+A separate task-only adjacent ReadEClock diagnostic is now implemented and crossbuilt. It records complete raw counter pairs under brief task exclusion, with no CIA vector, output commit or scheduling change. RC0 means observation completion only; finite min/max never establishes isolated call duration, WCET or a timed output capability. Native execution remains a separate gate. See [observation contract](CLOCK_READ_OBSERVATIONS.md).

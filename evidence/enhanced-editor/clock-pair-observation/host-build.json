@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PINNED_COMPILE_PASS_NATIVE_NOT_RUN",
+  "candidate": {
+    "bytes": 19952,
+    "sha256": "919196b89b92de580cf24ff32cd63ca82a616d1d36919bff79831cd39baf162c",
+    "crc32": "CEE66A58"
+  },
+  "nativeBuild": {
+    "sourceUnits": 3,
+    "projectDependencies": 8,
+    "sdkDependencies": 65,
+    "runtimeQueries": 7,
+    "commands": 15,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "offsetAssertions": 7,
+    "sizeAssertions": 3,
+    "compilerSHA256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "assemblerSHA256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+    "manifestSHA256": "94000e4ee1a86b208a8f33455f42157b85fcdbf8711d4a49af2f6bf3c9752029",
+    "wholeLinkerLoadAudit": false
+  },
+  "host": {
+    "cases": 129,
+    "sanitizerCFixtures": 3,
+    "pairArithmeticComparisons": 1024,
+    "frozenSourceUnchanged": true,
+    "stdoutSHA256": "74e66fd4c6f1177ce09525d50457c86446d5a6e19875ace3832e6007a3551d8c",
+    "stderrSHA256": "6fc94cba9903ed1e08ca69b065476a7e37c2bb44b603646abdd02db642e15ed3",
+    "resultSHA256": "f91ffb9bc6dd7a5db962312f2ed3fcd38f036ca6d1d80ffbe2c9facc23837743"
+  },
+  "preservedPreparationFailures": {
+    "missingExportTestLogSHA256": "c5f9cb9711b8675766fb039d07ce9dd47f2f005b3b11f3cd2c62fa38d15188f8",
+    "childBytecodeInventoryRefusalNoteSHA256": "fba70e8bf7e93719142114e1e100950ba30f048650bafb5842e8ffcfe9f39a51",
+    "childBytecodeTestLogSHA256": "8641460f72e792112fdf26b062fcdf329b862ece5090e4d5abbe1aefae2274ae"
+  },
+  "productionChanges": false,
+  "protectedUnrelatedPathsUnchanged": 16,
+  "scope": "Task-only adjacent library sampling observation. No CIA acquisition, output commit, scheduled activation, actual call duration, WCET, native runtime, physical timing or listening acceptance."
+}

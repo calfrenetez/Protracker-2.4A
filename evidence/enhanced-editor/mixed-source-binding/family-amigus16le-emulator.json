@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "state": "SCOPED_GENUINE_FIFTEEN_CASE_FAMILY_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "source_commit": "595a2c0e069e5290c8d82ea9e29aa4a93069752e",
+  "backend_family": "amigus16le",
+  "cases": 15,
+  "controls": 3,
+  "refusals": 12,
+  "candidate": {
+    "crc32": "854BD61C",
+    "sha256": "96879ce6675aee8f719dbf7b1bb3b795dd692dd98e443db72cf909e4ee2f7389",
+    "size": 296528
+  },
+  "scope": "Fifteen genuine8mono amigus16le cases;3controls12refusals;all three readiness boundaries;other480 and legacy constructor excluded",
+  "ordinary_allocator_and_fake_bus": true,
+  "assertions": "Existing genuine binding-case checks, original factory/cache/pins, master/cache/bus preservation and independent cleanup. Corrupted key is not repaired for retirement.",
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact": "true",
+    "chip_kib": 2048,
+    "z3_kib": 131072
+  },
+  "observed": {
+    "nativeMarkers": [
+      "MIXED BINDING TRACE:family-entered:8:1:0",
+      "MIXED BINDING TRACE:family-case-start:8:0:0",
+      "MIXED BINDING TRACE:family-case-closed:8:0:0",
+      "MIXED BINDING TRACE:family-case-start:8:1:0",
+      "MIXED BINDING TRACE:family-case-closed:8:1:0",
+      "MIXED BINDING TRACE:family-case-start:8:2:0",
+      "MIXED BINDING TRACE:family-case-closed:8:2:0",
+      "MIXED BINDING TRACE:family-case-start:8:0:1",
+      "MIXED BINDING TRACE:family-case-closed:8:0:1",
+      "MIXED BINDING TRACE:family-case-start:8:1:1",
+      "MIXED BINDING TRACE:family-case-closed:8:1:1",
+      "MIXED BINDING TRACE:family-case-start:8:2:1",
+      "MIXED BINDING TRACE:family-case-closed:8:2:1",
+      "MIXED BINDING TRACE:family-case-start:8:0:2",
+      "MIXED BINDING TRACE:family-case-closed:8:0:2",
+      "MIXED BINDING TRACE:family-case-start:8:1:2",
+      "MIXED BINDING TRACE:family-case-closed:8:1:2",
+      "MIXED BINDING TRACE:family-case-start:8:2:2",
+      "MIXED BINDING TRACE:family-case-closed:8:2:2",
+      "MIXED BINDING TRACE:family-case-start:8:0:3",
+      "MIXED BINDING TRACE:family-case-closed:8:0:3",
+      "MIXED BINDING TRACE:family-case-start:8:1:3",
+      "MIXED BINDING TRACE:family-case-closed:8:1:3",
+      "MIXED BINDING TRACE:family-case-start:8:2:3",
+      "MIXED BINDING TRACE:family-case-closed:8:2:3",
+      "MIXED BINDING TRACE:family-case-start:8:0:4",
+      "MIXED BINDING TRACE:family-case-closed:8:0:4",
+      "MIXED BINDING TRACE:family-case-start:8:1:4",
+      "MIXED BINDING TRACE:family-case-closed:8:1:4",
+      "MIXED BINDING TRACE:family-case-start:8:2:4",
+      "MIXED BINDING TRACE:family-case-closed:8:2:4",
+      "MIXED BINDING FAMILY PASS:8mono amigus16le;15 cases;3 controls12 refusals;before-action/enqueue/active readiness;genuine pins and independent retirement;other480 and legacy constructor excluded;SOFTWARE_ONLY",
+      "MIXED BINDING TRACE:family-finished:8:1:15"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 1627,
+    "outputCRC32": "4768FBCF",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "native_rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "orchestration": {
+    "host_runner_tests": 35,
+    "host_service_tests": 27,
+    "entry_tests": 15,
+    "input_files": 1,
+    "execution_files": 9,
+    "final_closed_sidecar_bytes": 43,
+    "actual_pass_required": true,
+    "unchanged_transaction_retried": false
+  },
+  "cleanup": {
+    "exact_guest_and_host_staging_absence": true,
+    "saved_originals_and_profile_mapping_restored": true,
+    "independent_observation": true,
+    "public_release": true,
+    "own_service_and_emulator_absent": true,
+    "tcp_and_named_unix_endpoints_absent": true,
+    "separate_final_idle": true,
+    "fence": 1755,
+    "archives": 101,
+    "holds": 0,
+    "availability": "Historical final observation; fresh live checks required"
+  },
+  "records_sha256": {
+    "spec": "7b7d0904cdb4bb00cbe7cd6741ae17f66bc14add5cfccec30edf54974a5a741a",
+    "admission": "a96419b9c404d41c27f4ec5b516551bc05ccc6753654d58df8f8d563d4928658",
+    "actual_result": "6c8e4967cc45f62be00965f1e2c17a84c76df07b8e4d084a1202ee33ae873205",
+    "independent_pass": "b89084603422136009b98221062987f9d4094ab08a8dd9ab313fc74b3cda6744",
+    "public_release": "1340975bdf79bd6a86220de9cc0b87ef475ef734f20b20b2219a48221708a881",
+    "owned_service_stop": "08227691aa2ab362ebc2e16989c24d87e50fea208621a88f1adc682f9a087580",
+    "separate_final_idle": "35f1f3b5dd700a0d8f262aa480496c65f75fd6e586b7d656b2896a04e9ee52b1"
+  },
+  "not_qualified": [
+    "Other480 cases and legacy constructor in this native run",
+    "Cause of earlier full495/75-case native deadlines",
+    "Exec Fast/Chip placement or whole callchain stack/WCET",
+    "Real device RAM capacity/ordering/completion/voice-stop/DMA/IRQ",
+    "Native output activation/exact musical timing/full app/audio/listening"
+  ],
+  "physical_execution": "NOT_RUN"
+}

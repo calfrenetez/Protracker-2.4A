@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "state": "FIVE_INDEPENDENT_FIFTEEN_CASE_NATIVE_PASSES",
+  "source_commit": "595a2c0e069e5290c8d82ea9e29aa4a93069752e",
+  "unique_cases": 75,
+  "controls": 15,
+  "refusals": 60,
+  "master_format": "signed8-bit mono",
+  "families": {
+    "paula": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "candidate": {
+        "crc32": "2397123A",
+        "sha256": "3b2d1647628eb7cd9ad71d02eff0ee3ec8c73de659169840f70a62cd87a9f155",
+        "size": 296520
+      },
+      "returnCode": 0,
+      "stackBytes": 1048576,
+      "stdoutBytes": 1622,
+      "stdoutCRC32": "02CA4ACA",
+      "record": "family-paula-emulator.json",
+      "recordSHA256": "630f1b2266477b839f68968046a0a38785fe5a76484e7d6406b2fbda93482b16",
+      "releaseFence": 1739,
+      "releaseArchives": 97
+    },
+    "amigus8be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "candidate": {
+        "crc32": "F07E9CF2",
+        "sha256": "d9f4eff686d2789cd7e35bae5f5def6a352a29275e19d987a0f6391dcfc414ef",
+        "size": 296524
+      },
+      "returnCode": 0,
+      "stackBytes": 1048576,
+      "stdoutBytes": 1626,
+      "stdoutCRC32": "30C14B9E",
+      "record": "family-amigus8be-emulator.json",
+      "recordSHA256": "1257ee33259ac4fec7a9ed151dd76f033928d4b892af1da85d495d442730d215",
+      "releaseFence": 1743,
+      "releaseArchives": 98
+    },
+    "amigus8le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "candidate": {
+        "crc32": "C512F7BD",
+        "sha256": "10705b5355d424dcfb685a0d04fb0b8b8e49f22d41928e96e031a6ecb525e099",
+        "size": 296528
+      },
+      "returnCode": 0,
+      "stackBytes": 1048576,
+      "stdoutBytes": 1626,
+      "stdoutCRC32": "67992F73",
+      "record": "family-amigus8le-emulator.json",
+      "recordSHA256": "47861dd959506dc7c4a9436d38c5889025649ff8b899e6fe50a8c51d6c580439",
+      "releaseFence": 1747,
+      "releaseArchives": 99
+    },
+    "amigus16be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "candidate": {
+        "crc32": "45FCFCAF",
+        "sha256": "411c4b279ac08d007304559be17708d813aa0c746c71a8de8d506f725163db47",
+        "size": 296528
+      },
+      "returnCode": 0,
+      "stackBytes": 1048576,
+      "stdoutBytes": 1627,
+      "stdoutCRC32": "10309F22",
+      "record": "family-amigus16be-emulator.json",
+      "recordSHA256": "af07457480d4e6bfe36f991776671ddeee66ed403f224db043506e2abe3b7739",
+      "releaseFence": 1751,
+      "releaseArchives": 100
+    },
+    "amigus16le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "candidate": {
+        "crc32": "854BD61C",
+        "sha256": "96879ce6675aee8f719dbf7b1bb3b795dd692dd98e443db72cf909e4ee2f7389",
+        "size": 296528
+      },
+      "returnCode": 0,
+      "stackBytes": 1048576,
+      "stdoutBytes": 1627,
+      "stdoutCRC32": "4768FBCF",
+      "record": "family-amigus16le-emulator.json",
+      "recordSHA256": "12534f7de93c96697d3cef7344d25769c2ce852606161cc66bc8c2e78c0d3517",
+      "releaseFence": 1755,
+      "releaseArchives": 101
+    }
+  },
+  "boundaries": [
+    "before action construction",
+    "enqueue admission",
+    "active reader readiness"
+  ],
+  "faults": [
+    "another sample",
+    "other playback width",
+    "changed word padding",
+    "changed byte order"
+  ],
+  "assertions": "Genuine factory/cache/pins, unchanged master/cache/fakebus bytes, independent command/reader retirement and zero explicitly owned resources. Corrupted keys are not repaired for cleanup.",
+  "ordinary_allocations_and_fake_bus": true,
+  "each_run_bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "native_rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "each_run_input_files": 1,
+  "each_run_execution_files": 9,
+  "each_run_stdout_lines": 33,
+  "each_final_closed_sidecar_bytes": 43,
+  "each_run_separate_independent_release": true,
+  "unchanged_transactions_retried": false,
+  "current_project_dependencies_per_family_unchanged": 89,
+  "frozen_inputs_unchanged": 1376,
+  "unrelated_paths_preserved": 16,
+  "earlier_continuous_75_and_495_attempts": "FAILED_COMPLETION_UNCONFIRMED; original evidence preserved; cause not established",
+  "not_qualified": [
+    "Continuous75/495-case execution in one process or original legacy constructor",
+    "Other420 mixed cases including stereo and16/24-bit masters",
+    "Exec Fast/Chip placement or whole-callchain stack/WCET",
+    "Physical card capacity/ordering/completion/actual voice-stop/DMA/IRQ",
+    "Native output activation/exact musical timing/full app/audio/listening"
+  ],
+  "physical_execution": "NOT_RUN",
+  "native_provider_inhibited": true,
+  "exact_musical_schedule_unchanged": true,
+  "shared_availability": "Historical release records only; fresh live checks required for future operations"
+}

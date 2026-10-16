@@ -1,5 +1,24 @@
 # Sample memory and playback ownership
 
+## Mixed cache source binding: separate native backend families —16 October2026
+
+The8-bit mono mixed-reader matrix now passes in five separate15-case Amiberry
+runs: Paula and AmiGUS8/16 with both byte orders. All75 cases retain the genuine
+factory, master/cache pins and independent command/reader retirement checks;
+15 controls and60 source/key refusals pass with unchanged master/cache/fake-bus
+bytes. Every exact run completes33 stdout observations and a separately closed
+sidecar, then independent cleanup/restoration/public release/service stop/fresh
+idle verification. Six sanitizer tests in four modules cover all five families,
+the earlier probes, full495-case HOST matrix and original six components.
+
+This advances software cache identity and retained ownership on the native CPU.
+The bus is modeled and allocations are ordinary. Continuous75/495-case native
+execution, the original constructor and the other420 mixed cases remain separate;
+earlier failed transactions are preserved. No physical card, actual voice-stop,
+IRQ, exact output timing, frontend or listening acceptance follows. See
+[family scope and results](SAMPLER_MIXED_READERS.md#bounded-backend-families-16-october2026)
+and [compact native evidence](../evidence/enhanced-editor/mixed-source-binding/families-emulator.json).
+
 ## Current Fast/Chip reader memory qualification — 16 October 2026
 
 The persistent-reader memory fixture has been rebuilt from the current committed

@@ -256,3 +256,37 @@ All family native/Amiberry and physical executions remain NOT_RUN at preparation
 Earlier failed transactions and their unconfirmed cause are preserved. No
 device, actual voice-stop, native output/IRQ, live timing or listening acceptance
 follows. See [family host/build evidence](../evidence/enhanced-editor/mixed-source-binding/families-host-build.json).
+
+The exact296,520-byte Paula family subsequently passes once in the shared68030:
+all15 cases, RC0, observed1MiB Stack,33 exact lines and the43-byte final closed
+sidecar. Separate custody, guest/host cleanup, saved-file restoration, independent
+observation, public release, owned-service stop and fresh final idle checks pass.
+This qualifies that15-case scope only; it does not qualify the other four
+families, continuous75/495-case native execution or the original constructor.
+Earlier deadline failures and their unconfirmed cause are unchanged. See
+[Paula family native evidence](../evidence/enhanced-editor/mixed-source-binding/family-paula-emulator.json).
+
+All five exact family candidates subsequently pass independently in the
+shared68030 profile. Together they cover the75 genuine8mono cases:15 controls
+and60 source/key refusals. Each has RC0,33 exact stdout lines, observed1MiB
+Stack, the43-byte final closed sidecar, separate exact custody/cleanup,
+restoration/absence verification, public release, owned-service stop and a fresh
+final idle check. All89 compiled project bodies per family and all16 unrelated
+paths remain unchanged. No owned resource or HOLD remains after the final run.
+
+| Family | Cases | Native result |
+| --- | ---: | --- |
+| Paula signed8 | 15 | PASS, independently released |
+| AmiGUS8 big-endian | 15 | PASS, independently released |
+| AmiGUS8 little-endian | 15 | PASS, independently released |
+| AmiGUS16 big-endian | 15 | PASS, independently released |
+| AmiGUS16 little-endian | 15 | PASS, independently released |
+
+These are five separate process scopes. Continuous75/495-case execution and the
+legacy constructor remain unqualified; earlier failures and their unconfirmed
+cause are preserved. The remaining420 mixed cases, including stereo and16/24-bit
+masters, still require their own native evidence. Ordinary allocations and the
+fake bus qualify neither physical card RAM/order/completion/voice-stop nor native
+output, IRQ, musical timing or listening. Actual Safari remains inaccessible
+with the Mac locked; physical execution remains NOT_RUN. See
+[aggregate native evidence and individual records](../evidence/enhanced-editor/mixed-source-binding/families-emulator.json).

@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "scope": "HOST sanitizer and pinned Amiga compile/link only; diagnostic case1 is one complete original mixed16 control; all clocks and buses are models",
+  "host": {
+    "diagnosticDispatch": "All68 original cases in original order with exact68 BEGIN/END pairs, then separately selected case1; ASan UBSan, enabled assertions, strict warnings",
+    "originalFullEntryRegression": "Original full68 native entry and exact oracle pass under ASan UBSan after optional-entry-name change",
+    "preservation": "Protected16 and classic51 baseline guards compare stable facts; raw cloud bookkeeping retained privately",
+    "firstDiagnosticCompileFailure": "Preserved separately; nested donor main macros required an explicit optional private entry name. No native execution from the failed compile.",
+    "evidenceSHA256": {
+      "diagnosticResult": "a669dd4f17f5f5385c216a593a79558c287d329558510eb45a7f92ac7deba89e",
+      "all68Stdout": "1a3eb8bded566e60eb37b418954bb5b6e5f6b75c30704696dd19c47a0595b097",
+      "case1Stdout": "056e5e0bb15b6b3466b3b6138b2c43d4278076c157180850830463fd9bf184c8",
+      "fullEntryResult": "d17cbb153c834cd9fd47d044f3327e0e3136a1bd42f63db39af1a90e0ec9decf",
+      "fullEntryStdout": "fabb67ced747f983cf45968f936ea8b67fd2c39fa2e2e65cb714ca4f85780594"
+    }
+  },
+  "nativeBuild": {
+    "candidate": {
+      "bytes": 337396,
+      "sha256": "7beeb37780179f93274ccf991319df7a5ba7d44a339093e6bb9149ea7009b375",
+      "crc32": "407F4375"
+    },
+    "sourceFiles": 235,
+    "translationUnits": 86,
+    "dependencyBodies": 226,
+    "sdkBodies": 43,
+    "runtimeCount": 7,
+    "baseFlags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "extraCompileFlags": [
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DPT_ROLLING_DIAGNOSTIC_CASE=1"
+    ],
+    "extraLinkFlags": [
+      "-Wl,--gc-sections"
+    ],
+    "HUNK_HEADER": "0x3f3",
+    "warnings": "errors",
+    "assertions": "SDK donor plus original sl_check enabled",
+    "assemblerLinkerBeforeAfterVerified": true,
+    "buildManifestSHA256": "91d1491ee2386dc2bcc119a5a09dc77d66667bc2bb16e2fc01822bec84787caf",
+    "sourceManifestSHA256": "58ade9fdf80b943dbfb8038ad5fc822627300dca24330ecc8d160fa5891d0860"
+  },
+  "sourceSHA256": {
+    "tests/native_exec_mixed_causal_rolling_diagnostic.c": "68f8c5a182e3f8a01ce7ad96b77505492d990afc78d5caa3bf8fe6b99340246a",
+    "tests/native_exec_mixed_causal_rolling_test.c": "39d004e5ba4def1fd62ea67be67ad69c51cee73bdc0b8d1f621339669ca9f3f9",
+    "tests/test_native_mixed_causal_rolling_diagnostic.py": "b577f9fbf8d21aa8174effbdccff05cd2fdf4cc3089909d0e7d7280672bedeed",
+    "tools/build_native_mixed_causal_rolling.py": "514b731aa91596dc35c363f2790a5290e50db591e4f05fa7afd95c875fae2b35"
+  },
+  "originalFull68FailedOperation": "Preserved separately; not replayed, no full68 native qualification",
+  "nativeExecution": "NOT_RUN",
+  "physicalExecution": "NOT_RUN",
+  "limits": "No actual clock, output activation, IRQ, device RAM/stop, physical placement, audio, listening or whole-app acceptance"
+}

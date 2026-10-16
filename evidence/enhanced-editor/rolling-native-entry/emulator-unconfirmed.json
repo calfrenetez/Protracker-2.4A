@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "tier": "AMIBERRY_EXECUTION_UNCONFIRMED_RECOVERY_COMPLETE",
+  "candidate": {
+    "bytes": 343956,
+    "sha256": "d93dbcb445649f3129a8b5325b614e9ebd61c22e02d492f0a04ccfbc248bcf22",
+    "crc32": "DECA9522"
+  },
+  "modelScope": "Original rolling68; clocks, buses and retirement models only; no active native provider",
+  "hostPrerequisites": {
+    "runnerCases": 35,
+    "serviceCases": 27,
+    "entryReviewCases": 15
+  },
+  "dispatch": "Native execution dispatched; no confirmed completion, return code, or68-case terminal marker",
+  "lastSavedReply": {
+    "nativeLogBytes": 0,
+    "controlLogBytes": 166,
+    "completeFlagBytes": 0
+  },
+  "failure": "Request reply unconfirmed; guard journal contention prevented normal unwind; original interrupted reservation retained until verified recovery",
+  "causeLimits": "Native crash, CRT fault or runtime overrun not established. Offline symbol/table inspection finds initialization and exit lists and their runtime functions present; this is not runtime qualification.",
+  "unchangedBounds": {
+    "nativeSeconds": 90,
+    "runnerSeconds": 140,
+    "wholeRunSeconds": 250,
+    "inputBytes": 524288
+  },
+  "recovery": {
+    "onlyVerifiedOwnedResources": true,
+    "failedTransactionReplayed": false,
+    "exactEmulatorAndServiceAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "exactStagingRemoved": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "originalInterruptedOperationArchived": true,
+    "separateFinalIdle": true,
+    "phase": "EMPTY",
+    "fence": 1892,
+    "archives": 135,
+    "holds": 0
+  },
+  "privateEvidenceHashes": {
+    "failedResult": "bbf0f43a14d83de2d9b8e85e37bd1d3add2fab2d68a3b11c04e4be024162e646",
+    "restoration": "3a23161b7c7340081919acbd49eb92af3c2fb9d79b927a8bbc474756a378a208",
+    "independentObservation": "dd4f889dea3fcedb1fc8756a54bc843fd8c35b7d8a35c9540260a04379972a01",
+    "release": "15cfb4da1fdc206f639c219a4e5da0c9ef8f13a079c76a46118a09a99704e815",
+    "independentFinalIdle": "ba3612c1edc8b72f9db713c6ccdca2fd5347f11f656662c9c86a28b5e5a9a52f",
+    "closedInventory": "39bff020c24d27c8a640c35ee56cb6e0756f8e4b1290b98f533bf85443e05f89"
+  },
+  "physicalPromotion": "NOT_RUN; exact candidate has no native completion qualification",
+  "otherAcceptance": "No scheduling, output activation, hardware RAM/stop, audio, listening or full-app acceptance"
+}

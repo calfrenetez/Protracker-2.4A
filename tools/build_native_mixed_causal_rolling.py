@@ -125,7 +125,18 @@ def main():
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--diagnostic-case', type=int, choices=range(69),
+                    help='Separate diagnostic: one original case (1..68), or all68 (0); never a full68 qualification marker')
     args = ap.parse_args()
+    units = list(SOURCES)
+    extra_compile = list(EXTRA_COMPILE_FLAGS)
+    target = TARGET
+    marker = b'ROLLING RAM NATIVE PASS:'
+    if args.diagnostic_case is not None:
+        units[0] = 'tests/native_exec_mixed_causal_rolling_diagnostic.c'
+        extra_compile.append('-DPT_ROLLING_DIAGNOSTIC_CASE=' + str(args.diagnostic_case))
+        target = 'PTMixedRollingDiagnostic'
+        marker = b'ROLLING DIAGNOSTIC PASS:'
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -162,7 +173,8 @@ def main():
               'base_commit': complete['base_commit'], 'base_tree': complete['base_tree'],
               'source_files_before': len(expected), 'source_fingerprint': source_fingerprint(expected),
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
-              'recipe_contract': convention, 'flags': FLAGS, 'extra_compile_flags': EXTRA_COMPILE_FLAGS, 'extra_link_flags': EXTRA_LINK_FLAGS, 'runtime_inputs': {},
+              'recipe_contract': convention, 'flags': FLAGS, 'extra_compile_flags': extra_compile, 'extra_link_flags': EXTRA_LINK_FLAGS, 'runtime_inputs': {},
+              'diagnostic_case': args.diagnostic_case,
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
     def persist():
@@ -203,9 +215,9 @@ def main():
             require_pin(path, pins['runtime_inputs'][name])
             runtime_paths[name] = str(path)
             result['runtime_inputs'][name] = pins['runtime_inputs'][name]
-        for index, unit in enumerate(SOURCES):
+        for index, unit in enumerate(units):
             toolchain_current()
-            text = run([compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, '-M', unit], 'dependencies-%02d' % index)
+            text = run([compiler, *FLAGS, *extra_compile, '-M', unit], 'dependencies-%02d' % index)
             for name in dependencies(text):
                 path = (source / name).resolve()
                 if below(path, source):
@@ -217,33 +229,33 @@ def main():
                     sdk_inputs[str(path)] = digest(path)
                 else:
                     raise ValueError('Dependency outside frozen source and pinned SDK roots: ' + str(path))
-        text = run([compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
+        text = run([compiler, *FLAGS, *extra_compile, '-E', '-dD', units[0]], 'preprocessed-fixture')
         assertions = re.findall(r'^#define assert\([^\n]*', text, re.MULTILINE)
         assertion = assertions[-1] if assertions else None
         if not assertion or 'sl_check(!!(expression)' not in assertion or text.count('__assert_func (') < 2:
             raise ValueError('Enabled SDK donor assertions and exact rolling sl_check macro required')
-        if 'ROLLING RAM NATIVE PASS:' not in text:
+        if marker.decode('ascii') not in text:
             raise ValueError('Native rolling fixture marker missing')
         toolchain_current()
         require_source(source, expected)
-        binary = out / TARGET
-        argv = [compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, *SOURCES, *EXTRA_LINK_FLAGS, '-o', str(binary)]
-        compile_commands.append({'name': TARGET, 'directory': str(source), 'argv': argv,
-                                 'output': str(binary), 'ordered_translation_units': SOURCES})
-        run(argv, TARGET + '.build')
+        binary = out / target
+        argv = [compiler, *FLAGS, *extra_compile, *units, *EXTRA_LINK_FLAGS, '-o', str(binary)]
+        compile_commands.append({'name': target, 'directory': str(source), 'argv': argv,
+                                 'output': str(binary), 'ordered_translation_units': units})
+        run(argv, target + '.build')
         raw = binary.read_bytes()
         if len(raw) < 4 or struct.unpack('>I', raw[:4])[0] != 0x3f3:
             raise ValueError('Linked native product lacks HUNK_HEADER0x3f3')
-        if b'ROLLING RAM NATIVE PASS:' not in raw:
+        if marker not in raw:
             raise ValueError('Linked product lacks shared assertion-completion marker')
-        result['targets'][TARGET] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': FLAGS,
-                                     'extra_compile_flags': EXTRA_COMPILE_FLAGS, 'extra_link_flags': EXTRA_LINK_FLAGS,
+        result['targets'][target] = {'scope': SCOPE, 'source_inputs': units, 'flags': FLAGS,
+                                     'extra_compile_flags': extra_compile, 'extra_link_flags': EXTRA_LINK_FLAGS,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',
                                      'last_assert_macro': assertion,
                                      'preprocessed_fixture': record(out / 'preprocessed-fixture.log'),
-                                     'build_log': record(out / (TARGET + '.build.log'))}
+                                     'build_log': record(out / (target + '.build.log'))}
         result['passed'] = True
     except Exception as error:
         result['failure'] = {'kind': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}

@@ -7661,3 +7661,13 @@ Its 495-case host regression, unchanged full factory/quantized suites and new
 Amiga compiler/linker check pass. The new candidate has not run in Amiberry or
 on hardware; backend resource checks and independent retirement remain required.
 See [mixed cache binding](SAMPLER_MIXED_READERS.md#exact-cache-source-binding--16-october-2026).
+
+The compact original rolling68 native fixture was dispatched once in Amiberry;
+completion, RC and its terminal oracle remained unconfirmed. Exact owned
+recovery, independent restoration/absence, public release preserving the
+interrupted operation, and a further idle check passed. It was not replayed or
+promoted to hardware. A separately selected first-case diagnostic now passes
+HOST sanitizers and the pinned native build; its all68 diagnostic dispatch and
+the unchanged default full-entry oracle also pass HOST regression. Native
+execution remains separate, as do device stop/capacity/order, exact output timing,
+audio and full-app acceptance. See [rolling execution scope](NATIVE_ROLLING_ENTRY.md).

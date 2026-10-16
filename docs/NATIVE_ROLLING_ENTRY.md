@@ -68,3 +68,38 @@ separate from an aggregate Stack/IRQ/WCET bound. Exact Amiberry execution must
 qualify the changed loader/CRT path before physical promotion. Native execution
 is NOT_RUN at this milestone; all earlier compile/gate failures remain preserved.
 See [the scoped compact-build evidence](../evidence/enhanced-editor/rolling-native-entry/gc-build.json).
+
+## First emulator execution remained unconfirmed
+
+The exact343956-byte candidate was dispatched once with unchanged native90s,
+runner140s and whole-run250s bounds. Completion, return code and the68-case
+terminal oracle were not confirmed. The last saved directory reply showed an
+empty native log and completion flag. Guard journal contention also prevented
+the normal unwind; the interrupted reservation was retained. These observations
+do not establish a native crash, a CRT fault or a fixture runtime overrun.
+
+Authorized recovery stopped only the positively identified emulator; its owned
+service was already absent. The exact two saved launcher files were restored
+and the run's staging copy removed. A separate observer verified restoration,
+process/socket absence and cleanup before public release archived the original
+interrupted operation. A further independent idle check passed: EMPTY1892,
+135retained archives, no holds. The failed transaction was not replayed and
+there was no physical promotion. Raw failed evidence and all prior records stay
+preserved. See [the compact failure/recovery evidence](../evidence/enhanced-editor/rolling-native-entry/emulator-unconfirmed.json).
+
+## Separately selected diagnostic
+
+A new diagnostic can select one original case at compile time, with flushed
+entry, header-control and case BEGIN/END witnesses. Its terminal message identifies
+that exact case and count; it never emits the full68 qualification marker. The
+first native candidate selects case1, the complete mixed16 rolling control. It
+retains original assertions, reader/source ownership and cleanup. The original
+full68 entry remains the default, with an optional private entry name for reuse.
+
+HOST ASan/UBSan checks pass for the diagnostic's all68 dispatch in original order
+and for separately selected case1, with exact progress and completion output.
+The original full68 entry and oracle also pass again. The first diagnostic compile
+failure is preserved separately. A pinned native build with case1, the original
+86 translation units and unchanged staging/runtime bounds passes. Emulator and
+physical execution of this diagnostic remain NOT_RUN at this build milestone.
+See [diagnostic host/build evidence](../evidence/enhanced-editor/rolling-native-entry/diagnostic-host-build.json).

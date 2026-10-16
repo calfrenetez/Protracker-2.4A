@@ -48,7 +48,10 @@ static void pt_rolling_header_byte_controls(void)
     assert(!pt_establish_inventory_field_byte(SIZE_MAX,0,SIZE_MAX));
     assert(pt_establish_inventory_field_byte(SIZE_MAX,SIZE_MAX,1));
 }
-int main(void)
+#ifndef PT_PRIVATE_ROLLING_NATIVE_ENTRY
+#define PT_PRIVATE_ROLLING_NATIVE_ENTRY main
+#endif
+int PT_PRIVATE_ROLLING_NATIVE_ENTRY(void)
 {
     assert(sizeof(uint64_t)==8 && sizeof(uint32_t)==4);
     pt_rolling_header_byte_controls();

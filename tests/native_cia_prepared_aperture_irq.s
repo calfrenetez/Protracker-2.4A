@@ -29,6 +29,21 @@ _pt_diagnostic_cia_prepared_aperture_irq:
     move.l 8(%a4),%d6
     move.l 12(%a4),%d7
     moveq #0,%d2 /* Previous exact offset, valid after first sample. */
+    /* Common window wholly within one high word. Compute its absolute bounds
+     * once, before the first actual read. A4 holds the expected high WORD VALUE
+     * (not an address) on this path; library ABI preserves it. A low-word carry
+     * in the window itself takes the unchanged general path below. */
+    move.l %d4,%a4
+    add.l %d5,%d6
+    bcc .Lwindow_high
+    addq.l #1,%a4
+.Lwindow_high:
+    add.l %d5,%d7
+    cmp.l %d6,%d7
+    bhi .Lfast_read
+    lea 24(%a2),%a4
+    move.l 8(%a4),%d6
+    move.l 12(%a4),%d7
 .Lread:
     move.l %a3,%a0
     jsr -60(%a6)
@@ -61,6 +76,7 @@ _pt_diagnostic_cia_prepared_aperture_irq:
     move.l #0x41504552,12(%a5) /* The only irreversible diagnostic write. */
     move.l %a3,%a0
     jsr -60(%a6) /* Immediately following actual sample, before bookkeeping. */
+.Lpost_observed:
     move.l %d0,8(%a3)
     addq.l #1,%d3
     moveq #1,%d1
@@ -83,6 +99,63 @@ _pt_diagnostic_cia_prepared_aperture_irq:
     cmp.l %d6,%d1
     bcs .Lpost_window
     moveq #1,%d0 /* COMMITTED */
+    bra .Lfinish
+.Lfast_read:
+    move.l %a3,%a0
+    jsr -60(%a6)
+    move.l %d0,8(%a3)
+    addq.l #1,%d3
+    cmp.l 40(%a2),%d0 /* Original descriptor frequency, BEFORE any store. */
+    bne .Lclock
+    cmpa.l (%a3),%a4 /* Full high-word equality; no modular-clock admission. */
+    bne .Lfast_general
+    move.l 4(%a3),%d0
+    cmp.l %d6,%d0
+    bcs .Lfast_general
+    cmp.l %d7,%d0
+    bcc .Lexpired
+    /* Every earlier accepted pre-store read took the below-first branch.
+     * Thus this full-width [first,last) sample exceeds that previous read.
+     * Entry>=arm and the residency bound follow from the prepared window.
+     * Neither frequency, high word, window nor reentry checks are deferred. */
+    tst.l 24(%a5)
+    bne .Lreentry
+    move.l #0x41504552,12(%a5)
+    lea 12(%a3),%a0
+    jsr -60(%a6)
+    /* The post-store sample is already actual. Now recover the exact previous
+     * offset and ordinary descriptor registers for common post-read checks.
+     * Bounded subtraction is exact even if arm->first crossed a low word. */
+    move.l 4(%a3),%d2
+    sub.l %d5,%d2
+    lea 12(%a3),%a3
+    lea 24(%a2),%a4
+    move.l 8(%a4),%d6
+    move.l 12(%a4),%d7
+    bra .Lpost_observed
+.Lfast_general:
+    /* Pre-window samples still receive all full-width arm/regression checks.
+     * A different high word cannot qualify through the absolute low bounds. */
+    move.l (%a3)+,%d0
+    move.l (%a3)+,%d1
+    addq.l #4,%a3
+    sub.l %d5,%d1
+    subx.l %d4,%d0
+    bcs .Lbelow_arm
+    tst.l %d0
+    bne .Lexpired
+    cmp.l %d2,%d1
+    bcs .Lclock
+    move.l %d1,%d2
+    cmp.l 36(%a2),%d1
+    bcc .Lexpired
+    cmp.l 32(%a2),%d1
+    bcc .Lclock /* Impossible for immutable same-high-word window; fail closed. */
+    move.l 44(%a2),%d0
+    subq.l #1,%d0
+    cmp.l %d0,%d3
+    bcs .Lfast_read
+    moveq #7,%d0
     bra .Lfinish
 .Lpoll:
     move.l 20(%a4),%d0

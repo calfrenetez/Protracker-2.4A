@@ -1,0 +1,58 @@
+{
+  "qualification": "COMPILE_AND_UNCHANGED_REFERENCE_ONLY",
+  "candidate": {
+    "bytes": 49820,
+    "sha256": "fd407610148ed6a6bcb23a4e0f585e6d5cee40e9859c7877b771eb8f4635fe5a",
+    "crc32": "B20B2812",
+    "executed": false
+  },
+  "change": "Distinct assembly same-high-word in-window comparisons; full general early/regression/carry path and output/descriptor contract retained. No epoch/phase/rate/priority/window change.",
+  "hostReference": {
+    "groups": 1,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "stableKeyPairedCases": 512,
+    "elapsedSeconds": 0.755,
+    "logSHA256": "3226896c7d968d1b48479b71ded310f46ed1bc355d626a125dc03b4433135eaa",
+    "provesAssemblyEquivalence": false
+  },
+  "build": {
+    "orderedUnits": [
+      "tests/native_exec_cia_prepared_aperture_test.c",
+      "tests/cia_prepared_aperture.c",
+      "tests/cia_aperture_model.c",
+      "src/core/elapsed_clock.c",
+      "tests/native_cia_prepared_aperture_irq.s"
+    ],
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "projectDependencies": 14,
+    "sdkDependencies": 70,
+    "runtimeQueries": 7,
+    "offsetAssertions": 26,
+    "sizeAssertions": 3,
+    "fullLinkerLoadAudit": false
+  },
+  "previousCandidate": {
+    "sha256": "9cbc7aa9994d7156c2d25056669c46d7bccec12e867f6f15845a06e5c15a5744",
+    "nativeQualification": "FAILED",
+    "irreversibleShadowWrites": 2,
+    "unchangedRetry": false
+  },
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "scope": "Diagnostic only; no real ownership, scheduled-output capability, total IRQ/stack/WCET, DMA, device, audio or listening qualification"
+}

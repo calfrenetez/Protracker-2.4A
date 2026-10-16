@@ -125,6 +125,37 @@ rate, monotonicity, original-window and zero-before/irreversible-after semantics
 The last accepted pre-window sample is below `first`, so a full-width sample
 inside `[first,last)` already exceeds it; this may permit some general polling
 work to occur outside the narrow store bracket. Low-word rollover still needs
-an explicit general path. This has not been implemented or qualified. No
+an explicit general path. The narrower candidate below implements this comparison; it is not yet native-qualified. No
 unchanged native retry, epoch shift, phase tuning, wider window, clock/priority
 change or native-provider enablement is authorized by the failed observation.
+
+
+## Shorter in-window comparison candidate — compile only
+
+A new49,820-byte candidate has SHA256
+`fd407610148ed6a6bcb23a4e0f585e6d5cee40e9859c7877b771eb8f4635fe5a`.
+It is native NOT_RUN. Only the diagnostic assembly changes. The descriptor,
+raw-read output schema, C oracle and bounded collector contract are unchanged.
+Pinned five-unit compilation and the unchanged ASan/UBSan reference pass; this
+is not assembly equivalence, timing, native output or stack qualification.
+
+Before reading the clock, the handler calculates absolute first/last low words
+and the complete expected high word. A window crossing a low-word boundary
+uses the existing general path. Otherwise, the narrow path still checks the
+returned frequency, complete high word, both absolute low bounds and reentry
+before any shadow write. Its high-word comparison is equality, not a truncated
+or signed-clock ordering test.
+
+Every earlier accepted pre-store read took the pre-window branch. A complete
+actual sample inside `[first,last)` therefore exceeds that earlier sample and
+is at or after `arm_at`; the prepared residency proof also still holds. This
+allows general offset normalization and polling bookkeeping to remain outside
+the narrow write bracket. Early samples and different high words still take
+full-width arm/regression/expiry/read-cap checks. The actual following read
+happens before recovering registers and bookkeeping. Its exact previous offset
+is recovered only after that sample, using the already-proved bounded absolute
+precommit range, then the original full-width post-read checks run.
+
+No native evidence for this candidate exists yet. It requires a new exact-byte
+Amiberry packet/run; the previous9cbc observation stays FAILED and frozen.
+See [compile evidence](../evidence/enhanced-editor/cia-prepared-window-host/result.json).

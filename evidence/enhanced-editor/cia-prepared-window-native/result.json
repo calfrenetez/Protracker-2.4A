@@ -1,0 +1,342 @@
+{
+  "qualification": "FAILED",
+  "nativeReturnCode": 20,
+  "candidate": {
+    "bytes": 49820,
+    "sha256": "fd407610148ed6a6bcb23a4e0f585e6d5cee40e9859c7877b771eb8f4635fe5a",
+    "crc32": "B20B2812"
+  },
+  "sourceCommit": "518514c68ccbf53a52e15c8c80f970fc59a8d111",
+  "attempts": 1,
+  "nativeRetries": 0,
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "observedCPUCycleExact": true,
+    "observedChipKB": 2048,
+    "observedZ3KB": 131072,
+    "physicalTimingEquivalence": false
+  },
+  "timing": {
+    "positive": 0,
+    "requiredPositive": 12,
+    "negative": 4,
+    "requiredNegative": 4,
+    "irreversibleShadowWrites": 12,
+    "frequency": 709379,
+    "originalWindowTicks": [
+      14,
+      15
+    ],
+    "allNormalPrecommitSamplesInOriginalWindow": true,
+    "normalPrecommitDeltas": [
+      1,
+      6
+    ],
+    "normalPostcommitDeltas": [
+      25,
+      29
+    ],
+    "normalPrePostReadGapTicks": [
+      22,
+      24
+    ],
+    "actualWriteTimeWithinReadBracketUnresolved": true,
+    "isolatedClockCallOrTotalIRQCostQualified": false
+  },
+  "observations": [
+    {
+      "index": 0,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -68,
+        -43,
+        -19,
+        5,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 1,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -70,
+        -46,
+        -21,
+        4,
+        28
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 2,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -70,
+        -46,
+        -21,
+        3,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 3,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -48,
+        -23,
+        2,
+        26
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 4,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -70,
+        -45,
+        -20,
+        5,
+        29
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 5,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -46,
+        -21,
+        4,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 6,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -72,
+        -47,
+        -22,
+        4,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 7,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -68,
+        -43,
+        -19,
+        5,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 8,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -46,
+        -20,
+        6,
+        29
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 9,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -73,
+        -49,
+        -24,
+        1,
+        25
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 10,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -70,
+        -45,
+        -19,
+        5,
+        28
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 11,
+      "mode": 0,
+      "result": 9,
+      "reads": 5,
+      "commits": 1,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        -71,
+        -47,
+        -20,
+        4,
+        27
+      ],
+      "beforeIndex": 4,
+      "afterIndex": 5
+    },
+    {
+      "index": 12,
+      "mode": 1,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [],
+      "beforeIndex": 0,
+      "afterIndex": 0
+    },
+    {
+      "index": 13,
+      "mode": 2,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [],
+      "beforeIndex": 0,
+      "afterIndex": 0
+    },
+    {
+      "index": 14,
+      "mode": 3,
+      "result": 5,
+      "reads": 1,
+      "commits": 0,
+      "windowTicks": 15,
+      "actualSampleDeltasFromFirst": [
+        198
+      ],
+      "beforeIndex": 1,
+      "afterIndex": 0
+    },
+    {
+      "index": 15,
+      "mode": 4,
+      "result": 3,
+      "reads": 0,
+      "commits": 0,
+      "windowTicks": 14,
+      "actualSampleDeltasFromFirst": [],
+      "beforeIndex": 0,
+      "afterIndex": 0
+    }
+  ],
+  "output": {
+    "bytes": 7728,
+    "crc32": "317E8470"
+  },
+  "reportedNativeClosure": {
+    "acquired": 1,
+    "attempted": 16,
+    "bit": 0,
+    "chip": 0,
+    "completed": 16,
+    "early_ticks": 128,
+    "failures": 12,
+    "frequency": 709379,
+    "negative": 4,
+    "positive": 0,
+    "priority": 0,
+    "reads_cap": 64,
+    "residency_ticks": 256,
+    "signals_restored": 1,
+    "task_identity": 1,
+    "timer_stopped": 1,
+    "unchanged": 1,
+    "vector_removed": 1
+  },
+  "cleanup": {
+    "independentlyVerified": true,
+    "guestTaskAndBothNamespacesObservedAbsent": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "exactStagingAbsent": true,
+    "originalLauncherFilesAndConfigurationRestored": true,
+    "publiclyReleased": true,
+    "releasedFence": 1671,
+    "releaseArchives": 82,
+    "holds": 0,
+    "independentEvidenceSHA256": {
+      "independent-collection-observation.json": "132d52f98a17f437452e8688d8f1c72483fdc1fe049308d8a9234d97521b1e40",
+      "release-result.json": "68beedd090a280bc97e1442068a5b9b7ad6cf4780dbb50bb0e32b7be84196819",
+      "service-stop-result.json": "1dc62986fe9cf556a9f8aaee665fca825342cffe45eb34ff5e37f19de8640b58",
+      "independent-final-idle.json": "5d7fc0e18b2c87018ee5eebb12da098823c87f5f894facc405f3d6627ebe3b5e"
+    }
+  },
+  "physical": "NOT_RUN_NOT_PROMOTABLE_FROM_FAILED_TIMING",
+  "scope": "Complete synthetic timer/RAM diagnostic only. All twelve writes retained as irreversible failures because post brackets were late. No proof every actual write was late, no real sample ownership or scheduled output, hardware/device/DMA/voice-stop/audio/listening acceptance."
+}

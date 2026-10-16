@@ -130,11 +130,11 @@ unchanged native retry, epoch shift, phase tuning, wider window, clock/priority
 change or native-provider enablement is authorized by the failed observation.
 
 
-## Shorter in-window comparison candidate — compile only
+## Shorter in-window comparison candidate
 
 A new49,820-byte candidate has SHA256
 `fd407610148ed6a6bcb23a4e0f585e6d5cee40e9859c7877b771eb8f4635fe5a`.
-It is native NOT_RUN. Only the diagnostic assembly changes. The descriptor,
+It subsequently ran once and FAILED, as recorded below. Only the diagnostic assembly changes. The descriptor,
 raw-read output schema, C oracle and bounded collector contract are unchanged.
 Pinned five-unit compilation and the unchanged ASan/UBSan reference pass; this
 is not assembly equivalence, timing, native output or stack qualification.
@@ -156,6 +156,31 @@ happens before recovering registers and bookkeeping. Its exact previous offset
 is recovered only after that sample, using the already-proved bounded absolute
 precommit range, then the original full-width post-read checks run.
 
-No native evidence for this candidate exists yet. It requires a new exact-byte
-Amiberry packet/run; the previous9cbc observation stays FAILED and frozen.
+Its separate exact-byte native observation is recorded below. The previous9cbc
+observation stays FAILED and frozen.
 See [compile evidence](../evidence/enhanced-editor/cia-prepared-window-host/result.json).
+
+
+## First shorter-comparison observation — FAILED
+
+The exact49,820-byte candidate completed one separate Amiberry run, again RC20:
+zero of12 positive timing gates and four of four negative gates passed. All12
+normal precommit readings were inside the original windows, at `first+1..6`.
+All12 shadow writes are irreversible and retained. The following readings were
+at `first+25..29`,22..24 ticks after the precommit readings, outside the unchanged
+14/15-tick windows. They therefore remain failed brackets. This does **not**
+prove every actual write was late: its time within the measured bracket remains
+unresolved. These measurements also do not isolate the clock library's cost.
+
+All16 C replays matched the complete actual read records. Exact custody, reported
+native resource closure, independent guest task/namespace absence, original
+file restoration, emulator exit, public release, exact disconnected service
+stop and separate fresh final idle verification passed. No ownership/HOLD
+remains. Physical execution and native output capability remain unqualified.
+See [separate failed comparison observation](../evidence/enhanced-editor/cia-prepared-window-native/result.json).
+
+Further work needs an independently established clock-observation baseline or a
+queued backend with an authentic activation observation, rather than interpreting
+these failed CPU brackets as permission to change the musical schedule. The
+original12-success gate, both failed candidates, native provider inhibition and
+all hardware/real-reader acceptance boundaries remain intact.

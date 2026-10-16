@@ -164,3 +164,6 @@ Prepared-clock native observation9cbc7aa9 also FAILED once:0/12 original positiv
 
 
 A distinct comparison-only assembly candidatefd407610 is implemented/crossbuilt, native NOT_RUN. It validates original full high word, rate and both same-high-word window bounds before a write; early/regression/carry cases retain the general path. Monotonicity on the narrow branch follows from earlier accepted reads all being below first, rather than deferring a necessary safety check. The fixed descriptor/raw-report/oracle contracts and native provider inhibition remain unchanged. It requires its own exact-candidate emulator run; no unchanged9cbc retry or relaxed musical gate.
+
+
+The distinctfd407610 comparison-only candidate completed once but FAILED the same timing gate: all12 precommit samples were inside, yet post samples22..24ticks later were outside. All12 irreversible RAM writes remain recorded as failed brackets; their actual time inside those brackets is unresolved, and these results do not isolate ReadEClock cost. All four negative gates and complete native reference replays passed. Independent release/restoration/final idle passed separately. Further work should establish the clock-observation baseline or a real queued-activation contract; no phase/rate/window change or native output capability follows.

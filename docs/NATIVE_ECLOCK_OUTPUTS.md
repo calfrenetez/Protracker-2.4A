@@ -28,8 +28,39 @@ standalone scheduled-output builder stays unchanged; a separate recipe retains
 its compiler flags, seven runtimes, full source seal, SDK dependencies, enabled
 assertions and HUNK checks. This is not native execution, memory placement,
 whole-callchain Stack/WCET or timing qualification. Amiberry and physical results
-for this new fixture are NOT_RUN at this milestone. Earlier adjacent clock-pair
+were NOT_RUN at that host/build milestone; completed results follow below. Earlier adjacent clock-pair
 observations used their own frozen header and direct assembly reads; they do not
 qualify this changed reader. Native scheduled-output providers stay inhibited.
 
 See [HOST and compile evidence](../evidence/enhanced-editor/eclock-output-ownership/host-build.json).
+
+
+## Exact native qualification —16 October2026
+
+The exact12,500-byte fixture now passes once in both the shared68030 Amiberry
+profile and the real68030 A1200/Exec47.13/PAL:25private-storage refusals and25
+subsequent actual-clock controls, RC0, one exact success marker and reported
+normal unsubmitted-owner closure. Both observe262144-byte task Stack; the252-byte
+maximum bounded local frame does not prove aggregate Stack or WCET.
+
+Each run retains exact one-input/eight-execution-file custody, independent full
+RAM/task/staging absence, unchanged saved installed inputs, disconnected transport,
+separate observation/public release, only its own service shutdown and a separate
+final idle check. Physical promotion binds six exact emulator records. Safari
+remains authenticated in View Only before and after physical execution; no Amiga
+browser input/control is acquired. The physical test never directs outputs into
+the shared Device/Exec headers; those refusal cases remain HOST-only models.
+
+The initial HOST factory check could not load an offloaded certificate file;
+its failure is retained. Read-only file hydration then loaded121CAs and the full
+HOST check passed, with no target operation from that failure. A separate composed
+physical packet-path assertion also stopped before any service, lease or target;
+its original source remains preserved. No failed target transaction was replayed.
+
+These results qualify the changed task reader's private output-storage checks,
+actual read controls and resource lifecycle. They do not establish arbitrary
+caller/corrupted-owner safety, all task-clock call paths, whole-library protection,
+physical placement, scheduled activation, exact musical timing, IRQ/WCET, audio
+or listening. Existing scheduling and native-provider inhibition are unchanged.
+See [emulator result](../evidence/enhanced-editor/eclock-output-ownership/emulator.json)
+and [A1200 result](../evidence/enhanced-editor/eclock-output-ownership/physical.json).

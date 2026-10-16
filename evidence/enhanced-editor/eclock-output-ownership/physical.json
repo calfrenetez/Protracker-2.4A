@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "state": "EXACT_NATIVE_ECLOCK_OUTPUT_STORAGE_PHYSICAL_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "7C900A79",
+    "sha256": "6fa0af7862177a2a31510a639438c202fe256c1afa7faef53ef663fa40e58d2a",
+    "size": 12500
+  },
+  "compiledSourceCommit": "53bfef57db3343a9f739c72b1c195e742a13b591",
+  "runID": "a7e9606ecb317de3ab6444945eec6b1d",
+  "sourceUnits": 1,
+  "currentProjectBodies": 2,
+  "sdkDependencies": 44,
+  "runtimeInputs": 7,
+  "host": {
+    "runnerTests": 43,
+    "serviceTests": 27,
+    "onlyNormalEntryFunctionChanged": "run",
+    "archiveCapacity": 256,
+    "inhibitedRunnerTests": 43,
+    "inhibitedServiceTests": 27,
+    "offlineNoEffects": true
+  },
+  "native": {
+    "returnCode": 0,
+    "outputBytes": 164,
+    "outputCRC32": "DCB35760",
+    "observedStackBytes": 262144,
+    "privateOutputRefusals": 25,
+    "subsequentActualClockReadControls": 25,
+    "privateOwnerRequestPortBeforeimagesPreserved": true,
+    "ownedUnsubmittedClockClosed": true,
+    "sharedDeviceOrExecHeaderOutputAttempted": false,
+    "ciaAcquired": false,
+    "audioOrDeviceOutput": false,
+    "actualTarget": {
+      "cpu": "68030",
+      "execMajor": 47,
+      "execRevision": 13,
+      "video": "PAL (50Hz)"
+    },
+    "exactEmulatorPromotionRecords": 6
+  },
+  "boundsSeconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "cleanup": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "exactRAMTaskAndStagingAbsence": true,
+    "savedInstalledHostInputsUnchanged": true,
+    "ownTransportDisconnected": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "onlyOwnServiceSIGTERMOnce": true,
+    "separateFinalIdle": true,
+    "finalFence": 1889,
+    "archives": 134,
+    "holds": 0,
+    "availability": "Historical observation; fresh live guards required",
+    "browserViewOnlyBeforeAndAfter": true,
+    "browserInputOrControlAcquired": false
+  },
+  "recordsSHA256": {
+    "spec": "40ccba703608c836bd7cb0d1820dfbf0e1b603453b8f7e71521ef83cbc8d9bb3",
+    "admission": "ab5389b98bfa62de083defc34027e3eae1abcb9c731c748fb223f84aa9502899",
+    "actualResult": "993544cf84b289f1f74d5a1a3fd95e58c59edc34be499b5ce1f8ecd88c9ee5ac",
+    "rawOutput": "e91985c968d38bc6a77d45fc66d5404c2cfbe6d393d933353e9b62a1fceae835",
+    "independentObservation": "5c5129f0b8a258e60b95b658ff76632d31c3b8eae3dbe4c83c7c36718a2ec025",
+    "publicRelease": "725ac8d2c349451b652d2799543c9addceb23259e3b0a6fc16a6945a1804d249",
+    "ownServiceStop": "86531c48124a5b2519493edb58ab7ef1b0ac37d651ac968aca81c51bf35730e5",
+    "separateFinalIdle": "1ea611227e1c9a2349cb32eafb1749767a367a34e929d39c6a66b0d6c5ffe891",
+    "immutableSourceInventory": "bd7fa9cde093a5035adf439c831a509519714a16f2a5d208c39ff516bf769763",
+    "normalEntryReview": "c47d53d7e82bdf80237cf82a2ab4ab712f8087fd7f5fee511f1195d7b33276a7",
+    "hostPrepared": "c482aa8675a76becf42f0d802535f09bb55e48b8170c30ddc97897ed043ab5a9",
+    "browserBefore": "5923bc4acf57ea6b9b60e2bfb18699afa80e4bd0d2355b6fe224075c3f1c781d",
+    "browserAfter": "f22cf42c41fa5ef3858a9053245da44cebf2e24136603dfa56b43c67d164baea"
+  },
+  "unchangedFailedTransactionReplayed": false,
+  "notQualified": [
+    "All task-clock callers or arbitrary copied/corrupted owners",
+    "Complete shared library allocation protection",
+    "Physical Fast/Chip placement or aggregate Stack/IRQ/WCET",
+    "Scheduled activation or musical output timing",
+    "Device sample RAM/stop/DMA/audio/listening/full application"
+  ]
+}

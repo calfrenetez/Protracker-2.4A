@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "state": "EXACT_NATIVE_ECLOCK_OUTPUT_STORAGE_EMULATOR_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "7C900A79",
+    "sha256": "6fa0af7862177a2a31510a639438c202fe256c1afa7faef53ef663fa40e58d2a",
+    "size": 12500
+  },
+  "compiledSourceCommit": "53bfef57db3343a9f739c72b1c195e742a13b591",
+  "runID": "fd153c0193e5c3c7f79c054332f4a412",
+  "sourceUnits": 1,
+  "currentProjectBodies": 2,
+  "sdkDependencies": 44,
+  "runtimeInputs": 7,
+  "host": {
+    "runnerTests": 35,
+    "serviceTests": 27,
+    "onlyNormalEntryFunctionChanged": "run",
+    "archiveCapacity": 256,
+    "normalEntryTests": 15,
+    "firstHostCertificateLoadFailurePreserved": true,
+    "noTargetEffectFromHostFailure": true
+  },
+  "native": {
+    "returnCode": 0,
+    "outputBytes": 164,
+    "outputCRC32": "DCB35760",
+    "observedStackBytes": 262144,
+    "privateOutputRefusals": 25,
+    "subsequentActualClockReadControls": 25,
+    "privateOwnerRequestPortBeforeimagesPreserved": true,
+    "ownedUnsubmittedClockClosed": true,
+    "sharedDeviceOrExecHeaderOutputAttempted": false,
+    "ciaAcquired": false,
+    "audioOrDeviceOutput": false
+  },
+  "boundsSeconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "cleanup": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "exactRAMTaskAndStagingAbsence": true,
+    "savedInstalledHostInputsUnchanged": true,
+    "ownTransportDisconnected": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "onlyOwnServiceSIGTERMOnce": true,
+    "separateFinalIdle": true,
+    "finalFence": 1885,
+    "archives": 133,
+    "holds": 0,
+    "availability": "Historical observation; fresh live guards required"
+  },
+  "recordsSHA256": {
+    "spec": "122140e5c83fe156e09af341a73b29db6db200fcd5c9512979a16576a5c84f74",
+    "admission": "6cd52e402cd02e22163158ec8f72e5c7a692f13a36b6f36c5be1f6d870411688",
+    "actualResult": "56c804da29140396bade61bb0d85b1072ff436913ca8ff0f8f3061659ae9a2bb",
+    "rawOutput": "e91985c968d38bc6a77d45fc66d5404c2cfbe6d393d933353e9b62a1fceae835",
+    "independentObservation": "398d249938f438cb834738ba441c2f5a0abc89161663c84e865a045b42a57bd5",
+    "publicRelease": "5b778c52aec038fa8b1d47abe4e1f53868c612a42c85409b714a61434ba7e409",
+    "ownServiceStop": "112a67ffff664701bdb8858e39a95bd1079ba4148546de37e276c6e5f318eba0",
+    "separateFinalIdle": "e3b3ec8db025d6a696a3693707bbaff1988dfa8af73025026059f788d279c15f",
+    "immutableSourceInventory": "9fd0180f37ac7cb4c817b9ffbdf96832992b44824147c6c2ba35fccda369f65b",
+    "normalEntryReview": "f5171c51175d867cec2725ea00cbb52a3945de383674bed1424779ff984021c7",
+    "preservedHostFailure": "a1fa82074cc1a1e3c336b43d496d29dd2b3765659760699e628d144ed28b7efd"
+  },
+  "unchangedFailedTransactionReplayed": false,
+  "notQualified": [
+    "All task-clock callers or arbitrary copied/corrupted owners",
+    "Complete shared library allocation protection",
+    "Physical Fast/Chip placement or aggregate Stack/IRQ/WCET",
+    "Scheduled activation or musical output timing",
+    "Device sample RAM/stop/DMA/audio/listening/full application"
+  ]
+}

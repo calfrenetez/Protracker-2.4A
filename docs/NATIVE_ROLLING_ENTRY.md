@@ -103,3 +103,19 @@ failure is preserved separately. A pinned native build with case1, the original
 86 translation units and unchanged staging/runtime bounds passes. Emulator and
 physical execution of this diagnostic remain NOT_RUN at this build milestone.
 See [diagnostic host/build evidence](../evidence/enhanced-editor/rolling-native-entry/diagnostic-host-build.json).
+
+The diagnostic's first fresh emulator lifecycle timed out on its initial IPC
+ping, before CPU/memory observation, bridge connection, upload or native launch.
+The diagnostic therefore remains NOT_RUN. Exact owned recovery, independent
+restoration/absence, release preserving all three holds and a separate idle check
+passed: EMPTY1898/136archives. See [startup failure evidence](../evidence/enhanced-editor/rolling-native-entry/diagnostic-startup-failure.json).
+
+A separate private startup overlay moves the existing owned bridge-listener
+readiness wait before the first IPC ping for030 bridge startup. The installed
+shared wrapper is unchanged. An inverse AST comparison allows only that move;
+wait arguments, identity/ownership/refusal checks and request counts stay intact.
+Stock/no-bridge ordering is unchanged. Six HOST tests cover the modeled early
+ping failure, corrected order, listener refusal before any ping/connection, ping
+refusal without retry, unchanged alternate modes and source-pin refusal. This
+models the readiness race; it does not establish the failed guest's actual cause
+or qualify the overlay in Amiberry. No original time limit is increased.

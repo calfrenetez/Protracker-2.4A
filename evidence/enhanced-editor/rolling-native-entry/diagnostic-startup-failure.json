@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "Exact case1 diagnostic attempted through fresh owned emulator lifecycle; native execution NOT_RUN",
+  "candidate": {
+    "bytes": 337396,
+    "sha256": "7beeb37780179f93274ccf991319df7a5ba7d44a339093e6bb9149ea7009b375",
+    "crc32": "407F4375"
+  },
+  "hostPacket": {
+    "runnerCases": 35,
+    "serviceCases": 27,
+    "normalEntryCases": 15,
+    "allPass": true
+  },
+  "failureStage": "Initial emulator IPC ping timeout; before actual CPU/memory observation, bridge connection, candidate upload or native launch",
+  "startupStages": "Exact private process launch and saved lifecycle write observed; IPC socket ownership wait completed; first control ping timed out",
+  "nativeFixtureDispatched": false,
+  "hardwareOrAudioOperation": false,
+  "replayed": false,
+  "changedBounds": false,
+  "recovery": {
+    "positivelyVerifiedOwnEmulatorStoppedOnce": true,
+    "ownedServiceAlreadyAbsent": true,
+    "twoSavedFilesRestored": true,
+    "sharedStagingIndependentlyAbsentNeverCreated": true,
+    "separateObserver": true,
+    "publicRelease": true,
+    "originalThreeHoldsArchived": true,
+    "separateFinalIdle": true,
+    "phase": "EMPTY",
+    "fence": 1898,
+    "archives": 136,
+    "holds": 0
+  },
+  "privateEvidenceSHA256": {
+    "failedResult": "6c25199e2d8436a63ef929d140bc0c31adc957dbf2dd4cdbc54d426f10ae1565",
+    "restoration": "7d42828bf115043ce1598f2d8f4736db83e9d68b5243bedbbf9a79d4fb163f5b",
+    "independentObservation": "d9928281eb47b476e0783d23428fe01fc2f07d1e060ec47bcb9059b4902f8baf",
+    "release": "b465e8b57b71df3b547668e0c3cebf8d3b798c08a242c84d88ab166d0631bac1",
+    "independentFinalIdle": "0ed9dadffe4ffcd452c26dd7009a471813f1075995ef5f8086fcb4329aa478c8",
+    "closedInventory": "a978f46f6dd9d365f4f6cba19c949e69a6b880dab7e034581835089b17e939f5"
+  },
+  "next": "Qualify a private bridge-readiness ordering correction with the same limits and identity checks; do not replay this failed transaction",
+  "physicalPromotion": "NOT_RUN; exact diagnostic has no native execution qualification"
+}

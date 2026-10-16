@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "scope": "HOST-only private owned-listener readiness ordering overlay; installed shared wrapper unchanged",
+  "sourceSHA256": "acbfc630f721f26aa71c612459a4d1ee97ec4b67428bb45ce7783d40862fa73b",
+  "testsSHA256": "5dae21220914df65e8d6e352abcd8278dc2e692597222b3157706defeffced3a",
+  "installedWrapperSHA256": "9f79c268a1539598ed235217f1d0bc7ce707cab58b2018c8cd7f5d2d08b31a25",
+  "tests": {
+    "cases": 6,
+    "passed": true,
+    "evidence": "Captured native tool result in development transcript",
+    "effects": "Only protocol suffix AST executed with in-memory fakes; no launch, filesystem writes, real socket, guard operation or target call"
+  },
+  "allowedChange": "For030 with bridge only, move the original owned bridge-listener wait before first IPC ping; original wait arguments and all other AST restored exactly by inverse proof",
+  "limitsChanged": false,
+  "installedFilesChanged": false,
+  "actualFailedStartupCause": "Not established by the HOST readiness model",
+  "emulatorQualification": "NOT_RUN",
+  "physicalQualification": "NOT_RUN"
+}

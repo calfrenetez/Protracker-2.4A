@@ -18,6 +18,14 @@ sanitizer tests in six modules pass. A pinned203,920-byte portable HUNK builds;
 Amiberry and physical execution remain NOT_RUN at preparation. No device,
 voice-stop, scheduled activation, output timing or listening acceptance follows.
 See [scoped host/build evidence](../evidence/enhanced-editor/dispatch-source-binding/host-build.json).
+The exact203,920-byte candidate subsequently passes once in the shared68030
+emulator: all60 cases, RC0, observed Stack1MiB and the exact completion line.
+One input/eight execution-file custody and both guest/host namespace cleanup
+pass. Separate saved-file/absence verification, public release, owned-service
+stop and a fresh final idle check confirm no owned resources or HOLD remain.
+Physical execution remains NOT_RUN; active-voice metadata, device stop and
+musical/output timing remain separate. See
+[scoped emulator evidence](../evidence/enhanced-editor/dispatch-source-binding/emulator.json).
 
 ## Independent future-trigger source binding — 16 October 2026
 

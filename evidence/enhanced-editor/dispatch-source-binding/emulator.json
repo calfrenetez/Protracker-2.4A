@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "state": "SCOPED_60_CASE_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "3870F10D",
+    "sha256": "cbcfc574390f901afde22779fc7388b09afa051c2e8c4bd34992b11895fdaa8b",
+    "size": 203920
+  },
+  "source_commit": "b0060daeb661588e26560f2248993b3be793d198",
+  "scope": "Prepared Paula candidate source identity;60 cases,12controls48refusals,8/16/24-bit masters;final preparation/readiness/private and public apply. Ordinary allocation/driver model, not Exec memory placement or actual DMA.",
+  "bounds_seconds": {
+    "input_upload": 120,
+    "native": 90,
+    "native_rpc_caller": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "host_packet": {
+    "runner_tests": 35,
+    "service_tests": 27,
+    "entry_tests": 15,
+    "validate_pass": true
+  },
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact": true,
+    "chip_kb": 2048,
+    "fast_z3_kb": 131072
+  },
+  "observed": {
+    "nativeMarkers": [
+      "PAULA DISPATCH SOURCE BINDING PASS:60 cases;12 controls48 source/representation refusals;final preparation,ready/private/public apply;masters preserved,no refused output,genuine cleanup"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 186,
+    "outputCRC32": "088A8AFC",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "custody": {
+    "input_files": 1,
+    "execution_files": 8,
+    "progress_sidecar": false,
+    "result_sha256": "5c3cee3db0127dfcc46edb4245db8b4a256e4897521af1c8e82364ada56d6f64"
+  },
+  "cleanup": {
+    "exact_guest_and_host_staging_absence": true,
+    "saved_originals_and_profile_mapping_restored": true,
+    "independent_observation_sha256": "e6ae2cc6a5dd95cffc46f93fa8cbd5df64495ef5f9bdb5df240d85eb575ff41d",
+    "public_release_sha256": "8e685550c30a1b2afa665499ef045489c124c281fed341b96b8fcec8f5c3b0bb",
+    "own_service_stop_sha256": "40608bd2f918b0cc62b0bd6048f18da1cd06f53a3d5e499864d40eb33e63c74a",
+    "separate_final_idle_sha256": "a2069dd734e313fbc801399989fa5aef251a4f7a3f9b857b66459ba487e3d613",
+    "fence": 1719,
+    "release_archives": 92,
+    "state": "EMPTY_NO_RESERVATION_HOLD_INFLIGHT_OR_RESIDENCY",
+    "own_emulator_service_and_endpoints_absent": true
+  },
+  "not_qualified": [
+    "Existing active-voice or direct-voice source metadata",
+    "Exec memory placement",
+    "Physical device or DMA or actual voice stop",
+    "Native scheduled activation and output timing",
+    "Full app and human listening"
+  ],
+  "physical_execution": "NOT_RUN"
+}

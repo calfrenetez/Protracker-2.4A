@@ -35,17 +35,22 @@ def fault_phases():
     return lines
 
 
+BINDING = ('SAMPLER READERS SOURCE BINDING PASS:66 cases;12 genuine controls,54 '
+           'sample/side/representation refusals;no dispatch,master preserved,'
+           'independent retirement,zero owned bytes')
+
+
 def completion(component):
-    return {'full': READERS, 'lifecycle': LIFECYCLE, 'faults': FAULTS}[component]
+    return {'full': READERS, 'lifecycle': LIFECYCLE, 'faults': FAULTS, 'binding': BINDING}[component]
 
 
 def markers(component='full'):
     # Invalid components refuse here, never silently omit either group.
     passed = completion(component)
     lines = [phase('entered'), POOL, phase('memory-started')]
-    if component != 'faults':
+    if component in ('full','lifecycle'):
         lines += lifecycle_phases()
-    if component != 'lifecycle':
+    if component in ('full','faults'):
         lines += fault_phases()
     return tuple(lines + [passed, phase('chip-closed'), CHIP, FINISH, phase('finished')])
 

@@ -29,9 +29,13 @@ static void readers_native_chip_release(void *p,size_t bytes)
 #define PT_READERS_NATIVE_MEMORY
 #define malloc native_allocate
 #define free native_release
+#if defined(PT_READERS_SOURCE_BINDING_FIXTURE) && PT_READERS_SOURCE_BINDING_FIXTURE
+#include "sampler_paula_readers_source_binding_test.c"
+#else
 #define main sampler_paula_readers_fixture
 #include "sampler_paula_readers_test.c"
 #undef main
+#endif
 int main(int argc,char **argv)
 {
     int result;
@@ -42,7 +46,11 @@ int main(int argc,char **argv)
     (void)argc;(void)argv;
 #endif
     native_memory_start();PT_READERS_TRACE("memory-started",0,0,0);
+#if defined(PT_READERS_SOURCE_BINDING_FIXTURE) && PT_READERS_SOURCE_BINDING_FIXTURE
+    result=readers_binding_fixture();
+#else
     result=sampler_paula_readers_fixture();
+#endif
     assert(readers_native_chip_calls && !readers_native_chip_bytes);
     PT_READERS_TRACE("chip-closed",0,0,0);
     puts("EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio");

@@ -1,5 +1,18 @@
 # Sample memory and playback ownership
 
+## Persistent Paula reader source binding — 16 October 2026
+
+Persistent readers now recheck the actual cache representation against their
+genuine sample and selected stereo side on every source-currentness check.
+Matching live lease/revision/length alone no longer admits another sample or
+representation. The66-case ready/active regression passes with independent
+retirement and zero explicit owned bytes, within50 passing sanitizer tests.
+A separate pinned native candidate is built; its Amiberry and physical execution
+remain NOT_RUN. Earlier memory-component results retain their historical exact
+bytes. This change grants no native output, DMA quiet, scheduling or audio
+capability. See [reader details](SAMPLER_PAULA_READERS.md) and
+[scoped evidence](../evidence/enhanced-editor/readers-source-binding/host-build.json).
+
 The enhanced project owns the authoritative sample, including its declared
 8/16/24-bit precision, loops and slices. PCM is represented by signed `int32_t`
 elements in the declared precision; 24-bit samples retain their low eight bits.

@@ -17,17 +17,41 @@ EXEC_READERS_SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *READE
 
 
 class ExecReadersMemory(unittest.TestCase):
-    def build(self, out, traced=False, component=0):
+    def build(self, out, traced=False, component=0, source_binding=False):
         model = memory_model(out);binary = out/'readers-memory'
         flags = ['-DPT_READERS_DIAGNOSTIC_TRACE=1'] if traced else []
         if component:
             flags += ['-DPT_READERS_COMPONENT='+str(component)]
+        if source_binding:
+            flags += ['-DPT_READERS_SOURCE_BINDING_FIXTURE=1']
         build = subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
             '-fsanitize=address,undefined', '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1', *flags,
             '-I'+str(out), '-Isrc/core', *EXEC_READERS_SOURCES, str(model), '-o', str(binary)],
             cwd=ROOT, check=True, capture_output=True, timeout=120)
         self.assertEqual((build.stdout, build.stderr), (b'', b''))
         return binary
+
+    def test_source_binding_fixture_with_classified_host_memory(self):
+        from test_sampler_paula_readers_source_binding import MARKER
+        with tempfile.TemporaryDirectory(prefix='pt-readers-binding-memory-') as folder:
+            binary=self.build(Path(folder),source_binding=True)
+            result=subprocess.run([str(binary)],check=True,capture_output=True,timeout=30)
+            self.assertEqual((result.stdout,result.stderr),
+                (b'\n'.join([POOL,MARKER.encode('ascii'),
+                 b'EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio',
+                 FINISH])+b'\n',b''))
+
+    def test_source_binding_trace_and_final_closed_sidecar(self):
+        from test_sampler_paula_readers_source_binding import MARKER
+        self.assertEqual(MARKER,trace.BINDING)
+        with tempfile.TemporaryDirectory(prefix='pt-readers-binding-trace-') as folder:
+            out=Path(folder);binary=self.build(out,traced=True,source_binding=True)
+            remote='RAM:PT24G-'+'c3'*8+'/progress.log';(out/remote).parent.mkdir()
+            result=subprocess.run([str(binary),remote],cwd=out,check=True,capture_output=True,timeout=30)
+            self.assertEqual((result.stdout,result.stderr),
+                (('\n'.join(trace.markers('binding'))+'\n').encode('ascii'),b''))
+            self.assertEqual(len(trace.markers('binding')),8)
+            self.assertEqual((out/remote).read_bytes(),trace.FINAL_SIDECAR)
 
     def test_real_fixture_with_classified_host_memory_and_fixed_markers(self):
         with tempfile.TemporaryDirectory(prefix='pt-exec-readers-memory-') as folder:

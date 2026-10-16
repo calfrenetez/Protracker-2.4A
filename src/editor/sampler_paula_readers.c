@@ -99,7 +99,10 @@ static int source_current(struct pt_paula_readers_reader *r)
  struct pt_paula_readers_pool *p=r->pool;struct pt_pcm pcm;struct pt_sample_version *pin;const uint8_t *data;size_t bytes;
  if(!r->pin||!r->leased||pt_sampler_pin_current(p->sampler,p->project,r->sample,p->generation,r->pin,&pcm,&pin)!=PT_EDIT_OK)return 0;
  pt_sampler_unpin(pin);
- return pt_sampler_paula_prepared_location_validated(&p->bridge,r->track,r->lease,&data,&bytes)&&data==r->data&&bytes==r->bytes;
+ /* A live lease/length alone cannot bind bytes to this reader's master and
+  * selected stereo side. Recheck the actual representation key on every use. */
+ return pt_sampler_paula_prepared_source_location_validated(&p->bridge,r->track,r->sample,r->channel,
+   r->lease,&data,&bytes)&&data==r->data&&bytes==r->bytes;
 }
 /* Resolve the immutable full key by registration first; a caller never carries
  * a dereferenceable predecessor pointer. Current callbacks do NOT recurse here. */

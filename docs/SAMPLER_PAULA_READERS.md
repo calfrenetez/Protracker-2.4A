@@ -390,3 +390,34 @@ Stack. Its normal entry remains inhibited, with no live service, admission,
 physical probe or test. Actual Safari access is currently blocked by the Mac
 lock. Fresh browser, ownership, target, build and promotion checks remain required.
 See [physical preparation, not acceptance](../evidence/enhanced-editor/readers-exec-memory/lifecycle-physical-prepared.json).
+# Persistent reader sample/cache binding — 16 October 2026
+
+Every persistent reader currentness check now uses the existing source-specific
+cache lookup. A live lease with the same revision and byte length is insufficient:
+its actual key must also match the reader's sample identity, selected stereo side,
+signed8 format, byte order and even-byte padding. This applies to ready views,
+enqueue, live views and continuing-command admission through the existing shared
+currentness path. No new getter, source certificate or retained validation is added.
+
+The separate regression runs66 cases across8/16/24-bit mono/stereo, before transfer
+and after genuine adoption. Twelve controls succeed;54 deliberately corrupted
+representation keys refuse. Different keys come from the production packer rather
+than a duplicated encoding. Refusal preserves outputs, existing cache bytes and
+masters, invokes no backend dispatch, and retains the original pin/lease until
+independent retirement. Cleanup uses genuine APIs without repairing the corrupted
+key and closes all explicit owned bytes. This tests an observed metadata mismatch;
+it does not make arbitrary cache/holder corruption safe.
+
+All50 tests in11 HOST groups pass with assertions, Werror, ASan and UBSan. The
+committed prior reader body reproduces the missing ready-view refusal. A separate
+24-unit native build with the actual SDK passes, including74 project bodies and
+seven runtimes. Its202404-byte `PTExecReadersBindingTest` has eight exact output
+lines and a required final closed progress sidecar. The compiler's largest local
+frame is353916 bytes; total stack/callchain/runtime bounds remain unqualified.
+Amiberry and physical execution of this new candidate are NOT_RUN. The prior
+lifecycle/fault component passes retain their exact historical bytes and do not
+qualify the changed source. Native provider inhibition, musical timing, DMA,
+device/audio and human listening boundaries are unchanged. Other older adapters
+using the generic lease lookup are separate follow-up work.
+
+See [HOST and build evidence](../evidence/enhanced-editor/readers-source-binding/host-build.json).

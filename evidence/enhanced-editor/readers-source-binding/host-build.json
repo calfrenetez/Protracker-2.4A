@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PINNED_NATIVE_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "108f4420209687f15d3b6972e185b7635615734f",
+  "scope": "Persistent Paula readers authenticate actual sample/side/signed8/even-padded representation on each currentness check. Backend remains serialized software model; no native provider/output/timing capability.",
+  "host": {
+    "tests": 50,
+    "groups": 11,
+    "flags": [
+      "C99",
+      "assertions",
+      "Werror",
+      "ASan",
+      "UBSan"
+    ],
+    "binding_cases": 66,
+    "controls": 12,
+    "refusals": 54,
+    "formats": "8/16/24-bit mono/stereo, ready and active readers",
+    "checks": [
+      "Actual differing keys obtained through production PCM packer, no duplicated encoding",
+      "Wrong sample, stereo side, signed16, byte order or padding refuses before backend dispatch",
+      "Caller output and existing cache/master data preserved",
+      "Same genuine lease/reference retained through explicit independent retirement",
+      "All explicit owned resources close without repairing corrupted cache key"
+    ],
+    "result_sha256": "950c4de577f041398bc2f92f0138de1024231331f5f70d409d61d9dceae57240",
+    "frozen_files": 345,
+    "frozen_inventory_unchanged": true
+  },
+  "baseline": {
+    "state": "FAILED_REGRESSION_AS_EXPECTED",
+    "result_sha256": "503bb7c64dd4df4870917d10fc3e8a6b5abc9359032dd8ead580b2d862647d9d",
+    "stderr_sha256": "b108522841719cddd2b79e45e4df3e45ec621e27bd482c13cfad7a7d7817ed3e",
+    "failure": "Ready-reader view accepted a deliberately wrong-source cache key instead of STALE; same live lease, bytes, serial and version."
+  },
+  "build": {
+    "target": "PTExecReadersBindingTest",
+    "bytes": 202404,
+    "sha256": "6d967aba566731f015c219c70b2d64689e02bdf8b322405874b7149f989973c8",
+    "crc32": "A27EADB0",
+    "translation_units": 24,
+    "project_bodies": 74,
+    "sdk_bodies": 49,
+    "runtimes": 7,
+    "assertions_enabled": true,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fbbb=-",
+      "-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1",
+      "-DPT_READERS_DIAGNOSTIC_TRACE=1",
+      "-DPT_READERS_SOURCE_BINDING_FIXTURE=1"
+    ],
+    "manifest_sha256": "95743cb28a7bc486c9496975c930e6f59a7e37016face3324250dc0c337106a9",
+    "stdout_lines": 8,
+    "progress": "Final closed sidecar required; partial progress never proves completion",
+    "maximum_compiler_local_frame": 353916,
+    "aggregate_stack_qualified": false
+  },
+  "preservation": {
+    "unrelated_paths": 16,
+    "contents_and_stable_metadata_unchanged": true,
+    "layout_unchanged": true,
+    "exact_musical_schedule_unchanged": true,
+    "typed_native_provider_inhibited": true
+  },
+  "not_qualified": [
+    "Amiberry execution",
+    "Physical A1200 memory placement/endurance",
+    "DMA/device/voice-stop/timing/audio/listening",
+    "Arbitrary cache or holder corruption recovery",
+    "Other older adapters still using generic lease lookup"
+  ]
+}

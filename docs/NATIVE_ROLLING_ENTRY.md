@@ -466,3 +466,38 @@ emulated ABI. It does not qualify the full68-case rolling execution, the origina
 17-unit native component, physical A1200, actual device/IRQ activation or timing.
 No comparative speedup is inferred. See
 [compact evidence](../evidence/enhanced-editor/rolling-native-entry/prepare-span-emulator.json).
+
+
+## Current-source original four-event diagnostic
+
+The separate originalcase1 entry was crossbuilt again using the current numeric
+containment and header-comparison source. HOST dispatch for all68 and selected
+case1 passes with sanitizers and every original oracle. A fresh exact338352-byte
+Amiberry attempt does not confirm completion within unchanged bounds. Final
+saved directory observations show103 bytes of output and an empty completion
+flag; no terminal native capture or RC was obtained. File size cannot locate
+its phase or establish a crash. The earlier complete4096-unit preparation/cancel
+pass remains a separate qualification.
+
+Verified own process teardown, exact saved launcher restoration, staging removal,
+independent observation/public release and separate final idle all pass. The
+failed transaction is preserved and never replayed or physically promoted.
+[Compact evidence](../evidence/enhanced-editor/rolling-native-entry/current-case1-emulator.json).
+
+
+## Stop pure guard searches after complete coverage
+
+Rolling and lineage-source preparation now stop numeric containment probes once
+all requested object roles are covered. Each role is existential and monotonic:
+`inside` neither dereferences its argument nor calls a callback, and another
+probe cannot revoke a role already found. No result is cached across calls.
+All guard-count, complete-span, source identity, constructor/backlink and lifetime
+checks remain at their original call sites. No allocation, owner authority,
+preparation work budget, musical gate or test deadline changes.
+
+Five HOST sanitizer groups pass:48,224 numeric equivalence cases, original header
+byte-mask equivalence, complete original68 rolling cases, original17-unit
+preflight and supported4096-unit preflight/cancellation, including sidecar refusal
+and preservation checks. The pinned86-unit/228-body build passes. Native speed,
+exact new emulator and physical execution remain unqualified at preparation.
+[Compact HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/guard-search-host-build.json).

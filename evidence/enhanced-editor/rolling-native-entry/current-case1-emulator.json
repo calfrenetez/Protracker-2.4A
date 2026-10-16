@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "state": "ORIGINAL_CASE1_NATIVE_UNCONFIRMED_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "size": 338352,
+    "sha256": "1baa65a37af42a6725b7f7afc78872db737895e1dc0c57e74c8431ae9838c448",
+    "crc32": "FF63F070"
+  },
+  "host": {
+    "all68DiagnosticSelectorAndSelectedCase1SanitizerOracles": "PASS",
+    "pinned86Unit228BodyBuild": "PASS",
+    "runner36Service27NormalEntry15AndValidate": "PASS",
+    "initialInheritedFileCountExpectation": "HOST failure preserved; fresh packet asserts8 no-sidecar files; no target effect"
+  },
+  "native": {
+    "result": "UNCONFIRMED",
+    "returnCode": null,
+    "terminalCapture": false,
+    "lastDirectoryObserved": {
+      "nativeOutputBytes": 103,
+      "completeFlagBytes": 0,
+      "controlBytes": 166
+    },
+    "interpretation": "No completion witness within original bound; output-size observations do not identify application phase, liveness, crash or timing cause.",
+    "limitsSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    },
+    "launches": 1,
+    "retries": 0
+  },
+  "recovery": {
+    "verifiedOwnProcessesStoppedOrAlreadyAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "exactStagingRemoved": true,
+    "independentObserver": "PASS",
+    "publicRelease": "PASS",
+    "separateFinalIdle": "PASS",
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "81b39a6bbae8147d665b2a01a3403df0fa58b2f5cf66129c3d25195c1ef31757",
+    "restoration-result.json": "9e2af3957bff6c03c7422972def7af8532c964674b87b12a0374ff1cf4c1c376",
+    "independent-observation.json": "1c8c0669c84c1a56652741f7a2900de829a631409b00afa424cd3b763c7e1437",
+    "release-result.json": "cc75c1a8acca0cb87c3d9f7efb8e238e79fd1a0e56d5dd3835b7488eed8e8d54",
+    "independent-final-idle.json": "0495918e4a99ca8753e468c4cd7861ba5fb3371f6f04de2215b1b103a44f9350"
+  },
+  "separatePriorQualification": "Complete4096-unit preparation/cancellation a1ea3b20 passes Amiberry; not originalcase1/full68 or physical output acceptance",
+  "physical": "NOT_RUN"
+}

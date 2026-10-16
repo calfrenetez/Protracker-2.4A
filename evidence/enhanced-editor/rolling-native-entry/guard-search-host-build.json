@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "state": "GUARD_COVERAGE_SEARCH_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "change": "Pure existential containment searches stop once all requested roles are covered; each found role is skipped on later probes.",
+  "proofBoundary": "Pure inside predicates read no pointee and invoke no callback; boolean roles change only false to true. Bound count, complete spans, source identity, constructor/backlink and lifetime checks remain at every original call site; no cross-call cache or new authority.",
+  "sourceSHA256": "027b76f16a5f95ff3d03a616fb895ea2713d7443c865b1d248e3b040d2f31ed3",
+  "checks": {
+    "hostSanitizerGroups": 5,
+    "goldenSpanCases": 48224,
+    "headerOriginalMaskEquivalence": true,
+    "fullOriginal68RollingOracle": true,
+    "original17PreflightOracle": true,
+    "supported4096PreflightOracle": true,
+    "foreignMissingAbsentProgressRefusals": true,
+    "protected16AndBaselinePreserved": true,
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 244
+  },
+  "candidate": {
+    "size": 330868,
+    "sha256": "0d4da249f27b0ec9a305dc4ca9bdc6f18b83d7831101dc5b15e966d0278b0927",
+    "crc32": "A0C8EADA"
+  },
+  "hostResultSHA256": "43dbeadeb913791c045ecbf0d13829129f177cab0a39086de3433ea03c132aa9",
+  "buildManifestSHA256": "2a1058d5105eaa6cbe0d78abd7a7c4682116a952aec6d65c5d90d7b82308a607",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "speedBenefit": "UNQUALIFIED",
+    "actualDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  }
+}

@@ -1,5 +1,13 @@
 # Sample memory and playback ownership
 
+## Preparation guard search —16 October2026
+
+Pure numeric coverage probes now stop after all requested roles are found. Every
+original complete-span, source/backlink and lifetime check remains; no authority
+or work/timing budget changes. Five HOST sanitizer groups and the pinned86-unit
+build pass. Exact new emulator, A1200 and performance acceptance are NOT_RUN or
+unqualified. See [the contract](NATIVE_ROLLING_ENTRY.md#stop-pure-guard-searches-after-complete-coverage).
+
 ## Equivalent preparation containment —16 October2026
 
 Preparation now derives child-end safety from a valid complete parent and the

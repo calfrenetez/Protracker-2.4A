@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "scope": "Exact protected-range sampler-header comparison and complete4096-unit preflight candidate",
+  "candidate": {
+    "bytes": 329960,
+    "sha256": "0bbe2152ee35744b931859306f5ac9bf91b2b49896cb61ddc967c4724abdec5d"
+  },
+  "result": "UNCONFIRMED",
+  "returnCodeObserved": false,
+  "progress": [
+    {
+      "seconds": 20.65097112499643,
+      "text": "ROLLING WORK4096 PHASE-END steps=133 phase=3\n"
+    },
+    {
+      "seconds": 41.939732250000816,
+      "text": "ROLLING WORK4096 PHASE-END steps=201 phase=10\n"
+    },
+    {
+      "seconds": 63.17338162497617,
+      "text": "ROLLING WORK4096 PROGRESS steps=256 phase=10\n"
+    },
+    {
+      "seconds": 83.98228762499639,
+      "text": "ROLLING WORK4096 PHASE-END steps=320 phase=29"
+    }
+  ],
+  "lastObservedPhase": "Consume (phase29), after forecast and normalization",
+  "originalAssertionsAndNativeLimitsRetained": true,
+  "measuredNativeSpeedup": false,
+  "replayed": false,
+  "rawResultSHA256": "59a6ec0bbec8e3a1b1f2f1baff45ae695d15d23f025185e19f2c2faa556f204c",
+  "recovery": {
+    "ownResourcesOnly": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactStagingCopyRemoved": true,
+    "guestRAMLifetimeEndedWithExactEmulator": true,
+    "independentObserverSHA256": "68f19186125abb8a6bac720c8729c471497d4bcc7f179828d144a883371cae1d",
+    "publicReleaseSHA256": "972130e0d57307338e260288893210582d9298fe81304d79be977368699e4f0f",
+    "separateFinalIdleSHA256": "c9f7e7308039531623d7b8225ee5e256f19aa35561ea9e3c6ab1f9005d0a2341",
+    "ownershipReleased": true,
+    "holdsRemaining": 0
+  },
+  "acceptance": {
+    "physical": "NOT_RUN",
+    "rolling68": "UNCONFIRMED",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

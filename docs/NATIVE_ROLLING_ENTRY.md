@@ -396,3 +396,13 @@ The pinned86-unit build passes:329,960bytes SHA256
 Exact Amiberry/A1200 execution and a measured native speedup are NOT_RUN at
 preparation. All device, scheduled output and listening gates stay separate. See
 [header comparison host/build](../evidence/enhanced-editor/rolling-native-entry/header-ranges-host-build.json).
+
+The exact protected-range candidate subsequently reaches sample pinning at
+21seconds, audit at42/63seconds and consume (phase29) at84seconds in Amiberry,
+but does not confirm complete preflight within90seconds. The full native result
+remains UNCONFIRMED; these coarse progress observations establish no native
+speedup or device/timing acceptance. Exact owned cleanup, both saved launcher
+restorations, independent observation/public release and a separate final idle
+check pass. Failure evidence and original three HOLDs are preserved without
+replay. Physical execution stays NOT_RUN. See
+[exact header candidate attempt](../evidence/enhanced-editor/rolling-native-entry/header-ranges-emulator.json).

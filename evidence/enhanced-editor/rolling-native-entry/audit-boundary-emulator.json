@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "state": "EXACT_AMIBERRY_PINNING_ACTIVATION_BEFORE_AUDIT_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "size": 332884,
+    "sha256": "28e70a230be9ca90712750890f1cb51e735796411291e64818e0adf3b16f38a9",
+    "crc32": "77DC417E"
+  },
+  "scope": "Original16-bit mixed fixture, original17-unit establishment, genuine current persistent sample pins and source activation through semantic AUDIT_BEGIN; stops before audit execution. Original master/save preservation, cancellation, disposal and zero accounting; ordinary allocations and modeled clocks/buses only.",
+  "native": {
+    "returnCode": 0,
+    "stackBytes": 1048576,
+    "outputBytes": 86,
+    "marker": "ROLLING AUDIT BOUNDARY NATIVE PASS:original17 promotion and cancellation;MODELED_ONLY",
+    "closedProgress": "ROLLING AUDIT BOUNDARY DONE phase=0\n",
+    "closedProgressBytes": 36,
+    "launches": 1
+  },
+  "capture": {
+    "liveProgressContentReads": false,
+    "finalClosedProgressRequired": true,
+    "allNineExecutionFilesCapturedAndSettled": true,
+    "originalDeadlinesSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    }
+  },
+  "cleanup": {
+    "exactBothRAMNamespacesAbsent": true,
+    "ownHostStagingAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObservationPassed": true,
+    "publicReleasePassed": true,
+    "separateFinalIdlePassed": true,
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "b75de0d893582faabee0fb8e4b08b2ea6708ae480dce930b3820b4cefbc91c6a",
+    "release/independent-pass-observation.json": "5ab2c579485d0a7541fbf2c6ff412a4dda05e3b54d9c3091e5111e2b405563fa",
+    "release/release-result.json": "d71a76657df6d09e7a4fcd0ab7417af8af7a72a1d1e4d842471193ea9bd9c375",
+    "release/independent-final-idle.json": "e3ccca2b357d10811443378bfc48e50cdf235a975295eb8ce46e8d6afdf7a120"
+  },
+  "unqualified": [
+    "Audit execution or complete original17 preflight",
+    "Originalcase1/full68 or whole editor",
+    "A1200 execution of this exact candidate",
+    "Exec Fast/Chip placement, card RAM or physical voice-stop/device behavior",
+    "IRQ/output activation and exact musical timing",
+    "Human listening"
+  ],
+  "earlierUnconfirmedTransactions": "Preserved separately; not replayed or reinterpreted by this component pass"
+}

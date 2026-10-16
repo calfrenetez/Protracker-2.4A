@@ -694,3 +694,12 @@ correctness issue. This establishes HOST/build qualification only; exact
 Amiberry and A1200 are NOT_RUN at preparation. Models and ordinary allocations
 cannot qualify native placement/device/IRQ/output timing or listening. See
 [HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/audit-boundary-host-build.json).
+
+The exact332884-byte candidate subsequently passes once in Amiberry030, RC0,
+sole86-byte stdout and closed36-byte progress. Nine-file custody/settlement,
+independent observation/public release, owned service shutdown and separate final
+idle pass. This original16-bit mixed fixture now qualifies staged sample pinning,
+source activation and cancellation under the unchanged limits. It stops before
+audit execution. No complete audit/preflight, case1/full68, whole-editor, physical
+placement/device, output timing or listening acceptance follows. See
+[exact scoped result](../evidence/enhanced-editor/rolling-native-entry/audit-boundary-emulator.json).

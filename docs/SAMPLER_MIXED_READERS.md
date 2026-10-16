@@ -167,3 +167,24 @@ fresh final observation passed (recorded EMPTY1711/90). The first timeout's caus
 is not established by this second timeout. Both transactions remain immutable.
 A smaller single-control diagnostic with separately closed phase observations
 is the next step. See [the component failure and recovery](../evidence/enhanced-editor/mixed-source-binding/8mono-emulator.json).
+
+## One-control native diagnostic —16 October2026
+
+The full495-case and separate75-case8mono native attempts did not confirm
+completion within the unchanged90-second native window. Their failures and
+independent restoration/releases remain preserved; neither transaction is replayed.
+
+A distinct opt-in probe now executes one genuine8mono Paula before-action control,
+with16 exact stdout lines and a separately closed owned-RAM progress file. It
+records entry, construction, pool opening, preparation, checking and cleanup.
+It excludes the other494 cases and legacy constructor. Default full HOST and six
+component assertions remain intact; trace hooks default to no operations.
+
+Twelve sanitizer tests across ten modules pass from369 frozen inputs, including
+the actual probe/closed-sidecar contract, full binding matrix and all six
+components. The pinned30-unit native build passes:296,632-byte HUNK,89 project
+dependencies,32 SDK inputs and seven runtime inputs; assertions remain enabled.
+Amiberry and physical execution are NOT_RUN at preparation. Compiler local
+frames do not establish a whole-call-chain stack or timing bound. No native
+provider, device, voice-stop, output timing or listening acceptance is added.
+See [scoped host/build evidence](../evidence/enhanced-editor/mixed-source-binding/probe-host-build.json).

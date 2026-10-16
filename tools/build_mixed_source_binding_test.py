@@ -147,8 +147,13 @@ def main():
     ap.add_argument('--out', type=Path, required=True)
     ap.add_argument('--component', choices=COMPONENTS,
                     help='One source bit-depth/channel matrix; excludes the separate legacy constructor')
+    ap.add_argument('--probe', action='store_true',
+                    help='One8mono Paula control with a separately closed phase trace; not the75-case matrix')
     args = ap.parse_args()
+    if args.probe and args.component != '8mono':
+        ap.error('--probe requires --component8mono')
     flags, target, marker, marker_occurrences = list(FLAGS), TARGET, MARKER, 1
+    units = list(SOURCES)
     if args.component:
         match = re.fullmatch(r'(8|16|24)(mono|stereo)', args.component)
         bits, side = match.groups()
@@ -161,6 +166,24 @@ def main():
                   ';Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY')
         marker_occurrences = 2  # One active macro definition and its puts expansion.
     source = Path(__file__).resolve().parents[1]
+    markers = [marker] if args.component else [
+        'SAMPLER MIXED FACTORY PASS:complete original constructor assertions;bounded completion marker;SOFTWARE_ONLY', marker]
+    if args.probe:
+        probe = ast.parse((source / 'tests/test_native_mixed_binding_probe.py').read_text())
+        imports = [n for n in probe.body if isinstance(n, ast.ImportFrom)
+                   and n.module == 'test_sampler_mixed_source_binding']
+        declaration = next(n.value for n in probe.body if isinstance(n, ast.Assign)
+                           and any(isinstance(t, ast.Name) and t.id == 'SOURCES' for t in n.targets))
+        if (len(imports) != 1 or [(n.name, n.asname) for n in imports[0].names] != [('SOURCES', 'MIXED_SOURCES')]
+                or ast.unparse(declaration) != "['tests/native_mixed_binding_probe_test.c', *MIXED_SOURCES[1:]]"):
+            raise ValueError('Exact genuine probe source declaration/import changed')
+        markers = next(ast.literal_eval(n.value) for n in probe.body if isinstance(n, ast.Assign)
+                       and any(isinstance(t, ast.Name) and t.id == 'MARKERS' for t in n.targets))
+        if (len(markers) != 16 or len(set(markers)) != 16 or
+                any(not isinstance(x, str) or not x or not x.isascii() or not x.isprintable() or len(x) > 256 for x in markers)):
+            raise ValueError('Exact bounded16-line probe contract required')
+        target, marker, marker_occurrences = 'PTMixed8MonoProbeTest', markers[-2], 1
+        units[0] = 'tests/native_mixed_binding_probe_test.c'
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
     if out.exists() or below(out, source) or below(source, out):
@@ -197,6 +220,7 @@ def main():
               'source_files_before': len(expected), 'source_fingerprint': source_fingerprint(expected),
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
               'recipe_contract': convention, 'flags': flags, 'fixture_component': args.component or 'full',
+              'single_control_probe': args.probe,
               'legacy_constructor_in_fixture': not bool(args.component), 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
@@ -238,7 +262,7 @@ def main():
             require_pin(path, pins['runtime_inputs'][name])
             runtime_paths[name] = str(path)
             result['runtime_inputs'][name] = pins['runtime_inputs'][name]
-        for index, unit in enumerate(SOURCES):
+        for index, unit in enumerate(units):
             toolchain_current()
             text = run([compiler, *flags, '-M', unit], 'dependencies-%02d' % index)
             for name in dependencies(text):
@@ -252,7 +276,7 @@ def main():
                     sdk_inputs[str(path)] = digest(path)
                 else:
                     raise ValueError('Dependency outside frozen source and pinned SDK roots: ' + str(path))
-        text = run([compiler, *flags, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
+        text = run([compiler, *flags, '-E', '-dD', units[0]], 'preprocessed-fixture')
         assertions = re.findall(r'^#define assert\([^\n]*', text, re.MULTILINE)
         assertion = assertions[-1] if assertions else None
         if not assertion or '__assert_func' not in assertion or text.count('__assert_func (') < 2:
@@ -262,19 +286,18 @@ def main():
         toolchain_current()
         require_source(source, expected)
         binary = out / target
-        argv = [compiler, *flags, *SOURCES, '-o', str(binary)]
+        argv = [compiler, *flags, *units, '-o', str(binary)]
         compile_commands.append({'name': target, 'directory': str(source), 'argv': argv,
-                                 'output': str(binary), 'ordered_translation_units': SOURCES})
+                                 'output': str(binary), 'ordered_translation_units': units})
         run(argv, target + '.build')
         raw = binary.read_bytes()
         if len(raw) < 4 or struct.unpack('>I', raw[:4])[0] != 0x3f3:
             raise ValueError('Linked native product lacks HUNK_HEADER0x3f3')
         if raw.count(marker.encode('ascii')) != 1:
             raise ValueError('Linked product lacks shared assertion-completion marker')
-        result['targets'][target] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': flags,
+        result['targets'][target] = {'scope': SCOPE, 'source_inputs': units, 'flags': flags,
                                      'fixture_component': args.component or 'full',
-                                     'markers': [marker] if args.component else [
-                                         'SAMPLER MIXED FACTORY PASS:complete original constructor assertions;bounded completion marker;SOFTWARE_ONLY', marker],
+                                     'single_control_probe': args.probe, 'markers': markers,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',

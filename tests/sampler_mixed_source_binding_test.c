@@ -28,6 +28,9 @@
 #endif
 #endif
 #include "sampler_mixed_readers_test.c"
+#ifndef PT_MIXED_BINDING_TRACE
+#define PT_MIXED_BINDING_TRACE(stage,x,y,n) ((void)0)
+#endif
 static uint64_t mixed_other_key(struct pt_sampler_mixed_reader *r,unsigned fault)
 {
  struct pt_sample_cache cache;struct pt_cache_lease lease;
@@ -53,17 +56,22 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
  struct pt_sampler_mixed_reader *r;struct pt_sample_cache *cache;
  struct pt_cache_entry entry;struct model model;uint8_t ram[4096],chip[8];
  int32_t masters[2][64];uint64_t ticket=0;unsigned done=999,steps=0,writes,calls,chipcalls;
- smf_open(f);smf_requests(f,card?5:1,little);
+ PT_MIXED_BINDING_TRACE("case-made",bits,channels,fault);
+ smf_open(f);PT_MIXED_BINDING_TRACE("pool-open",bits,channels,fault);
+ smf_requests(f,card?5:1,little);
  if(card)f->request[0]=f->request[4];
  f->count=1;f->request[0].channel=channels-1;
  if(phase==0){
+   PT_MIXED_BINDING_TRACE("begin",bits,channels,fault);
    assert(pt_sampler_mixed_begin(f->pool,f->revision,960,f->request,1,f->command)==PT_SAMPLER_MIXED_PENDING);
    c=f->command[0].address;r=c->source[0].reader;
    while(c->phase!=ACTION){
      assert(pt_sampler_mixed_advance(f->pool,f->revision,f->command[0],&done)==PT_SAMPLER_MIXED_PENDING);
      assert(++steps<100&&r->state!=READY);
+     PT_MIXED_BINDING_TRACE("prepared-step",bits,channels,steps);
    }
  }else{smf_prepare(f,0,960);c=f->command[0].address;r=c->source[0].reader;}
+ PT_MIXED_BINDING_TRACE("derived-ready",bits,channels,fault);
  smf_handles(f,0,0);
  if(phase==2){
    assert(pt_sampler_mixed_enqueue(f->pool,f->revision,f->command[0],&ticket)==PT_MIXED_READERS_OK);
@@ -81,6 +89,7 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
  memcpy(masters[0],f->pcm[0].data,6*channels*sizeof(int32_t));
  memcpy(masters[1],f->pcm[1].data,6*channels*sizeof(int32_t));
  if(!card){assert(entry.bytes<=sizeof(chip));memcpy(chip,entry.data,entry.bytes);}
+ PT_MIXED_BINDING_TRACE("checking",bits,channels,fault);
  if(phase==0){
    done=999;assert(pt_sampler_mixed_advance(f->pool,f->revision,f->command[0],&done)==
      (fault?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_OK));
@@ -92,6 +101,7 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
    if(fault)assert(ticket==999);
  }else assert(pt_sampler_mixed_reader_readiness(f->pool,f->reader[0])==
      (fault?PT_MIXED_READERS_STALE:PT_MIXED_READERS_OK));
+ PT_MIXED_BINDING_TRACE("checked",bits,channels,fault);
  if(fault||phase!=1)assert(!memcmp(&model,&f->inherited->model,sizeof(model)));
  assert(writes==v->card.writes&&calls==f->ordinary.calls&&chipcalls==f->chip.calls);
  assert(!memcmp(ram,v->card.ram,sizeof(ram)));
@@ -101,6 +111,7 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
  if(phase!=0||!fault){
    assert(!memcmp(&entry,cache->entry+r->lease.slot,sizeof(entry))&&r->pin&&r->leased&&!r->released);
  }
+ PT_MIXED_BINDING_TRACE("before-close",bits,channels,fault);
  /* Refusal is not retirement. A live ticket drains through the genuine
   * independent command and reader proof domains with its corrupted key intact. */
  if(phase==2||(phase==1&&!fault)){
@@ -126,9 +137,13 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
    closed=pt_sampler_mixed_command_close(f->pool,f->command);
    assert(!f->command[0].address&&!f->command[0].token&&closed==!(phase==0&&fault));
  }
- smf_drop(f);
+ PT_MIXED_BINDING_TRACE("before-drop",bits,channels,fault);
+ smf_drop(f);PT_MIXED_BINDING_TRACE("case-closed",bits,channels,fault);
 }
-int main(void)
+#ifndef PT_MIXED_BINDING_MAIN
+#define PT_MIXED_BINDING_MAIN main
+#endif
+int PT_MIXED_BINDING_MAIN(void)
 {
  unsigned bits,channels,card,cache_bits,little,fault,phase,count=0;
  for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels){

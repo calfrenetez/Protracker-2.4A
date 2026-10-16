@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Single genuine8mono Paula before-action control plus16 closed phase observations; other494 binding cases and legacy constructor excluded. Distinct diagnostic; no replay or native deadline change.",
+  "candidate": {
+    "bytes": 296632,
+    "sha256": "107eaa0d92022e68c0c4aa13a10940b1fc8a801836f065840d3a712e567f62d8",
+    "crc32": "6AC04F64"
+  },
+  "host": {
+    "tests": 12,
+    "modules": 10,
+    "assertions": true,
+    "asan": true,
+    "ubsan": true,
+    "frozen_inputs": 369,
+    "inventory_unchanged": true,
+    "host_result_sha256": "adad444916a4fc1cb6435b6f510a72a5c877e38746b0bf19434a991fe04ae776",
+    "observed_exact_stdout_lines": 16,
+    "closed_sidecar_matches_final_line": true,
+    "full495_and_six_components_retained": true
+  },
+  "compiler": {
+    "translation_units": 30,
+    "project_dependencies": 89,
+    "sdk_dependencies": 32,
+    "runtime_inputs": 7,
+    "assertions_enabled": true,
+    "manifest_sha256": "24d2031c3a4675763fe1f265c970730ab626f53e521a2af5ca146a0020c0370b",
+    "selected_assembler_unchanged": true,
+    "maximum_compiler_local_frame_bytes": 11824,
+    "selected_stack_bytes": 1048576,
+    "total_stack_qualified": false
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Other494 cases by this probe",
+    "Legacy constructor by this probe",
+    "Exec memory placement",
+    "MMIO and device or DMA behavior",
+    "Actual voice stop or queued activation",
+    "Output timing and human listening"
+  ],
+  "previous_incomplete_runs_preserved": true
+}

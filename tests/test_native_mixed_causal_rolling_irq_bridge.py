@@ -17,7 +17,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-OVERLAY_PINS = {'src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.c': {'bytes': 16451, 'sha256': 'e9266976fe1a1852378248eaef24814f14095de5eb8b3df8368a2cfb64576ca2'}, 'src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.h': {'bytes': 4887, 'sha256': '00f56f05a9d030718765afd74dae05ebd3336e1949429b76f6c8dcd34bf86450'}, 'src/native/readers_ram/native_mixed_causal_rolling_irq_layout.h': {'bytes': 3065, 'sha256': 'c49ca938fb279fccf4b16bc869966e48ca52525fb21a5f65e87798531762bdaf'}, 'tests/native_mixed_causal_rolling_irq_bridge_test.c': {'bytes': 25294, 'sha256': '8cce4a644b29a7fc4057806a442a8fc4ef8bb8ce5757c92082ea3c0dc4dda362'}, 'tests/native_mixed_causal_ram_rolling_song_test.c': {'bytes': 64445, 'sha256': 'ecd9e557d7e547aaeda8604c3fd59ee7bad6875bfaec64730e934c92d0904f4e'}}
+OVERLAY_PINS = {'src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.c': {'bytes': 16451, 'sha256': 'e9266976fe1a1852378248eaef24814f14095de5eb8b3df8368a2cfb64576ca2'}, 'src/native/readers_ram/native_mixed_causal_rolling_irq_bridge.h': {'bytes': 4887, 'sha256': '00f56f05a9d030718765afd74dae05ebd3336e1949429b76f6c8dcd34bf86450'}, 'src/native/readers_ram/native_mixed_causal_rolling_irq_layout.h': {'bytes': 3065, 'sha256': 'c49ca938fb279fccf4b16bc869966e48ca52525fb21a5f65e87798531762bdaf'}, 'tests/native_mixed_causal_rolling_irq_bridge_test.c': {'bytes': 25294, 'sha256': '8cce4a644b29a7fc4057806a442a8fc4ef8bb8ce5757c92082ea3c0dc4dda362'}, 'tests/native_mixed_causal_ram_rolling_song_test.c': {'bytes': 64449, 'sha256': 'e20fd19804bab520bec419fe394f7a13da2de1d0828cf962d595828c9945edaf'}}
 
 
 def source_path(relative):

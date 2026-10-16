@@ -142,7 +142,9 @@ static int prune(struct pt_editor_mixed_causal_song_pair *p)
 }
 static int registrations_empty(const struct pt_editor_mixed_causal_song_pair *p)
 {unsigned i;for(i=0;i<PT_SAMPLER_MIXED_COMMANDS;++i)if(p->command[i].reference.serial)return 0;
- for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(p->reader[i].reference.serial)return 0;return 1;}
+ for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(p->reader[i].reference.serial)return 0;
+ return 1;
+ }
 static int origin_equal(const struct pt_mixed_plan_origin *a,const struct pt_mixed_plan_origin *b)
 {return a->present==b->present&&a->sample==b->sample&&a->channel==b->channel&&a->frame==b->frame;}
 static int empty_record(const struct pt_mixed_plan_record *r)
@@ -353,7 +355,9 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_be
  if(r!=PT_EDITOR_MIXED_READERS_PENDING)return PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_INVALID;
  p->adopted=1;p->original=p;p->source=s;p->borrow=b;p->outputs=u;p->parent=s->contexts;
  memcpy(&p->saved,&p->configuration,sizeof(p->saved));
- for(i=0;i<6;++i)p->extent[i]=s->immutable[i];p->extent[6]=s->mutable[0];p->extent[7]=s->mutable[1];
+ for(i=0;i<6;++i)p->extent[i]=s->immutable[i];
+ p->extent[6]=s->mutable[0];
+ p->extent[7]=s->mutable[1];
  if(!add_size(&total,p->parent.bytes)||!add_size(&total,sizeof(*s))||!add_size(&total,sizeof(*b)))
     return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY);
  for(i=0;i<8;++i)if(!add_size(&total,p->extent[i].bytes))return fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY);
@@ -390,13 +394,15 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
        p->establish_parents,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PARENTS,p->revision);
     if(!external_leave(p,0))break;
     if(er!=PT_ESTABLISH_PENDING)fail(p,er==PT_ESTABLISH_CAPACITY?PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY:PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_STEP;break;
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_STEP;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_STEP:
     if(!external_enter(p,0))break;
     er=pt_sampler_establish_step(&p->establish,p->revision,p->generation,work);
     if(!external_leave(p,0))break;
     if(er==PT_ESTABLISH_READY)p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_BEGIN;
-    else if(er!=PT_ESTABLISH_PENDING)fail(p,er==PT_ESTABLISH_CAPACITY?PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY:PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;
+    else if(er!=PT_ESTABLISH_PENDING)fail(p,er==PT_ESTABLISH_CAPACITY?PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY:PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_BEGIN:
     if(p->pin_slot==e->project->sample_count){p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_CLOSE;break;}
     if(p->pin_slot>=PT_PROJECT_SAMPLES||u->temporary_pin||u->persistent_pin||p->pin_job.owner){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
@@ -406,27 +412,36 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
     if(!external_leave(p,0))break;
     if(pr!=PT_EDIT_OK)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_STEP;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_STEP:
-    if(!external_enter(p,0))break;u->ready=0;
+    if(!external_enter(p,0))break;
+    u->ready=0;
     pr=pt_sampler_pin_job_step(&p->pin_job,work,&u->temporary_pcm,&u->temporary_pin,&u->ready);
     if(!external_leave(p,0))break;
     if(pr!=PT_EDIT_OK)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else if(u->ready){if(!u->temporary_pin)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_CURRENT;}break;
+    else if(u->ready){if(!u->temporary_pin)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_CURRENT;
+    }
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_CURRENT:
     if(!external_enter(p,0))break;
     pr=pt_sampler_pin_current(&e->sampler,e->project,p->pin_slot,p->generation,
        u->temporary_pin,&u->persistent_pcm,&u->persistent_pin);
     if(!external_leave(p,0))break;
     if(pr!=PT_EDIT_OK||!u->persistent_pin)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_FINISH;break;
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_FINISH;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_FINISH:
     if(!u->persistent_pin||!u->temporary_pin||p->pin[p->pin_slot]){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
     if(!external_enter(p,0))break;
     p->pin[p->pin_slot]=u->persistent_pin;u->persistent_pin=NULL;++p->pin_count;
     {struct pt_sample_version *temporary=u->temporary_pin;u->temporary_pin=NULL;
        pt_sampler_pin_job_cancel(&p->pin_job);pt_sampler_unpin(temporary);}
-    if(!external_leave(p,0))break;++p->pin_slot;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_BEGIN;break;
+    if(!external_leave(p,0))break;
+    ++p->pin_slot;
+    p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_PIN_BEGIN;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ESTABLISH_CLOSE:
-    if(!external_enter(p,0))break;n=(unsigned)pt_sampler_establish_cancel(&p->establish);
+    if(!external_enter(p,0))break;
+    n=(unsigned)pt_sampler_establish_cancel(&p->establish);
     if(!external_leave(p,0))break;
     if(!n||p->establish.active)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ACTIVATE;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ACTIVATE:
@@ -441,25 +456,32 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
     ar=pt_mixed_quantized_audit_begin_in_workspace((void *)p->extent[3].data,p->extent[3].bytes,&p->audit_inputs,&u->audit);
     if(!external_leave(p,0))break;
     if(ar!=PT_MIXED_QAUDIT_PENDING||!u->audit)fail(p,ar==PT_MIXED_QAUDIT_CAPACITY?PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CAPACITY:PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_STEP;break;
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_STEP;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_STEP:
-    if(!external_enter(p,0))break;ar=pt_mixed_quantized_audit_step(u->audit,p->revision,p->generation,small_work(work));
+    if(!external_enter(p,0))break;
+    ar=pt_mixed_quantized_audit_step(u->audit,p->revision,p->generation,small_work(work));
     if(!external_leave(p,0))break;
     if(ar==PT_MIXED_QAUDIT_READY)p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_GET;
-    else if(ar!=PT_MIXED_QAUDIT_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;
+    else if(ar!=PT_MIXED_QAUDIT_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_GET:
-    if(!external_enter(p,0))break;ar=pt_mixed_quantized_audit_get(u->audit,p->revision,p->generation,&u->audit_report);
+    if(!external_enter(p,0))break;
+    ar=pt_mixed_quantized_audit_get(u->audit,p->revision,p->generation,&u->audit_report);
     if(!external_leave(p,0))break;
     if(ar!=PT_MIXED_QAUDIT_READY||u->audit_report.rewinds)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
     else{p->audited=u->audit_report;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_TAKE;}break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_TAKE:
     if(u->sequence){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
-    if(!external_enter(p,0))break;ar=pt_mixed_quantized_audit_take(u->audit,p->revision,p->generation,&u->sequence);
+    if(!external_enter(p,0))break;
+    ar=pt_mixed_quantized_audit_take(u->audit,p->revision,p->generation,&u->sequence);
     if(!external_leave(p,0))break;
     if(ar!=PT_MIXED_QAUDIT_TAKEN||!u->sequence)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
-    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_TRANSFER_CHECK;break;
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_TRANSFER_CHECK;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_AUDIT_TRANSFER_CHECK:
-    if(!external_enter(p,0))break;ar=pt_mixed_quantized_audit_get(u->audit,p->revision,p->generation,&u->audit_report);
+    if(!external_enter(p,0))break;
+    ar=pt_mixed_quantized_audit_get(u->audit,p->revision,p->generation,&u->audit_report);
     if(!external_leave(p,0))break;
     if(ar!=PT_MIXED_QAUDIT_TAKEN||u->audit_report.rewinds!=1||u->audit_report.frames!=p->audited.frames||
        u->audit_report.intervals!=p->audited.intervals)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
@@ -468,7 +490,8 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
     cr=pt_editor_mixed_causal_prepare_advance_validation(p->controller,work);
     if(!current(p))break;
     if(cr==PT_EDITOR_MIXED_READERS_OPEN)p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_LOAD;
-    else if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;
+    else if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_LOAD:
     if(p->pair_index>=2||p->candidate_count!=2){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
     memcpy(&u->normalized,p->frozen+p->pair_index,sizeof(u->normalized));
@@ -487,41 +510,52 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
     p->target=p->saved.absolute_start+p->frames+u->interval.frames;
     p->remaining=u->interval.frames;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FORECAST_BEGIN;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FORECAST_BEGIN:
-    if(!external_enter(p,0))break;rr=pt_render_lookahead_begin(&p->lookahead,u->sequence);
+    if(!external_enter(p,0))break;
+    rr=pt_render_lookahead_begin(&p->lookahead,u->sequence);
     if(!external_leave(p,0))break;
     if(rr!=PT_RENDER_OK)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FORECAST_STEP;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FORECAST_STEP:
-    if(!external_enter(p,0))break;u->ready=0;
+    if(!external_enter(p,0))break;
+    u->ready=0;
     if(!pt_render_sequence_output_disjoint(u->sequence,&u->plan,sizeof(u->plan))||
        !pt_render_sequence_output_disjoint(u->sequence,&u->ready,sizeof(u->ready))){
        (void)external_leave(p,1);fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
     rr=pt_render_lookahead_step(&p->lookahead,small_work(work),&u->plan,&u->ready);
     if(!external_leave(p,0))break;
     if(rr!=PT_RENDER_OK)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else if(u->ready){normalizer_inputs(p);p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_BEGIN;}break;
+    else if(u->ready){normalizer_inputs(p);
+    p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_BEGIN;
+    }
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_BEGIN:
     if(!external_enter(p,0))break;
     qr=pt_mixed_plan_normalizer_begin_quantized_in_workspace((void *)p->extent[5].data,p->extent[5].bytes,&p->normalizer_inputs,&u->normalizer);
     if(!external_leave(p,0))break;
     if(qr!=PT_MIXED_PLAN_PENDING||!u->normalizer)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_STEP;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_STEP:
-    if(!external_enter(p,0))break;qr=pt_mixed_plan_normalizer_step(u->normalizer,p->revision,p->generation,small_work(work));
+    if(!external_enter(p,0))break;
+    qr=pt_mixed_plan_normalizer_step(u->normalizer,p->revision,p->generation,small_work(work));
     if(!external_leave(p,0))break;
     if(qr==PT_MIXED_PLAN_READY)p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_GET;
-    else if(qr!=PT_MIXED_PLAN_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;
+    else if(qr!=PT_MIXED_PLAN_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_GET:
-    if(!external_enter(p,0))break;qr=pt_mixed_plan_normalizer_get_quantized(u->normalizer,p->revision,p->generation,&u->normalized);
+    if(!external_enter(p,0))break;
+    qr=pt_mixed_plan_normalizer_get_quantized(u->normalizer,p->revision,p->generation,&u->normalized);
     if(!external_leave(p,0))break;
     if(qr!=PT_MIXED_PLAN_READY)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_CLOSE;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_Q_CLOSE:
-    if(!external_enter(p,0))break;n=(unsigned)pt_mixed_plan_normalizer_close(&u->normalizer);
+    if(!external_enter(p,0))break;
+    n=(unsigned)pt_mixed_plan_normalizer_close(&u->normalizer);
     if(!external_leave(p,0))break;
     if(!n||u->normalizer)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_LOWER;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_LOWER:
     if(!snapshot_checked(p)){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;}
     if(!u->normalized.normalized.count){
        if(!checked_empty(p))fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-       else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CONSUME;break;}
+       else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CONSUME;
+       break;
+       }
     if(p->candidate_count>=2||
        (p->candidate_count&&p->target<=p->frozen[p->candidate_count-1].normalized.frame)||!lower(p)){
        fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;}
@@ -537,12 +571,14 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
        p->command[i].reference=u->command;p->working_command=i;}
     if(!current(p))break;
     if(cr!=PT_EDITOR_MIXED_READERS_PENDING||p->working_command==NO_COMMAND)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
-    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_BATCH_STEP;break;
+    else p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_BATCH_STEP;
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_BATCH_STEP:
     cr=pt_editor_mixed_causal_prepare_batch_advance(p->controller,p->command[p->working_command].reference);
     if(!current(p))break;
     if(cr==PT_EDITOR_MIXED_READERS_OPEN){p->action=0;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFERENCES;}
-    else if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;
+    else if(cr!=PT_EDITOR_MIXED_READERS_PENDING)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFERENCES:
     if(p->action==u->batch.count){p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ENQUEUE;break;}
     i=p->action++;
@@ -553,7 +589,8 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
        if(j>=PT_SAMPLER_MIXED_READERS||p->reader[j].reference.serial){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
        p->reader[j].reference=u->reader;}
     if(!current(p))break;
-    if(cr!=PT_EDITOR_MIXED_READERS_OPEN||!u->reader.serial)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;
+    if(cr!=PT_EDITOR_MIXED_READERS_OPEN||!u->reader.serial)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
+    break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_ENQUEUE:
     u->ticket=0;mr=pt_editor_mixed_causal_prepare_enqueue(p->controller,p->command[p->working_command].reference,&u->ticket);
     p->scheduled_result=mr;
@@ -569,11 +606,13 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_st
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CONSUME:
     if(!p->remaining){p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_COMMIT;break;}
     n=small_work(work);if(n>p->remaining)n=p->remaining;
-    if(!external_enter(p,0))break;rr=pt_render_sequence_consume(u->sequence,n);
+    if(!external_enter(p,0))break;
+    rr=pt_render_sequence_consume(u->sequence,n);
     if(!external_leave(p,0))break;
     if(rr!=PT_RENDER_OK)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);else p->remaining-=n;break;
  case PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_COMMIT:
-    if(!external_enter(p,0))break;rr=pt_render_lookahead_commit(&p->lookahead);
+    if(!external_enter(p,0))break;
+    rr=pt_render_lookahead_commit(&p->lookahead);
     if(!external_leave(p,0))break;
     if(rr!=PT_RENDER_OK||p->intervals==UINT64_MAX){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_REFUSED);break;}
     for(i=0;i<PT_MIXED_PLAN_RECORDS;++i)p->origins[i]=u->normalized.normalized.next[i];
@@ -673,8 +712,10 @@ enum pt_editor_mixed_causal_song_pair_result pt_editor_mixed_causal_song_pair_ca
 int pt_editor_mixed_causal_song_pair_close(struct pt_editor_mixed_causal_song_pair *p)
 {
  struct pt_editor_mixed_causal_song_pair_outputs *u;unsigned n=0;
- if(!identity(p))return 0;if(p->hook_closed)return 1;
- if(!enter(p,1))return 0;u=p->outputs;
+ if(!identity(p))return 0;
+ if(p->hook_closed)return 1;
+ if(!enter(p,1))return 0;
+ u=p->outputs;
  p->cancelled=1;if(!p->first_error)p->first_error=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_CANCELLED;
  p->result=p->first_error;p->phase=PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_DRAIN;
  switch(p->cleanup_phase){
@@ -704,16 +745,22 @@ int pt_editor_mixed_causal_song_pair_close(struct pt_editor_mixed_causal_song_pa
        pt_sampler_pin_job_cancel(&p->pin_job);(void)external_leave(p,1);
        if(p->pin_job.owner)break;}
     if(u->temporary_pin){struct pt_sample_version *v=u->temporary_pin;
-       if(!external_enter(p,1))break;u->temporary_pin=NULL;pt_sampler_unpin(v);
+       if(!external_enter(p,1))break;
+       u->temporary_pin=NULL;
+       pt_sampler_unpin(v);
        (void)external_leave(p,1);break;}
     if(u->persistent_pin){struct pt_sample_version *v=u->persistent_pin;
-       if(!external_enter(p,1))break;u->persistent_pin=NULL;pt_sampler_unpin(v);
+       if(!external_enter(p,1))break;
+       u->persistent_pin=NULL;
+       pt_sampler_unpin(v);
        (void)external_leave(p,1);break;}
     ++p->cleanup_phase;break;
  case 5:
     if(p->establish.active){if(!external_enter(p,1))break;
        n=(unsigned)pt_sampler_establish_cancel(&p->establish);(void)external_leave(p,1);
-       if(!n)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);if(p->establish.active)break;}
+       if(!n)fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);
+       if(p->establish.active)break;
+       }
     ++p->cleanup_phase;break;
  case 6:
     /* One explicit close may independently attempt source_close/source_quiet;
@@ -727,7 +774,9 @@ int pt_editor_mixed_causal_song_pair_close(struct pt_editor_mixed_causal_song_pa
  case 7:
     while(p->cleanup_slot<PT_PROJECT_SAMPLES&&!p->pin[p->cleanup_slot])++p->cleanup_slot;
     if(p->cleanup_slot<PT_PROJECT_SAMPLES){struct pt_sample_version *v=p->pin[p->cleanup_slot];
-       if(!external_enter(p,1))break;p->pin[p->cleanup_slot++]=NULL;--p->pin_count;
+       if(!external_enter(p,1))break;
+       p->pin[p->cleanup_slot++]=NULL;
+       --p->pin_count;
        pt_sampler_unpin(v);(void)external_leave(p,1);break;}
     if(p->pin_count){fail(p,PT_EDITOR_MIXED_CAUSAL_SONG_PAIR_FAULT);break;}
     ++p->cleanup_phase;break;

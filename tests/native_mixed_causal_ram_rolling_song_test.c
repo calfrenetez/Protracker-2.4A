@@ -251,7 +251,8 @@ static int sl_adapter_quiet(void *context,const struct pt_mixed_causal_registrat
         hook==6?PT_PRIVATE_CAUSAL_RAM_ARM_NOT_ENTERED:0);
     else if(hook==8){sl_inject64(a,&p->command[i&1U].identity.ticket);*a->injected64=0;}
     else{assert(hook==9);sl_clear_custody(a,p->command+(i&1U));}}
- if(a->ticket_raw==1)a->live[i]=0;return a->ticket_raw;
+ if(a->ticket_raw==1)a->live[i]=0;
+ return a->ticket_raw;
 }
 static int sl_adapter_close(void *context,const struct pt_mixed_causal_registration *r)
 {
@@ -795,7 +796,8 @@ static void sl_owned_row_mutation(unsigned arm,unsigned shape,unsigned outcome)
     sl_s(e)->command[ref.slot].handle.address&&e->producer.original.pin_count&&!p->source_attempted&&
     a->proofs==proofs+(arm?0:1)&&a->custody_clears==shape&&
     (arm?c->arm_outcome==raw:(c->rolling_ticket_raw==raw&&c->ticket_outcome==-1)));
- if(a->injected64||a->injected_mode)sl_undo_injected(a);a->arm_raw=a->ticket_raw=1;
+ if(a->injected64||a->injected_mode)sl_undo_injected(a);
+ a->arm_raw=a->ticket_raw=1;
  /* Pending real quiet retains the saved state; only later exact quiet1 may
   * consume it. No test clears any real uncertainty, ownership or fault. */
  proofs=a->proofs;a->hold[index]=1;

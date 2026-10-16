@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "state": "ROLLING68_NATIVE_ENTRY_HOST_AND_PINNED_COMPILE_PASS_NATIVE_NOT_RUN",
+  "change": "Strict native portability: formatting retains every C token; private inventory header uses the identical guarded range expression with an offset parameter; native entry retains all68 original assertions",
+  "host": {
+    "groups": 3,
+    "newExactNativeEntryCases": 68,
+    "newEntryEverySamplerHeaderByteChecked": true,
+    "zeroOffsetAndSizeMaxRangeControls": true,
+    "originalRollingCases": 68,
+    "irqContractModelCases": 25,
+    "caseGroupsOverlapDoNotSum": true,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "warningsAreErrors": true,
+    "assertionsEnabled": true,
+    "newEntryInnerCompilerAndFixtureDiagnosticsEmpty": true,
+    "completeShortOracleRequired": true,
+    "originalFixtureOracleRequiredBeforeMapping": true,
+    "protected16BytesAndStableMetadataUnchanged": true,
+    "baseline51GuardRetainedWithUnselectedDatalessBodiesMetadataOnly": true,
+    "crossReadCloudCtimeAndFlagsIgnoredButIndividualReadsStrict": true
+  },
+  "native": {
+    "units": 86,
+    "currentProjectBodies": 225,
+    "sdkDependencies": 43,
+    "runtimeInputs": 7,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "allSourceAndToolchainPinsUnchanged": true,
+    "selectedAssemblerBeforeAndAfterPinned": true,
+    "format": "HUNK_HEADER0x000003f3",
+    "candidate": {
+      "name": "PTMixedCausalRollingTest",
+      "bytes": 723832,
+      "sha256": "4edc561409dd49ebaaaa0635d6c7efb2cc1a5a1d540af795fa79b56a2356bda9",
+      "crc32": "332249CA"
+    },
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "actualClocksAndBuses": "MODELED",
+    "productionNativeProvider": "INHIBITED",
+    "maximumFixtureLocalFrameBytes": 93456,
+    "localFramesIncludeDormantDonors": true,
+    "wholeCallchainStackQualified": false
+  },
+  "preservedFailures": {
+    "partialReadResidencyRefusalBeforeCompile": true,
+    "hostBaselineResidencyRefusal": true,
+    "hostPreservationBookkeepingRefusal": true,
+    "strictNativePortabilityCompileFailure": true,
+    "noFailedTargetTransactionOrNativeExecution": true,
+    "warningsDisabled": false
+  },
+  "recordsSHA256": {
+    "host": "35920c89a3c217d153fbfeb649091fbeda5f7beef72c88fc795355ed9d694c77",
+    "innerFixtureStdout": "fabb67ced747f983cf45968f936ea8b67fd2c39fa2e2e65cb714ca4f85780594",
+    "innerFixtureStderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sourceManifest": "93bd7b995f63ce702b7500218bf94ef99a1a7a176380d092be4dae3ad87bcd0e",
+    "nativeManifest": "5dad837da11894f74ba0022c8196fc463083d601045cbf18383a2fcf6c2fa7d7",
+    "nativeInvocation": "7bb1ee393e18f63d6bc23ab0fb4347d6b00d884e74e3588f999cf0c30d258339",
+    "nativeResult": "3c9967cdaa9835c0a871fd845da747c584ab83330882aa70e2b72ce47b7bfd66",
+    "rollingRegression": "0215fd8a6638930c73d1bed4bf67fa67dd7c75956912ed621123f40601b9cbf8",
+    "irqModelRegression": "d39811d8b49fd5f561f6d0bae1f8b954b3fc2abdf3a44d3359d573e921284035",
+    "formattingTokenReview": "cf4388223e1e84333275d9a79ed73f8c17e40d62bc0bafb38fe72882436a3807",
+    "inventoryRangeReview": "2377edd7ede2dc1c198f3fcecb17babfe5614b57e48f03134009a2b64ba5702c",
+    "originalNativeFailure": "ec1d312ada485d58a2b426131081ada554657b63d5eeb7450b0576b4e5a6034a",
+    "localNativeFrames": "e8fc9f3f082ab0e67ad492ffa4b7ae45e4e9107a08337bcd97c50611fca9e3f8"
+  },
+  "notQualified": [
+    "Native HUNK execution and whole-callchain Stack",
+    "Actual four-deadline IRQ synchronization/activation/timing/WCET",
+    "Physical Fast/Chip placement or hardware device RAM/stop/DMA",
+    "Native frontend PLAY or output/audio/listening/full application"
+  ]
+}

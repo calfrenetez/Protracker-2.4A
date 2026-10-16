@@ -26,13 +26,18 @@ static int pt_establish_inventory_pending(const struct pt_sampler_pending *n,
            !n->retiring[k].bytes)return 0;
     return 1;
 }
+/* Preserve the original guarded subtraction for every size_t value. Keeping
+ * the offset a parameter also avoids a strict 68k unsigned >= literal-zero
+ * diagnostic for the sampler's first field, without disabling warnings. */
+static inline int pt_establish_inventory_field_byte(size_t byte,size_t offset,size_t bytes)
+{return byte>=offset && byte-offset<bytes;}
 static int pt_establish_inventory_header_equal(const struct pt_sampler *s,
     const struct pt_sampler *original)
 {
     const unsigned char *a=(const unsigned char *)s,*b=(const unsigned char *)original;
     size_t i;
-#define PT_INVENTORY_CHANGED(field) (i>=offsetof(struct pt_sampler,field)&& \
-    i-offsetof(struct pt_sampler,field)<sizeof(s->field))
+#define PT_INVENTORY_CHANGED(field) pt_establish_inventory_field_byte( \
+    i,offsetof(struct pt_sampler,field),sizeof(s->field))
     for(i=0;i<sizeof(*s);++i){
         if(PT_INVENTORY_CHANGED(current)||PT_INVENTORY_CHANGED(bytes)||
            PT_INVENTORY_CHANGED(live_head)||PT_INVENTORY_CHANGED(live_count)||

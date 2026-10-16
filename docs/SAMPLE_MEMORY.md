@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Four-event native entry —16 October2026
+
+The genuine68-case trigger/control/control/stop fixture now has an exact native
+entry, three passing sanitizer groups and a strict pinned68000 build. Native
+portability fixes retain all formatting tokens and the inventory range contract;
+additional controls check every sampler-header byte. The723832-byte HUNK is built,
+but its Amiberry/A1200 execution remains NOT_RUN. Native IRQ/PLAY and actual timing,
+device output and listening remain inhibited/unqualified. See
+[the entry and evidence](NATIVE_ROLLING_ENTRY.md).
+
 ## Native clock owner output protection —16 October2026
 
 The task clock reader now protects its full private request/port and known

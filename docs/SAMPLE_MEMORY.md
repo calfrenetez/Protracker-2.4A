@@ -32,6 +32,16 @@ adds no device, DMA/stop, scheduled activation, timing, full-app or listening
 acceptance. Older prepared physical candidates sharing the changed source must
 be rebuilt and promoted from a fresh exact emulator pass. See
 [scoped host/build evidence](../evidence/enhanced-editor/active-source-binding/host-build.json).
+The exact206,328-byte candidate subsequently passes once in the shared68030:
+all147 cases, RC0, observed Stack1MiB and the exact190-byte completion line.
+One input/eight execution-file custody, both guest namespaces and exact host
+staging cleanup pass. Separate restoration/absence observation, public release,
+owned-service stop and a fresh final idle check confirm no owned resources or
+HOLD remain. Physical execution and actual device stop remain NOT_RUN.
+The pinned predicate is a metadata comparison for an already owned reader
+captured from a published trigger; state2 alone is no publication or ownership
+receipt. These controller fields are in memory; saved project formats are
+unchanged. See [scoped emulator evidence](../evidence/enhanced-editor/active-source-binding/emulator.json).
 
 ## Prepared dispatcher trigger source binding —16 October2026
 

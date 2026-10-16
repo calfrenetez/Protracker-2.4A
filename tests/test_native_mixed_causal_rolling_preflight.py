@@ -10,8 +10,14 @@ ORACLE = b'ROLLING PREFLIGHT NATIVE PASS:original preflight and cancellation;MOD
 
 
 class PreflightHost(unittest.TestCase):
+    EXTRA_FLAGS = ()
+    EXPECTED = ORACLE
+    DONE = b'ROLLING PREFLIGHT DONE phase=0\n'
+    EVIDENCE_PREFIX = 'preflight-'
+
     def test_original_preflight_cancellation_disposal_and_foreign_file_refusals(self):
-        before=base.preservation_snapshot();base.evidence('preflight-before-preservation.json',before)
+        def evidence(name,value):base.evidence(self.EVIDENCE_PREFIX+name,value)
+        before=base.preservation_snapshot();evidence('before-preservation.json',before)
         pins={};original_sources=base.SOURCES
         try:
             base.SOURCES=SOURCES
@@ -24,14 +30,14 @@ class PreflightHost(unittest.TestCase):
                 env={'PATH':'/usr/bin:/bin','LC_ALL':'C','TMPDIR':str(private),
                      'ASAN_OPTIONS':'halt_on_error=1:abort_on_error=1','UBSAN_OPTIONS':'halt_on_error=1:print_stacktrace=1'}
                 fixture=private/'preflight'
-                compiled=subprocess.run(['/usr/bin/cc',*base.CFLAGS,*SOURCES,'-o',str(fixture)],cwd=private,env=env,capture_output=True,timeout=120)
-                base.evidence('preflight-compile.stdout',compiled.stdout);base.evidence('preflight-compile.stderr',compiled.stderr)
+                compiled=subprocess.run(['/usr/bin/cc',*base.CFLAGS,*self.EXTRA_FLAGS,*SOURCES,'-o',str(fixture)],cwd=private,env=env,capture_output=True,timeout=120)
+                evidence('compile.stdout',compiled.stdout);evidence('compile.stderr',compiled.stderr)
                 self.assertEqual((compiled.returncode,compiled.stdout,compiled.stderr),(0,b'',b''))
                 progress=private/'progress.log';progress.write_bytes(b'NOT STARTED\n')
                 actual=subprocess.run([str(fixture),str(progress)],cwd=private,env=env,capture_output=True,timeout=30)
-                base.evidence('preflight-fixture.stdout',actual.stdout);base.evidence('preflight-fixture.stderr',actual.stderr);base.evidence('preflight-progress.log',progress.read_bytes())
-                self.assertEqual((actual.returncode,actual.stdout,actual.stderr),(0,ORACLE,b''))
-                self.assertEqual(progress.read_bytes(),b'ROLLING PREFLIGHT DONE phase=0\n')
+                evidence('fixture.stdout',actual.stdout);evidence('fixture.stderr',actual.stderr);evidence('progress.log',progress.read_bytes())
+                self.assertEqual((actual.returncode,actual.stdout,actual.stderr),(0,self.EXPECTED,b''))
+                self.assertEqual(progress.read_bytes(),self.DONE)
                 progress.write_bytes(b'FOREIGN CONTENT\n')
                 foreign=subprocess.run([str(fixture),str(progress)],cwd=private,env=env,capture_output=True,timeout=30)
                 self.assertEqual((foreign.returncode,foreign.stdout,foreign.stderr),(20,b'',b''))
@@ -43,8 +49,15 @@ class PreflightHost(unittest.TestCase):
                 self.assertFalse(absent.exists());base.verify_sources(pins)
         finally:
             base.SOURCES=original_sources;base.verify_sources(pins)
-            after=base.preservation_snapshot();base.evidence('preflight-after-preservation.json',after)
+            after=base.preservation_snapshot();evidence('after-preservation.json',after)
             self.assertEqual(base.stable_fact(before),base.stable_fact(after))
+
+
+class PreflightPrefixHost(PreflightHost):
+    EXTRA_FLAGS = ('-DPT_ROLLING_PREFLIGHT_PREFIX=64',)
+    EXPECTED = b'ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY\n'
+    DONE = b'ROLLING PREFIX DONE steps=64 phase=0\n'
+    EVIDENCE_PREFIX = 'prefix-'
 
 
 if __name__ == '__main__':unittest.main()

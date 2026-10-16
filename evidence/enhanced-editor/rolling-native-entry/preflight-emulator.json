@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "scope": "Exact bounded original preflight/cancel component in Amiberry; incomplete result and independently verified recovery",
+  "candidate": {
+    "bytes": 329424,
+    "sha256": "76210621475e840c200a99f4c0afb1dff6caf2d8300cd6ac84e7bff76bb1f239"
+  },
+  "limits": {
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "stackBytes": 1048576,
+    "changed": false
+  },
+  "result": "UNCONFIRMED",
+  "nativeCompletion": false,
+  "returnCodeObserved": false,
+  "progressObservations": [
+    {
+      "seconds": 21.67483745800564,
+      "text": "ROLLING PREFLIGHT PREFLIGHT-BEGIN phase=0\n",
+      "bytes": 42
+    },
+    {
+      "seconds": 42.967533540999284,
+      "text": "ROLLING PREFLIGHT PREFLIGHT-BEGIN phase=0\n",
+      "bytes": 42
+    },
+    {
+      "seconds": 64.19885491600144,
+      "text": "ROLLING PREFLIGHT PREFLIGHT-BEGIN phase=0\n",
+      "bytes": 42
+    },
+    {
+      "seconds": 85.46950300000026,
+      "text": "ROLLING PREFLIGHT PREFLIGHT-BEGIN phase=0\n",
+      "bytes": 42
+    }
+  ],
+  "protocolRecords": 463,
+  "failureResultSHA256": "f8afa1e195b9dc885272e53657291d8d1fb11657640a6d91374d3ca2d720f7ea",
+  "originalFailedTransactionPreserved": true,
+  "replayed": false,
+  "recovery": {
+    "ownProcessesStoppedOrPositivelyAbsent": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactStagingRemoved": true,
+    "guestRAMLifetimeEndedWithExactEmulator": true,
+    "guestDirectoryAbsenceObserved": false,
+    "independentObserverSHA256": "f1d2759346e8a3ae68d843b07ff6b71179c956c7fc294f21d7d227860a1f81dd",
+    "firstReleaseSchemaRefusalPreserved": true,
+    "firstReleaseChangedState": false,
+    "publicReleaseSHA256": "e66d20c1dad05b65ed5f279a24ac6cd590450d54a1816da8cd37f1435aa63dd7",
+    "finalIdleSHA256": "6fed64f69f3a470396c2ed8b3256379b511baeacfe2c3199c5c2ed03a18e2f0b",
+    "holdsRemaining": 0,
+    "ownershipReleased": true
+  },
+  "acceptance": {
+    "amiberry": "UNCONFIRMED",
+    "physical": "NOT_RUN",
+    "actualDevice": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

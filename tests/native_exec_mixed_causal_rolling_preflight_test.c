@@ -6,14 +6,27 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #include "native_exec_mixed_causal_rolling_test.c"
 #undef PT_PRIVATE_ROLLING_NATIVE_ENTRY
 
+#ifndef PT_ROLLING_PREFLIGHT_PREFIX
+#define PT_ROLLING_PREFLIGHT_PREFIX 0
+#endif
+#if PT_ROLLING_PREFLIGHT_PREFIX != 0 && PT_ROLLING_PREFLIGHT_PREFIX != 64
+#error "Only the original preflight or the separately bounded64-step prefix is supported"
+#endif
+
 static const char *pt_preflight_progress;
 static unsigned pt_preflight_io_failed;
+static unsigned pt_preflight_steps;
 static void pt_preflight_record(const char *stage,const struct sl_trial *e)
 {
     FILE *stream=fopen(pt_preflight_progress,"wb");
     if(!stream){pt_preflight_io_failed=1;return;}
+#if PT_ROLLING_PREFLIGHT_PREFIX
+    if(fprintf(stream,"ROLLING PREFIX %s steps=%u phase=%u\n",stage,
+               pt_preflight_steps,e?(unsigned)e->producer.original.phase:0)<0)pt_preflight_io_failed=1;
+#else
     if(fprintf(stream,"ROLLING PREFLIGHT %s phase=%u\n",stage,
                e?(unsigned)e->producer.original.phase:0)<0)pt_preflight_io_failed=1;
+#endif
     if(fclose(stream))pt_preflight_io_failed=1;
 }
 
@@ -35,15 +48,36 @@ int main(int argc,char **argv)
     /* Invoke the original bounded helper with every original preflight oracle:
      * genuine source adoption/pins, four normalized events, complete audit,
      * untouched ordinary/Chip/card output and no command publication. */
+#if PT_ROLLING_PREFLIGHT_PREFIX
+    /* A distinct cancellation component, never a complete preflight oracle.
+     * Keep the genuine begin,17-unit steps and every no-output prefix guard. */
+    pt_preflight_record("ADOPT-BEGIN",e);sl_begin(e);
+    pt_preflight_record("ADOPT-END",e);
+    while(pt_preflight_steps<PT_ROLLING_PREFLIGHT_PREFIX){
+        pt_preflight_record("STEP-BEGIN",e);
+        assert(sl_step(e,17)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING);
+        ++pt_preflight_steps;
+        assert(!e->base.ordinary.calls&&!e->port.binds&&!e->port.external.clocks&&!e->port.ram.publishes&&
+               !e->base.chip.calls&&!e->base.card->writes&&!sl_s(e)->causal&&!sl_s(e)->pool);
+        pt_preflight_record("STEP-END",e);
+    }
+    assert(pt_preflight_steps==64&&e->producer.original.phase==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_ESTABLISH_STEP);
+#else
+    (void)pt_preflight_steps;
     pt_preflight_record("PREFLIGHT-BEGIN",e);sl_preflight(e);
     pt_preflight_record("PREFLIGHT-END",e);
     assert(e->producer.original.phase==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CONTROLLER);
+#endif
     pt_preflight_record("CANCEL-BEGIN",e);sl_close(e);
     pt_preflight_record("CANCEL-END",e);sl_same(e);
     /* Original recorded allocation ownership and all zero-byte/no-alias checks. */
     pt_preflight_record("DISPOSE-BEGIN",e);sl_drop(e);
     assert(!sl_current);pt_preflight_record("DONE",NULL);
     if(pt_preflight_io_failed)return 20;
+#if PT_ROLLING_PREFLIGHT_PREFIX
+    puts("ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY");
+#else
     puts("ROLLING PREFLIGHT NATIVE PASS:original preflight and cancellation;MODELED_ONLY");
+#endif
     return 0;
 }

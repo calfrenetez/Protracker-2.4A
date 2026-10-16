@@ -225,8 +225,8 @@ This entry never invokes the rolling68 entry and cannot emit its success marker.
 HOST ASan/UBSan qualification passes with the exact component stdout and closed
 `ROLLING PREFLIGHT DONE phase=0` sidecar. Missing arguments, missing files and
 foreign sidecar contents are refused without creating or changing those files.
-Baseline and unrelated display inputs are preserved. Native execution in
-Amiberry and on the A1200 is NOT_RUN; all clocks, buses and allocations here
+Baseline and unrelated display inputs are preserved. At HOST preparation, native
+execution was NOT_RUN; all clocks, buses and allocations here
 remain software models. This does not qualify publication, row retirement,
 scheduled activation, device output or listening.
 
@@ -241,9 +241,48 @@ working-recipe pin refusal are preserved separately. Neither reached native
 execution. See [host/build evidence](../evidence/enhanced-editor/rolling-native-entry/preflight-host-build.json).
 
 The new component's prepared runner passes36 HOST runner,27 service and15
-normal-entry checks, plus validation. No service or target has started for it.
+normal-entry checks, plus validation. These are packet checks, separate from
+the subsequent incomplete native execution below.
 A separate compiler metadata build of all86 units produces byte-identical linked
 candidate output. Its largest reported local frame is16,572bytes, including
 functions later discarded by the linker; this is not a whole-call-chain or
 runtime stack bound. Stack choice and native time limits remain unchanged.
 See [packet and compiler observation](../evidence/enhanced-editor/rolling-native-entry/preflight-packet-host.json).
+
+
+The exact candidate subsequently entered preflight once in Amiberry, but did
+not confirm completion within the original90-second native limit. Four bounded
+readbacks, at about22,43,64 and85seconds, captured the exact closed sidecar
+`ROLLING PREFLIGHT PREFLIGHT-BEGIN phase=0`. This proves entry into the helper,
+not its internal phase, completion, a crash or the cause of the delay. RC and
+terminal oracles remain unobserved; native acceptance is UNCONFIRMED and A1200
+execution remains NOT_RUN. The failed transaction was not repeated.
+
+Scoped recovery positively stopped or found absent only the original owned
+processes, restored both saved launcher files and removed the exact staging
+copy. Independent process/socket/restoration checks, public release and a
+separate final idle observation pass; the three original HOLDs are archived.
+The first release proof was refused for including a null field where the
+no-inflight schema requires omission; state was unchanged. Its evidence is
+preserved and the corrected release retained every absence/restoration check.
+Guest RAM lifetime ended with the exact emulator process; this is separate
+from a guest directory listing. See [bounded native attempt and recovery](../evidence/enhanced-editor/rolling-native-entry/preflight-emulator.json).
+
+## Bounded preparation prefix and cancellation
+
+A separate64-step entry now retains genuine source adoption,17-unit preparation
+calls, the original no-output guards and the original cancellation/disposal
+checks. Each step closes a diagnostic progress record before and after the call.
+Its sole completion marker and `ROLLING PREFIX DONE steps=64 phase=0` sidecar
+qualify this prefix only. The full preflight and rolling68 entries are uncalled.
+Both the original full-preflight HOST regression and prefix pass ASan/UBSan,
+including unchanged foreign/missing-sidecar refusals and preserved baseline and
+unrelated inputs. A pinned86-unit portable build passes; exact Amiberry and
+physical execution are NOT_RUN at preparation.
+
+A separate private HOST instrumentation copy records1,982 calls for the original
+complete preflight, including736 in establishment and589 in audit stepping.
+All original terminal oracles still pass and canonical sources are unchanged.
+Those host measurements neither establish native cost nor identify the timeout's
+cause. The64-step entry does not increase a limit or replay the failed operation.
+See [prefix host/build and observation](../evidence/enhanced-editor/rolling-native-entry/prefix-host-build.json).

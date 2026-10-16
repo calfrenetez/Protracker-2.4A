@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "Separately bounded64 original17-unit preparation steps, original cancel/dispose and zero accounting; no complete preflight acceptance",
+  "host": {
+    "sanitizerGroups": 2,
+    "fullPreflightRegressionPassed": true,
+    "prefixPassed": true,
+    "foreignMissingAndAbsentSidecarsRefusedInBoth": true,
+    "mutuallyExclusiveBuildOptionsRefused": true,
+    "unrelated16AndBaselinePreserved": true,
+    "firstHostModuleImportFailurePreserved": true,
+    "resultSHA256": "d5d517d2cd9ad9b8989036ce37cba132278e29f81d0823cf63c24ebfd0d77f96"
+  },
+  "privateHostObservation": {
+    "originalPreflightSteps": 1982,
+    "establishmentStepCalls": 736,
+    "auditStepCalls": 589,
+    "canonicalSourcesPreserved": true,
+    "instrumentationInPrivateCopyOnly": true,
+    "nativeCostInferred": false,
+    "stallCauseEstablished": false,
+    "resultSHA256": "85855d56aae4e961414b5c3c053f890135fa6ae4c22f2765451a677a059e01c4"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 239,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "candidateBytes": 328812,
+    "candidateSHA256": "11537b5dc03702e6150fa48d9f26330840d0a98a36ad7827fd9bc89c9b31c631",
+    "manifestSHA256": "ee87fcf80eba2d6058af591b12d72741b562600aea0cc9ef8705c3306b950ee1",
+    "compilerAndSelectedAssemblerLinkerPinsBeforeAfter": true
+  },
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

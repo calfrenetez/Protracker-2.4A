@@ -1,0 +1,97 @@
+{
+  "state": "ADOPT_CANCEL_AND_ONE_STEP_CANCEL_EXACT_AMIBERRY_PASS_RELEASED",
+  "sourceCommit": "0ad1ee94dc90ed47eeba55a0c82883ff51f5cce5",
+  "hostPerPacket": {
+    "runner": 36,
+    "service": 27,
+    "normalEntry": 15,
+    "wrongOrPartialFinalSidecarSubcases": 2
+  },
+  "components": [
+    {
+      "mode": 1,
+      "candidate": {
+        "crc32": "8790645C",
+        "sha256": "2ca23907d3d0495bcee232fea8fe0dd1ee70b17963b90d13a406fe85f988cf77",
+        "size": 328172
+      },
+      "native": {
+        "nativeMarkers": [
+          "ROLLING SETUP NATIVE PASS:mode=1;MODELED_ONLY"
+        ],
+        "observedStackBytes": 1048576,
+        "outputBytes": 46,
+        "outputCRC32": "AC8834E1",
+        "rawStackQuery": "Current stack size is 1048576 bytes",
+        "returnCode": 0
+      },
+      "finalProgress": "ROLLING SETUP DONE mode=1 steps=0 phase=0\n",
+      "independent": {
+        "fence": 1918,
+        "retainedArchives": 140,
+        "savedFilesRestored": true,
+        "exactGuestAndHostStagingAbsent": true,
+        "ownedServiceAndEmulatorAbsent": true,
+        "publicRelease": true,
+        "separateFinalIdle": true
+      },
+      "recordSHA256": {
+        "result.json": "adc7bc1ff90ec432009a70ea2031cc87f58260317832a98e0a66b6374698ebd7",
+        "release/independent-pass-observation.json": "f345fad07e8c088590bbf48cff689e258675705e64aeefea1c0cbf76f62229de",
+        "release/release-result.json": "0266b04fa9ce3f8780fd2becae84f6b48f2e681126030daf545706ed63e63d85",
+        "release/service-stop-result.json": "2bbbae4270c3b5efb658c48ab278548287a2c5fbb4be4fda5e2864b0fe9bab72",
+        "release/independent-final-idle.json": "0178e86d98e84e24320902533f7cbdb7c6daff0fa9861998e05967eb728e0c54"
+      }
+    },
+    {
+      "mode": 2,
+      "candidate": {
+        "crc32": "396F6087",
+        "sha256": "000fc1410b5970e116336e3d08715580a93ffcbb15bbacca4fc194f97189951e",
+        "size": 328408
+      },
+      "native": {
+        "nativeMarkers": [
+          "ROLLING SETUP NATIVE PASS:mode=2;MODELED_ONLY"
+        ],
+        "observedStackBytes": 1048576,
+        "outputBytes": 46,
+        "outputCRC32": "BDF55E98",
+        "rawStackQuery": "Current stack size is 1048576 bytes",
+        "returnCode": 0
+      },
+      "finalProgress": "ROLLING SETUP DONE mode=2 steps=1 phase=0\n",
+      "independent": {
+        "fence": 1922,
+        "retainedArchives": 141,
+        "savedFilesRestored": true,
+        "exactGuestAndHostStagingAbsent": true,
+        "ownedServiceAndEmulatorAbsent": true,
+        "publicRelease": true,
+        "separateFinalIdle": true
+      },
+      "recordSHA256": {
+        "result.json": "74a22137dc2ffb2ac03b66f3570ff810def09b055d7f5fe25b896c4731d8aa8e",
+        "release/independent-pass-observation.json": "28203e086b1293cc83e170a25d97e4d453d843538c52ab77d6bb3e199f7808ef",
+        "release/release-result.json": "c95d9a701c71863d2ec25aae875ee334b80138b675efcaf0022272a61c7950b4",
+        "release/service-stop-result.json": "1a98fa1dd1145e0c841412de5a96203159ff22be125b60819ee01e307b87e026",
+        "release/independent-final-idle.json": "52d095ecf4aff55357db652f342730804aa8a6b753f524d422eaa0ba2a14daac"
+      }
+    }
+  ],
+  "unchangedLimits": {
+    "nativeSeconds": 90,
+    "inputSeconds": 120,
+    "guestSeconds": 140,
+    "overallSeconds": 250,
+    "stackBytes": 1048576
+  },
+  "scope": "Original sl_make/sl_begin/sl_close/sl_drop, plus exactly one17-unit sl_step in mode2; all header-byte, zero-accounting and no-alias guards; ordinary allocation and modeled clocks/buses",
+  "unqualified": [
+    "Original rolling case1/full68 native execution",
+    "Physical allocation class, A1200 execution or AmiGUS/Paula devices",
+    "Whole-chain Stack, IRQ scheduling, audio or listening"
+  ],
+  "failedTargetTransactionsReplayed": false,
+  "priorRefusals": "One mode1 HOST preflight caught stale mode0 candidate pathname before any service, reservation or target; preserved separately; successor binds manifest binary path"
+}

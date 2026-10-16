@@ -178,3 +178,37 @@ packet before any service or target; that evidence remains preserved. The
 constructor pass does not identify the earlier stall or qualify adoption,
 preparation steps, original case1/full68, device, timing or audio. A1200 execution
 of this candidate remains NOT_RUN. See [exact emulator evidence](../evidence/enhanced-editor/rolling-native-entry/setup-emulator.json).
+
+
+The separately scoped A1200 constructor attempt stopped during input transfer at
+the original120-second bound. The last confirmed prefix was276,488bytes; the
+last pending4,066-byte write completed, leaving one280,554-byte partial file.
+No launch or script command was sent, so native execution remains NOT_RUN. The
+physical file body was not checksummed during GUI recovery, and no candidate
+content-custody or physical runtime pass is claimed.
+
+Authorized recovery stopped only the identified local service, removed exact
+host staging and deleted the sole partial RAM file and its empty input parent.
+Separate complete RAM-parent and task listings confirmed both namespaces and the
+native test absent. The temporary recovery Shell was closed and Safari returned
+to authenticated View Only. Independent local verification, public release
+archiving all three original holds and a separate final idle observation passed
+(EMPTY1914/139archives). No failed transaction was replayed or limit increased.
+See [physical transfer and recovery evidence](../evidence/enhanced-editor/rolling-native-entry/setup-physical-transfer.json).
+
+
+Separate exact Amiberry runs also passed mode1 (genuine adoption, immediate
+cancellation, disposal) and mode2 (adoption, one17-unit preparation step, then
+cancellation and disposal). Each returned RC0 with its sole46-byte stdout marker
+and its exact closed progress record; all original accounting, no-alias and
+header-byte controls remained enabled. One-file input and nine-file execution
+custody, exact cleanup, original launcher restoration, independent observation,
+public release and separate final idle passed. Final state was EMPTY1922 with
+141retained archives. A stale mode1 candidate pathname was refused in HOST
+preflight before any target and corrected in a fresh packet.
+
+These component passes narrow the earlier investigation: construction, adoption,
+and the first bounded step can complete with their cancellation paths. They do
+not establish the later preflight/publication/retirement path, original case1 or
+full68 completion. All clocks/buses remain models; physical, device, scheduling
+and listening acceptance remain separate. See [cancellation component evidence](../evidence/enhanced-editor/rolling-native-entry/setup-cancel-emulator.json).

@@ -1,0 +1,64 @@
+{
+  "state": "PHYSICAL_INPUT_TRANSFER_TIMEOUT_NATIVE_NOT_RUN_RECOVERY_RELEASED",
+  "candidate": {
+    "bytes": 307636,
+    "sha256": "39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c",
+    "crc32": "A3BB63F3"
+  },
+  "exactAmiberryPromotionPassed": true,
+  "input": {
+    "originalSeconds": 120,
+    "lastConfirmedBytes": 276488,
+    "lastPendingWriteBytes": 4066,
+    "actualSolePartialFileObservedBytes": 280554,
+    "fullCandidateUploaded": false,
+    "launchOrScriptCommands": 0,
+    "nativeResult": "NOT_RUN",
+    "physicalBodyChecksumObserved": false
+  },
+  "cleanup": {
+    "onlyOwnServiceStopped": true,
+    "exactHostStagingAbsent": true,
+    "exactPartialFileAndEmptyInputParentDeleted": true,
+    "separatePhysicalParentListing": [
+      "Clipboards",
+      "T",
+      "ENV"
+    ],
+    "separateTaskListingNoNativeTest": true,
+    "temporaryRecoveryShellClosed": true,
+    "actualSafariAuthenticatedViewOnly": true,
+    "originalHostInputsUnchanged": true,
+    "independentLocalObserverPassed": true,
+    "publicReleaseCalls": 1,
+    "originalHoldsArchived": 3,
+    "separateFinalIdle": true,
+    "fence": 1914,
+    "retainedArchives": 139,
+    "priorArchivesUnchanged": true
+  },
+  "recordSHA256": {
+    "result.json": "44428dcc57423d2cf1738e6345ff2c0e84ab06997dd2b88b36d566c231f8a0d0",
+    "recovery/physical-cleanup.json": "b66a0fe967b8bdcf58c3a98d2b2a7e63bdb4250eba9bc07f1bb8ee442ef14dd5",
+    "recovery/physical-independent-absence.json": "c756226efd27c3c744181f1907d7cabc778adfffe41b5c858895f33bacbadc18",
+    "recovery/safari-view-only-restoration.json": "ad863ee57eb6c93a3a516f128ed403915256d1d8ff4eaaa7cf936d8b453a1434",
+    "recovery/independent-observation.json": "b23de171320ff403f66e22a4d3187db7ad8c5cb39041261eba35e3b67b69238e",
+    "recovery/release-result.json": "70f4597b96d3a83a7db7057263363300e556a686657de762116954ed3d3a5692",
+    "recovery/final-idle-observation.json": "213a29c8f6f0f05a83d8d21d516a2bf89b9218bc629075a9fc397e965cbd2428"
+  },
+  "unchangedLimits": {
+    "inputSeconds": 120,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "overallSeconds": 250,
+    "stackBytes": 1048576
+  },
+  "failedTransactionReplayed": false,
+  "unqualified": [
+    "Physical constructor execution or candidate content custody",
+    "AmiGUS and Paula hardware",
+    "Physical memory allocation class",
+    "Original rolling case1/full68",
+    "Scheduled musical output and listening"
+  ]
+}

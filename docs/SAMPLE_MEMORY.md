@@ -8,9 +8,11 @@ UNCONFIRMED. Both failed operations were independently cleaned and released;
 no failed transaction was replayed or physically promoted. A separate smaller
 constructor-close mode0 now passes exact Amiberry execution with RC0, strict
 stdout and closed-sidecar custody, original zero-accounting guards and independent
-cleanup/release/final idle. Adoption/cancellation and one-step components pass
-HOST but remain native NOT_RUN. A1200 execution of the constructor candidate is
-NOT_RUN. All clocks/buses in these fixtures are models; native IRQ/PLAY, actual
+cleanup/release/final idle. Separate exact adoption/cancellation and one-step/
+cancellation components now pass Amiberry with their strict terminal witnesses
+and cleanup too. The constructor's A1200 input transfer timed out before launch;
+its partial upload was deleted and independently released. Physical execution
+remains NOT_RUN. All clocks/buses in these fixtures are models; native IRQ/PLAY, actual
 scheduled output, device and listening remain inhibited/unqualified. See
 [the current entry and evidence](NATIVE_ROLLING_ENTRY.md).
 

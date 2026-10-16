@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "state": "HOST_GENUINE_PREEXPOSURE_OWNER_PASS_NATIVE_NOT_RUN",
+  "sourcePins": {
+    "src/editor/prepared_paula_sources.h": {
+      "bytes": 6125,
+      "sha256": "5e4efbd9d250303bf5c743b6b6062f9c605072981f540918a066baacb3424152"
+    },
+    "src/editor/prepared_paula_sources.c": {
+      "bytes": 21680,
+      "sha256": "18f67c477e8bebca6cd7dea7b9928702165804cb512dfdd5748bb7f8f5d187ed"
+    },
+    "tests/prepared_paula_sources_test.c": {
+      "bytes": 29592,
+      "sha256": "4bf41b774bd82bbbcb787dbf36acea8deaa97a238798d4ecbd220d445b1069e9"
+    },
+    "tests/test_prepared_paula_sources.py": {
+      "bytes": 4836,
+      "sha256": "a5eb97c089c9bfb8b9af6ab16ff7cf5d680a6c628fc0cd3d6c9e1005619614ad"
+    }
+  },
+  "host": {
+    "unittestGroups": 1,
+    "translationUnits": 22,
+    "orderedTranslationUnits": [
+      "tests/prepared_paula_sources_test.c",
+      "src/editor/prepared_paula_sources.c",
+      "src/editor/sampler_paula.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/editor/sampler_lifetime.c",
+      "src/core/sample_usage.c"
+    ],
+    "actualProjectDependencyBodies": 53,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "assertionsEnabled": true,
+    "compileLimitSeconds": 120,
+    "fixtureLimitSeconds": 30,
+    "exactStdout": "PREPARED PAULA SOURCES HOST PASS:real mono8/16/24 pins/cache;load24/hit9/cancel25;save/alias/stale36/budget/retained2;NO OUTPUT AUTHORITY",
+    "emptyDiagnostics": true,
+    "coverage": {
+      "loadTransitions": 24,
+      "hitTransitions": 9,
+      "cancellationCutsIncludingInitAndReady": 25,
+      "staleCleanupCases": 36,
+      "deliberatelyRetainedHeapFixtures": 2
+    },
+    "sourceUnchanged": true,
+    "protectedUnrelatedPaths": 16,
+    "classicBaselinePreserved": true,
+    "artifacts": {
+      "result.json": {
+        "bytes": 189,
+        "sha256": "b7a052aa795bf97269ba8f11be66de6592b81ef1c53659490282310f2c0033d5"
+      },
+      "prepared-paula-sources-fixture.stdout": {
+        "bytes": 138,
+        "sha256": "2d8f9a76394be48d51375fff5746c62fadc4ceb59074062f5a5a4f24668a5375"
+      },
+      "prepared-paula-sources-fixture.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "prepared-paula-sources-before-preservation.json": {
+        "bytes": 31640,
+        "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+      },
+      "prepared-paula-sources-after-preservation.json": {
+        "bytes": 31640,
+        "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+      }
+    },
+    "retainedBoundary": "Forbidden callbacks latch HELD; genuine surviving owner/context resources remain reachable, never force-released"
+  },
+  "behavior": [
+    "Three distinct already-established mono masters use genuine pin-job begin/completion transfers",
+    "Chip HIT and final LOAD transfer actual leases; PENDING retains its independent temporary master reference",
+    "One child metadata transition or at most256 packed Chip bytes per step",
+    "Cancellation uses captured genuine jobs/leases/pins; stale table PROT_NONE is not traversed",
+    "Numeric status exports no source/PCM/cache pointer or activation/release authority",
+    "Early full-owner output alias refusal precedes all getter writes; read-only owner pages cover current/stale state",
+    "Fresh saved project bytes and8/16/24 master values remain identical",
+    "Clean cases end all resources; two deliberate forbidden-callback cases remain HELD with reachable genuine resources/context, no forced release"
+  ],
+  "acceptance": {
+    "hostSoftwareOwnership": true,
+    "nativeBuild": false,
+    "amiberry": false,
+    "physicalFastChipPlacement": false,
+    "DMAOrReaderQuiet": false,
+    "externalReaderOwnership": false,
+    "IRQOutputTiming": false,
+    "audioListening": false
+  },
+  "limits": [
+    "Caller already validated immutable project and established current masters; initial promotion is separate",
+    "Pre-exposure preparation only; no source export, output backend, borrow/retirement or provider adapter",
+    "Allocator and cache budgets remain existing bindings; HOST storage proves no Fast/Chip memory class",
+    "Allocation/eviction/metadata work remains synchronous; byte limits are not latency or WCET bounds",
+    "No actual output/timer/interrupt operations or native-inhibitor changes"
+  ]
+}

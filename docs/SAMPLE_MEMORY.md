@@ -7811,3 +7811,10 @@ the pinned Amiga compiler/linker check and one exact Amiberry run with independe
 cleanup and ownership release. This gate is not connected to actual interrupts,
 timers or playback; physical acceptance remains pending.
 See [restricted gate scope](NATIVE_MIXED_CAUSAL_ROLLING_IRQ_BRIDGE.md#separate-normal-task-delivery-gate--16-october-2026).
+
+A separate three-source owner now passes HOST integration with genuine
+8/16/24-bit master pins and selective Paula cache jobs. It prepares one bounded
+child transition at a time and cancels only never-exposed resources, preserving
+master/save bytes and retaining uncertain ownership. It exports no playback
+pointers, reader retirement or quiet authority. Native build, Fast/Chip placement
+and output integration remain separate. See [preparation owner and limits](SAMPLER_PAULA_LINEAGE.md#separate-three-source-preparation-owner--16-october-2026).

@@ -8,7 +8,10 @@ Matching live lease/revision/length alone no longer admits another sample or
 representation. The66-case ready/active regression passes with independent
 retirement and zero explicit owned bytes, within50 passing sanitizer tests.
 A separate pinned native candidate is built; its Amiberry and physical execution
-remain NOT_RUN. Earlier memory-component results retain their historical exact
+were NOT_RUN at preparation. That exact candidate subsequently passes once in
+Amiberry with real Exec Fast/Chip allocator assertions, all66 cases, zero explicit
+owned bytes and separate cleanup/public release/final idle checks. Physical
+execution remains NOT_RUN. Earlier memory-component results retain their historical exact
 bytes. This change grants no native output, DMA quiet, scheduling or audio
 capability. See [reader details](SAMPLER_PAULA_READERS.md) and
 [scoped evidence](../evidence/enhanced-editor/readers-source-binding/host-build.json).

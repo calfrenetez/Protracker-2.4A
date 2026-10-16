@@ -414,10 +414,29 @@ committed prior reader body reproduces the missing ready-view refusal. A separat
 seven runtimes. Its202404-byte `PTExecReadersBindingTest` has eight exact output
 lines and a required final closed progress sidecar. The compiler's largest local
 frame is353916 bytes; total stack/callchain/runtime bounds remain unqualified.
-Amiberry and physical execution of this new candidate are NOT_RUN. The prior
+At preparation, Amiberry and physical execution of this new candidate were
+NOT_RUN; the subsequent Amiberry result is recorded below. The prior
 lifecycle/fault component passes retain their exact historical bytes and do not
 qualify the changed source. Native provider inhibition, musical timing, DMA,
 device/audio and human listening boundaries are unchanged. Other older adapters
 using the generic lease lookup are separate follow-up work.
 
 See [HOST and build evidence](../evidence/enhanced-editor/readers-source-binding/host-build.json).
+
+### Exact source-binding candidate passes Amiberry
+
+The same202404-byte candidate now passed once under the guarded68030/no-FPU
+profile with2MiB Chip/128MiB Z3 Fast configured. RC0 returned all eight exact
+lines, including66 binding cases, Fast/Chip extent assertions and zero explicit
+owned resources. Stack1048576 was observed; total callchain bounds remain
+unqualified. Raw output is587 bytes, CRC32`832C51E6`. Backend adoption and
+retirement are serialized software models; this is no audio/voice-stop proof.
+
+All one-input/nine-execution-file custody checks, final closed progress sidecar,
+task/namespace absence, own emulator stop and original launcher restoration
+passed. Separate independent observation, public release, exact own-service
+stop and another fresh idle observation passed with no retained hold. Both
+source/helper inventories are preserved; no completed transaction is replayed.
+The50 HOST tests and35 runner/27 service/15 entry checks remain separate from
+this native result. Real-A1200 execution is NOT_RUN because Safari access still
+reports the Mac locked. See [native evidence](../evidence/enhanced-editor/readers-source-binding/emulator.json).

@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "state": "EXACT_AMIBERRY_EXEC_PASS_INDEPENDENTLY_RELEASED",
+  "source_commit": "a1eb480548be465b7c166b4aa94bd9e01649aef1",
+  "candidate": {
+    "crc32": "A27EADB0",
+    "sha256": "6d967aba566731f015c219c70b2d64689e02bdf8b322405874b7149f989973c8",
+    "size": 202404
+  },
+  "target": {
+    "observed_cpu_model": "68030",
+    "observed_fpu": "0",
+    "observed_cpu_cycle_exact": "true",
+    "configured_chip_kib": 2048,
+    "configured_z3_kib": 131072,
+    "timing_or_physical_equivalence": false
+  },
+  "native": {
+    "return_code": 0,
+    "exact_lines": 8,
+    "binding_cases": 66,
+    "controls": 12,
+    "refusals": 54,
+    "observed_stack_bytes": 1048576,
+    "output_bytes": 587,
+    "output_crc32": "832C51E6",
+    "output_sha256": "5e07fb0b07702034eb661e563a7ab6aa25a9f6dfe54b87fc1072a5193d039a8b",
+    "meaning": "Actual SDK and Exec Fast/Chip allocator callbacks; genuine persistent ready/active reader source checks, unchanged outputs/master/cache bytes, independent model reader retirement and zero explicit owned resources. Borrowed original stack storage and internal stdio allocations are outside explicit pool accounting. Backend remains software model.",
+    "limits": {
+      "upload_seconds": 120,
+      "native_seconds": 90,
+      "execution_seconds": 140,
+      "whole_seconds": 250
+    },
+    "whole_callchain_stack_bound": false
+  },
+  "orchestration": {
+    "host_runner_tests": 35,
+    "host_service_tests": 27,
+    "entry_tests": 15,
+    "failed_host_preparation": "Copied historical candidate/source guard refused before live effects. Original inputs and diagnostics preserved; corrected exact candidate and 51062-byte current source pinned, no equality check relaxed.",
+    "input_files": 1,
+    "execution_files": 9,
+    "final_closed_trace_required": true
+  },
+  "cleanup": {
+    "exact_guest_task_and_namespaces_absent": true,
+    "owned_emulator_absent": true,
+    "original_launcher_files_and_configuration_restored": true,
+    "transport_disconnected": true,
+    "public_ownership_released": true,
+    "owned_service_absent": true,
+    "tcp_and_named_unix_endpoints_absent": true,
+    "exact_shared_staging_absent": true,
+    "separate_final_idle": true,
+    "final_fence": 1699,
+    "release_archive_count": 88,
+    "holds": 0,
+    "availability": "Historical final observation; fresh live checks required before each new target operation"
+  },
+  "records_sha256": {
+    "spec": "9de9f4da96a7e4b7aad74a2ec3545b85a743f4d4c90aa5f0aa9875928f35eeb5",
+    "admission": "21ec95e2e6513ac74673027a1eabe3518b74a440b1941438615b5d53c08d1f57",
+    "actual_result": "9c9da0a5e1e93eab3e9d89baa5ef669fa5eb616993dcc35dd3af043f9f951cda",
+    "independent_pass": "89a9a23a33fa4229ea981367edcc6c8105af533f1169f9a3c2a6a3fa8980a667",
+    "public_release": "73114bca444f120c8ff8f729ae017552470a3b65ad10036bc00225930b13583f",
+    "owned_service_stop": "0b8120e2dba988d16045beded338d01538b9f6d0c526515dfd81d498e6c3f63f",
+    "separate_final_idle": "9ac5f94b49dbf7e53aa0ad6c8c2d8e805e8b9ad93eb4bae5a171f65f7cf3c2d9"
+  },
+  "preservation": {
+    "protected_paths": 16,
+    "contents_and_stable_metadata_unchanged": true,
+    "accepted_layout_unchanged": true,
+    "exact_musical_schedule_unchanged": true,
+    "typed_native_provider_inhibited": true
+  },
+  "not_qualified": [
+    "Real A1200 execution and physical memory/endurance",
+    "Other adapters still using generic cache lookup",
+    "Full original lifecycle and negative suite on changed source",
+    "Whole callchain stack/WCET",
+    "Actual backend activation/voice-stop/IRQ/DMA/device/audio/listening"
+  ]
+}

@@ -1,5 +1,24 @@
 # Sample memory and playback ownership
 
+## Studio output master preservation —16 October2026
+
+Studio's direct24-bit mixer now refuses output descriptors, written samples and
+clipping counters that overlap its complete current/pending master capacities or
+opaque session allocation. This includes unused source storage. The existing
+voice checks remain, and NULL/capacity precedence is unchanged. Refusal performs
+no callback, allocation, phase advance or pin release.
+
+The baseline accepts an output in unused pinned-master capacity. The48-case
+regression covers8/16/24-bit mono/stereo, current/pending sources and all output
+forms, with48 subsequent phase/pin/direct24 controls and complete byte
+beforeimages. Twelve host sanitizer groups pass, including sampler and both
+editor Studio paths. An existing duplicate flow/pitch test-link recipe was
+corrected without removing either source. The pinned four-unit37,520-byte HUNK
+cross-build passes; its Amiberry and physical execution remain NOT_RUN. No
+placement, timing, device, frontend or listening acceptance follows. See
+[scoped host/build evidence](../evidence/enhanced-editor/studio-master-outputs/host-build.json).
+
+
 ## Additional mixed source-format native checks —16 October2026
 
 Three new separately bounded families pass54 genuine source/cache binding cases

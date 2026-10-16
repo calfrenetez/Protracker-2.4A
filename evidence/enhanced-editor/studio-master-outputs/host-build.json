@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "state": "HOST_REGRESSION_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "b81295c482a8a227b636d803a3dfb5fe0a52b4c9",
+  "problem": "Studio_read previously accepted caller outputs inside unused capacity of an immutable pinned master or inside opaque session storage.",
+  "change": "Check output descriptor, written frame extent and clipping counter with the existing complete retained master/owner predicate before mixing. Preserve NULL/capacity precedence and underlying voice checks.",
+  "baseline": {
+    "observed": "First8mono current-master spare-capacity output accepted with PT_PCM_OK; expected-alias oracle abort preserved",
+    "raw_stdout_sha256": "92303807bd78c70e0e27449b519d43005ddc88bfffc6e6bab3d273178bd27f01",
+    "raw_stderr_sha256": "2f57fbb490a4767f488f9507149809fbe7e85a00107ea98dd53528a281d25c97",
+    "result_sha256": "72cc292e1a3e16881393253e7d7fbb32e2b9f71582ac7d6a9738843093222174"
+  },
+  "regression": {
+    "alias_refusals": 48,
+    "post_refusal_controls": 48,
+    "formats": [
+      8,
+      16,
+      24
+    ],
+    "channels": [
+      1,
+      2
+    ],
+    "sources": [
+      "current",
+      "pending handoff"
+    ],
+    "outputs": [
+      "PCM data",
+      "PCM descriptor",
+      "clipped counter",
+      "opaque owner data/counter"
+    ],
+    "assertions": "Full master/session/ordinary output beforeimages, exact pin/callback counts, unchanged phase, direct24 sample values and independent final release. No forged private session layout.",
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "warnings_as_errors": true,
+    "host_groups_pass": 12,
+    "core_and_existing_studio_groups": 9,
+    "sampler_integration_groups": 1,
+    "editor_integration_groups": 2,
+    "original_invocation_import_failure_preserved": true,
+    "existing_duplicate_link_failure_preserved": true,
+    "recipe_correction": "Remove duplicate flow/pitch units from shared editor Studio EXTRA; inherited SOURCES retains both once; no source omitted.",
+    "initial_core_console_sha256": "b2b010deb21061e4477ff13c00a40c0cb970da6a63fd04e5950ce414eab0c25c",
+    "additional_console_sha256": "d07f39f65596ea0a598ceb63b72f524cc8b753362e97ca1519d691e27c15af2a"
+  },
+  "frozen_exports": {
+    "baseline_and_current_files": 1380,
+    "build_files": 1381,
+    "inventories_unchanged": true,
+    "build_manifest_sha256": "7118eb275e74bef2f367d362a6caa7b44479ad79526ccc7f2bd86e287a60346a"
+  },
+  "portable_build": {
+    "units": 4,
+    "project_bodies": 23,
+    "sdk_bodies": 32,
+    "runtimes": 7,
+    "assertions": "#define assert(__e) ((__e) ? (void)0 : __assert_func (__FILE__, __LINE__, __ASSERT_FUNC, #__e))",
+    "binary": {
+      "bytes": 37520,
+      "sha256": "8a51cc8cb03b063affca2ad76d1e08688afd87a1188449d56d474eef6d95c5bb"
+    },
+    "selected_assembler_verified_before_after": true,
+    "native_manifest_sha256": "26493b76f073e35fb8ea7708ea12dc4e430369007f1312c7ea48e8ea96243cf0",
+    "private_builder_sha256": "097666bf21d989d2987251b1dfbaab81536323ff7c376b45f166a7871791cb12",
+    "recipe": "Committed flag/runtime contracts inspected as data; dirty shared recipe never executed."
+  },
+  "production_pins": {
+    "src/core/studio_mix.c": "21fd2e99644680be922d9f0a4b713544c8234ecf42212a74e1ffba5298f23e28",
+    "src/core/studio_mix.h": "eda353006ca5bad15eae65c82e59d79ea6e4593f9c49beace52d489a6aa7278e",
+    "tests/test_editor_studio.py": "ee1112d7abfe73c6d0ee42066ae8871141f7b27fa29ab8488bdee33ff479523e",
+    "tests/studio_master_outputs_test.c": "36b1e834c9e1876c65b3a1e11752657403175714a2eefc54bdbe0c7e3af886f0",
+    "tests/test_studio_master_outputs.py": "e9eb7afccd085aeb36e7779696f36e4a048c9931cff81ddf83311c40e6c1c695"
+  },
+  "amiberry": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "not_qualified": [
+    "Generic voice API or all-path mutation protection",
+    "Exec memory placement/whole-callchain Stack/WCET",
+    "Actual device output/stop/IRQ/timing/Studio throughput",
+    "Frontend/full app/audio/listening"
+  ]
+}

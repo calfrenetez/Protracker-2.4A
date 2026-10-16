@@ -47,8 +47,10 @@ void pt_studio_stop(struct pt_studio_mix *,unsigned);
 void pt_studio_close(struct pt_studio_mix *);
 /* Pull 1..256 stereo24 frames at48kHz into caller storage, preserving phase
  * between calls. No allocation/acquire; ended voices release their pins after
- * successful mix. Failure preserves voices/output/clipped. Output must not alias
- * any pinned PCM. Clip count is per block. Caller controls tick/note scheduling;
+ * successful mix. Failure preserves voices/output/clipped. The output descriptor,
+ * written frames and clipped counter must be disjoint from the entire session
+ * allocation and complete current/pending master capacities, including unused
+ * storage. Clip count is per block. Caller controls tick/note scheduling;
  * no tracker sequencing, device buffering, underrun recovery or speed guarantee. */
 enum pt_pcm_result pt_studio_read(struct pt_studio_mix *,struct pt_pcm *,uint64_t *clipped);
 #endif

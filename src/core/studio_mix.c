@@ -117,6 +117,13 @@ enum pt_pcm_result pt_studio_read(struct pt_studio_mix *s,struct pt_pcm *output,
 {
     enum pt_pcm_result result;unsigned i;
     if(!s || !output || !clipped || output->rate!=48000 || output->bits!=24 || output->channels!=2 || !output->frames || output->frames>256)return PT_PCM_INVALID;
+    if(!output->data)return PT_PCM_INVALID;
+    if(output->frames>output->capacity/2)return PT_PCM_CAPACITY;
+    /* The complete retained master capacities and session control storage stay
+       immutable, including pending handoffs and unused source allocation. */
+    if(!pt_studio_mix_output_disjoint(s,output,sizeof(*output)) ||
+       !pt_studio_mix_output_disjoint(s,output->data,(size_t)output->frames*2*sizeof(*output->data)) ||
+       !pt_studio_mix_output_disjoint(s,clipped,sizeof(*clipped)))return PT_PCM_ALIAS;
     result=pt_voice_mix(s->voice,s->count,(const uint32_t (*)[2])s->gain,output,clipped);
     if(result==PT_PCM_OK)for(i=0;i<s->count;++i) {
         if(!s->voice[i].active)pt_studio_stop(s,i);

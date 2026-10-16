@@ -141,3 +141,23 @@ separately closed progress sidecar. Its in-budget FILEINFO/READFILE suffixes are
 explicitly unconfirmed diagnostic evidence; they cannot establish completion,
 return code, stable capture custody or a test pass. Native90s and all other
 original limits remain unchanged.
+
+## Early components with owned progress
+
+Three smaller components separately exercise construction/disposal, genuine
+adoption followed by immediate cancellation, and adoption plus one17-unit step
+followed by cancellation. They use the original fixture's explicit allocation
+release and all zero-accounting/no-alias assertions. PCM field pointers are
+borrowed views; pointer equality does not prove allocation ownership. An initial
+diagnostic cleanup mistake was caught by those assertions and is preserved.
+No production or original full68 fixture code changed.
+
+The executable requires the harness's existing exact `NOT STARTED` progress
+file. It closes each diagnostic record and emits its own component terminal
+marker only after disposal. Partial progress cannot establish a pass. All three
+modes and their missing-argument/foreign-file refusals pass HOST ASan/UBSan with
+strict warnings and preserved baseline/display inputs. The separately pinned
+86-unit native build passes for constructor mode0. It has not run in Amiberry or
+on the A1200 at this milestone, and qualifies neither the longer rolling case
+nor a native allocator class, hardware operation or musical output.
+See [early-component host/build evidence](../evidence/enhanced-editor/rolling-native-entry/setup-host-build.json).

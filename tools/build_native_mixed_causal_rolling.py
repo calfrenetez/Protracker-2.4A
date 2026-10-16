@@ -125,8 +125,11 @@ def main():
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
-    ap.add_argument('--diagnostic-case', type=int, choices=range(69),
+    diagnostic = ap.add_mutually_exclusive_group()
+    diagnostic.add_argument('--diagnostic-case', type=int, choices=range(69),
                     help='Separate diagnostic: one original case (1..68), or all68 (0); never a full68 qualification marker')
+    diagnostic.add_argument('--setup-mode', type=int, choices=range(3),
+                    help='Separate early component: construct (0), adopt/cancel (1), one step/cancel (2); owned closed progress sidecar required')
     args = ap.parse_args()
     units = list(SOURCES)
     extra_compile = list(EXTRA_COMPILE_FLAGS)
@@ -137,6 +140,11 @@ def main():
         extra_compile.append('-DPT_ROLLING_DIAGNOSTIC_CASE=' + str(args.diagnostic_case))
         target = 'PTMixedRollingDiagnostic'
         marker = b'ROLLING DIAGNOSTIC PASS:'
+    elif args.setup_mode is not None:
+        units[0] = 'tests/native_exec_mixed_causal_rolling_setup_test.c'
+        extra_compile.append('-DPT_ROLLING_SETUP_MODE=' + str(args.setup_mode))
+        target = 'PTMixedRollingSetup'
+        marker = b'ROLLING SETUP NATIVE PASS:'
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -175,6 +183,7 @@ def main():
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
               'recipe_contract': convention, 'flags': FLAGS, 'extra_compile_flags': extra_compile, 'extra_link_flags': EXTRA_LINK_FLAGS, 'runtime_inputs': {},
               'diagnostic_case': args.diagnostic_case,
+              'setup_mode': args.setup_mode,
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
     def persist():

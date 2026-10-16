@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "scope": "HOST sanitizer early rolling ownership components and pinned native constructor compile; not originalcase1/full68 native qualification",
+  "host": {
+    "modes": [
+      {
+        "mode": 0,
+        "component": "Construct and dispose"
+      },
+      {
+        "mode": 1,
+        "component": "Genuine adoption, immediate cancel and dispose"
+      },
+      {
+        "mode": 2,
+        "component": "Genuine adoption, one17-unit step, cancel and dispose"
+      }
+    ],
+    "originalReleaseAndAccountingGuardsRetained": true,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "warnings": "errors",
+    "perModeRefusalControls": [
+      "Missing argument returns20",
+      "Foreign progress file returns20 without alteration"
+    ],
+    "progress": "Each record separately closed; exact finalDONE after original fixture zero-accounting/no-alias assertions; partial observations remain unconfirmed",
+    "preservation": "Protected16/classic51 guards pass with raw cloud bookkeeping retained",
+    "initialFailurePreserved": "New diagnostic wrongly treated sample-view pointer equality as allocation ownership; zero-accounting assertions caught all3 leaks. Replaced duplicate cleanup with unchanged original explicit fixture release; production source untouched.",
+    "resultSHA256": "4221d2686cba6a96e76203d5ced6e5b41b6c07c90d58cf0c21ace6fd00125a93",
+    "stdoutSHA256": {
+      "0": "f05f492dcc9643dc3c6f4832bc342b91afe42e744cc76febf54755b8530cff40",
+      "1": "149a39854fe0bb0256387b38f60fae1c5979bd9ed54dc213c12249d588a00725",
+      "2": "5bc13706be587f96a075f94fb813129c101bf5e65097fe089a6270ff3c39e8dd"
+    },
+    "progressSHA256": {
+      "0": "9e319d2b5276b3664e669f9607d3003fe117084c45236f715d98192356ddfb27",
+      "1": "317c9f77259850e8827a2abde08a34072bb6756a0d77bdf06a74d67eb669d490",
+      "2": "cebee53710cb7d1698c515cbd3985ea4dafd97ba23e87168721f9349dfd03ef1"
+    }
+  },
+  "nativeBuild": {
+    "setupMode": 0,
+    "candidate": {
+      "bytes": 307636,
+      "sha256": "39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c",
+      "crc32": "A3BB63F3"
+    },
+    "sourceFiles": 237,
+    "translationUnits": 86,
+    "dependencyBodies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "baseFlags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "extraCompileFlags": [
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DPT_ROLLING_SETUP_MODE=0"
+    ],
+    "extraLinkFlags": [
+      "-Wl,--gc-sections"
+    ],
+    "assertions": "Enabled SDK donor and original sl_check",
+    "assemblerAndLinkerBeforeAfterVerified": true,
+    "manifestSHA256": "1ce5aa6a51a14e4d685102092ac0e9a0fc32ec33e904bb9aaefd3cb3cb648615",
+    "sourceManifestSHA256": "d8c6247e9063963d540d27b847670a0417ca399de8e06da24dca691d027b80e4"
+  },
+  "sourceSHA256": {
+    "tests/native_exec_mixed_causal_rolling_setup_test.c": "b4eae7ca855630d9edcc7450e13a66b1f4218aba15b2642c29e9ad928be54e66",
+    "tests/test_native_mixed_causal_rolling_setup.py": "aaba496828c7c1f5d1e3b6a55f095524c607cdddc9773f190f9b8c7a2be7eb42",
+    "tools/build_native_mixed_causal_rolling.py": "0abc122833e369048ea0f44242b289f1c98bd21f4cb6c56f8744fb6e64832525"
+  },
+  "nativeExecution": "NOT_RUN",
+  "physicalExecution": "NOT_RUN",
+  "exclusions": "No full song/nativecase1/full68, native allocation class, device/IRQ/voice-stop/capacity/order, scheduled activation/timing, audio/listening or whole-app acceptance"
+}

@@ -212,3 +212,30 @@ and the first bounded step can complete with their cancellation paths. They do
 not establish the later preflight/publication/retirement path, original case1 or
 full68 completion. All clocks/buses remain models; physical, device, scheduling
 and listening acceptance remain separate. See [cancellation component evidence](../evidence/enhanced-editor/rolling-native-entry/setup-cancel-emulator.json).
+
+## Original preflight and cancellation component
+
+A separate entry now calls the original bounded `sl_preflight` helper for the
+first mixed16-track case, then the original cancellation and disposal helpers.
+Every original preflight assertion remains: genuine source adoption and pins,
+four normalized events, complete audit, and no command publication or output
+allocation. The original loop bound and17-unit preparation steps are unchanged.
+This entry never invokes the rolling68 entry and cannot emit its success marker.
+
+HOST ASan/UBSan qualification passes with the exact component stdout and closed
+`ROLLING PREFLIGHT DONE phase=0` sidecar. Missing arguments, missing files and
+foreign sidecar contents are refused without creating or changing those files.
+Baseline and unrelated display inputs are preserved. Native execution in
+Amiberry and on the A1200 is NOT_RUN; all clocks, buses and allocations here
+remain software models. This does not qualify publication, row retirement,
+scheduled activation, device output or listening.
+
+The pinned86-unit portable build also passes:329,424bytes, SHA256
+`76210621475e840c200a99f4c0afb1dff6caf2d8300cd6ac84e7bff76bb1f239`.
+It retains assertions, the original compiler flags,226 project dependency bodies,
+43 SDK bodies and seven runtime inputs, with the selected assembler and linker
+verified before and after. The recipe is read as committed convention data, and
+the font header is generated from the pinned baseline font; unrelated working
+copies remain unchanged. An initial source-freeze refusal and a subsequent
+working-recipe pin refusal are preserved separately. Neither reached native
+execution. See [host/build evidence](../evidence/enhanced-editor/rolling-native-entry/preflight-host-build.json).

@@ -2,6 +2,12 @@
 
 ## Four-event native entry —16 October2026
 
+The separately bounded original preflight/cancellation component now passes
+HOST ASan/UBSan and a pinned86-unit portable build. It retains all original
+preflight, zero-accounting and no-alias assertions. Exact Amiberry and A1200
+execution remain NOT_RUN; modeled clocks/buses supply no device or timing proof.
+See [the component scope](NATIVE_ROLLING_ENTRY.md#original-preflight-and-cancellation-component).
+
 The genuine68-case trigger/control/control/stop fixture and selected originalcase1
 pass HOST and pinned compile/link checks, but their native attempts remain
 UNCONFIRMED. Both failed operations were independently cleaned and released;

@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "scope": "HOST sanitizer and pinned portable 68k compile/link only; original preflight/cancel component",
+  "host": {
+    "passed": true,
+    "groups": 1,
+    "componentRuns": 1,
+    "refusalControls": [
+      "foreign progress unchanged",
+      "missing argument",
+      "missing path not created"
+    ],
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "stdoutSHA256": "87a7d41d4025d41dc5780ffbae7f23f64865ce34da3159515c79ca84ba0d500b",
+    "progressSHA256": "6dc827ddd4e3ce6eeb5c4a0fb632cd348ce585a1485be6e35f7b114248e1ad86",
+    "rawResultSHA256": "a2f14163f73b87cac1e7aaded76eec3669fcb1a3bc8c5c78eb493a76de65986f",
+    "baselineAndUnrelatedPreserved": true
+  },
+  "nativeBuild": {
+    "passed": true,
+    "sourceFiles": 239,
+    "translationUnits": 86,
+    "projectDependencyBodies": 226,
+    "sdkDependencyBodies": 43,
+    "runtimeInputs": 7,
+    "binary": {
+      "bytes": 329424,
+      "sha256": "76210621475e840c200a99f4c0afb1dff6caf2d8300cd6ac84e7bff76bb1f239",
+      "crc32": "9F1ED982"
+    },
+    "assertionsEnabled": true,
+    "compilerSHA256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "assemblerSHA256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+    "linkerSHA256": "b50c8aa31ff322825ddf90602b50871e30410724fadfda5eb60ffde193b9a9dc",
+    "manifestSHA256": "aac624f4f639ff6b058a9dfc02cd134ab839bf6727477d62a49b22249106d5d3",
+    "sourceFingerprint": "5327544e1d8958b7e28987fbb34f5726033176349dee8b63c1e5ad9543df7964",
+    "flagsUnchanged": true,
+    "exclusiveOptionRefusalPassed": true,
+    "sourceOriginExceptions": {
+      "tools/build_core_tests.py": "exact committed convention data; unrelated working file preserved",
+      "build/dev/pt_font.h": "deterministic header from pinned baseline raw font; working header preserved"
+    }
+  },
+  "preservedRefusals": [
+    "dataless working generated font refused before source freeze",
+    "working recipe differs from pinned committed convention; pre-compile refusal"
+  ],
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "ordinaryAllocationOnly": true,
+    "clockBus": "MODELED_ONLY",
+    "originalCase1AndFull68": "UNCONFIRMED",
+    "device": "NOT_QUALIFIED",
+    "scheduledOutputTiming": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

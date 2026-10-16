@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "state": "EMULATOR_INCOMPLETE_RECOVERY_AND_RELEASE_VERIFIED",
+  "sourceCommit": "104e56567e719e55711d7a811539b65bdd57db23",
+  "runID": "0b9f4f60f7565f18d8900a1f8bd5b019",
+  "target": "amiberry-030",
+  "candidate": {
+    "name": "PTExecPaulaReadersTest",
+    "bytes": 194240,
+    "sha256": "0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8",
+    "crc32": "9FF78A26"
+  },
+  "hostPreparation": {
+    "runnerGroups": 35,
+    "serviceFactoryGroups": 27,
+    "normalEntryGroups": 15,
+    "validatePassed": true
+  },
+  "attempt": {
+    "count": 1,
+    "executionDeadlineSeconds": 90,
+    "uploadPreparationSeconds": 120,
+    "guestExecutionSeconds": 140,
+    "wholeTransactionSeconds": 250,
+    "requestedStackBytes": 1048576,
+    "observedStackBytes": null,
+    "completionConfirmed": false,
+    "returnCode": null,
+    "nativeAssertionsConfirmed": false,
+    "nativeOutputCustodyConfirmed": false,
+    "cause": "Native execution stage timed out; program progress and root cause not captured. No automatic target follow-up after HOLD.",
+    "resultSHA256": "8701ad22ccb04e55908dea68269839eea5bfee9c719b7323b1855fe3598d68da"
+  },
+  "recovery": {
+    "routineOwnedRecoveryAuthorized": true,
+    "testReruns": 0,
+    "targetExchanges": 0,
+    "verifiedOwnedProcessesStopped": 2,
+    "signals": "One SIGTERM per positively verified owned process; no force kill",
+    "originalFilesRestored": true,
+    "exactHostStagingRemoved": true,
+    "guestRAMLifetimeEndedByOwnedEmulatorExit": true,
+    "guestAllocatorCleanupProven": false,
+    "restorationResultSHA256": "7da8d026c3f9bd4db35ea2607becb4b5e4e79272027badfb0a54f296cbbe7ba3",
+    "separateObservationSHA256": "01e5e216c7bdc224ec099f1e97298708afaf8c1d8c6e7b47bc33a2f1c229e1b3",
+    "publicReleaseResultSHA256": "04e9a6f86f067a0e0c6da3955474572a49a9404521d4d88e0c784f1119d5aa29",
+    "separatePostReleaseSHA256": "2ec15c2820c8285f3a9090bac3d51be6379b561882c93e0346a55c302a16c61f",
+    "originalHoldsArchived": 3,
+    "recordedFinalFence": 1681,
+    "recordedArchives": 84,
+    "recordedPhase": "EMPTY",
+    "currentReservation": false,
+    "currentHolds": 0,
+    "availabilityNote": "Recorded recovery release, not proof of availability before a later operation; fresh checks required"
+  },
+  "scope": {
+    "fastChipPlacementQualified": false,
+    "stackQualified": false,
+    "backendActivationQualified": false,
+    "deviceDMAOrVoiceStopQualified": false,
+    "exactMusicalTimingQualified": false,
+    "physicalPromotionAllowedFromThisAttempt": false,
+    "physicalOrListeningAcceptance": false
+  },
+  "next": "Preserve failure unchanged; prepare distinct bounded diagnostics before another candidate transaction. Do not replay this run or widen musical windows."
+}

@@ -7384,8 +7384,13 @@ genuine master/selective cache lifecycle with Fast-only promoted/control storage
 and Chip-only cache callbacks, including endpoint classification and zero final
 accounting. Eight sanitizer groups and pinned24-unit build pass; exact194240B
 `0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8`
-remains native NOT RUN. Initial borrowed stack-source placement is not asserted,
-and backend clocks/adoption/retirement remain software models. No native provider
+was attempted once in Amiberry but its execution stage timed out without confirmed
+completion, RC, output custody, observed Stack or native memory assertions. Routine
+verified own recovery/restoration, independent absence, public release and a fresh
+post-release check passed; original failure and three HOLDs remain archived.
+No unchanged transaction retry or physical promotion follows. Initial borrowed
+stack-source placement is not asserted, and backend clocks/adoption/retirement
+remain software models. No native provider
 or timing capability is enabled. A baseline renderer test's false opaque-header
 immutability assertion was corrected without ignoring immutable bytes or PCM;
 actual mutable reference/list fields are treated separately and list integrity

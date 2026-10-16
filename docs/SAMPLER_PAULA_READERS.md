@@ -265,8 +265,9 @@ selects the Exec wrapper explicitly; the ordinary portable recipe also builds.
 The native product is194240 bytes/SHA256
 `0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8`
 (CRC32 `9FF78A26`), with24 units/72 project dependencies/49 SDK bodies/seven
-runtime queries and enabled assertions. It remains native NOT RUN. Compiler
-local-frame reports reach252000 bytes; the proposed1MiB task Stack is a
+runtime queries and enabled assertions. The later exact-candidate Amiberry attempt
+was incomplete, as recorded below. Compiler local-frame reports reach 252,000
+bytes; the proposed 1 MiB task Stack is a
 conservative diagnostic choice, not aggregate/library stack qualification.
 
 A current regression also exposed a stale boundary-fixture assumption. The
@@ -283,5 +284,19 @@ The corrected boundary fixture passes. Historical boundary products retain their
 original source and must not be relabeled with this corrected fixture.
 
 See [compact host/build evidence](../evidence/enhanced-editor/readers-exec-memory/host-build.json).
-An exact-candidate Amiberry memory run is next, independently of unresolved live
-output timing. Physical promotion needs that run plus fresh access/ownership.
+The exact candidate was attempted once in Amiberry. Its execution stage reached
+the original 90-second limit without confirmed completion, native return code,
+output custody or observed Stack. The requested 1 MiB Stack was not independently
+observed. No native memory assertion is qualified and the cause is unresolved.
+No further guest exchange was issued after HOLD.
+
+Routine recovery verified both owned process identities, stopped each with one
+SIGTERM, restored saved launcher files and removed exact host staging. Separate
+observation, public release and fresh post-release absence passed; the original
+three HOLDs were archived, with recorded EMPTY state at fence 1681 and 84 archives. Emulator exit ends
+its RAM lifetime; it does not prove native allocator cleanup. A new operation
+requires fresh availability checks. See [incomplete attempt and recovery](../evidence/enhanced-editor/readers-exec-memory/emulator.json).
+
+The next candidate needs useful bounded progress diagnostics. This failed
+transaction will not be replayed. Physical promotion remains unavailable for
+these bytes, independently of unresolved live output timing.

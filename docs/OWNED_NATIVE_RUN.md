@@ -836,3 +836,16 @@ Native/guest/whole limits stayed 90/140/250 seconds. The native component uses
 modeled clocks and buses with ordinary allocation. This adds live emulator
 handoff qualification; physical MiniFTP, physical execution, device completion,
 output timing and listening remain unqualified by this result.
+
+`owned_transfer_namespace.TransferNamespace` prepares the separate physical
+transfer stage: one complete RAM parent observation must show the execution,
+input and download names absent, then exact directory creation and an empty
+listing are required. It uploads and launches nothing. A once-only claim returns
+the original whole/preparation deadlines; the adapter must cap subsequent
+transaction and input-stage deadlines with those values. Actual GUI completion,
+receipt verification, content custody and guarded settlement remain separate.
+Existing names, failed acknowledgements, cancellation, expired preparation and
+repeat claims refuse further work. Eight new namespace groups and the 61 prior
+input/handoff groups pass on HOST (69 overlapping groups). A private physical
+adapter model passes 35 groups including eight external-transfer cases. Physical
+caller orchestration and the actual MiniFTP transfer are not qualified yet.

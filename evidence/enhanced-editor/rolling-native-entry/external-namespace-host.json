@@ -1,0 +1,16 @@
+{
+  "state": "HOST_ONLY",
+  "scope": "Fresh empty namespace and original-deadline handoff for externally observed transfers",
+  "namespaceGroups": 8,
+  "namespaceAndInputRegressionGroups": 69,
+  "privatePhysicalServiceModelGroups": 35,
+  "allPassed": true,
+  "countsOverlap": true,
+  "namespaceStageUploadsOrLaunches": false,
+  "freshParentCreationAndEmptyInventoryRequired": true,
+  "originalWholeAndPreparationDeadlinesRetained": true,
+  "physicalCallerQualification": "NOT_RUN",
+  "actualMiniFTPTransfer": "NOT_RUN",
+  "physicalNativeExecution": "NOT_RUN",
+  "timingAndListeningAccepted": false
+}

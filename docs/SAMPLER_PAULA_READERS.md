@@ -343,3 +343,21 @@ The [incomplete native attempt and recovery](../evidence/enhanced-editor/readers
 are separate. The next native candidates split lifecycle and negative-matrix
 work into complete components within the unchanged time bounds; the full host
 regression and original assertions remain required.
+
+## Native workload components — 16 October 2026
+
+`--reader-component lifecycle` runs all six 8/16/24-bit mono/stereo lifecycles,
+including 20 continuing controls, explicit STOP, independent retirement and
+byte-exact master/cache checks. `--reader-component faults` runs the complete
+existing negative matrix, including all 53 cancellation phases. Each uses the
+same Exec wrapper and requires zero owned Fast/Chip bytes at completion. Their
+success markers explicitly name the excluded group. Full regression is still
+the default; neither component alone is the full suite.
+
+Both complete components pass ASan/UBSan with injected host memory classes.
+Their phase bodies concatenate to the original full workload in the same order.
+All 46 tests across ten modules pass, and both assertion-enabled 24-unit native
+builds pass. The lifecycle product is 183,388 bytes; the fault product is 194,844
+bytes. Both remain native **NOT RUN**. They retain the existing trace/RC/custody
+contracts and original time limits. No production implementation, scheduling
+tolerance or native provider flag changed.

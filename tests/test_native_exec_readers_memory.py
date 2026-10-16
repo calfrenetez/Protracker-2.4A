@@ -17,9 +17,11 @@ EXEC_READERS_SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *READE
 
 
 class ExecReadersMemory(unittest.TestCase):
-    def build(self, out, traced=False):
+    def build(self, out, traced=False, component=0):
         model = memory_model(out);binary = out/'readers-memory'
         flags = ['-DPT_READERS_DIAGNOSTIC_TRACE=1'] if traced else []
+        if component:
+            flags += ['-DPT_READERS_COMPONENT='+str(component)]
         build = subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
             '-fsanitize=address,undefined', '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1', *flags,
             '-I'+str(out), '-Isrc/core', *EXEC_READERS_SOURCES, str(model), '-o', str(binary)],
@@ -51,3 +53,20 @@ class ExecReadersMemory(unittest.TestCase):
             phases = [x for x in result.stdout.splitlines() if x.startswith(b'READERS MEMORY TRACE:')]
             self.assertEqual(len(phases), 92)
             self.assertEqual(len(list((out/remote).parent.iterdir())), 1)
+
+    def test_separate_components_preserve_complete_lifecycle_and_fault_matrices(self):
+        observed = {}
+        for name, number in (('lifecycle',1),('faults',2)):
+            with self.subTest(component=name), tempfile.TemporaryDirectory(prefix='pt-readers-component-') as folder:
+                out=Path(folder);binary=self.build(out,traced=True,component=number)
+                remote='RAM:PT24G-'+'b2'*8+'/progress.log';(out/remote).parent.mkdir()
+                result=subprocess.run([str(binary),remote],cwd=out,check=True,capture_output=True,timeout=90)
+                self.assertEqual(result.stderr,b'')
+                self.assertEqual(result.stdout, ('\n'.join(trace.markers(name))+'\n').encode('ascii'))
+                self.assertEqual((out/remote).read_bytes(),trace.FINAL_SIDECAR)
+                observed[name]=[x for x in result.stdout.decode().splitlines() if x.startswith('READERS MEMORY TRACE:')]
+        # Exclude the four common wrapper phases. Concatenated component bodies
+        # preserve the complete full workload's original phase order.
+        full=[x for x in trace.markers() if x.startswith('READERS MEMORY TRACE:')]
+        self.assertEqual(observed['lifecycle'][2:-2]+observed['faults'][2:-2],full[2:-2])
+        self.assertEqual((len(trace.markers('lifecycle')),len(trace.markers('faults'))),(80,24))

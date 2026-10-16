@@ -8,6 +8,12 @@
 #ifndef PT_READERS_TRACE
 #define PT_READERS_TRACE(stage,x,y,n) ((void)0)
 #endif
+#ifndef PT_READERS_COMPONENT
+#define PT_READERS_COMPONENT 0
+#endif
+#if PT_READERS_COMPONENT < 0 || PT_READERS_COMPONENT > 2
+#error "Unknown reader fixture component"
+#endif
 #define VALUES 16400
 struct block {void *data;size_t bytes;};
 struct memory {struct block block[128];unsigned calls,live,fail;size_t bytes;void *last,*quarantine,*spare;size_t spare_bytes;
@@ -294,9 +300,21 @@ static void persistent_controls(unsigned bits,unsigned channels)
  PT_READERS_TRACE("case-finished",bits,channels,20);
 }
 static void extra_cases(void);
+static void readers_component_report(void)
+{
+#if PT_READERS_COMPONENT == 0
+ puts("SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2");
+#elif PT_READERS_COMPONENT == 1
+ puts("SAMPLER PAULA READERS LIFECYCLE PASS: six8/16/24 mono/stereo cases,20controls/capacity2, explicit STOP and retirement; negative matrix excluded");
+#else
+ puts("SAMPLER PAULA READERS FAULT MATRIX PASS: retirement races, cancellation, allocation pressure, alias/reentry/stale-key refusal; lifecycle sequence excluded");
+#endif
+}
 int main(void)
-{unsigned bits,channels;for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels)persistent_controls(bits,channels);
- extra_cases();puts("SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2");return 0;}
+{unsigned bits,channels;
+ if(PT_READERS_COMPONENT!=2)for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels)persistent_controls(bits,channels);
+ if(PT_READERS_COMPONENT!=1)extra_cases();
+ readers_component_report();return 0;}
 static struct pt_paula_readers_reader *start_active(struct fixture *f,struct pt_paula_readers_command **command,struct pt_readers_key *key)
 {struct pt_paula_readers_command *c=begin(f,10,PT_SCHEDULED_TRIGGER,0,0,0,NULL);struct pt_paula_readers_reader *r;uint64_t t;
  prepare(f,c);t=enqueue(c);r=reader_handle(c,0);observe_fire(f,t);*key=active_key(r);*command=c;return r;}

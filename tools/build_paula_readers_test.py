@@ -152,6 +152,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exec-memory', action='store_true', help='Select the separate real Fast/Chip allocator wrapper; never runs it')
     ap.add_argument('--trace-memory', action='store_true', help='Add closed-sidecar fixture progress; requires --exec-memory, never runs it')
+    ap.add_argument('--reader-component', choices=('full','lifecycle','faults'), default='full',
+                    help='Separate traced native workload; full regression remains the default')
     ap.add_argument('--source-manifest', type=Path, required=True)
     ap.add_argument('--source-manifest-sha256', required=True)
     ap.add_argument('--pins', type=Path, required=True)
@@ -160,6 +162,8 @@ def main():
     args = ap.parse_args()
     if args.trace_memory and not args.exec_memory:
         ap.error('--trace-memory requires --exec-memory')
+    if args.reader_component != 'full' and not (args.exec_memory and args.trace_memory):
+        ap.error('A separate reader component requires --exec-memory --trace-memory')
     literal_markers = list(MARKERS)
     if args.exec_memory:
         SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *HOST_SOURCES[1:]]
@@ -173,7 +177,14 @@ def main():
         if args.trace_memory:
             FLAGS += ['-DPT_READERS_DIAGNOSTIC_TRACE=1']
             TARGET = 'PTExecReadersTraceTest'
-            MARKERS = list(readers_memory_trace.markers())
+            if args.reader_component != 'full':
+                number, TARGET = {'lifecycle':(1,'PTExecReadersLifeTest'),
+                                  'faults':(2,'PTExecReadersFaultTest')}[args.reader_component]
+                FLAGS += ['-DPT_READERS_COMPONENT='+str(number)]
+                literal_markers = [readers_memory_trace.POOL,
+                    readers_memory_trace.completion(args.reader_component),
+                    readers_memory_trace.CHIP, readers_memory_trace.FINISH]
+            MARKERS = list(readers_memory_trace.markers(args.reader_component))
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()

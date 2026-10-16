@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "state": "HOST_COMPONENTS_AND_PINNED_BUILDS_PASS_NATIVE_NOT_RUN",
+  "host": {
+    "tests": 46,
+    "modules": 10,
+    "sanitizers": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ],
+    "sourceFiles": 343,
+    "sourceUnchanged": true,
+    "elapsedSeconds": 65.62956391702755,
+    "hostResultSHA256": "65b9931f9b9c021632dff246c52bb62611ce710510395a70fa224dd502ed4276",
+    "stderrSHA256": "d6a55743293642e63311eae44ad5088985845192c9e8e8eb1f1042ee5118d2b6"
+  },
+  "partition": {
+    "defaultFullWorkloadUnchanged": true,
+    "allOriginalAssertionsRetained": true,
+    "phaseBodiesConcatenateToOriginalFullOrder": true,
+    "lifecycle": "Six8/16/24mono/stereo cases;20controls each,capacity2,explicitSTOP,independentretirement,master/cache beforeimages",
+    "faults": "All existing negative groups including53cancellation phases,allocation pressure,alias,reentry,stale identities and retirement races",
+    "componentMarkersExplicitlyExcludeOtherGroup": true,
+    "eitherComponentAloneQualifiesFullSuite": false,
+    "zeroOwnedFastAndChipBytesRequiredForEach": true
+  },
+  "products": {
+    "lifecycle": {
+      "name": "PTExecReadersLifeTest",
+      "bytes": 183388,
+      "sha256": "d6ec532bc577f970411684c5219544b52a222fee3a215dfddf4c6e19b5edd7de",
+      "crc32": "71A6D353",
+      "stdoutLines": 80,
+      "units": 24,
+      "projectBodies": 73,
+      "sdkBodies": 49,
+      "runtimeQueries": 7,
+      "commands": 36,
+      "assertionsEnabled": true,
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1",
+        "-DPT_READERS_DIAGNOSTIC_TRACE=1",
+        "-DPT_READERS_COMPONENT=1"
+      ],
+      "buildManifestSHA256": "06a7540db6085908ae61923a392664d134d0f6458e30fa4869a3dc236eb06331",
+      "allCompiledProjectBodiesMatchCurrentSource": true
+    },
+    "faults": {
+      "name": "PTExecReadersFaultTest",
+      "bytes": 194844,
+      "sha256": "de7a07fe66903bcb6199feb68d52408517227fb220a1a98f4bc38de8b1dbc14b",
+      "crc32": "C53489D4",
+      "stdoutLines": 24,
+      "units": 24,
+      "projectBodies": 73,
+      "sdkBodies": 49,
+      "runtimeQueries": 7,
+      "commands": 36,
+      "assertionsEnabled": true,
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1",
+        "-DPT_READERS_DIAGNOSTIC_TRACE=1",
+        "-DPT_READERS_COMPONENT=2"
+      ],
+      "buildManifestSHA256": "a0b26a696de3623c5b2e75732c644e7fa39a3244fc5a00a905cc5446c4fe3f5c",
+      "allCompiledProjectBodiesMatchCurrentSource": true
+    }
+  },
+  "effects": {
+    "productionCodeChanged": false,
+    "nativeProviderEnabled": false,
+    "nativeExecuted": false,
+    "physicalExecuted": false,
+    "deadlinesOrMusicalScheduleChanged": false
+  },
+  "scope": "HOST injected Exec memory classifications and compiler/link only. No native placement/Stack/device/DMA/IRQ/actualbackendstop/exacttiming/audio/listening acceptance. Stdio library allocations outside explicitpool accounting. Earlier incomplete full attempts preserved."
+}

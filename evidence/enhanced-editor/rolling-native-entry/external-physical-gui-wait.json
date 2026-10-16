@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "state": "PHYSICAL_GUI_WAIT_TIMEOUT_NO_TRANSFER_NATIVE_NOT_RUN_RECOVERED",
+  "candidate": {
+    "bytes": 307636,
+    "sha256": "39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c",
+    "crc32": "A3BB63F3"
+  },
+  "exactAmiberryExternalHandoffPreviouslyPassed": true,
+  "physicalAttempt": {
+    "identityAndInstalledBridgeChecksPassed": true,
+    "freshNamespacePreparationPassed": true,
+    "onlyEmptyInputFolderCreated": true,
+    "guiInputFailedBeforeTransfer": true,
+    "transferDeadlineSecondsUnchanged": 120,
+    "writeFileCommands": 0,
+    "launchOrScriptCommands": 0,
+    "ftpClientsOrTransfers": 0,
+    "inputAdopted": false,
+    "nativeResult": "NOT_RUN"
+  },
+  "recovery": {
+    "standingAuthorizedOwnedHostCleanupPassed": true,
+    "exactFolderObservedEmptyBeforeDelete": true,
+    "onlyExactEmptyDirectoryDeletedNoALL": true,
+    "separateCompleteRAMParentListingPassed": true,
+    "separateCompleteCLIStatusNoCandidatePassed": true,
+    "onlyOwnRecoveryShellClosed": true,
+    "actualReleaseAllAndAuthenticatedViewOnlyObserved": true,
+    "originalHostInputsUnchanged": true,
+    "independentLocalObserverPassed": true,
+    "publicReleaseCalls": 1,
+    "originalHoldsArchived": 1,
+    "separateFinalIdlePassed": true,
+    "fence": 1930,
+    "archives": 143,
+    "priorArchivesUnchanged": true
+  },
+  "preservedLocalRefusals": [
+    "redacted public state cannot be used as private lease",
+    "GUI focus/punctuation failure and bounded manual recovery windows",
+    "first local observer missing emulator module export; successor pins installed observer and retains all checks"
+  ],
+  "recordSHA256": {
+    "originalFailedResult": "7ac36bc56572c60c37e06a4f43e0f9ec8ca01058ef1b127e773c420b8d00d7c0",
+    "exactEmptyFolderRemoval": "c0cf4097cc0dfa1f17c4cb7474aa29e7cd925a85cf8b52e9ef38b8f7e77a2f90",
+    "independentPhysicalAbsence": "a709483fdd029505c3d1491839eebfc1578187f59a7d1565fe09e123d2c83cdc",
+    "browserRestoration": "5b5f6bcf651d1b889fed18246a89f7b7a30465c949a1772730578b22a3ca562c",
+    "independentObserver": "5afda94f3461a3e52771d0c291fc327f3024c60b163e77d2068108a033a1273d",
+    "publicRelease": "7ff9fb84cf7e44f712b575c67af11ec096c7a37d3ea58dc688e69eecf03ced3b",
+    "separateFinalIdle": "094fab92eae398e35e5548a9735e8a2c02dfeaec9137f2d39e85bfdb5b67d843"
+  },
+  "failedTransactionReplayed": false,
+  "unqualified": [
+    "Actual MiniFTP transfer and input custody",
+    "Physical candidate execution or allocation class",
+    "Paula/AmiGUS devices and voice stop",
+    "Original rolling case1/full68",
+    "Scheduled output timing and listening"
+  ]
+}

@@ -849,3 +849,19 @@ repeat claims refuse further work. Eight new namespace groups and the 61 prior
 input/handoff groups pass on HOST (69 overlapping groups). A private physical
 adapter model passes 35 groups including eight external-transfer cases. Physical
 caller orchestration and the actual MiniFTP transfer are not qualified yet.
+
+The separately admitted physical caller subsequently reached the real A1200,
+verified identity and the installed bridge, and prepared its fresh empty input
+folder. Safari input failed before MiniFTP could start. The original120-second
+GUI handoff wait expired; no transfer, file write, input adoption or native launch
+occurred. This remains a failed handoff with native execution NOT_RUN.
+
+Authorized recovery independently confirmed the exact folder empty, deleted
+only that folder, and obtained complete RAM-parent and CLI task listings with
+no candidate or execution namespace. The recovery Shell was closed and Safari
+returned to authenticated View Only. Separate local verification, one public
+archival release and another final idle check passed; the original failure and
+single HOLD remain archived. Native/guest/whole limits stayed unchanged. A
+new physical transfer requires a new operation and fresh guards; recovery does
+not qualify MiniFTP, the candidate, hardware or playback.
+See [the failed attempt and recovery](../evidence/enhanced-editor/rolling-native-entry/external-physical-gui-wait.json).

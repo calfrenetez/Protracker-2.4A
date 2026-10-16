@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "state": "DESCRIPTOR_LOCAL_PROOF_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "change": "Mode3 descriptor query reuses one fresh complete joint proof within that same callback-free read-only call.",
+  "proofBoundary": "Original earliest rolling-current stage, lineage entry/header and descriptor bytes, publisher scalar/pointee order and final descriptor field comparisons remain. Modes1/2 keep original paths; no proof across calls, callbacks or ownership queries. No allocation, authority, work/default, exact scheduling or test deadline change.",
+  "sourceSHA256": {
+    "src/editor/editor_mixed_causal_prepare.c": "b1e929ce002438e9a6563545ba139264c968f36e50cfee9798dbea95f5d3c11b",
+    "tests/descriptor_scope_reference.inc": "9dcd610e446e105c386f1cd7f20e34bd287342e76ec6fa2e37e73390ca419879",
+    "tests/descriptor_scope_comparison.inc": "a1308b9dc8a5961e757783ec7c585701fae281cb8662cad21ad34b890142e848",
+    "tests/test_descriptor_scope_proof.py": "3b6f0215078d0084f802d1c9008387896392d0b9c747c7f881036783598210bf"
+  },
+  "checks": {
+    "hostSanitizerGroups": 9,
+    "goldenValidSpanApartTuples": 3663138,
+    "goldenContainmentCases": 48224,
+    "originalHeaderMaskEquivalence": true,
+    "fullOriginal68Rolling": true,
+    "originalJoint31": true,
+    "original17Preflight": true,
+    "supported4096PreflightCancellation": true,
+    "all68AndSelectedCase1Dispatch": true,
+    "oldNewLineageScopeAndProtectedPageRefusals": true,
+    "frozenSixOriginalPredicatesAllCallsRebound": true,
+    "everyActualDescriptorOutcomeCompared": true,
+    "fullWrapperPreparationDescriptorPublisherBeforeimagesRestored": true,
+    "scalarGuardAndProtectedPageReadOrderRefusals": true,
+    "protected16AndBaselinePreserved": true,
+    "independentSourceReview": "No correctness finding; read/refusal ordering, local proof lifetime and exact six-function frozen reference verified.",
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 252
+  },
+  "descriptorObservation": {
+    "counts": [
+      {
+        "fixture": "rolling68",
+        "modeRefusalAcceptanceCounts": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            41,
+            1194651
+          ],
+          [
+            2,
+            3,
+            0
+          ]
+        ],
+        "exactOriginalOraclePassed": true,
+        "oldNewDescriptorOutcomesMatched": true
+      },
+      {
+        "fixture": "joint31",
+        "modeRefusalAcceptanceCounts": [
+          [
+            0,
+            27,
+            9313
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            3,
+            0
+          ]
+        ],
+        "exactOriginalOraclePassed": true,
+        "oldNewDescriptorOutcomesMatched": true
+      }
+    ],
+    "boundary": "Repeated descriptor calls plus temporary controls on genuine fixtures; not independent cases or native cost/timing evidence."
+  },
+  "candidate": {
+    "size": 339048,
+    "sha256": "57335b39946684369b4b1ef71afe90c6a0ade413e3f226792338f7d85e7efe26",
+    "crc32": "EB9BF416"
+  },
+  "hostResultSHA256": "c2fb288eb54ec708479716fa6ebd93f46e46a71428476c7384cd6f9bff450cd0",
+  "descriptorCountsSHA256": "6802699c3efe3757330d63b54de373495f23bab2e0828e4456f7ebc485feafaf",
+  "buildManifestSHA256": "5caebc3404e52ba1dbbdde2c73c1d069358e1db3aa293e11ad4b42db306f45c4",
+  "sourceManifestSHA256": "4836d9b9cd884a4a4eb11ec543845a7240fc40a75cf7b10476c74571012d99ea",
+  "earlierPrivateDriverCompileRefusal": "Compound literal comma in test macro; preserved before fixture execution. Corrected private successor passes; canonical production unchanged by driver correction.",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "speedBenefit": "UNQUALIFIED",
+    "actualDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  }
+}

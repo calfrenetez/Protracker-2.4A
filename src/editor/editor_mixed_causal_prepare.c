@@ -625,13 +625,53 @@ static int source_identity(struct pt_editor_mixed_causal_prepare *s)
 static int source_original(struct pt_editor_mixed_causal_prepare *s,
  const struct pt_editor_mixed_causal_source_borrow *b)
 {return s&&b&&b==s->source_publisher&&s->source_held&&source_identity(s)&&hook_owned(s);}
+/* One fresh joint proof within this read-only descriptor
+ * query only. Keep the original rolling-current, lineage fields, descriptor
+ * bytes and publisher-scalar refusal order. No callback or owned write occurs
+ * between this proof and its last use; nothing is retained across a call. */
+static int source_descriptor_joint3_prefix(struct pt_editor_mixed_causal_prepare *s)
+{
+ struct pt_editor_mixed_causal_rolling_state *r=NULL;
+ struct pt_editor_mixed_causal_lineage_source_prepare *w;
+ const struct pt_editor_mixed_causal_source_borrow *b;
+ /* Original optional rolling_current stage: preserve its earlier refusals. */
+ if(s->rolling_owner){
+    r=rolling_scope(s);
+    if(!r||!zero(&r->inputs->original.lineage,sizeof(r->inputs->original.lineage))||
+       memcmp(&r->inputs->rolling,&r->saved.rolling,sizeof(r->saved.rolling)))return 0;
+    if(!(s->source_mode&&!s->source_activated)&&memcmp(r->inputs,&r->saved,sizeof(r->saved)))return 0;
+ }
+ /* Original lineage_source_scope entry and post-proof fixed-header checks.
+  * In mode3, its repeated rolling_scope is the same untouched proof above. */
+ if((s->source_mode!=2&&s->source_mode!=3)||!s->lineage_owner||s->lineage_owner!=(void *)s||s->stop_owner||
+    !s->source_inputs||!s->source_preparation||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS)return 0;
+ if(!r)return 0;
+ w=(void *)s;
+ if(w->self!=w||w->inputs!=(void *)s->source_inputs||
+    w->saved.preparation!=(void *)s->source_preparation||
+    w->original.self!=&w->original||w->original.inputs!=w->saved.preparation||
+    (s->source_activated?s->inputs!=(void *)w->saved.preparation:s->inputs!=NULL))return 0;
+ if(memcmp(w->inputs,&w->saved,sizeof(w->saved)))return 0;
+ /* Original source_identity scalar/publisher stage. Its repeated lineage proof
+  * has no intervening mutation; the original complete fields are still kept. */
+ b=s->source_publisher;
+ if((s->source_mode!=1&&(s->source_mode!=2&&s->source_mode!=3))||!s->source_serial||!b||s->saved.binding!=s->source_binding||
+    (s->source_mode==1&&(s->lineage_owner||s->stop_owner)))return 0;
+ if(s->source_held)return !s->source_released&&b->address==s&&b->serial==s->source_serial;
+ return s->source_released&&!b->address&&!b->serial;
+}
 static int source_descriptor(struct pt_editor_mixed_causal_prepare *s)
 {
  const struct pt_editor_mixed_causal_source_inputs *v=s->source_inputs;
- if(s->rolling_owner&&!rolling_current(s))return 0;
- if((s->source_mode==2||s->source_mode==3)){struct pt_editor_mixed_causal_lineage_source_prepare *joint=lineage_source_scope(s);
-    if(!joint||memcmp(joint->inputs,&joint->saved,sizeof(joint->saved)))return 0;}
- if(!source_identity(s)||!v||v->binding!=s->source_binding||
+ if(s->source_mode==3){
+    if(!source_descriptor_joint3_prefix(s))return 0;
+ }else{
+    if(s->rolling_owner&&!rolling_current(s))return 0;
+    if(s->source_mode==2){struct pt_editor_mixed_causal_lineage_source_prepare *joint=lineage_source_scope(s);
+       if(!joint||memcmp(joint->inputs,&joint->saved,sizeof(joint->saved)))return 0;}
+    if(!source_identity(s))return 0;
+ }
+ if(!v||v->binding!=s->source_binding||
     v->preparation!=s->source_preparation||v->contexts.data!=s->source_contexts.data||
     v->contexts.bytes!=s->source_contexts.bytes||
     v->causal_workspace.data!=s->source_causal_workspace.data||

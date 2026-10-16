@@ -592,3 +592,37 @@ and protected16/baseline preservation. The pinned86-unit/228-body build passes:
 CRC32 `33E25962`;43 SDK bodies, seven runtimes,249 frozen source files. Exact
 new native and physical execution remain NOT_RUN at this milestone. See
 [HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/valid-scratch-span-host-build.json).
+
+
+## Descriptor-local joint proof
+
+Mode3 descriptor validation now establishes its complete rolling/joint proof
+once at the original earliest rolling-current stage. Within that same read-only
+query, it retains every rolling-current byte check, lineage entry/header check,
+whole-descriptor comparison, publisher scalar/pointee check and final descriptor
+field comparison in the original order. The equivalent repeated scope proofs
+have no intervening callback or owner write. No proof survives the query or is
+reused after an external child call. Modes1/2 keep their original paths.
+
+The regression freezes all six previous predicates with every internal call
+rebound, preventing the reference from borrowing the new path. It compares
+descriptor results on every genuine rolling68/joint31 call and uses restored
+scalar/guard controls plus protected pages for unreadable owners, inputs and
+publishers and missing complete parents. Complete wrapper, preparation/input,
+extended descriptor and publisher beforeimages are restored and compared.
+Original fixture assertions and terminal oracles remain. Comparison counts are
+call observations, not independent cases or native performance evidence.
+
+A separate read-only review confirms original read/refusal ordering, fresh local
+proof lifetime and frozen-reference identity. Exact new HOST suite/build/native
+and physical results are recorded in the accompanying evidence when qualified;
+no actual device/IRQ/output/timing/listening acceptance follows from this proof.
+
+Nine HOST sanitizer groups and the pinned86-unit build pass, including original
+rolling68/joint31, both17/4096 preparation budgets, all68/selectedcase1 dispatch,
+all prior numeric/header/scope controls and the new frozen descriptor/read-order
+regression. The candidate is339048 bytes, SHA256
+`57335b39946684369b4b1ef71afe90c6a0ade413e3f226792338f7d85e7efe26`,
+CRC32 `EB9BF416`;228 project bodies,43 SDK bodies, seven runtimes,252 frozen
+source files. Exact new Amiberry/A1200 and native speed remain unqualified at
+preparation. See [HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/descriptor-local-proof-host-build.json).

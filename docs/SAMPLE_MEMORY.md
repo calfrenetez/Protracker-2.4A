@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Descriptor-local joint proof —16 October2026
+
+A joint descriptor now reuses one fresh complete-parent proof within that same
+callback-free query. All original byte/field/publisher and ownership checks
+remain in their original read/refusal order; no proof is retained across calls
+or callbacks. Frozen six-predicate reference and full beforeimage/protected-page
+regressions retain original68/31 oracles. Nine HOST sanitizer groups and the
+pinned86-unit build pass; exact new native/physical, speed and device acceptance
+remain unqualified at preparation. See [the contract](NATIVE_ROLLING_ENTRY.md#descriptor-local-joint-proof).
+
 ## Reuse local numeric span facts —16 October2026
 
 Captured numeric queries now reuse the same first span already validated at

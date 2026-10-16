@@ -16,7 +16,10 @@ at preparation. Its17-unit native attempt subsequently reaches establishment
 but times out; independent cleanup/release passes. A separate supported256-unit
 preflight component now passes four HOST sanitizer groups and a pinned build,
 with all original semantic oracles and the17-unit default retained. Its native
-execution is NOT_RUN at preparation. Physical acceptance remains separate.
+attempt subsequently advances through establishment and audit to forecast
+but times out; independent cleanup/release passes. A separate existing4096-unit
+maximum-work entry now passes selected HOST checks and a pinned build, with
+exact native execution NOT_RUN at preparation. Physical acceptance stays separate.
 
 The genuine68-case trigger/control/control/stop fixture and selected originalcase1
 pass HOST and pinned compile/link checks, but their native attempts remain

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "scope": "Separate complete preflight using existing4096-unit maximum API work budget; default17 and256-unit evidence remain separate",
+  "host": {
+    "sanitizerGroups": 2,
+    "work256RegressionAndWork4096Passed": true,
+    "foreignMissingAbsentSidecarRefusalsInBoth": true,
+    "unrelated16AndBaselinePreserved": true,
+    "firstHostDirectoryPreparationRefusalPreserved": true,
+    "resultSHA256": "6fff98ee17e709bcfeee7b0a054b7096792e7bff3a423ad3a65158109e81fadf"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 239,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "testOnlyCompileFlag": "-DPT_ROLLING_PREFLIGHT_WORK4096=1",
+    "candidateBytes": 329920,
+    "candidateSHA256": "3bf30dafbe1807a56d96c3e32e7e263a7591c014ac94e1267722283485a0d187",
+    "manifestSHA256": "573b7c7f496ec5bfb0cdc11cfe2ddab861da37d5c63b25e33f65d48664e2b589",
+    "compilerAssemblerLinkerPinsBeforeAfter": true
+  },
+  "productionSourceChanged": false,
+  "default17UnitWorkRetained": true,
+  "originalLoopBound": 100000,
+  "originalCloseBound": 1000,
+  "nativeLimitsChanged": false,
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

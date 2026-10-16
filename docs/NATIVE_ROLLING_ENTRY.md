@@ -345,3 +345,27 @@ call, avoiding a misleading unchanged transition counter during a long phase.
 These are observations only. Exact Amiberry and physical execution are NOT_RUN
 at preparation; device/timing/listening remain unqualified. See
 [work256 host/build evidence](../evidence/enhanced-editor/rolling-native-entry/work256-host-build.json).
+
+The exact256-unit candidate subsequently advances beyond establishment and
+strict audit in Amiberry: phase3 at21seconds, phase10 at43/64seconds, and
+phase18 (render forecast) at85seconds. It does not confirm terminal completion
+within90seconds; RC and complete-preflight acceptance remain unobserved. These
+records show progress, not successful completion or a device/timing result.
+Exact scoped recovery, both saved-file restorations, staging/process/socket
+absence, independent observation/public release and separate final idle pass.
+The original three HOLDs and failed transaction are archived without replay.
+See [work256 native attempt](../evidence/enhanced-editor/rolling-native-entry/work256-emulator.json).
+
+## Existing maximum preparation-work component
+
+The separate4096-unit entry exercises the existing API maximum with the same
+complete preflight, all per-phase/terminal oracles and original cancellation/
+disposal. Existing17- and256-unit entries retain their own budgets and evidence.
+No production default, compiler flags or native deadlines change. Selected
+256-unit regression and4096-unit HOST sanitizer groups pass, including exact
+terminal sidecars, foreign/missing-file refusals and baseline/unrelated-input
+preservation. The pinned86-unit build passes:329,920bytes SHA256
+`3bf30dafbe1807a56d96c3e32e7e263a7591c014ac94e1267722283485a0d187`.
+Exact Amiberry/A1200 execution is NOT_RUN at preparation; device, output timing
+and listening remain unqualified. See
+[maximum-work host/build evidence](../evidence/enhanced-editor/rolling-native-entry/work4096-host-build.json).

@@ -1,7 +1,7 @@
 /* Separate original preflight/cancellation component. The rolling68 entry is
  * retained but never invoked. All clocks/buses and allocations remain models.
  * Only an existing exact owned progress sidecar may be overwritten. */
-#if defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256)
+#if defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 struct sl_trial;
 static void pt_preflight_observe_step(struct sl_trial *,unsigned);
 #define PT_PRIVATE_ROLLING_STEP_OBSERVE pt_preflight_observe_step
@@ -10,7 +10,7 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #define PT_PRIVATE_ROLLING_NATIVE_ENTRY pt_preflight_full_native_not_called
 #include "native_exec_mixed_causal_rolling_test.c"
 #undef PT_PRIVATE_ROLLING_NATIVE_ENTRY
-#if defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256)
+#if defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 #undef PT_PRIVATE_ROLLING_STEP_OBSERVE
 #endif
 
@@ -20,13 +20,18 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #if PT_ROLLING_PREFLIGHT_PREFIX != 0 && PT_ROLLING_PREFLIGHT_PREFIX != 64
 #error "Only the original preflight or the separately bounded64-step prefix is supported"
 #endif
-#if PT_ROLLING_PREFLIGHT_PREFIX && (defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256))
+#if PT_ROLLING_PREFLIGHT_PREFIX && (defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096)))
 #error "Prefix and complete-preflight trace are separate components"
 #endif
-#if defined(PT_ROLLING_PREFLIGHT_TRACE) && defined(PT_ROLLING_PREFLIGHT_WORK256)
+#if defined(PT_ROLLING_PREFLIGHT_TRACE) && (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 #error "Original17-unit and supported256-unit preflights are separate components"
 #endif
-#ifdef PT_ROLLING_PREFLIGHT_WORK256
+#if defined(PT_ROLLING_PREFLIGHT_WORK256) && defined(PT_ROLLING_PREFLIGHT_WORK4096)
+#error "Supported preparation budgets are separate components"
+#endif
+#ifdef PT_ROLLING_PREFLIGHT_WORK4096
+#define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING WORK4096"
+#elif defined(PT_ROLLING_PREFLIGHT_WORK256)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING WORK256"
 #elif defined(PT_ROLLING_PREFLIGHT_TRACE)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING TRACE"
@@ -104,7 +109,10 @@ int main(int argc,char **argv)
 #else
     (void)pt_preflight_steps;
     pt_preflight_record("PREFLIGHT-BEGIN",e);
-#ifdef PT_ROLLING_PREFLIGHT_WORK256
+#ifdef PT_ROLLING_PREFLIGHT_WORK4096
+    /* Existing API maximum, separate from both17- and256-unit evidence. */
+    sl_preflight_work(e,4096);
+#elif defined(PT_ROLLING_PREFLIGHT_WORK256)
     /* Existing production API budget, separate from original17-unit evidence. */
     sl_preflight_work(e,256);
 #else
@@ -121,6 +129,8 @@ int main(int argc,char **argv)
     if(pt_preflight_io_failed)return 20;
 #if PT_ROLLING_PREFLIGHT_PREFIX
     puts("ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY");
+#elif defined(PT_ROLLING_PREFLIGHT_WORK4096)
+    puts("ROLLING WORK4096 NATIVE PASS:complete preflight and cancellation;MODELED_ONLY");
 #elif defined(PT_ROLLING_PREFLIGHT_WORK256)
     puts("ROLLING WORK256 NATIVE PASS:complete preflight and cancellation;MODELED_ONLY");
 #elif defined(PT_ROLLING_PREFLIGHT_TRACE)

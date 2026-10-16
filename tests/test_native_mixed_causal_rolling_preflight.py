@@ -74,4 +74,11 @@ class PreflightWork256Host(PreflightHost):
     EVIDENCE_PREFIX = 'work256-'
 
 
+class PreflightWork4096Host(PreflightHost):
+    EXTRA_FLAGS = ('-DPT_ROLLING_PREFLIGHT_WORK4096=1',)
+    EXPECTED = b'ROLLING WORK4096 NATIVE PASS:complete preflight and cancellation;MODELED_ONLY\n'
+    DONE = b'ROLLING WORK4096 DONE phase=0\n'
+    EVIDENCE_PREFIX = 'work4096-'
+
+
 if __name__ == '__main__':unittest.main()

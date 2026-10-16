@@ -239,3 +239,11 @@ the font header is generated from the pinned baseline font; unrelated working
 copies remain unchanged. An initial source-freeze refusal and a subsequent
 working-recipe pin refusal are preserved separately. Neither reached native
 execution. See [host/build evidence](../evidence/enhanced-editor/rolling-native-entry/preflight-host-build.json).
+
+The new component's prepared runner passes36 HOST runner,27 service and15
+normal-entry checks, plus validation. No service or target has started for it.
+A separate compiler metadata build of all86 units produces byte-identical linked
+candidate output. Its largest reported local frame is16,572bytes, including
+functions later discarded by the linker; this is not a whole-call-chain or
+runtime stack bound. Stack choice and native time limits remain unchanged.
+See [packet and compiler observation](../evidence/enhanced-editor/rolling-native-entry/preflight-packet-host.json).

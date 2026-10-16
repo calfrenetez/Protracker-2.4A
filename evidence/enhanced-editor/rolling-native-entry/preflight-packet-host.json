@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "scope": "HOST-only packet and compile-only local stack metadata observation",
+  "candidateSHA256": "76210621475e840c200a99f4c0afb1dff6caf2d8300cd6ac84e7bff76bb1f239",
+  "packet": {
+    "hostPassed": true,
+    "runnerGroups": 36,
+    "serviceGroups": 27,
+    "normalEntryGroups": 15,
+    "validatePassed": true,
+    "onlyNormalEntryRunFunctionChanged": true,
+    "liveAdmitted": false,
+    "serviceStarted": false,
+    "targetOperation": false,
+    "entryReviewSHA256": "09acbd2c92e5de1f93f2b6e93b0fe0bca52341f0c56b758c9612af0d20ba274d"
+  },
+  "compilerObservation": {
+    "translationUnits": 86,
+    "metadataRows": 1626,
+    "byteIdenticalLinkedCandidate": true,
+    "sourceInventoryPreserved": true,
+    "maximumCompiledLocalFrame": 16572,
+    "wholeCallChainQualified": false,
+    "runtimeStackQualified": false,
+    "stackChoiceChanged": false,
+    "nativeLimitsChanged": false,
+    "resultSHA256": "88c42db1f0ea81d6157af221840cd92e58d660e88128522dd662f9e170c9de08"
+  },
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

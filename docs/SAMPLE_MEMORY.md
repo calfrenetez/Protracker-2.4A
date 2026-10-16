@@ -5,8 +5,9 @@
 Pure numeric coverage probes now stop after all requested roles are found. Every
 original complete-span, source/backlink and lifetime check remains; no authority
 or work/timing budget changes. Five HOST sanitizer groups and the pinned86-unit
-build pass. Exact new emulator, A1200 and performance acceptance are NOT_RUN or
-unqualified. See [the contract](NATIVE_ROLLING_ENTRY.md#stop-pure-guard-searches-after-complete-coverage).
+build pass. The new originalcase1 Amiberry attempt subsequently remains unconfirmed
+within unchanged bounds; independent recovery/release passes. A1200 and native
+performance acceptance remain unqualified. See [the contract](NATIVE_ROLLING_ENTRY.md#stop-pure-guard-searches-after-complete-coverage).
 
 ## Equivalent preparation containment —16 October2026
 

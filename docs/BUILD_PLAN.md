@@ -5,15 +5,24 @@ and initial emulator smoke checks are complete; the broader compatibility and
 hardware gates remain pending. See [BASELINE_BUILD.md](BASELINE_BUILD.md) for
 current evidence. Product naming is tracked in [HANDOVER_REVIEW.md](HANDOVER_REVIEW.md).
 
-## Current priority while the Mini is in transit
+## Current development priority
 
-On 19 September the owner requested all development that does not depend on
-physical AmiGUS tests. Independent software portions of stages 1, 3–5 and 7–10
-can therefore proceed before the physical gate in stage 2. Hardware evidence is
-still required before those backends are accepted. The native loader/input and
-portable channel/PCM/WAV checkpoint is documented in
-[HARDWARE_INDEPENDENT.md](HARDWARE_INDEPENDENT.md); its scope and missing UI/replay
-integration are explicit. No duplicate diagnostic profile is being created.
+The user has resumed implementation and testing, including real A1200/AmiGUS
+work when available. Continue the existing native baseline and sample-memory
+architecture; exact musical scheduling and the three approved workflow additions
+remain required. Do not treat the earlier Mini-in-transit restriction as current.
+
+Use the latest development checkpoint and [sample-memory status](SAMPLE_MEMORY.md)
+for implemented components, exact candidates and open acceptance gates. The
+stages below remain a scope/exit-evidence plan; they are not a claim that an
+entire stage is implemented or accepted. A compiled or passing RAM-only component
+does not qualify the full editor, native devices, scheduled output or listening.
+
+Qualify exact candidates in the owned030 Amiberry harness before physical
+promotion. Verify fresh live ownership, locks, recovery and target identity;
+return any acquired Safari/AmiConnect control to View Only. Continue independent
+software work while physical access or the UI is unavailable. Routine verified
+own cleanup and independent release follow the user's standing authority.
 
 ## First build milestone
 

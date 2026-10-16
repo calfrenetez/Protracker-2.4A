@@ -501,3 +501,14 @@ preflight and supported4096-unit preflight/cancellation, including sidecar refus
 and preservation checks. The pinned86-unit/228-body build passes. Native speed,
 exact new emulator and physical execution remain unqualified at preparation.
 [Compact HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/guard-search-host-build.json).
+
+
+The exact guard-search originalcase1 candidate338384B7b0ea164 subsequently runs
+once in Amiberry but does not confirm completion within unchanged bounds.
+Its last complete directory reply reports103 output bytes and an empty completion
+flag; the following directory exchange remains unconfirmed. No terminal body,
+RC, application phase or native speed claim is inferred. Separate verified own
+recovery, original-file restoration, independent public release and final idle
+all pass. See [the preserved scoped result](../evidence/enhanced-editor/rolling-native-entry/guard-search-case1-emulator.json).
+A further source improvement requires its own proof/tests/build; this transaction
+is not resumed or replayed.

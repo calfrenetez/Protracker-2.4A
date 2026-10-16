@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "45a68d757113a692a26d9f7955b2f22bd45bd0d3",
+  "scope": "Independent future-trigger owner source currentness now checks actual sample and selected stereo side/format key, preserving its separate retirement model.",
+  "regression": {
+    "cases": 66,
+    "controls": 12,
+    "refusals": 54,
+    "states": [
+      "ready",
+      "live-published"
+    ],
+    "formats": [
+      "8mono",
+      "8stereo",
+      "16mono",
+      "16stereo",
+      "24mono",
+      "24stereo"
+    ],
+    "checks": [
+      "Genuine donor representation keys from production packer",
+      "Wrong identity/side/bits/byte-order/padding refused before view/enqueue effects",
+      "Refused output and existing backend/cache/master bytes unchanged",
+      "Original genuine pin and lease retained until independent queue retirement",
+      "Retired valid cache may remain unpinned for reuse; full close frees all explicit owned bytes"
+    ],
+    "baseline_missing_refusal_result_sha256": "698943cf18a10c0018d9df348703c5b4e3fde1863ec413984c2edc072da35c3b",
+    "baseline_missing_refusal_stderr_sha256": "5777d55dd4936d6b32dad748ee12ecbf438640f670fcf61e6a92c38fc4c21a75"
+  },
+  "host": {
+    "tests": 7,
+    "groups": 6,
+    "flags": [
+      "C99",
+      "assertions",
+      "Werror",
+      "ASan",
+      "UBSan"
+    ],
+    "frozen_files": 352,
+    "source_inventory_unchanged": true,
+    "result_sha256": "b984db792568f0a2e90f4c576d8855056e78b5f5a95b16498d613fe85dd964d7"
+  },
+  "older_fixture_correction": {
+    "baseline_also_failed": true,
+    "failure": "Table snapshot treated exported interior table as allocator base. Private no-inline backtrace identified full_table_guard -> image -> allocated.",
+    "diagnostic_sha256": "7fe4087b1fbaf06c437c1f98f598a36bacf49e89b5bdab2ed181afb9965c9ce9",
+    "baseline_original_sha256": "1c01d916823a31f84bd17f57eca6594cdb3e855bfb7e371f28f383bd33958de7",
+    "correction": "Find actual containing allocator record numerically and snapshot its entire allocation, including intrinsic prefix and spare slots. No copied private layout or production change.",
+    "corrected_fixture_passes_prior_production": true,
+    "prior_production_control_sha256": "5c20daea32ff4b5a0b09b15d12b857bd8ea8bc3c618bfc2f4497064020f67d52",
+    "original_failures_preserved": true
+  },
+  "build": {
+    "target": "PTPaulaFutureTriggerTest",
+    "bytes": 177600,
+    "sha256": "008fdf9c612d43ef5760e5316b13b00afc391a6d82fed97a6b69d9ac152993a5",
+    "crc32": "9C7FAF29",
+    "units": 24,
+    "project_bodies": 57,
+    "sdk_bodies": 32,
+    "runtimes": 7,
+    "assertions_enabled": true,
+    "manifest_sha256": "db8233c4f14ee3d3c00fdf1b587089ee6fff67b8c6ba85668cfd0aa802091915",
+    "compiled_fixture": "Original future ownership regression only; separate66-case binding regression not included in HUNK.",
+    "execution": "NOT_RUN",
+    "meaning": "Portable 68000/softfloat/nix20 compiler/linker check only; no actual Exec memory placement or runtime proof."
+  },
+  "preservation": {
+    "protected16_contents_and_stable_metadata_unchanged": true,
+    "layout_unchanged": true,
+    "exact_musical_scheduling_unchanged": true,
+    "typed_native_provider_inhibited": true,
+    "shared_target_or_service_used": false
+  },
+  "not_qualified": [
+    "Amiberry/physical future-owner execution",
+    "Native66-case future key-fault fixture",
+    "Actual Fast/Chip allocation placement for this portable target",
+    "Backend scheduling/device/DMA/voice-stop/timing/audio/listening",
+    "Other older lineage/mixed/dispatcher paths"
+  ]
+}

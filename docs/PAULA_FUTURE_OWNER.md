@@ -81,3 +81,30 @@ standalone 68k portability build now pass. The 150,852-byte native fixture has
 not run. Compilation does not establish Exec Fast/Chip placement, DMA, native
 output or timing. See [the saved host/compiler evidence](../evidence/enhanced-editor/paula-future-trigger-owner/README.md)
 and [current architecture status](SAMPLE_MEMORY.md).
+# Actual source/representation checks — 16 October 2026
+
+The independent future-trigger owner now checks the actual cache key against
+its genuine sample and selected stereo side on every source-currentness call.
+Live lease, revision and byte length alone cannot admit another representation.
+The new66-case ready/published-live regression has12 controls and54 wrong
+sample/side/bits/byte-order/padding refusals. Production packing generates the
+different keys. Refusals preserve outputs, masters, cache bytes and backend
+observations, while genuine pins/leases stay held until independent retirement.
+An unpinned valid cache may remain for reuse; full close ends all owned bytes.
+
+Seven tests in six HOST groups pass with assertions, Werror, ASan and UBSan.
+The prior production body reproduces the missing ready-view refusal. A separate
+older full-fixture failure also occurs on that baseline: its table snapshot
+incorrectly assumes the exported table is an allocation base. A private no-inline
+backtrace localizes that assertion. The fixture now finds the actual containing
+allocator record and snapshots the entire allocation, including prefix/spare
+storage, without copying a private layout. This corrected fixture passes against
+the prior production body as well as the revised code. All earlier failures
+remain separate evidence.
+
+The pinned24-unit original future fixture also compiles with the68000/softfloat
+toolchain and enabled assertions. Its177600-byte HUNK has NOT_RUN; it excludes
+the separate66-case key-fault fixture. This is no native placement, hardware
+backend, scheduling, audio or listening acceptance. The persistent-reader
+Amiberry pass belongs to its different candidate. Other lineage/mixed/dispatcher
+lookups remain separate work. See [HOST/build evidence](../evidence/enhanced-editor/future-source-binding/host-build.json).

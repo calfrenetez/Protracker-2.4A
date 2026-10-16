@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Independent future-trigger source binding — 16 October 2026
+
+The older future-trigger owner now shares the actual sample/side/representation
+cache-key check used by persistent readers. Its separate66-case ready/live
+regression and broader HOST checks pass; independent retirement still controls
+pin/lease release. The portable original future fixture builds, but its native
+execution and the separate key-fault fixture remain unrun. This does not extend
+the different persistent-reader candidate's Amiberry result. See
+[future owner details](PAULA_FUTURE_OWNER.md).
+
 ## Persistent Paula reader source binding — 16 October 2026
 
 Persistent readers now recheck the actual cache representation against their

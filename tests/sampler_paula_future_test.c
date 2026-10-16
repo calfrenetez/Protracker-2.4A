@@ -45,6 +45,17 @@ static struct image image(struct memory *m,void *p)
 {struct image s={p,NULL,allocated(m,p)};s.saved=malloc(s.bytes);assert(s.saved);memcpy(s.saved,p,s.bytes);return s;}
 static void unchanged(struct image *s)
 {assert(!memcmp(s->object,s->saved,s->bytes));free(s->saved);s->saved=NULL;}
+/* An exported table may be an interior view of a larger owned allocation.
+ * Find the real allocator record; do not duplicate its private prefix layout.
+ * Snapshot the complete allocation, including that prefix and spare slots. */
+static struct image containing_image(struct memory *m,const void *p,size_t bytes)
+{
+    uintptr_t x=(uintptr_t)p;unsigned i;
+    for(i=0;i<128;++i)if(m->block[i].data){uintptr_t base=(uintptr_t)m->block[i].data;
+        if(x>=base&&x-base<=m->block[i].bytes&&bytes<=m->block[i].bytes-(x-base))
+            return image(m,m->block[i].data);}
+    assert(0);return (struct image){NULL,NULL,0};
+}
 struct backend {struct pt_scheduled_event event[8];unsigned n;uint64_t now;int submit,poll,cancel;};
 static int clock_read(void *c,uint64_t *ticks,uint32_t *frequency)
 {struct backend *b=c;*ticks=b->now;*frequency=1000;return 1;}
@@ -356,7 +367,8 @@ static void full_table_guard(void)
     o=begin(&f,10,0,0,0);prepare(&f,o);assert(pt_paula_future_view(o,0,&view)==PT_FUTURE_OK);
     event=batch(view,10);assert(pt_paula_future_enqueue(o,&event,&ticket)==PT_SCHEDULED_OK);
     event.frame=11;event.action[0].data=(uint8_t *)&data;event.action[0].words=1;
-    table=image(&f.fast,f.sampler.table);queue=image(&f.fast,f.queue);pool=image(&f.fast,f.pool);holder=image(&f.fast,o);
+    table=containing_image(&f.fast,f.sampler.table,PT_PROJECT_SAMPLES*sizeof(*f.sampler.table));
+    queue=image(&f.fast,f.queue);pool=image(&f.fast,f.pool);holder=image(&f.fast,o);
     assert(pt_scheduled_output_enqueue(f.queue,&event,&foreign,(uint64_t *)(f.sampler.table+200))==PT_SCHEDULED_INVALID);
     assert(!calls);unchanged(&table);unchanged(&queue);unchanged(&pool);unchanged(&holder);
     assert(pt_scheduled_output_stop(f.queue)==PT_SCHEDULED_OK);assert(pt_paula_future_owner_close(o));

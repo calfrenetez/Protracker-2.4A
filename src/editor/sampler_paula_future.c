@@ -100,7 +100,8 @@ static int source_current(struct pt_paula_future_owner *o,unsigned i)
     if(!s->pin || !s->leased || pt_sampler_pin_current(p->sampler,p->project,s->request.sample,
         p->generation,s->pin,&pcm,&pin)!=PT_EDIT_OK)return 0;
     pt_sampler_unpin(pin);
-    return pt_sampler_paula_prepared_location_validated(&p->bridge,s->request.track,s->lease,&data,&bytes) &&
+    return pt_sampler_paula_prepared_source_location_validated(&p->bridge,s->request.track,
+        s->request.sample,s->request.channel,s->lease,&data,&bytes) &&
         data==s->data && bytes==s->bytes;
 }
 static int batch_valid(struct pt_paula_future_owner *o,const struct pt_scheduled_batch *b)

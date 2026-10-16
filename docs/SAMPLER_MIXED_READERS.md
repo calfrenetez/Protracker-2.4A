@@ -220,3 +220,17 @@ timeouts retain their original evidence and cause remains unconfirmed. This
 adds no output activation, IRQ, device RAM capacity/completion/stop, exact live
 timing or listening acceptance. See
 [fault-probe host/build evidence](../evidence/enhanced-editor/mixed-source-binding/fault-probes-host-build.json).
+
+Each exact diagnostic subsequently passes once in the shared68030 emulator:
+Paula RC0/all16 lines/747 bytes, and active AmiGUS RC0/all12 lines/610 bytes.
+Both observe1MiB Stack and the exact35-byte final closed sidecar. Genuine
+wrong-source refusal, unchanged masters/cache/bus and independent retirement
+assertions pass. Each run has separate input/execution custody, exact guest/host
+cleanup, restoration/absence observation, public release, owned-service stop
+and a separate fresh final idle check. No owned resource or HOLD remains.
+These qualify the two selected cases only; the other493 matrix cases and legacy
+constructor remain outside these native runs. The earlier failed full/component
+transactions and their unconfirmed cause are unchanged. Physical/device/output
+timing and listening acceptance remain NOT_RUN. See the separate
+[Paula result](../evidence/enhanced-editor/mixed-source-binding/fault-paula-before-emulator.json)
+and [active AmiGUS-reader result](../evidence/enhanced-editor/mixed-source-binding/fault-amigus-active-emulator.json).

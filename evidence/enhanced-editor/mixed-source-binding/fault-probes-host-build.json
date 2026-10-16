@@ -99,5 +99,11 @@
     "Whole callchain stack/WCET",
     "Device RAM capacity/completion/ordering/actual voice-stop",
     "Native output/IRQ/exact musical timing/audio/listening"
-  ]
+  ],
+  "additional_cli_checks": {
+    "ambiguous_or_unsupported_selections": 4,
+    "return_code": 2,
+    "all_refused_before_build_output": true,
+    "source_inventory_unchanged": true
+  }
 }

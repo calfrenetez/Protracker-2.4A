@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "state": "SCOPED_GENUINE_WRONG_SOURCE_CASE_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "source_commit": "925db6d2a106cbecdf03c91603329973d3cbab93",
+  "diagnostic_selection": "amigus-active",
+  "candidate": {
+    "crc32": "1F6ABE24",
+    "sha256": "9b705fc652a5eea7fd865fbe9a9f3a92dc18f7467ceb87df2f40f0b6a261c40c",
+    "size": 296848
+  },
+  "scope": "One genuine8mono amigus-active wrong-sample refusal; other494 cases and legacy constructor excluded",
+  "ordinary_allocator_and_fake_bus": true,
+  "assertions": "Existing genuine binding-case checks, original factory/cache/pins, master/cache/bus preservation and independent cleanup. Corrupted key is not repaired for retirement.",
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact": "true",
+    "chip_kib": 2048,
+    "z3_kib": 131072
+  },
+  "observed": {
+    "nativeMarkers": [
+      "MIXED BINDING TRACE:entered:0:0:0",
+      "MIXED BINDING TRACE:case-start:8:1:1",
+      "MIXED BINDING TRACE:case-made:8:1:1",
+      "MIXED BINDING TRACE:pool-open:8:1:1",
+      "MIXED BINDING TRACE:derived-ready:8:1:1",
+      "MIXED BINDING TRACE:checking:8:1:1",
+      "MIXED BINDING TRACE:checked:8:1:1",
+      "MIXED BINDING TRACE:before-close:8:1:1",
+      "MIXED BINDING TRACE:before-drop:8:1:1",
+      "MIXED BINDING TRACE:case-closed:8:1:1",
+      "MIXED BINDING FAULT PROBE PASS:one8mono AmiGUS16le active wrong-sample refusal;genuine pins retained to independent retirement,unchanged masters and bus;other494 and legacy constructor excluded;SOFTWARE_ONLY",
+      "MIXED BINDING TRACE:finished:8:1:1"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 610,
+    "outputCRC32": "E9F3317E",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "native_rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "orchestration": {
+    "host_runner_tests": 35,
+    "host_service_tests": 27,
+    "entry_tests": 15,
+    "input_files": 1,
+    "execution_files": 9,
+    "final_closed_sidecar_bytes": 35,
+    "actual_pass_required": true,
+    "unchanged_transaction_retried": false
+  },
+  "cleanup": {
+    "exact_guest_and_host_staging_absence": true,
+    "saved_originals_and_profile_mapping_restored": true,
+    "independent_observation": true,
+    "public_release": true,
+    "own_service_and_emulator_absent": true,
+    "tcp_and_named_unix_endpoints_absent": true,
+    "separate_final_idle": true,
+    "fence": 1735,
+    "archives": 96,
+    "holds": 0,
+    "availability": "Historical final observation; fresh live checks required"
+  },
+  "records_sha256": {
+    "spec": "bae033dd441007a6070263341a51699922a3257de0b69bb05edb18547a4b2edf",
+    "admission": "62053e08dee1818401277da08b1794f9d3d60b26f233aa55ce03171424e3aa9b",
+    "actual_result": "74e5699a8becd9e35d5b83402f5b34b48c8cd269f80c92450ab024bc88d3a4c0",
+    "independent_pass": "ec04b0169f8d701df909d53c54e4ed12439b1e110ae72b0c061bc54067987f8a",
+    "public_release": "318570d1abac66e6a1cccaafd51a33034f58f372a66414369e82524f9b2eb763",
+    "owned_service_stop": "a40effa21c814ae04731f24cf9c44bd1db55418aff9f9501bcc518f569a94342",
+    "separate_final_idle": "cec90cca4aa98d6dfdc26ccd45ce4b83218a320a87608ba07a2ae23452248662"
+  },
+  "not_qualified": [
+    "Other494 cases and legacy constructor on native",
+    "Cause of earlier full495/75-case native deadlines",
+    "Exec Fast/Chip placement or whole callchain stack/WCET",
+    "Real device RAM capacity/ordering/completion/voice-stop/DMA/IRQ",
+    "Native output activation/exact musical timing/full app/audio/listening"
+  ],
+  "physical_execution": "NOT_RUN"
+}

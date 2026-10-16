@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PINNED_NATIVE_COMPILE_PASS_NEW_FIXTURE_EXECUTION_NOT_RUN",
+  "change": "Native task-clock outputs exclude complete private request/port and known Device header before actual clock call; no schedule/epoch/rate/priority change",
+  "host": {
+    "tests": 4,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "outputRefusals": 33,
+    "subsequentControls": 33,
+    "exactNativeEntryFakeExecRefusals": 25,
+    "exactNativeEntryFakeExecControls": 25,
+    "priorClockAndAlarmLifecycleFixtures": true,
+    "fullObjectAndOwnerBeforeimages": true,
+    "clockCallsOnRefusal": 0,
+    "completeTimerequestAllocatedInNewFixture": true
+  },
+  "baseline": {
+    "unalteredProduction": true,
+    "fixtureMatchesCurrentRegression": true,
+    "alignedPrivateRequestOutputAccepted": true,
+    "clockCalls": 1,
+    "returncode": 1,
+    "reportedAbortPreserved": true
+  },
+  "native": {
+    "candidate": {
+      "name": "PTNativeEClockOutputsTest",
+      "bytes": 12500,
+      "sha256": "6fa0af7862177a2a31510a639438c202fe256c1afa7faef53ef663fa40e58d2a",
+      "crc32": "7C900A79"
+    },
+    "translationUnits": 1,
+    "projectDependencies": 2,
+    "sdkDependencies": 44,
+    "runtimeInputs": 7,
+    "commands": 12,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "assertionsEnabled": true,
+    "selectedAssemblerBeforeAndAfterPinned": true,
+    "wholeCallchainStackQualified": false,
+    "newFixtureAmiberry": "NOT_RUN",
+    "newFixturePhysical": "NOT_RUN",
+    "runtimeScope": "25 private owner/request/port refusals and25 actual clock controls; no shared Device/Exec header output or device/audio/timing test"
+  },
+  "priorClockPairEvidence": "Historical frozen header/direct assembly path; does not qualify changed task reader",
+  "readOnlyOriginalStandaloneBuilderPreserved": true,
+  "productionAndFixtureSHA256": {
+    "src/native/eclock.h": "2ff1914a20b64ac4bb36d210c233f225449b6db067cb4fdc26c01199313bd230",
+    "tests/native_eclock_output_alias_test.c": "edf929ee7c2aaedbcc51aafb84c43fb7fcea6aa0778e26729a961a56e52af9ca",
+    "tests/native_exec_eclock_outputs_test.c": "708ab45b97938721cdabcbaa1a2c897740aab020c6f62588f8b65a5a74e73d9d",
+    "tests/native_eclock_outputs_entry_host_test.c": "f19ce554ae20ab762b21dc6b77da1d62d549239309f93a97b6fae65f205632e9",
+    "tests/test_native_eclock.py": "8125af3e1ca4b390c280df7dd445715f2f2df8ea452a6a2c17597a05a9c010c7",
+    "tools/build_native_eclock_outputs.py": "135c0373a3601d2b6e36f2c5d9ab4ba07078cecec7d60b4eb23f57468df6ac92"
+  },
+  "recordsSHA256": {
+    "baseline-source.json": "ea0661db8922c041865301c0e5d60cba6fbcfd869a2d45c2386fd60acfa56df9",
+    "baseline-result.json": "784c0a7e25d80c1e196e1329b0184ea788d4c24e29ca358f1c22afc5c35fcbde",
+    "baseline.stderr": "25dbadf556b8443a7341ebbde1dc6df38a34701ccbb86d8df5e5134c75d6d036",
+    "source-manifest.json": "c73d04b59c94a85e37ff2a63d1cecf3cc3e077295b4ff53af7e4f1a6f9e7e1af",
+    "host-result.json": "e1b6233644da4a02828a5ffe6b36925b29fd149e677c6aac1951a1c5997b9245",
+    "host.stdout": "6f8ab7e1662b0feb94ba01278b937b30977b0ddfef20ab8611ffed1cfe5ef236",
+    "host.stderr": "9263c50e791e7650eab8c4d8312abb2eb0b749be46fb72b9ad67d528cf97efd2",
+    "native/manifest.json": "c3b4f859120d7402a3d100963c608a964bf87d7350f662f6ea31c8759ae8acc1",
+    "native-invocation.json": "df4763f337474e2fdf0e9fe183a2047a82a5c657323179aa01906db5ff5f9924",
+    "native-result.json": "1aaf00bde37bbfdec3608057b58f78ad48f87e6ec84e0d562985ccdfe7375bbe",
+    "builder-derivation.json": "f29c1095ad5b746ef9fafe23542e0ce2b8ef6a7ea122707fa056d2135a31639e"
+  },
+  "notQualified": [
+    "Native runtime of changed reader",
+    "Complete library allocation or arbitrary caller memory protection",
+    "General copied/corrupted owner safety",
+    "Fast/Chip placement,aggregate Stack,IRQ/WCET",
+    "Native activation/exact musical timing/audio/listening/full app"
+  ]
+}

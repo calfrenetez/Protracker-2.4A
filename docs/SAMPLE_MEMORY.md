@@ -1,5 +1,16 @@
 # Sample memory and playback ownership
 
+## Native clock owner output protection —16 October2026
+
+The task clock reader now protects its full private request/port and known
+Device header from overlapping outputs before any clock call. The preserved
+baseline accepts a private-request overlap. HOST33 refusals/33 controls and the
+exact25-case native entry under fake Exec pass alongside existing clock/alarm
+lifecycle tests. The pinned one-unit native build passes; this changed reader's
+Amiberry and physical execution remain NOT_RUN at this milestone. Earlier direct
+clock-pair observations retain their own frozen source and scope. See
+[the contract and current evidence](NATIVE_ECLOCK_OUTPUTS.md).
+
 ## Current physical clock observation —16 October2026
 
 The standalone task-only clock diagnostic now completes16 adjacent read pairs

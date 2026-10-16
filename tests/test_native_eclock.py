@@ -1,11 +1,17 @@
 from pathlib import Path
 import subprocess,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
+NATIVE_SOURCES=['tests/native_exec_eclock_outputs_test.c']
+NATIVE_SOURCES=['tests/native_exec_eclock_outputs_test.c']
 class NativeEClock(unittest.TestCase):
     def test_owner_failures(self):
         self.run_fixture("native_eclock_test.c")
     def test_alarm_failures(self):
         self.run_fixture("native_alarm_test.c")
+    def test_owner_output_storage(self):
+        self.run_fixture("native_eclock_output_alias_test.c")
+    def test_native_output_entry_fake_exec(self):
+        self.run_fixture("native_eclock_outputs_entry_host_test.c")
     def run_fixture(self,fixture):
         with tempfile.TemporaryDirectory() as tmp:
             p=Path(tmp)

@@ -4,6 +4,7 @@
 #include <devices/timer.h>
 #include <proto/exec.h>
 #include <proto/timer.h>
+#include <stddef.h>
 #include <stdint.h>
 /* OS2+ owner-thread read-only clock. Zero-initialize before first open; never
  * copy a live owner. Its private request is never submitted, so close has no
@@ -29,16 +30,32 @@ static inline int pt_native_eclock_open(struct pt_native_eclock *c)
     return 1;
 failed:pt_native_eclock_close(c);return 0;
 }
+static inline int pt_native_eclock_output_storage_clear(const uint64_t *ticks,
+    const uint32_t *frequency,const void *storage,size_t bytes)
+{
+    uintptr_t a=(uintptr_t)storage,b=(uintptr_t)ticks,d=(uintptr_t)frequency;
+    if(!storage || !bytes || a>UINTPTR_MAX-(bytes-1))return 0;
+    return (b<=a?sizeof(*ticks)<=a-b:bytes<=b-a) &&
+        (d<=a?sizeof(*frequency)<=a-d:bytes<=d-a);
+}
+/* Output storage must also exclude the complete private request/port and the
+ * known shared Device header. Refuse before ReadEClock: an aliased write could
+ * corrupt still-live cleanup state even when the owner handle itself is clear.
+ * This names the SDK header, not an unknown complete library allocation. */
 static inline int pt_native_eclock_read(void *context,uint64_t *ticks,uint32_t *frequency)
 {
     struct pt_native_eclock *c=context;struct EClockVal value;ULONG rate;
     struct Device *TimerBase;
     uintptr_t a=(uintptr_t)c,b=(uintptr_t)ticks,d=(uintptr_t)frequency;
-    if(!c || !ticks || !frequency || !c->opened || !c->request ||
+    if(!c || !ticks || !frequency || !c->opened || !c->request || !c->port ||
        a>UINTPTR_MAX-sizeof(*c) || b>UINTPTR_MAX-sizeof(*ticks) || d>UINTPTR_MAX-sizeof(*frequency) ||
        (b<a+sizeof(*c) && a<b+sizeof(*ticks)) || (d<a+sizeof(*c) && a<d+sizeof(*frequency)) ||
        (b<d+sizeof(*frequency) && d<b+sizeof(*ticks)))return 0;
-    TimerBase=c->request->tr_node.io_Device;rate=ReadEClock(&value);
+    if(!pt_native_eclock_output_storage_clear(ticks,frequency,c->request,sizeof(*c->request)) ||
+       !pt_native_eclock_output_storage_clear(ticks,frequency,c->port,sizeof(*c->port)))return 0;
+    TimerBase=c->request->tr_node.io_Device;
+    if(!pt_native_eclock_output_storage_clear(ticks,frequency,TimerBase,sizeof(*TimerBase)))return 0;
+    rate=ReadEClock(&value);
     if(!rate)return 0;
     *ticks=((uint64_t)value.ev_hi<<32)|value.ev_lo;*frequency=rate;return 1;
 }

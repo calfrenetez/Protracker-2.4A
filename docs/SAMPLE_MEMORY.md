@@ -7395,3 +7395,12 @@ or timing capability is enabled. A baseline renderer test's false opaque-header
 immutability assertion was corrected without ignoring immutable bytes or PCM;
 actual mutable reference/list fields are treated separately and list integrity
 is checked. See [the prepared memory qualification](SAMPLER_PAULA_READERS.md#exec-backed-memory-fixture-prepared--16-october-2026).
+
+The separately scoped six-format lifecycle component now passes once in
+Amiberry with genuine Fast-only promoted storage, Chip-only caches, endpoint
+classification, 20 controls per case and zero explicit owned bytes. RC0, all 80
+lines, observed 1 MiB Stack, exact custody and independent cleanup/release passed.
+The negative component and combined full native suite remain unqualified; both
+earlier full-suite timeouts are preserved. Device/IRQ/DMA/actual voice stop,
+physical A1200, whole-library memory accounting and exact output timing/listening
+are separate. See [native lifecycle scope](SAMPLER_PAULA_READERS.md#native-workload-components--16-october-2026).

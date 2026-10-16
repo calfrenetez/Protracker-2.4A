@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "state": "LIFECYCLE_COMPONENT_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "sourceCommit": "f81ebce7d6c8c1fde4a022b477ed074c29fa660d",
+  "runID": "c5c0885e05d55ce99ce021e8afcb9953",
+  "candidate": {
+    "crc32": "71A6D353",
+    "sha256": "d6ec532bc577f970411684c5219544b52a222fee3a215dfddf4c6e19b5edd7de",
+    "size": 183388,
+    "name": "PTExecReadersLifeTest"
+  },
+  "attempts": 1,
+  "hostPacket": {
+    "runnerGroups": 35,
+    "serviceFactoryGroups": 27,
+    "normalEntryGroups": 15,
+    "validate": true
+  },
+  "native": {
+    "target": "amiberry-030",
+    "cpu": "68030",
+    "fpu": "0",
+    "cpuCycleExactObserved": true,
+    "configuredMemory": "2MiBChip/128MiBZ3, not physical timing equivalence",
+    "returnCode": 0,
+    "observedStackBytes": 1048576,
+    "markers": 80,
+    "outputBytes": 3732,
+    "outputCRC32": "22D5CBA4",
+    "outputSHA256": "e65442dfe6ba48c70f6babb565319888c0ef604a70c940bb243383b5fa7fbd3f",
+    "resultSHA256": "398e9f8822e98dbf861dcc9b428ea2bd02b1aac688f55273b29381cb7f081ada",
+    "inputCustodyFiles": 1,
+    "executionCustodyFiles": 9,
+    "sixFormatLifecycles": true,
+    "controlsPerCase": 20,
+    "commandCapacity": 2,
+    "execFastChipExtentClassificationAssertionsPassed": true,
+    "explicitOwnedPoolBytesAtExit": 0,
+    "zeroBudgetRefusalWithoutChipFallback": true,
+    "backend": "Serialized software model; no native resource/backend activation"
+  },
+  "closure": {
+    "reportedNativeOwnedMemoryZero": true,
+    "guestTaskAndBothNamespacesAbsent": true,
+    "exactHostStagingAbsent": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObserverSHA256": "4779da725e7e7423f9707306fd35ef3612f773b78de231092c45f5e94bcea15e",
+    "publicReleaseSHA256": "dff3bdc4a24e87d4e87d9e7544366a67c1ba5922f141c2f0808c234a91813521",
+    "ownedServiceStopSHA256": "0f8025bdf94ea4b8c9241536208d41f6c4bcb128e5a2cde574e35329bbb5c307",
+    "separateFinalIdleSHA256": "537bdc2908df8244b0a6d91d46167ac5b97ee81ae5b4f5477050df58fedf5e3c",
+    "recordedFence": 1691,
+    "recordedArchives": 86,
+    "availability": "Historical release only; fresh checks required for later operations"
+  },
+  "limits": {
+    "uploadSeconds": 120,
+    "nativeSeconds": 90,
+    "executionSeconds": 140,
+    "wholeSeconds": 250,
+    "unchanged": true
+  },
+  "notQualified": [
+    "Negative matrix component",
+    "Combined full native workload",
+    "Initial borrowed stack-source memory class",
+    "Total callchain/library stack and WCET",
+    "C-library allocation accounting",
+    "Native TASK/provider, IRQ, DMA or real device voice stop",
+    "Exact musical output timing",
+    "Physical A1200 or listening acceptance"
+  ],
+  "preservedFailures": "Both original full-suite incomplete attempts remain unchanged; this is a separately scoped component, not a replay or relabeling."
+}

@@ -358,6 +358,19 @@ Both complete components pass ASan/UBSan with injected host memory classes.
 Their phase bodies concatenate to the original full workload in the same order.
 All 46 tests across ten modules pass, and both assertion-enabled 24-unit native
 builds pass. The lifecycle product is 183,388 bytes; the fault product is 194,844
-bytes. Both remain native **NOT RUN**. They retain the existing trace/RC/custody
+bytes. The fault component remains native **NOT RUN**. They retain the existing trace/RC/custody
 contracts and original time limits. No production implementation, scheduling
 tolerance or native provider flag changed.
+
+The exact lifecycle component subsequently passed once in Amiberry: RC0,
+observed 1 MiB Stack, all 80 lines, Fast/Chip extent assertions and zero explicit
+owned bytes. All six precision/channel cases completed their controls, STOP and
+independent modeled retirement. Exact input/execution custody, task and namespace
+absence, original-file restoration, independent release, owned-service shutdown
+and a separate fresh idle check passed. Recorded EMPTY state is fence 1691 with
+86 archives; fresh checks remain required before any later operation.
+
+This qualifies the lifecycle's explicit allocations on that guest. The negative
+matrix, combined full native workload, real backend activation, physical memory
+pressure and musical timing/listening remain separate. See [lifecycle native
+evidence](../evidence/enhanced-editor/readers-exec-memory/lifecycle-emulator.json).

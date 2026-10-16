@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "scope": "Exact originalcase1 rolling software diagnostic attempted once using private readiness-order successor; no native PASS",
+  "candidate": {
+    "bytes": 337396,
+    "sha256": "7beeb37780179f93274ccf991319df7a5ba7d44a339093e6bb9149ea7009b375",
+    "crc32": "407F4375"
+  },
+  "hostPacket": {
+    "runnerCases": 35,
+    "serviceCases": 27,
+    "normalEntryCases": 15,
+    "allPass": true,
+    "servicePins": 21,
+    "callerHelperSeparatelyRootBound": true
+  },
+  "startup": {
+    "privateReadinessOrderObserved": true,
+    "bridgeWaitBeforeFirstIPCPing": true,
+    "emulatorStartElapsedSeconds": 37.66588979199878,
+    "firstIPCPingElapsedSeconds": 0.10630637500435114,
+    "actualCPUAndMemoryObservationPassed": true,
+    "limitsIncreased": false,
+    "installedWrapperModified": false
+  },
+  "input": "Exact candidate uploaded and custody retained before one native dispatch",
+  "nativeResult": "UNCONFIRMED; no timely completion flag, return code or terminal oracle",
+  "partialEvidence": {
+    "nativeLogBytes": 103,
+    "controlLogBytes": 166,
+    "completeFlagBytes": 0,
+    "contentsCaptured": false,
+    "sourceDerivedInterpretation": "103 bytes matches expected entry/header-control/begin1 prefix; not direct content custody or a partial PASS",
+    "specificStallOrFailureCause": "NOT_ESTABLISHED"
+  },
+  "bounds": {
+    "nativeSeconds": 90,
+    "runnerSeconds": 140,
+    "wholeRunSeconds": 250,
+    "provisionalStackBytes": 1048576,
+    "inputBytes": 524288
+  },
+  "recovery": {
+    "onlyVerifiedOwnedEmulatorStoppedOnce": true,
+    "ownedServiceAlreadyAbsent": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactOneFileStagingRemoved": true,
+    "separateIndependentObservation": true,
+    "publicReleaseOriginalThreeHoldsArchived": true,
+    "separateFinalIdle": true,
+    "phase": "EMPTY",
+    "fence": 1904,
+    "archives": 137,
+    "holds": 0,
+    "failedTransactionReplayed": false
+  },
+  "privateEvidenceSHA256": {
+    "failedResult": "128f2a8eb43add8614735e1465bd8fc273bd9852b96f78403b082000bfddb098",
+    "startupStages": "53f49828804c5a0c74745a25f8312481637dd0bf7855994e3e5c9a40b4177b80",
+    "restoration": "1247407b41c937c306372b489add6f0f7e65acf9b7fd617ae86bd985264b9462",
+    "independentObservation": "b0356cf7385101e4f6e8f4fab76b18280bacd621736b455cd7f534ea4777e2ba",
+    "release": "c07d63e25f8137caaf2f61f9529e4bd7d3964fecd71ec96bd0566adca059daa6",
+    "independentFinalIdle": "a259a0b76f6b38f4b60137a370a088bcb5f534b67f802be16b6678f6765774f8",
+    "closedInventory": "468c394bfc26368279ce1b5a63e61dec74e88369387ff2d24c5ce9b546fe6f82"
+  },
+  "physicalPromotion": "NOT_RUN; exact diagnostic lacks native completion qualification",
+  "limits": "No full68, native scheduled activation, physical memory/device RAM/voice-stop, audio/listening or whole-app acceptance"
+}

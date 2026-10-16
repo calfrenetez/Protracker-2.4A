@@ -119,3 +119,25 @@ ping failure, corrected order, listener refusal before any ping/connection, ping
 refusal without retry, unchanged alternate modes and source-pin refusal. This
 models the readiness race; it does not establish the failed guest's actual cause
 or qualify the overlay in Amiberry. No original time limit is increased.
+
+The separately admitted successor subsequently completed the corrected startup
+in Amiberry: the original owned-listener wait finished before its first IPC ping,
+the ping returned in0.106s, and startup finished in37.666s. Actual CPU/memory
+checks and exact candidate input custody passed. This is a scoped observation,
+not a universal startup guarantee or proof of the previous failure's cause.
+
+Its native case1 execution remained unconfirmed within the original limit. The
+last directory replies reported103bytes of native output,166bytes of Shell
+controls and an empty completion flag. The partial native bytes were not captured;
+their size matches the source's entry/header/begin1 prefix, but this does not
+qualify those partial checks. No RC or terminal success was obtained. Recovery
+stopped only the verified emulator, restored the two launcher files, removed the
+exact staging copy, and independently released/archived all three original holds.
+A further separate idle check passed: EMPTY1904/137archives. No transaction was
+replayed or promoted to the A1200. See [native attempt and recovery evidence](../evidence/enhanced-editor/rolling-native-entry/diagnostic-native-unconfirmed.json).
+
+The next diagnostic work is bounded phase observation through the existing
+separately closed progress sidecar. Its in-budget FILEINFO/READFILE suffixes are
+explicitly unconfirmed diagnostic evidence; they cannot establish completion,
+return code, stable capture custody or a test pass. Native90s and all other
+original limits remain unchanged.

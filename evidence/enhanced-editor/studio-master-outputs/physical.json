@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "state": "EXACT_STUDIO_MASTER_OUTPUT_MEMORY_FIXTURE_PHYSICAL_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "536B852C",
+    "sha256": "8a51cc8cb03b063affca2ad76d1e08688afd87a1188449d56d474eef6d95c5bb",
+    "size": 37520
+  },
+  "compiledSourceCommit": "4299a04d708267c1f656118deaa4bbb7aa28345d",
+  "runnerSourceCommit": "6b1da169a4cff77c30115ec7f7ce8b184c4300ca",
+  "runID": "1c1dbb21d2346010145886e40476c433",
+  "compiledSourceUnits": 4,
+  "currentCompiledProjectBodies": 23,
+  "sdkDependencies": 32,
+  "runtimeInputs": 7,
+  "host": {
+    "inhibitedRunnerTests": 43,
+    "normalRunnerTests": 43,
+    "serviceTests": 27,
+    "offlineNoEffects": true,
+    "normalEntryOnlyFunctionChanged": "run",
+    "reviewedArchiveBound": 256,
+    "hostOnlyWrongPacketPathAssertionPreserved": true,
+    "noServiceLeaseOrTargetFromInitialHelperRefusal": true
+  },
+  "physical": {
+    "cpu": "68030",
+    "execMajor": 47,
+    "execRevision": 13,
+    "video": "PAL (50Hz)",
+    "returnCode": 0,
+    "outputBytes": 144,
+    "outputCRC32": "B0884342",
+    "observedStackBytes": 1048576,
+    "outputOverlapRefusals": 48,
+    "subsequentControls": 48,
+    "masterBits": [
+      8,
+      16,
+      24
+    ],
+    "channels": [
+      1,
+      2
+    ],
+    "currentAndPendingMasterFullCapacities": true,
+    "opaqueSessionOutputs": true,
+    "masterBytesPinsPhaseAndDirect24ResultsPreserved": true,
+    "ordinaryAllocationSoftwareMixerOnly": true,
+    "audioOrDeviceOutput": false,
+    "exactEmulatorPromotionRecords": 6
+  },
+  "boundsSeconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "cleanup": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "exactGuestRAMAndTaskAbsence": true,
+    "hostStagingAbsent": true,
+    "installedHostInputsUnchanged": true,
+    "ownTransportDisconnected": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "onlyOwnServiceSIGTERMOnce": true,
+    "separateFinalIdle": true,
+    "finalFence": 1881,
+    "archives": 132,
+    "holds": 0,
+    "browserAuthenticatedViewOnlyBeforeAndAfter": true,
+    "browserInputOrControlAcquired": false,
+    "availability": "Historical observation; fresh live guards required"
+  },
+  "recordsSHA256": {
+    "spec": "0b1652aa6391ff36122b5ad46eee133a22a2dfe401bd252eded35a8363c4466b",
+    "admission": "385fff34a6ab676639c50a117ee9e1cc0c165dcf33d11ccead8eee1854aa014e",
+    "actualResult": "a821dab8908c1bd66f77cc75b9c718d4b611191fe92ba91833418504cd442f74",
+    "rawOutput": "42376aa391286b2f6adb1b06aacd83f1bfc58ab0313e4544a8cf3dc574c08b76",
+    "independentObservation": "30052f18e4e01f805b936df30e707fa56b3fbac3051e68b5fbdd3745653584fa",
+    "publicRelease": "dec9763c4896386d9b75f50ef854e297b457d88ce0a9ceecf7235d0e4152f306",
+    "ownServiceStop": "25b61bd458fd72eceba9589ffae14533bcd563bfb8469f2fca5f2cde1399279f",
+    "separateFinalIdle": "ab3ad01927e6e13c7a24bf777ccbabf2e255333e4b92e900101ff81b810e3e4d",
+    "immutableSourceInventory": "74b526df63ff81895b16a82a507c8eb201d76a01bcca05d626cf9510d977ade7",
+    "hostPrepared": "40f9607199b3a6f222657cc78752d44c75b2fb97269fa4002903e27ef07e84c5",
+    "normalEntryReview": "a407fe3bfd3df4b4916842bdb670366f14acc29a34ed31e241e92d07714d7e43",
+    "browserBefore": "c89886430256965ed59efb8479e6a8a0ea62b95d334c7ffc4b0f260bf2a76718",
+    "browserAfter": "0dbd12d1deddab4bc16ec6104b44a77610e8a88427b455a142d9b4fb0b87c1bf"
+  },
+  "unchangedFailedTransactionReplayed": false,
+  "notQualified": [
+    "Full Studio frontend or streaming/audio/listening",
+    "Native output activation or exact musical timing",
+    "Physical Fast placement or whole-callchain Stack/WCET",
+    "AmiGUS device RAM/capacity/order/completion/actual voice stop/DMA/IRQ",
+    "Every generic voice API or all caller mutation patterns"
+  ]
+}

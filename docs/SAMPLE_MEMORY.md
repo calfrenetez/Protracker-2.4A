@@ -40,10 +40,15 @@ editor Studio paths. An existing duplicate flow/pitch test-link recipe was
 corrected without removing either source. The pinned four-unit37,520-byte HUNK
 cross-build and exact Amiberry run pass:48 refusals and48 subsequent controls,
 RC0, independent cleanup/restoration/release and a separate final idle check.
-Physical Studio execution remains NOT_RUN. No placement, timing, device, frontend
-or listening acceptance follows. See
+The same exact candidate also passes once on the real68030 A1200:48 refusals
+and48 subsequent controls, RC0, exact RAM/task absence, unchanged installed
+configuration, independent release and a separate final idle check. Safari stays
+Authenticated View Only; no browser input/control is acquired. This is ordinary
+allocation and software-mixer memory qualification. Physical placement, streaming
+throughput, output timing, device, frontend and listening remain unqualified. See
 [scoped host/build evidence](../evidence/enhanced-editor/studio-master-outputs/host-build.json)
-and [exact native evidence](../evidence/enhanced-editor/studio-master-outputs/emulator.json).
+[exact emulator evidence](../evidence/enhanced-editor/studio-master-outputs/emulator.json)
+and [physical memory evidence](../evidence/enhanced-editor/studio-master-outputs/physical.json).
 
 
 ## Additional mixed source-format native checks —16 October2026

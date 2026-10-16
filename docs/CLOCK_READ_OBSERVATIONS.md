@@ -38,5 +38,33 @@ them to retune a phase or claim a timestamped output command exists.
 
 Current host and pinned three-unit 68k compile evidence is recorded in
 [the compact result](../evidence/enhanced-editor/clock-pair-observation/host-build.json).
-The exact candidate still requires its separate native run. Physical testing,
-actual output timing and human listening remain untested by these checks.
+The exact native observation is now recorded below. Physical testing, actual
+output timing and human listening remain untested by these checks.
+
+
+## First exact-candidate Amiberry observation — 16 October 2026
+
+Candidate 19,952 bytes, SHA256
+`919196b89b92de580cf24ff32cd63ca82a616d1d36919bff79831cd39baf162c`
+(CRC32 `CEE66A58`) ran once in a fresh guarded 68030/FPU0 profile. All sixteen
+pairs completed with returned frequency 709379 and unchanged task priority0.
+Their actual sampling deltas were 19..21 ticks (fourteen20, one19, one21).
+These observations already exceed the earlier 48kHz frame windows of14/15
+ticks in this profile. Further small reductions to intervening RAM checks do
+not address that observed measurement baseline. This is a finite observation,
+not a universal lower bound or a proof of the time of any actual output write.
+
+Native analysis and independent saved-output replay agree. RC0 is retained as
+OBSERVATION_COMPLETE. Reported task/nesting/signals/clock/Fast closure, exact
+file custody, separate task/both-namespace absence, own emulator exit, original
+launcher/config restoration, public release, exact own service shutdown and a
+separate fresh final idle check passed. The release ended at fence1675 with83
+archives and no HOLD. Those are recorded release facts, not future availability.
+See [compact native evidence](../evidence/enhanced-editor/clock-pair-observation/emulator.json).
+
+Safari access was checked after release: the Mac remained locked and automatic
+unlock failed. No physical session, service, control or probe was acquired.
+Current physical timing remains untested. Continue authentic device-activation
+contract work and independently useful memory/save integration; do not retune
+the musical grid, repeat an unchanged failed CIA candidate or enable a native
+provider from these observations.

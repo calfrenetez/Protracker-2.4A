@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "state": "EMULATOR_OBSERVATION_COMPLETE_NOT_SCHEDULING_ACCEPTANCE",
+  "candidate": {
+    "bytes": 19952,
+    "sha256": "919196b89b92de580cf24ff32cd63ca82a616d1d36919bff79831cd39baf162c",
+    "crc32": "CEE66A58"
+  },
+  "sourceCommit": "e1d35405ab44983800351206ae50f59cc394ac34",
+  "runID": "26e5578e558c1fa9cde62a2c88f6de65",
+  "hostPacket": {
+    "runnerCases": 51,
+    "serviceCases": 27,
+    "normalEntryCases": 15,
+    "inhibitedEntryAndExactPlanQualified": true,
+    "selectedInterfaces": 21,
+    "initialCandidateLiteralAndEntryTestPreparationFailuresPreserved": true
+  },
+  "native": {
+    "qualification": "OBSERVATION_COMPLETE",
+    "returnCode": 0,
+    "pairs": 16,
+    "frequency": 709379,
+    "observedSamplingDeltas": [
+      20,
+      20,
+      19,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      21,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "observedDeltaMin": 19,
+    "observedDeltaMax": 21,
+    "outputBytes": 2069,
+    "outputCRC32": "B4D8BD71",
+    "rawOutputSHA256": "4b1fa0ab1fe2d4f176e4c2a5ec711d41ae1027ee8663b0be9d8fa743a01d427c",
+    "reportedClosure": {
+      "attempted": 16,
+      "clock_closed": 1,
+      "completed": 16,
+      "failures": 0,
+      "interrupt_nesting_restored": 1,
+      "priority": 0,
+      "signals_restored": 1,
+      "task_identity": 1,
+      "task_nesting_restored": 1,
+      "unchanged": 1,
+      "valid": 16
+    },
+    "taskOnly": true,
+    "ciaVectorAcquired": false,
+    "outputCommit": false,
+    "audio": false,
+    "physical": false
+  },
+  "profile": {
+    "observedCPU": "68030",
+    "observedFPU": "0",
+    "configuredChipKB": 2048,
+    "configuredZ3KB": 131072,
+    "cpuCycleExactObserved": true,
+    "physicalTimingEquivalent": false
+  },
+  "limits": {
+    "uploadSeconds": 120,
+    "nativeSeconds": 90,
+    "executionSeconds": 140,
+    "wholeSeconds": 250,
+    "provisionalStackBytes": 262144,
+    "aggregateStackQualified": false
+  },
+  "custodyAndRelease": {
+    "exactCandidateAndCompleteReportsRetained": true,
+    "taskAndBothNamespacesAbsent": true,
+    "ownEmulatorAbsent": true,
+    "originalFilesAndConfigsRestored": true,
+    "publicReleaseFence": 1675,
+    "archiveCount": 83,
+    "ownServiceAbsent": true,
+    "separateIndependentFinalIdle": true,
+    "hold": false,
+    "resultSHA256": "04f328f2de12cdf6751b84bb2a84d9589ea5949b4c265d52cb4dc11280399a84",
+    "independentCollectionSHA256": "332a6600dbed63b3df78090c5f96f2680baf1c8137b68826dfe6e8e8985829c8",
+    "publicReleaseSHA256": "aa00580aa6c8a5fa371c100e5fe7f3ca21d16a4c8b4f6861dedef01a53137405",
+    "serviceStopSHA256": "6e3db5282cdef1d57765cbe422fbb59d8578c8bd2fca2d95c3578c8bd49e3621",
+    "separateFinalIdleSHA256": "f4e185d7e859a98c46668b597ca1f9194dbf06477b29c95d67fb6ba40a6bc4ff"
+  },
+  "scope": "Finite adjacent library sampling intervals including minimal intervening instructions. These observed19..21ticks exceed prior14/15tick windows in this profile, not a universal minimum, complete call duration, IRQ WCET, proof of actual output time, physical timing or listening acceptance."
+}

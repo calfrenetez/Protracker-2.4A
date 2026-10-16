@@ -170,3 +170,6 @@ The distinctfd407610 comparison-only candidate completed once but FAILED the sam
 
 
 A separate task-only adjacent ReadEClock diagnostic is now implemented and crossbuilt. It records complete raw counter pairs under brief task exclusion, with no CIA vector, output commit or scheduling change. RC0 means observation completion only; finite min/max never establishes isolated call duration, WCET or a timed output capability. Native execution remains a separate gate. See [observation contract](CLOCK_READ_OBSERVATIONS.md).
+
+
+The distinct task-only clock-pair candidate919196b8 completed once in exact030 Amiberry:16valid raw pairs, RC0/OBSERVATION_COMPLETE, sampling deltas19..21ticks at709379Hz. Those finite intervals exceed prior14/15tick frame windows in this profile; they neither isolate full call duration nor prove a universal minimum or actual output time. Exact custody/closure/restoration/publicrelease/ownedservicestop/separatefinalidle passed (recordedEMPTY1675/83, not futureavailability). No output/provider/scheduling policy change. CurrentSafari check stillfoundMaclocked; no physical operation acquired. See [clock observations](CLOCK_READ_OBSERVATIONS.md).

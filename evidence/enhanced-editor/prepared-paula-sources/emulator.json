@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "state": "EXACT_AMIBERRY_RAM_PASS_INDEPENDENTLY_RELEASED",
+  "sourceCommit": "0f58c6a5b48a96e788f6f1f23e77d60254ccd98e",
+  "nativeBuildBaseCommit": "cb2ab1f38a723c07c203ce56edfe3c9524b1c62a",
+  "candidate": {
+    "basename": "PTPreparedPaulaSourcesProbe",
+    "bytes": 131096,
+    "sha256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e",
+    "crc32": "856A177A"
+  },
+  "qualification": {
+    "actualRunnerUnitTests": 24,
+    "actualServiceUnitTests": 27,
+    "actualCombinedUnitTests": 51,
+    "normalEntryUnitTests": 15,
+    "auxiliary": [
+      "Generated59-file source inventory reviewed",
+      "Only run function enabled after qualification",
+      "CLI --validate",
+      "Independent saved generated-source guard comparison"
+    ],
+    "projectDependencyBodies": 51,
+    "frozenExportFiles": 54,
+    "translationUnits": 18,
+    "actualSDKBodies": 42,
+    "runtimes": 7,
+    "committedRecipeDataFiles": 2,
+    "savedDataAudit": "No material findings;406 distinct file pins checked. Path normalization and lifecycle byte/existence comparison limits recorded; no new live observation."
+  },
+  "native": {
+    "target": "amiberry-030",
+    "returnCode": 0,
+    "stdoutBytes": 165,
+    "stdoutCRC32": "E86B0879",
+    "stdoutSHA256": "99ae3e9d00a42cec8d498be762f47cc118cc312dbda3364b488d52de90eaad9a",
+    "soleMarker": "PREPARED PAULA SOURCES RAM PASS:mono8/16/24 Fast masters;3 selective Chip caches;cold/HIT/cancel5;exact master/save preservation;zero accounting;NO OUTPUT AUTHORITY",
+    "observedStackBytes": 1048576,
+    "sidecar": false,
+    "executionCustody": {
+      "NativeTest": {
+        "bytes": 131096,
+        "sha256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e"
+      },
+      "Run-once": {
+        "bytes": 1090,
+        "sha256": "a97192f6c6ce267a9f4c2804900e46e34fe724167b165cd323a8b36b4c0bad7b"
+      },
+      "Stage-once": {
+        "bytes": 434,
+        "sha256": "d2d51e8ed763673b95b1fa92b33ec169d55fefe1c7bb3a1d328b99b6e44fc314"
+      },
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "control.log": {
+        "bytes": 227,
+        "sha256": "334312ebdbb7bd4734950d6d3b940d263e73a22d86d90f0234dcc899dde165fe"
+      },
+      "native.log": {
+        "bytes": 165,
+        "sha256": "99ae3e9d00a42cec8d498be762f47cc118cc312dbda3364b488d52de90eaad9a"
+      },
+      "stage.log": {
+        "bytes": 30,
+        "sha256": "7aa84642bbd9e90fb83597f8212ea3d50bf3f32192a77ddbf247cc287f789d7f"
+      },
+      "staged.flag": {
+        "bytes": 7,
+        "sha256": "0ebf65c7984364f0999b4b54018b582a0da08a145e4d88a228ce2438856e7b06"
+      }
+    },
+    "inputFiles": 1,
+    "nativeLimitSeconds": 90,
+    "guestLimitSeconds": 140,
+    "wholeLimitSeconds": 250,
+    "runnerWallSeconds": 104.52152000000933,
+    "wallTimeLimit": "Whole harness/transport workflow only; not native execution cost, throughput or WCET."
+  },
+  "cleanup": {
+    "nativeTaskAndTwoRAMNamespacesAbsent": true,
+    "allExecutionAndInputFilesAbsent": true,
+    "exactSharedStagingAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "independentPassObservation": true,
+    "publicRelease": true,
+    "onlyOwnedServiceStopped": true,
+    "serviceExit": -15,
+    "separateFreshFinalIdle": true,
+    "fence": 2018,
+    "releaseArchives": 160,
+    "finalTargetCalls": 0,
+    "finalSignalsSent": 0,
+    "finalReleaseCalls": 0
+  },
+  "records": {
+    "result": {
+      "bytes": 46284,
+      "sha256": "3f41c6481d9c2bbf0ad8f0388945b82defd7060f3a4e05c22b4b22481b801585"
+    },
+    "independentObserver": {
+      "bytes": 4372,
+      "sha256": "1e0e7027f203ef142110f5fa51329660c7faf4b735d0e85bc48614f15c0ef48e"
+    },
+    "publicRelease": {
+      "bytes": 2269,
+      "sha256": "5e6443f626cd799eaee49599006a7e8bb0710c39c4b0f50dec13259d8ef23db8"
+    },
+    "ownedServiceStop": {
+      "bytes": 626,
+      "sha256": "a0c109d9fb450bea307056cf7a48660cbad28dad91915085cd92b16ce74625ef"
+    },
+    "separateFinalIdle": {
+      "bytes": 650,
+      "sha256": "d0080a6a8ca11093e48b5d1eada871cd999fb35e8af83c8c4544dfa9e0399c86"
+    },
+    "buildManifest": {
+      "bytes": 316204,
+      "sha256": "fcb95d33e4b2262806bc81d6d94ffd005bddd21ca914ccb824cc37e7e7c101e7"
+    },
+    "independentSavedDataAudit": {
+      "bytes": 8210,
+      "sha256": "b4605e8dc584793ccb2f1f59357abc0ab8b0010c5a9b57886fc791d91d3b4e23"
+    }
+  },
+  "acceptance": {
+    "hostOwnerIntegration": true,
+    "nativeCompileLink": true,
+    "amiberryRAM": true,
+    "emulatedFastChipPlacement": true,
+    "physicalA1200": false,
+    "physicalAmiGUSDevice": false,
+    "commandReaderTransfer": false,
+    "nativeOutputIRQDMA": false,
+    "deviceQuiet": false,
+    "musicalTiming": false,
+    "audioListening": false
+  },
+  "limits": [
+    "Exactly three established mono8/16/24 masters; cold/HIT and five cancellation cuts only.",
+    "Seven genuine distinct Fast owner arenas; native no-reset/no-address-reuse and zero explicit Fast/Chip accounting assertions completed.",
+    "Exact master/marker/in-memory project encoding checks passed; no filesystem save/export execution.",
+    "The full HOST25-cut/36-stale/fault matrix is not part of this native subset.",
+    "Allocation flags and TypeOfMem endpoints are checked in emulated Exec; no physical placement follows.",
+    "No reader exposure, output activation, gate, IRQ, DMA, timer, card RAM, audio or real voice-stop.",
+    "Provider inhibitors and exact scheduling remain unchanged."
+  ]
+}

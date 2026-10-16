@@ -179,3 +179,26 @@ subset does not replace the HOST25-cut/36-stale/fault matrix. No audio, output
 activation, IRQ, DMA, device stop, card RAM, timer or filesystem save is exercised.
 Per-function stack records do not establish aggregate stack or execution-time
 bounds. See [pinned build evidence](../evidence/enhanced-editor/prepared-paula-sources/native-build.json).
+
+
+## Three-source RAM probe Amiberry pass —16 October2026
+
+The exact131,096-byte candidate above now passes once in the shared030 Amiberry
+profile: RC0, sole165-byte completion line and all eight execution-custody files.
+Its genuine8/16/24-bit master/owner Fast assertions, three selective Chip caches,
+cold/HIT acquisition, five cancellation cuts, master/marker/in-memory-save
+preservation and final zero explicit accounting all complete. Seven distinct
+owner arenas are retained until cleanup; no reset or address recycling is used.
+
+The packet passes24 runner and27 service HOST tests, plus15 normal-entry checks
+and separate validation. Exact build/source closure and fresh shared ownership
+checks precede the run. Task and both RAM namespaces are independently absent,
+saved launcher files are restored, public release and only-owned-service exit
+pass, and a separate fresh idle check confirms closure. Original90/140/250-second
+bounds and observed1MiB task Stack remain. The104.52-second runner observation
+includes transport and cleanup; it is not native cost or a performance bound.
+
+This qualifies the selected pre-exposure RAM assertions on the emulated CPU and
+Exec allocator. A1200 execution, reader/command transfer, native output, physical
+DMA/device quiet, musical timing and listening remain unqualified. No playback
+provider inhibition was removed. See [exact emulator evidence](../evidence/enhanced-editor/prepared-paula-sources/emulator.json).

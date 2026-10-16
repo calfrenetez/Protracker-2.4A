@@ -7826,4 +7826,12 @@ It is prepared to check strict Fast master/owner allocation, selective Chip
 caches, cold/HIT and five cancellation cuts with exact master/in-memory-save
 preservation and zero explicit accounting. Amiberry and A1200 execution remain
 NOT_RUN; output, IRQ/DMA/device quiet, timing and listening remain unqualified.
-See [native probe scope](SAMPLER_PAULA_LINEAGE.md#three-source-native-ram-probe-build--16-october2026).
+See [native probe scope](SAMPLER_PAULA_LINEAGE.md#three-source-native-ram-probe-build-16-october2026).
+
+
+The exact three-source RAM probe subsequently passes once in Amiberry030 with
+RC0, sole165-byte completion and independent cleanup/release. Actual emulated
+Fast/Chip assertions, cold/HIT/five-cut cancellation, exact master/in-memory-save
+preservation and zero explicit ledgers complete. Physical A1200, reader transfer,
+output/IRQ/DMA/device quiet, timing and listening remain separate. See [the
+selected native result](SAMPLER_PAULA_LINEAGE.md#three-source-ram-probe-amiberry-pass-16-october2026).

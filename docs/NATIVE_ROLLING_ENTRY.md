@@ -406,3 +406,32 @@ restorations, independent observation/public release and a separate final idle
 check pass. Failure evidence and original three HOLDs are preserved without
 replay. Physical execution stays NOT_RUN. See
 [exact header candidate attempt](../evidence/enhanced-editor/rolling-native-entry/header-ranges-emulator.json).
+
+## Equivalent numeric containment during preparation
+
+An instrumented HOST observation of the previous candidate retains every
+original oracle and records17.2million source-function entries. About4.6million
+`inside` and10.5million `span` entries map to `editor_mixed_causal_prepare.c`.
+Instrumentation and clock overhead bias its timings; these counts are source
+observations, not native calls, native cost or bottleneck proof. See
+[compact source observation](../evidence/enhanced-editor/rolling-native-entry/prepare-host-profile.json).
+
+That controller's containment predicate now validates the complete parent,
+both non-NULL pointers, nonempty child, ordered address and bounded length/
+offset. A contained child cannot overflow a valid parent endpoint, so the
+separate repeated child-span overflow calculation is unnecessary. The helper
+uses guarded subtraction and dereferences nothing. All complete-parent, source
+identity, backlink, ownership and lifetime checks remain at their original
+call sites; numeric containment grants no provenance or authority.
+
+The original two-span expression agrees with the new helper for28,224 boundary
+tuples and20,000 deterministic mixed ranges, including NULL/zero/MAX/overflow
+and positive/negative controls. The pure golden checks also run before the
+original native header-byte controls, without traversing forged topology. Five
+HOST sanitizer groups pass, including full rolling68 and both17/4096-unit
+preflight. The pinned86-unit build passes:330,836bytes SHA256
+`a1ea3b207d6ba767e834579f1f85258dfd84282131657121dc957764b184518a`,
+with228 project dependency bodies,43 SDK bodies and seven runtimes.
+Exact Amiberry/A1200 and native speedup remain NOT_RUN at preparation. All
+original assertions, time limits and hardware/timing/listening gates remain. See
+[containment host/build evidence](../evidence/enhanced-editor/rolling-native-entry/prepare-span-host-build.json).

@@ -16,6 +16,9 @@ static int sl_original_producer62_not_called(void) __attribute__((unused));
 #undef PT_PRIVATE_ROLLING_RAM_FIXTURE_ENTRY
 #undef puts
 #include "../src/editor/sampler_establish_inventory_internal.h"
+#define PT_PREPARE_SPAN_NO_MAIN
+#include "prepare_span_test.c"
+#undef PT_PREPARE_SPAN_NO_MAIN
 int puts(const char *);
 int pt_rolling_native_fixture_puts(const char *text)
 {
@@ -32,6 +35,7 @@ static void pt_rolling_header_byte_controls(void)
 #undef PT_FIELD
     };
     size_t i,k;unsigned permitted;
+    pt_prepare_span_controls();
     /* Only the raw comparator is called. Reference the private header's full
      * static graph without traversing forged sampler topology. */
     (void)pt_sampler_establish_inventory_current;

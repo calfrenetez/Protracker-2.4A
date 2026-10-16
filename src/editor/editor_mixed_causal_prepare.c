@@ -9,6 +9,7 @@
 #include "project_snapshot.h"
 #include "sampler_internal.h"
 #include "sampler_establish_inventory_internal.h"
+#include "prepare_span_internal.h"
 #include "editor_mixed_causal_song_lineage_internal.h"
 #include "editor_mixed_causal_song_pair_internal.h"
 #include "sampler_mixed_readers_internal.h"
@@ -26,8 +27,7 @@ static int apart(const void *a,size_t n,const void *b,size_t m)
 {uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
  return span(a,n)&&span(b,m)&&(!n||!m||(x<=y?n<=y-x:m<=x-y));}
 static int inside(struct pt_sampler_storage_span s,const void *p,size_t n)
-{return n&&span(s.data,s.bytes)&&span(p,n)&&s.bytes>=n&&
- (uintptr_t)p>=(uintptr_t)s.data&&(uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
+{return pt_prepare_span_contains(s.data,s.bytes,p,n);}
 static int zero(const void *p,size_t n)
 {const unsigned char *b=p;size_t i;for(i=0;i<n;++i)if(b[i])return 0;return 1;}
 static int finish(void *);

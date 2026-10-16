@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "scope": "Private instrumented HOST source-function observation of the prior complete4096-unit preflight; not native cost or WCET",
+  "inputCandidateSHA256": "0bbe2152ee35744b931859306f5ac9bf91b2b49896cb61ddc967c4724abdec5d",
+  "originalOraclesPassed": true,
+  "sourceAndBaselinePreserved": true,
+  "instrumentedFunctions": 452,
+  "instrumentedSourceEntries": 17178466,
+  "attributedSource": "src/editor/editor_mixed_causal_prepare.c",
+  "entries": {
+    "inside": 4607872,
+    "span": 10466692,
+    "apart": 593046,
+    "rolling_scope": 15713,
+    "lineage_source_scope": 12095
+  },
+  "instrumentationOverheadBias": true,
+  "nativeBottleneckOrSpeedupQualified": false,
+  "resultSHA256": "c1a6464598aa038da4b0361fa7a4679d1a4411b60488dcb0cf62a5db6681637a"
+}

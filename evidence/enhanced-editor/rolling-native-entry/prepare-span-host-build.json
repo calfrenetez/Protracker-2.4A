@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "scope": "Pure numeric containment with derived child overflow proof; original accepted numeric ranges retained and no provenance authority added",
+  "checks": {
+    "parentNonNull": true,
+    "childNonNull": true,
+    "parentOverflowRefused": true,
+    "nonemptyChild": true,
+    "childLengthWithinParent": true,
+    "orderedAddressAndBoundedOffset": true,
+    "childEndSafetyDerivedFromParent": true
+  },
+  "host": {
+    "sanitizerGroups": 5,
+    "boundaryTuples": 28224,
+    "mixedDeterministicTuples": 20000,
+    "trueAndFalseControls": true,
+    "noForgedPointerDereferences": true,
+    "headerEquivalenceRegression": true,
+    "fullOriginalRolling68Passed": true,
+    "original17AndMaximum4096PreflightPassed": true,
+    "originalAllPerPhaseAndTerminalOraclesRetained": true,
+    "nativeEntryIncludesNumericGoldenControls": true,
+    "unrelated16AndBaselinePreserved": true,
+    "resultSHA256": "9345c500baaa8d2fbbab9341764164393dfe4ebdfe7c00b76e7e706e5aaddac4"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 228,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 244,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "candidateBytes": 330836,
+    "candidateSHA256": "a1ea3b207d6ba767e834579f1f85258dfd84282131657121dc957764b184518a",
+    "manifestSHA256": "35d7f8b7a776b38b9e6dc65346dc52902fa6acee3d55eef1413f3c9d7f211cba",
+    "compilerAssemblerLinkerPinsBeforeAfter": true
+  },
+  "callbacksAllocationsAuthorityOrNativeLimitsChanged": false,
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "nativeSpeedup": "NOT_QUALIFIED",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

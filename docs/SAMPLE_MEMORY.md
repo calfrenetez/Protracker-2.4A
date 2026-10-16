@@ -1,5 +1,17 @@
 # Sample memory and playback ownership
 
+## Equivalent preparation containment —16 October2026
+
+Preparation now derives child-end safety from a valid complete parent and the
+original containment inequalities, avoiding a duplicate span calculation.
+Both non-NULL checks, nonempty children and all overflow/address/length bounds
+remain equivalent; no pointer is dereferenced by this predicate and it grants
+no allocation or reader authority. Five HOST sanitizer groups and a pinned
+86-unit build pass, including48,224 numeric equivalence cases and full rolling68
+plus both preflight budgets. Exact Amiberry/A1200 and a native speed benefit are
+unqualified at preparation. See
+[scope and evidence](NATIVE_ROLLING_ENTRY.md#equivalent-numeric-containment-during-preparation).
+
 ## Sampler header integrity comparison —16 October2026
 
 The establishment inventory now compares fixed gaps around the same six mutable

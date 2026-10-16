@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "state": "PINNED_NATIVE_BUILD_PASS_NOT_RUN",
+  "baseCommit": "9407f77abfb45e6da7c2cc35ee8b6cef6a2cf3a7",
+  "baseTree": "87ae266efba99062f8dd92b1b56152963ce9afff",
+  "candidate": {
+    "bytes": 16680,
+    "sha256": "cce3ae3bed62397208956ee8841abeb050304c79d8d2c6e2b2b48083532f527a",
+    "basename": "PTPreparedDeliveryGateProbe",
+    "crc32": "DB9687D2",
+    "format": "HUNK_HEADER0x000003f3"
+  },
+  "build": {
+    "translationUnits": 2,
+    "compiledProjectBodies": {
+      "src/native/prepared_delivery_gate.c": "2f8be8e73b4e016cfbcc18399b0948df6daea8710403a183595a8afe3d29a425",
+      "src/native/prepared_delivery_gate.h": "2534f27067de8052a7ec872d6216a06fc0aa07faacef7c9760fa7697a5aec3fd",
+      "src/native/prepared_delivery_gate_probe.c": "834dbc35def69bdb67321add6330f5fb6c7e922212d3677b59325e685168a129"
+    },
+    "frozenExportFiles": {
+      "src/native/prepared_delivery_gate.c": "2f8be8e73b4e016cfbcc18399b0948df6daea8710403a183595a8afe3d29a425",
+      "src/native/prepared_delivery_gate_probe.c": "834dbc35def69bdb67321add6330f5fb6c7e922212d3677b59325e685168a129",
+      "src/native/prepared_delivery_gate.h": "2534f27067de8052a7ec872d6216a06fc0aa07faacef7c9760fa7697a5aec3fd",
+      "tools/build_prepared_delivery_gate_probe.py": "3a84db3cd1aa98a56cdab8055a9afd992589370cc8dd4a369c1cce955b57cf25",
+      "tools/build_core_tests.py": "a0cfecdd349ed7fe24e3aac1d62cdd0f59ea7bfc655507688a1434318382abf4",
+      "tools/build_diagnostic.py": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805"
+    },
+    "actualSDKBodies": 40,
+    "runtimeInputs": {
+      "ncrt0.o": {
+        "bytes": 1712,
+        "sha256": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804"
+      },
+      "libnix20.a": {
+        "bytes": 28720,
+        "sha256": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c"
+      },
+      "libnixmain.a": {
+        "bytes": 156,
+        "sha256": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df"
+      },
+      "libnix.a": {
+        "bytes": 87468,
+        "sha256": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144"
+      },
+      "libstubs.a": {
+        "bytes": 11992,
+        "sha256": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de"
+      },
+      "libamiga.a": {
+        "bytes": 297694,
+        "sha256": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021"
+      },
+      "libgcc.a": {
+        "bytes": 90908,
+        "sha256": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+      }
+    },
+    "compilerSHA256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "assemblerSHA256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+    "linkerSHA256": "b50c8aa31ff322825ddf90602b50871e30410724fadfda5eb60ffde193b9a9dc",
+    "objdumpSHA256": "f5f8cb3d10dcfa205c968556fe6afe070ddaf59294bb6dce0f6f7cf319002686",
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "assertionAddition": [
+      "-UNDEBUG"
+    ],
+    "objectDiagnostics": [
+      "-fstack-usage"
+    ],
+    "linkerSelection": "Pinned absolute GCC ld lookup; -### exposes collect2, not its child ld. No direct child-linker tracing claim.",
+    "sourceAndToolInputsReverified": true,
+    "protected16AndBaselinePreserved": true,
+    "manifest": {
+      "bytes": 65104,
+      "sha256": "21d5e9000550a123058b6add919aca065dd46cb3480654c37e0480bbfda39271"
+    },
+    "rootResult": {
+      "bytes": 170,
+      "sha256": "fa52da177bfb22120baddbce66c75720b96f628cbb19474780057119595fb2be"
+    },
+    "rawStackUsage": {
+      "src/native/prepared_delivery_gate.c": {
+        "bytes": 1533,
+        "sha256": "c0010768f5873bcc2f1355ba4e0cf820fca0b237767cc08b6a4e15ef10efcf34"
+      },
+      "src/native/prepared_delivery_gate_probe.c": {
+        "bytes": 117,
+        "sha256": "cbce47a893029237db4d33ff6ab270bfe53c5cdc947d1c2eb24b8bef56d190c8"
+      }
+    }
+  },
+  "acceptance": {
+    "nativeCompileLink": true,
+    "amiberry": false,
+    "physicalA1200": false,
+    "IRQIntegration": false,
+    "sourceLifetime": false,
+    "outputTiming": false,
+    "audioListening": false
+  },
+  "limits": [
+    "Normal original TASK/local ordinary-C probe only",
+    "No fake callbacks, artificial nesting, IRQ/Cause, timer, source owner or filesystem sidecar",
+    "No aggregate stack maximum, interrupt safety or WCET inferred from compiler per-function stack files",
+    "Actual ordinary-task Exec balance remains native NOT_RUN",
+    "Existing native provider barriers remain unchanged"
+  ]
+}

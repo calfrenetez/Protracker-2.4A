@@ -7806,6 +7806,7 @@ audio and full-app acceptance. See [rolling execution scope](NATIVE_ROLLING_ENTR
 The separate normal-task prepared-delivery gate now passes its HOST sanitizer
 model. Four single-use numeric slots, original token custody and distinct
 entry/restoration anchors preserve deferred ordinary-C records without granting
-source or cache ownership. This gate is not connected to actual interrupts,
-timers or playback; native build/execution and physical acceptance are pending.
+source or cache ownership. A separate two-unit normal-task probe also passes
+the pinned Amiga compiler/linker check. This gate is not connected to actual
+interrupts, timers or playback; Amiberry execution and physical acceptance are pending.
 See [restricted gate scope](NATIVE_MIXED_CAUSAL_ROLLING_IRQ_BRIDGE.md#separate-normal-task-delivery-gate--16-october-2026).

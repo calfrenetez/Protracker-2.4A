@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "state": "CURRENT_66_CASE_EXEC_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "source_commit": "2cfb4428fb5fafc93df809e0bfff50e1bdb4e8b5",
+  "candidate": {
+    "crc32": "6852FFCE",
+    "sha256": "56bf737a712e491661c60b3c9ff93796630aed80a235bf18514ec056de97d38e",
+    "size": 202556
+  },
+  "scope": "Existing genuine66-case persistent-reader source binding through actual Exec Fast-only master/control and Chip-only cache callbacks. Backend clocks/adoption/retirement are serialized software models.",
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact": "true",
+    "chip_kib": 2048,
+    "fast_z3_kib": 131072
+  },
+  "observed": {
+    "nativeMarkers": [
+      "READERS MEMORY TRACE:entered:0:0:0",
+      "EXEC MEMORY POOL PASS: Fast-only pool, reserve and zero-budget refusal",
+      "READERS MEMORY TRACE:memory-started:0:0:0",
+      "SAMPLER READERS SOURCE BINDING PASS:66 cases;12 genuine controls,54 sample/side/representation refusals;no dispatch,master preserved,independent retirement,zero owned bytes",
+      "READERS MEMORY TRACE:chip-closed:0:0:0",
+      "EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio",
+      "EXEC MEMORY PASS: Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "READERS MEMORY TRACE:finished:0:0:0"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 587,
+    "outputCRC32": "832C51E6",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "cases": {
+    "total": 66,
+    "controls": 12,
+    "refusals": 54,
+    "formats": "8/16/24-bit masters, mono/stereo and selected sides; genuine cache keys/pins and independent modeled retirement"
+  },
+  "memory_checks": {
+    "actual_exec_fast_only_allocations": true,
+    "actual_exec_chip_only_cache_extents": true,
+    "type_of_mem_endpoint_assertions": true,
+    "budget_refuses_without_chip_fallback": true,
+    "final_explicit_owned_bytes": 0,
+    "borrowed_initial_stack_and_internal_stdio_not_accounted": true
+  },
+  "bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "native_rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "orchestration": {
+    "runner_host_tests": 35,
+    "service_host_tests": 27,
+    "entry_host_tests": 15,
+    "input_files": 1,
+    "execution_files": 9,
+    "final_closed_sidecar_required": true,
+    "unchanged_transaction_retried": false
+  },
+  "cleanup": {
+    "exact_guest_and_host_staging_absence": true,
+    "saved_originals_and_profile_mapping_restored": true,
+    "separate_pass_observation": true,
+    "public_release": true,
+    "owned_service_and_emulator_absent": true,
+    "tcp_and_named_unix_endpoints_absent": true,
+    "separate_final_idle": true,
+    "fence": 1727,
+    "archives": 94,
+    "holds": 0,
+    "availability": "Historical final observation only; fresh live checks required"
+  },
+  "records_sha256": {
+    "spec": "d7e82427faa30d99dd7cec781139b5aaa11b6cd3d27e438f37c1d99a442a6b30",
+    "admission": "76a5ce956c473da29892468c1dd5a4f81cee15a65e3f026b42fd76c64e3483fa",
+    "actual_result": "ca0088e90bcb66448f685fab234f5d819ab3e16e8a151de4f206cb5e9f76049d",
+    "independent_pass": "e22a469038ac470d3c0773e241b85c7ae5e088f93d826e7662a3952de5108f09",
+    "public_release": "f5df2a3cd1d0ecc8b3501112c87cddd64f66268ddafbf3adcb8c1d0a3516db44",
+    "owned_service_stop": "a77fc9f62a60ea30f678af2b491f0e956005142bbc56c89834d54042e6394386",
+    "separate_final_idle": "057b567f015829695dd52226e0803b36e6dcd49ded1ca444243e1af02e2eb3a0"
+  },
+  "not_qualified": [
+    "Real A1200 execution/physical memory behavior",
+    "Whole native lifecycle and negative matrix on current source",
+    "Whole callchain stack/WCET and total-library allocation accounting",
+    "Actual device/DMA/voice-stop/IRQ/output activation",
+    "Live exact musical timing, full-app/audio/human listening"
+  ],
+  "physical": "NOT_RUN"
+}

@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "state": "CURRENT_COMMITTED_SOURCE_HOST_AND_PINNED_68K_BUILD_PASS",
+  "source_commit": "2cfb4428fb5fafc93df809e0bfff50e1bdb4e8b5",
+  "source_manifest_sha256": "5d9218b180ca0185e2a997027daa33565d70b10d98d550ba98da4f2f4e26cce6",
+  "frozen_inputs": 345,
+  "inventory_unchanged": true,
+  "host": {
+    "tests": 50,
+    "modules": 11,
+    "return_code": 0,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "assertions": true,
+    "source_manifest_sha256": "5d9218b180ca0185e2a997027daa33565d70b10d98d550ba98da4f2f4e26cce6",
+    "stdout_sha256": "15bd6d464409397c744df17ac5a3a3a83f7a46f48d271be1d0e1cf7c15fe7fc7",
+    "stderr_sha256": "0fa9b54756c4bb9ad81548d8acae0c1880e7c4d360d0b9f3ca0de970c28cc1ce"
+  },
+  "native_build": {
+    "units": 24,
+    "project_dependencies": 74,
+    "sdk_dependencies": 49,
+    "runtime_inputs": 7,
+    "assertions": true,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-",
+      "-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1",
+      "-DPT_READERS_DIAGNOSTIC_TRACE=1",
+      "-DPT_READERS_SOURCE_BINDING_FIXTURE=1"
+    ],
+    "candidate": {
+      "crc32": "6852FFCE",
+      "sha256": "56bf737a712e491661c60b3c9ff93796630aed80a235bf18514ec056de97d38e",
+      "size": 202556
+    },
+    "manifest_sha256": "1eadea59fa25775a6173f84390114f8c42be96a2836a87afe86b2a9c322bfaef",
+    "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f"
+  },
+  "scope": "Existing genuine66-case persistent-reader source binding through actual Exec Fast-only master/control and Chip-only cache callbacks. Backend clocks/adoption/retirement are serialized software models.",
+  "stack": {
+    "maximum_local_frame_bytes": 353916,
+    "kind": "dynamic,bounded",
+    "task_stack_bytes": 1048576,
+    "whole_callchain_bound": false,
+    "measured_minimum": false
+  },
+  "preservation": {
+    "current_canonical_build_dependency_bodies_unchanged": 74,
+    "unrelated_paths_unchanged": 16,
+    "native_provider_inhibited": true,
+    "exact_musical_schedule_unchanged": true,
+    "accepted_layout_unchanged": true
+  },
+  "physical": "NOT_RUN"
+}

@@ -1,5 +1,28 @@
 # Sample memory and playback ownership
 
+## Current Fast/Chip reader memory qualification — 16 October 2026
+
+The persistent-reader memory fixture has been rebuilt from the current committed
+source after the active-voice changes. Its exact202,556-byte candidate passes once
+in the shared68030 Amiberry profile: all66 source-binding cases, RC0, eight exact
+lines and the final closed sidecar. Actual Exec callbacks assert Fast-only master
+and control allocations, Chip-only cache extents, budget refusal without Chip
+fallback and zero final explicitly owned bytes. Fifty sanitizer tests in eleven
+modules and the pinned24-unit build pass; all74 compiled project bodies still
+match the canonical source.
+
+The1MiB task Stack is observed, but the353,916-byte maximum compiler local frame
+does not establish a whole-call-chain bound. Backend clocks, adoption and
+retirement remain software models; borrowed initial stack storage and internal
+stdio allocations are outside the explicit pool accounting. Exact guest/host
+cleanup, saved-file restoration, independent observation, public release, owned
+service stop and a separate final idle check pass. Real-A1200 execution remains
+NOT_RUN while actual Safari access is unavailable. Historical physical packets
+using earlier bytes remain separate and cannot acquire current qualification.
+No device, DMA/voice-stop, IRQ, scheduled output, timing or listening acceptance
+follows. See the [current host/build](../evidence/enhanced-editor/readers-current-memory/host-build.json)
+and [exact emulator evidence](../evidence/enhanced-editor/readers-current-memory/emulator.json).
+
 ## Active Paula original-source binding —16 October2026
 
 Active voices now retain their genuine original sample, selected stereo side,

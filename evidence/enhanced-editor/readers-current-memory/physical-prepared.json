@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "state": "PHYSICAL_HOST_PREPARED_NOT_ADMITTED",
+  "candidate": {
+    "crc32": "6852FFCE",
+    "sha256": "56bf737a712e491661c60b3c9ff93796630aed80a235bf18514ec056de97d38e",
+    "size": 202556
+  },
+  "host_tests": 52,
+  "runner_tests": 25,
+  "service_tests": 27,
+  "offline_no_effects": true,
+  "actual_validate_pass": true,
+  "exact_current_emulator_promotion_records": 6,
+  "promotion_pins_unchanged": true,
+  "input_files": 1,
+  "execution_files": 9,
+  "stack_bytes": 1048576,
+  "bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "native_rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "normal_entry_inhibited": true,
+  "service_pid": 0,
+  "browser_and_service_attestation": "UNSET",
+  "physical_service_started": false,
+  "physical_executed": false,
+  "browser_control_acquired": false,
+  "actual_safari_observation": "Mac locked; automatic unlock failed. Existing unlock request not repeated.",
+  "host_preparation_refusal": "Original copied selected-case equality refused current case before effects. Source and raw logs preserved; equality corrected to exact current case without weakening candidate/marker/ownership checks.",
+  "qualification_sha256": "a84eae454296d84074685a779abfc78f584bba2dfc67d5bea5f6bd3f272bc92e",
+  "requires_before_execution": [
+    "Fresh actual authenticated connected Safari View Only observation",
+    "Fresh both shared locks and ownership/recovery checks",
+    "Current full compiled source/toolchain/SDK/runtime closure",
+    "Fresh owned disconnected service and normal-entry qualification/admission",
+    "Physical target identity and exact current emulator promotion"
+  ]
+}

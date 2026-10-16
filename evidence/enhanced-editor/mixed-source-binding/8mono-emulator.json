@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "state": "NATIVE_COMPLETION_UNCONFIRMED_FAILURE_RECOVERED_AND_RELEASED",
+  "candidate": {
+    "size": 292920,
+    "sha256": "1a29f580fac76df19acaf8e6e33109581ddfb158b646914ffb2c199b657ac18e",
+    "crc32": "BCF914F4"
+  },
+  "source_commit": "3e69f044610abfaf498a4f5f75c56618fe00ec3d",
+  "scope": "One actual shared030 attempt of75-case8mono mixed source-binding component. No confirmed native completion, RC, Stack or stdout/execution custody; no partial case or phase inferred.",
+  "host_packet": {
+    "runner_checks": 35,
+    "service_checks": 27,
+    "normal_entry_checks": 15,
+    "validate_pass": true
+  },
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact_observed": true,
+    "chip_kb": 2048,
+    "fast_z3_kb": 131072,
+    "timing_or_placement_qualified": false
+  },
+  "bounds_seconds": {
+    "input_upload": 120,
+    "native": 90,
+    "native_rpc_caller": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "expected": {
+    "stack_bytes": 1048576,
+    "native_stdout_lines": 1,
+    "input_files": 1,
+    "execution_files": 8,
+    "progress_sidecar": false
+  },
+  "observed": {
+    "input_stage_completed_with_exact_candidate_custody": true,
+    "native_run_once_launch_dispatches": 1,
+    "stage_once_launch_dispatches": 1,
+    "service_error": "Native completion deadline expired",
+    "completion_confirmed": false,
+    "rc_confirmed": false,
+    "stack_confirmed": false,
+    "native_output_or_execution_custody_confirmed": false,
+    "failed_result_sha256": "85ce6a4fa50e1b5d638c6ed9da7d320206520124e752e7de56da9bfae903d55f",
+    "native_error_record_sha256": "dcd61003ddffbfcd8c09ad26acf7fa55d9ae395a449fd4bad1aed168eb1f42b8"
+  },
+  "recovery": {
+    "standing_authorization": "Routine positively verified own recovery authorized by direct15October instruction",
+    "own_emulator_and_service_stopped_once": true,
+    "saved_launcher_files_restored": true,
+    "original_configuration_and_other_staging_preserved": true,
+    "exact_own_staging_removed": true,
+    "guest_ram_absence_basis": "Positive owned emulator process absence ends RAM lifetime; no guest listing or disk restoration inferred",
+    "native_failure_and_three_holds_preserved": true,
+    "restoration_sha256": "1f184bb0ca2fd98ed860774f6d19636388c4cdb24abcfb58bc23e8573d613a3f",
+    "independent_observation_sha256": "804b03176a5c653b23aef8ea99183f9b768039efcdb742a7e0916bc0dfd36c16",
+    "public_release_sha256": "4fa042a1b36f9c93eef3179c94ed5864d1263d019bb89065107ed1777567cc2e",
+    "separate_fresh_final_observation_sha256": "e03089aa361d5e32ee05d77d2428eb5e99fad1d9131d144f74317ff0251bdfd0",
+    "recorded_final_phase": "EMPTY",
+    "recorded_final_fence": 1711,
+    "recorded_final_archives": 90,
+    "observed_processes_tcp_and_named_unix_endpoints_absent": true,
+    "availability_still_requires_fresh_check": true,
+    "shared_persistent_console_log_retained": true
+  },
+  "preservation": {
+    "protected16_contents_and_stable_metadata_unchanged": true,
+    "accepted_layout_and_exact_schedule_unchanged": true,
+    "native_provider_inhibited": true,
+    "no_physical_or_browser_control_acquired": true,
+    "identical_failed_transaction_replayed": false
+  },
+  "not_qualified": [
+    "Native75-case8mono completion or any subset/phase",
+    "Other five native components and legacy constructor",
+    "Native Fast/Chip placement or physical capacity/ordering/completion/voice stop",
+    "IRQ/DMA/output timing/audio/listening"
+  ],
+  "next": "Prepare a genuinely smaller single-control diagnostic with separately closed phase observation to locate the stall; keep both failed native transactions immutable and original deadlines unchanged.",
+  "component": "8mono",
+  "declared_cases": 75,
+  "legacy_constructor": "EXCLUDED"
+}

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "state": "HOST_AND_SIX_PORTABLE_COMPONENT_BUILDS_PASS_NATIVE_NOT_RUN",
+  "state": "HOST_AND_SIX_PORTABLE_COMPONENT_BUILDS_PASS_8MONO_NATIVE_COMPLETION_UNCONFIRMED",
   "base_commit": "d592fd47ce4bc9c9954cbf8fed8c07e7f3f1ef6b",
   "scope": "Test-only explicit source bit-depth/channel components of the same495 real mixed-cache binding cases. Default full fixture retains original constructor and main; components omit separately HOST-qualified legacy constructor.",
   "host": {
@@ -50,7 +50,7 @@
       "runtimes": 7,
       "assertions_enabled": true,
       "manifest_sha256": "b3b2f4f0f2511a032f2eb03a31236f5efffe15090ecda9016b302274a8bd4408",
-      "execution": "NOT_RUN"
+      "execution": "ATTEMPTED_COMPLETION_UNCONFIRMED_SEE_8MONO_EMULATOR_RECORD"
     },
     {
       "name": "8stereo",

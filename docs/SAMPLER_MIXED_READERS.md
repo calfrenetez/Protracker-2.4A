@@ -152,8 +152,18 @@ and quantized suites again match their complete stdout oracles. The standalone
 builder accepts `--component` with one of the six selections, records exact flags
 and its one bounded completion marker, and pins the same build conventions.
 
-All six component HUNKs compile/link with active assertions. Their native,
-Amiberry and physical execution is **NOT RUN** at this preparation stage. A
+All six component HUNKs compile/link with active assertions. The 8mono component was subsequently attempted once in Amiberry without
+confirmed completion. The other five components and physical execution remain
+**NOT RUN**. A
 component pass cannot qualify the omitted constructor, other components or the
 failed full transaction. Existing deadlines and native-provider inhibition remain
 unchanged. See [component host/build evidence](../evidence/enhanced-editor/mixed-source-binding/components-host-build.json).
+
+The 75-case 8mono attempt also reached the original native completion deadline,
+with no confirmed return code, observed Stack, stdout/custody or C-phase progress.
+Its independently verified own recovery restored the originals, removed exact
+staging and publicly released ownership with all three HOLDs archived; a separate
+fresh final observation passed (recorded EMPTY1711/90). The first timeout's cause
+is not established by this second timeout. Both transactions remain immutable.
+A smaller single-control diagnostic with separately closed phase observations
+is the next step. See [the component failure and recovery](../evidence/enhanced-editor/mixed-source-binding/8mono-emulator.json).

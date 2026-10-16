@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "state": "FAULT_COMPONENT_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "sourceCommit": "f81ebce7d6c8c1fde4a022b477ed074c29fa660d",
+  "runID": "469c80ce412c01f5806ca38794408447",
+  "candidate": {
+    "crc32": "C53489D4",
+    "sha256": "de7a07fe66903bcb6199feb68d52408517227fb220a1a98f4bc38de8b1dbc14b",
+    "size": 194844,
+    "name": "PTExecReadersFaultTest"
+  },
+  "attempts": 1,
+  "hostPacket": {
+    "runnerGroups": 35,
+    "serviceFactoryGroups": 27,
+    "normalEntryGroups": 15,
+    "validate": true
+  },
+  "native": {
+    "target": "amiberry-030",
+    "cpu": "68030",
+    "fpu": "0",
+    "cpuCycleExactObserved": true,
+    "configuredMemory": "2MiBChip/128MiBZ3, no physical timing equivalence",
+    "returnCode": 0,
+    "observedStackBytes": 1048576,
+    "markers": 24,
+    "outputBytes": 1263,
+    "outputCRC32": "DD5E75F5",
+    "outputSHA256": "0e0778f6358a87638099b6e318fce4608dff7bf79777ebd8ee117a9e61c8f99a",
+    "resultSHA256": "96b81c77648457fe754dd130585a78e41b7cc5e167905d002b040518010f446d",
+    "inputCustodyFiles": 1,
+    "executionCustodyFiles": 9,
+    "cancellationPhases": 53,
+    "negativeGroups": "Retirement/replacement/version races; control cancellation/pressure; all53trigger cancellation phases; allocation failures; alias guards; deferred retirement; address reuse; domain uncertainty; reentry; forged keys/metadata",
+    "execFastChipExtentAssertionsPassed": true,
+    "explicitOwnedPoolBytesAtExit": 0,
+    "backend": "Serialized software model, no actual device/backend activation"
+  },
+  "closure": {
+    "guestTaskAndBothNamespacesAbsent": true,
+    "exactHostStagingAbsent": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObserverSHA256": "ac739b50b48b90db2298cd7626ce57eda379ab21f167dd37931c256ef2394a39",
+    "publicReleaseSHA256": "bb0824581a9bfe66f0e41715c1e405e3c11df48787568194e7dd74d10b80c46d",
+    "ownedServiceStopSHA256": "f9c0818d87b223da89524989071179d0ddf9f7a4c587953cde1a9c165d9fc6b6",
+    "separateFinalIdleSHA256": "78d6e05747b7991b2c0c9a9d2485b1cff8a1c26b40554f8e38bc2379e3f02b7c",
+    "recordedFence": 1695,
+    "recordedArchives": 87,
+    "availability": "Historical release only; fresh checks for future operations"
+  },
+  "limits": {
+    "uploadSeconds": 120,
+    "nativeSeconds": 90,
+    "executionSeconds": 140,
+    "wholeSeconds": 250,
+    "unchanged": true
+  },
+  "scope": "Complete negative component only. Six-format lifecycle independently passed a separate candidate; no combined full native execution. No totalstack/stdioallocation/WCET/nativeTASK/provider/IRQ/DMA/devicevoice-stop/outputtiming/physical/listening qualification. Both earlier incomplete full transactions preserved unchanged."
+}

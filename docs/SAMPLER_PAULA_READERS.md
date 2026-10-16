@@ -358,7 +358,7 @@ Both complete components pass ASan/UBSan with injected host memory classes.
 Their phase bodies concatenate to the original full workload in the same order.
 All 46 tests across ten modules pass, and both assertion-enabled 24-unit native
 builds pass. The lifecycle product is 183,388 bytes; the fault product is 194,844
-bytes. The fault component remains native **NOT RUN**. They retain the existing trace/RC/custody
+bytes. Both subsequently passed separately in Amiberry. They retain the existing trace/RC/custody
 contracts and original time limits. No production implementation, scheduling
 tolerance or native provider flag changed.
 
@@ -370,7 +370,15 @@ absence, original-file restoration, independent release, owned-service shutdown
 and a separate fresh idle check passed. Recorded EMPTY state is fence 1691 with
 86 archives; fresh checks remain required before any later operation.
 
-This qualifies the lifecycle's explicit allocations on that guest. The negative
-matrix, combined full native workload, real backend activation, physical memory
-pressure and musical timing/listening remain separate. See [lifecycle native
+This qualifies the lifecycle's explicit allocations on that guest. The combined
+full native workload, real backend activation, physical memory pressure and
+musical timing/listening remain separate. See [lifecycle native
 evidence](../evidence/enhanced-editor/readers-exec-memory/lifecycle-emulator.json).
+
+The exact fault component also passed once: RC0, observed 1 MiB Stack and all 24
+lines, including all 53 cancellation phases and the complete existing negative
+groups. Fast/Chip extent and zero-owned-byte assertions passed. Exact custody,
+guest cleanup, original-file restoration, independent release and a separate
+fresh idle check passed; recorded EMPTY state is fence 1695 with 87 archives.
+The two component passes do not relabel either earlier incomplete combined run.
+See [fault-component native evidence](../evidence/enhanced-editor/readers-exec-memory/faults-emulator.json).

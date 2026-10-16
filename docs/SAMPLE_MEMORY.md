@@ -7400,7 +7400,10 @@ The separately scoped six-format lifecycle component now passes once in
 Amiberry with genuine Fast-only promoted storage, Chip-only caches, endpoint
 classification, 20 controls per case and zero explicit owned bytes. RC0, all 80
 lines, observed 1 MiB Stack, exact custody and independent cleanup/release passed.
-The negative component and combined full native suite remain unqualified; both
-earlier full-suite timeouts are preserved. Device/IRQ/DMA/actual voice stop,
+The complete negative component subsequently passed separately with all 53
+cancellation phases, RC0, 24 exact lines, Fast/Chip assertions and zero explicit
+owned bytes, followed by independent cleanup/release. The combined full native
+suite remains unqualified; both earlier full-suite timeouts are preserved.
+Device/IRQ/DMA/actual voice stop,
 physical A1200, whole-library memory accounting and exact output timing/listening
 are separate. See [native lifecycle scope](SAMPLER_PAULA_READERS.md#native-workload-components--16-october-2026).

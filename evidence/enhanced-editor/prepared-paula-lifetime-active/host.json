@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "scope": "Ordinary serialized HOST adopted-reader lifetime model; unchanged production API",
+  "result": "PASS",
+  "baseCommit": "5317089f10319494615df9c95b7177c10766011e",
+  "productionChanges": false,
+  "existingRegressionSourceAndOraclesUnchanged": true,
+  "privateQualification": {
+    "rootResultSHA256": "e91ed91e8cc54cdc0c2b3fc6b9d1428648748c6f71c9043ed7ad925d7ebdb49b",
+    "groupResultSHA256": "e70b8ce8c7c907c483114f89d5bcee86e3fd6c88e78cc790cba2ed8fb0b724ed",
+    "translationUnits": 25,
+    "exportedProjectBodies": 61,
+    "quotedIncludeEdges": 100,
+    "recordedCommands": 66,
+    "elapsedSeconds": 9.167,
+    "stdout": {
+      "bytes": 231,
+      "sha256": "ddd59e4d53d9d2e79375bc8179246d1b2fc23eb3ca7493a51c73d245c6b881f0"
+    },
+    "compilerAndFixtureDiagnosticsEmpty": true,
+    "assertionsEnabled": true,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "compileTimeoutSeconds": 120,
+    "fixtureTimeoutSeconds": 30
+  },
+  "cases": {
+    "total": 8,
+    "completed": 5,
+    "retained": 3,
+    "cleanReceiptOrders": 2,
+    "staleAfterActualAdoption": 2,
+    "postCommandDetachExactBadReaderClassification": 1,
+    "postCommandDetachReaderPendingOnce": 1,
+    "postCommandDetachWrongReaderEnvelope": 1,
+    "postCommandDetachReaderUncertain": 1,
+    "syntheticDispatches": 8,
+    "firstCacheReadBytesPerCase": 1026
+  },
+  "model": {
+    "rawFrame": 100,
+    "halfOpenWindow": [
+      2184,
+      2205
+    ],
+    "syntheticDispatchTick": 2184,
+    "realMusicalTimingAcceptance": false,
+    "actualFirstCacheReadBytes": 1026,
+    "postCommandDetachRead": true,
+    "readerCount": 1,
+    "genuineDependencyPins": 3,
+    "RFirstObservation": "Core may first see ADOPTED+RETIRED; no exposed ACTIVE/key permission is claimed.",
+    "retirement": "Model drops every actual reader geometry/domain/activation reference before retired receipt; actual core R release still waits C references0. Seven later bounded drain calls release captured sources."
+  },
+  "failureScope": "Bad classification after actual R retirement preserves BACKEND through genuine cleanup. Pending and Uncertain retain actual active R; wrong envelope drops backend R but cannot consume core ownership. Three complete contexts remain reachable without retry or repair.",
+  "donor": "Original committed acquisition/storage/save helpers only; renamed donor main and old cases never execute or count.",
+  "permanentWrapper": {
+    "passed": true,
+    "tests": 1,
+    "elapsedSeconds": 6.471,
+    "resultSHA256": "7b457bcb057e8cbaec83c6ea8031e36af9034940d79d9e8e171c4dcf8e2c97b8"
+  },
+  "sourcePins": {
+    "src/editor/prepared_paula_sources.c": "b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f",
+    "src/editor/prepared_paula_sources.h": "ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c",
+    "src/editor/prepared_paula_lifetime.c": "752eba455a1ea973aecf5b7eef1a4cf1852578bd3218b44e55a893e5cb80ed60",
+    "src/editor/prepared_paula_lifetime.h": "122a19963a54d4d6dfaf1f18183f342ddf2c2a8a8b1b4e547d16fb2c1857148e",
+    "tests/prepared_paula_lifetime_active_test.c": "8074483c516ea5bd9e4b1ca746d0149acd4d69758fd5718b17bc38091bfab869",
+    "tests/test_prepared_paula_lifetime_active.py": "c79482ea42c7c04d303d07cb9303f1782a3f382db13bf12b3fa84f2058b89993",
+    "tests/prepared_paula_lifetime_test.c": "a98ff044aef08c9f84bb21d24a6c966610cc2d91ff5be5bd5425224b02c4e3f3"
+  },
+  "independentSavedAudit": {
+    "passed": true,
+    "sha256": "a3a6cda0daa26b53c6d6a863253c9f3de65a62894b8b85830b954fd4f2a55648",
+    "frozenInputsUnchanged": 25
+  },
+  "preservation": {
+    "unrelatedPaths": 16,
+    "classicManifestEntries": 51,
+    "datalessBodiesMetadataOnly": 10,
+    "unchanged": true
+  },
+  "provenance": "Selected actual compiler/linker/dsymutil, SDK/resource operands and three runtime inputs checked; no complete system-header or dyld closure claim.",
+  "nativeBaseline": "Production, default build inputs and provider/compilation inhibitors unchanged; no new native build or run was needed for this test-only increment.",
+  "limits": [
+    "HOST modeled adoption and RAM consumption only; no native ABI/backend, IRQ, output, actual timing, hardware quiet, physical or listening acceptance.",
+    "Only first TRIGGER cache is consumed; three retained source dependencies do not mean three active voices."
+  ],
+  "targetOperations": 0
+}

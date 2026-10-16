@@ -7869,3 +7869,12 @@ window is unchanged. A fresh default native build reproduces the previously
 Amiberry-qualified RAM executable byte for byte. This qualifies neither ACTIVE
 playback nor native lifetime/IRQ/output, hardware quiet, physical timing or
 listening. See [published cancellation scope](SAMPLER_PAULA_LINEAGE.md#published-three-source-cancellation-bridge-16-october2026).
+
+
+A separate HOST adopted-reader fixture now passes eight cases using the unchanged
+lifetime API: five complete and three retain genuine unconfirmed ownership. A
+real bounded cache read follows command detachment while its independent reader
+still holds all three master/cache dependencies. Both retirement orders, stale
+cleanup and post-detach reader failures preserve master/save bytes and defer
+resource disposal. This model supplies no native audio, IRQ, actual timing,
+hardware quiet, physical or listening proof. See [adopted-reader scope](SAMPLER_PAULA_LINEAGE.md#host-adopted-reader-cancellation-16-october2026).

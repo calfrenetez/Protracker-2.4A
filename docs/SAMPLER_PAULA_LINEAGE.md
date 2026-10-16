@@ -304,3 +304,36 @@ the original pre-exposure RAM evidence; it is not a new runtime test of this HOS
 bridge. ACTIVE/adopted playback, IRQ delivery, hardware quiet, output timing,
 A1200 execution and listening remain unqualified. See [HOST cancellation evidence](../evidence/enhanced-editor/prepared-paula-lifetime-published/host.json)
 and [default native identity](../evidence/enhanced-editor/prepared-paula-lifetime-published/native-default-build.json).
+
+
+## HOST adopted-reader cancellation —16 October2026
+
+A separate eight-case HOST fixture now exercises the same unchanged API after
+genuine model adoption. A serialized model dispatch validates the original event
+and geometry at synthetic tick2184, inside the unchanged `[2184,2205)` window.
+It captures persistent reader geometry independently of command storage. In
+command-first cases it actually reads the first1026-byte Paula cache after the
+core has detached and cleared the command. One reader retains all three genuine
+mono8/16/24 master/cache dependencies; this is not three active voices.
+
+Both retirement orders and stale-after-adoption cleanup pass without restoring
+the generation. Reader-first receipts may first expose ADOPTED+RETIRED to the
+core; no ACTIVE/key permission observation is claimed in that order. Actual
+reader callbacks still wait for zero command references. All geometry and source
+borrowing end before the backend returns retirement, and seven later bounded
+drain calls release captured resources with exact master/save preservation.
+
+The strict25-unit ASan/UBSan fixture passes five completing and three deliberately
+retained cases. A bad classification in an authentic retired-reader envelope
+still permits real domain consumption and later cleanup while preserving
+BACKEND failure. Pending and uncertain replies retain the actual active reader.
+A wrong envelope ends backend borrowing but cannot end the core obligation.
+Those three complete contexts stay reachable without retry, repair or forced
+cleanup. The canonical Python wrapper passes separately. Production code and all
+previous fixtures/oracles remain unchanged.
+
+This is ordinary HOST model ownership acceptance. Synthetic dispatch, ADOPTED
+receipts and ordinary RAM reads establish no native backend, IRQ, real musical
+timing, audio output, hardware quiet, physical or listening acceptance. Existing
+default-OFF and native compilation/provider inhibitors remain. See [the scoped
+HOST evidence](../evidence/enhanced-editor/prepared-paula-lifetime-active/host.json).

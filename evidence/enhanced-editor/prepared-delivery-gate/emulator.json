@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "state": "EXACT_AMIBERRY_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "crc32": "DB9687D2",
+    "sha256": "cce3ae3bed62397208956ee8841abeb050304c79d8d2c6e2b2b48083532f527a",
+    "size": 16680
+  },
+  "candidateBasename": "PTPreparedDeliveryGateProbe",
+  "sourceCommit": "64df10aab4d182381f5d9a23bd18cc67a11bd399",
+  "nativeBuildBaseCommit": "9407f77abfb45e6da7c2cc35ee8b6cef6a2cf3a7",
+  "hostPacket": {
+    "preparedRunnerTests": 36,
+    "preparedServiceTests": 27,
+    "normalEntryTests": 15,
+    "auxiliaryValidation": true,
+    "entryReviewSHA256": "62e623372bc0cc24806161615fb6f9b6b551ef6fc64a48770b96896e95aed100"
+  },
+  "run": {
+    "exactOnce": true,
+    "retries": 0,
+    "nativeSecondsLimit": 90,
+    "guestSecondsLimit": 140,
+    "wholeSecondsLimit": 250,
+    "stackBytes": 1048576,
+    "nativeObserved": {
+      "nativeMarkers": [
+        "PREPARED DELIVERY GATE PASS:4 staged,4 local records,4 once-only observations;normal TASK Exec balance;no IRQ/output/source/quiet authority"
+      ],
+      "observedStackBytes": 1048576,
+      "outputBytes": 140,
+      "outputCRC32": "6F9D0A43",
+      "rawStackQuery": "Current stack size is 1048576 bytes",
+      "returnCode": 0
+    },
+    "executionFiles": {
+      "NativeTest": {
+        "bytes": 16680,
+        "sha256": "cce3ae3bed62397208956ee8841abeb050304c79d8d2c6e2b2b48083532f527a"
+      },
+      "Run-once": {
+        "bytes": 1090,
+        "sha256": "d1477306250cedd4c6c6edfdcbffea6ab636d2170d9c5cc178f57163e742a4d6"
+      },
+      "Stage-once": {
+        "bytes": 434,
+        "sha256": "877f408ca2fd29561e159a5f6712fd180a8ae3e67dd2c662ad50956e12f1f884"
+      },
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "control.log": {
+        "bytes": 227,
+        "sha256": "05608003c47fe7979d9e67106a83ab8c8002c9d72655f13273a0259aa588ec87"
+      },
+      "native.log": {
+        "bytes": 140,
+        "sha256": "b2e6b2951791caa7bb2f670c340110e257e9fb9836ffd927323975d213b0d6dd"
+      },
+      "stage.log": {
+        "bytes": 30,
+        "sha256": "2e26d1b2a8df8f283f03d0d1dc1b0006e4db6295b6b6663bf3c9a1dcc8e4814b"
+      },
+      "staged.flag": {
+        "bytes": 7,
+        "sha256": "0ebf65c7984364f0999b4b54018b582a0da08a145e4d88a228ce2438856e7b06"
+      }
+    },
+    "inputFiles": 1,
+    "progressSidecar": false,
+    "resultSHA256": "8e1131e6a64b8186a91d0b0c19809206324a92aed4aa7ddff60480d2d62d5e49",
+    "admissionSHA256": "ea8f5dcb29f06d92b9d6e400c6555bb674d0c88954369875035cd401825153ab",
+    "specSHA256": "0e08a7f034b853f1f8aec8bfdf1859137dc371643a67e74d1322df91ad7fdfaa"
+  },
+  "cleanup": {
+    "exactOwnedNamespacesAndStagingAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "independentObservationSHA256": "cf77ce516910cb18897a530a88e8d2e3ab1375b43e265ca1046582d1894bc016",
+    "publicReleaseSHA256": "846c35978c900d2989c26b8656ede6738f93e974abae004a5a6fa5f34946a4e0",
+    "ownServiceStoppedAndReaped": true,
+    "separateFreshFinalIdleSHA256": "af8a3107b5f579a9651e78e9a8b7d529b3405abe971360d9bae899a30f4d9173",
+    "guardState": "EMPTY",
+    "releaseArchives": 159,
+    "holds": 0,
+    "retainedOwner": false
+  },
+  "acceptance": {
+    "ordinaryTaskExecPairBalanceInExactEmulator": true,
+    "physicalA1200": false,
+    "interruptOrCauseEntry": false,
+    "arbitrarySRIPLRestoration": false,
+    "sourcePinOrCacheOwnership": false,
+    "timerOrOutputActivation": false,
+    "musicalTiming": false,
+    "DMAOrDeviceQuiet": false,
+    "audioListening": false
+  },
+  "limits": [
+    "Four numeric single-use tickets, local ordinary-C records and task observations only",
+    "Native Enable interleaving with an actual interrupt was not exercised; HOST fake callback evidence remains separate",
+    "No audio device, cache, source owner or hardware sample memory operated",
+    "Runner elapsed time is not native cost or WCET; Stack is provisional, not an aggregate bound",
+    "Existing native provider inhibitors and unconditional INVALID bridge entry stay unchanged"
+  ]
+}

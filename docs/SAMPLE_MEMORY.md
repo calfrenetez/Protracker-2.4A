@@ -7818,3 +7818,12 @@ child transition at a time and cancels only never-exposed resources, preserving
 master/save bytes and retaining uncertain ownership. It exports no playback
 pointers, reader retirement or quiet authority. Native build, Fast/Chip placement
 and output integration remain separate. See [preparation owner and limits](SAMPLER_PAULA_LINEAGE.md#separate-three-source-preparation-owner--16-october-2026).
+
+
+The separate three-source RAM probe now passes an18-unit pinned Amiga build:
+51 actual project dependency bodies,42 selected SDK bodies and seven runtimes.
+It is prepared to check strict Fast master/owner allocation, selective Chip
+caches, cold/HIT and five cancellation cuts with exact master/in-memory-save
+preservation and zero explicit accounting. Amiberry and A1200 execution remain
+NOT_RUN; output, IRQ/DMA/device quiet, timing and listening remain unqualified.
+See [native probe scope](SAMPLER_PAULA_LINEAGE.md#three-source-native-ram-probe-build--16-october2026).

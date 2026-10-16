@@ -152,3 +152,30 @@ Fresh generation, bridge, route, project-table, descriptor and cache/source chec
 The first HOST integration group passes strict warnings, assertions, ASan and UBSan across 22 actual translation units and 53 copied project dependency bodies. Real sampler and cache jobs cover 24 load transitions, nine HIT transitions, cancellation at all 25 cuts from initialization through READY, and 36 stale generation/route/descriptor/table cleanup cases. Packed bytes, 8/16/24 master values and enhanced-project save bytes match exact oracles. Constructor/output aliases, full-capacity tails, a protected page, read-only current/stale owners, allocation limits and cache-close refusal are covered. Clean fixtures end all allocations; two deliberate forbidden-callback fixtures retain genuine remaining resources and complete allocator contexts until process exit. They are not reclassified as successful cleanup or repaired by restoring ownership snapshots.
 
 This owner is not wired to the inhibited provider or native PLAY. It exports no backend arm/apply, external borrow, command/reader retirement, quiet or source-release certificate. Later output integration must retain all three dependencies until actual reader retirement and zero command references independently permit release; this preparation API proves none of that. Native compile/run, actual Fast/Chip placement, IRQ, DMA/device quiet, exact output timing and listening remain unqualified. Allocation, eviction and metadata work can remain synchronous; a byte bound is not a latency or WCET guarantee. See [HOST evidence](../evidence/enhanced-editor/prepared-paula-sources/host.json).
+
+
+## Three-source native RAM probe build —16 October2026
+
+A separate18-unit probe now passes the pinned Amiga compiler/linker check from
+a54-file private export, with51 actual project dependency bodies,42 selected
+SDK bodies and seven runtimes. Assertions stay enabled. Its131,096-byte HUNK
+(SHA256 `ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e`,
+CRC `856A177A`) has not yet run in Amiberry or on the A1200. The first build's
+missing-SDK-pin refusal is preserved; the successful separate build first
+established the complete actual18-unit dependency set.
+
+The probe promotes genuine distinct mono8/16/24-bit masters, each513 frames,
+through the strict checked Fast allocator. It prepares three selective514-byte
+Chip caches using the unchanged512KiB reserve policy, then checks cold loading,
+a separate-owner cache HIT and cancellation after0/1/2/3/4 transitions. Seven
+distinct Fast owner arenas stay allocated until final cleanup; none is reset or
+recycled. Allocation flags plus base/final-byte TypeOfMem observations check
+placement. Exact master/marker and in-memory project-encoding comparisons and
+zero explicit Fast/Chip ledgers gate the sole PASS marker. Any uncertain
+cancellation or refused restoration retains the entire process immediately.
+
+These are source assertions and build checks until exact execution. This native
+subset does not replace the HOST25-cut/36-stale/fault matrix. No audio, output
+activation, IRQ, DMA, device stop, card RAM, timer or filesystem save is exercised.
+Per-function stack records do not establish aggregate stack or execution-time
+bounds. See [pinned build evidence](../evidence/enhanced-editor/prepared-paula-sources/native-build.json).

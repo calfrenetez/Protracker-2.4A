@@ -93,8 +93,12 @@ int pt_prepared_paula_lifetime_source_phase(const struct pt_prepared_paula_lifet
         l->state==STOPPED&&l->stop_closed&&l->stop_returned&&
         l->command_consumed&&l->reader_consumed&&!l->uncertain&&l->queue&&
         !pt_readers_commands_held(l->queue)&&!pt_readers_readers_held(l->queue);
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
     return phase==3&&l->outer==PUBLISH_CALL&&l->transferred&&l->state==QUEUED&&
         l->publish_attempted&&!l->stop_attempted&&!l->uncertain;
+#else
+    return 0; /* Native probe has no PUBLISH source transaction. */
+#endif
 }
 static int current_source_phase(struct pt_prepared_paula_lifetime *l)
 {
@@ -103,10 +107,16 @@ static int current_source_phase(struct pt_prepared_paula_lifetime *l)
 }
 static int callback_phase(const struct pt_prepared_paula_lifetime *l,unsigned kind,unsigned phase)
 {
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
     if(phase==CURRENT_CALLBACK)return l->outer==ENQUEUE_CALL||l->outer==PUBLISH_CALL;
     if(phase!=TERMINAL_CALLBACK)return 0;
     return l->outer==STOP_CALL||l->outer==STOP_PUBLICATION_CALL||
         l->outer==COMMAND_CANCEL_CALL||(kind==2&&l->outer==READER_CANCEL_CALL);
+#else
+    (void)kind;
+    if(phase==CURRENT_CALLBACK)return l->outer==ENQUEUE_CALL;
+    return phase==TERMINAL_CALLBACK&&l->outer==STOP_CALL;
+#endif
 }
 static struct pt_prepared_paula_lifetime *callback_owner(void *context,unsigned kind,uint64_t token,unsigned phase)
 {
@@ -318,6 +328,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_stop_local(
     leave(l);
     return l->uncertain?PT_PREPARED_PAULA_SOURCES_FAULT:PT_PREPARED_PAULA_SOURCES_OK;
 }
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 /* Called only from the exact source-ledger publish transaction. */
 enum pt_scheduled_result pt_prepared_paula_lifetime_lower_publish(
     struct pt_prepared_paula_lifetime *l,struct pt_prepared_paula_sources *p)
@@ -411,6 +422,7 @@ enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_reader_once(
     callback_witness=NULL;classify(l,result);stopped_after_return(l);
     leave(l);return l->uncertain?PT_SCHEDULED_BACKEND:result;
 }
+#endif /* HOST publication/collection only. */
 enum pt_scheduled_result pt_prepared_paula_lifetime_failure(
     struct pt_prepared_paula_lifetime *l)
 {

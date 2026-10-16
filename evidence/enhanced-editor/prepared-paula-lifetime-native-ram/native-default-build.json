@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "draft": false,
+  "date": "2026-10-16",
+  "scope": "Fresh default-OFF18 build and whole old/new HUNK byte comparison only",
+  "result": "PASS",
+  "manifestSHA256": "30a27469fbc863347cffbe5eb5c7360c54deca07695826fc040eb6113e2f030e",
+  "rootWholeByteIdentitySHA256": "f72a3f3a6ff562d8345aa326870aa3afae8712ac4e06ffd8a181f419396324ae",
+  "actualTranslationUnits": 18,
+  "actualProjectDependencies": 51,
+  "actualSelectedSDKInputs": 42,
+  "runtimeInputs": 7,
+  "actualLinkLoads": 25,
+  "binary": {
+    "bytes": 131096,
+    "sha256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e",
+    "crc32": "856A177A"
+  },
+  "wholeFileBytesCompared": true,
+  "defaultOff": true,
+  "newEmulatorRun": false,
+  "newPhysicalRun": false,
+  "runtimeEvidenceScope": "Only prior exact old18-unit pre-exposure RAM executable scope may be reused; this does not run or qualify the new21-unit lifetime candidate.",
+  "limits": [
+    "No native lifetime publication/provider, ACTIVE playback, output, IRQ, timing, quiet or new physical/listening acceptance.",
+    "Whole-binary identity is separate from the new probe compile/link and its still-unrun runtime assertions."
+  ],
+  "targetOperations": 0,
+  "elapsedSeconds": 5.307
+}

@@ -1,14 +1,30 @@
 #ifndef PT_PRIVATE_PREPARED_PAULA_LIFETIME_H
 #define PT_PRIVATE_PREPARED_PAULA_LIFETIME_H
-#if defined(__m68k__) || defined(__amigaos__) || defined(__AMIGA__) || defined(AMIGA)
-#error "The unpublished prepared-source lifetime adapter is HOST-only"
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME) && defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+#error "HOST lifetime and native TASK probe modes are mutually exclusive"
 #endif
-#if !defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+#if PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY != 1
+#error "The native TASK probe requires the explicit value 1"
+#endif
+#if !defined(__m68k__) || !defined(__amigaos__)
+#error "The native TASK probe requires a genuine m68k AmigaOS compiler target"
+#endif
+#elif defined(__m68k__) || defined(__amigaos__) || defined(__AMIGA__) || defined(AMIGA)
+#error "The unpublished prepared-source lifetime adapter is HOST-only"
+#elif !defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 #error "The private HOST lifetime adapter requires its explicit opt-in"
 #endif
 #include "prepared_paula_sources.h"
 #include "../core/document.h"
 #include "../core/scheduled_readers.h"
+#if defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+#include <limits.h>
+typedef char pt_prepared_paula_native_task_probe_abi[
+    CHAR_BIT==8&&sizeof(int)==4&&sizeof(long)==4&&sizeof(void *)==4&&
+    sizeof(uintptr_t)==4&&sizeof(size_t)==4&&
+    sizeof(uint64_t)==8&&sizeof(uint32_t)==4&&sizeof(uint16_t)==2&&sizeof(uint8_t)==1?1:-1];
+#endif
 
 #define PT_PREPARED_PAULA_LIFETIME_CONTEXTS 16U
 struct pt_prepared_paula_lifetime;
@@ -22,7 +38,7 @@ struct pt_prepared_paula_lifetime_config {
     uint16_t period;uint8_t volume;
     struct pt_prepared_paula_context_extent context[PT_PREPARED_PAULA_LIFETIME_CONTEXTS];
 };
-/* Original normal-TASK serialized HOST path only. Genuine complete accessible
+/* Original normal-TASK serialized work only. Genuine complete accessible
  * source/backend/context objects remain alive through close or retained fault.
  * Every non-NULL allocator (source master/Chip/control) and backend context lies
  * in a genuinely complete declared extent. Length provenance/completeness is a
@@ -31,11 +47,16 @@ struct pt_prepared_paula_lifetime_config {
  * new controls/workspace/outputs remain disjoint. Backend controls and queue/
  * command/reader controls are disjoint from source data as the core requires.
  * No copies, reset, pointer exports, backend probes or native gate. Supplied
- * backend is the existing genuine HOST contract; no capability is fabricated.
- * The original unpublished methods never call that backend. The additive
- * publish/cancel methods below invoke the actual core and genuine HOST backend
- * once per admitted operation, at the original frame/grid with no timing edit.
- * This remains HOST-only and supplies no ACTIVE/adoption/output/quiet authority.
+ * backend is the existing genuine HOST contract in HOST mode. The separate
+ * native TASK probe admits a structurally complete refusal-only constructor
+ * descriptor with zero backend calls; its flags infer no device or capability.
+ * The original unpublished methods never call that backend. Only HOST mode
+ * compiles the publish/cancel methods below, invoking the actual core/backend
+ * once per admitted operation at the original frame/grid with no timing edit.
+ * Native probe mode has no publication/collection API, PUBLISH source phase or
+ * cancel callback authority. No ACTIVE/adoption/output/quiet authority follows.
+ * Native probe callers remain original ordinary TASK, never IRQ/exception,
+ * supervisor/signal/delivery or inside Disable/Enable; no SR/IPL claim is made.
  * Callers must not mutate opaque storage or borrowed inputs. Ordinary-method
  * callback reentry latches uncertainty; constructor refusal is specified below.
  * No arbitrary mutation detection or forced cleanup is promised.
@@ -56,7 +77,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_init(
     struct pt_prepared_paula_lifetime *,size_t capacity,
     struct pt_prepared_paula_sources *original_sources,
     const struct pt_prepared_paula_lifetime_config *,
-    const struct pt_readers_backend *original_host_backend);
+    const struct pt_readers_backend *original_backend);
 /* One attempt. Private reservation blocks disposal; actual lower enqueue OK
  * irreversibly transfers one C/one full3-source R even on outer fault. No supplied
  * transfer/quiet booleans. All genuine pins/leases stay in original source ledger.
@@ -68,6 +89,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_enqueue_unpubli
  */
 enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_stop_local(
     struct pt_prepared_paula_lifetime *);
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 /* One actual publish attempt for the original queued event. The original
  * source owner stays busy/current around the real pt_readers_publish and its
  * authenticated current callbacks; no fresh source pointer/token is exported.
@@ -98,6 +120,7 @@ enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_command_once(
     struct pt_prepared_paula_lifetime *);
 enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_reader_once(
     struct pt_prepared_paula_lifetime *);
+#endif /* HOST publication/collection only. */
 /* Sticky first classified publication/collection non-OK/non-Pending result,
  * preserved through genuine
  * drain and close. Authenticated terminal good0 records BACKEND semantic failure
@@ -141,8 +164,10 @@ int pt_prepared_paula_sources_private_output_disjoint(struct pt_prepared_paula_s
 int pt_prepared_paula_sources_private_contexts(struct pt_prepared_paula_sources *,const struct pt_prepared_paula_context_extent *,unsigned);
 int pt_prepared_paula_sources_private_current(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_enqueue(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 enum pt_scheduled_result pt_prepared_paula_sources_private_publish(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
 enum pt_scheduled_result pt_prepared_paula_lifetime_lower_publish(struct pt_prepared_paula_lifetime *,struct pt_prepared_paula_sources *);
+#endif
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
 enum pt_scheduled_result pt_prepared_paula_lifetime_lower_enqueue(struct pt_prepared_paula_lifetime *,struct pt_prepared_paula_sources *,const struct pt_prepared_paula_lifetime_data *);
 #endif

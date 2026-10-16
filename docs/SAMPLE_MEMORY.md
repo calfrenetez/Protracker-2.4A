@@ -7878,3 +7878,19 @@ still holds all three master/cache dependencies. Both retirement orders, stale
 cleanup and post-detach reader failures preserve master/save bytes and defer
 resource disposal. This model supplies no native audio, IRQ, actual timing,
 hardware quiet, physical or listening proof. See [adopted-reader scope](SAMPLER_PAULA_LINEAGE.md#host-adopted-reader-cancellation-16-october2026).
+
+
+## Native unpublished lifetime RAM partition —16 October2026
+
+
+A separate native TASK probe-only partition now admits only the original
+unpublished three-source1C/1R lifetime path. HOST-on-native rejection and the
+default-OFF baseline remain; native publication/collection APIs stay absent.
+Four unchanged HOST fixture/oracles and24 genuine cross-compiler guard cases
+pass. The new21-unit RAM probe compiles/links, but its actual local-stop,
+zero-backend-call and seven-later-drain assertions have NOT_RUN in Amiberry or
+on hardware. The independently rebuilt default18 executable is wholly byte
+identical to the old RAM candidate; that evidence does not qualify the new
+lifetime probe. No native output, IRQ, actual timing, device quiet, physical or
+listening proof is added.
+See [the lineage contract](SAMPLER_PAULA_LINEAGE.md#native-task-unpublished-ram-partition-16-october2026).

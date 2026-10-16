@@ -60,8 +60,10 @@ struct pt_prepared_paula_sources_status {
  * binding, publication/arm/apply, timer, output or external borrow interface.
  * Its cancellation is ONLY disposal of never-exposed software resources.
  * The separate explicit HOST-only lifetime opt-in may retain this exact ledger
- * for authentic core queue callbacks; it supplies no caller source pointer or
- * quiet certificate and has no native eligibility. Public cancellation refuses
+ * for authentic core queue callbacks. A mutually exclusive native TASK probe
+ * option admits only unpublished enqueue/local stop/deferred drain, never HOST
+ * publication or backend collection. Neither supplies a caller source pointer,
+ * quiet certificate or native output eligibility. Public cancellation refuses
  * a retained custodian. No DMA/source quiet or real interrupt lifetime follows.
  */
 size_t pt_prepared_paula_sources_size(void);
@@ -99,8 +101,8 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_step(
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
     struct pt_prepared_paula_sources *,struct pt_prepared_paula_sources_status *out);
 
-#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
-/* The private HOST opt-in makes cancellation return BUSY while a genuine
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME) || defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+/* Either explicit custody mode makes cancellation return BUSY while a genuine
  * custody reservation/transfer is retained; no writes or child work then. */
 #endif
 /* Permanently stops preparation. At most ONE original pending-job cancellation

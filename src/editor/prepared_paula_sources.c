@@ -1,10 +1,17 @@
 #include "prepared_paula_sources.h"
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME) && defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+#error "HOST lifetime and native TASK probe modes are mutually exclusive"
+#endif
 #if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 #if defined(__m68k__) || defined(__amigaos__) || defined(__AMIGA__) || defined(AMIGA)
 #error "The prepared-source custody opt-in is HOST-only"
 #endif
-#define PT_PREPARED_PAULA_HOST_LIFETIME 1
+#define PT_PREPARED_PAULA_LIFETIME_CUSTODY 1
 #include "prepared_paula_lifetime.h"
+#elif defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY)
+/* The private header independently checks native target/value/ABI eligibility. */
+#include "prepared_paula_lifetime.h"
+#define PT_PREPARED_PAULA_LIFETIME_CUSTODY 1
 #endif
 #include "sampler_internal.h"
 #include "sampler_paula_internal.h"
@@ -39,7 +46,7 @@ struct pt_prepared_paula_sources {
     uint64_t cache_version;
     unsigned generation,track,index,child_phase,busy,cancel_index;
     unsigned pin_cancel_attempted,chip_cancel_attempted;
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
     struct pt_prepared_paula_lifetime *custodian;unsigned custody_stage;
 #endif
     enum pt_prepared_paula_sources_phase phase;
@@ -198,7 +205,7 @@ static int pending_chip_clear(const struct pt_prepared_paula_sources *p)
        !apart(e->data,e->bytes,p->bridge->cache.entry[i].data,p->bridge->cache.entry[i].bytes))return 0;
     return 1;
 }
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
 static int custody_output_clear(const struct pt_prepared_paula_sources *p,const void *out,size_t n)
 {return !p->custodian||pt_prepared_paula_lifetime_output_disjoint(p->custodian,out,n);}
 #endif
@@ -207,7 +214,7 @@ static int output_clear(struct pt_prepared_paula_sources *p,const void *out,size
     unsigned i;
     if(!object(out,n,ALIGNMENT(struct pt_prepared_paula_sources_status))||
        !apart(out,n,p,p->capacity)
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
        ||!custody_output_clear(p,out,n)
 #endif
        )return 0;
@@ -341,7 +348,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
      * reentry failure latch can write any byte of the refused destination. */
     if(!object(out,sizeof(*out),ALIGNMENT(struct pt_prepared_paula_sources_status))||
        !apart(out,sizeof(*out),p,p->capacity)
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
        ||!custody_output_clear(p,out,sizeof(*out))
 #endif
        )return PT_PREPARED_PAULA_SOURCES_ALIAS;
@@ -364,7 +371,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
 done:p->busy=0;return result;
 }
 
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
 static enum pt_prepared_paula_sources_result cancel_owned_step(
 #else
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
@@ -425,7 +432,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
 done:p->busy=0;return result;
 }
 
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
 /* Public cancellation never acts on a privately reserved/transferred domain.
  * This early refusal performs no enter/failure write or child operation. */
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
@@ -437,7 +444,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
 }
 #endif
 
-#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+#if defined(PT_PREPARED_PAULA_LIFETIME_CUSTODY)
 int pt_prepared_paula_sources_private_output_disjoint(
     struct pt_prepared_paula_sources *p,const void *out,size_t n)
 {return valid(p)&&output_clear(p,out,n);}
@@ -467,8 +474,11 @@ int pt_prepared_paula_sources_private_current(struct pt_prepared_paula_sources *
     struct pt_prepared_paula_lifetime *l)
 {
     return valid(p)&&p->busy&&p->custodian==l&&
-        ((p->custody_stage==1&&pt_prepared_paula_lifetime_source_phase(l,p,1))||
-         (p->custody_stage==2&&pt_prepared_paula_lifetime_source_phase(l,p,3)))&&
+        ((p->custody_stage==1&&pt_prepared_paula_lifetime_source_phase(l,p,1))
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
+         ||(p->custody_stage==2&&pt_prepared_paula_lifetime_source_phase(l,p,3))
+#endif
+        )&&
         p->phase==PT_PREPARED_PAULA_SOURCES_PREPARED&&
         p->failure==PT_PREPARED_PAULA_SOURCES_OK&&held_current(p,0);
 }
@@ -518,6 +528,7 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_enqueue(
 abort:p->custodian=NULL;p->custody_stage=0;
 done:p->busy=0;return result;
 }
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
 enum pt_scheduled_result pt_prepared_paula_sources_private_publish(
     struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
 {
@@ -541,6 +552,7 @@ enum pt_scheduled_result pt_prepared_paula_sources_private_publish(
      * later receipt collection/disposal uses the captured original ledger. */
 done:p->busy=0;return result;
 }
+#endif /* HOST publication only. */
 
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(
     struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
@@ -552,4 +564,4 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(
     return cancel_owned_step(p);
 }
 
-#endif /* HOST-only additive friends; native owner has no adapter references. */
+#endif /* Explicit custody modes only; default owner has no adapter references. */

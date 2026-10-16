@@ -337,3 +337,38 @@ receipts and ordinary RAM reads establish no native backend, IRQ, real musical
 timing, audio output, hardware quiet, physical or listening acceptance. Existing
 default-OFF and native compilation/provider inhibitors remain. See [the scoped
 HOST evidence](../evidence/enhanced-editor/prepared-paula-lifetime-active/host.json).
+
+
+## Native TASK unpublished RAM partition —16 October2026
+
+A separate explicit `PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY=1` partition now
+compiles the genuine three-source lifetime adapter for one ordinary serialized
+TASK RAM probe. It is mutually exclusive with the HOST option, requires the
+real m68k/AmigaOS compiler target and checked ABI widths, and compiles only the
+shared unpublished path. The original HOST-on-native rejection and default-OFF
+owner path remain. Native publication/cancel wrapper and friend APIs are absent;
+this supplies no native output provider or IRQ delivery.
+
+Four original HOST fixtures retain their exact oracles and pass strict sanitizer
+regression. A separate actual cross-compiler matrix passes24 cases (eight
+positive,16 meaningful refusals) and three object boundaries, including absent
+publication/collection declarations and call edges from the adapter objects.
+These are static eligibility checks, not native ownership or quiet proofs.
+
+The new21-unit probe compiles and links with58 actual project dependencies,
+42 selected SDK inputs and seven runtime inputs. Its planned runtime sequence
+retains three genuine8/16/24 master/Chip-cache dependencies through one original
+unpublished1C/1R transfer, actual local C-then-R stop with zero backend calls,
+and seven later bounded drain calls before queue close. The native assertions
+have NOT_RUN: neither Amiberry nor physical execution is claimed for the new
+152,856-byte candidate. A fresh default18 build independently reproduces the
+entire old RAM executable byte for byte; that identity supplies no runtime
+qualification for the new lifetime probe.
+
+No publication, ACTIVE/adopted playback, audio, IRQ, real musical timing, device
+completion/voice-stop/quiet, physical or listening acceptance follows. Ordinary
+TASK identity, placement and cleanup still require the separate exact-candidate
+native run and its retained ownership boundaries. Aggregate stack, callback
+depth and WCET remain separately unqualified. The accepted
+exact musical schedule and all existing controller/provider inhibitors remain.
+See [HOST regression and compile boundaries](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/host-and-guards.json), [native build scope](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/native-probe-build.json) and [default byte identity](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/native-default-build.json).

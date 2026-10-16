@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "draft": false,
+  "date": "2026-10-16",
+  "scope": "Separate explicit native ordinary-TASK unpublished RAM probe, compile/link only",
+  "result": "PASS",
+  "buildBaseCommit": "ee77f94593176601380a1f97832a2f2500f8262a",
+  "manifestSHA256": "962f124538a4721fe4369d4a681bc488474e40607eb5360eac530d20e34b0853",
+  "actualTranslationUnits": 21,
+  "actualProjectDependencies": 58,
+  "actualSelectedSDKInputs": 42,
+  "runtimeInputs": 7,
+  "actualLinkLoads": 28,
+  "exportedBodies": 61,
+  "assertionsEnabled": true,
+  "format": "HUNK_HEADER0x000003f3",
+  "elapsedSeconds": 6.434,
+  "onlyAddedNativeOption": "PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY=1",
+  "modeBoundary": "Mutually exclusive with HOST option; genuine m68k/AmigaOS target and compile-time integer/pointer widths required. HOST native rejection and default-OFF remain.",
+  "binary": {
+    "bytes": 152856,
+    "sha256": "b8c1056b0b14bf1d20b36f850c860074789461201a415612dd4d9fdda718610e",
+    "crc32": "C0A61965"
+  },
+  "expectedStdout": {
+    "bytes": 198,
+    "sha256": "f25c394e50d06ca5afd20650a2d2ab0cf9ed02dce4233df5a2b06bff8adf4a7a",
+    "observedAtRuntime": false
+  },
+  "plannedRuntimeSubset": "One genuine unpublished command and one reader retain three master/cache dependencies. Real local stop consumes C then R with zero backend calls, followed by seven later bounded drain calls and queue close. These native assertions have not run.",
+  "independentActualNativeInputAudit": {
+    "result": "PASS_SAVED_DATA",
+    "sha256": "d0053449a4cae9918f54ef24d459ae0380146e12a0b8ae7cdbae9bd40ea2abeb",
+    "newCompilerOrObjdumpExecutionsByAudit": 0,
+    "runtime": "NOT_RUN",
+    "physical": "NOT_RUN"
+  },
+  "nativeCandidateRuntime": "NOT_RUN",
+  "Amiberry": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "listening": "NOT_RUN",
+  "limits": [
+    "Compilation is eligibility, not runtime placement, ownership, cleanup, failure recovery, source quiet or task/CPU-state restoration acceptance.",
+    "HOST publication/cancel APIs are absent in the probe partition; no provider, IRQ, audio output or real musical timing admission.",
+    "Actual raw stack records do not alone bound aggregate stack, callback depth, WCET or target deadlines.",
+    "Old source-probe executable evidence is not transferable to this new candidate."
+  ],
+  "targetOperations": 0,
+  "toolProvenanceLimit": "The donor builder enforces compiler, assembler, linker and objdump pins. Saved cc1/collect2 paths have current body hashes from the later audit; they are not separate independent pre/post-build child-tool pins. No complete toolchain/system-header/package or runtime closure is claimed."
+}

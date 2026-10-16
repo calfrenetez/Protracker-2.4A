@@ -26,13 +26,13 @@ SOURCES = (
 HOST_FLAGS = ('-DPT_PREPARED_PAULA_ENABLE_HOST_LIFETIME=1',)
 FROZEN = {
     'src/editor/prepared_paula_sources.c':
-        'b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f',
+        'f0f40f3100de1691f40ab37b725ad11e1008a6619c49e7b227a1f21658703112',
     'src/editor/prepared_paula_sources.h':
-        'ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c',
+        '74a070e4d7b4e8463afb61e3d182913872a7726ca61f4fdb7d5084bbe764757c',
     'src/editor/prepared_paula_lifetime.c':
-        '752eba455a1ea973aecf5b7eef1a4cf1852578bd3218b44e55a893e5cb80ed60',
+        '77e91ab9f056182faf64a04674c54db9f84436b971724336f0e35724b9da0748',
     'src/editor/prepared_paula_lifetime.h':
-        '122a19963a54d4d6dfaf1f18183f342ddf2c2a8a8b1b4e547d16fb2c1857148e',
+        '7131371ab2359a7464e638ed4fdc40014edc7cfdbc3dd8297ae4919d66915561',
     'tests/prepared_paula_lifetime_active_test.c':
         '8074483c516ea5bd9e4b1ca746d0149acd4d69758fd5718b17bc38091bfab869',
     'tests/prepared_paula_lifetime_test.c':

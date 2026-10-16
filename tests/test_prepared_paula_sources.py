@@ -23,9 +23,9 @@ SOURCES = (
     'src/core/raw.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c')
 FROZEN = {
     'src/editor/prepared_paula_sources.c':
-        'b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f',
+        'f0f40f3100de1691f40ab37b725ad11e1008a6619c49e7b227a1f21658703112',
     'src/editor/prepared_paula_sources.h':
-        'ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c'}
+        '74a070e4d7b4e8463afb61e3d182913872a7726ca61f4fdb7d5084bbe764757c'}
 ORACLE = ('PREPARED PAULA SOURCES HOST PASS:real mono8/16/24 pins/cache;'
           'load24/hit9/cancel25;save/alias/stale36/budget/retained2;NO OUTPUT AUTHORITY\n')
 

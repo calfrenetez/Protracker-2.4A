@@ -35,8 +35,8 @@
       "Failure close may consume a handle with return zero; test verifies exact NULL consumption without reuse",
       "All explicit factory/Chip ledgers empty after close"
     ],
-    "baseline_missing_refusal_result_sha256": "3e77de0bdcb1b05002d33be651f96fed0238f5270ab5ddb84def40e30d549941",
-    "baseline_missing_refusal_stderr_sha256": "a4bb3b982e9954b664e829befbe8f981641485c49a14d4059ad93739536f94f8"
+    "baseline_missing_refusal_result_sha256": "c43872429c9c4e6ef307c668eb7f50090f807c702c58416a98458cd4329076de",
+    "baseline_missing_refusal_stderr_sha256": "0d60f167a8c1e82a0ad173a2bf65c16422190c67a4342e4f06296dd2fa3b4b13"
   },
   "host": {
     "tests": 10,
@@ -48,9 +48,9 @@
       "ASan",
       "UBSan"
     ],
-    "frozen_files": 365,
+    "frozen_files": 366,
     "source_inventory_unchanged": true,
-    "result_sha256": "a1e614ecbf6434a613a81a12d50d704043a3d57ad909a64326fab4f0ca7f5081",
+    "result_sha256": "a676bf7a73063f26974b3a04a0f3f439bea439a43083ddffe868aaf358e816f2",
     "additional_legacy_checks": {
       "fixtures": [
         "unchanged original mixed factory plus original typed core main",
@@ -59,25 +59,26 @@
       "compile_run_calls": 4,
       "exact_historical_stdout_oracle_matched": true,
       "historical_qualifiers_imported_or_invoked": false,
-      "result_sha256": "5b3726d0e0986e9184e20c3ad7ae208f2620750d7513e9fb7de74596448ec050"
+      "result_sha256": "b8da882b9ac31bdb8f69a6f5f3cc8f42e9828ee0d477f6798be984048fa4d5fa"
     }
   },
   "build": {
     "target": "PTMixedSourceBindingTest",
-    "bytes": 318716,
-    "sha256": "d95800a2b9378709a926a5f658ec51ec0d9c2736d6127a4ffbff4098eb711084",
-    "crc32": "2FBC7888",
+    "bytes": 318240,
+    "sha256": "8a5cbe8401f662eeb426194fbb85321a91b48bef33975ed3ae3877551dd0719e",
+    "crc32": "66B8CA73",
     "units": 30,
     "project_bodies": 87,
     "sdk_bodies": 32,
     "runtimes": 7,
     "assertions_enabled": true,
-    "manifest_sha256": "529b902aac9de765964e3edf8822db6e1233752a9494a6c23385248deea69c01",
+    "manifest_sha256": "b990909b532d422ebc6928d1d4fc1a1d9c3423350f88792674774e2b9d8ec6e9",
     "compiled_fixture": "New495-case source binding main and unchanged original factory constructor; retained original typed-core donor main is not invoked.",
-    "host_common_365_inputs_identical": true,
-    "only_additional_frozen_input": "standalone pinned builder",
     "execution": "NOT_RUN",
-    "meaning": "68000/softfloat/nix20 compiler/linker qualification only; ordinary allocation and fake bus, no native Exec memory placement assertion."
+    "meaning": "68000/softfloat/nix20 compiler/linker qualification only; ordinary allocation and fake bus, no native Exec memory placement assertion.",
+    "host_and_build_same_366_frozen_inputs": true,
+    "selected_assembler_hash_before_and_after": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+    "bounded_completion_markers": true
   },
   "development_failures_preserved": {
     "initial_graph_omitted_current_causal_unit": true,
@@ -101,5 +102,19 @@
     "Native Exec Fast/Chip placement for ordinary-allocation fixture",
     "Actual voice stop/DMA/IRQ/output timing/audio/listening",
     "Older prepared dispatcher source binding"
-  ]
+  ],
+  "previous_compiler_only_candidate": {
+    "bytes": 318716,
+    "sha256": "d95800a2b9378709a926a5f658ec51ec0d9c2736d6127a4ffbff4098eb711084",
+    "crc32": "2FBC7888",
+    "execution": "NEVER_RUN",
+    "preparation_refusal": "Existing554-character original factory completion exceeds unchanged256-character plan marker bound; no live service/lease/target effect.",
+    "raw_refusal_sha256": "d74e2b1d1e6fe659ac088906e7cb86203942a9a4ec5ae7999c40d8abe1284037"
+  },
+  "bounded_completion": {
+    "scope": "New binding fixture completion markers are [107, 207] characters; existing factory constructor assertions and default full factory/quantized stdout unchanged.",
+    "original_factory_assertions_unchanged": true,
+    "plan_marker_limit_unchanged": 256,
+    "service_or_target_used": false
+  }
 }

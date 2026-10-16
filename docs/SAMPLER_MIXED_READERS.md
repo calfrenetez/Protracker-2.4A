@@ -110,10 +110,16 @@ baseline reproduces the missing action refusal; earlier fixture/compile failures
 are preserved separately from that product regression.
 
 The standalone pinned builder cross-compiles the new 495-case main plus the
-original factory constructor to `PTMixedSourceBindingTest` (318,716 bytes,
-SHA-256 `d95800a2b9378709a926a5f658ec51ec0d9c2736d6127a4ffbff4098eb711084`).
+original factory constructor to `PTMixedSourceBindingTest` (318,240 bytes,
+SHA-256 `8a5cbe8401f662eeb426194fbb85321a91b48bef33975ed3ae3877551dd0719e`).
 Its 30 units, 87 project bodies, 32 SDK bodies and seven runtimes are recorded,
 with assertions enabled. **Amiberry and physical execution are NOT RUN.**
 Allocation callbacks and the card bus remain software fixtures; native placement,
 physical capacity/order/completion, actual voice stop, IRQ/DMA, timing, audio and
 listening acceptance remain separate. See [scoped host/build evidence](../evidence/enhanced-editor/mixed-source-binding/host-build.json).
+
+The selected binding fixture uses a short original-factory completion line to
+fit the unchanged 256-character protocol marker bound. The original constructor
+assertions and default full factory/quantized output remain unchanged; both
+legacy stdout oracles pass again. The earlier 318,716-byte compiler-only HUNK
+was refused during host preparation for its 554-character marker and never ran.

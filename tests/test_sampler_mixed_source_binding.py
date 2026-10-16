@@ -18,6 +18,8 @@ SOURCES=['tests/sampler_mixed_source_binding_test.c','src/core/mixed_readers_cau
     ['amigus_reservation','amigus_wavetable_cache','amigus_sample_ram','sample_cache','playback_pcm']]]
 MARKER=('MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signed8 and AmiGUS8/16 '
     'key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY')
+FACTORY_MARKER=('SAMPLER MIXED FACTORY PASS:complete original constructor assertions;'
+    'bounded completion marker;SOFTWARE_ONLY')
 class MixedSourceBinding(unittest.TestCase):
     def test_genuine_mixed_factory_source_identity(self):
         with tempfile.TemporaryDirectory(prefix='pt-mixed-source-binding-') as folder:
@@ -32,6 +34,6 @@ class MixedSourceBinding(unittest.TestCase):
             self.assertEqual(r.stderr,b'')
             lines=r.stdout.decode('ascii').splitlines()
             self.assertEqual(len(lines),2)
-            self.assertTrue(lines[0].startswith('SAMPLER MIXED FACTORY PASS:'))
+            self.assertEqual(lines[0],FACTORY_MARKER)
             self.assertEqual(lines[1],MARKER)
 if __name__=='__main__':unittest.main()

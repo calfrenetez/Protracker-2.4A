@@ -2,6 +2,7 @@
  * suite and typed backend. Never manufacture a holder, pin, lease or receipt. */
 #include "../src/editor/sampler_mixed_readers.c"
 #define PT_MIXED_READERS_TEST_MAIN mixed_binding_donor_main
+#define PT_SMF_FACTORY_COMPLETION "SAMPLER MIXED FACTORY PASS:complete original constructor assertions;bounded completion marker;SOFTWARE_ONLY"
 #include "sampler_mixed_readers_test.c"
 static uint64_t mixed_other_key(struct pt_sampler_mixed_reader *r,unsigned fault)
 {

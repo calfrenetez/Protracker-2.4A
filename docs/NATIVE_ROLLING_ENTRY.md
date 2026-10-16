@@ -286,3 +286,31 @@ All original terminal oracles still pass and canonical sources are unchanged.
 Those host measurements neither establish native cost nor identify the timeout's
 cause. The64-step entry does not increase a limit or replay the failed operation.
 See [prefix host/build and observation](../evidence/enhanced-editor/rolling-native-entry/prefix-host-build.json).
+
+The exact328,812-byte prefix candidate subsequently passes once in Amiberry:
+64 original17-unit steps, genuine cancellation/disposal, RC0, sole75-byte stdout
+and the exact closed final sidecar. One input/nine execution-file custody, both
+RAM namespaces and host staging absence, saved-file restoration, independent
+observation/public release, owned-service stop and a separate fresh idle check
+pass. No failed transaction was replayed. Complete preflight remains UNCONFIRMED;
+physical/device/timing/listening acceptance is separate. See
+[exact prefix result](../evidence/enhanced-editor/rolling-native-entry/prefix-emulator.json).
+
+## Complete preflight with phase observations
+
+A distinct diagnostic retains the original complete17-unit preflight,100,000-call
+bound,1,000-close bound and every original assertion. An optional fixture-only
+hook closes progress records on genuine phase transitions around the original
+step call. It changes no production source, ownership state or clock. The
+original entry and64-step prefix compile without this hook. The traced entry
+has a distinct marker and exact `ROLLING TRACE DONE phase=0` terminal sidecar.
+Intermediate step counts are observations, not completion or timing evidence.
+
+All three HOST ASan/UBSan groups pass, including each entry's foreign/missing
+sidecar refusals and baseline/unrelated-input preservation. The pinned86-unit
+portable build passes:329,796bytes SHA256
+`23cc1900be40f140e1b399ad2a804a587e0688133247837c7f94cdf6f00b99df`.
+Exact Amiberry and A1200 execution remain NOT_RUN at preparation. This new
+diagnostic does not replay either earlier failed transaction or qualify the
+rolling68, device, timing or listening paths. See
+[trace host/build evidence](../evidence/enhanced-editor/rolling-native-entry/trace-host-build.json).

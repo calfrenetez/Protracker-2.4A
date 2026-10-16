@@ -9,6 +9,10 @@ out without confirmed completion; independent cleanup/release passes and the
 failed transaction is preserved. A1200 execution remains NOT_RUN; modeled
 clocks/buses supply no device or timing proof.
 See [the component scope](NATIVE_ROLLING_ENTRY.md#original-preflight-and-cancellation-component).
+A separate64-step prefix now passes exact Amiberry cancellation/disposal and
+independent release. A distinct complete-preflight phase-trace entry passes
+three HOST sanitizer groups and a pinned build; native execution is NOT_RUN
+at preparation. Neither extends complete-preflight or physical acceptance.
 
 The genuine68-case trigger/control/control/stop fixture and selected originalcase1
 pass HOST and pinned compile/link checks, but their native attempts remain

@@ -1,16 +1,27 @@
 /* Separate original preflight/cancellation component. The rolling68 entry is
  * retained but never invoked. All clocks/buses and allocations remain models.
  * Only an existing exact owned progress sidecar may be overwritten. */
+#ifdef PT_ROLLING_PREFLIGHT_TRACE
+struct sl_trial;
+static void pt_preflight_observe_step(struct sl_trial *,unsigned);
+#define PT_PRIVATE_ROLLING_STEP_OBSERVE pt_preflight_observe_step
+#endif
 static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #define PT_PRIVATE_ROLLING_NATIVE_ENTRY pt_preflight_full_native_not_called
 #include "native_exec_mixed_causal_rolling_test.c"
 #undef PT_PRIVATE_ROLLING_NATIVE_ENTRY
+#ifdef PT_ROLLING_PREFLIGHT_TRACE
+#undef PT_PRIVATE_ROLLING_STEP_OBSERVE
+#endif
 
 #ifndef PT_ROLLING_PREFLIGHT_PREFIX
 #define PT_ROLLING_PREFLIGHT_PREFIX 0
 #endif
 #if PT_ROLLING_PREFLIGHT_PREFIX != 0 && PT_ROLLING_PREFLIGHT_PREFIX != 64
 #error "Only the original preflight or the separately bounded64-step prefix is supported"
+#endif
+#if PT_ROLLING_PREFLIGHT_PREFIX && defined(PT_ROLLING_PREFLIGHT_TRACE)
+#error "Prefix and complete-preflight trace are separate components"
 #endif
 
 static const char *pt_preflight_progress;
@@ -20,15 +31,37 @@ static void pt_preflight_record(const char *stage,const struct sl_trial *e)
 {
     FILE *stream=fopen(pt_preflight_progress,"wb");
     if(!stream){pt_preflight_io_failed=1;return;}
-#if PT_ROLLING_PREFLIGHT_PREFIX
+#if PT_ROLLING_PREFLIGHT_PREFIX || defined(PT_ROLLING_PREFLIGHT_TRACE)
+#ifdef PT_ROLLING_PREFLIGHT_TRACE
+    if(!strcmp(stage,"DONE")){
+        if(fprintf(stream,"ROLLING TRACE DONE phase=0\n")<0)pt_preflight_io_failed=1;
+    }else if(fprintf(stream,"ROLLING TRACE %s steps=%u phase=%u\n",stage,
+                    pt_preflight_steps,e?(unsigned)e->producer.original.phase:0)<0)pt_preflight_io_failed=1;
+#else
     if(fprintf(stream,"ROLLING PREFIX %s steps=%u phase=%u\n",stage,
                pt_preflight_steps,e?(unsigned)e->producer.original.phase:0)<0)pt_preflight_io_failed=1;
+#endif
 #else
     if(fprintf(stream,"ROLLING PREFLIGHT %s phase=%u\n",stage,
                e?(unsigned)e->producer.original.phase:0)<0)pt_preflight_io_failed=1;
 #endif
     if(fclose(stream))pt_preflight_io_failed=1;
 }
+
+#ifdef PT_ROLLING_PREFLIGHT_TRACE
+/* Fixture observation only: leave the original step and every oracle intact.
+ * Close a record only when a genuine phase changes; no clock/cost inference. */
+static void pt_preflight_observe_step(struct sl_trial *e,unsigned after)
+{
+    static unsigned last_phase=~0U;
+    unsigned phase=e->producer.original.phase;
+    if(!after)++pt_preflight_steps;
+    if(phase!=last_phase){
+        pt_preflight_record(after?"PHASE-END":"PHASE-BEGIN",e);
+        last_phase=phase;
+    }
+}
+#endif
 
 int main(int argc,char **argv)
 {
@@ -76,6 +109,8 @@ int main(int argc,char **argv)
     if(pt_preflight_io_failed)return 20;
 #if PT_ROLLING_PREFLIGHT_PREFIX
     puts("ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY");
+#elif defined(PT_ROLLING_PREFLIGHT_TRACE)
+    puts("ROLLING TRACE NATIVE PASS:original preflight and cancellation;MODELED_ONLY");
 #else
     puts("ROLLING PREFLIGHT NATIVE PASS:original preflight and cancellation;MODELED_ONLY");
 #endif

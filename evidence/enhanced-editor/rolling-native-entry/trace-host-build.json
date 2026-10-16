@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "scope": "Original complete17-unit preflight/cancel with optional test-only observations on genuine phase transitions; all original oracles retained",
+  "host": {
+    "sanitizerGroups": 3,
+    "originalPreflightPrefixAndTracePassed": true,
+    "foreignMissingAbsentSidecarRefusalsInAllThree": true,
+    "unrelated16AndBaselinePreserved": true,
+    "resultSHA256": "fa062a22f4e97465629422c925c510c941965d043df15ee981fe6dde2fedc410"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 239,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "testOnlyCompileFlag": "-DPT_ROLLING_PREFLIGHT_TRACE=1",
+    "candidateBytes": 329796,
+    "candidateSHA256": "23cc1900be40f140e1b399ad2a804a587e0688133247837c7f94cdf6f00b99df",
+    "manifestSHA256": "de7b7d5ef163d9c94681a66b91e583871b20c9ea54fa9655a38599d9ad056645",
+    "compilerAssemblerLinkerPinsBeforeAfter": true
+  },
+  "nativeLimitsChanged": false,
+  "originalStepWork": 17,
+  "originalLoopBound": 100000,
+  "originalCloseBound": 1000,
+  "productionCodeChanged": false,
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

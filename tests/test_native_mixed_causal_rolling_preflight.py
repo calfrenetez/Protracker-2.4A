@@ -60,4 +60,11 @@ class PreflightPrefixHost(PreflightHost):
     EVIDENCE_PREFIX = 'prefix-'
 
 
+class PreflightTraceHost(PreflightHost):
+    EXTRA_FLAGS = ('-DPT_ROLLING_PREFLIGHT_TRACE=1',)
+    EXPECTED = b'ROLLING TRACE NATIVE PASS:original preflight and cancellation;MODELED_ONLY\n'
+    DONE = b'ROLLING TRACE DONE phase=0\n'
+    EVIDENCE_PREFIX = 'trace-'
+
+
 if __name__ == '__main__':unittest.main()

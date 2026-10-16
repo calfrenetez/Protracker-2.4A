@@ -423,7 +423,14 @@ static enum pt_editor_mixed_causal_song_lineage_result sl_step(struct sl_trial *
 {
  enum pt_editor_mixed_causal_song_lineage_result r;unsigned phase=e->producer.original.phase;
  e->promoting=phase<=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_ESTABLISH_CLOSE;
- r=pt_editor_mixed_causal_song_rolling_step(&e->producer,work);e->promoting=0;return r;
+#ifdef PT_PRIVATE_ROLLING_STEP_OBSERVE
+ PT_PRIVATE_ROLLING_STEP_OBSERVE(e,0);
+#endif
+ r=pt_editor_mixed_causal_song_rolling_step(&e->producer,work);e->promoting=0;
+#ifdef PT_PRIVATE_ROLLING_STEP_OBSERVE
+ PT_PRIVATE_ROLLING_STEP_OBSERVE(e,1);
+#endif
+ return r;
 }
 static void sl_begin(struct sl_trial *e)
 {

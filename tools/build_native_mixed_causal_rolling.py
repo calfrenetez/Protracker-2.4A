@@ -134,6 +134,8 @@ def main():
                     help='Separate original preflight/cancel component; closed owned progress sidecar required')
     diagnostic.add_argument('--preflight-prefix', action='store_true',
                     help='Separate64 original steps/cancel component; does not qualify complete preflight')
+    diagnostic.add_argument('--preflight-trace', action='store_true',
+                    help='Original complete17-unit preflight/cancel with closed phase-transition observations')
     args = ap.parse_args()
     units = list(SOURCES)
     extra_compile = list(EXTRA_COMPILE_FLAGS)
@@ -144,6 +146,11 @@ def main():
         extra_compile.append('-DPT_ROLLING_DIAGNOSTIC_CASE=' + str(args.diagnostic_case))
         target = 'PTMixedRollingDiagnostic'
         marker = b'ROLLING DIAGNOSTIC PASS:'
+    elif args.preflight_trace:
+        units[0] = 'tests/native_exec_mixed_causal_rolling_preflight_test.c'
+        extra_compile.append('-DPT_ROLLING_PREFLIGHT_TRACE=1')
+        target = 'PTMixedRollingTrace'
+        marker = b'ROLLING TRACE NATIVE PASS:'
     elif args.preflight_prefix:
         units[0] = 'tests/native_exec_mixed_causal_rolling_preflight_test.c'
         extra_compile.append('-DPT_ROLLING_PREFLIGHT_PREFIX=64')

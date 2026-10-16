@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "scope": "Exact64 original preparation steps and genuine cancellation/disposal in shared68030 Amiberry; ordinary allocation and modeled bus/clock",
+  "candidate": {
+    "bytes": 328812,
+    "sha256": "11537b5dc03702e6150fa48d9f26330840d0a98a36ad7827fd9bc89c9b31c631"
+  },
+  "result": "PASS",
+  "returnCode": 0,
+  "steps": 64,
+  "workPerStep": 17,
+  "stdoutBytes": 75,
+  "soleExpectedMarker": true,
+  "closedSidecar": "ROLLING PREFIX DONE steps=64 phase=0",
+  "nativeLimitsChanged": false,
+  "observedStackBytes": 1048576,
+  "exactInputAndNineExecutionFileCustody": true,
+  "bothRAMNamespacesAndHostStagingAbsent": true,
+  "savedLifecycleFilesRestored": true,
+  "independentObserverSHA256": "8a93e773c88c8801facede28b95b9fc6c58afb12afaeac0621ad93444e250296",
+  "publicReleaseSHA256": "e39493b56c87d1aabd2ec49c78a2e028c21e5736101d376f66a9918274947d8b",
+  "ownServiceStopped": true,
+  "separateFinalIdleSHA256": "7f047cbcb7f58f641cacc33b708d49390894d72d8f15b9b1d73041f85952c722",
+  "sourceInventoryFrozen": true,
+  "rawResultSHA256": "d7b6b0dc831b272b6bb27123e2436b9f47703e284016db26c5c60ad2010c85d1",
+  "acceptance": {
+    "completePreflight": "UNCONFIRMED",
+    "originalRolling68": "UNCONFIRMED",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "scope": "Private host lifecycle coordinator only; no application or shared guard policy change",
+  "original_failure": "Exact native fixture and public release passed, then owned-service SIGTERM exit observer failed while the parent had not reaped its child. Original failure retained.",
+  "corrected_behavior": "Parent concurrently waits for its own service child before independent PID-absence checking; no extra signal or native retry.",
+  "host_child_regression": {
+    "state": "PRIVATE_CHILD_REAPING_REPRODUCED_AND_CORRECTED",
+    "baseline": {
+      "unreaped_state": "Z",
+      "reaped_returncode": 0
+    },
+    "corrected_returncode": -15,
+    "corrected_pid_absent": true,
+    "signals": 1,
+    "shared_services": 0,
+    "target_operations": 0
+  },
+  "closure": {
+    "native_reruns": 0,
+    "additional_signals": 0,
+    "separate_exit_confirmation": true,
+    "separate_fresh_final_idle": true,
+    "historical_fence": 1767,
+    "historical_archives": 104,
+    "holds": 0
+  },
+  "records_sha256": {
+    "original_failure": "96633423ac0d5607b46654b18cc2d3203dd44f9b25dcd08a08c7ffd97313eae8",
+    "original_exit_check_stderr": "3b99767a6f2a8b7d18b855625ea5495f22fb07e67185a8fd0f380769a0818c4d",
+    "stop_intent": "186e81ca866e852a3961f768fc2f443b6800ef3f159a5690b685edf52a3d969a",
+    "separate_exit_observation": "a0f33499bfa9717c9ba8f99e97e9e0709478bbfd504c134ab328635ed9052bd3",
+    "separate_final_idle": "c0cc9c00a17e87f4a4245fa1bb168368effb511a91351d437b9be513ef35d9d5",
+    "private_child_regression": "da5439b2073718b511eda392e4f1c5421b94020e49519b0399d28c02db6141bf",
+    "corrected_coordinator_source": "83ef4bd4c151a3e0bebf71b189d3af4281ef2c7fb2c55d640988f6ac79a3f3d2"
+  },
+  "acceptance": "Host child lifetime correction and independently observed closure only; not a device/timing/physical qualification"
+}

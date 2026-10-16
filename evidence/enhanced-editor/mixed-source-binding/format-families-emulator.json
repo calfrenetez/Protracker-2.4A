@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "state": "PARTIAL_NEW_FORMAT_NATIVE_QUALIFICATION",
+  "completed_native_families": 3,
+  "new_native_cases": 54,
+  "new_native_controls": 9,
+  "new_native_refusals": 45,
+  "remaining_new_native_cases": 366,
+  "previous_8mono_cases": 75,
+  "combined_separate_native_binding_cases": 129,
+  "binding_matrix_cases": 495,
+  "previous_8mono_evidence": {
+    "file": "families-emulator.json",
+    "sha256": "9fe8bb89c47fe50dcfd56e4f57b190aaff017b860f3bcc6028a9c77b8b36bae1",
+    "all_five_89_body_graphs_match_current_source": true
+  },
+  "rows": [
+    {
+      "component": "24stereo",
+      "backend_family": "amigus16le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-24stereo-amigus16le-emulator.json",
+      "sha256": "a06eaeace1839d5bb70dfcee05adfd5954d277e37f76d892756f4c3498c970d5",
+      "candidate": {
+        "crc32": "86EFA5CC",
+        "sha256": "cf031d2e0453c8710c95afd0fc946e2da04f5106de3526b3939d711b3c5a5ead",
+        "size": 296564
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24stereo",
+      "backend_family": "paula",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-24stereo-paula-emulator.json",
+      "sha256": "52fc7169b9f372fa719ebbfaf77e00f1ee3909569847f0aaebda179cba472d9b",
+      "candidate": {
+        "crc32": "78826447",
+        "sha256": "94c0c0a90707a3d2c113f4820b28ec850d4aefe1a4535b23c88a98aa0c93f53c",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "8stereo",
+      "backend_family": "paula",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-8stereo-paula-emulator.json",
+      "sha256": "ca47c85510efe9c39ee66380fa63895385e81a633dd957ffc0dffae64f029805",
+      "candidate": {
+        "crc32": "77676DAC",
+        "sha256": "fbfe34fc78d5623e43f2c06068908bc5fa4ec9ab3ebc5567eac35eca5e526300",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": true
+    }
+  ],
+  "host_and_build": "All420 new cases pass ASan/UBSan/assertions;25 pinned builds and private runner/service/entry qualifications pass",
+  "original_limits_preserved": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "ordinary_allocator_and_fake_bus_only": true,
+  "continuous_495_case_run_qualified": false,
+  "legacy_constructor_native_qualified": false,
+  "physical_execution": "NOT_RUN",
+  "original_failed_transactions": "Preserved; no unchanged transaction retry or widened deadlines",
+  "not_qualified": [
+    "Exec memory classes in these fixtures",
+    "Device RAM/upload completion or actual stop/DMA/IRQ",
+    "Whole-callchain Stack/WCET",
+    "Native output activation/exact timing/frontend/audio/listening"
+  ],
+  "availability": "Each release is historical; every new operation requires fresh live guards"
+}

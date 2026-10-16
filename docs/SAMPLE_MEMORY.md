@@ -1,5 +1,21 @@
 # Sample memory and playback ownership
 
+## Additional mixed source-format native checks —16 October2026
+
+Three new separately bounded families pass54 genuine source/cache binding cases
+in Amiberry:24-bit stereo Paula and AmiGUS16-bit little-endian, plus8-bit stereo
+Paula. All exact native results complete with RC0; independent restoration,
+cleanup, ownership release and fresh idle observations pass. The8-bit stereo
+coordinator's original child-reaping exit-check failure is preserved alongside
+its separate exit confirmation; no native transaction was repeated.
+
+All420 remaining source-format cases and25 exact pinned builds pass host and
+compiler checks. At this milestone366 new cases remain native NOT_RUN. These
+ordinary-allocation/fake-bus results establish neither physical RAM/device stop
+nor exact output timing, frontend or listening acceptance. See
+[scope and current native results](SAMPLER_MIXED_READERS.md#new-source-format-native-qualifications-16-october2026).
+
+
 ## Mixed cache source binding: separate native backend families —16 October2026
 
 The8-bit mono mixed-reader matrix now passes in five separate15-case Amiberry

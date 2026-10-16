@@ -1,5 +1,36 @@
 # Genuine paired sampler reader factory
 
+## New source-format native qualifications —16 October2026
+
+Separate24-bit stereo Paula and AmiGUS16-bit little-endian families each pass18
+cases in Amiberry. A separate8-bit stereo Paula family also passes18 cases:
+together54 new cases,9 controls and45 source/representation refusals. Each exact
+run completes39 stdout observations, a separately closed sidecar, RC0 and an
+observed1MiB Stack. Genuine master/cache pins, full byte preservation and
+independent reader/command retirement remain asserted under unchanged limits.
+
+The8-bit stereo host coordinator originally failed to confirm service exit
+because its own child remained unreaped while the independent observer waited
+for PID absence. The original failure is preserved. Separate exit confirmation
+and a fresh final idle observation pass without a second signal or native rerun.
+A private child-process regression reproduces the issue and verifies concurrent
+parent reaping; subsequent windows use that correction. No application code or
+guarded target policy was changed by this coordinator fix.
+
+These54 new cases complement the prior75 separately qualified8mono cases;
+366 new-format cases remain native NOT_RUN at this milestone. All420 new cases
+pass host sanitizers in25 backend subtests. All25 exact pinned builds, local-frame
+checks and private runner/service/entry qualifications pass. A local frame
+estimate does not establish a complete call-chain bound or WCET.
+
+These are ordinary-allocation, fake-bus software tests. Continuous495-case native
+execution, original constructor, actual Exec placement, card RAM/device stop,
+IRQ, exact scheduled output, frontend, physical hardware and listening acceptance
+remain separate. Earlier failed native transactions are preserved without retry
+or widened deadlines. See [current scoped native results](../evidence/enhanced-editor/mixed-source-binding/format-families-emulator.json)
+and [the coordinator exit correction](../evidence/enhanced-editor/mixed-source-binding/coordinator-reaping.json).
+
+
 `sampler_mixed_readers` creates the genuine holders consumed by the opt-in
 `mixed_scheduled_readers` queue. It establishes no master and attaches no editor.
 The caller first establishes authoritative sampler-owned 8/16/24-bit masters,

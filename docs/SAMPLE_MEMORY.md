@@ -1,5 +1,19 @@
 # Sample memory and playback ownership
 
+## Current mixed binding coverage —16 October2026
+
+Separate native families now pass459/495 genuine binding cases:84 controls and
+375 refusals. All8/16-bit mono/stereo and24-bit mono backends pass; three24-bit
+stereo backends pass. One remaining18-case family stopped before native launch
+on a staging-marker error and was independently recovered/released; the other
+18-case family has not run. Both remain outside native acceptance. An offline
+capture/source/custody/release audit passes for all28 completed families.
+
+This remains ordinary-allocation/fake-bus evidence. Continuous495 execution,
+original constructor, physical device stop and scheduled output are separate.
+See [current scope and records](SAMPLER_MIXED_READERS.md#current-separately-bounded-native-coverage-16-october2026).
+
+
 ## Studio output master preservation —16 October2026
 
 Studio's direct24-bit mixer now refuses output descriptors, written samples and
@@ -71,7 +85,8 @@ retirement remain software models; borrowed initial stack storage and internal
 stdio allocations are outside the explicit pool accounting. Exact guest/host
 cleanup, saved-file restoration, independent observation, public release, owned
 service stop and a separate final idle check pass. Real-A1200 execution remains
-NOT_RUN while actual Safari access is unavailable. Historical physical packets
+NOT_RUN pending its separately guarded physical operation. Safari access has
+been observed available in View Only; freshness must be rechecked before use. Historical physical packets
 using earlier bytes remain separate and cannot acquire current qualification.
 No device, DMA/voice-stop, IRQ, scheduled output, timing or listening acceptance
 follows. See the [current host/build](../evidence/enhanced-editor/readers-current-memory/host-build.json)

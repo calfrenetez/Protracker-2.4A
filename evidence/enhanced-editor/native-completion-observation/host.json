@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "state": "BOUNDED_COMPLETION_OBSERVATION_HOST_PASS_NATIVE_NOT_RUN",
+  "source_scope": "Owned Python native-fixture protocol only; application candidate bytes and musical schedule unchanged",
+  "baseline": "Original protocol reproduces error when acknowledged staging launch temporarily removes marker",
+  "change": "Observe the complete owned directory while marker is absent/short; only exact terminal size permits strict content read; unknown entries/kinds and oversize/error replies still fail closed",
+  "new_tests": 8,
+  "owned_protocol_model_tests": 75,
+  "raw_file_protocol_tests": 28,
+  "preserved": {
+    "staging_seconds": 30,
+    "native_max_seconds": 90,
+    "whole_seconds": 250,
+    "one_launch_per_phase": true,
+    "no_request_replay_after_error": true,
+    "strict_terminal_content_capture_custody_checksums": true,
+    "no_guard_relaxation": true
+  },
+  "records_sha256": {
+    "baseline_failure": "309d03ea28036cd3bf1a0a9b010377918f8e9bfccd3b8eb0788e1fe260796a2c",
+    "baseline_stderr": "c84e924f5567c9588bc1284419ebad5793dbed08eb44440e3c2c856ef8729dd7",
+    "host_stderr": "effc5a1bf3bbd7382b830b8c388d3b711dd9a61c9537870959311abb2773d92c",
+    "wire_stderr": "1d554b7b3cd8be64af9e7db4630b76ff230bd5adb6392b434c13670b522e85f2",
+    "protocol_source": "717fc1df1cffa631c4369649b1c2467a45edd286ea31926b037f7c3db50209cf",
+    "regression_source": "db56534f0f889922593c3219783aa4ed80da0d5ab007ae9b41133d84b5d252a6"
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Atomic filesystem/daemon completeness or handle-close semantics",
+    "Native/physical app/device/timing/listening acceptance"
+  ]
+}

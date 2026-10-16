@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "state": "PREPARATION_FAILED_NO_NATIVE_COMPLETION_SCOPED_RECOVERY_INDEPENDENTLY_RELEASED",
+  "component": "24stereo",
+  "backend": "amigus8le",
+  "candidate": {
+    "crc32": "68F1E2EC",
+    "sha256": "830cc4ec0fc3c6ac6730025e79f36793073b6d51cfe9697478d1e787d9109c98",
+    "size": 296560
+  },
+  "observed": {
+    "single_staging_launch_acknowledged": true,
+    "next_reply": "ERR FILEINFO failed for own staging completion marker",
+    "guard_refusal": "R060 target tool error",
+    "native_execute_dispatched": false,
+    "native_completion_confirmed": false,
+    "diagnosis_limit": "Missing flag was observed; Shell redirection replacement is a modeled failure mechanism, not established device timing/root cause"
+  },
+  "original_limits": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "recovery": {
+    "own_emulator_SIGTERM_once": true,
+    "own_service_positively_absent_before_cleanup": true,
+    "saved_files_restored": true,
+    "exact_host_staging_absent": true,
+    "independent_observation": true,
+    "public_release": true,
+    "separate_final_idle": true,
+    "fence": 1853,
+    "archives": 125,
+    "original_holds_archived": 3,
+    "remaining_holds": 0,
+    "fixture_replayed": false,
+    "availability": "Historical; new live checks required"
+  },
+  "records_sha256": {
+    "failed_result": "55ef7593b9bcc81e907345822c44ff74a4e557629627651a7a9bb80c0191c991",
+    "last_error_reply": "4a34b67d2eb0dcce3f8059124102d5ecae9e968adef1bcc3f17a148f4812aadc",
+    "restoration": "c1b44f6571df0db3dab463c17839562c5c28c5772eb3a9c2e578dbb4e7f3cdb8",
+    "independent_observation": "537d11d89e091d22f02ea634b48e36c963da74854851faabf739135f302b9489",
+    "public_release": "c9cabb85bc091b29dac8683fd2d44622e7f4b3387f32ba998ccdbe19f4a2b028",
+    "separate_final_idle": "67c22ba88c53ed120c5617e434f4253280f53890b81c4951b3017c979b73fe55"
+  },
+  "not_qualified": [
+    "These18 native cases",
+    "Original continuous495/75 fixture and constructor",
+    "Device/physical stop/timing/frontend/listening"
+  ]
+}

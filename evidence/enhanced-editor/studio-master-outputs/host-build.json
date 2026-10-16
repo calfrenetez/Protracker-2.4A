@@ -46,7 +46,10 @@
     "existing_duplicate_link_failure_preserved": true,
     "recipe_correction": "Remove duplicate flow/pitch units from shared editor Studio EXTRA; inherited SOURCES retains both once; no source omitted.",
     "initial_core_console_sha256": "b2b010deb21061e4477ff13c00a40c0cb970da6a63fd04e5950ce414eab0c25c",
-    "additional_console_sha256": "d07f39f65596ea0a598ceb63b72f524cc8b753362e97ca1519d691e27c15af2a"
+    "additional_console_sha256": "d07f39f65596ea0a598ceb63b72f524cc8b753362e97ca1519d691e27c15af2a",
+    "positive_editor_capture_stdout_sha256": "d4e2a26c2eb6caf661f7188abd5bf995d28302a7af6af3138a77c02ed6f2b00b",
+    "positive_editor_capture_stderr_sha256": "02dd659757b7c66818e8088064269352095c1237e5b29f749a90705b3fa8f8b1",
+    "positive_editor_result_sha256": "d0d21498d2f8566512d1fd1503e8e5c3497253b4f89cad314a7beb28744517df"
   },
   "frozen_exports": {
     "baseline_and_current_files": 1380,
@@ -67,7 +70,14 @@
     "selected_assembler_verified_before_after": true,
     "native_manifest_sha256": "26493b76f073e35fb8ea7708ea12dc4e430369007f1312c7ea48e8ea96243cf0",
     "private_builder_sha256": "097666bf21d989d2987251b1dfbaab81536323ff7c376b45f166a7871791cb12",
-    "recipe": "Committed flag/runtime contracts inspected as data; dirty shared recipe never executed."
+    "recipe": "Committed flag/runtime contracts inspected as data; dirty shared recipe never executed.",
+    "maximum_compiler_local_frame": {
+      "unit": "tests/studio_master_outputs_test.c",
+      "function": "studio_master_outputs_test.c:43:13:one",
+      "bytes": 1056,
+      "kind": "dynamic,bounded"
+    },
+    "stack_scope": "Local compiler estimate only; conservative1MiB task Stack planned, not whole-callchain/WCET proof"
   },
   "production_pins": {
     "src/core/studio_mix.c": "21fd2e99644680be922d9f0a4b713544c8234ecf42212a74e1ffba5298f23e28",

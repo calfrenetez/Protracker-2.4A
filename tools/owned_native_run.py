@@ -237,6 +237,22 @@ class Transaction:
     def observer(self, seconds=60):
         return wire.Observation(self.ask, seconds=min(seconds, 60, self.remaining()), clock=self.clock)
 
+    async def completion_size(self, name, size, deadline, allowed):
+        """Observe a pending Shell output without opening a missing file.
+
+        Redirection can temporarily remove or partially write the marker. A
+        complete directory reply permits those pending states; it cannot prove
+        success. Only the exact terminal size permits the existing strict file
+        read, content, custody and checksum checks. Errors still end this run.
+        """
+        entries = await self.observer(deadline - self.clock()).directory(self.plan.directory)
+        require(self.clock() < deadline, "Completion observation deadline expired")
+        require(all(e.name in allowed and e.kind == "F" for e in entries),
+                "Completion namespace contains an unowned entry")
+        marker = next((e for e in entries if e.name == name), None)
+        require(marker is None or marker.size <= size, "Completion marker exceeds bound")
+        return 0 if marker is None else marker.size
+
     async def copy_candidate(self):
         """Copy caller-pinned shared or RAM staging; never alters its source.
 
@@ -259,11 +275,9 @@ class Transaction:
             remaining = deadline - self.clock()
             require(remaining > 0, "Staging completion deadline expired")
             path = self.plan.path("staged.flag")
-            raw = await self.ask({"type": "FILEINFO", "path": path}, "FILEINFO", min(4, remaining))
-            require(self.clock() < deadline, "Staging completion deadline expired")
-            size = wire.file_info(raw, path, 7)[0]
-            require(size in (0, 7), "Unexpected staging flag length")
-            if size:
+            size = await self.completion_size("staged.flag", 7, deadline,
+                                              {"NativeTest", "Stage-once", "staged.flag", "stage.log"})
+            if size == 7:
                 flag = await self.observer(deadline - self.clock()).file(path, 7)
                 require(self.clock() < deadline and flag == b"STAGED\n", "Exact timely staging success absent")
                 break
@@ -369,10 +383,8 @@ class Transaction:
                 remaining = native_deadline - self.clock()
                 require(remaining > 0, "Native completion deadline expired")
                 name = self.plan.path("complete.flag")
-                raw = await self.ask({"type": "FILEINFO", "path": name}, "FILEINFO", min(4, remaining))
-                require(self.clock() < native_deadline, "Native completion deadline expired")
-                size = wire.file_info(raw, name, 9)[0]
-                require(size in (0, 9), "Unexpected completion flag length")
+                size = await self.completion_size("complete.flag", 9, native_deadline,
+                                                  set(self.plan.names))
                 if size == 9:
                     flag = await self.observer(native_deadline - self.clock()).file(name, 9)
                     require(self.clock() < native_deadline and flag == b"COMPLETE\n", "Exact timely completion flag absent")

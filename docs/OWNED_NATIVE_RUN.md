@@ -1,5 +1,31 @@
 # Prepared RAM-only native test route
 
+## Pending completion-marker observation —16 October2026
+
+A newly preserved staging attempt acknowledged its one Shell launch, then the
+bridge reported that the completion file was missing. The transaction correctly
+failed closed. Its exact resources were independently recovered and released;
+no native result or rerun is inferred.
+
+The protocol now observes a complete owned-directory reply while a Shell marker
+is absent or shorter than its exact terminal length. It opens the marker only
+after the terminal length appears, then retains every strict content, capture,
+checksum and custody check. Unknown entries, directories, oversized markers and
+actual error replies still fail immediately. A missing/partial file is pending,
+not successful completion. Original30-second staging,90-second native and whole
+transaction limits, one launch per phase and sticky failure remain unchanged.
+
+The baseline reproduces the missing-file failure. Eight regressions cover
+staging/native absence and partial writes, both deadlines, wrong terminal text,
+foreign entries, oversized markers and actual directory errors without further
+requests. All75 owned-protocol model tests and28 raw-protocol tests pass. The
+updated private Studio packet passes35runner/27service/15entry checks; the
+physical packet passes25runner/27service checks. Native execution of this new
+observation path is pending; historical target results do not qualify it.
+Directory replies are observations, not atomic filesystem or handle-close proof.
+See [scoped evidence](../evidence/enhanced-editor/native-completion-observation/host.json).
+
+
 Status: **Exact Load fixture and full owned-RAM copy/capture/cleanup route pass
 in Amiberry. Independent restoration, release and final idle checks pass.
 The exact sampler18 fixture also passes the incremental direct-upload route on

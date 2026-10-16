@@ -1,5 +1,33 @@
 # Genuine paired sampler reader factory
 
+## Current separately bounded native coverage —16 October2026
+
+Twenty-eight separate Amiberry runs now qualify459 of the495 binding cases:
+84 genuine controls and375 refusals. Every8/16-bit mono/stereo family and every
+24-bit mono backend passes. Three24-bit stereo backends pass; the8-bit
+little-endian family failed during staging before native execution, and the
+16-bit big-endian family remains NOT_RUN. No failed transaction was replayed.
+
+The failed preparation acknowledged its single Shell staging launch, then
+returned an exact error for the staging-completion file. Its own emulator was
+stopped once, the already-absent service was independently checked, originals
+were restored, and cleanup/public release/separate final idle verification
+passed. All three original holds and the failed result remain archived. This
+neither passes those18 cases nor diagnoses the physical cause of the missing
+file. A bounded completion-observation successor is host qualified separately.
+
+An offline audit replays all28 actual captures/control records, checks their
+current89-body build closures, immutable source inventories, custody and release
+archives, and verifies the saved independent final observations. The audit sends
+no target commands and does not establish present availability. Continuous495
+execution and the original constructor remain unqualified; earlier failures and
+original time limits remain preserved. These ordinary-allocation/fake-bus tests
+supply no physical placement/device stop/timing/audio acceptance. See the
+[coverage record](../evidence/enhanced-editor/mixed-source-binding/format-families-emulator.json),
+[offline audit](../evidence/enhanced-editor/mixed-source-binding/completed-families-audit.json)
+and [preserved preparation failure](../evidence/enhanced-editor/mixed-source-binding/format-24stereo-amigus8le-preparation-failure.json).
+
+
 ## New source-format native qualifications —16 October2026
 
 Separate24-bit stereo Paula and AmiGUS16-bit little-endian families each pass18

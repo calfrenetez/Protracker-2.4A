@@ -1,13 +1,13 @@
 {
   "schema": 1,
   "state": "PARTIAL_NEW_FORMAT_NATIVE_QUALIFICATION",
-  "completed_native_families": 3,
-  "new_native_cases": 54,
-  "new_native_controls": 9,
-  "new_native_refusals": 45,
-  "remaining_new_native_cases": 366,
+  "completed_native_families": 23,
+  "new_native_cases": 384,
+  "new_native_controls": 69,
+  "new_native_refusals": 315,
+  "remaining_new_native_cases": 36,
   "previous_8mono_cases": 75,
-  "combined_separate_native_binding_cases": 129,
+  "combined_separate_native_binding_cases": 459,
   "binding_matrix_cases": 495,
   "previous_8mono_evidence": {
     "file": "families-emulator.json",
@@ -15,6 +15,231 @@
     "all_five_89_body_graphs_match_current_source": true
   },
   "rows": [
+    {
+      "component": "16mono",
+      "backend_family": "amigus16be",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-16mono-amigus16be-emulator.json",
+      "sha256": "59b2a18843933f66d67be42abcd9591d9b277af17b8f0a8d89a2d25258f140a0",
+      "candidate": {
+        "crc32": "4FC86538",
+        "sha256": "579efc6b37077c87cc592cfc39333a11cbb690f59b5d7f72d03a5ff28c97c3cf",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16mono",
+      "backend_family": "amigus16le",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-16mono-amigus16le-emulator.json",
+      "sha256": "a48502a0a7ee4539ce0b6a85843fc24caa2c51de3eb7f55c672862a8e7d12e22",
+      "candidate": {
+        "crc32": "42D9CCE1",
+        "sha256": "3ad57ca4ef11b46cec89b60adde7ae757cd2103cdde1ce2a2261424479edc7fe",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16mono",
+      "backend_family": "amigus8be",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-16mono-amigus8be-emulator.json",
+      "sha256": "3ec26884eba64496c2729e25ef8f5b94a388b07f631e29b137d275009aae9b30",
+      "candidate": {
+        "crc32": "D84B92BC",
+        "sha256": "cf54973e3c5a08fa321db2f60c933c1a967b552dbf9ed2546465b4bb0cf6a8f2",
+        "size": 296548
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16mono",
+      "backend_family": "amigus8le",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-16mono-amigus8le-emulator.json",
+      "sha256": "3deb566688984a4b91d9702f1060c3fd029f944d5d142b1216225bef515e451b",
+      "candidate": {
+        "crc32": "2DEA52B3",
+        "sha256": "6a0fb91170b9adf893be8b8ca727be34e87f0bf1bf244ed546b00b5861b12975",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16mono",
+      "backend_family": "paula",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-16mono-paula-emulator.json",
+      "sha256": "8a136b4be6444dcc64ba96dd040f5cc865feeaf59b0a92f1d26a086b5645cc23",
+      "candidate": {
+        "crc32": "6A6C943C",
+        "sha256": "3e8ba5f72ff6a17d525124fe612663e97eecf24d36c179abe5b94276275bff0c",
+        "size": 296544
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16stereo",
+      "backend_family": "amigus16be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-16stereo-amigus16be-emulator.json",
+      "sha256": "d7e5df86fc535b05a58b660e9abb61b8ff945333db67e10fe50f83536bb11ee0",
+      "candidate": {
+        "crc32": "7F93C031",
+        "sha256": "940f4d25618ce138d771f777bcbbc8ececf4f0c845e1eb4abddc4f3ce0cd8018",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16stereo",
+      "backend_family": "amigus16le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-16stereo-amigus16le-emulator.json",
+      "sha256": "3bccd01743b9cc88c714718a3b895aa2f93792910f2102d33ff362c58745533a",
+      "candidate": {
+        "crc32": "B82A83AA",
+        "sha256": "a27a4467a31473fd644521a6bba59756d2c0455a1f429c897af0d9a4005739d7",
+        "size": 296564
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16stereo",
+      "backend_family": "amigus8be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-16stereo-amigus8be-emulator.json",
+      "sha256": "54b3d36447288f6df37ed8bbcc291d74e4b67e77337caf47879a7ea15b8dc3dc",
+      "candidate": {
+        "crc32": "C005F747",
+        "sha256": "fbcc4b8e9227b3f618becb93027fa0cbb5a26cf51350a8ad5875eee0e4b05c11",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16stereo",
+      "backend_family": "amigus8le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-16stereo-amigus8le-emulator.json",
+      "sha256": "27d8c67f8323f545d9a59c4e487af6602eef7bc94c02f41718b84c0ea8e496bd",
+      "candidate": {
+        "crc32": "68B00860",
+        "sha256": "5193b089dfdec15dc0d96a5b6ee20687ebae6a38083ddf14e7ec8e69ed187e9a",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "16stereo",
+      "backend_family": "paula",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-16stereo-paula-emulator.json",
+      "sha256": "322b95c3e0964f4d07f9353ca275d2fe62701a4442a8803688886ae9ddf551b7",
+      "candidate": {
+        "crc32": "83ED0E4D",
+        "sha256": "ad955454f5b02bd2e1b51b4d8d1c32f621253fa73ec6abb9696eb0cd7466ac2d",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24mono",
+      "backend_family": "amigus16be",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-24mono-amigus16be-emulator.json",
+      "sha256": "5371fdf13a9a20059d02b2b33e67ca5aa9f71d4cfdacdd061223fb11ab4d14f4",
+      "candidate": {
+        "crc32": "51B5CA91",
+        "sha256": "b7cb2152acac1ba95d451f941cc006a407f757f962cbb96f81afa60fec82d50d",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24mono",
+      "backend_family": "amigus16le",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-24mono-amigus16le-emulator.json",
+      "sha256": "66a04d6058943c4698d24569098c8c8c66c86373c8f19d3f2d4e2a4741258fc9",
+      "candidate": {
+        "crc32": "0BCD0107",
+        "sha256": "87efeba617d71cfb49742bc5a6cb6a76074386c2856a826c73e5f56e3679d09c",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24mono",
+      "backend_family": "amigus8be",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-24mono-amigus8be-emulator.json",
+      "sha256": "b99338d330350169c9673239b0b51c970a2f505ba372350afd2f2729001f6556",
+      "candidate": {
+        "crc32": "584EA5F2",
+        "sha256": "5a751373b8037c384537ced24b5b352e0a2b2fa1040af917e755bf46b565538f",
+        "size": 296548
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24mono",
+      "backend_family": "amigus8le",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-24mono-amigus8le-emulator.json",
+      "sha256": "01d93ecabdbba227a9c7601459d77ab8cbd73dd373282cdeb343f07cbd965d2e",
+      "candidate": {
+        "crc32": "3397FD1A",
+        "sha256": "effa9f16c62fd70cf43e6d2320e6cf6eee10c7a09770ce1dc07a3ce2dea8be69",
+        "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24mono",
+      "backend_family": "paula",
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "evidence": "format-24mono-paula-emulator.json",
+      "sha256": "62f7a92f00d8556a58c4bf126483f6a401265181564ce69bfb0fa924f280a5e9",
+      "candidate": {
+        "crc32": "2DF0C6B5",
+        "sha256": "d1cb29964c77a1249ae999451582a291288caa49b605be21f69c2bb6cb4841b3",
+        "size": 296544
+      },
+      "host_reaping_failure_recovered": false
+    },
     {
       "component": "24stereo",
       "backend_family": "amigus16le",
@@ -32,6 +257,21 @@
     },
     {
       "component": "24stereo",
+      "backend_family": "amigus8be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-24stereo-amigus8be-emulator.json",
+      "sha256": "2de528c685f8825ee8d22e11ce5f6b1a5fd5bba70e0390e167319ca7e6cd9ce0",
+      "candidate": {
+        "crc32": "972D7F84",
+        "sha256": "22faef1db24134df80389557ac1615768381559c8dcf96aa0d82e88981b6e5ad",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24stereo",
       "backend_family": "paula",
       "cases": 18,
       "controls": 3,
@@ -42,6 +282,66 @@
         "crc32": "78826447",
         "sha256": "94c0c0a90707a3d2c113f4820b28ec850d4aefe1a4535b23c88a98aa0c93f53c",
         "size": 296552
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "8stereo",
+      "backend_family": "amigus16be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-8stereo-amigus16be-emulator.json",
+      "sha256": "136aab2d3aa2743eb901f68bfc7990adb7bf7fc3b006aa0b5467bfdec7ad8515",
+      "candidate": {
+        "crc32": "4A42F749",
+        "sha256": "48230fcbe1ee74f344e9a718a2f7a8ce7137429963e64e690765f33f4d6c0efd",
+        "size": 296556
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "8stereo",
+      "backend_family": "amigus16le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-8stereo-amigus16le-emulator.json",
+      "sha256": "6e3cd52212c980273a82e0b5d6ab6f95cd0929d744d79d24f7a19c97d87f9db8",
+      "candidate": {
+        "crc32": "3FC91AD9",
+        "sha256": "595ccf074920d88a6dc764c6bf8452f4845478579f33d2e369d9449f480c30af",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "8stereo",
+      "backend_family": "amigus8be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-8stereo-amigus8be-emulator.json",
+      "sha256": "5ef1f6489e6ee92e8c205b1b42f8fae935db47ae6d351a6106c5344f419e400a",
+      "candidate": {
+        "crc32": "996EBB6F",
+        "sha256": "c33df44e5c206ea40ea4972c86e3072d9839968f4d800f2326e148be939ab8dd",
+        "size": 296556
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "8stereo",
+      "backend_family": "amigus8le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-8stereo-amigus8le-emulator.json",
+      "sha256": "a602e5f685876834e21b413921c40e25d90f4a22bee051b4ca17b9a36d03df8d",
+      "candidate": {
+        "crc32": "965EF6B9",
+        "sha256": "f00ff3888d54213408f197ad7f889783cb9bcb5c189d0edb24ca6d89c35e4570",
+        "size": 296560
       },
       "host_reaping_failure_recovered": false
     },

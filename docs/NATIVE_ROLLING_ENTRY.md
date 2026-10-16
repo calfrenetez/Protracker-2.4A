@@ -435,3 +435,17 @@ with228 project dependency bodies,43 SDK bodies and seven runtimes.
 Exact Amiberry/A1200 and native speedup remain NOT_RUN at preparation. All
 original assertions, time limits and hardware/timing/listening gates remain. See
 [containment host/build evidence](../evidence/enhanced-editor/rolling-native-entry/prepare-span-host-build.json).
+
+The exact containment candidate's first attempt stops on an optional live
+FILEINFO progress-read error before a native completion result is observed.
+Its preceding directory sizes show the sidecar being rewritten; the underlying
+I/O cause is unproven. The native result remains UNCONFIRMED. Exact owned
+recovery, independent restoration/absence, public release and separate final
+idle pass. The failed transaction and original three HOLDs are archived.
+
+A fresh protocol successor will use the helper's existing final-only capture
+mode, retaining the final closed sidecar and every original native oracle and
+90/140/250-second limit. Thirty-five HOST protocol models pass, including new
+writer-ownership and sticky live-error cases. This neither ignores the error
+nor resumes the failed transaction. See
+[capture failure and successor scope](../evidence/enhanced-editor/rolling-native-entry/prepare-span-capture-failure.json).

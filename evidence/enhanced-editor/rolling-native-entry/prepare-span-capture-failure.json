@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "Containment candidate attempt interrupted by optional live progress metadata read; no native application verdict",
+  "candidate": {
+    "bytes": 330836,
+    "sha256": "a1ea3b207d6ba767e834579f1f85258dfd84282131657121dc957764b184518a"
+  },
+  "result": "UNCONFIRMED",
+  "returnCodeObserved": false,
+  "protocolRecords": 319,
+  "lastFailure": "ERR FILEINFO failed on exact owned progress file",
+  "precedingDirectoryProgressLengths": [
+    0,
+    45
+  ],
+  "underlyingIOCauseProven": false,
+  "concurrentWriterObservationUnsafe": true,
+  "failedResultSHA256": "3d5c803efb9fde4b53698bd1b70939f4f4c04a31ff09ee3193f419500056e49c",
+  "failedReplySHA256": "efcb855bbe3c1f25aa5f1a1e5bcdf1c6e6f89d5a55b819708544614890a0f991",
+  "originalAssertionsAndNativeLimitsRetained": true,
+  "originalFailedTransactionReplayed": false,
+  "recovery": {
+    "ownResourcesOnly": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactStagingCopyRemoved": true,
+    "independentObserverSHA256": "37cfeb4fddf65b0cd7b96ae3f01a78e6a8312fbff96644c4aaeda1029c853e7a",
+    "publicReleaseSHA256": "c36e9a6977acddc7a982b23ae75755a5c04843cff05cc01fdb65c7e03a1d3e05",
+    "separateFinalIdleSHA256": "e6adbe342a2e011febcd19a79c071b00f376d6d788580b91d88842a4b647eb18",
+    "ownershipReleased": true,
+    "holdsRemaining": 0
+  },
+  "successorPreparation": {
+    "policy": "Existing final-only capture mode; no FILEINFO/READFILE progress content while native writer may run",
+    "hostModelTestsPassed": 35,
+    "busyWriterAndStickyLiveErrorCases": 2,
+    "finalContentChecksumCustodyAndSettlementRetained": true,
+    "nativeLimitSeconds": 90,
+    "hostResultSHA256": "b47b7a360616f67739669271c477b10b10c7da87643da4c9b7be735150231840",
+    "nativeRun": "NOT_RUN"
+  },
+  "acceptance": {
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

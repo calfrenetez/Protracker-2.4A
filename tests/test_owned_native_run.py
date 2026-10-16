@@ -515,6 +515,63 @@ class TransactionTests(unittest.IsolatedAsyncioTestCase):
             await transaction.execute(diagnostic_progress=True)
         self.assertEqual((len(self.events), transaction.phase, self.bridge.launches), (count, 'FAILED', 1))
 
+    async def test_final_only_capture_does_not_open_progress_during_writer_ownership(self):
+        now = [0]
+        async def sleep(seconds):
+            now[0] += seconds
+            if now[0] >= 45:
+                self.bridge.files[self.plan.path('progress.log')] = b'MODEL CLOSED\n'
+                self.bridge.files[self.plan.path('complete.flag')] = b'COMPLETE\n'
+        transaction = self.new(copy=True, ram=True, progress=True, clock=lambda: now[0], sleep=sleep)
+        self.bridge.complete = False
+        original_files = dict(self.bridge.files)
+        original = self.bridge.exchange
+        reads = []
+        async def writer_owned(command, kind, seconds):
+            if (self.bridge.launches and command['type'] in ('FILEINFO', 'READFILE')
+                    and command.get('path') == self.plan.path('progress.log')):
+                closed = self.bridge.files[self.plan.path('complete.flag')] == b'COMPLETE\n'
+                reads.append(closed)
+                if not closed:
+                    self.bridge.calls.append(dict(command))
+                    return 'ERR|FILEINFO failed|' + command['path']
+            return await original(command, kind, seconds)
+        transaction.exchange = writer_owned
+        await transaction.prepare()
+        # The default reads the progress file only after authoritative completion.
+        result = await transaction.execute()
+        self.assertEqual((now[0], result['observed']['returnCode'], transaction.phase), (45, 0, 'COMPLETED'))
+        self.assertTrue(reads and all(reads))
+        self.assertFalse(any(e['event'] == 'native_progress_unconfirmed' for e in self.events))
+        self.assertEqual(transaction.custody['progress.log'], b'MODEL CLOSED\n')
+        self.idle_calls = 0
+        await transaction.settle(self.idle)
+        self.assertEqual((self.bridge.launches, self.idle_calls, self.bridge.files), (1, 1, original_files))
+
+    async def test_live_progress_fileinfo_error_stays_failed_without_retry(self):
+        now = [0]
+        async def sleep(seconds):
+            now[0] += seconds
+        transaction = self.new(progress=True, clock=lambda: now[0], sleep=sleep)
+        self.bridge.complete = False
+        original = self.bridge.exchange
+        async def writer_owned(command, kind, seconds):
+            if (self.bridge.launches and command['type'] == 'FILEINFO'
+                    and command.get('path') == self.plan.path('progress.log')):
+                self.bridge.calls.append(dict(command))
+                return 'ERR|FILEINFO failed|' + command['path']
+            return await original(command, kind, seconds)
+        transaction.exchange = writer_owned
+        await transaction.prepare()
+        with self.assertRaises(ValueError):
+            await transaction.execute(diagnostic_progress=True)
+        count = len(self.bridge.calls)
+        with self.assertRaises(ValueError):
+            await transaction.execute()
+        self.assertEqual((len(self.bridge.calls), now[0], transaction.phase,
+                          self.bridge.launches, transaction.custody), (count, 20, 'FAILED', 1, None))
+        self.assertFalse(any(c['type'] == 'DELETEFILE' for c in self.bridge.calls))
+
     async def test_progress_suffix_bound_and_malformed_reply(self):
         for malformed in (False, True):
             now = [0]

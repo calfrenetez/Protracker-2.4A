@@ -1,5 +1,24 @@
 # Prepared RAM-only native test route
 
+## Capture finalized progress after completion —16 October2026
+
+A current RAM-only candidate attempt stopped on an exact `ERR|FILEINFO failed`
+reply while optional live progress capture was enabled. Preceding owned-directory
+observations showed a zero-length then rewritten progress file. The underlying
+I/O cause is unproven; directory size is no handle-close or atomic-snapshot proof.
+The original failure is preserved and independently cleaned/released.
+
+Fresh qualifiers for a producer that rewrites its sidecar should explicitly use
+`diagnosticProgress=false`, the helper's existing default. After authoritative
+completion, retain the exact final sidecar, all stdout/control/RC/Stack checks,
+checksums, complete custody, separate settlement and independent release. No
+error is ignored, retried or converted to completion. Native deadlines stay90s.
+Two new writer-ownership model regressions prove final-only capture waits for
+completion and that an explicitly enabled live FILEINFO error stays failed,
+without a subsequent request or retry. All35 helper HOST model tests pass.
+A fresh exact successor is pending; this is not native or physical acceptance.
+See [failure, recovery and model checks](../evidence/enhanced-editor/rolling-native-entry/prepare-span-capture-failure.json).
+
 ## Pending completion-marker observation —16 October2026
 
 A newly preserved staging attempt acknowledged its one Shell launch, then the

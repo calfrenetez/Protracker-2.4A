@@ -9,7 +9,10 @@ remain equivalent; no pointer is dereferenced by this predicate and it grants
 no allocation or reader authority. Five HOST sanitizer groups and a pinned
 86-unit build pass, including48,224 numeric equivalence cases and full rolling68
 plus both preflight budgets. Exact Amiberry/A1200 and a native speed benefit are
-unqualified at preparation. See
+unqualified at preparation. Its first exact attempt subsequently stops on an
+optional live progress-file read error; native completion remains unconfirmed.
+Independent recovery/release passes. A final-only capture successor is prepared
+with all original completion and ownership checks. See
 [scope and evidence](NATIVE_ROLLING_ENTRY.md#equivalent-numeric-containment-during-preparation).
 
 ## Sampler header integrity comparison —16 October2026

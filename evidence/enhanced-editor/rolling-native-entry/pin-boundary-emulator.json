@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "state": "EXACT_AMIBERRY_PIN_BOUNDARY_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "size": 330852,
+    "sha256": "e7453ea5cf3930c5d5411ec3308267af5d494671543247daf588ff0883b60fdb",
+    "crc32": "10730610"
+  },
+  "scope": "Original17-unit establishment through semantic PIN_BEGIN, then original cancellation/preservation/disposal and zero accounting; stops before actual sample pinning. Ordinary allocations and modeled clocks/buses only.",
+  "native": {
+    "returnCode": 0,
+    "stackBytes": 1048576,
+    "outputBytes": 88,
+    "marker": "ROLLING PIN BOUNDARY NATIVE PASS:original17 establishment and cancellation;MODELED_ONLY",
+    "closedProgress": "ROLLING PIN BOUNDARY DONE phase=0\n",
+    "closedProgressBytes": 34,
+    "launches": 1
+  },
+  "capture": {
+    "liveProgressContentReads": false,
+    "finalClosedProgressRequired": true,
+    "allNineExecutionFilesCapturedAndSettled": true,
+    "originalDeadlinesSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    }
+  },
+  "cleanup": {
+    "exactBothRAMNamespacesAbsent": true,
+    "ownHostStagingAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObservationPassed": true,
+    "publicReleasePassed": true,
+    "separateFinalIdlePassed": true,
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "7e045843ffb272755a7347f09212780a78f965a0cc36ca663dcf82414e8e636b",
+    "release/independent-pass-observation.json": "598d1829137d8cb631cca8ac8b2befb9befa8f719a91dd8d93a36e58505e70b9",
+    "release/release-result.json": "d886c9a752b2963b43127ad3d84d2bf038ad647c31a391f798fe1399d2da64be",
+    "release/independent-final-idle.json": "d696692cb5c896117d8ea7c29bd23968841fe4aebb4ce16a6be8c43f00d325c1"
+  },
+  "unqualified": [
+    "Actual sample pinning/source activation",
+    "Complete audit/preflight or originalcase1/full68",
+    "A1200 execution of this candidate",
+    "Exec Fast/Chip placement, device/cache/voice stop",
+    "IRQ/output activation and exact musical timing",
+    "Human listening"
+  ],
+  "earlierUnconfirmedTransactions": "Preserved separately; not replayed or reinterpreted by this component pass"
+}

@@ -5,8 +5,10 @@
 A separate diagnostic follows original17-unit steps to genuine `PIN_BEGIN`,
 then original cancellation/preservation/zero accounting. It avoids assuming the
 same HOST/native step count. Seven HOST groups and the pinned86-unit build pass;
-exact new native/physical execution is NOT_RUN at preparation. This is
-establishment/cancellation scope only. See [the component](NATIVE_ROLLING_ENTRY.md#semantic-establishment-to-pin-component).
+exact new native/physical execution is NOT_RUN at preparation. The subsequent
+exact Amiberry component passes once with RC0, closed progress and independent
+cleanup/release. Physical execution remains NOT_RUN. This is establishment/
+cancellation scope only, stopping before actual sample pinning. See [the component](NATIVE_ROLLING_ENTRY.md#semantic-establishment-to-pin-component).
 
 ## Descriptor-local joint proof —16 October2026
 

@@ -662,3 +662,11 @@ passes:330852 bytes SHA256
 CRC32 `10730610`,43 SDK bodies, seven runtimes and252 frozen source files.
 Exact new Amiberry and physical execution are NOT_RUN at preparation. See
 [HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/pin-boundary-host-build.json).
+
+The exact330852-byte candidate subsequently passes once in Amiberry030, RC0,
+sole88-byte stdout and closed34-byte progress. All nine execution files settle;
+independent observation, explicit ownership release, owned service shutdown and
+separate final idle pass. This stops before sample pinning; it qualifies neither
+pinning/activation nor complete audit/preflight, case1/full68 or physical/device/
+timing/listening acceptance. Earlier unconfirmed transactions remain preserved.
+See [exact scoped result](../evidence/enhanced-editor/rolling-native-entry/pin-boundary-emulator.json).

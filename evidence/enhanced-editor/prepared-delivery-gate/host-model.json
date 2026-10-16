@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "state": "HOST_MODEL_PASS_NATIVE_NOT_RUN",
+  "date": "2026-10-16",
+  "sourcePins": {
+    "src/native/prepared_delivery_gate.h": {
+      "bytes": 6510,
+      "sha256": "2534f27067de8052a7ec872d6216a06fc0aa07faacef7c9760fa7697a5aec3fd"
+    },
+    "src/native/prepared_delivery_gate.c": {
+      "bytes": 12622,
+      "sha256": "2f8be8e73b4e016cfbcc18399b0948df6daea8710403a183595a8afe3d29a425"
+    },
+    "tests/prepared_delivery_gate_test.c": {
+      "bytes": 29439,
+      "sha256": "7165fa9573dd6599fdab62910748e3b856821cc856300c53eabed95fd009a34b"
+    },
+    "tests/test_prepared_delivery_gate.py": {
+      "bytes": 7080,
+      "sha256": "93f64926bbec8ca7b106e1dabc5c307bbd84b90ea915a124a4a043f1dd683630"
+    }
+  },
+  "host": {
+    "unittestGroups": 1,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "compileLimitSeconds": 120,
+    "fixtureLimitSeconds": 30,
+    "assertionsEnabled": true,
+    "sourcesUnchanged": true,
+    "protectedUnrelatedPaths": 16,
+    "classicBaselinePreserved": true,
+    "productionUndefinedSymbols": [
+      "Disable",
+      "Enable",
+      "SysBase"
+    ],
+    "privateFakeHeaderSha256": {
+      "exec/tasks.h": "f40923c5522a8790cdba993918cf65d335a17fa3bd9d30777f6d24056fc2c32f",
+      "exec/execbase.h": "c46c6ee26e5cf2eeeb94033fec2402c7bf48582b64c3ad1478bc00bcd558114c",
+      "proto/exec.h": "9e12378b7eeedde0c03b771bf0f2ddd2d49288fb7e0829d2f3468af24b0c99c1"
+    },
+    "oracle": "PREPARED DELIVERY GATE HOST PASS:constructor/task/local/deferred/fault;MODELED ORDINARY C ONLY",
+    "artifactHashes": {
+      "result.json": {
+        "bytes": 156,
+        "sha256": "a6e6c200ff18c3290cfc7bb0c14d31d788a7367e69d399609676a860195d196c"
+      },
+      "unittest.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "unittest.stderr": {
+        "bytes": 273,
+        "sha256": "22db6c5939613ce4de7b7db14501d4847d81ebbcdb6181b5c68b397a98ee4204"
+      },
+      "prepared-delivery-gate-fixture.stdout": {
+        "bytes": 95,
+        "sha256": "7e303075f6196acd43d7e4743984e47cd4922be40ebf07425351a1ed31b64b2c"
+      },
+      "prepared-delivery-gate-fixture.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "prepared-delivery-gate-before-preservation.json": {
+        "bytes": 31640,
+        "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+      },
+      "prepared-delivery-gate-after-preservation.json": {
+        "bytes": 31640,
+        "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+      }
+    },
+    "controls": [
+      "original token field mutation refuses without consuming owned pair",
+      "local-restoring and task-restoring reentry refusal",
+      "single attempt, single record, single observation per ticket",
+      "foreign task and Exec pre-operation refusal",
+      "own-pair nesting and identity anomalies retain sticky fault anchors",
+      "owned prefix only; capacity tail and protected page unchanged",
+      "signed prior -1,0,1,2,126 accepted; below -1 and127 refused as faults"
+    ]
+  },
+  "acceptance": {
+    "hostOrdinaryCModel": true,
+    "nativeBuild": false,
+    "amiberry": false,
+    "physicalA1200": false,
+    "IRQIntegration": false,
+    "sourceOrCacheOwnership": false,
+    "outputTiming": false,
+    "audioListening": false
+  },
+  "limits": [
+    "Normal original TASK and local ordinary-C path only; task identity does not authenticate execution context",
+    "No arbitrary saved CPU IPL/SR restoration promise",
+    "No actual timer, Cause or interrupt hookup; native provider barriers unchanged",
+    "No reset, disposal, source release, command detachment or quiet authority",
+    "Three-source genuine ownership and native output backend remain separate unfinished work"
+  ]
+}

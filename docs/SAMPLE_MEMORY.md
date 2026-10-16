@@ -7802,3 +7802,10 @@ HOST sanitizers and the pinned native build; its all68 diagnostic dispatch and
 the unchanged default full-entry oracle also pass HOST regression. Native
 execution remains separate, as do device stop/capacity/order, exact output timing,
 audio and full-app acceptance. See [rolling execution scope](NATIVE_ROLLING_ENTRY.md).
+
+The separate normal-task prepared-delivery gate now passes its HOST sanitizer
+model. Four single-use numeric slots, original token custody and distinct
+entry/restoration anchors preserve deferred ordinary-C records without granting
+source or cache ownership. This gate is not connected to actual interrupts,
+timers or playback; native build/execution and physical acceptance are pending.
+See [restricted gate scope](NATIVE_MIXED_CAUSAL_ROLLING_IRQ_BRIDGE.md#separate-normal-task-delivery-gate--16-october-2026).

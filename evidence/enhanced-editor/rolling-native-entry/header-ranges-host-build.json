@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "scope": "Sampler header comparison over exact complement of the original six mutable fields; no topology or ownership change",
+  "source": {
+    "originalSHA256": "996e1f39037eed09431cdb1360f78c74034fcf2bef3d07e551e3bccae8ef22a5",
+    "headerSHA256": "12e65fa308097e2f6b6777ce389466126dac7c54908717f15776e0dba6056006",
+    "mutableFields": [
+      "current",
+      "bytes",
+      "live_head",
+      "live_count",
+      "pending_head",
+      "pending_count"
+    ],
+    "allPaddingCompared": true,
+    "callbacksAllocationsWritesAdded": false
+  },
+  "host": {
+    "sanitizerGroups": 4,
+    "byteEquivalenceOriginalMaskBothOrdersEveryByteEveryBit": true,
+    "patterns": 16,
+    "nativeEntryHostPatterns": 2,
+    "combinedAllowedPlusProtectedMutation": true,
+    "fullOriginalRolling68Passed": true,
+    "original17AndMaximum4096PreflightPassed": true,
+    "foreignMissingAbsentSidecarRefusalsPassed": true,
+    "unrelated16AndBaselinePreserved": true,
+    "firstPrivatePrototypeIncludeRefusalPreserved": true,
+    "resultSHA256": "b9c9810cdcdb482cba21532ffa360e19e44e7a8bfd99bdb2fb27dbba75f53ee2"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 241,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "candidateBytes": 329960,
+    "candidateSHA256": "0bbe2152ee35744b931859306f5ac9bf91b2b49896cb61ddc967c4724abdec5d",
+    "manifestSHA256": "f075505f549a8e47b19d9eb66bc613cd9b29bb23c4725183b918b4d031b1aa49",
+    "compilerAssemblerLinkerPinsBeforeAfter": true
+  },
+  "preparationDefaultsAndNativeLimitsChanged": false,
+  "measuredNativeSpeedup": false,
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

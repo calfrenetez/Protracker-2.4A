@@ -35,16 +35,24 @@ static int pt_establish_inventory_header_equal(const struct pt_sampler *s,
     const struct pt_sampler *original)
 {
     const unsigned char *a=(const unsigned char *)s,*b=(const unsigned char *)original;
-    size_t i;
-#define PT_INVENTORY_CHANGED(field) pt_establish_inventory_field_byte( \
-    i,offsetof(struct pt_sampler,field),sizeof(s->field))
-    for(i=0;i<sizeof(*s);++i){
-        if(PT_INVENTORY_CHANGED(current)||PT_INVENTORY_CHANGED(bytes)||
-           PT_INVENTORY_CHANGED(live_head)||PT_INVENTORY_CHANGED(live_count)||
-           PT_INVENTORY_CHANGED(pending_head)||PT_INVENTORY_CHANGED(pending_count))continue;
-        if(a[i]!=b[i])return 0;
-    }
-#undef PT_INVENTORY_CHANGED
+    size_t cursor=0,next;
+/* Struct members have declaration order. Compare every gap, including all
+ * padding, while skipping only the same six complete mutable fields. Constant
+ * offsetof/sizeof boundaries avoid reclassifying every byte on every call. */
+#define PT_INVENTORY_SKIP(field) do { \
+    next=offsetof(struct pt_sampler,field); \
+    if(next<cursor||next>sizeof(*s)||sizeof(s->field)>sizeof(*s)-next)return 0; \
+    if(next>cursor&&memcmp(a+cursor,b+cursor,next-cursor))return 0; \
+    cursor=next+sizeof(s->field); \
+} while(0)
+    PT_INVENTORY_SKIP(current);
+    PT_INVENTORY_SKIP(bytes);
+    PT_INVENTORY_SKIP(live_head);
+    PT_INVENTORY_SKIP(live_count);
+    PT_INVENTORY_SKIP(pending_head);
+    PT_INVENTORY_SKIP(pending_count);
+#undef PT_INVENTORY_SKIP
+    if(cursor<sizeof(*s)&&memcmp(a+cursor,b+cursor,sizeof(*s)-cursor))return 0;
     return 1;
 }
 static int pt_sampler_establish_inventory_current(

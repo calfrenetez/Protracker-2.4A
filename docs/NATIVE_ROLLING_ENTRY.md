@@ -369,3 +369,30 @@ preservation. The pinned86-unit build passes:329,920bytes SHA256
 Exact Amiberry/A1200 execution is NOT_RUN at preparation; device, output timing
 and listening remain unqualified. See
 [maximum-work host/build evidence](../evidence/enhanced-editor/rolling-native-entry/work4096-host-build.json).
+
+The maximum-work candidate before the header comparison change also remains
+natively UNCONFIRMED. It reaches phase3 at21seconds, audit phase10 at42/63seconds
+and normalizer-get phase22 at84seconds, without terminal completion within90.
+Exact owned recovery, independent observation/public release and separate final
+idle pass; failure evidence and three HOLDs are archived without replay. See
+[maximum-work native attempt](../evidence/enhanced-editor/rolling-native-entry/work4096-emulator.json).
+
+## Exact header comparison with fixed ranges
+
+The production sampler-inventory comparator now compares the gaps around the
+same six mutable fields using their declaration-ordered `offsetof`/`sizeof`
+boundaries. It compares all intervening and trailing padding. This removes
+per-byte field classification while retaining the exact original byte mask.
+No source/node provenance, callback, allocation, mutation, work default or
+deadline changes; a successful raw comparison grants no ownership authority.
+
+The independent original-mask oracle passes every bit of every header byte in
+both directions across16 patterns, combined mutable-field edits plus a protected
+byte, and unchanged inputs. A two-pattern native-entry form also passes HOST.
+All four sanitizer groups pass, including the full original68-case rolling
+fixture and both original17-unit and maximum4096-unit complete preflight.
+The pinned86-unit build passes:329,960bytes SHA256
+`0bbe2152ee35744b931859306f5ac9bf91b2b49896cb61ddc967c4724abdec5d`.
+Exact Amiberry/A1200 execution and a measured native speedup are NOT_RUN at
+preparation. All device, scheduled output and listening gates stay separate. See
+[header comparison host/build](../evidence/enhanced-editor/rolling-native-entry/header-ranges-host-build.json).

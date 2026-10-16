@@ -1,5 +1,16 @@
 # Sample memory and playback ownership
 
+## Sampler header integrity comparison —16 October2026
+
+The establishment inventory now compares fixed gaps around the same six mutable
+header fields. Every protected byte and padding byte retains its original
+comparison; no owner, callback or allocation behavior changes. Four HOST sanitizer
+groups pass, including independent every-byte/every-bit equivalence, the full
+original rolling68 fixture and original17/maximum4096 complete preflight. The
+pinned86-unit native candidate builds; exact Amiberry/A1200 and measured native
+speed improvement remain unqualified at preparation. See
+[scope and evidence](NATIVE_ROLLING_ENTRY.md#exact-header-comparison-with-fixed-ranges).
+
 ## Four-event native entry —16 October2026
 
 The separately bounded original preflight/cancellation component now passes

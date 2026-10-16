@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "scope": "Exact maximum-supported4096-unit preflight before header comparison change",
+  "candidate": {
+    "bytes": 329920,
+    "sha256": "3bf30dafbe1807a56d96c3e32e7e263a7591c014ac94e1267722283485a0d187"
+  },
+  "result": "UNCONFIRMED",
+  "returnCodeObserved": false,
+  "progress": [
+    {
+      "seconds": 20.666657583002234,
+      "text": "ROLLING WORK4096 PHASE-END steps=125 phase=3\n"
+    },
+    {
+      "seconds": 41.61063066701172,
+      "text": "ROLLING WORK4096 PHASE-END steps=201 phase=10\n"
+    },
+    {
+      "seconds": 62.92019812500803,
+      "text": "ROLLING WORK4096 PROGRESS steps=256 phase=10\n"
+    },
+    {
+      "seconds": 84.4082756669959,
+      "text": "ROLLING WORK4096 PHASE-END steps=318 phase=22\n"
+    }
+  ],
+  "lastObservedPhase": "Normalizer get (phase22)",
+  "progressIsCompletionProof": false,
+  "originalAssertionsAndNativeLimitsRetained": true,
+  "replayed": false,
+  "rawResultSHA256": "64aebb944477a5fcaa20ed11ec9cfbf53bce30d33eb9b2519e50b1032eaf544f",
+  "recovery": {
+    "ownResourcesOnly": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactStagingCopyRemoved": true,
+    "guestRAMLifetimeEndedWithExactEmulator": true,
+    "independentObserverSHA256": "ccb30891c904b849a1bb84a155c2b7972b061148837572d00d3cb6b8aaf7306f",
+    "publicReleaseSHA256": "ea9b8d4aa8ac924f56fd7252c448e2afaca23be7c72646ba9bc4e22c6e061951",
+    "separateFinalIdleSHA256": "f2903f0c8d144847740490f29335d774fe74082b69ec1fe173124f0a21d4c91b",
+    "ownershipReleased": true,
+    "holdsRemaining": 0
+  },
+  "acceptance": {
+    "physical": "NOT_RUN",
+    "rolling68": "UNCONFIRMED",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

@@ -81,6 +81,7 @@ class PreflightPinBoundaryHost(PreflightHost):
                 conflict=b'Pin-boundary and other preflight modes are separate components'
                 invalid=b'Pin-boundary component must be selected with value1'
                 cases=(
+                    ('audit',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY=1',),conflict),
                     ('prefix64',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_PREFIX=64',),conflict),
                     ('trace',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_TRACE=1',),conflict),
                     ('work256',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_WORK256=1',),conflict),
@@ -101,6 +102,51 @@ class PreflightPinBoundaryHost(PreflightHost):
             base.SOURCES=original_sources;base.verify_sources(pins)
             after=base.preservation_snapshot()
             base.evidence('pin-boundary-conflict-after-preservation.json',after)
+            self.assertEqual(base.stable_fact(before),base.stable_fact(after))
+
+
+class PreflightAuditBoundaryHost(PreflightHost):
+    EXTRA_FLAGS = ('-DPT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY=1',)
+    EXPECTED = b'ROLLING AUDIT BOUNDARY NATIVE PASS:original17 promotion and cancellation;MODELED_ONLY\n'
+    DONE = b'ROLLING AUDIT BOUNDARY DONE phase=0\n'
+    EVIDENCE_PREFIX = 'audit-boundary-'
+
+    def test_conflicting_preflight_modes_and_invalid_selector_are_refused(self):
+        before=base.preservation_snapshot()
+        base.evidence('audit-boundary-conflict-before-preservation.json',before)
+        pins={};original_sources=base.SOURCES
+        try:
+            base.SOURCES=SOURCES
+            with tempfile.TemporaryDirectory(prefix='pt-audit-boundary-refusals-') as directory:
+                private=Path(directory);pins=base.source_snapshot(private)
+                font_pin,font=base.ordinary_pin(base.ROOT/'vendor/pt23f/raw/ptfont.raw')
+                self.assertEqual(font_pin['sha256'],base.RAW_FONT_SHA256)
+                (private/'pt_font.h').write_text('static const unsigned char pt_font[580] = {'+','.join(str(x) for x in font)+'};\n')
+                env={'PATH':'/usr/bin:/bin','LC_ALL':'C','TMPDIR':str(private)}
+                conflict=b'Audit-boundary and other preflight modes are separate components'
+                invalid=b'Audit-boundary component must be selected with value1'
+                cases=(
+                    ('pin',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_PIN_BOUNDARY=1',),conflict),
+                    ('prefix64',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_PREFIX=64',),conflict),
+                    ('trace',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_TRACE=1',),conflict),
+                    ('work256',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_WORK256=1',),conflict),
+                    ('work4096',self.EXTRA_FLAGS+('-DPT_ROLLING_PREFLIGHT_WORK4096=1',),conflict),
+                    ('selector0',('-DPT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY=0',),invalid),
+                    ('selector2',('-DPT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY=2',),invalid),
+                )
+                for label,flags,expected in cases:
+                    with self.subTest(mode=label):
+                        refused=subprocess.run(['/usr/bin/cc','-std=c99','-Isrc/core','-Itests','-I.',
+                                                '-E',*flags,SOURCES[0]],cwd=private,env=env,
+                                               stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,timeout=30)
+                        base.evidence('audit-boundary-conflict-'+label+'.stderr',refused.stderr)
+                        self.assertNotEqual(refused.returncode,0)
+                        self.assertIn(expected,refused.stderr)
+                base.verify_sources(pins)
+        finally:
+            base.SOURCES=original_sources;base.verify_sources(pins)
+            after=base.preservation_snapshot()
+            base.evidence('audit-boundary-conflict-after-preservation.json',after)
             self.assertEqual(base.stable_fact(before),base.stable_fact(after))
 
 

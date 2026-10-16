@@ -136,6 +136,8 @@ def main():
                     help='Separate64 original steps/cancel component; does not qualify complete preflight')
     diagnostic.add_argument('--preflight-pin-boundary', action='store_true',
                     help='Separate original17-unit establishment-to-pin boundary/cancel component; not complete preflight')
+    diagnostic.add_argument('--preflight-audit-boundary', action='store_true',
+                    help='Separate original17-unit pinning/activation-to-audit boundary/cancel component; audit not executed')
     diagnostic.add_argument('--preflight-trace', action='store_true',
                     help='Original complete17-unit preflight/cancel with closed phase-transition observations')
     diagnostic.add_argument('--preflight-work256', action='store_true',
@@ -152,6 +154,11 @@ def main():
         extra_compile.append('-DPT_ROLLING_DIAGNOSTIC_CASE=' + str(args.diagnostic_case))
         target = 'PTMixedRollingDiagnostic'
         marker = b'ROLLING DIAGNOSTIC PASS:'
+    elif args.preflight_audit_boundary:
+        units[0] = 'tests/native_exec_mixed_causal_rolling_preflight_test.c'
+        extra_compile.append('-DPT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY=1')
+        target = 'PTMixedRollingAuditBoundary'
+        marker = b'ROLLING AUDIT BOUNDARY NATIVE PASS:'
     elif args.preflight_pin_boundary:
         units[0] = 'tests/native_exec_mixed_causal_rolling_preflight_test.c'
         extra_compile.append('-DPT_ROLLING_PREFLIGHT_PIN_BOUNDARY=1')
@@ -227,6 +234,7 @@ def main():
               'setup_mode': args.setup_mode,
               'preflight_only': args.preflight_only,
               'preflight_pin_boundary': args.preflight_pin_boundary,
+              'preflight_audit_boundary': args.preflight_audit_boundary,
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
     def persist():

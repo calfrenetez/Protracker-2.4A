@@ -670,3 +670,27 @@ separate final idle pass. This stops before sample pinning; it qualifies neither
 pinning/activation nor complete audit/preflight, case1/full68 or physical/device/
 timing/listening acceptance. Earlier unconfirmed transactions remain preserved.
 See [exact scoped result](../evidence/enhanced-editor/rolling-native-entry/pin-boundary-emulator.json).
+
+
+## Semantic pinning and activation before audit
+
+A distinct `--preflight-audit-boundary` diagnostic follows original17-unit steps
+through genuine persistent sample pinning, establishment closure and source
+activation. It stops at semantic `AUDIT_BEGIN`, before that case can allocate or
+execute the audit. Original100000-call ceiling and no-output guards remain.
+Every persistent pin must equal its current sampler version; original allocator,
+master observation, borrow, preparation hook, activation and input identity are
+asserted. Temporary pins and establishment metadata must be closed. Original
+master/save preservation, cancellation, disposal and zero accounting follow.
+
+The separate exact witnesses are
+`ROLLING AUDIT BOUNDARY NATIVE PASS:original17 promotion and cancellation;MODELED_ONLY`
+and `ROLLING AUDIT BOUNDARY DONE phase=0`. No fixed HOST/native call count is
+assumed. Existing modes and exact scheduling remain unchanged; conflicting or
+invalid selectors refuse. Nine HOST groups and the pinned86-unit/228-body build
+pass, including all previous modes, strict sidecar refusals,14 selector controls
+and protected16/baseline preservation. Independent source reviews find no
+correctness issue. This establishes HOST/build qualification only; exact
+Amiberry and A1200 are NOT_RUN at preparation. Models and ordinary allocations
+cannot qualify native placement/device/IRQ/output timing or listening. See
+[HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/audit-boundary-host-build.json).

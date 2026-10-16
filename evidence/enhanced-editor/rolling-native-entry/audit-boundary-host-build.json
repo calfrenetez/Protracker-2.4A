@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "state": "ORIGINAL17_PINNING_ACTIVATION_AUDIT_BOUNDARY_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Separate genuine pinning and source activation through semantic AUDIT_BEGIN, before audit execution, followed by original cancellation; not complete preflight or originalcase1/full68.",
+  "contract": {
+    "steps": "Original sl_begin/sl_step17 to genuine AUDIT_BEGIN; original100000 ceiling/no-output guards. No fixed HOST step count imposed on native ABI.",
+    "boundary": "All persistent pins equal genuine sampler current versions, original allocator/master observation, borrow/hook/source activation retained, establishment and temporary pins closed, audit not allocated.",
+    "cleanup": "Original sl_same/sl_close/sl_same/sl_drop and zero accounting; master/save preservation.",
+    "stdout": "ROLLING AUDIT BOUNDARY NATIVE PASS:original17 promotion and cancellation;MODELED_ONLY",
+    "closedProgress": "ROLLING AUDIT BOUNDARY DONE phase=0\n",
+    "capture": "Fresh owned nine-file final-only capture with strict terminal witnesses, not live progress reads",
+    "limits": "Original native90/guest140/whole250/Stack1MiB retained for subsequent exact run"
+  },
+  "sourceSHA256": {
+    "tests/native_exec_mixed_causal_rolling_preflight_test.c": "97a2e03831019aded305986c52f05c3f990d87a3e9c5714c2ce0c44688981376",
+    "tests/test_native_mixed_causal_rolling_preflight.py": "7daafcdbb2549cd59f3349d30cfe5b783c7cc17cca1536fcdfb234a235bc9aa3",
+    "tools/build_native_mixed_causal_rolling.py": "a082824fbf8d7090e20ba550b9a6f87b20c1db5e8cbe000bd55d58c6bd00dd5f"
+  },
+  "checks": {
+    "hostGroups": 9,
+    "allSixPreviousPreflightModes": "Original17, prefix64, PIN boundary, trace17, work256 and work4096 retain original oracles",
+    "newSemanticAuditBoundary": "PASS",
+    "foreignMissingAbsentSidecarRefusals": "PASS",
+    "pinModeConflictAndSelectorRefusals": 7,
+    "auditModeConflictAndSelectorRefusals": 7,
+    "protected16AndBaselinePreserved": true,
+    "independentSourceReviews": "No correctness findings",
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 252
+  },
+  "candidate": {
+    "size": 332884,
+    "sha256": "28e70a230be9ca90712750890f1cb51e735796411291e64818e0adf3b16f38a9",
+    "crc32": "77DC417E"
+  },
+  "hostResultSHA256": "8e12edf79b5ba9ec279bbcd87af29eaf88c1291190c5923556f7dde5d674143c",
+  "buildManifestSHA256": "977fdf92725be7bdd45a463343384812f8bf2fe50a859d1f99c69d2367c9027b",
+  "sourceManifestSHA256": "2fcd545c81aefb97eb9f02614745a49a0cf832b1c2aef2d782474ea215930c8b",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "completeAuditPreflightCase1Full68": "UNQUALIFIED",
+    "speedPlacementDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  }
+}

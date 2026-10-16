@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Semantic pinning and activation boundary —16 October2026
+
+A separate original17-unit diagnostic follows genuine persistent sample pins
+and source activation through `AUDIT_BEGIN`, then cancels before audit execution.
+It asserts current-version/allocator/master/borrow/hook ownership, master/save
+preservation and zero accounting. Nine HOST sanitizer groups and the pinned
+86-unit build pass; exact Amiberry/A1200 are NOT_RUN at preparation. Complete
+audit/preflight, native placement/device and timing/listening remain unqualified.
+See [the component](NATIVE_ROLLING_ENTRY.md#semantic-pinning-and-activation-before-audit).
+
 ## Semantic establishment boundary —16 October2026
 
 A separate diagnostic follows original17-unit steps to genuine `PIN_BEGIN`,

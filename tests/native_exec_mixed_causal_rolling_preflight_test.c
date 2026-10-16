@@ -1,7 +1,7 @@
 /* Separate original preflight/cancellation component. The rolling68 entry is
  * retained but never invoked. All clocks/buses and allocations remain models.
  * Only an existing exact owned progress sidecar may be overwritten. */
-#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 struct sl_trial;
 static void pt_preflight_observe_step(struct sl_trial *,unsigned);
 #define PT_PRIVATE_ROLLING_STEP_OBSERVE pt_preflight_observe_step
@@ -10,7 +10,7 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #define PT_PRIVATE_ROLLING_NATIVE_ENTRY pt_preflight_full_native_not_called
 #include "native_exec_mixed_causal_rolling_test.c"
 #undef PT_PRIVATE_ROLLING_NATIVE_ENTRY
-#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 #undef PT_PRIVATE_ROLLING_STEP_OBSERVE
 #endif
 
@@ -23,8 +23,14 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) && PT_ROLLING_PREFLIGHT_PIN_BOUNDARY != 1
 #error "Pin-boundary component must be selected with value1"
 #endif
-#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) && (PT_ROLLING_PREFLIGHT_PREFIX || defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) && (defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY) || PT_ROLLING_PREFLIGHT_PREFIX || defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
 #error "Pin-boundary and other preflight modes are separate components"
+#endif
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY) && PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY != 1
+#error "Audit-boundary component must be selected with value1"
+#endif
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY) && (defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY) || PT_ROLLING_PREFLIGHT_PREFIX || defined(PT_ROLLING_PREFLIGHT_TRACE) || defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096))
+#error "Audit-boundary and other preflight modes are separate components"
 #endif
 #if PT_ROLLING_PREFLIGHT_PREFIX && (defined(PT_ROLLING_PREFLIGHT_TRACE) || (defined(PT_ROLLING_PREFLIGHT_WORK256) || defined(PT_ROLLING_PREFLIGHT_WORK4096)))
 #error "Prefix and complete-preflight trace are separate components"
@@ -35,7 +41,9 @@ static int pt_preflight_full_native_not_called(void) __attribute__((unused));
 #if defined(PT_ROLLING_PREFLIGHT_WORK256) && defined(PT_ROLLING_PREFLIGHT_WORK4096)
 #error "Supported preparation budgets are separate components"
 #endif
-#ifdef PT_ROLLING_PREFLIGHT_PIN_BOUNDARY
+#ifdef PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY
+#define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING AUDIT BOUNDARY"
+#elif defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING PIN BOUNDARY"
 #elif defined(PT_ROLLING_PREFLIGHT_WORK4096)
 #define PT_PREFLIGHT_OBSERVATION_TAG "ROLLING WORK4096"
@@ -100,7 +108,43 @@ int main(int argc,char **argv)
     /* Complete-preflight modes retain every original helper oracle: source
      * adoption/pins, four normalized events and complete audit. Prefix/boundary
      * modes qualify only their distinct staged component and cancellation. */
-#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY)
+    /* Reaching AUDIT_BEGIN proves genuine promotion but stops before the audit
+     * case allocates anything. Keep original17-unit steps and semantic phase
+     * selection; no HOST or native call count authorizes this transition. */
+    {
+        struct cp_trial *f=&e->base;unsigned n=0,i;
+        pt_preflight_record("ADOPT-BEGIN",e);sl_begin(e);
+        pt_preflight_record("ADOPT-END",e);
+        while(e->producer.original.phase!=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_AUDIT_BEGIN){
+            assert(sl_step(e,17)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING&&++n<100000);
+            assert(!f->ordinary.calls&&!e->port.binds&&!e->port.external.clocks&&!e->port.ram.publishes&&
+                   !f->chip.calls&&!f->card->writes&&!sl_s(e)->causal&&!sl_s(e)->pool);
+        }
+        assert(e->producer.original.phase==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_AUDIT_BEGIN&&
+               n&&n==pt_preflight_steps&&e->producer.original.activated&&sl_s(e)->source_activated);
+        assert(e->producer.original.pin_slot==f->editor->project->sample_count&&
+               e->producer.original.pin_count==f->editor->project->sample_count&&
+               !e->producer.original.establish.active&&!e->producer.original.pin_job.owner&&
+               !e->outputs->original.temporary_pin&&!e->outputs->original.persistent_pin);
+        for(i=0;i<f->editor->project->sample_count;++i)
+            assert(e->producer.original.pin[i]&&e->producer.original.pin[i]==f->editor->sampler.current[i]);
+        assert(f->editor->sampler.allocator.context==&f->masters&&
+               f->editor->sampler.allocator.allocate==sl_master_new&&
+               f->editor->sampler.allocator.release==cp_master_free&&e->master_observed);
+        assert(e->producer.original.original==&e->producer.original&&e->producer.original.adopted&&
+               e->producer.original.controller==sl_s(e)&&!e->producer.original.borrow_closed&&
+               !e->producer.original.hook_closed&&e->borrow->address==sl_s(e)&&e->borrow->serial&&
+               e->borrow->serial==sl_s(e)->source_serial&&sl_s(e)->source_publisher==e->borrow&&
+               sl_s(e)->source_held&&!sl_s(e)->source_released&&
+               f->binding->preparation_context==sl_s(e)&&f->binding->preparation_close);
+        assert(sl_s(e)->inputs==&e->producer.preparation.original.original&&
+               !sl_s(e)->queue&&!e->outputs->original.audit&&!e->outputs->original.sequence&&
+               !e->outputs->original.normalizer&&!e->producer.original.candidate_count&&
+               !e->producer.original.frames&&!e->producer.original.intervals);
+        sl_same(e);pt_preflight_record("AUDIT-BOUNDARY",e);
+    }
+#elif defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
     /* Stop at the genuine establishment transition, rather than a HOST step
      * count: original17-unit work may cross this boundary at another call on
      * the native ABI. This does not invoke the complete preflight helper. */
@@ -152,7 +196,9 @@ int main(int argc,char **argv)
     pt_preflight_record("DISPOSE-BEGIN",e);sl_drop(e);
     assert(!sl_current);pt_preflight_record("DONE",NULL);
     if(pt_preflight_io_failed)return 20;
-#if defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
+#if defined(PT_ROLLING_PREFLIGHT_AUDIT_BOUNDARY)
+    puts("ROLLING AUDIT BOUNDARY NATIVE PASS:original17 promotion and cancellation;MODELED_ONLY");
+#elif defined(PT_ROLLING_PREFLIGHT_PIN_BOUNDARY)
     puts("ROLLING PIN BOUNDARY NATIVE PASS:original17 establishment and cancellation;MODELED_ONLY");
 #elif PT_ROLLING_PREFLIGHT_PREFIX
     puts("ROLLING PREFIX NATIVE PASS:64 original steps and cancellation;MODELED_ONLY");

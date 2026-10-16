@@ -233,13 +233,15 @@ static int lineage_source_local(struct pt_editor_mixed_causal_prepare *s,uintptr
  const void *p=(const void *)address;unsigned i;if((s->source_mode!=2&&s->source_mode!=3))return 1;
  if(!p||!n||!span(p,n)||!s->guard_count||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||
     s->source_mutable_count>PT_EDITOR_MIXED_SOURCE_SPANS)return 0;
- for(i=0;i<s->guard_count;++i)if(!apart(p,n,s->guards[i].data,s->guards[i].bytes))return 0;
+ /* The unchanged entry check proved this same local p/n once. These loops
+  * neither yield nor invoke callbacks; every other full span remains checked. */
+ for(i=0;i<s->guard_count;++i)if(!pt_prepare_valid_span_apart(p,n,s->guards[i].data,s->guards[i].bytes))return 0;
  for(i=0;i<s->source_mutable_count;++i)
-    if(!apart(p,n,s->source_mutable[i].data,s->source_mutable[i].bytes))return 0;
+    if(!pt_prepare_valid_span_apart(p,n,s->source_mutable[i].data,s->source_mutable[i].bytes))return 0;
  for(i=0;i<PT_EDITOR_MIXED_READERS_ORDINARY;++i)
-    if(!apart(p,n,s->ordinary[i].data,s->ordinary[i].bytes))return 0;
+    if(!pt_prepare_valid_span_apart(p,n,s->ordinary[i].data,s->ordinary[i].bytes))return 0;
  for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)
-    if(!apart(p,n,s->chip[i].data,s->chip[i].bytes))return 0;
+    if(!pt_prepare_valid_span_apart(p,n,s->chip[i].data,s->chip[i].bytes))return 0;
  return 1;
 }
 static int capture_sources(struct pt_editor_mixed_causal_prepare *s,unsigned require_current)
@@ -1177,7 +1179,9 @@ static int source_query_extent(const void *p,size_t n,const struct pt_sampler_st
  unsigned empty_allowed)
 {
  if(!g->data&&!g->bytes)return empty_allowed!=0;
- return g->data&&g->bytes&&span(g->data,g->bytes)&&apart(p,n,g->data,g->bytes);
+ /* Sole caller proves the nonempty p/n span before its callback-free loops.
+  * The helper still validates this complete g span, exactly once. */
+ return g->data&&g->bytes&&pt_prepare_valid_span_apart(p,n,g->data,g->bytes);
 }
 int pt_editor_mixed_causal_source_allocation_disjoint(struct pt_editor_mixed_causal_prepare *s,
  const struct pt_editor_mixed_causal_source_borrow *b,const void *p,size_t n)

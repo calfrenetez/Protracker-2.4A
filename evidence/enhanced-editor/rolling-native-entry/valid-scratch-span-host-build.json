@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "state": "LOCAL_VALID_SPAN_QUERY_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "change": "Reuse the original valid first span only within callback-free captured numeric loops; preserve validation of every other complete span. Producer containment reuses the existing equivalent helper.",
+  "precondition": "Same nonNULL, nonempty, overflow-safe first span established at unchanged caller entry; never reused across calls, callbacks, yielded steps or ownership queries.",
+  "proofBoundary": "No pointee is followed. Other-span NULL/empty/overflow and captured-query empty_allowed/half-empty behavior remain. No scope, owner, count, publisher, full-parent, backlink, activation or lifetime check is removed. No allocation, work/default, exact scheduling or test deadline changes.",
+  "sourceSHA256": {
+    "src/editor/editor_mixed_causal_prepare.c": "046b51c6fc417a27bb45dd5417e6f3b7e27c89ebea5fe96d257ceee82c77e852",
+    "src/editor/editor_mixed_causal_song_lineage.c": "40a200a48919f0a4ae866bb9f8916553a22479180cbbda1172caed016cc22c97",
+    "src/editor/prepare_span_internal.h": "a7ebfc76febd8e335660cd1de2b454c96900c1323151281760719f862e8ace4d",
+    "tests/prepare_valid_span_apart_test.c": "9f0f8ba59d7e79cf636698adb27f0df8adde1ab3519270d97b7d5c5bb4331093",
+    "tests/test_prepare_valid_span_apart.py": "9a93fdf68eb6b7c809f52eb2498cca6ae59c9a25c47520b633c38083445c3061"
+  },
+  "checks": {
+    "hostSanitizerGroups": 8,
+    "goldenValidSpanApartTuples": 3663138,
+    "validFirstOutcomes": 2387186,
+    "validFirstAccepted": 837705,
+    "validFirstRefused": 1549481,
+    "invalidFirstEntryRefusals": 1275952,
+    "domains": "Exhaustive five-bit model plus finite32/64 boundaries and deterministic random/alias/adjacency/overlap; only matching HOST ABI invokes original pointer predicate and production helper. Models are not native ABI proof.",
+    "goldenContainmentCases": 48224,
+    "originalHeaderMaskEquivalence": true,
+    "fullOriginal68Rolling": true,
+    "originalJoint31AndOldNewLineagePointerProof": true,
+    "original17Preflight": true,
+    "supported4096PreflightCancellation": true,
+    "all68AndSelectedCase1Dispatch": true,
+    "protectedPageParentBeforeHeaderRefusal": true,
+    "protected16AndBaselinePreserved": true,
+    "independentSourceReview": "No correctness finding; all helper call preconditions and full other-span validation retained.",
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 249
+  },
+  "candidate": {
+    "size": 338572,
+    "sha256": "5b17d4996816ea47b2b44f3f460f7117b15bded0761468d0f0aebe0650f336aa",
+    "crc32": "33E25962"
+  },
+  "hostResultSHA256": "d54edfe2e76d314b275d1d95de430b546384549ea3a38249c0b1d9f16cb18f4a",
+  "buildManifestSHA256": "b9680e2ddcb98893f9505fb2b72a6e10815febc042ece042e1d4a05718ef7152",
+  "sourceManifestSHA256": "7acf638ee3a73cd752a697d923722dd5ce795686dc6c77833de9b5a620ad4e4f",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "speedBenefit": "UNQUALIFIED",
+    "actualDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  }
+}

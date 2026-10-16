@@ -3,6 +3,7 @@
  * no timer, IRQ, device, whole-song PLAY, lead, jitter or refill integration. */
 #include "editor_mixed_causal_song_lineage_internal.h"
 #include "editor_mixed_causal_song_rolling_internal.h"
+#include "prepare_span_internal.h"
 #include "../core/render_storage_internal.h"
 #include "../core/paula_render_voice.h"
 #include "../core/amigus_render_voice.h"
@@ -17,8 +18,7 @@ static int apart(const void *a,size_t n,const void *b,size_t m)
 {uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
  return span(a,n)&&span(b,m)&&(!n||!m||(x<=y?n<=y-x:m<=x-y));}
 static int inside(struct pt_sampler_storage_span s,const void *p,size_t n)
-{return n&&span(s.data,s.bytes)&&span(p,n)&&n<=s.bytes&&
- (uintptr_t)p>=(uintptr_t)s.data&&(uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
+{return pt_prepare_span_contains(s.data,s.bytes,p,n);}
 static int add_size(size_t *n,size_t more)
 {if(more>SIZE_MAX-*n)return 0;*n+=more;return 1;}
 static int empty_bytes(const void *v,size_t n)

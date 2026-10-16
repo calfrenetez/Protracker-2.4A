@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Reuse local numeric span facts —16 October2026
+
+Captured numeric queries now reuse the same first span already validated at
+entry, retaining every other complete-span check and all ownership/lifetime
+checks. Producer containment uses the already-proven helper. The regression
+compares3,663,138 numeric tuples, including invalid-entry refusal;32/64 models
+are separate from native ABI/device acceptance. Eight HOST sanitizer groups
+and the pinned86-unit native build pass; exact new Amiberry/A1200 and speed
+remain unqualified. No allocation, authority or scheduling change. See [the contract](NATIVE_ROLLING_ENTRY.md#reuse-numeric-span-facts-within-one-captured-query).
+
 ## Ordered joint parent checks —16 October2026
 
 Joint preparation now checks all complete parents before derived header reads
@@ -8,7 +18,9 @@ backlinks, activation and lifetime checks remain; no allocation, authority or
 scheduling change. Seven HOST sanitizer groups, including the protected-page
 read-order regression and original rolling68/joint31, plus the pinned86-unit
 build pass. Exact new Amiberry/A1200 and native speed remain unqualified at
-preparation. See [the contract](NATIVE_ROLLING_ENTRY.md#ordered-complete-parent-proof-for-joint-preparation).
+preparation. Its subsequent exact originalcase1 Amiberry attempt remains
+unconfirmed within unchanged bounds; independent recovery/release passes.
+See [the contract](NATIVE_ROLLING_ENTRY.md#ordered-complete-parent-proof-for-joint-preparation).
 
 ## Preparation guard search —16 October2026
 

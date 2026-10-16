@@ -548,3 +548,47 @@ Exact new Amiberry and physical execution remain NOT_RUN at preparation. No
 speed improvement, device/IRQ/output/timing or listening acceptance is inferred.
 Original work/defaults, exact musical scheduling and all test limits remain. See
 [compact HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/ordered-parent-host-build.json).
+
+The exact ordered-parent338520-byte originalcase1 candidate subsequently runs
+once in Amiberry but does not confirm completion within the original bounds.
+The last complete directory reply reports103 output bytes and an empty completion
+flag, followed by an unconfirmed directory exchange. No terminal body/RC, phase,
+crash, liveness or speed claim follows. Verified own teardown/restoration, exact
+staging removal, independent observation/public release and separate final idle
+all pass. The transaction is preserved without retry or physical promotion. See
+[the scoped result](../evidence/enhanced-editor/rolling-native-entry/ordered-parent-case1-emulator.json).
+
+
+## Reuse numeric span facts within one captured query
+
+The local-scratch and captured-allocation queries retain their original entry
+proof that the candidate is non-NULL, nonempty and cannot overflow. Inside their
+callback-free guard loops, the same first span need not be recalculated for
+every other span. A private helper reuses only that immediately established
+arithmetic fact and still validates each complete other span. Captured queries
+keep their original empty/half-empty and `empty_allowed` behavior. No scope,
+owner, publisher, count, full-parent, backlink or lifetime check is removed.
+The producer also reuses the previously equivalent containment helper.
+
+The golden regression freezes the original span/disjoint expressions and
+compares3,663,138 numeric tuples: exhaustive five-bit domain, finite32/64-bit
+boundaries and deterministic random/alias/adjacency/overlap controls. It checks
+2,387,186 valid-first outcomes and1,275,952 invalid-first entry refusals. Invalid
+first spans never enter the specialized helper. The matching HOST pointer ABI
+calls the production helper; wider domains are numeric models. No pointee is
+dereferenced. The original owner/base-file preservation pipeline remains.
+
+Project regression, native and physical acceptance are recorded separately in
+the accompanying evidence; numeric equivalence alone proves neither a native
+speed benefit nor device/IRQ/output/timing/listening. Original17-unit work,
+all assertions, exact musical scheduling and all test limits remain.
+
+Eight HOST sanitizer groups pass, including this golden test, original
+containment/header equivalence, full rolling68, joint31/scope-order controls,
+original17 and supported4096 preflight/cancellation, all68/selectedcase1 dispatch
+and protected16/baseline preservation. The pinned86-unit/228-body build passes:
+338572 bytes, SHA256
+`5b17d4996816ea47b2b44f3f460f7117b15bded0761468d0f0aebe0650f336aa`,
+CRC32 `33E25962`;43 SDK bodies, seven runtimes,249 frozen source files. Exact
+new native and physical execution remain NOT_RUN at this milestone. See
+[HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/valid-scratch-span-host-build.json).

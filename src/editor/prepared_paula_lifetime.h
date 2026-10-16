@@ -30,9 +30,12 @@ struct pt_prepared_paula_lifetime_config {
  * extents may overlap where their actual allocator contract permits an arena;
  * new controls/workspace/outputs remain disjoint. Backend controls and queue/
  * command/reader controls are disjoint from source data as the core requires.
- * No copies, reset, pointer exports, publication, backend probes or native gate.
- * Supplied backend is the existing genuine HOST contract; no capability is
- * fabricated. It is never called by this unpublished-only interface.
+ * No copies, reset, pointer exports, backend probes or native gate. Supplied
+ * backend is the existing genuine HOST contract; no capability is fabricated.
+ * The original unpublished methods never call that backend. The additive
+ * publish/cancel methods below invoke the actual core and genuine HOST backend
+ * once per admitted operation, at the original frame/grid with no timing edit.
+ * This remains HOST-only and supplies no ACTIVE/adoption/output/quiet authority.
  * Callers must not mutate opaque storage or borrowed inputs. Ordinary-method
  * callback reentry latches uncertainty; constructor refusal is specified below.
  * No arbitrary mutation detection or forced cleanup is promised.
@@ -65,8 +68,50 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_enqueue_unpubli
  */
 enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_stop_local(
     struct pt_prepared_paula_lifetime *);
+/* One actual publish attempt for the original queued event. The original
+ * source owner stays busy/current around the real pt_readers_publish and its
+ * authenticated current callbacks; no fresh source pointer/token is exported.
+ * A Pending/refused/failed attempt cannot be replayed. It still retains the
+ * original queue/C/R/source custody for explicit stop and separate collection.
+ */
+enum pt_scheduled_result pt_prepared_paula_lifetime_publish_once(
+    struct pt_prepared_paula_lifetime *);
+/* One genuine stop closes publication permanently. Unpublished entries may
+ * consume local C then R here. Published entries keep their actual domains for
+ * the separate command/reader cancel methods. Stop's completed outer return is
+ * required before collection/drain; a non-OK result does not fabricate quiet.
+ */
+enum pt_scheduled_result pt_prepared_paula_lifetime_stop_publication(
+    struct pt_prepared_paula_lifetime *);
+/* At most ONE real core cancellation attempt per original domain. No supplied
+ * receipt, consumed/retired boolean or quiet certificate is admitted. Pending,
+ * observation or unknown/error retains actual unconsumed custody; this slice
+ * exposes no retry or polling. The other domain may still be collected after
+ * semantic failure. Core reader retirement can precede command detach, but its
+ * actual R callback remains deferred until C references end. Before a backend
+ * returns READER_RETIRED it must clear every actual persistent data/span/domain
+ * and future-activation reference. Any remaining C event identity must never
+ * revive or traverse that retired domain. These are genuine backend duties,
+ * not facts inferred by this adapter from caller flags.
+ */
+enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_command_once(
+    struct pt_prepared_paula_lifetime *);
+enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_reader_once(
+    struct pt_prepared_paula_lifetime *);
+/* Sticky first classified publication/collection non-OK/non-Pending result,
+ * preserved through genuine
+ * drain and close. Authenticated terminal good0 records BACKEND semantic failure
+ * while actual releases still consume the original domain. Structural witness,
+ * context/token/phase/duplicate or reentry uncertainty reports BACKEND and holds
+ * resources. This scalar observation grants no ownership/currentness/quiet.
+ */
+enum pt_scheduled_result pt_prepared_paula_lifetime_failure(
+    struct pt_prepared_paula_lifetime *);
 /* <=one original resource disposal transition after actual C/R consumption AND
- * completed outer stop return. Repeated CLOSED is observational. Release errors
+ * completed outer stop/collection return, closed admission, both actual core
+ * held counts zero and no structural uncertainty. Semantic failure remains
+ * classified but does not prevent genuine captured disposal. Repeated CLOSED
+ * is observational. Release errors
  * retain original contexts; no retry of refused releases or resurrection.
  */
 enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_drain_step(
@@ -96,6 +141,8 @@ int pt_prepared_paula_sources_private_output_disjoint(struct pt_prepared_paula_s
 int pt_prepared_paula_sources_private_contexts(struct pt_prepared_paula_sources *,const struct pt_prepared_paula_context_extent *,unsigned);
 int pt_prepared_paula_sources_private_current(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_enqueue(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
+enum pt_scheduled_result pt_prepared_paula_sources_private_publish(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
+enum pt_scheduled_result pt_prepared_paula_lifetime_lower_publish(struct pt_prepared_paula_lifetime *,struct pt_prepared_paula_sources *);
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(struct pt_prepared_paula_sources *,struct pt_prepared_paula_lifetime *);
 enum pt_scheduled_result pt_prepared_paula_lifetime_lower_enqueue(struct pt_prepared_paula_lifetime *,struct pt_prepared_paula_sources *,const struct pt_prepared_paula_lifetime_data *);
 #endif

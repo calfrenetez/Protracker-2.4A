@@ -26,13 +26,13 @@ SOURCES = (
 HOST_FLAGS = ('-DPT_PREPARED_PAULA_ENABLE_HOST_LIFETIME=1',)
 FROZEN = {
     'src/editor/prepared_paula_sources.c':
-        '60832088f551380a293efaa63b5d0e2e99551b937a57b8bf3b2e6a0bb5e51761',
+        'b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f',
     'src/editor/prepared_paula_sources.h':
-        '05ead924313186a64f3728f2de1c0f452eaced9185127a7dc93444a05b290046',
+        'ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c',
     'src/editor/prepared_paula_lifetime.c':
-        'd0539a2d86bc4a52fa5fd45a694bc4236d9d6ee91bafaa0cce6f65c310c2f4b7',
+        '752eba455a1ea973aecf5b7eef1a4cf1852578bd3218b44e55a893e5cb80ed60',
     'src/editor/prepared_paula_lifetime.h':
-        '9bc8e39737ac2681060760386fc34d4604974f7c7e60d3cca1530436311597ae',
+        '122a19963a54d4d6dfaf1f18183f342ddf2c2a8a8b1b4e547d16fb2c1857148e',
     'tests/prepared_paula_lifetime_test.c':
         'a98ff044aef08c9f84bb21d24a6c966610cc2d91ff5be5bd5425224b02c4e3f3'}
 ORACLE = ('PREPARED PAULA LIFETIME HOST PASS:real mono8/16/24;'

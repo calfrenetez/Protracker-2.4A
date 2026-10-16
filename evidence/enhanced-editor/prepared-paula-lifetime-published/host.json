@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "scope": "Explicit opt-in HOST published cancellation-before-activation model only",
+  "baseCommit": "576398385f21f3b67139b885f140bd85bd9ac574",
+  "result": "PASS",
+  "rootResultSHA256": "15ad1f65b91a8599f8a5985dbb0e2b6a0eac81cd5a8c8b80aee5f7d609e2eb37",
+  "groups": {
+    "published": {
+      "resultSHA256": "40677fec3d64ef09e4d9b91d11b0e3397c493aa874e1bffb7a7288908633e55b",
+      "passed": true,
+      "translationUnits": 25,
+      "exportedProjectBodies": 61,
+      "elapsedSeconds": 9.333,
+      "fixtureStdout": {
+        "bytes": 250,
+        "sha256": "88193178c61cd194d958a5875f13001cc02bacfb95acf93f594fbb762d0e7f54"
+      },
+      "compilerAndFixtureDiagnosticsEmpty": true,
+      "assertionsEnabled": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compileSeconds": 120,
+      "fixtureSeconds": 30
+    },
+    "unpublished": {
+      "resultSHA256": "c3b9686fcd6defd3e6cf05291d8b217523587def9df046f8e90c7b6f73624a51",
+      "passed": true,
+      "translationUnits": 25,
+      "exportedProjectBodies": 60,
+      "elapsedSeconds": 8.748,
+      "fixtureStdout": {
+        "bytes": 163,
+        "sha256": "fa50ebd2b3435951458c0fe6131f80b9881020a51ef558c05624a21b7a406355"
+      },
+      "compilerAndFixtureDiagnosticsEmpty": true,
+      "assertionsEnabled": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compileSeconds": 120,
+      "fixtureSeconds": 30
+    },
+    "defaultoff": {
+      "resultSHA256": "d337db9ee84c3226be0a9c34593b98c7dae1c1fea0bc3cfeb80767786bdba9ce",
+      "passed": true,
+      "translationUnits": 22,
+      "exportedProjectBodies": 53,
+      "elapsedSeconds": 7.755,
+      "fixtureStdout": {
+        "bytes": 138,
+        "sha256": "2d8f9a76394be48d51375fff5746c62fadc4ceb59074062f5a5a4f24668a5375"
+      },
+      "compilerAndFixtureDiagnosticsEmpty": true,
+      "assertionsEnabled": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compileSeconds": 120,
+      "fixtureSeconds": 30
+    }
+  },
+  "publishedCases": {
+    "total": 17,
+    "completed": 11,
+    "deliberatelyRetainedCompleteContexts": 6,
+    "newEntryGuards": 3
+  },
+  "donor": "Original committed unpublished fixture is included as genuine acquisition/storage/save helpers only; its renamed main and old cases never execute or count in published17.",
+  "ownership": "Original event/domain bindings; reader geometry and pending activation dropped before retirement receipt; actual reader callback waits command references0; closed admission and actual C/R release plus core counts0 precede seven later bounded drain transitions.",
+  "failures": "First semantic failure stays visible through authentic captured disposal/close. Pending, wrong envelopes and structural reentry retain without retry, forced release, private flag repair or generation restoration.",
+  "musicalSchedule": {
+    "rawFrame": 100,
+    "halfOpenWindow": [
+      2184,
+      2205
+    ],
+    "changed": false
+  },
+  "permanentWrapper": {
+    "passed": true,
+    "tests": 1,
+    "elapsedSeconds": 6.377,
+    "resultSHA256": "47614a6e1b4b7514bb35edb710ac45c414d463d69eeb91d2e0ea774002ac629f",
+    "oldTwoWrappers": "Production hash substitutions only; recipes and oracles unchanged; their controlled regressions passed separately."
+  },
+  "sourcePins": {
+    "src/editor/prepared_paula_lifetime.c": "752eba455a1ea973aecf5b7eef1a4cf1852578bd3218b44e55a893e5cb80ed60",
+    "src/editor/prepared_paula_lifetime.h": "122a19963a54d4d6dfaf1f18183f342ddf2c2a8a8b1b4e547d16fb2c1857148e",
+    "src/editor/prepared_paula_sources.c": "b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f",
+    "src/editor/prepared_paula_sources.h": "ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c",
+    "tests/test_prepared_paula_lifetime.py": "aa6a161a87a563e00f0edeffc4af13b03b99c43af00b11a5171dbadf3b00bc70",
+    "tests/test_prepared_paula_sources.py": "45aeb42e2d8cbfe9fded5f9eb8336f0ce4a1569e8614bb5b37645b96bc17d058",
+    "tests/prepared_paula_lifetime_published_test.c": "4b08292999178ced98fec94a5ea0fd3d8681bfd466cbfdd7430c6b85210f5548",
+    "tests/test_prepared_paula_lifetime_published.py": "a79edb9e44175c482f69a2e146292ac50209d473598662ed6b7261df9f82d3a4"
+  },
+  "independentSavedAudit": {
+    "passed": true,
+    "auditSHA256": "fbab265d9e9a3b40883c052925cf44b967f6a813b33ebf67409425f03d1f64bb",
+    "commandOriginSupplementSHA256": "d85c682ecb0ea285be08c45eb441b82d7f662dd72560bc3b0b2b0e227be6524d",
+    "recordedCommands": 195,
+    "savedFrozenInputs": 31,
+    "laterCanonicalPinAdoption": "Occurs after controlled execution; saved before/after remains separate from later working-tree changes."
+  },
+  "preservation": {
+    "unrelatedPaths": 16,
+    "classicManifestEntries": 51,
+    "datalessBodiesMetadataOnly": 10,
+    "unchanged": true
+  },
+  "provenance": "Selected actual compiler/linker/dsymutil and three sanitizer/runtime inputs, plus SDK/resource operands checked; not a complete system-header or dyld closure.",
+  "limits": [
+    "HOST option OFF by default; native compilation of this lifetime option remains inhibited.",
+    "No ACTIVE/adoption, issued output, native IRQ/provider, device/DMA quiet, musical timing, physical or listening acceptance."
+  ],
+  "targetOperations": 0
+}

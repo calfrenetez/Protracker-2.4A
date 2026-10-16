@@ -56,10 +56,13 @@ struct pt_prepared_paula_sources_status {
  * context extents additionally remain caller-disjoint. Constructor arguments
  * may expire after successful init; their named pointees/contexts may not.
  *
- * There is deliberately no source/PCM/cache-pointer export, backend/reader
+ * The default interface has no source/PCM/cache-pointer export, backend/reader
  * binding, publication/arm/apply, timer, output or external borrow interface.
- * Consequently cancellation here is ONLY disposal of never-exposed software
- * resources. It proves no DMA/reader/source quiet or real interrupt lifetime.
+ * Its cancellation is ONLY disposal of never-exposed software resources.
+ * The separate explicit HOST-only lifetime opt-in may retain this exact ledger
+ * for authentic core queue callbacks; it supplies no caller source pointer or
+ * quiet certificate and has no native eligibility. Public cancellation refuses
+ * a retained custodian. No DMA/source quiet or real interrupt lifetime follows.
  */
 size_t pt_prepared_paula_sources_size(void);
 size_t pt_prepared_paula_sources_alignment(void);

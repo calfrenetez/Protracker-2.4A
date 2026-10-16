@@ -260,3 +260,47 @@ Its131,096-byte executable is byte-for-byte identical to the previously
 Amiberry-qualified `ef6259a7` / `856A177A` candidate; that exact-byte evidence is
 reused without another native run. This does not qualify the new HOST bridge on
 Amiga. Physical testing remains unrun. See [default build and byte identity](../evidence/enhanced-editor/prepared-paula-lifetime/native-default-build.json).
+
+
+## Published three-source cancellation bridge —16 October2026
+
+The same explicit HOST-only option now supports one actual core publication,
+one stop that closes admission, and one cancellation attempt per original command
+and reader domain. Publication rechecks the original source ledger while holding
+it busy through authentic current callbacks. The original frame100 and half-open
+window `[2184,2205)` remain unchanged; no fallback or rescheduling is supplied.
+The previous unpublished path and its oracle remain intact.
+
+The backend model borrows the real submitted event and reader identities. Before
+reader retirement it removes all actual data, span, domain and future-activation
+references. Reader-first receipt collection still leaves the genuine core's
+reader callback deferred until command references reach zero. Later task drain
+requires closed admission, completed outer calls, both actual release callbacks,
+zero original core held counts and no structural uncertainty. Callbacks do not
+free sample resources; seven later one-child drain calls dispose captured owners.
+
+An authenticated terminal receipt with a bad semantic classification records a
+sticky failure while its actual release still consumes that domain. Both genuine
+domains can therefore finish and permit captured cleanup without hiding the
+failure. Pending, wrong envelopes and reentry retain unconsumed or uncertain
+ownership. No failed cancellation is retried, source generation restored, private
+owner flag edited or forced release supplied.
+
+The new25-unit sanitizer fixture passes17 cases:11 complete and six deliberately
+retain their complete contexts. Both orders cover normal cancellation, stale
+sources and bad classification in either domain. Pending, wrong-envelope and
+reentry cases retain in both orders. Three entry guards cover fresh staleness
+before publication, submit-zero without retained backend references, and a clock
+exactly at the first boundary. Genuine mono8/16/24 masters, markers and save bytes
+remain exact through retention and deferred cleanup. The included donor supplies
+acquisition helpers; its renamed main and old cases never execute or count here.
+Original unpublished25-unit and default-OFF22-unit sanitizer groups also pass,
+with unchanged oracles. The canonical new Python wrapper passes separately.
+
+Default mode stays OFF, native compilation of the lifetime option remains
+inhibited, and the default18-unit native RAM probe rebuilds to the complete same
+131,096 bytes previously qualified in Amiberry. That byte identity reuses only
+the original pre-exposure RAM evidence; it is not a new runtime test of this HOST
+bridge. ACTIVE/adopted playback, IRQ delivery, hardware quiet, output timing,
+A1200 execution and listening remain unqualified. See [HOST cancellation evidence](../evidence/enhanced-editor/prepared-paula-lifetime-published/host.json)
+and [default native identity](../evidence/enhanced-editor/prepared-paula-lifetime-published/native-default-build.json).

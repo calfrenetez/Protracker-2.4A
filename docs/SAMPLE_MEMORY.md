@@ -7856,3 +7856,16 @@ Its131,096-byte executable is byte-for-byte identical to the previously
 Amiberry-qualified `ef6259a7` / `856A177A` candidate; that exact-byte evidence is
 reused without another native run. This does not qualify the new HOST bridge on
 Amiga. Physical testing remains unrun. See [default build and byte identity](../evidence/enhanced-editor/prepared-paula-lifetime/native-default-build.json).
+
+
+The explicit HOST lifetime bridge now also publishes once and collects separate
+command/reader cancellation receipts in either order, retaining genuine source
+ownership until both actual core releases and a later bounded drain. The new
+17-case sanitizer fixture passes11 complete and six intentionally retained
+contexts; original unpublished and default-OFF regressions pass unchanged.
+Semantic failure remains visible through safe captured cleanup; uncertainty
+retains ownership without retry or generation restoration. The exact musical
+window is unchanged. A fresh default native build reproduces the previously
+Amiberry-qualified RAM executable byte for byte. This qualifies neither ACTIVE
+playback nor native lifetime/IRQ/output, hardware quiet, physical timing or
+listening. See [published cancellation scope](SAMPLER_PAULA_LINEAGE.md#published-three-source-cancellation-bridge-16-october2026).

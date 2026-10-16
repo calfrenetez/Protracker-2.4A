@@ -466,8 +466,9 @@ int pt_prepared_paula_sources_private_contexts(struct pt_prepared_paula_sources 
 int pt_prepared_paula_sources_private_current(struct pt_prepared_paula_sources *p,
     struct pt_prepared_paula_lifetime *l)
 {
-    return valid(p)&&p->busy&&p->custodian==l&&p->custody_stage==1&&
-        pt_prepared_paula_lifetime_source_phase(l,p,1)&&
+    return valid(p)&&p->busy&&p->custodian==l&&
+        ((p->custody_stage==1&&pt_prepared_paula_lifetime_source_phase(l,p,1))||
+         (p->custody_stage==2&&pt_prepared_paula_lifetime_source_phase(l,p,3)))&&
         p->phase==PT_PREPARED_PAULA_SOURCES_PREPARED&&
         p->failure==PT_PREPARED_PAULA_SOURCES_OK&&held_current(p,0);
 }
@@ -517,6 +518,30 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_enqueue(
 abort:p->custodian=NULL;p->custody_stage=0;
 done:p->busy=0;return result;
 }
+enum pt_scheduled_result pt_prepared_paula_sources_private_publish(
+    struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
+{
+    enum pt_scheduled_result result;
+    if(!valid(p)||p->custodian!=l||p->custody_stage!=2||
+       !pt_prepared_paula_lifetime_source_phase(l,p,3))return PT_SCHEDULED_INVALID;
+    if(!enter(p))return PT_SCHEDULED_BACKEND;
+    if(p->phase!=PT_PREPARED_PAULA_SOURCES_PREPARED||
+       p->failure!=PT_PREPARED_PAULA_SOURCES_OK||p->pin_job.reservation.owner||
+       p->chip_job.owner||!held_current(p,0)){
+        result=PT_SCHEDULED_STALE;goto done;
+    }
+    /* The original current proof is never retained across this call. Hold this
+     * actual source ledger busy through authentic publish/current callbacks. */
+    result=pt_prepared_paula_lifetime_lower_publish(l,p);
+    if(p->phase==PT_PREPARED_PAULA_SOURCES_HELD)result=PT_SCHEDULED_BACKEND;
+    else if(!held_current(p,0)){
+        (void)fail(p,PT_PREPARED_PAULA_SOURCES_STALE);result=PT_SCHEDULED_STALE;
+    }
+    /* Actual published/uncertain core references never roll back stage2. All
+     * later receipt collection/disposal uses the captured original ledger. */
+done:p->busy=0;return result;
+}
+
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(
     struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
 {

@@ -3,8 +3,10 @@
 #include <string.h>
 
 #define ALIGNMENT(T) offsetof(struct {char byte;T value;},value)
-enum {EMPTY=1,QUEUED,STOPPED,CLOSED,HELD};
-enum {OPEN_CALL=1,ENQUEUE_CALL,STOP_CALL,DRAIN_CALL,CLOSE_CALL};
+enum {EMPTY=1,QUEUED,STOPPING,STOPPED,CLOSED,HELD};
+enum {OPEN_CALL=1,ENQUEUE_CALL,STOP_CALL,DRAIN_CALL,CLOSE_CALL,
+      PUBLISH_CALL,STOP_PUBLICATION_CALL,COMMAND_CANCEL_CALL,READER_CANCEL_CALL};
+enum {CURRENT_CALLBACK=1,TERMINAL_CALLBACK};
 struct command_control {struct pt_prepared_paula_lifetime *owner;};
 struct reader_control {struct pt_prepared_paula_lifetime *owner;};
 struct pt_prepared_paula_lifetime {
@@ -25,6 +27,9 @@ struct pt_prepared_paula_lifetime {
     unsigned stop_attempted,stop_returned,drained;
     unsigned command_terminal,command_consumed,reader_terminal,reader_consumed;
     unsigned release_consumed;
+    unsigned publish_attempted,publish_called,stop_closed;
+    unsigned command_cancel_attempted,reader_cancel_attempted;
+    enum pt_scheduled_result classified_failure;
 };
 /* The witness is established from our actual original queue call. Incoming
  * callback context is compared by address BEFORE any incoming dereference. */
@@ -39,8 +44,13 @@ static int apart(const void *a,size_t n,const void *b,size_t m)
 {uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;return (!n||object(a,n,1))&&(!m||object(b,m,1))&&(!n||!m||x+n<=y||y+m<=x);}
 static int valid(const struct pt_prepared_paula_lifetime *l)
 {return object(l,sizeof(*l),ALIGNMENT(struct pt_prepared_paula_lifetime))&&l->self==l&&l->capacity>=sizeof(*l)&&object(l,l->capacity,ALIGNMENT(struct pt_prepared_paula_lifetime))&&l->state>=EMPTY&&l->state<=HELD&&l->config.context_count<=PT_PREPARED_PAULA_LIFETIME_CONTEXTS&&l->data.count<=PT_PREPARED_PAULA_LIFETIME_DATA_SPANS;}
+static void classify(struct pt_prepared_paula_lifetime *l,enum pt_scheduled_result result)
+{
+    if(result!=PT_SCHEDULED_OK&&result!=PT_SCHEDULED_PENDING&&
+       l->classified_failure==PT_SCHEDULED_OK)l->classified_failure=result;
+}
 static void fault(struct pt_prepared_paula_lifetime *l)
-{l->failed=1;l->uncertain=1;}
+{l->failed=1;l->uncertain=1;classify(l,PT_SCHEDULED_BACKEND);}
 static int enter(struct pt_prepared_paula_lifetime *l,unsigned phase)
 {if(l->busy){fault(l);return 0;}l->busy=1;l->outer=phase;return 1;}
 static void leave(struct pt_prepared_paula_lifetime *l)
@@ -79,57 +89,72 @@ int pt_prepared_paula_lifetime_source_phase(const struct pt_prepared_paula_lifet
 {
     if(!valid(l)||l->sources!=p||!l->busy||(callback_witness&&callback_witness!=l))return 0;
     if(phase==1)return l->outer==ENQUEUE_CALL&&!l->transferred&&l->state==EMPTY;
-    return phase==2&&!callback_witness&&l->outer==DRAIN_CALL&&l->transferred&&l->state==STOPPED&&
-        l->stop_returned&&l->command_consumed&&l->reader_consumed&&!l->uncertain;
+    if(phase==2)return !callback_witness&&l->outer==DRAIN_CALL&&l->transferred&&
+        l->state==STOPPED&&l->stop_closed&&l->stop_returned&&
+        l->command_consumed&&l->reader_consumed&&!l->uncertain&&l->queue&&
+        !pt_readers_commands_held(l->queue)&&!pt_readers_readers_held(l->queue);
+    return phase==3&&l->outer==PUBLISH_CALL&&l->transferred&&l->state==QUEUED&&
+        l->publish_attempted&&!l->stop_attempted&&!l->uncertain;
 }
 static int current_source_phase(struct pt_prepared_paula_lifetime *l)
 {
     /* Keep the original authenticated witness through every metadata check. */
     return callback_witness==l&&pt_prepared_paula_sources_private_current(l->sources,l);
 }
+static int callback_phase(const struct pt_prepared_paula_lifetime *l,unsigned kind,unsigned phase)
+{
+    if(phase==CURRENT_CALLBACK)return l->outer==ENQUEUE_CALL||l->outer==PUBLISH_CALL;
+    if(phase!=TERMINAL_CALLBACK)return 0;
+    return l->outer==STOP_CALL||l->outer==STOP_PUBLICATION_CALL||
+        l->outer==COMMAND_CANCEL_CALL||(kind==2&&l->outer==READER_CANCEL_CALL);
+}
 static struct pt_prepared_paula_lifetime *callback_owner(void *context,unsigned kind,uint64_t token,unsigned phase)
 {
     struct pt_prepared_paula_lifetime *l=callback_witness;
     if(!l)return NULL;
-    if(!valid(l)||!l->busy||l->outer!=phase||!l->queue||
+    if(!valid(l)||!l->busy||!callback_phase(l,kind,phase)||!l->queue||
        context!=(kind==1?(void *)&l->command:(void *)&l->reader)||
        token!=(uint64_t)kind||l->command.owner!=l||l->reader.owner!=l){fault(l);return NULL;}
     return l;
 }
 static int command_current(void *context,uint64_t token,uint64_t generation)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,ENQUEUE_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,CURRENT_CALLBACK);
     return l&&!l->failed&&generation==l->config.grid.generation&&current_source_phase(l);
 }
 static int reader_current(void *context,uint64_t token,uint64_t generation)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,ENQUEUE_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,CURRENT_CALLBACK);
     return l&&!l->failed&&generation==l->config.grid.generation&&current_source_phase(l);
 }
 static void command_terminal(void *context,uint64_t token,int good)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,STOP_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,TERMINAL_CALLBACK);
     if(!l)return;
-    if(!l->transferred||l->command_terminal||l->command_consumed||good!=1){fault(l);return;}
+    if(!l->transferred||l->command_terminal||l->command_consumed||
+       (good!=0&&good!=1)){fault(l);return;}
+    if(!good)classify(l,PT_SCHEDULED_BACKEND);
     l->command_terminal=1;
 }
 static void command_release(void *context,uint64_t token)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,STOP_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,1,token,TERMINAL_CALLBACK);
     if(!l)return;
     if(!l->transferred||!l->command_terminal||l->command_consumed){fault(l);return;}
     l->command_consumed=1;
 }
 static void reader_terminal(void *context,uint64_t token,int good)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,STOP_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,TERMINAL_CALLBACK);
     if(!l)return;
-    if(!l->transferred||!l->command_consumed||l->reader_terminal||l->reader_consumed||good!=1){fault(l);return;}
+    if(!l->transferred||!l->command_consumed||l->reader_terminal||l->reader_consumed||
+       (good!=0&&good!=1)){fault(l);return;}
+    if(!good)classify(l,PT_SCHEDULED_BACKEND);
     l->reader_terminal=1;
 }
 static void reader_release(void *context,uint64_t token)
 {
-    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,STOP_CALL);
+    struct pt_prepared_paula_lifetime *l=callback_owner(context,2,token,TERMINAL_CALLBACK);
     if(!l)return;
     if(!l->transferred||!l->command_consumed||!l->reader_terminal||l->reader_consumed){fault(l);return;}
     l->reader_consumed=1;
@@ -278,7 +303,8 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_stop_local(
     enum pt_scheduled_result result;
     if(!valid(l))return PT_PREPARED_PAULA_SOURCES_INVALID;
     if(!enter(l,STOP_CALL))return PT_PREPARED_PAULA_SOURCES_FAULT;
-    if(l->state!=QUEUED||!l->transferred||l->stop_attempted||!l->queue){leave(l);return PT_PREPARED_PAULA_SOURCES_INVALID;}
+    if(l->state!=QUEUED||!l->transferred||l->publish_attempted||
+       l->stop_attempted||!l->queue){leave(l);return PT_PREPARED_PAULA_SOURCES_INVALID;}
     if(callback_witness){fault(l);leave(l);return PT_PREPARED_PAULA_SOURCES_FAULT;}
     l->stop_attempted=1;callback_witness=l;
     result=pt_readers_stop(l->queue);
@@ -288,10 +314,111 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_stop_local(
        pt_readers_commands_held(l->queue)||pt_readers_readers_held(l->queue))fault(l);
     /* This publication occurs only after the actual stop/callback stack ended.
      * A callback attempting drain before this point sees busy, never authority. */
-    if(!l->uncertain){l->state=STOPPED;l->stop_returned=1;}
+    if(!l->uncertain){l->state=STOPPED;l->stop_returned=1;l->stop_closed=1;}
     leave(l);
     return l->uncertain?PT_PREPARED_PAULA_SOURCES_FAULT:PT_PREPARED_PAULA_SOURCES_OK;
 }
+/* Called only from the exact source-ledger publish transaction. */
+enum pt_scheduled_result pt_prepared_paula_lifetime_lower_publish(
+    struct pt_prepared_paula_lifetime *l,struct pt_prepared_paula_sources *p)
+{
+    enum pt_scheduled_result result;
+    if(!pt_prepared_paula_lifetime_source_phase(l,p,3)||!l->queue||
+       l->failed||l->publish_called)return PT_SCHEDULED_INVALID;
+    if(callback_witness){fault(l);return PT_SCHEDULED_BACKEND;}
+    l->publish_called=1;callback_witness=l;
+    result=pt_readers_publish(l->queue,l->ticket);
+    if(callback_witness!=l)fault(l);
+    callback_witness=NULL;
+    classify(l,result);
+    return result;
+}
+enum pt_scheduled_result pt_prepared_paula_lifetime_publish_once(
+    struct pt_prepared_paula_lifetime *l)
+{
+    enum pt_scheduled_result result;
+    if(!valid(l))return PT_SCHEDULED_INVALID;
+    if(!enter(l,PUBLISH_CALL))return PT_SCHEDULED_BACKEND;
+    if(l->state!=QUEUED||!l->transferred||l->publish_attempted||
+       l->stop_attempted||l->failed||!l->queue){leave(l);return PT_SCHEDULED_INVALID;}
+    l->publish_attempted=1;
+    result=pt_prepared_paula_sources_private_publish(l->sources,l);
+    classify(l,result);leave(l);
+    return l->uncertain?PT_SCHEDULED_BACKEND:result;
+}
+/* Counts are observations of our actual original queue, not caller declarations.
+ * A semantically bad terminal receipt can still end an authentic domain. */
+static void stopped_after_return(struct pt_prepared_paula_lifetime *l)
+{
+    unsigned commands,readers;
+    if(l->uncertain||!l->queue||!l->stop_closed||!l->stop_returned)return;
+    commands=pt_readers_commands_held(l->queue);readers=pt_readers_readers_held(l->queue);
+    if(commands>1||readers>1||
+       ((commands==0)!=(l->command_consumed!=0))||
+       ((readers==0)!=(l->reader_consumed!=0))){fault(l);return;}
+    l->state=l->command_consumed&&l->reader_consumed?STOPPED:STOPPING;
+}
+enum pt_scheduled_result pt_prepared_paula_lifetime_stop_publication(
+    struct pt_prepared_paula_lifetime *l)
+{
+    enum pt_scheduled_result result;
+    if(!valid(l))return PT_SCHEDULED_INVALID;
+    if(!enter(l,STOP_PUBLICATION_CALL))return PT_SCHEDULED_BACKEND;
+    if(l->state!=QUEUED||!l->transferred||l->stop_attempted||
+       !l->queue){leave(l);return PT_SCHEDULED_INVALID;}
+    if(l->uncertain||callback_witness){fault(l);leave(l);return PT_SCHEDULED_BACKEND;}
+    l->stop_attempted=1;callback_witness=l;
+    result=pt_readers_stop(l->queue);
+    if(callback_witness!=l)fault(l);
+    callback_witness=NULL;
+    classify(l,result);
+    /* The genuine stop closes admission even when a classified queue failure
+     * is already sticky. No disposal runs on this call/callback stack. */
+    if(!l->uncertain){l->stop_closed=1;l->stop_returned=1;stopped_after_return(l);}
+    leave(l);return l->uncertain?PT_SCHEDULED_BACKEND:result;
+}
+enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_command_once(
+    struct pt_prepared_paula_lifetime *l)
+{
+    struct pt_readers_command_receipt receipt;enum pt_scheduled_result result;
+    if(!valid(l))return PT_SCHEDULED_INVALID;
+    if(!enter(l,COMMAND_CANCEL_CALL))return PT_SCHEDULED_BACKEND;
+    if(l->state!=STOPPING||!l->stop_closed||!l->stop_returned||
+       !l->transferred||!l->queue||l->command_consumed||l->command_cancel_attempted){
+        leave(l);return PT_SCHEDULED_INVALID;
+    }
+    if(l->uncertain||callback_witness){fault(l);leave(l);return PT_SCHEDULED_BACKEND;}
+    l->command_cancel_attempted=1;callback_witness=l;
+    result=pt_readers_cancel_command(l->queue,l->ticket,&receipt);
+    if(callback_witness!=l)fault(l);
+    callback_witness=NULL;classify(l,result);stopped_after_return(l);
+    leave(l);return l->uncertain?PT_SCHEDULED_BACKEND:result;
+}
+enum pt_scheduled_result pt_prepared_paula_lifetime_cancel_reader_once(
+    struct pt_prepared_paula_lifetime *l)
+{
+    struct pt_readers_reader_receipt receipt;enum pt_scheduled_result result;
+    if(!valid(l))return PT_SCHEDULED_INVALID;
+    if(!enter(l,READER_CANCEL_CALL))return PT_SCHEDULED_BACKEND;
+    if(l->state!=STOPPING||!l->stop_closed||!l->stop_returned||
+       !l->transferred||!l->queue||l->reader_consumed||l->reader_cancel_attempted){
+        leave(l);return PT_SCHEDULED_INVALID;
+    }
+    if(l->uncertain||callback_witness){fault(l);leave(l);return PT_SCHEDULED_BACKEND;}
+    l->reader_cancel_attempted=1;callback_witness=l;
+    result=pt_readers_cancel_reader(l->queue,l->ticket,0,&receipt);
+    if(callback_witness!=l)fault(l);
+    callback_witness=NULL;classify(l,result);stopped_after_return(l);
+    leave(l);return l->uncertain?PT_SCHEDULED_BACKEND:result;
+}
+enum pt_scheduled_result pt_prepared_paula_lifetime_failure(
+    struct pt_prepared_paula_lifetime *l)
+{
+    if(!valid(l))return PT_SCHEDULED_INVALID;
+    if(l->busy){fault(l);return PT_SCHEDULED_BACKEND;}
+    return l->uncertain?PT_SCHEDULED_BACKEND:l->classified_failure;
+}
+
 enum pt_prepared_paula_sources_result pt_prepared_paula_lifetime_drain_step(
     struct pt_prepared_paula_lifetime *l)
 {

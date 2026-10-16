@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "scope": "Default-OFF pre-exposure native RAM probe build and exact-binary reuse only",
+  "result": "PASS",
+  "buildBaseCommit": "a4f4eddd9d71844eb02bb435369c1597291a2bf6",
+  "sourceComposition": {
+    "committedBodies": 52,
+    "reviewedOwnerOverlays": 2,
+    "exportBodies": 54
+  },
+  "ownerOverlaySHA256": {
+    "src/editor/prepared_paula_sources.c": "b2f5736eb7fc6a7a6362d72421459162399b3cf0732fd14c5a40942339860e9f",
+    "src/editor/prepared_paula_sources.h": "ad5069642d6ae242264353f2466043feb6ab51f0f7e7972b2838d9cb01d2c71c"
+  },
+  "manifestSHA256": "20333dc521337b4dffb0075ca95e1a38467ad07ca5f3c16ec9ed7c26490f6227",
+  "rootBuildResultSHA256": "9ebcc0dc285f9d21cb5c978db6256328e1ce2671c811551163783f08f18abafc",
+  "rootFullByteComparisonSHA256": "7df2d6b800f8640f594fc3a251663ab7dc5b80a3da3dbceef635c3ffb296a9a0",
+  "elapsedSeconds": 5.06,
+  "actualTranslationUnits": 18,
+  "actualProjectDependencies": 51,
+  "actualSelectedSDKInputs": 42,
+  "runtimeInputs": 7,
+  "actualLinkLoads": 25,
+  "assertionsEnabled": true,
+  "allActualNativeDependenciesAndPreprocessedBodiesExcludeLifetime": true,
+  "binary": {
+    "bytes": 131096,
+    "sha256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e",
+    "crc32": "856A177A"
+  },
+  "wholeOldAndNewBytesCompared": true,
+  "runtimeEvidenceReusedFrom": "../prepared-paula-sources/emulator.json",
+  "newEmulatorRun": false,
+  "physicalRun": "NOT_RUN",
+  "hostLifetimeNativeQualification": false,
+  "preservation": "Unrelated16/classic51 preserved; ten dataless classic bodies metadata-only.",
+  "limits": [
+    "Byte reuse covers only the old exact Amiberry pre-exposure Fast/Chip/cold-HIT/cancellation/master-save assertions.",
+    "No native published lifetime, source-reader/output integration, physical placement, IRQ/device quiet, timing, listening, aggregate stack or WCET qualification."
+  ],
+  "targetOperations": 0
+}

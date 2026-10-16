@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "state": "BOUNDED_COMPLETION_OBSERVATION_HOST_PASS_NATIVE_NOT_RUN",
+  "state": "HOST_PASS_AND_EXACT_STUDIO_NATIVE_PATH_PASS_INDEPENDENTLY_RELEASED",
   "source_scope": "Owned Python native-fixture protocol only; application candidate bytes and musical schedule unchanged",
   "baseline": "Original protocol reproduces error when acknowledged staging launch temporarily removes marker",
   "change": "Observe the complete owned directory while marker is absent/short; only exact terminal size permits strict content read; unknown entries/kinds and oversize/error replies still fail closed",
@@ -24,7 +24,13 @@
     "protocol_source": "717fc1df1cffa631c4369649b1c2467a45edd286ea31926b037f7c3db50209cf",
     "regression_source": "db56534f0f889922593c3219783aa4ed80da0d5ab007ae9b41133d84b5d252a6"
   },
-  "native_execution": "NOT_RUN",
+  "native_execution": {
+    "state": "Exact Studio fixture passed through same new completion observation method/poll sites;48refusals48controls",
+    "evidence": "../studio-master-outputs/emulator.json",
+    "evidenceSHA256": "0c5c78cda202c7258f14bdafa2baa5831f64c5b2a6721b030d943d6861ad88cb",
+    "real_guest_transient_absence_injected": false,
+    "offline_capture_and_readonly_inventory_reverified": true
+  },
   "physical_execution": "NOT_RUN",
   "not_qualified": [
     "Atomic filesystem/daemon completeness or handle-close semantics",

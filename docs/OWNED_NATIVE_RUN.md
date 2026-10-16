@@ -21,7 +21,11 @@ foreign entries, oversized markers and actual directory errors without further
 requests. All75 owned-protocol model tests and28 raw-protocol tests pass. The
 updated private Studio packet passes35runner/27service/15entry checks; the
 physical packet passes25runner/27service checks. Native execution of this new
-observation path is pending; historical target results do not qualify it.
+observation path now passes once with the exact Studio master-protection fixture:
+48 refusals and48 controls, RC0 and independent cleanup/release/final idle. An
+offline check revalidates the raw capture and read-only source inventory. The
+actual guest run does not inject marker disappearance; those transitions remain
+host-model evidence. Physical execution of the new path remains pending.
 Directory replies are observations, not atomic filesystem or handle-close proof.
 See [scoped evidence](../evidence/enhanced-editor/native-completion-observation/host.json).
 

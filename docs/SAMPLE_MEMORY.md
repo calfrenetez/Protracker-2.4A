@@ -28,9 +28,12 @@ forms, with48 subsequent phase/pin/direct24 controls and complete byte
 beforeimages. Twelve host sanitizer groups pass, including sampler and both
 editor Studio paths. An existing duplicate flow/pitch test-link recipe was
 corrected without removing either source. The pinned four-unit37,520-byte HUNK
-cross-build passes; its Amiberry and physical execution remain NOT_RUN. No
-placement, timing, device, frontend or listening acceptance follows. See
-[scoped host/build evidence](../evidence/enhanced-editor/studio-master-outputs/host-build.json).
+cross-build and exact Amiberry run pass:48 refusals and48 subsequent controls,
+RC0, independent cleanup/restoration/release and a separate final idle check.
+Physical Studio execution remains NOT_RUN. No placement, timing, device, frontend
+or listening acceptance follows. See
+[scoped host/build evidence](../evidence/enhanced-editor/studio-master-outputs/host-build.json)
+and [exact native evidence](../evidence/enhanced-editor/studio-master-outputs/emulator.json).
 
 
 ## Additional mixed source-format native checks —16 October2026

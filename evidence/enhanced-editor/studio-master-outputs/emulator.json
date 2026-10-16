@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "state": "EXACT_NATIVE_STUDIO_MASTER_OUTPUT_FIXTURE_PASS_INDEPENDENTLY_RELEASED",
+  "source_commit": "4299a04d708267c1f656118deaa4bbb7aa28345d",
+  "candidate": {
+    "crc32": "536B852C",
+    "sha256": "8a51cc8cb03b063affca2ad76d1e08688afd87a1188449d56d474eef6d95c5bb",
+    "size": 37520
+  },
+  "scope": "48 full current/pending master-capacity and opaque-session output refusals, each followed by a phase/pin/direct24 control;8/16/24 mono/stereo;ordinary allocator/source callbacks",
+  "alias_refusals": 48,
+  "post_refusal_controls": 48,
+  "ordinary_allocator_model_only": true,
+  "source_units": 4,
+  "compiled_project_bodies": 23,
+  "observed": {
+    "nativeMarkers": [
+      "STUDIO MASTER OUTPUT PASS:48 refusals/48 controls;8/16/24 mono/stereo;current/pending full capacity and opaque owner;phase/pins/bytes preserved"
+    ],
+    "observedStackBytes": 1048576,
+    "outputBytes": 144,
+    "outputCRC32": "B0884342",
+    "rawStackQuery": "Current stack size is 1048576 bytes",
+    "returnCode": 0
+  },
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact": "true",
+    "chip_kib": 2048,
+    "z3_kib": 131072
+  },
+  "bounds_seconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "orchestration": {
+    "host_runner_tests": 35,
+    "host_service_tests": 27,
+    "entry_tests": 15,
+    "input_files": 1,
+    "execution_files": 8,
+    "sidecar": false,
+    "unchanged_transaction_retried": false
+  },
+  "cleanup": {
+    "exact_guest_and_host_staging_absence": true,
+    "saved_originals_restored": true,
+    "independent_observation": true,
+    "public_release": true,
+    "own_service_and_emulator_absent": true,
+    "separate_final_idle": true,
+    "fence": 1857,
+    "archives": 126,
+    "holds": 0,
+    "availability": "Historical final observation; fresh live checks required"
+  },
+  "records_sha256": {
+    "spec": "d28460bf6a60f69bbb1f3b3c9778701fd8a38d10512964bc319e63bc89aacb45",
+    "admission": "e216f57dc38b324a8598c92920e0109bc621f1450440e302e4cc0f25433ccaa6",
+    "actual_result": "223aeeab0b0f4b1e7a854b7f95a52d72ebb2e10ca31bae2f602b475d60963463",
+    "independent_pass": "4ea61d3c6ee0f2b347c952c60df05a3fc5084bf2f709499e72e8a651f1224412",
+    "public_release": "d5cec9fc2b1d9d4a03b3a2224bbcf3464ef82cc8ae7055e99cb8630e751055d9",
+    "owned_service_stop": "aa3d8a60eabdbe0cbc2cc4e2a83c5ebfe17a32524804653f1c466e60e36e4413",
+    "separate_final_idle": "1029468ec2c8e8221b13e1d0999b1b5e2a8bae30e4c2fb3a5d2fec61696b4004"
+  },
+  "not_qualified": [
+    "Generic voice API/all-path mutation protection",
+    "Exec memory placement/whole-callchain Stack/WCET",
+    "Device output/stop/IRQ/timing/Studio throughput",
+    "Physical A1200/frontend/full app/audio/listening"
+  ],
+  "physical_execution": "NOT_RUN"
+}

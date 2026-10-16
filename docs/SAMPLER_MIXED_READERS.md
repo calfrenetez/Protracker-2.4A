@@ -2,21 +2,26 @@
 
 ## Current separately bounded native coverage —16 October2026
 
-Twenty-nine separate Amiberry runs now qualify477 of the495 binding cases:
-87 genuine controls and390 refusals. Every8/16-bit mono/stereo family and every
-24-bit mono backend passes. Four24-bit stereo backends pass. The8-bit
-little-endian family failed during staging before native execution; its18 cases
-remain unqualified. No failed transaction was replayed.
+Thirty separate Amiberry runs now qualify all495 binding cases:
+90 genuine controls and405 refusals. Every8/16/24-bit mono/stereo family and every
+Paula/card8/card16 cache format, including both card byte orders, passes.
+The final24-bit stereo/card8 little-endian family passes in a fresh protocol
+successor. No failed transaction was resumed or replayed.
 
 The failed preparation acknowledged its single Shell staging launch, then
 returned an exact error for the staging-completion file. Its own emulator was
 stopped once, the already-absent service was independently checked, originals
 were restored, and cleanup/public release/separate final idle verification
 passed. All three original holds and the failed result remain archived. This
-neither passes those18 cases nor diagnoses the physical cause of the missing
-file. A bounded completion-observation successor is host qualified separately.
+neither passes those18 cases nor diagnoses the cause of the missing file.
+The changed successor observes the complete owned directory while a Shell marker
+is absent or partial, then applies the original exact terminal-file checks.
+Its new run identity, namespace and claim complete all18 cases with RC0,
+independent cleanup, release and a separate final idle observation. The original
+time limits and failure-on-actual-error policy remain unchanged. Its service was
+freshly qualified against the separately approved256-record harness bound.
 
-An offline audit replays all29 actual captures/control records, checks their
+An offline audit replays all30 actual captures/control records, checks their
 current89-body build closures, immutable source inventories, custody and release
 archives, and verifies the saved independent final observations. The audit sends
 no target commands and does not establish present availability. Continuous495

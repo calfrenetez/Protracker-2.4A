@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "state": "PARTIAL_NEW_FORMAT_NATIVE_QUALIFICATION",
-  "completed_native_families": 24,
-  "new_native_cases": 402,
-  "new_native_controls": 72,
-  "new_native_refusals": 330,
-  "remaining_new_native_cases": 18,
+  "state": "ALL_420_NEW_FORMAT_CASES_SEPARATELY_NATIVE_QUALIFIED",
+  "completed_native_families": 25,
+  "new_native_cases": 420,
+  "new_native_controls": 75,
+  "new_native_refusals": 345,
+  "remaining_new_native_cases": 0,
   "previous_8mono_cases": 75,
-  "combined_separate_native_binding_cases": 477,
+  "combined_separate_native_binding_cases": 495,
   "binding_matrix_cases": 495,
   "previous_8mono_evidence": {
     "file": "families-emulator.json",
@@ -28,7 +28,8 @@
         "sha256": "579efc6b37077c87cc592cfc39333a11cbb690f59b5d7f72d03a5ff28c97c3cf",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16mono",
@@ -43,7 +44,8 @@
         "sha256": "3ad57ca4ef11b46cec89b60adde7ae757cd2103cdde1ce2a2261424479edc7fe",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16mono",
@@ -58,7 +60,8 @@
         "sha256": "cf54973e3c5a08fa321db2f60c933c1a967b552dbf9ed2546465b4bb0cf6a8f2",
         "size": 296548
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16mono",
@@ -73,7 +76,8 @@
         "sha256": "6a0fb91170b9adf893be8b8ca727be34e87f0bf1bf244ed546b00b5861b12975",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16mono",
@@ -88,7 +92,8 @@
         "sha256": "3e8ba5f72ff6a17d525124fe612663e97eecf24d36c179abe5b94276275bff0c",
         "size": 296544
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16stereo",
@@ -103,7 +108,8 @@
         "sha256": "940f4d25618ce138d771f777bcbbc8ececf4f0c845e1eb4abddc4f3ce0cd8018",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16stereo",
@@ -118,7 +124,8 @@
         "sha256": "a27a4467a31473fd644521a6bba59756d2c0455a1f429c897af0d9a4005739d7",
         "size": 296564
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16stereo",
@@ -133,7 +140,8 @@
         "sha256": "fbcc4b8e9227b3f618becb93027fa0cbb5a26cf51350a8ad5875eee0e4b05c11",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16stereo",
@@ -148,7 +156,8 @@
         "sha256": "5193b089dfdec15dc0d96a5b6ee20687ebae6a38083ddf14e7ec8e69ed187e9a",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "16stereo",
@@ -163,7 +172,8 @@
         "sha256": "ad955454f5b02bd2e1b51b4d8d1c32f621253fa73ec6abb9696eb0cd7466ac2d",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24mono",
@@ -178,7 +188,8 @@
         "sha256": "b7cb2152acac1ba95d451f941cc006a407f757f962cbb96f81afa60fec82d50d",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24mono",
@@ -193,7 +204,8 @@
         "sha256": "87efeba617d71cfb49742bc5a6cb6a76074386c2856a826c73e5f56e3679d09c",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24mono",
@@ -208,7 +220,8 @@
         "sha256": "5a751373b8037c384537ced24b5b352e0a2b2fa1040af917e755bf46b565538f",
         "size": 296548
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24mono",
@@ -223,7 +236,8 @@
         "sha256": "effa9f16c62fd70cf43e6d2320e6cf6eee10c7a09770ce1dc07a3ce2dea8be69",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24mono",
@@ -238,7 +252,8 @@
         "sha256": "d1cb29964c77a1249ae999451582a291288caa49b605be21f69c2bb6cb4841b3",
         "size": 296544
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24stereo",
@@ -253,7 +268,8 @@
         "sha256": "6afb2a13764f2951a51775ee2b220b3b6a1b32d0e222b2dd0a2a4c3a5d65cb2e",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24stereo",
@@ -268,7 +284,8 @@
         "sha256": "cf031d2e0453c8710c95afd0fc946e2da04f5106de3526b3939d711b3c5a5ead",
         "size": 296564
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "24stereo",
@@ -283,7 +300,24 @@
         "sha256": "22faef1db24134df80389557ac1615768381559c8dcf96aa0d82e88981b6e5ad",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
+    },
+    {
+      "component": "24stereo",
+      "backend_family": "amigus8le",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-24stereo-amigus8le-emulator.json",
+      "sha256": "1065b9a7ae08b868bf2b48b8b11086270e64e8811c3cde6f3ff4396357cb7af8",
+      "candidate": {
+        "crc32": "68F1E2EC",
+        "sha256": "830cc4ec0fc3c6ac6730025e79f36793073b6d51cfe9697478d1e787d9109c98",
+        "size": 296560
+      },
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": true
     },
     {
       "component": "24stereo",
@@ -298,7 +332,8 @@
         "sha256": "94c0c0a90707a3d2c113f4820b28ec850d4aefe1a4535b23c88a98aa0c93f53c",
         "size": 296552
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "8stereo",
@@ -313,7 +348,8 @@
         "sha256": "48230fcbe1ee74f344e9a718a2f7a8ce7137429963e64e690765f33f4d6c0efd",
         "size": 296556
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "8stereo",
@@ -328,7 +364,8 @@
         "sha256": "595ccf074920d88a6dc764c6bf8452f4845478579f33d2e369d9449f480c30af",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "8stereo",
@@ -343,7 +380,8 @@
         "sha256": "c33df44e5c206ea40ea4972c86e3072d9839968f4d800f2326e148be939ab8dd",
         "size": 296556
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "8stereo",
@@ -358,7 +396,8 @@
         "sha256": "f00ff3888d54213408f197ad7f889783cb9bcb5c189d0edb24ca6d89c35e4570",
         "size": 296560
       },
-      "host_reaping_failure_recovered": false
+      "host_reaping_failure_recovered": false,
+      "protocol_successor_after_preserved_failure": false
     },
     {
       "component": "8stereo",
@@ -373,7 +412,8 @@
         "sha256": "fbfe34fc78d5623e43f2c06068908bc5fa4ec9ab3ebc5567eac35eca5e526300",
         "size": 296552
       },
-      "host_reaping_failure_recovered": true
+      "host_reaping_failure_recovered": true,
+      "protocol_successor_after_preserved_failure": false
     }
   ],
   "host_and_build": "All420 new cases pass ASan/UBSan/assertions;25 pinned builds and private runner/service/entry qualifications pass",

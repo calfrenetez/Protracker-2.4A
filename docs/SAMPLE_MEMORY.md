@@ -2,12 +2,12 @@
 
 ## Current mixed binding coverage —16 October2026
 
-Separate native families now pass477/495 genuine binding cases:87 controls and
-390 refusals. All8/16-bit mono/stereo and24-bit mono backends pass. Four24-bit
-stereo backend families now pass. The remaining18-case family stopped
-before native launch on a staging-marker error and was independently recovered
-and released. Those18 cases remain outside native acceptance. An offline
-capture/source/custody/release audit passes for all29 completed families.
+Thirty separate native families now pass all495 genuine binding cases:
+90 controls and405 refusals across8/16/24-bit mono/stereo and every cache format.
+The final18-case family passes in a fresh protocol successor after the bounded
+completion-observation fix. The earlier staging failure and its archived holds
+remain preserved; that transaction was not resumed or replayed. An offline
+capture/source/custody/release audit passes for all30 completed families.
 
 This remains ordinary-allocation/fake-bus evidence. Continuous495 execution,
 original constructor, physical device stop and scheduled output are separate.

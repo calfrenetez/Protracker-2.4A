@@ -824,3 +824,15 @@ The new eight Root validation groups plus the existing 53 input/receipt groups
 pass on HOST (61 overlapping groups total). The registered private service's
 separate parent-observation models pass 45 groups. These results do not qualify a
 live emulator handoff, physical transfer or native playback.
+
+The exact constructor component (307636 bytes, SHA256 `39f286c49b5c6a6f75af97d2b8a64ff0b2bc4251232b61f707c2398e77f5d42c`)
+subsequently passed this external handoff on the shared 030 Amiberry target.
+The Root caller validated the complete upload ledger and separate parent/task
+observations, pinned the receipt, and admitted the independently checked input.
+The native component returned RC0 with its exact stdout and closed progress
+markers. Both guest namespaces and host staging were removed, original launcher
+files restored, and separate observation/release/final-idle checks passed.
+Native/guest/whole limits stayed 90/140/250 seconds. The native component uses
+modeled clocks and buses with ordinary allocation. This adds live emulator
+handoff qualification; physical MiniFTP, physical execution, device completion,
+output timing and listening remain unqualified by this result.

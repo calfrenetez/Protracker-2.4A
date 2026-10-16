@@ -1,0 +1,257 @@
+{
+  "schema": 1,
+  "draft": false,
+  "state": "ACTUAL_COMPILE_LINK_AND_INDEPENDENT_SAVED_DATA_AUDIT_PASS_NOT_RUNTIME",
+  "date": "2026-10-17",
+  "scope": "Distinct ordinary-TASK unpublished real-editor RAM probe; no frontend/output authority",
+  "sourceBaseCommit": "2526fa27d747a20a610c90a437a6de2e90428eda",
+  "sourceBaseTree": "4735fa43707e98fca4c27a63f2cd9c8d41534b19",
+  "selectedSourcePins": {
+    "src/editor/prepared_paula_mutation_barrier.h": {
+      "bytes": 10175,
+      "sha256": "6dbf3118efefb2b02e3b2d7811b9f8303809e7ffd3f5f5b90e3f7c2bcb0d8aec"
+    },
+    "src/native/prepared_paula_mutation_probe.c": {
+      "bytes": 33874,
+      "sha256": "01802d287b5e4348fe25fcb63dcc8319d12c9b70dbd19dc416e9419aa0e0a2e8"
+    },
+    "tools/build_prepared_paula_mutation_probe.py": {
+      "bytes": 22481,
+      "sha256": "c30fb52829bd8fa618a6da9272df3ab9e1c7e6030ee33feff258118c1ce10bcb"
+    },
+    "tests/test_prepared_paula_mutation_barrier.py": {
+      "bytes": 9621,
+      "sha256": "fb5c662187ad9b543895dcefac0cacf9a0a26056444ecca6d4f8915c0ee51757"
+    },
+    "src/editor/prepared_paula_mutation_barrier.c": {
+      "bytes": 24386,
+      "sha256": "d5dcb03c2e27db45d86933fa1beacf78c19fbdd8ce00bffa4ddd09986b030c41"
+    },
+    "src/editor/prepared_paula_sources.c": {
+      "bytes": 29839,
+      "sha256": "f0f40f3100de1691f40ab37b725ad11e1008a6619c49e7b227a1f21658703112"
+    },
+    "src/editor/prepared_paula_sources.h": {
+      "bytes": 6794,
+      "sha256": "74a070e4d7b4e8463afb61e3d182913872a7726ca61f4fdb7d5084bbe764757c"
+    },
+    "src/editor/prepared_paula_lifetime.c": {
+      "bytes": 24956,
+      "sha256": "77e91ab9f056182faf64a04674c54db9f84436b971724336f0e35724b9da0748"
+    },
+    "src/editor/prepared_paula_lifetime.h": {
+      "bytes": 10812,
+      "sha256": "7131371ab2359a7464e638ed4fdc40014edc7cfdbc3dd8297ae4919d66915561"
+    }
+  },
+  "sourceBoundary": {
+    "ownChanges": "Header native TASK-probe guard partition, new native RAM probe/builder, and HOST wrapper header pin only",
+    "commonCompositorBodyUnchanged": true,
+    "sourceLifetimePrimitiveBodiesUnchanged": true,
+    "earlierNative21ProbeUnchanged": true,
+    "hostGuardBranchPreserved": true,
+    "existingProviderAndNativePublicationInhibitorsPreserved": true,
+    "nativeOptions": [
+      "PT_PREPARED_PAULA_MUTATION_NATIVE_TASK_PROBE_ONLY=1",
+      "PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY=1"
+    ],
+    "genuineTargetRequired": true,
+    "hostOptionsForbidden": true
+  },
+  "objectEligibility": {
+    "result": "PASS",
+    "cases": 18,
+    "hostCases": 8,
+    "genuineAmigaCompilerCases": 10,
+    "positives": 3,
+    "meaningfulRefusals": 15,
+    "positiveKinds": [
+      "HOST header",
+      "native header",
+      "native common compositor object"
+    ],
+    "oldNineCasesRetained": true,
+    "linked": false,
+    "executed": false,
+    "commonObjectLiteralProjectHeadersPinned": 40,
+    "commonObjectEditorHeader": "Preserved working display header; no committed-editor ABI inference"
+  },
+  "hostRegression": {
+    "result": "PASS_BOTH_CURRENT_HEADER_EXECUTIONS",
+    "sourceHeaderSha256": "6dbf3118efefb2b02e3b2d7811b9f8303809e7ffd3f5f5b90e3f7c2bcb0d8aec",
+    "executions": [
+      {
+        "editorSourcePair": "preserved_working_display",
+        "translationUnits": 34,
+        "literalProjectInputs": 85,
+        "cases": 13,
+        "completed": 7,
+        "retainedFaultContexts": 6,
+        "diagnostics": "EMPTY",
+        "assertions": true,
+        "sanitizers": [
+          "address",
+          "undefined"
+        ]
+      },
+      {
+        "editorSourcePair": "committed_editor_baseline",
+        "privateSourceOrigins": {
+          "workingBodies": 83,
+          "verifiedGitEditorBodies": 2
+        },
+        "translationUnits": 34,
+        "literalProjectInputs": 85,
+        "cases": 13,
+        "completed": 7,
+        "retainedFaultContexts": 6,
+        "diagnostics": "EMPTY",
+        "assertions": true,
+        "sanitizers": [
+          "address",
+          "undefined"
+        ]
+      }
+    ],
+    "soleOracle": {
+      "bytes": 224,
+      "sha256": "300167cf71f39cb3c9202bc8977704aa46a634676c5af26a2e913d6cdf677d94"
+    },
+    "boundsSeconds": {
+      "compile": 120,
+      "fixture": 30
+    },
+    "oracleAndFixtureUnchanged": true,
+    "fixtureSha256": "549f7f6335a8a1f675832e7487e2027e45ee2cb141eb84908ce68032ed089a08"
+  },
+  "nativeBuild": {
+    "actualResult": "PASS_COMPILE_LINK_ONLY",
+    "manifestSha256": "e30047fb0e32a69cd8c5d783588937658ff83b85a872d2c3220798b1605dd61d",
+    "translationUnits": 35,
+    "exportFiles": 92,
+    "verifiedCommittedBodies": 89,
+    "reviewedRawOverlays": 3,
+    "actualProjectDependencies": 89,
+    "actualSelectedSdkHeaders": 50,
+    "priorSelectedSdkHeaders": 42,
+    "newSdkHeadersReviewedThenExplicitlyPinned": 8,
+    "sdkRootsUnchanged": true,
+    "runtimeInputs": 7,
+    "exactLinkMapLoads": 42,
+    "savedCommands": 153,
+    "assertionsEnabled": true,
+    "originalCompilerSafetyFlagsPreserved": true,
+    "rawPerFunctionStackUsageRetained": true,
+    "progressSidecar": false,
+    "candidate": {
+      "name": "PTPreparedPaulaMutationProbe",
+      "bytes": 242936,
+      "sha256": "ff636f0ff1618326d89f99c827ea537f81c4915e37930ad254184fbec7bf5f8b",
+      "crc32": "31D07C35",
+      "format": "HUNK_HEADER0x000003f3"
+    },
+    "soleExpectedRuntimeStdout": {
+      "bytes": 208,
+      "sha256": "512742126379768705d5ddb0d561e3fda3e4f6f43846cfeb0e469265182c4be2"
+    },
+    "runtimeExecution": "NOT_RUN",
+    "independentSavedBuildAudit": {
+      "state": "PASS_SAVED_DATA_ONLY",
+      "bytes": 28831,
+      "sha256": "610c926acdcc9ea07a8732302d82eae40bc3036de5f88de1fee04cae19806eb7",
+      "newTestOrToolQueries": false,
+      "nativeRuntimeQualified": false
+    },
+    "verifiedRawStreams": 306,
+    "allSavedCommandsRC0": true,
+    "rawStackObservations": {
+      "perFunctionRows": 635,
+      "largestRecordedFunctionBytes": 16572,
+      "probeMainRecordedBytes": 620,
+      "aggregateOrHighWaterBound": false,
+      "futureOneMiBDiagnosticSetting": "NOT_YET_ADMITTED_OR_OBSERVED"
+    },
+    "nativePartitionAudit": {
+      "threeOwnerLifetimeCompositorUnitsChecked": true,
+      "sixHostPublicationCollectionOrFriendNamesAbsentFromSavedPreprocessingAndObjects": true,
+      "sourcePhase3AndCancellationAuthorityExcluded": true,
+      "genericLowerCorePublicationSymbolsMayRemainInHunk": true
+    },
+    "buildElapsedSeconds": 10.343908,
+    "verifiedPerUnitProducts": 105
+  },
+  "plannedNativeSubset": [
+    "One actual initialized editor and original checked allocator setup",
+    "Three genuine mono8/16/24 Fast masters and selective signed8 Chip caches",
+    "One actual unpublished command/reader transfer; cooperating editor veto with no hook child work",
+    "Later actual local stop, seven captured drain steps, queue/cache closure and separate exact detach",
+    "Real edit/dispose, master-preserving encoded bytes and explicit final zero ledgers",
+    "Actual Fast endpoint observations and checked Fast registry; uncertainty retains whole process"
+  ],
+  "plannedNativeSubsetBoundary": "These are unexecuted native source assertions, not runtime placement, cleanup, backend-call, zero-ledger, real-task/SR or timing facts. HOST fault matrix is not claimed natively.",
+  "preservation": {
+    "hostAndSourceExportProtectedPaths": 16,
+    "classicBaselineEntries": 51,
+    "ordinaryBaselineBodies": 41,
+    "metadataOnlyDatalessEntries": 10,
+    "noPlaceholderHydration": true,
+    "canonicalDirtyEditorPairReplaced": false,
+    "nativeBuildUsesBothCommittedEditorBodies": true,
+    "noLayoutOrFrontendRuntimeAcceptance": true
+  },
+  "privateIndependentReviewPins": {
+    "source-export": {
+      "bytes": 4674,
+      "sha256": "72e268943027841f8b99bac1429434da73ebcfdf6d5186c05582007ce471b3b6"
+    },
+    "sdk-discovery": {
+      "bytes": 4518,
+      "sha256": "b47b3316d302e5b4bb4c9cf20327ebc145f893b71c9a16f4f4f72c91d3836f23"
+    },
+    "eligibility-r2": {
+      "bytes": 14396,
+      "sha256": "e1711312faf098d709fd644bed9b6126b98945213cfbbbacc784da62e47ddcfb"
+    },
+    "current-host": {
+      "bytes": 11139,
+      "sha256": "0935120a2fe15aa62afc79c39e0bac2e0a569d679298d8f6844fcaecf8236321"
+    },
+    "actual-native-build": {
+      "bytes": 28831,
+      "sha256": "610c926acdcc9ea07a8732302d82eae40bc3036de5f88de1fee04cae19806eb7"
+    },
+    "link-inputs": {
+      "bytes": 3677,
+      "sha256": "75c711a989878fb305ccc87d32a0e9cdb79f5cf173ddec5e560c4c459da7789a"
+    },
+    "probe-source": {
+      "bytes": 9139,
+      "sha256": "561b13f3205367a3c75f81cad44be927b4815f676daf32b13289fd2c5b73a011"
+    }
+  },
+  "acceptance": {
+    "hostCurrentHeaderSoftware": "PASS",
+    "objectEligibility": "PASS",
+    "nativeCompileLink": "PASS",
+    "independentNativeBuildAudit": "PASS_SAVED_DATA_ONLY",
+    "nativeRuntime": "NOT_RUN",
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "frontendNewLoadExit": "UNFINISHED",
+    "publishedOrActiveBackend": "NOT_IMPLEMENTED_BY_THIS_MODULE",
+    "outputDmaIrqDeviceQuiet": "NOT_QUALIFIED",
+    "exactMusicalTiming": "NOT_QUALIFIED"
+  },
+  "limits": [
+    "Build results do not qualify native runtime placement, ownership cleanup, stack depth, IRQ/SR/IPL, frontend, musical output or device quiet.",
+    "Raw stack-usage files are per-function observations; no aggregate stack/callback-depth/WCET bound.",
+    "One compositor step calls at most one original lifecycle operation; bridge close can synchronously free several of32 cache entries.",
+    "Full context extents, allocator freshness and exclusive owner lifetimes remain caller contracts.",
+    "Direct editor init, preview load, workflow preparation and direct sampler/document writes are excluded while attached; native New/Load/final teardown need checked integration.",
+    "HOST and exported source preservation use original stable metadata semantics;10 dataless classic entries have no hydrated body proof.",
+    "No complete transitive compiler-child-tool/system-header/dynamic-library audit or whole-library accounting claim.",
+    "Earlier native21 build and its unadmitted packet retain separate evidence/status.",
+    "Compiler cc1/collect2 lack dedicated before-and-after content pins; the queried absolute linker is pinned, but the actual collect2 child linker is not directly exposed. No complete child-tool closure is claimed."
+  ]
+}

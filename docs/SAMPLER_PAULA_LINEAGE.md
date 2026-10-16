@@ -420,7 +420,8 @@ add only the required PCM declaration include and private temporary-directory
 setting respectively. No fixture ran in either failed preparation.
 
 The option is absent by default and requires the original HOST lifetime option.
-It rejects native selection, including the separate TASK RAM probe. This is
+The HOST option rejects native selection, including use with the separate
+lifetime TASK RAM probe. The distinct mutation TASK partition follows below. This is
 not publication, ACTIVE playback, native frontend/ABI/IRQ, output, device quiet,
 timing, physical or listening acceptance. Direct editor init, preview-source
 loading, workflow preparation and direct sampler/document writes are excluded
@@ -428,3 +429,54 @@ while attached: the existing hook does not universally intercept them. Native
 New/Load must retain original storage until checked owner retirement, and final
 disposal must honor refusal, before integration. Complete context lengths and
 allocator freshness remain caller contracts. See [scoped HOST evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/host.json).
+
+
+## Native TASK mutation RAM partition —17 October2026
+
+The separate value1 `PT_PREPARED_PAULA_MUTATION_NATIVE_TASK_PROBE_ONLY` mode
+requires the original native lifetime TASK value1, a genuine m68k/AmigaOS target
+and neither HOST option. It compiles the same unpublished compositor C body;
+source/lifetime primitives and the earlier native21 probe remain unchanged.
+Existing native publication/collection inhibitors remain. There is no native
+frontend, output provider or interrupt wiring in this partition.
+
+The expanded eligibility matrix passes18 object-only checks: three positives
+(HOST header, native header and native common compositor) and15 meaningful
+refusals. The old nine cases and diagnostics remain. Forty literal project
+headers are pinned for the common-object check, which uses the preserved
+working editor header and supplies no link or committed-editor ABI proof.
+The later complete build instead uses both verified committed editor bodies.
+
+That separate35-unit native build now passes. Its92-file export contains89
+committed source/recipe bodies plus three reviewed overlays: the new header,
+probe and builder. Actual dependency queries and preprocessing select89 project
+bodies and50 SDK headers. Eight newly observed standard-library headers were
+reviewed and explicitly pinned after discovery; no SDK root or unrelated input
+was automatically admitted. Seven pinned runtime inputs and35 objects produce
+42 exact link-map LOADs. Enabled assertions, original compiler safety flags,
+raw stack-usage files, HUNK inspection and final input pins pass. The executable
+is242,936 bytes, SHA256
+`ff636f0ff1618326d89f99c827ea537f81c4915e37930ad254184fbec7bf5f8b`,
+CRC32 `31D07C35`. It has **NOT_RUN** in Amiberry or on the A1200.
+
+The compact probe's planned runtime is one actual initialized editor lifecycle:
+checked empty-owner allocator setup; genuine mono8/16/24 Fast masters and three
+selective Chip caches; one unpublished enqueue; actual editor vetoes without
+child work; later local stop and seven captured drain steps; queue/cache close;
+and separate detach before successful real edit/disposal. Complete static
+contexts require actual Fast endpoint observations; persistent allocations use
+the checked Fast registry. It observes real void-initializer results before
+acquiring resources, keeps the editor alive through all external version unpins,
+checks exact master/save bytes and requires final zero explicit ledgers. Any
+uncertainty retains the entire original process. These are unexecuted native
+assertions, not established placement, cleanup or zero-backend-call facts.
+
+Both current-header HOST sanitizer executions also pass their unchanged13-case,
+seven-complete/six-retained oracle against the working and committed editor
+pairs. Source and layout preservation remain separate from native execution.
+Raw per-function stack records establish no aggregate stack, callback-depth or
+execution-time bound; whole-library accounting and complete child-tool/SDK/dyld
+provenance remain outside scope. The original exact musical schedule is unchanged.
+No published/ACTIVE playback, native frontend New/Load/exit, output/IRQ/DMA,
+device quiet, physical or listening acceptance follows. See [current partition
+build and regression evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/native-task.json).

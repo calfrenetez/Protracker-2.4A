@@ -7903,8 +7903,19 @@ executions, against the preserved working and committed editor source pairs,
 each pass13 cases: seven complete cleanups and six retained uncertain contexts.
 Master/cache/save bytes and the protected baseline are preserved. Nine separate
 object-only eligibility checks pass, including genuine native rejection.
-This adds no source-pointer, receipt or quiet authority and no native/frontend
+This adds no source-pointer, receipt or quiet authority and no frontend or native
 output eligibility. Preview/workflow/direct mutation routes and native
 New/Load/final teardown still require explicit integration. No native,
 Amiberry or physical execution of this compositor is claimed. See [the barrier
 contract and limits](SAMPLER_PAULA_LINEAGE.md#exclusive-host-editor-mutation-barrier-17-october2026).
+
+
+A distinct native TASK mutation-probe partition now compiles the same unpublished
+compositor body with the real committed editor. Eighteen object eligibility
+checks and both unchanged HOST13-case sanitizer groups pass. The pinned35-unit
+build selects89 actual project bodies,50 SDK headers and seven runtime inputs;
+its242,936-byte `ff636f0f` / `31D07C35` RAM executable has NOT_RUN in Amiberry
+or on hardware. Planned actual editor veto, deferred ownership cleanup, Fast/Chip
+placement and zero-ledger assertions therefore remain unqualified natively.
+Published/ACTIVE playback, frontend New/Load/final teardown, output/IRQ/device
+quiet, exact timing and listening remain separate. See [native TASK scope](SAMPLER_PAULA_LINEAGE.md#native-task-mutation-ram-partition-17-october2026).

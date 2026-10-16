@@ -1,5 +1,19 @@
 #ifndef PT_PREPARED_PAULA_MUTATION_BARRIER_H
 #define PT_PREPARED_PAULA_MUTATION_BARRIER_H
+#if defined(PT_PREPARED_PAULA_MUTATION_NATIVE_TASK_PROBE_ONLY)
+#if PT_PREPARED_PAULA_MUTATION_NATIVE_TASK_PROBE_ONLY != 1
+#error "The native TASK mutation probe requires the explicit value 1"
+#endif
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER) || defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
+#error "The native TASK mutation probe forbids HOST mutation and lifetime options"
+#endif
+#if !defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY) || PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY != 1
+#error "The native TASK mutation probe requires the original value-1 native TASK lifetime option"
+#endif
+#if !defined(__m68k__) || !defined(__amigaos__)
+#error "The native TASK mutation probe requires a genuine m68k AmigaOS compiler target"
+#endif
+#else
 #if !defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
 #error "The prepared mutation barrier requires its explicit HOST opt-in"
 #elif PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER != 1
@@ -10,6 +24,7 @@
 #endif
 #if defined(PT_PREPARED_PAULA_NATIVE_TASK_PROBE_ONLY) || defined(__m68k__) || defined(__amigaos__) || defined(__AMIGA__) || defined(AMIGA)
 #error "The prepared mutation barrier has no native eligibility"
+#endif
 #endif
 #include "prepared_paula_lifetime.h"
 
@@ -49,10 +64,16 @@ struct pt_prepared_paula_mutation_config {
     struct pt_readers_backend backend;
 };
 
-/* A single-use, exclusive HOST model of ordinary serialized TASK work. No
- * native eligibility/frontend wiring, IRQ/delivery/signal/supervisor context,
- * gate, backend publication, activation, timer, DMA/audio or quiet authority.
- * Neither existing native21 sources nor its probe option are changed/admitted.
+/* A single-use, exclusive compositor of ordinary serialized TASK work. The
+ * original explicit HOST mode remains a HOST model. The separate native TASK
+ * mutation probe-only mode admits these same unpublished RAM operations in a
+ * genuine original normal TASK, outside Disable/Enable, IRQ/exception, signal,
+ * supervisor or delivery entry. It admits no frontend wiring, gate, backend
+ * publication/activation, timer, DMA/audio, output, quiet or timing authority.
+ * Existing source/lifetime/native21 bodies are unchanged; their native TASK
+ * option alone does not admit this compositor. Neither HOST option is allowed
+ * in native mutation probe mode. The included native lifetime partition still
+ * excludes publication APIs, PUBLISH phase3 and cancel callback authority.
  *
  * Caller has fully validated the immutable project/PCM/markers and established
  * exactly three distinct nonempty mono8/16/24 masters. The original dedicated

@@ -151,11 +151,15 @@ def main():
                     help='One8mono Paula control with a separately closed phase trace; not the75-case matrix')
     ap.add_argument('--fault-probe', choices=['paula-before', 'amigus-active'],
                     help='One genuine wrong-sample refusal with a closed phase trace; not the75-case matrix')
+    ap.add_argument('--family', choices=['paula', 'amigus8be', 'amigus8le', 'amigus16be', 'amigus16le'],
+                    help='One15-case8mono backend family with closed per-case observations')
     args = ap.parse_args()
     if args.probe and args.component != '8mono':
         ap.error('--probe requires --component8mono')
     if args.fault_probe and (args.component != '8mono' or args.probe):
         ap.error('--fault-probe requires --component8mono and excludes --probe')
+    if args.family and (args.component != '8mono' or args.probe or args.fault_probe):
+        ap.error('--family requires --component8mono and excludes --probe/--fault-probe')
     flags, target, marker, marker_occurrences = list(FLAGS), TARGET, MARKER, 1
     units = list(SOURCES)
     if args.component:
@@ -214,6 +218,33 @@ def main():
         marker, marker_occurrences = markers[-2], 1
         flags += ['-DPT_MIXED_FAULT_PROBE='+str(selection)]
         units[0] = 'tests/native_mixed_binding_fault_probe_test.c'
+    if args.family:
+        family = ast.parse((source / 'tests/test_native_mixed_binding_family.py').read_text())
+        imports = [n for n in family.body if isinstance(n, ast.ImportFrom)
+                   and n.module == 'test_sampler_mixed_source_binding']
+        declaration = next(n.value for n in family.body if isinstance(n, ast.Assign)
+                           and any(isinstance(t, ast.Name) and t.id == 'SOURCES' for t in n.targets))
+        families = next(ast.literal_eval(n.value) for n in family.body if isinstance(n, ast.Assign)
+                        and any(isinstance(t, ast.Name) and t.id == 'FAMILIES' for t in n.targets))
+        required = {'paula': 0, 'amigus8be': 1, 'amigus8le': 2, 'amigus16be': 3, 'amigus16le': 4}
+        if (len(imports) != 1 or [(n.name, n.asname) for n in imports[0].names] != [('SOURCES', 'MIXED_SOURCES')]
+                or ast.unparse(declaration) != "['tests/native_mixed_binding_family_test.c', *MIXED_SOURCES[1:]]"
+                or families != required):
+            raise ValueError('Exact genuine family declaration/import changed')
+        markers = ['MIXED BINDING TRACE:family-entered:8:1:0']
+        for fault in range(5):
+            for phase in range(3):
+                markers += ['MIXED BINDING TRACE:family-case-start:8:'+str(phase)+':'+str(fault),
+                            'MIXED BINDING TRACE:family-case-closed:8:'+str(phase)+':'+str(fault)]
+        marker = ('MIXED BINDING FAMILY PASS:8mono '+args.family+
+                  ';15 cases;3 controls12 refusals;before-action/enqueue/active readiness;genuine pins and independent retirement;other480 and legacy constructor excluded;SOFTWARE_ONLY')
+        markers += [marker, 'MIXED BINDING TRACE:family-finished:8:1:15']
+        if len(markers) != 33 or len(set(markers)) != 33 or any(len(x) > 256 for x in markers):
+            raise ValueError('Exact bounded33-line family contract required')
+        marker_occurrences = 2
+        flags += ['-DPT_MIXED_FAMILY='+str(required[args.family])]
+        target = 'PTMixed'+args.family.title()+'FamilyTest'
+        units[0] = 'tests/native_mixed_binding_family_test.c'
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
     if out.exists() or below(out, source) or below(source, out):
@@ -252,6 +283,7 @@ def main():
               'recipe_contract': convention, 'flags': flags, 'fixture_component': args.component or 'full',
               'single_control_probe': args.probe,
               'single_fault_probe': args.fault_probe,
+              'binding_family': args.family,
               'legacy_constructor_in_fixture': not bool(args.component), 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
@@ -330,6 +362,7 @@ def main():
                                      'fixture_component': args.component or 'full',
                                      'single_control_probe': args.probe, 'markers': markers,
                                      'single_fault_probe': args.fault_probe,
+                                     'binding_family': args.family,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',

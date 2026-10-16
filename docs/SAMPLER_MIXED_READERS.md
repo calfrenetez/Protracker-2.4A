@@ -234,3 +234,25 @@ transactions and their unconfirmed cause are unchanged. Physical/device/output
 timing and listening acceptance remain NOT_RUN. See the separate
 [Paula result](../evidence/enhanced-editor/mixed-source-binding/fault-paula-before-emulator.json)
 and [active AmiGUS-reader result](../evidence/enhanced-editor/mixed-source-binding/fault-amigus-active-emulator.json).
+
+## Bounded backend families —16 October2026
+
+The explicit `--component 8mono --family` selections `paula`, `amigus8be`,
+`amigus8le`, `amigus16be` and `amigus16le` each execute15 unchanged genuine
+binding cases: three controls and twelve refusals across before-action, enqueue
+and active readiness. Together they partition the original75-case8mono matrix.
+Closed per-case start/end observations identify completed cases without changing
+the binding function or retirement assertions. The original inner trace defaults
+to no operations; each family has33 exact stdout lines and one final closed
+sidecar, within the existing trace/file bounds. Native deadlines remain unchanged.
+
+Six sanitizer tests across four modules pass from1,376 unchanged frozen inputs,
+including all five families, both single-fault probes, the control, the full495
+matrix and all six original components. Five pinned30-unit HUNKs compile/link
+with enabled SDK assertions and the selected assembler unchanged. Five invalid
+family selections refuse before output creation. The Paula family maximum
+compiler local frame is11,808 bytes; it is not a whole-call-chain bound.
+All family native/Amiberry and physical executions remain NOT_RUN at preparation.
+Earlier failed transactions and their unconfirmed cause are preserved. No
+device, actual voice-stop, native output/IRQ, live timing or listening acceptance
+follows. See [family host/build evidence](../evidence/enhanced-editor/mixed-source-binding/families-host-build.json).

@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "state": "FIVE_GENUINE_FAMILIES_HOST_AND_PINNED_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "c9a56e4c307fa586da6b59d77b1d2c6f98f3e8d8",
+  "source_manifest_sha256": "ec97fdc248477b56695ffe82f868f592e6105d1072e4658c1aa8464cb83ec35e",
+  "frozen_inputs": 1376,
+  "inventory_unchanged": true,
+  "host": {
+    "tests": 6,
+    "modules": 4,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "assertions": true,
+    "warnings_as_errors": true,
+    "scope": "All five15-case families, two single faults, prior control, full495 matrix and all six original components",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "f94d8a2773383788bb2e7d10d065afd839299ee4ca145c6e0073dee7a0fa76b4"
+  },
+  "families": {
+    "paula": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296520,
+        "sha256": "3b2d1647628eb7cd9ad71d02eff0ee3ec8c73de659169840f70a62cd87a9f155",
+        "crc32": "2397123A"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "ccbd21195d35fd4d59ffbe50cda3f23803edb8af8c5ae799aec902db362bcbe7"
+    },
+    "amigus8be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296524,
+        "sha256": "d9f4eff686d2789cd7e35bae5f5def6a352a29275e19d987a0f6391dcfc414ef",
+        "crc32": "F07E9CF2"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "8ceca1ab273dc285462d0b21a252a3724ac6fa1c6c27d3e96245f2b8606165f4"
+    },
+    "amigus8le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296528,
+        "sha256": "10705b5355d424dcfb685a0d04fb0b8b8e49f22d41928e96e031a6ecb525e099",
+        "crc32": "C512F7BD"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "201e7d1c1d0a0eaae2008b4631ec05b6eaa4c8e7fb282042ddb8882153d43950"
+    },
+    "amigus16be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296528,
+        "sha256": "411c4b279ac08d007304559be17708d813aa0c746c71a8de8d506f725163db47",
+        "crc32": "45FCFCAF"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "3e1173e8eba6cc0c2919a7a4c539e174e026a00a961e53420e12a850a8291394"
+    },
+    "amigus16le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296528,
+        "sha256": "96879ce6675aee8f719dbf7b1bb3b795dd692dd98e443db72cf909e4ee2f7389",
+        "crc32": "854BD61C"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "60626d0ab1db810b1d54e506b636bbd08e6ac6d3892d316eca618bf59a3c4b84"
+    }
+  },
+  "cli_invalid_selections": {
+    "cases": 5,
+    "returncode": 2,
+    "refused_before_output": true
+  },
+  "whole_callchain_stack_bound": false,
+  "paula_family_maximum_local_frame_bytes": 11808,
+  "production_changed": false,
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Cause of earlier full495/75-case native deadlines",
+    "Continuous full native matrix or constructor",
+    "Exec placement and whole callchain/WCET",
+    "Device/DMA/real voice-stop/IRQ/output/live timing/listening"
+  ]
+}

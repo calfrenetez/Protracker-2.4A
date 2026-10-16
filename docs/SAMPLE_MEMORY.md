@@ -7439,3 +7439,10 @@ stereo side and signed8/padded cache key for trigger/control/stop views and
 enqueueing. Its 198-case host regression and original-fixture Amiga build pass;
 neither constitutes native execution, device ownership or output timing proof.
 See [lineage source binding](SAMPLER_PAULA_LINEAGE.md#exact-cache-source-binding--16-october-2026).
+
+The genuine mixed factory now checks the actual sample/side/format key for both
+Paula and AmiGUS caches before action construction and retained-reader admission.
+Its 495-case host regression, unchanged full factory/quantized suites and new
+Amiga compiler/linker check pass. The new candidate has not run in Amiberry or
+on hardware; backend resource checks and independent retirement remain required.
+See [mixed cache binding](SAMPLER_MIXED_READERS.md#exact-cache-source-binding--16-october-2026).

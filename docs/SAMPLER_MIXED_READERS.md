@@ -80,3 +80,40 @@ execution, placement/device timing/audio and listening remain separate.
 Whole-song paired lowering, native PLAY and a qualified real atomic activation
 port remain unfinished. Neither this factory nor an injected RAM model qualifies
 physical card capacity, upload ordering/completion or actual voice stop.
+
+## Exact cache source binding — 16 October 2026
+
+Action construction and retained-reader currentness now pair each actual lease
+with the requested sample, selected source side and packed representation.
+Paula uses the existing signed8/even-padding source predicate; AmiGUS uses the
+existing PCM key predicate with its captured 8/16-bit format and bridge version.
+The live backend ownership, resource pointer, arena identity, complete written
+length, capacity and serial checks remain separate and unchanged. No key lookup
+proves a device transfer completed or that an active reader has stopped.
+
+The new genuine factory regression covers 495 cases: 90 controls and 405 wrong
+sample/side/bits/endian/padding refusals across 8/16/24-bit mono/stereo masters,
+at action construction, ready enqueue and active-reader readiness. It includes
+99 Paula and 396 AmiGUS cases with real pins, packer-generated keys and synthetic
+card resources. It checks unchanged refused outputs, promoted masters, project
+saves, cache payload and fake card RAM, no new dispatch/bus write, and independent
+command/reader retirement without repairing keys or reference counts. Preparation
+failure can release unpublished resources; active-source rejection retains them
+until the genuine independent proof domains drain. Sticky failure classifications
+and zero-return handle consumption are preserved through cleanup.
+
+Ten tests in nine host groups pass with ASan/UBSan and assertions. The unchanged
+full mixed-factory/core and quantized-factory/core fixtures also pass separately
+against the current graph with their complete historical stdout oracles. Their
+old pinned qualification entries are neither invoked nor relaxed. The unchanged
+baseline reproduces the missing action refusal; earlier fixture/compile failures
+are preserved separately from that product regression.
+
+The standalone pinned builder cross-compiles the new 495-case main plus the
+original factory constructor to `PTMixedSourceBindingTest` (318,716 bytes,
+SHA-256 `d95800a2b9378709a926a5f658ec51ec0d9c2736d6127a4ffbff4098eb711084`).
+Its 30 units, 87 project bodies, 32 SDK bodies and seven runtimes are recorded,
+with assertions enabled. **Amiberry and physical execution are NOT RUN.**
+Allocation callbacks and the card bus remain software fixtures; native placement,
+physical capacity/order/completion, actual voice stop, IRQ/DMA, timing, audio and
+listening acceptance remain separate. See [scoped host/build evidence](../evidence/enhanced-editor/mixed-source-binding/host-build.json).

@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "ec4441ad7504f2434b087371761d98fa0a7c9a71",
+  "scope": "Mixed factory Paula and AmiGUS leases are bound to actual sample/side/packed format before action lowering and subsequent holder currentness; existing backend/resource and separate retirement checks remain.",
+  "regression": {
+    "cases": 495,
+    "controls": 90,
+    "refusals": 405,
+    "paula_cases": 99,
+    "amigus_cases": 396,
+    "masters": [
+      "8mono",
+      "8stereo",
+      "16mono",
+      "16stereo",
+      "24mono",
+      "24stereo"
+    ],
+    "derived_formats": [
+      "Paula signed8 even padding",
+      "AmiGUS signed8/16 explicit endian and source side"
+    ],
+    "boundaries": [
+      "before trigger action construction",
+      "ready enqueue",
+      "active-reader readiness"
+    ],
+    "checks": [
+      "Real factory controls, pins, leases, uploads and adopted typed reader proofs",
+      "Wrong sample/side/bits/endian/padding keys obtained from actual PCM packer; no duplicated encoding or pin/serial repair",
+      "Refused action count/ticket outputs unchanged; no new clock, dispatch or bus write",
+      "Original save and promoted master/cache payload and fake card RAM unchanged",
+      "Published active resources retained until independent command and reader retirement, preserving sticky failure classifications",
+      "Failure close may consume a handle with return zero; test verifies exact NULL consumption without reuse",
+      "All explicit factory/Chip ledgers empty after close"
+    ],
+    "baseline_missing_refusal_result_sha256": "3e77de0bdcb1b05002d33be651f96fed0238f5270ab5ddb84def40e30d549941",
+    "baseline_missing_refusal_stderr_sha256": "a4bb3b982e9954b664e829befbe8f981641485c49a14d4059ad93739536f94f8"
+  },
+  "host": {
+    "tests": 10,
+    "groups": 9,
+    "flags": [
+      "C99",
+      "assertions",
+      "Werror",
+      "ASan",
+      "UBSan"
+    ],
+    "frozen_files": 365,
+    "source_inventory_unchanged": true,
+    "result_sha256": "a1e614ecbf6434a613a81a12d50d704043a3d57ad909a64326fab4f0ca7f5081",
+    "additional_legacy_checks": {
+      "fixtures": [
+        "unchanged original mixed factory plus original typed core main",
+        "unchanged quantized factory plus original typed core main"
+      ],
+      "compile_run_calls": 4,
+      "exact_historical_stdout_oracle_matched": true,
+      "historical_qualifiers_imported_or_invoked": false,
+      "result_sha256": "5b3726d0e0986e9184e20c3ad7ae208f2620750d7513e9fb7de74596448ec050"
+    }
+  },
+  "build": {
+    "target": "PTMixedSourceBindingTest",
+    "bytes": 318716,
+    "sha256": "d95800a2b9378709a926a5f658ec51ec0d9c2736d6127a4ffbff4098eb711084",
+    "crc32": "2FBC7888",
+    "units": 30,
+    "project_bodies": 87,
+    "sdk_bodies": 32,
+    "runtimes": 7,
+    "assertions_enabled": true,
+    "manifest_sha256": "529b902aac9de765964e3edf8822db6e1233752a9494a6c23385248deea69c01",
+    "compiled_fixture": "New495-case source binding main and unchanged original factory constructor; retained original typed-core donor main is not invoked.",
+    "host_common_365_inputs_identical": true,
+    "only_additional_frozen_input": "standalone pinned builder",
+    "execution": "NOT_RUN",
+    "meaning": "68000/softfloat/nix20 compiler/linker qualification only; ordinary allocation and fake bus, no native Exec memory placement assertion."
+  },
+  "development_failures_preserved": {
+    "initial_graph_omitted_current_causal_unit": true,
+    "fixture_untransferred_handle_close_order_corrected": true,
+    "fixture_unpublished_command_service_corrected": true,
+    "fixture_consumed_close_zero_handling_corrected": true,
+    "initial_internal_predicate_header_compile_failures_corrected": true,
+    "baseline_v4_and_final_v5_missing_action_refusal_preserved": true
+  },
+  "preservation": {
+    "protected16_contents_and_stable_metadata_unchanged": true,
+    "layout_unchanged": true,
+    "exact_musical_scheduling_unchanged": true,
+    "typed_native_provider_inhibited": true,
+    "shared_target_or_service_used": false,
+    "safari_check": "Mac locked; no browser control or physical probe acquired"
+  },
+  "not_qualified": [
+    "Amiberry/physical execution of this candidate",
+    "Physical sample RAM region/capacity/upload ordering/completion/device ownership",
+    "Native Exec Fast/Chip placement for ordinary-allocation fixture",
+    "Actual voice stop/DMA/IRQ/output timing/audio/listening",
+    "Older prepared dispatcher source binding"
+  ]
+}

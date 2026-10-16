@@ -1,4 +1,5 @@
 #include "../core/amigus_trigger_levels.h"
+#include "../core/playback_internal.h"
 #include "sampler_mixed_readers.h"
 #include "sampler_mixed_readers_internal.h"
 #include "sampler_mixed_causal_internal.h"
@@ -1055,7 +1056,8 @@ size_t bytes;
 void *resource;
  if(!r->pin||!r->leased||pt_sampler_pin_current(p->config.sampler,p->config.project,r->sample,p->generation,r->pin,&pcm,&pin)!=PT_EDIT_OK)return 0;
 pt_sampler_unpin(pin);
- if(r->route==PT_MIXED_READERS_PAULA)return pt_sampler_paula_prepared_location_validated(&p->paula,r->track,r->lease,&data,&bytes)&&data==r->data&&bytes==r->bytes;
+ if(r->route==PT_MIXED_READERS_PAULA)return pt_sampler_paula_prepared_source_location_validated(&p->paula,r->track,r->sample,r->channel,r->lease,&data,&bytes)&&data==r->data&&bytes==r->bytes;
+ if(!pt_playback_pcm_lease_matches(&p->config.backend->cache,r->sample+1,p->wave.version,&r->format,r->lease))return 0;
  resource=pt_cache_data(&p->config.backend->cache,r->lease);
  if(resource&&resource==&p->config.backend->arena.block[r->arena_index]){struct pt_amigus_ram_block *b=resource;
 return b->address==r->resource.address&&b->bytes==r->resource.logical_bytes&&b->reserved==r->resource.full_capacity&&b->written==b->bytes&&!b->fill&&!b->failed&&p->config.backend->cache.entry[r->lease.slot].valid==1&&p->config.backend->cache.entry[r->lease.slot].version==r->resource.version&&p->config.backend->cache.entry[r->lease.slot].serial==r->resource.serial;
@@ -1148,7 +1150,7 @@ return 1;
 }
  if(a->route==PT_MIXED_READERS_PAULA){const uint8_t *data;
 size_t bytes;
-if(!pt_sampler_paula_prepared_current(&p->paula)||!pt_sampler_paula_prepared_location_validated(&p->paula,r->track,r->lease,&data,&bytes)||!bytes||(bytes&1)||bytes/2>65535)return 0;
+if(!pt_sampler_paula_prepared_current(&p->paula)||!pt_sampler_paula_prepared_source_location_validated(&p->paula,r->track,r->sample,r->channel,r->lease,&data,&bytes)||!bytes||(bytes&1)||bytes/2>65535)return 0;
 r->data=data;
 r->bytes=bytes;
 a->geometry.paula.data=data;
@@ -1157,9 +1159,11 @@ a->geometry.paula.period=x->geometry.paula.period;
 a->geometry.paula.volume=x->geometry.paula.volume;
 }
  else {struct pt_amigus_wavetable_cache *b=p->config.backend;
-void *v=pt_cache_data(&b->cache,r->lease);
+void *v;
 unsigned j;
 uint32_t address,bytes;
+if(!pt_playback_pcm_lease_matches(&b->cache,r->sample+1,p->wave.version,&r->format,r->lease))return 0;
+v=pt_cache_data(&b->cache,r->lease);
 if(!v)return 0;
 for(j=0;j<PT_CACHE_SLOTS&&v!=&b->arena.block[j];++j){}
 if(j==PT_CACHE_SLOTS||!pt_amigus_sample_ram_location(&b->arena,v,&address,&bytes)||b->arena.block[j].reserved<bytes)return 0;

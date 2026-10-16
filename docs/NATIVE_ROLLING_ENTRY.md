@@ -703,3 +703,29 @@ source activation and cancellation under the unchanged limits. It stops before
 audit execution. No complete audit/preflight, case1/full68, whole-editor, physical
 placement/device, output timing or listening acceptance follows. See
 [exact scoped result](../evidence/enhanced-editor/rolling-native-entry/audit-boundary-emulator.json).
+
+
+## Reuse the current lineage query's complete parent proof
+
+Mode3 `lineage_current` now reuses the complete joint-parent and backlink proof
+just obtained through `lineage_scope` in the same query. It preserves the original
+stage/constructing refusals before rolling payload reads, then the same rolling
+zero/byte comparisons, root flags and both saved-input comparisons in the original
+order. No callback, mutation or yield intervenes, no proof survives the call, and
+all other modes retain their original expression. Work, scheduling and deadlines
+are unchanged. This removes one redundant scope invocation in this predicate;
+it is source reasoning, without a measured native speed or cost claim.
+
+Six predecessor predicates are frozen independently. The dual regression compares
+every original rolling68/joint31 invocation, restores complete wrapper/input/
+descriptor/publisher beforeimages and verifies positive scope followed by protected
+payload early refusals for stage, constructing and inactive-source controls.
+Counts are observations, not independent cases. Ten HOST sanitizer groups pass,
+including all existing preflight modes, and a pinned86-unit/228-body build passes.
+The new native entry is complete original17-unit preflight/cancellation with all
+original perphase/current-pin/audit/four-event and zero-accounting oracles.
+Exact new Amiberry and A1200 remain NOT_RUN at preparation. Prior passed boundary
+candidates retain their own frozen source; the prepared physical predecessor is
+preserved/superseded, with no current-source guard relaxed. No physical placement,
+device, IRQ/output, timing or listening acceptance follows. See
+[HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/lineage-current-proof-host-build.json).

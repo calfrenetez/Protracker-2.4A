@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "state": "LINEAGE_CURRENT_SAME_QUERY_PROOF_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Only mode3 lineage_current reuses the fresh complete joint-parent/backlink proof obtained in that same query. Original stage/constructing-before-payload, rolling zero/byte, root flags and input comparisons remain in original read/refusal order; other modes keep the original expression. No callback, mutation, yield, cross-call proof, allocation, work/default/scheduling/deadline change.",
+  "sourceSHA256": {
+    "src/editor/editor_mixed_causal_prepare.c": "319107bdc7bd7410de02cfe2b28d0bb7a2cdbbf369d29149675f154dab956f42",
+    "tests/lineage_current_reference.inc": "41efbbc87214cca41f955b73505b6aba80d7f2d7f3691e8d0b279af2fbf4b3a2",
+    "tests/lineage_current_comparison.inc": "aab94173225d8c3c1dd98b86ed2937b487da7d8ab1df6cf2a7ba91917a2e9ce1",
+    "tests/test_lineage_current_proof.py": "913494a16c47350c3944cc042a5ab39973598d80240a60b175465e7f40a6cfb8"
+  },
+  "checks": {
+    "hostGroups": 10,
+    "frozenPredecessorPredicates": 6,
+    "originalRolling68AndJoint31Oracles": "PASS with every genuine lineage_current outcome compared",
+    "wholeBeforeimages": "Wrapper, rolling/lineage preparation, extended descriptor and publisher restored and compared",
+    "protectedPayloadReadOrder": "Positive original/new complete lineage scope followed by two invalid stage/constructing refusals and one inactive-source refusal before PROT_NONE payload reads",
+    "actualPredicateObservationCounts": [
+      {
+        "fixture": "rolling68",
+        "modeRefusalAcceptanceCounts": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            44,
+            474384
+          ],
+          [
+            2,
+            3,
+            0
+          ]
+        ],
+        "protectedStageActivationChecks": [
+          2,
+          1
+        ],
+        "exactOriginalOraclePassed": true,
+        "oldNewLineageCurrentOutcomesMatched": true
+      },
+      {
+        "fixture": "joint31",
+        "modeRefusalAcceptanceCounts": [
+          [
+            0,
+            27,
+            9171
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            2,
+            2,
+            1
+          ]
+        ],
+        "protectedStageActivationChecks": [
+          0,
+          0
+        ],
+        "exactOriginalOraclePassed": true,
+        "oldNewLineageCurrentOutcomesMatched": true
+      }
+    ],
+    "allPreflightModes": "Original17, prefix64, PIN boundary, AUDIT boundary, trace17, work256, work4096 including strict sidecar/selector guards PASS",
+    "protected16AndBaselinePreserved": true,
+    "independentSourceReviews": "Two reviews and permanent-regression review, no correctness findings",
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 255
+  },
+  "candidate": {
+    "size": 331328,
+    "sha256": "db90653736de27f428f414cb7c80207c424f5bfa4bbfb41c5e5724187d4436df",
+    "crc32": "3B18DE71",
+    "component": "Complete original17-unit preflight/cancellation; modeled clocks/buses and ordinary allocations"
+  },
+  "hostResultSHA256": "ae4604b5fd4706fe52cb04ad24bde7aecad0995b7fc6c3c77159aa48624d7e31",
+  "buildManifestSHA256": "d749382a1bfa350acda827aed4425a73ef6e98c8de31d54c94aeb4fc0dc566b7",
+  "sourceManifestSHA256": "93dae010b039c3eec52b3ff817430106214b2f058c5f5cd48ef811443d017f9d",
+  "acceptance": {
+    "exactCurrentAmiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "nativeSpeedOrCost": "UNQUALIFIED",
+    "placementDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  },
+  "previousPhysicalCaller": "HOST-qualified predecessor preserved and marked superseded before this selected source changed; never admitted and parity guard not relaxed"
+}

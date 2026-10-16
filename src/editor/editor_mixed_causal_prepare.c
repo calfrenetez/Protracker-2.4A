@@ -185,6 +185,20 @@ static struct pt_editor_mixed_causal_lineage_prepare *lineage_scope(struct pt_ed
 static int lineage_current(struct pt_editor_mixed_causal_prepare *s)
 {
  struct pt_editor_mixed_causal_lineage_prepare *w=lineage_scope(s);
+ if(s->source_mode==3){
+    struct pt_editor_mixed_causal_rolling_state *r;
+    /* lineage_scope just proved the full joint parents and exact embedded
+     * rolling owner. No write/callback/yield occurs in this predicate. Keep
+     * both original stage refusals before any rolling input body is read. */
+    if(!w||w->stage>(s->rolling_owner?4U:3U)||w->constructing>(s->rolling_owner?4U:3U))return 0;
+    r=&((struct pt_editor_mixed_causal_rolling_source_prepare *)(void *)s)->rolling;
+    if(!zero(&r->inputs->original.lineage,sizeof(r->inputs->original.lineage))||
+       memcmp(&r->inputs->rolling,&r->saved.rolling,sizeof(r->saved.rolling)))return 0;
+    if(!(s->source_mode&&!s->source_activated)&&memcmp(r->inputs,&r->saved,sizeof(r->saved)))return 0;
+    return w->root_detached<=1&&w->root_closed<=1&&
+       !memcmp(w->inputs,&w->saved,sizeof(w->saved))&&
+       !memcmp(&w->saved.original,&s->saved,sizeof(s->saved));
+ }
  return w&&w->stage<=(s->rolling_owner?4U:3U)&&w->constructing<=(s->rolling_owner?4U:3U)&&
     (!s->rolling_owner||rolling_current(s))&&w->root_detached<=1&&w->root_closed<=1&&
     !memcmp(w->inputs,&w->saved,sizeof(w->saved))&&

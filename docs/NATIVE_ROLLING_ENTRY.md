@@ -314,3 +314,34 @@ Exact Amiberry and A1200 execution remain NOT_RUN at preparation. This new
 diagnostic does not replay either earlier failed transaction or qualify the
 rolling68, device, timing or listening paths. See
 [trace host/build evidence](../evidence/enhanced-editor/rolling-native-entry/trace-host-build.json).
+
+The exact traced candidate subsequently reaches sample establishment in Amiberry
+but does not confirm completion within90seconds. Four original-budget readbacks
+(at about22,43,64,85seconds) capture `PHASE-END steps=1 phase=2`. The counter
+marks the last recorded transition; it does not establish how many calls later
+completed within that phase, or prove a stall, crash or cost explanation. RC and
+complete-preflight acceptance remain unobserved. Exact owned cleanup, both saved
+launcher restorations, independent absence/restoration, public release and a
+separate final idle check pass; the original three HOLDs are archived. No failed
+transaction is repeated or physically promoted. See
+[exact traced attempt and recovery](../evidence/enhanced-editor/rolling-native-entry/trace-emulator.json).
+
+## Supported256-unit preparation component
+
+A separately named component now uses the production preparation API's existing
+256-unit work request. The original helper is shared through an explicit checked
+work argument; existing fixtures still call its17-unit wrapper. Every original
+per-phase/no-output assertion, four normalized musical boundaries, complete audit,
+genuine master pins, cancellation/disposal and zero accounting remain in place.
+The100,000-call/1,000-close bounds and90/140/250-second limits are unchanged.
+No production default or musical scheduling changes. Earlier17-unit incomplete
+results remain separate; a future256-unit pass would not qualify that old run.
+
+All four HOST sanitizer groups pass with their own markers, final sidecars and
+foreign/missing-file refusals. The pinned86-unit build passes:329,916bytes SHA256
+`4a237c0c5f5794d862f042ea73b476fbc52b92f6c0ccd2fa758c7839c59c8a37`.
+The new progress observer records phase transitions and every64th preparation
+call, avoiding a misleading unchanged transition counter during a long phase.
+These are observations only. Exact Amiberry and physical execution are NOT_RUN
+at preparation; device/timing/listening remain unqualified. See
+[work256 host/build evidence](../evidence/enhanced-editor/rolling-native-entry/work256-host-build.json).

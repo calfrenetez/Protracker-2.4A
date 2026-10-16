@@ -12,7 +12,11 @@ See [the component scope](NATIVE_ROLLING_ENTRY.md#original-preflight-and-cancell
 A separate64-step prefix now passes exact Amiberry cancellation/disposal and
 independent release. A distinct complete-preflight phase-trace entry passes
 three HOST sanitizer groups and a pinned build; native execution is NOT_RUN
-at preparation. Neither extends complete-preflight or physical acceptance.
+at preparation. Its17-unit native attempt subsequently reaches establishment
+but times out; independent cleanup/release passes. A separate supported256-unit
+preflight component now passes four HOST sanitizer groups and a pinned build,
+with all original semantic oracles and the17-unit default retained. Its native
+execution is NOT_RUN at preparation. Physical acceptance remains separate.
 
 The genuine68-case trigger/control/control/stop fixture and selected originalcase1
 pass HOST and pinned compile/link checks, but their native attempts remain

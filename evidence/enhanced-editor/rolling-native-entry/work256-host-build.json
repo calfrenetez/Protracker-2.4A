@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "scope": "Separate complete preflight using existing256-unit preparation API budget; original17-unit wrapper retained and all original per-phase and final oracles preserved",
+  "host": {
+    "sanitizerGroups": 4,
+    "originalPrefixTraceAndWork256Passed": true,
+    "foreignMissingAbsentSidecarRefusalsInAllFour": true,
+    "unrelated16AndBaselinePreserved": true,
+    "resultSHA256": "0badf9beab96c94393e5d6115f9cf40dfe735d1f6aad1dcec3558b8cade32533"
+  },
+  "build": {
+    "passed": true,
+    "translationUnits": 86,
+    "projectDependencies": 226,
+    "sdkBodies": 43,
+    "runtimes": 7,
+    "frozenFiles": 239,
+    "assertionsEnabled": true,
+    "originalFlagsRetained": true,
+    "testOnlyCompileFlag": "-DPT_ROLLING_PREFLIGHT_WORK256=1",
+    "candidateBytes": 329916,
+    "candidateSHA256": "4a237c0c5f5794d862f042ea73b476fbc52b92f6c0ccd2fa758c7839c59c8a37",
+    "manifestSHA256": "5696b4508b9985a0ccb15efb3e25e1fb00ddcc9bba4cef67341bf4b2209dae97",
+    "compilerAssemblerLinkerPinsBeforeAfter": true
+  },
+  "productionSourceChanged": false,
+  "default17UnitWorkRetained": true,
+  "originalLoopBound": 100000,
+  "originalCloseBound": 1000,
+  "nativeLimitsChanged": false,
+  "progress": "Every phase transition and each64th call; observation only",
+  "acceptance": {
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

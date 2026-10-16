@@ -446,9 +446,9 @@ static void sl_begin(struct sl_trial *e)
  assert(pt_editor_mixed_causal_song_rolling_step(&e->producer,0)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID);
  assert(pt_editor_mixed_causal_song_rolling_step(&e->producer,4097)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_INVALID);
 }
-static void sl_preflight(struct sl_trial *e)
+static void sl_preflight_work(struct sl_trial *e,unsigned work)
 {
- unsigned n=0,nonempty=0,i;sl_begin(e);
+ unsigned n=0,nonempty=0,i;assert(work&&work<=4096);sl_begin(e);
  while(e->producer.original.phase!=PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_CONTROLLER){
     if(e->producer.original.phase==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_LOWER&&e->outputs->original.normalized.normalized.count){
        static const unsigned kind[4]={PT_MIXED_PLAN_TRIGGER,PT_MIXED_PLAN_CONTROL,PT_MIXED_PLAN_CONTROL,PT_MIXED_PLAN_STOP};
@@ -456,7 +456,7 @@ static void sl_preflight(struct sl_trial *e)
        assert(nonempty<4&&b->normalized.frame==960U*(nonempty+1)&&e->producer.original.target==b->normalized.frame);
        for(i=0;i<b->normalized.count;++i)assert(b->normalized.record[i].kind==kind[nonempty]);++nonempty;
     }
-    assert(sl_step(e,17)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING&&++n<100000);
+    assert(sl_step(e,work)==PT_EDITOR_MIXED_CAUSAL_SONG_LINEAGE_PENDING&&++n<100000);
     assert(!e->base.ordinary.calls&&!e->port.binds&&!e->port.external.clocks&&!e->port.ram.publishes&&
        !e->base.chip.calls&&!e->base.card->writes&&!sl_s(e)->causal&&!sl_s(e)->pool);
  }
@@ -470,6 +470,8 @@ static void sl_preflight(struct sl_trial *e)
  assert(e->base.editor->sampler.allocator.context==&e->base.masters&&e->base.editor->sampler.allocator.allocate==sl_master_new&&
     e->base.editor->sampler.allocator.release==cp_master_free);sl_same(e);
 }
+/* Existing fixtures retain their exact17-unit work request. */
+static void sl_preflight(struct sl_trial *e){sl_preflight_work(e,17);}
 static void sl_to_publication(struct sl_trial *e,unsigned index)
 {
  unsigned n=0;assert(e->producer.original.lineage_index==index);

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "scope": "Exact complete17-unit preflight with optional phase observations; bounded native completion unconfirmed",
+  "candidate": {
+    "bytes": 329796,
+    "sha256": "23cc1900be40f140e1b399ad2a804a587e0688133247837c7f94cdf6f00b99df"
+  },
+  "result": "UNCONFIRMED",
+  "returnCodeObserved": false,
+  "progress": [
+    {
+      "seconds": 21.60921833300381,
+      "text": "ROLLING TRACE PHASE-END steps=1 phase=2\n"
+    },
+    {
+      "seconds": 42.858245874987915,
+      "text": "ROLLING TRACE PHASE-END steps=1 phase=2\n"
+    },
+    {
+      "seconds": 64.10772629099665,
+      "text": "ROLLING TRACE PHASE-END steps=1 phase=2\n"
+    },
+    {
+      "seconds": 85.36382012499962,
+      "text": "ROLLING TRACE PHASE-END steps=1 phase=2\n"
+    }
+  ],
+  "lastObservedPhase": "Sample establishment; diagnostic count is at its last recorded phase transition, not a per-call heartbeat",
+  "stalledOrCrashedProven": false,
+  "timingCauseProven": false,
+  "originalAssertionsAndNativeLimitsRetained": true,
+  "replayed": false,
+  "rawResultSHA256": "05c963cf94e08adaa998fee722ceeec061ece1c8dcc915c2aec16d4bf2e29f1e",
+  "recovery": {
+    "ownResourcesOnly": true,
+    "twoSavedLauncherFilesRestored": true,
+    "exactStagingCopyRemoved": true,
+    "guestRAMLifetimeEndedWithExactEmulator": true,
+    "independentObserverSHA256": "34fbd6c1d62126275fcf705912d84d5306b3bc5fd6101b89577262b8f7eda399",
+    "publicReleaseSHA256": "ea74fea0fed900670077724816ca5176c69c8c051e00b58fcfbb04950602c661",
+    "separateFinalIdleSHA256": "d866234bc149cfac02ba945234038b1fad163c145000d2d64359640cdcdb10ab",
+    "ownershipReleased": true,
+    "holdsRemaining": 0
+  },
+  "acceptance": {
+    "physical": "NOT_RUN",
+    "rolling68": "UNCONFIRMED",
+    "device": "NOT_QUALIFIED",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_TESTED"
+  }
+}

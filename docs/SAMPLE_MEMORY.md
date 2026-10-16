@@ -11,8 +11,10 @@ no allocation or reader authority. Five HOST sanitizer groups and a pinned
 plus both preflight budgets. Exact Amiberry/A1200 and a native speed benefit are
 unqualified at preparation. Its first exact attempt subsequently stops on an
 optional live progress-file read error; native completion remains unconfirmed.
-Independent recovery/release passes. A final-only capture successor is prepared
-with all original completion and ownership checks. See
+Independent recovery/release passes. A fresh final-only capture successor now passes exact Amiberry030 complete
+4096-unit preflight/cancellation, RC0, closed terminal progress, all custody
+and independent release checks within unchanged bounds. Physical execution
+and the original full68-case native entry remain unqualified. See
 [scope and evidence](NATIVE_ROLLING_ENTRY.md#equivalent-numeric-containment-during-preparation).
 
 ## Sampler header integrity comparison —16 October2026

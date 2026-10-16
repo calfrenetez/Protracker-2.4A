@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "state": "EXACT_AMIBERRY_COMPONENT_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "size": 330836,
+    "sha256": "a1ea3b207d6ba767e834579f1f85258dfd84282131657121dc957764b184518a",
+    "crc32": "EFEBD9E1"
+  },
+  "scope": "Complete original4096-unit supported preflight and cancellation with original perphase, audit, source-pin, numeric/header controls and final zero-accounting oracles; modeled clock and bus only.",
+  "native": {
+    "returnCode": 0,
+    "stackBytes": 1048576,
+    "outputBytes": 78,
+    "marker": "ROLLING WORK4096 NATIVE PASS:complete preflight and cancellation;MODELED_ONLY",
+    "progress": "ROLLING WORK4096 DONE phase=0\n",
+    "launches": 1
+  },
+  "capture": {
+    "liveProgressContentReads": false,
+    "finalClosedProgressRequired": true,
+    "allNineExecutionFilesCapturedAndSettled": true,
+    "originalDeadlinesSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    }
+  },
+  "cleanup": {
+    "exactBothRAMNamespacesAbsent": true,
+    "ownHostStagingAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObservationPassed": true,
+    "publicReleasePassed": true,
+    "separateFinalIdlePassed": true,
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "f3b323247dcacb8dd2fc4f699c1b834e73a21a8fd12396a1ed619e0dedb46808",
+    "independent-pass-observation.json": "abca0a9f03b2060f1dfd3c8fbdeccab8c1abc2d3a3de741596ad194f84d48b44",
+    "release-result.json": "44438a1c9e07f1a4ba529a42a498b8d326f2509cc71e500b6edb6549b7a8b078",
+    "independent-final-idle.json": "f7d318a700141d34e3d25b2a89fd1732c40dfb41750a16cdec53381392a8e81c"
+  },
+  "unqualified": [
+    "Original full68 rolling execution",
+    "Original17-unit full native preflight",
+    "A1200 execution of this candidate",
+    "Real allocation placement/device operations",
+    "IRQ/output activation and exact musical timing",
+    "Human listening"
+  ],
+  "earlierInterruptedTransaction": "Preserved separately; never resumed or replayed"
+}

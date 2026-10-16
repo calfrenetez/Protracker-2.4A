@@ -884,3 +884,10 @@ single HOLD remain archived. Native/guest/whole limits stayed unchanged. A
 new physical transfer requires a new operation and fresh guards; recovery does
 not qualify MiniFTP, the candidate, hardware or playback.
 See [the failed attempt and recovery](../evidence/enhanced-editor/rolling-native-entry/external-physical-gui-wait.json).
+
+
+The exact preparation/cancellation candidate subsequently passes a fresh030
+transaction using final-only capture: RC0, exact terminal stdout/progress,
+original bounds and all settlement/independent release checks. This actual
+result is separate from the35 HOST transport model cases; it establishes no
+cause for the earlier FILEINFO failure and no physical or timing acceptance.

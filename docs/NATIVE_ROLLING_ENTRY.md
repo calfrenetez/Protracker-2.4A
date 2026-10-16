@@ -449,3 +449,20 @@ mode, retaining the final closed sidecar and every original native oracle and
 writer-ownership and sticky live-error cases. This neither ignores the error
 nor resumes the failed transaction. See
 [capture failure and successor scope](../evidence/enhanced-editor/rolling-native-entry/prepare-span-capture-failure.json).
+
+
+## Complete preparation and cancellation qualifies in Amiberry
+
+The exact330836-byte containment candidate now completes the supported4096-unit
+preflight and original cancellation/disposal assertions in a fresh Amiberry030
+transaction. RC0, sole78-byte stdout, exact closed `DONE phase=0` progress,
+all nine file custody/settlement checks, original Stack and90/140/250-second
+bounds pass. Both RAM namespaces and staging are absent; original launcher
+files, independent observation, public release and separate final idle pass.
+The earlier optional-live-read failure remains preserved and was not replayed.
+
+This qualifies the separate complete preparation/cancellation component on the
+emulated ABI. It does not qualify the full68-case rolling execution, the original
+17-unit native component, physical A1200, actual device/IRQ activation or timing.
+No comparative speedup is inferred. See
+[compact evidence](../evidence/enhanced-editor/rolling-native-entry/prepare-span-emulator.json).

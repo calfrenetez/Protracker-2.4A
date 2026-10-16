@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "state": "REMAINING_420_CASES_HOST_AND_25_PINNED_BUILDS_PASS_NATIVE_NOT_RUN",
+  "base_commit": "b8714def9060c73c8f0c3774bf178818e5f940e7",
+  "source_manifest_sha256": "cea242eaf95f531e5c263241e7265f28e9641ae5be122ec1e6eece139363b232",
+  "frozen_inputs": 1378,
+  "inventory_unchanged": true,
+  "host": {
+    "tests": 5,
+    "backend_subtests": 25,
+    "genuine_cases": 420,
+    "modules": 1,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "assertions": true,
+    "warnings_as_errors": true,
+    "components": {
+      "8stereo": {
+        "tests": 1,
+        "backend_subtests": 5,
+        "stderr_sha256": "a9c0e4bae3616cebf44f80c2cbabd64ff11544b6c3607636de67a0929c33e9d7"
+      },
+      "16mono": {
+        "tests": 1,
+        "backend_subtests": 5,
+        "stderr_sha256": "2681249ad95332aa01e0a0d1f2244b57d48a4983d8c4d98760943d901c8a5300"
+      },
+      "16stereo": {
+        "tests": 1,
+        "backend_subtests": 5,
+        "stderr_sha256": "25b77a38b7622d8d1b1e8e2c56e42a094d999b7d2ca062e2323236f3f1624f51"
+      },
+      "24mono": {
+        "tests": 1,
+        "backend_subtests": 5,
+        "stderr_sha256": "dbf8d4406ccbd3ba239b736da0407eb11b300d3225ff1dfed6889759aee9e542"
+      },
+      "24stereo": {
+        "tests": 1,
+        "backend_subtests": 5,
+        "stderr_sha256": "553a703d93cbf3e2ccb2e4f578fbefa2e15c48215d65431f61aa273f837898c0"
+      }
+    }
+  },
+  "families": {
+    "8stereo/paula": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "fbfe34fc78d5623e43f2c06068908bc5fa4ec9ab3ebc5567eac35eca5e526300",
+        "crc32": "77676DAC"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "13dceb8727e54c11913b3b1bce9d21866c66cced9a24a4f3a423e22dfab8c5c4"
+    },
+    "8stereo/amigus8be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296556,
+        "sha256": "c33df44e5c206ea40ea4972c86e3072d9839968f4d800f2326e148be939ab8dd",
+        "crc32": "996EBB6F"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "01537e64aefbaea360b29d8bbbc909628b583ce5a047e875712e4b8ced97bb58"
+    },
+    "8stereo/amigus8le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "f00ff3888d54213408f197ad7f889783cb9bcb5c189d0edb24ca6d89c35e4570",
+        "crc32": "965EF6B9"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "dddd1105b9ab34027e2cc998b43d8b9c3b6b79ccd2fdb9da528c0c0cb8d441d7"
+    },
+    "8stereo/amigus16be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296556,
+        "sha256": "48230fcbe1ee74f344e9a718a2f7a8ce7137429963e64e690765f33f4d6c0efd",
+        "crc32": "4A42F749"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "125f4e024338a5cbb24ef146ff57ed33b71d0df0a65471500461391c22f8aeea"
+    },
+    "8stereo/amigus16le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "595ccf074920d88a6dc764c6bf8452f4845478579f33d2e369d9449f480c30af",
+        "crc32": "3FC91AD9"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "356ba3f421d35edca17dc29abb124a1281f7ab9b0dd6908b958574fbb1100bfc"
+    },
+    "16mono/paula": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296544,
+        "sha256": "3e8ba5f72ff6a17d525124fe612663e97eecf24d36c179abe5b94276275bff0c",
+        "crc32": "6A6C943C"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "948f05432f46c74ef1d0e1ea142c744232cedef634f3030c4ffa637148c0fb20"
+    },
+    "16mono/amigus8be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296548,
+        "sha256": "cf54973e3c5a08fa321db2f60c933c1a967b552dbf9ed2546465b4bb0cf6a8f2",
+        "crc32": "D84B92BC"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "06611f6db4794d51895939dd866e2407c6f35359ac4ea40e34343a602ff8c9b5"
+    },
+    "16mono/amigus8le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "6a0fb91170b9adf893be8b8ca727be34e87f0bf1bf244ed546b00b5861b12975",
+        "crc32": "2DEA52B3"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "749f2cb38cef96e374ffd0d8662039e6352b18d28e939f3111f28765d61b27d1"
+    },
+    "16mono/amigus16be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "579efc6b37077c87cc592cfc39333a11cbb690f59b5d7f72d03a5ff28c97c3cf",
+        "crc32": "4FC86538"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "59a05bb0ac51e3875dd27cc5f96664d9958db5f4e0c5152dafec0dcdefbf3e0a"
+    },
+    "16mono/amigus16le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "3ad57ca4ef11b46cec89b60adde7ae757cd2103cdde1ce2a2261424479edc7fe",
+        "crc32": "42D9CCE1"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "9f381bc184a0bf8f82ba28f389e24f69d857d2f5d4599c8014473c653a6d1f72"
+    },
+    "16stereo/paula": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "ad955454f5b02bd2e1b51b4d8d1c32f621253fa73ec6abb9696eb0cd7466ac2d",
+        "crc32": "83ED0E4D"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "5625d0b712333f06b80a1efc1961093b6b1a0088833b0f1e145eeb32ff4964e8"
+    },
+    "16stereo/amigus8be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "fbcc4b8e9227b3f618becb93027fa0cbb5a26cf51350a8ad5875eee0e4b05c11",
+        "crc32": "C005F747"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "489d880de504eb48b4080617d31a91c47783abaa4a5d0c1b4fc665286b9cb69e"
+    },
+    "16stereo/amigus8le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "5193b089dfdec15dc0d96a5b6ee20687ebae6a38083ddf14e7ec8e69ed187e9a",
+        "crc32": "68B00860"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "642922ec5420ee74de07b84f0c152fa33e283eae0185dcf56fc1f0d86b0d9d27"
+    },
+    "16stereo/amigus16be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "940f4d25618ce138d771f777bcbbc8ececf4f0c845e1eb4abddc4f3ce0cd8018",
+        "crc32": "7F93C031"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "2b699127295be74255436b5e8fd9f7d3cad770ee47e82e5489bca1037c0e1079"
+    },
+    "16stereo/amigus16le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296564,
+        "sha256": "a27a4467a31473fd644521a6bba59756d2c0455a1f429c897af0d9a4005739d7",
+        "crc32": "B82A83AA"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "3f57a627d46384c65219fa232ace6628e9f33002cd7be1647070e63ae25e4848"
+    },
+    "24mono/paula": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296544,
+        "sha256": "d1cb29964c77a1249ae999451582a291288caa49b605be21f69c2bb6cb4841b3",
+        "crc32": "2DF0C6B5"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "4de9eb7df51e86e397c49d16ee47464014357a6ca8cefd99afe7a4f4ddce7796"
+    },
+    "24mono/amigus8be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296548,
+        "sha256": "5a751373b8037c384537ced24b5b352e0a2b2fa1040af917e755bf46b565538f",
+        "crc32": "584EA5F2"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "4b0e903bdcf42317bd2fefd68b64b9eaf8d7124a383d36d495d75eb6fc0dae5c"
+    },
+    "24mono/amigus8le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "effa9f16c62fd70cf43e6d2320e6cf6eee10c7a09770ce1dc07a3ce2dea8be69",
+        "crc32": "3397FD1A"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "72b9c2661298908083ec4350716e5b5df6f3ffb23d4f1330a8c19c71522f85f8"
+    },
+    "24mono/amigus16be": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "b7cb2152acac1ba95d451f941cc006a407f757f962cbb96f81afa60fec82d50d",
+        "crc32": "51B5CA91"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "59e6774ebff8949d9c106cc7849529312b70e124732b13ed1f982f4071ebe5ba"
+    },
+    "24mono/amigus16le": {
+      "cases": 15,
+      "controls": 3,
+      "refusals": 12,
+      "stdout_markers": 33,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "87efeba617d71cfb49742bc5a6cb6a76074386c2856a826c73e5f56e3679d09c",
+        "crc32": "0BCD0107"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "b25bad8807803f4286aa34206b47532926ee5ebfcbc1466e1031cb83ea191343"
+    },
+    "24stereo/paula": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296552,
+        "sha256": "94c0c0a90707a3d2c113f4820b28ec850d4aefe1a4535b23c88a98aa0c93f53c",
+        "crc32": "78826447"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "140e0f0fcf5bd64d3e04629914514433004b901782f7e32701b8c902fddcb66e"
+    },
+    "24stereo/amigus8be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "22faef1db24134df80389557ac1615768381559c8dcf96aa0d82e88981b6e5ad",
+        "crc32": "972D7F84"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "d25d5aca752d03f28fc85ef35585a8fe80621619682828b4f5d53e1a31f9c461"
+    },
+    "24stereo/amigus8le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "830cc4ec0fc3c6ac6730025e79f36793073b6d51cfe9697478d1e787d9109c98",
+        "crc32": "68F1E2EC"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "3ebfe8cf33c1200eb9146a00ef82ca7601364467715852cf49e8bf65131a44cb"
+    },
+    "24stereo/amigus16be": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296560,
+        "sha256": "6afb2a13764f2951a51775ee2b220b3b6a1b32d0e222b2dd0a2a4c3a5d65cb2e",
+        "crc32": "7FD22ABD"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "f7fd171d3bfe551cfe84e863a171ba9666f7076c131d8e986859c575a524186f"
+    },
+    "24stereo/amigus16le": {
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "stdout_markers": 39,
+      "candidate": {
+        "bytes": 296564,
+        "sha256": "cf031d2e0453c8710c95afd0fc946e2da04f5106de3526b3939d711b3c5a5ead",
+        "crc32": "86EFA5CC"
+      },
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "manifest_sha256": "4fae67296e7bf3e7b4db358b62b5836203995c23739772264f05c69ee20f803d"
+    }
+  },
+  "prior_8mono_candidate_reproduced": {
+    "bytes": 296520,
+    "sha256": "3b2d1647628eb7cd9ad71d02eff0ee3ec8c73de659169840f70a62cd87a9f155",
+    "actual_binary_equal": true,
+    "hunk_executed_again": false
+  },
+  "invalid_cli_selections_refused_before_output": 6,
+  "production_changed": false,
+  "old_8mono_fixture_changed": false,
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Actual native execution or continuous495-case/legacy constructor",
+    "Exec memory class or total-library accounting/whole stack/WCET",
+    "Actual device/voice-stop/DMA/IRQ/output timing/audio/listening"
+  ]
+}

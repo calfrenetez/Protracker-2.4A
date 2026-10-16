@@ -290,3 +290,29 @@ fake bus qualify neither physical card RAM/order/completion/voice-stop nor nativ
 output, IRQ, musical timing or listening. Actual Safari remains inaccessible
 with the Mac locked; physical execution remains NOT_RUN. See
 [aggregate native evidence and individual records](../evidence/enhanced-editor/mixed-source-binding/families-emulator.json).
+
+## Remaining source-format families —16 October2026
+
+A separate `--format-family` entry now covers `8stereo`, `16mono`, `16stereo`,
+`24mono` and `24stereo`, each with the same five backend selections. Mono
+families retain15 cases/3 controls/12 refusals; stereo families add the genuine
+opposite-side cache key and contain18 cases/3 controls/15 refusals. All use the
+unchanged binding-case function, genuine master/cache pins, before-action,
+enqueue and active readiness checks, and independent retirement assertions.
+The already qualified8mono fixture is unchanged and remains a separate entry.
+
+All420 remaining cases pass host ASan/UBSan/assertion checks in five tests with
+25 backend subtests. Every exact stdout sequence and closed final sidecar is
+checked; there are33 mono or39 stereo lines. All25 pinned30-unit Amiga builds
+pass with89 project bodies,32 SDK inputs and seven runtime inputs. The compiler
+checks the complete preprocessed literal `puts` value for the new composed
+completion string; existing marker checks are unchanged. The old296,520-byte
+8mono Paula executable reproduces byte-for-byte using the updated builder and
+is not executed again. Six invalid/conflicting selections refuse before output
+creation. All1,378 frozen inputs remain unchanged.
+
+This supplies HOST and portable compiler evidence only. Native/Amiberry and
+physical execution of these25 new candidates remain NOT_RUN at preparation.
+No continuous495-case/legacy-constructor, device/voice-stop, native output/IRQ,
+exact timing or listening acceptance follows. See
+[remaining-format host/build evidence](../evidence/enhanced-editor/mixed-source-binding/format-families-host-build.json).

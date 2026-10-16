@@ -153,6 +153,8 @@ def main():
                     help='One genuine wrong-sample refusal with a closed phase trace; not the75-case matrix')
     ap.add_argument('--family', choices=['paula', 'amigus8be', 'amigus8le', 'amigus16be', 'amigus16le'],
                     help='One15-case8mono backend family with closed per-case observations')
+    ap.add_argument('--format-family', choices=['paula', 'amigus8be', 'amigus8le', 'amigus16be', 'amigus16le'],
+                    help='One remaining mono/stereo source-format family with closed per-case observations')
     args = ap.parse_args()
     if args.probe and args.component != '8mono':
         ap.error('--probe requires --component8mono')
@@ -160,6 +162,8 @@ def main():
         ap.error('--fault-probe requires --component8mono and excludes --probe')
     if args.family and (args.component != '8mono' or args.probe or args.fault_probe):
         ap.error('--family requires --component8mono and excludes --probe/--fault-probe')
+    if args.format_family and (args.component not in COMPONENTS[1:] or args.probe or args.fault_probe or args.family):
+        ap.error('--format-family requires a remaining component and excludes --probe/--fault-probe/--family')
     flags, target, marker, marker_occurrences = list(FLAGS), TARGET, MARKER, 1
     units = list(SOURCES)
     if args.component:
@@ -245,6 +249,41 @@ def main():
         flags += ['-DPT_MIXED_FAMILY='+str(required[args.family])]
         target = 'PTMixed'+args.family.title()+'FamilyTest'
         units[0] = 'tests/native_mixed_binding_family_test.c'
+    if args.format_family:
+        family = ast.parse((source / 'tests/test_native_mixed_binding_format_family.py').read_text())
+        imports = [n for n in family.body if isinstance(n, ast.ImportFrom)
+                   and n.module == 'test_sampler_mixed_source_binding']
+        declaration = next(n.value for n in family.body if isinstance(n, ast.Assign)
+                           and any(isinstance(t, ast.Name) and t.id == 'SOURCES' for t in n.targets))
+        families = next(ast.literal_eval(n.value) for n in family.body if isinstance(n, ast.Assign)
+                        and any(isinstance(t, ast.Name) and t.id == 'FAMILIES' for t in n.targets))
+        formats = next(ast.literal_eval(n.value) for n in family.body if isinstance(n, ast.Assign)
+                       and any(isinstance(t, ast.Name) and t.id == 'FORMATS' for t in n.targets))
+        required = {'paula': 0, 'amigus8be': 1, 'amigus8le': 2, 'amigus16be': 3, 'amigus16le': 4}
+        required_formats = {'8stereo': (8, 2), '16mono': (16, 1), '16stereo': (16, 2),
+                            '24mono': (24, 1), '24stereo': (24, 2)}
+        if (len(imports) != 1 or [(n.name, n.asname) for n in imports[0].names] != [('SOURCES', 'MIXED_SOURCES')]
+                or ast.unparse(declaration) != "['tests/native_mixed_binding_format_family_test.c', *MIXED_SOURCES[1:]]"
+                or families != required or formats != required_formats):
+            raise ValueError('Exact genuine format-family declaration/import changed')
+        count = 18 if channels == 2 else 15
+        faults = 6 if channels == 2 else 5
+        markers = ['MIXED BINDING TRACE:format-family-entered:'+bits+':'+str(channels)+':0']
+        for fault in range(faults):
+            for phase in range(3):
+                markers += ['MIXED BINDING TRACE:format-family-case-start:'+bits+':'+str(phase)+':'+str(fault),
+                            'MIXED BINDING TRACE:format-family-case-closed:'+bits+':'+str(phase)+':'+str(fault)]
+        marker = ('MIXED FORMAT FAMILY PASS:'+args.component+' '+args.format_family+';'+str(count)+
+                  ' cases;3 controls'+str(count-3)+' refusals;before-action/enqueue/active readiness;'
+                  'genuine pins and independent retirement;other'+str(495-count)+
+                  ' and legacy constructor excluded;SOFTWARE_ONLY')
+        markers += [marker, 'MIXED BINDING TRACE:format-family-finished:'+bits+':'+str(channels)+':'+str(count)]
+        if (len(markers) != count*2+3 or len(set(markers)) != len(markers)
+                or any(len(x) > 256 or not x.isascii() or not x.isprintable() for x in markers)):
+            raise ValueError('Exact bounded format-family marker contract required')
+        flags += ['-DPT_MIXED_FAMILY='+str(required[args.format_family])]
+        target = 'PTMixed'+bits+side.title()+args.format_family.title()+'FamilyTest'
+        units[0] = 'tests/native_mixed_binding_format_family_test.c'
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
     if out.exists() or below(out, source) or below(source, out):
@@ -284,6 +323,7 @@ def main():
               'single_control_probe': args.probe,
               'single_fault_probe': args.fault_probe,
               'binding_family': args.family,
+              'format_family': args.format_family,
               'legacy_constructor_in_fixture': not bool(args.component), 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
@@ -344,7 +384,14 @@ def main():
         assertion = assertions[-1] if assertions else None
         if not assertion or '__assert_func' not in assertion or text.count('__assert_func (') < 2:
             raise ValueError('Enabled SDK assertion expansion required')
-        if text.count(marker) != marker_occurrences:
+        if args.format_family:
+            literals = r'"(?:[^"\\]|\\.)*"'
+            calls = re.findall(r'\bputs\s*\(\s*((?:'+literals+r'\s*)+)\)', text)
+            completions = [''.join(ast.literal_eval(x) for x in re.findall(literals, call))
+                           for call in calls if call.startswith('"MIXED FORMAT FAMILY PASS:')]
+            if completions != [marker]:
+                raise ValueError('Exact genuine format-family literal puts completion missing')
+        elif text.count(marker) != marker_occurrences:
             raise ValueError('Genuine mixed source-binding fixture marker missing')
         toolchain_current()
         require_source(source, expected)
@@ -363,6 +410,7 @@ def main():
                                      'single_control_probe': args.probe, 'markers': markers,
                                      'single_fault_probe': args.fault_probe,
                                      'binding_family': args.family,
+                                     'format_family': args.format_family,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',

@@ -2,11 +2,11 @@
 
 ## Current separately bounded native coverage —16 October2026
 
-Twenty-eight separate Amiberry runs now qualify459 of the495 binding cases:
-84 genuine controls and375 refusals. Every8/16-bit mono/stereo family and every
-24-bit mono backend passes. Three24-bit stereo backends pass; the8-bit
-little-endian family failed during staging before native execution, and the
-16-bit big-endian family remains NOT_RUN. No failed transaction was replayed.
+Twenty-nine separate Amiberry runs now qualify477 of the495 binding cases:
+87 genuine controls and390 refusals. Every8/16-bit mono/stereo family and every
+24-bit mono backend passes. Four24-bit stereo backends pass. The8-bit
+little-endian family failed during staging before native execution; its18 cases
+remain unqualified. No failed transaction was replayed.
 
 The failed preparation acknowledged its single Shell staging launch, then
 returned an exact error for the staging-completion file. Its own emulator was
@@ -16,7 +16,7 @@ passed. All three original holds and the failed result remain archived. This
 neither passes those18 cases nor diagnoses the physical cause of the missing
 file. A bounded completion-observation successor is host qualified separately.
 
-An offline audit replays all28 actual captures/control records, checks their
+An offline audit replays all29 actual captures/control records, checks their
 current89-body build closures, immutable source inventories, custody and release
 archives, and verifies the saved independent final observations. The audit sends
 no target commands and does not establish present availability. Continuous495

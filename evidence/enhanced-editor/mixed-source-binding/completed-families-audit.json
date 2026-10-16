@@ -1,7 +1,7 @@
 {
   "state": "PARTIAL_COMPLETED_FAMILY_CUSTODY_RELEASES_OFFLINE_VERIFIED",
-  "families": 28,
-  "cases": 459,
+  "families": 29,
+  "cases": 477,
   "rows": [
     {
       "component": "8mono",
@@ -299,6 +299,17 @@
       "archives": 124,
       "stdout_sha256": "2d2473e04ff64703acea4456d4842e5e8e94ed01ee2c6b1831e87427704d8004",
       "raw_result_sha256": "56a13bc4f6880f155e7817ddcd34266bd2a9cc1899f6d32182d062e4c05f9953"
+    },
+    {
+      "component": "24stereo",
+      "backend": "amigus16be",
+      "cases": 18,
+      "evidence_sha256": "1d903fe834450bcfec7bde8a3f855671c5041cef899ca6aca8ce55180b9aa2e2",
+      "source_inventory_sha256": "ae06315c0ec09a6ba0fb821723f2a4d6cd2fb8cd93c8c56e5a644bea1fa32ee4",
+      "final_fence": 1865,
+      "archives": 128,
+      "stdout_sha256": "c028a8af08d51bb73c8b30b3c13b794749c7ddb2e1d0141827324628473c0d4c",
+      "raw_result_sha256": "f3bbafb7599e4c1b1203c28f8e0466b89ba07de329672b9c7f346f1a5864f9b9"
     },
     {
       "component": "24stereo",

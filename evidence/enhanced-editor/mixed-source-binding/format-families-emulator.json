@@ -1,13 +1,13 @@
 {
   "schema": 1,
   "state": "PARTIAL_NEW_FORMAT_NATIVE_QUALIFICATION",
-  "completed_native_families": 23,
-  "new_native_cases": 384,
-  "new_native_controls": 69,
-  "new_native_refusals": 315,
-  "remaining_new_native_cases": 36,
+  "completed_native_families": 24,
+  "new_native_cases": 402,
+  "new_native_controls": 72,
+  "new_native_refusals": 330,
+  "remaining_new_native_cases": 18,
   "previous_8mono_cases": 75,
-  "combined_separate_native_binding_cases": 459,
+  "combined_separate_native_binding_cases": 477,
   "binding_matrix_cases": 495,
   "previous_8mono_evidence": {
     "file": "families-emulator.json",
@@ -237,6 +237,21 @@
         "crc32": "2DF0C6B5",
         "sha256": "d1cb29964c77a1249ae999451582a291288caa49b605be21f69c2bb6cb4841b3",
         "size": 296544
+      },
+      "host_reaping_failure_recovered": false
+    },
+    {
+      "component": "24stereo",
+      "backend_family": "amigus16be",
+      "cases": 18,
+      "controls": 3,
+      "refusals": 15,
+      "evidence": "format-24stereo-amigus16be-emulator.json",
+      "sha256": "1d903fe834450bcfec7bde8a3f855671c5041cef899ca6aca8ce55180b9aa2e2",
+      "candidate": {
+        "crc32": "7FD22ABD",
+        "sha256": "6afb2a13764f2951a51775ee2b220b3b6a1b32d0e222b2dd0a2a4c3a5d65cb2e",
+        "size": 296560
       },
       "host_reaping_failure_recovered": false
     },

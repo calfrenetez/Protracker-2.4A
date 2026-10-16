@@ -1,0 +1,30 @@
+{
+  "state": "INDEPENDENT_CAPACITY256_INSTALL_VERIFIED_ALL128_RECORDS_UNCHANGED",
+  "fence": 1865,
+  "archives": 128,
+  "loadedBound": 256,
+  "stateByteBound": 65536,
+  "holdBound": 32,
+  "allJournalAndArchiveBodiesModesMtimesInodesFlagsUnchanged": true,
+  "twoInstalledFileHashesVerified": true,
+  "originalSourceBackupsVerified": true,
+  "idleToolServicesUntouched": true,
+  "targetCalls": 0,
+  "signalsSent": 0,
+  "journalWrites": 0,
+  "archiveDeletes": 0,
+  "installResultSHA256": "aea89b699961819c9e44c50697fef34efae4e00fb3adc82ad35419e928d4d756",
+  "journalSnapshotSHA256": "29a80f2316278df31dd326714918a15c9b708669452f6851254520437ce2700d",
+  "schema": 1,
+  "humanApproval": "Explicitly approved reviewed128->256 increase in this task",
+  "hostTemporaryFixtureChecks": 84,
+  "scope": "Two shared host source/doc files only; all128 state/history records byte-and-metadata preserved,64KiB state/32HOLD bounds unchanged; idle tools untouched; no native/device/audio operation",
+  "records_sha256": {
+    "review": "605edc2a955db672d94b6b07d23026379251a0955a266157d7ebca667d9c955e",
+    "diff": "e808a35a8a9c176a7e7039c3d6eebd58133232760c2f358caa83e3c46c7d7799",
+    "host": "f878ad17360c19b16aa0ebcc0a7e864069c34d6aca1fb989b12ac68b945016a2",
+    "capacity": "bfadd9aa06d5cc4117ef743280ca6c8c4e0f749b0ae50f7c75378d4456674374",
+    "installation": "aea89b699961819c9e44c50697fef34efae4e00fb3adc82ad35419e928d4d756",
+    "separate_verification": "ee63382a4b051c953bd3eac7ae4f61db810c49265c46433f60ccbcf770b02af8"
+  }
+}

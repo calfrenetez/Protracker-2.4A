@@ -113,7 +113,7 @@ The standalone pinned builder cross-compiles the new 495-case main plus the
 original factory constructor to `PTMixedSourceBindingTest` (318,240 bytes,
 SHA-256 `8a5cbe8401f662eeb426194fbb85321a91b48bef33975ed3ae3877551dd0719e`).
 Its 30 units, 87 project bodies, 32 SDK bodies and seven runtimes are recorded,
-with assertions enabled. **Amiberry and physical execution are NOT RUN.**
+with assertions enabled. **The full candidate was attempted once in Amiberry without confirmed completion; physical execution is NOT RUN.**
 Allocation callbacks and the card bus remain software fixtures; native placement,
 physical capacity/order/completion, actual voice stop, IRQ/DMA, timing, audio and
 listening acceptance remain separate. See [scoped host/build evidence](../evidence/enhanced-editor/mixed-source-binding/host-build.json).
@@ -123,3 +123,14 @@ fit the unchanged 256-character protocol marker bound. The original constructor
 assertions and default full factory/quantized output remain unchanged; both
 legacy stdout oracles pass again. The earlier 318,716-byte compiler-only HUNK
 was refused during host preparation for its 554-character marker and never ran.
+
+The full bounded-marker candidate subsequently reached its native completion
+deadline without confirmed completion, return code, observed Stack or native
+stdout/file custody. The upload stage completed and the native Run-once launch
+was dispatched once. No subset of the C fixture is qualified by that attempt.
+Routine verified own teardown restored the saved launcher files and removed
+only exact run staging. Independent absence/restoration, public release with
+all three original HOLDs archived, and a separate fresh final observation
+passed (recorded EMPTY1705/89; future use needs fresh checks). The failed full
+transaction is preserved and will not be replayed. Smaller, explicitly scoped
+native components are the next qualification step. See [the failed attempt and recovery](../evidence/enhanced-editor/mixed-source-binding/emulator.json).

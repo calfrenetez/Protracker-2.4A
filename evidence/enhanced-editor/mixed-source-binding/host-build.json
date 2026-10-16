@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_QUALIFICATION_FAILED",
   "base_commit": "ec4441ad7504f2434b087371761d98fa0a7c9a71",
   "scope": "Mixed factory Paula and AmiGUS leases are bound to actual sample/side/packed format before action lowering and subsequent holder currentness; existing backend/resource and separate retirement checks remain.",
   "regression": {
@@ -74,7 +74,7 @@
     "assertions_enabled": true,
     "manifest_sha256": "b990909b532d422ebc6928d1d4fc1a1d9c3423350f88792674774e2b9d8ec6e9",
     "compiled_fixture": "New495-case source binding main and unchanged original factory constructor; retained original typed-core donor main is not invoked.",
-    "execution": "NOT_RUN",
+    "execution": "ATTEMPTED_NO_CONFIRMED_COMPLETION_SEE_EMULATOR_RECORD",
     "meaning": "68000/softfloat/nix20 compiler/linker qualification only; ordinary allocation and fake bus, no native Exec memory placement assertion.",
     "host_and_build_same_366_frozen_inputs": true,
     "selected_assembler_hash_before_and_after": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",

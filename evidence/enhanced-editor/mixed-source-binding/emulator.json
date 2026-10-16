@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "state": "NATIVE_COMPLETION_UNCONFIRMED_FAILURE_RECOVERED_AND_RELEASED",
+  "candidate": {
+    "size": 318240,
+    "sha256": "8a5cbe8401f662eeb426194fbb85321a91b48bef33975ed3ae3877551dd0719e",
+    "crc32": "66B8CA73"
+  },
+  "source_commit": "91fe246f5abf8944884375e9067e71cf17eca112",
+  "scope": "One actual shared030 attempt of full495-case mixed source-binding fixture plus original factory constructor. No confirmed native completion, RC, Stack or output/custody.",
+  "host_packet": {
+    "runner_checks": 35,
+    "service_checks": 27,
+    "normal_entry_checks": 15,
+    "validate_pass": true
+  },
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpu_cycle_exact_observed": true,
+    "chip_kb": 2048,
+    "fast_z3_kb": 131072,
+    "timing_or_placement_qualified": false
+  },
+  "bounds_seconds": {
+    "input_upload": 120,
+    "native": 90,
+    "native_rpc_caller": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "expected": {
+    "stack_bytes": 1048576,
+    "native_stdout_lines": 2,
+    "input_files": 1,
+    "execution_files": 8,
+    "progress_sidecar": false
+  },
+  "observed": {
+    "input_stage_completed_with_exact_candidate_custody": true,
+    "native_run_once_launch_dispatches": 1,
+    "stage_once_launch_dispatches": 1,
+    "service_error": "Native completion deadline expired",
+    "completion_confirmed": false,
+    "rc_confirmed": false,
+    "stack_confirmed": false,
+    "native_output_or_execution_custody_confirmed": false,
+    "failed_result_sha256": "4c270abc9ab8b8c644c92060b487e6136e2cce4be0a06cc89cd32f74a78cf27f",
+    "native_error_record_sha256": "dcd61003ddffbfcd8c09ad26acf7fa55d9ae395a449fd4bad1aed168eb1f42b8"
+  },
+  "recovery": {
+    "standing_authorization": "Routine positively verified own recovery authorized by direct15October instruction",
+    "own_emulator_and_service_stopped_once": true,
+    "saved_launcher_files_restored": true,
+    "original_configuration_and_other_staging_preserved": true,
+    "exact_own_staging_removed": true,
+    "guest_ram_absence_basis": "Positive owned emulator process absence ends RAM lifetime; no guest listing or disk restoration inferred",
+    "native_failure_and_three_holds_preserved": true,
+    "restoration_sha256": "b66a2f56a896c3364aee2db899fb7b09442dcc1c0b106337630fe2cd9f94152b",
+    "independent_observation_sha256": "1f6735556b96d12cf738e9c4958e4578c63120343f211450ca86031ff470bace",
+    "public_release_sha256": "75d238e93db79f12184104d659426c7b09bd9c06275a12870017009091871509",
+    "separate_fresh_final_observation_sha256": "d722bfc0f430eeed36a819ee195ffed00c7a85b07a8c847b36aef2154c536ce9",
+    "recorded_final_phase": "EMPTY",
+    "recorded_final_fence": 1705,
+    "recorded_final_archives": 89,
+    "observed_processes_tcp_and_named_unix_endpoints_absent": true,
+    "availability_still_requires_fresh_check": true,
+    "shared_persistent_console_log_retained": true
+  },
+  "preservation": {
+    "protected16_contents_and_stable_metadata_unchanged": true,
+    "accepted_layout_and_exact_schedule_unchanged": true,
+    "native_provider_inhibited": true,
+    "no_physical_or_browser_control_acquired": true,
+    "identical_failed_transaction_replayed": false
+  },
+  "not_qualified": [
+    "Full native495 matrix and original constructor completion",
+    "Any subset or progress inside the C fixture",
+    "Native Fast/Chip placement or memory-class assertions",
+    "Physical capacity/upload ordering/completion/actual voice stop",
+    "IRQ/DMA/output timing/audio/listening"
+  ],
+  "next": "Prepare smaller separately declared native components with genuine assertions and original time bounds, then new exact-candidate guarded qualifications. The failed full transaction remains immutable."
+}

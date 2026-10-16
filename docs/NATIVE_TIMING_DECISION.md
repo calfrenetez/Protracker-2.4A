@@ -1,5 +1,21 @@
 # Native musical-boundary timing decision
 
+## Current clock evidence —16 October2026
+
+The task-only adjacent ReadEClock diagnostic now has exact-candidate emulator
+and physical A1200 observations. The updated emulator run completed16 pairs
+at19..22 ticks; the physical68030 A1200 completed16 pairs at15..17 ticks.
+RC0 means OBSERVATION_COMPLETE. Independent saved-report replay, reported
+resource closure, exact RAM/task absence, public release and separate final
+idle checks passed for both operations. Safari stayed in View Only.
+
+These finite sampling intervals include intervening instructions. They cannot
+isolate clock-call duration, establish a universal bound, locate an output write
+or qualify exact scheduled activation. The musical schedule and native provider
+inhibition remain unchanged. Earlier CIA failures remain preserved; no window,
+epoch, rate or priority was retuned. See
+[clock observations and scoped evidence](CLOCK_READ_OBSERVATIONS.md#updated-transport-and-first-a1200-observation-16-october2026).
+
 ## User decision: preserve exact scheduling
 
 On 3 October 2026 the user selected **Keep exact scheduling** in response to

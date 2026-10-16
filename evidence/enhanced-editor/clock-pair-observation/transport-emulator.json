@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "state": "EMULATOR_CLOCK_OBSERVATION_COMPLETE_INDEPENDENTLY_RELEASED_NOT_OUTPUT_TIMING_ACCEPTANCE",
+  "candidate": {
+    "crc32": "CEE66A58",
+    "sha256": "919196b89b92de580cf24ff32cd63ca82a616d1d36919bff79831cd39baf162c",
+    "size": 19952
+  },
+  "runID": "43361582880cded3e317d995416fb7fd",
+  "compiledSourceCommit": "e1d35405ab44983800351206ae50f59cc394ac34",
+  "runnerSourceCommit": "e584cf6062834cf49030e46ccfa334dce079fbb2",
+  "currentCompiledProjectBodies": 8,
+  "compiledSourceUnits": 3,
+  "native": {
+    "returnCode": 0,
+    "qualification": "OBSERVATION_COMPLETE",
+    "pairs": 16,
+    "frequencies": [
+      709379
+    ],
+    "samplingDeltas": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      19,
+      22,
+      20,
+      19,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "observedDeltaMin": 19,
+    "observedDeltaMax": 22,
+    "reportedClosure": {
+      "attempted": 16,
+      "completed": 16,
+      "valid": 16,
+      "failures": 0,
+      "task_identity": 1,
+      "priority": 0,
+      "unchanged": 1,
+      "signals_restored": 1,
+      "clock_closed": 1,
+      "interrupt_nesting_restored": 1,
+      "task_nesting_restored": 1
+    },
+    "outputBytes": 2069,
+    "outputCRC32": "E1804FA6",
+    "observedStackBytes": 262144
+  },
+  "host": {
+    "runnerTests": 67,
+    "serviceTests": 27,
+    "normalEntryQualified": true,
+    "completeAndFailedClockProfilesModeled": true,
+    "selectedInterfaces": 21,
+    "reviewedArchiveBound": 256,
+    "newDirectoryCompletionObservation": true,
+    "preservedHostOnlySandboxAndOffloadedHeaderRefusals": true
+  },
+  "boundsSeconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "custodyAndRelease": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "exactGuestAndHostStagingAbsence": true,
+    "unchangedInstalledConfigurationOrRestoredOriginals": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "onlyOwnServiceStopped": true,
+    "separateFinalIdle": true,
+    "finalFence": 1873,
+    "archives": 130,
+    "holds": 0,
+    "currentAvailability": "Historical observation; fresh guards required"
+  },
+  "recordsSHA256": {
+    "spec": "2bbb5710f85490b8014126811b1d3e31e4c1cd6cf34ab364f5b308c3f661cda8",
+    "admission": "ccc247b5c05a4054d48c4c42b98ab4f9d42c23089ce7dd0601d8375745286f6e",
+    "actualResult": "8c2a84427ad421f813e855b2ce6d467ff3dccf7f2b938430e10cb1d641e5693a",
+    "rawReport": "e7013e102cc22a322c08999e0342160463d6d2f7688c388c67a8b1e2b310c1af",
+    "independentObservation": "f67cb8840d1aeecae9024f977ebbe4aa34dce44729a3cef14c62f758cc6dab38",
+    "publicRelease": "3260629c49b628b554763b131996d4c6a9d4659dac47cb0b6f78d2ed7f74b8b9",
+    "ownServiceStop": "9da148e7649603102788288c4fcd22ab30dc266ca5bfcac9c3cf334df752829c",
+    "separateFinalIdle": "ab18c27707255253fa15ad8ea800a024443fb05a7df19343f69d783b62b4642b",
+    "immutableSourceInventory": "4022beffa760ef535d652abc403412dc5f78fb4b9557206bb752700bb5375948",
+    "hostEntryReview": "e17dc419938a088e21b3fbf313900f75acb1831d1a3bc687eb859ee6cbee1a21"
+  },
+  "unchangedFailedTransactionReplayed": false,
+  "scope": "Sixteen finite task-only adjacent ReadEClock sampling intervals including minimal intervening instructions. No isolated call duration, universal minimum, upper bound, IRQ WCET, actual output time, musical scheduling, card RAM/DMA, audio or listening qualification. Exact schedule and native output inhibition unchanged.",
+  "target": {
+    "cpu": "68030",
+    "fpu": "0",
+    "cpuCycleExactObserved": "true",
+    "physicalTimingEquivalent": false
+  }
+}

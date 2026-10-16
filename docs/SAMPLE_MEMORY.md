@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Current physical clock observation —16 October2026
+
+The standalone task-only clock diagnostic now completes16 adjacent read pairs
+on the real68030 A1200:15..17 sampling ticks, RC0/OBSERVATION_COMPLETE,
+reported resource closure and independent custody/cleanup/release/final idle.
+The same exact binary also completes the updated emulator path at19..22 ticks.
+These finite intervals do not qualify output activation, IRQ/WCET or musical
+timing. Exact scheduling and native provider inhibition remain unchanged.
+See [the observations and evidence](CLOCK_READ_OBSERVATIONS.md#updated-transport-and-first-a1200-observation-16-october2026).
+
 ## Current mixed binding coverage —16 October2026
 
 Thirty separate native families now pass all495 genuine binding cases:

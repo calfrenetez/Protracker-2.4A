@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "state": "PHYSICAL_CLOCK_OBSERVATION_COMPLETE_INDEPENDENTLY_RELEASED_NOT_OUTPUT_TIMING_ACCEPTANCE",
+  "candidate": {
+    "crc32": "CEE66A58",
+    "sha256": "919196b89b92de580cf24ff32cd63ca82a616d1d36919bff79831cd39baf162c",
+    "size": 19952
+  },
+  "runID": "ab2bc7efe1fd70439238874d89ff40ff",
+  "compiledSourceCommit": "e1d35405ab44983800351206ae50f59cc394ac34",
+  "runnerSourceCommit": "e584cf6062834cf49030e46ccfa334dce079fbb2",
+  "currentCompiledProjectBodies": 8,
+  "compiledSourceUnits": 3,
+  "native": {
+    "returnCode": 0,
+    "qualification": "OBSERVATION_COMPLETE",
+    "pairs": 16,
+    "frequencies": [
+      709379
+    ],
+    "samplingDeltas": [
+      17,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15
+    ],
+    "observedDeltaMin": 15,
+    "observedDeltaMax": 17,
+    "reportedClosure": {
+      "attempted": 16,
+      "completed": 16,
+      "valid": 16,
+      "failures": 0,
+      "task_identity": 1,
+      "priority": 0,
+      "unchanged": 1,
+      "signals_restored": 1,
+      "clock_closed": 1,
+      "interrupt_nesting_restored": 1,
+      "task_nesting_restored": 1
+    },
+    "outputBytes": 2165,
+    "outputCRC32": "863EA4BA",
+    "observedStackBytes": 262144
+  },
+  "host": {
+    "runnerTests": 43,
+    "serviceTests": 27,
+    "normalEntryQualified": true,
+    "completeAndFailedClockProfilesModeled": true,
+    "selectedInterfaces": 21,
+    "reviewedArchiveBound": 256,
+    "newDirectoryCompletionObservation": true,
+    "preservedHostOnlyRelocationImportFailure": true
+  },
+  "boundsSeconds": {
+    "upload": 120,
+    "native": 90,
+    "rpc": 110,
+    "guest": 140,
+    "whole": 250
+  },
+  "custodyAndRelease": {
+    "inputFiles": 1,
+    "executionFiles": 8,
+    "exactGuestAndHostStagingAbsence": true,
+    "unchangedInstalledConfigurationOrRestoredOriginals": true,
+    "independentObservation": true,
+    "publicRelease": true,
+    "onlyOwnServiceStopped": true,
+    "separateFinalIdle": true,
+    "finalFence": 1877,
+    "archives": 131,
+    "holds": 0,
+    "currentAvailability": "Historical observation; fresh guards required"
+  },
+  "recordsSHA256": {
+    "spec": "9cdfc89abb8e664b6604c3b385b32e9b257209ae41e751bbb3ee460d19e46807",
+    "admission": "19089b2dfaefb81ef5f2803b785f7d64f9de2e6fd58dadd89f33bf94d01db32f",
+    "actualResult": "112845be30d71279eb8bc0578e520bfb93c7e2cd97329bd429aaa8e8e1b42f63",
+    "rawReport": "28cac3cf2bf52f4ab00448ae9068ab46ff43a65dadc357d618fc5f074376e207",
+    "independentObservation": "d9148384522f3d33d8eec0b3deaa5d023d6940f3f1f5b004b4c0948806f99db8",
+    "publicRelease": "29310f1160a05760bb606fb2bf9a258666ea8e4d48103320ea22788c172be648",
+    "ownServiceStop": "da85a8d9d0ab3473ecd99b343e4178930c8d7fa9b50ad874dec6720e67784ce8",
+    "separateFinalIdle": "5d477f41386dcb5842551f4646891ed2bd2bc1ac3984f1c0bb1b42bb4640f104",
+    "immutableSourceInventory": "3cbd33ed4df93b2c8086958cb7856dea442ac1d75ce3b75620d37e79fb4e3b6d",
+    "hostEntryReview": "6cb39ab2725e1ffe72c0710f48a205fbe40c1a6959663af1edc31c68b25d61de",
+    "browserBefore": "ecefe3d183a800b0a3de651c368c92649b9c18672bbcb331116cef4d51ff0dd0",
+    "browserAfter": "0c33e548c85da6620b1ada617b62ca0307d1a76ef02725b48ed15c5ce6cb7504"
+  },
+  "unchangedFailedTransactionReplayed": false,
+  "scope": "Sixteen finite task-only adjacent ReadEClock sampling intervals including minimal intervening instructions. No isolated call duration, universal minimum, upper bound, IRQ WCET, actual output time, musical scheduling, card RAM/DMA, audio or listening qualification. Exact schedule and native output inhibition unchanged.",
+  "target": {
+    "cpu": "68030",
+    "execMajor": 47,
+    "execRevision": 13,
+    "video": "PAL (50Hz)",
+    "chipTotal": 2093056,
+    "fastTotal": 133169152
+  },
+  "browser": {
+    "authenticatedViewOnlyBeforeAndAfter": true,
+    "controlAcquired": false,
+    "inputSent": false
+  },
+  "exactEmulatorPromotionRecords": 6
+}

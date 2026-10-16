@@ -38,7 +38,7 @@ them to retune a phase or claim a timestamped output command exists.
 
 Current host and pinned three-unit 68k compile evidence is recorded in
 [the compact result](../evidence/enhanced-editor/clock-pair-observation/host-build.json).
-The exact native observation is now recorded below. Physical testing, actual
+The exact emulator and physical observations are recorded below. Actual
 output timing and human listening remain untested by these checks.
 
 
@@ -68,3 +68,41 @@ Current physical timing remains untested. Continue authentic device-activation
 contract work and independently useful memory/save integration; do not retune
 the musical grid, repeat an unchanged failed CIA candidate or enable a native
 provider from these observations.
+
+## Updated transport and first A1200 observation —16 October2026
+
+The unchanged19,952-byte candidate ran once in a fresh Amiberry transaction
+using the bounded directory completion observer and approved256-record guard.
+All16 pairs completed: thirteen20-tick, two19-tick and one22-tick intervals.
+RC0 remains OBSERVATION_COMPLETE. The updated path
+passed67 runner and27 service host tests, including complete and failed-clock
+profiles. Exact custody, independent cleanup/release, own service stop and a
+separate final idle observation passed. Initial host-only sandbox process-access
+and offloaded-header refusals remain preserved before any service or target
+operation; restoring the header retained its original hash.
+
+After that exact qualification and fresh physical admission, the candidate ran
+once on the owner's68030 A1200, Exec47.13/PAL. All16 valid pairs completed with
+frequency709379 and unchanged task priority0: the first interval was17 ticks and
+the remaining15 were15 ticks. Both returned clock words/rates and all reported
+task, nesting, signal, timer and Fast-memory closure checks survive independent
+saved-output replay. The physical path passed43 runner and27 service host tests;
+an initial relocated offline helper import failure is preserved separately from
+the corrected no-effect construction check.
+
+One input and eight execution files were retained for custody, then their exact
+RAM namespaces and task absence were observed independently. Installed host
+configuration stayed unchanged. Public release, exact own-service shutdown and
+a separate final idle check passed: fence1877,131 retained archives, no HOLD.
+Safari was Authenticated Connected View Only before and after; no browser
+control or input was acquired. Release facts are historical and cannot clear a
+future operation.
+
+The real-machine intervals differ from the emulator's finite19..22-tick sample.
+Neither set isolates call duration or establishes a lower bound, WCET, IRQ
+latency or the time of an output write. These observations do not qualify the
+earlier14/15-tick output brackets, scheduled activation or listening. Preserve
+the exact schedule and native provider inhibition; no failed CIA experiment was
+replayed and no timing window, epoch, rate or priority was changed. See
+[updated emulator evidence](../evidence/enhanced-editor/clock-pair-observation/transport-emulator.json)
+and [physical observation evidence](../evidence/enhanced-editor/clock-pair-observation/physical.json).

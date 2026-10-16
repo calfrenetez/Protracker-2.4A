@@ -729,3 +729,15 @@ candidates retain their own frozen source; the prepared physical predecessor is
 preserved/superseded, with no current-source guard relaxed. No physical placement,
 device, IRQ/output, timing or listening acceptance follows. See
 [HOST/build scope](../evidence/enhanced-editor/rolling-native-entry/lineage-current-proof-host-build.json).
+
+The exact331328-byte candidate subsequently passes complete original17-unit
+preflight/cancellation once in Amiberry030, RC0, sole79-byte stdout and closed
+terminal progress. Original perphase/current-pin/audit/four-event/no-output and
+master/save/disposal/zero-accounting oracles remain. Nine-file custody/settlement,
+independent observation/public release, owned service stop and separate final idle
+pass under unchanged90/140/250/1MiB limits. Whole-runner duration is not native cost,
+speed or WCET evidence. This qualifies the original16-bit mixed preparation
+component, not case1/full68, the full editor or native output. A1200 execution,
+physical placement/device/voice stop, scheduling/IRQ/output and listening remain
+unqualified. Earlier unconfirmed transactions stay preserved. See
+[exact scoped result](../evidence/enhanced-editor/rolling-native-entry/lineage-current-proof-emulator.json).

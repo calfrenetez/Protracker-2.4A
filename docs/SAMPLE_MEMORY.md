@@ -8,7 +8,10 @@ reads; all byte, root and input comparisons remain, with no callback or retained
 proof across calls. Ten HOST sanitizer groups and the pinned86-unit build pass,
 including frozen six-predicate comparison with original rolling68/joint31 and
 protected-read controls. Exact new Amiberry/A1200 and native speed are NOT_RUN/
-unqualified at preparation. Previous physical preparation is preserved/superseded.
+unqualified at preparation. The subsequent exact Amiberry complete original17-unit
+preflight/cancellation component passes once with RC0, strict terminal witnesses
+and independent cleanup/release. A1200 and native output/device/timing/listening
+remain unqualified. Previous physical preparation is preserved/superseded.
 See [the contract](NATIVE_ROLLING_ENTRY.md#reuse-the-current-lineage-querys-complete-parent-proof).
 
 ## Semantic pinning and activation boundary —16 October2026

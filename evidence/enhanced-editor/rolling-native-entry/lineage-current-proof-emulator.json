@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "state": "EXACT_AMIBERRY_COMPLETE_ORIGINAL17_PREFLIGHT_PASS_INDEPENDENTLY_RELEASED",
+  "candidate": {
+    "size": 331328,
+    "sha256": "db90653736de27f428f414cb7c80207c424f5bfa4bbfb41c5e5724187d4436df",
+    "crc32": "3B18DE71"
+  },
+  "scope": "Original16-bit mixed fixture, complete original17-unit sl_preflight with original perphase, genuine current master pins, audit/four normalized event and no-output oracles, then master/save preservation, cancellation, disposal and zero accounting. Current same-query lineage-parent proof reuse; ordinary allocations and modeled clocks/buses only.",
+  "native": {
+    "returnCode": 0,
+    "stackBytes": 1048576,
+    "outputBytes": 79,
+    "marker": "ROLLING PREFLIGHT NATIVE PASS:original preflight and cancellation;MODELED_ONLY",
+    "closedProgress": "ROLLING PREFLIGHT DONE phase=0\n",
+    "closedProgressBytes": 31,
+    "launches": 1
+  },
+  "capture": {
+    "liveProgressContentReads": false,
+    "finalClosedProgressRequired": true,
+    "allNineExecutionFilesCapturedAndSettled": true,
+    "originalDeadlinesSeconds": {
+      "native": 90,
+      "guest": 140,
+      "whole": 250
+    }
+  },
+  "cleanup": {
+    "exactBothRAMNamespacesAbsent": true,
+    "ownHostStagingAbsent": true,
+    "originalLauncherFilesRestored": true,
+    "independentObservationPassed": true,
+    "publicReleasePassed": true,
+    "separateFinalIdlePassed": true,
+    "ownerOrHoldRemaining": false
+  },
+  "evidenceSHA256": {
+    "result.json": "1b54c8148cccfb11cc65352e14b2870ca0b43cef8bf5c72475cc8723bc22d7dc",
+    "release/independent-pass-observation.json": "90acda54e26ca6f738022251ef6792cc3738e6f652c91e23673ac63969baf09f",
+    "release/release-result.json": "eaf9a391d629a2590895e3b407dca5a6b6cd0430f3456655c9cfe7705e823ff0",
+    "release/independent-final-idle.json": "2363c371386f439fae5cad866d90762c8a91326cd06d8c2e137a458af599a44b"
+  },
+  "unqualified": [
+    "Originalcase1/full68 or native whole editor",
+    "A1200 execution of this exact candidate",
+    "Measured native speed, cost or worst-case execution time",
+    "Exec Fast/Chip placement, card RAM or physical voice-stop/device behavior",
+    "Native resource/provider bridge, IRQ/output activation and exact musical timing",
+    "Human listening"
+  ],
+  "earlierUnconfirmedTransactions": "Preserved separately; not replayed or reinterpreted by this full-preflight component pass"
+}

@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "scope": "HOST software ownership only: explicit opt-in unpublished three-source lifetime adapter; original default-OFF regression separate",
+  "baseCommit": "a4f4eddd9d71844eb02bb435369c1597291a2bf6",
+  "sourceSHA256": {
+    "src/editor/prepared_paula_sources.c": "60832088f551380a293efaa63b5d0e2e99551b937a57b8bf3b2e6a0bb5e51761",
+    "src/editor/prepared_paula_sources.h": "05ead924313186a64f3728f2de1c0f452eaced9185127a7dc93444a05b290046",
+    "src/editor/prepared_paula_lifetime.c": "d0539a2d86bc4a52fa5fd45a694bc4236d9d6ee91bafaa0cce6f65c310c2f4b7",
+    "src/editor/prepared_paula_lifetime.h": "9bc8e39737ac2681060760386fc34d4604974f7c7e60d3cca1530436311597ae",
+    "tests/prepared_paula_lifetime_test.c": "a98ff044aef08c9f84bb21d24a6c966610cc2d91ff5be5bd5425224b02c4e3f3"
+  },
+  "runs": {
+    "optin": {
+      "result": "PASS",
+      "translationUnits": 25,
+      "projectExportBodies": 60,
+      "assertions": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compileWarnings": "-Wall -Wextra -Werror",
+      "fixtureStdout": "PREPARED PAULA LIFETIME HOST PASS:real mono8/16/24;unpublished 1C1R local C-then-R;bounded drain/save/aliases/stale/preclaim/reentry;retained2;NO OUTPUT AUTHORITY\n",
+      "fixtureStderrBytes": 0,
+      "compileDiagnosticBytes": 0,
+      "elapsedSeconds": 9.62215454201214,
+      "compileTimeoutSeconds": 120,
+      "fixtureTimeoutSeconds": 30,
+      "selectedToolOperandsVerified": true,
+      "exportManifestSHA256": "567248e4808c7fb0b5e723e20b1a117e8281000b207035c2826125024c5b5381",
+      "rawResultSHA256": "417baafe079e08184acee542a421b565ba5c108285d006908b9dbe2fc4c03d86",
+      "protected16Classic51Unchanged": true
+    },
+    "defaultoff": {
+      "result": "PASS",
+      "translationUnits": 22,
+      "projectExportBodies": 53,
+      "assertions": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compileWarnings": "-Wall -Wextra -Werror",
+      "fixtureStdout": "PREPARED PAULA SOURCES HOST PASS:real mono8/16/24 pins/cache;load24/hit9/cancel25;save/alias/stale36/budget/retained2;NO OUTPUT AUTHORITY\n",
+      "fixtureStderrBytes": 0,
+      "compileDiagnosticBytes": 0,
+      "elapsedSeconds": 7.8734920419810805,
+      "compileTimeoutSeconds": 120,
+      "fixtureTimeoutSeconds": 30,
+      "selectedToolOperandsVerified": true,
+      "exportManifestSHA256": "0ca99d6bc56616cf341da0c915182692420c75e856d6a7a725295344bc1966bf",
+      "rawResultSHA256": "89019c32e1add6ecca94c9072ffd1c78331383cd4ab695f3016a831eb06c43a7",
+      "protected16Classic51Unchanged": true
+    }
+  },
+  "coverage": {
+    "genuineMonoMasterBits": [
+      8,
+      16,
+      24
+    ],
+    "commandReferences": 1,
+    "readerDomains": 1,
+    "genuineReaderDependencies": 3,
+    "normallyCleanedCompleteFixtures": 6,
+    "aliasRefusals": 12,
+    "drainCallsAfterLocalStop": 7,
+    "backendCallsIncludingClock": 0,
+    "deliberatelyRetainedCompleteFaultFixtures": 2
+  },
+  "retainedBoundary": "The first retained fixture contains two rejected input-allocation aliases and a genuine lease-refusal fault with surviving source ownership. The second retains context/aggregate after queue free/reentry, while its source ledger is finished. Both remain reachable; no repair or forced release.",
+  "preservation": {
+    "allFrozenControlBytesUnchanged": true,
+    "readyPlanBytesUnchanged": true,
+    "protected16AndClassicBaseline": true,
+    "datalessVendorBodies": "metadata only; no hydration or body verification"
+  },
+  "history": [
+    {
+      "phase": "driver diagnostic",
+      "result": "REFUSED_BEFORE_COMPILE",
+      "reason": "Actual compiler runtime archive was not in the inherited pin map; narrow successor added the observed archive pin."
+    },
+    {
+      "phase": "first compile",
+      "result": "FAIL",
+      "reason": "Lifetime configuration embedded an incomplete allocator type; explicit document.h include fixed the declaration. Original bodies and evidence preserved."
+    }
+  ],
+  "limits": [
+    "No complete system-header or dyld provenance audit",
+    "No published backend, R-first retirement or actual quiet receipt exercised",
+    "Lower-OK/outer-fault and forged private contexts are source-review limits",
+    "No native ABI/IRQ/output/device/physical/timing/listening acceptance",
+    "Existing provider/native-output inhibitors remain unchanged"
+  ],
+  "rootResultSHA256": "ce077be4f5b06c5cc50034652308be7a1f5dfee9acaaad239eede152d67fba50",
+  "permanentRegression": {
+    "result": "PASS",
+    "tests": 2,
+    "elapsedSeconds": 11.295110917009879,
+    "returnCode": 0,
+    "rawResultSHA256": "d78165d3ed27332e95d62e9dfe5737f611797f64786307c9aa70e90a2cfc34cb",
+    "wrapperSHA256": "349201f28252a49406aabd3898d7d0d08ac252a962cad3dad25829344cca6082",
+    "allEightSelectedSourcePinsUnchanged": true,
+    "scope": "Exact permanent opt-in lifetime and original default-OFF wrappers; sanitizer and preservation checks"
+  }
+}

@@ -7835,3 +7835,24 @@ Fast/Chip assertions, cold/HIT/five-cut cancellation, exact master/in-memory-sav
 preservation and zero explicit ledgers complete. Physical A1200, reader transfer,
 output/IRQ/DMA/device quiet, timing and listening remain separate. See [the
 selected native result](SAMPLER_PAULA_LINEAGE.md#three-source-ram-probe-amiberry-pass-16-october2026).
+
+
+An explicit HOST-only lifetime bridge now transfers one actual command and one
+three-source reader domain from the genuine prepared owner. Local unpublished
+C-then-R stop records consumption; a later bounded task drain releases original
+pins/cache leases. The25-unit sanitizer integration and separate original22-unit
+default-OFF regression pass with exact master/save preservation, alias/stale/
+reentry checks and honest retained-fault accounting. No backend is called.
+Default owner preprocessing excludes the bridge; native compilation of the option
+is refused. Published/active-voice retirement, native output/IRQ/device quiet,
+physical, musical timing and listening remain unfinished. See [the HOST bridge
+and limits](SAMPLER_PAULA_LINEAGE.md#unpublished-three-source-lifetime-bridge-16-october2026).
+
+
+After the HOST-only bridge was added, the default18-unit native RAM probe also
+passes a fresh pinned build (51 actual project dependencies,42 SDK bodies and
+seven runtimes). Every native dependency/preprocessed body excludes the bridge.
+Its131,096-byte executable is byte-for-byte identical to the previously
+Amiberry-qualified `ef6259a7` / `856A177A` candidate; that exact-byte evidence is
+reused without another native run. This does not qualify the new HOST bridge on
+Amiga. Physical testing remains unrun. See [default build and byte identity](../evidence/enhanced-editor/prepared-paula-lifetime/native-default-build.json).

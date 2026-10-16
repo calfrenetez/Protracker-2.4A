@@ -96,6 +96,10 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_step(
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
     struct pt_prepared_paula_sources *,struct pt_prepared_paula_sources_status *out);
 
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
+/* The private HOST opt-in makes cancellation return BUSY while a genuine
+ * custody reservation/transfer is retained; no writes or child work then. */
+#endif
 /* Permanently stops preparation. At most ONE original pending-job cancellation
  * or ONE completed lease/pin release per call, using captured own resources,
  * not stale former source tables. Returns PENDING until local ownership ends,

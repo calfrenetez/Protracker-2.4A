@@ -1,4 +1,11 @@
 #include "prepared_paula_sources.h"
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME)
+#if defined(__m68k__) || defined(__amigaos__) || defined(__AMIGA__) || defined(AMIGA)
+#error "The prepared-source custody opt-in is HOST-only"
+#endif
+#define PT_PREPARED_PAULA_HOST_LIFETIME 1
+#include "prepared_paula_lifetime.h"
+#endif
 #include "sampler_internal.h"
 #include "sampler_paula_internal.h"
 #include "project_snapshot.h"
@@ -32,6 +39,9 @@ struct pt_prepared_paula_sources {
     uint64_t cache_version;
     unsigned generation,track,index,child_phase,busy,cancel_index;
     unsigned pin_cancel_attempted,chip_cancel_attempted;
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+    struct pt_prepared_paula_lifetime *custodian;unsigned custody_stage;
+#endif
     enum pt_prepared_paula_sources_phase phase;
     enum pt_prepared_paula_sources_result failure;
     struct prepared_source source[PT_PREPARED_PAULA_SOURCES_COUNT];
@@ -188,11 +198,19 @@ static int pending_chip_clear(const struct pt_prepared_paula_sources *p)
        !apart(e->data,e->bytes,p->bridge->cache.entry[i].data,p->bridge->cache.entry[i].bytes))return 0;
     return 1;
 }
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+static int custody_output_clear(const struct pt_prepared_paula_sources *p,const void *out,size_t n)
+{return !p->custodian||pt_prepared_paula_lifetime_output_disjoint(p->custodian,out,n);}
+#endif
 static int output_clear(struct pt_prepared_paula_sources *p,const void *out,size_t n)
 {
     unsigned i;
     if(!object(out,n,ALIGNMENT(struct pt_prepared_paula_sources_status))||
-       !apart(out,n,p,p->capacity))return 0;
+       !apart(out,n,p,p->capacity)
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+       ||!custody_output_clear(p,out,n)
+#endif
+       )return 0;
     if(p->phase==PT_PREPARED_PAULA_SOURCES_FINISHED)return 1;
     if(!apart(out,n,p->bridge,sizeof(*p->bridge))||
        !apart(out,n,p->sampler,sizeof(*p->sampler))||
@@ -322,7 +340,11 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
     /* Refuse the entire owner-capacity output alias before enter or a stale/
      * reentry failure latch can write any byte of the refused destination. */
     if(!object(out,sizeof(*out),ALIGNMENT(struct pt_prepared_paula_sources_status))||
-       !apart(out,sizeof(*out),p,p->capacity))return PT_PREPARED_PAULA_SOURCES_ALIAS;
+       !apart(out,sizeof(*out),p,p->capacity)
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+       ||!custody_output_clear(p,out,sizeof(*out))
+#endif
+       )return PT_PREPARED_PAULA_SOURCES_ALIAS;
     if(!enter(p))return PT_PREPARED_PAULA_SOURCES_FAULT;
     if(p->phase==PT_PREPARED_PAULA_SOURCES_HELD){result=PT_PREPARED_PAULA_SOURCES_FAULT;goto done;}
     if(p->phase!=PT_PREPARED_PAULA_SOURCES_FINISHED&&!fixed_current(p)){
@@ -342,7 +364,11 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_get(
 done:p->busy=0;return result;
 }
 
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+static enum pt_prepared_paula_sources_result cancel_owned_step(
+#else
 enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
+#endif
     struct pt_prepared_paula_sources *p)
 {
     struct prepared_source *s;struct pt_sample_version *pin;unsigned i;
@@ -398,3 +424,107 @@ enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
     result=PT_PREPARED_PAULA_SOURCES_CLOSED;
 done:p->busy=0;return result;
 }
+
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+/* Public cancellation never acts on a privately reserved/transferred domain.
+ * This early refusal performs no enter/failure write or child operation. */
+enum pt_prepared_paula_sources_result pt_prepared_paula_sources_cancel_step(
+    struct pt_prepared_paula_sources *p)
+{
+    if(!valid(p))return PT_PREPARED_PAULA_SOURCES_INVALID;
+    if(p->custodian)return PT_PREPARED_PAULA_SOURCES_BUSY;
+    return cancel_owned_step(p);
+}
+#endif
+
+#if defined(PT_PREPARED_PAULA_HOST_LIFETIME)
+int pt_prepared_paula_sources_private_output_disjoint(
+    struct pt_prepared_paula_sources *p,const void *out,size_t n)
+{return valid(p)&&output_clear(p,out,n);}
+static int context_covered(const struct pt_prepared_paula_context_extent *a,
+    unsigned count,const void *context)
+{
+    unsigned i;uintptr_t x=(uintptr_t)context;
+    if(!context)return 1;
+    for(i=0;i<count;++i){uintptr_t b=(uintptr_t)a[i].base;
+        if(object(a[i].base,a[i].bytes,1)&&x>=b&&x-b<a[i].bytes)return 1;
+    }
+    return 0;
+}
+int pt_prepared_paula_sources_private_contexts(struct pt_prepared_paula_sources *p,
+    const struct pt_prepared_paula_context_extent *a,unsigned count)
+{
+    unsigned i;
+    if(!valid(p)||p->phase==PT_PREPARED_PAULA_SOURCES_FINISHED||
+       count>PT_PREPARED_PAULA_LIFETIME_CONTEXTS||
+       (count&&!object(a,count*sizeof(*a),ALIGNMENT(struct pt_prepared_paula_context_extent))))return 0;
+    for(i=0;i<count;++i)if(!object(a[i].base,a[i].bytes,1)||
+       !apart(a[i].base,a[i].bytes,p,p->capacity))return 0;
+    return context_covered(a,count,p->sampler_header.allocator.context)&&
+        context_covered(a,count,p->chip_context);
+}
+int pt_prepared_paula_sources_private_current(struct pt_prepared_paula_sources *p,
+    struct pt_prepared_paula_lifetime *l)
+{
+    return valid(p)&&p->busy&&p->custodian==l&&p->custody_stage==1&&
+        pt_prepared_paula_lifetime_source_phase(l,p,1)&&
+        p->phase==PT_PREPARED_PAULA_SOURCES_PREPARED&&
+        p->failure==PT_PREPARED_PAULA_SOURCES_OK&&held_current(p,0);
+}
+static int data_add(struct pt_prepared_paula_lifetime_data *d,const void *p,size_t n)
+{
+    if(!n)return 1;
+    if(!object(p,n,1)||d->count==PT_PREPARED_PAULA_LIFETIME_DATA_SPANS)return 0;
+    d->span[d->count++]=(struct pt_scheduled_span){p,n};return 1;
+}
+enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_enqueue(
+    struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
+{
+    struct pt_prepared_paula_lifetime_data data;
+    struct pt_sampler_storage_span spans[PT_SAMPLER_VERSION_SPANS];unsigned i,j,n;
+    enum pt_scheduled_result lower;enum pt_prepared_paula_sources_result result;
+    if(!valid(p)||!pt_prepared_paula_lifetime_source_phase(l,p,1))return PT_PREPARED_PAULA_SOURCES_INVALID;
+    if(p->custodian)return PT_PREPARED_PAULA_SOURCES_BUSY;
+    if(!enter(p))return PT_PREPARED_PAULA_SOURCES_FAULT;
+    if(p->phase!=PT_PREPARED_PAULA_SOURCES_PREPARED||
+       p->failure!=PT_PREPARED_PAULA_SOURCES_OK||p->pin_job.reservation.owner||
+       p->chip_job.owner||!held_current(p,0)){
+        result=PT_PREPARED_PAULA_SOURCES_STALE;goto done;
+    }
+    /* Reversible PRIVATE reservation. No caller gets a borrow or pointer. */
+    p->custodian=l;p->custody_stage=1;memset(&data,0,sizeof(data));
+    for(i=0;i<PT_PREPARED_PAULA_SOURCES_COUNT;++i){struct prepared_source *s=p->source+i;
+        n=0;
+        if(!s->pin||!s->leased||!pt_sampler_version_spans(s->pin,spans,
+           PT_SAMPLER_VERSION_SPANS,&n)){result=PT_PREPARED_PAULA_SOURCES_STALE;goto abort;}
+        for(j=0;j<n;++j)if(!data_add(&data,spans[j].data,spans[j].bytes)){
+            result=PT_PREPARED_PAULA_SOURCES_CAPACITY;goto abort;}
+        if(!data_add(&data,s->cache_data,s->cache_bytes)){
+            result=PT_PREPARED_PAULA_SOURCES_CAPACITY;goto abort;}
+    }
+    data.first=p->source[0].cache_data;data.first_bytes=p->source[0].cache_bytes;
+    lower=pt_prepared_paula_lifetime_lower_enqueue(l,p,&data);
+    /* Actual lower OK is irreversible even if an outer callback faulted us.
+     * No further callback is made between this actual return and the commit. */
+    if(lower==PT_SCHEDULED_OK)p->custody_stage=2;
+    else {p->custodian=NULL;p->custody_stage=0;}
+    if(p->phase==PT_PREPARED_PAULA_SOURCES_HELD)result=PT_PREPARED_PAULA_SOURCES_FAULT;
+    else if(lower!=PT_SCHEDULED_OK)result=lower==PT_SCHEDULED_CAPACITY?
+        PT_PREPARED_PAULA_SOURCES_CAPACITY:PT_PREPARED_PAULA_SOURCES_STALE;
+    else if(!held_current(p,0))result=fail(p,PT_PREPARED_PAULA_SOURCES_STALE);
+    else result=PT_PREPARED_PAULA_SOURCES_OK;
+    goto done;
+abort:p->custodian=NULL;p->custody_stage=0;
+done:p->busy=0;return result;
+}
+enum pt_prepared_paula_sources_result pt_prepared_paula_sources_private_drain(
+    struct pt_prepared_paula_sources *p,struct pt_prepared_paula_lifetime *l)
+{
+    if(!valid(p)||p->custodian!=l||p->custody_stage!=2||
+       !pt_prepared_paula_lifetime_source_phase(l,p,2))return PT_PREPARED_PAULA_SOURCES_INVALID;
+    /* Callback consumption and completed outer stop return are checked by the
+     * original adapter. This calls only the captured original resource ledger. */
+    return cancel_owned_step(p);
+}
+
+#endif /* HOST-only additive friends; native owner has no adapter references. */

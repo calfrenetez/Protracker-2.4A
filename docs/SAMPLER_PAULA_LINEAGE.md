@@ -202,3 +202,61 @@ This qualifies the selected pre-exposure RAM assertions on the emulated CPU and
 Exec allocator. A1200 execution, reader/command transfer, native output, physical
 DMA/device quiet, musical timing and listening remain unqualified. No playback
 provider inhibition was removed. See [exact emulator evidence](../evidence/enhanced-editor/prepared-paula-sources/emulator.json).
+
+
+## Unpublished three-source lifetime bridge —16 October2026
+
+The explicit `PT_PREPARED_PAULA_ENABLE_HOST_LIFETIME=1` HOST option adds a
+separate lifetime bridge to the existing three-source preparation owner. It opens
+an empty genuine readers queue before claiming sources. Fresh admission then
+reserves the original owner and transfers one command reference plus one reader
+domain that retains all three genuine master/cache dependencies. The actual lower
+enqueue result establishes custody; callers cannot supply a transfer or quiet
+boolean. Public source cancellation returns BUSY while that custody remains.
+
+This first slice never publishes the command. An actual core local stop consumes
+command then reader references; those callbacks record consumption without freeing
+sample resources. Only after the outer stop returns does a serialized task drain
+release at most one captured original child per call. Six children and a final
+completion take seven calls. The queue pointer is consumed before its allocator
+release callback, so free-then-reentry cannot resurrect or release it twice.
+Failures retain surviving ownership and complete callback contexts; there is no
+forced cleanup, count repair, retry of a refused release or source reset.
+
+Callers supply complete accessible callback-context extents and retain original
+objects until close or retained fault. These lengths are a caller contract;
+addresses alone cannot establish them. Full source/lifetime capacities, backend
+controls and declared contexts are protected from output/allocation aliases.
+Stale-source cleanup uses the captured original ledger and does not restore an
+old generation or sample table to make release succeed.
+
+The new 25-unit integration and separate original22-unit default-OFF regression
+pass assertions, strict warnings, ASan/UBSan and exact output checks. The genuine
+mono8/16/24 fixture checks master, marker and saved bytes through transfer/local
+stop/drain, stale cleanup, constructor cancellation, reentry and twelve alias
+refusals. Positive close is followed by a protected inaccessible lifetime arena
+before source get/cancel. Six full fixtures clean normally. Two deliberate fault
+fixtures remain reachable: one has surviving source obligations; the other keeps
+its context after a consumed raw queue and finished source ledger. Neither is
+reported as successful full cleanup. All backend callbacks, including the clock,
+remain unused. Selected tool/SDK operands are checked; complete system-header
+and dynamic-library provenance are outside this qualification.
+
+The option is OFF by default, with the original owner token stream preserved;
+actual default preprocessing excludes lifetime fields, references and header.
+The new bridge explicitly refuses native compilation. Existing native provider
+inhibitions remain. Published backend retirement, R-first callback order,
+quiet/device stop, output activation, native/physical integration, exact musical
+timing and listening are still unfinished. This component is not active-voice
+hardware acceptance. Earlier native RAM results remain their own pre-exposure
+scope; current-source default native rebuild and physical promotion are separate.
+See [scoped HOST evidence](../evidence/enhanced-editor/prepared-paula-lifetime/host.json).
+
+
+After the HOST-only bridge was added, the default18-unit native RAM probe also
+passes a fresh pinned build (51 actual project dependencies,42 SDK bodies and
+seven runtimes). Every native dependency/preprocessed body excludes the bridge.
+Its131,096-byte executable is byte-for-byte identical to the previously
+Amiberry-qualified `ef6259a7` / `856A177A` candidate; that exact-byte evidence is
+reused without another native run. This does not qualify the new HOST bridge on
+Amiga. Physical testing remains unrun. See [default build and byte identity](../evidence/enhanced-editor/prepared-paula-lifetime/native-default-build.json).

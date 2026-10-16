@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "result": "PASS",
+  "scope": "Fresh default-OFF native RAM-probe compile/link; HOST lifetime adapter excluded",
+  "baseCommit": "a4f4eddd9d71844eb02bb435369c1597291a2bf6",
+  "projectExportBodies": 54,
+  "actualProjectDependencies": 51,
+  "actualSDKBodies": 42,
+  "runtimeInputs": 7,
+  "translationUnits": 18,
+  "linkLoads": 25,
+  "assertions": "-UNDEBUG",
+  "nativeFlags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "objectDiagnostic": "-fstack-usage",
+  "binary": {
+    "bytes": 131096,
+    "sha256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e",
+    "crc32": "856A177A",
+    "hunk": 1011,
+    "byteIdenticalPreviousAmiberryCandidate": true
+  },
+  "allActualNativeDependenciesAndPreprocessedBodiesExcludeLifetime": true,
+  "protected16Classic51Unchanged": true,
+  "elapsedSeconds": 5.22033387501142,
+  "rawManifestSHA256": "e534b7689a54a1be9b1e11cfade6d08dd6196699f752aadbc7f11b9fb9471427",
+  "rootResultSHA256": "6476316fe905de4a0fbefdbd34ad64055816ef76dd78abd644992ccce86e7467",
+  "emulatorEvidence": {
+    "policy": "Exact-byte reuse of the existing once-only Amiberry result; no new native execution or replay",
+    "candidateSHA256": "ef6259a77f4da61ab0c69ad9811dc6e9367423d8e467d09097b9a932f1c1049e",
+    "previousResultSHA256": "3f41c6481d9c2bbf0ad8f0388945b82defd7060f3a4e05c22b4b22481b801585",
+    "scope": "Selected pre-exposure Fast/Chip/master-save/cancellation RAM assertions only"
+  },
+  "limits": [
+    "No native lifetime adapter, reader publication or IRQ qualification",
+    "No physical test performed",
+    "No aggregate stack, output timing, DMA/device quiet or listening acceptance",
+    "Pinned absolute linker query and actual map; no direct child-linker process tracing"
+  ]
+}

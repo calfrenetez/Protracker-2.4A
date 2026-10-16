@@ -80,11 +80,37 @@ static int stop_current(struct pt_editor_mixed_causal_prepare *s)
 /* Mode2 is issued only by the complete joint constructor. Captured full
  * extents and fixed constructor backlinks authenticate cleanup even stale;
  * mutable/expired source tables and composite input bodies are not followed. */
+typedef char pt_scope_rolling_source_prefix[offsetof(struct pt_editor_mixed_causal_rolling_source_inputs,original)==0?1:-1];
+typedef char pt_scope_rolling_prepare_prefix[offsetof(struct pt_editor_mixed_causal_rolling_inputs,original)==0?1:-1];
+/* Validate all complete parents before following any rolling/source header.
+ * The lineage child roles then follow from these parents and prefix layouts.
+ * Full captured parents bound these reads; original backlinks remain required. */
+static struct pt_editor_mixed_causal_rolling_state *rolling_joint_scope(
+ struct pt_editor_mixed_causal_prepare *s)
+{
+ const struct pt_editor_mixed_causal_rolling_source_inputs *v=(void *)s->source_inputs;
+ const struct pt_editor_mixed_causal_rolling_inputs *in=(void *)s->source_preparation;
+ struct pt_editor_mixed_causal_rolling_state *r;unsigned i,control=0,input=0,preparation=0;
+ for(i=0;i<s->guard_count&&(!control||!input||!preparation);++i){
+    if(!control&&inside(s->guards[i],s,sizeof(struct pt_editor_mixed_causal_rolling_source_prepare)))control=1;
+    if(!input&&inside(s->guards[i],v,sizeof(*v)))input=1;
+    if(!preparation&&inside(s->guards[i],in,sizeof(*in)))preparation=1;
+ }
+ if(!control||!input||!preparation)return NULL;
+ r=&((struct pt_editor_mixed_causal_rolling_source_prepare *)(void *)s)->rolling;
+ if(s->rolling_owner!=r)return NULL;
+ if(r->self!=r||r->preparation!=(void *)s||!r->inputs||r->inputs!=in||
+    r->joint!=1||r->wrapper.data!=(void *)s||
+    r->wrapper.bytes!=sizeof(struct pt_editor_mixed_causal_rolling_source_prepare))return NULL;
+ if(v->preparation!=in||v->original.preparation!=&in->original)return NULL;
+ return r;
+}
 static struct pt_editor_mixed_causal_rolling_state *rolling_scope(struct pt_editor_mixed_causal_prepare *s)
 {
  struct pt_editor_mixed_causal_rolling_state *r;unsigned i,covered=0,input=0,wrapper=0;
  if(!s->rolling_owner||s->stop_owner||!s->lineage_owner||s->lineage_owner!=(void *)s||
     s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS)return NULL;
+ if(s->source_mode==3)return rolling_joint_scope(s);
  /* Coverage is existential: pure numeric probes cannot revoke a found role.
   * Complete extents, constructor backlinks and lifetime checks remain below. */
  for(i=0;i<s->guard_count&&!covered;++i)if(inside(s->guards[i],s->rolling_owner,sizeof(*r)))covered=1;
@@ -120,12 +146,20 @@ static struct pt_editor_mixed_causal_lineage_source_prepare *lineage_source_scop
  struct pt_editor_mixed_causal_lineage_source_prepare *w;unsigned i,control=0,input=0,preparation=0;
  if((s->source_mode!=2&&s->source_mode!=3)||!s->lineage_owner||s->lineage_owner!=(void *)s||s->stop_owner||
     !s->source_inputs||!s->source_preparation||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS)return NULL;
- for(i=0;i<s->guard_count&&(!control||!input||!preparation);++i){
-    if(!control&&inside(s->guards[i],s,s->source_mode==3?sizeof(struct pt_editor_mixed_causal_rolling_source_prepare):sizeof(*w)))control=1;
-    if(!input&&inside(s->guards[i],s->source_inputs,sizeof(struct pt_editor_mixed_causal_lineage_source_inputs)))input=1;
-    if(!preparation&&inside(s->guards[i],s->source_preparation,sizeof(struct pt_editor_mixed_causal_lineage_inputs)))preparation=1;
+ if(s->source_mode==3){
+    /* rolling_scope proves the full joint wrapper, extended source descriptor,
+     * and rolling preparation plus exact embedded lineage address. Those same
+     * valid complete parents also cover the three original child roles. This
+     * repeats the actual proof each call; no cached flag authorizes a read. */
+    if(!rolling_scope(s))return NULL;
+ }else{
+    for(i=0;i<s->guard_count&&(!control||!input||!preparation);++i){
+       if(!control&&inside(s->guards[i],s,sizeof(*w)))control=1;
+       if(!input&&inside(s->guards[i],s->source_inputs,sizeof(struct pt_editor_mixed_causal_lineage_source_inputs)))input=1;
+       if(!preparation&&inside(s->guards[i],s->source_preparation,sizeof(struct pt_editor_mixed_causal_lineage_inputs)))preparation=1;
+    }
+    if(!control||!input||!preparation)return NULL;
  }
- if(!control||!input||!preparation||(s->source_mode==3&&!rolling_scope(s)))return NULL;
  w=(void *)s;
  if(w->self!=w||w->inputs!=(void *)s->source_inputs||
     w->saved.preparation!=(void *)s->source_preparation||

@@ -512,3 +512,39 @@ recovery, original-file restoration, independent public release and final idle
 all pass. See [the preserved scoped result](../evidence/enhanced-editor/rolling-native-entry/guard-search-case1-emulator.json).
 A further source improvement requires its own proof/tests/build; this transaction
 is not resumed or replayed.
+
+
+## Ordered complete-parent proof for joint preparation
+
+Mode3 now proves the complete joint wrapper, extended source descriptor and
+rolling-input parents before following either derived header. It then requires
+the rolling owner to be the exact embedded member before reading that member.
+The original self, preparation/input, joint, wrapper and descriptor backlinks
+remain. Checked C prefix/member layouts make the original lineage child spans
+consequences of those same valid parents, so lineage reuses the freshly executed
+proof. No proof is cached. Mode0 rolling, mode2 lineage and every downstream
+source, activation and lifetime check retain their original predicates.
+
+The HOST regression freezes both previous scope functions, compares exact pointer
+outcomes on every lineage-scope call in genuine rolling68 and joint31, and
+exercises temporary NULL/count/mode/wrapper/guard-length controls. It compares
+the complete base-owner prefix before/after and explicitly restores the two
+rolling fields outside that prefix. Standalone rolling-scope calls retain
+normal fixture coverage, without separate old/new comparison.
+A protected-page rolling pointer with no complete wrapper/source/preparation
+coverage must be refused before a header read. This ordering test rejected a
+private earlier proposal despite its matching live outcomes; that proposal was
+never committed or run on an Amiga. The ordered successor passes the test.
+
+Seven sanitizer groups pass, including the original rolling68, joint31,17-unit
+and4096-unit preflight/cancellation, all68/selectedcase1 dispatch, numeric span
+and header-byte controls, and protected16/baseline preservation. Millions of
+recorded comparisons are repeated calls, not independent cases or native cost
+evidence. The pinned86-unit/228-project-body build produces338520 bytes, SHA256
+`bdf59dc1517cd0c30067c26349c8df676f70f1510dfdb4056694559de5a97690`,
+CRC32 `543104D3`;43 SDK bodies, seven runtimes and247 frozen source files.
+
+Exact new Amiberry and physical execution remain NOT_RUN at preparation. No
+speed improvement, device/IRQ/output/timing or listening acceptance is inferred.
+Original work/defaults, exact musical scheduling and all test limits remain. See
+[compact HOST/build evidence](../evidence/enhanced-editor/rolling-native-entry/ordered-parent-host-build.json).

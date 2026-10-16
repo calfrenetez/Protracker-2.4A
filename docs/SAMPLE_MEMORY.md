@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Ordered joint parent checks —16 October2026
+
+Joint preparation now checks all complete parents before derived header reads
+and reuses that fresh proof for embedded lineage coverage. Exact owner identity,
+backlinks, activation and lifetime checks remain; no allocation, authority or
+scheduling change. Seven HOST sanitizer groups, including the protected-page
+read-order regression and original rolling68/joint31, plus the pinned86-unit
+build pass. Exact new Amiberry/A1200 and native speed remain unqualified at
+preparation. See [the contract](NATIVE_ROLLING_ENTRY.md#ordered-complete-parent-proof-for-joint-preparation).
+
 ## Preparation guard search —16 October2026
 
 Pure numeric coverage probes now stop after all requested roles are found. Every

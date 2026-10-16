@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "state": "ORDERED_COMPLETE_PARENT_PROOF_HOST_AND_BUILD_PASS_NATIVE_NOT_RUN",
+  "change": "Mode3 authenticates complete joint wrapper, extended source descriptor and full rolling inputs before any derived header read, then reuses that fresh proof for embedded lineage roles.",
+  "proofBoundary": "Complete numeric spans plus checked C prefix/member layout imply child coverage. Original exact owner identity, self, input, wrapper, constructor/backlink, activation and lifetime checks remain; modes0/2 retain their original paths. No cross-call cache, authority grant, callback, allocation, work budget, deadline or musical scheduling change.",
+  "sourceSHA256": "78d11a4408eacc1e64141bed62219d5a175afa9dc640599975876ad03a9fb3e4",
+  "frozenReferenceSHA256": "8d1c71021c53a1417df5ee73e5940bc25edf67e9de7cb7590615250a8d7e2261",
+  "checks": {
+    "hostSanitizerGroups": 7,
+    "goldenSpanCases": 48224,
+    "headerOriginalMaskEquivalence": true,
+    "fullOriginal68RollingOracle": true,
+    "original17PreflightOracle": true,
+    "supported4096PreflightOracle": true,
+    "all68AndSelectedCase1Dispatch": true,
+    "originalJoint31Oracle": true,
+    "everyActualLineageScopePointerOutcomeCompared": true,
+    "scalarGuardLengthNullModeControls": true,
+    "protectedPageParentBeforeHeaderRefusal": true,
+    "protected16AndBaselinePreserved": true,
+    "pinnedUnits": 86,
+    "projectDependencyBodies": 228,
+    "sdkBodies": 43,
+    "runtimeInputs": 7,
+    "frozenSourceFiles": 247
+  },
+  "comparisonObservation": {
+    "scope": "Repeated function calls on the genuine fixtures plus temporary restored scalar controls; these are not independent cases or a native cost measurement.",
+    "rolling68": {
+      "mode3Accepted": 5066716,
+      "mode3Refused": 13
+    },
+    "joint31": {
+      "mode2Accepted": 29936,
+      "mode2Refused": 10
+    },
+    "restorationBoundary": "Base-owner prefix compared byte-for-byte; wrapper length and joint fields outside it are manually restored. Standalone rolling-scope calls retain ordinary fixture coverage without separate old/new comparison."
+  },
+  "declinedPrivateProposal": {
+    "sourceSHA256": "c6f5157bbe2dacaa7f13fa5164356e1cff5c39055dd2e394666488b43b4c6bf1",
+    "reason": "Moving the previous rolling proof before outer full-parent checks could read an inaccessible rolling header. Protected-page HOST observation reproduced a read fault; that proposal was never committed or target-executed.",
+    "committed": false,
+    "targetExecuted": false
+  },
+  "candidate": {
+    "size": 338520,
+    "sha256": "bdf59dc1517cd0c30067c26349c8df676f70f1510dfdb4056694559de5a97690",
+    "crc32": "543104D3"
+  },
+  "hostResultSHA256": "1729dd5f90b44174c73b6da1d133717cfc652aa8317dd314353b40d7d9620ca4",
+  "proofCountsSHA256": "df0a471817c823507a5c8afed19441d8db6d178dcbc517465ed0f7097f038bb1",
+  "buildManifestSHA256": "50eade168304fa040b8bb9412767928174574a7503d639b0d5cc3ad78d64b3a4",
+  "sourceManifestSHA256": "7f5e1d4f9e91460ad8ceb59afc2087d31f85ae75fe62c4d360e4e50f85ae8602",
+  "acceptance": {
+    "native": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "speedBenefit": "UNQUALIFIED",
+    "actualDeviceIRQOutputTimingListening": "UNQUALIFIED"
+  },
+  "independentReview": {
+    "scope": "Read-only source/pre-read ordering/predicate and frozen-reference review",
+    "productionFindings": 0,
+    "limits": "Finite HOST controls do not exhaust arbitrary guarded topologies; direct rolling calls are not dual-compared and restoration snapshot covers the base prefix."
+  }
+}

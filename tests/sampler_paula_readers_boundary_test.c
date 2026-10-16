@@ -3,6 +3,7 @@
 #undef main
 #include "../src/editor/paula_preflight.h"
 #include "../src/core/render_lookahead.h"
+#include "sampler_version_snapshot.h"
 
 /* Reuse the existing genuine sampler, cache, allocation accounting and bounded
  * backend model. The model remains serialized host work, never native activation.
@@ -106,12 +107,15 @@ struct boundary_saved_span {const void *data;void *saved;size_t bytes;};
 static unsigned boundary_save_version(struct pt_sample_version *version,struct boundary_saved_span saved[PT_SAMPLER_VERSION_SPANS])
 {
  struct pt_sampler_storage_span spans[PT_SAMPLER_VERSION_SPANS];unsigned i,n=0;
- assert(pt_sampler_version_spans(version,spans,PT_SAMPLER_VERSION_SPANS,&n)&&n);
+ /* This fixture pins contiguous promoted masters with no markers/backing:
+  * complete actual header plus complete PCM capacity, never guessed offsets. */
+ assert(pt_sampler_version_spans(version,spans,PT_SAMPLER_VERSION_SPANS,&n)&&n==2&&spans[0].data==version);
  for(i=0;i<n;++i){saved[i].data=spans[i].data;saved[i].bytes=spans[i].bytes;saved[i].saved=malloc(spans[i].bytes);
  assert(saved[i].saved);memcpy(saved[i].saved,spans[i].data,spans[i].bytes);}return n;
 }
 static void boundary_check_version(struct boundary_saved_span *saved,unsigned n)
-{unsigned i;for(i=0;i<n;++i)assert(!memcmp(saved[i].data,saved[i].saved,saved[i].bytes));}
+{unsigned i;assert(n==2&&pt_test_version_header_equal(saved[0].data,saved[0].saved,saved[0].bytes));
+ for(i=1;i<n;++i)assert(!memcmp(saved[i].data,saved[i].saved,saved[i].bytes));}
 static void boundary_free_version(struct boundary_saved_span *saved,unsigned n)
 {unsigned i;boundary_check_version(saved,n);for(i=0;i<n;++i)free(saved[i].saved);}
 static void boundary_full_song(unsigned bits)
@@ -200,6 +204,8 @@ static void boundary_full_song(unsigned bits)
    }
    boundary_consume(sequence,frames);assert(pt_render_lookahead_commit(&ahead)==PT_RENDER_OK);
    if(saved_count)boundary_check_version(saved,saved_count);
+   /* Mutable links still require a consistent actual intrinsic inventory. */
+   {unsigned outside=0;assert(pt_sampler_lifetime_output_disjoint(&f.sampler,&outside,sizeof(outside)));}
    assert(!memcmp(before,f.master.values,sizeof(before)));
  }while(!span.end);
  assert(!delayed&&controls>=80&&held_count==5&&seen960&&seen800&&frame-BOUNDARY_START==report.frames);
@@ -277,6 +283,7 @@ static void boundary_allocation_input_aliases(void)
 }
 int main(void)
 {
+ pt_test_version_header_fixture();
  boundary_full_song(8);boundary_full_song(16);boundary_full_song(24);
  boundary_refusals();boundary_allocation_input_aliases();
  puts("PAULA READERS BOUNDARY PASS: exact renderer plans, folded triggers and independently retained readers; software ownership only");return 0;

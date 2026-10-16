@@ -7,7 +7,11 @@
 #include "../src/core/playback_pcm.h"
 #define VALUES 16400
 struct block {void *data;size_t bytes;};
-struct memory {struct block block[128];unsigned calls,live,fail;size_t bytes;void *last,*quarantine,*spare;size_t spare_bytes;};
+struct memory {struct block block[128];unsigned calls,live,fail;size_t bytes;void *last,*quarantine,*spare;size_t spare_bytes;
+#ifdef PT_READERS_NATIVE_MEMORY
+ unsigned chip;
+#endif
+};
 static struct pt_paula_readers_pool *reenter_pool;
 static struct pt_paula_readers_command *reenter_owner;
 static unsigned reenter_calls;
@@ -20,8 +24,18 @@ static void *allocate(void *context,size_t n)
     if(reenter_owner) {assert(!pt_paula_readers_command_close(reenter_owner));++reenter_calls;}
     if(m->calls==m->fail)return NULL;
     if(m->spare && n==m->spare_bytes){p=m->spare;m->spare=NULL;m->spare_bytes=0;}
-    else p=malloc(n);
+    else {
+#ifdef PT_READERS_NATIVE_MEMORY
+        if(m->chip)p=readers_native_chip_allocate(n);
+        else
+#endif
+        p=malloc(n);
+    }
     if(!p)return NULL;
+#ifdef PT_READERS_NATIVE_MEMORY
+    assert((TypeOfMem(p)&(MEMF_FAST|MEMF_CHIP))==(m->chip?MEMF_CHIP:MEMF_FAST));
+    assert((TypeOfMem((unsigned char *)p+n-1)&(MEMF_FAST|MEMF_CHIP))==(m->chip?MEMF_CHIP:MEMF_FAST));
+#endif
     memset(p,0xa5,n);
     for(i=0;i<128;++i)if(!m->block[i].data)break;
     assert(i<128);m->block[i]=(struct block){p,n};++m->live;m->bytes+=n;m->last=p;return p;
@@ -34,7 +48,13 @@ static void release(void *context,void *p)
     for(i=0;i<128;++i)if(m->block[i].data==p)break;
     assert(i<128 && m->live);m->bytes-=m->block[i].bytes;
     if(m->quarantine==p) {assert(!m->spare);m->spare=p;m->spare_bytes=m->block[i].bytes;m->quarantine=NULL;}
-    else free(p);
+    else {
+#ifdef PT_READERS_NATIVE_MEMORY
+        if(m->chip)readers_native_chip_release(p,m->block[i].bytes);
+        else
+#endif
+        free(p);
+    }
     m->block[i].data=NULL;--m->live;
 }
 static void *chip_allocate(void *c,size_t n) {return allocate(c,n);}
@@ -160,7 +180,11 @@ struct fixture {
 static void init(struct fixture *f,unsigned bits,unsigned channels,unsigned readers,size_t chipbudget)
 {
  struct pt_paula_readers_config c;struct pt_scheduled_grid grid={100,7,1000,100};struct pt_readers_backend b;unsigned i;
- memset(f,0,sizeof(*f));f->allocator=(struct pt_allocator){&f->fast,allocate,release};
+ memset(f,0,sizeof(*f));
+#ifdef PT_READERS_NATIVE_MEMORY
+ f->chip.chip=1;
+#endif
+ f->allocator=(struct pt_allocator){&f->fast,allocate,release};
  pt_document_init(&f->document,&f->allocator);assert(pt_document_new(&f->document,4,SIZE_MAX)==PT_PROJECT_OK);
  for(i=0;i<VALUES;++i)f->master.values[i]=((int32_t)(i%200)-100)*(1L<<(bits-8))+(bits==8?0:(int32_t)(i&63));
  f->master.values[0]=-(1L<<(bits-1));f->master.values[1]=(1L<<(bits-1))-1;

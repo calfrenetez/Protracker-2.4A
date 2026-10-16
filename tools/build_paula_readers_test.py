@@ -2,7 +2,8 @@
 """Pinned standalone split-domain-sampler-Paula-readers compile/link check; never runs the HUNK.
 
 Uses the committed core-test 68000/nix20 conventions, suitable for the shared
-030 profile. This is portable compilation only, not Exec allocation, Chip/DMA,
+030 profile. The optional Exec wrapper checks the same workload using genuine
+allocator calls, but linking is not execution. This is compilation only, not Chip/DMA,
 song/native output, interrupts or timing qualification. The SDK assertions stay
 enabled. A later runtime harness needs its own ownership/identity/cleanup gates
 and separately measured sufficient Stack for full master before-image objects.
@@ -20,12 +21,15 @@ import sys
 import time
 import traceback
 
-SOURCES = ['tests/sampler_paula_readers_test.c', 'src/editor/sampler_paula.c', 'src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/scheduled_readers.c', 'src/core/elapsed_clock.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/pattern.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
+HOST_SOURCES = ['tests/sampler_paula_readers_test.c', 'src/editor/sampler_paula.c', 'src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/scheduled_readers.c', 'src/core/elapsed_clock.c', 'src/core/paula_render_voice.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/pattern.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
+SOURCES = list(HOST_SOURCES)
 FLAGS = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
          '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', '-fbbb=-']
+RECIPE_FLAGS = list(FLAGS)
 RUNTIMES = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
             'libstubs.a', 'libamiga.a', 'libgcc.a']
 TARGET = 'PTPaulaReadersTest'
+MARKERS = ['SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2']
 SCOPE = ('Portable pinned 68k compile/link only; no HUNK execution, native/Exec '
          'allocator, Chip/DMA, device, song, IRQ, audio or hardware timing proof')
 
@@ -94,7 +98,7 @@ def recipe_contract(source, expected, pins):
                  and any(isinstance(t, ast.Name) and t.id == 'flags' for t in n.targets))
     literals = [n.value for n in flags.elts if isinstance(n, ast.Constant)]
     expansions = [ast.unparse(n.value) for n in flags.elts if isinstance(n, ast.Starred)]
-    if literals != FLAGS[:-1] or expansions != ['compiler_safety_flags(cc)']:
+    if literals != RECIPE_FLAGS[:-1] or expansions != ['compiler_safety_flags(cc)']:
         raise ValueError('Committed native flag convention changed')
     diagnostic = source / 'tools/build_diagnostic.py'
     require_pin(diagnostic, expected['tools/build_diagnostic.py'])
@@ -114,34 +118,52 @@ def recipe_contract(source, expected, pins):
                        and any(isinstance(t, ast.Name) and t.id == 'READERS_SOURCES' for t in n.targets))
     imports = [n for n in h.body if isinstance(n, ast.ImportFrom) and n.module == 'test_sampler']
     if (len(imports) != 1 or [(n.name, n.asname) for n in imports[0].names] != [('SOURCES', None)]
-            or not isinstance(declaration, ast.List) or len(declaration.elts) != 7
-            or [ast.literal_eval(n) for n in declaration.elts[:-1]] != SOURCES[:6]
+            or not isinstance(declaration, ast.List) or len(declaration.elts) != 8
+            or [ast.literal_eval(n) for n in declaration.elts[:-1]] != HOST_SOURCES[:7]
             or not isinstance(declaration.elts[-1], ast.Starred)
             or ast.unparse(declaration.elts[-1].value) != 'SOURCES[1:]'):
         raise ValueError('Exact sampler readers source declaration/import changed')
     units = [ast.literal_eval(n) for n in declaration.elts[:-1]] + parent_units[1:]
-    if units != SOURCES or len(units) != len(set(units)):
+    if units != HOST_SOURCES or len(units) != len(set(units)):
         raise ValueError('Host ordered source declaration changed')
-    fixture = source / SOURCES[0]
+    fixture = source / HOST_SOURCES[0]
     if fixture.read_text().count('#include "../src/editor/sampler_paula_readers.c"') != 1 or 'src/editor/sampler_paula_readers.c' in SOURCES:
         raise ValueError('Adapter must be included exactly once, never separately compiled')
+    if SOURCES != HOST_SOURCES:
+        wrapper = source / SOURCES[0]
+        text = wrapper.read_text()
+        if (SOURCES != ['tests/native_exec_sampler_paula_readers_test.c', *HOST_SOURCES[1:]]
+                or text.count('#include "sampler_paula_readers_test.c"') != 1
+                or '#define PT_READERS_NATIVE_MEMORY' not in text
+                or '#define main sampler_paula_readers_fixture' not in text):
+            raise ValueError('Exact Exec wrapper substitution changed')
     return {'committed_flag_recipe': record(recipe), 'committed_runtime_recipe': record(diagnostic),
             'host_declaration': record(host), 'host_parent_declaration': record(parent_host),
-            'exact_ordered_translation_units': SOURCES,
+            'exact_ordered_host_units': HOST_SOURCES, 'exact_ordered_translation_units': SOURCES,
             'adapter_inclusion': 'Shared C fixture includes sampler_paula_readers.c exactly once; not separately compiled',
             'flags': FLAGS, 'runtime_names': RUNTIMES,
             'policy': 'Standalone one-target build, reusing committed flags/runtime conventions without executing or editing the shared recipe'}
 
 
 def main():
+    global SOURCES, FLAGS, TARGET, MARKERS
     sys.dont_write_bytecode = True
     ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--exec-memory', action='store_true', help='Select the separate real Fast/Chip allocator wrapper; never runs it')
     ap.add_argument('--source-manifest', type=Path, required=True)
     ap.add_argument('--source-manifest-sha256', required=True)
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
+    if args.exec_memory:
+        SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *HOST_SOURCES[1:]]
+        FLAGS = [*RECIPE_FLAGS, '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1']
+        TARGET = 'PTExecPaulaReadersTest'
+        MARKERS = ['EXEC MEMORY POOL PASS: Fast-only pool, reserve and zero-budget refusal',
+                   *MARKERS,
+                   'EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio',
+                   'EXEC MEMORY PASS: Fast allocations, zero owned bytes, budget refusal without Chip fallback']
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -163,6 +185,9 @@ def main():
         raise ValueError('Python executable/version does not match supplied pin')
     require_pin(python['path'], python['sha256'])
     require_pin(compiler, pins['compiler']['sha256'])
+    assembler = pins['assembler']
+    for path in assembler['allowed_paths']:
+        require_pin(path, assembler['sha256'])
     if set(pins['runtime_inputs']) != set(RUNTIMES):
         raise ValueError('Exactly seven runtime pins required')
     sdk_roots = [Path(p).resolve() for p in pins['allowed_sdk_roots']]
@@ -177,7 +202,7 @@ def main():
               'source_manifest': record(manifest_input), 'pins': record(pin_input),
               'base_commit': complete['base_commit'], 'base_tree': complete['base_tree'],
               'source_files_before': len(expected), 'source_fingerprint': source_fingerprint(expected),
-              'compiler': pins['compiler'], 'python': python, 'builder': builder,
+              'compiler': pins['compiler'], 'assembler': assembler, 'python': python, 'builder': builder,
               'recipe_contract': convention, 'flags': FLAGS, 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
@@ -203,6 +228,8 @@ def main():
 
     def toolchain_current():
         require_pin(compiler, pins['compiler']['sha256'])
+        for path in assembler['allowed_paths']:
+            require_pin(path, assembler['sha256'])
         require_pin(python['path'], python['sha256'])
         for name, path in runtime_paths.items():
             require_pin(path, pins['runtime_inputs'][name])
@@ -211,6 +238,10 @@ def main():
         persist()
         if run([compiler, '--version'], 'compiler-version').splitlines()[0] != pins['compiler']['version']:
             raise ValueError('Native compiler version changed')
+        actual_as = Path(run([compiler, '-print-prog-name=as'], 'assembler-path').strip()).resolve()
+        if actual_as not in [Path(p).resolve() for p in assembler['allowed_paths']]:
+            raise ValueError('Compiler selected another assembler')
+        require_pin(actual_as, assembler['sha256']);result['selected_assembler'] = record(actual_as)
         if '-fbbb=' not in run([compiler, '--help=target'], 'compiler-target-help'):
             raise ValueError('Required late-optimizer safety flag unavailable')
         for name in RUNTIMES:
@@ -238,7 +269,7 @@ def main():
         assertion = assertions[-1] if assertions else None
         if not assertion or '__assert_func' not in assertion or text.count('__assert_func (') < 2:
             raise ValueError('Enabled SDK assertion expansion required')
-        if text.count('SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2') != 1:
+        if any(text.count(marker) != 1 for marker in MARKERS):
             raise ValueError('Shared split-domain sampler fixture marker missing')
         toolchain_current()
         require_source(source, expected)
@@ -250,13 +281,13 @@ def main():
         raw = binary.read_bytes()
         if len(raw) < 4 or struct.unpack('>I', raw[:4])[0] != 0x3f3:
             raise ValueError('Linked native product lacks HUNK_HEADER0x3f3')
-        if raw.count(b'SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2') != 1:
+        if any(raw.count(marker.encode()) != 1 for marker in MARKERS):
             raise ValueError('Linked product lacks shared assertion-completion marker')
         result['targets'][TARGET] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': FLAGS,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',
-                                     'last_assert_macro': assertion,
+                                     'last_assert_macro': assertion, 'markers': MARKERS,
                                      'preprocessed_fixture': record(out / 'preprocessed-fixture.log'),
                                      'build_log': record(out / (TARGET + '.build.log'))}
         result['passed'] = True

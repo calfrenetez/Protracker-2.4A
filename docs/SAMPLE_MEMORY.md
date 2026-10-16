@@ -7377,3 +7377,16 @@ A separate task-only adjacent ReadEClock diagnostic is now implemented and cross
 
 
 The distinct task-only clock-pair candidate919196b8 completed once in exact030 Amiberry:16valid raw pairs, RC0/OBSERVATION_COMPLETE, sampling deltas19..21ticks at709379Hz. Those finite intervals exceed prior14/15tick frame windows in this profile; they neither isolate full call duration nor prove a universal minimum or actual output time. Exact custody/closure/restoration/publicrelease/ownedservicestop/separatefinalidle passed (recordedEMPTY1675/83, not futureavailability). No output/provider/scheduling policy change. CurrentSafari check stillfoundMaclocked; no physical operation acquired. See [clock observations](CLOCK_READ_OBSERVATIONS.md).
+
+
+A separate Exec-backed persistent-reader fixture now compiles the existing
+genuine master/selective cache lifecycle with Fast-only promoted/control storage
+and Chip-only cache callbacks, including endpoint classification and zero final
+accounting. Eight sanitizer groups and pinned24-unit build pass; exact194240B
+`0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8`
+remains native NOT RUN. Initial borrowed stack-source placement is not asserted,
+and backend clocks/adoption/retirement remain software models. No native provider
+or timing capability is enabled. A baseline renderer test's false opaque-header
+immutability assertion was corrected without ignoring immutable bytes or PCM;
+actual mutable reference/list fields are treated separately and list integrity
+is checked. See [the prepared memory qualification](SAMPLER_PAULA_READERS.md#exec-backed-memory-fixture-prepared--16-october-2026).

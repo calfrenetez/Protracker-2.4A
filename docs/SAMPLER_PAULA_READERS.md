@@ -244,3 +244,44 @@ ownership evidence only. Constructor metadata structurally exceeds a nominal
 DMA/IRQ/timing/audio or listening acceptance follows. Existing editor PLAY and native
 backend paths are untouched. See [producer contract](PAULA_READERS_SONG.md) and
 [saved evidence](../evidence/enhanced-editor/paula-readers-song/README.md).
+
+
+## Exec-backed memory fixture prepared — 16 October 2026
+
+The genuine reader/command lifecycle fixture now has a separate native allocator
+wrapper. Promoted versions and control/snapshot allocations use the bounded
+Fast-only pool. Cache allocations use the existing Chip-only allocator and
+reserve. Both ends of registered allocation extents are classified, including
+reused control storage, and final pool/cache accounting must be zero. The initial
+borrowed source lives in the diagnostic's task stack; its memory class is not
+asserted. Backend clocks, adoption and retirement remain serialized software
+models. No provider/IRQ/DMA/audio or scheduling path is enabled.
+
+Eight ASan/UBSan host groups pass, including the actual wrapper with injected
+Exec memory classifications, unchanged ordinary reader/preparation/scheduled
+ownership work, the old cache wrapper, and renderer-boundary coverage. The build
+recipe now includes the current host declaration's paula_render_voice unit and
+selects the Exec wrapper explicitly; the ordinary portable recipe also builds.
+The native product is194240 bytes/SHA256
+`0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8`
+(CRC32 `9FF78A26`), with24 units/72 project dependencies/49 SDK bodies/seven
+runtime queries and enabled assertions. It remains native NOT RUN. Compiler
+local-frame reports reach252000 bytes; the proposed1MiB task Stack is a
+conservative diagnostic choice, not aggregate/library stack qualification.
+
+A current regression also exposed a stale boundary-fixture assumption. The
+unchanged baseline compared an entire opaque version header across registration
+of a second version. Its intrusive previous link legitimately changed. The
+original failed run and a distinct layout-authenticated diagnostic are retained.
+A test-only TU now compiles genuine sampler.c exactly once, avoiding a copied
+private layout. It compares all header bytes except the reference count and two
+intrusive links, requires positive references, and rejects a byte fault at each
+of196 other header positions in the host layout. The actual intrinsic list is
+checked separately. Full retained PCM capacities remain byte-exact; the whole
+header is not omitted. No application accessor or sampler implementation changed.
+The corrected boundary fixture passes. Historical boundary products retain their
+original source and must not be relabeled with this corrected fixture.
+
+See [compact host/build evidence](../evidence/enhanced-editor/readers-exec-memory/host-build.json).
+An exact-candidate Amiberry memory run is next, independently of unresolved live
+output timing. Physical promotion needs that run plus fresh access/ownership.

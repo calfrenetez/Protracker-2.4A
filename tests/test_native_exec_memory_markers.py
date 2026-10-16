@@ -17,22 +17,19 @@ FINISH = (b"EXEC MEMORY PASS: Fast allocations, zero owned bytes, "
           b"budget refusal without Chip fallback")
 
 
-class NativeMemoryMarkers(unittest.TestCase):
-    def test_fixed_and_default_cache_wrapper_output(self):
-        with tempfile.TemporaryDirectory(prefix="pt-exec-memory-markers-") as folder:
-            out = Path(folder)
-            (out / "exec").mkdir()
-            (out / "proto").mkdir()
-            (out / "exec/memory.h").write_text(
-                "#ifndef MODEL_EXEC_MEMORY_H\n#define MODEL_EXEC_MEMORY_H\n"
-                "#include <stdint.h>\ntypedef uint32_t ULONG;\n"
-                "#define MEMF_PUBLIC 1\n#define MEMF_CHIP 2\n"
-                "#define MEMF_FAST 4\n#define MEMF_TOTAL 8\n#endif\n")
-            (out / "proto/exec.h").write_text(
-                "ULONG AvailMem(ULONG);\nvoid *AllocMem(ULONG,ULONG);\n"
-                "void FreeMem(void *,ULONG);\nULONG TypeOfMem(const void *);\n")
-            model = out / "exec_model.c"
-            model.write_text(r'''
+def memory_model(out):
+    (out / "exec").mkdir()
+    (out / "proto").mkdir()
+    (out / "exec/memory.h").write_text(
+        "#ifndef MODEL_EXEC_MEMORY_H\n#define MODEL_EXEC_MEMORY_H\n"
+        "#include <stdint.h>\ntypedef uint32_t ULONG;\n"
+        "#define MEMF_PUBLIC 1\n#define MEMF_CHIP 2\n"
+        "#define MEMF_FAST 4\n#define MEMF_TOTAL 8\n#endif\n")
+    (out / "proto/exec.h").write_text(
+        "ULONG AvailMem(ULONG);\nvoid *AllocMem(ULONG,ULONG);\n"
+        "void FreeMem(void *,ULONG);\nULONG TypeOfMem(const void *);\n")
+    model = out / "exec_model.c"
+    model.write_text(r'''
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -46,7 +43,7 @@ void *AllocMem(ULONG bytes,ULONG flags)
 {
     unsigned i;void *data;ULONG *available=flags&MEMF_FAST?&fast:&chip;
     assert(bytes && ((flags&(MEMF_FAST|MEMF_CHIP))==MEMF_FAST ||
-                     (flags&(MEMF_FAST|MEMF_CHIP))==MEMF_CHIP));
+             (flags&(MEMF_FAST|MEMF_CHIP))==MEMF_CHIP));
     if(bytes>*available)return NULL;
     for(i=0;i<1024 && blocks[i].data;++i){}assert(i<1024);
     data=malloc(bytes);if(!data)return NULL;
@@ -68,6 +65,14 @@ void FreeMem(void *data,ULONG bytes)
     free(data);blocks[i]=(struct block){0};
 }
 ''')
+    return model
+
+
+class NativeMemoryMarkers(unittest.TestCase):
+    def test_fixed_and_default_cache_wrapper_output(self):
+        with tempfile.TemporaryDirectory(prefix="pt-exec-memory-markers-") as folder:
+            out = Path(folder)
+            model = memory_model(out)
             common = ["tests/native_exec_sampler_paula_test.c",
                       "src/editor/sampler_paula.c", "src/core/sample_cache.c",
                       "src/core/playback_pcm.c", *SOURCES[1:], str(model)]

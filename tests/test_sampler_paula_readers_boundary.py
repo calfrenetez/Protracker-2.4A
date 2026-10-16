@@ -7,9 +7,12 @@ from test_sampler_paula_readers import READERS_SOURCES
 ROOT = Path(__file__).resolve().parents[1]
 # The inherited fixture includes sampler_paula_readers.c exactly once. The
 # remaining production units supply genuine sampler/cache and renderer behavior.
+# The test-only snapshot TU compiles sampler.c once using its actual opaque
+# layout; no private header shape is copied into the boundary fixture.
 BOUNDARY_SOURCES = [
     'tests/sampler_paula_readers_boundary_test.c',
-    *READERS_SOURCES[1:],
+    'tests/sampler_version_snapshot.c',
+    *(unit for unit in READERS_SOURCES[1:] if unit != 'src/editor/sampler.c'),
     'src/editor/paula_preflight.c',
     'src/core/render.c',
     'src/core/pitch.c',

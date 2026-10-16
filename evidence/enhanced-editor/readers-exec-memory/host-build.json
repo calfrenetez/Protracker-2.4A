@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PINNED_BUILD_PASS_NATIVE_NOT_RUN",
+  "host": {
+    "sanitizerGroups": 8,
+    "sharedReaderLifecycle": "6precision/channel cases,20controls each, capacity2 commands; existing cancellation/pressure/reuse/retirement/alias/reentry cases retained",
+    "memoryClassification": "Injected host Exec model only",
+    "sourceInventoryUnchanged": true,
+    "resultSHA256": "7cbe49b226e836feeb30e239defd7b20bdc54102f7c696a73ea3486b4fb5479a",
+    "stdoutSHA256": "15bd6d464409397c744df17ac5a3a3a83f7a46f48d271be1d0e1cf7c15fe7fc7",
+    "stderrSHA256": "e635942ede8680a5e4911a4961d7d772aa44e890f1866b6058d073fe54fed531"
+  },
+  "boundaryRegression": {
+    "committedBaselineAlsoFailed": true,
+    "baselineResultSHA256": "a05e6b06f78d59b23d7c63dc9762be67c49a2a277c83af5ef6216bbe036d65b5",
+    "instrumentedOriginalFailureSHA256": "8b2554aba5a96b8ae19d50330e5db38e4a087bbeaa634d5b5d6aad433e721196",
+    "observedHeaderBytes": 216,
+    "referenceOffset": 128,
+    "previousLinkOffset": 136,
+    "nextLinkOffset": 144,
+    "changedByteOffsets": [
+      136,
+      137,
+      138,
+      140,
+      141
+    ],
+    "normalizedEqual": true,
+    "correctedRule": "Compare all header bytes except actual reference count and intrusive previous/next pointers; require positive references and independently consistent intrinsic live inventory. Full PCM capacity remains byte-exact.",
+    "immutableHeaderByteFaultsRejected": 196,
+    "privateLayoutCopied": false,
+    "samplerProductionUnit": "Test-only observation TU compiles genuine sampler.c once instead of separately linking it; no application getter/API change"
+  },
+  "nativeBuild": {
+    "target": "PTExecPaulaReadersTest",
+    "bytes": 194240,
+    "sha256": "0870a3eda309b0f551d9d81520e9bc64dbaaec1f04f996eae6877c88f2e753e8",
+    "crc32": "9FF78A26",
+    "orderedUnits": 24,
+    "projectDependencies": 72,
+    "sdkDependencies": 49,
+    "runtimeQueryPins": 7,
+    "commands": 36,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-",
+      "-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1"
+    ],
+    "manifestSHA256": "6568703b085fab6c3788a8e532698bde9b1ea449ad130de3c6a0f544da97f090",
+    "all72CompiledProjectBodiesMatchCurrentSource": true
+  },
+  "defaultPortableBuild": {
+    "bytes": 191740,
+    "sha256": "689bdc54687cf4d282388ce2f8599337c9ca8535de6a25a2ab02280a851ed28f",
+    "manifestSHA256": "473ddb24054659b6168410d0555bde892fcb573441a88fe7394208c1f049ea89",
+    "hostSourceDeclarationCurrent": true
+  },
+  "stackAssessment": {
+    "maximumCompilerLocalFrame": 252000,
+    "localFrameKind": "dynamic,bounded",
+    "compiledUnitsAssessed": 24,
+    "provisionalTaskStack": 1048576,
+    "aggregateOrRuntimeStackQualified": false,
+    "frameEvidenceSHA256": "cf7487249d94be84168fbac7ee9ae825d480d164266884b8525fc87e97c97b0a"
+  },
+  "effects": {
+    "productionCodeChanged": false,
+    "nativeProviderEnabled": false,
+    "targetOperation": false,
+    "physicalOperation": false,
+    "outputOrSchedulingQualified": false,
+    "borrowedInitialStackSourcePlacementQualified": false
+  },
+  "preservedExportFailure": "Initial host package requested a nonexistent test filename and did not complete its manifest; partial package/output retained separately.",
+  "scope": "Real Exec allocator call paths compiled; host runs use injected classification. No native TypeOfMem, DMA, actual backend adoption/stop, IRQ, exact timing, physical or listening acceptance."
+}

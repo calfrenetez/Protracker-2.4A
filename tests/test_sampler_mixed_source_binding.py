@@ -20,12 +20,19 @@ MARKER=('MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signe
     'key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY')
 FACTORY_MARKER=('SAMPLER MIXED FACTORY PASS:complete original constructor assertions;'
     'bounded completion marker;SOFTWARE_ONLY')
+COMPONENTS={str(bits)+side:(bits,channels) for bits in (8,16,24)
+            for side,channels in (('mono',1),('stereo',2))}
+def component_marker(name):
+    _,channels=COMPONENTS[name]
+    counts='75 cases;15 controls60 refusals' if channels==1 else '90 cases;15 controls75 refusals'
+    return ('MIXED SOURCE BINDING COMPONENT PASS:'+name+';'+counts+
+            ';Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY')
 class MixedSourceBinding(unittest.TestCase):
-    def test_genuine_mixed_factory_source_identity(self):
+    def check_fixture(self,defines,markers):
         with tempfile.TemporaryDirectory(prefix='pt-mixed-source-binding-') as folder:
             exe=Path(folder)/'fixture'
             r=subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-UNDEBUG',
-                '-fsanitize=address,undefined','-Isrc/core','-I.',*SOURCES,'-o',str(exe)],
+                '-fsanitize=address,undefined','-Isrc/core','-I.',*defines,*SOURCES,'-o',str(exe)],
                 cwd=ROOT,capture_output=True,timeout=120)
             self.assertEqual(r.returncode,0,(r.stdout+r.stderr).decode('utf-8','replace'))
             self.assertEqual((r.stdout,r.stderr),(b'',b''))
@@ -33,7 +40,12 @@ class MixedSourceBinding(unittest.TestCase):
             self.assertEqual(r.returncode,0,(r.stdout+r.stderr).decode('utf-8','replace'))
             self.assertEqual(r.stderr,b'')
             lines=r.stdout.decode('ascii').splitlines()
-            self.assertEqual(len(lines),2)
-            self.assertEqual(lines[0],FACTORY_MARKER)
-            self.assertEqual(lines[1],MARKER)
+            self.assertEqual(lines,markers)
+    def test_genuine_mixed_factory_source_identity(self):
+        self.check_fixture([],[FACTORY_MARKER,MARKER])
+    def test_all_six_components_keep_actual_assertions_and_exact_counts(self):
+        for name,(bits,channels) in COMPONENTS.items():
+            with self.subTest(component=name):
+                self.check_fixture(['-DPT_MIXED_BINDING_BITS='+str(bits),
+                    '-DPT_MIXED_BINDING_CHANNELS='+str(channels)],[component_marker(name)])
 if __name__=='__main__':unittest.main()

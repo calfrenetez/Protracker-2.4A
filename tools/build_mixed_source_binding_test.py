@@ -26,6 +26,9 @@ FLAGS = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
 RUNTIMES = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
             'libstubs.a', 'libamiga.a', 'libgcc.a']
 TARGET = 'PTMixedSourceBindingTest'
+MARKER = ('MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signed8 and AmiGUS8/16 '
+          'key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY')
+COMPONENTS = ['8mono', '8stereo', '16mono', '16stereo', '24mono', '24stereo']
 SCOPE = ('Portable pinned 68k compile/link only; no HUNK execution, native/Exec '
          'allocator, Chip/DMA, device, song, IRQ, audio or hardware timing proof')
 
@@ -142,7 +145,21 @@ def main():
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--component', choices=COMPONENTS,
+                    help='One source bit-depth/channel matrix; excludes the separate legacy constructor')
     args = ap.parse_args()
+    flags, target, marker, marker_occurrences = list(FLAGS), TARGET, MARKER, 1
+    if args.component:
+        match = re.fullmatch(r'(8|16|24)(mono|stereo)', args.component)
+        bits, side = match.groups()
+        channels = 1 if side == 'mono' else 2
+        flags += ['-DPT_MIXED_BINDING_BITS=' + bits,
+                  '-DPT_MIXED_BINDING_CHANNELS=' + str(channels)]
+        target = 'PTMixed' + bits + side.title() + 'BindingTest'
+        counts = '75 cases;15 controls60 refusals' if channels == 1 else '90 cases;15 controls75 refusals'
+        marker = ('MIXED SOURCE BINDING COMPONENT PASS:' + args.component + ';' + counts +
+                  ';Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY')
+        marker_occurrences = 2  # One active macro definition and its puts expansion.
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -179,7 +196,8 @@ def main():
               'base_commit': complete['base_commit'], 'base_tree': complete['base_tree'],
               'source_files_before': len(expected), 'source_fingerprint': source_fingerprint(expected),
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
-              'recipe_contract': convention, 'flags': FLAGS, 'runtime_inputs': {},
+              'recipe_contract': convention, 'flags': flags, 'fixture_component': args.component or 'full',
+              'legacy_constructor_in_fixture': not bool(args.component), 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
     def persist():
@@ -222,7 +240,7 @@ def main():
             result['runtime_inputs'][name] = pins['runtime_inputs'][name]
         for index, unit in enumerate(SOURCES):
             toolchain_current()
-            text = run([compiler, *FLAGS, '-M', unit], 'dependencies-%02d' % index)
+            text = run([compiler, *flags, '-M', unit], 'dependencies-%02d' % index)
             for name in dependencies(text):
                 path = (source / name).resolve()
                 if below(path, source):
@@ -234,32 +252,35 @@ def main():
                     sdk_inputs[str(path)] = digest(path)
                 else:
                     raise ValueError('Dependency outside frozen source and pinned SDK roots: ' + str(path))
-        text = run([compiler, *FLAGS, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
+        text = run([compiler, *flags, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
         assertions = re.findall(r'^#define assert\([^\n]*', text, re.MULTILINE)
         assertion = assertions[-1] if assertions else None
         if not assertion or '__assert_func' not in assertion or text.count('__assert_func (') < 2:
             raise ValueError('Enabled SDK assertion expansion required')
-        if text.count('MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signed8 and AmiGUS8/16 key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY') != 1:
+        if text.count(marker) != marker_occurrences:
             raise ValueError('Genuine mixed source-binding fixture marker missing')
         toolchain_current()
         require_source(source, expected)
-        binary = out / TARGET
-        argv = [compiler, *FLAGS, *SOURCES, '-o', str(binary)]
-        compile_commands.append({'name': TARGET, 'directory': str(source), 'argv': argv,
+        binary = out / target
+        argv = [compiler, *flags, *SOURCES, '-o', str(binary)]
+        compile_commands.append({'name': target, 'directory': str(source), 'argv': argv,
                                  'output': str(binary), 'ordered_translation_units': SOURCES})
-        run(argv, TARGET + '.build')
+        run(argv, target + '.build')
         raw = binary.read_bytes()
         if len(raw) < 4 or struct.unpack('>I', raw[:4])[0] != 0x3f3:
             raise ValueError('Linked native product lacks HUNK_HEADER0x3f3')
-        if raw.count(b'MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signed8 and AmiGUS8/16 key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY') != 1:
+        if raw.count(marker.encode('ascii')) != 1:
             raise ValueError('Linked product lacks shared assertion-completion marker')
-        result['targets'][TARGET] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': FLAGS,
+        result['targets'][target] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': flags,
+                                     'fixture_component': args.component or 'full',
+                                     'markers': [marker] if args.component else [
+                                         'SAMPLER MIXED FACTORY PASS:complete original constructor assertions;bounded completion marker;SOFTWARE_ONLY', marker],
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',
                                      'last_assert_macro': assertion,
                                      'preprocessed_fixture': record(out / 'preprocessed-fixture.log'),
-                                     'build_log': record(out / (TARGET + '.build.log'))}
+                                     'build_log': record(out / (target + '.build.log'))}
         result['passed'] = True
     except Exception as error:
         result['failure'] = {'kind': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}

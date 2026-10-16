@@ -134,3 +134,26 @@ all three original HOLDs archived, and a separate fresh final observation
 passed (recorded EMPTY1705/89; future use needs fresh checks). The failed full
 transaction is preserved and will not be replayed. Smaller, explicitly scoped
 native components are the next qualification step. See [the failed attempt and recovery](../evidence/enhanced-editor/mixed-source-binding/emulator.json).
+
+## Separate bit-depth/channel components
+
+The test now has six explicit compiler selections: `8mono`, `8stereo`, `16mono`,
+`16stereo`, `24mono` and `24stereo`. Each mono component contains 75 cases
+(15 controls, 60 refusals); each stereo component contains 90 (15 controls,
+75 refusals). Together they partition the same 495 cases. Every component covers
+Paula and both AmiGUS cache widths/endian choices at action construction, enqueue
+and active readiness. The binding-case function and its assertions are unchanged.
+
+Component builds explicitly exclude the separately host-qualified original
+factory constructor. The default full fixture retains that constructor and its
+495-case main. Eleven tests in nine host groups pass, including actual execution
+of all six components and the default full fixture. The original full factory
+and quantized suites again match their complete stdout oracles. The standalone
+builder accepts `--component` with one of the six selections, records exact flags
+and its one bounded completion marker, and pins the same build conventions.
+
+All six component HUNKs compile/link with active assertions. Their native,
+Amiberry and physical execution is **NOT RUN** at this preparation stage. A
+component pass cannot qualify the omitted constructor, other components or the
+failed full transaction. Existing deadlines and native-provider inhibition remain
+unchanged. See [component host/build evidence](../evidence/enhanced-editor/mixed-source-binding/components-host-build.json).

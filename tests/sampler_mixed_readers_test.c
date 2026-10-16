@@ -916,7 +916,10 @@ assert(f->ordinary.consumed==1&&!f->ordinary.hook);
 assert(pt_sampler_mixed_close(&f->pool));
 smf_drop(f);
 }
-static void __attribute__((constructor)) smf_suite(void)
+#ifndef PT_SMF_FACTORY_AUTORUN
+#define PT_SMF_FACTORY_AUTORUN __attribute__((constructor))
+#endif
+static void PT_SMF_FACTORY_AUTORUN smf_suite(void)
 {unsigned bits,cache_bits,little,order,mode;
 for(bits=8;bits<=24;bits+=8)for(cache_bits=8;cache_bits<=16;cache_bits+=8)for(little=0;little<2;++little)for(order=0;order<2;++order)smf_lifetime(bits,cache_bits,little,order);
  for(mode=0;mode<13;++mode)smf_constructor(mode);

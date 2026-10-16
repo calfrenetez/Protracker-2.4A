@@ -3,6 +3,30 @@
 #include "../src/editor/sampler_mixed_readers.c"
 #define PT_MIXED_READERS_TEST_MAIN mixed_binding_donor_main
 #define PT_SMF_FACTORY_COMPLETION "SAMPLER MIXED FACTORY PASS:complete original constructor assertions;bounded completion marker;SOFTWARE_ONLY"
+/* Native components explicitly exclude the separately HOST-qualified legacy
+ * constructor. The default full fixture retains its original auto-run body. */
+#if defined(PT_MIXED_BINDING_BITS) != defined(PT_MIXED_BINDING_CHANNELS)
+#error Both component selectors are required
+#endif
+#ifdef PT_MIXED_BINDING_BITS
+#if (PT_MIXED_BINDING_BITS!=8 && PT_MIXED_BINDING_BITS!=16 && PT_MIXED_BINDING_BITS!=24) || (PT_MIXED_BINDING_CHANNELS!=1 && PT_MIXED_BINDING_CHANNELS!=2)
+#error Unsupported binding component
+#endif
+#define PT_SMF_FACTORY_AUTORUN __attribute__((unused))
+#if PT_MIXED_BINDING_BITS==8 && PT_MIXED_BINDING_CHANNELS==1
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:8mono;75 cases;15 controls60 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#elif PT_MIXED_BINDING_BITS==8 && PT_MIXED_BINDING_CHANNELS==2
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:8stereo;90 cases;15 controls75 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#elif PT_MIXED_BINDING_BITS==16 && PT_MIXED_BINDING_CHANNELS==1
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:16mono;75 cases;15 controls60 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#elif PT_MIXED_BINDING_BITS==16 && PT_MIXED_BINDING_CHANNELS==2
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:16stereo;90 cases;15 controls75 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#elif PT_MIXED_BINDING_BITS==24 && PT_MIXED_BINDING_CHANNELS==1
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:24mono;75 cases;15 controls60 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#else
+#define PT_MIXED_BINDING_COMPLETE "MIXED SOURCE BINDING COMPONENT PASS:24stereo;90 cases;15 controls75 refusals;Paula and AmiGUS8/16;independent retirement;legacy constructor excluded;SOFTWARE_ONLY"
+#endif
+#endif
 #include "sampler_mixed_readers_test.c"
 static uint64_t mixed_other_key(struct pt_sampler_mixed_reader *r,unsigned fault)
 {
@@ -107,12 +131,22 @@ static void mixed_binding_case(unsigned bits,unsigned channels,unsigned card,uns
 int main(void)
 {
  unsigned bits,channels,card,cache_bits,little,fault,phase,count=0;
- for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels)for(card=0;card<2;++card)
+ for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels){
+#ifdef PT_MIXED_BINDING_BITS
+   if(bits!=PT_MIXED_BINDING_BITS||channels!=PT_MIXED_BINDING_CHANNELS)continue;
+#endif
+   for(card=0;card<2;++card)
    for(cache_bits=8;cache_bits<=(card?16U:8U);cache_bits+=8)
      for(little=0;little<(card?2U:1U);++little)
        for(fault=0;fault<(channels==2?6U:5U);++fault)for(phase=0;phase<3;++phase){
          mixed_binding_case(bits,channels,card,cache_bits,little,fault,phase);++count;}
+ }
+#ifdef PT_MIXED_BINDING_BITS
+ assert(count==(PT_MIXED_BINDING_CHANNELS==1?75U:90U));
+ puts(PT_MIXED_BINDING_COMPLETE);
+#else
  assert(count==495);
  puts("MIXED SOURCE BINDING PASS:495 cases;90 controls405 refusals;Paula signed8 and AmiGUS8/16 key binding before action/enqueue/active readiness;master and bus bytes preserved;independent retirement;SOFTWARE_ONLY");
+#endif
  return 0;
 }

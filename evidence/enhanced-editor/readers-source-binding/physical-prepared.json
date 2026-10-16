@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "state": "PHYSICAL_HOST_PREPARED_NOT_ADMITTED_NOT_RUN",
+  "candidate": {
+    "crc32": "A27EADB0",
+    "sha256": "6d967aba566731f015c219c70b2d64689e02bdf8b322405874b7149f989973c8",
+    "size": 202404
+  },
+  "host_tests": 52,
+  "runner_tests": 25,
+  "service_tests": 27,
+  "offline_mocked_no_effects": true,
+  "validate_passed": true,
+  "prepared_qualification_sha256": "6d8de0514397d137cad9d4303eed919b5f5f72d4be570597f32c5d2434c871d1",
+  "exact_emulator_promotion_records": 6,
+  "promotion_pins_unchanged": true,
+  "normal_entry_inhibited": true,
+  "observer_admission_unbound": true,
+  "service_started": false,
+  "browser_control_acquired": false,
+  "physical_probe_or_execution": false,
+  "contract": {
+    "stdout_lines": 8,
+    "source_binding_cases": 66,
+    "input_files": 1,
+    "execution_files": 9,
+    "stack_bytes": 1048576,
+    "final_closed_progress_required": true,
+    "upload_seconds": 120,
+    "native_seconds": 90,
+    "execution_seconds": 140,
+    "whole_seconds": 250
+  },
+  "required_before_live_use": [
+    "Actual fresh authenticated Connected Safari ViewOnly access",
+    "Fresh shared locks, ownership, recovery and physical target identity",
+    "Exact current74-body/toolchain/SDK/runtime/candidate and promotion validation",
+    "Review and HOST qualify normal entry; fresh own disconnected physical service and actual admission",
+    "Actual independent cleanup, public release and separate final idle after one physical run"
+  ],
+  "acceptance": "HOST preparation only; no physical memory/device/voice-stop/output/timing/audio/listening acceptance"
+}

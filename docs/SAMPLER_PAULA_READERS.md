@@ -440,3 +440,11 @@ source/helper inventories are preserved; no completed transaction is replayed.
 The50 HOST tests and35 runner/27 service/15 entry checks remain separate from
 this native result. Real-A1200 execution is NOT_RUN because Safari access still
 reports the Mac locked. See [native evidence](../evidence/enhanced-editor/readers-source-binding/emulator.json).
+
+The separate real-A1200 packet for these exact bytes now passes52 HOST tests,
+the mocked disconnected-service constructor/lifespan and validation. Its six
+emulator promotion records remain pinned. Normal entry is deliberately inhibited,
+observer admission and live browser/service evidence are unset, and no physical
+probe or run occurred. Fresh actual access, ownership, target identity and exact
+current source/toolchain checks remain required. The original upload/execution
+limits are unchanged. See [physical preparation](../evidence/enhanced-editor/readers-source-binding/physical-prepared.json).

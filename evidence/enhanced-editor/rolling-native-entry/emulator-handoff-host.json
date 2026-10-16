@@ -1,0 +1,14 @@
+{
+  "state": "HOST_ONLY",
+  "scope": "Root validation of exact emulator upload observations before receipt-pinned external input adoption",
+  "rootValidationGroups": 8,
+  "rootAndInputRegressionGroups": 61,
+  "registeredServiceModelGroups": 45,
+  "allPassed": true,
+  "countsOverlap": true,
+  "guards": ["fresh empty namespace", "all chunk acknowledgements", "exact checksum and size", "sole file inventory", "complete separate RAM parent", "independent task absence", "original deadlines retained", "no replay"],
+  "liveEmulatorHandoff": "NOT_RUN",
+  "physicalMiniFTP": "NOT_RUN",
+  "physicalNative": "NOT_RUN",
+  "timingAndListeningAccepted": false
+}

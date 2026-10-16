@@ -809,3 +809,18 @@ Caller staging/handoff integration and exact Amiberry execution are still pendin
 before physical promotion of this route. The existing native component binaries
 retain their separate upload-route qualifications. See
 [receipt and service HOST evidence](../evidence/enhanced-editor/rolling-native-entry/transfer-receipt-host.json).
+
+The emulator handoff caller also uses `owned_emulator_handoff.make_receipt` to
+validate the original upload ledger before recording external adoption. It requires
+fresh directory creation and an empty listing, every exact chunk acknowledgement,
+both candidate checksum/size checks, the sole-file inventory, a separate complete
+RAM parent observation, and independent reader absence. Missing, reordered or
+extra exchanges refuse adoption. This pure helper performs no I/O and grants no
+ownership; current shared guards remain the caller's responsibility. It produces
+only emulator-route witnesses. Physical MiniFTP completion and browser control
+release still require actual observations on the A1200.
+
+The new eight Root validation groups plus the existing 53 input/receipt groups
+pass on HOST (61 overlapping groups total). The registered private service's
+separate parent-observation models pass 45 groups. These results do not qualify a
+live emulator handoff, physical transfer or native playback.

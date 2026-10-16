@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "state": "PHYSICAL_HOST_PREPARED_NOT_ADMITTED_NOT_RUN",
+  "runID": "8c1f55de7c476c6874d50abf42c386be",
+  "candidate": {
+    "crc32": "71A6D353",
+    "sha256": "d6ec532bc577f970411684c5219544b52a222fee3a215dfddf4c6e19b5edd7de",
+    "size": 183388,
+    "name": "PTExecReadersLifeTest"
+  },
+  "sourceCommit": "f81ebce7d6c8c1fde4a022b477ed074c29fa660d",
+  "host": {
+    "runnerLifecycleGuestGroups": 25,
+    "serviceFactoryGroups": 27,
+    "offlineConstructPassed": true,
+    "validatePassed": true,
+    "qualificationSHA256": "c647a2358fe29dc4eb4cf4d95aa38b2a57f2758e1c6736bde07eeeec8c1688f6",
+    "targetEffects": 0,
+    "liveServiceStarted": false
+  },
+  "promotion": {
+    "exactCandidateEmulatorPass": true,
+    "observedEmulatorStackBytes": 1048576,
+    "pins": {
+      "root-run-admission.json": "72327a1fa1aabacb4309b9d894e7c50b9a9891d938ac5bfee6622893ff65e1d9",
+      "independent-final-idle.json": "537bdc2908df8244b0a6d91d46167ac5b97ee81ae5b4f5477050df58fedf5e3c",
+      "independent-pass-observation.json": "4779da725e7e7423f9707306fd35ef3612f773b78de231092c45f5e94bcea15e",
+      "release-result.json": "dff3bdc4a24e87d4e87d9e7544366a67c1ba5922f141c2f0808c234a91813521",
+      "result.json": "398e9f8822e98dbf861dcc9b428ea2bd02b1aac688f55273b29381cb7f081ada",
+      "run-spec.json": "e6e4bc7ff19b399a315e922bbff8f11152161a68f001984e942a759b66431b3b"
+    }
+  },
+  "contract": {
+    "inputFiles": 1,
+    "executionFiles": 9,
+    "stdoutLines": 80,
+    "stackBytes": 1048576,
+    "finalClosedSidecarRequired": true,
+    "uploadSeconds": 120,
+    "nativeSeconds": 90,
+    "executionSeconds": 140,
+    "wholeSeconds": 250,
+    "backend": "Serialized software model; no IRQ/DMA/audio/device output"
+  },
+  "inhibition": {
+    "normalEntryRaises": true,
+    "observerSpecAndAdmissionUnbound": true,
+    "servicePIDUnset": true,
+    "browserObservationUnbound": true,
+    "liveLeaseOrAdmission": false
+  },
+  "preservedHostRefusal": "Copied native-plan initially retained262144 Stack and refused equality with1048576 specification; exact value corrected and repinned without relaxing check. OriginalHOSTrecords preserved, no target operation.",
+  "physicalAcceptance": false,
+  "pending": "Actual authenticated Connected Safari ViewOnly access, fresh ownership/recovery/target/build/promotion checks, reviewed normal-entry successor and disconnected service admission; actual physical pass and independently bound cleanup/release evidence. Current observed Mac lock is an access limitation, not hardware failure."
+}

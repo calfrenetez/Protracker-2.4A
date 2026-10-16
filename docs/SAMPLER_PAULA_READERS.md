@@ -382,3 +382,11 @@ guest cleanup, original-file restoration, independent release and a separate
 fresh idle check passed; recorded EMPTY state is fence 1695 with 87 archives.
 The two component passes do not relabel either earlier incomplete combined run.
 See [fault-component native evidence](../evidence/enhanced-editor/readers-exec-memory/faults-emulator.json).
+
+The separate real-A1200 lifecycle packet is host prepared: 52 orchestration,
+guest-model, service and factory checks, offline construction and validation
+pass. It pins the exact independently released emulator candidate and observed
+Stack. Its normal entry remains inhibited, with no live service, admission,
+physical probe or test. Actual Safari access is currently blocked by the Mac
+lock. Fresh browser, ownership, target, build and promotion checks remain required.
+See [physical preparation, not acceptance](../evidence/enhanced-editor/readers-exec-memory/lifecycle-physical-prepared.json).

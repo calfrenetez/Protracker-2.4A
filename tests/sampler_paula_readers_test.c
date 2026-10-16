@@ -5,6 +5,9 @@
 #include "../src/editor/sampler_paula_readers.c"
 #include "../src/editor/sampler_internal.h"
 #include "../src/core/playback_pcm.h"
+#ifndef PT_READERS_TRACE
+#define PT_READERS_TRACE(stage,x,y,n) ((void)0)
+#endif
 #define VALUES 16400
 struct block {void *data;size_t bytes;};
 struct memory {struct block block[128];unsigned calls,live,fail;size_t bytes;void *last,*quarantine,*spare;size_t spare_bytes;
@@ -253,8 +256,11 @@ static void persistent_controls(unsigned bits,unsigned channels)
 {
  struct fixture f;struct pt_paula_readers_command *c;struct pt_paula_readers_reader *r;struct pt_readers_key key;
  struct pt_sampler_storage_span spans[PT_SAMPLER_VERSION_SPANS];unsigned ns,i;void *header_image;size_t sb,cb;unsigned count;uint64_t t,old;
- int32_t before[VALUES];init(&f,bits,channels,2,16388);memcpy(before,f.master.values,sizeof(before));
+ int32_t before[VALUES];PT_READERS_TRACE("case-begin",bits,channels,0);
+ init(&f,bits,channels,2,16388);memcpy(before,f.master.values,sizeof(before));
+ PT_READERS_TRACE("case-initialized",bits,channels,0);
  c=begin(&f,10,PT_SCHEDULED_TRIGGER,0,0,channels-1,NULL);assert(prepare(&f,c)>32);
+ PT_READERS_TRACE("trigger-prepared",bits,channels,0);
  {struct image ci=image(&f.fast,c);unsigned *bad=(unsigned *)&c->token;assert(pt_paula_readers_step(c,bad)==PT_PAULA_READERS_INVALID);unchanged(&ci);}
  t=enqueue(c);r=reader_handle(c,0);
  {uint8_t expected[8194];struct pt_playback_format format={8,channels-1,0,1};
@@ -263,6 +269,7 @@ static void persistent_controls(unsigned bits,unsigned channels)
  observe_fire(&f,t);key=active_key(r);old=t;
  assert(!pt_paula_readers_command_close(c)&&!pt_paula_readers_reader_close(r)&&!pt_paula_readers_close(f.pool));
  detach_collect(&f,t);assert(pt_paula_readers_command_close(c));assert(pt_readers_readers_held(f.queue)==1&&pins(&f)==1);
+ PT_READERS_TRACE("trigger-active",bits,channels,0);
  assert(pt_sampler_version_spans(r->pin,spans,PT_SAMPLER_VERSION_SPANS,&ns)&&ns);header_image=malloc(spans[0].bytes);assert(header_image);memcpy(header_image,spans[0].data,spans[0].bytes);
  sb=f.sampler.bytes;cb=f.chip.bytes;count=f.chip.calls;
  for(i=0;i<20;++i) {
@@ -273,13 +280,18 @@ static void persistent_controls(unsigned bits,unsigned channels)
    assert(pt_readers_poll_command(f.queue,old,&stale)==PT_SCHEDULED_INVALID);
    again=active_key(r);assert(same_key(&again,&key));assert(pins(&f)==1&&f.sampler.bytes==sb&&f.chip.bytes==cb&&f.chip.calls==count);
    assert(!memcmp(header_image,spans[0].data,spans[0].bytes));assert(!memcmp(before,f.master.values,sizeof(before)));
+   if(i==0||(i+1)%5==0)PT_READERS_TRACE("control-complete",bits,channels,i+1);
  }
  free(header_image);c=begin(&f,50,PT_SCHEDULED_STOP,0,0,channels-1,&key);assert(prepare(&f,c)==1);t=enqueue(c);observe_fire(&f,t);
+ PT_READERS_TRACE("stop-active",bits,channels,20);
  {struct pt_readers_key k=key;assert(pt_paula_readers_reader_key(r,&k)!=PT_SCHEDULED_OK&&!memcmp(&k,&key,sizeof(k)));}
  /* Reader proof first cannot release while the STOP command references it. */
- retire_collect(&f,key);assert(pins(&f)==1&&!pt_paula_readers_reader_close(r));detach_collect(&f,t);assert(pins(&f)==0&&r->released);
+ retire_collect(&f,key);assert(pins(&f)==1&&!pt_paula_readers_reader_close(r));
+ PT_READERS_TRACE("retirement-observed",bits,channels,20);
+ detach_collect(&f,t);assert(pins(&f)==0&&r->released);
  assert(pt_paula_readers_command_close(c)&&pt_paula_readers_reader_close(r));assert(f.backend.effects==22);
  assert(!memcmp(before,f.master.values,sizeof(before)));finish(&f);
+ PT_READERS_TRACE("case-finished",bits,channels,20);
 }
 static void extra_cases(void);
 int main(void)
@@ -438,8 +450,15 @@ static void domain_failures(void);
 static void reentry_cases(void);
 static void forged_keys_and_metadata(void);
 static void extra_cases(void)
-{unsigned a,b;for(a=0;a<2;++a)for(b=0;b<2;++b)retire_races(a,b);
- replacement_race();version_race();control_cancels_and_pressure();all_phase_cancel();allocation_failures();alias_guards();deferred_retirement();address_reuse();domain_failures();reentry_cases();forged_keys_and_metadata();}
+{unsigned a,b;for(a=0;a<2;++a)for(b=0;b<2;++b){
+ PT_READERS_TRACE("retire-race",a,b,0);retire_races(a,b);}
+#define READERS_EXTRA(fn) do{PT_READERS_TRACE(#fn,0,0,0);fn();}while(0)
+ READERS_EXTRA(replacement_race);READERS_EXTRA(version_race);READERS_EXTRA(control_cancels_and_pressure);
+ READERS_EXTRA(all_phase_cancel);READERS_EXTRA(allocation_failures);READERS_EXTRA(alias_guards);
+ READERS_EXTRA(deferred_retirement);READERS_EXTRA(address_reuse);READERS_EXTRA(domain_failures);
+ READERS_EXTRA(reentry_cases);READERS_EXTRA(forged_keys_and_metadata);
+#undef READERS_EXTRA
+ PT_READERS_TRACE("extras-finished",0,0,0);}
 static void domain_failures(void)
 {
  unsigned bad;

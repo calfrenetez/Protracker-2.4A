@@ -5,25 +5,49 @@ not native SDK layout, actual Fast/Chip placement, backend or device timing.
 """
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from test_sampler_paula_readers import READERS_SOURCES
 from test_native_exec_memory_markers import memory_model, POOL, FINISH
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'tools'))
+import readers_memory_trace as trace
 EXEC_READERS_SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *READERS_SOURCES[1:]]
 
 
 class ExecReadersMemory(unittest.TestCase):
+    def build(self, out, traced=False):
+        model = memory_model(out);binary = out/'readers-memory'
+        flags = ['-DPT_READERS_DIAGNOSTIC_TRACE=1'] if traced else []
+        build = subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
+            '-fsanitize=address,undefined', '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1', *flags,
+            '-I'+str(out), '-Isrc/core', *EXEC_READERS_SOURCES, str(model), '-o', str(binary)],
+            cwd=ROOT, check=True, capture_output=True, timeout=120)
+        self.assertEqual((build.stdout, build.stderr), (b'', b''))
+        return binary
+
     def test_real_fixture_with_classified_host_memory_and_fixed_markers(self):
         with tempfile.TemporaryDirectory(prefix='pt-exec-readers-memory-') as folder:
-            out = Path(folder);model = memory_model(out);binary = out/'readers-memory'
-            build = subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
-                '-fsanitize=address,undefined', '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1',
-                '-I'+str(out), '-Isrc/core', *EXEC_READERS_SOURCES, str(model), '-o', str(binary)],
-                cwd=ROOT, check=True, capture_output=True, timeout=120)
-            self.assertEqual((build.stdout, build.stderr), (b'', b''))
+            binary = self.build(Path(folder))
             result = subprocess.run([str(binary)], check=True, capture_output=True, timeout=90)
             self.assertEqual(result.stderr, b'')
             self.assertEqual(result.stdout.splitlines(), [POOL,
                 b'SAMPLER PAULA READERS PASS: genuine master and selective Chip cache retained through 20 controls with command capacity2',
                 b'EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio', FINISH])
+
+    def test_full_fixture_trace_and_final_closed_sidecar(self):
+        with tempfile.TemporaryDirectory(prefix='pt-exec-readers-trace-') as folder:
+            out = Path(folder);binary = self.build(out, traced=True)
+            remote = 'RAM:PT24G-' + 'a1'*8 + '/progress.log'
+            (out/remote).parent.mkdir()
+            (out/remote).write_bytes(b'NOT STARTED\n')
+            result = subprocess.run([str(binary), remote], cwd=out, check=True,
+                                    capture_output=True, timeout=90)
+            self.assertEqual(result.stderr, b'')
+            self.assertEqual(result.stdout, ('\n'.join(trace.markers())+'\n').encode('ascii'))
+            self.assertEqual((out/remote).read_bytes(), trace.FINAL_SIDECAR)
+            self.assertLess(len(result.stdout), 8192)
+            phases = [x for x in result.stdout.splitlines() if x.startswith(b'READERS MEMORY TRACE:')]
+            self.assertEqual(len(phases), 92)
+            self.assertEqual(len(list((out/remote).parent.iterdir())), 1)

@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "state": "HOST_TRACE_AND_PINNED_BUILD_PASS_NATIVE_NOT_RUN",
+  "baseCommit": "f24086ce0a8b5a32c1cbb4c15d409d7f1a05c851",
+  "host": {
+    "tests": 45,
+    "modules": 10,
+    "sanitizers": "AddressSanitizer and UndefinedBehaviorSanitizer on C fixtures",
+    "sourceUnchanged": true,
+    "elapsedSeconds": 52.1850762499962,
+    "resultSHA256": "ddc2bcc2f12c99d2e344a6bf35bc995af5f836ccc012ac21b97435df227e07ac",
+    "stderrSHA256": "e0579d89c83a033709e2a649de0c11051f15de325762f0376be012a358303c35",
+    "testedBodiesInNativeSourceV2": "All host-executed inputs unchanged; only compiler marker-validation recipe changed after host pass"
+  },
+  "trace": {
+    "phaseLines": 92,
+    "stdoutLines": 96,
+    "closedSidecar": "Latest phase only; each fixture update closes file before stdout/flush",
+    "finalSidecar": "READERS MEMORY TRACE:finished:0:0:0\n",
+    "namespace": "Exact run-owned RAM:PT24G-<16lowercasehex>/progress.log",
+    "fullOriginalWorkloadPreserved": true,
+    "ordinaryFixtureTraceEnabledByDefault": false,
+    "collector": "Unchanged existing progress_sidecar/diagnostic_progress API, at most256bytes every20seconds, original deadlines and final RC/custody retained",
+    "progressAloneQualifiesCompletion": false
+  },
+  "nativeBuild": {
+    "name": "PTExecReadersTraceTest",
+    "bytes": 198256,
+    "sha256": "0abcba58d5e43cddeadabf99f4545034ad2cfd30cd909564ecfdc4274c285204",
+    "crc32": "C592528D",
+    "units": 24,
+    "projectDependencies": 73,
+    "sdkDependencies": 49,
+    "runtimeQueryPins": 7,
+    "commands": 36,
+    "assertionsEnabled": true,
+    "fixedLiteralMarkersChecked": 4,
+    "dynamicTraceContractPinned": true,
+    "manifestSHA256": "7a333f3533e1b0d6b2ac300afc6b1220b019d318e986b648dae2c290c14d7ed1",
+    "allCompiledProjectBodiesMatchCurrentSource": true
+  },
+  "preservedBuildPreflightRefusal": {
+    "cause": "Dynamic formatted trace lines incorrectly required as full literals before compilation",
+    "correction": "Keep all four exact original literal markers in preprocessor/link checks; pin dynamic contract and verify96lines by full host execution",
+    "failedManifestSHA256": "026ca49886ad46efb6066fbf6dac536063c27b4d59373bd47887412e0db6ebf8",
+    "targetOperation": false
+  },
+  "scope": "Diagnostic only. Backend remains serialized software model. Actual Exec placement/Stack/native completion untested for new candidate. No product provider, IRQ, DMA, real device activation/stop, exact timing, physical or listening qualification. Library stdio allocations outside explicit pool tracking."
+}

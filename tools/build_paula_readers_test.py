@@ -20,6 +20,7 @@ import subprocess
 import sys
 import time
 import traceback
+import readers_memory_trace
 
 HOST_SOURCES = ['tests/sampler_paula_readers_test.c', 'src/editor/sampler_paula.c', 'src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/scheduled_readers.c', 'src/core/elapsed_clock.c', 'src/core/paula_render_voice.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/pattern.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
 SOURCES = list(HOST_SOURCES)
@@ -150,12 +151,16 @@ def main():
     sys.dont_write_bytecode = True
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--exec-memory', action='store_true', help='Select the separate real Fast/Chip allocator wrapper; never runs it')
+    ap.add_argument('--trace-memory', action='store_true', help='Add closed-sidecar fixture progress; requires --exec-memory, never runs it')
     ap.add_argument('--source-manifest', type=Path, required=True)
     ap.add_argument('--source-manifest-sha256', required=True)
     ap.add_argument('--pins', type=Path, required=True)
     ap.add_argument('--pins-sha256', required=True)
     ap.add_argument('--out', type=Path, required=True)
     args = ap.parse_args()
+    if args.trace_memory and not args.exec_memory:
+        ap.error('--trace-memory requires --exec-memory')
+    literal_markers = list(MARKERS)
     if args.exec_memory:
         SOURCES = ['tests/native_exec_sampler_paula_readers_test.c', *HOST_SOURCES[1:]]
         FLAGS = [*RECIPE_FLAGS, '-DPT_TEST_NATIVE_MEMORY_FIXED_MARKERS=1']
@@ -164,6 +169,11 @@ def main():
                    *MARKERS,
                    'EXEC READERS CHIP PASS: Chip-only cache extents, zero owned bytes; modeled backend, no DMA or audio',
                    'EXEC MEMORY PASS: Fast allocations, zero owned bytes, budget refusal without Chip fallback']
+        literal_markers = list(MARKERS)
+        if args.trace_memory:
+            FLAGS += ['-DPT_READERS_DIAGNOSTIC_TRACE=1']
+            TARGET = 'PTExecReadersTraceTest'
+            MARKERS = list(readers_memory_trace.markers())
     source = Path(__file__).resolve().parents[1]
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
@@ -269,7 +279,7 @@ def main():
         assertion = assertions[-1] if assertions else None
         if not assertion or '__assert_func' not in assertion or text.count('__assert_func (') < 2:
             raise ValueError('Enabled SDK assertion expansion required')
-        if any(text.count(marker) != 1 for marker in MARKERS):
+        if any(text.count(marker) != 1 for marker in literal_markers):
             raise ValueError('Shared split-domain sampler fixture marker missing')
         toolchain_current()
         require_source(source, expected)
@@ -281,13 +291,15 @@ def main():
         raw = binary.read_bytes()
         if len(raw) < 4 or struct.unpack('>I', raw[:4])[0] != 0x3f3:
             raise ValueError('Linked native product lacks HUNK_HEADER0x3f3')
-        if any(raw.count(marker.encode()) != 1 for marker in MARKERS):
+        if any(raw.count(marker.encode()) != 1 for marker in literal_markers):
             raise ValueError('Linked product lacks shared assertion-completion marker')
         result['targets'][TARGET] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': FLAGS,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',
                                      'last_assert_macro': assertion, 'markers': MARKERS,
+                                     'literal_markers_checked': literal_markers,
+                                     'trace_contract': record(Path(readers_memory_trace.__file__)) if args.trace_memory else None,
                                      'preprocessed_fixture': record(out / 'preprocessed-fixture.log'),
                                      'build_log': record(out / (TARGET + '.build.log'))}
         result['passed'] = True

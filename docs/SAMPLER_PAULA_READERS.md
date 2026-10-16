@@ -300,3 +300,32 @@ requires fresh availability checks. See [incomplete attempt and recovery](../evi
 The next candidate needs useful bounded progress diagnostics. This failed
 transaction will not be replayed. Physical promotion remains unavailable for
 these bytes, independently of unresolved live output timing.
+
+## Separate closed-file trace candidate — 16 October 2026
+
+The optional `--exec-memory --trace-memory` build preserves the full six-format
+reader workload and all assertions. It records 92 phase lines around preparation,
+the 20 continuing controls, STOP, retirement and each negative-case group. The
+four original success lines remain, giving 96 exact stdout lines. Each phase
+also replaces and closes the separate run-owned progress file before flushing
+stdout. This reuses the existing bounded collector; it never reads active stdout
+or changes the original completion deadline. The final sidecar must match the
+finished phase in addition to complete stdout, RC0 and custody.
+
+The default reader fixtures emit no trace. The new trace candidate passes the
+full allocator wrapper under the injected host Exec model, plus existing
+ownership regressions and transaction fault checks: 45 tests in ten modules.
+Even all trace lines without the completion flag still fail at 90 seconds, and
+RC20 still refuses success. The pinned 24-unit build passes with active assertions.
+An initial compiler preflight incorrectly required dynamic formatted lines to
+exist as complete literals; its refusal is preserved. The corrected recipe
+retains all four original literal-marker checks and separately pins the dynamic
+contract that was executed byte-exact on the host.
+
+`PTExecReadersTraceTest` is 198,256 bytes, SHA256
+`0abcba58d5e43cddeadabf99f4545034ad2cfd30cd909564ecfdc4274c285204`.
+It remains native **NOT RUN**. Tracing adds diagnostic I/O; no performance or
+timing result follows. Library stdio allocations remain outside explicit pool
+tracking. The backend is still a serialized software model. The earlier
+untraced timeout is unchanged and cannot qualify this distinct candidate.
+See [trace host/build evidence](../evidence/enhanced-editor/readers-exec-memory/trace-host-build.json).

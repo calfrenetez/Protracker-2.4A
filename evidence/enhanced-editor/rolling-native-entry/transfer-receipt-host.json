@@ -1,0 +1,37 @@
+{
+  "state": "HOST_TRANSFER_RECEIPTS_AND_REGISTERED_SERVICE_CALLBACK_PASS",
+  "receiptGroups": 12,
+  "receiptPlusExistingInputGroups": 53,
+  "registeredServiceGroups": 33,
+  "newRegisteredExternalGroups": 6,
+  "countsOverlapDoNotSum": true,
+  "sourceSHA256": {
+    "tools/owned_transfer_receipt.py": "b8ec22c8855bb5bb89282a24d099cc82ceb7d6d80064e18e76a1224f6f23a498",
+    "tests/test_owned_transfer_receipt.py": "bd2aa93691b1b7e39ace891bdde23f4e6c17538fed73e5804ca55b3f901d94cf"
+  },
+  "privateServiceSHA256": "23c29936626928ef31e4b1c421bdc6a754741d4353fcfab8015fba343bee98b5",
+  "serviceSourcePins": 22,
+  "guards": [
+    "Root-request receipt SHA256 required",
+    "Same run, target, candidate description and native-plan SHA256",
+    "Actual observed namespace/completion/placement witness hashes",
+    "Fixed bounded local record names with no caller-chosen read paths",
+    "Duplicate keys, stale/future/nonfinite times and changed boolean types refused",
+    "Live owner checked before and after record reads",
+    "Normal protocol inventory/CRC and separate settlement retained",
+    "Foreign/missing/replayed receipt and changed same-size source refuse before native launch"
+  ],
+  "records": {
+    "receiptHostResult": "ec566c39f9d81db112e5f56f370b095b569313d195ebda20e4ad136b007ec238",
+    "receiptHostOutput": "2eb50f43877a2cf7cae8e012ea32df5691fcc7464d1097b0511ebbe7141b1355",
+    "serviceHostResult": "a5f8cc2feff601f31b8131150eb579b9a9497783015fde03176c35507f84908f",
+    "serviceHostOutput": "67ccd1873739ff53f0798f86bfafd08d1bef51150ef081a3ace48b3f21618abd"
+  },
+  "notQualified": [
+    "Truth of synthetic HOST observations on a real target",
+    "Live owned service or emulator transfer handoff",
+    "MiniFTP transfer",
+    "Physical A1200 execution through this new route",
+    "Device, audio, exact scheduling or listening"
+  ]
+}

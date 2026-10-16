@@ -781,3 +781,31 @@ The new seam has not yet been integrated into the live owned service or tested
 with MiniFTP, Amiberry or the A1200. Existing exact native component passes use
 the previous upload route and do not qualify this new route.
 See [external-admission HOST evidence](../evidence/enhanced-editor/rolling-native-entry/external-input-host.json).
+
+
+### Root transfer receipts and registered callback
+
+`ReceiptObserver` binds the external-input callback to a Root-pinned receipt
+hash, exact native plan, candidate description, owner, target and download name.
+Three fixed bounded witness records describe fresh empty namespace creation,
+completed transfer, and single-file placement with the download path absent,
+no native task and released UI control. Receipt contents cannot choose host read
+paths. Duplicate keys, changed hashes, stale/future/nonfinite times, extra fields
+and numeric substitutes for boolean completion flags are refused. The live guard
+runs before and after record reads. These records remain trusted local caller
+assertions; the helper cannot establish that a GUI observation actually occurred.
+Remote inventory/checksum and the original separate settlement still follow.
+
+Twelve new receipt groups plus the41 existing input groups pass HOST checks.
+A separately pinned private service adapter accepts an optional receipt hash
+only in explicit external mode; the registered callback passes six new groups
+and27 existing factory/copy/upload/service groups. Foreign/missing/replayed
+receipts, changed same-size files and expired execution deadlines refuse without
+new native preparation. Counts overlap and are not summed. The factory retains
+its disconnected, metadata-guarded entry and pins all22 selected inputs. No live
+service, target connection or process was started for these models.
+
+Caller staging/handoff integration and exact Amiberry execution are still pending
+before physical promotion of this route. The existing native component binaries
+retain their separate upload-route qualifications. See
+[receipt and service HOST evidence](../evidence/enhanced-editor/rolling-native-entry/transfer-receipt-host.json).

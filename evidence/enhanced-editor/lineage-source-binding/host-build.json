@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "b2b02ce8f3dbe681b831cdeaa2900e0f9d341973",
+  "scope": "Typed Paula lineage source currentness checks actual sample, selected stereo side and signed8/padded representation before view/enqueue. Independent original-reader and command lifetimes remain separate.",
+  "regression": {
+    "cases": 198,
+    "controls": 36,
+    "refusals": 162,
+    "masters": [
+      "8mono",
+      "8stereo",
+      "16mono",
+      "16stereo",
+      "24mono",
+      "24stereo"
+    ],
+    "owners": [
+      "trigger",
+      "control",
+      "stop"
+    ],
+    "states": [
+      "ready",
+      "active-software-backend"
+    ],
+    "checks": [
+      "Keys derived from genuine production PCM packer; no duplicated encoding or pin/serial repair",
+      "Wrong identity/side/bits/endian/padding refused with unchanged output/cache/backend/original and promoted master bytes",
+      "Existing pin and lease remain held until exact independent backend ticket retirement",
+      "Full close frees all explicit owned allocations"
+    ],
+    "baseline_missing_refusal_result_sha256": "41c73605f74068af7eadbb94b1aa6cf8504986703b31ca4e390262e05744b237",
+    "baseline_missing_refusal_stderr_sha256": "8dcd1cf43b5f202c0fe10c932fb8be6c2bdd8a707a7386a06deb6abc248b6985"
+  },
+  "host": {
+    "tests": 8,
+    "groups": 7,
+    "flags": [
+      "C99",
+      "assertions",
+      "Werror",
+      "ASan",
+      "UBSan"
+    ],
+    "frozen_files": 355,
+    "source_inventory_unchanged": true,
+    "result_sha256": "c83e1b323d410c9e83d4b73c55c2239f8b2229e9868c1cb7660184363e141783"
+  },
+  "build": {
+    "target": "PTPaulaLineageTest",
+    "bytes": 178240,
+    "sha256": "ec3b4f75a379883d6091f739ea2f99171182d88db1bffa13f74a06db006f6461",
+    "crc32": "7292AA45",
+    "units": 24,
+    "project_bodies": 58,
+    "sdk_bodies": 32,
+    "runtimes": 7,
+    "assertions_enabled": true,
+    "manifest_sha256": "e3b8a58b9f4a575f2b75f8b6e4b57b4e309e0598095942ba4dd2d84864b28e78",
+    "compiled_fixture": "Original full lineage fixture; new198-case binding fixture is HOST only and is not included in this HUNK.",
+    "execution": "NOT_RUN",
+    "meaning": "Pinned 68000/softfloat/nix20 compiler/linker check; no Exec allocation or runtime qualification."
+  },
+  "preservation": {
+    "protected16_contents_and_stable_metadata_unchanged": true,
+    "layout_unchanged": true,
+    "exact_musical_scheduling_unchanged": true,
+    "typed_native_provider_inhibited": true,
+    "shared_target_or_service_used": false
+  },
+  "not_qualified": [
+    "Amiberry/physical lineage execution",
+    "Native198-case binding fixture",
+    "Actual Fast/Chip allocation placement for this portable target",
+    "Device/IRQ/DMA/actual voice stop/output timing/audio/listening",
+    "Mixed Paula/AmiGUS and dispatcher bindings"
+  ]
+}

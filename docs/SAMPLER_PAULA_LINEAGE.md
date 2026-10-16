@@ -118,3 +118,27 @@ stack is provisional; neither adequate stack nor native/Exec memory placement,
 DMA, IRQ, hardware timing or physical/audio/listening acceptance follows.
 The original frozen host documentation and all prior development failures remain
 archived separately. See [saved host/compiler records](../evidence/enhanced-editor/sampler-paula-lineage/README.md).
+
+## Exact cache source binding — 16 October 2026
+
+The typed lineage owner now checks the actual cache representation key against
+its held sample and explicit stereo side, including signed8 format and padding,
+before publishing a view or enqueueing a command. A live lease with matching
+version, address and byte count is insufficient. This uses the existing internal
+source predicate after current bridge validation; it adds no ownership grant or
+PCM scan and never treats cache refusal as confirmation that a reader stopped.
+
+A separate genuine fixture covers 198 cases: 36 valid controls and 162 wrong
+sample, side, bit-depth, byte-order or padding refusals across 8/16/24-bit mono
+and stereo masters, with trigger/control/stop owners both ready and active in
+the software backend. Keys come from the production packer; original pins and
+leases remain genuine through independent per-ticket retirement. Refused outputs,
+cache and master bytes and backend observations stay unchanged. Full close leaves
+zero explicit owned allocations. The unchanged baseline reproduces the missing
+refusal; eight host tests in seven groups pass with ASan/UBSan and assertions.
+
+The original full lineage fixture also passes a fresh pinned Amiga compile/link
+check. The new 198-case fixture is not included in that HUNK. Neither fixture has
+run in Amiberry or on the A1200 in this qualification; Exec memory placement,
+device/IRQ/DMA, actual voice stop, output timing and listening remain separate.
+See [the scoped host/build result](../evidence/enhanced-editor/lineage-source-binding/host-build.json).

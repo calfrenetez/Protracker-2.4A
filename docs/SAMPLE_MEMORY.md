@@ -7433,3 +7433,9 @@ suite remains unqualified; both earlier full-suite timeouts are preserved.
 Device/IRQ/DMA/actual voice stop,
 physical A1200, whole-library memory accounting and exact output timing/listening
 are separate. See [native lifecycle scope](SAMPLER_PAULA_READERS.md#native-workload-components--16-october-2026).
+
+The separate typed lineage owner now also authenticates the actual sample,
+stereo side and signed8/padded cache key for trigger/control/stop views and
+enqueueing. Its 198-case host regression and original-fixture Amiga build pass;
+neither constitutes native execution, device ownership or output timing proof.
+See [lineage source binding](SAMPLER_PAULA_LINEAGE.md#exact-cache-source-binding--16-october-2026).

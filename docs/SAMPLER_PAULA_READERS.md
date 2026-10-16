@@ -324,8 +324,22 @@ contract that was executed byte-exact on the host.
 
 `PTExecReadersTraceTest` is 198,256 bytes, SHA256
 `0abcba58d5e43cddeadabf99f4545034ad2cfd30cd909564ecfdc4274c285204`.
-It remains native **NOT RUN**. Tracing adds diagnostic I/O; no performance or
-timing result follows. Library stdio allocations remain outside explicit pool
+Its subsequent Amiberry attempt was incomplete. Four saved closed-sidecar
+observations reached the 16-bit stereo controls, a retirement race, the
+cancellation matrix and then alias checks at about 85 seconds. The original
+90-second execution limit expired without confirmed RC, complete output,
+observed Stack or zero-owned-memory evidence. These are progress observations,
+not individual case passes or a per-function performance measurement.
+Routine owned recovery, independent observation, public release and a separate
+fresh idle check passed. The three HOLDs remain archived; recorded EMPTY state
+is fence 1687 with 85 archives. The failed transaction is not replayed.
+
+Tracing adds diagnostic I/O; no performance or timing result follows.
+Library stdio allocations remain outside explicit pool
 tracking. The backend is still a serialized software model. The earlier
 untraced timeout is unchanged and cannot qualify this distinct candidate.
 See [trace host/build evidence](../evidence/enhanced-editor/readers-exec-memory/trace-host-build.json).
+The [incomplete native attempt and recovery](../evidence/enhanced-editor/readers-exec-memory/trace-emulator.json)
+are separate. The next native candidates split lifecycle and negative-matrix
+work into complete components within the unchanged time bounds; the full host
+regression and original assertions remain required.

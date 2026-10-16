@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "state": "TRACED_EMULATOR_INCOMPLETE_RECOVERY_RELEASED",
+  "sourceCommit": "826aed6b8cf8816fb1011f7fe9cc715a5b5be356",
+  "runID": "6c93a689c2d0aa486cbb87025884bcfe",
+  "candidate": {
+    "crc32": "C592528D",
+    "sha256": "0abcba58d5e43cddeadabf99f4545034ad2cfd30cd909564ecfdc4274c285204",
+    "size": 198256,
+    "name": "PTExecReadersTraceTest"
+  },
+  "attempts": 1,
+  "nativeExecutionLimitSeconds": 90,
+  "wholeTransactionLimitSeconds": 250,
+  "requestedStackBytes": 1048576,
+  "observedStackBytes": null,
+  "nativeReturnCode": null,
+  "nativeCompletionConfirmed": false,
+  "nativeOutputCustodyConfirmed": false,
+  "progress": [
+    {
+      "elapsedSeconds": 20.76516070900834,
+      "reportedPhase": "READERS MEMORY TRACE:control-complete:16:2:1",
+      "recordSHA256": "cc92cb66ca67d205a5c4e5847c8570d84349519be84a64c02571d49a9485acf1"
+    },
+    {
+      "elapsedSeconds": 41.81388999999035,
+      "reportedPhase": "READERS MEMORY TRACE:retire-race:1:0:0",
+      "recordSHA256": "0f8df04a52897034280ef925f83a978bb466abf72f6836acf7c5b7b7254d18cc"
+    },
+    {
+      "elapsedSeconds": 63.16008845900069,
+      "reportedPhase": "READERS MEMORY TRACE:all_phase_cancel:0:0:0",
+      "recordSHA256": "aed4f7950b9992a953e3836c461c29c73ae1f3ef3426c6dba9bfed8f28f096f2"
+    },
+    {
+      "elapsedSeconds": 84.54915587499272,
+      "reportedPhase": "READERS MEMORY TRACE:alias_guards:0:0:0",
+      "recordSHA256": "9025290e8da23dafacf223a3a92ed3c058dbc7837588cf00d007f0a7fa7ade81"
+    }
+  ],
+  "progressScope": "Unconfirmed finite closed-sidecar observations only; cannot qualify individual assertions, completion, zero owned bytes, Stack or output. No post-HOLD target exchange.",
+  "resultSHA256": "e077a57e2ee4eb016831f026a1d56cbbbaf646969ab0c30844548df6bf1d92ff",
+  "recovery": {
+    "routineAuthorized": true,
+    "targetCommands": 0,
+    "testReruns": 0,
+    "signals": "One SIGTERM per positively identified owned emulator/service; no forcekill",
+    "restorationSHA256": "9fc264d72bdaab7c993d551b72143653e22a94bf4bcad7389b2ffc3fa81df7c9",
+    "independentObservationSHA256": "6af69f26354e70785a581191c5d5a89881a4bcd9577e3c790a3c74bd82d8fa0b",
+    "publicReleaseSHA256": "0470e53f4a67b162027a67e4eaa46279ef07579092ec22d60b441cdd8e640534",
+    "separatePostReleaseSHA256": "599654139b3eb8a7b4ab8cd8445ca23d7723f467dfcaa2464a82162382ebd17b",
+    "recordedPhase": "EMPTY",
+    "recordedFence": 1687,
+    "archives": 85,
+    "originalHoldsArchived": 3,
+    "restoredOriginals": true,
+    "exactHostStagingAbsent": true,
+    "ownedProcessesAbsent": true,
+    "guestAllocatorCleanupProven": false,
+    "availability": "Historical recorded release; fresh checks before any next operation"
+  },
+  "scope": "No native memory placement, total Stack, backend/device/DMA/IRQ/output timing, physical or listening acceptance. Tracing adds I/O; phase observations do not establish a per-function performance cause.",
+  "next": "Split full native workload into separately scoped lifecycle and negative-matrix components within unchanged bounds; preserve full host regression and both incomplete transactions."
+}

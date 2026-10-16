@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "scope": "HOST-only exclusive editor mutation barrier; no native/frontend/output authority",
+  "date": "2026-10-17",
+  "sourceBaseCommit": "f9dfb0d9d46a0a27cbc87535f1389bcf2a7c9691",
+  "selectedSourcePins": {
+    "src/editor/prepared_paula_mutation_barrier.c": {
+      "bytes": 24386,
+      "sha256": "d5dcb03c2e27db45d86933fa1beacf78c19fbdd8ce00bffa4ddd09986b030c41"
+    },
+    "src/editor/prepared_paula_mutation_barrier.h": {
+      "bytes": 8943,
+      "sha256": "8d5ee9ae0c0aad1e8d28b3366a838dd002c3a00afe260b0850977e595f6539b1"
+    },
+    "tests/prepared_paula_mutation_barrier_test.c": {
+      "bytes": 25548,
+      "sha256": "549f7f6335a8a1f675832e7487e2027e45ee2cb141eb84908ce68032ed089a08"
+    },
+    "tests/test_prepared_paula_mutation_barrier.py": {
+      "bytes": 9621,
+      "sha256": "d6d96b1152ba326fc415203b97d2ce92ec9dda0d103c3e1da67afb857af32a61"
+    }
+  },
+  "softwareCasesPerExecution": {
+    "total": 13,
+    "completed": 7,
+    "retainedFaultContexts": 6
+  },
+  "executions": [
+    {
+      "editorSourcePair": "preserved_working_display",
+      "result": "PASS",
+      "returnCode": 0,
+      "elapsedSeconds": 8.872,
+      "translationUnits": 34,
+      "literalProjectInputs": 85,
+      "compilerAndFixtureDiagnostics": "EMPTY",
+      "assertions": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ]
+    },
+    {
+      "editorSourcePair": "committed_editor_baseline",
+      "result": "PASS",
+      "returnCode": 0,
+      "elapsedSeconds": 8.97,
+      "translationUnits": 34,
+      "literalProjectInputs": 85,
+      "privateOrigins": {
+        "workingBodies": 83,
+        "verifiedGitEditorBodies": 2
+      },
+      "compilerAndFixtureDiagnostics": "EMPTY",
+      "assertions": true,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "fixtureBinary": {
+        "bytes": 2682760,
+        "sha256": "8fdf245f2c9b1367fb80c5159db9d20c47e29de54a0fa154e8b61c97a6998365"
+      }
+    }
+  ],
+  "soleOracle": {
+    "bytes": 224,
+    "sha256": "300167cf71f39cb3c9202bc8977704aa46a634676c5af26a2e913d6cdf677d94"
+  },
+  "boundsSeconds": {
+    "compile": 120,
+    "fixture": 30
+  },
+  "coverage": [
+    "Callback-free exclusive hook refuses cooperating note, undo, sample-attribute, table and disposal changes",
+    "Six real cancellation cuts including genuinely completed PREPARED before queue construction",
+    "Genuine mono8/16/24 masters, selective signed8 Chip-cache bytes and exact in-memory project encoding preserved",
+    "Actual unpublished 1C/1R transfer, local consumption and later captured drain/queue/cache closure",
+    "Chip allocation, queue allocation and cache-release reentry retain full contexts",
+    "New-cache aliases against control capacity and full declared backend/allocator context tails retain ownership",
+    "Foreign hook is not removed or repaired",
+    "Separate exact-hook detach precedes inaccessible child/barrier arenas and successful real editor edit/disposal"
+  ],
+  "headerEligibility": {
+    "actualCases": 9,
+    "passedCases": 9,
+    "positiveHost": 1,
+    "negativeHost": 6,
+    "negativeGenuineAmigaCompiler": 2,
+    "perCaseSeconds": 10,
+    "positive": "RC0, empty diagnostics, object present",
+    "negative": "ordinary RC1, new-header diagnostic, no object, no missing-header/tool/crash diagnostic",
+    "objectOnly": true,
+    "objectExecuted": false,
+    "linked": false,
+    "listedToolAndInputPinsUnchanged": true
+  },
+  "preservation": {
+    "protectedUnrelatedPaths": 16,
+    "classicBaselineEntries": 51,
+    "ordinaryBaselineBodyChecks": 41,
+    "metadataOnlyDatalessEntries": 10,
+    "noPlaceholderHydration": true,
+    "canonicalEditorReplaced": false,
+    "originalPrimitiveAndNativeProbeBodiesUnchanged": true
+  },
+  "preservedFailures": [
+    {
+      "stage": "Initial HOST compiler only",
+      "reason": "Missing pt_pcm_shape declaration; no fixture ran",
+      "successorChange": "Required pcm_internal.h include only; header and fixture unchanged"
+    },
+    {
+      "stage": "Separate private committed-editor export before compiler",
+      "reason": "Read-only Git warning from omitted temporary-directory environment; no fixture ran",
+      "successorChange": "Set private TMPDIR only; empty-diagnostics predicate unchanged"
+    }
+  ],
+  "privateIndependentReviewPins": {
+    "independent-source-review.json": {
+      "bytes": 3601,
+      "sha256": "3884e47fa5da67e8ec3cd7912584925eb080c833404074236386075f95bd08c5"
+    },
+    "independent-source-review-include-supplement.json": {
+      "bytes": 1635,
+      "sha256": "cc4a66a38df39d0422021761f2125b31148e4592af2c4faf1634d8f4c1bcc00e"
+    },
+    "independent-working-host-saved-data-review.json": {
+      "bytes": 5070,
+      "sha256": "307ed23bb0759f1015aad3efe62d3063cac0281504986c14675ad13aa85f9816"
+    },
+    "clean-editor-controls-v2/independent-actual-clean-review.json": {
+      "bytes": 8629,
+      "sha256": "19314098a5b3cb6e7fa8e96f687973a514392fbff9c383711fb0e3399f814651"
+    },
+    "controls/independent-actual-header-review.json": {
+      "bytes": 13353,
+      "sha256": "a8f2fa7c1c29669f4a05effef431d371d5201768858e22757b040f88a48a36f5"
+    }
+  },
+  "acceptance": {
+    "hostExclusiveUnpublishedOwnership": "PASS",
+    "headerEligibility": "PASS",
+    "nativeBuild": "NOT_RUN_FOR_THIS_COMPOSITOR",
+    "amiberry": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "frontendIntegration": "UNFINISHED",
+    "publicationOrActiveBackend": "NOT_IMPLEMENTED_BY_THIS_MODULE",
+    "deviceQuiet": "NOT_QUALIFIED",
+    "exactMusicalTiming": "NOT_QUALIFIED",
+    "listening": "NOT_RUN"
+  },
+  "limits": [
+    "Caller establishes exclusive genuine editor/bridge/source ownership and full live context extents; lengths and allocator freshness remain contracts",
+    "Existing hook does not intercept direct init, source-preview load, workflow preparation or arbitrary sampler/document writes; these are excluded while attached",
+    "Native New/Load and final teardown require checked retirement/disposal before integration",
+    "One step invokes at most one original lifecycle operation; fixed32-slot bridge close can release several blocks; no WCET or one-allocator-call bound",
+    "Source input preservation is verified by the original helper; clean export retains full private before/after pins, with canonical source-after verification reported by helper rather than a second separately saved full canonical pinset",
+    "No complete system-header, dynamic-library or transitive toolchain provenance audit",
+    "Native TASK lifetime probe and unadmitted harness packet retain their separate earlier build-only status; F2 physical cleanup HOLD unchanged"
+  ]
+}

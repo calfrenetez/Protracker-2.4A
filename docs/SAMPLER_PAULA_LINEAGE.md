@@ -372,3 +372,59 @@ native run and its retained ownership boundaries. Aggregate stack, callback
 depth and WCET remain separately unqualified. The accepted
 exact musical schedule and all existing controller/provider inhibitors remain.
 See [HOST regression and compile boundaries](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/host-and-guards.json), [native build scope](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/native-probe-build.json) and [default byte identity](../evidence/enhanced-editor/prepared-paula-lifetime-native-ram/native-default-build.json).
+
+
+## Exclusive HOST editor mutation barrier —17 October2026
+
+The separate explicit `PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER=1`
+compositor constructs its own genuine three-source owner and unpublished
+lifetime for one existing editor and dedicated Paula bridge. It installs only
+the existing exclusive veto hook. Cooperating edits and disposal are refused
+while attached; the hook merely closes admission and requests cancellation.
+It performs no allocation, child operation, stop, polling or backend call.
+
+Later serialized task steps perform original captured cancellation, actual
+local command/reader consumption, deferred resource drain, queue closure and
+dedicated cache closure. Each step calls at most one original child lifecycle
+operation. The existing fixed32-slot bridge close may release several blocks;
+this is not a one-allocator-call or execution-time guarantee. Positive child
+transfers and closures remain recorded before outer postchecks. Uncertain
+ownership retains complete original contexts, without retry, reset, fabricated
+quiet flags or restoration of a former sample generation. Newly allocated
+cache intervals are checked against full declared control/context extents,
+including tails, before later copy or release.
+
+CLEANED still vetoes edits. A separate final detach requires positive original
+closure and the exact original hook/context before removing that hook. The
+fixture then makes child and barrier storage inaccessible before a successful
+real editor edit/dispose, checking that no stale borrowed anchor is followed.
+
+Two separate strict sanitizer executions pass the same13-case oracle: seven
+complete cleanups and six retained fault contexts. One uses the preserved
+working editor C/H pair; the other copies85 source bodies and replaces only
+its private editor C/H with verified committed bodies (83 working bodies plus
+two Git bodies). Neither changes canonical editor files or claims ABI equality
+between those pairs. Both compile34 translation units with enabled assertions,
+ASan/UBSan and strict warnings, and produce the sole224-byte marker with empty
+compiler/fixture diagnostics. Tests exercise six genuine cancellation cuts,
+actual edit/dispose refusal, callback reentry, full-context-tail allocation
+aliases and a foreign hook. Genuine mono8/16/24 master, marker, cache and exact
+in-memory project-save bytes are preserved; protected display work and the
+classic baseline remain intact.
+
+Nine separate object-only eligibility checks pass: one HOST positive, six HOST
+refusals and two refusals from the genuine Amiga cross-compiler. No object is
+executed by those checks. The initial compile-only missing declaration and a
+separate clean-export Git-environment refusal are preserved; their successors
+add only the required PCM declaration include and private temporary-directory
+setting respectively. No fixture ran in either failed preparation.
+
+The option is absent by default and requires the original HOST lifetime option.
+It rejects native selection, including the separate TASK RAM probe. This is
+not publication, ACTIVE playback, native frontend/ABI/IRQ, output, device quiet,
+timing, physical or listening acceptance. Direct editor init, preview-source
+loading, workflow preparation and direct sampler/document writes are excluded
+while attached: the existing hook does not universally intercept them. Native
+New/Load must retain original storage until checked owner retirement, and final
+disposal must honor refusal, before integration. Complete context lengths and
+allocator freshness remain caller contracts. See [scoped HOST evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/host.json).

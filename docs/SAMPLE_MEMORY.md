@@ -7894,3 +7894,17 @@ identical to the old RAM candidate; that evidence does not qualify the new
 lifetime probe. No native output, IRQ, actual timing, device quiet, physical or
 listening proof is added.
 See [the lineage contract](SAMPLER_PAULA_LINEAGE.md#native-task-unpublished-ram-partition-16-october2026).
+
+
+The separate HOST-only mutation compositor now holds the existing editor veto
+until its genuine three-source/unpublished queue ownership and dedicated Paula
+cache positively end, followed by separate exact-owner detach. Two sanitizer
+executions, against the preserved working and committed editor source pairs,
+each pass13 cases: seven complete cleanups and six retained uncertain contexts.
+Master/cache/save bytes and the protected baseline are preserved. Nine separate
+object-only eligibility checks pass, including genuine native rejection.
+This adds no source-pointer, receipt or quiet authority and no native/frontend
+output eligibility. Preview/workflow/direct mutation routes and native
+New/Load/final teardown still require explicit integration. No native,
+Amiberry or physical execution of this compositor is claimed. See [the barrier
+contract and limits](SAMPLER_PAULA_LINEAGE.md#exclusive-host-editor-mutation-barrier-17-october2026).

@@ -8,7 +8,10 @@ portability fixes retain all formatting tokens and the inventory range contract;
 additional controls check every sampler-header byte. The723832-byte HUNK is built,
 but its Amiberry/A1200 execution remains NOT_RUN. Native IRQ/PLAY and actual timing,
 device output and listening remain inhibited/unqualified. See
-[the entry and evidence](NATIVE_ROLLING_ENTRY.md).
+[the entry and evidence](NATIVE_ROLLING_ENTRY.md). The full fixture now also
+has a343956-byte section-GC build below the unchanged512KiB input bound, without
+removing cases or assertions. Exact native execution remains NOT_RUN; see its
+[compact build record](../evidence/enhanced-editor/rolling-native-entry/gc-build.json).
 
 ## Native clock owner output protection —16 October2026
 

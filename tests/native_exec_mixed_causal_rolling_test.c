@@ -2,6 +2,14 @@
  * Only its exact terminal success oracle is mapped to a short capture marker.
  * All original assertions/diagnostics stay live. Clocks/buses remain MODELS;
  * no CIA, interrupts, output, audio, MMIO or physical memory-placement proof. */
+/* The four donor suite entries are never invoked by this native entry.
+ * Prior internal declarations preserve their original definitions and all
+ * genuine rolling68 calls, while allowing unused donor-only code to be omitted.
+ * This changes no cases, assertions, compiler warnings or staging limits. */
+static int ct_committed_resource_fixture_not_called(void) __attribute__((unused));
+static int inherited_causal_pair_suite_not_called(void) __attribute__((unused));
+static int cs_typed43_donor_not_called(void) __attribute__((unused));
+static int sl_original_producer62_not_called(void) __attribute__((unused));
 #define puts pt_rolling_native_fixture_puts
 #define PT_PRIVATE_ROLLING_RAM_FIXTURE_ENTRY pt_rolling_original_68
 #include "native_mixed_causal_ram_rolling_song_test.c"

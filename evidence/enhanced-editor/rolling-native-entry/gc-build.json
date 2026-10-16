@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "state": "FULL_ROLLING68_GC_NATIVE_BUILD_PASS_FITS_UNCHANGED_INPUT_BOUND_NATIVE_NOT_RUN",
+  "originalFixtureCases": 68,
+  "caseBodyAndAssertionsUnchanged": true,
+  "allSamplerHeaderByteControlsRetained": true,
+  "exactHostCodeAndDriverMatchPassingActualRun": true,
+  "hostTestsNotRerunForNativeRecipeOnlyChange": true,
+  "fourUncalledDonorEntriesInternalOnly": true,
+  "baseCompilerFlagsWarningsAndSevenRuntimesUnchanged": true,
+  "extraCompileFlags": [
+    "-ffunction-sections",
+    "-fdata-sections"
+  ],
+  "extraLinkFlags": [
+    "-Wl,--gc-sections"
+  ],
+  "ltoUsed": false,
+  "executablePackedOrSelfDecompressed": false,
+  "testCasesSplitOrOmitted": false,
+  "originalInputBoundBytes": 524288,
+  "previousCompleteCandidatesBytes": [
+    723832,
+    610708
+  ],
+  "candidate": {
+    "bytes": 343956,
+    "sha256": "d93dbcb445649f3129a8b5325b614e9ebd61c22e02d492f0a04ccfbc248bcf22",
+    "crc32": "DECA9522"
+  },
+  "translationUnits": 86,
+  "projectDependenciesIncludingFont": 225,
+  "sdkDependencies": 43,
+  "runtimeInputs": 7,
+  "selectedAssemblerAndLinkerBeforeAndAfterVerified": true,
+  "maximumFixtureLocalFrameBytes": 11832,
+  "wholeCallchainStackQualified": false,
+  "nativeExecution": "NOT_RUN",
+  "physicalExecution": "NOT_RUN",
+  "clockBusStopAreSoftwareModels": true,
+  "nativeIrqAndPlayProvider": "INHIBITED",
+  "recordsSHA256": {
+    "sourceManifest": "805ba3fba1053817cbcff02fb2cfa89b3bf180e83f6a2f647462cb45a7601725",
+    "sameHostCodeBinding": "0dfc5dfa9116816103e9af438129427f00f85543c65c3ba47ec3ff78c949e4a3",
+    "actualHostResult": "be4a253bee803f316e3cfba8f91e64045fdc7b6a002a6d9f07ce8dad576d012f",
+    "actualHostFixtureStdout": "fabb67ced747f983cf45968f936ea8b67fd2c39fa2e2e65cb714ca4f85780594",
+    "actualHostFixtureStderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "nativeManifest": "2f8672309a8a5e6477f542c196ac5d5dabac1aab173bd352b64c1ac9d457e03f",
+    "nativeInvocation": "c264c1402005ac008f5f6396a36e9479959ac03bff0dedccca2c7cf721ad4964",
+    "nativeResult": "7947963481a19a9abc62eafeb24e9a09b238ba984d8ea7d06b00c959b491310a",
+    "nativeLocalFrames": "dc8a6e0f3a963f0c10cf283a4e86a33bdbc028d7b286cf4050aff09e150fc093",
+    "donorVisibilityReview": "51089d311556ffd5a4e144759e22c32e44f18bb67489458007cdb545649f7a14",
+    "gcProbe": "a327643cf7494c3f768660d2d70abea6ed16cc45fca2cf3c9b3da55699e789c8",
+    "gcProbeSymbols": "a8a4edccd63de7206b9075fab24acb83533b5f527c59e9e7682ed5d19c55828e",
+    "originalInputGateRefusal": "d4d4c8f08fc79ec94deac0634f1940a002af79daa6c31c816320c49169857c7c"
+  },
+  "notQualified": [
+    "Native HUNK runtime and CRT/loader startup under section GC",
+    "Actual IRQ synchronization or four-deadline output timing",
+    "Physical placement/device RAM/stop/DMA/audio/listening/full application"
+  ]
+}

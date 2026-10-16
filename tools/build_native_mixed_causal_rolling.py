@@ -21,6 +21,8 @@ import traceback
 SOURCES = ['tests/native_exec_mixed_causal_rolling_test.c', 'src/editor/editor_mixed_causal_prepare.c', 'src/editor/sampler_mixed_readers.c', 'src/core/mixed_readers_causal.c', 'src/core/amigus_trigger_levels.c', 'src/core/mixed_scheduled_readers.c', 'src/core/elapsed_clock.c', 'src/editor/sampler_paula.c', 'src/editor/sampler_wavetable.c', 'src/core/amigus_voice_plan.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/pattern.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/editor/editor.c', 'src/editor/song.c', 'src/editor/view.c', 'src/editor/workflow.c', 'src/editor/sample_range.c', 'src/editor/wave_summary.c', 'src/core/sample_usage.c', 'src/core/event_resource.c', 'src/core/flow.c', 'src/core/pitch.c', 'src/core/amigus_reservation.c', 'src/editor/sampler_invert_song.c', 'src/core/render_invert.c', 'src/core/invert_bank.c', 'src/core/invert_sequence.c', 'src/core/invert_pcm.c', 'src/core/invert_loop.c', 'src/core/amigus_session.c', 'src/core/amigus_fifo.c', 'src/core/amigus_pcm_pack.c', 'src/core/studio_consumer.c', 'src/core/studio_pump.c', 'src/core/studio_queue.c', 'src/editor/editor_studio.c', 'src/editor/sampler_song.c', 'src/editor/sampler_studio.c', 'src/core/studio_song.c', 'src/core/studio_plan.c', 'src/core/render.c', 'src/core/timeline.c', 'src/core/frame_clock.c', 'src/core/studio_mix.c', 'src/core/voice.c', 'src/editor/wavetable_song.c', 'src/editor/wavetable_voices.c', 'src/editor/wavetable_dispatch.c', 'src/core/amigus_render_voice.c', 'src/editor/paula_preflight.c', 'src/core/paula_render_voice.c', 'src/core/amigus_wavetable_cache.c', 'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/editor/editor_mixed.c', 'src/editor/mixed_owner.c', 'src/editor/mixed_transport.c', 'src/editor/mixed_preflight.c', 'src/editor/paula_voices.c', 'src/editor/paula_dispatch.c', 'src/editor/editor_wavetable.c', 'src/platform/sample_import.c', 'src/platform/raw_import.c', 'src/platform/mod_import.c', 'src/platform/pp20_import.c', 'src/editor/editor_mixed_causal_song_pair.c', 'src/editor/editor_mixed_causal_song_lineage.c', 'src/editor/sampler_establish.c', 'src/editor/mixed_quantized_audit.c', 'src/editor/mixed_readers_plan_normalize.c', 'src/native/readers_ram/native_mixed_causal_ram_port.c', 'src/editor/sampler_lifetime.c']
 FLAGS = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
          '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', '-fbbb=-']
+EXTRA_COMPILE_FLAGS = ['-ffunction-sections', '-fdata-sections']
+EXTRA_LINK_FLAGS = ['-Wl,--gc-sections']
 RUNTIMES = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
             'libstubs.a', 'libamiga.a', 'libgcc.a']
 TARGET = 'PTMixedCausalRollingTest'
@@ -160,7 +162,7 @@ def main():
               'base_commit': complete['base_commit'], 'base_tree': complete['base_tree'],
               'source_files_before': len(expected), 'source_fingerprint': source_fingerprint(expected),
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
-              'recipe_contract': convention, 'flags': FLAGS, 'runtime_inputs': {},
+              'recipe_contract': convention, 'flags': FLAGS, 'extra_compile_flags': EXTRA_COMPILE_FLAGS, 'extra_link_flags': EXTRA_LINK_FLAGS, 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
     def persist():
@@ -203,7 +205,7 @@ def main():
             result['runtime_inputs'][name] = pins['runtime_inputs'][name]
         for index, unit in enumerate(SOURCES):
             toolchain_current()
-            text = run([compiler, *FLAGS, '-M', unit], 'dependencies-%02d' % index)
+            text = run([compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, '-M', unit], 'dependencies-%02d' % index)
             for name in dependencies(text):
                 path = (source / name).resolve()
                 if below(path, source):
@@ -215,7 +217,7 @@ def main():
                     sdk_inputs[str(path)] = digest(path)
                 else:
                     raise ValueError('Dependency outside frozen source and pinned SDK roots: ' + str(path))
-        text = run([compiler, *FLAGS, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
+        text = run([compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, '-E', '-dD', SOURCES[0]], 'preprocessed-fixture')
         assertions = re.findall(r'^#define assert\([^\n]*', text, re.MULTILINE)
         assertion = assertions[-1] if assertions else None
         if not assertion or 'sl_check(!!(expression)' not in assertion or text.count('__assert_func (') < 2:
@@ -225,7 +227,7 @@ def main():
         toolchain_current()
         require_source(source, expected)
         binary = out / TARGET
-        argv = [compiler, *FLAGS, *SOURCES, '-o', str(binary)]
+        argv = [compiler, *FLAGS, *EXTRA_COMPILE_FLAGS, *SOURCES, *EXTRA_LINK_FLAGS, '-o', str(binary)]
         compile_commands.append({'name': TARGET, 'directory': str(source), 'argv': argv,
                                  'output': str(binary), 'ordered_translation_units': SOURCES})
         run(argv, TARGET + '.build')
@@ -235,6 +237,7 @@ def main():
         if b'ROLLING RAM NATIVE PASS:' not in raw:
             raise ValueError('Linked product lacks shared assertion-completion marker')
         result['targets'][TARGET] = {'scope': SCOPE, 'source_inputs': SOURCES, 'flags': FLAGS,
+                                     'extra_compile_flags': EXTRA_COMPILE_FLAGS, 'extra_link_flags': EXTRA_LINK_FLAGS,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',

@@ -41,3 +41,30 @@ audio, listening or whole-application acceptance from these host/compiler result
 
 See [compact host/compiler evidence](../evidence/enhanced-editor/rolling-native-entry/host-build.json)
 and [the original rolling ownership contract](NATIVE_MIXED_CAUSAL_RAM_ROLLING.md).
+
+
+## Full fixture below the unchanged staging bound
+
+The first complete candidate exceeded the existing512KiB input bound, so the
+HOST harness refused it before any target operation. Four deliberately uncalled
+donor-suite entries now have internal declarations; no original case, helper
+assertion or musical boundary is removed. That alone reduced the file to610708
+bytes, still too large, and that intermediate product was not admitted.
+
+The separately checked native linker supports function/data sections and removal
+of unreferenced sections. The fixture recipe records these extra options while
+retaining the original base flags, warnings as errors, enabled assertions, all86
+translation units, pinned SDK/runtime inputs and complete-source checks. There is
+no LTO, executable packer, decompressor, case split, larger upload allowance or
+longer runtime limit. The exact HOST code and driver match the passing complete
+68-case entry; only the native link recipe differs, so that HOST result is bound
+rather than reported as a new run.
+
+The resulting HUNK is343956bytes, SHA256
+`d93dbcb445649f3129a8b5325b614e9ebd61c22e02d492f0a04ccfbc248bcf22`,
+CRCDECA9522. The actual selected assembler and linker are checked before and
+after the build. Fixture-local annotations now peak at11832bytes; this remains
+separate from an aggregate Stack/IRQ/WCET bound. Exact Amiberry execution must
+qualify the changed loader/CRT path before physical promotion. Native execution
+is NOT_RUN at this milestone; all earlier compile/gate failures remain preserved.
+See [the scoped compact-build evidence](../evidence/enhanced-editor/rolling-native-entry/gc-build.json).

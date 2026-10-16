@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "state": "HOST_AND_PORTABLE_BUILD_PASS_NATIVE_NOT_RUN",
+  "scope": "Prepared Paula trigger candidate source binding at final preparation, readiness, private apply and public apply. Active pre-existing voices and direct voice API source metadata are separate remaining audit.",
+  "production_change": "Retain all existing currentness/range/address/descriptor checks; additionally use existing actual sample and signed8/channel0/padding key predicate. No new getter, key encoding, source version, pin/refcount mutation or device callback.",
+  "baseline": {
+    "commit": "83be620107139e47571828d31e1d05855c02d071",
+    "wrong_sample_final_preparation_accepted": true,
+    "raw_negative_result_sha256": "3d5c267949c138ec15ff68d7d1ae285ef8e080ca8fbf0dcf20671cc7f6b52e86",
+    "missing_tools_export_failure_preserved_separately": true
+  },
+  "host": {
+    "tests": 7,
+    "modules": 6,
+    "cases": 60,
+    "controls": 12,
+    "refusals": 48,
+    "bits": [
+      8,
+      16,
+      24
+    ],
+    "faults": [
+      "other sample identity",
+      "16-bit representation",
+      "no word padding",
+      "other endian key"
+    ],
+    "assertions": true,
+    "asan": true,
+    "ubsan": true,
+    "genuine_production_donor_keys": true,
+    "no_output_on_refusal": true,
+    "master_bits_and_storage_preserved": true,
+    "readiness_no_mutation": true,
+    "unstarted_candidates_cancelled_with_no_key_repair": true,
+    "confirmed_model_driver_stop_before_cache_release": true,
+    "zero_explicit_owned_bytes_after_close": true,
+    "frozen_inputs": 1260,
+    "result_sha256": "6787eb039be9498820aefe177dc1b9f5ad82156c0a6cf67f7053aafd5e73c986",
+    "inventory_unchanged": true
+  },
+  "native_build": {
+    "candidate_bytes": 203920,
+    "candidate_sha256": "cbcfc574390f901afde22779fc7388b09afa051c2e8c4bd34992b11895fdaa8b",
+    "crc32": "3870F10D",
+    "translation_units": 31,
+    "project_dependencies": 79,
+    "sdk_inputs": 32,
+    "runtime_inputs": 7,
+    "assertions_enabled": true,
+    "pinned_private_builder_sha256": "86b4dd7b2c4cc344f82441b34550fc4d2ccdf75249e382d8469e00238488b7dd",
+    "private_builder": "Established standalone compiler workflow adapted only for exact host source graph, target and marker; no shared recipe execution",
+    "manifest_sha256": "01619f16ab3877255d8ea4d96ecdb8ca4435fdba27178fb32913b6e6ef90cbe1",
+    "selected_assembler_unchanged": true,
+    "maximum_compiler_local_frame_bytes": 36644,
+    "total_stack_qualified": false
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "not_qualified": [
+    "Existing active voices source metadata",
+    "Direct voice API exact source metadata",
+    "Native provider or DMA",
+    "Actual device voice stop",
+    "Output timing or listening"
+  ]
+}

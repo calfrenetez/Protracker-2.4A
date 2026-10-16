@@ -42,6 +42,7 @@ static int prepare_batch(struct pt_paula_voices *v,uint64_t version,unsigned rat
             if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)goto refused;
             e->held=1;memcpy(&e->source,a->voice.pcm,sizeof(e->source));
             if(!pt_sampler_paula_location(v->bridge,a->channel,e->lease,&data,&bytes) ||
+               !pt_sampler_paula_prepared_source_location_validated(v->bridge,a->channel,j,0,e->lease,&data,&bytes) ||
                ((uintptr_t)data&1) || (uint64_t)r.offset+r.length>bytes)goto refused;
             e->offset=r.offset;e->length=r.length;
             e->plan.data=data+r.offset;e->plan.words=(uint16_t)(r.length/2);
@@ -70,6 +71,7 @@ static int validate_batch(struct pt_paula_voices *v,uint64_t version,unsigned ra
            !pt_paula_render_voice(&a->voice,rate,a->gain,(unsigned)v->map[a->channel],caps,&r) ||
            !(prepared?pt_sampler_paula_prepared_location(v->bridge,a->channel,e->lease,&data,&bytes):
               pt_sampler_paula_location(v->bridge,a->channel,e->lease,&data,&bytes)) ||
+           !pt_sampler_paula_prepared_source_location_validated(v->bridge,a->channel,e->sample,0,e->lease,&data,&bytes) ||
            ((uintptr_t)data&1) || (uint64_t)r.offset+r.length>bytes ||
            e->plan.data!=data+r.offset || e->plan.words!=r.length/2 ||
            e->plan.period!=r.period || e->plan.volume!=r.volume)return 0;
@@ -245,6 +247,7 @@ enum pt_cache_result pt_paula_prepare_step_owned(struct pt_paula_prepared *p)
     e->held=1;
     if(!pt_paula_render_voice(&a->voice,p->rate,a->gain,(unsigned)slot,&p->caps,&r) ||
        !pt_sampler_paula_prepared_location(p->bridge,a->channel,e->lease,&data,&bytes) ||
+       !pt_sampler_paula_prepared_source_location_validated(p->bridge,a->channel,e->sample,0,e->lease,&data,&bytes) ||
        ((uintptr_t)data&1) || (uint64_t)r.offset+r.length>bytes)goto refused;
     e->offset=r.offset;e->length=r.length;
     e->plan.data=data+r.offset;e->plan.words=(uint16_t)(r.length/2);e->plan.period=r.period;e->plan.volume=r.volume;
@@ -269,7 +272,7 @@ int pt_paula_prepared_ready_owned(struct pt_paula_prepared *p)
         if(!e->held || e->sample>=p->project->sample_count ||
            a->voice.pcm!=&p->project->samples[e->sample].pcm ||
            memcmp(a->voice.pcm,&e->source,sizeof(e->source)) ||
-           !pt_sampler_paula_prepared_location_validated(p->bridge,a->channel,e->lease,&data,&bytes) ||
+           !pt_sampler_paula_prepared_source_location_validated(p->bridge,a->channel,e->sample,0,e->lease,&data,&bytes) ||
            ((uintptr_t)data&1) || (uint64_t)e->offset+e->length>bytes ||
            e->plan.data!=data+e->offset || e->plan.words!=e->length/2)return 0;
     }

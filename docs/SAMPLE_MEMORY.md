@@ -1,5 +1,24 @@
 # Sample memory and playback ownership
 
+## Prepared dispatcher trigger source binding —16 October2026
+
+The prepared dispatcher now checks each candidate's actual sample and signed8,
+channel0, padded representation at acquisition, final preparation, readiness and
+both private/public apply. A live lease with matching revision/length alone is
+insufficient. Existing descriptor, master, map, address/range and ownership
+checks remain; refusal emits no output and cancellation releases only unstarted
+candidates. Existing active-voice metadata and the direct voice API remain a
+separate source-binding audit, not qualified by this change.
+
+The unchanged baseline accepts a genuine wrong-sample cache key at final
+preparation. The fixed60-case regression passes:12controls/48refusals across
+8/16/24-bit masters and four preparation/apply boundaries, with real donor keys,
+master/cache beforeimages and genuine cancellation/driver-stop cleanup. Seven
+sanitizer tests in six modules pass. A pinned203,920-byte portable HUNK builds;
+Amiberry and physical execution remain NOT_RUN at preparation. No device,
+voice-stop, scheduled activation, output timing or listening acceptance follows.
+See [scoped host/build evidence](../evidence/enhanced-editor/dispatch-source-binding/host-build.json).
+
 ## Independent future-trigger source binding — 16 October 2026
 
 The older future-trigger owner now shares the actual sample/side/representation

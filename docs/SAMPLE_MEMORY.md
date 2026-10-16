@@ -87,13 +87,21 @@ does not establish a whole-call-chain bound. Backend clocks, adoption and
 retirement remain software models; borrowed initial stack storage and internal
 stdio allocations are outside the explicit pool accounting. Exact guest/host
 cleanup, saved-file restoration, independent observation, public release, owned
-service stop and a separate final idle check pass. Real-A1200 execution remains
-NOT_RUN pending its separately guarded physical operation. Safari access has
-been observed available in View Only; freshness must be rechecked before use. Historical physical packets
-using earlier bytes remain separate and cannot acquire current qualification.
-No device, DMA/voice-stop, IRQ, scheduled output, timing or listening acceptance
-follows. See the [current host/build](../evidence/enhanced-editor/readers-current-memory/host-build.json)
-and [exact emulator evidence](../evidence/enhanced-editor/readers-current-memory/emulator.json).
+service stop and a separate final idle check pass.
+
+The same exact candidate now also passes once on the real A1200: all66 cases,
+RC0, eight lines, final closed sidecar and observed1MiB Stack. The actual Exec
+Fast-only/Chip-only allocation and bounded refusal checks pass. Exact input and
+execution RAM cleanup, independent task absence, unchanged installed files,
+disconnected transport, public release, own-service exit and a separate final
+idle observation pass. Safari is authenticated in View Only before and after;
+no browser control/input was acquired. Earlier physical bytes remain separate.
+
+Backend adoption/clock/retirement remain models. No actual device, DMA/voice-stop,
+IRQ, scheduled output, timing, full frontend or listening acceptance follows.
+See the [current host/build](../evidence/enhanced-editor/readers-current-memory/host-build.json),
+[exact emulator evidence](../evidence/enhanced-editor/readers-current-memory/emulator.json)
+and [exact A1200 memory evidence](../evidence/enhanced-editor/readers-current-memory/physical.json).
 
 ## Active Paula original-source binding —16 October2026
 

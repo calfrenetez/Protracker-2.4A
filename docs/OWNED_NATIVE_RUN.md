@@ -25,7 +25,11 @@ observation path now passes once with the exact Studio master-protection fixture
 48 refusals and48 controls, RC0 and independent cleanup/release/final idle. An
 offline check revalidates the raw capture and read-only source inventory. The
 actual guest run does not inject marker disappearance; those transitions remain
-host-model evidence. Physical execution of the new path remains pending.
+host-model evidence. The same new observation path also completes the exact202,556-byte66-case
+reader-memory fixture once on the A1200, followed by independent RAM/task
+absence, public release, own-service exit and separate final idle. Safari stays
+in View Only throughout. These are RAM-only functional results, not device stop,
+DMA, exact timing or listening acceptance.
 Directory replies are observations, not atomic filesystem or handle-close proof.
 See [scoped evidence](../evidence/enhanced-editor/native-completion-observation/host.json).
 

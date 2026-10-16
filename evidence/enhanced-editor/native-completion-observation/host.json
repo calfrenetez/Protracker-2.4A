@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "state": "HOST_PASS_AND_EXACT_STUDIO_NATIVE_PATH_PASS_INDEPENDENTLY_RELEASED",
+  "state": "HOST_PASS_STUDIO_NATIVE_AND_A1200_MEMORY_PATHS_INDEPENDENTLY_RELEASED",
   "source_scope": "Owned Python native-fixture protocol only; application candidate bytes and musical schedule unchanged",
   "baseline": "Original protocol reproduces error when acknowledged staging launch temporarily removes marker",
   "change": "Observe the complete owned directory while marker is absent/short; only exact terminal size permits strict content read; unknown entries/kinds and oversize/error replies still fail closed",
@@ -31,7 +31,13 @@
     "real_guest_transient_absence_injected": false,
     "offline_capture_and_readonly_inventory_reverified": true
   },
-  "physical_execution": "NOT_RUN",
+  "physical_execution": {
+    "state": "Exact emulator-qualified202556-byte66-case A1200 RAM-only fixture PASS and independently released",
+    "evidence": "../readers-current-memory/physical.json",
+    "evidenceSHA256": "a8a72b8abd8fc57fff2b862cda686273e6c06f86f9cca3adc399a8a9af3c8334",
+    "actual_transient_absence_injected": false,
+    "device_timing_listening_qualified": false
+  },
   "not_qualified": [
     "Atomic filesystem/daemon completeness or handle-close semantics",
     "Native/physical app/device/timing/listening acceptance"

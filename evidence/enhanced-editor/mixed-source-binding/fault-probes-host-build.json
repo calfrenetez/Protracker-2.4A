@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "state": "GENUINE_FAULT_PROBES_HOST_AND_PINNED_68K_BUILD_PASS_NATIVE_NOT_RUN",
+  "base_commit": "3df5d5dc54dfef1ed952c8db4acd1c20e92b8512",
+  "source_manifest_sha256": "92d26db6df9d02d34de3d7698c07487cea2cce1f44daeaa8101ba132d7ac0000",
+  "frozen_inputs": 1374,
+  "inventory_unchanged": true,
+  "overlays": [
+    "tests/native_mixed_binding_fault_probe_test.c",
+    "tests/test_native_mixed_binding_fault_probe.py",
+    "tools/build_mixed_source_binding_test.py"
+  ],
+  "host": {
+    "tests": 5,
+    "modules": 3,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "assertions": true,
+    "warnings_as_errors": true,
+    "scope": "Two actual one-case faults, earlier control, default full495 matrix and all six75/90-case components",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "7c14ba7a4e5de1fb43a5effb5a03118e98a5970cf7ad144a39c53ce01dc0cef0"
+  },
+  "probes": {
+    "paula-before": {
+      "candidate": {
+        "bytes": 296828,
+        "sha256": "c8c3315d5bc9b9519d0bcdd9cd13a1655859102ca353cdfb2a81365b49516d4d",
+        "crc32": "01F5F904"
+      },
+      "markers": [
+        "MIXED BINDING TRACE:entered:0:0:0",
+        "MIXED BINDING TRACE:case-start:8:1:1",
+        "MIXED BINDING TRACE:case-made:8:1:1",
+        "MIXED BINDING TRACE:pool-open:8:1:1",
+        "MIXED BINDING TRACE:begin:8:1:1",
+        "MIXED BINDING TRACE:prepared-step:8:1:1",
+        "MIXED BINDING TRACE:prepared-step:8:1:2",
+        "MIXED BINDING TRACE:prepared-step:8:1:3",
+        "MIXED BINDING TRACE:derived-ready:8:1:1",
+        "MIXED BINDING TRACE:checking:8:1:1",
+        "MIXED BINDING TRACE:checked:8:1:1",
+        "MIXED BINDING TRACE:before-close:8:1:1",
+        "MIXED BINDING TRACE:before-drop:8:1:1",
+        "MIXED BINDING TRACE:case-closed:8:1:1",
+        "MIXED BINDING FAULT PROBE PASS:one8mono Paula before-action wrong-sample refusal;genuine factory/cache/pins,unchanged masters and cleanup;other494 and legacy constructor excluded;SOFTWARE_ONLY",
+        "MIXED BINDING TRACE:finished:8:1:1"
+      ],
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "maximum_local_frame_bytes": 11824,
+      "whole_callchain_bound": false,
+      "manifest_sha256": "4f94e0d1bf148da5cb2fa03dcc2131ced81f94f8d2b6b2ae191017a59c91ff44"
+    },
+    "amigus-active": {
+      "candidate": {
+        "bytes": 296848,
+        "sha256": "9b705fc652a5eea7fd865fbe9a9f3a92dc18f7467ceb87df2f40f0b6a261c40c",
+        "crc32": "1F6ABE24"
+      },
+      "markers": [
+        "MIXED BINDING TRACE:entered:0:0:0",
+        "MIXED BINDING TRACE:case-start:8:1:1",
+        "MIXED BINDING TRACE:case-made:8:1:1",
+        "MIXED BINDING TRACE:pool-open:8:1:1",
+        "MIXED BINDING TRACE:derived-ready:8:1:1",
+        "MIXED BINDING TRACE:checking:8:1:1",
+        "MIXED BINDING TRACE:checked:8:1:1",
+        "MIXED BINDING TRACE:before-close:8:1:1",
+        "MIXED BINDING TRACE:before-drop:8:1:1",
+        "MIXED BINDING TRACE:case-closed:8:1:1",
+        "MIXED BINDING FAULT PROBE PASS:one8mono AmiGUS16le active wrong-sample refusal;genuine pins retained to independent retirement,unchanged masters and bus;other494 and legacy constructor excluded;SOFTWARE_ONLY",
+        "MIXED BINDING TRACE:finished:8:1:1"
+      ],
+      "units": 30,
+      "project_dependencies": 89,
+      "sdk_dependencies": 32,
+      "runtime_inputs": 7,
+      "assertions": true,
+      "selected_assembler_sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "maximum_local_frame_bytes": 11824,
+      "whole_callchain_bound": false,
+      "manifest_sha256": "583d4a5e38f672a95de2cb638dde8f0f0286bff5fcd644b968af957c623ec2d2"
+    }
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "production_changed": false,
+  "historical_native_timeouts": "Original failed495/75-case transactions retained; cause unconfirmed; no unchanged replay or deadline widening",
+  "not_qualified": [
+    "Native execution or whole matrix completion",
+    "Exec memory-class or total-library allocation accounting",
+    "Whole callchain stack/WCET",
+    "Device RAM capacity/completion/ordering/actual voice-stop",
+    "Native output/IRQ/exact musical timing/audio/listening"
+  ]
+}

@@ -198,3 +198,25 @@ HOLD remains. This qualifies the one control path only. It neither establishes
 the cause of the earlier deadlines nor qualifies completion of the75/495-case
 candidates. Physical execution remains NOT_RUN. See
 [scoped emulator evidence](../evidence/enhanced-editor/mixed-source-binding/probe-emulator.json).
+
+## Separate wrong-source diagnostic selections —16 October2026
+
+Two further opt-in selections execute one genuine8mono negative case each:
+`--component 8mono --fault-probe paula-before` checks Paula before-action
+wrong-sample refusal; `--fault-probe amigus-active` checks active AmiGUS16le
+wrong-sample refusal and retained pins through independent command/reader
+retirement. They call the existing binding-case function and its original master,
+cache, bus, ownership and cleanup assertions. Neither repairs the corrupted key
+to release resources. Each excludes the other494 cases and legacy constructor.
+
+The exact16-line/12-line stdout contracts and separately closed sidecars pass
+under assertions, ASan/UBSan and warnings as errors. The earlier control and the
+complete495-case HOST fixture, including all six components, still pass: five
+tests in three modules from1,374 unchanged frozen inputs. Two pinned30-unit
+portable HUNKs build with89 project bodies,32 SDK inputs and seven runtime inputs.
+The11,824-byte maximum compiler local frame is not a whole-call-chain bound.
+Native/Amiberry/physical execution remains NOT_RUN at preparation. The earlier
+timeouts retain their original evidence and cause remains unconfirmed. This
+adds no output activation, IRQ, device RAM capacity/completion/stop, exact live
+timing or listening acceptance. See
+[fault-probe host/build evidence](../evidence/enhanced-editor/mixed-source-binding/fault-probes-host-build.json).

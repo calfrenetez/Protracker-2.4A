@@ -149,9 +149,13 @@ def main():
                     help='One source bit-depth/channel matrix; excludes the separate legacy constructor')
     ap.add_argument('--probe', action='store_true',
                     help='One8mono Paula control with a separately closed phase trace; not the75-case matrix')
+    ap.add_argument('--fault-probe', choices=['paula-before', 'amigus-active'],
+                    help='One genuine wrong-sample refusal with a closed phase trace; not the75-case matrix')
     args = ap.parse_args()
     if args.probe and args.component != '8mono':
         ap.error('--probe requires --component8mono')
+    if args.fault_probe and (args.component != '8mono' or args.probe):
+        ap.error('--fault-probe requires --component8mono and excludes --probe')
     flags, target, marker, marker_occurrences = list(FLAGS), TARGET, MARKER, 1
     units = list(SOURCES)
     if args.component:
@@ -184,6 +188,32 @@ def main():
             raise ValueError('Exact bounded16-line probe contract required')
         target, marker, marker_occurrences = 'PTMixed8MonoProbeTest', markers[-2], 1
         units[0] = 'tests/native_mixed_binding_probe_test.c'
+    if args.fault_probe:
+        probe = ast.parse((source / 'tests/test_native_mixed_binding_fault_probe.py').read_text())
+        imports = [n for n in probe.body if isinstance(n, ast.ImportFrom)
+                   and n.module == 'test_sampler_mixed_source_binding']
+        declaration = next(n.value for n in probe.body if isinstance(n, ast.Assign)
+                           and any(isinstance(t, ast.Name) and t.id == 'SOURCES' for t in n.targets))
+        if (len(imports) != 1 or [(n.name, n.asname) for n in imports[0].names] != [('SOURCES', 'MIXED_SOURCES')]
+                or ast.unparse(declaration) != "['tests/native_mixed_binding_fault_probe_test.c', *MIXED_SOURCES[1:]]"):
+            raise ValueError('Exact genuine fault probe source declaration/import changed')
+        probes = next(ast.literal_eval(n.value) for n in probe.body if isinstance(n, ast.Assign)
+                      and any(isinstance(t, ast.Name) and t.id == 'PROBES' for t in n.targets))
+        selected = probes[args.fault_probe]
+        selection, target, count = {
+            'paula-before': (1, 'PTMixedPaulaFaultProbe', 16),
+            'amigus-active': (2, 'PTMixedAmigusFaultProbe', 12),
+        }[args.fault_probe]
+        markers = selected['markers']
+        if (set(probes) != {'paula-before', 'amigus-active'} or selected['selection'] != selection
+                or selected['target'] != target or len(markers) != count or len(set(markers)) != count
+                or markers[-1] != 'MIXED BINDING TRACE:finished:8:1:1'
+                or any(not isinstance(x, str) or not x or not x.isascii() or not x.isprintable()
+                       or len(x) > 256 for x in markers)):
+            raise ValueError('Exact bounded genuine fault probe contract required')
+        marker, marker_occurrences = markers[-2], 1
+        flags += ['-DPT_MIXED_FAULT_PROBE='+str(selection)]
+        units[0] = 'tests/native_mixed_binding_fault_probe_test.c'
     out = args.out.resolve()
     manifest_input, pin_input = args.source_manifest.resolve(), args.pins.resolve()
     if out.exists() or below(out, source) or below(source, out):
@@ -221,6 +251,7 @@ def main():
               'compiler': pins['compiler'], 'python': python, 'builder': builder,
               'recipe_contract': convention, 'flags': flags, 'fixture_component': args.component or 'full',
               'single_control_probe': args.probe,
+              'single_fault_probe': args.fault_probe,
               'legacy_constructor_in_fixture': not bool(args.component), 'runtime_inputs': {},
               'runtime_paths': runtime_paths, 'commands': commands, 'targets': {}}
 
@@ -298,6 +329,7 @@ def main():
         result['targets'][target] = {'scope': SCOPE, 'source_inputs': units, 'flags': flags,
                                      'fixture_component': args.component or 'full',
                                      'single_control_probe': args.probe, 'markers': markers,
+                                     'single_fault_probe': args.fault_probe,
                                      'dependencies': dict(sorted(canonical_inputs.items())),
                                      'external_sdk_dependencies': dict(sorted(sdk_inputs.items())),
                                      'binary': record(binary), 'format': 'HUNK_HEADER0x000003f3',

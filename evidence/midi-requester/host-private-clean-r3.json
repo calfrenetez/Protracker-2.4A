@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "scope": "Actual revision3 private portable requester-model HOST pass only; native window excluded/unbound",
+  "status": "PASS",
+  "sourceRevision": 3,
+  "precompileOriginalSourceObservation": {
+    "commit": "a2399babfa19df23b1c21fef811369435e2dc36a",
+    "originalBodies": 73,
+    "allEqualFrozenSourceClosure": true,
+    "meaning": "Source equality observation, not separate runtime acceptance"
+  },
+  "editorPairKind": "COMPLETE_CLEAN_GIT_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69993,
+      "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6646,
+      "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    }
+  },
+  "qualifiedRequesterBodies": {
+    "src/native/midi_requester.h": {
+      "bytes": 4764,
+      "sha256": "9ce44efc2fc59408b36d646e0f7f63501b7b1437f93ecd49255e93413c6abbe0"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 8262,
+      "sha256": "721b4ef6f336abf112e64389bb56ff3bec526e0cdfcd9bc75dcd007b43b068ba"
+    },
+    "tests/midi_requester_model_test.c": {
+      "bytes": 15927,
+      "sha256": "3298a580468d9ba674563a897d9325909df9c705fe8ed07ed229a2dc082cd8ac"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 32,
+    "literalBodies": 76,
+    "sha256": "0782d4cf0d7f79996d47a4389856a77f38a77968590c198f918f6c7ac1b261cc",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "outerTimeoutSeconds": 180,
+  "compileSeconds": 7.965758582984563,
+  "fixtureSeconds": 0.30036383401602507,
+  "outerSeconds": 8.548155166994547,
+  "returnCode": 0,
+  "fixtureGroups": 8,
+  "terminalOracle": {
+    "bytes": 161,
+    "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+  },
+  "emptyStreams": {
+    "compileStdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compileStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixtureStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "supportedModelPlacement": "Separate live zeroed allocation, context stores pointer only; actual complete model/context disjoint assertion; model retained until after genuine journal disposal/controller close, or statically with HELD owner",
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "historicalR2": {
+    "actualResult": "HOST_PASS",
+    "returnCode": 0,
+    "outerSeconds": 8.299262707994785,
+    "supportedPlacement": "NOT_QUALIFIED",
+    "reason": "Embedded model overlapped allocator/guard fixture context under expanded contract",
+    "originalSourceControlStreamsPreserved": true,
+    "qualificationNotRelabelled": true
+  },
+  "proposedCanonicalSuccessor": {
+    "workingPair": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "qualification": "NOT_RUN",
+    "sourceClosureSHA256": "04a574ee9d4d572d8c80c5a9e419c1451e94e0024698275b05a6c7cf901ef578",
+    "exactPairSelector": "Exactly complete known clean or working pair; pure6cases prepared, NOT_RUN for requester successor"
+  },
+  "acceptanceNotEstablished": [
+    "native window ABI/link/runtime",
+    "visible frontend or IDCMP/keyboard/rendering",
+    "parent input isolation",
+    "durable native owner/document transition composition",
+    "CAMD discovery/open/link/message or route activation",
+    "recording or clock traffic",
+    "exact scheduling",
+    "emulator",
+    "physical A1200/AmiGUS",
+    "hardware quiet",
+    "human listening",
+    "release acceptance"
+  ]
+}

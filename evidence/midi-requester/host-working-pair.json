@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "scope": "Actual canonical portable requester-model HOST qualification with complete working editor pair; private R3 clean run is separate",
+  "status": "PASS",
+  "sourceRevision": 3,
+  "baseGitBeforeRequesterAdoption": "a2399babfa19df23b1c21fef811369435e2dc36a",
+  "editorPairKind": "COMPLETE_CURRENT_WORKING_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    }
+  },
+  "pairAdmission": "EXACT_ONE_OF_TWO_COMPLETE_KNOWN_PAIRS",
+  "unittestMethods": 3,
+  "purePairAdmissionCases": 6,
+  "CFixtureGroups": 8,
+  "qualifiedRequesterBodies": {
+    "src/native/midi_requester.h": {
+      "bytes": 4764,
+      "sha256": "9ce44efc2fc59408b36d646e0f7f63501b7b1437f93ecd49255e93413c6abbe0"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 8262,
+      "sha256": "721b4ef6f336abf112e64389bb56ff3bec526e0cdfcd9bc75dcd007b43b068ba"
+    },
+    "tests/midi_requester_model_test.c": {
+      "bytes": 15927,
+      "sha256": "3298a580468d9ba674563a897d9325909df9c705fe8ed07ed229a2dc082cd8ac"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 32,
+    "literalBodies": 76,
+    "sha256": "04a574ee9d4d572d8c80c5a9e419c1451e94e0024698275b05a6c7cf901ef578",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "wrapper": {
+    "path": "tests/test_midi_requester_model.py",
+    "bytes": 18583,
+    "sha256": "e1518a1b725b0136b3d7468940bcf0dc156584755913930de53aa4fdba0d0a23"
+  },
+  "snapshotHelper": {
+    "path": "tests/test_native_mixed_causal_rolling_entry.py",
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "outerTimeoutSeconds": 180,
+  "compileSeconds": 7.6753707920142915,
+  "fixtureSeconds": 0.3006745000020601,
+  "outerSeconds": 8.28013137500966,
+  "returnCode": 0,
+  "terminalOracle": {
+    "bytes": 161,
+    "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+  },
+  "emptyStreams": {
+    "compileStdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compileStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixtureStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "independentR3SourceReview": {
+    "bytes": 4011,
+    "sha256": "d33056a260651b7898d6ea6a4093d88f27e19f8fd7c2b8b295b748e2b9157088",
+    "finding": "No material finding in prior source-only placement/lifetime review; not an additional execution"
+  },
+  "historicalQualifications": {
+    "privateR3CleanPair": "Separate actual PASS; its canonical successor NOT_RUN field describes its earlier boundary",
+    "R2": "Actual PASS preserved; supported model placement NOT_QUALIFIED; source/control/streams are not relabelled"
+  },
+  "limits": [
+    "Only complete known editor C/H pairs admitted; no mixed halves or arbitrary override",
+    "Caller model must be separately owned and disjoint from complete original live source/controller/context spans; opaque-prefix check is not arbitrary spatial admission",
+    "Native window remains private, uncompiled/unbound; no visible frontend or actual IDCMP/keyboard/rendering acceptance",
+    "No CAMD discovery/open/link/delivery, route activation, recording/clock traffic, exact scheduling, native ABI/link/runtime, emulator, physical, hardware quiet, listening or release acceptance"
+  ]
+}

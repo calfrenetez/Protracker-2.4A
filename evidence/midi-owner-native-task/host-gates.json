@@ -1,0 +1,141 @@
+{
+  "state": "HOST_PREPROCESS_ONLY_PASS",
+  "scope": "MIDI native-partition gate refusals on real HOST; default/HOST token preservation. No native admission or activation.",
+  "sources": {
+    "frozen_R2_source_plan": {
+      "bytes": 6905,
+      "sha256": "bb1eb25c799f45b23de82ca4861de63e6fb4142821001634c195a8c25b29b319"
+    },
+    "gate_control_plan": {
+      "bytes": 3310,
+      "sha256": "092c9fc117ff51effb5c6f7317ae99e2430f25495f3942e1dee65ce4074d155c"
+    },
+    "qualifier": {
+      "bytes": 7853,
+      "sha256": "03eb8c5396cf2a1d773fcecd76e84f29c46d3fd94c335928c8969cd96b11c7d8"
+    },
+    "literal_inputs": {
+      "bytes": 10246,
+      "sha256": "dadeaf1ad7e20ccc76bb5c81360f777d1ab27829160e82a37640888df93e187a"
+    },
+    "body_files": 66,
+    "bodies_each_tree": 33
+  },
+  "actual": {
+    "attempts": 1,
+    "outer_rc": 0,
+    "outer_timeout": false,
+    "outer_seconds": 0.737658250000095,
+    "gate_cases": 13,
+    "rejecting_new_cases": 10,
+    "positive_header_cases": 3,
+    "preprocessor_children": 21,
+    "expected_RC1_children": 11,
+    "RC0_children": 10,
+    "exact_ordered_error_marker_checks": "PASS",
+    "default_owner_refusal_preserved": "PASS",
+    "token_parity_pairs": [
+      {
+        "pair": "owner-host-admits",
+        "raw_stdout_identical": true,
+        "tokens": {
+          "count": 7862,
+          "sha256": "e482584ad44f19a90d5f7152268038b4673fc4ee3d6fcf72a60b83eb6060c354"
+        },
+        "stdout": {
+          "bytes": 51421,
+          "sha256": "b47682e74bac485d592feb6b8c4a627dcf04ee4f22d98f42de177cb4500377c5"
+        }
+      },
+      {
+        "pair": "requester-default-admits-model-only",
+        "raw_stdout_identical": true,
+        "tokens": {
+          "count": 7879,
+          "sha256": "6bc908ab4419bec9d9ebe59579886d3297bc263aa794e14f692c45f792783c9d"
+        },
+        "stdout": {
+          "bytes": 51554,
+          "sha256": "11d27ddf2e36d433aff7f8ac514524f89144168de3c58454101acda86ab27dc3"
+        }
+      },
+      {
+        "pair": "requester-host-admits-modal",
+        "raw_stdout_identical": true,
+        "tokens": {
+          "count": 8189,
+          "sha256": "7f978e14933741a0e841c8e7b5a0df520bb2eefd6cb5d18f982954e3719e22c3"
+        },
+        "stdout": {
+          "bytes": 54129,
+          "sha256": "b5c1d34b786f90886cb0667fef22477fa22418d1de828f22fe84c46ab4665475"
+        }
+      },
+      {
+        "pair": "model-default-token-parity",
+        "raw_stdout_identical": true,
+        "tokens": {
+          "count": 11057,
+          "sha256": "246c5819fd3d11912fea2c40779a4b94aac36984a0c0598db93152d11a35c281"
+        },
+        "stdout": {
+          "bytes": 65203,
+          "sha256": "128a9ad4246284491a07f4a673e0f657c56fe6cebbd268eae4164d22e09fbc2b"
+        }
+      },
+      {
+        "pair": "model-host-token-parity",
+        "raw_stdout_identical": true,
+        "tokens": {
+          "count": 11872,
+          "sha256": "59f136c7cc92f9d30de5d4db7bfd31dd3e54049cb4af1b1dfd3e53a86951a401"
+        },
+        "stdout": {
+          "bytes": 70232,
+          "sha256": "9a5774dbfa184bc24f99dbffd904f41e3676da18657ebcb32c7fddef7e948dc5"
+        }
+      }
+    ],
+    "positive_stderr_bytes_each": 0,
+    "outer_stdout": {
+      "bytes": 113,
+      "sha256": "f1b56054467ecea2c50ac80ffc25341046baabfd615f6a1ce0a8b70426464c38"
+    },
+    "outer_stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "preservation": {
+    "protected_paths_strict_unchanged": 68,
+    "saved_guard_bytes_unchanged": true,
+    "all_frozen_66_input_bodies_and_controls_match": true,
+    "actual_argv_exact_no_fake_platform_or_SDK_override": true
+  },
+  "tool": {
+    "name": "actual system cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": "C99 -E -P only; no compiler queries or objects"
+  },
+  "acceptance": {
+    "HOST_gate_and_token_checks": "PASS",
+    "compile_link_native_ABI_runtime_Task": "NOT_QUALIFIED",
+    "emulator_physical_frontend_CAMD_output_timing_listening": "NOT_RUN"
+  },
+  "evidence": {
+    "actual_child_record": {
+      "bytes": 23576,
+      "sha256": "3b23dd41df1049d9a65538a68970aa88da9acd497c81ffd7b4adfe2e6037825c"
+    },
+    "actual_outer_record": {
+      "bytes": 449,
+      "sha256": "fa75f77ff5d03312ed2ce1f98baf8b4306c680a272371196be90ffad177b2670"
+    },
+    "independent_saved_audit": {
+      "bytes": 9316,
+      "sha256": "1094d302db6cf98d7be016bba29dec4a0ddc804ad7e31ee7079537b0dcfbc698"
+    }
+  },
+  "audit": "Saved-data inspection only; no rerun, SDK body read, project import or target operation."
+}

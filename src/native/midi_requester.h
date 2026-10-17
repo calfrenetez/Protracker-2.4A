@@ -84,11 +84,18 @@ enum pt_midi_requester_result {
  */
 enum pt_midi_requester_result pt_native_midi_requester(struct Window *,
     struct pt_midi_setup *,unsigned track);
-#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
+#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
+#if defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
+#if PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
+#error "Requester modal native partition is the paired TASK RAM probe only"
+#endif
+#else
 #if PT_MIDI_REQUESTER_OWNER_HOST_ONLY != 1
 #error "Requester modal composition requires explicit HOST-only selection"
 #endif
-/* Include the genuine gate unchanged: this composition has NO native admission. */
+#endif
+/* The owner header keeps its old default/HOST gates and independently checks
+ * the exact genuine native TASK-only qualification partition when selected. */
 #include "../editor/midi_setup_owner.h"
 /* Original zeroed, aligned, stationary, separately owned modal binding. The
  * complete binding, not just its model, must avoid complete original owner/

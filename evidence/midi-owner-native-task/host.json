@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "state": "CURRENT_CANONICAL_WORKING_SIX_HOST_PASS",
+  "scope": "HOST_ONLY",
+  "independentReview": {
+    "bytes": 12862,
+    "sha256": "a799270e6e5a1155d77c48fd1db000081753bb4d2dda5cacba9fe5c9445f9cc6"
+  },
+  "actualRootResult": {
+    "bytes": 6575,
+    "sha256": "2b3e2944a0dc8ced3136190773f4692cf2bd89e5b0d0f113da4e4e19a4f1506d"
+  },
+  "productionPins": {
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 7544,
+      "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 7893,
+      "sha256": "d17ec76f4cc882ec34bc60d69db0e97e68c4f0397e9750e0b43801318a69d50d"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10759,
+      "sha256": "b5ef67da67d6c044ea90e21a007fed80ca7e3c2128292ad05ea0fddeca268316"
+    },
+    "src/native/midi_requester_owner_task_probe.c": {
+      "bytes": 14024,
+      "sha256": "31dbb58910c52e8c2d76ea027efc00048fcb89b1ff4bcc2f3656365dd2300099"
+    }
+  },
+  "actual": {
+    "groups": 6,
+    "allOuterReturncodesZero": true,
+    "seconds": 94.51011258299695,
+    "unittestMethods": 24,
+    "purePairQuartetAdmissionCases": 96,
+    "strictASanUBSanCompileCommands": 8,
+    "fixtureInvocations": 23,
+    "exactOracleBytes": 5605,
+    "compileRuntimeDiagnosticsEmpty": true
+  },
+  "groups": [
+    {
+      "name": "test_midi_setup_owner",
+      "seconds": 8.758766499988269,
+      "translationUnits": [
+        32
+      ],
+      "literalBodies": [
+        76
+      ],
+      "additionalDefaultTUs": null,
+      "selected": "COMPLETE_CURRENT_WORKING_PAIR",
+      "fixtureInvocations": 1,
+      "exactOracleBytes": 170
+    },
+    {
+      "name": "test_midi_setup_document",
+      "seconds": 30.735617041995283,
+      "translationUnits": [
+        86
+      ],
+      "literalBodies": [
+        202
+      ],
+      "additionalDefaultTUs": 84,
+      "selected": "COMPLETE_CURRENT_WORKING_QUARTET",
+      "fixtureInvocations": 10,
+      "exactOracleBytes": 2996
+    },
+    {
+      "name": "test_document_policy",
+      "seconds": 15.242869958019583,
+      "translationUnits": [
+        84
+      ],
+      "literalBodies": [
+        200
+      ],
+      "additionalDefaultTUs": null,
+      "selected": "COMPLETE_CURRENT_WORKING_QUARTET",
+      "fixtureInvocations": 7,
+      "exactOracleBytes": 1666
+    },
+    {
+      "name": "test_midi_requester_model",
+      "seconds": 7.900243709009374,
+      "translationUnits": [
+        32
+      ],
+      "literalBodies": [
+        77
+      ],
+      "additionalDefaultTUs": null,
+      "selected": "COMPLETE_CURRENT_WORKING_PAIR",
+      "fixtureInvocations": 1,
+      "exactOracleBytes": 161
+    },
+    {
+      "name": "test_midi_requester_owner_modal",
+      "seconds": 16.44031191599788,
+      "translationUnits": [
+        33,
+        32
+      ],
+      "literalBodies": [
+        79,
+        77
+      ],
+      "additionalDefaultTUs": null,
+      "selected": "COMPLETE_CURRENT_WORKING_PAIR",
+      "fixtureInvocations": 3,
+      "exactOracleBytes": 474
+    },
+    {
+      "name": "test_midi_requester_modal_document",
+      "seconds": 15.40788479099865,
+      "translationUnits": [
+        87
+      ],
+      "literalBodies": [
+        205
+      ],
+      "additionalDefaultTUs": null,
+      "selected": "COMPLETE_CURRENT_WORKING_QUARTET",
+      "fixtureInvocations": 1,
+      "exactOracleBytes": 138
+    }
+  ],
+  "coverage": {
+    "owner": "8 groups,6 complete/2 rooted retained; original allocator/workspace and genuine journal; repeated by modal legacy",
+    "documentMidi": "8 focused:6 complete/2 rooted retained, opt-in NULL original13 plus separate defaultOFF original13",
+    "policy": "6 focused:5 complete/1 rooted retained, plus original13 action cases",
+    "defaultRequesterModel": "8 groups, also repeated as separate no-HOST modal build",
+    "ownerModal": "7 focused:6 complete/1 rooted retained",
+    "realModalDocument": "1 genuine modal/action prepare-cancel/redo/save/disposal case",
+    "nativeRejectBoundary": "These six runs contain no native rejection compile/preprocessor matrix. Native default/HOST rejection guards stay source-preserved; separate native object/link evidence is not relabelled as HOST or runtime."
+  },
+  "preservation": {
+    "strict68SavedFactsEqual": true,
+    "selected14Historical8SavedFactsEqual": true,
+    "sixWrapperPinOnlyInverseExact": true,
+    "originalFlagsCountsLogicOraclesUnchanged": true,
+    "rootRecordedGuardBytesUnchanged": true,
+    "historicalEvidenceNotRelabelled": true
+  },
+  "limitations": [
+    "Complete current working pairs/quartets; historical clean qualification remains separate",
+    "All child RC0 follows passing wrapper assertions; command records do not serialize every child RC separately",
+    "Guard equality is Root-recorded; raw guard evidence is omitted",
+    "No fresh native-rejection matrix/native runtime/frontend/CAMD/device/output/quiet/IRQ/emulator/physical/timing/listening qualification"
+  ],
+  "sourceStatus": "Actual adopted canonical working bodies; no commit identity inferred."
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "pt24g-experimental-probe-source-recipe-1",
+  "state": "DECLARATIVE_SOURCE_RECIPE_ONLY_NOT_DEFAULT_BUILD_OR_RUNTIME_ADMISSION",
+  "target": "PTMidiRequesterOwnerTaskProbe",
+  "probe": "src/native/midi_requester_owner_task_probe.c",
+  "orderedTranslationUnits": [
+    "src/native/midi_requester_owner_task_probe.c",
+    "src/native/midi_requester_model.c",
+    "src/editor/midi_setup_owner.c",
+    "src/editor/midi_setup.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/pattern.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/editor/sampler_lifetime.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/sample_usage.c",
+    "src/core/event_resource.c",
+    "src/core/flow.c",
+    "src/core/pitch.c",
+    "src/core/render.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/voice.c",
+    "src/native/native_checked_memory.c"
+  ],
+  "featureFlags": [
+    "-DPT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY=1",
+    "-DPT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY=1"
+  ],
+  "actualCC1TargetOptions": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20"
+  ],
+  "languageAndDiagnostics": [
+    "-std=c99",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "preprocessorUndefines": [
+    "NDEBUG"
+  ],
+  "originalDriverSuppliedCRTDefines": [
+    "libnix",
+    "__libnix__",
+    "__libnix"
+  ],
+  "assemblerOptions": [
+    "--traditional-format",
+    "-m68000"
+  ],
+  "actualRequiredBuiltinFacts": {
+    "__GNUC_MINOR__": "5",
+    "__GNUC__": "6",
+    "__STDC_VERSION__": "199901L",
+    "__STRICT_ANSI__": "1",
+    "__amigaos__": "1",
+    "__m68k__": "1"
+  },
+  "projectIncludeOperands": [
+    "src/core",
+    "build/dev"
+  ],
+  "sourceSnapshotPolicy": "Complete coherent clean editor C/H, exact finite source map and genuine pinned tool/SDK profile must be independently admitted; this relative recipe alone does not choose installed headers or execute any build.",
+  "SDKRoutePolicy": "Only genuine reviewed gcc/libnix/sys/Include_H roots, original ordering and classification; no installed fallback, fabricated headers, platformdefines or guards. Actual dependency/ordinaryI equality and unknown-path refusal required.",
+  "nativeProfile": "Paired qualification-only selectors, genuine classic m68k/Amiga; HOST/document selectors excluded. No frontend, window, provider, IRQ, MIDI/audio or timing authority.",
+  "inputSourcePins": {
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 7544,
+      "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 7893,
+      "sha256": "d17ec76f4cc882ec34bc60d69db0e97e68c4f0397e9750e0b43801318a69d50d"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10759,
+      "sha256": "b5ef67da67d6c044ea90e21a007fed80ca7e3c2128292ad05ea0fddeca268316"
+    },
+    "src/native/midi_requester_owner_task_probe.c": {
+      "bytes": 14024,
+      "sha256": "31dbb58910c52e8c2d76ea027efc00048fcb89b1ff4bcc2f3656365dd2300099"
+    }
+  },
+  "oracle": {
+    "ascii": "MIDI OWNER TASK RAM PASS:real editor/owner/modal;apply/cancel/retained redo;dispose/close/final-address rebind;original Fast context;zero ledgers;NO WINDOW/CAMD/OUTPUT AUTHORITY\n",
+    "bytes": 178,
+    "sha256": "8a74eea2511ea5a6e6e937ec734c1568399ed541c9b2b86c44893947257d3b51"
+  },
+  "entry": "main(void); no CLI selectors. PASS only after positive disposal/close/rebind/release and zero ledgers; refusal retains whole process.",
+  "status": {
+    "objectBuild": "SEPARATE_EVIDENCE_REQUIRED",
+    "link": "SEPARATE_EVIDENCE_REQUIRED",
+    "emulator": "NOT_RUN",
+    "physicalA1200": "NOT_RUN"
+  },
+  "stack": "Individual source/buildSU rows do not prove wholeTask stack or WCET",
+  "activation": "Not referenced by Makefile/default core/frontend entrypoints. Maintainers must explicitly prepare a fresh reviewed build/admission; no executable builder is supplied here."
+}

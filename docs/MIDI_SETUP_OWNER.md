@@ -1,10 +1,16 @@
 # MIDI-only HOST setup owner
 
-This component is a serialized MIDI sidecar for ownership qualification. It
+The HOST qualification path is a serialized MIDI sidecar for ownership qualification. It
 requires `PT_MIDI_SETUP_OWNER_HOST_ONLY=1` and rejects native targets. The gate
 remains intentional: this is not native application integration, a document or
 replacement owner, a frontend, or a default activation path. It does not open
 CAMD, send messages, change routes, stop audio or replace the editor barrier.
+
+A separate [experimental ordinary-Task RAM probe](MIDI_OWNER_NATIVE_TASK_PROBE.md)
+uses two explicit native qualification selectors. This exception reuses the same
+owner and controller; it does not admit the native application or document path.
+Default builds and the original HOST target rejection remain unchanged.
+
 
 The original caller-owned sidecar allocates one durable setup-controller workspace
 through the genuine original editor allocator. Its complete capacity and the

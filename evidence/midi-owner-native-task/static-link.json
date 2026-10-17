@@ -1,0 +1,53 @@
+{
+  "state": "STATIC_LINKED_ARTIFACT_REVIEW_COMPLETE_WITH_ORIGINAL_CONTROL_FAILURE",
+  "candidate": {
+    "name": "PTMidiRequesterOwnerTaskProbe",
+    "bytes": 233376,
+    "sha256": "67660884bbebd2e84cae8b4068fa29a139d49460b4a5c2edb3a6510690b0bf6d",
+    "format": "Amiga HUNK/m68k68000"
+  },
+  "originalResult": "LINK_FAILED; two newly created JSON controls changed st_flags0\u219264 and ctime only. Cause unknown; original result/evidence retained.",
+  "observedCommands": {
+    "count": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "linkDiagnosticBytes": 0
+  },
+  "structuralFacts": {
+    "objects": 34,
+    "exactLOADs": 41,
+    "externalNamesResolved": 26,
+    "undefinedSymbols": 0,
+    "startup": "Original nix20 ncrt0 and genuine SysBase",
+    "fiveExecStubs": "Actual original members/C-stack/register/vector paths inspected",
+    "probe": "Emitted apply/cancel/retained-redo; dispose/close/final-address rebind; positive zero-ledger/finish/PASS paths",
+    "markerBytes": 178
+  },
+  "savedPreservation": {
+    "protected": 68,
+    "residentBodyPins": 58,
+    "metadataOnly": 10,
+    "guardEqual": true,
+    "binaryMapFinalFactsEqual": true,
+    "inputRecordsFullEqual": 73,
+    "inputRecordsMetadataOnlyChanged": 2,
+    "inputBodiesChanged": 0
+  },
+  "qualification": {
+    "overallLinkPass": false,
+    "nativeRuntime": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "newToolOrTargetOperationsByReview": 0,
+    "CAMDorOutputAuthority": false
+  },
+  "limits": [
+    "No aggregate stack/WCET, full dynamic-toolchain trace or runtime/physical acceptance.",
+    "CRT performs normal OS library/DOS/Exec calls. Historical whole-archive and control-preservation failures remain failures."
+  ]
+}

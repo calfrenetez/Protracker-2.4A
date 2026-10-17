@@ -1,0 +1,130 @@
+{
+  "ABI": {
+    "OSCalls": "Ordinary external clib Exec callsites remain unresolved until separate link/stub/base review.",
+    "TaskObservations": "Same original Task/nesting checks compiled; no SR/IPL/IRQ proof or native behavior observed.",
+    "byteBits": 8,
+    "endian": "big",
+    "intBytes": 4,
+    "longBytes": 4,
+    "longLongBytes": 8,
+    "pointerBytes": 4,
+    "sizeTBytes": 4
+  },
+  "acceptance": {
+    "executable": "NOT_CREATED",
+    "link": "NOT_PERFORMED",
+    "nativeRuntime": "NOT_RUN",
+    "noWindowCAMDOutputTimingPhysicalListeningAcceptance": true,
+    "targetOperations": 0
+  },
+  "criticalObjects": {
+    "src/editor/midi_setup.c": {
+      "bytes": 5336,
+      "individualSU": {
+        "entries": 25,
+        "largestIndividualBytes": 204,
+        "meaning": "Individual entries only; no whole-Task/IRQ/runtime stack bound."
+      },
+      "sha256": "8ea83a9a2bbe67340b0923b0878a3d1b626c0acacb6a62ab543f2bb194fd86c4"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 4536,
+      "individualSU": {
+        "entries": 20,
+        "largestIndividualBytes": 228,
+        "meaning": "Individual entries only; no whole-Task/IRQ/runtime stack bound."
+      },
+      "sha256": "7aee8e4047be3a6d425a0d3f4c5b74301e1456fa65a1464a30910197bb0184b5"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 3524,
+      "individualSU": {
+        "entries": 12,
+        "largestIndividualBytes": 2264,
+        "meaning": "Individual entries only; no whole-Task/IRQ/runtime stack bound."
+      },
+      "sha256": "01a8a2cdd69b394b62f0afcc4bf86e8c0fbd30648052ae05528018f17d6a7f7c"
+    },
+    "src/native/midi_requester_owner_task_probe.c": {
+      "bytes": 6984,
+      "individualSU": {
+        "entries": 17,
+        "largestIndividualBytes": 292,
+        "meaning": "Individual entries only; no whole-Task/IRQ/runtime stack bound."
+      },
+      "sha256": "a9cffe3b0771b97bce49beff1c79cecd1461fa5fc9f1fbd738c319dd0958cf31"
+    },
+    "src/native/native_checked_memory.c": {
+      "bytes": 3296,
+      "individualSU": {
+        "entries": 15,
+        "largestIndividualBytes": 512,
+        "meaning": "Individual entries only; no whole-Task/IRQ/runtime stack bound."
+      },
+      "sha256": "cfe402089992d1814492f85b5fba327ca142e5c4cfbc820be4cbfb579a3b27df"
+    }
+  },
+  "evidence": {
+    "READYPlan": {
+      "bytes": 60951,
+      "sha256": "0dadd58380ac909c368ddf7297889b82fb19b9a86c21298d00a89b462484319a"
+    },
+    "actualManifest": {
+      "bytes": 864883,
+      "sha256": "e6b3daeebb5f2cf3dbe5b173f0aa05a91ccfe8664d0e4b11d851e169a4ff2e2e"
+    },
+    "actualRootResult": {
+      "bytes": 695,
+      "sha256": "f559afb2bdb8322ace3bf13910774817fde1f3fb57f2570310f75c0d59f4ee5f"
+    },
+    "builder": {
+      "bytes": 15654,
+      "sha256": "ba159e0ad98048513edb40e09f472c091e35bf3eff0b1d25d3e3f096885e710d"
+    },
+    "candidatePlan": {
+      "bytes": 6905,
+      "sha256": "bb1eb25c799f45b23de82ca4861de63e6fb4142821001634c195a8c25b29b319"
+    },
+    "independentReview": {
+      "bytes": 13713,
+      "sha256": "4ddc7d6e6b0b15b84cce461e48657cdf8a14ca2941c86f9dc1e10668073d4bff"
+    }
+  },
+  "redaction": "No private paths,process identifiers,raw metadata,environment values,raw commands oraddresses.",
+  "schemaVersion": 1,
+  "sourceComposition": {
+    "actualProjectSelectedUnion": 81,
+    "actualSDKSelectedUnion": 48,
+    "literalProjectBodies": 81,
+    "originalOwnerAndControllerImplementationUnchanged": true,
+    "profileSDKAllowance": 82,
+    "sourceHistory": "Frozen private clean composition with three nativeTask guards and newprobe; no canonical native adoption inferred.",
+    "units": 34
+  },
+  "stackDiagnostics": {
+    "dynamicBounded": 497,
+    "files": 34,
+    "largestFunction": "pt_pcm_resample_filtered_progress.part.0",
+    "largestIndividualBytes": 16572,
+    "noWholeTaskBoundOrMinimumClaim": true,
+    "rows": 625,
+    "static": 128
+  },
+  "state": "NATIVE_OWNER_TASK_OBJECT_STAGE_PASS_NOT_LINKED_NOT_RUN",
+  "validation": {
+    "UNDEBUGPreservedNoAssertionEmissionPremise": true,
+    "all191SavedInputMetadataAndPinsUnchanged": true,
+    "allCompilerAssemblerDiagnosticsEmpty": true,
+    "allHUNKUnitAndM68k68000": true,
+    "allMEqualsI": true,
+    "allProductAndSourcePinsVerified": true,
+    "allReturnCodes": 0,
+    "commands": 170,
+    "genuineGNU65M68kAmigaosPredefines": true,
+    "objects": 34,
+    "observedOuterSeconds": 14.638894749979954,
+    "savedGuardRecordUnchanged": true,
+    "strictPreservation68Unchanged": true,
+    "twoNativeTaskSelectorsExactly1NoHOSTDocumentOrFakePlatformSelectors": true
+  }
+}

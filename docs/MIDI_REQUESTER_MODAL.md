@@ -1,10 +1,16 @@
 # MIDI requester owner/modal composition
 
-The optional section in `midi_requester.h` and `midi_requester_model.c` composes
+The HOST selection in `midi_requester.h` and `midi_requester_model.c` composes
 the existing model with its [durable owner](MIDI_SETUP_OWNER.md). It requires
 `PT_MIDI_REQUESTER_OWNER_HOST_ONLY=1` and the unchanged HOST-only owner gate,
 which rejects native targets. Default requester behavior and ABI stay unchanged.
 This adds no controller, output owner, change barrier, CAMD operation or frontend.
+
+The separate [ordinary-Task RAM probe](MIDI_OWNER_NATIVE_TASK_PROBE.md) may select
+this same modal body through its paired experimental native options. It opens no
+window and does not enable a frontend, device, output or HOST document route.
+The historical HOST qualifications below keep their original source bindings.
+
 
 One stationary, separately owned binding contains the real owner ticket and
 transient model. Callback-free admission checks its full extent against the exact

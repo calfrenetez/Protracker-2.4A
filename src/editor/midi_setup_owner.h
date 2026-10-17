@@ -1,10 +1,24 @@
 #ifndef PT_MIDI_SETUP_OWNER_H
 #define PT_MIDI_SETUP_OWNER_H
+/* A separate qualification-only partition. This does not admit a frontend,
+ * document transition, interrupt callback or external MIDI/backend operation. */
+#if defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY)
+#if PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1
+#error "Native MIDI owner requires the exact paired TASK RAM probe options"
+#endif
+#if !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
+#error "Native MIDI owner TASK RAM probe requires the genuine classic target"
+#endif
+#if defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#error "Native MIDI owner TASK RAM probe excludes HOST/document composition"
+#endif
+#else
 #if !defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || PT_MIDI_SETUP_OWNER_HOST_ONLY != 1
 #error "Private MIDI setup owner requires explicit HOST-only selection"
 #endif
 #if defined(__amigaos__) || defined(__m68k__) || defined(__AROS__) || defined(__MORPHOS__)
 #error "This private MIDI setup owner has no native admission"
+#endif
 #endif
 #include "midi_setup.h"
 struct pt_midi_setup_owner;

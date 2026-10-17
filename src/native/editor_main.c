@@ -453,8 +453,8 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
 }
 int main(int argc,char **argv)
 {
-    struct pt_view_cache view_cache={0};
-    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",raw_path[1024]="new-sample.raw",raw_input[1024]="",chosen_path[1024];
+    static struct pt_view_cache view_cache={0};
+    static struct pt_paula audio={0};static char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",raw_path[1024]="new-sample.raw",raw_input[1024]="",chosen_path[1024];
     struct pt_allocator allocator={&master_memory,pt_master_allocate,pt_master_release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct MsgPort *clock_port=NULL;struct timerequest *clock_request=NULL;

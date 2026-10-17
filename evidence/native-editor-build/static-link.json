@@ -1,0 +1,58 @@
+{
+  "state": "STATIC_HOST_LINK_TRANSACTION_PASS_PENDING_PROVIDER_ABI_AND_HUNK_REVIEW",
+  "scope": "Complete actual69 C objects plus qualified ordinary replay; no runtime.",
+  "reviewRole": "Control-author saved transaction audit; Root performed actual link.",
+  "actual": {
+    "commandsRC0": 5,
+    "originalInputFullFacts": 81,
+    "allInputFullFacts": 115,
+    "allInputFactsEqual": true,
+    "strictProtected68Equal": true,
+    "guardAndRawREADYEqual": true,
+    "orderedLOADInputs": 77,
+    "applicationObjects": 70,
+    "runtimeInputs": 7,
+    "currentExternalObligations": 103,
+    "ownedGroupsClosed": 5,
+    "retainedHOSTOwners": 0,
+    "internalSeconds": 0.6801534999976866,
+    "externalCompletedUpperSeconds": 11
+  },
+  "binary": {
+    "bytes": 343364,
+    "sha256": "b45e3dd36a429e845116ef0d1c5cf1e6b0235c62bf049bb93eedef91b0406e7f"
+  },
+  "map": {
+    "bytes": 142984,
+    "sha256": "45bc43d42ee5a8a11113d899d1d9bd75d4669d42e8e64f5dea9bd1cf8713d46c"
+  },
+  "source": {
+    "currentGitTrackedBodies": 154,
+    "privateCorrections": 2,
+    "generatedFont": 1,
+    "ordinaryReplayObject": {
+      "bytes": 7024,
+      "sha256": "4382069a6040133ae907d89724e8068ec9ce1f7d23ceec4a38411982bb7ffa52"
+    },
+    "actualObjectManifest": {
+      "bytes": 1362185,
+      "sha256": "31f48a9914722c11d3e142d1152865d7a5df13dc10c443d9b6e01300e144f31e"
+    }
+  },
+  "evidence": {
+    "actualManifest": {
+      "bytes": 62876,
+      "sha256": "b4d2d2eff94d4d25cf7bc2a9abdbe8fc9f593c8b4c6a1866676b34e3be2a4592"
+    },
+    "externalReturn": {
+      "bytes": 227,
+      "sha256": "939bfeb32a0dc358355459566865657ab38857083983b40d022728fa728715ea"
+    }
+  },
+  "limits": [
+    "Current103 provider identities/ABI, full HUNK and startup/manual3base/replay five-argument ABI are separate pending reviews.",
+    "HUNK_HEADER magic/native68000 format/noUND checked here; no full structural parse in this transaction audit.",
+    "Individual main frame3484/SU3632 is not aggregate/whole-Task or shipping launch-stack proof.",
+    "No native application execution, emulator, physical device, scheduling, audio quiet or default activation acceptance."
+  ]
+}

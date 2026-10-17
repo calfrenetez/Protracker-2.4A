@@ -1,0 +1,61 @@
+{
+  "state": "WORKING_MAIN_THREE_STATIC_NATIVE_OBJECT_PASS_NOT_LINKED_NOT_RUNTIME",
+  "scope": "One genuine working main TU with original coherent working headers and pattern source.",
+  "source": {
+    "bytes": 52473,
+    "sha256": "fcef2c241c3d895ccd4e382b59594221a871fc97f0d42787cab3aced6c9f39d1",
+    "exactThreeStaticInverseSHA256": "aec92b7fe5180073a8064fc9ff7d8fc41d1018d22b786cbf5ea922eb23ecb172",
+    "originalDisplayAndPriorFiveOwnEditsPreserved": true
+  },
+  "actual": {
+    "commandsRC0": 5,
+    "diagnosticsBytes": 0,
+    "selectedProject": 64,
+    "selectedSDK": 90,
+    "SDKAllowance": 118,
+    "MEqualsI": true,
+    "originalPatternGuard": true,
+    "strongGlobalBaseStorageBytes": {
+      "IntuitionBase": 4,
+      "GfxBase": 4
+    },
+    "mainFrameReservationBytes": 3536,
+    "mainIndividualSUBytes": 3684,
+    "individualSUEntries": 23,
+    "fullInputFacts": 293,
+    "allFullFactsEqual": true,
+    "strictProtected68Equal": true,
+    "guardAndRawREADYEqual": true,
+    "ownedGroupClosed": true,
+    "retainedHOSTOwners": 0,
+    "rootSeconds": 1.1488525419845246,
+    "externalCompletedUpperSeconds": 15
+  },
+  "object": {
+    "bytes": 34072,
+    "sha256": "82813dce28361a4c2a4d16d887d7280a2f8f8c9bfb689b33fa424499e06bfb9d"
+  },
+  "evidence": {
+    "manifest": {
+      "bytes": 148502,
+      "sha256": "5dca347e695dfbc5f3773f56a6436d2b777958b9e7ab4981d576407dbc92aab9"
+    },
+    "rootResult": {
+      "bytes": 8834,
+      "sha256": "61ac0ae235bb2bec7e45baffb005d65155c3b4397390d9c813610e529d1670ea"
+    },
+    "assembly": {
+      "bytes": 88660,
+      "sha256": "f7a3932e66e61d99bea3f8e06ceefad5e781095b390391d881e52e1cbfcb3e41"
+    },
+    "rawSU": {
+      "bytes": 1279,
+      "sha256": "ef08cb865a9ee95ab4aa0238013246487d6ce6fd8ceae6af039c30d9b0df406a"
+    }
+  },
+  "limits": [
+    "Native object only; no whole working application link, runtime, target or shipping activation.",
+    "Individual SU/frame values are not aggregate/whole-Task/CRT/OS stack proof.",
+    "No clean-main frame or wholeclean69 application acceptance is transferred to this working cohort."
+  ]
+}

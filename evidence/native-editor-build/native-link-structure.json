@@ -1,0 +1,61 @@
+{
+  "artifact": {
+    "bytes": 343364,
+    "name": "PT24GEdit",
+    "sha256": "b45e3dd36a429e845116ef0d1c5cf1e6b0235c62bf049bb93eedef91b0406e7f"
+  },
+  "currentInputs": {
+    "LOADs": 77,
+    "cohort": "Complete clean native application plus genuine replay; exact current object pins verified.",
+    "nativeCObjects": 69,
+    "replayObjects": 1
+  },
+  "limitations": [
+    "No execution, GUI, device, audio, MIDI, emulator or physical acceptance.",
+    "Current103 provider/ownership/startup/replay ABI audit remains separate.",
+    "Historical failures and the original static-stage manifest are preserved."
+  ],
+  "savedOperation": {
+    "all115RecordedInputFullFactsEqual": true,
+    "allReturncodesZero": true,
+    "commands": 5,
+    "nativeInspectionDiagnosticsEmpty": true,
+    "nativeRuntime": "NOT_RUN",
+    "positiveOwnedClosureForAllFive": true,
+    "savedGuardAndRawREADYEqual": true,
+    "strictProtectedEntries": 68
+  },
+  "schemaVersion": 1,
+  "startup": {
+    "aggregateTaskStackMinimum": "NOT_PROVED",
+    "entryOffset": 0,
+    "linkedMainOffset": 10152,
+    "mainFrameBytes": 3484,
+    "stackOptIn": "Not present in this baseline"
+  },
+  "state": "STATIC_APPLICATION_LINK_STRUCTURE_PASS_NOT_RUNTIME",
+  "structure": {
+    "RELOC32": 3416,
+    "allComparedBytesEqual": true,
+    "allWriteAndTargetBoundsValid": true,
+    "completeBytesConsumed": 343364,
+    "currentApplicationFixupsReconstructed": 2938,
+    "currentApplicationInputSections": 87,
+    "currentApplicationPayloadBytesCompared": 285584,
+    "duplicateWriteSites": 0,
+    "hunkAllocationBytes": [
+      299280,
+      6356,
+      52700,
+      5888
+    ],
+    "hunkKinds": [
+      "CODE",
+      "DATA",
+      "BSS",
+      "CODE"
+    ],
+    "replayIdentity": "Distinct fourth hunk, not the first .text hunk.",
+    "runtimeMemberPayloadReconstruction": "Not claimed; current-provider/ABI review is separate."
+  }
+}

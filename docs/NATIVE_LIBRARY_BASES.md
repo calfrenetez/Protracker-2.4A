@@ -19,10 +19,11 @@ Each editor-entry object has one four-byte strong BSS definition for each of
 its two library bases.
 The display changes remain separate from this five-line source correction.
 
-These are object-level checks. Full application linking, library-reference
-lifecycle, whole-Task stack sufficiency, Amiberry execution and physical-A1200
-execution of this editor change remain to be qualified. The requester fixture's
-separate linked/runtime results do not qualify the editor application.
+These initial results are object-level checks. Subsequent full-editor build
+and link results are recorded below. Library-reference lifecycle, whole-Task
+stack sufficiency, Amiberry execution and physical-A1200 execution remain to be
+qualified. The requester fixture's separate linked/runtime results do not
+qualify the editor application.
 
 The ASL requester and Paula playback unit also pass all five strict native
 compiler/object stages. The requester has a four-byte strong BSS `AslBase`;
@@ -31,10 +32,12 @@ arguments or control flow. The actual Paula object retains the expected
 five-argument replay call and return-value check. This checks the object-level
 calling convention, not device ownership or successful playback.
 
-Those two units were among 44 completed units in a 69-unit editor build. That
-build stopped in stem export because the private SDK copy lacked
-`machine/endian.h`. The full build remains failed; the remaining units, linking
-and runtime tests are pending. No compiler warning was disabled to obtain these
-results.
+Those two units were initially among 44 completed units in a 69-unit editor
+build that stopped because the private SDK copy lacked `machine/endian.h`.
+That failed result is preserved. A later build using genuine SDK headers,
+a Linux-only stem-export feature guard and reduced automatic main storage
+completed all 69 units and linked with the ordinary replay object. No compiler
+warning was disabled. Current provider, startup and application runtime checks
+remain separate; see [the native editor build notes](NATIVE_EDITOR_BUILD.md).
 
 The compiler/object results are recorded in [clean-object.json](../evidence/native-library-bases/clean-object.json), [working-object.json](../evidence/native-library-bases/working-object.json) and [asl-paula-objects.json](../evidence/native-library-bases/asl-paula-objects.json).

@@ -1,0 +1,56 @@
+{
+  "state": "NATIVE_OBJECT_BATCH_PASS_NOT_LINKED_NOT_RUNTIME",
+  "scope": "Complete clean application69 C units; independent saved Root-operation audit, reviewer earlier authored main storage reduction.",
+  "actual": {
+    "commands": 345,
+    "units": 69,
+    "projectBodies": 157,
+    "SDKAllowance": 118,
+    "allReturncodesZero": true,
+    "allDiagnosticsEmpty": true,
+    "allCommandAndProductPinsVerified": true,
+    "MEqualsIAllUnits": true,
+    "unknownDependencies": 0,
+    "selectedProjectHeadersAndSources": 157,
+    "selectedSDKBodies": 108,
+    "nativeProfile": "Genuine68000/softfloat/nix20/C99/Os/Werror/NDEBUG undefined",
+    "objects": "69 actual HUNK_UNIT with saved amiga68000 inspection"
+  },
+  "sourceScope": "Coherent clean editor/view.154 tracked unchanged plus two private(main static storage and native stem guard) successors and generated font. Working display cohort not compiled.",
+  "stack": {
+    "mainFrame": 3484,
+    "mainSU": 3632,
+    "historicalMainFrame": 18552,
+    "historicalMainSU": 18700,
+    "individualSUFiles": 69,
+    "aggregateTaskMinimum": "NOT_PROVEN"
+  },
+  "bases": "IntuitionBase/GfxBase/AslBase each strong4-byteBSS, no COMMON; linked CRT ownership pending.",
+  "preservation": {
+    "recordedFullFactsEqual": 340,
+    "protectedEqual": 68,
+    "residentBodyPins": 58,
+    "metadataOnly": 10,
+    "rawREADYAndOperationalPlanEqual": true,
+    "guardAndSDKNamespaceRecordedEqual": true,
+    "ownedClosureConfirmed": true,
+    "retainedOwners": 0
+  },
+  "timing": {
+    "builderSeconds": 43.54340545804007,
+    "supervisedSeconds": 43.68942258396419,
+    "rootSeconds": 43.88541558297584,
+    "completedExternalUpperSeconds": 62.563,
+    "completedExternalBoundSeconds": 180
+  },
+  "pins": {
+    "manifestSHA256": "31f48a9914722c11d3e142d1152865d7a5df13dc10c443d9b6e01300e144f31e",
+    "rootResultSHA256": "9fff27502404033d7d0f552a47c492a00df1395cb34a9ab5012c7449e80fd00d",
+    "sourceMainSHA256": "6effa57f0ca7904c38305698c9161a2955e680151ad8804b6d247f292dccf210"
+  },
+  "limits": [
+    "Object-tier only; link, replay/runtime providers, startup/CRT ownership and final relocations remain unqualified.",
+    "No wholeTask stack minimum, runtime/UI/device/output/physical acceptance.",
+    "Prior failures remain preserved; no target operation or unchanged rebuild by reviewer."
+  ]
+}

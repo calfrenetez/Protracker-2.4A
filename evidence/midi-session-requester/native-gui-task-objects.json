@@ -1,0 +1,68 @@
+{
+  "schema": "protracker-native-object-evidence-v1",
+  "component": "MIDI session requester GUI Task qualification candidate",
+  "state": "NATIVE_OBJECTS_PASS_NOT_LINKED_NOT_RUNTIME",
+  "result": {
+    "bytes": 8317,
+    "sha256": "a71843a45779b5442aa8f443c86ed82c186a9292d1cd86daf9cf342b9ebcbf20"
+  },
+  "manifest": {
+    "bytes": 872701,
+    "sha256": "314303d91b988ee330520615eb70252c2b4299eea9cabe2fb01bcc0a9051ff7e"
+  },
+  "source": {
+    "probeSHA256": "3b2386ed2987c04bc4676c75c3e94b75a96a2f4828ca442a120a86afa0713136",
+    "literalProjectBodies": 98,
+    "orderedTranslationUnits": 43,
+    "SDKAllowance": 92,
+    "actualSelectedSDKHeaders": 82,
+    "actualProjectAndSDKDependencyUnion": 180,
+    "allDependencyAndPreprocessorSetsEqual": true,
+    "unknownPaths": 0
+  },
+  "build": {
+    "commands": 215,
+    "returnCodesAllZero": true,
+    "emptyCompilerAssemblerDiagnostics": true,
+    "allSavedProductsAndCommandStreamsRehashed": true,
+    "objects": 43,
+    "format": "Amiga HUNK_UNIT, m68k:68000",
+    "flags": "68000 / soft-float / nix20 / Os / C99 / Werror / UNDEBUG",
+    "selector": "PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY=1",
+    "actualToolReturnCode": 0,
+    "ownedSupervisorClosed": true,
+    "retainedOwners": 0,
+    "manifestSeconds": 19.272523374995217,
+    "supervisedSeconds": 19.392704125028104,
+    "wholeSeconds": 19.568781375011895,
+    "requiredManifestAndSupervisorSecondsAtMost": 170,
+    "requiredWholeSecondsAtMost": 180
+  },
+  "preservation": {
+    "finiteInputFullFacts": 233,
+    "allBeforeAfterEqual": true,
+    "protectedEntries": 68,
+    "residentBodyPins": 58,
+    "metadataOnlyEntries": 10,
+    "rawREADYAndOperationalPlanEqual": true,
+    "savedGuardFullFactsEqual": true,
+    "directBASEAndSelfBound": true
+  },
+  "stack": {
+    "individualRows": 713,
+    "probeMainIndividualBytes": 696,
+    "largestIndividualBytes": 16572,
+    "emittedEntryRemainingStackGuardBytes": 1048576,
+    "aggregateTaskCRTGUIStack": "NOT_PROVEN"
+  },
+  "futureLink": {
+    "actualCrossUnitUnresolvedImports": 50,
+    "providersAndLOADCount": "REQUIRE_CURRENT_LINK_REVIEW"
+  },
+  "history": "R3 pre-child helper-schema failure remains failed; R4 is the distinct corrected object operation.",
+  "limits": [
+    "Unlinked object qualification only.",
+    "No native executable, runtime186-byte oracle, GUI interaction, port restoration, emulator, physical, device/output or timing acceptance.",
+    "Saved finite preservation evidence; no SDK body reads or live guard/target operation during independent review."
+  ]
+}

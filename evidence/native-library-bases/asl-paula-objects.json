@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "state": "ASL_AND_PAULA_NATIVE_OBJECT_PASS_FULL_EDITOR_BUILD_FAILED",
+  "scope": "Two exact native translation units with explicit ASL base ownership and genuine SDK string casts.",
+  "actualReview": {
+    "bytes": 31406,
+    "sha256": "7db4ba387e5abbdd19457d0f5076c583d9712ccf992d08b0578a4a847f090a92"
+  },
+  "manifest": {
+    "bytes": 814962,
+    "sha256": "e61880d848fa133b5c07c6538333ff799b325354cfe3761a45ca61c2d538f616"
+  },
+  "units": [
+    {
+      "unit": "src/native/file_request.c",
+      "source": {
+        "bytes": 2393,
+        "sha256": "f119330c6d522d958ce367b7aa45b1a62fa8730ff4803edb9f9de3eda7f55052"
+      },
+      "products": {
+        "dependencies": {
+          "bytes": 6505,
+          "sha256": "a7f6beab91576f871928e55e2d20db8dcd522b9a69aa03fa95b166ea3f64b26f"
+        },
+        "preprocessed": {
+          "bytes": 222915,
+          "sha256": "79958789ae2a5a7f3ffb45580c4df87f812886fd805acc022b2809c9ed84ba67"
+        },
+        "assembly": {
+          "bytes": 4266,
+          "sha256": "7a4826b51b85cc8000c6962a048c7b45ba06233cdcc14b23d39f2edb77f340fd"
+        },
+        "rawStackUsage": {
+          "bytes": 88,
+          "sha256": "8f8f95fedbf9fa8448a4dd0bcee2f65192309b00409776c4f9110e51bed134e1"
+        },
+        "object": {
+          "bytes": 1596,
+          "sha256": "d29a24ffeb39d962fb4b066524b81db3f75506ef54c7145d6285b9b7cde71c75"
+        }
+      },
+      "dependencyCounts": {
+        "allowedProject": 157,
+        "allowedSDK": 111,
+        "selectedProject": 2,
+        "selectedSDK": 77,
+        "selectedTotal": 79
+      },
+      "MEqualsI": true,
+      "allFiveStagesRC0AndEmptyDiagnostics": true,
+      "AslBase": {
+        "section": ".bss",
+        "bytes": 4,
+        "strong": true,
+        "COMMON": false
+      }
+    },
+    {
+      "unit": "src/native/paula.c",
+      "source": {
+        "bytes": 15346,
+        "sha256": "128fe1ec73f19d449ccfb8b61ceb97dc2c5bec97923f8ae91d89c9ac9554a04d"
+      },
+      "products": {
+        "dependencies": {
+          "bytes": 4189,
+          "sha256": "591ddeaf29e8ef49fca9bf072cc17ee1ca78a391f2f982177535d0436049938e"
+        },
+        "preprocessed": {
+          "bytes": 144127,
+          "sha256": "6df465dc76cb6ca37cf1b16d237f7c1bf31c9e9a297ae5002e5ddb98b9ba82b7"
+        },
+        "assembly": {
+          "bytes": 47348,
+          "sha256": "9aa82fe9b74e2fca98248b9dada8dbd9384f1d31733665c8fc1298b788bde1cf"
+        },
+        "rawStackUsage": {
+          "bytes": 1189,
+          "sha256": "f6db57f4bfd006c0366bf62e984c5155430a4071a5f4383738341f79d4ffc1ef"
+        },
+        "object": {
+          "bytes": 12208,
+          "sha256": "9e2ea34f89b41a7e32af703b464635868483c83f6d5e61609f24cc9ee11e09ed"
+        }
+      },
+      "dependencyCounts": {
+        "allowedProject": 157,
+        "allowedSDK": 111,
+        "selectedProject": 16,
+        "selectedSDK": 46,
+        "selectedTotal": 62
+      },
+      "MEqualsI": true,
+      "allFiveStagesRC0AndEmptyDiagnostics": true,
+      "savedReplayCall": {
+        "arguments32Bit": 5,
+        "callerStackPopBytes": 20,
+        "returnValueChecked": true,
+        "stopReturnType": "void",
+        "hardwareQuietProved": false
+      }
+    }
+  ],
+  "fullEditorBatch": {
+    "plannedUnits": 69,
+    "completedUnits": 44,
+    "actualCommands": 221,
+    "failedUnit": "src/platform/stem_file.c",
+    "diagnostic": "Missing genuine SDK machine/endian.h",
+    "passed": false,
+    "remainingUnits": "NOT_RUN"
+  },
+  "preservation": {
+    "strict68Equal": true,
+    "all317SavedInputFullFactsEqual": true,
+    "ownedHostClosureConfirmed": true,
+    "retainedOwnerCount": 0
+  },
+  "limits": [
+    "No full application link or CRT/manual library lifecycle qualification.",
+    "No Amiberry, A1200 or audio execution of this editor change.",
+    "No whole-Task stack or replay hardware quiet/timing proof.",
+    "Partial failed-batch objects are not a qualified full-editor link set."
+  ],
+  "targetOperations": 0
+}

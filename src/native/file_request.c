@@ -6,7 +6,7 @@
 #include <proto/asl.h>
 #include <string.h>
 #include "file_request.h"
-struct Library *AslBase;
+struct Library *AslBase=NULL;
 int pt_file_request(struct Window *window,int saving,const char *initial,char *path,size_t capacity)
 {
     struct FileRequester *request=NULL;char drawer[1024],chosen[1024],file[108];
@@ -16,7 +16,7 @@ int pt_file_request(struct Window *window,int saving,const char *initial,char *p
     part=(const char *)FilePart((STRPTR)initial);prefix=(size_t)(part-initial);
     if(strlen(part)>=sizeof(file))return -1;
     memcpy(drawer,initial,prefix);drawer[prefix]=0;strcpy(file,part);
-    AslBase=OpenLibrary("asl.library",39);if(!AslBase)return -1;
+    AslBase=OpenLibrary((CONST_STRPTR)"asl.library",39);if(!AslBase)return -1;
     request=AllocAslRequestTags(ASL_FileRequest,
         ASLFR_Window,(ULONG)window,ASLFR_PrivateIDCMP,TRUE,ASLFR_SleepWindow,TRUE,
         ASLFR_TitleText,(ULONG)(saving==10?"Export stems to a NEW folder name":saving==9?"Render to a NEW WAV file":saving==8?"Choose MOD or PP20 source; select instrument next":saving==6?"Load RAW using displayed format settings":saving==7?"Export PCM to a NEW RAW file":saving==5?"Export sample to a NEW IFF 8SVX file":saving==3?"Load WAV or IFF 8SVX into selected sample":saving==4?"Export sample to a NEW WAV file":saving==2?"Export classic MOD to a NEW file":saving?"Save ProTracker project to a NEW file":"Load ProTracker MOD or project"),

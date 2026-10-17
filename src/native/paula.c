@@ -141,7 +141,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     if(!a->audio || !a->lock)goto failed;
     a->audio->ioa_Request.io_Message.mn_Node.ln_Pri=-128;
     a->audio->ioa_Data=&channels;a->audio->ioa_Length=1;
-    if(OpenDevice("audio.device",0,(struct IORequest *)a->audio,0))goto failed;
+    if(OpenDevice((CONST_STRPTR)"audio.device",0,(struct IORequest *)a->audio,0))goto failed;
     a->opened=1;
     /* Allocate only free channels, then prevent subsequent stealing. A failed
        precedence change means we lost ownership before touching hardware. */

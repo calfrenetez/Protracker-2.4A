@@ -1,0 +1,211 @@
+{
+  "amiberry": "NOT_RUN_FOR_THIS_MUTATION_PROBE",
+  "date": "2026-10-17",
+  "host": {
+    "adopted": {
+      "cases": 4,
+      "completed": 3,
+      "retained": 1
+    },
+    "assertions": "ENABLED_UNDEBUG",
+    "checkedBehavior": [
+      "Authentic original submit and typed C/R cancel envelopes; synthetic adopted model uses independent R geometry for an actual 514-byte cache read after C detach, and clears all R geometry before R-first retirement.",
+      "Real note, undo, sample-transform, sample-table and disposal vetoes perform no child/backend/resource work, including all six retained boundaries.",
+      "Semantic terminal good0 can complete captured cleanup with sticky child BACKEND; missing or uncertain custody remains retained. Outer compositor fault and actual cached child classification remain distinct.",
+      "Stale source generation is never reset. Master/sample/marker/cache and exact in-memory project-save gold remain preserved before the intended post-detach editor mutation.",
+      "Seven later actual drain transitions, positive queue/cache closure and separate authenticated detach precede successful editor change/disposal and final zero explicit ledgers.",
+      "Complete child capacities become PROT_NONE before later observations, repeated service and detach; terminal own-storage observations also follow editor expiry.",
+      "Six distinct complete retained contexts remain statically reachable; no forced cleanup, fabricated release authority or retry."
+    ],
+    "compilerAndFixtureDiagnostics": "EMPTY",
+    "executions": [
+      {
+        "editorPair": "preserved_working_display",
+        "receipt": {
+          "bytes": 607,
+          "sha256": "38e2daaef0d9115aef28f359b35f8cd85b7b7a1dc52f3ab4c363f4348cc15e03"
+        },
+        "returnCode": 0,
+        "seconds": 8.454192
+      },
+      {
+        "editorPair": "committed_editor_baseline",
+        "receipt": {
+          "bytes": 1840,
+          "sha256": "f8fc531796cf9ec5c797d14a61441918b6b779fe868a21ab0ef2df63d744b1fe"
+        },
+        "returnCode": 0,
+        "seconds": 8.428387
+      }
+    ],
+    "limitsSeconds": {
+      "compile": 120,
+      "fixture": 30
+    },
+    "literalProjectBodiesPerExecution": 85,
+    "oracle": {
+      "bytes": 208,
+      "exactFinalLF": true,
+      "sha256": "1fe5dc80eb77df8b489cd1a6ec663404fe7564114137f589d4fec5cd0c969890"
+    },
+    "perExecution": {
+      "cases": 17,
+      "completed": 11,
+      "editorVetoGroups": 34,
+      "retained": 6,
+      "retainedBoundaryVetoGroups": 6
+    },
+    "published": {
+      "cases": 13,
+      "completed": 8,
+      "retained": 5
+    },
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "state": "PASS_TWO_SEPARATE_EDITOR_PAIR_EXECUTIONS",
+    "translationUnitsPerExecution": 34,
+    "warnings": "Wall_Wextra_Werror"
+  },
+  "listening": "NOT_RUN",
+  "nativePartition": {
+    "actualProjectDependencies": 89,
+    "allCommandsRC0": true,
+    "buildReceipt": {
+      "bytes": 264,
+      "sha256": "88ffcb747b1ac88b2532c7a16d4b6089192d7d3d51ef30fda79a140082b869a3"
+    },
+    "commands": 153,
+    "linkedHunk": {
+      "bytes": 242936,
+      "crc32": "31D07C35",
+      "sha256": "ff636f0ff1618326d89f99c827ea537f81c4915e37930ad254184fbec7bf5f8b",
+      "wholeRawBytesIdenticalToEarlierCandidate": true
+    },
+    "manifest": {
+      "bytes": 569260,
+      "sha256": "24a0d335cf918538954cd6b710a4d474c4732e296c34f3ce56b8b48ed7572b1e"
+    },
+    "mapLOADs": 42,
+    "rawObjectComparison": {
+      "differentCompleteObjects": 35,
+      "receipt": {
+        "bytes": 1155,
+        "sha256": "17e831977d8df234b064bc21ef9960f73f6e165a81b77f68454f8f4534911dcc"
+      },
+      "state": "REFUSED_PRESERVED"
+    },
+    "runtimeInputs": 7,
+    "savedPreprocessingExclusion": {
+      "HOSTAdapterIdentifiersAbsent": 17,
+      "genericLowerCorePublicationSymbolsAreNotBlanketExcluded": true,
+      "newCompositorIdentifiers": 11,
+      "originalHOSTLifetimeIdentifiers": 6,
+      "receipt": {
+        "bytes": 7925,
+        "sha256": "74bed60c08ddf84b0d4faffd60f589433110e8baf9fc83f044015af3fd417e4c"
+      },
+      "translationUnits": 35
+    },
+    "seconds": 10.062273,
+    "selectedSDKInputs": 50,
+    "separateStructuralInvestigation": {
+      "additionalBytesPerObject": 8,
+      "firstCodePayloadsEqual": 35,
+      "initialHunkUnitPathRecordOnly": true,
+      "postUnitRecordStreamsEqual": 35,
+      "rawObjectIdentityEstablished": false,
+      "receipt": {
+        "bytes": 75253,
+        "sha256": "86f461b6cd1282bf58c38ef7538b49a0c4b4e3cfdadd432ed4ddfcb0a1bbe17c"
+      }
+    },
+    "sourceBuildOrigin": {
+      "baseCommit": "16cd180f786afc60b80e159f26f77e3c4df53bad",
+      "reviewedBarrierOverlays": 2,
+      "sourceManifestSha256": "579512be28c7317d6e3167e13fab0bbd8ff0571d2853ea16d7d8052f04f8825e",
+      "verifiedGitBodies": 90
+    },
+    "state": "PINNED_COMPILE_LINK_PASS_NOT_RUNTIME",
+    "translationUnits": 35
+  },
+  "notQualified": [
+    "Native execution of the mutation probe or new HOST APIs",
+    "Native frontend New/Load/final teardown",
+    "Actual IRQ/DMA/output/provider activation or device quiet",
+    "Real musical timing, aggregate stack or WCET",
+    "Physical hardware and listening",
+    "Full system-header, compiler-child or dynamic-loader provenance",
+    "ABI equivalence between the two editor source pairs"
+  ],
+  "physical": "NOT_RUN",
+  "preservedUnpublishedRegression": {
+    "committedEditor": {
+      "receipt": {
+        "bytes": 1769,
+        "sha256": "180579df5c093bc06f8911a59a014ec9d714bbd31d6a3be9a49916dcf7f7afa2"
+      },
+      "seconds": 8.730199,
+      "state": "PASS"
+    },
+    "originalFixtureAndOracle": "UNCHANGED",
+    "perExecution": {
+      "cases": 13,
+      "completed": 7,
+      "oracleBytes": 224,
+      "retained": 6
+    },
+    "working": {
+      "receipt": {
+        "bytes": 585,
+        "sha256": "e6bba30fe24c9dddd9176fd052cb0733c4a48b16605f093f86abb40b43dfcab4"
+      },
+      "seconds": 8.43173,
+      "state": "PASS"
+    }
+  },
+  "priorEvidence": "Earlier HOST and native TASK records remain separate and unchanged; whole-HUNK identity does not turn the refused raw-object comparison into a pass.",
+  "review": {
+    "fixtureSource": {
+      "bytes": 6180,
+      "sha256": "c6256944ca580a1133320638c85e369605ab60fbf9f1d77e526ef7bac86154c7"
+    },
+    "independentSavedHostAudit": {
+      "receipt": {
+        "bytes": 8888,
+        "sha256": "e6bce0762dc963c9873769a74982f8519f0eb592de5573e250efcd65f0dd3d45"
+      },
+      "state": "PASS_NO_FINDING"
+    },
+    "productionSource": {
+      "bytes": 4666,
+      "sha256": "959490a9a11e4b80c3080f55e382d11360b4d24d0a3deed11a7cba7a214098cb"
+    }
+  },
+  "schema": "pt24g.prepared-paula-published-mutation-host.v1",
+  "scope": "Explicit HOST-only compositor publication and typed command/reader cancellation around one real initialized editor and three genuine mono8/16/24 master/cache dependencies.",
+  "source": {
+    "src/editor/prepared_paula_mutation_barrier.c": {
+      "bytes": 30722,
+      "path": "src/editor/prepared_paula_mutation_barrier.c",
+      "sha256": "0e0fb90092d07b89904bc9e668aa89651eedb9aed786d7d186104480a6dd9de0"
+    },
+    "src/editor/prepared_paula_mutation_barrier.h": {
+      "bytes": 14300,
+      "path": "src/editor/prepared_paula_mutation_barrier.h",
+      "sha256": "fdde8a639f59883f8a7313a97fe9430b1eedf5f4cda833d608d4beca6b3f68c3"
+    },
+    "tests/prepared_paula_mutation_barrier_published_test.c": {
+      "bytes": 37337,
+      "path": "tests/prepared_paula_mutation_barrier_published_test.c",
+      "sha256": "2c2bdd134259a8cdb80686b42c66f6de637ad6e12dc794b2fcdb60c11c0cf6a2"
+    },
+    "tests/test_prepared_paula_mutation_barrier_published.py": {
+      "bytes": 10701,
+      "path": "tests/test_prepared_paula_mutation_barrier_published.py",
+      "sha256": "48c994957aa72efab8a5fcf733b8a96ba3bbd9ae03a2ee1ff97dd8178a4df4b0"
+    }
+  },
+  "state": "HOST_PUBLISHED_ADOPTED_EDITOR_CUSTODY_QUALIFIED_NOT_NATIVE_OUTPUT"
+}

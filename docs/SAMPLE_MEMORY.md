@@ -7919,3 +7919,15 @@ or on hardware. Planned actual editor veto, deferred ownership cleanup, Fast/Chi
 placement and zero-ledger assertions therefore remain unqualified natively.
 Published/ACTIVE playback, frontend New/Load/final teardown, output/IRQ/device
 quiet, exact timing and listening remain separate. See [native TASK scope](SAMPLER_PAULA_LINEAGE.md#native-task-mutation-ram-partition-17-october2026).
+
+
+The explicit HOST editor compositor now passes separate13-published and
+four-adopted-reader model families against both complete editor source pairs:
+11 complete and six retained contexts per execution, with34 actual veto groups.
+Typed C/R custody, master/cache/save gold, stale cleanup without generation reset,
+child expiry and separate detach are checked; original unpublished13 regressions
+remain unchanged. The native35 rebuild reproduces the entire RAM HUNK exactly,
+while its strict raw-object comparison remains refused for35 differing initial
+`HUNK_UNIT` name records. HOST publication/collection remains absent natively;
+mutation-probe Amiberry/hardware execution and frontend/IRQ/output/timing/listening
+acceptance remain unfinished. See [the published editor-barrier scope](SAMPLER_PAULA_LINEAGE.md#host-publishedadopted-editor-barrier-17-october2026).

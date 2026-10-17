@@ -154,6 +154,67 @@ enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_enqueu
 enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_cancel(
     struct pt_prepared_paula_mutation_barrier *);
 
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+/* Additive HOST model only. After the genuine positive unpublished enqueue,
+ * publish_once delegates fresh currentness to the original lifetime's stage2
+ * source transaction, with the exact hook and captured control/cleanup bindings
+ * still authenticated here. Its attempt is recorded BEFORE that real call and
+ * permanently selects publication cleanup for every result, even STALE before
+ * submit, PENDING, LATE, BACKEND or outer reentry. No rollback to stop_local and
+ * no inference that a failed call retained no backend references. Any non-OK
+ * publication latches cancellation for a LATER top-level step; no cleanup here.
+ * The old unpublished API/path remains available until that actual attempt.
+ *
+ * An editor refusal or cancel remains latch-only. In publication mode, a later
+ * step makes exactly one original lifetime_stop_publication call, recording only
+ * its returned outer-call fact. Later steps delegate admission/release to the
+ * original lifetime_drain_step: BUSY retains the hook and ALL contexts without
+ * backend/allocator/source work; PENDING/CLOSED record only actual permitted
+ * captured disposal. Positive original queue close and dedicated bridge close
+ * are still necessary before the separate exact-hook detach. No spin/poll loop,
+ * failed-transaction replay, direct backend call, supplied receipt/ticket/quiet
+ * flag or raw domain/PCM pointer is added.
+ *
+ * Command/reader *_once are separate top-level calls, in either order, only after
+ * the actual publication-stop call returned and before source draining begins.
+ * The lifetime owns attempt/consumption custody and refuses repeats without a
+ * second backend attempt. PENDING, wrong envelope or uncertainty retains the
+ * aggregate; no retry completion route is supplied. An authentic exact-envelope
+ * terminal good0 may classify BACKEND yet end its actual domain; the other
+ * original domain and the genuine drain gate still decide resource admission.
+ * BACKEND alone is never interpreted as release or as structural compositor
+ * uncertainty. Actual compositor reentry/foreign-hook/control uncertainty latches
+ * HELD and maps the scheduled method result to BACKEND, even if its lower call
+ * returned OK. Ordinary early/replayed/terminal entry refuses INVALID unchanged.
+ * All backend/model/allocator contexts remain live through positive cleanup and
+ * detach, or indefinitely if a real domain cannot be retired. Deliberately stale
+ * source generation is never restored for cleanup; other arbitrary mutation is
+ * still forbidden by the original exclusive-owner contract.
+ *
+ * These methods neither observe nor claim ACTIVE/adopted reader state, output,
+ * real event timing or hardware quiet. Their declarations, fields and authority
+ * are absent in the native TASK partition; that path remains unpublished only.
+ */
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_publish_once(
+    struct pt_prepared_paula_mutation_barrier *);
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_cancel_command_once(
+    struct pt_prepared_paula_mutation_barrier *);
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_cancel_reader_once(
+    struct pt_prepared_paula_mutation_barrier *);
+/* Own-storage scalar only. Cache the original lifetime's first classified
+ * scheduled failure AFTER actual outer calls return, preserving it through
+ * drain/close/detach and child/editor expiry. Never follow a child/context here,
+ * including callback reentry. Before any publication attempt this is OK; source
+ * preparation faults remain separately observable through the original getter.
+ * Compositor-only uncertainty does not invent a child classification: an outer
+ * method can return BACKEND/latch HELD while this cache remains OK. A prior child
+ * classification is never overwritten by later refusal or compositor uncertainty.
+ * Neither result grants release/adoption/quiet authority.
+ */
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_publication_failure(
+    const struct pt_prepared_paula_mutation_barrier *);
+#endif
+
 /* Numeric own-storage observations only; never follow children or borrowed
  * contexts. UNKNOWN/invalid storage returns phase0 or INVALID failure. Sticky
  * first classified source failure remains after genuine cleanup/detach; HELD

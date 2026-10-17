@@ -16,6 +16,12 @@ enum {
     QUEUE_CLOSED=1024U,SOURCE_CLOSED=2048U,
     BRIDGE_ATTEMPT=4096U,BRIDGE_CLOSED=8192U,DETACHED=16384U
 };
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+enum {
+    PUBLICATION_ATTEMPT=32768U,PUBLICATION_STOP_ATTEMPT=65536U,
+    PUBLICATION_STOP_RETURNED=131072U
+};
+#endif
 struct pt_prepared_paula_mutation_barrier {
     struct pt_prepared_paula_mutation_barrier *self;size_t capacity;
     struct pt_prepared_paula_mutation_config config;
@@ -26,6 +32,9 @@ struct pt_prepared_paula_mutation_barrier {
     uint64_t bridge_version;uint32_t revision;
     unsigned flags,busy,cancelled,uncertain;
     enum pt_prepared_paula_sources_result failure;
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+    enum pt_scheduled_result publication_failure;
+#endif
 };
 
 static int object(const void *p,size_t n,size_t a)
@@ -220,6 +229,30 @@ static enum pt_prepared_paula_mutation_result finish(struct pt_prepared_paula_mu
     if(b->uncertain||!controls_clear(b,b->cancelled||(b->flags&BRIDGE_CLOSED)))result=hold(b);
     b->busy=0;return result;
 }
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+/* Called only after an actual original lifetime outer call returned, while its
+ * complete storage remains live. A scheduled failure is not a release fact. */
+static void publication_observe(struct pt_prepared_paula_mutation_barrier *b)
+{
+    enum pt_scheduled_result result=pt_prepared_paula_lifetime_failure(b->config.lifetime);
+    if(b->publication_failure==PT_SCHEDULED_OK&&
+       result!=PT_SCHEDULED_OK&&result!=PT_SCHEDULED_PENDING)b->publication_failure=result;
+}
+static int publication_postcheck(struct pt_prepared_paula_mutation_barrier *b)
+{
+    /* Publication currentness belongs to the genuine stage2 friend. A stale
+     * source may still require captured retirement, never a former-table walk. */
+    int ok=!b->uncertain&&controls_clear(b,1);
+    if(!ok)hold(b);
+    b->busy=0;return ok;
+}
+static enum pt_scheduled_result publication_finish(struct pt_prepared_paula_mutation_barrier *b,
+    enum pt_scheduled_result result)
+{
+    publication_observe(b);
+    return publication_postcheck(b)?result:PT_SCHEDULED_BACKEND;
+}
+#endif
 size_t pt_prepared_paula_mutation_barrier_size(void)
 {return sizeof(struct pt_prepared_paula_mutation_barrier);}
 size_t pt_prepared_paula_mutation_barrier_alignment(void)
@@ -293,12 +326,46 @@ enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_step(
     enum pt_prepared_paula_mutation_result r;
     enum pt_prepared_paula_sources_result child;unsigned f;
     if(!valid(b))return PT_PREPARED_PAULA_MUTATION_INVALID;
-    r=enter(b,b->cancelled||(b->flags&BRIDGE_CLOSED));
+    r=enter(b,b->cancelled||(b->flags&BRIDGE_CLOSED)
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+        ||(b->flags&PUBLICATION_ATTEMPT)
+#endif
+    );
     if(r!=PT_PREPARED_PAULA_MUTATION_OK)return r;
     f=b->flags;
     if(f&BRIDGE_CLOSED)return finish(b,PT_PREPARED_PAULA_MUTATION_CLEANED);
     if(b->cancelled){
         if((f&QUEUE_OPEN)&&!(f&QUEUE_CLOSED)){
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+            if(f&PUBLICATION_ATTEMPT){
+                if(!(f&PUBLICATION_STOP_ATTEMPT)){
+                    enum pt_scheduled_result stopped;
+                    b->flags|=PUBLICATION_STOP_ATTEMPT;
+                    stopped=pt_prepared_paula_lifetime_stop_publication(b->config.lifetime);
+                    /* Only outer-return provenance, not admission-closed,
+                     * domain-consumed, reader-ended or quiet authority. */
+                    b->flags|=PUBLICATION_STOP_RETURNED;
+                    publication_observe(b);
+                    if(stopped!=PT_SCHEDULED_OK&&stopped!=PT_SCHEDULED_PENDING&&
+                       stopped!=PT_SCHEDULED_BACKEND){r=hold(b);goto done;}
+                }else if(!(f&PUBLICATION_STOP_RETURNED)){
+                    r=hold(b);goto done;
+                }else if(!(f&DRAINED)){
+                    child=pt_prepared_paula_lifetime_drain_step(b->config.lifetime);
+                    publication_observe(b);
+                    if(child==PT_PREPARED_PAULA_SOURCES_BUSY){r=PT_PREPARED_PAULA_MUTATION_BUSY;goto done;}
+                    if(child==PT_PREPARED_PAULA_SOURCES_CLOSED)b->flags|=STOPPED|DRAINED|SOURCE_CLOSED;
+                    else if(child==PT_PREPARED_PAULA_SOURCES_PENDING)b->flags|=STOPPED;
+                    else {classify(b,child);r=hold(b);goto done;}
+                }else{
+                    child=pt_prepared_paula_lifetime_close(b->config.lifetime);
+                    publication_observe(b);
+                    if(child==PT_PREPARED_PAULA_SOURCES_CLOSED)b->flags|=QUEUE_CLOSED;
+                    else {classify(b,child);r=hold(b);goto done;}
+                }
+                r=PT_PREPARED_PAULA_MUTATION_PENDING;goto done;
+            }
+#endif
             if(f&TRANSFERRED){
                 if(!(f&STOPPED)){
                     if(f&STOP_ATTEMPT){r=hold(b);goto done;}
@@ -364,7 +431,11 @@ enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_step(
         r=f&TRANSFERRED?PT_PREPARED_PAULA_MUTATION_QUEUED:PT_PREPARED_PAULA_MUTATION_READY;goto done;
     }
     r=(b->flags&QUEUE_OPEN)?PT_PREPARED_PAULA_MUTATION_READY:PT_PREPARED_PAULA_MUTATION_PENDING;
-done:return finish(b,r);
+done:
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+    if(b->flags&PUBLICATION_ATTEMPT)return publication_postcheck(b)?r:PT_PREPARED_PAULA_MUTATION_HELD;
+#endif
+    return finish(b,r);
 }
 
 enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_enqueue_once(
@@ -396,6 +467,60 @@ enum pt_prepared_paula_mutation_result pt_prepared_paula_mutation_barrier_cancel
     b->cancelled=1;
     return finish(b,b->flags&BRIDGE_CLOSED?PT_PREPARED_PAULA_MUTATION_CLEANED:PT_PREPARED_PAULA_MUTATION_PENDING);
 }
+#if defined(PT_PREPARED_PAULA_ENABLE_HOST_MUTATION_BARRIER)
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_publish_once(
+    struct pt_prepared_paula_mutation_barrier *b)
+{
+    enum pt_scheduled_result result;
+    if(!valid(b)||(b->flags&DETACHED))return PT_SCHEDULED_INVALID;
+    if(b->uncertain)return PT_SCHEDULED_BACKEND;
+    if(b->busy){hold(b);return PT_SCHEDULED_BACKEND;}
+    if(b->cancelled||!(b->flags&QUEUE_OPEN)||!(b->flags&TRANSFERRED)||
+       (b->flags&(PUBLICATION_ATTEMPT|STOP_ATTEMPT|QUEUE_CLOSED|BRIDGE_CLOSED)))return PT_SCHEDULED_INVALID;
+    if(enter(b,1)!=PT_PREPARED_PAULA_MUTATION_OK)return PT_SCHEDULED_BACKEND;
+    /* Irrevocable before the real call, including failed publication/reentry.
+     * No result can route this original transfer back through stop_local. */
+    b->flags|=PUBLICATION_ATTEMPT;
+    result=pt_prepared_paula_lifetime_publish_once(b->config.lifetime);
+    if(result!=PT_SCHEDULED_OK)b->cancelled=1;
+    if(result==PT_SCHEDULED_INVALID)hold(b);
+    return publication_finish(b,result);
+}
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_cancel_command_once(
+    struct pt_prepared_paula_mutation_barrier *b)
+{
+    enum pt_scheduled_result result;
+    if(!valid(b)||(b->flags&DETACHED))return PT_SCHEDULED_INVALID;
+    if(b->uncertain)return PT_SCHEDULED_BACKEND;
+    if(b->busy){hold(b);return PT_SCHEDULED_BACKEND;}
+    if(!(b->flags&PUBLICATION_ATTEMPT)||!(b->flags&PUBLICATION_STOP_RETURNED)||
+       !b->cancelled||!(b->flags&QUEUE_OPEN)||!(b->flags&TRANSFERRED)||
+       (b->flags&(STOPPED|DRAINED|QUEUE_CLOSED|BRIDGE_CLOSED)))return PT_SCHEDULED_INVALID;
+    if(enter(b,1)!=PT_PREPARED_PAULA_MUTATION_OK)return PT_SCHEDULED_BACKEND;
+    result=pt_prepared_paula_lifetime_cancel_command_once(b->config.lifetime);
+    return publication_finish(b,result);
+}
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_cancel_reader_once(
+    struct pt_prepared_paula_mutation_barrier *b)
+{
+    enum pt_scheduled_result result;
+    if(!valid(b)||(b->flags&DETACHED))return PT_SCHEDULED_INVALID;
+    if(b->uncertain)return PT_SCHEDULED_BACKEND;
+    if(b->busy){hold(b);return PT_SCHEDULED_BACKEND;}
+    if(!(b->flags&PUBLICATION_ATTEMPT)||!(b->flags&PUBLICATION_STOP_RETURNED)||
+       !b->cancelled||!(b->flags&QUEUE_OPEN)||!(b->flags&TRANSFERRED)||
+       (b->flags&(STOPPED|DRAINED|QUEUE_CLOSED|BRIDGE_CLOSED)))return PT_SCHEDULED_INVALID;
+    if(enter(b,1)!=PT_PREPARED_PAULA_MUTATION_OK)return PT_SCHEDULED_BACKEND;
+    result=pt_prepared_paula_lifetime_cancel_reader_once(b->config.lifetime);
+    return publication_finish(b,result);
+}
+enum pt_scheduled_result pt_prepared_paula_mutation_barrier_publication_failure(
+    const struct pt_prepared_paula_mutation_barrier *b)
+{
+    if(!valid(b))return PT_SCHEDULED_INVALID;
+    return b->publication_failure;
+}
+#endif
 enum pt_prepared_paula_mutation_phase pt_prepared_paula_mutation_barrier_state(
     const struct pt_prepared_paula_mutation_barrier *b)
 {

@@ -480,3 +480,37 @@ provenance remain outside scope. The original exact musical schedule is unchange
 No published/ACTIVE playback, native frontend New/Load/exit, output/IRQ/DMA,
 device quiet, physical or listening acceptance follows. See [current partition
 build and regression evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/native-task.json).
+
+
+## HOST published/adopted editor barrier —17 October2026
+
+The explicit HOST compositor now publishes its genuine owned queue once and
+collects separate typed command/reader cancellation attempts after the original
+stop returns. The editor hook remains veto-only: it closes admission without
+child/backend/resource work. Later steps use original captured drain, queue and
+cache closure, followed by separate authenticated detach. Semantic terminal
+`good0` can complete with sticky child `BACKEND`; uncertain custody stays retained
+without retry or generation restoration. An outer compositor fault does not
+invent a child failure classification.
+
+Two separate strict sanitizer executions, using the working and committed editor
+C/H pairs, each pass13 published cases (eight complete,five retained) and four
+synthetic adopted-reader cases (three complete,one retained). Each checks34 real
+editor veto groups, including six at retained boundaries, exact master/cache/save
+gold, C-first reader access after command detach, R-first geometry removal and
+stale captured cleanup without resetting generation. Complete child workspaces
+become `PROT_NONE` before later observations/service/detach; a real edit/dispose
+succeeds only after detach. The original13-case unpublished oracle also passes
+unchanged for both editor pairs. These are separate HOST source-pair results,
+not ABI equivalence.
+
+The native35 rebuild passes and reproduces the entire242,936-byte `ff636f0f` /
+`31D07C35` HUNK exactly. Its strict raw-object comparison **refused**: all35 raw
+objects differ. A separate investigation confines each difference to the first
+`HUNK_UNIT` output-name/length/padding record (+8 bytes); remaining record streams
+and code match. This does not establish raw-object identity. All17 HOST adapter
+identifiers remain absent across35 saved native preprocessing units. The new
+HOST publication/collection APIs remain excluded natively; mutation-probe
+Amiberry/hardware execution, frontend New/Load/teardown, IRQ/output/device quiet,
+real timing and listening are still unqualified. See [scoped HOST and native
+partition evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/published-host.json).

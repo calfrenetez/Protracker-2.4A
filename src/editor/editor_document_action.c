@@ -94,7 +94,7 @@ static int protection_apart(const struct pt_sampler_storage_span *protected,unsi
     if(!span(p,n)||!p||!n)return 0;
     for(j=0;j<count;++j)
         if(!apart(p,n,protected[j].data,protected[j].bytes))return 0;
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
     if(i->midi_setup&&!pt_midi_setup_owner_storage_disjoint(i->midi_setup,i->midi_capacity,p,n))return 0;
 #endif
     return pt_sampler_lifetime_output_disjoint(&i->binding->editor->sampler,p,n)&&
@@ -157,7 +157,7 @@ static int admit(struct pt_editor_document_action *out,const struct pt_editor_do
        !apart(i->candidate,sizeof(*i->candidate),i,sizeof(*i))||
        !apart(i->candidate,sizeof(*i->candidate),source,bytes)||
        !add(&c,out,sizeof(*out))||!add(&c,source,bytes))return 0;
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
     if(i->midi_setup){
         struct pt_midi_setup_owner_transition_span spans[PT_DOCUMENT_ACTION_SPANS];unsigned k;
         for(j=0;j<c.protected_count;++j){
@@ -208,7 +208,7 @@ static enum pt_document_action_result prepared(struct pt_editor_document_action 
         (struct pt_sampler_storage_span){c,sizeof(*c)},c->inputs.work);
     active=c;
     if(next!=PT_DOCUMENT_REPLACE_PREPARED)return cleanup(c,PT_DOCUMENT_ACTION_FAILED);
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
     if(c->inputs.midi_setup&&pt_editor_document_replacement_midi_setup(&c->replacement,
        c->inputs.midi_setup,c->inputs.midi_capacity)!=PT_DOCUMENT_REPLACE_PREPARED)return hold(c);
 #endif

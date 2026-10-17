@@ -1,0 +1,53 @@
+{
+  "state": "INDEPENDENT_SAVED_NATIVE88_LINKED_ARTIFACT_REVIEW_PASS_NOT_RUNTIME",
+  "findings": [],
+  "binary": {
+    "bytes": 396080,
+    "sha256": "e94fd23ec2a5da949ee1689af8d73dda076363cc8160ba0b67e021815e58a877"
+  },
+  "map": {
+    "bytes": 108981,
+    "sha256": "b42b92f6ccc9440a2878b873b570c00a38fb56edc0638f6b0ba0c4ef724c631b"
+  },
+  "actualLink": {
+    "commands": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "seconds": 0.34485058300197124,
+    "orderedApplicationObjects": 88,
+    "orderedLOADs": 95,
+    "originalRuntimeInputs": 7,
+    "unresolved": 0,
+    "format": "Amiga HUNK, m68k:68000",
+    "codeBytes": 354952,
+    "dataBytes": 1172,
+    "bssBytes": 270512,
+    "symbols": 822,
+    "reloc32Entries": 3272,
+    "fullParse": true
+  },
+  "providers": {
+    "applicationExternalNames": 32,
+    "originalProviders": 26,
+    "additionalNamedProviders": 6,
+    "errnoDataPointerNotFunction": true,
+    "sixProviderReviewSHA256": "b49a49dcee6e364c646034fd2596284fdf7ae0240bb3fb3f314680c7f6546967"
+  },
+  "entryAndMarker": "Original real Exec/CRT entry and final explicit checked-ledger guards remain. Sole stored marker would be180B with puts newline; runtime unobserved. Normal CRT OS/library/file-I/O paths remain.",
+  "preservation": "Saved128-input, strict68 protected(58 resident/10 metadata-only), guard hash/fullmetadata and final artifact records equal; no live target/guard call.",
+  "history": "Previous34-object overallLINK_FAILED preserved despite five priorRC0; no replay/relabel.",
+  "runtime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": [
+    "No frontend/window/publication/CAMD/music/device/IRQ authority.",
+    "No aggregate stack/WCET/full dynamic-toolchain or actual memory-placement claim.",
+    "Explicit checked zero-ledger excludes CRT internal allocations."
+  ],
+  "actualResultSHA256": "7e3b369885f1f5845e86d1770ad1e09860448677605d9131cfcaf3b8c9a28ba5",
+  "independentReviewSHA256": "eb90506e58ea8acdc3956ed0067d00b0bb61a7675150eb3623b2a5f031255f23"
+}

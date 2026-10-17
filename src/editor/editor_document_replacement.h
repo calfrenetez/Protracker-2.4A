@@ -4,8 +4,21 @@
 #include "editor_mixed_establish.h"
 #include "editor_mixed_bridges.h"
 #include "../core/document.h"
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
-#if PT_DOCUMENT_MIDI_SETUP_HOST_ONLY != 1
+/* Separate ordinary-Task RAM qualification only; no frontend/publication grant.
+ * Existing default/HOST selections and their bodies remain unchanged. */
+#if defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
+#if PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY != 1 || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
+#error "Native MIDI document TASK RAM probe excludes HOST composition"
+#endif
+#if !defined(PT_DOCUMENT_TYPED_ACTION) || PT_DOCUMENT_TYPED_ACTION != 1 || !defined(PT_DOCUMENT_TYPED_REPLACEMENT) || PT_DOCUMENT_TYPED_REPLACEMENT != 1 || !defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1
+#error "Native MIDI document TASK RAM probe requires exact typed and owner options"
+#endif
+#if !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
+#error "Native MIDI document TASK RAM probe requires the genuine classic target"
+#endif
+#endif
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) && PT_DOCUMENT_MIDI_SETUP_HOST_ONLY != 1
 #error "MIDI document composition requires explicit HOST-only selection"
 #endif
 #include "midi_setup_owner.h"
@@ -64,7 +77,7 @@ struct pt_editor_document_replacement {
     struct pt_editor_mixed_establish *establish;
     void *protected_storage[14];size_t protected_bytes[14];
     size_t sampler_budget,song_budget;
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
     struct pt_midi_setup_owner *midi_setup;size_t midi_capacity;
     unsigned midi_close_attempted,midi_rebind_attempted;
 #endif
@@ -79,7 +92,7 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
     struct pt_editor_mixed_bridges *,const struct pt_editor_mixed_bridge_inputs *,
     const struct pt_render_options *,const struct pt_paula_render_caps *,
     const struct pt_playback_format *,struct pt_sampler_storage_span,unsigned);
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
 /* Optional HOST-only enrollment on this genuine PREPARED phase0 replacement.
  * It neither closes nor cancels anything. Original owner must match this editor;
  * full capacity is verified by its typed query. NULL preserves ordinary behavior.

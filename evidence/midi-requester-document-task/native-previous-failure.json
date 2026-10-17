@@ -1,0 +1,22 @@
+{
+  "state": "PREVIOUS_NATIVE_ATTEMPT_FAILED_PRESERVED",
+  "probeRevision": "R2",
+  "probeSHA256": "80b5900d5515e71f98c859bbfb25a737656356e7a19c529d9db6686eafeae79b",
+  "manifestSHA256": "3796b827a1dfb5b9a986398dbf169ad8d5269f7447a0543d91d34d53ac1a478a",
+  "RootResultSHA256": "113ab633bb926b222da0e9e81ecbb74236f7cd5db6e7cd2d4c900a2cdb8eea0a",
+  "commands": 3,
+  "returncodes": [
+    0,
+    0,
+    1
+  ],
+  "failure": "Strict code generation rejected14 positional values for genuine13-field pt_render_options; warnings remain errors.",
+  "partialObservation": "Only unit00 M/I agree:73 project+40 selectedSDK=113. Partial assembly/SU are failed diagnostics, not complete codegen/object/stack acceptance.",
+  "completedObjects": 0,
+  "unchanged": "All316 Root-recorded input full facts, READY, strict68 and saved guard compare equal; original failed evidence retained.",
+  "correctedSource": "R3 changes exactly the initializer to five genuine named fields with other eight zero; no warning relaxation or same-candidate replay.",
+  "correctedProbeSHA256": "18a3fa7cf186f562dae01dc61e2a4275fdf0a3bd6157eef242a8735c1337a37b",
+  "independentFailureReviewSHA256": "55dc3493637b9dd73c660c7d84403e0d5c20770c82ea0b1e48c34105a253abe4",
+  "runtime": "NOT_RUN",
+  "targetOperations": 0
+}

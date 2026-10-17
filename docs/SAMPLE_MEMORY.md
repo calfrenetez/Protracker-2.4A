@@ -1,5 +1,16 @@
 # Sample memory and playback ownership
 
+## Native MIDI document cancellation qualifier —17 October2026
+
+A separate explicit ordinary-Task RAM probe now builds with genuine classic
+headers and keeps its original options/caps/format in stationary owner storage.
+It is designed to check modal veto plus New/encoded-Load preparation/cancellation,
+retained records/redo/master/save and positive zero-ledger cleanup. All 88 objects
+compile and the separate host link passes; actual native execution remains
+NOT_RUN. No frontend, publication,
+voice-stop/device or physical acceptance is inferred. Default/HOST composition
+is preserved. See [the exact scope](MIDI_REQUESTER_DOCUMENT_TASK.md).
+
 ## MIDI setup lifetime during document replacement —17 October2026
 
 The existing typed New/Load action can optionally retain the original MIDI setup

@@ -32,7 +32,7 @@ struct pt_editor_document_action_inputs {
     struct pt_allocator allocator;
     struct pt_sampler_storage_span contexts[PT_DOCUMENT_ACTION_CONTEXTS];
     unsigned context_count,work;
-#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
     /* Optional genuine original sidecar, still live during prepare/cancel. No
      * retained modal ticket/draft; exact constructor capacity, not a prefix.
      * Caller keeps action/candidate/byte source/contexts disjoint from all

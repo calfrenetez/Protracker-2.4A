@@ -1,0 +1,81 @@
+{
+  "state": "HOST_PASS_SAVED_EVIDENCE_INDEPENDENTLY_REVIEWED",
+  "sourceProposalSHA256": "9969aaa25196827c99f1b3413eba0c95a921e5b4ac611e33900ba5980bc5c4b0",
+  "resultSHA256": "d5c2ff6899f0d4c932eae82ac073633e2e606c215b672548bf7f9140c014e5c7",
+  "elapsedSeconds": 61.932544208015315,
+  "counts": {
+    "wrapperRuns": 3,
+    "unittestMethods": 15,
+    "pureSelectionMethods": 12,
+    "pureQuartetCaseInstances": 78,
+    "strictCompiles": 4,
+    "fixtureProcessInvocations": 18,
+    "oracleBytesTotal": 4800,
+    "recordedSourceUnionBodies": 206
+  },
+  "groups": {
+    "test_midi_setup_document": {
+      "resultSHA256": "a374a54f054cf8d95d64b0ab9e868747f0915f7f554db19b7020376e2d2bf429",
+      "unittestMethods": 5,
+      "pureQuartetCases": 26,
+      "literalProjectInputs": 202,
+      "compileUnits": [
+        86,
+        84
+      ],
+      "fixtureProcesses": 10,
+      "oracleBytes": [
+        83,
+        1154,
+        88,
+        1154,
+        86,
+        86,
+        85,
+        88,
+        85,
+        87
+      ]
+    },
+    "test_midi_requester_modal_document": {
+      "resultSHA256": "55e8c01b011b471fff0cb325257499ee2c6db387e859ed1ba835fc14e9a1813c",
+      "unittestMethods": 5,
+      "pureQuartetCases": 26,
+      "literalProjectInputs": 205,
+      "compileUnits": [
+        87
+      ],
+      "fixtureProcesses": 1,
+      "oracleBytes": [
+        138
+      ]
+    },
+    "test_document_policy": {
+      "resultSHA256": "a08af103c9cf4675bb99454d2f50897a011cdb9f957df0fe05bf1d81b7320c99",
+      "unittestMethods": 5,
+      "pureQuartetCases": 26,
+      "literalProjectInputs": 200,
+      "compileUnits": [
+        84
+      ],
+      "fixtureProcesses": 7,
+      "oracleBytes": [
+        1154,
+        82,
+        86,
+        85,
+        85,
+        84,
+        90
+      ]
+    }
+  },
+  "sourceAndOracles": "Own8 saved full facts unchanged; three wrappers only four hash substitutions each, inverse exact. C fixtures and all oracles unchanged.",
+  "selectedQuartet": "Complete working editor/view C/H in all actual C builds; pure clean admission and historical clean execution remain distinct.",
+  "preservation": "Saved strict68 equal:58 resident bodies/10metadata-only; own8/tools full facts equal. Guard equality is Root-recorded; raw boundary guard bytes not independently reconstructed.",
+  "firstAttempt": "Preserved preparation refusal at known Python symlink before HOST child. Distinct corrected interpreter-binding run passed without source-copy replay.",
+  "nativeRuntime": "NOT_RUN",
+  "emulator": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "scope": "No native probe/Task/window/device/output authority; no rerun by auditor."
+}

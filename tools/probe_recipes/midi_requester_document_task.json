@@ -1,0 +1,192 @@
+{
+  "schema": "pt24g-experimental-probe-source-recipe-1",
+  "state": "DECLARATIVE_SOURCE_RECIPE_ONLY_NOT_DEFAULT_BUILD_OR_RUNTIME_ADMISSION",
+  "target": "PTMidiRequesterDocumentTaskProbe",
+  "probe": "src/native/midi_requester_document_task_probe.c",
+  "orderedTranslationUnits": [
+    "src/native/midi_requester_document_task_probe.c",
+    "src/native/midi_requester_model.c",
+    "src/editor/editor_mixed.c",
+    "src/editor/editor_mixed_checked.c",
+    "src/editor/editor_mixed_establish.c",
+    "src/editor/sampler_establish.c",
+    "src/editor/mixed_owner_established.c",
+    "src/editor/sampler_prepare_project.c",
+    "src/editor/sampler_prepare_memory.c",
+    "src/editor/mixed_owner.c",
+    "src/editor/mixed_transport.c",
+    "src/editor/paula_voices.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/paula_dispatch.c",
+    "src/editor/mixed_preflight.c",
+    "src/editor/paula_preflight.c",
+    "src/core/paula_render_voice.c",
+    "src/core/render.c",
+    "src/core/pitch.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/flow.c",
+    "src/core/voice.c",
+    "src/core/project.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/wavetable_song.c",
+    "src/editor/wavetable_voices.c",
+    "src/editor/wavetable_dispatch.c",
+    "src/core/amigus_voice_plan.c",
+    "src/core/amigus_render_voice.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/editor/sampler_lifetime.c",
+    "src/core/sample_usage.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/view.c",
+    "src/editor/sampler_invert_song.c",
+    "src/core/render_invert.c",
+    "src/core/invert_bank.c",
+    "src/core/invert_sequence.c",
+    "src/core/invert_pcm.c",
+    "src/core/invert_loop.c",
+    "src/core/amigus_session.c",
+    "src/core/amigus_fifo.c",
+    "src/core/amigus_pcm_pack.c",
+    "src/core/studio_consumer.c",
+    "src/core/studio_pump.c",
+    "src/core/studio_queue.c",
+    "src/editor/editor_studio.c",
+    "src/editor/sampler_song.c",
+    "src/editor/sampler_studio.c",
+    "src/core/studio_song.c",
+    "src/core/studio_plan.c",
+    "src/core/studio_mix.c",
+    "src/editor/editor_wavetable.c",
+    "src/platform/sample_import.c",
+    "src/platform/raw_import.c",
+    "src/platform/mod_import.c",
+    "src/platform/pp20_import.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/event_resource.c",
+    "src/editor/editor_mixed_bridges.c",
+    "src/editor/editor_document_replacement.c",
+    "src/editor/editor_document_action.c",
+    "src/editor/midi_setup.c",
+    "src/editor/midi_setup_owner.c",
+    "src/native/native_checked_memory.c"
+  ],
+  "featureFlags": [
+    "-DPT_DOCUMENT_TYPED_ACTION=1",
+    "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+    "-DPT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY=1",
+    "-DPT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY=1",
+    "-DPT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY=1"
+  ],
+  "actualCC1TargetOptions": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20"
+  ],
+  "languageAndDiagnostics": [
+    "-std=c99",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "preprocessorUndefines": [
+    "NDEBUG"
+  ],
+  "originalDriverSuppliedCRTDefines": [
+    "libnix",
+    "__libnix__",
+    "__libnix"
+  ],
+  "assemblerOptions": [
+    "--traditional-format",
+    "-m68000"
+  ],
+  "actualRequiredBuiltinFacts": {
+    "__GNUC_MINOR__": "5",
+    "__GNUC__": "6",
+    "__STDC_VERSION__": "199901L",
+    "__STRICT_ANSI__": "1",
+    "__amigaos__": "1",
+    "__m68k__": "1"
+  },
+  "projectIncludeOperands": [
+    "src/core",
+    "build/dev"
+  ],
+  "sourceSnapshotPolicy": "Exact200 project bodies including complete clean editor/view quartet, current canonical196 other bodies, original stationary parent objects, genuine pinned compiler/SDK92 profile and unknown-M refusal; relative recipe does not select installed SDK files or execute a build.",
+  "SDKRoutePolicy": "Only genuine reviewed gcc/libnix/sys/Include_H roots, original ordering and classification; no installed fallback, fabricated headers, platformdefines or guards. Actual dependency/ordinaryI equality and unknown-path refusal required.",
+  "nativeProfile": "Five exact qualification-only native/typed selectors on genuine classic m68k/Amiga. HOST selections excluded; no frontend, publication/action_step, window, CAMD, IRQ, MIDI/audio or timing authority.",
+  "inputSourcePins": {
+    "src/native/midi_requester_document_task_probe.c": {
+      "bytes": 24013,
+      "sha256": "18a3fa7cf186f562dae01dc61e2a4275fdf0a3bd6157eef242a8735c1337a37b"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 9487,
+      "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10759,
+      "sha256": "b5ef67da67d6c044ea90e21a007fed80ca7e3c2128292ad05ea0fddeca268316"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 7544,
+      "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
+    },
+    "src/editor/editor_document_action.c": {
+      "bytes": 18008,
+      "sha256": "259de6c492990053ba27bfe8d08934b4636a59b21925b592345dd66b89c3c91c"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4565,
+      "sha256": "866049ef39de097ad429d68185ca7b187aaebb2c55868ba5914f8e001388feb1"
+    },
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 20428,
+      "sha256": "de6ab36ab44a29900ea9dacd061183adefc4ecb33de30bcb9faff48b4212744b"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 7413,
+      "sha256": "004e973651264c60e83e83d9f201f90cd7d2b5632aeba1a79533d7e01902e92e"
+    }
+  },
+  "oracle": {
+    "ascii": "MIDI DOCUMENT TASK RAM PASS:modal veto;New/Load prepare-cancel;original records/redo/master/save;genuine RAM tokens;zero Fast ledgers;NO PUBLICATION/WINDOW/DEVICE/OUTPUT AUTHORITY\n",
+    "bytes": 180,
+    "sha256": "bdc83330c8dbeee57566c70c88be508d34c355dc80a569d7e4cb14cfb7414063"
+  },
+  "entry": "main(void); genuine modal veto, New/encoded-Load prepare-cancel, preserved originals/redo/master/save and positive disposal/close/release/zero-ledger assertions. First refusal retains the process; no source or runtime retry.",
+  "status": {
+    "objectBuild": "SEPARATE_EXACT_EVIDENCE",
+    "link": "HOST_LINK_PASS_SEPARATE_RECEIPT_NATIVE_EXECUTION_NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physicalA1200": "NOT_RUN"
+  },
+  "stack": "Raw SU entries only; largest individual16572 bytes in filtered PCM, probe main376. These do not establish reachable call-chain, wholeTask stack, CRT or WCET; runtime requires separate admission.",
+  "activation": "Not referenced by Makefile/default core/frontend entrypoints. Maintainers must explicitly prepare a fresh reviewed build/admission; no executable builder is supplied here."
+}

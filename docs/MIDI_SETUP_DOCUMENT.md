@@ -1,5 +1,11 @@
 # Optional MIDI setup lifetime in document actions
 
+A separate explicit ordinary-Task RAM qualification candidate now compiles the
+same composition bodies for modal veto and New/encoded-Load prepare/cancel.
+It is unselected in the frontend and has no native execution or publication
+acceptance. Default shipping enrollment remains HOST-only. See
+[the native qualifier scope](MIDI_REQUESTER_DOCUMENT_TASK.md).
+
 The existing typed document action/replacement has an optional MIDI lifetime
 composition for HOST qualification. It requires
 `PT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1` and the existing HOST-only setup-owner gate,

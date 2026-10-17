@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "state": "DOCUMENT_TASK_GATES_HOST_PREPROCESS_PASS",
+  "tier": "HOST_GATES_AND_RAW_PREPROCESS_PARITY_ONLY",
+  "review": {
+    "bytes": 19928,
+    "sha256": "c7224b892095951a8fd06b8ab32241c59d860141b11b5b1af449c9d21378ce81"
+  },
+  "actualRootResult": {
+    "bytes": 35321,
+    "sha256": "a355e5ab4cee4731842adf768558f6ff8d481b2f2e5a5d225c5e196695a3e517"
+  },
+  "rootReady": {
+    "bytes": 1049,
+    "sha256": "3f7c927da3d5fc6ce9ebc39551d24cc120cdc4acb48dbd08ffdfde8579322cc0"
+  },
+  "runner": {
+    "bytes": 12031,
+    "sha256": "644c410d8da84e5ed5c4df77fb84f5e488b8ee613f858d93f4b5daed210a5477"
+  },
+  "sourcePins": {
+    "src/editor/editor_document_action.c": {
+      "bytes": 18008,
+      "sha256": "259de6c492990053ba27bfe8d08934b4636a59b21925b592345dd66b89c3c91c"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4565,
+      "sha256": "866049ef39de097ad429d68185ca7b187aaebb2c55868ba5914f8e001388feb1"
+    },
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 20428,
+      "sha256": "de6ab36ab44a29900ea9dacd061183adefc4ecb33de30bcb9faff48b4212744b"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 7413,
+      "sha256": "004e973651264c60e83e83d9f201f90cd7d2b5632aeba1a79533d7e01902e92e"
+    }
+  },
+  "boundRequesterHeader": {
+    "bytes": 9487,
+    "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
+  },
+  "actual": {
+    "seconds": 1.0328497499867808,
+    "commands": 30,
+    "negativeCasesExactRC1": 15,
+    "positiveCommandsRC0": 15,
+    "actualHOSTBuiltinObservation": 1,
+    "nativePlatformMacrosAbsent": true,
+    "exactExpectedProjectErrorsNoExtras": true,
+    "rawByteParityPairs": [
+      {
+        "name": "typed-default/editor_document_action",
+        "rawBytesEqual": true,
+        "bytes": 118527,
+        "sha256": "960eba9a741e6e8f17f0278851a006ea9234a7892e1e40ec223ec89ba18de383"
+      },
+      {
+        "name": "typed-default/editor_document_replacement",
+        "rawBytesEqual": true,
+        "bytes": 106946,
+        "sha256": "662c6f78fe967d27d1da50ede46f929662f7efd3fbe839d7279347f8f7e6ba26"
+      },
+      {
+        "name": "HOST-midi/editor_document_action",
+        "rawBytesEqual": true,
+        "bytes": 127521,
+        "sha256": "640866a77000b721c156c5e624c8068d8c0c509df65630e3de7a3b806d31a7c6"
+      },
+      {
+        "name": "HOST-midi/editor_document_replacement",
+        "rawBytesEqual": true,
+        "bytes": 117959,
+        "sha256": "71b54813fc43ac2f75442af29734d0b6fee76717aa100d326072f848a88308db"
+      },
+      {
+        "name": "old-native-owner-flags-document-absent/editor_document_action",
+        "rawBytesEqual": true,
+        "bytes": 118527,
+        "sha256": "960eba9a741e6e8f17f0278851a006ea9234a7892e1e40ec223ec89ba18de383"
+      },
+      {
+        "name": "old-native-owner-flags-document-absent/editor_document_replacement",
+        "rawBytesEqual": true,
+        "bytes": 106946,
+        "sha256": "662c6f78fe967d27d1da50ede46f929662f7efd3fbe839d7279347f8f7e6ba26"
+      },
+      {
+        "name": "default-header-no-options",
+        "rawBytesEqual": true,
+        "bytes": 96078,
+        "sha256": "8284e76b6a07b87322b78c7b7eb151ddc89f4a038ab1ffcb4ebf2bb981ab8c7d"
+      }
+    ],
+    "comparison": "Raw -E -P stdout bytes; no normalization",
+    "caseFlagsAndVectorsExact": true,
+    "boundedDiagnosticsAndStreams": true,
+    "nativeProbeNeverPreprocessed": true
+  },
+  "compiler": {
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+  },
+  "preservation": {
+    "snapshot400AndOrigin204FullFactsEqual": true,
+    "compilerFullFactsEqual": true,
+    "compilerKnownRegularNlink78": true,
+    "controlFullFactsEqual": true,
+    "strict68SavedFullFactsEqual": true,
+    "guardSerializedFactsEqual": true,
+    "actualGuardByteComparisonRecordedTrue": true,
+    "guardEvidenceLimit": "Runner compared actual guard bytes in memory; raw guard bodies were not serialized or exposed by this review."
+  },
+  "sourceScope": "Only the four R1 gate overlays. Identical R2 gates do not transfer R1 probe or whole R2 build admission. R1 probe SOURCE_NOT_ADMITTED remains preserved.",
+  "limits": [
+    "HOST preprocessing/error/token compatibility only, not code generation or ABI/layout-size qualification",
+    "Actual native-positive DOCUMENT_TASK branch requires genuine native compilation and its separate lifetime/API qualifier",
+    "R1 probe has a separate source lifetime refusal; no R1 probe or whole R2 build admission transferred",
+    "No link/Task/runtime/window/parent isolation/publication/device/CAMD/quiet/emulator/physical/timing/listening acceptance"
+  ]
+}

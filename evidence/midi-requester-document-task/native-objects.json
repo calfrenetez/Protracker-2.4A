@@ -1,0 +1,89 @@
+{
+  "state": "NATIVE_OBJECT_BUILD_PASS_NOT_LINKED_NOT_RUNTIME",
+  "sourceProbe": {
+    "bytes": 24013,
+    "sha256": "18a3fa7cf186f562dae01dc61e2a4275fdf0a3bd6157eef242a8735c1337a37b"
+  },
+  "fourEligibilityBodies": {
+    "src/editor/editor_document_action.c": {
+      "bytes": 18008,
+      "sha256": "259de6c492990053ba27bfe8d08934b4636a59b21925b592345dd66b89c3c91c"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4565,
+      "sha256": "866049ef39de097ad429d68185ca7b187aaebb2c55868ba5914f8e001388feb1"
+    },
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 20428,
+      "sha256": "de6ab36ab44a29900ea9dacd061183adefc4ecb33de30bcb9faff48b4212744b"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 7413,
+      "sha256": "004e973651264c60e83e83d9f201f90cd7d2b5632aeba1a79533d7e01902e92e"
+    }
+  },
+  "sourceComposition": "Private R3 clean-quartet200-body composition; one named-field initializer correction. Default frontend is not activated.",
+  "actual": {
+    "orderedTranslationUnits": 88,
+    "projectBodies": 200,
+    "SDKAllowed": 92,
+    "SDKSelected": 58,
+    "selectedUnion": 258,
+    "commands": 440,
+    "returncodesAllZero": true,
+    "allCompileDiagnosticsEmpty": true,
+    "allMEqualsI": true,
+    "objects": 88,
+    "objectFormat": "Amiga HUNK_UNIT / m68k68000",
+    "source32BitGeometryCompiled": true,
+    "assertionsNotDisabled": true,
+    "rawSURows": 1242,
+    "largestIndividualSUBytes": 16572,
+    "probeMainIndividualSUBytes": 376,
+    "externalUnresolvedCount": 32,
+    "newRuntimeImports": [
+      "___errno",
+      "_close",
+      "_lseek",
+      "_open",
+      "_read",
+      "_strncmp"
+    ]
+  },
+  "diagnosticStaticSizes": {
+    "rigBytes": 445618,
+    "rigAndBeforeimageBytes": 891236,
+    "existingActionBSSBytes": 236836
+  },
+  "preservation": {
+    "sourceBodiesVerified": 200,
+    "inputFullFactsEqual": 316,
+    "strictProtectedObservationsEqual": 68,
+    "RootRecordedGuardAndREADYEqual": true
+  },
+  "history": "Original failed R2 initializer attempt retained; no same-candidate replay or failed-product acceptance.",
+  "pins": {
+    "actualManifest": {
+      "bytes": 1779964,
+      "sha256": "6566f6fbf0881a11b686c44cab8bfb2dfa34f81f65fcdf55fa32db7f11cbdd9c"
+    },
+    "independentActualReview": {
+      "bytes": 11809,
+      "sha256": "3349262fb456fe5a302636595decb09e625e4288a366412f657bdee574a9948d"
+    }
+  },
+  "qualification": {
+    "link": "NOT_PERFORMED",
+    "runtime": "NOT_RUN",
+    "GUIFrontend": "NOT_RUN",
+    "publication": "NOT_RUN",
+    "deviceOutputIRQTiming": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN"
+  },
+  "limits": [
+    "Object compilation and per-function stack estimates do not prove whole Task stack,live allocation counts,Fast capacity,deadlines or native behavior.",
+    "Genuine runtime provider resolution and separately admitted link required; no executable exists for this build.",
+    "No new compiler/tool/target operations by this independent saved-data review."
+  ]
+}

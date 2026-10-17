@@ -17,6 +17,7 @@
 #include "wav.h"
 #include "mod_project.h"
 #include "../editor/view.h"
+#include "../editor/sampler_lifetime_internal.h"
 #include "../platform/file_save.h"
 #include "../platform/sample_file.h"
 #include "../platform/project_file.h"
@@ -466,6 +467,53 @@ static void screen_close_or_hold(struct Screen **screen)
     }
     *screen=NULL;
 }
+/* Private draft: retain original Task/stack/owner domain on a genuine owner
+ * refusal. No stdio, CRT return, compensating retry or reset on this path. */
+static void cleanup_owner_hold(void)
+{
+    static const char message[]="EDITOR EXIT HELD - OWNER CLEANUP UNCONFIRMED; RESOURCES RETAINED\n";
+    BPTR output=Output();
+    if(output)(void)Write(output,message,(LONG)(sizeof(message)-1));
+    for(;;)Wait(0UL);
+}
+/* Uses only the original native frontend's bounded allocator/lifetime records.
+ * This is not a heap census or authority over a foreign callback/controller. */
+/* Original serialized frontend owners only: a false decision requires the
+ * sole native caller to HOLD immediately, before any dependent teardown. */
+static int cleanup_editor_owners(struct pt_editor *editor,struct pt_document *doc)
+{
+    size_t editor_charge=editor?sizeof(*editor)+sizeof(size_t):0;
+    if(editor && (!pt_sampler_lifetime_idle(&editor->sampler) ||
+        editor->sampler.progress || editor->sampler.progress_context))return 0;
+    if(!pt_editor_dispose(editor))return 0;
+    if(editor) {
+        if(!pt_sampler_lifetime_storage_retired(&editor->sampler) ||
+            editor->song.current || editor->song.bytes)return 0;
+        /* dispose's source_close uses the legacy void release. A successful
+         * close leaves an empty source here; quarantine refuses without retry. */
+        if(pt_document_release_checked(&editor->sample_source)!=PT_DOCUMENT_RELEASED)
+            return 0;
+    }
+    if(pt_document_release_checked(doc)!=PT_DOCUMENT_RELEASED)return 0;
+    /* All original master allocations must be retired except this editor.
+     * Check before freeing its descriptor or allowing the main frame to return. */
+    if(master_memory.used!=editor_charge)return 0;
+    return 1;
+}
+/* -1: original owner busy/uncertain;0: closed filesystem residue;1: finished. */
+static int cleanup_recovery_result(struct pt_native_recovery *owner,int normal_exit)
+{
+    if(owner->store.busy || owner->schedule.busy || owner->project)return -1;
+    return pt_native_recovery_finish(owner,normal_exit)!=0;
+}
+/* Called after the existing native teardown and editor descriptor release.
+ * -1 still requires originalTask HOLD; zero is the narrow late clean result. */
+static int cleanup_return_code(int normal_exit,int recovery_clean)
+{
+    if(master_memory.used || recovery_clean<0)return -1;
+    return normal_exit==1 && recovery_clean==1?0:20;
+}
+
 int main(int argc,char **argv)
 {
     static struct pt_view_cache view_cache={0};
@@ -475,7 +523,7 @@ int main(int argc,char **argv)
     struct MsgPort *clock_port=NULL;struct timerequest *clock_request=NULL;
     int clock_open=0,clock_pending=0;unsigned frame_log=1,frames=0,peak_gap=0;
     struct DateStamp frame_start,frame_last;
-    struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
+    struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1,normal_exit=0,recovery_clean=1;
     pt_master_memory_init(&master_memory);
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
     if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
@@ -729,10 +777,20 @@ int main(int argc,char **argv)
             redraw=1;frame_log=1;
         }
     }
-    rc=0;
+    normal_exit=1;
 done:
     pt_paula_stop(&audio);
-    if(!pt_native_recovery_finish(&recovery,rc==0))puts("EDITOR RECOVERY cleanup retained");
+    /* A busy callback/operation is not a filesystem-residue result. */
+    recovery_clean=cleanup_recovery_result(&recovery,normal_exit);
+    if(recovery_clean<0)cleanup_owner_hold();
+    if(!recovery_clean) {
+        static const char message[]="EDITOR RECOVERY cleanup retained; EXIT FAILED\n";
+        BPTR output=Output();
+        /* Idle discard failure retains closed-file/directory residue, not an
+         * active code owner: finish genuine cleanup and return RC20. */
+        if(output)(void)Write(output,message,(LONG)(sizeof(message)-1));
+    }
+    if(!cleanup_editor_owners(editor,&doc))cleanup_owner_hold();
     if(clock_pending) {AbortIO((struct IORequest *)clock_request);WaitIO((struct IORequest *)clock_request);}
     if(clock_open)CloseDevice((struct IORequest *)clock_request);
     if(clock_request)DeleteIORequest((struct IORequest *)clock_request);
@@ -743,5 +801,9 @@ done:
     if(pixels)FreeMem(pixels,4UL*PT_VIEW_PLANE_BYTES);
     if(GfxBase)CloseLibrary((struct Library *)GfxBase);
     if(IntuitionBase)CloseLibrary((struct Library *)IntuitionBase);
-    pt_editor_dispose(editor);pt_master_release(&master_memory,editor);pt_document_release(&doc);if(rc==0)puts("EDITOR EXIT clean");return rc;
+    pt_master_release(&master_memory,editor);
+    rc=cleanup_return_code(normal_exit,recovery_clean);
+    if(rc<0)cleanup_owner_hold();
+    if(rc==0)puts("EDITOR EXIT clean");
+    return rc;
 }

@@ -1,0 +1,57 @@
+{
+  "actualOrdinaryCanonicalTest": {
+    "ASanUBSan": "PASS",
+    "LSan": "NOT_AVAILABLE_NOT_REQUESTED",
+    "cases": 11,
+    "inputsEqual": true,
+    "protected68Equal": true,
+    "returncode": 0,
+    "seconds": 8.541602457989939,
+    "supervisorClosed": true
+  },
+  "cases": [
+    "startup_empty",
+    "success_history",
+    "editor_veto",
+    "sampler_pin",
+    "progress_retained",
+    "workflow_cancel",
+    "recovery_admission",
+    "recovery_residue",
+    "ledger_mismatch",
+    "source_quarantine",
+    "root_quarantine"
+  ],
+  "cohort": "Current working editor layout; actual selected cleanup definitions are identical in the paired clean main.",
+  "limits": [
+    "HOST selects actual main/recovery definitions and binds caller order; it does not execute native Wait, DOS, GUI teardown or Task lifetime.",
+    "Six negative cases deliberately retain rooted owners until their separate process ends; no leak-reclamation acceptance.",
+    "This is not a new full-app link, Amiberry runtime, physical A1200, active-device quiet, timing or listening qualification."
+  ],
+  "preservation": "Only own cleanup source adopted; all23 original clean/working display differences and other67 protected rows preserved. Ten cold metadata-only bodies remain unopened.",
+  "preservedFailures": [
+    "First focused build failed because strict POSIX declarations hid mkdtemp on macOS. Fixture-only Darwin visibility prefix repaired that build; product source and warnings were unchanged.",
+    "First canonical-test preflight refused an own-main ctime-only filesystem update before output, compiler or tests. Body and other metadata were verified unchanged; an explicit observation successor preceded the actual canonical run."
+  ],
+  "priorFocusedQualification": {
+    "actualCommands": 12,
+    "allActualRC0": true,
+    "allDiagnosticsEmpty": true,
+    "allExpectedStdoutExact": true,
+    "completeCases": 5,
+    "copiedSourceBodies": 82,
+    "detailedSavedAuditSHA256": "21ab4b6eae8e305f144163a695c77b8eb88296bcbdccd2d926fd797cd3f59d5d",
+    "ownedSupervisorsClosed": true,
+    "quotedIncludeEdges": 131,
+    "rootedRefusalCases": 6,
+    "translationUnits": 30
+  },
+  "qualification": "OWNER_CLEANUP_HOST_DECISIONS_PASS_NOT_NATIVE",
+  "schema": 1,
+  "source": {
+    "cleanMainSHA256": "fba70a7b867b92f37661adfb4089efc1f0d9eebc47ddea4af75c237d7b6398c9",
+    "fixtureSHA256": "8159fec6e1f532295151c2425b0135a0222796ce1770b20f5482ad4b3a212146",
+    "ordinaryTestSHA256": "cb446aae2df7568b7ecc4fd44282ba8384795418adf6a237c7f431ba603ca2a3",
+    "workingMainSHA256": "fefeb6134ad47e10c04da2a720781a05a5ac57e1a06b34de0b6114c58c972b46"
+  }
+}

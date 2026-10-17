@@ -81,3 +81,30 @@ clean candidate. See [working-layout-link.json](../evidence/native-editor-build/
 Exact-candidate Amiberry execution remains a separate gate. Physical A1200,
 allocation-failure and stack-restoration runtime checks, audio ownership,
 timing and listening remain unqualified until recorded explicitly.
+
+## Checked owner cleanup before a clean return
+
+Normal event-loop completion is now separate from a successful exit code.
+Before native teardown, the entry point checks recovery activity, sampler
+lifetimes, editor disposal, checked document releases and the local master
+allocation ledger. An uncertain owner retains the original Task and its
+remaining resources. A closed recovery-file residue returns failure after
+ordinary teardown. The clean result requires both successful cleanup and a
+zero ledger after releasing the editor descriptor.
+
+The ordinary regression `python3 -B tests/test_native_main_cleanup.py` selects
+the actual entry-point decisions and recovery definitions, links genuine
+editor/document/sampler/history/workflow code, and passes eleven cases under
+ASan/UBSan. Five cases finish; six deliberately retain refused owners until
+their separate HOST process ends. Leak-sanitizer was unavailable and disabled.
+These are ownership decisions, not simulated native HOLD or reclamation proof.
+
+The clean baseline and working display layout also pass separate genuine native
+entry-point compilations, five stages each. Their 64/65 project inputs and
+90 selected SDK headers agree between dependencies and preprocessing. Other
+objects and the previous full executable are not requalified by these checks.
+The change still needs a new full link, exact Amiberry application execution,
+and real-A1200 qualification. Native teardown, Task/stack lifetime, device quiet,
+audio timing and listening remain separate gates. See
+[owner-cleanup-host.json](../evidence/native-editor-build/owner-cleanup-host.json)
+and [owner-cleanup-objects.json](../evidence/native-editor-build/owner-cleanup-objects.json).

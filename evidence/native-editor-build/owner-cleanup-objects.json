@@ -1,0 +1,64 @@
+{
+  "cohorts": {
+    "clean": {
+      "actualCommands": 5,
+      "actualMEqualsI": 154,
+      "allRC0": true,
+      "allowedSDKHeaders": 118,
+      "diagnosticsBytes": 0,
+      "fullInputFactsEqual": 222,
+      "mainFixedFrameBytes": 3484,
+      "mainIndividualSUBytes": 3632,
+      "object": {
+        "bytes": 33344,
+        "sha256": "a23795a2792edd4d97e850c24efedc9d58b5163693b5ff0a1d4cf965d168029c"
+      },
+      "ownedSupervisorClosed": true,
+      "projectBodies": 64,
+      "protected68Equal": true,
+      "rawREADYAndOperationalPlanEqual": true,
+      "selectedSDKHeaders": 90,
+      "sourceSHA256": "fba70a7b867b92f37661adfb4089efc1f0d9eebc47ddea4af75c237d7b6398c9",
+      "strongBSSBases": [
+        "_IntuitionBase",
+        "_GfxBase"
+      ],
+      "undefinedSymbols": 124
+    },
+    "working": {
+      "actualCommands": 5,
+      "actualMEqualsI": 155,
+      "allRC0": true,
+      "allowedSDKHeaders": 118,
+      "diagnosticsBytes": 0,
+      "fullInputFactsEqual": 223,
+      "mainFixedFrameBytes": 3536,
+      "mainIndividualSUBytes": 3684,
+      "object": {
+        "bytes": 34040,
+        "sha256": "d3ca024d01630c5cada89a9ec984e39578775f3f7b5a76ce6d4b6d9f2026ef37"
+      },
+      "ownedSupervisorClosed": true,
+      "projectBodies": 65,
+      "protected68Equal": true,
+      "rawREADYAndOperationalPlanEqual": true,
+      "selectedSDKHeaders": 90,
+      "sourceSHA256": "fefeb6134ad47e10c04da2a720781a05a5ac57e1a06b34de0b6114c58c972b46",
+      "strongBSSBases": [
+        "_IntuitionBase",
+        "_GfxBase"
+      ],
+      "undefinedSymbols": 131
+    }
+  },
+  "detailedAuditSHA256": "f16db8f216d5d3d2dba7a01fcb3227c600403fa7637ad999d36924490d00c0bb",
+  "limits": [
+    "One mainTU per coherent cohort; no other72workingobjects or fullapp link acceptance",
+    "No runtime/wholeTask minimum/callback absence/audio/device quiet/ENV restoration/AppSegment unload/physical acceptance"
+  ],
+  "nativeEmission": "Owner cleanup refusals retain original Task through unconditional Wait(0); late clean/RC0 follows owner retirement, native teardown, descriptor release and zero local ledger. Static emission only.",
+  "preservation": "Each run preserved all recorded fullfacts, original68 including10metadata-only cold rows, guardhash/facts, rawREADY and operationalplan; original1248 ownedgroup EOF/absence/reap with0retained owners.",
+  "qualification": "PAIRED_NATIVE_MAIN_OBJECTS_PASS_NOT_LINKED_NOT_RUNTIME",
+  "role": "Saved-operation audit; reviewer authored control derivatives, Root executed both operations.",
+  "schema": 1
+}

@@ -1,0 +1,71 @@
+{
+  "HUNK": {
+    "boundsAndTargetsValid": true,
+    "consumedBytes": 349260,
+    "reloc32": 3561,
+    "sectionBytes": [
+      303936,
+      6408,
+      52720,
+      5888
+    ],
+    "symbols": 663,
+    "trailingBytes": 0,
+    "undefinedSymbols": 0
+  },
+  "actualLink": {
+    "actualToolRC0": 5,
+    "commands": 5,
+    "completedExternalUpperMs": 3237,
+    "diagnostics": "Empty except exactdriver-vector stderr",
+    "internalSeconds": 0.6247929590172134,
+    "orderedLOADs": 80,
+    "positiveEOFClosure": true,
+    "retainedOwners": 0,
+    "runtimeInputs": 7
+  },
+  "candidate": {
+    "bytes": 349260,
+    "crc32": "EC06BC66",
+    "entryOffset": 0,
+    "format": "classic68000 HUNK",
+    "sha256": "ce395ec1929daeb5116df132c2b1a608e5bad44689f37a148fd324dbf9028455"
+  },
+  "currentABI": {
+    "allCurrentMapHunkBindings": true,
+    "classicCLibBaseVectorRoutes": 75,
+    "code": 112,
+    "data": 4,
+    "directProviders": 116,
+    "individualMainSUBytes": 3684,
+    "oldArchiveRequestMemberAbsent": true,
+    "ownership": "CRT DOSBase; strongmanual Intuition/Gfx/ASLslots; no GUIautoopener conflict.",
+    "replay": "Actual5wordcdecl +separatehunk relocation checked.",
+    "requester": "One actualstackrefusal C-stringcdecl caller returns to originalexit20; guardedCRT DOSBase/directDOS only.",
+    "runtimeArchiveMembers": 138,
+    "runtimeGlobalBindings": 184,
+    "screenFalse": "EmitteddirectDOS thenunconditionalWait0 beforecleanup; notruntime-observed.",
+    "soleAppRequest": true,
+    "stackLimit": "Experimentalrequest/individualSU only, no wholeTaskminimum.",
+    "stackRequestBytes": 65536,
+    "workingTrue": "OriginaltwoWaitTOFs precedepattern/bothbitmap teardown."
+  },
+  "limits": [
+    "Reviewer authoredfallback/cohort controls, notRootcompile/link; role disclosed.",
+    "No generalCRT/Task orfullcallgraph/payloadreconstruction claim.",
+    "No nativeGUI/events/refusal/stackrestoration/timing/devicequiet/physicalacceptance."
+  ],
+  "preservation": {
+    "allBeforeAfterEqual": true,
+    "linkedProductsFullfactsEqual": true,
+    "savedFullFactRecords": 133,
+    "savedGuardAndRawREADYEqual": true,
+    "strictProtected68": true,
+    "versionedSourceAndCTimeTransitions": true
+  },
+  "runtime": "NOT_RUN",
+  "schemaVersion": 1,
+  "sourceScope": "All70 coherentworking C objects +separate replay,stackoptin,request=73objects;159workingprojectbodies. Original23displayspans retained, no mixedclean-substitution.",
+  "state": "SAVED_WORKING73_STATIC_PROVIDER_ABI_HUNK_PASS_NOT_RUNTIME",
+  "targetOperations": 0
+}

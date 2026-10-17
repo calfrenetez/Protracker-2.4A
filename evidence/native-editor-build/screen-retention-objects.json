@@ -1,0 +1,76 @@
+{
+  "state": "NATIVE_MAIN_SCREEN_RETENTION_OBJECTS_PASS_NOT_RUNTIME",
+  "scope": "Two separate one-TU clean and working main qualifications; five native compile/assemble/inspect stages each.",
+  "sourceHelperSHA256": "098ee70e2315ce59743d2ef7ca02140ab7a7da5f9ab59951145d6eece63f1526",
+  "cohorts": [
+    {
+      "cohort": "clean",
+      "sourceSHA256": "a4c24efe7ed4fe2c695c91942988c445d0aa8345a8b4f834ad69327ff83be4ff",
+      "sourceBodies": 63,
+      "selectedSDKHeaders": 90,
+      "SDKAllowance": 118,
+      "MEqualsI": true,
+      "commands": 5,
+      "allReturncodesZero": true,
+      "diagnosticsEmpty": true,
+      "object": {
+        "bytes": 33192,
+        "sha256": "854dee6ee3ce34eed1e4dc94dc90c275197e465ebf913c74de93758d51db3210"
+      },
+      "HUNKComplete": true,
+      "strongFourByteBasesNoCOMMON": true,
+      "newUnresolvedImports": [
+        "_Output",
+        "_Write"
+      ],
+      "mainFrameBytes": 3488,
+      "mainIndividualSUBytes": 3636,
+      "finiteInputFullFactsEqual": 284,
+      "strict68Preserved": true,
+      "rawREADYAndOperationalPlanEqual": true,
+      "ownedHOSTClosureConfirmed": true,
+      "retainedOwners": 0,
+      "externalCompletedUpperMilliseconds": 8961
+    },
+    {
+      "cohort": "working",
+      "sourceSHA256": "86981bf3e71ff41884cb9b968cc2666547b0cbacf72edcfbc736172e81576a97",
+      "sourceBodies": 64,
+      "selectedSDKHeaders": 90,
+      "SDKAllowance": 118,
+      "MEqualsI": true,
+      "commands": 5,
+      "allReturncodesZero": true,
+      "diagnosticsEmpty": true,
+      "object": {
+        "bytes": 34440,
+        "sha256": "176d8ff2484818c5b4f705f2127c8ee62809de3da7007d8c536077acd4d07097"
+      },
+      "HUNKComplete": true,
+      "strongFourByteBasesNoCOMMON": true,
+      "newUnresolvedImports": [
+        "_Output",
+        "_Write"
+      ],
+      "mainFrameBytes": 3536,
+      "mainIndividualSUBytes": 3684,
+      "finiteInputFullFactsEqual": 285,
+      "strict68Preserved": true,
+      "rawREADYAndOperationalPlanEqual": true,
+      "ownedHOSTClosureConfirmed": true,
+      "retainedOwners": 0,
+      "externalCompletedUpperMilliseconds": 4732
+    }
+  ],
+  "emittedFalsePath": "One BOOL CloseScreen result test; FALSE calls direct Output, optional one Write with count60, then loops Wait(0) with no CRT/cleanup/return path. Working success still retains two WaitTOF calls.",
+  "limits": [
+    "Saved object emission only; new DOS providers and current linked artifact/ABI remain unqualified.",
+    "Individual stack records are not a whole-Task minimum.",
+    "HOST fault-model and native OS/GUI behavior remain separate."
+  ],
+  "fullAppRebuild": false,
+  "link": "NOT_PERFORMED",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "retries": 0
+}

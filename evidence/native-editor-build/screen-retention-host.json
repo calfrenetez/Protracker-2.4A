@@ -1,0 +1,109 @@
+{
+  "state": "HOST_SCREEN_RETENTION_BOUNDARY_MODEL_PASS_NOT_NATIVE",
+  "helperSHA256": "098ee70e2315ce59743d2ef7ca02140ab7a7da5f9ab59951145d6eece63f1526",
+  "compile": {
+    "actualRC": 0,
+    "diagnosticsEmpty": true,
+    "ASan": true,
+    "UBSan": true,
+    "assertionsEnabled": true,
+    "LSan": "UNAVAILABLE_detect_leaks0"
+  },
+  "cases": [
+    {
+      "name": "positive",
+      "actualRC": 0,
+      "rawTimedOut": false,
+      "rawHelperState": "TOOL_RESULT_EOF_AND_OWNED_SUPERVISOR_CLOSED",
+      "rawHelperErrors": [],
+      "stdout": {
+        "bytes": 49,
+        "sha256": "e5bbd6970a5247f1bee9c4b956667e12da52479f32609e43e5ce2344d89b1b7d"
+      },
+      "stderrBytes": 0
+    },
+    {
+      "name": "retained",
+      "actualRC": -15,
+      "rawTimedOut": true,
+      "rawHelperState": "REFUSED",
+      "rawHelperErrors": [
+        "Actual tool/status deadline exceeded"
+      ],
+      "stdout": {
+        "bytes": 156,
+        "sha256": "47b466d654a2bb777d8fb6a8acf30355b5f275bb2dd0678ff98459e15aba3b89"
+      },
+      "stderrBytes": 0
+    },
+    {
+      "name": "nil",
+      "actualRC": -15,
+      "rawTimedOut": true,
+      "rawHelperState": "REFUSED",
+      "rawHelperErrors": [
+        "Actual tool/status deadline exceeded"
+      ],
+      "stdout": {
+        "bytes": 91,
+        "sha256": "03ec8b77e4b80ad9897b05fdea0b86413e16444ac3405ca96dc15d7837ff0f65"
+      },
+      "stderrBytes": 0
+    },
+    {
+      "name": "short",
+      "actualRC": -15,
+      "rawTimedOut": true,
+      "rawHelperState": "REFUSED",
+      "rawHelperErrors": [
+        "Actual tool/status deadline exceeded"
+      ],
+      "stdout": {
+        "bytes": 152,
+        "sha256": "b2362b4995ba50672545275a6b309ba57c1154eefca8fcbadb3456c69a97c663"
+      },
+      "stderrBytes": 0
+    },
+    {
+      "name": "error",
+      "actualRC": -15,
+      "rawTimedOut": true,
+      "rawHelperState": "REFUSED",
+      "rawHelperErrors": [
+        "Actual tool/status deadline exceeded"
+      ],
+      "stdout": {
+        "bytes": 93,
+        "sha256": "1efdae5be427eb1ef2a291b402d1b5ec7aeb9c4d204bb200aa30f184b2919eff"
+      },
+      "stderrBytes": 0
+    }
+  ],
+  "meaning": "Positive close returns once with handle cleared and four frees. Four exact retention witnesses keep all four original HOST allocations and never return until run-owned HOST containment; expected timeout classifications do not relabel raw REFUSED as ordinary helper success.",
+  "preservation": {
+    "finiteInputFullFactsEqual": 28,
+    "strict68Preserved": true,
+    "rawREADYEqual": true,
+    "guardFullFactsEqual": true,
+    "compiledProductEqualityGate": true
+  },
+  "ownedHOSTClosure": {
+    "allSixConfirmed": true,
+    "allStreamsEOF": true,
+    "originalSupervisorsRC": -9,
+    "bothSignalsBeforeReap": true,
+    "groupAbsenceObserved": true,
+    "retainedOwners": 0
+  },
+  "internalSeconds": 8.731399209005758,
+  "externalCompletedUpperMilliseconds": 10928,
+  "wholeLimitMilliseconds": 60000,
+  "limits": [
+    "Four explicit HOST API stubs are a fault-boundary control-flow experiment, not native ABI or OS ownership/quiet proof.",
+    "Nil/short/error diagnostic paths retain the original domain; no actual DOS, Intuition or Exec calls ran.",
+    "No native linked/runtime, emulator or physical acceptance."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "retries": 0
+}

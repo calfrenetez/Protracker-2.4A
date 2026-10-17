@@ -451,6 +451,21 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
         result,detail,(unsigned long)e->history.revision,pt_editor_dirty(e),e->project->sample_count,
         result==PT_EDIT_OK?(unsigned long)report.frames:0UL);fflush(stdout);
 }
+/* Only the original main Task calls this with its live, non-NULL screen.
+ * FALSE leaves the screen and all remaining display/application resources live.
+ * This fatal retention branch never retries, frees resources or returns to CRT.
+ * Wait(0) sleeps this Task; it does not authorize killing/unloading the owner. */
+static void screen_close_or_hold(struct Screen **screen)
+{
+    if(!CloseScreen(*screen)) {
+        static const char message[]="EDITOR EXIT HELD - SCREEN CLOSE REFUSED; RESOURCES RETAINED\n";
+        BPTR output=Output();
+        /* Direct DOS only: stdio may abort through CRT on a pending Ctrl-C. */
+        if(output)(void)Write(output,message,(LONG)(sizeof(message)-1));
+        for(;;)Wait(0UL);
+    }
+    *screen=NULL;
+}
 int main(int argc,char **argv)
 {
     static struct pt_view_cache view_cache={0};
@@ -714,7 +729,7 @@ int main(int argc,char **argv)
             redraw=1;frame_log=1;
         }
     }
-    puts("EDITOR EXIT clean");rc=0;
+    rc=0;
 done:
     pt_paula_stop(&audio);
     if(!pt_native_recovery_finish(&recovery,rc==0))puts("EDITOR RECOVERY cleanup retained");
@@ -723,10 +738,10 @@ done:
     if(clock_request)DeleteIORequest((struct IORequest *)clock_request);
     if(clock_port)DeleteMsgPort(clock_port);
     if(window)CloseWindow(window);
-    if(screen)CloseScreen(screen);
+    if(screen)screen_close_or_hold(&screen);
     if(GfxBase) {WaitBlit();for(plane=0;plane<4;++plane)if(bitmap.Planes[plane])FreeRaster(bitmap.Planes[plane],640,512);}
     if(pixels)FreeMem(pixels,4UL*PT_VIEW_PLANE_BYTES);
     if(GfxBase)CloseLibrary((struct Library *)GfxBase);
     if(IntuitionBase)CloseLibrary((struct Library *)IntuitionBase);
-    pt_editor_dispose(editor);pt_master_release(&master_memory,editor);pt_document_release(&doc);return rc;
+    pt_editor_dispose(editor);pt_master_release(&master_memory,editor);pt_document_release(&doc);if(rc==0)puts("EDITOR EXIT clean");return rc;
 }

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "state": "HOST_NINE_CASE_BOUNDARY_MODEL_PASS_NOT_NATIVE",
+  "productionSource": {
+    "bytes": 1029,
+    "sha256": "60c689870ab08f150ba4c71203409248609a3e3493dbf428c14199c7f419e683"
+  },
+  "selectedProductionFunction": {
+    "bytes": 623,
+    "sha256": "78880a57024c32cc677c5f94bfe931e49738c6e06c0a3bdc164149ce87f848c3"
+  },
+  "fixture": {
+    "bytes": 2955,
+    "sha256": "fd306012019a0fbca227e6b1b5ea176756a55345ff40b0b4910d9e456534397e"
+  },
+  "actualResult": {
+    "bytes": 15781,
+    "sha256": "c4d78fb46cd21c70ce24081dd34777818e5472713fd4ced10d5d64632ec87329"
+  },
+  "commands": 2,
+  "returncodes": [
+    0,
+    0
+  ],
+  "modelCases": 9,
+  "oracle": {
+    "bytes": 55,
+    "sha256": "de7e0c0e25b81ce8ae76dba94ba0fab35e66ea7d0f93534b262c5e660da6b182"
+  },
+  "diagnosticsEmpty": true,
+  "assertionsEnabled": true,
+  "sanitizers": [
+    "ASan",
+    "UBSan"
+  ],
+  "leakSanitizer": "UNAVAILABLE_DISABLED",
+  "all39FullFactsStrict68GuardRawREADYAndHOSTProductEqual": true,
+  "ownedClosures": 2,
+  "retainedOwners": 0,
+  "internalSeconds": 0.5349172499845736,
+  "externalCompletedMillisecondsUpper": 3269,
+  "scope": "HOST API-boundary stubs only; no native32 ABI, CRT startup/exit/stack-error execution, DOS IO delivery or GUI/device/runtime qualification. Write error/short cases prove bounded return, not successful output.",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "reviewRole": "Saved Root operation independently verified; shared supervisor/donor authorship overlap disclosed in private detailed audit."
+}

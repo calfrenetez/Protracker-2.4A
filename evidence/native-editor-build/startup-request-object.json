@@ -1,0 +1,54 @@
+{
+  "state": "NATIVE_STARTUP_REQUEST_OBJECT_PASS_NOT_LINKED_NOT_RUNTIME",
+  "sourceSHA256": "60c689870ab08f150ba4c71203409248609a3e3493dbf428c14199c7f419e683",
+  "commands": 5,
+  "allReturncodesZero": true,
+  "compilerAssemblerDiagnosticsEmpty": true,
+  "genuineProfile": "68000 softfloat nix20 Os C99 Werror assertions enabled",
+  "dependencies": {
+    "MEqualsI": true,
+    "projectBodies": 1,
+    "selectedSDKHeaders": 29,
+    "SDKAllowance": 118,
+    "unknownPaths": 0
+  },
+  "object": {
+    "bytes": 400,
+    "sha256": "0a5a27f2b4a64afe06c7afe03d46871e5613ba9d7e6b12fa3c1b04748a35d490"
+  },
+  "HUNK": {
+    "completeBytesConsumed": 400,
+    "CODEBytes": 152,
+    "soleStrongGlobal": "___request",
+    "COMMON": false,
+    "unresolved": [
+      "_DOSBase",
+      "_Output",
+      "_Write"
+    ],
+    "allREF32WriteBoundsValid": true
+  },
+  "emittedGuards": "NULL and-1 DOSBase return before Output/message dereference; zeroOutput returns before input read; bounded loop reads maximum160 bytes. Direct prefix/message/newline requests, no retries/GUI/stdio/heap/exit or base writes.",
+  "ordinaryABI": "Pointer argument from8(A5); D2/D3/A2/A3 preserved; ordinary stack arguments to Write and return.",
+  "individualFrameBytes": 0,
+  "individualSUBytes": 28,
+  "preservation": {
+    "finiteFullFactsEqual": 164,
+    "strict68Equal": true,
+    "rawREADYAndOperationalPlanEqual": true,
+    "guardFullFactsEqual": true
+  },
+  "ownedHOSTClosureConfirmed": true,
+  "retainedOwners": 0,
+  "internalSeconds": 0.5513331249821931,
+  "externalCompletedUpperMilliseconds": 3473,
+  "limits": [
+    "No whole-startup stack headroom or aggregate Task minimum proof.",
+    "Original request archive-member exclusion and current application caller/provider ABI require a separate link.",
+    "No native startup/stack failure/exit20/restoration or OS behavior executed."
+  ],
+  "link": "NOT_PERFORMED",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "retries": 0
+}

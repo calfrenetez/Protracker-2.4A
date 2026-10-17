@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "state": "NATIVE_WORKING70_OBJECTS_PASS_NOT_LINKED_NOT_RUNTIME",
+  "sourceCohort": "Exact private working editor/view/pattern composition with original23 display payloads retained through own screen-retention inverse. Separate clean cohort is not substituted.",
+  "manifest": {
+    "bytes": 1402523,
+    "sha256": "1a42b3884453b23c31a4e547b0b77a24c65b3c9823739274fc8cc17a866568d7"
+  },
+  "actualRoot": {
+    "bytes": 9037,
+    "sha256": "84276f5aac2967c648d4e7ddef845eb56ebb1276b8efb6410574ff567590ee87"
+  },
+  "commands": 350,
+  "translationUnits": 70,
+  "projectBodies": 159,
+  "SDKAllowance": 118,
+  "selectedDependencies": {
+    "project": 159,
+    "SDK": 111,
+    "MEqualsI": true,
+    "unknownPaths": 0
+  },
+  "allRC0": true,
+  "allDiagnosticsEmpty": true,
+  "strongFourByteBSSManualBases": [
+    "IntuitionBase",
+    "GfxBase",
+    "AslBase"
+  ],
+  "mainFrameBytes": 3536,
+  "mainIndividualSUBytes": 3684,
+  "rawSUEntries": 833,
+  "stackScope": "Individual entries only; no aggregate Task/CRT/IRQ launch minimum proof.",
+  "all318FullFactsStrict68GuardRawREADYAndOperationalPlanEqual": true,
+  "ownedHOSTClosures": 1,
+  "retainedOwners": 0,
+  "internalSeconds": 44.447715374990366,
+  "externalCompletedMillisecondsUpper": 47062,
+  "runtime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": "No link/archive-provider/startup/error-route/GUI/audio/Amiberry/physical acceptance. Shared supervisor/donor authorship overlap disclosed privately."
+}

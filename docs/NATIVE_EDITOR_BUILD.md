@@ -30,3 +30,54 @@ These results do not qualify application execution, Amiberry GUI behavior,
 physical A1200 operation, audio ownership, playback timing or listening.
 The compact evidence files in ../evidence/native-editor-build/ keep those
 boundaries separate from compiler and linker results.
+
+## Startup failure and screen ownership
+
+The editor's explicit nix20 startup object requests a 64 KiB stack through the
+genuine libnix stack module. Its typed anchor retains that module's own startup
+and exit constructors. This is an experimental request, not a measured minimum
+or a final shipping requirement. The runtime libraries and CRT remain intact.
+
+The selected libnix stack-allocation failure path can report an error before
+`main` opens Intuition. When GUI requests are allowed, its original reporter
+would then use the editor's still-null manual library base. An app-owned
+`__request` provider instead checks
+the CRT-owned DOS base, attempts a bounded diagnostic through direct DOS calls,
+and returns to the genuine caller. That caller retains its own failure exit.
+This is an app-specific link binding, not a general libnix extension API.
+Every candidate must prove the selected provider and its callers from its own
+link map and emitted code; source-list enrollment alone is insufficient.
+
+Shutdown also checks `CloseScreen`'s result. A refusal leaves the screen and
+remaining resources alive, attempts a direct DOS diagnostic and waits in the
+original Task. It does not announce a clean exit or return to the CRT. A
+successful screen close permits the remaining teardown; the clean-exit marker
+is emitted only after that teardown. A retained physical Task requires recovery
+appropriate to its still-live resources, not forced executable unloading.
+
+The startup reporter passes nine HOST API-boundary cases and a distinct genuine
+native compilation. Screen-close handling passes five HOST cases and separate
+clean and working native entry-point compilations. The full working-layout
+cohort also passes all 350 stages across 70 C units. HOST stubs establish only
+the tested control flow; they do not establish Amiga library or Task behavior.
+The focused results are retained in
+[startup-request-host.json](../evidence/native-editor-build/startup-request-host.json),
+[startup-request-object.json](../evidence/native-editor-build/startup-request-object.json),
+[screen-retention-host.json](../evidence/native-editor-build/screen-retention-host.json),
+[screen-retention-objects.json](../evidence/native-editor-build/screen-retention-objects.json)
+and [working-layout-objects.json](../evidence/native-editor-build/working-layout-objects.json).
+The startup data object was compiled with its separately recorded `-O2` profile;
+the reporter and application use their recorded `-Os` profiles. The legacy
+builder's source-list additions do not prove reproduction of these objects.
+
+The complete working-layout candidate also links and passes its current
+provider, calling-convention and HUNK review: all 70 working C objects plus the
+separate replay, startup and reporter objects, 116 direct runtime providers,
+and 80 ordered link inputs. Its 349,260 bytes and 3,561 relocation records are
+fully consumed by the structural parser. The current emitted startup-failure,
+screen-retention and replay-call paths are checked separately from the earlier
+clean candidate. See [working-layout-link.json](../evidence/native-editor-build/working-layout-link.json).
+
+Exact-candidate Amiberry execution remains a separate gate. Physical A1200,
+allocation-failure and stack-restoration runtime checks, audio ownership,
+timing and listening remain unqualified until recorded explicitly.

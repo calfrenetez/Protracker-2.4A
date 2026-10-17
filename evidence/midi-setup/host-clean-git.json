@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "scope": "Historical private portable HOST qualification only; no target operations",
+  "status": "PASS",
+  "baseGit": "56ff32d0a5c71df094b115d36c8b368030e6f3dc",
+  "editorPairKind": "COMPLETE_CLEAN_GIT_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69993,
+      "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6646,
+      "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    }
+  },
+  "newBodies": {
+    "src/editor/midi_setup.c": {
+      "bytes": 15293,
+      "sha256": "ff254db741b4d0c98b289f2e1c2644ccd8084db55a0ec01f0dafdefdf3c5fa38"
+    },
+    "src/editor/midi_setup.h": {
+      "bytes": 4920,
+      "sha256": "5ee19232be94a6f64843cd74c181249fadad5482dede743383d69b901111abf8"
+    },
+    "tests/midi_setup_test.c": {
+      "bytes": 21405,
+      "sha256": "f8f7af8aedbb530d358824693a37000ee9d0638606c724a405eeea55bf169742"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 31,
+    "literalBodies": 74,
+    "sha256": "00be761330efe95c1d8ffc9c8f6ea77ffa603ce18e7be2cc9e83f9130f44b706",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "compileSeconds": 7.8419948749942705,
+  "fixtureSeconds": 0.5455517080263235,
+  "outerSeconds": 8.745660165994195,
+  "returnCode": 0,
+  "fixtureGroups": 11,
+  "terminalOracle": {
+    "bytes": 155,
+    "sha256": "7f1cc1476f2be4dce7bf7a7035dea4bb8446ad9288f8509c6cc286b8d3240277"
+  },
+  "compileStdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "compileStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fixtureStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "separateWorkingPair": {
+    "editorPair": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "qualification": "NOT_RUN",
+    "sourceClosureSHA256": "88aa591e6bbc84c3ece6481cdb373a7812c02b02429dc34e08debbb7c86b6da2"
+  },
+  "acceptanceNotEstablished": [
+    "native ABI/link/runtime",
+    "frontend binding",
+    "CAMD lifecycle and discovery",
+    "message delivery or route activation",
+    "input recording or clock traffic",
+    "exact scheduling",
+    "emulator",
+    "physical A1200/AmiGUS",
+    "hardware quiet",
+    "human listening",
+    "release acceptance"
+  ]
+}

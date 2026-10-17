@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "scope": "Actual portable HOST qualification of complete preserved working editor pair; historical clean-pair run is separate",
+  "status": "PASS",
+  "sourceCommitBeforeAdoption": "56ff32d0a5c71df094b115d36c8b368030e6f3dc",
+  "editorPairKind": "COMPLETE_CURRENT_WORKING_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    }
+  },
+  "newBodies": {
+    "src/editor/midi_setup.c": {
+      "bytes": 15293,
+      "sha256": "ff254db741b4d0c98b289f2e1c2644ccd8084db55a0ec01f0dafdefdf3c5fa38"
+    },
+    "src/editor/midi_setup.h": {
+      "bytes": 4920,
+      "sha256": "5ee19232be94a6f64843cd74c181249fadad5482dede743383d69b901111abf8"
+    },
+    "tests/midi_setup_test.c": {
+      "bytes": 21405,
+      "sha256": "f8f7af8aedbb530d358824693a37000ee9d0638606c724a405eeea55bf169742"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 31,
+    "literalBodies": 74,
+    "sha256": "88aa591e6bbc84c3ece6481cdb373a7812c02b02429dc34e08debbb7c86b6da2",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "wrapper": {
+    "path": "tests/test_midi_setup.py",
+    "bytes": 16419,
+    "sha256": "b6e6425297400a4a967145c682c60439806068719c6255058583f1e1acf1430a"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "outerTimeoutSeconds": 180,
+  "compileSeconds": 7.550689209019765,
+  "fixtureSeconds": 0.3482211669906974,
+  "outerSeconds": 8.262450374983018,
+  "returnCode": 0,
+  "fixtureGroups": 11,
+  "terminalOracle": {
+    "bytes": 155,
+    "sha256": "7f1cc1476f2be4dce7bf7a7035dea4bb8446ad9288f8509c6cc286b8d3240277"
+  },
+  "emptyStreams": {
+    "midi-setup-compile.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "midi-setup-compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "midi-setup-fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "limits": [
+    "Two complete editor pairs separately qualified; no mixed ABI halves",
+    "Borrowed 8/16/24 PCM values are preservation checks, not master-pin/cache qualification",
+    "No visible requester/frontend activation, CAMD discovery/open/delivery, native object/link/runtime, exact scheduling, emulator, physical, quiet, listening or release acceptance"
+  ]
+}

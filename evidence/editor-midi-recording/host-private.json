@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "state": "INDEPENDENT_EDITOR_MIDI_RECORDING_DUAL_COHORT_HOST_PASS",
+  "basis": "Saved actual execution evidence and frozen-source review; no rerun.",
+  "source": {
+    "ownerC": {
+      "bytes": 12309,
+      "sha256": "96884997fa546fa72b5db55805f7cdcc7d1ff606a437af7a8aff8ad7597af9df"
+    },
+    "ownerH": {
+      "bytes": 4702,
+      "sha256": "956e889cab40db6ebea2248b02b9b7c15fe90b81a5ea29109aef5c3bd6a118b6"
+    },
+    "fixture": {
+      "bytes": 21483,
+      "sha256": "11a3dd3ab97a455d68848c6f3bb3b0e3ad848858ae4d6ebfa38d17b3b44ba392"
+    },
+    "wrapper": {
+      "bytes": 19492,
+      "sha256": "d72c2c79454331b7d1f9747f45c0e4d8189e49a20cdfe1f7903b600ece4be931"
+    }
+  },
+  "actualResult": {
+    "bytes": 2963,
+    "sha256": "d9d733e71991ba7673227ae95eca9ded5fdfd34396316c726e790f54f96a80d2"
+  },
+  "seconds": 17.91261358401971,
+  "cohorts": [
+    {
+      "pair": "COMPLETE_CLEAN_GIT_PAIR",
+      "returncode": 0,
+      "seconds": 9.308376457978738,
+      "compileSeconds": 8.459084250003798,
+      "fixtureSeconds": 0.5461977920203935,
+      "wrapperMethods": 3,
+      "pureSelectorCases": 6,
+      "orderedTranslationUnits": 35,
+      "literalSourceBodies": 82,
+      "groups": 7,
+      "complete": 5,
+      "rootedRetained": 2,
+      "fixtureStdout": {
+        "bytes": 163,
+        "sha256": "b39f175948ea9162fe48caeccc5b9d43210445d882e1926466ef851731b30311"
+      },
+      "compilerAndFixtureDiagnosticsEmpty": true
+    },
+    {
+      "pair": "COMPLETE_CURRENT_WORKING_PAIR",
+      "returncode": 0,
+      "seconds": 8.488743041991256,
+      "compileSeconds": 7.9797271249990445,
+      "fixtureSeconds": 0.2601644579845015,
+      "wrapperMethods": 3,
+      "pureSelectorCases": 6,
+      "orderedTranslationUnits": 35,
+      "literalSourceBodies": 82,
+      "groups": 7,
+      "complete": 5,
+      "rootedRetained": 2,
+      "fixtureStdout": {
+        "bytes": 163,
+        "sha256": "b39f175948ea9162fe48caeccc5b9d43210445d882e1926466ef851731b30311"
+      },
+      "compilerAndFixtureDiagnosticsEmpty": true
+    }
+  ],
+  "recipe": {
+    "c99": true,
+    "optimization": "O1",
+    "warningsAsErrors": true,
+    "assertionsEnabled": true,
+    "asan": true,
+    "ubsan": true,
+    "compileLimitSeconds": 120,
+    "fixtureLimitSeconds": 30
+  },
+  "preservation": {
+    "inputFullFacts": 258,
+    "boundariesCompared": 5,
+    "allRecordedInputsAndREADYFullFactsEqual": true,
+    "strictEntries": 68,
+    "residentBodyPins": 58,
+    "metadataOnlyEntries": 10,
+    "innerRaw68MatchesRoot": true,
+    "savedSharedGuardFactsEqual": true,
+    "directBaselineFullFactBound": {
+      "bytes": 30956,
+      "sha256": "127c4de690b64c6d3cd6a5fce5cabeb3e1d491d9b50c0d94998d9b1633271f9e"
+    }
+  },
+  "coverage": "Genuine recorder/editor/journal; armed veto; original mono24 master and save/undo; failed Stop/local cancel; real resource-discard callback BUSY; completed-preview staleness; detached get after former context free.",
+  "limits": [
+    "Same seven scenarios run for both complete editor pairs; five complete and two deliberately rooted HELD rigs per process. No cleanup or zero-ledger claim for retained cases.",
+    "Temporary compiled exports/executables were removed normally; saved commands and checked copy maps remain. No full compiler/system-header closure claim.",
+    "Ordinary freed-parent check is not protected-page proof. Serial HOST metadata only; native, emulator, hardware, input/CAMD/output, timing and listening unqualified."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0
+}

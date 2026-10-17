@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "state": "CANONICAL_SOURCE_BINDING_BRIDGE_ONLY",
+  "basis": "Exact source bodies from the independently audited actual dual private HOST qualifier; no rerun or native claim.",
+  "source": {
+    "src/editor/editor_midi_recording.c": {
+      "bytes": 12309,
+      "sha256": "96884997fa546fa72b5db55805f7cdcc7d1ff606a437af7a8aff8ad7597af9df"
+    },
+    "src/editor/editor_midi_recording.h": {
+      "bytes": 4702,
+      "sha256": "956e889cab40db6ebea2248b02b9b7c15fe90b81a5ea29109aef5c3bd6a118b6"
+    },
+    "tests/editor_midi_recording_test.c": {
+      "bytes": 21483,
+      "sha256": "11a3dd3ab97a455d68848c6f3bb3b0e3ad848858ae4d6ebfa38d17b3b44ba392"
+    }
+  },
+  "actualPrivateWrapper": {
+    "bytes": 19492,
+    "sha256": "d72c2c79454331b7d1f9747f45c0e4d8189e49a20cdfe1f7903b600ece4be931"
+  },
+  "canonicalWrapper": {
+    "bytes": 19423,
+    "sha256": "04a6c925f7cd2711c9a413debcfb7590d2bb573140fad0f1c615d3ee707e8ba2"
+  },
+  "normalization": "Exactly one CANONICAL explicit checkout binding replaced by dynamic ROOT. All other wrapper bytes and source pins remain unchanged.",
+  "actualHostReceipt": {
+    "bytes": 3533,
+    "sha256": "0e136ab4704b771f4548970803023dd7e9fcb1b350c6e9847df217e06e668aec"
+  },
+  "actualCohorts": [
+    "COMPLETE_CLEAN_GIT_PAIR",
+    "COMPLETE_CURRENT_WORKING_PAIR"
+  ],
+  "sourceBodiesEach": 82,
+  "translationUnitsEach": 35,
+  "commonBodies": 80,
+  "uniqueBodyVersionsUnion": 84,
+  "cohortBoundary": "Each actual run used a complete coherent editor C/H pair. View sources were not selected; protected work remains separately preserved.",
+  "canonicalWrapperExecution": "NOT_RUN; byte-exact inverse source bridge only",
+  "nativeObject": {
+    "state": "SEPARATE_ONE_OBJECT_SOURCE_COMPATIBILITY_PASS",
+    "receipt": {
+      "bytes": 3040,
+      "sha256": "3d40bc49c8feaa555fe31cdc6f57a47c439dbf6376c066de7df67113a5dd757d"
+    },
+    "sameProductionBodies": "Byte-exact R2/R3 owner C/H; no native editor/view/fixture compile",
+    "link": "NOT_PERFORMED",
+    "runtime": "NOT_RUN"
+  },
+  "nativeRuntime": "NOT_RUN",
+  "defaultActivation": false,
+  "targetOperations": 0
+}

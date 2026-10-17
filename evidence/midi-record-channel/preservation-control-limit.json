@@ -1,0 +1,15 @@
+{
+  "state": "PRESERVATION_CONTROL_SCOPE_CLARIFICATION_ONLY",
+  "historicalNativeObjectReceiptSha256": "46cdd826217dd3915ec9aa324d1effabfca0895aa98c4f0fc240744db430bf05",
+  "controlLimit": "The115 recorded full-fact input rows did not directly include the preservation helper baseline source. They are finite evidence, not a complete transitive control-input closure.",
+  "unchangedEvidence": {
+    "rawProtectedBeforeAfterEqual": true,
+    "protectedRows": 68,
+    "residentBodyPins": 58,
+    "metadataOnlyRows": 10,
+    "snapshotSha256": "d4c77da45eeadffc3b92a75d97d3453d01aabef406fd97e64b6fe74e889a5d0c",
+    "codeDependencyAndProductChanges": false,
+    "rerun": false
+  },
+  "limit": "No retroactive execution-time baseline binding or external-source immutability is inferred. The original object receipt remains unchanged; link/runtime remain unqualified. Successor controls must directly bind the actual helper baseline."
+}

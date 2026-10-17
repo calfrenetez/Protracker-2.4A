@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "state": "INDEPENDENT_NATIVE_EDITOR_MIDI_RECORDING_OBJECT_PASS",
+  "basis": "Saved actual one-shot HOST cross-compile products and boundary records; no rerun.",
+  "source": {
+    "ownerC": {
+      "bytes": 12309,
+      "sha256": "96884997fa546fa72b5db55805f7cdcc7d1ff606a437af7a8aff8ad7597af9df"
+    },
+    "ownerH": {
+      "bytes": 4702,
+      "sha256": "956e889cab40db6ebea2248b02b9b7c15fe90b81a5ea29109aef5c3bd6a118b6"
+    },
+    "cleanEditorHeaderSHA256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65",
+    "actualDualCohortHOSTAuditSHA256": "6c75913977ea3a5900ca8168862d77431491c92bcfab7fc338e4ebdb0c70a12d"
+  },
+  "actual": {
+    "builderResult": {
+      "bytes": 16799,
+      "sha256": "fe2312c31c49ace148ef3169e57f0ef8f7eb7ad721bc9584f551eda5bc109a2e"
+    },
+    "rootResult": {
+      "bytes": 1925,
+      "sha256": "ae2c5c1a4133e005072cc5c544b22493029b6a61607c6dcaab9790520e621aa2"
+    },
+    "rootSeconds": 0.9814052080037072,
+    "builderSeconds": 0.7705786669976078,
+    "stages": 5,
+    "allReturncodesZero": true,
+    "allStageDiagnosticsEmpty": true,
+    "translationUnits": 1,
+    "projectBodyAllowance": 35,
+    "selectedProjectBodies": 35,
+    "SDKAllowance": 72,
+    "selectedSDKBodies": 20,
+    "actualM_EqualsI": true,
+    "selectedDependencyUnion": 55
+  },
+  "recipe": {
+    "target": "m68k:68000",
+    "CRT": "nix20",
+    "softFloat": true,
+    "optimization": "Os",
+    "C99": true,
+    "warningsAsErrors": true,
+    "assertionsEnabled": true,
+    "stackUsage": true,
+    "controlledGenuinePrivateSDK": true
+  },
+  "object": {
+    "bytes": 4180,
+    "sha256": "0dbd14e8c8305c5af233243ad5035e431cd10f17f5a5ca03aef4b78be7760d70",
+    "format": "Amiga HUNK_UNIT",
+    "textBytes": 3136,
+    "exportedAPI": 8,
+    "unresolvedSymbols": 11,
+    "relocationCount": 20,
+    "emittedOwnerBytes": 358,
+    "emittedAlignment": 2,
+    "nativeEditorOrViewOrFixtureCompiled": false
+  },
+  "preservation": {
+    "all139InputFactsAndREADYExactBeforeAfter": true,
+    "strict68Exact": true,
+    "savedGuardExact": true,
+    "allCopied35SourceBodiesExact": true,
+    "originalPreservationBaselineBound": true,
+    "sixOwnControlMetadataTransitionsExplicitBodyExact": true
+  },
+  "individualStackUsage": {
+    "rows": 16,
+    "static": 7,
+    "dynamicBounded": 9,
+    "maximumBytes": 88,
+    "maximumFunction": "pt_editor_midi_recording_begin",
+    "messageBytes": 68,
+    "getBytes": 64,
+    "limit": "Individual compiler rows only; no aggregate/callee/CRT/OS/callback/whole-Task or runtime bound."
+  },
+  "review": {
+    "bytes": 14504,
+    "sha256": "479cd5d226ec27f4015c9aa2c697550ef2f53c400bda4672608e1c15ede7aafb"
+  },
+  "limits": [
+    "Native source/ABI object compatibility only; unresolved references remain, no link or runtime.",
+    "Existing HOST metadata recording acceptance is separate. No native enrollment/frontend, MIDI input/clock/CAMD/output, device quiet, timing or listening proof."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "link": "NOT_PERFORMED",
+  "targetOperations": 0
+}

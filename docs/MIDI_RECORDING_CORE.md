@@ -115,11 +115,22 @@ soft-float/nix20 profile. Its 468-byte HUNK_UNIT exports the adapter and retains
 `_pt_record_input` as its sole unresolved reference. Actual dependency and
 ordinary-preprocessor sets agree: six project bodies and seven genuine SDK
 headers, within the unchanged 72-header allowance. All 115 input full-fact
-records, READY, 68 protected records and guard match before/after. The emitted
-validation/scalar delegation and unchanged Q16 argument were reviewed. One
+records, READY, 68 protected records and guard match before/after. These are
+finite input comparisons: the 115 rows did not directly include the preservation
+helper's baseline source. The [separate control-scope clarification](../evidence/midi-record-channel/preservation-control-limit.json)
+records that limit without changing the original receipt or inferring retrospective
+baseline immutability. The emitted validation/scalar delegation and unchanged Q16
+argument were reviewed. One
 48-byte compiler stack row is local evidence only; linked recorder/store ABI,
 whole-Task stack and native runtime remain unqualified. No executable was linked.
 CAMD input, Amiberry, physical MIDI, output timing and listening are **NOT RUN**.
+
+## Optional editor enrollment
+
+[MIDI_EDITOR_RECORDING.md](MIDI_EDITOR_RECORDING.md) describes the separate,
+allocation-free stopped-take owner. Actual clean and working editor HOST qualifiers
+cover genuine recording/store/history, editor vetoes, master preservation and safe
+matched detach. It does not activate native input, recording UI or MIDI output.
 
 ## Verification and remaining integration
 

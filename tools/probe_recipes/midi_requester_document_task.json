@@ -187,7 +187,7 @@
     "emulator": "NOT_RUN",
     "physicalA1200": "NOT_ADMITTED"
   },
-  "stack": "R4 reads actual m68k SP against original volatile Task lower/upper bounds before heavy planning/allocation/construction; requires at least1048576 remaining bytes and unchanged Task/nesting/bounds. The helper is inlined in the reviewed artifact. A future separately admitted same-Shell Stack2097152 setter/query is required; its private runner allowance remains separately qualified. Raw individual SU: main376, largest16572; not wholeTask/CRT/OS/IRQ/call-chain/WCET or cancellation proof.",
+  "stack": "R4 reads actual m68k SP against original volatile Task lower/upper bounds before heavy planning/allocation/construction; requires at least1048576 remaining bytes and unchanged Task/nesting/bounds. The helper is inlined in the reviewed artifact. A future separately admitted same-Shell Stack2097152 setter/query is required; its exact-value private runner allowance must be qualified separately. This recipe admits no runner, packet or native execution. Raw individual SU: main376, largest16572; not wholeTask/CRT/OS/IRQ/call-chain/WCET or cancellation proof.",
   "activation": "Not referenced by Makefile/default core/frontend entrypoints. Maintainers must explicitly prepare a fresh reviewed build/admission; no executable builder is supplied here.",
   "runtimeAdmission": {
     "state": "NOT_ADMITTED",

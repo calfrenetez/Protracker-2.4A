@@ -1,0 +1,92 @@
+{
+  "status": "HOST_PASS_CANONICAL_CURRENT_WORKING",
+  "wrapper": {
+    "path": "tests/test_midi_requester_model.py",
+    "bytes": 18684,
+    "sha256": "4d76a9b1cd51a16a42d9ec0f47873aa1b47049c44b2b37b63db8fa862a50b6bf"
+  },
+  "qualification": {
+    "testMethods": 3,
+    "purePairCases": 6,
+    "originalModelGroups": 8,
+    "oracleBytes": 161,
+    "hostFlags": [],
+    "conditionalOwnerHeaderCountedLiterally": true,
+    "selectedABIKind": "COMPLETE_CURRENT_WORKING_PAIR",
+    "selectedABI": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "sourceRecipes": {
+      "model": {
+        "translationUnits": 32,
+        "literalBodies": 77,
+        "savedInputPin": {
+          "bytes": 47054,
+          "sha256": "800b0090679815438d0b048c2b9cac8bf393ba38505d8726d7b2afdcfb8d2d3b"
+        }
+      }
+    },
+    "outerSeconds": 8.231634083000245,
+    "timingsSeconds": {
+      "compile": 7.708347166015301,
+      "fixture": 0.2386679159826599
+    },
+    "exactOracles": {
+      "midi-requester-fixture": {
+        "bytes": 161,
+        "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+      }
+    },
+    "returnCode": 0,
+    "allCompilerAndFixtureDiagnosticsEmpty": true,
+    "childSuccessBasis": "Exact unchanged wrapper return-code/oracle assertions and successful outer qualifier; raw command records do not independently store child exit codes."
+  },
+  "sourcePins": {
+    "src/native/midi_requester.h": {
+      "bytes": 7395,
+      "sha256": "3ad6b133bb5acfac346506f1d5a6a2824333bd4b22c81dd28904292b084fa239"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10700,
+      "sha256": "f58691e8525d46bd1d03f4cc71272ee670cf7d1e58ba954188723848810d55cc"
+    }
+  },
+  "helperPin": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "actualSavedResultPin": {
+    "bytes": 646,
+    "sha256": "81d63338ed12b961c73087d16f32f12a243fb3d769a31809604055fd31f74d06"
+  },
+  "rootFourResultPin": {
+    "bytes": 3168,
+    "sha256": "076b2a261481a2d9344b86c9799d6ea4e05e0988c7651fe224bc4abca01a50ac"
+  },
+  "acceptance": [
+    "The original eight-group model fixture/oracle and32-unit default compile pass unchanged.",
+    "Static literal closure is77 bodies: updated model C/H plus the conditional quoted original owner header; this does not enable the HOST-only composition or native gate.",
+    "Both known complete editor pairs are pure admission choices; only the recorded working pair really compiled in this run."
+  ],
+  "preservation": {
+    "protectedEntries": 68,
+    "strictRootSavedBeforeAfterEqual": true,
+    "wrapperSavedBeforeAfterEqual": true,
+    "guardSavedBeforeAfterEqual": true,
+    "allNineCandidateSourcePinsUnchanged": true,
+    "targetOperations": 0
+  },
+  "limits": [
+    "HOST acceptance only; no native ABI/link/runtime or visible requester/frontend/Task input isolation.",
+    "No CAMD/provider/message/clock/route/output activation or exact live scheduling change.",
+    "No repeating live native document session, hardware quiet/completion/timing, emulator/physical A1200/AmiGUS, listening or release acceptance.",
+    "Historical private clean receipts, first companion compile failure and earlier NOT_RUN drafts remain unchanged; pure selectors are not another clean compile."
+  ]
+}

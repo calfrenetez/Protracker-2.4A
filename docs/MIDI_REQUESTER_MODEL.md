@@ -3,8 +3,9 @@
 The portable requester model borrows the existing durable MIDI setup controller.
 It supplies a chooser, captured-track output selection, one field's bounded name
 editing or clock flags, focus/hit handling, Apply and Cancel. It is not bound to
-the native application. The separate window source remains private, uncompiled
-and unbound; this model does not establish a visible MIDI setup page.
+the native application. The separate window remains private and unbound; its
+separate object-only check does not establish this composition or a visible MIDI
+setup page.
 
 Choosing Input, Output or Clock begins one genuine controller draft. Apply commits
 only that field through the existing chronological editor journal, then consumes
@@ -54,3 +55,14 @@ parent-input isolation, durable native document-transition integration, emulator
 physical A1200/AmiGUS, hardware quiet, listening or release acceptance. The 8-bit,
 16-bit and 24-bit master/cache architecture and exact scheduling remain governed
 by their own implementation and qualification boundaries.
+
+The optional HOST-only [owner/modal composition](MIDI_REQUESTER_MODAL.md) uses the
+genuine original owner ticket around this same model. Its private clean pair and
+separate real document-admission companion passed first; four separate canonical
+working-pair/quartet HOST qualifiers now pass as well. The original model wrapper
+now records77 literal bodies because the conditional quoted owner header belongs
+to its static graph. Its32-unit no-HOST-flag recipe and original eight-group
+fixture/oracle remain unchanged and passed separately with the complete working
+pair; see `evidence/midi-requester-modal/host-canonical-original-model-regression.json`.
+This does not relabel the historical76-body receipt above or activate a native
+requester. Earlier private receipt NOT_RUN fields retain their original boundary.

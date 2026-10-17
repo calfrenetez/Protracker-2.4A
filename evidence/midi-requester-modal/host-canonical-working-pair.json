@@ -1,0 +1,116 @@
+{
+  "status": "HOST_PASS_CANONICAL_CURRENT_WORKING",
+  "wrapper": {
+    "path": "tests/test_midi_requester_owner_modal.py",
+    "bytes": 23983,
+    "sha256": "bd0744f48f960e4e01b7fe7fdfd0377fa975d0044d6b4c0fbcf1b531801350a0"
+  },
+  "qualification": {
+    "testMethods": 3,
+    "purePairCases": 6,
+    "focusedGroups": 7,
+    "focusedComplete": 6,
+    "wholeDomainHeld": 1,
+    "originalOwnerFreshProcessGroups": 8,
+    "defaultModelGroups": 8,
+    "selectedABIKind": "COMPLETE_CURRENT_WORKING_PAIR",
+    "selectedABI": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "sourceRecipes": {
+      "modal": {
+        "translationUnits": 33,
+        "literalBodies": 79,
+        "savedInputPin": {
+          "bytes": 38682,
+          "sha256": "4d15bff88fe9b1f187a6159b5ecafaf9bef22fd64412bc88df019c956555bb19"
+        }
+      },
+      "model-default": {
+        "translationUnits": 32,
+        "literalBodies": 77,
+        "savedInputPin": {
+          "bytes": 37609,
+          "sha256": "291bfa922d7780874d7483d3c43b0850f27b1098133baebd75669e8dd0502287"
+        }
+      }
+    },
+    "outerSeconds": 16.98754345800262,
+    "timingsSeconds": {
+      "requester-owner-modal-modal-compile": 8.22545554098906,
+      "requester-owner-modal-modal-focused": 0.3250124590122141,
+      "requester-owner-modal-modal-owner-legacy": 0.016051959013566375,
+      "requester-owner-modal-model-default-compile": 7.626472125004511,
+      "requester-owner-modal-model-default-fixture": 0.23404204100370407
+    },
+    "exactOracles": {
+      "requester-owner-modal-modal-focused": {
+        "bytes": 143,
+        "sha256": "dae57394099a1a5a5d30f72d9e0bd852442a5e0fa2b96579b01c6b666c10070a"
+      },
+      "requester-owner-modal-modal-owner-legacy": {
+        "bytes": 170,
+        "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+      },
+      "requester-owner-modal-model-default-fixture": {
+        "bytes": 161,
+        "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+      }
+    },
+    "returnCode": 0,
+    "allCompilerAndFixtureDiagnosticsEmpty": true,
+    "childSuccessBasis": "Exact unchanged wrapper return-code/oracle assertions and successful outer qualifier; raw command records do not independently store child exit codes."
+  },
+  "sourcePins": {
+    "src/native/midi_requester.h": {
+      "bytes": 7395,
+      "sha256": "3ad6b133bb5acfac346506f1d5a6a2824333bd4b22c81dd28904292b084fa239"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10700,
+      "sha256": "f58691e8525d46bd1d03f4cc71272ee670cf7d1e58ba954188723848810d55cc"
+    },
+    "tests/midi_requester_owner_modal_test.c": {
+      "bytes": 14587,
+      "sha256": "a2c449d618f8b9a918c9a7997455ad8316373b51ef07310b73fd9dc0e8b87819"
+    }
+  },
+  "helperPin": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "actualSavedResultPin": {
+    "bytes": 652,
+    "sha256": "834f156e34615b8a65f6866f51658504c1b118517c65419f2048076c4e7f5d03"
+  },
+  "rootFourResultPin": {
+    "bytes": 3168,
+    "sha256": "076b2a261481a2d9344b86c9799d6ea4e05e0988c7651fe224bc4abca01a50ac"
+  },
+  "acceptance": [
+    "Genuine original borrow, failed-open positive return, model Apply with consumed self and matched ticket return pass.",
+    "Actual note/MIDI chronology, retained undone redo, saved project encoding, callback BUSY, original allocator HELD retention and final-address rebind are exercised.",
+    "Original owner8 and separate default-OFF model8 remain separate fixture outcomes; HELD rigs retain their whole original domains."
+  ],
+  "preservation": {
+    "protectedEntries": 68,
+    "strictRootSavedBeforeAfterEqual": true,
+    "wrapperSavedBeforeAfterEqual": true,
+    "guardSavedBeforeAfterEqual": true,
+    "allNineCandidateSourcePinsUnchanged": true,
+    "targetOperations": 0
+  },
+  "limits": [
+    "HOST acceptance only; no native ABI/link/runtime or visible requester/frontend/Task input isolation.",
+    "No CAMD/provider/message/clock/route/output activation or exact live scheduling change.",
+    "No repeating live native document session, hardware quiet/completion/timing, emulator/physical A1200/AmiGUS, listening or release acceptance.",
+    "Historical private clean receipts, first companion compile failure and earlier NOT_RUN drafts remain unchanged; pure selectors are not another clean compile."
+  ]
+}

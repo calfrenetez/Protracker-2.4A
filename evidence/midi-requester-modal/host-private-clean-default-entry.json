@@ -1,0 +1,109 @@
+{
+  "acceptanceLimits": [
+    "HOST private clean quartet only; pure working-quartet admission does not execute working frontend code.",
+    "No new native ABI, window, CAMD, device, output, synchronization, timing, emulator, physical or listening qualification.",
+    "Main modal and typed modal/document companion records remain separate.",
+    "No canonical adoption or publication is asserted by this receipt."
+  ],
+  "actualEvidence": {
+    "independentReview": {
+      "bytes": 52073,
+      "sha256": "99f3eecccd5d275d83a7f7a0ec35e452c486c179ffb1656c59bedf60551ecb82"
+    },
+    "inputRecord": {
+      "bytes": 102444,
+      "sha256": "519fcfd30906d7b2ad28768039ad66294209da67dc960df3a1f042fccee5eb02"
+    },
+    "literalClosure": {
+      "bytes": 99187,
+      "sha256": "329e9b5829c96439d9be624d0542f400ee87e0964bc264f85c4fff183c8de4ff"
+    },
+    "result": {
+      "bytes": 497,
+      "sha256": "ec0549b3e6890de225edbd8d19b7604a81bfa0b67f4ad4456f63932102f80ea7"
+    },
+    "sourcePlan": {
+      "bytes": 6946,
+      "sha256": "1d20acd57a3888b32875b54df426063801b56a85d4ac47131543a65614b4ff09"
+    },
+    "wrapper": {
+      "bytes": 37442,
+      "sha256": "bc4b88177d1ce1e6ec9b38fb44cde607f1e5cebedadda22d8a2dfcf2f9a97f88"
+    }
+  },
+  "boundsSeconds": {
+    "eachCompile": 120,
+    "eachRuntimeProcess": 30,
+    "outer": 180
+  },
+  "qualification": "Saved actual HOST default-entry regression independently reviewed; no new run.",
+  "redaction": "No private filesystem paths, process identifiers, raw metadata, environment values or raw commands.",
+  "schemaVersion": 1,
+  "scope": {
+    "defaultTranslationUnits": 84,
+    "focusedCases": 8,
+    "focusedComplete": 6,
+    "focusedRootedRetained": 2,
+    "focusedTranslationUnits": 86,
+    "literalProjectBodies": 202,
+    "modalCompanionExcluded": true,
+    "nullOriginalActionCases": 13,
+    "ordinaryDonorDefaultEntryInvoked": true,
+    "pureQuartetCases": 26,
+    "selectedFrontend": "COMPLETE_CLEAN_GIT_QUARTET",
+    "separateDefaultOffOriginalActionCases": 13,
+    "tenFreshRuntimeProcesses": true,
+    "unittestMethods": 5
+  },
+  "source": {
+    "donorEntryHook": {
+      "bytes": 22971,
+      "sha256": "7a231bcfa6f57487a845fc9d10c995710f64fb5afb03e7732e8fbfd7f9cbb1b6"
+    },
+    "editorViewQuartet": {
+      "src/editor/editor.c": {
+        "bytes": 69993,
+        "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6646,
+        "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+      },
+      "src/editor/view.c": {
+        "bytes": 42964,
+        "sha256": "5ae31dfe5d90f5dc6214a9ccad84751779c5f02b8efce196bdbd48cbb3002a06"
+      },
+      "src/editor/view.h": {
+        "bytes": 1731,
+        "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c"
+      }
+    },
+    "frozenPrivateComposition": "201 inherited bodies plus one specific test donor entry-hook body; no canonical adoption claim.",
+    "projectBodyMapCanonicalSha256": "2baa30412bf5aee2f4b369ea89d93c16b5932aad6a8575573904dcf772fcc505"
+  },
+  "state": "HOST_PRIVATE_CLEAN_DEFAULT_ENTRY_PASS",
+  "validation": {
+    "addressAndUndefinedBehaviorSanitizers": true,
+    "all202SourceBodiesAndControlsVerified": true,
+    "allExactStdoutOraclesMatched": true,
+    "allTenRuntimeDiagnosticStreamsEmpty": true,
+    "assertionsEnabled": true,
+    "bothCompilerDiagnosticStreamsEmpty": true,
+    "focusedOracle": {
+      "bytes": 688,
+      "sha256": "bedf714fe78ada572d85d781bd9bb21dab02d09e99626c68426f40cccbf3d28b"
+    },
+    "nullAndDefaultEachOracle": {
+      "bytes": 1154,
+      "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+    },
+    "observedOuterSeconds": 32.57776208300493,
+    "originalD1CompileFailurePreserved": true,
+    "outerReturnCode": 0,
+    "perChildSuccessEvidence": "Exact unchanged wrapper assertions passed; command records do not independently store child exit codes.",
+    "savedGuardBytesUnchanged": true,
+    "strictPreservation68Unchanged": true,
+    "strictWarnings": true,
+    "timedOut": false
+  }
+}

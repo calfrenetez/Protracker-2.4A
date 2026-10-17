@@ -1,0 +1,108 @@
+{
+  "status": "HOST_PASS_PRIVATE_CLEAN_QUARTET_R2",
+  "scope": "One genuine requester-modal/document admission, matched return and prepare/cancel case. No native authority.",
+  "qualification": {
+    "testMethods": 5,
+    "pureQuartetCases": 26,
+    "actualCompanionCases": 1,
+    "translationUnits": 87,
+    "literalBodies": 205,
+    "selectedQuartetKind": "COMPLETE_CLEAN_GIT_QUARTET",
+    "selectedQuartet": {
+      "src/editor/editor.c": {
+        "bytes": 69993,
+        "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6646,
+        "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+      },
+      "src/editor/view.c": {
+        "bytes": 42964,
+        "sha256": "5ae31dfe5d90f5dc6214a9ccad84751779c5f02b8efce196bdbd48cbb3002a06"
+      },
+      "src/editor/view.h": {
+        "bytes": 1731,
+        "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c"
+      }
+    },
+    "outerSeconds": 15.850552624993725,
+    "compileSeconds": 14.74532320900471,
+    "fixtureSeconds": 0.3854725410055835,
+    "oracle": {
+      "bytes": 138,
+      "sha256": "e3a8d4cb771591d90be4672dee65b564822e0f430a3f4b8eb99e77ac6533499c"
+    },
+    "emptyCompilerDiagnostics": true,
+    "emptyFixtureDiagnostics": true,
+    "returnCode": 0
+  },
+  "sourcePins": {
+    "tests/midi_setup_document_test.c": {
+      "bytes": 22971,
+      "sha256": "7a231bcfa6f57487a845fc9d10c995710f64fb5afb03e7732e8fbfd7f9cbb1b6"
+    },
+    "tests/midi_requester_modal_document_test.c": {
+      "bytes": 4183,
+      "sha256": "65eab5ccc9bf716731cf3c281b2361aa48ecb91d2870d2804e11f7e68a314de7"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 7395,
+      "sha256": "3ad6b133bb5acfac346506f1d5a6a2824333bd4b22c81dd28904292b084fa239"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10700,
+      "sha256": "f58691e8525d46bd1d03f4cc71272ee670cf7d1e58ba954188723848810d55cc"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 6671,
+      "sha256": "726b3658ca8b9d6ed834484e1e8b219e7b70c9cf250e42c9a941fa6e470e92ec"
+    }
+  },
+  "wrapperPin": {
+    "bytes": 32932,
+    "sha256": "2944ce49779df6625b3ddd7907b1e080c1875a633810e929c44b88276a1d1d51"
+  },
+  "helperPin": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "sourceLineage": {
+    "savedActualGitHead": "79e29542f98a2a999d323d3d308fe82e791905f6",
+    "unchangedInheritedBodies": 201,
+    "testOnlyDonorEntryHook": 1,
+    "unchangedModalOverlayBodies": 2,
+    "newCompanionCase": 1,
+    "freshGitOrHistoricalRunRelabelling": false
+  },
+  "acceptance": [
+    "Actual modal/draft blocks real action_new before candidate allocation, source/action/checked-owner writes or Stop.",
+    "Positive matched modal return admits genuine prepare/cancel preserving saved project bytes and retained redo.",
+    "Genuine original Stop precedes actual redo/undo; supported disposal, positive owner close/workspace release and complete ledger cleanup pass."
+  ],
+  "preservation": {
+    "protectedEntries": 68,
+    "strictSavedBeforeAfterEqual": true,
+    "wrapperSavedBeforeAfterEqual": true,
+    "guardSavedBeforeAfterEqual": true,
+    "targetOperations": 0
+  },
+  "previousAttempt": {
+    "status": "PRESERVED_TEST_COMPILE_FAILURE_NO_FIXTURE_RUNTIME",
+    "cause": "Test entry macro collision; not a product/runtime failure.",
+    "resultPin": {
+      "bytes": 442,
+      "sha256": "54671a4588f4dd2c08d75d3afffef85784518643bbfc54e3ee83cfff3e321c18"
+    },
+    "diagnosticPin": {
+      "bytes": 865,
+      "sha256": "d18a6a36d4f9846eadf6bd785feba35e89d0b11144ecc5eaacd2df5109cfd315"
+    }
+  },
+  "notEstablished": [
+    "Original MIDI full/default-entry compatibility: separate8focused+NULL13/defaultOFF13 still NOT_RUN.",
+    "Canonical four selected working pair/quartet qualifiers and adoption: NOT_RUN.",
+    "Native preparation source-binding refusal is not a native runtime failure or pass.",
+    "Native frontend/window runtime, CAMD/provider/output, repeating native document actions, hardware quiet/timing, emulator/physical A1200/AmiGUS, listening and release acceptance."
+  ]
+}

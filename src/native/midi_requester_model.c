@@ -165,3 +165,51 @@ enum pt_midi_setup_result pt_midi_requester_model_cancel(struct pt_midi_requeste
     else if(result==PT_MIDI_SETUP_HELD)m->held=1;
     return result;
 }
+
+#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
+static enum pt_midi_setup_result modal_hold(struct pt_midi_requester_modal *m)
+{m->held=1;m->busy=0;return PT_MIDI_SETUP_HELD;}
+static enum pt_midi_setup_result modal_return_ticket(struct pt_midi_requester_modal *m)
+{
+    enum pt_midi_setup_result result;
+    if(m->return_attempted)return modal_hold(m);
+    m->return_attempted=1;
+    result=pt_midi_setup_owner_return(m->owner,&m->ticket);
+    if(result!=PT_MIDI_SETUP_OK)return modal_hold(m);
+    memset(m,0,sizeof(*m));return PT_MIDI_SETUP_OK;
+}
+enum pt_midi_setup_result pt_midi_requester_modal_begin(struct pt_midi_requester_modal *m,
+    struct pt_midi_setup_owner *owner,size_t capacity,struct pt_editor *editor,unsigned track)
+{
+    struct pt_midi_setup_owner_transition_span storage;
+    struct pt_midi_setup_owner_borrow ticket;enum pt_midi_setup_result result,returned;
+    const unsigned char *zero=(const unsigned char *)m;size_t i;
+    if(!m||(uintptr_t)m%offsetof(struct {char prefix;struct pt_midi_requester_modal value;},value)||
+       sizeof(*m)>UINTPTR_MAX-(uintptr_t)m)return PT_MIDI_SETUP_INVALID;
+    storage=(struct pt_midi_setup_owner_transition_span){m,sizeof(*m),PT_MIDI_OWNER_TRANSITION_STORAGE};
+    result=pt_midi_setup_owner_transition_admit(owner,capacity,editor,&storage,1);
+    if(result!=PT_MIDI_SETUP_OK)return result;
+    for(i=0;i<sizeof(*m);++i)if(zero[i])return PT_MIDI_SETUP_INVALID;
+    result=pt_midi_setup_owner_borrow(owner,&ticket);
+    if(result!=PT_MIDI_SETUP_OK)return result;
+    m->self=m;m->owner=owner;m->ticket=ticket;m->busy=1;
+    result=pt_midi_requester_model_open(&m->model,ticket.setup,track);
+    if(result==PT_MIDI_SETUP_OK){m->busy=0;return result;}
+    returned=modal_return_ticket(m);
+    return returned==PT_MIDI_SETUP_OK?result:PT_MIDI_SETUP_HELD;
+}
+enum pt_midi_setup_result pt_midi_requester_modal_return(struct pt_midi_requester_modal *m)
+{
+    enum pt_midi_setup_result result;
+    if(!m||m->self!=m||!m->owner||m->ticket.owner!=m->owner)return PT_MIDI_SETUP_INVALID;
+    if(m->busy||m->model.busy)return PT_MIDI_SETUP_BUSY;
+    if(m->held)return PT_MIDI_SETUP_HELD;
+    if(m->model.setup!=m->ticket.setup)return PT_MIDI_SETUP_INVALID;
+    m->busy=1;
+    if(m->model.self){
+        result=pt_midi_requester_model_cancel(&m->model);
+        if(result!=PT_MIDI_SETUP_OK&&result!=PT_MIDI_SETUP_HELD)return modal_hold(m);
+    }
+    return modal_return_ticket(m);
+}
+#endif

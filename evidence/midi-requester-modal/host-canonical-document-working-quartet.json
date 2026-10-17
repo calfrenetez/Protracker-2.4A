@@ -1,0 +1,106 @@
+{
+  "status": "HOST_PASS_CANONICAL_CURRENT_WORKING",
+  "wrapper": {
+    "path": "tests/test_midi_requester_modal_document.py",
+    "bytes": 32852,
+    "sha256": "44fb75fb0dc260b7218dc04360d150b424da84dad4b6881f7790ca06dfd5991f"
+  },
+  "qualification": {
+    "testMethods": 5,
+    "pureQuartetCases": 26,
+    "actualDocumentCases": 1,
+    "oracleBytes": 138,
+    "selectedABIKind": "COMPLETE_CURRENT_WORKING_QUARTET",
+    "selectedABI": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      },
+      "src/editor/view.c": {
+        "bytes": 44217,
+        "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432"
+      },
+      "src/editor/view.h": {
+        "bytes": 2032,
+        "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+      }
+    },
+    "sourceRecipes": {
+      "companion": {
+        "translationUnits": 87,
+        "literalBodies": 205,
+        "savedInputPin": {
+          "bytes": 99903,
+          "sha256": "fd9e14f35562444d59b66e0b490df51f301d4bfe85c5662d504de0e2cb6c6469"
+        }
+      }
+    },
+    "outerSeconds": 15.663200625014724,
+    "timingsSeconds": {
+      "compile": 14.79917695900076,
+      "fixture": 0.28128312501939945
+    },
+    "exactOracles": {
+      "requester-modal-document-fixture": {
+        "bytes": 138,
+        "sha256": "e3a8d4cb771591d90be4672dee65b564822e0f430a3f4b8eb99e77ac6533499c"
+      }
+    },
+    "returnCode": 0,
+    "allCompilerAndFixtureDiagnosticsEmpty": true,
+    "childSuccessBasis": "Exact unchanged wrapper return-code/oracle assertions and successful outer qualifier; raw command records do not independently store child exit codes."
+  },
+  "sourcePins": {
+    "src/native/midi_requester.h": {
+      "bytes": 7395,
+      "sha256": "3ad6b133bb5acfac346506f1d5a6a2824333bd4b22c81dd28904292b084fa239"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10700,
+      "sha256": "f58691e8525d46bd1d03f4cc71272ee670cf7d1e58ba954188723848810d55cc"
+    },
+    "tests/midi_setup_document_test.c": {
+      "bytes": 22971,
+      "sha256": "7a231bcfa6f57487a845fc9d10c995710f64fb5afb03e7732e8fbfd7f9cbb1b6"
+    },
+    "tests/midi_requester_modal_document_test.c": {
+      "bytes": 4183,
+      "sha256": "65eab5ccc9bf716731cf3c281b2361aa48ecb91d2870d2804e11f7e68a314de7"
+    }
+  },
+  "helperPin": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "actualSavedResultPin": {
+    "bytes": 656,
+    "sha256": "441420ded720dfaf7523a55d01aa4312629e97c918864196dd4909ea8fa22bd9"
+  },
+  "rootFourResultPin": {
+    "bytes": 3168,
+    "sha256": "076b2a261481a2d9344b86c9799d6ea4e05e0988c7651fe224bc4abca01a50ac"
+  },
+  "acceptance": [
+    "Actual modal/draft blocks real typed action New before candidate allocation, source/action/checked-state writes or old Stop.",
+    "Matched return admits genuine preparation/cancellation preserving saved bytes and retained redo; actual original Stop precedes real redo/undo and supported positive disposal/close/release.",
+    "This case does not publish a document or qualify a repeating native session."
+  ],
+  "preservation": {
+    "protectedEntries": 68,
+    "strictRootSavedBeforeAfterEqual": true,
+    "wrapperSavedBeforeAfterEqual": true,
+    "guardSavedBeforeAfterEqual": true,
+    "allNineCandidateSourcePinsUnchanged": true,
+    "targetOperations": 0
+  },
+  "limits": [
+    "HOST acceptance only; no native ABI/link/runtime or visible requester/frontend/Task input isolation.",
+    "No CAMD/provider/message/clock/route/output activation or exact live scheduling change.",
+    "No repeating live native document session, hardware quiet/completion/timing, emulator/physical A1200/AmiGUS, listening or release acceptance.",
+    "Historical private clean receipts, first companion compile failure and earlier NOT_RUN drafts remain unchanged; pure selectors are not another clean compile."
+  ]
+}

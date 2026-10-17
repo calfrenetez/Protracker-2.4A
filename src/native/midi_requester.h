@@ -84,4 +84,47 @@ enum pt_midi_requester_result {
  */
 enum pt_midi_requester_result pt_native_midi_requester(struct Window *,
     struct pt_midi_setup *,unsigned track);
+#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
+#if PT_MIDI_REQUESTER_OWNER_HOST_ONLY != 1
+#error "Requester modal composition requires explicit HOST-only selection"
+#endif
+/* Include the genuine gate unchanged: this composition has NO native admission. */
+#include "../editor/midi_setup_owner.h"
+/* Original zeroed, aligned, stationary, separately owned modal binding. The
+ * complete binding, not just its model, must avoid complete original owner/
+ * workspace/allocator-context storage before any write. The admission query
+ * checks those known extents, not a transitive heap census. Caller additionally
+ * places the complete binding apart from original editor/project/document/PCM,
+ * history buffers, retained MIDI records and all other live inputs. These and
+ * the original allocator context remain live through matched return and every
+ * retained record. No live copy/reinit/mutation or same-address lifetime reuse.
+ * Only model editing APIs may change model while borrowed. Do not copy/replace
+ * its ticket or call owner return directly. This object owns no controller,
+ * journal, heap block, output, document or quiet/teardown authority.
+ */
+struct pt_midi_requester_modal {
+    struct pt_midi_requester_modal *self;
+    struct pt_midi_setup_owner *owner;
+    struct pt_midi_setup_owner_borrow ticket;
+    struct pt_midi_requester_model model;
+    unsigned busy,held,return_attempted;
+};
+/* Callback-free begin validates the exact original owner capacity/editor and
+ * full binding extent, obtains its real modal ticket, then opens the existing
+ * chooser with once-captured track. No implicit Stop, allocation or driver work.
+ * A failed model open returns that genuine ticket once. Positive return zeroes
+ * only this unadopted binding; failure/HELD retains it and the entire domain.
+ */
+enum pt_midi_setup_result pt_midi_requester_modal_begin(struct pt_midi_requester_modal *,
+    struct pt_midi_setup_owner *,size_t,struct pt_editor *,unsigned track);
+/* Ends an actual live model, then returns the exact original ticket ONCE.
+ * Apply may already have consumed model; committed and undone journal commands
+ * remain owned by the original durable controller. OK zeroes only the transient
+ * binding, so it may be opened again. Any uncertain refusal/HELD latches held,
+ * retains original ticket/domain and forbids retry/reset/free/closure inference.
+ * During real model callbacks BUSY refuses without touching either owner/model.
+ * No post-dispose call is supported; return before any document transition.
+ */
+enum pt_midi_setup_result pt_midi_requester_modal_return(struct pt_midi_requester_modal *);
+#endif
 #endif

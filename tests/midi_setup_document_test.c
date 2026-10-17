@@ -325,7 +325,10 @@ static void held_admission_case(void)
         !a->action.self&&!a->calls&&!r->release_observations);
     retained=r; /* Alias was never initialized/freed; all genuine sources survive. */
 }
-int main(int argc,char **argv)
+#ifndef PT_MIDI_SETUP_DOCUMENT_TEST_ENTRY
+#define PT_MIDI_SETUP_DOCUMENT_TEST_ENTRY main
+#endif
+int PT_MIDI_SETUP_DOCUMENT_TEST_ENTRY(int argc,char **argv)
 {
     if(argc!=2)return 20;
     if(!strcmp(argv[1],"null-regression")){

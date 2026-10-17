@@ -1,0 +1,103 @@
+{
+  "status": "HOST_PASS_PRIVATE_CLEAN_PAIR",
+  "scope": "Original durable owner ticket and actual requester model modal composition; native gate retained.",
+  "qualification": {
+    "testMethods": 3,
+    "purePairSubcases": 6,
+    "selectedEditorPairKind": "COMPLETE_CLEAN_GIT_PAIR",
+    "selectedEditorPair": {
+      "src/editor/editor.c": {
+        "bytes": 69993,
+        "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6646,
+        "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+      }
+    },
+    "outerSeconds": 16.944281499978388,
+    "timingsSeconds": {
+      "requester-owner-modal-modal-compile": 8.118553292006254,
+      "requester-owner-modal-modal-focused": 0.3639710409916006,
+      "requester-owner-modal-modal-owner-legacy": 0.016024959011701867,
+      "requester-owner-modal-model-default-compile": 7.72662216599565,
+      "requester-owner-modal-model-default-fixture": 0.21436958297272213
+    },
+    "focused": {
+      "translationUnits": 33,
+      "literalBodies": 79,
+      "groups": 7,
+      "complete": 6,
+      "wholeDomainHeld": 1,
+      "oracle": {
+        "bytes": 143,
+        "sha256": "dae57394099a1a5a5d30f72d9e0bd852442a5e0fa2b96579b01c6b666c10070a"
+      }
+    },
+    "originalOwnerFreshProcess": {
+      "groups": 8,
+      "oracle": {
+        "bytes": 170,
+        "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+      }
+    },
+    "originalModelDefaultOff": {
+      "translationUnits": 32,
+      "literalBodies": 77,
+      "groups": 8,
+      "flags": [],
+      "oracle": {
+        "bytes": 161,
+        "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+      }
+    },
+    "returnCode": 0,
+    "emptyCompilerAndFixtureDiagnostics": true
+  },
+  "sourcePins": {
+    "src/native/midi_requester.h": {
+      "bytes": 7395,
+      "sha256": "3ad6b133bb5acfac346506f1d5a6a2824333bd4b22c81dd28904292b084fa239"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10700,
+      "sha256": "f58691e8525d46bd1d03f4cc71272ee670cf7d1e58ba954188723848810d55cc"
+    },
+    "tests/midi_requester_owner_modal_test.c": {
+      "bytes": 14587,
+      "sha256": "a2c449d618f8b9a918c9a7997455ad8316373b51ef07310b73fd9dc0e8b87819"
+    },
+    "tests/midi_setup_owner_test.c": {
+      "bytes": 16794,
+      "sha256": "d347d64aec8e449466fcadd0719f58b31bca4b3f358ab2d179bc766e30f0ae47"
+    }
+  },
+  "wrapperPin": {
+    "bytes": 24063,
+    "sha256": "5a20168c7f4de9981b6f093adffea95f9ddf3c13f2472bf51c818e631a79260b"
+  },
+  "helperPin": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "acceptance": [
+    "Full binding storage aliases and wrong original editor/capacity refuse before writes; failed track open positively returns its real acquired ticket.",
+    "Repeated chooser/Apply/Cancel preserves actual note/MIDI chronology, retained undone redo, saved revisions, exact active project encoding and all channel route choices.",
+    "Real model callback reentry refuses BUSY without binding writes. Genuine allocator alias produces a retained whole original domain.",
+    "Actual disposal drains history before positive owner close; exact workspace rebind to a final initialized editor and later release pass genuine ledgers."
+  ],
+  "preservation": {
+    "protectedEntries": 68,
+    "strictSavedBeforeAfterEqual": true,
+    "wrapperSavedBeforeAfterEqual": true,
+    "guardSavedBeforeAfterEqual": true,
+    "targetOperations": 0
+  },
+  "boundaries": [
+    "Modelled activity flags and HOST fake drivers do not prove real audio/recording quiet.",
+    "The focused case invokes the genuine owner admission query only; actual document entry has the separate R2 companion receipt.",
+    "Original model default-OFF pass does not establish the new donor test hook default-entry compatibility. Full original MIDI8+NULL13/defaultOFF13 is separately NOT_RUN.",
+    "Canonical selected working pair/quartet qualifiers and adoption remain NOT_RUN.",
+    "No native frontend/window runtime, CAMD/output/provider/route activation, repeating native document session, timing/emulator/physical/listening acceptance."
+  ]
+}

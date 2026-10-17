@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "state": "QUALIFIED_PRIVATE_SOURCE_TO_CANONICAL_BRIDGE",
+  "sourcePins": {
+    "src/native/midi_session_requester.c": {
+      "bytes": 10009,
+      "sha256": "5e6182b862cfb9235d1ce9a682bb33b8b45851099a21c844c0475b64d410f344"
+    },
+    "src/native/midi_session_requester.h": {
+      "bytes": 4652,
+      "sha256": "93a7fe5f3a42d86b38fea387d3e279778f5f8f5cb92c5cf8afe77e3379c4e176"
+    },
+    "src/native/midi_frontend_recording_session.h": {
+      "bytes": 7992,
+      "sha256": "ab8deced7fc11dd31ce981f9d205efdf809b087d91a0a7fcc8f69a359a420e01"
+    },
+    "src/native/midi_frontend_context.h": {
+      "bytes": 7426,
+      "sha256": "75194b503d26528edb6dab2b74760c013d835b9560b83c08ab49de14a726b507"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 8832,
+      "sha256": "6ebb59f2a11f74e5b56779cd6d9dbe16805ae4c80d5d79e20e28d8f44fc8e290"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 10843,
+      "sha256": "3e308b2bd177257bfaf82ff44809334bf6e198718e5a544d1aa7b722fd0cb178"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10827,
+      "sha256": "39053d277b62f757a54fa8c56e54388d32dff70eb731a85b83ac1ad5a5a7afd6"
+    },
+    "src/native/midi_requester_parent.h": {
+      "bytes": 7036,
+      "sha256": "406b0f5d3e2dced156406175ecb776d7824e21ad2b12279ac12c6dcc4caf7e16"
+    }
+  },
+  "productionSource": "All eight candidate bodies are byte-exact frozen private R2 production sources used by the separate dual-cohort HOST/native-object/profile checks. No shipping caller or build is enrolled.",
+  "canonicalSessionHeaderLineage": {
+    "earlierCanonicalHOST": "1bfb585511abc4d5779edad3241254e41cd21f402275f155b094d29972c62fc8",
+    "qualifiedNativeRAM": "ad3555df32c0626e9d59cd3f6ac794cab8de39b79d9575da0574221e18d2a4ef",
+    "combinedGUIAndRAM": "ab8deced7fc11dd31ce981f9d205efdf809b087d91a0a7fcc8f69a359a420e01",
+    "nativeRAMTokenPair": "Exact old/new token preservation; not an identical rebuilt-binary claim."
+  },
+  "fixture": {
+    "bytes": 25763,
+    "sha256": "a0a7cd9b4dbed1b2a2961033f896a666606d3bebb8f1f85676cc608ff2efe442"
+  },
+  "normalizedWrapper": {
+    "bytes": 21429,
+    "sha256": "9aed566e7e973d9f0bc4080ef40778353bf32f5b6b0278b17ab8058fcd8faeb5"
+  },
+  "wrapperBridge": "Only CANONICAL absolute-path binding becomes ROOT. Fixture, source pins, algorithms, methods, flags and172B oracle are unchanged. Canonical normalized wrapper NOT_RUN.",
+  "existingWrappers": {
+    "tests/test_midi_setup_owner.py": {
+      "newBody": {
+        "bytes": 18711,
+        "sha256": "3254f768f0342a8c1ac76e4ef57c6cec46148eb34839538afd2d055b15240718"
+      },
+      "sourceSHAChanges": 1,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_setup_document.py": {
+      "newBody": {
+        "bytes": 37217,
+        "sha256": "981da2510279b0f795e4e6712bf2e32f1f560634647f9919598563c751fbe31c"
+      },
+      "sourceSHAChanges": 1,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_frontend_context.py": {
+      "newBody": {
+        "bytes": 19321,
+        "sha256": "e1bcc49ee9de1f9ac0731b7e2c8009e4808f1531f96c803e6426aab256fbed77"
+      },
+      "sourceSHAChanges": 4,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_frontend_recording_session.py": {
+      "newBody": {
+        "bytes": 20637,
+        "sha256": "75f210efd825362a58099a5209608b4a8b4bb3bf7d93f482360ab0d3140625db"
+      },
+      "sourceSHAChanges": 5,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_requester_owner_modal.py": {
+      "newBody": {
+        "bytes": 23983,
+        "sha256": "39ab3b8cfe5cea88093dfea5600281ba261c07ef6e10e93237256445aaed10a7"
+      },
+      "sourceSHAChanges": 3,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_requester_model.py": {
+      "newBody": {
+        "bytes": 18684,
+        "sha256": "c8dcac131aa8b730127d8ba42ef42a21ef645115d17bb226111d8cd45cd55f82"
+      },
+      "sourceSHAChanges": 3,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    },
+    "tests/test_midi_requester_modal_document.py": {
+      "newBody": {
+        "bytes": 32852,
+        "sha256": "2933146b25a7c0b6c6f1a683178bb87a022a460f75aa90572d780959ef7b2334"
+      },
+      "sourceSHAChanges": 3,
+      "behavior": "Exact inverse recovers original; AST identical outside source pin map. Updated wrapper NOT_RUN."
+    }
+  },
+  "hostQualification": "host-private.json: two complete editor C/H cohorts,40TUs/93bodies each; source matches private qualified bytes.",
+  "nativeQualification": "native-object.json: new compositor one-object ABI compilation only; unresolved imports intentionally unlinked.",
+  "profileQualification": "legacy-profile-tokens.json: exact17old/newpairs plus5HOSTgates. Default/oldHOST/nativeRAM diagnostics retained.",
+  "preservation": {
+    "originalDirtyPaths": 16,
+    "originalProtectedRecords": 68,
+    "residentBodies": 58,
+    "metadataOnly": 10,
+    "observedAtActualQualificationBoundaries": "EXACT",
+    "unrelatedFilesAdopted": 0
+  },
+  "notQualified": [
+    "shipping frontend enrollment",
+    "native GUI/window/input lifetime",
+    "Amiberry runtime",
+    "real A1200/AmiGUS runtime",
+    "CAMD/input/output scheduling",
+    "listening"
+  ]
+}

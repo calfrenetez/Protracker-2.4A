@@ -1,0 +1,133 @@
+{
+  "state": "HOST_MODEL_DUAL_COHORT_PASS",
+  "scope": "Private requester compositor candidate; genuine session/editor/owner/modal/recording fixture. Parent protocol MODEL ONLY.",
+  "source": {
+    "compositorC": {
+      "bytes": 10009,
+      "sha256": "5e6182b862cfb9235d1ce9a682bb33b8b45851099a21c844c0475b64d410f344"
+    },
+    "compositorH": {
+      "bytes": 4652,
+      "sha256": "93a7fe5f3a42d86b38fea387d3e279778f5f8f5cb92c5cf8afe77e3379c4e176"
+    },
+    "fixture": {
+      "bytes": 25763,
+      "sha256": "a0a7cd9b4dbed1b2a2961033f896a666606d3bebb8f1f85676cc608ff2efe442"
+    },
+    "wrapper": {
+      "bytes": 21498,
+      "sha256": "f1e219319febb01872f15a675e2631efb0dddff9f70b5d84ae6a7f6459651d45"
+    },
+    "sourcePlan": {
+      "bytes": 8646,
+      "sha256": "10aa997e3abba8c7cda2cf347b0e48fa74a2b27e7adce77c82189138d7a59508"
+    }
+  },
+  "evidence": {
+    "rootResult": {
+      "bytes": 3244,
+      "sha256": "0c77f656362098461c57c608e41469bbc5c8c3a7641c9b61787d57a5b1e567aa"
+    },
+    "savedDataAudit": {
+      "bytes": 19629,
+      "sha256": "009ab46d04c28257c8ff64a94729e035811a1e3d6f882d21f6ad8949bbc82096"
+    }
+  },
+  "wholeSeconds": 20.274773416982498,
+  "cohorts": {
+    "clean": {
+      "editorPairKind": "COMPLETE_CLEAN_GIT_PAIR",
+      "editorPair": {
+        "src/editor/editor.c": {
+          "bytes": 69993,
+          "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+        },
+        "src/editor/editor.h": {
+          "bytes": 6646,
+          "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+        }
+      },
+      "sourceBodies": 93,
+      "translationUnits": 40,
+      "fixtureCases": 12,
+      "complete": 7,
+      "retained": 5,
+      "unittestMethods": 3,
+      "purePairCases": 6,
+      "oracle": {
+        "bytes": 172,
+        "sha256": "9abc55ed0e440986ec12ef5f117fff902990548f2cb3232e6dcde1720d9131c9"
+      },
+      "compileSeconds": 9.63586454099277,
+      "fixtureSeconds": 0.2776280419784598,
+      "cohortSeconds": 10.260185333958361,
+      "strictDiagnosticsEmpty": true
+    },
+    "working": {
+      "editorPairKind": "COMPLETE_CURRENT_WORKING_PAIR",
+      "editorPair": {
+        "src/editor/editor.c": {
+          "bytes": 69953,
+          "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+        },
+        "src/editor/editor.h": {
+          "bytes": 6699,
+          "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+        }
+      },
+      "sourceBodies": 93,
+      "translationUnits": 40,
+      "fixtureCases": 12,
+      "complete": 7,
+      "retained": 5,
+      "unittestMethods": 3,
+      "purePairCases": 6,
+      "oracle": {
+        "bytes": 172,
+        "sha256": "9abc55ed0e440986ec12ef5f117fff902990548f2cb3232e6dcde1720d9131c9"
+      },
+      "compileSeconds": 9.33333691599546,
+      "fixtureSeconds": 0.19936237501678988,
+      "cohortSeconds": 9.9067593330401,
+      "strictDiagnosticsEmpty": true
+    }
+  },
+  "recipe": {
+    "C99": true,
+    "warningsAsErrors": true,
+    "assertionsEnabled": true,
+    "ASan": true,
+    "UBSan": true,
+    "compileLimitSeconds": 120,
+    "fixtureLimitSeconds": 30
+  },
+  "preservation": {
+    "fullInputs": 304,
+    "savedBoundaryMaps": 6,
+    "allFullFactsEqual": true,
+    "rawREADYEqual": true,
+    "strictProtected": 68,
+    "residentBodyPins": 58,
+    "metadataOnlyBodiesNotRead": 10,
+    "savedGuardEqual": true,
+    "directOriginalBaselineBound": true
+  },
+  "hostSupervision": {
+    "successfulOperations": 2,
+    "realToolRC0AndEOFSeparateFromSupervisorMinus9": true,
+    "recordedTERMAndKILLBeforeReap": true,
+    "TERMackGroupAbsentAndAllEOF": true,
+    "noRetainedOwnerOrStop": true,
+    "limits": "These successful operations only; no universal failure/process-tree proof."
+  },
+  "returncodeEvidence": "Strict frozen wrapper assertions plus actual wrapperRC0/3-methodOK; no separate child-RC JSON invented.",
+  "auditRole": "Saved-data review independent of Root operation; source/helper authorship and delegated-fixture overlap disclosed in private audit.",
+  "nativeGUI": "NOT_RUN",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": [
+    "Parent protocol modeled; no actual native restoration or parent input isolation.",
+    "No CAMD/input/clock/output/timing/listening/quiet/physical acceptance.",
+    "Private qualification does not adopt or activate frontend."
+  ]
+}

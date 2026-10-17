@@ -1,0 +1,97 @@
+{
+  "state": "NATIVE_SESSION40_OBJECTS_PASS_NOT_RUNTIME",
+  "reviewRole": "Saved-data review by probe author, independent of Root compiler operation; independent source/control reviews remain separate.",
+  "source": {
+    "midi_frontend_recording_session_task_probe.c": {
+      "bytes": 21806,
+      "sha256": "81ee9d6c779bc1b52254999a595fd612664ba083a555a2231638439a3c99fc97"
+    },
+    "midi_frontend_recording_session.c": {
+      "bytes": 13720,
+      "sha256": "7a88ced28cc666e4778dd11528d7774a635e92cadac858c68071c7f68d33d34f"
+    },
+    "midi_frontend_recording_session.h": {
+      "bytes": 6704,
+      "sha256": "ad3555df32c0626e9d59cd3f6ac794cab8de39b79d9575da0574221e18d2a4ef"
+    }
+  },
+  "actualOperation": {
+    "units": 40,
+    "stages": 200,
+    "allExactVectorsAndRC0": true,
+    "outerSeconds": 19.516073749982752,
+    "manifest": {
+      "bytes": 803511,
+      "sha256": "ea83822c7f5247d888f692654a557e4c50f5d1fc05172e14b321fba2e421412c"
+    },
+    "rootResult": {
+      "bytes": 1412,
+      "sha256": "044f95c988265948bb832d7e515c4e5376c88f8121c585da1759671fa1597719"
+    },
+    "toolchain": "genuine m68k-amigaos GCC6.5 cc1/as/objdump;68000/soft-float/nix20/Os/strictC99/Werror;no NDEBUG",
+    "fourPairedTaskSelectors": true,
+    "fakePlatformDefines": false,
+    "allStderrEmpty": true
+  },
+  "actualClosure": {
+    "originalAndCopiedProjectBodies": 93,
+    "SDKAllowance": 92,
+    "actualProjectUnion": 93,
+    "actualSDKUnion": 48,
+    "actualTotal": 141,
+    "all40RawMEqualsI": true,
+    "completeCleanEditorPair": true,
+    "windowOrFrontendMainSelected": false
+  },
+  "products": {
+    "format": "40 big-endian relocatable Amiga HUNK_UNIT objects; complete raw parse and saved section geometry agree.",
+    "probeObject": {
+      "bytes": 10408,
+      "sha256": "6bb2832f56ba436ce0d07cf6e81170acfe7031189df1000423d9ec3032b2c5f4"
+    },
+    "unlinkedSectionBytes": {
+      "CODE": 205304,
+      "DATA": 136,
+      "BSS": 37388
+    },
+    "globalDefinitions": 341,
+    "undefinedUnion": 244,
+    "actualExternalNames": 26,
+    "externalSetSHA256": "67d95fb4b545819caddb091df3062a7e3803c4647592627f6a10dc9f6e2b607a"
+  },
+  "stackAndLifecycle": {
+    "individualRows": 685,
+    "probeMainIndividualBytes": 620,
+    "largestIndividualBytes": 16572,
+    "rawSPCapture": true,
+    "remainingHeadroomGateBytes": 1048576,
+    "wholeTaskBound": false,
+    "emittedOriginalTaskAdmissionAndGenuineSessionLifecycleReviewed": true,
+    "prospectiveMarkerBytes": 156,
+    "prospectiveMarkerSHA256": "ae2e9de7b10defbd89295bccb9c12ed79b08948c5e770a7dc16310177b406166",
+    "markerExecuted": false
+  },
+  "preservation": {
+    "savedInputFullFacts": 228,
+    "allBeforeAfterEqual": true,
+    "rawREADYAndFullFactsEqual": true,
+    "originalBASEAndStrict68Equal": true,
+    "residentBodies": 58,
+    "metadataOnly": 10,
+    "savedGuardEqual": true,
+    "timeoutOrCleanup": false,
+    "unexpectedHOSTGroup": false
+  },
+  "limits": [
+    "No SDK bodies read or compiler/tool/target operation by reviewer.",
+    "Saved objdump stdout decoder annotations across10units limit blanket disassembly claims; all actual commands returned0 with empty stderr.",
+    "Individual SU rows/headroom gate are not a total Task, CRT, callback, IRQ or runtime stack guarantee.",
+    "Objects are not linked; provider resolution, native runtime, GUI, CAMD/device, timing and physical acceptance remain unqualified.",
+    "Earlier recording35 outer metadata failure stays separate and failed; no retry or historical relabel."
+  ],
+  "link": "NOT_PERFORMED",
+  "nativeRuntime": "NOT_RUN",
+  "emulator": "NOT_ADMITTED",
+  "physical": "NOT_ADMITTED",
+  "targetOperations": 0
+}

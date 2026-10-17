@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "role": "Saved-data review independent of actual Root execution; product/shared-helper authorship overlap disclosed in private report.",
+  "source": {
+    "C": {
+      "bytes": 10009,
+      "sha256": "5e6182b862cfb9235d1ce9a682bb33b8b45851099a21c844c0475b64d410f344"
+    },
+    "H": {
+      "bytes": 4652,
+      "sha256": "93a7fe5f3a42d86b38fea387d3e279778f5f8f5cb92c5cf8afe77e3379c4e176"
+    }
+  },
+  "targetOperations": 0,
+  "nativeRuntime": "NOT_RUN",
+  "sharedTargetChanges": false,
+  "state": "NATIVE_GUI_COMPOSITOR_OBJECT_QUALIFIED_NOT_RUNTIME",
+  "result": {
+    "bytes": 80004,
+    "sha256": "a2d88d747e06ce341231718ec5b341e3fc1e1295798b0041b5b60628992205c4"
+  },
+  "commands": {
+    "total": 5,
+    "actualRC0": 5,
+    "emptyStderr": 5
+  },
+  "seconds": 1.4111218329635449,
+  "translationUnits": 1,
+  "projectAllowance": 42,
+  "SDKAllowance": 72,
+  "actualSelected": {
+    "project": 42,
+    "SDK": 62,
+    "total": 104
+  },
+  "actualMEqualsOrdinaryI": true,
+  "soleFeatureSelector": "PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY",
+  "compiler": "Genuine GCC6.5 classic m68000/softfloat/nix20/C99/Os/Werror/UNDEBUG, controlled private genuine GUI SDK route.",
+  "object": {
+    "bytes": 3480,
+    "sha256": "5aa1a65353c99bc23b4bba8739daf39035408c41528c5a76154663169c2a7a16"
+  },
+  "objectFormat": "HUNK_UNIT / m68k:68000",
+  "objectExports": [
+    "_pt_native_midi_session_requester"
+  ],
+  "unresolvedImports": 22,
+  "individualSU": [
+    {
+      "function": "span",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "apart",
+      "bytes": 28,
+      "kind": "dynamic,bounded"
+    },
+    {
+      "function": "domain_admit",
+      "bytes": 184,
+      "kind": "dynamic,bounded"
+    },
+    {
+      "function": "task_current",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "same_control",
+      "bytes": 4,
+      "kind": "static"
+    },
+    {
+      "function": "pt_native_midi_session_requester",
+      "bytes": 376,
+      "kind": "dynamic,bounded"
+    }
+  ],
+  "maximumIndividualSUBytes": 376,
+  "strictInputFactsCount": 279,
+  "allRecordedFullInputBoundariesEqual": true,
+  "strict68AndSavedGuardAndRawREADYEqual": true,
+  "link": "NOT_PERFORMED",
+  "GUI": "NOT_RUN",
+  "limits": "Individual SU is not aggregate/Task/CRT/GUI stack proof. Ordinary unresolved clib/owner/parent imports have no provider/link/runtime acceptance here."
+}

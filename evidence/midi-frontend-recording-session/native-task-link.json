@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "state": "NATIVE40_LINK_STATIC_ARTIFACT_PASS_RUNTIME_NOT_RUN",
+  "reviewRole": "Independent saved-data artifact audit; reviewer authored earlier probe, not actual compiler/link operation.",
+  "candidate": {
+    "name": "PTMidiFrontendRecordingSessionTaskProbe",
+    "bytes": 248076,
+    "sha256": "58a6dd4813ca2faf0b34a8d3c50c67db522e8f9510fb28983821b7ca3be7eecd",
+    "crc32": "D3724991",
+    "architecture": "m68k:68000",
+    "entry": 0,
+    "sections": [
+      {
+        "kind": "CODE",
+        "bytes": 225176,
+        "payloadOffset": 40,
+        "symbols": 411,
+        "reloc32": 1949
+      },
+      {
+        "kind": "DATA",
+        "bytes": 424,
+        "payloadOffset": 245940,
+        "symbols": 16,
+        "reloc32": 32
+      },
+      {
+        "kind": "BSS",
+        "bytes": 37504,
+        "payloadOffset": null,
+        "symbols": 47,
+        "reloc32": 0
+      }
+    ],
+    "symbols": 474,
+    "reloc32": 1981,
+    "noUndefinedSymbols": true,
+    "noTrailingBytes": true,
+    "prospectiveOracle": {
+      "bytes": 156,
+      "sha256": "ae2e9de7b10defbd89295bccb9c12ed79b08948c5e770a7dc16310177b406166",
+      "exactNULTerminatedMarkerInArtifact": true,
+      "observedAtRuntime": false
+    }
+  },
+  "actualHostLink": {
+    "commands": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "seconds": 0.6711881249793805,
+    "LOADs": 47,
+    "applicationObjects": 40,
+    "startup": 1,
+    "archives": 6,
+    "reviewedVectorsAndOwnedEOFClosure": true
+  },
+  "currentProviders": {
+    "externalCount": 26,
+    "actualCurrentMapAndRawHunkBindingsVerified": true
+  },
+  "preservation": {
+    "savedInputFullFacts": 85,
+    "allEqual": true,
+    "strictProtectedFiles": 68,
+    "strictEqual": true,
+    "rawReadyAndFullFactsEqual": true,
+    "savedGuardEqual": true,
+    "linkedProductsEqual": true
+  },
+  "individualStack": {
+    "mainBytes": 620,
+    "remainingGuardBytes": 1048576,
+    "afterMainPrologue": true,
+    "wholeTaskBound": "NOT_PROVED"
+  },
+  "limits": [
+    "Native executable/emulator/physical/GUI/device/runtime NOT_RUN.",
+    "No timing/quiet/listening/CAMD/input/output acceptance.",
+    "Input40 object body hashes and55 map section contributions match; complete post-relocation HUNK_UNIT payload reconstruction NOT_VERIFIED. Saved donor builders only check HUNK_UNIT magic; no EXT33 semantics inferred.",
+    "No whole-Task/aggregate stack/callgraph bound, asynchronous cancellation or complete dynamic toolchain closure.",
+    "Preservation compares exact saved operation boundaries, not new live guard observations.",
+    "Earlier failed35/runtime and process-control attempts remain separate and unchanged."
+  ],
+  "detailedAudit": {
+    "bytes": 25760,
+    "sha256": "240bcdf4aa075c1e01907c22697255c26b1c820da3d513470b67dd59c84267f9"
+  }
+}

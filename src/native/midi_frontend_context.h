@@ -1,5 +1,14 @@
 #ifndef PT_NATIVE_MIDI_FRONTEND_CONTEXT_H
 #define PT_NATIVE_MIDI_FRONTEND_CONTEXT_H
+/* Separate unselected native GUI qualification, never inferred from RAM flags. */
+#if defined(PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY)
+#if PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY != 1 || !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
+#error "Session requester GUI qualification requires value1 and the genuine classic target"
+#endif
+#if defined(PT_MIDI_FRONTEND_RECORDING_SESSION_HOST_ONLY) || defined(PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY) || defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_SESSION_REQUESTER_HOST_MODEL_TEST_ONLY) || defined(PT_MIDI_FRONTEND_RECORDING_SESSION_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_EDITOR_MIDI_RECORDING_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_TYPED_REPLACEMENT) || defined(PT_DOCUMENT_TYPED_ACTION)
+#error "Session requester GUI qualification excludes HOST/RAM/document selectors"
+#endif
+#else
 /* Qualification-only native branch. It admits this RAM probe, never the
  * shipping/frontend/window caller. Existing HOST selection remains below. */
 #if defined(PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY)
@@ -25,6 +34,7 @@
 #error "MIDI frontend context has no native or TASK-probe admission"
 #endif
 #endif
+#endif /* separate native GUI qualification */
 #include "midi_requester.h"
 
 struct pt_midi_frontend_context;

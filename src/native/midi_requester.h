@@ -106,7 +106,16 @@ enum pt_midi_requester_result pt_native_midi_requester(struct Window *,
  */
 enum pt_midi_requester_result pt_native_midi_requester_model_window(struct Window *,
     struct pt_midi_requester_model *);
-#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
+#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY)
+/* Separate unselected native GUI qualification, never inferred from RAM flags. */
+#if defined(PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY)
+#if PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY != 1 || !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
+#error "Session requester GUI qualification requires value1 and the genuine classic target"
+#endif
+#if defined(PT_MIDI_FRONTEND_RECORDING_SESSION_HOST_ONLY) || defined(PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY) || defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_SESSION_REQUESTER_HOST_MODEL_TEST_ONLY) || defined(PT_MIDI_FRONTEND_RECORDING_SESSION_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_EDITOR_MIDI_RECORDING_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_TYPED_REPLACEMENT) || defined(PT_DOCUMENT_TYPED_ACTION)
+#error "Session requester GUI qualification excludes HOST/RAM/document selectors"
+#endif
+#else
 #if defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
 #if PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)
 #error "Requester modal native partition is the paired TASK RAM probe only"
@@ -116,6 +125,7 @@ enum pt_midi_requester_result pt_native_midi_requester_model_window(struct Windo
 #error "Requester modal composition requires explicit HOST-only selection"
 #endif
 #endif
+#endif /* separate native GUI qualification */
 /* The owner header keeps its old default/HOST gates and independently checks
  * the exact genuine native TASK-only qualification partition when selected. */
 #include "../editor/midi_setup_owner.h"

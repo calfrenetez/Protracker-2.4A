@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "state": "EXACT_NATIVE40_PROBE_SOURCE_BRIDGE_NOT_RUNTIME",
+  "probe": {
+    "path": "src/native/midi_frontend_recording_session_task_probe.c",
+    "bytes": 21806,
+    "sha256": "81ee9d6c779bc1b52254999a595fd612664ba083a555a2231638439a3c99fc97"
+  },
+  "probeMatchesActualCompilerInput": true,
+  "declarativeRecipe": {
+    "path": "tools/probe_recipes/midi_frontend_recording_session_task.json",
+    "bytes": 8060,
+    "sha256": "621e57cef4ff6a1ae7b406f8655d691dd43bf6e9a23f1c1980b0eaaee5132119"
+  },
+  "actualBuild": {
+    "translationUnits": 40,
+    "projectBodies": 93,
+    "SDKSelected": 48,
+    "SDKAllowance": 92,
+    "commands": 200,
+    "sourceSelection": "Complete frozen clean editor C/H pair; no working view/main source."
+  },
+  "headerProvenance": "Original actual nativeRAM header6704/ad355. Current combinedGUI/RAM header7992/ab8d has separate17pair source-profile preservation; current tree is not claimed to rebuild identical linked bytes.",
+  "link": "native-task-link.json: actual five-command link and current26 static artifact review. No complete post-relocation object payload reconstruction or whole-Task stack proof.",
+  "candidate": {
+    "bytes": 248076,
+    "sha256": "58a6dd4813ca2faf0b34a8d3c50c67db522e8f9510fb28983821b7ca3be7eecd",
+    "crc32": "D3724991"
+  },
+  "recipeIsBuilder": false,
+  "defaultEnrollment": false,
+  "runtime": "NOT_RUN",
+  "physical": "NOT_ADMITTED_FOR_UNCANCELLABLE_DIAGNOSTIC",
+  "targetOperations": 0
+}

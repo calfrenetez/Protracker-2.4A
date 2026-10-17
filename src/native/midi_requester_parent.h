@@ -1,9 +1,18 @@
 #ifndef PT_NATIVE_MIDI_REQUESTER_PARENT_H
 #define PT_NATIVE_MIDI_REQUESTER_PARENT_H
 /* Unselected native source candidate, never a frontend/owner/Task admission. */
+#if defined(PT_MIDI_SESSION_REQUESTER_HOST_MODEL_TEST_ONLY)
+#if PT_MIDI_SESSION_REQUESTER_HOST_MODEL_TEST_ONLY != 1 || !defined(PT_MIDI_FRONTEND_RECORDING_SESSION_HOST_ONLY) || PT_MIDI_FRONTEND_RECORDING_SESSION_HOST_ONLY != 1 || !defined(PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY) || PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY != 1 || !defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || PT_MIDI_SETUP_OWNER_HOST_ONLY != 1 || !defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || PT_MIDI_REQUESTER_OWNER_HOST_ONLY != 1
+#error "Parent protocol HOST model requires the exact existing four HOST selections"
+#endif
+#if defined(__m68k__) || defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__) || defined(PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY) || defined(PT_MIDI_FRONTEND_RECORDING_SESSION_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY) || defined(PT_EDITOR_MIDI_RECORDING_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_TYPED_ACTION) || defined(PT_DOCUMENT_TYPED_REPLACEMENT)
+#error "Parent protocol HOST model excludes native/RAM/document admission"
+#endif
+#else
 #if !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
 #error "MIDI parent bracket requires the genuine classic native target"
 #endif
+#endif /* HOST protocol declarations only; actual OS C is never selected */
 #include "midi_requester.h"
 struct ExecBase;struct Task;struct Library;struct MsgPort;struct Screen;
 struct RastPort;struct Message;

@@ -1,0 +1,182 @@
+{
+  "state": "DESCRIPTIVE_QUALIFICATION_RECIPE_NOT_A_BUILDER_OR_RUNTIME_ADMISSION",
+  "target": "PTMidiFrontendRecordingSessionTaskProbe",
+  "orderedTranslationUnits": [
+    "src/native/midi_frontend_recording_session_task_probe.c",
+    "src/native/midi_frontend_recording_session.c",
+    "src/native/midi_frontend_context.c",
+    "src/native/midi_requester_model.c",
+    "src/editor/midi_setup_owner.c",
+    "src/editor/editor_midi_recording.c",
+    "src/core/record.c",
+    "src/core/record_pattern.c",
+    "src/core/record_channel.c",
+    "src/editor/midi_setup.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/pattern.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/editor/sampler_lifetime.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/sample_usage.c",
+    "src/core/event_resource.c",
+    "src/core/flow.c",
+    "src/core/pitch.c",
+    "src/core/render.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/voice.c",
+    "src/native/native_checked_memory.c"
+  ],
+  "translationUnits": 40,
+  "literalProjectBodies": 93,
+  "quotedEdges": 155,
+  "sourcePair": "Complete saved genuinely qualified clean editor C/H pair; view bodies unselected",
+  "selectors": [
+    "PT_MIDI_FRONTEND_RECORDING_SESSION_NATIVE_TASK_PROBE_ONLY=1",
+    "PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY=1",
+    "PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY=1",
+    "PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY=1"
+  ],
+  "CFLAGS": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-std=c99",
+    "-fbbb=-",
+    "-fstack-usage",
+    "-U",
+    "NDEBUG"
+  ],
+  "flagScope": "Describes actual direct cc1 options; not a complete driver command or future dependency admission. Actual200 vectors separately pin original builtins, CRT defines, controlled include routes, sources, assembler and tools.",
+  "SDK": "Actual -M equals ordinary .i paths for every40 units:93 project bodies plus48 selected genuine SDK headers inside the unchanged92-header allowance. No unknown/fallback header was admitted. Future builds require fresh finite exact source/tool/dependency review.",
+  "assertionPolicy": "Always-on REQUIRE and negative-array actual classic geometry; no claim from constant-true assert emission.",
+  "expectedStdout": {
+    "ascii": "MIDI SESSION TASK RAM PASS:real setup/take/master/save/undo;attached guards;detach reuse;dispose/close;zero Fast ledgers;NO WINDOW/INPUT/CAMD/TIMING/OUTPUT\n",
+    "bytes": 156,
+    "sha256": "ae2e9de7b10defbd89295bccb9c12ed79b08948c5e770a7dc16310177b406166"
+  },
+  "allocationRegistry": {
+    "unchangedCapacity": 32,
+    "expectedDerivedPeak": 16,
+    "formula": {
+      "documentArrays": 3,
+      "editor": 1,
+      "samplerOriginalMasterAndJournal": 3,
+      "separateSessionFrontendOwnerTake": 4,
+      "saveBuffers": 3,
+      "setupWorkspace": 1,
+      "retainedSettingsRecord": 1
+    },
+    "bytes": "Overflow-checked document+editor+four queried full capacities+three exact encode buffers+queried setup workspace+one queried metadata-command budget+1MiB original sampler allowance. Numeric guard does not census unrelated process/library heaps."
+  },
+  "futureRuntime": {
+    "state": "NOT_ADMITTED_NOT_RUN",
+    "target": "Separately owned VM only after exact candidate/source/object/link/packet admission",
+    "stackBytes": 2097152,
+    "remainingSPGuardBytes": 1048576,
+    "physical": "NOT_ADMITTED; unexpected branch retains uncancellable whole Task/HUNK/stack and original resources",
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "boundsAre": "Unchanged prospective owned-VM diagnostic bounds; no new operation packet, service, READY, lease, admission or target run is created by this declarative recipe."
+  },
+  "link": {
+    "status": "ACTUAL_HOST_LINK_AND_CURRENT26_ARTIFACT_REVIEW_PASS",
+    "commands": 5,
+    "allReturncodes": 0,
+    "orderedLOADs": 47,
+    "startupObjects": 1,
+    "applicationObjects": 40,
+    "archives": 6,
+    "externalProviders": 26,
+    "rootSeconds": 0.6711881249793805,
+    "evidence": "evidence/midi-frontend-recording-session/native-task-link.json",
+    "candidate": {
+      "bytes": 248076,
+      "sha256": "58a6dd4813ca2faf0b34a8d3c50c67db522e8f9510fb28983821b7ca3be7eecd",
+      "crc32": "D3724991"
+    },
+    "HUNK": {
+      "CODE": 225176,
+      "DATA": 424,
+      "BSS": 37504,
+      "symbols": 474,
+      "RELOC32": 1981,
+      "entry": 0,
+      "undefined": 0,
+      "trailingBytes": 0
+    },
+    "limits": "Exact static executable/current26 concrete map-member/rawHUNK identity tier. Original40 object hashes/55 contribution sizes match; complete post-relocation object payload reconstruction is not claimed. No dynamic toolchain closure or runtime acceptance."
+  },
+  "nativeObjects": {
+    "status": "ACTUAL_NATIVE40_OBJECT_PASS_SEPARATE_SAVED_DATA_REVIEW",
+    "commands": 200,
+    "allReturncodes": 0,
+    "MEqualsIProjectBodies": 93,
+    "MEqualsISDKHeaders": 48,
+    "SDKAllowance": 92,
+    "rootSeconds": 19.516073749982752,
+    "evidence": "evidence/midi-frontend-recording-session/native-task-objects.json"
+  },
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "probe": "src/native/midi_frontend_recording_session_task_probe.c",
+  "language": "C99",
+  "targetProfile": "Genuine classic m68k AmigaOS; actual68000/soft-float/nix20/Os strict direct cc1 profile, with original native builtin facts. No simulated platform defines.",
+  "actualIncludeRouteDescription": {
+    "project": [
+      "src/core",
+      "build/dev"
+    ],
+    "SDK": "Controlled private genuine gcc/libnix/sys/Include_H namespace, original route order; exact absolute vectors and48-of-92 identities are retained in actual200-command manifest."
+  },
+  "sourceSelection": "Actual native40 build used the complete frozen clean editor C/H pair; no working editor/view/frontend-main path was compiled. The session C body is exact HOST-qualified production code; its6704-byte ad3555df nativeRAM header was a qualification-only gate overlay. Later GUI/header gate extensions require separate old-profile preservation evidence and do not relabel this build as compilation from those later bodies.",
+  "actualProfileSourcePins": {
+    "src/native/midi_frontend_recording_session.c": {
+      "bytes": 13720,
+      "sha256": "7a88ced28cc666e4778dd11528d7774a635e92cadac858c68071c7f68d33d34f"
+    },
+    "src/native/midi_frontend_recording_session.h": {
+      "bytes": 6704,
+      "sha256": "ad3555df32c0626e9d59cd3f6ac794cab8de39b79d9575da0574221e18d2a4ef"
+    },
+    "src/native/midi_frontend_recording_session_task_probe.c": {
+      "bytes": 21806,
+      "sha256": "81ee9d6c779bc1b52254999a595fd612664ba083a555a2231638439a3c99fc97"
+    }
+  },
+  "stackEvidence": {
+    "individualSURows": 685,
+    "mainIndividualBytes": 620,
+    "largestIndividualBytes": 16572,
+    "compiledRemainingSPGuardBytes": 1048576,
+    "guardAfterMainPrologue": true,
+    "limits": "Current emitted/rawSP checks dominate heavy setup; individual .su is not an aggregate CRT/callback/Exec/whole-Task or WCET bound. Same-Shell2MiB total stack is prospective and separately admitted."
+  },
+  "activation": "No default build/Makefile/app/native frontend/input/output/CAMD enrollment. Qualification-only profile with four paired Task selectors; GUI, HOST and document selectors remain excluded under this build. No actual input/timestamp source or device output.",
+  "historicalSourceOnlyRecipe": {
+    "bytes": 4265,
+    "sha256": "c51c086f739a12cf1d3477a23f184b2bdd200f51bc73d28dbd4805bc1bccbc29",
+    "status": "Original unexecuted source-only proposal retained separately without rewriting."
+  }
+}

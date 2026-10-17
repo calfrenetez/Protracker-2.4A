@@ -166,7 +166,7 @@ enum pt_midi_setup_result pt_midi_requester_model_cancel(struct pt_midi_requeste
     return result;
 }
 
-#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
+#if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY)
 static enum pt_midi_setup_result modal_hold(struct pt_midi_requester_modal *m)
 {m->held=1;m->busy=0;return PT_MIDI_SETUP_HELD;}
 static enum pt_midi_setup_result modal_return_ticket(struct pt_midi_requester_modal *m)

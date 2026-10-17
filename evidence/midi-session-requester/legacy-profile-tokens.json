@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "role": "Saved-data review independent of actual Root execution; product/shared-helper authorship overlap disclosed in private report.",
+  "source": {
+    "C": {
+      "bytes": 10009,
+      "sha256": "5e6182b862cfb9235d1ce9a682bb33b8b45851099a21c844c0475b64d410f344"
+    },
+    "H": {
+      "bytes": 4652,
+      "sha256": "93a7fe5f3a42d86b38fea387d3e279778f5f8f5cb92c5cf8afe77e3379c4e176"
+    }
+  },
+  "targetOperations": 0,
+  "nativeRuntime": "NOT_RUN",
+  "sharedTargetChanges": false,
+  "state": "LEGACY_PROFILE_TOKENS_AND_EXCLUSIVE_HOST_GATES_QUALIFIED",
+  "result": {
+    "bytes": 225833,
+    "sha256": "1aeea2dc84b93487b1726846436a905feb3d2a345bd301e909353fcc494e09e6"
+  },
+  "seconds": 8.146918291982729,
+  "counts": {
+    "commands": 39,
+    "pairs": 17,
+    "default": 6,
+    "HOST": 5,
+    "nativeRAM": 6,
+    "newHOSTChecks": 5
+  },
+  "actualRC0": 29,
+  "exactExpectedRC1": 10,
+  "all17OldNewTokenListsExactlyEqual": true,
+  "all39RawOutputsRecomputedAsExactTokens": true,
+  "allExpectedDiagnosticMultisetsExact": true,
+  "comparison": "C99 preprocessing tokens, preserving quoted/UCN/numeric spellings and longest punctuators; no whitespace-only/path/string normalization.",
+  "nativeBuiltinPrerequisite": {
+    "bytes": 80004,
+    "sha256": "a2d88d747e06ce341231718ec5b341e3fc1e1295798b0041b5b60628992205c4"
+  },
+  "oldRAMBaseline": "Preserved native session ad355 source; separately preserved canonical HOST1bfb baseline.",
+  "strictInputFactsCount": 280,
+  "allRecordedFullInputBoundariesEqual": true,
+  "strict68AndSavedGuardAndRawREADYEqual": true,
+  "all39OwnedClosuresConfirmed": true,
+  "link": "NOT_PERFORMED",
+  "limits": "Exact named-source profile preservation and HOST admission/refusal only; no linked old binary identity or runtime/GUI/device/timing/physical claim."
+}

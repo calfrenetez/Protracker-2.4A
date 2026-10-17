@@ -6,6 +6,10 @@ It is unselected in the frontend and has no native execution or publication
 acceptance. Default shipping enrollment remains HOST-only. See
 [the native qualifier scope](MIDI_REQUESTER_DOCUMENT_TASK.md).
 
+The separate [frontend context composition](MIDI_FRONTEND_CONTEXT.md) exercises
+durable construction, modal return and final disposal in HOST tests. It does
+not activate native caller or document-publication integration.
+
 The existing typed document action/replacement has an optional MIDI lifetime
 composition for HOST qualification. It requires
 `PT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1` and the existing HOST-only setup-owner gate,

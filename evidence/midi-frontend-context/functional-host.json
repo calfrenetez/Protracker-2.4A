@@ -1,0 +1,81 @@
+{
+  "state": "FUNCTIONAL_HOST_PASS_OUTER_FULLFACTS_FAILED",
+  "overallResultRetained": "CANONICAL_MIDI_CONTEXT_HOST_FAILED",
+  "functionalHost": {
+    "wrapperReturncode": 0,
+    "unittestMethods": 3,
+    "purePairCases": 6,
+    "genuineGroups": 9,
+    "completeGroups": 5,
+    "rootedHeldGroups": 4,
+    "translationUnits": 34,
+    "sourceBodies": 80,
+    "editorPair": "COMPLETE_CURRENT_WORKING_PAIR",
+    "oracleBytes": 143,
+    "oracleSHA256": "c53af2c1c5a34377933d8eeb0561d99e9805a8023981d4eaa55d0d251731dec1",
+    "compilerAndFixtureDiagnosticsEmpty": true,
+    "compileSeconds": 8.220111834001727,
+    "fixtureSeconds": 0.2576284160022624,
+    "unittestSeconds": 8.728,
+    "outerSeconds": 8.820674249989679,
+    "boundsSeconds": {
+      "outer": 180,
+      "compile": 120,
+      "fixture": 30
+    }
+  },
+  "failure": {
+    "kind": "NEW_SOURCE_FILE_METADATA_CHANGED",
+    "affectedPaths": [
+      "src/native/midi_frontend_context.c",
+      "src/native/midi_frontend_context.h",
+      "tests/midi_frontend_context_test.c"
+    ],
+    "fields": [
+      "st_flags:0->64",
+      "st_ctime_ns"
+    ],
+    "contentAndOtherRecordedFactsEqual": true,
+    "cause": "UNPROVEN",
+    "rerun": false,
+    "originalResultUnmodified": true
+  },
+  "preservation": {
+    "all80BodyHashesAndSizesStable": true,
+    "newWrapperFullFactsStable": "UNCONFIRMED_NO_SEPARATE_RAW_AFTER_RECORD",
+    "privateFourFullFactsStable": true,
+    "originalStrict68FullFactsStable": true,
+    "savedGuardHashFullFactsStable": true,
+    "toolsFullFactsStable": true,
+    "newWrapperBodyAndStableFactsCheckPassed": true
+  },
+  "sourcePins": {
+    "src/native/midi_frontend_context.c": {
+      "bytes": 7815,
+      "sha256": "42972ae8bec7109518e1ab9b092684f679d917ac0341d136691eee0496f266ca"
+    },
+    "src/native/midi_frontend_context.h": {
+      "bytes": 5026,
+      "sha256": "953933a1f2a7216f5cef8cdbed4bd69d61ef40f4f7dee654e9a9f676fa1ba5fa"
+    },
+    "tests/midi_frontend_context_test.c": {
+      "bytes": 18374,
+      "sha256": "4a34d1771d0a14dc8480b6e1cdde042b74abffb81fc593abb00851d22f975b53"
+    },
+    "tests/test_midi_frontend_context.py": {
+      "bytes": 19321,
+      "sha256": "f94ded8fdc522912b100f99d2b9126cc8608acd0bb14b7e44354b90ef292b0c3"
+    }
+  },
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": [
+    "Actual C run used complete working editor pair; clean pair only selector admission.",
+    "No native frontend/window/publication/IRQ/device/CAMD/music/listening authority.",
+    "No arbitrary allocator/resource census, native stack lifetime or full toolchain closure.",
+    "Full outer preservation failed and is not relabelled PASS.",
+    "New wrapper full metadata equality at the run boundary is unconfirmed; no raw after wrapper record retained. Root withdrew earlier equality inference. Later observations cannot reconstruct that boundary."
+  ],
+  "actualResultSHA256": "6584c41f702a932ff2550fb1ce380fd11ee4534fe4cb141b9ae2cdb2b51d5ee7",
+  "independentReviewSHA256": "e7c751f10b4d175ab91a7bc7dfae92aa2663fa9fc40f837c9575561fdd190e3b"
+}

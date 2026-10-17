@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "scope": "Portable MIDI endpoint registry and injected CAMD control owner; no native provider or frontend activation",
+  "sourceFiles": {
+    "docs/MIDI_ENDPOINT_CONTROL.md": {
+      "bytes": 2799,
+      "sha256": "32704858ab6488547b0d24a1fcc1298f0c6151fdf4013a0e9a2022ae29abd488"
+    },
+    "docs/MIDI_RECORDING_CORE.md": {
+      "bytes": 5436,
+      "sha256": "e19f3bdd1a8f92a5e0183b63879731e046ca2a0dbf45a805aa95dd1e8379b790"
+    },
+    "src/platform/camd_control.c": {
+      "bytes": 7327,
+      "sha256": "0349b579c30e472bf168cce6f83ac465a9c96a02bc4a51112f03ce0909f500aa"
+    },
+    "src/platform/camd_control.h": {
+      "bytes": 3914,
+      "sha256": "2b5d4005f2d6838217ad5dff8600fad92630969061473f4f507e5f910fe9727f"
+    },
+    "src/platform/midi_endpoints.c": {
+      "bytes": 10045,
+      "sha256": "acf4bc39492a65a48940670c31566ec566969e543bed4976409416551d7c7b2e"
+    },
+    "src/platform/midi_endpoints.h": {
+      "bytes": 4775,
+      "sha256": "89af1d6d0cd3824e825f3d6b6823bd24d5896db69e8408f004f43dabb5ea5eda"
+    },
+    "tests/camd_control_test.c": {
+      "bytes": 17852,
+      "sha256": "d3c3dc4c181a4ab4a9e1710c1a44cffaff0509745da6ffb838e4a425f7ede36f"
+    },
+    "tests/midi_endpoints_test.c": {
+      "bytes": 19516,
+      "sha256": "82a5bde919cc6d8ad7165a9988b5f9f6ee43a2931cb135ea74ee6ba389b1b683"
+    },
+    "tests/test_camd_control.py": {
+      "bytes": 9593,
+      "sha256": "e42206b17886ce917a986b077eda18317813d2f4cee2ecdcf31f7128b267e392"
+    },
+    "tests/test_midi_endpoints.py": {
+      "bytes": 8669,
+      "sha256": "9328ecdd5dc44102e8c183797ed92087cacabe5786da9523a2f7bd306bcb7b55"
+    }
+  },
+  "host": [
+    {
+      "fixture": "registry",
+      "cases": 11,
+      "result": "PASS",
+      "assertions": "ENABLED",
+      "sanitizers": [
+        "ASan",
+        "UBSan"
+      ],
+      "warnings": "ERROR",
+      "compileTimeoutSeconds": 120,
+      "fixtureTimeoutSeconds": 30,
+      "parentTimeoutSeconds": 180,
+      "literalProjectBodies": 8,
+      "oracleBytes": 184,
+      "oracleSHA256": "a3e28d84db884c57e8ae04b474891bc041ce5692561578e7d4b24086e1d3cdbd",
+      "compileSeconds": 0.7569518749951385,
+      "fixtureSeconds": 0.4905480000015814,
+      "parentSeconds": 1.361680834001163
+    },
+    {
+      "fixture": "control",
+      "groups": 8,
+      "result": "PASS",
+      "assertions": "ENABLED",
+      "sanitizers": [
+        "ASan",
+        "UBSan"
+      ],
+      "warnings": "ERROR",
+      "compileTimeoutSeconds": 120,
+      "fixtureTimeoutSeconds": 30,
+      "parentTimeoutSeconds": 180,
+      "literalProjectBodies": 10,
+      "oracleBytes": 186,
+      "oracleSHA256": "8136c79a751a4558b3506e5fe2e3423a026c797eee8f70fcea2982ecf621ef7e",
+      "compileSeconds": 0.7550022920186166,
+      "fixtureSeconds": 0.49048858298920095,
+      "parentSeconds": 1.3616470000124536
+    }
+  ],
+  "privateTargetObjectChecks": {
+    "registryAndGenuineCore": {
+      "result": "PASS",
+      "units": 2,
+      "projectBodies": 7,
+      "sdkSelected": 20,
+      "manifestSHA256": "4fa42cd11b2c1eb6ad6187321fd6100b670f0a95690ff08b6e36d056994a9103",
+      "objectSHA256": [
+        "684112ea35e4b837d49a4d310abc60ba5112922d37c80248bc5658ef4d820ca0",
+        "0e02457171993493ff9885a2958836fc761f9d315e94b8edb36651daa8c1709b"
+      ]
+    },
+    "control": {
+      "result": "PASS",
+      "units": 1,
+      "projectBodies": 7,
+      "sdkSelected": 20,
+      "manifestSHA256": "efbddb959306a6d6efbeafbafffde74a4b0ec2c38f905a56fb1a5e309f72cdd3",
+      "objectSHA256": "2afe317bc982fb70106c4c4d5cdf46d07dbb1fd32ab94f3f5a09e5eb903c9b42"
+    },
+    "scope": "Original selected private source bytes equal adopted C/H; 68000 soft-float HUNK_UNIT objects only; no linked executable or runtime"
+  },
+  "preservation": {
+    "protectedObjects": 68,
+    "residentBodies": 58,
+    "datalessMetadataOnly": 10,
+    "strictBeforeAfter": "UNCHANGED",
+    "unrelatedEditorDisplayPaths": 16
+  },
+  "notQualified": [
+    "Native CAMD provider/installed library compatibility/activation",
+    "Frontend MIDI setup and transport wiring",
+    "Atomic complete-message MIDI delivery and exact scheduling",
+    "Amiberry CAMD runtime",
+    "Real MIDI device behavior, hardware quiet and human listening",
+    "Full compiler child closure, aggregate task/IRQ stack and WCET"
+  ]
+}

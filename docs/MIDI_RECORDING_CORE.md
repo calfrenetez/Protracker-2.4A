@@ -78,7 +78,11 @@ quantisation ties, short-note OFF, collisions, stale releases, monotonic positio
 last-row boundaries, full-song limits, retryable partial Stop, effect preservation,
 and undo/redo of recorded project events.
 
+[MIDI_ENDPOINT_CONTROL.md](MIDI_ENDPOINT_CONTROL.md) describes the portable stable
+endpoint registry and control-only CAMD resource owner. Their HOST fixtures and
+68000 object checks do not qualify a native CAMD provider or delivery backend.
+
 Native tests use a recording message sink, not CAMD or physical MIDI. Still open:
-CAMD discovery/link lifecycle and stable endpoint mapping, input parsing and
-channel/track allocation, the MIDI setup UI, live audition, effect mapping, shared
-sequencer timing/clock, transport wiring, real external MIDI and human timing feel.
+native CAMD discovery/link and delivery integration, input parsing and channel/track
+allocation, the MIDI setup UI, live audition, effect mapping, shared sequencer
+timing/clock, transport wiring, real external MIDI and human timing feel.

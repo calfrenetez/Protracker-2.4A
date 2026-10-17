@@ -58,9 +58,9 @@ inventory, all three routes, inactive slots, 8/16/24-bit PCM value preservation,
 ordered disposal and HELD observation. The compact historical result is in
 `evidence/midi-setup/host-clean-git.json`.
 
-`tests/test_midi_setup.py` pins a separate complete current working editor C/H
-pair and the exact 31-unit/74-body source closure. Its eleven groups also pass
-once under the canonical wrapper, with the original strict 68-entry preservation
+The original canonical `tests/test_midi_setup.py` pinned a separate complete
+working editor C/H pair and the exact 31-unit/74-body source closure. Its eleven
+groups passed once with the original strict 68-entry preservation
 snapshot and ASan/UBSan policy unchanged. That separate result is recorded in
 `evidence/midi-setup/host-working-pair.json`. The historical clean-pair record's
 working-pair NOT_RUN field describes its earlier qualification boundary.
@@ -68,3 +68,15 @@ working-pair NOT_RUN field describes its earlier qualification boundary.
 These HOST passes do not establish native ABI/link, visible frontend, emulator,
 physical A1200/AmiGUS, output scheduling, recording, device capability, listening
 or release acceptance.
+
+The successor wrapper now admits exactly either complete known editor C/H
+pair using both lengths and hashes before compilation. Its actual HOST run
+passed three unittest methods: six pure pair-admission subcases and one real
+unchanged eleven-group C fixture using the complete working pair. Both mixed
+pairings, an unknown hash and an unknown size refused. The pure clean-pair
+admission case is not a new clean C compile; the earlier real clean-pair pass
+remains a separate historical receipt. The selected pair, exact source/helper/
+wrapper and saved command/result records are bound in
+`evidence/midi-setup/host-pair-selector.json`. The strict 68-entry preservation
+snapshot and saved guard before/after pins were unchanged. No native/frontend/
+CAMD/target or full toolchain qualification is inferred.

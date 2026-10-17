@@ -1,0 +1,164 @@
+{
+  "state": "HOST_PAIR_SELECTOR_SUCCESSOR_PASS",
+  "sourceBaseCommit": "c3f95f5ec3fffbca69934267a06db3fe2df2bffe",
+  "scope": "Reviewed successor Python wrapper with unchanged silent MIDI configuration C/H/fixture; actual selected complete working editor C/H pair. HOST only.",
+  "result": {
+    "returnCode": 0,
+    "timeout": false,
+    "outerSeconds": 8.390873333002673,
+    "unittestMethods": 3,
+    "purePairAdmissionSubcases": 6,
+    "realCFixtureRuns": 1,
+    "realCFixtureGroups": 11,
+    "freshRealCleanPairCompile": false
+  },
+  "pairAdmission": {
+    "policy": "EXACT_ONE_OF_TWO_COMPLETE_KNOWN_PAIRS",
+    "selectedKind": "COMPLETE_CURRENT_WORKING_PAIR",
+    "selectedPair": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "pureCases": "Two complete known admissions; both mixed pairings, unknown hash and unknown size refused. Six subcases are within two unittest methods, not six additional C runs.",
+    "historicalCleanPair": "Prior real clean C fixture pass remains separate; this run only exercised clean-pair scalar admission."
+  },
+  "sources": {
+    "orderedTranslationUnits": 31,
+    "literalBodies": 74,
+    "sourceInventorySha256": "88aa591e6bbc84c3ece6481cdb373a7812c02b02429dc34e08debbb7c86b6da2",
+    "sourceInventoryEncoding": "UTF8 JSON, sorted keys, compact separators, relative path to bytes/SHA256 map",
+    "wrapper": {
+      "bytes": 18381,
+      "sha256": "6794a2ccbe11192745b7c958fc3eeb30e4a7b6335adcf0e1bed455e40c372d72"
+    },
+    "helper": {
+      "bytes": 12598,
+      "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+    },
+    "unchangedBodies": {
+      "src/editor/midi_setup.c": {
+        "bytes": 15293,
+        "sha256": "ff254db741b4d0c98b289f2e1c2644ccd8084db55a0ec01f0dafdefdf3c5fa38"
+      },
+      "src/editor/midi_setup.h": {
+        "bytes": 4920,
+        "sha256": "5ee19232be94a6f64843cd74c181249fadad5482dede743383d69b901111abf8"
+      },
+      "tests/midi_setup_test.c": {
+        "bytes": 21405,
+        "sha256": "f8f7af8aedbb530d358824693a37000ee9d0638606c724a405eeea55bf169742"
+      }
+    }
+  },
+  "execution": {
+    "compiler": "HOST cc",
+    "flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-Itests",
+      "-I."
+    ],
+    "compileSeconds": 7.684504916978767,
+    "fixtureSeconds": 0.38196233302005567,
+    "compileLimitSeconds": 120,
+    "fixtureLimitSeconds": 30,
+    "outerLimitSeconds": 180,
+    "compilerAndPythonExecutableBodyPins": "NOT_CAPTURED_BY_THIS_RUN; saved invocation/command records are pinned below",
+    "fullSystemHeaderOrToolchainClosure": "NOT_QUALIFIED"
+  },
+  "oracle": {
+    "bytes": 155,
+    "sha256": "7f1cc1476f2be4dce7bf7a7035dea4bb8446ad9288f8509c6cc286b8d3240277",
+    "compilerStdoutBytes": 0,
+    "compilerStderrBytes": 0,
+    "fixtureStderrBytes": 0
+  },
+  "preservation": {
+    "strictProtectedEntries": 68,
+    "residentBodies": 58,
+    "datalessMetadataOnly": 10,
+    "originalFullMetadataAndRecordedBodiesUnchanged": true,
+    "savedGuardBeforeAfterPinsEqual": true,
+    "targetOperations": 0,
+    "historicalReceipts": "PRESERVED; no earlier result relabeled"
+  },
+  "savedRecordPins": {
+    "result.json": {
+      "bytes": 433,
+      "sha256": "470ee579d0ad282808086ee1092019e7047d8e688683261caefbf11ec6215b6b"
+    },
+    "invocation.json": {
+      "bytes": 987,
+      "sha256": "af75216bf23ba68681a8a1b296d9441170170468ebde4128042f90a0ae907d2f"
+    },
+    "before-preservation.json": {
+      "bytes": 30834,
+      "sha256": "d4c77da45eeadffc3b92a75d97d3453d01aabef406fd97e64b6fe74e889a5d0c"
+    },
+    "after-preservation.json": {
+      "bytes": 30834,
+      "sha256": "d4c77da45eeadffc3b92a75d97d3453d01aabef406fd97e64b6fe74e889a5d0c"
+    },
+    "guard-before.json": {
+      "bytes": 101,
+      "sha256": "31e1ec6bb610ac90c0dc3deeca6879cd68876fa4377f3a989505b12f82fd28b9"
+    },
+    "guard-after.json": {
+      "bytes": 101,
+      "sha256": "31e1ec6bb610ac90c0dc3deeca6879cd68876fa4377f3a989505b12f82fd28b9"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr.txt": {
+      "bytes": 468,
+      "sha256": "67e7c2b5baedfce5d3e3dc0c12470ad034da02b1592f408f085f8296f10b9443"
+    },
+    "evidence/midi-setup-inputs.json": {
+      "bytes": 45623,
+      "sha256": "b731ff399204d9813fb4f8b75e1ed9477a9346f598c21ffef91b68344834eabd"
+    },
+    "evidence/midi-setup-compile-command.json": {
+      "bytes": 1978,
+      "sha256": "c93f4eb3f6092c71173ca696426903d628d09b70e43176df82f4eadf025b7b27"
+    },
+    "evidence/midi-setup-fixture-command.json": {
+      "bytes": 922,
+      "sha256": "0947aad9181159f34d23888fd069f5df905df57de0fde07937d0923855e42499"
+    },
+    "evidence/midi-setup-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/midi-setup-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/midi-setup-fixture.stdout": {
+      "bytes": 155,
+      "sha256": "7f1cc1476f2be4dce7bf7a7035dea4bb8446ad9288f8509c6cc286b8d3240277"
+    },
+    "evidence/midi-setup-fixture.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limits": [
+    "No native window/ABI/link/emulator/physical A1200/AmiGUS/CAMD open or delivery, timing, recording, hardware quiet, listening or release acceptance.",
+    "Outer/compile/fixture wall times are HOST elapsed observations, not native cost or a musical timing guarantee."
+  ]
+}

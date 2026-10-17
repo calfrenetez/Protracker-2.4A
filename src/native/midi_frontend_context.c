@@ -131,10 +131,12 @@ enum pt_midi_setup_result pt_midi_frontend_context_dispose_close(struct pt_midi_
     memcpy(&before,c,sizeof(before));disposed=pt_editor_dispose(c->editor);
     if(!same(c,&before)||!disposed)return hold(c);
     /* No former editor/project/history reads after this genuine dispose. */
-    if(c->close_attempted)return hold(c);c->close_attempted=1;
+    if(c->close_attempted)return hold(c);
+    c->close_attempted=1;
     memcpy(&before,c,sizeof(before));r=pt_midi_setup_owner_close_controller(c->owner);
     if(!same(c,&before)||r!=PT_MIDI_SETUP_OK)return hold(c);
-    if(c->release_attempted)return hold(c);c->release_attempted=1;
+    if(c->release_attempted)return hold(c);
+    c->release_attempted=1;
     memcpy(&before,c,sizeof(before));r=pt_midi_setup_owner_release_workspace(c->owner);
     if(!same(c,&before)||r!=PT_MIDI_SETUP_OK)return hold(c);
     c->state=PT_MIDI_FRONTEND_CLOSED;c->busy=0;return PT_MIDI_SETUP_OK;

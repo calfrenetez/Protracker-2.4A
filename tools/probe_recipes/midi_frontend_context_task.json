@@ -1,0 +1,135 @@
+{
+  "schema": "pt24g-experimental-probe-source-recipe-1",
+  "state": "EXPLICIT_RAM_PROBE_COMPILER_AND_HOST_LINK_PASS_NATIVE_NOT_RUN",
+  "actualCC1TargetOptions": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20"
+  ],
+  "languageAndDiagnostics": [
+    "-std=c99",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "preprocessorUndefines": [
+    "NDEBUG"
+  ],
+  "originalDriverSuppliedCRTDefines": [
+    "libnix",
+    "__libnix__",
+    "__libnix"
+  ],
+  "assemblerOptions": [
+    "--traditional-format",
+    "-m68000"
+  ],
+  "actualRequiredBuiltinFacts": {
+    "__GNUC_MINOR__": "5",
+    "__GNUC__": "6",
+    "__STDC_VERSION__": "199901L",
+    "__STRICT_ANSI__": "1",
+    "__amigaos__": "1",
+    "__m68k__": "1"
+  },
+  "projectIncludeOperands": [
+    "src/core",
+    "build/dev"
+  ],
+  "SDKRoutePolicy": "Use only separately reviewed genuine SDK92 private namespace and original gcc/libnix/sys/Include_H order. No installed fallback, fabricated platform/type/header or hydration. Exact profile/tool/source controls require independent Root admission. Actual R3 selected paths are83 project bodies plus48 genuine SDK headers; every -M and ordinary-I set agrees. The92-header allowance is not the selected count or a whole toolchain census.",
+  "activation": "No Makefile/core/frontend/GUI dispatch change. Existing parent-modal and rawNew/Load restrictions remain. Declarative relative recipe only, not an executable builder or target admission.",
+  "target": "PTMidiFrontendContextTaskProbe",
+  "probe": "src/native/midi_frontend_context_task_probe.c",
+  "orderedTranslationUnits": [
+    "src/native/midi_frontend_context_task_probe.c",
+    "src/native/midi_frontend_context.c",
+    "src/native/midi_requester_model.c",
+    "src/editor/midi_setup_owner.c",
+    "src/editor/midi_setup.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/pattern.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/editor/sampler_lifetime.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/sample_usage.c",
+    "src/core/event_resource.c",
+    "src/core/flow.c",
+    "src/core/pitch.c",
+    "src/core/render.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/voice.c",
+    "src/native/native_checked_memory.c"
+  ],
+  "featureFlags": [
+    "-DPT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY=1",
+    "-DPT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY=1",
+    "-DPT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY=1"
+  ],
+  "sourceSnapshotPolicy": "Fresh pinned35TUs/83 source-derived literal project bodies, complete saved clean editor C/H together, no view/default frontend bodies. Context C has only two newline/indent formatting splits from the published body, with identical non-whitespace tokens and API; context header retains the reviewed native Task gate overlay. Actual -M/ordinary-I equality and unknown-header refusal are required before code generation; source graph is not compiler-measured.",
+  "nativeProfile": "Exact3 qualification-only selectors on genuine classic target, HOST/document/nativefrontend/window selectors excluded. Current default/HOST declarations/body unchanged. No new API or owner; actual same original pt_midi_frontend_context/owner/model/journal.",
+  "oracle": {
+    "ascii": "MIDI FRONTEND CONTEXT TASK RAM PASS:original constructor/modal/journal;apply/cancel/retained redo;dispose/close/workspace;zero Fast ledgers;NO WINDOW/FRONTEND/DEVICE/OUTPUT AUTHORITY\n",
+    "bytes": 183,
+    "sha256": "fb65b82db32f75eff31db6260ad87e5d89710da51863b6594f9591879bb2abb0"
+  },
+  "entry": "main(void), one finite positive lifecycle with supported negative admission/reentry controls. No CLI. First unexpected result retains full original HUNK/Task/domain with no cleanup retry.",
+  "stack": "Read actual SP against original volatile Task lower/upper, even/current bounded and remaining>=1MiB before planning/allocation/construction. It may inline; no helperframe/call-chain/CRT/OS/IRQ/wholeTask bound. Future same-Shell total2MiB requires separate runner/profile admission; no target action here. Individual .su and emitted dominance must be measured after build.",
+  "inputSourcePins": {
+    "src/native/midi_frontend_context.h": {
+      "bytes": 6138,
+      "sha256": "1bab68467e7e9069524b03de01c233b5ad36fc449798835e1e88f770aae9de21"
+    },
+    "src/native/midi_frontend_context.c": {
+      "bytes": 7825,
+      "sha256": "1d1f21142de9b9364b629bbf1b5715819b7d4f6c70157c8704ad54ba0575d400"
+    },
+    "src/native/midi_frontend_context_task_probe.c": {
+      "bytes": 16347,
+      "sha256": "df1ed433282b40f91179b8e611824df7be9ac0b6dc471ad98684454fecec79f5"
+    }
+  },
+  "status": {
+    "objectBuild": "R3_EXACT_NATIVE_OBJECT_PASS_SEPARATE_RECEIPT",
+    "link": "R3_EXACT_HOST_LINK_AND_ARTIFACT_REVIEW_PASS_SEPARATE_RECEIPT",
+    "emulator": "NOT_ADMITTED",
+    "physicalA1200": "NOT_ADMITTED"
+  },
+  "runtimeAdmission": {
+    "state": "NOT_ADMITTED",
+    "firstTarget": "SEPARATELY_OWNED_AMIBERRY_VM_ONLY",
+    "shellStackBytes": 2097152,
+    "minimumRemainingStackBytes": 1048576,
+    "privateRunnerAllowance": "EXACT_ARTIFACT_HOST_PLAN_MODEL_PASS_ONLY_SEPARATE_REVIEWED_RUNTIME_BINDING_REQUIRED",
+    "physicalInheritance": false,
+    "failureContainment": "Original retained Task/HUNK/domain on unexpected result. No general cancellation; separately owned VM and verified cleanup/release required."
+  },
+  "buildEvidence": {
+    "objects": "evidence/midi-frontend-context/native-r3-objects.json",
+    "link": "evidence/midi-frontend-context/native-r3-link.json",
+    "binaryBytes": 236120,
+    "binarySHA256": "17139163361b7d51c7080c44aec191d9eb12484ed826d7db323583963810916a",
+    "binaryCRC32": "B8B144A1",
+    "nativeRuntime": "NOT_RUN",
+    "privatePlanModel": "evidence/midi-frontend-context/artifact-bound-plan-host.json"
+  }
+}

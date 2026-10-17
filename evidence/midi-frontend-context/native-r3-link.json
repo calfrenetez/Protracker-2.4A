@@ -1,0 +1,63 @@
+{
+  "schema": "pt24g-native-linked-artifact-qualification-1",
+  "state": "HOST_LINK_AND_SAVED_ARTIFACT_PASS_NOT_RUNTIME",
+  "candidate": "PTMidiFrontendContextTaskProbe / R3",
+  "binary": {
+    "bytes": 236120,
+    "sha256": "17139163361b7d51c7080c44aec191d9eb12484ed826d7db323583963810916a",
+    "crc32": "B8B144A1"
+  },
+  "actualManifest": {
+    "bytes": 26033,
+    "sha256": "984dedf59d79419497a0dfb79dbc8a8f2cb5d1c0c491a2f2b9c71339a9cc7cef"
+  },
+  "independentReview": {
+    "bytes": 21264,
+    "sha256": "64dd80e1680728aae16ddb43ae9e28b1d2926e6d97f2ed5012af62b2dc17f4ef"
+  },
+  "sourceObjectManifest": {
+    "bytes": 680183,
+    "sha256": "07fbb0113371c4c41e0d5e7a9d0b19659c18b127235eb55a001ec58ffefe39cb"
+  },
+  "actual": {
+    "commands": 5,
+    "allReturncodes": 0,
+    "seconds": 0.2743278330017347,
+    "applicationObjects": 35,
+    "runtimeInputs": 7,
+    "orderedExactLOADs": 42,
+    "applicationProvidersVerified": 26,
+    "newProviderNames": 0,
+    "startupAndFiveExecStubABIsVerifiedAsSavedBytes": true,
+    "HUNK_HEADER": "000003f3",
+    "architecture": "m68k:68000",
+    "segments": {
+      "codeBytes": 214996,
+      "dataBytes": 384,
+      "bssBytes": 37376
+    },
+    "relocations": 1825,
+    "symbols": 446,
+    "unresolvedSymbols": 0
+  },
+  "SPAndOracle": {
+    "actualLinkedSPRead": "move.l sp,d0",
+    "TaskBoundsAnd1MiBRemainingCheckDominatesHeavyPaths": true,
+    "runtimeTaskGeometryObserved": false,
+    "expectedStdoutBytes": 183,
+    "expectedStdoutSha256": "fb65b82db32f75eff31db6260ad87e5d89710da51863b6594f9591879bb2abb0",
+    "actualStdoutObserved": false,
+    "wholeTaskOrCRTStackBound": false
+  },
+  "preservation": {
+    "all64InputFullFactsAndREADYEqual": true,
+    "strict68Equal": true,
+    "savedGuardEqual": true,
+    "linkedProductsFullFactsEqual": true,
+    "historicalFailuresRetained": true
+  },
+  "readerLimit": "Saved linked reader annotations elsewhere do not establish complete instruction/FPU decoding; critical linked paths checked with raw HUNK and relocations.",
+  "runtime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": "No GUI/frontend/CAMD/device/output/publication/IRQ/timing/emulator/physical/quiet acceptance. Uncancellable failure retention remains a separate runtime-containment admission condition."
+}

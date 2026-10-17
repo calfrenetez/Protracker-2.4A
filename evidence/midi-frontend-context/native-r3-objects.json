@@ -1,0 +1,91 @@
+{
+  "schema": "pt24g-native-object-qualification-1",
+  "state": "NATIVE_OBJECT_BUILD_PASS_NOT_RUNTIME",
+  "candidate": "PTMidiFrontendContextTaskProbe / R3",
+  "source": {
+    "src/native/midi_frontend_context.c": {
+      "bytes": 7825,
+      "sha256": "1d1f21142de9b9364b629bbf1b5715819b7d4f6c70157c8704ad54ba0575d400"
+    },
+    "src/native/midi_frontend_context.h": {
+      "bytes": 6138,
+      "sha256": "1bab68467e7e9069524b03de01c233b5ad36fc449798835e1e88f770aae9de21"
+    },
+    "src/native/midi_frontend_context_task_probe.c": {
+      "bytes": 16347,
+      "sha256": "df1ed433282b40f91179b8e611824df7be9ac0b6dc471ad98684454fecec79f5"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 7544,
+      "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 9487,
+      "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10759,
+      "sha256": "b5ef67da67d6c044ea90e21a007fed80ca7e3c2128292ad05ea0fddeca268316"
+    }
+  },
+  "actualManifest": {
+    "bytes": 680183,
+    "sha256": "07fbb0113371c4c41e0d5e7a9d0b19659c18b127235eb55a001ec58ffefe39cb"
+  },
+  "independentReview": {
+    "bytes": 17290,
+    "sha256": "57d79e4659ecd75a17ed9e4c56c257b3a3da78e14cf320928fb485342c2c255b"
+  },
+  "actual": {
+    "translationUnits": 35,
+    "commands": 175,
+    "allReturncodes": 0,
+    "allCompileAssembleStdoutAndAllStderrEmpty": true,
+    "projectBodies": 83,
+    "SDKAllowance": 92,
+    "selectedSDKHeaders": 48,
+    "selectedProjectBodies": 83,
+    "selectedPathUnion": 131,
+    "allMEqualsOrdinaryI": true,
+    "objects": 35,
+    "HUNK_UNIT": "000003e7",
+    "architecture": "m68k:68000",
+    "productBodiesRehashed": 175,
+    "rawStreamsRehashed": 350
+  },
+  "nativeABI": {
+    "genuineCompilerPredefines": true,
+    "pointerIntLongSizeTBytes": 4,
+    "byteOrder": "big endian",
+    "threeProbeSelectorsOnly": true,
+    "HOSTDocumentEnrollmentSelectorsAbsent": true,
+    "NDEBUGAbsent": true,
+    "realSPTaskBoundsAnd1MiBDiagnosticGuardEmittedBeforeHeavyWork": true,
+    "actualGuardObservedAtRuntime": false
+  },
+  "individualStackUsage": {
+    "rows": 638,
+    "static": 132,
+    "dynamicBounded": 506,
+    "mainBytes": 216,
+    "contextConstructBytes": 252,
+    "requesterModelLargestBytes": 2264,
+    "ownerLargestBytes": 228,
+    "checkedMemoryLargestBytes": 512,
+    "largestCompiledBytes": 16572,
+    "largestCompiledFunction": "pt_pcm_resample_filtered_progress.part.0",
+    "wholeTaskOrReachabilityBound": false
+  },
+  "preservation": {
+    "all204InputFullFactsEqual": true,
+    "READYFullFactsEqual": true,
+    "strict68Equal": true,
+    "savedGuardFullFactsEqual": true,
+    "historicalR1R2FailuresPreserved": true
+  },
+  "savedInspectionLimit": "RC0 saved decoder has section-boundary annotations; retained compiler assembly and raw guard bytes support critical order. No whole-object disassembly proof.",
+  "link": "NOT_PERFORMED",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": "Object compilation only; no GUI/frontend/CAMD/device/output/publication/IRQ/timing/emulator/physical/quiet or whole-Task stack acceptance."
+}

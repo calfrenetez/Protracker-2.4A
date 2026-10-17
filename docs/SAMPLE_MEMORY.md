@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+
+## Native MIDI context RAM qualifier —17 October2026
+
+A separate opt-in ordinary-Task probe now compiles the durable MIDI context,
+real owner/model and metadata journal using genuine classic headers. The affected
+HOST sanitizer fixture passes; the complete 35-unit native build passes. Native
+execution remains NOT_RUN and the shipping frontend stays unselected. This
+qualifier uses empty PCM slots, so it adds no sample-master, active-voice or
+hardware acceptance. See [the exact scope](MIDI_FRONTEND_CONTEXT.md).
+
 ## Native MIDI document cancellation qualifier —17 October2026
 
 A separate explicit ordinary-Task RAM probe now builds with genuine classic

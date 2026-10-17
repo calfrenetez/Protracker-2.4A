@@ -1,0 +1,70 @@
+{
+  "schema": "pt24g-context-host-gates-receipt-1",
+  "state": "HOST_GATE_TOKEN_COMPATIBILITY_PASS",
+  "source": {
+    "candidateHeader": {
+      "bytes": 6138,
+      "sha256": "1bab68467e7e9069524b03de01c233b5ad36fc449798835e1e88f770aae9de21"
+    },
+    "originalHeader": {
+      "bytes": 5026,
+      "sha256": "953933a1f2a7216f5cef8cdbed4bd69d61ef40f4f7dee654e9a9f676fa1ba5fa"
+    },
+    "contextC": {
+      "bytes": 7815,
+      "sha256": "42972ae8bec7109518e1ab9b092684f679d917ac0341d136691eee0496f266ca"
+    },
+    "casePlan": {
+      "bytes": 75515,
+      "sha256": "74c7f8b33ea8f757dbefae02dab482bddab17659c3c5a7ef0c317ecfaccff9a5"
+    }
+  },
+  "actual": {
+    "commands": 25,
+    "exactRC1Refusals": 20,
+    "RC0": 5,
+    "realHOSTBuiltinObservations": 1,
+    "rawTokenPairs": [
+      {
+        "name": "header",
+        "rawByteIdentical": true,
+        "stdoutEach": {
+          "bytes": 55334,
+          "sha256": "4e35758fd77dec7a4f3b03a5cf3cebb82eae8196873716d71780c2f13777d284"
+        }
+      },
+      {
+        "name": "context-C",
+        "rawByteIdentical": true,
+        "stdoutEach": {
+          "bytes": 69732,
+          "sha256": "6a489fc4b65fb4d61278cdce8ebd053b76968acd3a115be9e09dee0d45f985ec"
+        }
+      }
+    ],
+    "gateSeconds": 0.9776035420072731,
+    "rootSeconds": 1.109947083,
+    "rootReturncode": 0,
+    "unexpectedDiagnostics": 0,
+    "platformSpoofing": false,
+    "nativeProbePreprocessed": false
+  },
+  "preservation": {
+    "rawInputsFullFactsEqual": 162,
+    "rawControlsIncludingReadyFullFactsEqual": 5,
+    "strict68RawFactsEqual": true,
+    "savedGuardRawFactsEqual": true,
+    "rootOuterFiveInputsEqual": true
+  },
+  "result": {
+    "bytes": 27558,
+    "sha256": "7ab4141b680ba9348a5f757247761639dab8da1d2150f78a24bc9d212914e4b7"
+  },
+  "independentSavedAudit": {
+    "bytes": 6854,
+    "sha256": "a6ebbd39f7249d830e308c6202267fcedb654ef56a6b7bc6556544090c62ecad"
+  },
+  "limits": "HOST preprocessing proves exact gate refusals and originalHOST header/C token parity only. No native ABI/object/executable/runtime/GUI, target, physical or shipping-frontend acceptance.",
+  "targetOperations": 0,
+  "reruns": 0
+}

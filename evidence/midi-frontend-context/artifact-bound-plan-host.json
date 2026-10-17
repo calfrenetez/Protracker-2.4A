@@ -1,0 +1,67 @@
+{
+  "schema": "pt24g-artifact-bound-plan-host-receipt-1",
+  "state": "PRIVATE_ARTIFACT_PLAN_HOST12_PASS",
+  "candidate": {
+    "target": "PTMidiFrontendContextTaskProbe",
+    "bytes": 236120,
+    "sha256": "17139163361b7d51c7080c44aec191d9eb12484ed826d7db323583963810916a",
+    "crc32": "B8B144A1"
+  },
+  "source": {
+    "PlanEachRoute": {
+      "bytes": 25907,
+      "sha256": "6eff9698396f00c4680688b475b47999ac9267a0c3b6d94b1753a9d33ea0cb92"
+    },
+    "test": {
+      "bytes": 9742,
+      "sha256": "364ba65fc526c47469d41fb4682ae17ab30541dde326b84877b37f7b09fe14b4"
+    },
+    "manifest": {
+      "bytes": 2569,
+      "sha256": "24782d34b2631e0c8c521f6f73b4f60bd835075f8dda6ffa1eb854ca9e487bf1"
+    }
+  },
+  "actual": {
+    "freshProcesses": 2,
+    "methodsEach": 6,
+    "methodsTotal": 12,
+    "returncodes": [
+      0,
+      0
+    ],
+    "childSeconds": [
+      0.11895800000638701,
+      0.09994004198233597
+    ],
+    "outerSeconds": 0.235278083011508,
+    "stdoutEach": {
+      "bytes": 1002,
+      "sha256": "f60975eb7953912c688603e6e6c05f34a218207f35dae1c0d7b7c3b9c4e28604"
+    },
+    "stderrBytes": [
+      0,
+      0
+    ],
+    "oracleBytes": 183,
+    "coverage": "Artifact identity/custody; same-Shell script order; exact/synthetic-control refusals; packet namespace isolation; stacktypes/gaps;8+1files;512KiB uploadboundary."
+  },
+  "preservation": {
+    "rawInputFullFactsEqual": 23,
+    "rawREADYBeforeAfterEachChildAndFinalEqual": true,
+    "strict68RawFactsEqual": true,
+    "savedGuardRawFactsEqual": true
+  },
+  "result": {
+    "bytes": 4520,
+    "sha256": "33e03dd0f7946ceab10c96b72faeed0478df44263cd5b65bdb367c379fbd20ef"
+  },
+  "independentSavedAudit": {
+    "bytes": 6220,
+    "sha256": "4ab1afac6c3db11dbcf90d7ee0bce3eac802ade831a159d968e75d9353fd972a"
+  },
+  "scope": "Private in-memory helpers only. No installedharness, packet/native/guestStack, runtime, GUI, frontend, emulator, physical or audio acceptance. Original16functionalPASS/outerFAILED remains separate and unchanged.",
+  "nativeRuntime": "NOT_RUN",
+  "runtimePacketAdmission": "NOT_ADMITTED",
+  "targetOperations": 0,
+  "reruns": 0
+}

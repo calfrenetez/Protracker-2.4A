@@ -1,0 +1,56 @@
+{
+  "schema": "pt24g-retained-native-failures-1",
+  "state": "R1_R2_FAILED_ATTEMPTS_PRESERVED",
+  "attempts": [
+    {
+      "revision": "R1",
+      "state": "CONTEXT_NATIVE35_OBJECT_FAILED",
+      "manifest": {
+        "bytes": 24677,
+        "sha256": "5f2ca34997dddd8ecb7894c744abd88f22e0344b002b71699dace16fb97a96d0"
+      },
+      "rootResult": {
+        "bytes": 689,
+        "sha256": "4c66d999b93633afc89921068b7afc6f9e9ae04e0ae969d0d3a82970b0d98d59"
+      },
+      "commands": 3,
+      "returncodes": [
+        0,
+        0,
+        1
+      ],
+      "inputAndREADYAnd68AndSavedGuardEqual": true,
+      "nativeRuntime": "NOT_RUN",
+      "meaning": "R1 probe lacked genuine PT_CLASSIC_RATE declaration."
+    },
+    {
+      "revision": "R2",
+      "state": "CONTEXT_NATIVE35_OBJECT_FAILED",
+      "manifest": {
+        "bytes": 48435,
+        "sha256": "ec913231ac302b7aa55b8ab7221dfd1a0762d7b7f3c4a28ff5e1e2d6ce97527f"
+      },
+      "rootResult": {
+        "bytes": 696,
+        "sha256": "8b91e14cba1d34c110feb581d99423a2a5b5e89e590fa36ed0bbbb4467b8f640"
+      },
+      "commands": 8,
+      "returncodes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "inputAndREADYAnd68AndSavedGuardEqual": true,
+      "nativeRuntime": "NOT_RUN",
+      "meaning": "R2 unit01 stopped at two existing context C misleading-indentation Werror diagnostics; one prior object unit completed."
+    }
+  ],
+  "currentSourceRevision": "R3 adds original header and two formatting-only statement splits without warning relaxation. R3 build result remains separate pending here.",
+  "limits": "Historical failures are not relabelled or replayed; no native runtime/target acceptance.",
+  "targetOperations": 0
+}

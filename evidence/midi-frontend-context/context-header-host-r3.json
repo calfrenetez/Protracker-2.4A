@@ -1,0 +1,63 @@
+{
+  "schema": "pt24g-redacted-host-receipt-1",
+  "state": "R3_CONTEXT_C_AND_NATIVE_ADMISSION_HEADER_HOST_PASS_INDEPENDENT_SAVED_REVIEW",
+  "actualResult": {
+    "bytes": 773,
+    "sha256": "8ec81d1b6971ac78d86245c52b4b0dee3b6ab2a4930a121050e1f0e866a0d137"
+  },
+  "actualHOSTSourcePlan": {
+    "bytes": 9856,
+    "sha256": "c2e6477e595d3047627e03e7950b3c1b1f638b70ae40b68c0d063f4ca3a5cc66"
+  },
+  "source": {
+    "C": {
+      "bytes": 7825,
+      "sha256": "1d1f21142de9b9364b629bbf1b5715819b7d4f6c70157c8704ad54ba0575d400"
+    },
+    "header": {
+      "bytes": 6138,
+      "sha256": "1bab68467e7e9069524b03de01c233b5ad36fc449798835e1e88f770aae9de21"
+    },
+    "fixture": {
+      "bytes": 18374,
+      "sha256": "4a34d1771d0a14dc8480b6e1cdde042b74abffb81fc593abb00851d22f975b53"
+    },
+    "wrapper": {
+      "bytes": 19390,
+      "sha256": "58ff1405f32f03804b91fca0d57bd6207c17905ebc4e4c9914552cdb92287b89"
+    }
+  },
+  "functional": {
+    "returncode": 0,
+    "methods": 3,
+    "pureCases": 6,
+    "translationUnits": 34,
+    "literalBodies": 80,
+    "genuineGroups": 9,
+    "completed": 5,
+    "rootedHeldRigs": 4,
+    "oracleBytes": 143,
+    "oracleSha256": "c53af2c1c5a34377933d8eeb0561d99e9805a8023981d4eaa55d0d251731dec1",
+    "compilerAndFixtureDiagnosticsEmpty": true,
+    "unittestProgressOnlyBytes": 101,
+    "completeWorkingEditorPair": true,
+    "outerSeconds": 9.056125499977497,
+    "compileSeconds": 8.469780165993143,
+    "fixtureSeconds": 0.3841217499866616
+  },
+  "recipe": "C99 O1 Werror UNDEBUG ASan+UBSan; three HOST selectors;120s compile/30s fixture/180s outer.",
+  "preservation": {
+    "all104InputFullFactsEqual": true,
+    "strict68Equal": true,
+    "resident58": true,
+    "metadataOnly10": true,
+    "savedGuardBoundaryFullFactsEqual": true
+  },
+  "limits": [
+    "Actual HOST run binds preserved c2e source plan; later native origin-label metadata gets no new execution attribution.",
+    "Native probe/selector branch/runtime NOT_RUN; no new clean C compile.",
+    "Historical outer-preservation and native compile failures remain unchanged.",
+    "No full toolchain/system-header, GUI/frontend/device/output/quiet/timing/emulator/physical authority."
+  ],
+  "targetOperations": 0
+}

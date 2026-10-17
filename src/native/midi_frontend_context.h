@@ -1,5 +1,18 @@
 #ifndef PT_NATIVE_MIDI_FRONTEND_CONTEXT_H
 #define PT_NATIVE_MIDI_FRONTEND_CONTEXT_H
+/* Qualification-only native branch. It admits this RAM probe, never the
+ * shipping/frontend/window caller. Existing HOST selection remains below. */
+#if defined(PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY)
+#if PT_MIDI_FRONTEND_CONTEXT_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1
+#error "Native frontend context requires the exact three TASK RAM probe options"
+#endif
+#if !defined(__m68k__) || !defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__)
+#error "Native frontend context TASK RAM probe requires the genuine classic target"
+#endif
+#if defined(PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY) || defined(PT_MIDI_SETUP_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
+#error "Native frontend context TASK RAM probe excludes HOST/document/window composition"
+#endif
+#else
 /* Private source composition only. None of the native TASK/RAM selectors admits
  * this caller or the shipping frontend. The genuine owner gate is unchanged. */
 #if !defined(PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY) || PT_MIDI_FRONTEND_CONTEXT_HOST_ONLY != 1
@@ -10,6 +23,7 @@
 #endif
 #if defined(__m68k__) || defined(__amigaos__) || defined(__AROS__) || defined(__MORPHOS__) || defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY) || defined(PT_DOCUMENT_MIDI_SETUP_NATIVE_TASK_PROBE_ONLY)
 #error "MIDI frontend context has no native or TASK-probe admission"
+#endif
 #endif
 #include "midi_requester.h"
 

@@ -1,0 +1,104 @@
+{
+  "schema": "pt24g-native-context-task-preparation-1",
+  "state": "SOURCE_HOST_NATIVE_OBJECT_AND_HOST_LINK_QUALIFIED_NOT_RUNTIME",
+  "target": "PTMidiFrontendContextTaskProbe",
+  "source": {
+    "src/native/midi_frontend_context.c": {
+      "bytes": 7825,
+      "sha256": "1d1f21142de9b9364b629bbf1b5715819b7d4f6c70157c8704ad54ba0575d400"
+    },
+    "src/native/midi_frontend_context.h": {
+      "bytes": 6138,
+      "sha256": "1bab68467e7e9069524b03de01c233b5ad36fc449798835e1e88f770aae9de21"
+    },
+    "src/native/midi_frontend_context_task_probe.c": {
+      "bytes": 16347,
+      "sha256": "df1ed433282b40f91179b8e611824df7be9ac0b6dc471ad98684454fecec79f5"
+    }
+  },
+  "nativeSourceClosure": {
+    "translationUnits": 35,
+    "literalProjectBodies": 83,
+    "quotedEdges": 136,
+    "completeCleanEditorPair": true,
+    "viewSelected": false
+  },
+  "HOST": {
+    "receipt": "context-header-host-r3.json",
+    "translationUnits": 34,
+    "projectBodies": 80,
+    "completeWorkingEditorPair": true,
+    "methods": 3,
+    "pureCases": 6,
+    "groups": 9,
+    "completed": 5,
+    "retainedWholeRigs": 4,
+    "oracleBytes": 143,
+    "all104InputFullFactsEqual": true
+  },
+  "nativeObjects": {
+    "receipt": "native-r3-objects.json",
+    "commands": 175,
+    "allRC0": true,
+    "SDKAllowance": 92,
+    "selectedSDK": 48,
+    "MEqualsOrdinaryIAll35": true,
+    "all204InputFullFactsEqual": true
+  },
+  "hostLink": {
+    "receipt": "native-r3-link.json",
+    "commands": 5,
+    "allRC0": true,
+    "orderedLOADs": 42,
+    "applicationExternals": 26,
+    "all64InputFullFactsEqual": true,
+    "binaryBytes": 236120,
+    "binarySHA256": "17139163361b7d51c7080c44aec191d9eb12484ed826d7db323583963810916a",
+    "binaryCRC32": "B8B144A1"
+  },
+  "sourceExpectedAllocatorSlots": {
+    "peakLive": 11,
+    "runtimeObserved": false,
+    "normalCRTAllocationsIncluded": false
+  },
+  "stack": {
+    "minimumRemainingDiagnosticBytes": 1048576,
+    "futureSameShellTotalStackBytes": 2097152,
+    "SPTaskGuardEmitted": true,
+    "guardObservedAtRuntime": false,
+    "wholeTaskCallChainIRQOrWCETProof": false,
+    "privatePlanAllowance": "EXACT_ARTIFACT_PRIVATE_HOST_PLAN_MODEL_PASS_NOT_RUNTIME"
+  },
+  "runtime": {
+    "state": "NOT_RUN",
+    "firstTarget": "SEPARATELY_OWNED_AMIBERRY_VM_ONLY_AFTER_SEPARATE_ADMISSION",
+    "physicalA1200": "NOT_ADMITTED",
+    "generalCancellation": false,
+    "failureRetention": "Original Task/HUNK/caller domain remains held; no unrelated-free or quiet authority."
+  },
+  "composition": {
+    "defaultFrontend": false,
+    "windowEnrollment": false,
+    "typedDocumentActionPublication": false,
+    "deviceOrOutput": false,
+    "PCMFramesInQualifier": 0
+  },
+  "preservation": {
+    "strict68Equal": true,
+    "unrelated16Preserved": true,
+    "savedGuardEqual": true,
+    "priorFailedEvidence": "native-retained-failures.json",
+    "earlierCanonicalHOSTOuterFailure": "functional-host.json"
+  },
+  "limits": "Compiler and HOST functional/link results only. No native Task, emulator, physical memory/device, active voice, whole-stack, exact musical timing or listening acceptance. New C only splits two statements; actual HEAD integration bridges exact source copies instead of repeating unchanged tests.",
+  "privatePlanModel": {
+    "receipt": "artifact-bound-plan-host.json",
+    "methods": 12,
+    "processes": 2,
+    "allRC0": true,
+    "all23InputFullFactsAndREADYEqual": true,
+    "installedHarnessChanged": false,
+    "guestStackObserved": false,
+    "runtimePacketAdmission": "NOT_ADMITTED"
+  }
+}

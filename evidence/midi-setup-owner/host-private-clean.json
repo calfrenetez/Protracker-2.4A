@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "scope": "Actual private MIDI-only HOST sidecar qualification; native rejection gate unchanged",
+  "status": "PASS",
+  "editorPairKind": "COMPLETE_CLEAN_GIT_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69993,
+      "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6646,
+      "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    }
+  },
+  "historicalEditorBodyProvenance": "Original complete clean56ff editor C/H pair; current body equality does not relabel its provenance",
+  "precompileSourceEquality": {
+    "commit": "1427d6380d7bda92463bc943f8875d8047fd7d44",
+    "originalBodies": 73,
+    "allEqualFrozenClosureBeforePrivateRun": true,
+    "scope": "Saved Root source observation; no new Git query or historical run relabelling"
+  },
+  "qualifiedOwnerBodies": {
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 5027,
+      "sha256": "9ac2dbf21cb51c3701d5e41ced23d39cca0832fe86f8716d71fe2ca0b3edf4f4"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 11156,
+      "sha256": "669abce9311f4b8717243f3e784eb58e4ad82fb459b1a0310d812246ab6cf4ad"
+    },
+    "tests/midi_setup_owner_test.c": {
+      "bytes": 16794,
+      "sha256": "d347d64aec8e449466fcadd0719f58b31bca4b3f358ab2d179bc766e30f0ae47"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 32,
+    "literalBodies": 76,
+    "sha256": "a1f602656be69479fcf8043b0e5b0bd7ffb9e601740a4f4e3fcb7363fa3c8240",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "privateWrapper": {
+    "bytes": 15977,
+    "sha256": "15f73d96afedbbce638e9564710d3e9aeeed30bc411f8c591885a3b96084bcf0"
+  },
+  "snapshotHelper": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "HOST_FLAGS": [
+    "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+  ],
+  "nativeGate": "Header rejects native architectures; no eligibility inferred",
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "outerTimeoutSeconds": 180,
+  "compileSeconds": 7.8355837920098566,
+  "fixtureSeconds": 0.38779266699566506,
+  "outerSeconds": 8.600572791008744,
+  "returnCode": 0,
+  "fixtureGroups": 8,
+  "completedRigs": 6,
+  "retainedWholeHELDContexts": 2,
+  "terminalOracle": {
+    "bytes": 170,
+    "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+  },
+  "emptyStreams": {
+    "compileStdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compileStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixtureStderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "independentSourceReview": {
+    "bytes": 3889,
+    "sha256": "70717f5c6628c0890b687a6d481b714f8a6bb4e24c0b628a4c0453d8fe75fb71",
+    "scope": "Prior complete source-only review; no execution claim"
+  },
+  "proposedCanonicalSuccessor": {
+    "workingPair": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      }
+    },
+    "qualification": "NOT_RUN",
+    "sourceClosureSHA256": "661f0dd10395dae641652cf4d3fc3da87a45ed9b360c048a040aca5033384f22",
+    "pairAdmission": "Exactly complete known clean or working pair; six pure cases prepared, not run for owner successor"
+  },
+  "limits": [
+    "Six completed rigs plus two whole retained alias-fault contexts are not all-resources-clean or two exclusive fresh blocks",
+    "Known spans are not a transitive heap census; fresh allocator/source/context lifetime and disjoint output buffers remain caller preconditions",
+    "Tickets authenticate only one original owner lifetime; no global ABA or stale-lifetime protection",
+    "No document/action/replacement/publication owner or frontend/default activation",
+    "No native ABI/link/runtime, CAMD/message/route, output quiet, emulator, physical, timing, listening or release acceptance"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "scope": "Actual canonical MIDI-only HOST owner qualification; native rejection unchanged",
+  "status": "PASS",
+  "editorPairKind": "COMPLETE_CURRENT_WORKING_PAIR",
+  "editorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    }
+  },
+  "sourceClosure": {
+    "translationUnits": 32,
+    "literalBodies": 76,
+    "sha256": "661f0dd10395dae641652cf4d3fc3da87a45ed9b360c048a040aca5033384f22",
+    "hashConvention": "SHA256 of UTF-8 sorted-key compact JSON mapping relative body names to bytes and sha256"
+  },
+  "ownerBodies": {
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 5027,
+      "sha256": "9ac2dbf21cb51c3701d5e41ced23d39cca0832fe86f8716d71fe2ca0b3edf4f4"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 11156,
+      "sha256": "669abce9311f4b8717243f3e784eb58e4ad82fb459b1a0310d812246ab6cf4ad"
+    },
+    "tests/midi_setup_owner_test.c": {
+      "bytes": 16794,
+      "sha256": "d347d64aec8e449466fcadd0719f58b31bca4b3f358ab2d179bc766e30f0ae47"
+    }
+  },
+  "wrapper": {
+    "bytes": 18711,
+    "sha256": "fe61792a558c7903340ad680f8697876d71a4dce508d68489e44f8372919bfc8"
+  },
+  "snapshotHelper": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "compilerPolicy": "C99 O1 debug Wall Wextra Werror UNDEBUG ASan+UBSan",
+  "HOST_FLAGS": [
+    "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+  ],
+  "compileTimeoutSeconds": 120,
+  "fixtureTimeoutSeconds": 30,
+  "outerTimeoutSeconds": 180,
+  "compileSeconds": 7.873573332995875,
+  "fixtureSeconds": 0.3025175000075251,
+  "outerSeconds": 8.52374154201243,
+  "returnCode": 0,
+  "testMethods": 3,
+  "purePairCases": 6,
+  "fixtureGroups": 8,
+  "completedRigs": 6,
+  "retainedWholeHELDContexts": 2,
+  "terminalOracle": {
+    "bytes": 170,
+    "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+  },
+  "emptyCompilerAndFixtureErrorStreams": true,
+  "strictPreservationEntries": 68,
+  "strictPreservationUnchanged": true,
+  "savedRecoveryGuardUnchanged": true,
+  "targetOperations": 0,
+  "historicalPrivateCleanQualification": "SEPARATE_PRIOR_HOST_PASS; complete clean56ff provenance with separate saved1427 source-equality observation",
+  "toolchainClosure": "Full system-header and executable binary closure NOT_OBSERVED; no tool hashes invented",
+  "limits": [
+    "MIDI-only ownership model, not document/action/replacement/frontend/default activation",
+    "Six completed rigs plus two whole rooted HELD contexts; no all-clean or exclusive fresh-block claim",
+    "Known-span and one-original-lifetime ticket protocol; no transitive heap census or global ABA protection",
+    "No native ABI/link/runtime, emulator, physical A1200/AmiGUS, output timing or listening acceptance"
+  ]
+}

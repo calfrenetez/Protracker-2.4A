@@ -25,6 +25,7 @@ enum pt_edit_result pt_editor_sample_file_import(struct pt_editor *e,const char 
         return pt_svx_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
     }
     if(pt_mod_file_candidate(path) || pt_pp20_file_candidate(path)) {
+        if(!pt_editor_prepare_change(e))return PT_EDIT_CONFLICT;
         if(preview)*preview=1;
         return pt_editor_source_load_with(e,load_mod_source,(void *)path);
     }

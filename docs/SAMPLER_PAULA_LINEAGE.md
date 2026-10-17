@@ -514,3 +514,45 @@ HOST publication/collection APIs remain excluded natively; mutation-probe
 Amiberry/hardware execution, frontend New/Load/teardown, IRQ/output/device quiet,
 real timing and listening are still unqualified. See [scoped HOST and native
 partition evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/published-host.json).
+
+
+## HOST donor-preview dispatch veto —17 October2026
+
+The MOD/PP20 file dispatcher now calls the existing editor change hook before
+marking or loading a donor preview. This closes the missing entry check beside
+the existing RAW/WAV/SVX checks. Format-sniff reads remain permitted. Direct
+`pt_editor_source_load` and `pt_editor_source_load_with` APIs remain outside this
+entry guard; this is not protection for every frontend or mutation route.
+
+A genuine HOST fixture owns three 8/16/24-bit masters, three selective caches
+and an unpublished command/reader queue. All four MOD/PP20 × `source_only=0/1`
+calls refuse while the custodian is attached, preserving the existing donor,
+preview flag, source generation, sampler budget, master/save bytes and caches.
+Authentic later cleanup and separate detach permit four actual bounded donor
+loads; final ledgers are zero and no backend was called. The working-editor
+run passed with 38 translation units, 93 literal project inputs, assertions,
+ASan/UBSan, empty compiler/fixture diagnostics and the exact 209-byte oracle.
+The original sample-dispatch HOST regression also passed under its unchanged
+legacy recipe. Its recipe has no explicit assertion-enable flag or per-child
+120/30-second limits; those stricter controls apply to the new preview fixture,
+clean-pair run and baseline control. Working temporary export/donor bodies were
+removed by the original wrapper; retained pins agree with saved clean/baseline
+bodies, without rereading the missing working export.
+
+An independent negative control used the actual committed dispatcher body with
+only this new line absent. The same fixture compiled, then stopped at its first
+MOD/`source_only=0` refusal assertion with the expected SIGABRT; all other 92
+copied source bodies matched. This establishes that the regression detects the
+missing guard, not that the baseline completed cleanup. The earlier missing-
+header compile failure and pre-test import-cache stall are preserved separately.
+
+A separate complete committed-editor C/H run also passed the same 38-unit,
+93-input fixture and 209-byte oracle, using 91 working input bodies plus the two
+verified committed editor bodies. Compiler/fixture diagnostics were empty and
+source, donor, preservation and control checks passed. These are separate HOST
+qualifications; they do not establish ABI equivalence between editor pairs.
+
+No new native build or execution qualifies this guard; the existing native35
+artifact excludes the platform dispatcher. Amiberry, real-A1200, whole-application/
+frontend integration, device/output/timing and listening acceptance remain
+untested for this change. Independent saved-data review passes; see [scoped evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/source-preview-host.json).

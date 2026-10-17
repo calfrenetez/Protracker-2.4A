@@ -1,0 +1,298 @@
+{
+  "acceptance": {
+    "Amiberry": "NOT_RUN_FOR_THIS_CHANGE",
+    "changedDispatcherNativeBuild": "NOT_BUILT",
+    "changedDispatcherNativeRuntime": "NOT_RUN",
+    "currentNative35Artifact": "Unchanged prior artifact; its compiled source closure excludes src/platform/sample_import.c. It cannot qualify the new guard.",
+    "listening": "NOT_RUN",
+    "physicalA1200": "NOT_RUN_FOR_THIS_CHANGE"
+  },
+  "baselineNegative": {
+    "committedBlob": {
+      "bytes": 1903,
+      "commit": "db129b47cdc0a4e2001f9a580c05e5900cc014fc",
+      "file": "src/platform/sample_import.c",
+      "sha256": "f609332bb26f4abab4bdd85d084b98ae1fba329f9ad918478aad809f97526f2b"
+    },
+    "compileReturnCode": 0,
+    "fixtureReturnCode": -6,
+    "preservation": "Recorded project-input/protected16/control checks passed.",
+    "resultSeconds": 8.17264616600005,
+    "signal": "SIGABRT",
+    "soleDifference": "Actual committed blob is exactly the current dispatcher with only the new MOD/PP20 change-hook line removed. All other92 copied source bodies match the working fixture inputs.",
+    "state": "EXPECTED_BASELINE_ASSERTION",
+    "witness": "First MOD/source_only=0 call fails the exact PT_EDIT_CONFLICT assertion. Empty compile diagnostics and no sanitizer error; this expected negative is not a successful cleanup run."
+  },
+  "cleanEditorPair": {
+    "childWallSeconds": 8.349856707995059,
+    "compileSeconds": 7.811890416982351,
+    "compileTimeoutSeconds": 120,
+    "compilerAndFixtureStreams": {
+      "compile.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "compile.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fixture.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fixture.stdout": {
+        "bytes": 209,
+        "sha256": "09d72c44244cd97ed834aade15229780763c692c65cf66ad2b890eda48579566"
+      }
+    },
+    "editorPairSha256": {
+      "src/editor/editor.c": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0",
+      "src/editor/editor.h": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    },
+    "executable": {
+      "bytes": 2659816,
+      "sha256": "6458b52c85f14e502689d8525856c2af69f6a4838db8f58c6a54c826f3806b54"
+    },
+    "fixtureSeconds": 0.26478624998708256,
+    "fixtureTimeoutSeconds": 30,
+    "literalProjectInputs": 93,
+    "orderedTranslationUnits": 38,
+    "outerControlResult": {
+      "bytes": 160,
+      "sha256": "7750f3eda0464a5f97d089697403c15b083fe5ac603aeb3ef791987c1ad0d0c1"
+    },
+    "outerElapsedSeconds": 8.594423332979204,
+    "recordedAfterChecks": {
+      "canonicalSources": "PASS",
+      "controls": "PASS",
+      "generatedDonors": "PASS",
+      "preservation": "PASS",
+      "privateExport": "PASS"
+    },
+    "result": {
+      "bytes": 2064,
+      "sha256": "22a3904877ddc72a55c6f5e39b9942c5aeeaf6798518ba332723b0924a8caea7"
+    },
+    "scope": "Separate complete committed editor C/H HOST qualification; no working/clean ABI equivalence or native/runtime acceptance.",
+    "sourceOrigins": "91 copied working inputs plus the two recorded verified-Git editor bodies; complete fixed fixture/dispatcher/common-owner bodies unchanged.",
+    "state": "PASS_HOST_CLEAN_EDITOR_PAIR_ONLY"
+  },
+  "independentSavedHostReview": {
+    "bytes": 6557,
+    "sha256": "bcd573c38f1acc7b2944c778e8efd58c4df87da90b191ceb2b00a462fcc8a803"
+  },
+  "limitations": [
+    "New test is HOST-only and uses modeled allocation memory; no actual Fast/Chip placement or device-output qualification.",
+    "The one real queued three-source lifecycle proves four dispatch vetoes and four post-detach bounded loads in this fixture; it is not whole-application/frontend integration.",
+    "No new native publication/adoption, IRQ/DMA/MMIO, audio, device quiet, exact timing, stack-chain or listening acceptance.",
+    "Earlier failed attempts remain failures; expected baseline assertion is distinct from positive regression acceptance.",
+    "New working wrapper retained its93-input/donor pins and preservation evidence, then removed its temporary export, donors and executable. Those missing working files were not reread; all93 selected pins were compared against retained clean/baseline source bodies, with their exact editor/dispatcher exceptions. No complete compiler/system-header/runtime provenance is claimed.",
+    "Independent saved-data review passed. Scope remains the described HOST executions; the current native35 artifact excludes the changed dispatcher."
+  ],
+  "originalDispatchRegression": {
+    "coverage": "Original unsupported/no-allocation, donor-only refusal, exact24-bit master and retained-redo oracle preserved. Original wrapper and fixture unchanged; separate legacy HOST recipe.",
+    "elapsedSeconds": 8.730603208008688,
+    "recipeLimits": "Original ASan/UBSan and Werror recipe has no explicit UNDEBUG, no per-child120/30 limits and no standalone saved compile argv; Root outer180-second bound is separate.",
+    "returnCode": 0,
+    "state": "PASS",
+    "stdout": {
+      "bytes": 117,
+      "sha256": "7d02b79488338d811e67920b9f8d89117aaa34fd5e267b4d42dd4147002d6bf0"
+    },
+    "unitTests": 1
+  },
+  "postHostPreservation": "Root independently rechecked all68 original body/metadata boundaries, with ten dataless bodies not read; unchanged.",
+  "preservedEarlierAttempts": [
+    {
+      "description": "First working compile omitted the full Paula bridge header and produced12 errors. Beforeimages/failure evidence were retained; only the missing include and frozen fixture pin were corrected.",
+      "receipt": {
+        "bytes": 522,
+        "sha256": "e4511830778e5d24fae53a3db9573939d3be8f83176bf65e9505b8632b41c288"
+      },
+      "state": "FAILED_BEFORE_FIXTURE_EXECUTION"
+    },
+    {
+      "description": "First original-dispatch attempt stalled on an existing offloaded bytecode cache. Only the verified run-owned child was stopped; failed evidence/cache preserved. R2 used a fresh isolated cache location with bytecode writes disabled.",
+      "receipt": {
+        "bytes": 530,
+        "sha256": "e1418a199637cffbed806cc3a3d10e0c3e9f4cc513244c96f2913c0622a3d6c2"
+      },
+      "state": "STOPPED_BEFORE_TEST_ENTRY"
+    }
+  ],
+  "productionChange": {
+    "addedLines": 1,
+    "behavior": "Call pt_editor_prepare_change before setting preview=1 or invoking source_load_with in the MOD/PP20 branch. RAW/WAV/SVX behavior is unchanged; candidate sniff IO remains permitted.",
+    "file": "src/platform/sample_import.c",
+    "source": {
+      "bytes": 1968,
+      "sha256": "0fee44980b58c88b55e48480b3a6e53807e36cbd47fce670bba53d00bd28e300"
+    },
+    "unchangedDirectAPIs": "Direct pt_editor_source_load / pt_editor_source_load_with calls remain excluded; no claim that all mutation routes are intercepted."
+  },
+  "savedEvidencePins": {
+    "baselineAssertionStderr": {
+      "bytes": 186,
+      "sha256": "06d993a37650491981d3d01f03b00c97b534e191aea08968ff35370ed69c1699"
+    },
+    "baselineGitBlob": {
+      "bytes": 1903,
+      "sha256": "f609332bb26f4abab4bdd85d084b98ae1fba329f9ad918478aad809f97526f2b"
+    },
+    "baselineResult": {
+      "bytes": 3314,
+      "sha256": "f810311494cae427f9ff99554dd743d3af3d41a7187de0d7a1adecdbf7bf2111"
+    },
+    "cleanEditorOuterResult": {
+      "bytes": 160,
+      "sha256": "7750f3eda0464a5f97d089697403c15b083fe5ac603aeb3ef791987c1ad0d0c1"
+    },
+    "cleanEditorResult": {
+      "bytes": 2064,
+      "sha256": "22a3904877ddc72a55c6f5e39b9942c5aeeaf6798518ba332723b0924a8caea7"
+    },
+    "firstCompileFailure": {
+      "bytes": 522,
+      "sha256": "e4511830778e5d24fae53a3db9573939d3be8f83176bf65e9505b8632b41c288"
+    },
+    "firstImportStall": {
+      "bytes": 530,
+      "sha256": "e1418a199637cffbed806cc3a3d10e0c3e9f4cc513244c96f2913c0622a3d6c2"
+    },
+    "originalDispatchResult": {
+      "bytes": 501,
+      "sha256": "2ace84852511d9cecd373e42f701868d5632d0d8f7a54866038a599e5a38eebd"
+    },
+    "originalDispatchStderr": {
+      "bytes": 214,
+      "sha256": "3c3e6819877dc13814f1ba88c491db14e4640a402386fd3db8f33c1479613b54"
+    },
+    "originalDispatchStdout": {
+      "bytes": 117,
+      "sha256": "7d02b79488338d811e67920b9f8d89117aaa34fd5e267b4d42dd4147002d6bf0"
+    },
+    "workingAfterPreservation": {
+      "bytes": 31640,
+      "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+    },
+    "workingBeforePreservation": {
+      "bytes": 31640,
+      "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"
+    },
+    "workingInputs": {
+      "bytes": 46684,
+      "sha256": "5bade80f34dfda7181d128c170c035e18dcc62a9c731360900e5b6e670d95b5c"
+    },
+    "workingResult": {
+      "bytes": 496,
+      "sha256": "e1da4f5ff79fc112d29a66a4640b81efb1dff4cc40bba6c151e2695bcf83dfce"
+    }
+  },
+  "scope": "MOD/PP20 donor-preview dispatcher change hook only; HOST regression with genuine unpublished prepared source/cache/queue custody.",
+  "selectedInputs": {
+    "src/editor/prepared_paula_lifetime.c": {
+      "bytes": 24956,
+      "sha256": "77e91ab9f056182faf64a04674c54db9f84436b971724336f0e35724b9da0748"
+    },
+    "src/editor/prepared_paula_lifetime.h": {
+      "bytes": 10812,
+      "sha256": "7131371ab2359a7464e638ed4fdc40014edc7cfdbc3dd8297ae4919d66915561"
+    },
+    "src/editor/prepared_paula_mutation_barrier.c": {
+      "bytes": 30722,
+      "sha256": "0e0fb90092d07b89904bc9e668aa89651eedb9aed786d7d186104480a6dd9de0"
+    },
+    "src/editor/prepared_paula_mutation_barrier.h": {
+      "bytes": 14300,
+      "sha256": "fdde8a639f59883f8a7313a97fe9430b1eedf5f4cda833d608d4beca6b3f68c3"
+    },
+    "src/editor/prepared_paula_sources.c": {
+      "bytes": 29839,
+      "sha256": "f0f40f3100de1691f40ab37b725ad11e1008a6619c49e7b227a1f21658703112"
+    },
+    "src/editor/prepared_paula_sources.h": {
+      "bytes": 6794,
+      "sha256": "74a070e4d7b4e8463afb61e3d182913872a7726ca61f4fdb7d5084bbe764757c"
+    },
+    "src/platform/sample_import.c": {
+      "bytes": 1968,
+      "sha256": "0fee44980b58c88b55e48480b3a6e53807e36cbd47fce670bba53d00bd28e300"
+    },
+    "tests/sample_dispatch_test.c": {
+      "bytes": 2677,
+      "sha256": "81f47d529151e1efab4ca73c23aa947474b8ec1dd8059c3cb6fb45aa78c271f2"
+    },
+    "tests/sample_source_preview_barrier_test.c": {
+      "bytes": 15298,
+      "sha256": "9083811395b4261ac9625ea4a7efae43b6a23773a7b45d6eaeff365624c11746"
+    },
+    "tests/test_native_mixed_causal_rolling_entry.py": {
+      "bytes": 12598,
+      "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+    },
+    "tests/test_sample_dispatch.py": {
+      "bytes": 825,
+      "sha256": "47d040985e5b73476566da809c0a4e13db2544561984961cc0811ce3c738d791"
+    },
+    "tests/test_sample_source_preview_barrier.py": {
+      "bytes": 9496,
+      "sha256": "2009568bb3c4c5b5912ad6fe21943e0833f473984b7eea03a73f7767d94cf4df"
+    }
+  },
+  "state": "HOST_SOURCE_PREVIEW_DISPATCH_QUALIFIED",
+  "workingHost": {
+    "assertions": "enabled",
+    "compileTimeoutSeconds": 120,
+    "compilerAndFixtureStreams": {
+      "compile.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "compile.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fixture.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fixture.stdout": {
+        "bytes": 209,
+        "sha256": "09d72c44244cd97ed834aade15229780763c692c65cf66ad2b890eda48579566"
+      }
+    },
+    "coverage": {
+      "actualThreeSourceUnpublishedQueueOwners": 1,
+      "backendCalls": 0,
+      "formats": [
+        "MOD",
+        "PP20"
+      ],
+      "postDetachLoads": 4,
+      "preexistingDonorLoads": 1,
+      "sourceOnlyValues": [
+        0,
+        1
+      ],
+      "vetoCalls": 4
+    },
+    "editorPair": "preserved_working_display",
+    "editorPairSha256": {
+      "src/editor/editor.c": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6",
+      "src/editor/editor.h": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    },
+    "elapsedSeconds": 8.732850625005085,
+    "fixtureTimeoutSeconds": 30,
+    "literalProjectInputs": 93,
+    "orderedTranslationUnits": 38,
+    "preservation": "Wrapper source-currentness and existing protected-display/classic-baseline stable-snapshot assertions passed. Offloaded baseline records remain metadata-only.",
+    "returnCode": 0,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "state": "PASS",
+    "strictWarnings": true,
+    "unitTests": 1
+  }
+}

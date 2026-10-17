@@ -7931,3 +7931,21 @@ while its strict raw-object comparison remains refused for35 differing initial
 `HUNK_UNIT` name records. HOST publication/collection remains absent natively;
 mutation-probe Amiberry/hardware execution and frontend/IRQ/output/timing/listening
 acceptance remain unfinished. See [the published editor-barrier scope](SAMPLER_PAULA_LINEAGE.md#host-publishedadopted-editor-barrier-17-october2026).
+
+
+The MOD/PP20 donor-preview file dispatcher now checks the existing editor change
+hook before preview assignment/load. A genuine queued three-source HOST fixture
+passes four format/`source_only` vetoes with donor, budget, master/save and cache
+preservation, followed by authentic cleanup/detach and four bounded loads. The
+working-editor run passed (38 translation units/93 literal inputs; 209-byte
+oracle), as did the original dispatch regression under its unchanged separate
+legacy recipe; strict new-fixture assertions/child bounds are not attributed to
+that legacy run. Working temporary-export bodies were removed; their retained
+pins agree with saved clean/baseline bodies. The sole-line inverse using
+the actual committed dispatcher aborts at the first expected refusal assertion.
+Earlier failed attempts remain preserved. The separate complete committed-editor
+pair also passed the same 38-unit/93-input fixture and exact oracle; this does not
+establish editor-pair ABI equivalence. Direct source-load APIs remain excluded.
+The new guard has no native build/runtime, Amiberry, real-A1200 or listening
+acceptance; the existing native35 artifact does not compile this platform file.
+See [the dispatch-guard contract](SAMPLER_PAULA_LINEAGE.md#host-donor-preview-dispatch-veto-17-october2026).

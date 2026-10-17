@@ -3,9 +3,9 @@
 The portable requester model borrows the existing durable MIDI setup controller.
 It supplies a chooser, captured-track output selection, one field's bounded name
 editing or clock flags, focus/hit handling, Apply and Cancel. It is not bound to
-the native application. The separate window remains private and unbound; its
-separate object-only check does not establish this composition or a visible MIDI
-setup page.
+the native application. The separate [window source](MIDI_REQUESTER_WINDOW.md)
+is present but unbound; its exact object-only check does not establish native
+owner/frontend composition or a visible MIDI setup page.
 
 Choosing Input, Output or Clock begins one genuine controller draft. Apply commits
 only that field through the existing chronological editor journal, then consumes

@@ -28,8 +28,10 @@ extern const struct pt_midi_requester_rect pt_midi_requester_controls[PT_MIDI_FO
  * records and allocator/context storage; these sources stay alive throughout
  * each synchronous call. The numeric open check covers only the controller's
  * minimum opaque prefix, NOT arbitrary model/source spatial admission. Caller
- * placement establishes these full extents; the native candidate uses a separate
- * Task-stack model, which no callback retains. Zero-initialize; do not copy, edit
+ * placement establishes these full extents. The setup/track window wrapper uses
+ * a separate Task-stack model; the external-model entry borrows the caller's
+ * original separately placed model. No callback retains either. Zero-initialize;
+ * do not copy, edit
  * or reinitialize a live
  * model, controller, editor, document or history. Only this model may own its
  * controller draft during the modal interval. No callback retains this model.
@@ -84,6 +86,26 @@ enum pt_midi_requester_result {
  */
 enum pt_midi_requester_result pt_native_midi_requester(struct Window *,
     struct pt_midi_setup *,unsigned track);
+/* Private successor: display the caller's genuine already-open chooser at its
+ * original address. It may be the actual model inside an original modal binding;
+ * pass no copy. No reopen/reset/ownership transfer occurs. Refused admission and
+ * GUI-unavailable return leave the model unchanged. Admission requires a live
+ * chooser, no busy/HELD or controller draft, and the captured track/current saved
+ * source query; it is not arbitrary-pointer/source spatial admission.
+ * Caller supplies normal serialized Task execution, complete supported model/
+ * owner/editor/project/history/records/allocator lifetimes and disjoint storage,
+ * also disjoint from all borrowed parent Window/Screen/RPort/UserPort storage.
+ * Parent input isolation/drain/restoration/redraw remains caller work, not done
+ * here. No other task, callback or parent dispatch may change these live objects.
+ * Apply/Cancel may consume this actual model. The window closes only its own
+ * font/window; UNAVAILABLE does not cancel it. Any genuine modal ticket remains
+ * caller-owned across every result: return it once through the genuine modal API
+ * after this call, retaining the whole domain on uncertainty/HELD. No controller/
+ * owner close, workspace release, history disposal, Stop or CAMD action occurs.
+ * Source candidate only: this declares no native owner/window/frontend admission.
+ */
+enum pt_midi_requester_result pt_native_midi_requester_model_window(struct Window *,
+    struct pt_midi_requester_model *);
 #if defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY) || defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
 #if defined(PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY)
 #if PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || !defined(PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY) || PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY != 1 || defined(PT_MIDI_REQUESTER_OWNER_HOST_ONLY)

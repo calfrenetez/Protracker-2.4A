@@ -90,8 +90,8 @@
       "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
     },
     "src/native/midi_requester.h": {
-      "bytes": 7893,
-      "sha256": "d17ec76f4cc882ec34bc60d69db0e97e68c4f0397e9750e0b43801318a69d50d"
+      "bytes": 9487,
+      "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
     },
     "src/native/midi_requester_model.c": {
       "bytes": 10759,

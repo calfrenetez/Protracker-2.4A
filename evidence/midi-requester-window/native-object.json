@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "state": "BOUND_WINDOW_NATIVE_OBJECT_PASS",
+  "tier": "OBJECT_ONLY_UNLINKED_NOT_RUNTIME",
+  "review": {
+    "bytes": 11457,
+    "sha256": "f825781f4f2100b09c39ddf34b1da8e080208e49bb7ab81d67c57a6bfb259284"
+  },
+  "manifest": {
+    "bytes": 101538,
+    "sha256": "4ccd00dc7eb7b377cbc237a34aa15179d89c4d33fa57b710fecaaab772929c8c"
+  },
+  "actualRootResult": {
+    "bytes": 364,
+    "sha256": "55da4c63665a1793ee2d7bbfdfb13deecb694a2451f57dd95fe55fdcdc721cef"
+  },
+  "sourcePins": {
+    "windowC": "5a120345f4d20a250db8a7e291c13a15add2122bb7b639b470cb8472b0d855f3",
+    "requesterH": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9",
+    "cleanEditorH": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+  },
+  "actual": {
+    "translationUnits": 1,
+    "commandsRC0": 5,
+    "diagnosticsEmpty": true,
+    "outerSeconds": 0.6767118330171797,
+    "builderSeconds": 0.5815097910235636,
+    "allowedProject": 33,
+    "selectedProject": 32,
+    "allowedSDK": 72,
+    "selectedSDK": 72,
+    "MEqualsOrdinaryI": true,
+    "ordinaryPaths": 104,
+    "optionalOwnerHeaderSelected": false,
+    "HOSTAndNativeOwnerSelectorsAbsent": true,
+    "NDEBUGAbsent": true
+  },
+  "object": {
+    "bytes": 4892,
+    "sha256": "697634de30c477f5d586595e880122d24f74e541ce8ddd1821c537a5589e5640",
+    "magic": "HUNK_UNIT 0x3e7",
+    "architecture": "m68k:68000",
+    "textBytes": 3584,
+    "dataBytes": 8,
+    "unresolvedImports": 28,
+    "ownerTicketCalls": false,
+    "interface": "ordinary C/clib unresolved imports; provider/stub/base resolution not linked"
+  },
+  "codeObservations": [
+    "Original-model get/view admission precedes all UI creation; external entry does not open/cancel its model on unavailable return",
+    "Common event loop uses exact borrowed model pointer; message reply-before-action and UI cleanup order retained",
+    "Original setup/track wrapper opens and positively attempts cleanup of its separate108-byte local model only"
+  ],
+  "individualStackUsage": {
+    "rows": [
+      {
+        "function": "label",
+        "bytes": 24,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "outline",
+        "bytes": 60,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "draw",
+        "bytes": 128,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "chooser_admit",
+        "bytes": 2260,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "pt_native_midi_requester_model_window",
+        "bytes": 12,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "pt_native_midi_requester",
+        "bytes": 132,
+        "classification": "dynamic,bounded"
+      },
+      {
+        "function": "requester_window.isra.0",
+        "bytes": 168,
+        "classification": "dynamic,bounded"
+      }
+    ],
+    "largestIndividualBytes": 2260,
+    "scope": "Individual compiler rows; no full Task/GUI call-chain/minimumStack/runtime bound"
+  },
+  "preservation": {
+    "inputFullFactsIncludingUIDGIDEqual": true,
+    "strict68SavedFactsEqual": true,
+    "readyFullFactsEqual": true,
+    "SDK72NamespaceCheckedByPassedBuilder": true,
+    "rootRecordedGuardBytesEqual": true
+  },
+  "limits": [
+    "No link/executable/GUI/OS runtime execution",
+    "No native owner/modal/frontend/parent-input integration admission",
+    "No CAMD/device/output/quiet/IRQ/emulator/physical/timing/listening qualification",
+    "Historical old object/evidence remains separate; no new Git identity query"
+  ]
+}

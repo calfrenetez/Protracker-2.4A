@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "state": "BOUND_WINDOW_HEADER_CANONICAL_HOST_REGRESSIONS_PASS",
+  "tier": "HOST_SANITIZER_AND_SOURCE_SELECTION_ONLY",
+  "review": {
+    "bytes": 22942,
+    "sha256": "ebeffb822dd2892226329373d52e1c5cc087ab4552557c6df82ac6e9e8de043a"
+  },
+  "actualRootResult": {
+    "bytes": 3463,
+    "sha256": "516a194d24a6bf3d3fb7a7e7ba167bce81ee21c062862200cef2509098ac2df0"
+  },
+  "sourcePins": {
+    "src/native/midi_requester.h": {
+      "bytes": 9487,
+      "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
+    },
+    "src/native/midi_requester_model.c": {
+      "bytes": 10759,
+      "sha256": "b5ef67da67d6c044ea90e21a007fed80ca7e3c2128292ad05ea0fddeca268316"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 7544,
+      "sha256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 13046,
+      "sha256": "959d64e0166c3b0ea78f4f821b9754be0eba1afebf65e731022ef4641705af47"
+    }
+  },
+  "windowC": {
+    "sha256": "5a120345f4d20a250db8a7e291c13a15add2122bb7b639b470cb8472b0d855f3",
+    "meaning": "Exact separate object-qualified source; NOT compiled by these HOST regressions"
+  },
+  "workingQuartet": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432"
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+    }
+  },
+  "actual": {
+    "outerSeconds": 40.675061082991306,
+    "unittestMethods": 11,
+    "pureSelectionCases": 38,
+    "sanitizerCompiles": 4,
+    "fixtureInvocations": 5,
+    "oracleBytes": 773,
+    "qualifiers": [
+      {
+        "qualifier": "test_midi_requester_model.py",
+        "returncode": 0,
+        "seconds": 8.849687457986875,
+        "unittestMethods": 3,
+        "pureSelectionCases": 6,
+        "wrapper": {
+          "bytes": 18684,
+          "sha256": "799e749204fa5735a0469659c369d87a57e42e3d186649e5ba829af593895535"
+        }
+      },
+      {
+        "qualifier": "test_midi_requester_owner_modal.py",
+        "returncode": 0,
+        "seconds": 16.370620708999922,
+        "unittestMethods": 3,
+        "pureSelectionCases": 6,
+        "wrapper": {
+          "bytes": 23983,
+          "sha256": "762215ada8f5880b775afbe767890997ef5964cec3fac6bd31ac37b407a07e19"
+        }
+      },
+      {
+        "qualifier": "test_midi_requester_modal_document.py",
+        "returncode": 0,
+        "seconds": 15.441666166996583,
+        "unittestMethods": 5,
+        "pureSelectionCases": 26,
+        "wrapper": {
+          "bytes": 32852,
+          "sha256": "8820da93f6691e2b18600c187c34bc746ae9ed096965cdd7ac1a5c467fc9b05a"
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "recipe": "midi-requester",
+        "translationUnits": 32,
+        "literalBodies": 77,
+        "workingSelection": "COMPLETE_CURRENT_WORKING_PAIR",
+        "selectedFeatureFlags": [],
+        "compileAndRunTimingsSeconds": {
+          "compile": 8.05289425002411,
+          "fixture": 0.543535625009099
+        },
+        "compilerDiagnosticsEmpty": true,
+        "strict68InnerSavedFactsEqual": true,
+        "nativeWindowCCompiled": false
+      },
+      {
+        "recipe": "requester-owner-modal-modal",
+        "translationUnits": 33,
+        "literalBodies": 79,
+        "workingSelection": "COMPLETE_CURRENT_WORKING_PAIR",
+        "selectedFeatureFlags": [
+          "-DPT_MIDI_REQUESTER_OWNER_HOST_ONLY=1",
+          "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+        ],
+        "compileAndRunTimingsSeconds": {
+          "compile": 8.00400791701395,
+          "focused": 0.25266033300431445,
+          "owner-legacy": 0.015563583991024643
+        },
+        "compilerDiagnosticsEmpty": true,
+        "strict68InnerSavedFactsEqual": true,
+        "nativeWindowCCompiled": false
+      },
+      {
+        "recipe": "requester-owner-modal-model-default",
+        "translationUnits": 32,
+        "literalBodies": 77,
+        "workingSelection": "COMPLETE_CURRENT_WORKING_PAIR",
+        "selectedFeatureFlags": [],
+        "compileAndRunTimingsSeconds": {
+          "compile": 7.514735083008418,
+          "fixture": 0.19714979198761284
+        },
+        "compilerDiagnosticsEmpty": true,
+        "strict68InnerSavedFactsEqual": true,
+        "nativeWindowCCompiled": false
+      },
+      {
+        "recipe": "requester-modal-document",
+        "translationUnits": 87,
+        "literalBodies": 205,
+        "workingSelection": "COMPLETE_CURRENT_WORKING_QUARTET",
+        "selectedFeatureFlags": [
+          "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+          "-DPT_DOCUMENT_TYPED_ACTION=1",
+          "-DPT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1",
+          "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1",
+          "-DPT_MIDI_REQUESTER_OWNER_HOST_ONLY=1"
+        ],
+        "compileAndRunTimingsSeconds": {
+          "compile": 14.659549082978629,
+          "fixture": 0.24856745899887756
+        },
+        "compilerDiagnosticsEmpty": true,
+        "strict68InnerSavedFactsEqual": true,
+        "nativeWindowCCompiled": false
+      }
+    ],
+    "oracles": [
+      {
+        "recipe": "midi-requester",
+        "case": "fixture",
+        "oracle": {
+          "bytes": 161,
+          "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+        },
+        "diagnosticsEmpty": true
+      },
+      {
+        "recipe": "requester-owner-modal-modal",
+        "case": "focused",
+        "oracle": {
+          "bytes": 143,
+          "sha256": "dae57394099a1a5a5d30f72d9e0bd852442a5e0fa2b96579b01c6b666c10070a"
+        },
+        "diagnosticsEmpty": true
+      },
+      {
+        "recipe": "requester-owner-modal-modal",
+        "case": "owner-legacy",
+        "oracle": {
+          "bytes": 170,
+          "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+        },
+        "diagnosticsEmpty": true
+      },
+      {
+        "recipe": "requester-owner-modal-model-default",
+        "case": "fixture",
+        "oracle": {
+          "bytes": 161,
+          "sha256": "1fad42e7272d46794b5fa2352bad5298e1bb4b8fcbc2ffcf11185f5820e28fb7"
+        },
+        "diagnosticsEmpty": true
+      },
+      {
+        "recipe": "requester-modal-document",
+        "case": "fixture",
+        "oracle": {
+          "bytes": 138,
+          "sha256": "e3a8d4cb771591d90be4672dee65b564822e0f430a3f4b8eb99e77ac6533499c"
+        },
+        "diagnosticsEmpty": true
+      }
+    ]
+  },
+  "preservation": {
+    "elevenSavedInputFullFactsEqual": true,
+    "elevenMatchFrozenCandidatePins": true,
+    "outerStrict68SavedFullFactsEqual": true,
+    "innerStrict68SavedFactsEqualAllThree": true,
+    "outerResidentBodyPins": 58,
+    "outerMetadataOnlyPins": 10,
+    "rootRecordedGuardBytesEqual": true,
+    "guardLimit": "Root records the actual guard byte comparison; this run has no serialized raw guard bytes for independent reread"
+  },
+  "limits": [
+    "Default model and optional HOST owner/document selections qualified separately; no native-owner selector used",
+    "Native window C excluded from all four HOST compiles; separate unlinked object receipt remains distinct",
+    "No GUI/IDCMP/keyboard/rendering/parent isolation or frontend/native owner enrollment",
+    "No emulator/physical/CAMD/device/quiet/timing/listening/release acceptance"
+  ]
+}

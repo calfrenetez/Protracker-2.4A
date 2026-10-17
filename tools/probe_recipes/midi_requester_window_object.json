@@ -1,0 +1,88 @@
+{
+  "schema": "pt24g-experimental-window-object-source-recipe-1",
+  "state": "DECLARATIVE_SOURCE_RECIPE_ONLY_NOT_DEFAULT_BUILD_OR_RUNTIME_ADMISSION",
+  "object": "midi_requester.o",
+  "orderedTranslationUnits": [
+    "src/native/midi_requester.c"
+  ],
+  "featureFlags": [],
+  "forbiddenSelectors": [
+    "PT_MIDI_SETUP_OWNER_HOST_ONLY",
+    "PT_MIDI_REQUESTER_OWNER_HOST_ONLY",
+    "PT_DOCUMENT_MIDI_SETUP_HOST_ONLY",
+    "PT_MIDI_SETUP_OWNER_NATIVE_TASK_PROBE_ONLY",
+    "PT_MIDI_REQUESTER_OWNER_NATIVE_TASK_PROBE_ONLY"
+  ],
+  "actualCC1TargetOptions": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20"
+  ],
+  "languageAndDiagnostics": [
+    "-std=c99",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-fstack-usage"
+  ],
+  "preprocessorUndefines": [
+    "NDEBUG"
+  ],
+  "originalDriverSuppliedCRTDefines": [
+    "libnix",
+    "__libnix__",
+    "__libnix"
+  ],
+  "assemblerOptions": [
+    "--traditional-format",
+    "-m68000"
+  ],
+  "projectIncludeOperands": [
+    "src/core",
+    "build/dev"
+  ],
+  "inputSourcePins": {
+    "src/native/midi_requester.c": {
+      "bytes": 11229,
+      "sha256": "5a120345f4d20a250db8a7e291c13a15add2122bb7b639b470cb8472b0d855f3"
+    },
+    "src/native/midi_requester.h": {
+      "bytes": 9487,
+      "sha256": "e7da328fde1e40951e747f17a90d4fbe14364f738e6d1cfd2b238f0d0fba08c9"
+    }
+  },
+  "qualifiedHeaderPin": {
+    "src/editor/editor.h": {
+      "bytes": 6646,
+      "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    }
+  },
+  "SDKRoutePolicy": "Actual one-object recipe used reviewed genuine archive gcc/libnix/sys/Include_H roots, exact ordered nostdinc/direct-cc1 route and clib prototypes. This relative description admits no SDK paths, fallback, generated inline route or tool execution.",
+  "measuredProjectAndSDK": {
+    "allowedProjectBodies": 33,
+    "selectedProjectBodies": 32,
+    "allowedSDKHeaders": 72,
+    "selectedSDKHeaders": 72,
+    "dependencyOrdinaryIPaths": 104,
+    "optionalOwnerHeaderSelected": false,
+    "MEqualsOrdinaryI": true
+  },
+  "sourceSnapshotPolicy": "Fresh complete reviewed project closure, exact tool/profile/SDK namespace and saved original-input facts required separately. Historical object receipt binds the private clean editor header above; no current working-frontend ABI or full editor build inferred.",
+  "nativeObjectEvidence": "evidence/midi-requester-window/native-object.json",
+  "activation": "No executable builder, Makefile/default target, parent modal insertion, owner constructor or frontend dispatch is supplied. Native owner gates remain unchanged.",
+  "status": {
+    "objectBuild": "SEPARATE_EXACT_PRIVATE_OBJECT_PASS",
+    "link": "NOT_RUN",
+    "GUI": "NOT_RUN",
+    "frontend": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physicalA1200": "NOT_RUN"
+  },
+  "scopeLimits": [
+    "No owner ticket return/close, controller/workspace teardown, automatic Stop or CAMD",
+    "Unresolved genuine clib/model/controller imports require separate link/runtime qualification",
+    "Individual stack rows do not prove complete GUI Task stack, timing or IRQ safety"
+  ]
+}

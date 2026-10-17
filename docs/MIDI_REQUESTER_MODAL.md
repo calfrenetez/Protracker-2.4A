@@ -60,3 +60,9 @@ The earlier private window object has separate pins/profile. No result establish
 native Task/input isolation, a visible MIDI page, repeated live New/Load, CAMD/
 provider/output activation, device quiet/completion, exact live timing, emulator/
 physical A1200/AmiGUS, listening or release acceptance.
+
+The separate [bound-model window source](MIDI_REQUESTER_WINDOW.md) can display
+the actual model inside this binding while the caller retains its genuine ticket.
+Its native object check used no owner selector and grants no frontend admission.
+Parent input restoration and a durable native HOLD/transition lifetime remain
+unfinished; adding that source does not call modal return or enable this route.

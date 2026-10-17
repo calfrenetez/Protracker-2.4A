@@ -1,0 +1,79 @@
+{
+  "actualReview": {
+    "bytes": 16543,
+    "sha256": "6318dc37731307f40a0b04c682f4039cb7be795e0d1c30ddb2238453605e778f"
+  },
+  "closure": {
+    "MEqualsI": true,
+    "actualPaths": 153,
+    "allowedProject": 63,
+    "allowedSDK": 111,
+    "selectedProject": 63,
+    "selectedSDK": 90
+  },
+  "commands": {
+    "allDiagnosticsEmpty": true,
+    "allRC0": true,
+    "count": 5
+  },
+  "individualStackUsage": {
+    "classification": "dynamic,bounded",
+    "entries": 22,
+    "maximumBytes": 18700,
+    "maximumFunction": "main",
+    "wholeTaskOrCRTStackProof": false
+  },
+  "limits": [
+    "Working cohort unqualified by this operation.",
+    "No application link or current CRT/provider lifecycle acceptance.",
+    "No native GUI/Task/physical runtime or hardware quiet proof.",
+    "Historical first compile failure preserved, no unchanged replay."
+  ],
+  "link": "NOT_PERFORMED",
+  "manifest": {
+    "bytes": 147877,
+    "sha256": "ed27d587b8a3c107f48f69b2a886f8c5969254376e75df88a487cc4142a2f8e5"
+  },
+  "nativeRuntime": "NOT_RUN",
+  "object": {
+    "bytes": 32556,
+    "format": "Amiga HUNK_UNIT m68k",
+    "sha256": "1b4ed73ecf7c49e644955e2001c56fdeb9bc302ba7d961e3629ba2c9dce551b8",
+    "strongApplicationBases": {
+      "_GfxBase": {
+        "COMMON": false,
+        "bytes": 4,
+        "offset": 4,
+        "section": ".bss"
+      },
+      "_IntuitionBase": {
+        "COMMON": false,
+        "bytes": 4,
+        "offset": 0,
+        "section": ".bss"
+      }
+    }
+  },
+  "preservation": {
+    "SDKNamespaceEqual": true,
+    "all212InputFullFactsEqual": true,
+    "guardAndRawREADYAndOperationalPlanEqual": true,
+    "ownedHostClosureConfirmed": true,
+    "strict68": true
+  },
+  "schema": 1,
+  "scope": "One coherent clean editor main translation unit; private twoNULL and three genuine SDK string casts only.",
+  "seconds": {
+    "Root": 1.0502682499936782,
+    "externalCompletedReturnUpper": 3.736,
+    "manifest": 0.8104739579721354,
+    "supervised": 0.9250010420219041
+  },
+  "source": {
+    "bytes": 50644,
+    "sha256": "1eb05752850ee1d053fa085b66a70f131e8d9a2a4c7fc00f932025fc923f29cd"
+  },
+  "sourceControlReviewSHA256": "0cf7203b874992465ee2f681e7f21bc2cd6b72e09fce94bf705071da18da3265",
+  "state": "CLEAN_APP_MAIN_NATIVE_OBJECT_PASS_NOT_RUNTIME",
+  "targetOperations": 0
+}

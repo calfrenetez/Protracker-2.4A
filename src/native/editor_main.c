@@ -40,8 +40,8 @@
 #include "recovery.h"
 #include "recovery_preferences.h"
 #include "recovery_requester.h"
-struct IntuitionBase *IntuitionBase;
-struct GfxBase *GfxBase;
+struct IntuitionBase *IntuitionBase=NULL;
+struct GfxBase *GfxBase=NULL;
 static struct pt_master_memory master_memory;
 static const struct pt_allocator render_allocator={&master_memory,pt_master_allocate,pt_master_release};
 static struct pt_recent recent_projects;
@@ -480,8 +480,8 @@ int main(int argc,char **argv)
     pt_native_recovery_bind(&recovery,argc>1?argv[1]:NULL);
     if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
     if(argc==3)snprintf(save_path,sizeof(save_path),"%s",argv[2]);
-    IntuitionBase=(struct IntuitionBase *)OpenLibrary("intuition.library",36);
-    GfxBase=(struct GfxBase *)OpenLibrary("graphics.library",36);
+    IntuitionBase=(struct IntuitionBase *)OpenLibrary((CONST_STRPTR)"intuition.library",36);
+    GfxBase=(struct GfxBase *)OpenLibrary((CONST_STRPTR)"graphics.library",36);
     if(!IntuitionBase || !GfxBase)goto done;
     pixels=AllocMem(4UL*PT_VIEW_PLANE_BYTES,MEMF_PUBLIC|MEMF_FAST);
     if(!pixels)pixels=AllocMem(4UL*PT_VIEW_PLANE_BYTES,MEMF_PUBLIC);
@@ -512,7 +512,7 @@ int main(int argc,char **argv)
     recovery_offer(&doc,&editor,window);view_cache.valid=0;
     clock_port=CreateMsgPort();if(!clock_port)goto done;
     clock_request=(struct timerequest *)CreateIORequest(clock_port,sizeof(*clock_request));
-    if(!clock_request || OpenDevice(TIMERNAME,UNIT_VBLANK,(struct IORequest *)clock_request,0))goto done;
+    if(!clock_request || OpenDevice((CONST_STRPTR)TIMERNAME,UNIT_VBLANK,(struct IORequest *)clock_request,0))goto done;
     clock_open=1;DateStamp(&frame_start);frame_last=frame_start;
     printf("EDITOR READY channels=%u patterns=%u bitmap_bytes=%lu history_bytes=%lu\n",
         doc.project.channels.count,doc.project.pattern_count,4UL*PT_VIEW_PLANE_BYTES,(unsigned long)sizeof(*editor));fflush(stdout);

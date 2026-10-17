@@ -1,0 +1,80 @@
+{
+  "actualReview": {
+    "bytes": 18318,
+    "sha256": "1204eab4823d70f01b43fc540af6a6fff98b67a41aead1822c24f01a91820acf"
+  },
+  "closure": {
+    "MEqualsI": true,
+    "actualPaths": 154,
+    "allowedProject": 64,
+    "allowedSDK": 111,
+    "realPatternHeaderGuardOriginObserved": true,
+    "selectedProject": 64,
+    "selectedSDK": 90
+  },
+  "commands": {
+    "allDiagnosticsEmpty": true,
+    "allRC0": true,
+    "count": 5
+  },
+  "individualStackUsage": {
+    "classification": "dynamic,bounded",
+    "entries": 23,
+    "maximumBytes": 18756,
+    "maximumFunction": "main",
+    "wholeTaskOrCRTStackProof": false
+  },
+  "limits": [
+    "Working-source snapshot, not a clean Git claim.",
+    "Six actual pattern-display imports remain unlinked; implementation not qualified here.",
+    "No full application link/current CRT ownership or native GUI/physical runtime proof.",
+    "No whole-Task stack or hardware quiet acceptance."
+  ],
+  "link": "NOT_PERFORMED",
+  "manifest": {
+    "bytes": 149004,
+    "sha256": "6f648a7cbd2e38a9bd1512769c456de7442e7b6cefcc4ac0064b1e90ed1d8e3b"
+  },
+  "nativeRuntime": "NOT_RUN",
+  "object": {
+    "bytes": 33700,
+    "format": "Amiga HUNK_UNIT m68k",
+    "sha256": "cdfd87f4bb0445352fa037e30c0956f3f134ed25d0f4b31cbf041d16a6989b0b",
+    "strongApplicationBases": {
+      "_GfxBase": {
+        "COMMON": false,
+        "bytes": 4,
+        "offset": 4,
+        "section": ".bss"
+      },
+      "_IntuitionBase": {
+        "COMMON": false,
+        "bytes": 4,
+        "offset": 0,
+        "section": ".bss"
+      }
+    }
+  },
+  "preservation": {
+    "SDKNamespaceEqual": true,
+    "all213FullInputFactsEqual": true,
+    "guardAndRawREADYAndOperationalPlanEqual": true,
+    "ownedHostClosureConfirmed": true,
+    "strict68": true
+  },
+  "schema": 1,
+  "scope": "One coherent captured working editor main plus original working editor/view/pattern headers and own five inline edits.",
+  "seconds": {
+    "Root": 1.0297971249674447,
+    "externalCompletedReturnUpper": 3.44,
+    "manifest": 0.7984953330014832,
+    "supervised": 0.9078945000073873
+  },
+  "source": {
+    "bytes": 52452,
+    "sha256": "aec92b7fe5180073a8064fc9ff7d8fc41d1018d22b786cbf5ea922eb23ecb172"
+  },
+  "sourceControlReviewSHA256": "0a87f3ecb0eb1db3ad08a5d9795ac328bffc5fef8db2479bcac948525ce69296",
+  "state": "WORKING_APP_MAIN_NATIVE_OBJECT_PASS_NOT_RUNTIME",
+  "targetOperations": 0
+}

@@ -1,0 +1,73 @@
+{
+  "state": "HOST_LINKED_ARTIFACT_AND_CURRENT26_PROVIDER_REVIEW_PASS",
+  "candidate": {
+    "name": "PTEditorMidiRecordingTaskProbe",
+    "bytes": 228840,
+    "sha256": "070fd6b991482a3521ce7abb7117a4f46430766e2fb56eec64ab00263397f574",
+    "crc32": "02279F4C"
+  },
+  "actualLink": {
+    "commands": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "seconds": 0.2781963339948561,
+    "applicationObjects": 35,
+    "orderedLOADs": 42,
+    "runtimeInputs": 7,
+    "unresolvedFinalSymbols": 0,
+    "current26ProviderIdentitiesReviewed": true,
+    "inputFullFacts": 75,
+    "all75FullFactsEqual": true,
+    "strict68Preserved": true,
+    "guardREADYAndProductsPreserved": true
+  },
+  "binary": {
+    "format": "Amiga HUNK_HEADER,m68k:68000",
+    "sections": {
+      "text": 208896,
+      "data": 424,
+      "bss": 37484
+    },
+    "relocations32": 1787,
+    "symbolEntries": 418,
+    "rawStructureComplete": true,
+    "originalCRTAndExecBaseInitializationReviewed": true
+  },
+  "probe": {
+    "sourceSha256": "bb8d289d6e4efc1e1883d6c95edc8f6cee1fb72b6e8ef5790b36e36f7b2a8a5c",
+    "genuineTaskAndRealSPGuardEmittedBeforeHeavyConstruction": true,
+    "remainingHeadroomGuardBytes": 1048576,
+    "original24BitMasterWitnessAndGenuineSaveUndoPathsEmitted": true,
+    "failedStopRetainsArmedUntilExplicitLocalCancel": true,
+    "positiveCleanupAndZeroLedgerChecksPrecedeStoredPASSPath": true,
+    "storedExpectedStdoutBytes": 161,
+    "oracleExecuted": false,
+    "unexpectedFailure": "UNCANCELLABLE_RETAINED_TASK_HOLD"
+  },
+  "stack": {
+    "probeMainIndividualBytes": 812,
+    "probeMainClassification": "dynamic,bounded",
+    "largestExistingIndividualEntryBytes": 16572,
+    "aggregateTaskCRTOrRuntimeBoundEstablished": false
+  },
+  "history": {
+    "ancestorObjectRootOverallResult": "FAILED_PRESERVED",
+    "ancestorObjectCompilationScope": "QUALIFIED",
+    "failure": "Two public receipt ctime differences;all221bodypins and219otherfullfacts agreed. Cause unknown. Fresh link success does not relabel it."
+  },
+  "evidence": {
+    "actualManifestSha256": "052dea5d9a807306fdeed44c8d064adbc9ceb6cc7c829400a40fd74e6410dcbc",
+    "independentReviewSha256": "fa31efef66111cd445522337a8a6668523526d86d4445fdf87718c269ee70e0b",
+    "scopedObjectReviewSha256": "5f48d5402d04e6985756e813507c7d3c6e80eca1c44273756aabdb0ed352c592"
+  },
+  "runtime": "NOT_RUN",
+  "emulator": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "GUIInputCAMDOutputTimingQuietAcceptance": "NOT_RUN",
+  "targetOperations": 0
+}

@@ -1,0 +1,103 @@
+{
+  "state": "DESCRIPTIVE_QUALIFICATION_RECIPE_NOT_A_BUILDER_OR_RUNTIME_ADMISSION",
+  "target": "PTEditorMidiRecordingTaskProbe",
+  "orderedTranslationUnits": [
+    "src/native/editor_midi_recording_task_probe.c",
+    "src/editor/editor_midi_recording.c",
+    "src/core/record.c",
+    "src/core/record_pattern.c",
+    "src/core/record_channel.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/pattern.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/editor/sampler_lifetime.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/sample_usage.c",
+    "src/core/event_resource.c",
+    "src/core/flow.c",
+    "src/core/pitch.c",
+    "src/core/render.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/voice.c",
+    "src/native/native_checked_memory.c"
+  ],
+  "translationUnits": 35,
+  "literalProjectBodies": 81,
+  "language": "C99",
+  "targetProfile": "genuine classic m68k AmigaOS; same reviewed 68000/soft-float/nix20 profile as native context Task donor, subject to fresh actual vectors/closure review",
+  "selectors": [
+    "PT_EDITOR_MIDI_RECORDING_NATIVE_TASK_PROBE_ONLY=1"
+  ],
+  "assertionPolicy": "Always-on REQUIRE and negative-array geometry, with actual -U NDEBUG. No constant-true assert proof.",
+  "CFLAGS": [
+    "-mcpu=68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-std=c99",
+    "-fstack-usage",
+    "-U",
+    "NDEBUG"
+  ],
+  "diagnostics": "strict errors; no fake target defines, no warning relaxation",
+  "proposedRuntime": {
+    "target": "owned Amiberry 030 only after separate exact candidate and operation admission",
+    "stackBytes": 2097152,
+    "remainingStackGuardBytes": 1048576,
+    "nativeSeconds": 90,
+    "guestSeconds": 140,
+    "wholeSeconds": 250,
+    "status": "INHIBITED_OWNED_VM_ONLY_PROPOSAL_NO_RUNTIME_ADMISSION",
+    "physical": "NOT_ADMITTED: unexpected path retains an uncancellable original Task, stack and resources."
+  },
+  "SDK": "Actual -M equals ordinary .i paths for all35 units:81 project bodies and48 selected genuine SDK headers within the unchanged92-header allowance. Future builds must freshly check exact sources/tools/dependencies; this recipe alone admits none.",
+  "compilerInvocations": "See actual native-task-objects.json; this recipe executes none.",
+  "link": "See separate native-task-link.json; this recipe executes none.",
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0,
+  "expectedStdout": {
+    "ascii": "EDITOR MIDI RECORD TASK RAM PASS:arm/veto;real NoteOn/Off;master/save/undo;failed Stop/local cancel;matched detach;zero Fast ledgers;NO INPUT/CAMD/TIMING/OUTPUT\n",
+    "bytes": 161,
+    "sha256": "59e109ae37e2e5d0d5df24b4a096b3b96d4b1f5042293da545d11a3db87de7ef"
+  },
+  "historicalSourceOnlyRecipe": {
+    "bytes": 2830,
+    "sha256": "497cb399e76027560d3575a033081da0cb9eccba8a724837613e36b9c8f5a558",
+    "status": "Preserved unexecuted generic-O1 source recipe; this new recipe describes the separately admitted actual native Os profile."
+  },
+  "flagScope": "Describes genuine direct cc1 profile; not a complete driver command. Actual vectors also pin builtin/include/SDK/system paths and assembler -m68000, and are retained in the native object manifest.",
+  "sourceSelection": "Actual35-unit/81-body native build selected the complete frozen clean editor C/H pair. No preserved working display/editor path was compiled or overwritten by this qualification.",
+  "actualObjectCommands": 175,
+  "historicalUnexecutedGenericIncludeRoots": [
+    "src/core",
+    "tests",
+    "."
+  ],
+  "actualIncludeRouteDescription": {
+    "project": [
+      "src/core",
+      "build/dev"
+    ],
+    "SDK": "Controlled private genuine builtin/system header roots; all exact absolute routes and selected 48-of-92 SDK identities are bound by the actual 175-command object manifest. This description is not a complete include vector or future dependency admission."
+  }
+}

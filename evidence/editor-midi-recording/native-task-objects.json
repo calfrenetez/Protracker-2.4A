@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "state": "NATIVE35_OBJECT_COMPILATION_QUALIFIED_ROOT_METADATA_BOUNDARY_FAILED",
+  "basis": "Independent saved-products/source review; no rerun or rewritten raw results.",
+  "source": {
+    "probe": {
+      "bytes": 18353,
+      "sha256": "bb8d289d6e4efc1e1883d6c95edc8f6cee1fb72b6e8ef5790b36e36f7b2a8a5c"
+    },
+    "ownerC": {
+      "bytes": 12309,
+      "sha256": "96884997fa546fa72b5db55805f7cdcc7d1ff606a437af7a8aff8ad7597af9df"
+    },
+    "ownerH": {
+      "bytes": 4702,
+      "sha256": "956e889cab40db6ebea2248b02b9b7c15fe90b81a5ea29109aef5c3bd6a118b6"
+    },
+    "sourcePlan": {
+      "bytes": 4005,
+      "sha256": "91eabb310a7def3f656d17eb5f8a9e5f6517f1fb72f95ac4b7f8090d1d31cb85"
+    }
+  },
+  "actual": {
+    "manifest": {
+      "bytes": 653582,
+      "sha256": "e897b1379c6c6cda751cc4ac33427484976648c19d3a7422746012bf6d167bce"
+    },
+    "manifestPassed": true,
+    "rawRootResult": {
+      "bytes": 1350,
+      "sha256": "2af0406b629a175d46c52338e01ea3e14bf3fbc9dedba01977bc0f91a648a2d0"
+    },
+    "rawRootState": "RECORDING_TASK_NATIVE35_OBJECT_FAILED",
+    "rootReturncode": 0,
+    "RootSeconds": 14.185613542009378,
+    "builderSeconds": 14.022658707981464,
+    "commands": 175,
+    "allCommandsRC0AndEmptyDiagnostics": true,
+    "translationUnits": 35,
+    "projectBodies": 81,
+    "SDKAllowance": 92,
+    "selectedSDKUnion": 48,
+    "selectedCombinedUnion": 129,
+    "actualMEqualsIAll35": true,
+    "all35HUNKObjectsVerified": true,
+    "probeObject": {
+      "bytes": 8352,
+      "sha256": "ee62db9c48ad78d445d7f007e43617752516551d071c9ef67c1f569b9625de69"
+    },
+    "remainingExternalNames": [
+      "_AllocMem",
+      "_AvailMem",
+      "_FindTask",
+      "_FreeMem",
+      "_SysBase",
+      "_TypeOfMem",
+      "___ashldi3",
+      "___bcopz",
+      "___divdi3",
+      "___divsi3",
+      "___modsi3",
+      "___muldi3",
+      "___mulsi3",
+      "___udivdi3",
+      "___udivsi3",
+      "___umoddi3",
+      "___umodsi3",
+      "__ctype_",
+      "_free",
+      "_malloc",
+      "_memcpy",
+      "_memset",
+      "_puts",
+      "_snprintf",
+      "_strcmp",
+      "_strstr"
+    ],
+    "remainingExternalCount": 26
+  },
+  "boundary": {
+    "inputFullFacts": 221,
+    "identicalFullRecords": 219,
+    "all221BodyPinsEqual": true,
+    "compilerSources81_SDK92_Tools_ControlsExact": true,
+    "READYStrict68SavedGuardExact": true,
+    "failure": "Exactly2 PUBLIC receipt st_ctime_ns fields changed during operation; body/dev/inode/mode/nlink/UID/GID/size/mtime/flags unchanged. Cause UNKNOWN. Raw Root FAILED preserved.",
+    "affectedPublicReceipts": [
+      "editor-midi-recording/host-private.json",
+      "editor-midi-recording/native-object.json"
+    ],
+    "originalBASEDirectlyBound": true,
+    "earlierPreparationRefusalPreserved": true
+  },
+  "emitted": {
+    "genuineClassic32BigEndian": true,
+    "TaskAndNestingChecks": true,
+    "realSPAndTaskBoundsBeforeHeavyPreparation": true,
+    "chosenRemainingSPGuardBytes": 1048576,
+    "proposedShellStackBytes": 2097152,
+    "originalMasterDescriptorPointerAnd24bitValuesChecked": true,
+    "realRecordStoreUndoStopCancelDetachCleanupGates": true,
+    "soleNativeOracleBytes": 161,
+    "nativeOracleNotExecuted": true,
+    "staticStateBytes": 8070,
+    "checkedMemoryControlBytes": 448
+  },
+  "individualSU": {
+    "rows": 588,
+    "probeMainBytes": 812,
+    "largestIndividual": {
+      "function": "pt_pcm_resample_filtered_progress.part.0",
+      "bytes": 16572,
+      "kind": "dynamic,bounded"
+    },
+    "limit": "Individual compiler rows only; no aggregate/CRT/OS/callback/whole-Task/WCET or native placement proof."
+  },
+  "review": {
+    "bytes": 25130,
+    "sha256": "5f48d5402d04e6985756e813507c7d3c6e80eca1c44273756aabdb0ed352c592"
+  },
+  "scope": "Qualified actual compilation/source-ABI OBJECT scope only. Whole-outer preservation did not pass; no target-promotion grant. Future link/provider/artifact review requires a separate admitted operation.",
+  "nativeRuntime": "NOT_RUN",
+  "link": "NOT_PERFORMED",
+  "targetOperations": 0
+}

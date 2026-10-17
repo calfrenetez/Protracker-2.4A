@@ -61,7 +61,12 @@ within the 72-header allowance. All 139 recorded input full facts, READY, strict
 and saved guard match; the preservation baseline source was bound. Individual
 compiler stack rows reach 88 bytes and give no whole-Task or callback bound.
 
-Link/runtime, GUI input isolation, playback recording, CAMD/source binding,
+A separate [ordinary-Task RAM test](MIDI_EDITOR_RECORDING_TASK.md) now has
+qualified full native compilation and HOST link/structure checks. Its preserved
+outer object-metadata failure and its distinct successful link are reported
+separately. This qualification source is unselected and has not executed natively.
+
+Runtime, GUI input isolation, playback recording, CAMD/source binding,
 timestamp conversion, device/output timing, Amiberry, physical MIDI and listening
 remain unqualified. Software admission is not hardware quiet. No default app or
 frontend enrollment is included.

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "state": "HOST_PASS_INDEPENDENTLY_REVIEWED",
+  "scope": "Complete MIDI1.0 channel-message recording adapter; portable serialized HOST only.",
+  "source": {
+    "record_channel.c": {
+      "bytes": 938,
+      "sha256": "54a20cd3b55b663ba7b616b4a232f6d802a6a5eba152e9a9caef3377c3cb5e28"
+    },
+    "record_channel.h": {
+      "bytes": 1839,
+      "sha256": "fbe1b23f057721ea99774e3230bc2b36dbac376386fe8372f83966d46a4e7c3b"
+    },
+    "record_channel_test.c": {
+      "bytes": 12946,
+      "sha256": "4e6501cc20859be9929bdb05332e9c1db71272951b38809eb494dc2c5e2f3afd"
+    },
+    "test_record_channel.py": {
+      "bytes": 10085,
+      "sha256": "6f80fcc1ba03fe7f6827af75a9b0914fd5e864ce4d2ffbf9e74330acba74660d"
+    }
+  },
+  "actual": {
+    "unittestMethods": 1,
+    "genuineCgroups": 6,
+    "translationUnits": 8,
+    "literalProjectBodies": 16,
+    "unchangedGenuineCoreBodies": 13,
+    "returncode": 0,
+    "oracleBytes": 155,
+    "oracleSha256": "4c02b5e624c5b07bbdd0eac8c1a3915d635e3fd63c64ddd28fcba02671819eb9",
+    "compilerAndFixtureDiagnosticsEmpty": true,
+    "outerSeconds": 2.374705416004872,
+    "compileSeconds": 1.770393040991621,
+    "fixtureSeconds": 0.4769324160006363
+  },
+  "qualification": {
+    "warningsAsErrors": true,
+    "assertionsEnabled": true,
+    "ASan": true,
+    "UBSan": true,
+    "all38RecordedInputsUnchanged": true,
+    "strict68Preserved": true,
+    "savedControlAndGuardPreserved": true
+  },
+  "coverage": [
+    "Complete-message validation and explicit input-channel/target-track filtering.",
+    "Hold Record, zero-velocity Off, row63/64 boundary, genuine project/save/undo/redo and24-bit master roundtrip.",
+    "Collision/stale release, route/occupied refusal, monotonic/capacity failure and explicit local cancellation."
+  ],
+  "limitations": [
+    "Local cancel is not external MIDI/audio quiet.",
+    "No native ABI/FPU/runtime, CAMD input lifecycle, default/frontend activation, hardware, output, exact MIDI timing or listening acceptance.",
+    "No full compiler-resource/system-header/CRT closure claim."
+  ],
+  "evidence": {
+    "sourceReviewSha256": "78627c84398f88f81b65e8e423d22a5e72f65686717bc12dc3abdbd2c5ccdb86",
+    "actualResultSha256": "15a87538ec2363ee54cf63f974d19efca167df63e403ac8d27fe498b8b564e2c",
+    "independentActualReviewSha256": "02d89c903df1678dd2c0ea0801537426e3b9ef5289faece9f54316b79d25d661"
+  },
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0
+}

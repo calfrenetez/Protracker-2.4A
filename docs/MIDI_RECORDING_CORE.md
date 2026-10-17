@@ -69,6 +69,58 @@ instrument; incoming velocity replaces prior velocity and slice selection clears
 Recording across row 63 stores the OFF in the next ordered pattern. Every accepted
 input is undoable; grouping a complete take into one command remains future UI work.
 
+## Complete channel-message recording adapter
+
+`pt_record_channel_message` accepts an already complete MIDI 1.0 channel message,
+an explicit target track (0–15), independent input-channel filter (1–16) and the
+caller's authoritative Q16 sequencer row position. The filter is unrelated to
+the project's saved MIDI output channel. Cn/Dn messages have two bytes; other
+80..EF channel messages have three, following the
+[MIDI Association channel-message table](https://midi.org/expanded-midi-1-0-messages-list).
+There is no serial/running-status or System/SysEx parser and no timestamp or
+latency conversion.
+
+The adapter validates the full message before filtering and copies its bytes to
+scalars before a recorder mutation. Invalid input and valid unselected/non-note
+channel messages leave recorder/store state unchanged. Selected Note On/Off
+uses genuine `pt_record_input`; zero-velocity Note On follows its Off path.
+Quantisation, short-note Off, collisions, stale releases and store/undo behavior
+are unchanged. Delegated orphan releases or failures may advance `last_position`;
+only adapter-rejected/filtered calls promise no recorder mutation.
+
+This is per-call routing, not automatic key/track allocation. Matching releases
+must reach their original recorder track, or the caller must use the genuine
+recording lifecycle. Changing track/filter does not release an old key or prove
+external silence. The adapter never arms, force-starts, stops, cancels or rearms
+recording and emits no MIDI. Hold Record starts only after a real store succeeds.
+
+One [focused private HOST qualifier](../evidence/midi-record-channel/host-private.json)
+passed six genuine groups using eight translation
+units and sixteen literal project bodies, assertions, ASan/UBSan and warnings as
+errors. The exact 155-byte oracle matched, with empty compiler/fixture diagnostics;
+38 saved input records, READY, 68 protected records and guard match before/after.
+It exercises real validated mixed-route projects, the original pattern store and
+journal, Hold Record, row63→64/velocity-zero Off, save/decode/identical re-encode,
+current 24-bit PCM roundtrip, Undo/Redo/saved revisions, filters/invalid bytes, all
+sixteen input channels, stale releases/collisions, route/occupied-store refusal,
+monotonic/end-of-song capacity and explicit track binding. No replacement store
+or native input/resource receipt is used. This is HOST software evidence only.
+The [canonical wrapper source bridge](../evidence/midi-record-channel/canonical-source-bridge.json)
+records its sole repository-root binding change; that normalized wrapper has
+**NOT RUN** and does not replace the actual private qualifier's receipt.
+
+A separate [native one-object check](../evidence/midi-record-channel/native-object.json)
+passes five stages with RC0 and empty diagnostics using the genuine 68000,
+soft-float/nix20 profile. Its 468-byte HUNK_UNIT exports the adapter and retains
+`_pt_record_input` as its sole unresolved reference. Actual dependency and
+ordinary-preprocessor sets agree: six project bodies and seven genuine SDK
+headers, within the unchanged 72-header allowance. All 115 input full-fact
+records, READY, 68 protected records and guard match before/after. The emitted
+validation/scalar delegation and unchanged Q16 argument were reviewed. One
+48-byte compiler stack row is local evidence only; linked recorder/store ABI,
+whole-Task stack and native runtime remain unqualified. No executable was linked.
+CAMD input, Amiberry, physical MIDI, output timing and listening are **NOT RUN**.
+
 ## Verification and remaining integration
 
 Host ASan/UBSan tests exercise shared-note co-ownership, note replacement ordering,
@@ -83,6 +135,9 @@ endpoint registry and control-only CAMD resource owner. Their HOST fixtures and
 68000 object checks do not qualify a native CAMD provider or delivery backend.
 
 Native tests use a recording message sink, not CAMD or physical MIDI. Still open:
-native CAMD discovery/link and delivery integration, input parsing and channel/track
-allocation, the MIDI setup UI, live audition, effect mapping, shared sequencer
-timing/clock, transport wiring, real external MIDI and human timing feel.
+authorized receiver/source binding, serial/running-status parsing if needed,
+automatic key/track allocation, timestamp-to-sequencer conversion, native CAMD
+discovery/link and input/output delivery integration, MIDI setup/recording UI
+activation, live audition, effect mapping, shared sequencer timing/clock,
+transport wiring, real external MIDI and human timing feel. Saved-settings
+controller/model/window source exists separately; it does not activate MIDI.

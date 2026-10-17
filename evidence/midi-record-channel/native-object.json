@@ -1,0 +1,88 @@
+{
+  "state": "RECORD_CHANNEL_NATIVE_OBJECT_STATIC_REVIEW_PASS",
+  "scope": "One unlinked native object of the complete-channel recording adapter only.",
+  "source": {
+    "src/core/record_channel.c": {
+      "bytes": 938,
+      "sha256": "54a20cd3b55b663ba7b616b4a232f6d802a6a5eba152e9a9caef3377c3cb5e28"
+    },
+    "src/core/record_channel.h": {
+      "bytes": 1839,
+      "sha256": "fbe1b23f057721ea99774e3230bc2b36dbac376386fe8372f83966d46a4e7c3b"
+    }
+  },
+  "build": {
+    "units": 1,
+    "stages": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "diagnostics": "EMPTY",
+    "target": "m68k:68000",
+    "flags": "68000/soft-float/nix20/C99/-Os/-Wall/-Wextra/-Werror/-U NDEBUG",
+    "featureOrPlatformSelectorsAdded": false
+  },
+  "dependencies": {
+    "literalProjectBodies": 6,
+    "quotedEdges": 5,
+    "actualProject": 6,
+    "actualSDK": 7,
+    "SDKAllowance": 72,
+    "MEqualsI": true,
+    "unknown": 0
+  },
+  "object": {
+    "bytes": 468,
+    "sha256": "942de7d37ab59fd9ec1a8c78ec4ecc7124717f243f9f2e949aa1395d80ba9485",
+    "format": "HUNK_UNIT amiga",
+    "codeBytes": 292,
+    "exports": [
+      "_pt_record_channel_message"
+    ],
+    "unresolved": [
+      "_pt_record_input"
+    ]
+  },
+  "emitted": "Input bounds/status/length/data/channel validation, no-write INVALID/IGNORED paths and scalar-copy tail delegation are present; original uint64 position retained. No clock, OS, CAMD, allocation or output import.",
+  "preservation": {
+    "fullInputRecordsUnchanged": 115,
+    "READYUnchanged": true,
+    "protectedMetadataUnchanged": 68,
+    "residentBodyPinsUnchanged": 58,
+    "metadataOnly": 10,
+    "savedGuardUnchanged": true,
+    "copiedSourceFullFactsUnchanged": 6
+  },
+  "stack": "One compiler static48-byte report; linked recorder/whole Task/WCET not qualified.",
+  "labelLimit": "Raw builder state PARENT_OBJECT_PASS_NOT_RUNTIME is inherited and preserved; this receipt identifies record_channel.",
+  "resultPins": {
+    "Root": {
+      "bytes": 1120,
+      "sha256": "c179954dd8e12c81f96a6c725d836a59e040d7fc62e4b53c31538d0fabc1065b"
+    },
+    "builder": {
+      "bytes": 10414,
+      "sha256": "7ac61c0fcc0ab9a05fdd04d6b3a6216db4c22e5dc55a434d8133a74e7c76215d"
+    },
+    "READY": {
+      "bytes": 116996,
+      "sha256": "4670ef9d3d6eda06ba87eef9dc671d878d1af817775fba99bbe5acf75651fd55"
+    },
+    "inspection": {
+      "bytes": 6115,
+      "sha256": "a0c07cfee7cd0b4a4e936ff2062c2366f4f70b7141adfb222b1e384c4e7290f8"
+    }
+  },
+  "remaining": {
+    "link": "NOT_PERFORMED",
+    "runtime": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "targetOperations": 0
+  },
+  "limits": "No linked ABI/store behavior, native caller, musical timing, CAMD/device/output, GUI/IRQ, whole-stack or F2 release claim."
+}

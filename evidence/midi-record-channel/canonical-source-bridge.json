@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "state": "EXACT_SOURCE_COPY_AND_WRAPPER_BINDING_BRIDGE",
+  "scope": "Source correspondence only; no new compiler, qualifier, native or target execution.",
+  "basisCommit": "380ffaea9845400a922b9c1c4243bccee94902e3",
+  "qualifiedPrivateSourceBodies": {
+    "src/native/midi_requester_parent.c": {
+      "bytes": 8128,
+      "sha256": "a9226d3e022113aedf6550ab4a0501022e669061bb8cd94af031e5ad8be36bd0"
+    },
+    "src/native/midi_requester_parent.h": {
+      "bytes": 5647,
+      "sha256": "b23d46ff7beebf176b08ede062732cfa9fdff8bae1c93d30b1b0505d3c5cb9fd"
+    },
+    "src/core/record_channel.c": {
+      "bytes": 938,
+      "sha256": "54a20cd3b55b663ba7b616b4a232f6d802a6a5eba152e9a9caef3377c3cb5e28"
+    },
+    "src/core/record_channel.h": {
+      "bytes": 1839,
+      "sha256": "fbe1b23f057721ea99774e3230bc2b36dbac376386fe8372f83966d46a4e7c3b"
+    },
+    "tests/record_channel_test.c": {
+      "bytes": 12946,
+      "sha256": "4e6501cc20859be9929bdb05332e9c1db71272951b38809eb494dc2c5e2f3afd"
+    }
+  },
+  "recordingHOSTWrapper": {
+    "actualPrivate": {
+      "bytes": 10085,
+      "sha256": "6f80fcc1ba03fe7f6827af75a9b0914fd5e864ce4d2ffbf9e74330acba74660d",
+      "qualification": "HOST_PASS_INDEPENDENTLY_REVIEWED",
+      "fixtureGroups": 6,
+      "literalProjectBodies": 16,
+      "translationUnits": 8,
+      "oracleBytes": 155
+    },
+    "canonical": {
+      "bytes": 10016,
+      "sha256": "b8969bf59f3937bc2ccfa26312b45262ec522e8752a577209f40dc3e1622bfc5",
+      "execution": "NOT_RUN"
+    },
+    "onlyChange": "CANONICAL repository-root binding becomes ROOT; no other byte changes.",
+    "inverseByteExact": true,
+    "ASTEqualAfterOnlyRootBindingMasked": true,
+    "sameSourcesFlagsFrozenPinsOracleTimeoutsAndPreservation": true
+  },
+  "enrollment": {
+    "existingBuildRecipesUnchanged": true,
+    "applicationSourceEnrollment": "No new nativeMain call or source-list entry; no startup initializer in either new C unit.",
+    "automaticCoreDirectoryCompilation": "Not used by the inspected existing Makefile/core-tests/baseline/dev/editor-wavetable recipes.",
+    "HOSTTestDiscovery": "Existing make test discovers the new unittest wrapper after adoption; this does not activate an application input/output route.",
+    "defaultBuildRuntime": "NOT_RUN"
+  },
+  "limits": [
+    "Historical private HOST and native-object receipts retain their original actual source and wrapper pins; this is not a new canonical test result.",
+    "Only a current24-bit PCM save/decode/reencode roundtrip is asserted; no independent original-before/after master preservation witness is added.",
+    "No native linked/runtime ABI, GUI/restoration, CAMD input/output, source selection, automatic allocation, timestamp conversion, device quiet, exact musical timing, physical or listening acceptance."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0
+}

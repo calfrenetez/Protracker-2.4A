@@ -1,0 +1,92 @@
+{
+  "state": "NATIVE_PARENT_BRACKET_OBJECT_STATIC_REVIEW_PASS",
+  "scope": "One unselected native object only; no executable, runtime, GUI, device or frontend admission.",
+  "source": {
+    "src/native/midi_requester_parent.c": {
+      "bytes": 8128,
+      "sha256": "a9226d3e022113aedf6550ab4a0501022e669061bb8cd94af031e5ad8be36bd0"
+    },
+    "src/native/midi_requester_parent.h": {
+      "bytes": 5647,
+      "sha256": "b23d46ff7beebf176b08ede062732cfa9fdff8bae1c93d30b1b0505d3c5cb9fd"
+    }
+  },
+  "build": {
+    "units": 1,
+    "stages": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "diagnostics": "EMPTY",
+    "target": "m68k:68000",
+    "flags": "68000/soft-float/nix20/C99/-Os/-Wall/-Wextra/-Werror/-U NDEBUG",
+    "featureOrPlatformSelectorsAdded": false
+  },
+  "dependencies": {
+    "projectAllowance": 34,
+    "SDKAllowance": 72,
+    "actualProject": 33,
+    "actualSDK": 49,
+    "MEqualsI": true,
+    "unknown": 0,
+    "ownerHeaderUnselected": true
+  },
+  "object": {
+    "bytes": 2420,
+    "sha256": "32a1f63b122b0fbfb69321bd5372b97265f8ddb953776517bb84a28a21fb280b",
+    "format": "HUNK_UNIT amiga",
+    "codeSections": 2,
+    "codeBytes": 1744,
+    "exports": 2,
+    "uniqueUnresolvedReferences": 9,
+    "finalProviders": "NOT_BOUND"
+  },
+  "emitted": [
+    "original Task/library/parent identities and version guard",
+    "128-attempt validated-message drain cap",
+    "HELD/busy across calls",
+    "once-only nonzero isolation and original-mask restoration",
+    "no owner return, disposal or allocator release"
+  ],
+  "preservation": {
+    "fullInputRecordsUnchanged": 132,
+    "READYUnchanged": true,
+    "protectedMetadataUnchanged": 68,
+    "residentBodyPinsUnchanged": 58,
+    "metadataOnly": 10,
+    "savedGuardUnchanged": true,
+    "copiedSourceFullFactsUnchanged": 34
+  },
+  "history": "Distinct READY corrected only private historical-control ctime with unchanged body and added byte-exact temporary builder. Old inhibited preparation records retained; cause unknown.",
+  "stack": "Seven individual compiler records; largest reported local amount64 bytes. OS/callback/whole Task/WCET unqualified.",
+  "resultPins": {
+    "root": {
+      "bytes": 1085,
+      "sha256": "a618fb1bdee29740d75b48bda79e252dc2dab1a6551979f697df404b2bbb31df"
+    },
+    "builder": {
+      "bytes": 24111,
+      "sha256": "bdaaa485527d5e9ee83176e55c3a3feb63c7f095eadabf7ecd8019133e3b19d2"
+    },
+    "READY": {
+      "bytes": 133160,
+      "sha256": "c3d9a351def75951759d758ac2fe63fb49fa6548a61f7fbf964aad5b01864edf"
+    },
+    "inspection": {
+      "bytes": 33548,
+      "sha256": "966cf852fe5cda7f58eb4537275759daa287b8c4bd62707c2e325f6cc9e25dc2"
+    }
+  },
+  "remaining": {
+    "link": "NOT_PERFORMED",
+    "runtime": "NOT_RUN",
+    "GUI": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "targetOperations": 0
+  },
+  "limits": "No linked ABI/provider, exclusive live port, pixel/restoration, owner/modal completion, stack/timing/cancellation or F2 release claim."
+}

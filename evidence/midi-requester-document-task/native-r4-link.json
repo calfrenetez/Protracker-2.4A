@@ -1,0 +1,50 @@
+{
+  "state": "INDEPENDENT_SAVED_R4_LINKED_ARTIFACT_CURRENT32_REVIEW_PASS_NOT_RUNTIME",
+  "findings": [],
+  "binary": {
+    "bytes": 396176,
+    "sha256": "a85a38db97a048d3cf0c8964541c74bba5ae17f8b9e2c2965c5534cf1d2a6fd5"
+  },
+  "binaryCRC32": "7A981098",
+  "map": {
+    "bytes": 108984,
+    "sha256": "4c8fa0cbe19bcad0a248fd05107763c876b715ec5cec3141545dae70e086c4f6"
+  },
+  "actualLink": {
+    "commands": 5,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "seconds": 0.35598383299657144,
+    "orderedApplicationObjects": 88,
+    "orderedLOADs": 95,
+    "originalRuntimeInputs": 7,
+    "current32OriginalProvidersMatch": true,
+    "unresolved": 0,
+    "format": "Amiga HUNK, m68k:68000",
+    "codeBytes": 355040,
+    "dataBytes": 1172,
+    "bssBytes": 270512,
+    "symbols": 822,
+    "reloc32Entries": 3274,
+    "fullParse": true
+  },
+  "SPAdmission": "Actual original Task offsets58/62 and currentSP capture precede all heavy planning/allocation/construction. Bounds/even/sameTask/normality/remaining>=1MiB checks refuse to retained self-loop. Individual main.su376 only; no wholeTask/CRT/IRQ/OS/callchain proof. Total1MiB stack alone cannot guarantee1MiB remaining headroom.",
+  "lifecycle": "Original real Exec/CRT and genuine New/Load prepare-cancel/metadata retention/final explicit ledger checks remain emitted. Sole stored marker would be180B via puts; no native output observed. No general cancellation/quiet/forced-free qualification.",
+  "preservation": "Saved132 input full facts including READY, strict68(58 resident/10metadata-only), saved guard hash/fullmetadata and final binary/map facts compare exactly; no live guard/target call.",
+  "runtime": "NOT_RUN",
+  "targetOperations": 0,
+  "limits": [
+    "No native frontend/window/publication/device/CAMD/music/IRQ/physical/listening authority.",
+    "No current Git bridge or full dynamic toolchain/system-header closure.",
+    "Explicit checked zero-ledger excludes CRT internal allocations.",
+    "Original stage-pending result and historical failures unchanged; separate subsequent current32/artifact reviews."
+  ],
+  "actualResultSHA256": "e0f50ceed90cc4e1e61a849161206cec7e61cf7b75b8614e985357ef8bacf3f3",
+  "current32ReviewSHA256": "5bc09df6b6803db6a3d8a86e56153be0b67f0864910b9b9c661d28cf0aa2338c",
+  "independentReviewSHA256": "dc72b779fc45beab02964d7faef8f9942f3615336ea6ddb7192aef8b11f85906"
+}

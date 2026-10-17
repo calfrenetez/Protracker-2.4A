@@ -83,6 +83,21 @@ static int normal(void)
 {return state.exec&&SysBase==state.exec&&state.exec->ThisTask==state.task&&
     (int)(signed char)state.exec->IDNestCnt==state.idnest&&
     (int)(signed char)state.exec->TDNestCnt==state.tdnest;}
+/* One-time diagnostic resource admission, after the original Task/nesting
+ * checks and before planning/allocation/construct. This reads actual m68k SP
+ * inside THIS helper frame: startup/main/helper consumption is already excluded
+ * from remaining headroom. It is no call-chain/CRT/OS/interrupt stack bound. */
+#define STACK_HEADROOM_BYTES (1024UL*1024UL)
+static int stack_headroom(void)
+{
+    const volatile struct Task *task;uintptr_t lower,upper,current;
+    if(!normal())return 0;
+    task=state.task;lower=(uintptr_t)task->tc_SPLower;upper=(uintptr_t)task->tc_SPUpper;
+    __asm__ volatile ("move.l %%sp,%0" : "=d" (current) : : "memory");
+    return lower&&lower<upper&&current>=lower&&current<upper&&!(current&1u)&&
+        current-lower>=STACK_HEADROOM_BYTES&&task==state.task&&normal()&&
+        (uintptr_t)task->tc_SPLower==lower&&(uintptr_t)task->tc_SPUpper==upper;
+}
 static int fast(const void *p,size_t n)
 {uintptr_t a=(uintptr_t)p;return p&&n&&n<=UINTPTR_MAX-a&&
     (TypeOfMem((APTR)p)&(MEMF_FAST|MEMF_CHIP))==MEMF_FAST&&
@@ -264,7 +279,7 @@ int main(void)
     unsigned calls,releases;size_t written;unsigned i;
     state.exec=SysBase;REQUIRE(state.exec&&(state.task=FindTask(NULL))&&state.exec->ThisTask==state.task);
     state.idnest=(int)(signed char)state.exec->IDNestCnt;state.tdnest=(int)(signed char)state.exec->TDNestCnt;
-    REQUIRE(state.idnest==-1&&state.tdnest==-1&&normal()&&fast(&state,sizeof(state))&&fast(&memory,sizeof(memory)));
+    REQUIRE(state.idnest==-1&&state.tdnest==-1&&normal()&&stack_headroom()&&fast(&state,sizeof(state))&&fast(&memory,sizeof(memory)));
     plan();guard=(struct pt_private_memory_span){&state,sizeof(state)};
     REQUIRE(pt_private_native_memory_init(&memory,state.byte_ceiling,&guard,1)==PT_PRIVATE_MEMORY_OK&&normal());
     state.allocator=(struct pt_allocator){&memory,allocate,release};

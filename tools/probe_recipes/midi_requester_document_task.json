@@ -143,8 +143,8 @@
   "nativeProfile": "Five exact qualification-only native/typed selectors on genuine classic m68k/Amiga. HOST selections excluded; no frontend, publication/action_step, window, CAMD, IRQ, MIDI/audio or timing authority.",
   "inputSourcePins": {
     "src/native/midi_requester_document_task_probe.c": {
-      "bytes": 24013,
-      "sha256": "18a3fa7cf186f562dae01dc61e2a4275fdf0a3bd6157eef242a8735c1337a37b"
+      "bytes": 24914,
+      "sha256": "de9c8e735ff9762f2c8103dc2fa6dfa838cd544b33e4cb52bac39c378217f3f1"
     },
     "src/native/midi_requester.h": {
       "bytes": 9487,
@@ -182,11 +182,20 @@
   },
   "entry": "main(void); genuine modal veto, New/encoded-Load prepare-cancel, preserved originals/redo/master/save and positive disposal/close/release/zero-ledger assertions. First refusal retains the process; no source or runtime retry.",
   "status": {
-    "objectBuild": "SEPARATE_EXACT_EVIDENCE",
-    "link": "HOST_LINK_PASS_SEPARATE_RECEIPT_NATIVE_EXECUTION_NOT_RUN",
+    "objectBuild": "R4_EXACT_OBJECT_BUILD_PASS_SEPARATE_RECEIPT",
+    "link": "R4_EXACT_HOST_LINK_AND_ARTIFACT_REVIEW_PASS_NATIVE_EXECUTION_NOT_RUN",
     "emulator": "NOT_RUN",
-    "physicalA1200": "NOT_RUN"
+    "physicalA1200": "NOT_ADMITTED"
   },
-  "stack": "Raw SU entries only; largest individual16572 bytes in filtered PCM, probe main376. These do not establish reachable call-chain, wholeTask stack, CRT or WCET; runtime requires separate admission.",
-  "activation": "Not referenced by Makefile/default core/frontend entrypoints. Maintainers must explicitly prepare a fresh reviewed build/admission; no executable builder is supplied here."
+  "stack": "R4 reads actual m68k SP against original volatile Task lower/upper bounds before heavy planning/allocation/construction; requires at least1048576 remaining bytes and unchanged Task/nesting/bounds. The helper is inlined in the reviewed artifact. A future separately admitted same-Shell Stack2097152 setter/query is required; its private runner allowance remains separately qualified. Raw individual SU: main376, largest16572; not wholeTask/CRT/OS/IRQ/call-chain/WCET or cancellation proof.",
+  "activation": "Not referenced by Makefile/default core/frontend entrypoints. Maintainers must explicitly prepare a fresh reviewed build/admission; no executable builder is supplied here.",
+  "runtimeAdmission": {
+    "state": "NOT_ADMITTED",
+    "firstTarget": "SEPARATELY_OWNED_AMIBERRY_VM_ONLY",
+    "shellStackBytes": 2097152,
+    "minimumRemainingStackBytes": 1048576,
+    "nativeStackObserved": false,
+    "physicalInheritance": false,
+    "failureContainment": "Original retained busy HOLD; separate owned-VM recovery and fresh shared cleanup/release prerequisites required."
+  }
 }

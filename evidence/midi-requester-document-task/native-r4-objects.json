@@ -1,0 +1,81 @@
+{
+  "state": "NATIVE_R4_DOCUMENT_TASK_OBJECTS_PASS_NOT_LINKED_NOT_RUNTIME",
+  "evidence": {
+    "manifest": {
+      "bytes": 1780172,
+      "sha256": "31e1c76c0d29aeaec86eb3f34ec346c94b34be1047c79cf4b9c68e19b8c2641e"
+    },
+    "independentReview": {
+      "bytes": 14215,
+      "sha256": "0893e92f0e608a92a9a92bd837346ae16193c3262a919426302b7453ead35fd0"
+    }
+  },
+  "sourceProbe": {
+    "bytes": 24914,
+    "sha256": "de9c8e735ff9762f2c8103dc2fa6dfa838cd544b33e4cb52bac39c378217f3f1"
+  },
+  "counts": {
+    "translationUnits": 88,
+    "orderedCommandsRC0": 440,
+    "productBodies": 440,
+    "streamsVerified": 880,
+    "projectBodies": 200,
+    "SDKAllowance": 92,
+    "actualProjectUnion": 200,
+    "actualSDKUnion": 58,
+    "actualDependencyUnion": 258
+  },
+  "diagnostics": {
+    "allStderrEmpty": true,
+    "allCompilerPreprocessorAssemblerStdoutEmpty": true
+  },
+  "objects": {
+    "HUNK_UNIT": 88,
+    "format": "amiga",
+    "architecture": "m68k:68000",
+    "probe": {
+      "bytes": 11568,
+      "sha256": "68864b179745d83e3e7896c37fbc53962b243313f16a866b60d1a41df19cadab"
+    },
+    "runtimeImportsUnresolved": 32,
+    "unresolvedProjectImports": 0
+  },
+  "stackResourceGuard": {
+    "actualCurrentSPRead": true,
+    "genuineTaskLowerUpperChecks": true,
+    "minimumRemainingBytes": 1048576,
+    "originalTaskAndNestsRechecked": true,
+    "guardDominatesPlanningAndAllocation": true,
+    "refusalRetains": true,
+    "wholeTaskStackProof": false
+  },
+  "individualStackUsage": {
+    "rows": 1242,
+    "static": 246,
+    "dynamicBounded": 996,
+    "mainBytes": 376,
+    "largestBytes": 16572,
+    "wholeCallChainOrCRTBound": false
+  },
+  "sourceExpectationsNotRuntimeMeasurements": {
+    "poolCeilingBytes": 951118,
+    "livePeak": 18,
+    "registrySlots": 32,
+    "stdoutOracleBytes": 180
+  },
+  "preservation": {
+    "current320InputFullFactsEqual": true,
+    "READYFullFactsEqual": true,
+    "strict68Equal": true,
+    "savedGuardEqual": true
+  },
+  "history": "Earlier preparation refused historical own-wrapper metadata before READY/builder; retained separately. Distinct current-baseline r2 admitted one actual native build. No past boundary rewritten.",
+  "boundaries": {
+    "link": "NOT_PERFORMED",
+    "executable": "NOT_CREATED",
+    "nativeRuntime": "NOT_RUN",
+    "targetOperations": 0,
+    "frontendWindowDevicePublicationIRQPhysicalListening": "NOT_QUALIFIED"
+  },
+  "limitation": "Chosen1MiB remaining resource guard and proposed2MiB Shell Stack do not establish whole-Task/CRT/OS/call-chain/WCET or cancellation safety."
+}

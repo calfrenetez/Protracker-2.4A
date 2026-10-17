@@ -35,7 +35,9 @@ retry or uncertain release. Its terminal busy retention is a diagnostic policy,
 not production OS-coexistence acceptance.
 
 The source-derived peak is 18 allocation slots within the unchanged 32-slot
-registry. Request/byte limits use checked sizeof/API/project requirements and
+registry. The compiled classic geometry expects a 951118-byte checked pool;
+this excludes normal CRT internal allocations and is not a runtime measurement.
+Request/byte limits use checked sizeof/API/project requirements and
 reserve-aware Fast allocation policy. Actual native allocation success and byte
 peaks have not been measured; no fixed free-memory capacity is assumed.
 
@@ -48,8 +50,8 @@ Their C fixtures/oracles are unchanged; only four frozen source hashes per
 wrapper changed. These recipes exclude the new native probe. Historical clean
 execution and the earlier outer8-input R2 snapshot remain separate evidence.
 
-The exact corrected native source compiles once into 88 genuine 68000 HUNK objects
-with 440 successful stages and empty diagnostics in 54.076482542 seconds. Actual
+The current R4 source compiles once into 88 genuine 68000 HUNK objects
+with 440 successful stages and empty diagnostics in 57.268159083 seconds. Actual
 dependency and ordinary-preprocessor paths agree for every unit: 200 project
 bodies plus 58 selected genuine SDK bodies within the 92-body allowance. SDK92
 adds 10 resident genuine headers to the existing 82; no installed fallback,
@@ -58,16 +60,23 @@ full facts, protected 68 and the Root-recorded saved guard remain unchanged.
 This native build uses the separately pinned clean editor/view quartet; it
 does not qualify the unrelated working display changes used by the HOST builds.
 
-A separate host link passes all five commands and produces a 396080-byte Amiga
-HUNK executable, SHA-256
-`e94fd23ec2a5da949ee1689af8d73dda076363cc8160ba0b67e021815e58a877`.
-The map contains exactly the expected 88 application objects, original startup
-and six runtime archives, with no unresolved symbols. The six additional runtime
-providers are reviewed from saved map/disassembly data. Input, protected-file,
-saved guard and product checks remain unchanged. This is a build result; the
-executable has not run. See the separate compact receipts in
+A separate current R4 host link passes all five commands once and produces a
+396176-byte Amiga HUNK executable, SHA-256
+`a85a38db97a048d3cf0c8964541c74bba5ae17f8b9e2c2965c5534cf1d2a6fd5`,
+CRC32 `7A981098`. The independently reviewed map has exactly 95 ordered inputs:
+88 application objects, original startup and six runtime archives. No unresolved
+symbols remain; all 32 original runtime providers match the prior reviewed
+identities. The complete HUNK parse and emitted stack guard are reviewed too.
+Input, protected-file, saved guard and product facts remain unchanged. This is
+a build result; the executable has not run. See the separate `native-r4-*`
+receipts in
 [`evidence/midi-requester-document-task/`](../evidence/midi-requester-document-task/).
-The earlier object-only receipt retains its original pre-link status.
+
+Historical R3 build/link receipts remain unchanged: its native build took
+54.076482542 seconds and its 396080-byte executable has SHA-256
+`e94fd23ec2a5da949ee1689af8d73dda076363cc8160ba0b67e021815e58a877`.
+That different candidate also never ran. Object-only receipts retain their
+original pre-link status; subsequent link reviews are separate evidence.
 
 The first R2 native attempt is preserved as FAILED: it stopped after dependency
 and preprocessing success because 14 positional initializer values targeted a
@@ -75,11 +84,25 @@ and preprocessing success because 14 positional initializer values targeted a
 fields, leaving the remaining eight zero. Compiler warnings remain errors.
 The earlier R1 retained-local-parent finding remains an uncompiled source refusal.
 
-Raw stack-usage rows are individual observations only. The probe main entry
-reports 376 bytes; the largest individual entry across all 88 objects is 16572 bytes
-in filtered PCM. No whole-Task/CRT/reachable-call-chain stack or WCET is qualified.
+R4 adds a one-time diagnostic resource check before heavy planning, allocation
+and construction. It reads the actual m68k stack pointer and the original Task's
+volatile lower/upper bounds, requires an even pointer with at least 1 MiB of
+remaining space, and rechecks Task identity, nesting and bounds. The reviewed
+compiler inlines this helper after the startup/main stack consumption; there is
+no independent helper frame in that artifact. A future separately admitted test
+must set and query 2 MiB of Stack in the same Shell. The existing runner needs a
+separately qualified private allowance for that exact value. No runtime packet
+is admitted by these source or build results.
 
-Native Task execution, Amiberry and physical A1200 acceptance remain untested.
+Raw stack-usage rows are individual observations only. The probe main entry
+reports 376 bytes; the largest individual entry across all 88 objects is 16572
+bytes in filtered PCM. Neither those rows nor the chosen remaining-space guard
+qualifies whole-Task/CRT/OS/interrupt/call-chain stack safety or WCET. The original
+terminal busy HOLD has no general cancellation guarantee. Its first experiment
+is restricted to a separately owned Amiberry VM with reviewed failure containment;
+physical execution is not admitted and cannot inherit an emulator-only admission.
+
+Native Task execution and Amiberry remain NOT_RUN; physical A1200 is NOT_ADMITTED.
 No GUI, active playback, hardware DMA, sample-RAM capacity/order,
 voice-stop, musical timing or human listening acceptance follows from this build.
 The [window source](MIDI_REQUESTER_WINDOW.md) still needs its genuine durable

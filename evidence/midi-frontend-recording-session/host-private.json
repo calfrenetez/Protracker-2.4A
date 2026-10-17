@@ -1,0 +1,83 @@
+{
+  "actual": {
+    "cohorts": [
+      "complete clean editor pair",
+      "complete protected working editor pair"
+    ],
+    "compileAndFixtureDiagnosticsEmpty": true,
+    "compileSeconds": [
+      8.606998749979539,
+      8.281905375013594
+    ],
+    "completeDomainsEach": 6,
+    "fixtureGroupsEach": 11,
+    "fixtureSeconds": [
+      0.45098070899257436,
+      0.2440655410173349
+    ],
+    "literalProjectBodiesEach": 90,
+    "oracleBytesEach": 140,
+    "oracleSHA256": "0a004f5a493ca5241233559683dc6272f13d3ca8d8f7fbe68f3ebd0083414bec",
+    "pureSelectorCasesEach": 6,
+    "quotedEdgesEach": 151,
+    "rootedRetainedDomainsEach": 5,
+    "translationUnitsEach": 39,
+    "unittestMethodsEach": 3,
+    "wholeHOSTSeconds": 18.221827375004068
+  },
+  "evidencePins": {
+    "actualRootResult": {
+      "bytes": 2987,
+      "sha256": "c8735826855c7e2d2c3da057d44ed8c2b146a4e65573e606771a52c5ba45fd38"
+    },
+    "independentReview": {
+      "bytes": 18628,
+      "sha256": "d998c60d2b675a2d59bcde05e7783b3a5e70e19198d60a1158be5e731a0d179a"
+    },
+    "sourceFreeze": {
+      "bytes": 30987,
+      "sha256": "ecac8293663a1c12facab3eb39e6f50ba572e246dad53106aa0d041e8735a3a5"
+    }
+  },
+  "limits": [
+    "Six complete and five rooted retained HOST domains per cohort; retained domains are not claimed cleaned.",
+    "Temporary compile exports/executables were not retained; genuine source-copy checks and exact saved commands/streams plus wrapper assertions bind execution.",
+    "Pinned compiler executable is not a full transitive compiler/system-header/toolchain audit.",
+    "No native ABI/runtime, GUI/frontend activation, physical input/output, CAMD/driver, clock accuracy, device quiet or listening qualification."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "preservation": {
+    "READYBeforeAfterEachCohortAndFinalEqual": true,
+    "all180PrivateBodiesMatchSavedCopies": true,
+    "allFiveSavedBoundaryMapsEqual": true,
+    "directOriginalBaselineIncluded": true,
+    "onlyEditorCHPairDiffersAcrossCohorts": true,
+    "original68AndSavedGuardFactsEqual": true,
+    "recordedFiniteInputFullFacts": 289,
+    "tenDatalessBaselineInputsMetadataOnly": true
+  },
+  "retries": 0,
+  "reviewRefinement": "A saved-data reader shape correction counted10 metadata-only baseline entries by residency flags; first audit retained unchanged. No execution result changed or rerun.",
+  "schema": 1,
+  "scope": "Optional HOST-only MIDI setup/frontend/recording session composition; no application enrollment or external input/output.",
+  "sourcePins": {
+    "src/native/midi_frontend_recording_session.c": {
+      "bytes": 13720,
+      "sha256": "7a88ced28cc666e4778dd11528d7774a635e92cadac858c68071c7f68d33d34f"
+    },
+    "src/native/midi_frontend_recording_session.h": {
+      "bytes": 5344,
+      "sha256": "1bfb585511abc4d5779edad3241254e41cd21f402275f155b094d29972c62fc8"
+    },
+    "tests/midi_frontend_recording_session_test.c": {
+      "bytes": 23023,
+      "sha256": "9b15e69d1d1af59e3af5f55f88703bf6acabaf4d4e428f7c3bdf23a8f58e270b"
+    },
+    "tests/test_midi_frontend_recording_session.py": {
+      "bytes": 20706,
+      "sha256": "5591dd989747f2f86206e69300c0d61e72995374f0de5ed51c08147ab8ef2cab"
+    }
+  },
+  "state": "HOST_DUAL_COHORT_SESSION_PASS",
+  "targetOperations": 0
+}

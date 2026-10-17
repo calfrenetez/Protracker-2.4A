@@ -70,3 +70,9 @@ Runtime, GUI input isolation, playback recording, CAMD/source binding,
 timestamp conversion, device/output timing, Amiberry, physical MIDI and listening
 remain unqualified. Software admission is not hardware quiet. No default app or
 frontend enrollment is included.
+
+The optional HOST-only [frontend recording session](MIDI_FRONTEND_RECORDING_SESSION.md)
+uses this same take alongside the genuine setup modal and frontend context.
+Stopped or canceled takes remain attached until matched detach; only then can
+settings, workspace reuse or explicit context shutdown proceed. Its separate
+HOST checks provide no default application or native input enrollment.

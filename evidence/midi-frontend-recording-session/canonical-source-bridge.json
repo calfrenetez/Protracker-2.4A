@@ -1,0 +1,74 @@
+{
+  "state": "CANONICAL_SESSION_SOURCE_EQUIVALENCE_BRIDGE_NOT_A_CANONICAL_TEST_RUN",
+  "scope": "Exact actual dual-cohort HOST C/H/fixture source bodies; sole wrapper root-binding normalization. Optional HOST-only source remains unselected by default.",
+  "testedSourcePins": {
+    "src/native/midi_frontend_recording_session.c": {
+      "bytes": 13720,
+      "sha256": "7a88ced28cc666e4778dd11528d7774a635e92cadac858c68071c7f68d33d34f"
+    },
+    "src/native/midi_frontend_recording_session.h": {
+      "bytes": 5344,
+      "sha256": "1bfb585511abc4d5779edad3241254e41cd21f402275f155b094d29972c62fc8"
+    },
+    "tests/midi_frontend_recording_session_test.c": {
+      "bytes": 23023,
+      "sha256": "9b15e69d1d1af59e3af5f55f88703bf6acabaf4d4e428f7c3bdf23a8f58e270b"
+    }
+  },
+  "proposedCanonicalSourcePins": {
+    "src/native/midi_frontend_recording_session.c": {
+      "bytes": 13720,
+      "sha256": "7a88ced28cc666e4778dd11528d7774a635e92cadac858c68071c7f68d33d34f"
+    },
+    "src/native/midi_frontend_recording_session.h": {
+      "bytes": 5344,
+      "sha256": "1bfb585511abc4d5779edad3241254e41cd21f402275f155b094d29972c62fc8"
+    },
+    "tests/midi_frontend_recording_session_test.c": {
+      "bytes": 23023,
+      "sha256": "9b15e69d1d1af59e3af5f55f88703bf6acabaf4d4e428f7c3bdf23a8f58e270b"
+    }
+  },
+  "sourceBodiesByteExact": true,
+  "wrapper": {
+    "actualPrivate": {
+      "bytes": 20706,
+      "sha256": "5591dd989747f2f86206e69300c0d61e72995374f0de5ed51c08147ab8ef2cab"
+    },
+    "proposedCanonical": {
+      "bytes": 20637,
+      "sha256": "b1d85083090a805ac3b5a24cb0ce6f7bd3bc8739f0d4b4a8178fe8facc5a53b9"
+    },
+    "change": "Sole CANONICAL assignment changes from the explicit original checkout Path to ROOT.",
+    "inverseTextReconstructionExact": true,
+    "ASTEqualExceptCANONICALAssignment": true,
+    "normalizedCanonicalWrapperExecution": "NOT_RUN",
+    "selectorsRecipeFixtureOracleAndKnownCompletePairAdmissionUnchanged": true
+  },
+  "actualHOSTReceipt": {
+    "bytes": 3273,
+    "sha256": "109cdbe9056d587e326280e9c130455754d6dac0d05fb5eb4cec826b1e7016c2"
+  },
+  "actualHOSTReceiptScope": {
+    "cohorts": [
+      "complete clean editor pair",
+      "complete protected working editor pair"
+    ],
+    "translationUnitsEach": 39,
+    "literalBodiesEach": 90,
+    "quotedEdgesEach": 151,
+    "commonBodies": 88,
+    "unionBodyVersions": 92,
+    "fixtureGroupsEach": 11,
+    "completeEach": 6,
+    "wholeRootedRetainedEach": 5
+  },
+  "reviewRefinement": "Original detailed/compact reports stay unchanged. A separate saved-reader revision counts10 metadata-only baseline entries using the actual residency flag shape; no execution changed or repeated.",
+  "limits": [
+    "No normalized canonical wrapper run or fresh Git compilation is inferred.",
+    "No temporary executable/codegen retained for independent native inspection; HOST return-code basis is exact successful wrapper assertions plus saved streams.",
+    "No full transitive compiler/system-header audit, native ABI/runtime, Task/GUI/input/CAMD/output/clock/device/listening or shipping enrollment qualification."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0
+}

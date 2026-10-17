@@ -138,3 +138,9 @@ Raw frontend New/Load still cannot adopt this owner by adding a guard. Integrati
 must use the existing typed close/publication/final-address rebind lifecycle and
 qualify it separately. The [native document RAM test](MIDI_REQUESTER_DOCUMENT_TASK.md)
 has its own independent source, build and execution boundaries.
+
+A separate optional HOST-only [recording session](MIDI_FRONTEND_RECORDING_SESSION.md)
+composes this same context with the genuine editor recording take. It prevents
+settings/shutdown while that take remains attached and permits workspace reuse
+only after matched detach. Its dual-cohort metadata checks add no shipping or
+native frontend enrollment.

@@ -85,6 +85,37 @@ static enum pt_midi_setup_result observe(struct pt_midi_setup_owner *o,struct pt
 }
 size_t pt_midi_setup_owner_size(void){return sizeof(struct pt_midi_setup_owner);}
 size_t pt_midi_setup_owner_alignment(void){return ALIGN_OF(struct pt_midi_setup_owner);}
+int pt_midi_setup_owner_storage_disjoint(const struct pt_midi_setup_owner *o,size_t capacity,
+    const void *p,size_t bytes)
+{
+    if(admission(o)!=PT_MIDI_SETUP_OK||capacity!=o->capacity||!span(p,bytes))return 0;
+    return apart(p,bytes,o,o->capacity)&&apart(p,bytes,o->context.data,o->context.bytes)&&
+        apart(p,bytes,o->workspace,o->workspace?o->workspace_bytes:0)&&
+        apart(p,bytes,o->unresolved,o->unresolved?o->workspace_bytes:0);
+}
+enum pt_midi_setup_result pt_midi_setup_owner_transition_admit(
+    const struct pt_midi_setup_owner *o,size_t capacity,const struct pt_editor *e,
+    const struct pt_midi_setup_owner_transition_span *spans,unsigned count)
+{
+    struct pt_midi_setup_status s;enum pt_midi_setup_result r=admission(o);unsigned n;
+    if(r!=PT_MIDI_SETUP_OK)return r;
+    if(capacity!=o->capacity||e!=o->source.editor||count>64||(!spans&&count)||
+       !pt_midi_setup_owner_storage_disjoint(o,capacity,spans,count*sizeof(*spans)))return PT_MIDI_SETUP_INVALID;
+    if(o->state!=PT_MIDI_OWNER_LIVE)return PT_MIDI_SETUP_STALE;
+    if(o->modal)return PT_MIDI_SETUP_BUSY;
+    /* This read-only genuine-child query validates the original project/history/
+     * allocator binding and all retained records. It invokes no callback. */
+    r=pt_midi_setup_get(o->workspace,&s);if(r!=PT_MIDI_SETUP_OK)return r;
+    if(s.draft)return PT_MIDI_SETUP_IN_USE;
+    for(n=0;n<count;++n){
+        if(spans[n].role!=PT_MIDI_OWNER_TRANSITION_STORAGE&&
+           spans[n].role!=PT_MIDI_OWNER_TRANSITION_CONTEXT_INPUT)return PT_MIDI_SETUP_INVALID;
+        if(spans[n].role==PT_MIDI_OWNER_TRANSITION_CONTEXT_INPUT&&o->context.bytes&&
+           spans[n].data==o->context.data&&spans[n].bytes==o->context.bytes)continue;
+        if(!pt_midi_setup_owner_storage_disjoint(o,capacity,spans[n].data,spans[n].bytes))return PT_MIDI_SETUP_INVALID;
+    }
+    return PT_MIDI_SETUP_OK;
+}
 enum pt_midi_setup_result pt_midi_setup_owner_init(struct pt_midi_setup_owner *o,size_t capacity,
     struct pt_editor *e,struct pt_midi_setup_owner_span context,size_t budget)
 {

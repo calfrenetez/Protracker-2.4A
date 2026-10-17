@@ -1,0 +1,185 @@
+{
+  "sourceScope": "HOST only; compiler executable/system-header closure is not qualified and no compiler binary hash is claimed",
+  "preservation": {
+    "protectedEntries": 68,
+    "strictSavedSnapshotsEqual": true,
+    "savedGuardBytesEqual": true,
+    "targetOperations": 0
+  },
+  "historicalReceiptsPreserved": {
+    "evidence/midi-setup-owner/host-private-clean.json": {
+      "bytes": 4436,
+      "sha256": "681b72b83a5fee901e70c66ee6ae3e7801e1b2a577688ba2199634d2ddeb57b9"
+    },
+    "evidence/midi-setup-owner/host-working-pair.json": {
+      "bytes": 2981,
+      "sha256": "cabe1f1971a49d01f4df25c8243e4f7d0e960ce9ffe3b64e50caf1841f6131bf"
+    },
+    "evidence/midi-setup-document/host-private-clean-quartet.json": {
+      "bytes": 6073,
+      "sha256": "ae9626a4ad50a559a9f1d862d6e1cbe25108ddd0f79be6f98d0db951c0d2a74e"
+    }
+  },
+  "limits": [
+    "Actual HOST qualification only; no native ABI/link/runtime, requester/frontend/default activation, CAMD/device/audio/clock/emulator/physical/listening or release acceptance.",
+    "No repeating native New/Load session or silent source/song allocator-policy rewrite.",
+    "Fresh living aligned disjoint allocation and original source/context lifetime/placement contracts remain; known spans are not a complete resource heap census."
+  ],
+  "schema": "pt24g-midi-document-host-v1",
+  "status": "HOST_PASS",
+  "qualification": "CANONICAL_EXACT_COMPLETE_CURRENT_WORKING_EDITOR_VIEW_QUARTET",
+  "returnCode": 0,
+  "outerSeconds": 30.698509999987436,
+  "unittestMethods": 5,
+  "pureQuartetSelectionCases": {
+    "knownComplete": 2,
+    "allMixedRefusals": 14,
+    "unknownHashOrLengthRefusals": 8,
+    "missingOrExtraRefusals": 2,
+    "total": 26
+  },
+  "recipe": {
+    "translationUnits": 86,
+    "literalBodies": 202,
+    "commonBodies": 198,
+    "selectedQuartetBodies": 4,
+    "defaultTranslationUnits": 84,
+    "hostFlags": [
+      "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+      "-DPT_DOCUMENT_TYPED_ACTION=1",
+      "-DPT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1",
+      "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+    ],
+    "defaultFlags": [
+      "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+      "-DPT_DOCUMENT_TYPED_ACTION=1"
+    ],
+    "compileTimeoutSeconds": 120,
+    "fixtureTimeoutSeconds": 30
+  },
+  "selectedQuartet": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    },
+    "src/editor/view.c": {
+      "bytes": 44217,
+      "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432"
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+    }
+  },
+  "selectedQuartetKind": "COMPLETE_CURRENT_WORKING_QUARTET",
+  "actualWrapper": {
+    "bytes": 37217,
+    "sha256": "94865f705438b9c5143adc6461ab135a4900597366c0ac18582ff21460b43392"
+  },
+  "originalHelper": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "sourcePinsDigestSha256": "bbe4b95cb542bde4c9e39bceecdeee8912d9054be85c57d2707a5d9488af9f55",
+  "changedSourcePins": {
+    "src/editor/editor_document_action.c": {
+      "bytes": 17834,
+      "sha256": "cb2f3c09b52e164566eb35b247b031037acbbb5b4b548858300338a78fa1ca66"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4507,
+      "sha256": "1c28af5a3001dc4fb73b5958098d4bb0275f1376536d3975b3154bde4944cd59"
+    },
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 18311,
+      "sha256": "5df813ed706871f7b35d7491cf2b9df3abaf6fa3588f05109870b0b3d5573970"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 5560,
+      "sha256": "ac1c4b09498e51c04071311f0bec23bdecdadd426b8e55ba8a635cfacc0fa1ec"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 13046,
+      "sha256": "959d64e0166c3b0ea78f4f821b9754be0eba1afebf65e731022ef4641705af47"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 6671,
+      "sha256": "726b3658ca8b9d6ed834484e1e8b219e7b70c9cf250e42c9a941fa6e470e92ec"
+    },
+    "tests/midi_setup_document_test.c": {
+      "bytes": 22846,
+      "sha256": "7085bd75f0cbe91498072ce922d80390262b6f3439c911d16627548702622c14"
+    }
+  },
+  "acceptance": {
+    "focusedFreshProcessCases": 8,
+    "completedWholeRigs": 6,
+    "globallyRootedHeldRigCases": [
+      "waiting-modal",
+      "held-admission"
+    ],
+    "sameOriginalSamplerCandidateAllocatorCase": "shared-load",
+    "focusedOracleBytes": 688,
+    "focusedOracles": {
+      "admission": {
+        "bytes": 83,
+        "sha256": "8a72012601b03c66289bebb4a136fffd08eccd88aa39763008ce5849d9d77b85"
+      },
+      "preservation": {
+        "bytes": 86,
+        "sha256": "22c9820249cf5d94404f8a185183da27e0cde18bed6d545693e5b3d2f220a776"
+      },
+      "publish-new": {
+        "bytes": 85,
+        "sha256": "86c964b00448c42203818df84a79daf9bb33f2472e7b297f06da9ca5f9c8a18e"
+      },
+      "publish-load": {
+        "bytes": 86,
+        "sha256": "983f1dbb21c8e82143b43ed37b3d0230638d76cfa46faf35c7ffa004194fedbc"
+      },
+      "shared-load": {
+        "bytes": 85,
+        "sha256": "eb0c3839a2db0b09809584ebe06dcf49bbc24cfad3eff36b098e8f5f52aed887"
+      },
+      "waiting-modal": {
+        "bytes": 87,
+        "sha256": "cdaa04c374c316e9b78603619ae802f2111189b023e2dc66a406d3acffb9bbe1"
+      },
+      "record-reentry": {
+        "bytes": 88,
+        "sha256": "cda3f12f58c3974b09a20eb06a6d556dd80c766e178313055974bc7cb2e83309"
+      },
+      "held-admission": {
+        "bytes": 88,
+        "sha256": "0616e3ec285f971445b118848ee4afb9ab7ccee80d313cc8ce8af7a90c11e407"
+      }
+    },
+    "originalNullActionCases": 13,
+    "originalDefaultOffActionCases": 13,
+    "legacyOracle": {
+      "bytes": 1154,
+      "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+    },
+    "allCompilerAndFixtureDiagnosticStreamsEmpty": true,
+    "defensiveCloseRebindRefusalBranches": "SOURCE_REVIEW_ONLY_NOT_FORCE_INJECTED"
+  },
+  "timingsSeconds": {
+    "compile": 15.086404000001494,
+    "admission": 0.28953804200864397,
+    "preservation": 0.027232041000388563,
+    "publish-new": 0.035345250013051555,
+    "publish-load": 0.10598729099729098,
+    "shared-load": 0.10501475000637583,
+    "waiting-modal": 0.018017834023339674,
+    "record-reentry": 0.031734291987959296,
+    "held-admission": 0.014619249996030703,
+    "null-regression": 0.2628290409920737,
+    "default-compile": 13.82424658400123,
+    "default-regression": 0.4835328750195913
+  },
+  "privateCleanRun": "Separate preserved actual receipt; this run selected the complete current working quartet."
+}

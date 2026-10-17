@@ -67,3 +67,23 @@ No HOST pass establishes document publication, native ABI/link/runtime, frontend
 output quiet, emulator, physical A1200/AmiGUS, timing, listening or release
 acceptance. Existing source/context lifetime and genuine caller-placement
 preconditions remain required.
+
+
+A separately qualified optional HOST document composition adds callback-free
+original-binding admission and numeric known-storage exclusions to this sidecar.
+The sidecar still owns no document or publication authority; existing typed
+action/replacement code performs the actual once-only disposal/close/publication/
+rebind sequence. See `MIDI_SETUP_DOCUMENT.md`. The receipts above retain their
+original historical sidecar source scope; added-query qualification and the
+updated owner regression must remain separate actual evidence.
+
+
+The original owner regression separately passed after those two query-source pins
+changed. Three methods still contain the original six pure editor-pair cases and
+the unchanged eight-group 170-byte fixture, using 32 units/76 bodies. Actual compiler
+and fixture diagnostics were empty, strict saved 68-entry/guard equality held, and
+no target operation ran. This successor records the selected complete working
+editor pair at `evidence/midi-setup-owner/host-working-pair-after-document-queries.json`.
+The optional document composition has its own complete working-quartet acceptance
+in `evidence/midi-setup-document/host-canonical-working-quartet.json`; the original
+historical private-clean and working-pair receipts above remain untouched.

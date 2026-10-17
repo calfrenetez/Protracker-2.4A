@@ -4,6 +4,12 @@
 #include "editor_mixed_establish.h"
 #include "editor_mixed_bridges.h"
 #include "../core/document.h"
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+#if PT_DOCUMENT_MIDI_SETUP_HOST_ONLY != 1
+#error "MIDI document composition requires explicit HOST-only selection"
+#endif
+#include "midi_setup_owner.h"
+#endif
 /* Private serialized typed replacement. A candidate is a complete, detached,
  * genuinely owned document made by the ordinary document API while the old
  * document still lives. Its full-capacity allocations must be disjoint from
@@ -53,6 +59,10 @@ struct pt_editor_document_replacement {
     struct pt_editor_mixed_establish *establish;
     void *protected_storage[14];size_t protected_bytes[14];
     size_t sampler_budget;
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+    struct pt_midi_setup_owner *midi_setup;size_t midi_capacity;
+    unsigned midi_close_attempted,midi_rebind_attempted;
+#endif
     unsigned work,phase,busy,fault,release_attempted;
     enum pt_document_replace_result result;
 };
@@ -64,6 +74,22 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
     struct pt_editor_mixed_bridges *,const struct pt_editor_mixed_bridge_inputs *,
     const struct pt_render_options *,const struct pt_paula_render_caps *,
     const struct pt_playback_format *,struct pt_sampler_storage_span,unsigned);
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+/* Optional HOST-only enrollment on this genuine PREPARED phase0 replacement.
+ * It neither closes nor cancels anything. Original owner must match this editor;
+ * full capacity is verified by its typed query. NULL preserves ordinary behavior.
+ * Enrollment/close/rebind refusal latches HOLD without retry. Fresh rebind runs
+ * only after publication, final editor_init and original sampler policy restore.
+ * Source/song allocator policy and repeating-session finish limits are unchanged.
+ * The context/parent containing this mutable control is STORAGE, never an
+ * allocator-context-input exemption. All controls/candidate/contexts remain
+ * disjoint from opaque retained MIDI records under the original placement and
+ * fresh-disjoint allocator preconditions; no complete resource census exists.
+ * Sidecar/workspace/context stay alive through genuine finish; the final owner
+ * must be positively closed before its separate explicit workspace release. */
+enum pt_document_replace_result pt_editor_document_replacement_midi_setup(
+    struct pt_editor_document_replacement *,struct pt_midi_setup_owner *,size_t);
+#endif
 enum pt_document_replace_result pt_editor_document_replacement_step(
     struct pt_editor_document_replacement *);
 int pt_editor_document_replacement_finish(struct pt_editor_document_replacement *);

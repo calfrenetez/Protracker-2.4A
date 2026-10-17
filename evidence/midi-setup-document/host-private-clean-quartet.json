@@ -1,0 +1,171 @@
+{
+  "schema": "pt24g-midi-document-host-v1",
+  "status": "HOST_PASS",
+  "qualification": "PRIVATE_EXACT_COMPLETE_CLEAN_EDITOR_VIEW_QUARTET",
+  "returnCode": 0,
+  "outerSeconds": 30.534937582997372,
+  "recipe": {
+    "translationUnits": 86,
+    "literalProjectBodies": 202,
+    "defaultTranslationUnits": 84,
+    "hostFlags": [
+      "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+      "-DPT_DOCUMENT_TYPED_ACTION=1",
+      "-DPT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1",
+      "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+    ],
+    "defaultFlags": [
+      "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+      "-DPT_DOCUMENT_TYPED_ACTION=1"
+    ],
+    "cflags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-Itests",
+      "-I."
+    ],
+    "compiler": "/usr/bin/cc; executable/system-header closure not qualified"
+  },
+  "selectedQuartet": {
+    "src/editor/editor.c": {
+      "bytes": 69993,
+      "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6646,
+      "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    },
+    "src/editor/view.c": {
+      "bytes": 42964,
+      "sha256": "5ae31dfe5d90f5dc6214a9ccad84751779c5f02b8efce196bdbd48cbb3002a06"
+    },
+    "src/editor/view.h": {
+      "bytes": 1731,
+      "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c"
+    }
+  },
+  "sourcePinsDigestSha256": "55a95f1945d8e893784c1bc8447bb6b78e5e5a25ba74f6d70e575ae63b5c70f2",
+  "changedSourcePins": {
+    "src/editor/editor_document_action.c": {
+      "bytes": 17834,
+      "sha256": "cb2f3c09b52e164566eb35b247b031037acbbb5b4b548858300338a78fa1ca66"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4507,
+      "sha256": "1c28af5a3001dc4fb73b5958098d4bb0275f1376536d3975b3154bde4944cd59"
+    },
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 18311,
+      "sha256": "5df813ed706871f7b35d7491cf2b9df3abaf6fa3588f05109870b0b3d5573970"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 5560,
+      "sha256": "ac1c4b09498e51c04071311f0bec23bdecdadd426b8e55ba8a635cfacc0fa1ec"
+    },
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 13046,
+      "sha256": "959d64e0166c3b0ea78f4f821b9754be0eba1afebf65e731022ef4641705af47"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 6671,
+      "sha256": "726b3658ca8b9d6ed834484e1e8b219e7b70c9cf250e42c9a941fa6e470e92ec"
+    },
+    "tests/midi_setup_document_test.c": {
+      "bytes": 22846,
+      "sha256": "7085bd75f0cbe91498072ce922d80390262b6f3439c911d16627548702622c14"
+    }
+  },
+  "actualPrivateWrapper": {
+    "bytes": 32795,
+    "sha256": "35fa360ba34681f4aab568e246f5eab9e2a85fd34977a0cd719fedd2ff90243a"
+  },
+  "originalHelper": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "acceptance": {
+    "focusedCases": 8,
+    "completedWholeRigs": 6,
+    "globallyRootedHeldRigCases": [
+      "waiting-modal",
+      "held-admission"
+    ],
+    "sameOriginalSamplerCandidateAllocatorCase": "shared-load",
+    "legacyNullCases": 13,
+    "legacyDefaultOffCases": 13,
+    "focusedOracleBytes": 688,
+    "focusedOracles": {
+      "admission": {
+        "bytes": 83,
+        "sha256": "8a72012601b03c66289bebb4a136fffd08eccd88aa39763008ce5849d9d77b85"
+      },
+      "preservation": {
+        "bytes": 86,
+        "sha256": "22c9820249cf5d94404f8a185183da27e0cde18bed6d545693e5b3d2f220a776"
+      },
+      "publish-new": {
+        "bytes": 85,
+        "sha256": "86c964b00448c42203818df84a79daf9bb33f2472e7b297f06da9ca5f9c8a18e"
+      },
+      "publish-load": {
+        "bytes": 86,
+        "sha256": "983f1dbb21c8e82143b43ed37b3d0230638d76cfa46faf35c7ffa004194fedbc"
+      },
+      "shared-load": {
+        "bytes": 85,
+        "sha256": "eb0c3839a2db0b09809584ebe06dcf49bbc24cfad3eff36b098e8f5f52aed887"
+      },
+      "waiting-modal": {
+        "bytes": 87,
+        "sha256": "cdaa04c374c316e9b78603619ae802f2111189b023e2dc66a406d3acffb9bbe1"
+      },
+      "record-reentry": {
+        "bytes": 88,
+        "sha256": "cda3f12f58c3974b09a20eb06a6d556dd80c766e178313055974bc7cb2e83309"
+      },
+      "held-admission": {
+        "bytes": 88,
+        "sha256": "0616e3ec285f971445b118848ee4afb9ab7ccee80d313cc8ce8af7a90c11e407"
+      }
+    },
+    "legacyOracle": {
+      "bytes": 1154,
+      "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+    },
+    "allCompilerAndFixtureDiagnosticStreamsEmpty": true
+  },
+  "timingsSeconds": {
+    "compile": 14.403332458023215,
+    "admission": 0.32437016698531806,
+    "preservation": 0.02788620800129138,
+    "publish-new": 0.03527779199066572,
+    "publish-load": 0.1086001249786932,
+    "shared-load": 0.10459904198069125,
+    "waiting-modal": 0.017459875001804903,
+    "record-reentry": 0.031717667006887496,
+    "held-admission": 0.01410200001555495,
+    "null-regression": 0.2752477500180248,
+    "default-compile": 13.897097959008534,
+    "default-regression": 0.4839899999788031
+  },
+  "preservation": {
+    "protectedEntries": 68,
+    "strictSavedSnapshotsEqual": true,
+    "savedGuardBytesEqual": true,
+    "targetOperations": 0
+  },
+  "boundaries": [
+    "This receipt records only the actual private clean-quartet run; canonical working-quartet qualification and updated original owner regression remain separate pending runs.",
+    "Earlier failed fixture source/evidence remains preserved and is not relabelled.",
+    "Two HELD cases retain whole original domains until process exit, not successful zero-ledger teardown.",
+    "Known spans are not a complete record-storage census; original source lifetime, placement and fresh aligned disjoint allocator contracts remain.",
+    "No repeating native New/Load session, three-allocator native initialization rewrite, native requester/frontend/default activation, CAMD/device/message/audio/clock/emulator/physical/listening or release acceptance."
+  ]
+}

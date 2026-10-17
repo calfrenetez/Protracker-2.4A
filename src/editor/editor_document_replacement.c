@@ -97,6 +97,37 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
     active=c;
     return c->result;
 }
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+static int midi_admit(struct pt_editor_document_replacement *c,struct pt_midi_setup_owner *o,size_t capacity)
+{
+    const struct pt_midi_setup_owner_transition_span spans[]={
+        {c,sizeof(*c),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->document,sizeof(*c->document),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->candidate,sizeof(*c->candidate),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->binding,sizeof(*c->binding),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->old_control,sizeof(*c->old_control),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->new_control,sizeof(*c->new_control),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->old_paula,sizeof(*c->old_paula),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->old_amigus,sizeof(*c->old_amigus),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->new_bridges,sizeof(*c->new_bridges),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->establish,sizeof(*c->establish),PT_MIDI_OWNER_TRANSITION_STORAGE},{c->inputs.backend,sizeof(*c->inputs.backend),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->inputs.backend->reservation,sizeof(*c->inputs.backend->reservation),PT_MIDI_OWNER_TRANSITION_STORAGE},
+        {c->context.data,c->context.bytes,PT_MIDI_OWNER_TRANSITION_STORAGE},{c->parent.data,c->parent.bytes,PT_MIDI_OWNER_TRANSITION_STORAGE}};
+    unsigned n;
+    if(pt_midi_setup_owner_transition_admit(o,capacity,c->editor,spans,
+       sizeof(spans)/sizeof(spans[0]))!=PT_MIDI_SETUP_OK)return 0;
+    for(n=0;n<14;++n)if(!pt_midi_setup_owner_storage_disjoint(o,capacity,
+        c->protected_storage[n],c->protected_bytes[n]))return 0;
+    return 1;
+}
+enum pt_document_replace_result pt_editor_document_replacement_midi_setup(
+    struct pt_editor_document_replacement *c,struct pt_midi_setup_owner *o,size_t capacity)
+{
+    if(!c||active!=c||c->self!=c)return PT_DOCUMENT_REPLACE_INVALID;
+    if(c->busy){c->fault=1;return held(c);}
+    if(c->result==PT_DOCUMENT_REPLACE_HOLD)return c->result;
+    if(c->fault||c->phase||c->result!=PT_DOCUMENT_REPLACE_PREPARED||!headers(c)||
+       c->midi_setup||c->midi_capacity||(!o&&capacity))return held(c);
+    if(!o)return c->result;
+    if(!midi_admit(c,o,capacity))return held(c);
+    c->midi_setup=o;c->midi_capacity=capacity;return c->result;
+}
+#endif
 enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_editor_document_replacement *c)
 {
     int a,b;enum pt_establish_result r;enum pt_mixed_owner_result owner;
@@ -106,16 +137,40 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
     if(c->result==PT_DOCUMENT_REPLACE_HOLD||c->result==PT_DOCUMENT_REPLACE_COMMITTED||
        c->result==PT_DOCUMENT_REPLACE_COMMITTED_NO_OWNER)return c->result;
     if(c->fault||!headers(c))return held(c);
-    if(c->phase==0)c->phase=1;
+    if(c->phase==0){
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+        if(c->midi_setup&&!midi_admit(c,c->midi_setup,c->midi_capacity))return held(c);
+#endif
+        c->phase=1;
+    }
     if(c->phase==1){
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+        if(c->midi_setup&&!midi_admit(c,c->midi_setup,c->midi_capacity))return held(c);
+#endif
         before_call(c,&saved);a=pt_editor_mixed_stop(c->binding);
         if(!after(c,&saved))return held(c);
         if(!a){c->result=PT_DOCUMENT_REPLACE_WAITING;return c->result;}
         before_call(c,&saved);a=pt_paula_voices_close(c->old_paula);b=pt_wavetable_voices_close(c->old_amigus);
         if(!after(c,&saved))return held(c);
         if(!a||!b){c->result=PT_DOCUMENT_REPLACE_WAITING;return c->result;}
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+        /* WAITING continuations and real stop/voice-close callbacks cannot
+         * smuggle a new modal/draft into the irreversible dispose boundary. */
+        if(c->midi_setup&&!midi_admit(c,c->midi_setup,c->midi_capacity))return held(c);
+#endif
         before_call(c,&saved);a=pt_editor_dispose(c->editor);
         if(!after(c,&saved)||!a)return held(c);
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+        /* One real close immediately after genuine journal disposal, before
+         * phase2 can release/publish the old document. Never retry a refusal. */
+        if(c->midi_setup){
+            enum pt_midi_setup_result midi;
+            if(c->midi_close_attempted)return held(c);
+            c->midi_close_attempted=1;before_call(c,&saved);
+            midi=pt_midi_setup_owner_close_controller(c->midi_setup);
+            if(!after(c,&saved)||midi!=PT_MIDI_SETUP_OK)return held(c);
+        }
+#endif
         /* No descriptor traversal after dispose: the original sample table can
          * be retired. Its captured numeric ownership/header must remain exact. */
         c->phase=2;
@@ -143,6 +198,15 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
         c->phase=3;c->result=PT_DOCUMENT_REPLACE_PUBLISHED;
         if(!pt_editor_init(c->editor,&c->document->project))return no_owner(c);
         c->editor->sampler.allocator=c->sampler_allocator;c->editor->sampler.budget=c->sampler_budget;
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+        if(c->midi_setup){
+            enum pt_midi_setup_result midi;
+            if(!c->midi_close_attempted||c->midi_rebind_attempted)return held(c);
+            c->midi_rebind_attempted=1;before_call(c,&saved);
+            midi=pt_midi_setup_owner_rebind(c->midi_setup,c->editor);
+            if(!after(c,&saved)||midi!=PT_MIDI_SETUP_OK)return held(c);
+        }
+#endif
         if(!pt_editor_mixed_attach(c->binding,c->editor))return held(c);
         before_call(c,&saved);r=pt_editor_mixed_establish_begin(c->establish,c->binding,&c->parent,1);
         if(!after(c,&saved))return held(c);
@@ -213,6 +277,9 @@ int pt_document_typed_replacement_output_disjoint(const void *p,size_t bytes)
     if(!c)return span(p,bytes);
     if(c->self!=c||c->fault||!apart(p,bytes,c,sizeof(*c))||
        !apart(p,bytes,c->candidate,sizeof(*c->candidate)))return 0;
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+    if(c->midi_setup&&!pt_midi_setup_owner_storage_disjoint(c->midi_setup,c->midi_capacity,p,bytes))return 0;
+#endif
     /* Only the exact captured old header is a synchronous release INPUT.
      * Header subspans/overlapping outputs cannot consume this exception. */
     if(!apart(p,bytes,c->document,sizeof(*c->document)))

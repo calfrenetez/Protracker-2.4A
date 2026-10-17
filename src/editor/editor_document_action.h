@@ -32,6 +32,16 @@ struct pt_editor_document_action_inputs {
     struct pt_allocator allocator;
     struct pt_sampler_storage_span contexts[PT_DOCUMENT_ACTION_CONTEXTS];
     unsigned context_count,work;
+#if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
+    /* Optional genuine original sidecar, still live during prepare/cancel. No
+     * retained modal ticket/draft; exact constructor capacity, not a prefix.
+     * Caller keeps action/candidate/byte source/contexts disjoint from all
+     * opaque retained MIDI records; fresh disjoint allocator contract remains.
+     * Known sidecar exclusions do not infer a complete resource-span census.
+     * Keep original sidecar/workspace/context alive through genuine finish;
+     * final workspace release is a later explicit owner operation, not finish. */
+    struct pt_midi_setup_owner *midi_setup;size_t midi_capacity;
+#endif
 };
 enum pt_document_action_result {
     PT_DOCUMENT_ACTION_INVALID,PT_DOCUMENT_ACTION_FAILED,PT_DOCUMENT_ACTION_PREPARED,

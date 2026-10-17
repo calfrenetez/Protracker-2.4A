@@ -1,0 +1,93 @@
+{
+  "sourceScope": "HOST only; compiler executable/system-header closure is not qualified and no compiler binary hash is claimed",
+  "preservation": {
+    "protectedEntries": 68,
+    "strictSavedSnapshotsEqual": true,
+    "savedGuardBytesEqual": true,
+    "targetOperations": 0
+  },
+  "historicalReceiptsPreserved": {
+    "evidence/midi-setup-owner/host-private-clean.json": {
+      "bytes": 4436,
+      "sha256": "681b72b83a5fee901e70c66ee6ae3e7801e1b2a577688ba2199634d2ddeb57b9"
+    },
+    "evidence/midi-setup-owner/host-working-pair.json": {
+      "bytes": 2981,
+      "sha256": "cabe1f1971a49d01f4df25c8243e4f7d0e960ce9ffe3b64e50caf1841f6131bf"
+    },
+    "evidence/midi-setup-document/host-private-clean-quartet.json": {
+      "bytes": 6073,
+      "sha256": "ae9626a4ad50a559a9f1d862d6e1cbe25108ddd0f79be6f98d0db951c0d2a74e"
+    }
+  },
+  "limits": [
+    "Actual HOST qualification only; no native ABI/link/runtime, requester/frontend/default activation, CAMD/device/audio/clock/emulator/physical/listening or release acceptance.",
+    "No repeating native New/Load session or silent source/song allocator-policy rewrite.",
+    "Fresh living aligned disjoint allocation and original source/context lifetime/placement contracts remain; known spans are not a complete resource heap census."
+  ],
+  "schema": "pt24g-midi-owner-host-v1",
+  "status": "HOST_PASS",
+  "qualification": "CANONICAL_ORIGINAL_OWNER_REGRESSION_AFTER_DOCUMENT_QUERY_ADDITION",
+  "returnCode": 0,
+  "outerSeconds": 8.697411875007674,
+  "unittestMethods": 3,
+  "pureEditorPairCases": 6,
+  "recipe": {
+    "translationUnits": 32,
+    "literalBodies": 76,
+    "hostFlags": [
+      "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+    ],
+    "compileTimeoutSeconds": 120,
+    "fixtureTimeoutSeconds": 30
+  },
+  "selectedEditorPair": {
+    "src/editor/editor.c": {
+      "bytes": 69953,
+      "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6699,
+      "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+    }
+  },
+  "selectedEditorPairKind": "COMPLETE_CURRENT_WORKING_PAIR",
+  "actualWrapper": {
+    "bytes": 18711,
+    "sha256": "70696e422b7e5f90e29841446c5f0d568c70edc6774c78a5fa823c154505ad17"
+  },
+  "originalHelper": {
+    "bytes": 12598,
+    "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+  },
+  "sourcePinsDigestSha256": "e4d10cd4222cb9b8b421db61cd987d115efaf9226efa92f433b75f9741741dd7",
+  "changedOwnerSourcePins": {
+    "src/editor/midi_setup_owner.c": {
+      "bytes": 13046,
+      "sha256": "959d64e0166c3b0ea78f4f821b9754be0eba1afebf65e731022ef4641705af47"
+    },
+    "src/editor/midi_setup_owner.h": {
+      "bytes": 6671,
+      "sha256": "726b3658ca8b9d6ed834484e1e8b219e7b70c9cf250e42c9a941fa6e470e92ec"
+    }
+  },
+  "originalFixturePin": {
+    "bytes": 16794,
+    "sha256": "d347d64aec8e449466fcadd0719f58b31bca4b3f358ab2d179bc766e30f0ae47"
+  },
+  "acceptance": {
+    "genuineFixtureGroups": 8,
+    "completedWholeRigs": 6,
+    "globallyRootedHeldRigs": 2,
+    "oracle": {
+      "bytes": 170,
+      "sha256": "d36c131df96533812ca79502bcbb9c6877628f40a9be7365745315f40e88b8dd"
+    },
+    "allCompilerAndFixtureDiagnosticStreamsEmpty": true
+  },
+  "timingsSeconds": {
+    "compile": 8.135058749991003,
+    "fixture": 0.3343903750064783
+  },
+  "scope": "Original fixture body and170B oracle unchanged. Qualifier differs from its prior canonical version only in the two owner C/H frozen source hashes. This regression preserves original owner behavior; the new query/action composition is exercised separately by the document qualification."
+}

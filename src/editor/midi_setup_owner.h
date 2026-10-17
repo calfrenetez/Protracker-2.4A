@@ -38,6 +38,31 @@ struct pt_midi_setup_owner_status {
  */
 size_t pt_midi_setup_owner_size(void);
 size_t pt_midi_setup_owner_alignment(void);
+/* Callback-free negative transition admission, with no owner/output writes.
+ * Exact constructor capacity and the SAME original initialized editor are
+ * required; LIVE, no modal borrow, no draft and current genuine child binding.
+ * STORAGE spans are disjoint from complete owner, context and workspace.
+ * CONTEXT_INPUT permits only the exact captured complete allocator/context
+ * extent as a shared input; a distinct disjoint context is also allowed. It
+ * never permits an overlapping superset/subspan or any write over that context.
+ * Span descriptors themselves remain disjoint read inputs.
+ * No quiet/close/history-release or arbitrary allocator/heap census authority.
+ * Original sources are still live here; do not call after editor_dispose.
+ */
+enum pt_midi_setup_owner_transition_role {PT_MIDI_OWNER_TRANSITION_STORAGE=0,
+    PT_MIDI_OWNER_TRANSITION_CONTEXT_INPUT};
+struct pt_midi_setup_owner_transition_span {
+    const void *data;size_t bytes;enum pt_midi_setup_owner_transition_role role;
+};
+enum pt_midi_setup_result pt_midi_setup_owner_transition_admit(
+    const struct pt_midi_setup_owner *,size_t,const struct pt_editor *,
+    const struct pt_midi_setup_owner_transition_span *,unsigned);
+/* Numeric known-storage exclusion for existing document output vetoes, including
+ * after disposal. Does NOT read former editor/project/history or unknown journal
+ * allocations. Exact original owner capacity and live sidecar/context/workspace
+ * remain required; a false result grants no mutation/release authority. */
+int pt_midi_setup_owner_storage_disjoint(const struct pt_midi_setup_owner *,size_t,
+    const void *,size_t);
 enum pt_midi_setup_result pt_midi_setup_owner_init(struct pt_midi_setup_owner *,size_t,
     struct pt_editor *,struct pt_midi_setup_owner_span,size_t metadata_budget);
 /* Exactly one modal borrow. Ticket names the original allocator-owned setup,

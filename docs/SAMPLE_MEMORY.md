@@ -1,5 +1,20 @@
 # Sample memory and playback ownership
 
+## MIDI setup lifetime during document replacement —17 October2026
+
+The existing typed New/Load action can optionally retain the original MIDI setup
+owner through preparation and cancellation, close its controller after genuine
+journal disposal, and rebind it only after final editor initialization. Failed
+admission or uncertain closure retains ownership. This remains explicitly
+HOST-only; the default native path and musical scheduling are unchanged.
+Separate clean and current working editor/view qualifications pass eight focused
+cases, including two whole retained HELD contexts, plus the original thirteen
+action cases with both NULL and default-OFF composition. The current qualifier
+also passes 26 coherent-quartet selection checks, and the original eight-group
+setup-owner regression passes separately. Native frontend, emulator, physical
+device and listening acceptance remain unqualified. See
+[the lifetime contract](MIDI_SETUP_DOCUMENT.md).
+
 ## Same-query lineage ownership proof —16 October2026
 
 Mode3 preparation reuses its just-proven complete joint parents inside one

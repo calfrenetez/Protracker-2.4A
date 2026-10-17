@@ -7983,3 +7983,17 @@ native35 artifact/source-bound packet for current source. New native build/run,
 Amiberry, real-A1200, output/timing and listening acceptance remain unqualified.
 
 See [compact HOST evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/workflow-host.json).
+
+
+### Typed New/Load source and song policy — 17 October 2026
+
+Typed replacement now returns genuinely retired source capacity to the new
+editor and preserves the independent original song allocator and budget. Checked
+overflow refuses before transition writes or stopping the old owner; uncertain
+source retirement holds before old-document release/publication without retry.
+Separate clean and preserved-working-quartet HOST qualifications each pass six
+new cases plus thirteen legacy cases; current MIDI composition and default-OFF
+regressions pass separately. Two default-native typed objects compile with the
+real 32-bit Amiga layout, but remain unlinked and unrun. No new emulator, physical,
+output timing or listening acceptance is claimed. See [the policy contract and
+qualification limits](DOCUMENT_REPLACEMENT_POLICY.md).

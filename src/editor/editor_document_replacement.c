@@ -12,6 +12,24 @@ static int apart(const void *a,size_t an,const void *b,size_t bn)
 {uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;return span(a,an)&&span(b,bn)&&(!an||!bn||x>=y+bn||y>=x+an);}
 static int zero(const void *p,size_t n)
 {const unsigned char *v=p;size_t i;for(i=0;i<n;++i)if(v[i])return 0;return 1;}
+static int allocator_same(struct pt_allocator a,struct pt_allocator b)
+{return a.context==b.context&&a.allocate==b.allocate&&a.release==b.release;}
+static int policy_current(const struct pt_editor_document_replacement *c)
+{
+    const struct pt_editor *e=c->editor;const struct pt_document *source=&e->sample_source;
+    return source->allocated_bytes<=SIZE_MAX-e->sampler.budget&&
+        e->sampler.budget+source->allocated_bytes==c->sampler_budget&&
+        allocator_same(e->sampler.allocator,c->sampler_allocator)&&
+        allocator_same(e->song.allocator,c->song_allocator)&&e->song.budget==c->song_budget&&
+        !pt_document_retirement_project_busy(&source->project)&&pt_document_replacement_allowed(source);
+}
+static int retired_policy(const struct pt_editor_document_replacement *c)
+{
+    const struct pt_editor *e=c->editor;const struct pt_document *source=&e->sample_source;
+    return policy_current(c)&&!source->allocated_bytes&&!source->loaded&&!source->dirty&&
+        zero(&source->project,sizeof(source->project))&&zero(&source->storage,sizeof(source->storage))&&
+        !e->song.current&&!e->song.bytes;
+}
 static int contains(struct pt_sampler_storage_span s,const void *p,size_t n)
 {return span(s.data,s.bytes)&&span(p,n)&&(uintptr_t)p>=(uintptr_t)s.data&&
     n<=s.bytes&&(uintptr_t)p-(uintptr_t)s.data<=s.bytes-n;}
@@ -54,7 +72,10 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
        !contains(context,c,sizeof(*c))||
        !next->loaded||pt_project_validate(&next->project,NULL)!=PT_PROJECT_OK||
        !pt_document_replacement_allowed(next)||!in->backend||!in->backend->reservation||
-       in->backend==w->bridge->backend)return PT_DOCUMENT_REPLACE_INVALID;
+       in->backend==w->bridge->backend||
+       e->sample_source.allocated_bytes>SIZE_MAX-e->sampler.budget||
+       pt_document_retirement_project_busy(&e->sample_source.project)||
+       !pt_document_replacement_allowed(&e->sample_source))return PT_DOCUMENT_REPLACE_INVALID;
     controls[0]=c;sizes[0]=sizeof(*c);controls[1]=establish;sizes[1]=sizeof(*establish);
     controls[2]=fresh;sizes[2]=sizeof(*fresh);controls[3]=bridges;sizes[3]=sizeof(*bridges);
     controls[4]=d;sizes[4]=sizeof(*d);controls[5]=next;sizes[5]=sizeof(*next);
@@ -89,7 +110,9 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
     memcpy(&c->old_header,d,sizeof(*d));memcpy(&c->next_header,next,sizeof(*next));
     memcpy(&c->inputs,in,sizeof(*in));memcpy(&c->options,options,sizeof(*options));
     memcpy(&c->caps,caps,sizeof(*caps));memcpy(&c->format,format,sizeof(*format));
-    c->sampler_allocator=e->sampler.allocator;c->sampler_budget=e->sampler.budget;c->context=context;
+    c->sampler_allocator=e->sampler.allocator;
+    c->sampler_budget=e->sampler.budget+e->sample_source.allocated_bytes;
+    c->song_allocator=e->song.allocator;c->song_budget=e->song.budget;c->context=context;
     c->parent=(struct pt_sampler_storage_span){c,sizeof(*c)};c->work=work;c->result=PT_DOCUMENT_REPLACE_PREPARED;
     if(!pt_document_owned_storage_spans(d,c->protected_storage,c->protected_bytes)||
        !pt_document_owned_storage_spans(next,c->protected_storage+7,c->protected_bytes+7)){
@@ -137,6 +160,7 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
     if(c->result==PT_DOCUMENT_REPLACE_HOLD||c->result==PT_DOCUMENT_REPLACE_COMMITTED||
        c->result==PT_DOCUMENT_REPLACE_COMMITTED_NO_OWNER)return c->result;
     if(c->fault||!headers(c))return held(c);
+    if(c->phase<2&&!policy_current(c))return held(c);
     if(c->phase==0){
 #if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
         if(c->midi_setup&&!midi_admit(c,c->midi_setup,c->midi_capacity))return held(c);
@@ -158,8 +182,9 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
          * smuggle a new modal/draft into the irreversible dispose boundary. */
         if(c->midi_setup&&!midi_admit(c,c->midi_setup,c->midi_capacity))return held(c);
 #endif
+        if(!policy_current(c))return held(c);
         before_call(c,&saved);a=pt_editor_dispose(c->editor);
-        if(!after(c,&saved)||!a)return held(c);
+        if(!after(c,&saved)||!a||!retired_policy(c))return held(c);
 #if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
         /* One real close immediately after genuine journal disposal, before
          * phase2 can release/publish the old document. Never retry a refusal. */
@@ -176,6 +201,7 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
         c->phase=2;
     }
     if(c->phase==2){
+        if(!retired_policy(c))return held(c);
         if(!pt_sampler_lifetime_storage_retired(&c->editor->sampler)){
             c->result=PT_DOCUMENT_REPLACE_RETIRING;return c->result;
         }
@@ -183,7 +209,8 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
         if(c->release_attempted)return held(c);
         c->release_attempted=1;before_call(c,&saved);
         a=pt_document_release_checked(c->document)==PT_DOCUMENT_RELEASED;
-        if(!after_control(c,&saved)||!a||memcmp(c->candidate,&c->next_header,sizeof c->next_header))return held(c);
+        if(!after_control(c,&saved)||!a||memcmp(c->candidate,&c->next_header,sizeof c->next_header)||
+           !retired_policy(c))return held(c);
         /* Transfer once, after every old allocation was positively retired.
          * No rollback or old-descriptor access exists beyond this boundary. */
         memcpy(c->document,&c->next_header,sizeof(*c->document));
@@ -198,6 +225,7 @@ enum pt_document_replace_result pt_editor_document_replacement_step(struct pt_ed
         c->phase=3;c->result=PT_DOCUMENT_REPLACE_PUBLISHED;
         if(!pt_editor_init(c->editor,&c->document->project))return no_owner(c);
         c->editor->sampler.allocator=c->sampler_allocator;c->editor->sampler.budget=c->sampler_budget;
+        pt_song_init(&c->editor->song,&c->song_allocator,c->song_budget);
 #if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
         if(c->midi_setup){
             enum pt_midi_setup_result midi;

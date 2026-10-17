@@ -1,0 +1,152 @@
+{
+  "schema": "pt24g-document-policy-host-v1",
+  "status": "HOST_PASS",
+  "qualification": "PRIVATE_EXACT_COMPLETE_CLEAN_EDITOR_VIEW_QUARTET",
+  "returnCode": 0,
+  "outerSeconds": 15.90808387499419,
+  "recipe": {
+    "translationUnits": 84,
+    "literalProjectBodies": 200,
+    "typedReplacementSelector": 1,
+    "typedActionSelector": 1,
+    "assertionsEnabled": true,
+    "strictWarningsAsErrors": true,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "compileBoundSeconds": 120,
+    "caseBoundSeconds": 30,
+    "outerBoundSeconds": 180,
+    "compiler": "/usr/bin/cc; executable/system-header closure not qualified"
+  },
+  "sourceComposition": {
+    "savedCleanBaseCommit": "0854ea77e30578f3cab7dab984a250c4449e1126",
+    "inheritedBodies": 197,
+    "privatePolicyBodies": 2,
+    "newFixtureBodies": 1,
+    "currentCanonicalQualificationClaimed": false,
+    "selectedCleanQuartet": {
+      "src/editor/editor.c": {
+        "bytes": 69993,
+        "sha256": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6646,
+        "sha256": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+      },
+      "src/editor/view.c": {
+        "bytes": 42964,
+        "sha256": "5ae31dfe5d90f5dc6214a9ccad84751779c5f02b8efce196bdbd48cbb3002a06"
+      },
+      "src/editor/view.h": {
+        "bytes": 1731,
+        "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c"
+      }
+    },
+    "sourcePinsDigestSha256": "b7777ea3dafe710b165e09c66a016e4416733da60441bc3bccdb4064dc330c5a",
+    "policySourceBodies": {
+      "src/editor/editor_document_replacement.c": {
+        "bytes": 20022,
+        "sha256": "b5ed4f3270be4665e638674344ccb771924655852672ee95ba86c768934eff56"
+      },
+      "src/editor/editor_document_replacement.h": {
+        "bytes": 6060,
+        "sha256": "982e4af83b14f823edee3e9a6cb87568dd69c4f39f6ad0e01e365cddd6fd895c"
+      }
+    }
+  },
+  "controls": {
+    "fixture": {
+      "bytes": 20342,
+      "sha256": "9e70e55a4b5471153cdbc51e608f77a718663114f3cfa6b320da82e271876061"
+    },
+    "wrapper": {
+      "bytes": 29783,
+      "sha256": "958f59e36fcb8448d1a48c47ee8f2b0237bd5299747cebccb15e53c2becf0fd9"
+    },
+    "sourcePlan": {
+      "bytes": 10378,
+      "sha256": "85acb7166f5217a491e6960b70243959c603d29e3eb0ca74ebb3bf31ba78e66c"
+    },
+    "pinnedHelper": {
+      "bytes": 12598,
+      "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"
+    }
+  },
+  "acceptance": {
+    "focusedCases": 6,
+    "completeRigs": 5,
+    "globallyRootedHeldRigCases": [
+      "source-uncertain"
+    ],
+    "focusedOracleTotalBytes": 512,
+    "focusedOracles": {
+      "source-new": {
+        "bytes": 84,
+        "sha256": "51dd18c2ad9b23fe9d9386596b2bfb022a2610a201cb65767ef7880010ab0605"
+      },
+      "source-load": {
+        "bytes": 85,
+        "sha256": "c0c65402e9f7fe4e3d3b29bbe083f013aeb1b18c4c0f1356380c10da5297f55d"
+      },
+      "preservation": {
+        "bytes": 86,
+        "sha256": "471daaeb26cf573f3ccfc10ed4694a1493678ee3dd356f24a7100cb379f51879"
+      },
+      "song-policy": {
+        "bytes": 85,
+        "sha256": "168bfad89c452a070339a9461c6fa1d9cf4edf99550a1f8ebfcb0748c69d7750"
+      },
+      "overflow": {
+        "bytes": 82,
+        "sha256": "73ceb09ab3365692623e005d106487111cc914342d581ea75d2e43ec3e330908"
+      },
+      "source-uncertain": {
+        "bytes": 90,
+        "sha256": "cf3368a92c867c097a1c1a89520c13ecec8dc7f54af9e55e961da3c7218e14a5"
+      }
+    },
+    "focusedOrderedConcatenationSha256": "0245d087548a920b95402f8b4169e1bad7cd331dd625f238b1e203d1728337c5",
+    "legacyActionCases": 13,
+    "legacyOracle": {
+      "bytes": 1154,
+      "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+    },
+    "oneUnittestPassed": true,
+    "allCompilerAndChildDiagnosticStreamsEmpty": true,
+    "childReturnCodesZeroAssertedByPassingWrapper": true,
+    "defaultOffCompile": "NOT_IN_THIS_RUN"
+  },
+  "timingsSeconds": {
+    "compile": 14.223079667019192,
+    "source-new": 0.5829852500173729,
+    "source-load": 0.11230366601375863,
+    "preservation": 0.024733708996791393,
+    "song-policy": 0.03652237501228228,
+    "overflow": 0.016469791997224092,
+    "source-uncertain": 0.02140495800995268,
+    "legacy": 0.2673041249800008
+  },
+  "preservation": {
+    "strict68Unchanged": true,
+    "wrapperAndOuterSavedSnapshotsEqual": true,
+    "savedGuardBytesEqual": true,
+    "targetOperations": 0
+  },
+  "evidenceBindings": {
+    "actualResult": {
+      "bytes": 438,
+      "sha256": "5e09ed3542be13272469fe68dde2ca6acfbcbb2248ac2a26e8512f8de939fe05"
+    },
+    "independentSavedHostReview": {
+      "bytes": 15457,
+      "sha256": "dfdba2f5d214103e6756e1d6405f1970d7f9f7a14f687c94d8bf2c826df40647"
+    }
+  },
+  "boundaries": [
+    "This records only the actual private six-case clean-quartet policy run plus its original13-action legacy entry. The separate policy-MIDI regression/defaultOFF result is not incorporated or relabelled.",
+    "Five complete rigs have supported zero-ledger cleanup; the source-uncertain case retains the whole original domain with consumed obligations, not rollback, retry or a successful quiet/closure certificate.",
+    "Current canonical adoption/working-quartet checks remain separate. No native/link/runtime/frontend, SDK/toolchain, emulator/physical, device/timing/audio/listening or release acceptance."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "schema": "pt24g-policy-midi-working-host-v1",
+  "status": "HOST_PASS",
+  "qualification": "CANONICAL_EXACT_PRESERVED_WORKING_EDITOR_VIEW_QUARTET",
+  "returnCode": 0,
+  "outerSeconds": 30.267034207994584,
+  "sourceBinding": {
+    "policyBodies": {
+      "src/editor/editor_document_replacement.c": {
+        "bytes": 20022,
+        "sha256": "b5ed4f3270be4665e638674344ccb771924655852672ee95ba86c768934eff56"
+      },
+      "src/editor/editor_document_replacement.h": {
+        "bytes": 6060,
+        "sha256": "982e4af83b14f823edee3e9a6cb87568dd69c4f39f6ad0e01e365cddd6fd895c"
+      }
+    },
+    "selectedQuartet": {
+      "src/editor/editor.c": {
+        "bytes": 69953,
+        "sha256": "6301ed250aa5f0518b360c448a2fb742ab48fdc8e828c1a2d3c69df3ab479ea6"
+      },
+      "src/editor/editor.h": {
+        "bytes": 6699,
+        "sha256": "63fb2ab5b528b327a347811dc446bb95fbabf92a873199b832583380ddcec6c3"
+      },
+      "src/editor/view.c": {
+        "bytes": 44217,
+        "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432"
+      },
+      "src/editor/view.h": {
+        "bytes": 2032,
+        "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+      }
+    },
+    "sourcePinsDigestSha256": "bfd27471d27d31e3036c0da5fbf4b44583f56e65548fe78c56efac5fc063357e",
+    "wrapper": {
+      "bytes": 37217,
+      "sha256": "b928c278f695c431699fa76989b223303c1c3ae30b7301a33f5c97281e888ff5"
+    },
+    "fixture": {
+      "bytes": 22846,
+      "sha256": "7085bd75f0cbe91498072ce922d80390262b6f3439c911d16627548702622c14"
+    },
+    "currentCommitIdentityClaimed": false
+  },
+  "recipe": {
+    "translationUnits": 86,
+    "literalProjectBodies": 202,
+    "fixedBodies": 198,
+    "selectedQuartetBodies": 4,
+    "flags": [
+      "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+      "-DPT_DOCUMENT_TYPED_ACTION=1",
+      "-DPT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1",
+      "-DPT_MIDI_SETUP_OWNER_HOST_ONLY=1"
+    ],
+    "assertionsEnabled": true,
+    "strictWarningsAsErrors": true,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "compileBoundSeconds": 120,
+    "childBoundSeconds": 30,
+    "outerBoundSeconds": 180,
+    "compiler": "/usr/bin/cc; executable/system-header closure not qualified"
+  },
+  "acceptance": {
+    "unittests": 5,
+    "pureQuartetSelectionCases": 26,
+    "pureCaseBreakdown": {
+      "knownComplete": 2,
+      "mixed": 14,
+      "unknownHashOrLength": 8,
+      "missingOrExtra": 2,
+      "total": 26
+    },
+    "focusedFreshProcesses": 8,
+    "completeRigs": 6,
+    "globallyRootedHeldRigCases": [
+      "waiting-modal",
+      "held-admission"
+    ],
+    "focusedOracleTotalBytes": 688,
+    "focusedOrderedConcatenationSha256": "bedf714fe78ada572d85d781bd9bb21dab02d09e99626c68426f40cccbf3d28b",
+    "focusedOracles": {
+      "admission": {
+        "bytes": 83,
+        "sha256": "8a72012601b03c66289bebb4a136fffd08eccd88aa39763008ce5849d9d77b85"
+      },
+      "preservation": {
+        "bytes": 86,
+        "sha256": "22c9820249cf5d94404f8a185183da27e0cde18bed6d545693e5b3d2f220a776"
+      },
+      "publish-new": {
+        "bytes": 85,
+        "sha256": "86c964b00448c42203818df84a79daf9bb33f2472e7b297f06da9ca5f9c8a18e"
+      },
+      "publish-load": {
+        "bytes": 86,
+        "sha256": "983f1dbb21c8e82143b43ed37b3d0230638d76cfa46faf35c7ffa004194fedbc"
+      },
+      "shared-load": {
+        "bytes": 85,
+        "sha256": "eb0c3839a2db0b09809584ebe06dcf49bbc24cfad3eff36b098e8f5f52aed887"
+      },
+      "waiting-modal": {
+        "bytes": 87,
+        "sha256": "cdaa04c374c316e9b78603619ae802f2111189b023e2dc66a406d3acffb9bbe1"
+      },
+      "record-reentry": {
+        "bytes": 88,
+        "sha256": "cda3f12f58c3974b09a20eb06a6d556dd80c766e178313055974bc7cb2e83309"
+      },
+      "held-admission": {
+        "bytes": 88,
+        "sha256": "0616e3ec285f971445b118848ee4afb9ab7ccee80d313cc8ce8af7a90c11e407"
+      }
+    },
+    "legacyActionCasesPerEntry": 13,
+    "legacyOracles": {
+      "null-regression": {
+        "bytes": 1154,
+        "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+      },
+      "default-regression": {
+        "bytes": 1154,
+        "sha256": "5b8b9082525e24ab299cd59670c9b77c8114dcf9f5ca09cc04e59a1650f10b38"
+      }
+    },
+    "allCompilerAndChildDiagnosticsEmpty": true,
+    "childReturnCodesZeroAssertedByPassingWrapper": true,
+    "defaultOffCompile": {
+      "translationUnits": 84,
+      "flags": [
+        "-DPT_DOCUMENT_TYPED_REPLACEMENT=1",
+        "-DPT_DOCUMENT_TYPED_ACTION=1"
+      ],
+      "actual": "PASS"
+    }
+  },
+  "timingsSeconds": {
+    "compile": 14.46447412497946,
+    "admission": 0.2864572909893468,
+    "preservation": 0.024589625012595206,
+    "publish-new": 0.033083708985941485,
+    "publish-load": 0.10747437499230728,
+    "shared-load": 0.10925754098570906,
+    "waiting-modal": 0.01814166599069722,
+    "record-reentry": 0.0328506660007406,
+    "held-admission": 0.015045083011500537,
+    "null-regression": 0.2701524169824552,
+    "default-compile": 13.829082499985816,
+    "default-regression": 0.508194124995498
+  },
+  "preservation": {
+    "strict68Unchanged": true,
+    "wrapperAndOuterSavedSnapshotsEqual": true,
+    "savedGuardBytesEqual": true,
+    "allSelectedSourceHashesVerified": true,
+    "targetOperations": 0
+  },
+  "evidenceBindings": {
+    "actualGroupResult": {
+      "bytes": 335,
+      "sha256": "ec0e1b6f5d145c7e1691bda2a54511488cb4ff01383c244f0dfd278347517d9f"
+    },
+    "independentSavedCanonicalHostReview": {
+      "bytes": 26416,
+      "sha256": "ff8881d033c5a14b9921bdd8496d4c9cb34098ced5c2242600f682eecc970207"
+    }
+  },
+  "boundaries": [
+    "Actual new canonical preserved working-quartet qualification after exact policy adoption; prior private clean/history results are not substituted or relabelled.",
+    "Whole HELD domains retain consumed obligations until process exit; no rollback, release retry or successful quiet certificate.",
+    "HOST only. No current Git commit, clean native ABI/link/runtime/frontend, device/IRQ/timing, emulator/physical/audio/listening or release acceptance."
+  ]
+}

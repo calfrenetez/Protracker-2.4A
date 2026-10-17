@@ -1,0 +1,214 @@
+{
+  "schema": "pt24g-typed-document-native-objects-v1",
+  "status": "OBJECT_PASS",
+  "scope": "PRIVATE_POLICY_TWO_OBJECTS_ONLY_NOT_RUNTIME",
+  "composition": {
+    "savedCleanBaseCommit": "0854ea77e30578f3cab7dab984a250c4449e1126",
+    "projectBodies": 71,
+    "savedCommittedBodies": 69,
+    "privatePolicyOverlayBodies": 2,
+    "privateOverlays": [
+      "src/editor/editor_document_replacement.c",
+      "src/editor/editor_document_replacement.h"
+    ],
+    "currentCanonicalIdentityClaimed": false,
+    "description": "Saved clean0854 source proof plus exactly two reviewed private policy overlays. The action body is the saved committed0854 body; this is not a current canonical build or full application qualification."
+  },
+  "sourceBodies": {
+    "src/editor/editor_document_replacement.c": {
+      "bytes": 20022,
+      "sha256": "b5ed4f3270be4665e638674344ccb771924655852672ee95ba86c768934eff56"
+    },
+    "src/editor/editor_document_replacement.h": {
+      "bytes": 6060,
+      "sha256": "982e4af83b14f823edee3e9a6cb87568dd69c4f39f6ad0e01e365cddd6fd895c"
+    },
+    "src/editor/editor_document_action.c": {
+      "bytes": 17834,
+      "sha256": "cb2f3c09b52e164566eb35b247b031037acbbb5b4b548858300338a78fa1ca66"
+    },
+    "src/editor/editor_document_action.h": {
+      "bytes": 4507,
+      "sha256": "1c28af5a3001dc4fb73b5958098d4bb0275f1376536d3975b3154bde4944cd59"
+    }
+  },
+  "recipe": {
+    "translationUnits": 2,
+    "typedReplacementSelector": 1,
+    "typedActionSelector": 1,
+    "MIDIHostComposition": "OFF",
+    "assertionsEnabled": true,
+    "strictWarningsAsErrors": true,
+    "compiler": "pinned GCC6.5 native compiler backend",
+    "CPU": "68000",
+    "softFloat": true,
+    "CRT": "nix20",
+    "optimization": "Os",
+    "headerProfile": "Distinct reviewed genuine private SDK72 allowance; actual selected20. No historical SDK51 equivalence claimed."
+  },
+  "actualCommands": {
+    "count": 10,
+    "allReturnCodesZero": true,
+    "allDiagnosticStreamsEmpty": true,
+    "preInspectionStandardOutputEmpty": true
+  },
+  "units": [
+    {
+      "source": "src/editor/editor_document_replacement.c",
+      "object": {
+        "bytes": 6420,
+        "sha256": "498924842b5f039779079620cabcaf364b916a8ff72338a5fe72f9c45d0d4efc"
+      },
+      "selectedDependencies": {
+        "project": 61,
+        "SDK": 20,
+        "total": 81
+      },
+      "actualMEqualsOrdinaryI": true,
+      "rawStackUsage": {
+        "rows": 16,
+        "classifications": {
+          "dynamic,bounded": 12,
+          "static": 4
+        },
+        "maximumIndividualBytes": 3600,
+        "largestEntries": [
+          {
+            "function": "pt_editor_document_replacement_step",
+            "bytes": 3600,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "no_owner",
+            "bytes": 3548,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "pt_editor_document_replacement_begin",
+            "bytes": 280,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "pt_document_typed_replacement_output_disjoint",
+            "bytes": 36,
+            "classification": "dynamic,bounded"
+          }
+        ]
+      },
+      "objectSections": [
+        {
+          "name": ".text",
+          "bytes": 3904
+        },
+        {
+          "name": ".bss",
+          "bytes": 4
+        },
+        {
+          "name": ".text",
+          "bytes": 536
+        }
+      ]
+    },
+    {
+      "source": "src/editor/editor_document_action.c",
+      "object": {
+        "bytes": 6648,
+        "sha256": "23a420bcc69c2062d32065200528ac1fc3724aa4998a031201dc0c20fada20ff"
+      },
+      "selectedDependencies": {
+        "project": 68,
+        "SDK": 20,
+        "total": 88
+      },
+      "actualMEqualsOrdinaryI": true,
+      "rawStackUsage": {
+        "rows": 20,
+        "classifications": {
+          "dynamic,bounded": 17,
+          "static": 3
+        },
+        "maximumIndividualBytes": 2236,
+        "largestEntries": [
+          {
+            "function": "admit.part.4",
+            "bytes": 2236,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "prepared",
+            "bytes": 84,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "cleanup",
+            "bytes": 56,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "source_current",
+            "bytes": 52,
+            "classification": "dynamic,bounded"
+          }
+        ]
+      },
+      "objectSections": [
+        {
+          "name": ".text",
+          "bytes": 5060
+        },
+        {
+          "name": ".bss",
+          "bytes": 236812
+        }
+      ]
+    }
+  ],
+  "selectedUnion": {
+    "project": 71,
+    "SDK": 20,
+    "total": 91
+  },
+  "nativeABIFacts": {
+    "format": "amiga HUNK_UNIT",
+    "architecture": "m68k:68000",
+    "endianness": "big",
+    "intBits": 32,
+    "longBits": 32,
+    "pointerBits": 32,
+    "sizeTBits": 32,
+    "ptrdiffTBits": 32,
+    "HOSTOwnerHeadersMacrosAndSymbolsAbsent": true,
+    "typedPolicyOverflowGuardPreservedInSavedAssembly": true,
+    "songInitThreeArgumentStackOrderMatchesDeclaration": true
+  },
+  "preservation": {
+    "strict68Unchanged": true,
+    "savedGuardBytesUnchanged": true,
+    "privateSDK72NamespaceMetadataUnchanged": true,
+    "allSavedControlSourceProductAndStreamPinsVerified": true
+  },
+  "evidenceBindings": {
+    "actualManifest": {
+      "bytes": 144172,
+      "sha256": "34a435afa135ed07b70879a7d84b2cea45d7a81a99feac8996842c0259023593"
+    },
+    "independentSavedObjectReview": {
+      "bytes": 25312,
+      "sha256": "6dd05a70dd9d8b6f6cf5c00b4f9d5f488b3950644b63cafb90eb1eec02a4066c"
+    }
+  },
+  "limits": [
+    "Two unlinked objects only: no executable, link/callee compatibility, object execution, native runtime or target operation.",
+    "Individual compiler stack rows are not summed into a whole-program/call-chain/Task/IRQ/WCET bound or minimum Stack setting.",
+    "The action declares a large static snapshot and active pointer in BSS; these object section sizes are not a new dynamic allocation, final linked RAM capacity/placement proof or Task-stack claim.",
+    "No native frontend/MIDI activation, publication integration, quiet certificate, output/device/timing, emulator/physical/listening or release acceptance.",
+    "The separate six-case policy HOST fixture is not covered by this receipt."
+  ],
+  "operations": {
+    "link": "NOT_PERFORMED",
+    "executable": "NOT_CREATED",
+    "runtime": "NOT_RUN",
+    "targetOperations": 0
+  }
+}

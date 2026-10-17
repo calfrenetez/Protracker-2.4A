@@ -32,6 +32,11 @@
  * owner/cache close and editor disposal. HOLD has no forced finish/retry grant.
  * Finish also keeps the document veto until the complete four-control bridge
  * object is zero. This negative check is not independent closure authority.
+ * The captured sampler budget includes the actual loaded-source debit, checked
+ * for overflow before stop. Dispose must genuinely empty the old source and
+ * song ownership; a void source release or budget credit alone is insufficient.
+ * Only the original song allocator/budget policy is restored on the fresh empty
+ * editor. No old source/song owner, history, allocation or generation is copied.
  * It is not native, device, placement, latency or factory-membership authority.
  */
 enum pt_document_replace_result {
@@ -54,11 +59,11 @@ struct pt_editor_document_replacement {
     struct pt_render_options options;
     struct pt_paula_render_caps caps;
     struct pt_playback_format format;
-    struct pt_allocator sampler_allocator;
+    struct pt_allocator sampler_allocator,song_allocator;
     struct pt_sampler_storage_span context,parent;
     struct pt_editor_mixed_establish *establish;
     void *protected_storage[14];size_t protected_bytes[14];
-    size_t sampler_budget;
+    size_t sampler_budget,song_budget;
 #if defined(PT_DOCUMENT_MIDI_SETUP_HOST_ONLY)
     struct pt_midi_setup_owner *midi_setup;size_t midi_capacity;
     unsigned midi_close_attempted,midi_rebind_attempted;
@@ -80,7 +85,8 @@ enum pt_document_replace_result pt_editor_document_replacement_begin(
  * full capacity is verified by its typed query. NULL preserves ordinary behavior.
  * Enrollment/close/rebind refusal latches HOLD without retry. Fresh rebind runs
  * only after publication, final editor_init and original sampler policy restore.
- * Source/song allocator policy and repeating-session finish limits are unchanged.
+ * Empty source policy and repeating-session finish limits are unchanged. The
+ * original song allocator/budget is restored only on the fresh empty owner.
  * The context/parent containing this mutable control is STORAGE, never an
  * allocator-context-input exemption. All controls/candidate/contexts remain
  * disjoint from opaque retained MIDI records under the original placement and

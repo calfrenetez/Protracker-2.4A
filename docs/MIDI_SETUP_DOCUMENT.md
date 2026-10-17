@@ -3,8 +3,8 @@
 The existing typed document action/replacement has an optional MIDI lifetime
 composition for HOST qualification. It requires
 `PT_DOCUMENT_MIDI_SETUP_HOST_ONLY=1` and the existing HOST-only setup-owner gate,
-which still rejects native targets. Default builds retain the original action
-and replacement ABI. An opt-in NULL owner/capacity0 follows the ordinary path.
+which still rejects native targets. Default builds leave this MIDI composition
+disabled. An opt-in NULL owner/capacity0 follows the ordinary path.
 This does not bind a native requester, activate MIDI, or add another document
 producer, output owner or change barrier.
 
@@ -33,10 +33,12 @@ the original sampler allocator/budget does the replacement attempt fresh owner
 rebind once. A failure retains the published document in HOLD. The owner,
 workspace and original context remain alive through genuine finish; final close
 and workspace release remain explicit owner operations. Existing finish still
-requires final new engine/cache/editor retirement. Repeating native New/Load and
-the separate source/song allocator policies are not silently rewritten here.
-Loaded-source capacity and custom song-policy retention require a separate
-follow-up; those cases are outside this MIDI lifetime qualification.
+requires final new engine/cache/editor retirement. Repeating native New/Load
+remains unfinished. Source/song allocation policies are a separate contract. The
+subsequent typed
+replacement policy fix now preserves source capacity and custom song policy;
+its loaded-source cases remain separate from this MIDI lifetime qualification.
+See [source and song policy](DOCUMENT_REPLACEMENT_POLICY.md).
 
 The actual private clean-quartet HOST run passed eight focused cases: six complete
 rigs and two whole retained domains, plus the original thirteen action cases with
@@ -65,3 +67,8 @@ The actual private clean result and historical owner receipts remain separate an
 unchanged. No HOST result establishes native ABI/link/runtime, frontend, CAMD/
 device/audio, exact live timing, emulator/physical A1200/AmiGUS, listening or release
 acceptance.
+
+After the separate source/song policy fix, a fresh canonical working-quartet
+regression again passes the eight focused cases, NULL13/default-OFF13 and 26 pure
+quartet cases with unchanged oracles. This does not relabel the earlier receipts.
+See `evidence/document-policy/host-midi-working-regression.json`.

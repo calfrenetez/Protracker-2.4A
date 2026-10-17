@@ -1,68 +1,73 @@
 {
   "schema": "protracker-native-object-evidence-v1",
-  "component": "MIDI session requester GUI Task qualification candidate",
-  "state": "NATIVE_OBJECTS_PASS_NOT_LINKED_NOT_RUNTIME",
+  "component": "MIDI session requester GUI Task strong-base successor",
+  "state": "NATIVE_OBJECTS_PASS_STRONG_APPLICATION_BASE_DEFINITIONS_NOT_LINKED_NOT_RUNTIME",
   "result": {
-    "bytes": 8317,
-    "sha256": "a71843a45779b5442aa8f443c86ed82c186a9292d1cd86daf9cf342b9ebcbf20"
+    "bytes": 8340,
+    "sha256": "607b61e7c4c834407a324e809699c453088f0c9d48c75bb24c7fbe7cefffe4a1"
   },
   "manifest": {
-    "bytes": 872701,
-    "sha256": "314303d91b988ee330520615eb70252c2b4299eea9cabe2fb01bcc0a9051ff7e"
+    "bytes": 874642,
+    "sha256": "c668622343fe6042b0ddb1d8ce47181494c72ae0060554dd59a0742035015992"
   },
-  "source": {
-    "probeSHA256": "3b2386ed2987c04bc4676c75c3e94b75a96a2f4828ca442a120a86afa0713136",
-    "literalProjectBodies": 98,
-    "orderedTranslationUnits": 43,
+  "probeSHA256": "014616184843b409cfd3cf766b578560816400e93f4054a182ce7dd124b5ada0",
+  "build": {
+    "units": 43,
+    "commands": 215,
+    "allReturnCodesZero": true,
+    "all430StreamsAnd215ProductsRehashed": true,
+    "diagnosticsEmpty": true,
+    "objects": "43 Amiga HUNK_UNIT/m68k:68000",
+    "profile": "68000/softfloat/nix20/Os/C99/Werror/UNDEBUG",
+    "projectBodies": 98,
     "SDKAllowance": 92,
-    "actualSelectedSDKHeaders": 82,
-    "actualProjectAndSDKDependencyUnion": 180,
-    "allDependencyAndPreprocessorSetsEqual": true,
+    "selectedSDKHeaders": 82,
+    "actualMEqualsIUnion": 180,
     "unknownPaths": 0
   },
-  "build": {
-    "commands": 215,
-    "returnCodesAllZero": true,
-    "emptyCompilerAssemblerDiagnostics": true,
-    "allSavedProductsAndCommandStreamsRehashed": true,
-    "objects": 43,
-    "format": "Amiga HUNK_UNIT, m68k:68000",
-    "flags": "68000 / soft-float / nix20 / Os / C99 / Werror / UNDEBUG",
-    "selector": "PT_MIDI_SESSION_REQUESTER_NATIVE_GUI_QUALIFICATION_ONLY=1",
-    "actualToolReturnCode": 0,
-    "ownedSupervisorClosed": true,
-    "retainedOwners": 0,
-    "manifestSeconds": 19.272523374995217,
-    "supervisedSeconds": 19.392704125028104,
-    "wholeSeconds": 19.568781375011895,
-    "requiredManifestAndSupervisorSecondsAtMost": 170,
-    "requiredWholeSecondsAtMost": 180
+  "correctedObjectSymbols": {
+    "IntuitionBase": "global BSS+0, not COMMON",
+    "GfxBase": "global BSS+4, not COMMON",
+    "finalLinkedOwnership": "PENDING_NEW_LINK_MAP"
   },
   "preservation": {
-    "finiteInputFullFacts": 233,
+    "finiteFullfactRows": 233,
     "allBeforeAfterEqual": true,
-    "protectedEntries": 68,
+    "protected": 68,
     "residentBodyPins": 58,
-    "metadataOnlyEntries": 10,
-    "rawREADYAndOperationalPlanEqual": true,
-    "savedGuardFullFactsEqual": true,
-    "directBASEAndSelfBound": true
+    "metadataOnly": 10,
+    "rawREADYAndPlanEqual": true,
+    "savedGuardFullfactsEqual": true
+  },
+  "elapsed": {
+    "manifestSeconds": 18.837329708971083,
+    "supervisedSeconds": 18.960118624963798,
+    "internalOuterSeconds": 19.169588249991648,
+    "completedExternalReturnUpperBoundSeconds": 43.414123164,
+    "kind": "Root-recorded conservative READY-close to post-RC0 observation; not exact process duration or summed polls.",
+    "externalWitness": {
+      "bytes": 645,
+      "sha256": "b7e639d0f4483750457254c01911b36a473e841fad029bdec5b73c3709c1964b"
+    },
+    "manifestSupervisorWithin170AndExternalWithin180": true
+  },
+  "ownedHOSTClosure": {
+    "toolRC": 0,
+    "supervisorRC": -9,
+    "TERM_ACK": true,
+    "bothSignalsBeforeReap": true,
+    "allEOFGroupGone": true,
+    "retainedOwners": 0
   },
   "stack": {
     "individualRows": 713,
-    "probeMainIndividualBytes": 696,
+    "probeMainBytes": 696,
     "largestIndividualBytes": 16572,
-    "emittedEntryRemainingStackGuardBytes": 1048576,
-    "aggregateTaskCRTGUIStack": "NOT_PROVEN"
+    "aggregateStack": "NOT_PROVEN"
   },
-  "futureLink": {
-    "actualCrossUnitUnresolvedImports": 50,
-    "providersAndLOADCount": "REQUIRE_CURRENT_LINK_REVIEW"
-  },
-  "history": "R3 pre-child helper-schema failure remains failed; R4 is the distinct corrected object operation.",
-  "limits": [
-    "Unlinked object qualification only.",
-    "No native executable, runtime186-byte oracle, GUI interaction, port restoration, emulator, physical, device/output or timing acceptance.",
-    "Saved finite preservation evidence; no SDK body reads or live guard/target operation during independent review."
-  ]
+  "futureLink": "Current50 actual imports measured; new application base map/no graphics-intuition CRT list and provider ABI still required.",
+  "runtime": "NOT_RUN",
+  "expected186ByteNativeOracle": "NOT_PRODUCED",
+  "targetOperations": 0,
+  "history": "Old COMMON/CRT-conflicted static artifact stays preserved and runtime blocked."
 }

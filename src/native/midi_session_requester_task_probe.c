@@ -86,8 +86,8 @@ struct gui_state {
 struct repaint_state {struct Window *parent;unsigned guard,phase,repaints;};
 static struct gui_state gui;
 static struct repaint_state repaint_state;
-struct IntuitionBase *IntuitionBase;
-struct GfxBase *GfxBase;
+struct IntuitionBase *IntuitionBase=NULL;
+struct GfxBase *GfxBase=NULL;
 #define PARENT_MASK (IDCMP_RAWKEY|IDCMP_MOUSEBUTTONS|IDCMP_REFRESHWINDOW|IDCMP_INACTIVEWINDOW)
 static void gui_refused(void);
 

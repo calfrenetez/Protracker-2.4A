@@ -62,11 +62,13 @@
     "MEqualsIProjectBodies": 98,
     "MEqualsISDKHeaders": 82,
     "SDKAllowance": 92,
-    "manifestSHA256": "314303d91b988ee330520615eb70252c2b4299eea9cabe2fb01bcc0a9051ff7e",
-    "compilerSeconds": 19.272523374995217,
-    "supervisedSeconds": 19.392704125028104,
-    "wholeSeconds": 19.568781375011895,
-    "evidence": "evidence/midi-session-requester/native-gui-task-objects.json"
+    "manifestSHA256": "c668622343fe6042b0ddb1d8ce47181494c72ae0060554dd59a0742035015992",
+    "compilerSeconds": 18.837329708971083,
+    "supervisedSeconds": 18.960118624963798,
+    "evidence": "evidence/midi-session-requester/native-gui-task-objects.json",
+    "internalMainEntrySeconds": 19.169588249991648,
+    "completedExternalUpperBoundSeconds": 43.414123164,
+    "strongApplicationBases": "IntuitionBase/GfxBase are initialized application definitions, compiled as global BSS instead of COMMON."
   },
   "expectedStdout": {
     "ascii": "MIDI SESSION GUI TASK PASS:real parent/chooser/apply/cancel/refresh;master/save/undo;attached refusal;detach;owned close calls;zero private Fast ledgers;NO MIDI INPUT/CAMD/TIMING/OUTPUT\n",
@@ -104,10 +106,17 @@
     "boundsAre": "Prospective original diagnostic bounds; no operation, service, READY, lease or target admission created."
   },
   "link": {
-    "state": "NOT_PERFORMED",
+    "state": "STATIC_HOST_LINK_PASS_PROVIDER_ABI_REVIEW_PASS_NOT_RUNTIME",
     "currentObjectExternals": 50,
-    "providerResolution": "PENDING_EXACT_CURRENT50",
-    "limits": "Previous native40 provider/load/artifact counts do not qualify this GUI43 composition."
+    "providerResolution": "ACTUAL_CURRENT50_REVIEWED_AT_ARTIFACT_TIER",
+    "bytes": 261520,
+    "sha256": "eb78b4a4b1f2ebb1c7264f11da68683bcce205b0696c94d56b633db46d4532f3",
+    "crc32": "90C35D41",
+    "providerEvidence": "evidence/midi-session-requester/native-gui-task-provider.json",
+    "guiBaseOwnership": "Both GUI bases belong to application BSS; CRT retains only DOS/Utility library-list entries. The earlier COMMON/CRT-conflicted candidate is preserved and excluded.",
+    "limits": "Static link/provider checks do not establish GUI, emulator, physical, whole-Task stack or cleanup behavior.",
+    "artifactEvidence": "evidence/midi-session-requester/native-gui-task-link.json",
+    "structuralHUNKReview": "PASS; three sections,2316 bounded relocations,505 symbols,exact EOF."
   },
   "nativeRuntime": "NOT_RUN",
   "targetOperations": 0,

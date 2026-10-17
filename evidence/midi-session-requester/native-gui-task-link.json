@@ -1,0 +1,78 @@
+{
+  "schema": "pt24g-native-gui43-static-link-evidence-v1",
+  "state": "STATIC_LINK_ARTIFACT_REVIEW_PASS_RUNTIME_NOT_RUN",
+  "candidate": {
+    "name": "PTMidiSessionRequesterGuiTaskProbe",
+    "bytes": 261520,
+    "sha256": "eb78b4a4b1f2ebb1c7264f11da68683bcce205b0696c94d56b633db46d4532f3",
+    "crc32": "90C35D41"
+  },
+  "sourceProbeSHA256": "014616184843b409cfd3cf766b578560816400e93f4054a182ce7dd124b5ada0",
+  "actualObjectLineage": {
+    "units": 43,
+    "stages": 215,
+    "projectBodies": 98,
+    "SDKAllowance": 92,
+    "objectManifestSHA256": "c668622343fe6042b0ddb1d8ce47181494c72ae0060554dd59a0742035015992"
+  },
+  "link": {
+    "commands": 5,
+    "allReturnCodes": 0,
+    "seconds": 0.5816712499945424,
+    "orderedLOADs": 50,
+    "order": "one original startup +43 current application objects +six original runtime archives",
+    "actualUndefinedSymbols": 0,
+    "architecture": "m68k:68000",
+    "resultSHA256": "906782baa3d96d8b739d3e8eb0fffdf60b3da43fd262df1ddc2291a54957dc01"
+  },
+  "preservation": {
+    "fullFactInputs": 89,
+    "originalObjectRuntimeToolInputs": 54,
+    "allRecordedBeforeAfterEqual": true,
+    "protectedEntries": 68,
+    "residentBodyPins": 58,
+    "metadataOnlyDataless": 10,
+    "savedGuardAndRawREADYEqual": true,
+    "linkedProductFullFactsEqual": true,
+    "scope": "Finite saved boundaries, no external-file census."
+  },
+  "ownedHostProcessClosure": {
+    "fiveActualToolsRC0AndEOF": true,
+    "fiveOriginalSupervisorsTERMACKThenKILLBeforeReap": true,
+    "fiveSupervisorsReturnMinus9": true,
+    "groupsAbsentAndAllStreamsEOF": true,
+    "retainedOwners": 0
+  },
+  "HUNK": {
+    "sections": [
+      {
+        "kind": "CODE",
+        "bytes": 236520
+      },
+      {
+        "kind": "DATA",
+        "bytes": 456
+      },
+      {
+        "kind": "BSS",
+        "bytes": 38436
+      }
+    ],
+    "relocations": 2316,
+    "symbols": 505,
+    "structuralBoundsAndEOFVerified": true,
+    "wholePostrelocationPayloadIdentity": "NOT_PROVED"
+  },
+  "strongBaseCorrection": {
+    "applicationOwnedIntuitionBaseBSSOffset": 4,
+    "applicationOwnedGfxBaseBSSOffset": 8,
+    "graphicsAndIntuitionStubMembersAbsent": true,
+    "legitimateDOSUtilityCRTActivityRemains": true
+  },
+  "currentProviderABIReviewSHA256": "83a5ea1d4f660ef1a9c86564a57802042b66fc0795f8222e721d8e5c33e485de",
+  "stackLimit": "Individual main696B; emitted original-Task actualSP/lower58/upper62 and>=1MiB remaining guard; no aggregate Task/CRT/GUI stack or timing proof.",
+  "nativeOutput": "Stored sole186B marker/emitted puts path; runtime NOT_RUN.",
+  "historicalBlockedCandidate": "Preserved separately; no inherited ABI/runtime pass.",
+  "runtime": "NOT_RUN",
+  "targetOperations": 0
+}

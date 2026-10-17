@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "state": "CORRECTED_GUI43_LINKED_PROVIDER_ABI_REVIEW_PASS_NOT_RUNTIME",
+  "candidate": {
+    "bytes": 261520,
+    "sha256": "eb78b4a4b1f2ebb1c7264f11da68683bcce205b0696c94d56b633db46d4532f3"
+  },
+  "sourceProbeSHA256": "014616184843b409cfd3cf766b578560816400e93f4054a182ce7dd124b5ada0",
+  "bindings": {
+    "objectManifestSHA256": "c668622343fe6042b0ddb1d8ce47181494c72ae0060554dd59a0742035015992",
+    "linkManifestSHA256": "906782baa3d96d8b739d3e8eb0fffdf60b3da43fd262df1ddc2291a54957dc01",
+    "providerReviewSHA256": "83a5ea1d4f660ef1a9c86564a57802042b66fc0795f8222e721d8e5c33e485de"
+  },
+  "actualLink": {
+    "commands": 5,
+    "returnCodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "seconds": 0.5816712499945424,
+    "orderedInputLOADs": 50,
+    "allFinite89InputFactsEqual": true,
+    "original54ObjectRuntimeToolFactsEqual": true,
+    "strictProtected68Equal": true,
+    "savedGuard2022Equal": true,
+    "rawREADYEqual": true
+  },
+  "providers": {
+    "currentExternalNames": 50,
+    "all50CurrentOriginsObservedInMap": true,
+    "allOriginalRuntimeOrigins": true,
+    "newGUIWrappers": 24,
+    "argumentRegisterVectorBaseRelocationsAndReturnUseReviewed": true,
+    "noFinalUndefinedSymbols": true
+  },
+  "strongBaseCorrection": {
+    "finalApplicationOwnedBSS": {
+      "IntuitionBase": 4,
+      "GfxBase": 8
+    },
+    "noGraphicsIntuitionArchiveBaseProviders": true,
+    "noGraphicsIntuitionCRTLibraryListEntries": true,
+    "retainedCRTLibraryList": [
+      "dos.library",
+      "utility.library"
+    ],
+    "manualGUIBaseClearSeparateFromCRTList": true,
+    "priorRuntimeBlockingConflictResolvedAtArtifactTier": true
+  },
+  "limits": [
+    "Artifact/compiler ABI review only; GUI/native runtime NOT_RUN.",
+    "No whole-Task stack/CRT bound or actual library-close/quiet claim.",
+    "186-byte GUI oracle and real input/refresh/cleanup await separately admitted owned VM qualification; uncancellable HOLD excludes automatic physical promotion."
+  ],
+  "runtime": "NOT_RUN",
+  "targetOperations": 0
+}

@@ -7949,3 +7949,22 @@ establish editor-pair ABI equivalence. Direct source-load APIs remain excluded.
 The new guard has no native build/runtime, Amiberry, real-A1200 or listening
 acceptance; the existing native35 artifact does not compile this platform file.
 See [the dispatch-guard contract](SAMPLER_PAULA_LINEAGE.md#host-donor-preview-dispatch-veto-17-october2026).
+
+### HOST stopped workflow request admission — 17 October 2026
+
+
+Stopped Cleanup/Copy request admission now checks the existing change hook before
+setting a pending workflow request. Two genuine queued three-source HOST cases
+pass refusal preservation, later authentic cleanup/detach, transaction plus one
+undo, exact master/save restoration and zero ledgers (34 translation units/85
+literal inputs; sole 205-byte oracle). The unchanged legacy workflow regression
+separately passes its silent/active/Stop+Apply compatibility checks. The same
+fixture with only the actual committed old workflow body aborts at its first
+pending/job-zero assertion, as expected; this is distinct from positive cleanup.
+The separate complete committed-editor C/H run also passes the same two-case
+fixture and exact oracle; this does not establish editor-pair ABI equivalence.
+Workflow-idle custody coexistence is not established. The changed workflow TU supersedes the old
+native35 artifact/source-bound packet for current source. New native build/run,
+Amiberry, real-A1200, output/timing and listening acceptance remain unqualified.
+
+See [compact HOST evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/workflow-host.json).

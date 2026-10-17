@@ -1,0 +1,111 @@
+{
+  "acceptance": {
+    "Amiberry": "NOT_RUN_FOR_THIS_CHANGE",
+    "changedWorkflowNativeBuild": "NOT_BUILT",
+    "changedWorkflowNativeRuntime": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "priorNative35Packet": "Externally superseded for the changed workflow TU/current source; old artifact and evidence preserved. Its source/body/HUNK qualification cannot transfer to a future rebuild.",
+    "realA1200": "NOT_RUN_FOR_THIS_CHANGE"
+  },
+  "baselineNegative": {
+    "assertionStderr": {"bytes": 251, "sha256": "8f2be31eb7487632531e13a694e52a146485ab16005d6dcefffc8e386ce23236"},
+    "committedOldBody": {
+      "bytes": 24518,
+      "commit": "5a418551f61f83c25d1d00edd15cf04d427c703a",
+      "file": "src/editor/workflow.c",
+      "sha256": "9f1d0f51835d0e67264a2f6f30aa447d635a9affdbec99ba82f15b62492fe76b"
+    },
+    "compileReturnCode": 0,
+    "fixtureReturnCode": -6,
+    "recordedPreservation": "Project inputs, controls, direct protected16 and classic/protected checks unchanged.",
+    "result": {"bytes": 3365, "sha256": "702a8536a8a96f03043616ca272160e740aba4da3b81965c6896cd1e7f4c64ed"},
+    "savedCommandContract": "Actual retained34-TU compiler argv has assertions, ASan/UBSan, Werror and120/30 limits.",
+    "seconds": 8.414372416998958,
+    "signal": "SIGABRT",
+    "sourceIsolation": "85 retained source bodies; only workflow.c is replaced by the exact captured/committed old body, all other84 match the working fixture receipts. Fixed fixture/wrapper pins were not weakened.",
+    "state": "EXPECTED_BASELINE_ASSERTION",
+    "witness": "First Cleanup/copy=0 request reaches the exact post-key assertion requiring pending/job flags to stay zero and aborts. Compile/stdout empty; no sanitizer error. Expected negative does not complete cleanup."
+  },
+  "cleanEditorPair": {
+    "TUs": 34,
+    "childSeconds": 8.564440249989275,
+    "compileSeconds": 7.963649666984566,
+    "compileSecondsLimit": 120,
+    "compilerAndFixtureDiagnostics": "EMPTY",
+    "editorPairSha256": {
+      "src/editor/editor.c": "c569b9bb445b4af2df5bbe44f6d2fd07166c9d9c668272098aaa8ead32f47ec0",
+      "src/editor/editor.h": "5b93982695779bafe45a1093cd3b3f4c905524dda5a6556a00f410e528f7aa65"
+    },
+    "executable": {"bytes": 2657848, "sha256": "9f33cd46891b076af4ef8c6b5d144c20b9054e70f6aa40ea755ef22634112acc"},
+    "fixtureSeconds": 0.31346187499002554,
+    "fixtureSecondsLimit": 30,
+    "literalProjectInputs": 85,
+    "oracle": {"bytes": 205, "sha256": "06f112bbaf9a1ec38ad3d5d4755b406b10379ff236a33f77bbe00b969154293e"},
+    "origins": "83 copied working bodies plus2 actual verified-Git clean editor C/H bodies from5a418551; all85 retained bodies match the expected pair/working pins.",
+    "outerResult": {"bytes": 809, "sha256": "1f5f977c83c3bbd3faac7a2e3ac716f20cb3693c7631b16b73c9c888856e6e9f"},
+    "outerSeconds": 8.850354084017454,
+    "recordedAfterChecks": "Current sources/export/admission data/controls/preservation all PASS.",
+    "result": {"bytes": 2737, "sha256": "75bf0e36aa77072da892d78735bc85a14906754f888161100fd8348d8709cbfb"},
+    "scope": "Separate complete editor-pair HOST qualification of the same two genuine cases; no editor ABI equivalence, native runtime or device qualification.",
+    "state": "PASS_HOST_CLEAN_EDITOR_PAIR_ONLY"
+  },
+  "limits": [
+    "No active/read-only coverage is attributed to the new two-case fixture; it comes from the unchanged legacy HOST compatibility regression.",
+    "No workflow-idle coexistence, whole application/frontend integration, publication/adoption/provider, IRQ/DMA/MMIO/audio, device quiet, exact timing or physical/listening acceptance.",
+    "Working temporary export/executable is removed by the original wrapper; retained input/source/preservation receipts are evidence, not a reread of missing temporary bodies.",
+    "Existing protected16/classic-baseline stable-snapshot and source-currentness assertions passed; offloaded baseline bodies remain metadata-only. Full compiler/system-header/runtime provenance is unqualified.",
+    "New source-only graph review verifies both literal include graphs, not native/preprocessor/link closure. Both complete editor pairs now have separate HOST results; expected old-body assertion remains a distinct negative.",
+    "Existing shared recovery hold remains unresolved; no shared target operation belongs to this change."
+  ],
+  "preservation": {"protectedPaths": 16, "classicEntries": 51, "classicMetadataOnly": 10, "rootStrictBoundaries": 68, "state": "UNCHANGED_AFTER_ALL_FOUR_HOST_EXECUTIONS", "rootAfterReceiptSha256": "5eae5084be4b4800ec6553fabdb25bbfc995182fa7fbae9c9735b932d7dcad9a"},
+  "savedDataReview": {"state": "PASS_NO_MATERIAL_FINDING", "sha256": "120efed84d08d4483a546b5857ca37d0487921ecbad271c642c014ef968487d6"},
+  "productionDelta": "API/layout unchanged. Public Apply retains active/change-hook checks. Active requests retain pending and Stop+Apply behavior; stopped requests consult the hook before pending mutation, then use the original shared post-hook body once.",
+  "scope": "Stopped Cleanup/Copy request admission with real completed usage preview and genuine unpublished prepared custody; no whole frontend/native grant.",
+  "sourcePins": {
+    "src/editor/prepared_paula_lifetime.c": {"bytes": 24956, "sha256": "77e91ab9f056182faf64a04674c54db9f84436b971724336f0e35724b9da0748"},
+    "src/editor/prepared_paula_lifetime.h": {"bytes": 10812, "sha256": "7131371ab2359a7464e638ed4fdc40014edc7cfdbc3dd8297ae4919d66915561"},
+    "src/editor/prepared_paula_mutation_barrier.c": {"bytes": 30722, "sha256": "0e0fb90092d07b89904bc9e668aa89651eedb9aed786d7d186104480a6dd9de0"},
+    "src/editor/prepared_paula_mutation_barrier.h": {"bytes": 14300, "sha256": "fdde8a639f59883f8a7313a97fe9430b1eedf5f4cda833d608d4beca6b3f68c3"},
+    "src/editor/prepared_paula_sources.c": {"bytes": 29839, "sha256": "f0f40f3100de1691f40ab37b725ad11e1008a6619c49e7b227a1f21658703112"},
+    "src/editor/prepared_paula_sources.h": {"bytes": 6794, "sha256": "74a070e4d7b4e8463afb61e3d182913872a7726ca61f4fdb7d5084bbe764757c"},
+    "src/editor/workflow.c": {"bytes": 24920, "sha256": "768dba18085aeb8e5c815a558ecf233f57652bd5762bbbe866d0ffbce519b6ca"},
+    "tests/editor_workflow_test.c": {"bytes": 10810, "sha256": "97f8e6448445ec6b5de9d9ccae0330837de2ea679b089a537ac519895b9e235b"},
+    "tests/prepared_paula_workflow_admission_test.c": {"bytes": 17480, "sha256": "1a93c77a27031f0f27b56192bae6482d3cb2ee805a32eeb4bc1f7faf6c25b7b3"},
+    "tests/test_editor.py": {"bytes": 2035, "sha256": "0cfc913fba9327dd8d7aaf7025e1e41a0118245132d283bcab0d0e003fb4fd44"},
+    "tests/test_editor_workflow.py": {"bytes": 639, "sha256": "4deaba7aee592c3da75996c20d7d391e2fee2050144abc419fe39616622e9234"},
+    "tests/test_native_mixed_causal_rolling_entry.py": {"bytes": 12598, "sha256": "f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1"},
+    "tests/test_prepared_paula_workflow_admission.py": {"bytes": 10704, "sha256": "a24f30e60f09d5f55bf3d492cbeacd74b2b486d86c2f72a1f72123cc38cfa985"}
+  },
+  "state": "HOST_WORKING_CLEAN_AND_LEGACY_PASS_EXPECTED_BASELINE_ASSERTION",
+  "unchangedWorkflowRegression": {
+    "coverage": "Existing silent navigation/no-hook, active Copy pending and stale range, cancellation, explicit Stop+Apply for active Cleanup, exact Copy/undo, event origin and summary reuse assertions passed.",
+    "elapsedSeconds": 7.844644541008165,
+    "recipeLimit": "Unchanged separate legacy ASan/UBSan/Werror wrapper; no explicit UNDEBUG or per-child120/30 limits. No complete saved compiler argv/toolchain provenance is claimed. HOST structure sizes in its output are not native ABI evidence.",
+    "result": {"bytes": 301, "sha256": "4228960030dc1b782e8f87311c564870f193951ffb1a68dee1bb7205b2eadcd5"},
+    "returnCode": 0,
+    "state": "PASS",
+    "stderr": {"bytes": 254, "sha256": "e240e88048c9577786e76d25840a94e6822cf76b0214053d67b40c789e1705aa"},
+    "stdout": {"bytes": 167, "sha256": "02b0471c507f44ace1dff778271fb025e6f70b6e5cb3300c7a517e37ba44abe8"},
+    "unitTests": 1
+  },
+  "workingHost": {
+    "TUs": 34,
+    "afterPreservation": {"bytes": 31640, "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"},
+    "beforePreservation": {"bytes": 31640, "sha256": "8326f446d09f6123aeb5587f4f01f8f016e54533d389d997f2320f083fe88727"},
+    "compileSecondsLimit": 120,
+    "compilerAndFixtureDiagnostics": "EMPTY",
+    "coverage": "Two independent Cleanup/Copy contexts: completed real usage scan before queued three-source/cache custody; real stopped UI request veto before pending/job/resource mutation; authentic later stop/drain/close and separate detach; actual transaction plus one undo; exact master/project-save restoration and zero final ledgers; no backend calls.",
+    "editorPair": "preserved_working_display",
+    "elapsedSeconds": 9.08560429199133,
+    "fixtureSecondsLimit": 30,
+    "inputs": {"bytes": 44440, "sha256": "e3bde6c3130cf7471e8c6f3a830e2d6f27d7b2c3a31c5b8ffef4be7d829752b9"},
+    "literalProjectInputs": 85,
+    "oracle": {"bytes": 205, "sha256": "06f112bbaf9a1ec38ad3d5d4755b406b10379ff236a33f77bbe00b969154293e"},
+    "recipe": "Assertions enabled, ASan/UBSan, Wall/Wextra/Werror, minimal compiler environment.",
+    "result": {"bytes": 318, "sha256": "8bc43f4cdf7790d9b52de6d6596d71b5788e609af099e5f590b9849419af757c"},
+    "returnCode": 0,
+    "scopeLimit": "Status and captured Copy cursor bookkeeping may change. No workflow idle service during prepared custody is qualified.",
+    "state": "PASS",
+    "unitTests": 1
+  }
+}

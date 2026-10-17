@@ -107,11 +107,12 @@ static void copy_begin_ready(struct pt_editor *e)
     }
     transaction_result(e,pt_sampler_copy_begin(&e->sampler,e->project,&e->history,&w->usage,w->copy_slot,w->copy_start,w->copy_end,1,&w->transaction));
 }
-void pt_editor_workflow_apply(struct pt_editor *e)
+/* Caller has freshly checked stopped ownership and the editor change hook.
+ * Keep stopped request admission before pending flags: a refusing owner must
+ * remain able to perform its later cleanup without an unstarted workflow. */
+static void apply_admitted(struct pt_editor *e)
 {
     struct pt_editor_workflow *w=&e->workflow;
-    if(active(e)) {status(e,"STOP TRANSPORT/PREVIEW BEFORE APPLY OR USE STOP+APPLY");return;}
-    if(!pt_editor_prepare_change(e))return;
     if(w->pending_apply==1) {
         if(!current(e)) {status(e,"CLEANUP PREVIEW STALE - REFRESH BEFORE APPLY");w->pending_apply=0;return;}
         transaction_result(e,pt_sampler_cleanup_begin(&e->sampler,e->project,&e->history,&w->usage,w->usage.selected,1,&w->transaction));
@@ -119,11 +120,20 @@ void pt_editor_workflow_apply(struct pt_editor *e)
         if(current(e))copy_begin_ready(e);else (void)scan_begin(e,1);
     }
 }
+void pt_editor_workflow_apply(struct pt_editor *e)
+{
+    if(active(e)) {status(e,"STOP TRANSPORT/PREVIEW BEFORE APPLY OR USE STOP+APPLY");return;}
+    if(!pt_editor_prepare_change(e))return;
+    apply_admitted(e);
+}
 static enum pt_editor_action request_apply(struct pt_editor *e,unsigned which)
 {
-    e->workflow.pending_apply=which;
-    if(active(e)) {status(e,"STOP+APPLY WILL STOP ACTIVE TRANSPORT/PREVIEW BEFORE THIS TRANSACTION");return PT_UI_NONE;}
-    pt_editor_workflow_apply(e);return PT_UI_NONE;
+    if(active(e)) {
+        e->workflow.pending_apply=which;
+        status(e,"STOP+APPLY WILL STOP ACTIVE TRANSPORT/PREVIEW BEFORE THIS TRANSACTION");return PT_UI_NONE;
+    }
+    if(!pt_editor_prepare_change(e))return PT_UI_NONE;
+    e->workflow.pending_apply=which;apply_admitted(e);return PT_UI_NONE;
 }
 static enum pt_editor_action copy_range(struct pt_editor *e)
 {

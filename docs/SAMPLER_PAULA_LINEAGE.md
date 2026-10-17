@@ -556,3 +556,47 @@ No new native build or execution qualifies this guard; the existing native35
 artifact excludes the platform dispatcher. Amiberry, real-A1200, whole-application/
 frontend integration, device/output/timing and listening acceptance remain
 untested for this change. Independent saved-data review passes; see [scoped evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/source-preview-host.json).
+
+### HOST stopped workflow admission — 17 October 2026
+
+Stopped Cleanup and Copy Range requests now consult the existing editor change
+hook before setting `pending_apply`. A refusing custodian can therefore complete
+its later authentic cleanup without an unstarted workflow request. Public Apply
+keeps its original active/hook checks; active requests keep their existing pending
+and explicit Stop+Apply behavior. No API, layout, receipt or native grant is added.
+
+The new HOST fixture passes two independent genuine-owner cases. Each completes
+a real usage preview before acquiring three 8/16/24-bit master/cache dependencies
+and an unpublished command/reader queue. Actual stopped UI requests refuse with
+pending, jobs and owned resources preserved. Later top-level stop/drain/close and
+separate detach permit a real Cleanup or Copy transaction and one undo; exact
+master/project-save gold returns and final ledgers are zero, without backend work.
+The working-editor run passed 34 translation units/85 literal inputs with the sole
+205-byte oracle, assertions, ASan/UBSan and empty compiler/fixture diagnostics.
+
+The unchanged workflow HOST regression separately passed its silent navigation,
+active pending/Stop+Apply, stale-range, cancellation, exact-copy/undo, event-origin
+and summary-reuse assertions under its existing legacy recipe. This compatibility
+result is distinct from the new stopped-custody cases and from physical playback.
+Workflow idle is not serviced during prepared custody by this new fixture.
+
+The independent old-workflow control compiled the same fixture with only the
+actual committed prechange workflow body substituted. It aborts at the first
+Cleanup request's exact pending/job-zero assertion, as expected; the other 84
+source bodies and fixed fixture/wrapper pins are unchanged. Empty compile
+output and no sanitizer error accompany this negative witness. It does not
+complete cleanup or qualify the baseline as a passing implementation.
+
+The separate complete committed-editor C/H run also passes the same two cases,
+34 translation units/85 inputs and exact 205-byte oracle, with empty compiler/
+fixture diagnostics and all source/export/admission/control/preservation checks
+passing. It uses 83 working bodies plus the two verified committed editor bodies;
+these separate HOST passes do not establish editor-pair ABI equivalence.
+
+The changed workflow belongs to the old native35 compiled closure, so that artifact and
+source-bound packet are externally superseded for current source; no old native
+qualification transfers. A new native build/runtime, frontend coexistence, output/
+device quiet/exact timing, Amiberry, real-A1200 and listening acceptance remain
+unqualified.
+
+See [compact HOST evidence](../evidence/enhanced-editor/prepared-paula-mutation-barrier/workflow-host.json).

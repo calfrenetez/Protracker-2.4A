@@ -202,3 +202,20 @@ failure and three holds remain in the release archive. All protected inputs and
 unrelated display work were preserved. No physical or audio acceptance follows.
 
 See [updated-editor-launch-refusal.json](../evidence/native-editor-build/updated-editor-launch-refusal.json).
+
+## Bridge-error journal regression —18 October2026
+
+The guarded exchange now accepts an optional synchronous error recorder. It
+records one validated, unambiguous bridge error before raising the generic
+exception. Invalid or duplicate replies cannot become exact error evidence;
+recorder failure is terminal and cannot authorize another send.
+
+One HOST run passed 20 tests: eighteen exchange tests, including the original
+twelve, plus two private service-wiring tests using the actual journal writer.
+The tested helper and eighteen ordinary tests are adopted. The private service
+wiring is not installed in a running service. Input, protected-file, guard and
+admission checks passed, and supervision closed with no retained owner.
+
+This qualifies error reporting on HOST connection boundaries. It does not
+recover the earlier missing reply, establish its guest cause or qualify editor
+runtime. See [bridge-error-host-qualification.json](../evidence/native-editor-build/bridge-error-host-qualification.json).

@@ -169,5 +169,100 @@ class Tests(unittest.IsolatedAsyncioTestCase):
         self.assertIs(connection.on_rx, connection.original)
 
 
+    async def test_error_recorder_runs_once_before_error_propagation(self):
+        for raw in ("ERR|LAUNCH failed|command", "ERR|" + "x" * (MAX_LINE - 4)):
+            with self.subTest(bytes=len(raw)):
+                connection = Connection([raw])
+                recorded = []
+                def record(event):
+                    self.assertTrue(exchange.busy)
+                    self.assertFalse(exchange.failed)
+                    recorded.append(dict(event))
+                exchange = Exchange(connection, lambda: True, error_record=record)
+                with self.assertRaises(BridgeReplyError) as failure:
+                    await exchange(self.command, "DIR", 1)
+                self.assertEqual(recorded, [{"event": "exchange_error_reply",
+                    "source": "native_guarded_exchange", "commandType": "LISTDIR",
+                    "replyType": "DIR", "raw": raw}])
+                self.assertEqual(failure.exception.raw, raw)
+                self.assertTrue(exchange.failed)
+                self.assertIs(connection.on_rx, connection.original)
+                with self.assertRaises(ValueError):
+                    await exchange(self.command, "DIR", 1)
+                self.assertEqual(connection.sent, [self.command])
+                self.assertEqual(len(recorded), 1)
+
+    async def test_error_recorder_failure_propagates_without_followup(self):
+        connection = Connection(["ERR|LAUNCH failed"])
+        observed = []
+        def record(event):
+            observed.append(event)
+            raise OSError("private journal refused")
+        exchange = Exchange(connection, lambda: True, error_record=record)
+        with self.assertRaisesRegex(OSError, "private journal refused"):
+            await exchange(self.command, "DIR", 1)
+        self.assertEqual(len(observed), 1)
+        self.assertTrue(exchange.failed)
+        self.assertFalse(exchange.busy)
+        self.assertIs(connection.on_rx, connection.original)
+        with self.assertRaises(ValueError):
+            await exchange(self.command, "DIR", 1)
+        self.assertEqual(connection.sent, [self.command])
+
+    async def test_error_recorder_is_not_called_for_success(self):
+        connection = Connection(["DIR|RAM:|0|"])
+        recorded = []
+        exchange = Exchange(connection, lambda: True, error_record=recorded.append)
+        self.assertEqual(await exchange(self.command, "DIR", 1), "DIR|RAM:|0|")
+        self.assertEqual(recorded, [])
+        self.assertFalse(exchange.failed)
+        self.assertIs(connection.on_rx, connection.original)
+
+    async def test_invalid_or_ambiguous_error_never_calls_recorder(self):
+        for replies in (["ERR|bad\nline"], ["ERR|\u00e9"],
+                        ["ERR|" + "x" * MAX_LINE], ["ERR|a", "ERR|b"],
+                        ["ERR|a", "DIR|RAM:|0|"]):
+            with self.subTest(replies=replies):
+                connection = Connection(replies)
+                recorded = []
+                exchange = Exchange(connection, lambda: True, error_record=recorded.append)
+                with self.assertRaises(ValueError):
+                    await exchange(self.command, "DIR", 1)
+                self.assertEqual(recorded, [])
+                self.assertTrue(exchange.failed)
+                self.assertIs(connection.on_rx, connection.original)
+                with self.assertRaises(ValueError):
+                    await exchange(self.command, "DIR", 1)
+                self.assertEqual(connection.sent, [self.command])
+
+    async def test_error_recorder_requires_callable_and_synchronous_completion(self):
+        connection = Connection(["ERR|failed"])
+        with self.assertRaises(ValueError):
+            Exchange(connection, lambda: True, error_record=object())
+        self.assertEqual(connection.sent, [])
+        exchange = Exchange(connection, lambda: True, error_record=lambda event: 1)
+        with self.assertRaisesRegex(ValueError, "finish synchronously"):
+            await exchange(self.command, "DIR", 1)
+        self.assertTrue(exchange.failed)
+        self.assertIs(connection.on_rx, connection.original)
+
+    async def test_error_recorder_cannot_replace_original_observer(self):
+        connection = Connection(["ERR|failed"])
+        replacement = lambda raw: None
+        recorded = []
+        def record(event):
+            recorded.append(event)
+            connection.on_rx = replacement
+        exchange = Exchange(connection, lambda: True, error_record=record)
+        with self.assertRaisesRegex(RuntimeError, "callback changed"):
+            await exchange(self.command, "DIR", 1)
+        self.assertEqual(len(recorded), 1)
+        self.assertIs(connection.on_rx, replacement)
+        self.assertTrue(exchange.failed)
+        with self.assertRaises(ValueError):
+            await exchange(self.command, "DIR", 1)
+        self.assertEqual(connection.sent, [self.command])
+
+
 if __name__ == "__main__":
     unittest.main()

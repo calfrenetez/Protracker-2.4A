@@ -5,6 +5,9 @@ registering its tool. This helper never opens a connection or writes a socket
 directly: conn.send remains the shared guard's checked leaf. admit() is the
 caller's additional live identity check, not a substitute for launcher hooks.
 on_rx is an observation callback in the pinned upstream SerialConnection.
+An optional error_record callback durably records one validated, unambiguous
+raw error before generic error conversion. It must finish synchronously and
+return None; its failure is terminal. It grants no retry or target authority.
 """
 import asyncio
 import math
@@ -19,9 +22,11 @@ ALLOWED = {
 
 
 class Exchange:
-    def __init__(self, connection, admit):
+    def __init__(self, connection, admit, *, error_record=None):
         require(callable(admit), "Caller live-admission check required")
+        require(error_record is None or callable(error_record), "Synchronous raw error recorder required")
         self.connection, self.admit = connection, admit
+        self.error_record = error_record
         self.busy = False
         self.failed = False
 
@@ -65,6 +70,13 @@ class Exchange:
             require(not overflow and queue.empty(), "Ambiguous duplicate bridge response")
             line(raw)
             if raw.startswith("ERR|"):
+                # Private evidence only, after unique bounded line validation.
+                # Recording refusal is terminal and is never swallowed.
+                if self.error_record is not None:
+                    require(self.error_record({"event": "exchange_error_reply",
+                        "source": "native_guarded_exchange",
+                        "commandType": command["type"], "replyType": reply_type,
+                        "raw": raw}) is None, "Raw error recorder must finish synchronously")
                 raise BridgeReplyError(raw)
             require(self.admit() is True and self.connection.connected is True, "Admission changed before success")
             return raw

@@ -1,0 +1,41 @@
+{
+  "schema": "pt24g-bridge-error-host-qualification-1",
+  "date": "2026-10-18",
+  "scope": "HOST_ONLY_ERROR_REPORTING",
+  "actualRun": {
+    "returnCode": 0,
+    "seconds": 0.30764279200229794,
+    "methods": 20,
+    "ordinaryExchangeMethods": 18,
+    "privateServiceWriterMethods": 2,
+    "originalMethodsPreserved": 12,
+    "fixedInputsPreserved": 24,
+    "protectedInputsPreserved": 68,
+    "rawGuardAndAdmissionPreserved": true,
+    "supervisionClosed": true,
+    "retainedOwners": 0,
+    "targetOperations": 0
+  },
+  "checks": [
+    "Validated error recorded before propagation",
+    "Malformed and ambiguous replies never recorded as exact errors",
+    "Recorder refusal and observer replacement remain terminal",
+    "Prior observer restored when still owned",
+    "No follow-up send after failure",
+    "Actual private service journal writer and refusal exercised"
+  ],
+  "adoptedSHA256": {
+    "helper": "b5494016fc175a9cdc9ad5d5f8c5af4cacdcc777179aec412c9f776f20e173c7",
+    "ordinaryTests": "d295bc8a1da779a566ddafe57e383cc6132eec152f92d7b17d4c8cf7a18c342e"
+  },
+  "privateEvidenceSHA256": {
+    "actualResult": "23488c3439e17a48af9529a490b663f2ad0f78265bb3b32140dc15ac4bed8006",
+    "sourceReview": "5f9cd07ac29195f612839ad592faec675166aa661077220ba1fbf94ba99b9a1f",
+    "savedResultReview": "6493b19494cb579d685f05a6fb12eb14e8a565328ca42d7c8eaea7b1369e9690"
+  },
+  "liveServiceWiring": "NOT_INSTALLED",
+  "earlierMissingError": "NOT_RECOVERED",
+  "earlierGuestCause": "UNKNOWN",
+  "editorRuntime": "NOT_QUALIFIED",
+  "physicalA1200": "NOT_RUN_FOR_THIS_CHANGE"
+}

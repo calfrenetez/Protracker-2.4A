@@ -1,0 +1,74 @@
+{
+  "HOST": {
+    "actualCarrierClassMethods": 8,
+    "actualReturnCodes": [
+      0,
+      0
+    ],
+    "expectedVerboseTestStderr": true,
+    "mockedExchangeRepliesOnly": true,
+    "originalSupervisorClosureConfirmed": true,
+    "pureScriptPolicyMethods": 8,
+    "retainedOwners": 0,
+    "strict68RawGuardREADYAndInputFactsPreserved": true
+  },
+  "candidate": {
+    "CRC32": "71BE605A",
+    "bytes": 10948,
+    "sha256": "f634634f41e383b88be16f74c44592a6a310f6e04c0e062335dd3f6db82a513f"
+  },
+  "limits": {
+    "AmiberryProbeRuntime": "NOT_RUN",
+    "fullEditorGUI": "NOT_RUN_BY_THIS_PROBE; PRIOR_R7_FAILURE_UNCHANGED",
+    "liveFileSharing": "NOT_RUN",
+    "physicalA1200": "NOT_RUN",
+    "productionFeatureEnabled": false,
+    "sourceAndTestsPubliclyAdopted": false
+  },
+  "nativeStatic": {
+    "CRTBaseAndCallABIReviewed": true,
+    "SDKAllowance": 118,
+    "aggregateStackOrDelayTimingProved": false,
+    "completeHUNKBytes": 10948,
+    "currentExternalProviders": 8,
+    "finalCOMMON": 0,
+    "finalUnresolved": 0,
+    "individualStackUsageBytes": [
+      8,
+      20
+    ],
+    "linkAndInspectionStagesRC0": 5,
+    "objectStagesRC0": 5,
+    "orderedLOADs": 8,
+    "relocations": 225,
+    "sections": 3,
+    "selectedProjectFiles": 1,
+    "selectedSDKHeaders": 52,
+    "symbols": 109
+  },
+  "receipts": {
+    "carrierHOST8": {
+      "bytes": 5206,
+      "sha256": "f8754728079a353f0c67cbdfd3e3d1acb620a27e3bcb75a10de080ea9fd9c5f8"
+    },
+    "nativeObject": {
+      "bytes": 5458,
+      "sha256": "e282b46996f4483091674c43afcf9eb9df96f898a4027152c296db78bb034b52"
+    },
+    "scriptHOST8": {
+      "bytes": 5148,
+      "sha256": "f64d528747dddf0d623102cdecf1b09740dcd356ebb85aaee74d00c0b253a60e"
+    },
+    "staticGate": {
+      "bytes": 2015,
+      "sha256": "13bdc078c27f56a83f34945394723bc6eb6e3532872dacb9a6061375834b3a66"
+    },
+    "staticLink": {
+      "bytes": 39276,
+      "sha256": "042209d9ecac935a8ac046fc406461b23a9450413eea56e2334aed7f2abea0f5"
+    }
+  },
+  "role": "Compilation/link control author summarized Root-operated results and accepted saved audits; this is not independent original-source assurance.",
+  "sourceSHA256": "2345ac4d2b75ab9f9372d82e7c0f337e49182175fb0b110477201ef33bbd4f27",
+  "state": "PRIVATE_LOG_SHARE_HOST_AND_NATIVE_STATIC_QUALIFIED_NOT_RUNTIME"
+}

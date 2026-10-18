@@ -264,3 +264,26 @@ The probe remains private: no clean-HEAD qualification, canonical probe/frontend
 adoption, native runtime, functional allocation-ledger oracle or whole-Task
 stack minimum is established. It is not an editor GUI result. See
 [document-switch-task-static-host-progress.json](../evidence/native-editor-build/document-switch-task-static-host-progress.json).
+
+## Private live-log sharing probe qualification
+
+A separate private probe now passes eight pure script/policy HOST cases and
+eight carrier cases using the actual Plan, Transaction, Observation and
+callback with mocked exchange replies. Its single genuine native C unit passes
+five object stages, and the 10,948-byte static candidate passes five link and
+inspection stages. All eight current providers and CRT/base call paths were
+reviewed; the complete three-section HUNK contains 225 relocations. These
+results establish HOST control flow and static bytes, not installed-Shell sharing.
+See [live-log-share-host-static.json](../evidence/native-editor-build/live-log-share-host-static.json).
+
+The independently reviewed carrier retains the default exclusive-redirection
+path and selects append only through its exact private profile. It requires an
+early FIRST-only read before terminal controls, then final BOTH markers, RC0
+and exact five-file custody. Original guard ownership and VM-disposal ordering
+remain in place. See [live-log-share-carrier-source.json](../evidence/native-editor-build/live-log-share-carrier-source.json).
+
+Probe Amiberry runtime, live file sharing and A1200 execution remain NOT_RUN;
+this probe establishes no full-editor GUI result. The original R7 failure is
+unchanged. Source and test adoption wait for the separate actual target result;
+no production feature is enabled by these qualifications. Individual stack
+reports and the Delay argument establish neither a whole-Task minimum nor timing.

@@ -1,0 +1,31 @@
+{
+  "carrierFreeze": {
+    "bytes": 9161,
+    "sha256": "b0641e7a27e0a293cd3374a5485e1b2e4d95e1868fa3c588a25712757f962ade"
+  },
+  "limits": [
+    "No probe Amiberry runtime, live file sharing, full-editor GUI, physical A1200, signals/fault recovery, timing or whole-Task stack acceptance.",
+    "Original R7 FILEINFO failure and its scoped recovery remain unchanged.",
+    "Private source/test proposals only; no canonical carrier activation or production feature adoption."
+  ],
+  "materialFindings": [],
+  "review": {
+    "bytes": 8096,
+    "sha256": "aa92089139b98b4e7dea5302ed7e3c5ea00d3b62f8b8ee39c4f2acf54f09e2e6"
+  },
+  "reviewed": {
+    "actualCandidateAndFiveFullFactReadinessChecksReviewed": true,
+    "appendOnlyByExactOptIn": true,
+    "defaultExclusiveRedirectionUnchanged": true,
+    "earlyFIRSTOnlyBeforeTerminalControls": true,
+    "finalBOTH_RC0AndFiveFileCustodyRequired": true,
+    "noInputGUIOrLiveRAMDelete": true,
+    "originalCallbackTaskAndDeadlineChecks": true,
+    "originalGuardFrameAndStickyFailurePreserved": true,
+    "originalTransactionClassASTUnchanged": true,
+    "ownedVMAbsenceBeforeOfflineCleanup": true,
+    "separateReleaseAndServiceCleanupRequired": true
+  },
+  "scope": "Different-author carrier implementation reviewed; reviewer prior donor/control and native static-audit overlap disclosed. The distinct carrier HOST8 uses actual classes with mocked bounded replies; factory/readiness/runner changes receive source review, not an actual lifecycle pass.",
+  "state": "PRIVATE_LOG_SHARE_CARRIER_SOURCE_REVIEW_PASS_NOT_ACTIVATED"
+}

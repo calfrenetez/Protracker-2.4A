@@ -1,0 +1,79 @@
+{
+  "candidate": {
+    "bytes": 14640,
+    "crc32": "39849DA7",
+    "sha256": "e915664a5244a61e57378be1424284bc04a99ec16f1acc0bc978004aef6350de"
+  },
+  "date": "2026-10-18",
+  "host": {
+    "HUNKRelocationsChecked": 447,
+    "allReturnCodes": 0,
+    "boundComponentPolicyMethods": 13,
+    "classicDOSWrappers": 22,
+    "currentRuntimeProviders": 25,
+    "helperCommands": 35,
+    "helperModelGroups": 34,
+    "nativeObjectStages": 5,
+    "staticLinkCommands": 5
+  },
+  "limits": [
+    "No native present-record ENV coverage from this run.",
+    "No full editor, GUI, native Task/aggregate-stack or allocation-failure runtime acceptance.",
+    "No physical A1200, AmiGUS, DMA/voice-stop, audio, timing or listening acceptance.",
+    "The original RC20 run and this outer reporting failure remain failures; no test replay.",
+    "A strict bounded three-line parser successor is prepared but has not yet been qualified."
+  ],
+  "native": {
+    "ENVARCWritten": false,
+    "custodyObjectsVerified": 11,
+    "editorLaunched": false,
+    "nativeResultSHA256": "e437f839e58fbd0c1271e61b4b2ee6fb839689d4bd9062739ffd2209d8c5c15f",
+    "originalRecordCount": 5,
+    "originalRecordCoverage": "All five absent in this actual run; absence preserved.",
+    "prepareRC": 0,
+    "restoreRC": 0,
+    "shellStackBytesObserved": 2097152,
+    "snapshotBytes": 5204,
+    "snapshotCRCsVerified": true,
+    "snapshotPhases": [
+      1,
+      3
+    ]
+  },
+  "outer": {
+    "cause": "Two genuine launcher lifecycle lines precede final JSON; the original parser expected JSON only.",
+    "error": "JSONDecodeError",
+    "failedNativeTransactionReplayed": false,
+    "genuineNativeToolRC": 0,
+    "ordinaryOuterPASS": false,
+    "ownedSupervisorClosedReapedGroupAbsentRetainedZero": true,
+    "preserved": true,
+    "protectedRowsAndRawREADYEqual": 68,
+    "returnCode": 1,
+    "savedExtraFactsEqual": 44,
+    "savedSourceInputsEqual": 1813,
+    "standaloneOuter280SecondPASS": false,
+    "supervisedCommandSeconds": 67.74374679202447
+  },
+  "runtimeGateSHA256": "9b86646c60e50473a4d4be7b00629536ffa0c7ec3657f6ec229e8866dceff109",
+  "schema": 1,
+  "settlement": {
+    "finalFence": 2036,
+    "finalIndependentRecordSHA256": "916c9b90adf7ce66b7f5b6f274e51482523cf6abc58ba8141415849deae42e40",
+    "heldOwnership": false,
+    "oneFourFactPublicRelease": true,
+    "oneNormalSignalToOriginalService": true,
+    "originalStagingAndLauncherRestored": true,
+    "ownedEmulatorAndServiceAbsent": true,
+    "releaseArchiveCount": 164,
+    "separateFinalIndependentEmpty": true,
+    "separateFreshVMAbsenceAndRestoration": true,
+    "separateSavedReconciliation": true
+  },
+  "source": {
+    "bytes": 20497,
+    "sha256": "4f4f9839f580ffe702f7ecb65dfa8f753fcb650b029d7e83dc1a144b97b60448"
+  },
+  "state": "NATIVE_ENV_COMPONENT_OBSERVED_AND_RELEASED_OUTER_PARSER_FAILURE_PRESERVED",
+  "target": "amiberry-030"
+}

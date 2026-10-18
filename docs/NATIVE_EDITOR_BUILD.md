@@ -135,3 +135,32 @@ See [environment-helper-emulator-refusal.json](../evidence/native-editor-build/e
 The updated editor build remains unexecuted. A corrected helper needs its own
 HOST/native build and exact-candidate emulator qualification before physical
 promotion; the earlier compilation checks do not establish DOS runtime success.
+
+## Corrected environment-helper component qualification
+
+A distinct corrected helper now passes the HOST model, genuine native object
+and link checks, and one exact-candidate Amiberry prepare/restore sequence.
+The helper changes its newly created directory lock to shared mode through a
+checked call before shared-lock operations, and admits DOS V37 or later.
+This addresses a source contract defect; the earlier RC20 predicate remains
+unconfirmed and its failed operation was not replayed.
+
+Both native phases returned RC0 with the exact transcript and 5,204-byte
+snapshot states 1 and 3. Eleven custody objects and snapshot CRCs check out.
+All five original environment records were absent in this run and remained
+absent after restoration. Present-record cases remain HOST model coverage.
+The observed 2 MiB Shell stack is not a measured minimum.
+
+The native sequence completed, but its outer reporter returned failure when
+it tried to parse two routine launcher messages as JSON. That failure remains
+preserved. A separate saved-data reconciliation verifies the actual native
+result, original supervisor closure, 1,813 source facts, 44 extra facts and
+unchanged protected inputs. It does not relabel the original outer as passing.
+
+Separate fresh checks then confirmed emulator absence and restoration, released
+the original reservation, normally stopped only the original local service,
+and independently confirmed EMPTY ownership with both processes absent.
+A strict three-line reporter correction is prepared for qualification before
+the next application test. The updated editor, physical A1200 and audio gates
+remain outstanding. See
+[environment-helper-emulator-qualification.json](../evidence/native-editor-build/environment-helper-emulator-qualification.json).

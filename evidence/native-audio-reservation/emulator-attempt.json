@@ -1,0 +1,55 @@
+{
+  "attempt": {
+    "allFixedInputsProtectedRawREADYEqual": true,
+    "completedNativeOracle": false,
+    "count": 1,
+    "firstBlockingOrHELDPhase": "UNKNOWN",
+    "nativeLogBodyCollected": false,
+    "outerTimedOut": false,
+    "ownedHostSupervisorClosureConfirmed": true,
+    "physicalPromotion": false,
+    "returncode": 1,
+    "seconds": 137.28073937498266,
+    "unchangedReplay": false
+  },
+  "candidate": {
+    "bytes": 15264,
+    "crc32": "CE512BF6",
+    "sha256": "71a705e97c6ab0f844aff574ad8d749be7fefc192c2a9ed4f47dbc0dab40c455"
+  },
+  "limits": [
+    "No native device/IRQ/retirement qualification.",
+    "No causal audio.device or allocation-wait defect established.",
+    "Canonical module and production STOP_UNQUALIFIED boundary unchanged.",
+    "Physical device, timing and listening NOT_RUN."
+  ],
+  "schema": 1,
+  "separateRecovery": {
+    "guestEnvironmentRestoration": "UNCONFIRMED_VM_DISPOSAL_ONLY",
+    "independentPublicRelease": true,
+    "launcherFilesRestored": true,
+    "runOwnedProcessesAndStagingAbsent": true,
+    "sharedState": "EMPTY",
+    "singleNormalSignalEach": true,
+    "strict68Preserved": true
+  },
+  "sourceRecords": {
+    "cleanup": {
+      "bytes": 2414,
+      "sha256": "bb04c266bb282798397ad2ca67d244a80d3f67e31553caa333d32a7640f771f7"
+    },
+    "native": {
+      "bytes": 19418,
+      "sha256": "85074df7d7fca404ad074282c3786dc7ddc302b5a9eea38a5819c2250e50f37b"
+    },
+    "release": {
+      "bytes": 1003,
+      "sha256": "2811d2242edc9226d5cc6f5716d71c2f2cebd4cab31bb64e3cf61ec596b422c4"
+    },
+    "root": {
+      "bytes": 5450,
+      "sha256": "f60a4f6f63b3935e8c9fef6970dc21e2376837d03a60ecb5fb8c43d30a56b20d"
+    }
+  },
+  "state": "EXACT_EMULATOR_ATTEMPT_FAILED_RECOVERED_RELEASED_NOT_NATIVE_ACCEPTANCE"
+}

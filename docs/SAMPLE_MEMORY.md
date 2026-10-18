@@ -13,7 +13,10 @@ status HOST groups; uncertain ownership retains state and cannot report STOPPED.
 These models do not qualify full cache/workspace cleanup, `audio.device` or DMA
 completion. A separate private generation successor passes 12 sequential CIA
 model cycles and 31 owner groups under HOST sanitizers. Actual native repeated
-PLAY, full cleanup and default frontend adoption remain open. See
+PLAY, full cleanup and default frontend adoption remain open. A distinct acquisition
+refusal diagnostic passes its C model, 15 replay-transform methods and genuine native
+C/replay object builds; its final link/ABI and exact emulator execution remain pending.
+No physical qualification follows from these build results. See
 [the implementation and evidence limits](NATIVE_REPLAY_CIA_LIFETIME.md).
 
 ## Checked document commit boundary — 18 October 2026

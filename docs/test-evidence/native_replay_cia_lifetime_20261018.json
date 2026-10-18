@@ -2,12 +2,71 @@
   "acquisition_diagnostic_successor": {
     "acquisition_policy": "Original one-shot guards retained",
     "additional_cia_register_reads": 0,
+    "amiberry": "NOT_RUN",
+    "default_native_selected": false,
     "failure_record_bytes": 240,
+    "host": {
+      "assertions": true,
+      "c_model_compile_and_execution": true,
+      "correction": "Unique full graphics context; original outside bytes and API counts retained.",
+      "independent_saved_review_sha256": "d2217c25b664cecf7446d1451f90226b5d642d93880a40265a1198f0e3aef2c2",
+      "original_owned_closure": true,
+      "prior_ambiguous_graphics_anchor_failure_preserved": true,
+      "pure_transform_methods": 15,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "status": "PASS_HOST_ONLY",
+      "warnings_as_errors": true
+    },
+    "link_static_abi": "NOT_RUN",
     "native_execution": "NOT_RUN",
+    "native_object": {
+      "bytes": 5888,
+      "commands": {
+        "assembler": 1,
+        "codegen": 1,
+        "object_inspection": 1
+      },
+      "independent_saved_review_sha256": "5a6ee6f9b6e510d86b5793367e527144d6da242fee4cf57d54501fbd26076b6b",
+      "largest_individual_compiler_stack_bytes": 76,
+      "sha256": "bf9d985b25b2b1dd8afeaa4d7321ae4567113358becb4a808c0c8277a42d988c",
+      "status": "PASS_OBJECT_ONLY",
+      "strong_public_definitions": 3,
+      "unresolved_imports": 24,
+      "whole_irq_task_stack_qualified": false
+    },
+    "native_preprocess": {
+      "actual_platform_builtins_verified": 9,
+      "commands": 2,
+      "dependency_and_line_marker_sets_equal": true,
+      "forced_platform_macros": false,
+      "independent_saved_review_sha256": "506b7d5f13f425932238d5a5918aba8e009bf3813995297476cfdaa9b8c1b0a5",
+      "project_sources": 4,
+      "selected_genuine_sdk_headers": 46,
+      "status": "PASS_PREPROCESS_ONLY"
+    },
     "physical": "NOT_RUN",
     "pre_c_assembly_words": 6,
     "reason_rows": 2,
-    "status": "REVIEWED_PRIVATE_SOURCE_ONLY",
+    "replay_object": {
+      "actual_local_transform_modules": 4,
+      "bytes": 7800,
+      "commands": {
+        "assembler": 1,
+        "object_inspection": 1,
+        "transform": 1
+      },
+      "diagnostic_exports": 6,
+      "independent_saved_review_sha256": "4e35c262d542cd9723d48f5a1dd1bf7c896b4fa30b7d6b924ff843042df3fc31",
+      "sha256": "441c5f08010bba0adacdd4d00fe1315e9ceb381b36d94c5c6f32f9fb4ce37078",
+      "source_inputs": 8,
+      "status": "PASS_OBJECT_ONLY",
+      "unresolved_checked_c_imports": 2
+    },
+    "source_freeze_sha256": "f69e2996ac551eec099cffad879944cd4b28873c183e1b53c44a5e2af628616c",
+    "status": "PASS_PRIVATE_HOST_NATIVE_OBJECTS_UNLINKED",
     "success_oracle_bytes": 198,
     "words_each": 24
   },
@@ -126,7 +185,7 @@
     "symbols": 104
   },
   "pending": [
-    "Distinct acquisition-reason diagnostic host/native/static and exact Amiberry qualification",
+    "Distinct acquisition-reason diagnostic static link/ABI and exact Amiberry qualification",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",

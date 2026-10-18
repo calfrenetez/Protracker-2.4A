@@ -1,4 +1,31 @@
 {
+  "acquisition_diagnostic_successor": {
+    "acquisition_policy": "Original one-shot guards retained",
+    "additional_cia_register_reads": 0,
+    "failure_record_bytes": 240,
+    "native_execution": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "pre_c_assembly_words": 6,
+    "reason_rows": 2,
+    "status": "REVIEWED_PRIVATE_SOURCE_ONLY",
+    "success_oracle_bytes": 198,
+    "words_each": 24
+  },
+  "amiberry_cia_attempt": {
+    "active_retired_pass_observed": false,
+    "attempts": 1,
+    "candidate_sha256": "58c2e7d8098f1b76aff59a123dd9ee928aedeae0477f7b494810b3a3003a7683",
+    "complete_marker_observed": true,
+    "failed_evidence_preserved": true,
+    "native_begin_observed": true,
+    "native_return_code": 20,
+    "outer_dispatch_reply": "UNCERTAIN_SAVED_NATIVE_RESULT_CONFIRMED",
+    "physical_promotion_qualified": false,
+    "recovery_restoration_independent_absence_release": "VERIFIED",
+    "refusal_observed": true,
+    "replayed": false,
+    "status": "FAILED_RC20_NO_ACQUISITION"
+  },
   "canonical_host": {
     "assertions": true,
     "commands": 2,
@@ -88,7 +115,7 @@
     "hunk_sections": 4,
     "input_objects": 4,
     "link_inspection_workers": 5,
-    "native_execution": "NOT_RUN",
+    "native_execution": "FAILED_AMIBERRY_RC20_NO_ACQUISITION",
     "original_sdk_reference_bytes": 8290,
     "relocations": 425,
     "replay_workers": 3,
@@ -99,13 +126,42 @@
     "symbols": 104
   },
   "pending": [
-    "Exact CIA-only Amiberry execution",
+    "Distinct acquisition-reason diagnostic host/native/static and exact Amiberry qualification",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",
-    "Repeat PLAY generation lifecycle",
+    "Native repeat PLAY generation integration and full cleanup",
     "Real A1200 and listening acceptance"
   ],
+  "private_generation_host": {
+    "assertions": true,
+    "cia_chip_timer_choices": 4,
+    "cia_sequential_cycles": 12,
+    "compiles": 2,
+    "correction": "Test mock formatting only; predicates, product source, flags and bounds unchanged.",
+    "cycles_each_without_reset": 3,
+    "default_native_selected": false,
+    "diagnostic_stream_bytes": 0,
+    "first_legacy_fixture_compile_failure_preserved": true,
+    "full_allocator_cache_cleanup_qualified": false,
+    "independent_saved_actual_review_sha256": "aa6639739bca84864d650bd87603690772e61c67cd8df7bf00699374fabad0db",
+    "leak_detection": false,
+    "legacy_owner_groups": 31,
+    "model_executions": 2,
+    "native_execution": "NOT_RUN",
+    "original_owned_process_closure": true,
+    "physical": "NOT_RUN",
+    "protected_source_unchanged": true,
+    "root_actual_receipt_sha256": "ed078892b7ad102dfc047f16b72716d393572b6be3ddcc99a7f5716c9d6fc99c",
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "scope": "Actual CIA C against fake Exec/resource/register boundary; actual owner against separate fake OS/CIA generation boundary. Cleanup flag models the post-cleanup seam.",
+    "source_freeze_sha256": "b5b7bac37fadef7ae2b935aaff62abc5053c8dfc29b7ddba41684b74d7c34dc1",
+    "status": "PASS_PRIVATE_HOST_ONLY",
+    "warnings_as_errors": true
+  },
   "private_legacy_native_objects": {
     "actual_imports_measured": true,
     "commands_each": {

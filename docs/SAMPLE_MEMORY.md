@@ -5,11 +5,15 @@
 The default-off CIA ownership primitive now has passing HOST models, genuine
 native preprocessing/object and replay assembly, and a separate static-linked
 CIA-only qualifier. The saved audit checks actual API providers and all four
-HUNK sections using section-aware relocation routes. Native execution is still
-NOT_RUN. A private legacy Paula successor passes 21 owner and 12 typed STOP/Apply/
+HUNK sections using section-aware relocation routes. Its one exact Amiberry
+attempt returned RC20 without acquisition; no retirement pass is established.
+Recovery and independent release completed, and the failed candidate is preserved.
+A private legacy Paula successor passes 21 owner and 12 typed STOP/Apply/
 status HOST groups; uncertain ownership retains state and cannot report STOPPED.
 These models do not qualify full cache/workspace cleanup, `audio.device` or DMA
-completion. Default frontend adoption and repeated PLAY remain open. See
+completion. A separate private generation successor passes 12 sequential CIA
+model cycles and 31 owner groups under HOST sanitizers. Actual native repeated
+PLAY, full cleanup and default frontend adoption remain open. See
 [the implementation and evidence limits](NATIVE_REPLAY_CIA_LIFETIME.md).
 
 ## Checked document commit boundary — 18 October 2026

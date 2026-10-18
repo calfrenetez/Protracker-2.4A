@@ -1,0 +1,80 @@
+{
+  "canonical_host": {
+    "assertions": true,
+    "commands": 2,
+    "compiler": "system cc",
+    "diagnostic_stream_bytes": 0,
+    "leak_detection": false,
+    "logical_case_groups": {
+      "acquisition_refusals": 3,
+      "chip_timer_success": 4,
+      "retained_uncertainty": 10
+    },
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "source_unchanged": true,
+    "status": "PASS"
+  },
+  "component": "Checked replay CIA ownership primitive",
+  "date": "2026-10-18",
+  "default_native_linked": false,
+  "limits": "HOST models and object inspection do not qualify native resource semantics, target completion or default frontend behavior.",
+  "native_object": {
+    "commands": {
+      "assembler": 1,
+      "codegen": 1,
+      "object_inspection": 1,
+      "preprocess": 2
+    },
+    "compiler": "m68k-amigaos GCC 6.5",
+    "largest_individual_compiler_stack_bytes": 72,
+    "required_definitions": [
+      "_main",
+      "_pt_native_replay_add_cia_vector",
+      "_pt_native_replay_cia_retire"
+    ],
+    "sdk": "genuine NDK 3.2 declarations",
+    "status": "PASS_OBJECT_ONLY",
+    "translation_unit": "Separate CIA-only qualifier including exact published primitive",
+    "unresolved_cia_imports": [
+      "_AbleICR",
+      "_AddICRVector",
+      "_RemICRVector",
+      "_SetICR"
+    ],
+    "whole_irq_task_stack_qualified": false
+  },
+  "pending": [
+    "Replay provider linkage and native execution",
+    "Actual CIA retirement and ordering",
+    "Paula DMA and audio.device retirement",
+    "Active cache/master release and full app integration",
+    "Repeat PLAY generation lifecycle",
+    "Real A1200 and listening acceptance"
+  ],
+  "schema": 1,
+  "source_pins": {
+    "src/native/native_replay_cia_stop.c": {
+      "bytes": 8340,
+      "sha256": "062e3a405596bfaa044dec48624e4f921ed78039e985d7baa5d7e98fa155b802"
+    },
+    "src/native/native_replay_cia_stop.h": {
+      "bytes": 1855,
+      "sha256": "7e2f8795f4f8c8dabe77093919cd47747d0384bd68cff445e7890e8f7713f449"
+    },
+    "tests/native_replay_cia_stop_stubs.h": {
+      "bytes": 1394,
+      "sha256": "6097850ccb601167ab725c0e86a28c40d8e90a9233b04c124625f39d485ce553"
+    },
+    "tests/test_native_replay_cia_stop.c": {
+      "bytes": 7773,
+      "sha256": "60b7278986269fae1fb84248c6c73b4ff176c33a5c46bfc5c0b68a307867ac4a"
+    },
+    "tools/test_replay_cia_stop_host.py": {
+      "bytes": 6583,
+      "sha256": "69934490c14cdfcdce6c9cdca953ce55eb721dc7d17ba71f7cafe35340a71f93"
+    }
+  }
+}

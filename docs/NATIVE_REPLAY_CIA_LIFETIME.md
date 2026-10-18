@@ -1,0 +1,17 @@
+# Checked replay CIA ownership primitive
+
+This opt-in module records ownership at the actual replay `AddICRVector` call and retires that same producer before any caller may release resources that the producer could access. It is not linked into the default native application. Selection requires `PT_REPLAY_STOP_PRIVATE_SOURCE=1`; ordinary replay generation and the shipping STOP path are unchanged.
+
+The acquisition wrapper calls the real add operation once and records the resource, timer bit, interrupt server, CIA register address, ordinary Process, stack bounds and Exec identity within the same interrupt exclusion. It refuses a second acquisition. Retirement disables replay production, masks the owned interrupt, stops and reads back the owned timer, clears and observes pending state, preserves foreign bits, removes the exact vector, and checks the postconditions before clearing the replay alias. A result of `1` describes this proposed source protocol. Sticky `-1` retains uncertain ownership and cannot be retried as a successful stop. A successful add followed by uncertain custody retains the original Process/HUNK/stack.
+
+The causal HOST fixture includes the actual C module. It checks all four chip/timer combinations, API ordering and exclusion, foreign-vector refusal, an already running timer, enabled replay refusal, one-shot acquisition, and ten identity/readback/foreign-state failures. Those failures must retain the original alias and must not repeat retirement operations. The typed stub preserves the real `CONST_STRPTR` unsigned-byte pointer signature. Run the standalone check from the project root with a fresh evidence directory:
+
+```sh
+python3 tools/test_replay_cia_stop_host.py --evidence-dir /tmp/pt24g-cia-stop-host-evidence
+```
+
+The loader runs one bounded `/usr/bin/cc` compile and one bounded HOST execution with AddressSanitizer, UndefinedBehaviorSanitizer, warnings as errors, and assertions explicitly enabled. Leak detection is disabled, matching the qualified local HOST configuration. Its logs and JSON report are HOST evidence only; this ordinary local test runner does not provide the shared target harness's custody or acceptance protocol.
+
+On 18 October 2026 the exact private typed primitive and fixture passed the original bounded HOST qualification. The primitive was also included in a genuine single native qualifier translation unit: strict-C99 preprocessing, code generation, assembly and object inspection passed with the real Amiga SDK declarations. The four CIA functions remain unresolved object imports at that stage. The source-era PRIVATE/SOURCE-ONLY comments are retained byte-for-byte from that qualified private input; they are not a current test result. The standalone canonical loader also passed its exact compile and model run on 18 October 2026, with unchanged source hashes and empty diagnostic streams. The compact qualification record is [saved alongside this document](test-evidence/native_replay_cia_lifetime_20261018.json).
+
+No native replay assembly/provider linkage, CIA resource semantics, actual interrupt retirement, register ordering, Paula DMA completion, `audio.device` release, cache/master unpin, full-app exit, real A1200 behavior or listening acceptance is claimed. The primitive is intentionally one-shot; repeat PLAY needs a separately designed generation lifetime. The private CIA-only qualifier main and assembly fragments are not part of this module's publication. Existing exact musical scheduling and the accepted native baseline remain in place.

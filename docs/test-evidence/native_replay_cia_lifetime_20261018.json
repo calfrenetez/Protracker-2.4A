@@ -17,6 +17,16 @@
     "source_unchanged": true,
     "status": "PASS"
   },
+  "cia_test_carrier_model": {
+    "exact_current_native_bytes_as_inert_data": true,
+    "native_execution": "NOT_RUN",
+    "original_owned_process_closure": true,
+    "scope": "Causal current source/evidence association, pending-log and complete-file custody with fake ports; no target resources or API effects.",
+    "source_oracle_bytes": 198,
+    "status": "PASS_HOST_ONLY",
+    "tests": 16,
+    "worker_executions": 1
+  },
   "component": "Checked replay CIA ownership primitive",
   "date": "2026-10-18",
   "default_native_linked": false,
@@ -96,6 +106,37 @@
     "Repeat PLAY generation lifecycle",
     "Real A1200 and listening acceptance"
   ],
+  "private_legacy_native_objects": {
+    "actual_imports_measured": true,
+    "commands_each": {
+      "assembler": 1,
+      "codegen": 1,
+      "object_inspection": 1
+    },
+    "default_native_selected": false,
+    "diagnostic_stream_bytes": 0,
+    "final_providers_link_qualified": false,
+    "native_execution": "NOT_RUN",
+    "scope": "Private R3 full backend and typed STOP consumer; this is not a canonical source export or runtime device/cache cleanup qualification.",
+    "status": "PASS_OBJECT_ONLY",
+    "translation_units": [
+      {
+        "largest_individual_compiler_stack_bytes": 6812,
+        "name": "private paula.c",
+        "object_bytes": 16636,
+        "object_sha256": "a0189c97d9c4b8f3d3e40195ecb0199c19b58c999af32978a4880506cf570648",
+        "strong_public_definitions": 7
+      },
+      {
+        "largest_individual_compiler_stack_bytes": 32,
+        "name": "private paula_stop_action.c",
+        "object_bytes": 804,
+        "object_sha256": "933d53c1a2ec93ffd39232a583813b9cf68eaf1638977423613961555a3e34f2",
+        "strong_public_definitions": 2
+      }
+    ],
+    "whole_irq_task_stack_qualified": false
+  },
   "schema": 1,
   "source_pins": {
     "src/native/native_replay_cia_stop.c": {

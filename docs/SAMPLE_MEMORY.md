@@ -8053,3 +8053,14 @@ regressions pass separately. Two default-native typed objects compile with the
 real 32-bit Amiga layout, but remain unlinked and unrun. No new emulator, physical,
 output timing or listening acceptance is claimed. See [the policy contract and
 qualification limits](DOCUMENT_REPLACEMENT_POLICY.md).
+
+## Private checked legacy STOP native objects —18 October2026
+
+The private full Paula backend and typed STOP/Stop-and-Apply consumer each pass
+native code generation, assembly and object inspection with genuine SDK inputs.
+Actual 16,636/804-byte objects preserve the checked retirement and RELEASED-only
+edit barrier routes; selected external providers, linking, repeated playback,
+full app cleanup and native device/cache behavior remain unqualified. A separate
+16-case carrier model passes locally; the fresh exact CIA qualifier still needs
+Amiberry execution. Default backend selection and the accepted layout remain
+unchanged. See [the scope and compact evidence](NATIVE_REPLAY_CIA_LIFETIME.md).

@@ -1,0 +1,59 @@
+{
+  "command": "python3 -B tests/test_native_document_switch.py",
+  "coverage": [
+    "Genuine detached New preparation and cancellation across 4,8,16 channels.",
+    "Genuine encoded project Load and 24-bit low-bit master/save preservation.",
+    "Undo/redo and original editor/document/history remain unchanged on supported cancellation.",
+    "Selected allocation failures, budget rejection, malformed input and complete known-span overlap.",
+    "Busy reentry, original/candidate drift and genuine checked-release quarantine."
+  ],
+  "date": "2026-10-18",
+  "qualification": {
+    "allReturnCodes": 0,
+    "compilerAndCaseCommands": 10,
+    "completeDomains": 5,
+    "deliberatelyRetainedDomains": 4,
+    "elapsedSeconds": 8.917054958001245,
+    "groups": 9,
+    "inputFactsEqual": true,
+    "leakSanitizer": "NOT_AVAILABLE_NOT_REQUESTED",
+    "original68ProtectedPathsEqual": true,
+    "retainedProcessOwners": 0,
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "sourceAndControlInputs": 91,
+    "supervisorClosureConfirmed": true
+  },
+  "roles": "Implementation and HOST operator overlap; separate source review found no material issue. No independent hardware or owner acceptance is claimed.",
+  "schema": 1,
+  "scope": {
+    "defaultFrontendSelected": false,
+    "deviceQuiet": "NOT_QUALIFIED",
+    "emulator": "NOT_RUN",
+    "listening": "NOT_QUALIFIED",
+    "nativeBuild": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "publication": "STOP_UNQUALIFIED"
+  },
+  "sources": {
+    "src/native/editor_document_switch.c": {
+      "bytes": 8769,
+      "sha256": "dda158d4868d37bbe028074bf597a93b16ed494a5b43c4fbb8d4a2d227d9396d"
+    },
+    "src/native/editor_document_switch.h": {
+      "bytes": 3726,
+      "sha256": "b40054403fe3060ba5c76eb96711142dff2314bb5f328c4b8dbc767442d04588"
+    },
+    "tests/native_document_switch_test.c": {
+      "bytes": 18016,
+      "sha256": "2f4fb2f15e28dc9cbcd1edaac3b6a170813bc6f5c2f5a484baf0f13d7a0f6676"
+    },
+    "tests/test_native_document_switch.py": {
+      "bytes": 8810,
+      "sha256": "4c6dc51221c42065b3c91eb91fb27da51ace95bc44622238dee2594521803d36"
+    }
+  },
+  "state": "CANONICAL_HOST_DOCUMENT_PREPARATION_PASS_NOT_PUBLICATION"
+}

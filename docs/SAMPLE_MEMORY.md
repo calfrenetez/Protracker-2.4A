@@ -1,5 +1,15 @@
 # Sample memory and playback ownership
 
+## Detached document preparation —18 October2026
+
+A separate New/encoded-Load preparation component now preserves the original
+editor/document, 24-bit masters and history through genuine candidate creation
+and checked cancellation. Nine canonical HOST sanitizer groups pass; uncertain
+release retains both domains. Publication is explicitly STOP_UNQUALIFIED and
+the default native frontend remains unselected. Checked native playback stop
+and final-address adoption, native build, emulator and A1200 acceptance remain
+open. See [the exact boundary](NATIVE_DOCUMENT_SWITCH.md).
+
 
 ## Native MIDI context RAM qualifier —17 October2026
 

@@ -164,3 +164,22 @@ A strict three-line reporter correction is prepared for qualification before
 the next application test. The updated editor, physical A1200 and audio gates
 remain outstanding. See
 [environment-helper-emulator-qualification.json](../evidence/native-editor-build/environment-helper-emulator-qualification.json).
+## Updated startup and reporting HOST qualification —18 October2026
+
+The current 349152-byte working editor (`97f9f3a6…`) and 14640-byte
+environment helper (`e915664a…`) are now bound into the startup test profile.
+One normal-import HOST run passed 37 distinct methods: the existing 19 profile
+and input-adapter cases, ten VM-disposal models, and eight new build-binding,
+admission and transcript cases. All 123 input facts and protected files were
+preserved, all 33 temporary model roots were removed, and supervision closed
+with no retained owner. This qualifies models, not an actual editor launch.
+
+A separate HOST run passed 24 transcript groups against each of the two exact
+outer parsers. The parsers accept the expected health line, positive owned-
+emulator stop line and single final JSON object. Extra, reordered, truncated,
+ambiguous and oversized output is refused. The original helper run's outer
+JSON error remains recorded as a failure; it was not replayed or relabelled.
+
+Both runs and their evidence boundaries are summarized in
+`evidence/native-editor-build/updated-startup-host-qualification.json`.
+The new full editor's exact Amiberry GUI run and A1200 promotion remain pending.

@@ -1,0 +1,56 @@
+{
+  "schema": "PT24G_UPDATED_STARTUP_HOST_QUALIFICATION_V1",
+  "date": "2026-10-18",
+  "tier": "HOST_ONLY",
+  "editorInput": {
+    "bytes": 349152,
+    "sha256": "97f9f3a6f3ff5d7c29aaa7e9414fe269c6a2db45662e4886918a90b3bf1754f0"
+  },
+  "helperInput": {
+    "bytes": 14640,
+    "sha256": "e915664a5244a61e57378be1424284bc04a99ec16f1acc0bc978004aef6350de"
+  },
+  "startupModels": {
+    "actualToolRC": 0,
+    "distinctMethods": 37,
+    "existingProfileAndAdapter": 19,
+    "existingVMDisposal": 10,
+    "newBindingAdmissionAndParser": 8,
+    "internalSeconds": 5.209832000022288,
+    "inputFacts": 123,
+    "temporaryRootsEnrolled": 33,
+    "temporaryRootsRemaining": 0,
+    "diagnostics": "Verbose unittest output and eight ordinary asyncio debug notices; all methods passed.",
+    "resultSHA256": "70da4b096c7dc5a448a0e638da8b86449356fa0796fabb5cf97dc217caaab77a",
+    "independentSavedAuditSHA256": "12b22317a33b1cdcfba2195f1ce8ba76651b4f2c89c2c8eba6330226936dad80"
+  },
+  "strictTranscriptParsers": {
+    "actualToolRC": 0,
+    "parsers": 2,
+    "distinctGroupsPerParser": 24,
+    "internalSeconds": 0.1512495829956606,
+    "stdoutBytes": 67,
+    "stderrBytes": 0,
+    "savedHistoricalTranscriptBytes": 447,
+    "savedTranscriptAccepted": true,
+    "originalWholeStdoutJSONFailurePreserved": true,
+    "resultSHA256": "4bef9b8815d4dc002022ab4356c37aefb9a6144ab62ee332f44e054b7484dce0",
+    "independentSavedAuditSHA256": "5b6bf07af55c063c030a1067c363b06d76456a11ea2e4304f6a9d5da402bad68"
+  },
+  "boundaries": {
+    "allCapturedInputFactsEqual": true,
+    "protectedResidentBodies": 58,
+    "protectedMetadataOnlyRows": 10,
+    "protectedRowsEqual": true,
+    "guardAndRawAdmissionsEqual": true,
+    "positiveOriginalSupervisionClosure": true,
+    "retainedOwners": 0,
+    "targetOperations": 0
+  },
+  "limits": [
+    "HOST models and pure-parser syntax only; binaries are inert data inputs in these checks.",
+    "No actual GUI, IPC, service, VM, native ENV, audio, device, physical or listening acceptance follows.",
+    "The original native helper outer RC1 remains preserved; these tests do not replay or retrospectively qualify it.",
+    "Internal durations are separate clocks; no independently measured external-return duration is claimed."
+  ]
+}

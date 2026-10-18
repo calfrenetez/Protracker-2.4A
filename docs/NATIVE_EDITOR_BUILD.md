@@ -116,3 +116,21 @@ lifetime, device quiet, audio timing and listening remain separate gates. See
 [owner-cleanup-host.json](../evidence/native-editor-build/owner-cleanup-host.json)
 [owner-cleanup-objects.json](../evidence/native-editor-build/owner-cleanup-objects.json)
 and [owner-cleanup-link.json](../evidence/native-editor-build/owner-cleanup-link.json).
+
+## Isolated environment-helper runtime refusal
+
+An exact helper-only Amiberry run returned RC20 from preparation with empty
+output and no snapshot state. Its returned marker was observed; this was a
+confirmed refusal, not a timeout or successful setup. Restore and the editor
+were not launched. The original failed operation was not replayed.
+
+Separate scoped cleanup stopped only its positively identified emulator and
+local service, restored the saved launcher lifecycle files and removed its
+exact offline staging copy after emulator absence. A separate observation,
+four-fact ownership release and final independent EMPTY check passed. Native
+ENV restoration is unconfirmed; that guest domain was disposed with its VM.
+See [environment-helper-emulator-refusal.json](../evidence/native-editor-build/environment-helper-emulator-refusal.json).
+
+The updated editor build remains unexecuted. A corrected helper needs its own
+HOST/native build and exact-candidate emulator qualification before physical
+promotion; the earlier compilation checks do not establish DOS runtime success.

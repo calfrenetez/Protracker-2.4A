@@ -1,0 +1,54 @@
+{
+  "candidate": {
+    "bytes": 10732,
+    "crc32": "841DC1EA",
+    "sha256": "8442d84337c0ce4f735b7b9b5fa85defaf038bc988ec2cd20982d363f0cee418"
+  },
+  "date": "2026-10-18",
+  "limits": [
+    "No successful native helper setup or restore qualification.",
+    "No updated editor runtime or GUI acceptance.",
+    "No real-A1200, device, audio, timing, aggregate-stack or listening acceptance."
+  ],
+  "observation": {
+    "editorLaunched": false,
+    "nativeStackBytesObserved": 2097152,
+    "restoreAttempted": false,
+    "returnCode": 20,
+    "returned": true,
+    "returnedIsNotSuccess": true,
+    "snapshotDirectoryObserved": true,
+    "snapshotStateCreated": false,
+    "stdoutBytes": 0,
+    "verb": "prepare"
+  },
+  "outer": {
+    "all1813FixedInputsAndProtected68Equal": true,
+    "elapsedSeconds": 47.50926612498006,
+    "originalSupervisorClosureConfirmed": true,
+    "retainedOwnerCount": 0,
+    "returnCode": 1,
+    "timedOut": false
+  },
+  "recovery": {
+    "exactOfflineStagingAbsent": true,
+    "failedEvidencePreserved": true,
+    "failedTransactionReplayed": false,
+    "finalFence": 2032,
+    "finalIndependentEmpty": true,
+    "guestCommands": 0,
+    "nativeEnvironmentRestoration": "UNCONFIRMED; guest domain disposed with original VM",
+    "normalSignalPerOriginalProcess": 1,
+    "originalLauncherLifecycleRestored": true,
+    "ownedEmulatorAndServiceIndependentlyAbsent": true,
+    "releaseArchiveCount": 163,
+    "separateFourFactOwnershipRelease": true
+  },
+  "schema": 1,
+  "source": {
+    "bytes": 14357,
+    "sha256": "981422eb8db5883ed0057a556c5fd209fbdcf56056f2264f0bcafb07f8a02404"
+  },
+  "state": "NATIVE_ENVIRONMENT_HELPER_REFUSED_RECOVERED_EDITOR_NOT_RUN",
+  "target": "amiberry-030"
+}

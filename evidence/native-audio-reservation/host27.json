@@ -1,0 +1,43 @@
+{
+  "schema": "native-audio-reservation-host27-qualification-r1",
+  "state": "HOST27_AUDIO_RESERVATION_QUALIFIED_NOT_NATIVE",
+  "materialFindings": [],
+  "source": {
+    "productionC": {
+      "bytes": 12361,
+      "sha256": "7df1fa08bf8ad781b94f478f82770a8d6795196ded5ea287570a2d51716c93c4"
+    },
+    "productionHeaderSHA256": "2453e97b75db36b3e1e39c7e9b80495db59e76940ab2f24bb732f4db829df596",
+    "selectedAlgorithmSHA256": "f8feaff3c5ec33c5eb77ea6667b9e2787089e8c69ad845e8a8730f56f4cb280c",
+    "literalProductionFunctions": 9
+  },
+  "actual": {
+    "compilerCommands": 1,
+    "cases": 27,
+    "commands": 28,
+    "allRC0": true,
+    "strictQuietCompiler": true,
+    "all27ExactOracles": true,
+    "allStderrEmpty": true,
+    "seconds": 3.3223797090467997,
+    "wholeLimitSeconds": 240,
+    "ASan": true,
+    "UBSan": true,
+    "Werror": true,
+    "assertionsEnabled": true,
+    "LSan": "UNAVAILABLE_DETECT_LEAKS_0"
+  },
+  "checks": [
+    "Original24 model cases preserved; new OPEN/FREE/LOCK high-bit masks enter actual selected-C HELD before truncating diagnostic observations.",
+    "Full output span, refusal/one-shot/wrong-Task and exact API traces checked by model fixtures.",
+    "All59 saved boundaries agree:38 input facts,11 copied sources, strict68, raw READY bytes and recorded guard facts.",
+    "All28 original HOST supervisor groups closed with EOF/reap/absence, errors empty and zero retained owners. Normal SIGTERM/SIGKILL supervisor containment is separate from native behavior."
+  ],
+  "priorEvidence": "Three HOST24 actual failures and uninvoked R5 count finding remain preserved; this passing R6 is a distinct corrected transaction.",
+  "roles": "Root actual operator; saved auditor previously reviewed production/fixture/R6 and authored original donor controls, not R6 derivative.",
+  "limits": [
+    "HOST fake Exec/audio/SP and Wait sentinel only; native preamble/layout/SP/LVO/device/Task behavior unqualified.",
+    "Native compile/link/runtime, physical audio, checked native stop and frontend publication remain unqualified; default STOP_UNQUALIFIED.",
+    "No live queries or target operations; saved observations do not grant current resource authority."
+  ]
+}

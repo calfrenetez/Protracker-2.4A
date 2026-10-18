@@ -1,0 +1,250 @@
+{
+  "caseCount": 27,
+  "cases": [
+    {
+      "case": "01",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "e39d88e06dfce1415f2281e535a37b821901884a1186c045689df57cf8712c31",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=01 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "02",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "d026c0febaf6f5880ec1fb657479b611761e0d54e2b07aad99ebd2fd78a16405",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=02 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "03",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "a0a822ff65178da29d8ac4a338bd9ce20b249d41f52024fee6ee9406c184c1a1",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=03 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "04",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "d08dbb61024b69ed0b1566b2d7d84a0ec9148de50a85f6d0fc1a7911d7d6337d",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=04 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "05",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "01d8103944205f385b61d404599ccf34ce5587ad1f771a652cac72fc94c827b1",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=05 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "06",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "c4ba928b593f69ee02183d2a7294f373d2f55109ab1e57694acb33186663087c",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=06 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "07",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "b375d4eb5f7415d1dfef884c2f83f90f7e02cbe7893eb23fd8a38c478179b90a",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=07 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "08",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "1c9019d5b6b5f7a7260ac8dd0fbd5e1535b5822fefc1d0b2f77c9e4a2279e571",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=08 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "09",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "26ed421bf15155d55df46b9f7fb838fe0bc5eb790e1016fec65fac2dfa96de68",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=09 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "10",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "fd85a67e8531d811700c7dc2d5be30204c1224e9d263801ab4761f9b4d052793",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=10 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "11",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "3b8cf9dd4d204ddad2a1c4ea5f3b58a0b368ea96d4ae023f016d6355a735673b",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=11 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "12",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "78fec6d674b3386a948771298f2d2302ad9834ab29470ab1ca819a757f2d17c3",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=12 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "13",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "38c02a99fc78743b9dc0b0150964c18b6ae635c65237d28376eaa484f6911d50",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=13 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "14",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "67713152b1cb023a96603da3a9a315654e76e17ddd5ab588baa390c1dc4aef9d",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=14 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "15",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "34c762e32775a84dc68d3f2f0dcae65ee6836097be0eced10b490868d16b210f",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=15 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "16",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "13fbdd1bb2aea7785711160d6328c65bbaf07ec94eaac3fb196b4f2083d3995b",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=16 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "17",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "2ffcb46e4b29428379e64b129b831afa14decdd68b486d84de3af0d3ab55293b",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=17 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "18",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "b46ce8841eaadd9d98cf41289c8384c7012064b1a3aa430a920e789c283928c2",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=18 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "19",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "2e99842dec31210e3bccad74bf17566a627ef5067a30c7f772e62835ad8e2c38",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=19 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "20",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "9bc0fcba142a1a4c4659a89626fc47e2809abd900c7551744aae520b566340d1",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=20 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "21",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "3c3ae8b6fab2ed5b949a3052697d72f340f47842338ae89bcea1c7b0c677015a",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=21 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "22",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "7f8c40098054daed9e08d78304755354017383b0b2a7fad7581d93b536a09fba",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=22 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "23",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "5aa3046b6884566dabec77d980a1aaf6409297cc225c960a3da9decb46579941",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=23 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "24",
+      "meaning": "Exact selected production branch assertions and fake boundary call/live checks completed in this fresh HOST process; not native retention/ABI.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "e49554ced15a7d1a432942c6d333b58c95b2471398bead418fcaba23eeba1116",
+      "stdoutUTF8": "AUDIO RESERVATION HOST24 case=24 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "25",
+      "meaning": "Full-width highbit OPEN mask is retained before recording unsigned mask or SETPREC. Actual selected C HELD, exact call trace and3live/no cleanup; HOST boundary only.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "d03d15797133ed93003f3874773d6f485c3ae55d59339f869e3354f4363979bd",
+      "stdoutUTF8": "AUDIO RESERVATION HOST27 case=25 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "26",
+      "meaning": "Full-width highbit FREE mask is retained before recording unsigned mask or checking/consuming LOCK. Actual selected C HELD, exact call trace and3live/no cleanup; HOST boundary only.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "38933d0315643a041988c9ef03564fa3ec436d80004be7aac52ea2944262fdd4",
+      "stdoutUTF8": "AUDIO RESERVATION HOST27 case=26 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    },
+    {
+      "case": "27",
+      "meaning": "Full-width highbit completed LOCK mask is retained after genuine model WaitIO consumption but before unsigned observation/CloseDevice. Actual selected C HELD, exact call trace and3live/no cleanup; HOST boundary only.",
+      "returncode": 0,
+      "stderrBytes": 0,
+      "stdoutBytes": 90,
+      "stdoutSHA256": "2b7c146ae63831d138d83680e57e6b6ddadeb8fd7f021e0d6691e5c935f870fb",
+      "stdoutUTF8": "AUDIO RESERVATION HOST27 case=27 PASS; ACTUAL_SELECTED_C; HOST_MODEL_ONLY; native=NOT_RUN\n"
+    }
+  ],
+  "firstFailure": "Fixture prints case+failing predicate+call trace to stderr and exits1; it performs no compensating resource cleanup. Original supervisor preserves raw failure and stops; no unchanged replay.",
+  "state": "EXPECTED_HOST27_ORACLES_NOT_EXECUTED"
+}

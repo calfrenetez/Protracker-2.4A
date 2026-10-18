@@ -1,0 +1,70 @@
+{
+  "CRT": {
+    "EXIT": 6,
+    "INIT": 6,
+    "appOwnedDOSOnlyRequest": true,
+    "autoOpenLibraries": [
+      "dos.library"
+    ],
+    "experimentalStackRequestBytes": 65536,
+    "noDetachOrGUIOpener": true
+  },
+  "actual": {
+    "LOADs": 11,
+    "allRC0": true,
+    "commands": 5,
+    "inputFactsEqual": 51,
+    "original1248ClosedReapedAbsent": true,
+    "protectedRowsEqual": 68,
+    "rawREADYAndSavedGuardEqual": true,
+    "retainedOwners": 0,
+    "timeouts": 0
+  },
+  "candidate": {
+    "bytes": 15264,
+    "crc32": "CE512BF6",
+    "sha256": "71a705e97c6ab0f844aff574ad8d749be7fefc192c2a9ed4f47dbc0dab40c455"
+  },
+  "currentStatic": {
+    "RELOC32": 393,
+    "allBoundsValid": true,
+    "allFourObjectRelocations": 144,
+    "allocationBytes": [
+      10420,
+      280,
+      224
+    ],
+    "archiveMembers": 36,
+    "bytesConsumed": 15264,
+    "directImports": 18,
+    "full15FREEThenExactCheckIOWaitIOBeforeCloseDelete": true,
+    "hunks": 3,
+    "providersResolved": true,
+    "realExecABIAndSPChecks": true,
+    "realExecDOSWrappers": 14,
+    "runtimeGlobals": 67,
+    "symbols": 128,
+    "trailingBytes": 0,
+    "unknownRetainsHELD": true
+  },
+  "limits": [
+    "STATIC_ONLY: audio.device results/retirement and live Task/SP remain NOT_RUN.",
+    "No sample WRITE,CIA,playback,default frontend,Amiberry or physical qualification.",
+    "No aggregate stack/minimum/headroom or runtime timing claim."
+  ],
+  "materialFindings": [],
+  "review": {
+    "bytes": 33049,
+    "sha256": "10d9c4be5fca5c1b8ed6fdac1adc043bd6e6f137b60b98b22645de204ea1abe3"
+  },
+  "role": "Saved audit by earlier source/control reviewer and generic donor author; current production/link source authors and Root operator separate.",
+  "schema": 1,
+  "source": {
+    "HOSTMacrosOrFakePlatform": false,
+    "genuineNativeTUs": 2,
+    "productionBytes": 12361,
+    "productionSHA256": "7df1fa08bf8ad781b94f478f82770a8d6795196ded5ea287570a2d51716c93c4",
+    "separateStackAndRequestObjects": 2
+  },
+  "state": "AUDIO4_STATIC_PROVIDER_ABI_QUALIFIED_NOT_RUNTIME"
+}

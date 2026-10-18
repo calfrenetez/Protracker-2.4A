@@ -1,0 +1,96 @@
+{
+  "functionBodies": [
+    {
+      "byteExactProduction": true,
+      "bytes": 604,
+      "name": "ordinary",
+      "sha256": "26df10abe06e508597e7ae025b2feffe1394bf6ee7aab6dd34b1fa4ba853821d"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 485,
+      "name": "held",
+      "sha256": "5bff91830150d8a207557d7c7066691c464868514ac9fa7cbeccc0619efabf12"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 496,
+      "name": "request_storage",
+      "sha256": "b23a095343a311a2316a3fabe9f28e9e8b086955db9a46b2081eec316334cd33"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 405,
+      "name": "keyed_requests",
+      "sha256": "beab5edaf8315182a09c4cc59acab7432121d9b1063500c5d44c8c8dd5181c5a"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 984,
+      "name": "refuse_unissued",
+      "sha256": "8cdc4432871a01e29eb6017b23e3047244a52c9a91695e2a68849fdbd733b31e"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 4192,
+      "name": "pt_private_audio_enroll",
+      "sha256": "9a3b0e9b201f6f8b56378d2c314db6139b4205951d6e0718f1a4452158232072"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 3013,
+      "name": "pt_private_audio_retire",
+      "sha256": "a34cda9611d051e66168b82d601213c40fc78226738e71b169f793da1df16fad"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 272,
+      "name": "overlaps",
+      "sha256": "2e08d0b5f2d90b0b5897f73708709a2bd13d4603f0f9b055d9f1be99a4e20360"
+    },
+    {
+      "byteExactProduction": true,
+      "bytes": 579,
+      "name": "pt_private_audio_observe",
+      "sha256": "d6cc5f47ae6011ef218ab1ee28b0d9a3231eaaa4df9b36f135069f1d137cfa2a"
+    }
+  ],
+  "functionNames": [
+    "ordinary",
+    "held",
+    "request_storage",
+    "keyed_requests",
+    "refuse_unissued",
+    "pt_private_audio_enroll",
+    "pt_private_audio_retire",
+    "overlaps",
+    "pt_private_audio_observe"
+  ],
+  "header": {
+    "bytes": 2470,
+    "path": "src/native/native_audio_reservation.h",
+    "sha256": "2453e97b75db36b3e1e39c7e9b80495db59e76940ab2f24bb732f4db829df596"
+  },
+  "method": "Literal selection with full-byte inverse. Native includes/geometry and real SP accessor are explicit fake HOST boundaries. The nine production lifecycle/ordinary/held functions are never hand-transcribed.",
+  "nativePreamble": {
+    "byteOffset": 0,
+    "bytes": 686,
+    "sha256": "7c3dc3b024ba1208a5e5cd2b9afa9c3652819b2444a753970d1cb84a2b8c708b"
+  },
+  "nativeSP": {
+    "byteOffset": 1063,
+    "bytes": 148,
+    "replacement": "static uintptr_t current_stack_pointer(void);\n\n",
+    "sha256": "d7dfb1621161d5e75d8d35b983121e595482c698a56aa2b0a74fb2e2df7f9260"
+  },
+  "production": {
+    "bytes": 12361,
+    "path": "src/native/native_audio_reservation.c",
+    "sha256": "7df1fa08bf8ad781b94f478f82770a8d6795196ded5ea287570a2d51716c93c4"
+  },
+  "schema": "native-audio-reservation-host27-extraction-v1",
+  "selected": {
+    "bytes": 11574,
+    "sha256": "f8feaff3c5ec33c5eb77ea6667b9e2787089e8c69ad845e8a8730f56f4cb280c"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "native-audio-reservation-public-wrapper-host27-qualification-r1",
+  "state": "PUBLIC_WRAPPER_HOST27_PACKAGING_QUALIFIED_NOT_NATIVE",
+  "materialFindings": [],
+  "source": {
+    "src/native/native_audio_reservation.c": {
+      "bytes": 12361,
+      "sha256": "7df1fa08bf8ad781b94f478f82770a8d6795196ded5ea287570a2d51716c93c4"
+    },
+    "src/native/native_audio_reservation.h": {
+      "bytes": 2470,
+      "sha256": "2453e97b75db36b3e1e39c7e9b80495db59e76940ab2f24bb732f4db829df596"
+    },
+    "tests/native_audio_reservation_host27.c": {
+      "bytes": 24905,
+      "sha256": "844da2e0e5ffab983e9f3cd1eae3ab088e6c0274b833dd7450b77ad4f769eaff"
+    },
+    "tests/native_audio_reservation_host27/expected-oracles.json": {
+      "bytes": 13182,
+      "sha256": "9b55e65cea9dc134f8a4e861391d7325f88cad3187445f2934890bc212ac3ad0"
+    },
+    "tests/native_audio_reservation_host27/extraction.json": {
+      "bytes": 3032,
+      "sha256": "8ce2c5d02a1053c2d32e559ccdc1289d0caa507e3e27f514bc253a92f2364e95"
+    },
+    "tests/native_audio_reservation_host27/host_exec_model.h": {
+      "bytes": 2004,
+      "sha256": "5bfeebf5ef95fa6291fa8418d9c8e0a2fd57cff83fe2abfce056ccc326dc64cd"
+    },
+    "tests/test_native_audio_reservation.py": {
+      "bytes": 9762,
+      "sha256": "4d996b6a3c127b333a8bff4d13058de03f00f4b943509c8ba03eba1cfcc64f38"
+    }
+  },
+  "actual": {
+    "outerUnittests": 1,
+    "compilerCommands": 1,
+    "freshWorkerCases": 27,
+    "innerCommands": 28,
+    "allRC0": true,
+    "strictQuietCompiler": true,
+    "all27ExactOracles": true,
+    "allWorkerStderrEmpty": true,
+    "ASan": true,
+    "UBSan": true,
+    "Werror": true,
+    "assertionsEnabled": true,
+    "LSan": "UNAVAILABLE_DETECT_LEAKS_0",
+    "outerSeconds": 1.554071250022389,
+    "wrapperSeconds": 1.068130540952552,
+    "wholeLimitSeconds": 250,
+    "wrapperLimitSeconds": 240
+  },
+  "preserved": {
+    "stagedSourceFiles": 7,
+    "inputFacts": 31,
+    "allBeforePrelaunchAfterInputFactsEqual": true,
+    "strict68ResidentAndMetadataOnly": [
+      58,
+      10
+    ],
+    "rawREADYEqual": true,
+    "guardFactsEqual": true,
+    "wrapperEvidenceLeaves": 58,
+    "originalSupervisorStatusFrames": 5,
+    "actualToolRC0AndEOF": true,
+    "TERM_ACKAndKILLBeforeOriginalLeaderReap": true,
+    "groupAbsenceAndAllStreamEOF": true,
+    "retainedOwners": 0,
+    "temporaryResidue": 0
+  },
+  "roles": "Root operated the one exact transaction; independent saved auditor reviewed the wrapper and controls but authored neither and performed no test/compiler/live operation.",
+  "limits": [
+    "Reproducibility of the exact repository wrapper and nine selected lifecycle functions under fake HOST Exec/audio/SP/Wait boundaries only.",
+    "Normal original group closure of this one completed operation is not a universal descendant or failure-cleanup guarantee.",
+    "No genuine native layout/SP/LVO/Process/Task/device/IRQ/retirement, linked ABI/runtime, physical audio or listening acceptance.",
+    "No canonical adoption/default enrollment, checked legacy Paula/CIA/cache/document-stop or current shared-resource authority inferred."
+  ]
+}

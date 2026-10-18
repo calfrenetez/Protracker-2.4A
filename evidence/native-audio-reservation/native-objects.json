@@ -1,0 +1,67 @@
+{
+  "schema": "native-audio-reservation-two-tu-objects-r1",
+  "state": "NATIVE_AUDIO_RESERVATION_TWO_TU_OBJECTS_QUALIFIED_NOT_LINKED_NOT_RUNTIME",
+  "materialFindings": [],
+  "source": {
+    "productionCBytes": 12361,
+    "productionCSHA256": "7df1fa08bf8ad781b94f478f82770a8d6795196ded5ea287570a2d51716c93c4",
+    "headerSHA256": "2453e97b75db36b3e1e39c7e9b80495db59e76940ab2f24bb732f4db829df596",
+    "realProbeSHA256": "c58290202feff7e02db627966711d8213f067fc4c40889359b82e3c4d5a17cca",
+    "quotedProjectBodies": 3,
+    "HOST27PrerequisiteBound": true
+  },
+  "actual": {
+    "TUs": 2,
+    "stages": 10,
+    "allRC0": true,
+    "strictDiagnosticsEmpty": true,
+    "MEqualsIBoth": true,
+    "selectedProjectPerTU": [
+      2,
+      2
+    ],
+    "selectedSDKPerTU": [
+      30,
+      41
+    ],
+    "allowedSDK": 118,
+    "genuineNative32C99AndGeometryAsserts": true,
+    "privateSelectorBothNoHOSTMacros": true,
+    "realSPReadsBoth": true,
+    "objects": [
+      {
+        "bytes": 3512,
+        "sha256": "bc828708fa6404e4b72d39f27394184314e5348974786e9b735df4c48d231296",
+        "individualSUEntries": 9,
+        "largestIndividualBytes": 36
+      },
+      {
+        "bytes": 924,
+        "sha256": "72d18f5257bb85428de7893349ed8cf452dc8f35c8191db8e9c5c979445ef35a",
+        "individualSUEntries": 2,
+        "largestIndividualBytes": 92
+      }
+    ],
+    "requiredExportsPresent": true,
+    "COMMON": 0,
+    "objectUndefinedCounts": [
+      13,
+      6
+    ],
+    "remainingRuntimeExterns": 14
+  },
+  "preserved": {
+    "inputs": 153,
+    "strict68": true,
+    "rawREADYAndGuard": true,
+    "originalSupervisorClosed": true,
+    "retainedOwners": 0
+  },
+  "roles": "Root actual operator; saved auditor reviewed current controls/source and authored original qualified donor, not this native derivative.",
+  "limits": [
+    "Objects only: link/provider ABI/executable, native device/Task behavior and runtime remain unqualified.",
+    "Individual SU values are not aggregate stack/headroom evidence.",
+    "No native playback/checked-stop/frontend/physical acceptance; shipping STOP_UNQUALIFIED unchanged.",
+    "No reviewer compiler/live queries/target operations."
+  ]
+}

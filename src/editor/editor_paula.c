@@ -8,6 +8,10 @@ int pt_editor_paula_stop(struct pt_editor_paula *o)
 static int barrier(void *context){return pt_editor_paula_stop(context);}
 static int attached(const struct pt_editor_paula *o)
 {return o && o->editor && o->editor->change_ready==barrier && o->editor->before_change_context==o;}
+#if defined(PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY)
+int pt_editor_paula_attachment_current(const struct pt_editor_paula *o,const struct pt_editor *e)
+{return attached(o) && o->editor==e && !e->before_change;}
+#endif
 int pt_editor_paula_attach(struct pt_editor_paula *o,struct pt_editor *e)
 {
     if(!o || o->editor || o->song || !pt_editor_change_barrier(e,barrier,o))return 0;

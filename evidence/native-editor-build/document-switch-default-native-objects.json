@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "state": "NATIVE_DEFAULT_TWO_TU_OBJECTS_AND_HOST_OPTIN_REFUSAL_PASS_NOT_LINKED_NOT_RUNTIME",
+  "materialFindings": [],
+  "scope": "Two default-off native API objects; no native stop, publication or runtime authority.",
+  "actualCommands": {
+    "positiveRC0": 10,
+    "expectedNativeHOSTOptInErrorRC1": 1,
+    "total": 11,
+    "timeouts": 0
+  },
+  "objects": [
+    {
+      "bytes": 3076,
+      "sha256": "f7e8e2518f261179bdcd22f2cb488383158b426073efed07f5a80f04d745b977",
+      "format": "Amiga m68k HUNK_UNIT",
+      "selectedProject": 29,
+      "selectedSDK": 20,
+      "MEqualsI": true,
+      "assertionsEnabled": true,
+      "stackEntries": 12,
+      "largestIndividualStackBytes": 1596
+    },
+    {
+      "bytes": 3180,
+      "sha256": "4f7dcf8f0ff9135a000f97d4937123e319f335761b48eae42c98b7cb753a0ad8",
+      "format": "Amiga m68k HUNK_UNIT",
+      "selectedProject": 39,
+      "selectedSDK": 7,
+      "MEqualsI": true,
+      "assertionsEnabled": true,
+      "stackEntries": 23,
+      "largestIndividualStackBytes": 40
+    }
+  ],
+  "nativeDefinitions": "Ordinary New/Load/state/admission/cancel/reset and Paula stop/attach/detach verified; both HOST-only commit and attachment query absent.",
+  "preservation": {
+    "fullFactInputs": 189,
+    "protectedRows": 68,
+    "allSavedFactsEqual": true,
+    "rawGuardREADYByteEqual": true
+  },
+  "supervision": {
+    "original1248Closed": true,
+    "errors": [],
+    "groupAbsent": true,
+    "originalLeaderReaped": true,
+    "streamsEOF": true,
+    "retainedOwners": 0
+  },
+  "history": "R1 oracle failure preserved; no failed result relabeled.",
+  "auditRole": "R2 control correction author; independent saved audit of Root-operated execution.",
+  "excluded": [
+    "link",
+    "runtime",
+    "hardware quiet",
+    "publication enablement",
+    "whole-Task stack proof"
+  ]
+}

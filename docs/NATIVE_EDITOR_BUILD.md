@@ -352,3 +352,38 @@ This qualifies preparation and cancellation in the standalone VM component.
 Checked frontend commit/publication remains STOP_UNQUALIFIED; whole-editor GUI,
 native device quiet, physical A1200 operation, pre-stop Task absence, aggregate
 stack limits, timing and listening are separate acceptance gates.
+
+
+## Guarded document commit: HOST and native default-off checks
+
+A separate checked commit seam now composes genuine typed software-owner stop
+and retirement with New or encoded-Load publication at the original editor
+address. Before irreversible release, refusal preserves the current document,
+history and sample masters. Uncertain later cleanup retains the remaining
+ownership in HELD; it does not roll released state back or permit retry.
+
+The original nine preparation/cancellation HOST groups and thirteen corrected
+commit groups pass in separate ASan/UBSan runs. The new cases include repeated
+New/Load cycles, actual history/undo/redo, exact 24-bit master/save preservation,
+allocator accounting, copied-owner refusal and final-address adoption. Eleven
+HOST cases deliberately retain their remaining domains until their individual
+process ends. Leak sanitizer was unavailable and disabled. See
+[document-switch-commit-host22.json](../evidence/native-editor-build/document-switch-commit-host22.json).
+
+Two genuine default-off native C units then pass ten compile/inspection stages.
+A separate eleventh preprocessing command returns the sole expected native
+HOST-opt-in error. Dependency and preprocessing sets agree for 29 project plus
+20 SDK inputs and 39 project plus seven SDK inputs, respectively. Both objects
+omit the HOST-only commit and attachment-query symbols. Individual stack-report
+maxima of 1,596 and 40 bytes are not whole-Task stack bounds. The original
+incorrect symbol-oracle failure remains preserved. See
+[document-switch-default-native-objects.json](../evidence/native-editor-build/document-switch-default-native-objects.json).
+
+The commit seam requires `PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY=1`, which
+hard-errors on native targets. Default/native publication still returns
+`STOP_UNQUALIFIED`; no frontend branch or hardware stop is enabled. These two
+objects are unlinked and unrun. The earlier 349,152-byte editor (`97f9f3a6…`)
+retains its old source cohort and was not rebuilt by this qualification.
+See [the API boundary](NATIVE_DOCUMENT_SWITCH.md). Native checked stop,
+frontend adoption, GUI/ENV integration, A1200, timing and listening remain
+separate acceptance gates.

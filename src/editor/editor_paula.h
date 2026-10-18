@@ -20,6 +20,11 @@ int pt_editor_paula_bind_release(struct pt_editor_paula *,int (*)(void *),void *
  * required before mutation/disposal/replacement. NULL song already stopped. */
 int pt_editor_paula_stop(struct pt_editor_paula *);
 int pt_editor_paula_detach(struct pt_editor_paula *);
+#if defined(PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY)
+/* Instantaneous attachment observation of the genuine private barrier. It
+ * neither stops readers nor grants native/output or document-release authority. */
+int pt_editor_paula_attachment_current(const struct pt_editor_paula *,const struct pt_editor *);
+#endif
 /* Freshly bound idle voices/bridge must belong to THIS editor sampler/project.
  * Uses editor sampler allocator for session/sequence/master work. Native allocator
  * must be bounded Fast RAM; Chip cache allocator remains bridge-owned. Caller

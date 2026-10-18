@@ -2,6 +2,9 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#if defined(PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY)
+#include "../editor/sampler_lifetime_internal.h"
+#endif
 
 struct switch_alignment {char byte;struct pt_native_document_switch value;};
 struct document_alignment {char byte;struct pt_document value;};
@@ -157,7 +160,127 @@ enum pt_native_document_switch_result pt_native_document_switch_cancel(struct pt
 int pt_native_document_switch_reset(struct pt_native_document_switch *c)
 {
     if(!c || c->self!=c || c->busy ||
-       (c->result!=PT_NATIVE_DOCUMENT_SWITCH_FAILED && c->result!=PT_NATIVE_DOCUMENT_SWITCH_CANCELED) ||
+       (c->result!=PT_NATIVE_DOCUMENT_SWITCH_FAILED && c->result!=PT_NATIVE_DOCUMENT_SWITCH_CANCELED
+#if defined(PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY)
+        && c->result!=PT_NATIVE_DOCUMENT_SWITCH_COMMITTED
+#endif
+       ) ||
        !empty_candidate(&c->candidate))return 0;
     memset(c,0,sizeof(*c));return 1;
 }
+
+#if defined(PT_NATIVE_DOCUMENT_SWITCH_COMMIT_HOST_ONLY)
+struct owner_alignment {char byte;struct pt_editor_paula value;};
+static int allocator_equal(struct pt_allocator a,struct pt_allocator b)
+{return a.context==b.context && a.allocate==b.allocate && a.release==b.release;}
+static int commit_output_apart(const struct pt_native_document_switch *c,const void *p,size_t bytes)
+{
+    struct span s,known;
+    if(!region(p,bytes,&s))return 0;
+#define APART(pointer,capacity) do {if(!region((pointer),(capacity),&known) || !apart(s,known))return 0;} while(0)
+    APART(c,c->capacity);APART(c->inputs.document,c->inputs.document_capacity);
+    APART(c->inputs.editor,c->inputs.editor_capacity);
+    if(c->inputs.allocator_context)APART(c->inputs.allocator_context,c->inputs.allocator_context_capacity);
+#undef APART
+    return old_storage_apart(c->inputs.document,s) && old_storage_apart(&c->candidate,s) &&
+        pt_sampler_lifetime_output_disjoint(&c->inputs.editor->sampler,p,bytes);
+}
+static int commit_geometry(const struct pt_native_document_switch *c,
+    const struct pt_native_document_switch_commit_inputs *in)
+{
+    struct span owner,context;const struct pt_editor *e=c->inputs.editor;
+    if(!in || !in->owner || in->owner_capacity<sizeof(*in->owner) ||
+       (uintptr_t)in->owner%offsetof(struct owner_alignment,value) ||
+       !commit_output_apart(c,in->owner,in->owner_capacity) ||
+       !region(in->owner,in->owner_capacity,&owner) ||
+       !pt_editor_paula_attachment_current(in->owner,e) ||
+       in->owner->release_pending ||
+       in->release_context!=in->owner->release_context ||
+       e->sampler.progress || e->sampler.progress_context ||
+       e->sample_source.allocated_bytes>SIZE_MAX-e->sampler.budget ||
+       !e->sampler.allocator.allocate || !e->sampler.allocator.release ||
+       !e->song.allocator.allocate || !e->song.allocator.release ||
+       !pt_document_replacement_allowed(&e->sample_source))return 0;
+    if(in->owner->release) {
+        if(!region(in->release_context,in->release_context_capacity,&context) ||
+           !apart(owner,context) ||
+           !commit_output_apart(c,in->release_context,in->release_context_capacity))return 0;
+    } else if(in->release_context || in->release_context_capacity)return 0;
+    return 1;
+}
+static int candidate_current(const struct pt_native_document_switch *c)
+{return !memcmp(&c->candidate,&c->candidate_snapshot,sizeof(c->candidate));}
+static int commit_control_current(const struct pt_native_document_switch *c,
+    const struct pt_native_document_switch *saved)
+{return !memcmp(c,saved,sizeof(*c)) && candidate_current(c);}
+static int stopped_editor_current(const struct pt_native_document_switch *c)
+{
+    const struct pt_editor *e=c->inputs.editor;struct pt_editor expected;
+    memcpy(&expected,&c->original_editor,sizeof(expected));
+    /* Genuine song close may change sampler pin/list bookkeeping. No other
+     * editor/history field or allocator/budget policy may drift in that call. */
+    expected.before_change=NULL;expected.change_ready=NULL;expected.before_change_context=NULL;
+    memcpy(&expected.sampler,&e->sampler,sizeof(expected.sampler));
+    return !memcmp(e,&expected,sizeof(expected)) &&
+        allocator_equal(e->sampler.allocator,c->sampler_allocator) &&
+        e->sampler.budget==c->original_editor.sampler.budget &&
+        e->sampler.generation==c->original_editor.sampler.generation &&
+        e->sampler.table==c->original_editor.sampler.table &&
+        e->sampler.table_original==c->original_editor.sampler.table_original &&
+        e->sampler.table_bytes==c->original_editor.sampler.table_bytes &&
+        !memcmp(e->sampler.current,c->original_editor.sampler.current,sizeof(e->sampler.current)) &&
+        !e->sampler.progress && !e->sampler.progress_context &&
+        pt_sampler_lifetime_idle(&e->sampler);
+}
+static int retired_editor(const struct pt_native_document_switch *c)
+{
+    const struct pt_editor *e=c->inputs.editor;
+    return e->project==&c->inputs.document->project &&
+        !e->before_change && !e->change_ready && !e->before_change_context &&
+        !e->sampler.progress && !e->sampler.progress_context &&
+        allocator_equal(e->sampler.allocator,c->sampler_allocator) && e->sampler.budget==c->sampler_budget &&
+        allocator_equal(e->sample_source.allocator,c->source_allocator) && empty_candidate(&e->sample_source) &&
+        pt_document_replacement_allowed(&e->sample_source) &&
+        allocator_equal(e->song.allocator,c->song_allocator) && e->song.budget==c->song_budget &&
+        !e->song.current && !e->song.bytes && pt_sampler_lifetime_storage_retired(&e->sampler);
+}
+enum pt_native_document_switch_result pt_native_document_switch_commit_paula(
+    struct pt_native_document_switch *c,const struct pt_native_document_switch_commit_inputs *in)
+{
+    enum pt_native_document_switch_result r=pt_native_document_switch_state(c);
+    struct pt_native_document_switch saved;struct pt_editor *e;struct pt_document *d;int ok;
+    if(r!=PT_NATIVE_DOCUMENT_SWITCH_PREPARED)return r;
+    if(c->commit_attempted)return hold(c);
+    if(!commit_geometry(c,in))return PT_NATIVE_DOCUMENT_SWITCH_INVALID;
+    c->commit=*in;c->commit_attempted=1;c->commit_phase=1;c->busy=1;
+    e=c->inputs.editor;d=c->inputs.document;
+    c->sampler_allocator=e->sampler.allocator;c->source_allocator=e->sample_source.allocator;
+    c->song_allocator=e->song.allocator;c->sampler_budget=e->sampler.budget+e->sample_source.allocated_bytes;
+    c->song_budget=e->song.budget;
+    memcpy(&saved,c,sizeof(saved));ok=pt_editor_paula_detach(c->commit.owner);
+    if(!commit_control_current(c,&saved) || !ok ||
+       memcmp(d,&c->original_document,sizeof(*d)) ||
+       c->commit.owner->editor || c->commit.owner->song || c->commit.owner->release ||
+       c->commit.owner->release_context || c->commit.owner->release_pending ||
+       !stopped_editor_current(c))return hold(c);
+    /* Irreversible boundary. Stop refusal above never releases the old journal. */
+    c->commit_phase=2;memcpy(&saved,c,sizeof(saved));ok=pt_editor_dispose(e);
+    if(!commit_control_current(c,&saved) || !ok ||
+       memcmp(d,&c->original_document,sizeof(*d)) || !retired_editor(c))return hold(c);
+    c->commit_phase=3;memcpy(&saved,c,sizeof(saved));
+    ok=pt_document_release_checked(d)==PT_DOCUMENT_RELEASED;
+    if(!commit_control_current(c,&saved) || !ok || !empty_candidate(d) ||
+       !retired_editor(c) || pt_project_validate(&c->candidate.project,NULL)!=PT_PROJECT_OK)return hold(c);
+    /* Sole ownership transfer from this genuine detached factory result. The
+     * original editor address is initialized in place; no initialized editor
+     * or retained owner/control is copied from temporary storage. */
+    *d=c->candidate;
+    {struct pt_allocator a=c->candidate.allocator;memset(&c->candidate,0,sizeof(c->candidate));c->candidate.allocator=a;}
+    c->commit_phase=4;
+    if(!pt_editor_init(e,&d->project))return hold(c);
+    pt_sampler_init(&e->sampler,&c->sampler_allocator,c->sampler_budget);
+    pt_document_init(&e->sample_source,&c->source_allocator);
+    pt_song_init(&e->song,&c->song_allocator,c->song_budget);
+    c->busy=0;c->commit_phase=5;c->result=PT_NATIVE_DOCUMENT_SWITCH_COMMITTED;return c->result;
+}
+#endif

@@ -1,5 +1,18 @@
 # Sample memory and playback ownership
 
+## Checked document commit boundary — 18 October 2026
+
+A guarded HOST-only New/encoded-Load commit now composes genuine typed software
+owner retirement with single final-address adoption. Thirteen commit groups
+and the unchanged nine preparation groups pass ASan/UBSan, including repeated
+cycles, history/master/save preservation and retained refusal domains. Two
+default-off native C units compile, and an explicit native HOST-opt-in check
+fails with its expected hard error. Default/native publication remains
+`STOP_UNQUALIFIED`; these objects are unlinked and unrun. The existing editor
+binary retains its historical source cohort. Native checked stop, frontend
+adoption and GUI/device/physical/timing/listening acceptance remain separate.
+See [the API and qualification boundary](NATIVE_DOCUMENT_SWITCH.md).
+
 ## Detached document preparation —18 October2026
 
 A separate New/encoded-Load preparation component now preserves the original

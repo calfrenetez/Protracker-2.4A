@@ -1,0 +1,101 @@
+{
+  "schema": "private_document_switch_commit_host_qualification_v1",
+  "state": "HOST_ORIGINAL9_AND_CORRECTED13_PASS_WITH_PRIOR_FAILURE_PRESERVED",
+  "materialFindings": [],
+  "scope": "Private typed software document commit on HOST only; no native or frontend acceptance.",
+  "source": {
+    "r3Freeze": {
+      "bytes": 3822,
+      "sha256": "41481b88fcaa918f66bc2084663552bf230ee1d96c91374ad2c8a1567d25b8cc"
+    },
+    "r3Fixture": {
+      "bytes": 17391,
+      "sha256": "67174926f24b483dee14aa51c71b8782862aa24545b1569623bd24224a201087"
+    },
+    "productionChangedFromR2": 0,
+    "otherBodiesExact": 101,
+    "originalNineBodiesAndWrapperExact": 83
+  },
+  "passedRuns": {
+    "originalNineR2": {
+      "result": {
+        "bytes": 5373,
+        "sha256": "e4ad1157403c079e27dec3561862cee9ef65499ca388824782fc73bdf960af07"
+      },
+      "inner": {
+        "bytes": 31946,
+        "sha256": "0bbf8aee2c87ffa3a51e587135b16410ed6ffcac7907f178bf0083b66819c083"
+      },
+      "cases": 9,
+      "commands": 10,
+      "translationUnits": 31,
+      "completeCases": 5,
+      "retainedCases": 4
+    },
+    "correctedThirteenR3": {
+      "result": {
+        "bytes": 5377,
+        "sha256": "e498dc4b70eb380146a6edf4e4c7665532aba0153b5c37039eb674973ddd3c35"
+      },
+      "inner": {
+        "bytes": 40086,
+        "sha256": "8f42bb614288eaa7789943a598b591d25f9cb4d891ae8a8c586ced3afa7a85d3"
+      },
+      "cases": 13,
+      "commands": 14,
+      "translationUnits": 41,
+      "completeCases": 6,
+      "retainedCases": 7
+    }
+  },
+  "historicalFailedThirteenR2": {
+    "result": {
+      "bytes": 5399,
+      "sha256": "b364734caa6bc1a29ca31c9088ac05fbfc627e511113bf5552d12c0bb738b32e"
+    },
+    "inner": {
+      "bytes": 36047,
+      "sha256": "99e0600391d4ae3272f3635ba380a357420565cf3f1ac564bc93e28827c0b09e"
+    },
+    "state": "FAILED_PRESERVED",
+    "returncode": 1,
+    "firstFiveCasesPassed": true,
+    "sixthCase": "repeated_cycles",
+    "sixthCaseReturncode": -6,
+    "casesNotRun": 7,
+    "causeBoundary": "History-enrichment fixture precondition; no product data-loss proof. R3 changes only that fixture and strengthens assertions."
+  },
+  "verification": {
+    "allObservedChildOraclesReadBackExact": true,
+    "allThreeSavedInputMapsExact": true,
+    "inputFactsPerRun": 126,
+    "sourceBodiesStagedPerRun": 102,
+    "protectedEntries": 68,
+    "residentBodyPins": 58,
+    "metadataOnly": 10,
+    "allThreeRawREADYExact": true,
+    "savedContainmentEvidenceVerified": true,
+    "ownedHOSTTemporaryDirectoriesEmpty": true,
+    "sanitizers": "ASan_UBSan",
+    "leakSanitizer": "NOT_AVAILABLE_NOT_REQUESTED",
+    "boundsRecipeSeconds": {
+      "compile": 90,
+      "case": 5,
+      "wrapper": 180,
+      "child": 185,
+      "reserve": 3,
+      "whole": 200
+    }
+  },
+  "authority": {
+    "nativePublication": "STOP_UNQUALIFIED",
+    "nativeRuntime": "NOT_RUN",
+    "frontendAdoption": false,
+    "deviceQuiet": "NOT_ASSERTED",
+    "GUI_ENV_TaskIntegration": "NOT_QUALIFIED",
+    "physical": "NOT_RUN",
+    "timing": "NOT_QUALIFIED",
+    "listening": "NOT_RUN"
+  },
+  "roles": "Saved-data audit independent of Root actual execution; prior product/control source reviewer and unrelated append-profile/HOST15/START source author. No product/fixture/controller authorship or operator independence is invented."
+}

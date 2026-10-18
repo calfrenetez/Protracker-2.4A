@@ -312,3 +312,43 @@ The older editor failure cause and full-editor GUI/ENV integration remain
 unqualified, as do pre-stop native Task absence, aggregate stack, timing, audio,
 physical A1200 operation and listening. No production playback feature is
 enabled by this result.
+
+
+## Private full-editor append profile — HOST qualification
+
+The exact private full-editor append profile and its fixture passed one HOST
+run: thirteen pure script cases and two cases using the actual Plan with HOST
+models. All fifteen passed. The ten module-origin hashes, 46 input facts, all
+68 protected items, guard and admission records stayed exact; original HOST
+supervision closed with no retained owner. See
+[editor-append-profile-host15.json](../evidence/native-editor-build/editor-append-profile-host15.json).
+
+The suite used the unchanged editor binary as inert data and explicit model
+ENVGuard bytes. The actual editor and ENVGuard binaries were unchanged and
+were not executed by this qualification. This is source/script/model evidence,
+not full-editor GUI, native ENV, live IPC, Amiberry integration or physical
+acceptance. It neither establishes the prior FILEINFO failure's cause nor
+proves that append resolves it. The profile and tests remain private proposals;
+this record enables no production feature.
+
+
+## Native document-switch Task RAM qualification
+
+The exact 225312-byte standalone document-switch Task candidate passed once
+in Amiberry 68030 with a 170-byte oracle, RC0 and an observed 2 MiB stack. Its
+32 translation units and 75 source bodies cover New/refusal/cancel/reset,
+encoded 24-bit Load/cancel, a real budget refusal, original history/master/save
+preservation and a zero final Fast-memory ledger. The five custody files and
+100 ordered protocol pairs were verified. See
+[document-switch-task-native-runtime.json](../evidence/native-editor-build/document-switch-task-native-runtime.json).
+
+The runtime receipt deliberately records ownership retained at completion. A
+separate observer, genuine release, single normal service stop and independent
+final check then confirmed empty ownership, original process and endpoint
+absence, restored launcher files and all 68 protected items. See
+[document-switch-task-native-release.json](../evidence/native-editor-build/document-switch-task-native-release.json).
+
+This qualifies preparation and cancellation in the standalone VM component.
+Checked frontend commit/publication remains STOP_UNQUALIFIED; whole-editor GUI,
+native device quiet, physical A1200 operation, pre-stop Task absence, aggregate
+stack limits, timing and listening are separate acceptance gates.

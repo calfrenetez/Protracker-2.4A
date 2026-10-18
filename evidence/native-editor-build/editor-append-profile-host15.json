@@ -1,0 +1,78 @@
+{
+  "actualHOST": {
+    "PlanAndModelCases": 2,
+    "errors": 0,
+    "failures": 0,
+    "inputFactsEqual": 46,
+    "methods": 15,
+    "moduleOriginsMatched": 10,
+    "original1248ClosureConfirmed": true,
+    "pureScriptCases": 13,
+    "rawGuardAndREADYFactsEqual": true,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "stderrBytes": 114,
+    "stderrIsExpectedUnittestProgress": true,
+    "strictProtectedRowsEqual": 68,
+    "targetOperations": 0
+  },
+  "limits": [
+    "No full-editor GUI, native ENV helper, live IPC, Amiberry integration or physical acceptance",
+    "Actual editor and ENVGuard bytes are unchanged; model ENVGuard is not a native helper qualification",
+    "No inference that append resolves the prior editor FILEINFO failure or establishes its cause",
+    "No production profile activation or public source/test adoption by this evidence",
+    "Original HOST supervisor containment is separate from the worker RC0; no target process was signalled"
+  ],
+  "materialFindings": [],
+  "nativeArtifacts": {
+    "ENVGuard": "EXPLICIT_HOST_MODEL_BYTES_ONLY",
+    "actualEditorAndENVGuardBinariesChanged": false,
+    "actualNativeBinaryExecuted": false,
+    "editor": {
+      "HOSTUse": "INERT_DATA_ONLY",
+      "bytes": 349152,
+      "sha256": "97f9f3a6f3ff5d7c29aaa7e9414fe269c6a2db45662e4886918a90b3bf1754f0"
+    }
+  },
+  "receipts": {
+    "RootControlSourceReview": {
+      "bytes": 1620,
+      "sha256": "b31746a65738f8ddc4273708a95ea58b352bb2fb12ab9b148bf58f7cf3a2107d"
+    },
+    "actualResult": {
+      "bytes": 6670,
+      "sha256": "da1ff70db894761240f951dde406ff44e8b4dcb59bbdcf5037b7dc8175fa6d04"
+    },
+    "independentProfileSourceReview": {
+      "bytes": 9326,
+      "sha256": "60241d88111b3f1c708ad3080d2b241eb22738f221f71cdf4d96579d45b1ba0c"
+    },
+    "independentSavedAudit": {
+      "bytes": 10599,
+      "sha256": "503bdf8defb62012edf1db943e8d762905a53303ef55daf409eb690be3b7f117"
+    },
+    "rawREADY": {
+      "bytes": 62561,
+      "sha256": "512a7152a3f2ef357df3466478f549a7d42d1f3f7f034ecc7cba577fdc09c50c"
+    }
+  },
+  "role": "Different-author profile/tests and controls; independent saved actual audit is separate from Root source review and execution.",
+  "schema": 1,
+  "scope": "Exact private full-editor append-profile source and15 HOST script/Plan/model cases. Child effects were denied by its admitted HOST audit.",
+  "source": {
+    "beforeProfile": {
+      "bytes": 7912,
+      "sha256": "acd917df844341980516e08de9be5f83b065bb59619145807ce05668617669ae"
+    },
+    "profile": {
+      "bytes": 8732,
+      "sha256": "beed922b44ff7c56c015076e16339ad6c36faa07660956deaf9b62d8883a5db2"
+    },
+    "sharedPlanTransactionBytesUnchanged": true,
+    "tests": {
+      "bytes": 12724,
+      "sha256": "7d7ea46f89fe432dc2049b90c999fd40c7cdd5924cfdbdc92eaa70e1ce35f880"
+    }
+  },
+  "state": "PRIVATE_EDITOR_APPEND_PROFILE_HOST15_QUALIFIED_NOT_NATIVE"
+}

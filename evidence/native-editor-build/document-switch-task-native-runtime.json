@@ -1,0 +1,40 @@
+{
+  "state": "DOCUMENT_SWITCH_TASK_NATIVE_VM_RUNTIME_SAVED_ACTUAL_PASS_RELEASE_PENDING",
+  "materialFindings": [],
+  "candidate": {
+    "bytes": 225312,
+    "sha256": "a542d9013dadb84603d71df84b43fe666b8e1ac87b12488f7e0a8dcc39d6610d"
+  },
+  "runtime": {
+    "returncode": 0,
+    "seconds": 109.54563879105262,
+    "nativeLaunches": 1,
+    "nativeReturncode": 0,
+    "nativeOracleBytes": 170,
+    "nativeOracleSHA256": "f44db3b72d430616bb48b92264ac64406afb743efd85fae481787312267f5561",
+    "observedStackBytes": 2097152,
+    "scope": "New/refusal/cancel/reset; encoded24 Load/cancel; real budget refusal; original history/master/save; zero Fast ledger."
+  },
+  "evidence": {
+    "fiveCustodyFilesExact": true,
+    "orderedProtocolPairs": 100,
+    "completedThenReturnedCustody": true,
+    "stdoutBytes": 445,
+    "stderrBytes": 0,
+    "fixedInputs": 1890,
+    "extras": 45,
+    "originalUnchangedRows": 1888,
+    "protected": 68,
+    "rawREADYAndSpecEqual": true,
+    "supervisorClosedReapedGroupAbsent": true,
+    "errors": [],
+    "retainedOwnerCount": 0
+  },
+  "completion": "Saved runner records original VM disposal, offline staging removal and restoration. Lease and separate disconnected service intentionally retained at completion.",
+  "release": "PENDING_SEPARATE_ROOT_POST_ACCEPTANCE",
+  "limits": [
+    "Standalone VM component only; no publication or device authority.",
+    "No physical acceptance, pre-stop Task absence or aggregate stack proof.",
+    "Saved-operation audit with source authorship disclosed; no current-state queries."
+  ]
+}

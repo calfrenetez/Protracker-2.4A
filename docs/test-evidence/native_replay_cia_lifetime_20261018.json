@@ -20,7 +20,21 @@
   "component": "Checked replay CIA ownership primitive",
   "date": "2026-10-18",
   "default_native_linked": false,
-  "limits": "HOST models and object inspection do not qualify native resource semantics, target completion or default frontend behavior.",
+  "legacy_stop_model": {
+    "compiles": 2,
+    "consumer_helper_groups": 12,
+    "default_native_selected": false,
+    "diagnostic_stream_bytes": 0,
+    "model_executions": 2,
+    "owner_groups": 21,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "scope": "Actual private owner algorithm and typed STOP/Apply/status helper with fake native API/stack boundaries; full paula.c allocator/cache cleanup and device completion unqualified.",
+    "status": "PASS_PRIVATE_HOST_ONLY"
+  },
+  "limits": "HOST models, native object and static provider/ABI inspection do not establish runtime resource semantics, actual target completion or default frontend behavior.",
   "native_object": {
     "commands": {
       "assembler": 1,
@@ -46,8 +60,36 @@
     ],
     "whole_irq_task_stack_qualified": false
   },
+  "native_static": {
+    "actual_cia_vector_offsets": {
+      "AbleICR": -18,
+      "AddICRVector": -6,
+      "RemICRVector": -12,
+      "SetICR": -24
+    },
+    "candidate": {
+      "bytes": 15960,
+      "crc32": "0B4601FE",
+      "name": "PTReplayCIARetirementQualifier",
+      "sha256": "58c2e7d8098f1b76aff59a123dd9ee928aedeae0477f7b494810b3a3003a7683"
+    },
+    "default_native_linked": false,
+    "disassembler_annotation_ambiguity": "Two independent code hunks have VMA zero; annotation labels alone are not routing evidence.",
+    "hunk_sections": 4,
+    "input_objects": 4,
+    "link_inspection_workers": 5,
+    "native_execution": "NOT_RUN",
+    "original_sdk_reference_bytes": 8290,
+    "relocations": 425,
+    "replay_workers": 3,
+    "routes_use_hunk_section_and_relocation_target": true,
+    "selected_external_providers": 15,
+    "selected_loads": 11,
+    "status": "PASS_STATIC_ONLY",
+    "symbols": 104
+  },
   "pending": [
-    "Replay provider linkage and native execution",
+    "Exact CIA-only Amiberry execution",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",

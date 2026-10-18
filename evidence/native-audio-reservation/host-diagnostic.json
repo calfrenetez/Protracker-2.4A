@@ -1,0 +1,43 @@
+{
+  "schema": "private-native-audio-diagnostic-host-qualification-r1",
+  "state": "HOST_MODELS_PASS_NOT_NATIVE_RUNTIME",
+  "canonicalModuleUnchanged": true,
+  "diagnosticSources": {
+    "moduleSHA256": "45f245d891850dd1a64d1b4494deb6a60880f654ca077de9a9fbeb8db8e282b8",
+    "probeSHA256": "f4dd50bad23d2992537ba2a3417ea81f0fb5fc07a3e59a32d48d87ae02d8fb33",
+    "headerSHA256": "2453e97b75db36b3e1e39c7e9b80495db59e76940ab2f24bb732f4db829df596",
+    "successTraceBytes": 734,
+    "successTraceSHA256": "97b1cb3efce0c4efaf4f48044c796154a59be76544072acb41836eb495c27342",
+    "finiteTraces": 50,
+    "collectionByteBound": 1024
+  },
+  "diagnosticHOST": {
+    "cases": 34,
+    "commands": 35,
+    "originalCasesPreserved": 27,
+    "exactOracles": true,
+    "ASan": true,
+    "UBSan": true,
+    "strictWarningsAndAssertions": true,
+    "LSan": "Unavailable on selected Darwin route; disabled",
+    "quietCompilerAndStderr": true,
+    "preservationBoundaries": 73,
+    "retainedHostOwners": 0,
+    "actualResultSHA256": "6f50c353154441515d2a9c717d3cdc35b4b412d8f0663765276d83ae1f84f8f1",
+    "independentActualReviewSHA256": "652067d66ded3cc823bd76372ced03a08b1b89a3e118c8df1794dc783e2295bd",
+    "rootActualAcceptanceSHA256": "b8acebc295a7347e3dfaacaec0755296c84c32506d40921e3641c2293da4156b"
+  },
+  "prefixCollectorHOST": {
+    "cases": 17,
+    "actualResultSHA256": "3a02cd198e9e062e1ebda2a8574a5cd657158f7d03739ae9c781a4d65099b5ae",
+    "rootActualAcceptanceSHA256": "2ab5b688478132869493a18d0d3d9da4ff14fedbd8cbbea6dceb6538449c93d0",
+    "genericTransportUnchanged": true,
+    "nativeTimeoutSeconds": 90
+  },
+  "limits": [
+    "Private diagnostic sources and HOST models; canonical production module and default build unchanged.",
+    "Fake Exec/audio/SP/stdio and retention boundaries do not qualify native Process, HUNK, stack, device completion or quiet.",
+    "A partial trace is progress only; it cannot certify completion, cleanup or release. No first cause of the original failed native attempt has been established.",
+    "This record grants no native diagnostic compile/link/runtime, physical or listening acceptance; default document publication stays STOP_UNQUALIFIED."
+  ]
+}

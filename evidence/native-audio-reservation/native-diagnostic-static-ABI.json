@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "state": "DIAGNOSTIC_NATIVE_OBJECT_AND_STATIC_ABI_QUALIFIED_NOT_RUNTIME",
+  "source": {
+    "privateVariant": true,
+    "productionCBytes": 15304,
+    "productionCSHA256": "45f245d891850dd1a64d1b4494deb6a60880f654ca077de9a9fbeb8db8e282b8",
+    "probeBytes": 5723,
+    "probeSHA256": "f4dd50bad23d2992537ba2a3417ea81f0fb5fc07a3e59a32d48d87ae02d8fb33",
+    "canonicalUnchanged": true
+  },
+  "nativeObjects": {
+    "translationUnits": 2,
+    "stages": 10,
+    "allReturnCodes": 0,
+    "diagnosticsEmpty": true,
+    "objectBytes": [
+      5576,
+      1576
+    ],
+    "genuine32BitAmiga": true,
+    "realSPAccessor": true,
+    "dependencySetsMatch": true,
+    "selectedProjectFilesPerUnit": 2,
+    "selectedSDKHeadersPerUnit": 41,
+    "allowedSDKHeaders": 118
+  },
+  "staticExecutable": {
+    "bytes": 17944,
+    "sha256": "55e026dbc141cae455f8653de7e1469d71f4affdf0c5c1525ad8997bf4da76e4",
+    "crc32": "B9A0CEDE",
+    "orderedLinkInputs": 11,
+    "directImports": 20,
+    "runtimeGlobals": 68,
+    "archiveMembers": 37,
+    "hunks": 3,
+    "symbols": 129,
+    "boundedRELOC32": 432,
+    "allBytesConsumed": true,
+    "currentProviderABIReviewed": true,
+    "newFFlushProviderBytes": 92,
+    "newFFlushRelocations": 3,
+    "ExecDOSRoutes": 14,
+    "CRTInitEntries": 6,
+    "CRTExitEntries": 6,
+    "autoOpenedLibraries": [
+      "dos.library"
+    ],
+    "requestedStackBytes": 65536
+  },
+  "preserved": {
+    "strict68": true,
+    "originalOwnedSupervisorClosed": true,
+    "retainedOwners": 0
+  },
+  "notQualified": [
+    "Diagnostic emulator execution",
+    "Physical A1200 or AmiGUS execution",
+    "Real device allocation, LOCK, FREE and reply retirement",
+    "Runtime Task and SP checks",
+    "Diagnostic stdio latency",
+    "Aggregate stack requirement or headroom",
+    "Shipping frontend or native document publication",
+    "Audio output, timing or human listening"
+  ]
+}

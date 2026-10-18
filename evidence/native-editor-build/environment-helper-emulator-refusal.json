@@ -5,6 +5,7 @@
     "sha256": "8442d84337c0ce4f735b7b9b5fa85defaf038bc988ec2cd20982d363f0cee418"
   },
   "date": "2026-10-18",
+  "evidenceCorrection": "Initial report incorrectly treated a zero-byte directory entry as an empty child inventory. No nested snapshot inventory is established.",
   "limits": [
     "No successful native helper setup or restore qualification.",
     "No updated editor runtime or GUI acceptance.",
@@ -18,7 +19,7 @@
     "returned": true,
     "returnedIsNotSuccess": true,
     "snapshotDirectoryObserved": true,
-    "snapshotStateCreated": false,
+    "snapshotState": "NOT_OBSERVED; root directory size does not inventory nested children",
     "stdoutBytes": 0,
     "verb": "prepare"
   },

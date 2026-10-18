@@ -120,9 +120,10 @@ and [owner-cleanup-link.json](../evidence/native-editor-build/owner-cleanup-link
 ## Isolated environment-helper runtime refusal
 
 An exact helper-only Amiberry run returned RC20 from preparation with empty
-output and no snapshot state. Its returned marker was observed; this was a
-confirmed refusal, not a timeout or successful setup. Restore and the editor
-were not launched. The original failed operation was not replayed.
+output. Its returned marker and snapshot directory were observed; the directory
+entry does not inventory its children, so snapshot state creation is unconfirmed.
+This was a confirmed refusal, not a timeout or successful setup. Restore and
+the editor were not launched. The original failed operation was not replayed.
 
 Separate scoped cleanup stopped only its positively identified emulator and
 local service, restored the saved launcher lifecycle files and removed its

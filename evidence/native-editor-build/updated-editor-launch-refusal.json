@@ -1,0 +1,51 @@
+{
+  "schema": "pt24g-editor-launch-refusal-1",
+  "date": "2026-10-18",
+  "candidate": {
+    "bytes": 349152,
+    "sha256": "97f9f3a6f3ff5d7c29aaa7e9414fe269c6a2db45662e4886918a90b3bf1754f0"
+  },
+  "environmentHelper": {
+    "bytes": 14640,
+    "sha256": "e915664a5244a61e57378be1424284bc04a99ec16f1acc0bc978004aef6350de"
+  },
+  "attempt": {
+    "count": 1,
+    "outerReturnCode": 1,
+    "seconds": 151.593227165984,
+    "state": "EXECUTION_REPLY_UNCONFIRMED",
+    "lastDurableEvent": "LAUNCH_DISPATCH",
+    "observedError": "BridgeReplyError",
+    "rawBridgeError": "NOT_PRESERVED",
+    "guestCause": "UNKNOWN",
+    "editorRuntime": "NOT_QUALIFIED",
+    "guiAcceptance": "NOT_GRANTED",
+    "nativeEnvironmentRestoration": "UNCONFIRMED_VM_DISPOSAL_ONLY",
+    "failedTransactionReplayed": false,
+    "fixedInputsPreserved": 1859,
+    "protectedInputsPreserved": 68,
+    "supervisionClosed": true,
+    "retainedSupervisorOwners": 0
+  },
+  "recovery": {
+    "normalSignalPerVerifiedOriginalProcess": 1,
+    "originalProcessesAbsent": true,
+    "testEndpointsAbsent": true,
+    "savedLauncherFilesRestored": true,
+    "exactStagingAbsent": true,
+    "independentObservationAndRelease": true,
+    "finalOwnership": "EMPTY",
+    "originalFailureAndThreeHoldsArchived": true,
+    "guestCalls": 0,
+    "physicalOperations": 0
+  },
+  "privateEvidenceSHA256": {
+    "rootFailedResult": "603e0ba3b4282fbe9134405077684886009591715b9c0e5832bd0a5a3a4c5fa4",
+    "nativeFailedResult": "696cf5ce2de96af0df9f1df925554468e3b93e1122cae70932ea177a28fc2b7c",
+    "cleanup": "f8589b9a2c88426fcb733f12c411d52a3203f33c2df479fb299743abadf63143",
+    "independentRelease": "275be712157c52e8d09fd18f009477bbd26033dbf308549e9bb29b3d97d382a5",
+    "cleanupSourceReview": "27570d19ca9d5a518f5973cc117b947e37beb53be086f13586e045fea94bd018"
+  },
+  "physicalA1200": "NOT_RUN_FOR_THIS_CANDIDATE",
+  "audioAndListeningAcceptance": "NOT_GRANTED"
+}

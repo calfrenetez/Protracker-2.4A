@@ -182,4 +182,23 @@ JSON error remains recorded as a failure; it was not replayed or relabelled.
 
 Both runs and their evidence boundaries are summarized in
 `evidence/native-editor-build/updated-startup-host-qualification.json`.
-The new full editor's exact Amiberry GUI run and A1200 promotion remain pending.
+The subsequent exact Amiberry attempt failed as described below; A1200 promotion
+remains pending.
+
+## Updated editor launch refusal —18 October2026
+
+One exact Amiberry attempt prepared the candidate and environment helper, then
+received a bridge error at the execution boundary. The launch command was
+dispatched, but no launch acknowledgement, editor result, GUI capture or native
+environment restoration was confirmed. The service retained a generic error;
+the detailed bridge reply was missing from its durable journal. The guest cause
+therefore remains unknown. This is not a passing application test.
+
+The failed transaction was not replayed. Separate recovery positively identified
+and normally stopped only its emulator and local service, restored the saved
+launcher files and removed the exact staging copy. A separate observation
+confirmed absence and restoration before releasing ownership. The original
+failure and three holds remain in the release archive. All protected inputs and
+unrelated display work were preserved. No physical or audio acceptance follows.
+
+See [updated-editor-launch-refusal.json](../evidence/native-editor-build/updated-editor-launch-refusal.json).

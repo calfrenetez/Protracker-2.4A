@@ -1,0 +1,74 @@
+{
+  "HOSTAdmission": {
+    "actualReturnCode": 0,
+    "factoryInstalled": false,
+    "fullInputFacts": 21,
+    "localHOSTObservationsOnly": true,
+    "methods": 8,
+    "onlyActualRequireAndAdmitAST": true,
+    "originalSupervisorClosureConfirmed": true,
+    "retainedOwners": 0,
+    "serviceModuleImported": false,
+    "strict68AndRawGuardREADYEqual": true,
+    "targetOperations": 0
+  },
+  "limits": [
+    "Native runtime and the functional/allocation-ledger oracle have NOT_RUN.",
+    "No actual guard/lease/IPC/factory/VM-lifecycle qualification follows from HOST8.",
+    "No clean-HEAD source cohort, canonical probe/frontend adoption, aggregate stack minimum, GUI, physical A1200, audio or listening acceptance."
+  ],
+  "nativeObjects": {
+    "HUNK_UNITObjects": 32,
+    "SDKAllowance": 118,
+    "allActualReturnCodesZero": true,
+    "dependenciesEqualPreprocessing": true,
+    "diagnosticsEmpty": true,
+    "individualStackRows": 576,
+    "largestIndividualSUBytes": 16572,
+    "orderedStages": 160,
+    "preservedFullFacts": 222,
+    "probeMainIndividualSUBytes": 216,
+    "selectedGenuineSDKFiles": 48,
+    "strictProtectedRows": 68,
+    "wholeTaskStackMinimumProved": false
+  },
+  "role": "Summary of existing object, static-provider and HOST admission receipts; source/control-author roles remain identified in those receipts.",
+  "sourceCohort": {
+    "description": "Private frozen working-source closure including the dirty editor source/header pair. No clean-HEAD provenance or canonical probe/frontend adoption is claimed.",
+    "nativeTranslationUnits": 32,
+    "probeSHA256": "da8863796cebaa3484618276af17f86700d505175dd40fa60e431722cd539dae",
+    "projectFiles": 75
+  },
+  "sourceReceipts": {
+    "HOST8": {
+      "bytes": 2323,
+      "sha256": "a9ceea76cdd93b88c8d9efea03c94c042ec23f2210a8b2dbc47663c876ae2021"
+    },
+    "objects": {
+      "bytes": 1607,
+      "sha256": "92ea505ededc9d02262db72d2626a68e5a66a50eff1d4ab5ddb422490cf910d6"
+    },
+    "static": {
+      "bytes": 1453,
+      "sha256": "baff5a292c782867da30a5027bcb5d21a242ca67ecf44921fbbb164805f14647"
+    }
+  },
+  "state": "FROZEN_WORKING_DOCUMENT_SWITCH_TASK_NATIVE_STATIC_AND_HOST8_PROGRESS_NOT_RUNTIME",
+  "staticLink": {
+    "candidate": {
+      "bytes": 225312,
+      "sha256": "a542d9013dadb84603d71df84b43fe666b8e1ac87b12488f7e0a8dcc39d6610d"
+    },
+    "directExternalProviders": 26,
+    "entryTaskSPAndMemoryTypeGatesPresent": true,
+    "initialThreeLinkCommandsRC0": true,
+    "lexicalOrderedLOADs": 39,
+    "originalFailureSHA256": "24cd19a624d729f6442f76f04ec8f06fd395ea8ff0e18e256aaf6a1720b2ba28",
+    "originalValidatorFailurePreserved": true,
+    "realExecVectorWrappersChecked": 5,
+    "remainingTwoInspectionCommandsRC0": true,
+    "scope": "Saved-text provider and calling-convention review; full raw-HUNK payload reconstruction is a separate gate.",
+    "unresolved": 0,
+    "validatorMismatch": "Only two driver LOAD path spellings used a doubled slash. Saved lexical reconciliation accepted exactly those spellings; no relink."
+  }
+}

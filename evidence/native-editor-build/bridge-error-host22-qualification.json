@@ -1,0 +1,77 @@
+{
+  "actual": {
+    "actualToolRC": 0,
+    "all22InputFactsEqual": true,
+    "exactVerboseOracle": true,
+    "methods": 22,
+    "ordinaryExchangeMethods": 18,
+    "original1248PositiveClosure": true,
+    "ownedBounds": {
+      "bytes": 248413,
+      "entries": 19,
+      "recordedBeforeFinalResultSave": true,
+      "scope": "FINAL_ONLY_NOT_LIVE_CAP"
+    },
+    "privateSelectedServiceMethods": 4,
+    "rawGuardAndREADYEqual": true,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "seconds": 0.32586624997202307,
+    "stderrBytes": 3411,
+    "stdoutBytes": 0,
+    "strict68Equal": true,
+    "supervisorRC": -9,
+    "targetOperations": 0
+  },
+  "actualResult": {
+    "bytes": 5186,
+    "sha256": "0b38a1a634b142014dc51d43727e3e0d3d955a165fbb3d6a6418f615366ad36e"
+  },
+  "findings": [],
+  "limits": [
+    "No service activation/native/GUI/target/physical acceptance.",
+    "Historical817c rawERR, launch and guest/hardware cause remain unconfirmed; failure unchanged.",
+    "Record is source-qualified exception evidence, not independent authentication of native cause or ownership.",
+    "Final-only owned tree bound, not continuous disk-growth proof."
+  ],
+  "plan": {
+    "bytes": 14483,
+    "sha256": "4e9fb6bb91a96cdec1bffeaec4925ed5e11971496b887f28a4d990362b0784c6"
+  },
+  "rawREADY": {
+    "bytes": 48954,
+    "sha256": "ea926cf9fced2a3df3a71b740112e2366a286ce21d796c97242bfaf7467bafa6"
+  },
+  "rawStreams": {
+    "statusRaw": {
+      "bytes": 871,
+      "sha256": "9dfdb992cdc16d9c39dd321624bac205fdfa2394cf415c24874918e7965915e3"
+    },
+    "stderrRaw": {
+      "bytes": 3411,
+      "sha256": "13c87319902f69e064f91bf17af29ec697a722263f539d92b6630ce18d95b9d5"
+    },
+    "stdoutRaw": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "role": "Source/helper/wrapper author; saved-data audit of Root actual once-only operation, not independent source authorship.",
+  "schema": 1,
+  "scope": [
+    "18 unchanged Exchange methods plus two existing actual service writer/wiring methods and two actual selected terminal guarded-method cases.",
+    "Valid raw from clone exception/max8192 plain instance field persists separately; absent/invalid/property/oversize raw omitted; identical terminal exception propagates, no admission/followup.",
+    "Real private durable JSON writes; serial connection and downstream constructor are HOST boundaries, not a live service."
+  ],
+  "source": {
+    "helperSHA256": "b5494016fc175a9cdc9ad5d5f8c5af4cacdcc777179aec412c9f776f20e173c7",
+    "ordinaryTestsSHA256": "d295bc8a1da779a566ddafe57e383cc6132eec152f92d7b17d4c8cf7a18c342e",
+    "privateServiceOverlaySHA256": "b9f126d2949cb750eb41c28e69da7cddb3eca0dc330ffadcc3aead410465eabe",
+    "privateServiceTestsSHA256": "bf6e3e91c5b4716773ee050f3993957307a1d5e2e9039788ca96b56361549832"
+  },
+  "sourceReceipt": {
+    "bytes": 2927,
+    "sha256": "0a718226762800d403863745fd8b23ac700ec9bbb80df02839bf69f4229e7d1a"
+  },
+  "state": "SAVED_HOST22_BRIDGE_AND_TERMINAL_ERROR_EVIDENCE_PASS_NOT_RUNTIME"
+}

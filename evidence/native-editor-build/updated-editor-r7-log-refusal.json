@@ -1,0 +1,55 @@
+{
+  "actual": {
+    "allSavedFactsAndRawREADYEqual": true,
+    "bridgeErrorClass": "FILEINFO failed on the owned native.log",
+    "captureOrKeyCommandsAttempted": 0,
+    "extraFacts": 47,
+    "fixedFacts": 1862,
+    "nativeLogFileInfoAttempts": 1,
+    "nativeLogListingBytes": 64,
+    "originalFailurePreserved": true,
+    "originalSupervisorClosureConfirmed": true,
+    "protectedRows": 68,
+    "rawErrorSanitized": "ERR|FILEINFO failed|RAM:<owned-run>/native.log",
+    "replay": false,
+    "retainedSupervisedOwners": 0,
+    "rootReturnCode": 1,
+    "rootSeconds": 152.13876170798903,
+    "scriptLaunchAcknowledged": true,
+    "separateOwnedCleanupAndFourFactReleaseCompleted": true
+  },
+  "candidate": {
+    "bytes": 349152,
+    "sha256": "97f9f3a6f3ff5d7c29aaa7e9414fe269c6a2db45662e4886918a90b3bf1754f0"
+  },
+  "evidence": {
+    "cleanup": {
+      "bytes": 2414,
+      "sha256": "27c15d577633c973bc5581b8ecc589823b9a98a8b610a95550b63cf3dbc73478"
+    },
+    "durableFirstError": {
+      "bytes": 260,
+      "sha256": "76e1de7fc4a5ebee061d4d269e248129f398db5643ffb611d429c86caf93e9d6"
+    },
+    "failedRoot": {
+      "bytes": 5447,
+      "sha256": "4e8fc6d5bb0ea88c47ee8e500cef09ab81d535247ef0550d322741a482aa6f0f"
+    },
+    "nativeFailure": {
+      "bytes": 22999,
+      "sha256": "196dea0cee4b85f8c347cfc4ff2bd9a3a073621932956c1a6e6161b52a9a5b00"
+    },
+    "release": {
+      "bytes": 1003,
+      "sha256": "4fc547125866a8bbef6f7e3428bc180fbc7e2bc1ce06687865f83c427c38946d"
+    }
+  },
+  "limits": [
+    "The raw error identifies the failed bridge operation, not its DOS predicate or cause. Open-writer lock conflict remains a hypothesis.",
+    "Listing sizes do not establish file contents, native READY/frame/exit or snapshot children.",
+    "Native environment restoration unconfirmed; recovery disposed the owned VM.",
+    "No GUI, physical A1200, audio, timing or listening acceptance."
+  ],
+  "role": "Cleanup adapter/control contributor; saved-data audit of Root operation, not independent source authorship.",
+  "state": "UPDATED_EDITOR_R7_FAILED_DIAGNOSTIC_CAPTURED_RECOVERY_RELEASE_COMPLETE"
+}

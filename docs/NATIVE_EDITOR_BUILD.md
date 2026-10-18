@@ -219,3 +219,48 @@ admission checks passed, and supervision closed with no retained owner.
 This qualifies error reporting on HOST connection boundaries. It does not
 recover the earlier missing reply, establish its guest cause or qualify editor
 runtime. See [bridge-error-host-qualification.json](../evidence/native-editor-build/bridge-error-host-qualification.json).
+
+## Fresh editor log-inspection refusal — 18 October 2026
+
+A fresh exact-candidate Amiberry attempt used the updated bridge-error journal.
+The bridge acknowledged the launch script, then one `FILEINFO` attempt for
+`RAM:<owned-run>/native.log` returned an error. Two preceding directory listings
+reported a 64-byte native log, a 50-byte preparation log and a 166-byte control
+log, with an empty completion flag. Those sizes do not establish their contents,
+editor READY, a frame, native return or restored environment. No capture or key
+command was attempted. The detailed error was preserved by both the exchange
+and terminal journal; this addresses the earlier diagnostic gap.
+
+An open-writer lock conflict is a possible explanation for the failed file
+inspection. The saved reply contains no DOS error number or failed internal
+predicate, so that explanation remains unproved. This operation was not replayed.
+Separate recovery normally stopped only its identified emulator and service,
+restored the saved launcher files, removed exact offline staging and completed
+a separately observed four-fact public release. Native environment restoration
+remains unconfirmed; the guest domain was disposed with its owned VM. The earlier
+launch refusal remains a separate failed transaction. See
+[updated-editor-r7-log-refusal.json](../evidence/native-editor-build/updated-editor-r7-log-refusal.json).
+
+The corresponding HOST regression passed 22 methods: eighteen guarded-exchange
+cases and four private service error-wiring cases. It qualifies durable error
+reporting and terminal propagation at the tested HOST boundaries. It does not
+prove the guest cause or editor behavior. See
+[bridge-error-host22-qualification.json](../evidence/native-editor-build/bridge-error-host22-qualification.json).
+
+## Private document-switch Task probe progress
+
+The separate Task probe passes 160 native object stages across 32 translation
+units over 75 frozen working-source files, including the dirty editor source
+and header pair. Dependency and preprocessing sets agree with 48 selected
+genuine SDK headers. Its static candidate resolves all 26 direct external
+providers; the five real Exec vector wrappers and emitted Task/SP/memory-type
+gates were reviewed from saved output. An initial LOAD-path validator failure
+was preserved, then reconciled for exactly two doubled-slash spellings before
+the two remaining inspection commands ran. No relink was needed.
+
+Eight HOST admission models also pass against the actual admission AST with
+local observations. They did not import the service or install its factory.
+The probe remains private: no clean-HEAD qualification, canonical probe/frontend
+adoption, native runtime, functional allocation-ledger oracle or whole-Task
+stack minimum is established. It is not an editor GUI result. See
+[document-switch-task-static-host-progress.json](../evidence/native-editor-build/document-switch-task-static-host-progress.json).

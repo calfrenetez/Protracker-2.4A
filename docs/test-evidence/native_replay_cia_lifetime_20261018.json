@@ -20,7 +20,31 @@
       "status": "PASS_HOST_ONLY",
       "warnings_as_errors": true
     },
-    "link_static_abi": "NOT_RUN",
+    "link_static_abi": {
+      "candidate": {
+        "bytes": 17516,
+        "crc32": "6ABDA220",
+        "sha256": "82544b21fe862237bdacdb203425cf4cafc44973b794889ebc8f104f6e6e2c04"
+      },
+      "corrected_saved_audit": "Distinct reviewed correction checks the actual DOS Write register preservation and calling convention.",
+      "diagnostic_ram_fields": 6,
+      "host_write_stub_assumption_failure_preserved": true,
+      "hunk_sections": 4,
+      "independent_saved_static_abi_review_sha256": "b263a2d89c8097d74f5783bb3e3cdab8d44c136c99ffe01f23b89b31792aa3af",
+      "input_objects": 4,
+      "link_inspection_workers": 5,
+      "native_execution": "NOT_RUN",
+      "original_owned_closure": true,
+      "physical": "NOT_RUN",
+      "relocations": 477,
+      "root_static_abi_receipt_sha256": "a6389ca28c01dc4c11955aad08a63a43ffa4214320d8ae0ad552993b77f17d0a",
+      "routes_use_hunk_section_and_relocation_target": true,
+      "selected_external_providers": 15,
+      "selected_loads": 11,
+      "source_local_symbol_parser_finding_preserved": true,
+      "status": "PASS_STATIC_ONLY",
+      "symbols": 110
+    },
     "native_execution": "NOT_RUN",
     "native_object": {
       "bytes": 5888,
@@ -50,6 +74,17 @@
     "physical": "NOT_RUN",
     "pre_c_assembly_words": 6,
     "reason_rows": 2,
+    "refusal_decoder": {
+      "binary_record_bytes": 240,
+      "decoded_data_grants_native_acceptance": false,
+      "independent_saved_review_sha256": "86e7b3834f775b8b7fa6294021cf5739f3f3f78b44cad181632d1a711071fe4a",
+      "input_bytes": 309,
+      "native_returncode_observed": false,
+      "original_owned_closure": true,
+      "row_validity_preserved": true,
+      "status": "PASS_PURE_HOST_ONLY",
+      "synthetic_format_test_methods": 24
+    },
     "replay_object": {
       "actual_local_transform_modules": 4,
       "bytes": 7800,
@@ -66,7 +101,7 @@
       "unresolved_checked_c_imports": 2
     },
     "source_freeze_sha256": "f69e2996ac551eec099cffad879944cd4b28873c183e1b53c44a5e2af628616c",
-    "status": "PASS_PRIVATE_HOST_NATIVE_OBJECTS_UNLINKED",
+    "status": "PASS_PRIVATE_STATIC_LINK_AND_ABI_NOT_RUNTIME",
     "success_oracle_bytes": 198,
     "words_each": 24
   },
@@ -114,7 +149,7 @@
     "worker_executions": 1
   },
   "component": "Checked replay CIA ownership primitive",
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "default_native_linked": false,
   "legacy_stop_model": {
     "compiles": 2,
@@ -185,7 +220,7 @@
     "symbols": 104
   },
   "pending": [
-    "Distinct acquisition-reason diagnostic static link/ABI and exact Amiberry qualification",
+    "Distinct acquisition-reason diagnostic exact Amiberry qualification",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",

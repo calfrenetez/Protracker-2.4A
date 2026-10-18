@@ -1,0 +1,61 @@
+{
+  "actual": {
+    "completeBytes": 9,
+    "custodyFiles": 5,
+    "earlyControlBytes": 166,
+    "earlyFirstBytes": 22,
+    "finalBothBytes": 45,
+    "finalControlBytes": 227,
+    "firstThenBothAndImmediateRC0": true,
+    "launches": 1,
+    "liveRAMDeletion": false,
+    "observedShellStackBytes": 2097152,
+    "originalVMAbsenceObservedByRunner": true,
+    "pairedCommands": 63,
+    "protocolRecords": 129,
+    "returncode": 0,
+    "seconds": 62.92174695804715
+  },
+  "candidate": {
+    "bytes": 10948,
+    "crc32": "71BE605A",
+    "sha256": "f634634f41e383b88be16f74c44592a6a310f6e04c0e062335dd3f6db82a513f"
+  },
+  "completionOnly": {
+    "currentState": "NOT_OBSERVED",
+    "publicLeaseRetained": true,
+    "publicRelease": "SEPARATE_POST_ACCEPTANCE_REQUIRED",
+    "serviceClosure": "SEPARATE_POST_ACCEPTANCE_REQUIRED"
+  },
+  "countCorrection": "Actual final BOTH45=FIRST22+SECOND23; earlier43-byte descriptive prose inaccurate. Executable computed-length checks correct.",
+  "finalNativeLogSHA256": "92d0ca789d71ab4619cd1c382ea0708217e5e878e804f0573be0c2b6aee3048d",
+  "hostClosure": {
+    "allEOF": true,
+    "errors": [],
+    "groupAbsent": true,
+    "leaderReaped": true,
+    "retainedOwners": 0,
+    "supervisorRC": -9,
+    "toolRC": 0
+  },
+  "limits": [
+    "Probe-specific route; no editor, GUI/input, audio/device, physical, exact timing, native pre-stop Task-absence or aggregate stack acceptance.",
+    "No current ownership or later release/service-closure claim."
+  ],
+  "materialFindings": [],
+  "preservation": {
+    "beforeAfterEqual": true,
+    "extraFullFacts": 45,
+    "fiveMandatoryFull4GatesEqual": true,
+    "fixedFullFacts": 1823,
+    "metadataOnlyCold": 10,
+    "residentBodies": 58,
+    "specAndBothREADYRawEqual": true,
+    "strictProtected": 68
+  },
+  "rawStdoutSHA256": "1802fa79fd872cfd21fdbad9782829d9356ddcf4b400b664cde446694f27327f",
+  "rootResultSHA256": "4779683dc1fa27525e1da690f69abf3151f5a05556a400c169bb5e7314cea54f",
+  "runnerResultSHA256": "a36a7191af555875072aa59227e96b819fbec9a9b21c652211ea8d3e8982358d",
+  "scope": "Exact installed-Shell precreated append-log component on owned Amiberry; independent saved Root-operation audit. Separate public release/service closure not accepted here.",
+  "state": "LOG_SHARE_COMPONENT_NATIVE_RUNTIME_OBSERVED_VM_DISPOSED_RELEASE_PENDING"
+}

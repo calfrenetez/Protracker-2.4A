@@ -287,3 +287,28 @@ this probe establishes no full-editor GUI result. The original R7 failure is
 unchanged. Source and test adoption wait for the separate actual target result;
 no production feature is enabled by these qualifications. Individual stack
 reports and the Delay argument establish neither a whole-Task minimum nor timing.
+
+## Installed-Shell live-log runtime qualification
+
+The exact 10,948-byte LogShare probe completed one Amiberry run on the private
+68030 profile. The same Shell appended to a precreated log with `>>`: a read
+while the probe was active returned exactly FIRST (22 bytes), followed by the
+complete FIRST-plus-SECOND output (45 bytes), immediate RC0 and exact five-file
+custody. The independent saved runtime audit is preserved unchanged in
+[live-log-share-native-runtime.json](../evidence/native-editor-build/live-log-share-native-runtime.json),
+including its historical release-pending state. Earlier descriptive 43-byte
+prose was inaccurate; the executable length checks correctly required 45.
+
+The subsequent, separately audited stages observed original VM disposal,
+restored launcher files, public ownership release, normal closure of the
+identified service and final process, endpoint and staging absence. All 68
+protected items remained exact. These later results are recorded separately in
+[live-log-share-native-release.json](../evidence/native-editor-build/live-log-share-native-release.json).
+The earlier source/HOST/static qualification retains its historical NOT_RUN
+boundary; the new results do not rewrite that milestone.
+
+This qualifies the exact component's append/read route on this installed Shell.
+The older editor failure cause and full-editor GUI/ENV integration remain
+unqualified, as do pre-stop native Task absence, aggregate stack, timing, audio,
+physical A1200 operation and listening. No production playback feature is
+enabled by this result.

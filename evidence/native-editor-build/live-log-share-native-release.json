@@ -1,0 +1,40 @@
+{
+  "actual": {
+    "TCPAndNamedIPCAbsent": true,
+    "archiveCount": 167,
+    "guardSHA256": "ec27315d646632a0dbbaf068ad7e6703ad5813b38fbd7edb79fcff51af6d8339",
+    "independentVMDisposalObservation": true,
+    "metadataOnlyCold": 10,
+    "offlineStagingAbsent": true,
+    "originalConfigsProfilesLifecycleRestored": true,
+    "originalVMAndServiceAbsent": true,
+    "phase": "EMPTY",
+    "releaseFence": 2052,
+    "residentBodies": 58,
+    "singleGenuinePublicRelease": true,
+    "singleNormalOriginalServiceSIGTERM": true,
+    "strictProtected68Equal": true
+  },
+  "bindings": {
+    "exactFiveReviewedSourceCopies": true,
+    "fourPinnedSequentialBindings": true,
+    "fourPublicProofRecordHashesVerified": true,
+    "initialMissingPycacheRefusalPreserved": true,
+    "nativeTargetReplayed": false
+  },
+  "evidenceSHA256": {
+    "independentFinalEmpty": "81858d7589dd24e3b389ec92b03d2ae2f25e27ae27118c0aa9a4ec5190b076b8",
+    "independentObservation": "b322984397f46efc9d82759237ad97ecff0453eaaa4d305e72cf52fc59205f66",
+    "nativeRuntimeReceipt": "7bfe25b8e90809ae50dbd4bf99674e394db1e1daf591afd9e0aeedbab79fd7e9",
+    "normalServiceStop": "63cf4b1f39123f6a480e06c4dc9fec587c81297e161969070ed34928bc71cedf",
+    "publicRelease": "0eeedba142d16a20df823a24dd81c691a4f3996e990e07efd265f34a88f04423"
+  },
+  "limits": [
+    "Saved-process observations, not a fresh current-state assertion.",
+    "No pre-stop native Task absence, editor/GUI/input/audio/device/physical or aggregate stack qualification.",
+    "Service exit status unobserved; original identity/process and endpoint absence recorded."
+  ],
+  "materialFindings": [],
+  "scope": "Later saved Root-operated post chain; separate from the historical runtime receipt that correctly ended with release/service closure pending. No live observation by reviewer.",
+  "state": "LOG_SHARE_COMPONENT_VM_PUBLIC_RELEASE_AND_SERVICE_CLOSURE_OBSERVED_SAVED"
+}

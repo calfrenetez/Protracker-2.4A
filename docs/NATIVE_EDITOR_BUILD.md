@@ -103,8 +103,16 @@ The clean baseline and working display layout also pass separate genuine native
 entry-point compilations, five stages each. Their 64/65 project inputs and
 90 selected SDK headers agree between dependencies and preprocessing. Other
 objects and the previous full executable are not requalified by these checks.
-The change still needs a new full link, exact Amiberry application execution,
-and real-A1200 qualification. Native teardown, Task/stack lifetime, device quiet,
-audio timing and listening remain separate gates. See
+
+The updated working executable has since passed a separate static link and
+current provider/ABI review. Only main is replaced; 72 other objects retain
+their qualified identities. All 116 direct runtime providers and the three new
+application references resolve, and the complete 349,152-byte HUNK structure,
+relocations, replay and startup/cleanup routes pass saved-byte checks. This is
+the working layout candidate; it does not establish a new complete compiler
+batch or application execution. Exact Amiberry application execution and
+real-A1200 qualification remain outstanding. Native teardown, Task/stack
+lifetime, device quiet, audio timing and listening remain separate gates. See
 [owner-cleanup-host.json](../evidence/native-editor-build/owner-cleanup-host.json)
-and [owner-cleanup-objects.json](../evidence/native-editor-build/owner-cleanup-objects.json).
+[owner-cleanup-objects.json](../evidence/native-editor-build/owner-cleanup-objects.json)
+and [owner-cleanup-link.json](../evidence/native-editor-build/owner-cleanup-link.json).

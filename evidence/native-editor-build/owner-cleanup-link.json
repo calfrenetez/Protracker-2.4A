@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "state": "STATIC_LINK_PROVIDER_ABI_HUNK_PASS_NOT_RUNTIME",
+  "candidate": {
+    "bytes": 349152,
+    "sha256": "97f9f3a6f3ff5d7c29aaa7e9414fe269c6a2db45662e4886918a90b3bf1754f0",
+    "crc32": "E47E8735",
+    "format": "classic68000 HUNK_HEADER",
+    "entryHunk": 0,
+    "entryOffset": 0
+  },
+  "qualification": {
+    "actualCommands": 5,
+    "allReturncodesZero": true,
+    "secondsInternal": 0.7181989580276422,
+    "savedInputFullFacts": 141,
+    "savedInputAndProtected68GuardRawREADYProductsEqual": true,
+    "positiveOwnedChildClosure": 5,
+    "retainedOwners": 0,
+    "orderedLOADs": 80,
+    "applicationObjects": 73,
+    "replacementMainObjects": 1,
+    "retainedOtherObjects": 72,
+    "currentDirectRuntimeProviders": 116,
+    "runtimeCode": 112,
+    "runtimeData": 4,
+    "selectedRuntimeMembers": 138,
+    "runtimeGlobalBindings": 184,
+    "classicCLibBaseVectorRoutes": 75,
+    "runtimeContributionPayloadAndRelocationIdentityComparisons": 322,
+    "strongManualGUIBases": true,
+    "soleAppStackFailureReporter": true,
+    "newThreeApplicationReferencesResolved": true,
+    "originalCRTStackInitExitAndSPRestoreStaticRoutes": true
+  },
+  "structure": {
+    "hunks": 4,
+    "sizes": [
+      304080,
+      6408,
+      52720,
+      5888
+    ],
+    "fullBytesConsumed": 349152,
+    "trailingBytes": 0,
+    "symbols": 663,
+    "reloc32": 3498,
+    "allRelocationWriteAndTargetBoundsValid": true,
+    "replayHunk": 3,
+    "replayPayloadSHA256": "4f220d79c16c38608bf2d8726965aece366c4a421b573772fb7afa95f97e1422"
+  },
+  "cleanup": "Current emitted owner vetoes and screenFALSE enter originalTask Wait0 HOLD before dependent frees/CRT return; genuine positive retirement plus native teardown and zeroledger precede late cleanRC0.",
+  "stack": {
+    "experimentalRequestedBytes": 65536,
+    "mainIndividualSUBytes": 3684,
+    "mainFixedFrameBytes": 3536,
+    "aggregateTaskMinimum": "NOT_PROVED"
+  },
+  "role": "Reviewer authored relink/compiler-consumer derivatives; independently audited saved Root operation and current artifact, not independent source authorship.",
+  "limits": [
+    "No native/runtime/GUI/audio/devicequiet/physical acceptance.",
+    "No complete new70/73 compiler batch or inherited old executable/provider acceptance.",
+    "No whole changed-main source-to-relocated-payload or computedcallgraph guarantee.",
+    "Recorded internal timing only; no separate external completed-return receipt reviewed."
+  ],
+  "nativeRuntime": "NOT_RUN",
+  "targetOperations": 0
+}

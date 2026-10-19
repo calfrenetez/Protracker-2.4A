@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "qualification": "Private final-Close diagnostic native build and bounded static ABI only",
+  "source": {
+    "source_bodies": 40,
+    "freeze_sha256": "dd19161807d7fe28ff79c929613dbfb95bdea7cc9bba2c5a66c1fdba1bb81ef6",
+    "default_frontend_selected": false
+  },
+  "candidate": {
+    "bytes": 103516,
+    "sha256": "6af3231456d73eb805baf20910c80080308a8f9d788152bd9848be0c39a68473",
+    "crc32": "FB002D90"
+  },
+  "prior_host_models": {
+    "owner_groups": 39,
+    "transcript_helper_groups": 17,
+    "diagnostic_ring_encoder_groups": 15,
+    "sanitizers": ["AddressSanitizer", "UndefinedBehaviorSanitizer"],
+    "scope": "Fake Exec/device and output boundaries; previously recorded separately"
+  },
+  "native_build": {
+    "target": "Motorola 68000",
+    "current_main_preprocess": {
+      "dependency_and_preprocessor_closures_equal": true,
+      "preprocessed_bytes": 258487,
+      "preprocessed_sha256": "f0084c90d65e6c521524ac822058adc4772d39de18c4a7d95043d01a4a2fbbd6"
+    },
+    "current_main_object": {
+      "bytes": 31276,
+      "sha256": "b3b3357f95f2b327e5d718feb9fbe614b4038ddeabd15f9eca70057f9810cb73"
+    },
+    "newly_compiled_C_units": 1,
+    "historically_compiled_C_units_retained_with_current_typed_compatibility": 8,
+    "retained_replay_assembly_objects": 1,
+    "retained_startup_request_support_objects": 2,
+    "link_stages": 5,
+    "all_link_stage_returncodes_zero": true,
+    "link_input_facts_unchanged": 345,
+    "linked_objects": 12,
+    "ordered_LOADs": 19
+  },
+  "current_mechanical_audit": {
+    "successful_worker_invocations": 1,
+    "object_reconstructions": 12,
+    "selected_external_providers": 42,
+    "HUNK_sections": 4,
+    "relocations": 1478,
+    "symbols": 213
+  },
+  "bounded_static_acceptance": {
+    "accepted": true,
+    "scope": "Current fixed fixture, selected providers, caller ABI and cleanup ownership routes",
+    "root_receipt_bytes": 5499,
+    "root_receipt_sha256": "7c9b21bffd5fad8302fd6df20cfac76bcc9f132d181c383efecb5189a32ff647",
+    "semantic_receipt_bytes": 6241,
+    "semantic_receipt_sha256": "1ace1f672fa39f983ba8441487ee6209b2a0ac5ae63694f75dd852536ba4ffd9",
+    "individual_compiler_reports": 179,
+    "current_main_reports": 70,
+    "retained_reports": 109,
+    "largest_current_main_individual_frame_bytes": 6812,
+    "whole_Task_OS_IRQ_stack_highwater": "NOT_MEASURED"
+  },
+  "current_candidate_runtime": {
+    "native_execution": "NOT_RUN",
+    "Amiberry": "NOT_RUN",
+    "A1200": "NOT_RUN",
+    "native_cleanup": "NOT_RUN",
+    "listening": "NOT_RUN"
+  },
+  "carrier_preparation": {
+    "current_candidate_carrier_HOST": "NOT_RUN",
+    "status": "Earlier unadmitted source-scope mismatch preserved; source correction pending qualification"
+  },
+  "preserved_evidence": [
+    "The earlier candidate's 677-byte native failure remains a failure; its separate owned-resource recovery remains preserved.",
+    "Retained objects preserve historical build identity; this is not nine new C compilations.",
+    "No native cleanup, device/DMA silence, cache/master release or full-application playback is inferred from build/static or HOST evidence."
+  ]
+}

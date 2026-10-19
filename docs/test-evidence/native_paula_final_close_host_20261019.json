@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "qualification": "HOST models only; private native successor remains unqualified",
+  "source_sha256": "dd19161807d7fe28ff79c929613dbfb95bdea7cc9bba2c5a66c1fdba1bb81ef6",
+  "production_owner_sha256": "d077e3093f40112c6e9e9425a1061cdd9b99d7740f5fe3702cf4e96acb2c8bfb",
+  "default_frontend_selected": false,
+  "checks": [
+    {
+      "scope": "Actual owner include with fake Exec, CIA and audio requests; optional diagnostics disabled",
+      "groups": 39,
+      "original_groups_preserved": 30,
+      "new_groups": 9,
+      "compile_rc": 0,
+      "run_rc": 0,
+      "stdout_bytes": 1311,
+      "stdout_sha256": "0f372d55025436937ad431e74390c4fb72eab31a93d06d5539523cef1cf6b30b",
+      "stderr_bytes": 0,
+      "input_facts_unchanged": 58,
+      "protected_inputs_unchanged": 68
+    },
+    {
+      "scope": "Actual read-only cleanup-transcript predicate; no OS completion authority",
+      "groups": 17,
+      "compile_rc": 0,
+      "run_rc": 0,
+      "stdout_bytes": 545,
+      "stdout_sha256": "d551913babf4eebb767beb3ca1fa24d0c9f35b0dd132cf4cf3611f062ee134ab",
+      "stderr_bytes": 0,
+      "input_facts_unchanged": 20,
+      "protected_inputs_unchanged": 68
+    },
+    {
+      "scope": "Actual optional production RAM ring and encoder with fake request, output and context boundaries",
+      "groups": 15,
+      "compile_rc": 0,
+      "run_rc": 0,
+      "stdout_bytes": 432,
+      "stdout_sha256": "3b058fe11e68ce14c9829c0c26cfc6bd9bf62e9523cbd31db44b22c8af784e13",
+      "stderr_bytes": 0,
+      "input_facts_unchanged": 14,
+      "protected_inputs_unchanged": 68
+    }
+  ],
+  "verification": {
+    "assertions": true,
+    "address_sanitizer": true,
+    "undefined_behavior_sanitizer": true,
+    "leak_sanitizer": false,
+    "workers_normally_reaped": true,
+    "shared_target_operations": 0
+  },
+  "ownership_contract": [
+    "A terminal FREE reply with zero mask does not establish channel release.",
+    "The zero-mask path also requires exact terminal LOCK success, RESET full mask and checked CIA retirement.",
+    "Keep consumed reply snapshots unchanged; enter one-shot CLOSING before restoring the original owned mask for CloseDevice.",
+    "Check documented closed device and unit outputs plus original storage, owner, context and immutable ledgers before destructor permission.",
+    "Uncertain postconditions, pending replies or reentry retain HELD without another close or premature destruction.",
+    "The original full-mask FREE path and permitted terminal channel-stolen LOCK cases remain covered."
+  ],
+  "preserved_failures": [
+    "The earlier Amiberry zero-mask refusal remains a failed native run, with no return-code or cleanup pass inferred.",
+    "Two earlier HOST compile attempts refused a missing fake-boundary header and fixture indentation warnings. Neither ran the model. Their evidence is retained; corrected candidates used new namespaces."
+  ],
+  "not_qualified": [
+    "Native build, ABI, runtime and repeated full-app playback of this successor",
+    "Real audio.device completion, DMA silence, cache or sample-master release",
+    "Real A1200 or AmiGUS behavior, exact output timing, endurance and human listening"
+  ]
+}

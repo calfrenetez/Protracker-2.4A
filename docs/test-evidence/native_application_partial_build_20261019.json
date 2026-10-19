@@ -1,0 +1,484 @@
+{
+  "SDK": {
+    "allowedFiles": 127,
+    "facts": "Ten native builtins and the three private selectors checked in every listed M/E result; actual dependency and line-marker sets agree.",
+    "profile": {
+      "bytes": 411240,
+      "sha256": "4a8761f1675d4280131c59d09d0e435c8464ec3468445c1ab3b2b700677eec60"
+    }
+  },
+  "allListedIndependentSavedReviews": "PASS with no material findings",
+  "applicationSource": {
+    "bodies": 174,
+    "canonicalAdoption": false,
+    "defaultFrontendEnabled": false,
+    "freeze": {
+      "bytes": 118435,
+      "sha256": "00b767bd1cab10ca158d61e2267a32ec8fae78d709130f7411aea2908526ee0e"
+    },
+    "privateSelectors": [
+      "PT_LEGACY_FINAL_CLOSE_PRIVATE=1",
+      "PT_LEGACY_PAULA_RETIRE_PRIVATE=1",
+      "PT_REPLAY_STOP_PRIVATE_SOURCE=1"
+    ]
+  },
+  "canonicalBaseCommit": "5a889f7eff618e5aa8533bf631ae4686b415b2c5",
+  "date": "2026-10-19",
+  "independentSavedReviews": {
+    "pt24g-untapped-application-main-object-independent-actual-review-r2.json": {
+      "bytes": 5767,
+      "sha256": "1dcca5791d4c73645163663fd776afe9dd29009946746b9732b4b680eba03170"
+    },
+    "pt24g-untapped-application-native-affected-three-independent-actual-review-r1.json": {
+      "bytes": 6420,
+      "sha256": "e977c48fafcca4bbbc957cabcf907aa5a93d8372f986f4d05df644b04facc328"
+    },
+    "pt24g-untapped-application-native-next-three-independent-actual-review-r1.json": {
+      "bytes": 6409,
+      "sha256": "e7ed3b088bc70e14464600c93cd8d5cff150ae708f6312149225dab9279a9940"
+    },
+    "pt24g-untapped-application-native-unit00-independent-actual-review-r2.json": {
+      "bytes": 5152,
+      "sha256": "4e0132ace00916b6c929672f7c172a59803595cec28125923039dfd830a5e19e"
+    },
+    "pt24g-untapped-application-native-unit03-independent-actual-review-r2.json": {
+      "bytes": 5383,
+      "sha256": "b796e1edc4809fa2166a25180a2c4ac5784c8c6c5a103f672a3b58dec04d1dd9"
+    },
+    "pt24g-untapped-application-paula-object-independent-actual-review-r2.json": {
+      "bytes": 5770,
+      "sha256": "ee273bd8b54f8dcca44372b62613555f3cb10f4292ece6feab02735bac575aab"
+    },
+    "pt24g-untapped-application-unit04-object-independent-actual-review-r1.json": {
+      "bytes": 14948,
+      "sha256": "fad4ffb8a71795e2603114d7024a28a91a19896fd010cd33b6b9f5458e8bb2ef"
+    },
+    "pt24g-untapped-application-unit70-object-independent-actual-review-r1.json": {
+      "bytes": 14404,
+      "sha256": "755d5a08419fb0dc1b0b72bb4098f56e8587c834cd5b24fa804dec64413eaf88"
+    },
+    "pt24g-untapped-application-unit71-object-independent-actual-review-r1.json": {
+      "bytes": 13008,
+      "sha256": "0189d002aa2b0287774770dc1245cdd70c97b9e2c4e64c9b6ce24dae05a81554"
+    }
+  },
+  "limits": [
+    "Private partial native build only; no complete application binary, selected provider/link/full ABI or native runtime acceptance.",
+    "Compiler stack-usage rows are individual frames, not a summed Task/OS/IRQ stack bound or stack high-water measurement.",
+    "Mandatory source symbols and observed unresolved symbols do not identify the eventual linked library providers.",
+    "No Amiberry, A1200, AmiGUS, DMA/card RAM, timing or human listening acceptance follows from these build steps.",
+    "The established frontend/layout and unrelated work remain unchanged; deferred ZooperTracker features are excluded."
+  ],
+  "objects": [
+    {
+      "component": "native frontend",
+      "individualStackUsage": {
+        "entries": 28,
+        "largestIndividualBytes": 4232,
+        "meaning": "Individual compiler entries only; no Task/IRQ/whole runtime stack acceptance"
+      },
+      "inputFacts": 415,
+      "nativeCodegenAssemblerInspectorCommands": [
+        1,
+        1,
+        1
+      ],
+      "originalOwnedClosures": 3,
+      "producerIndex": 0,
+      "products": {
+        "unit-00.o": {
+          "bytes": 34344,
+          "sha256": "8c46eb9023696b687db64631ac8c02fcd5ff084718d63836392275d3fedaf691"
+        },
+        "unit-00.s": {
+          "bytes": 90735,
+          "sha256": "4e7506ead54099d4b5f3448ebe037ca18b864891b778ba860abe9d7ffdd4f9eb"
+        },
+        "unit-00.su": {
+          "bytes": 1967,
+          "sha256": "08b35c72cde9fb3b97b3652d948c3feca583a7ee007e533de37246f0e141a932"
+        }
+      },
+      "receipt": {
+        "bytes": 73053,
+        "sha256": "36028e7f472ddae5010c7a1d6b9fd8a5ce9db33526b968097c35c92f1caae743"
+      },
+      "requiredStrongDefinitions": [
+        "_main"
+      ],
+      "retainedOwners": 0,
+      "seconds": 1.5946615420107264,
+      "sourceCohortBound": 174,
+      "stagedPreprocessedInputs": 1,
+      "state": "PASS_UNLINKED_OBJECT_ONLY",
+      "undefinedSymbolsObserved": 130
+    },
+    {
+      "component": "Paula backend",
+      "individualStackUsage": {
+        "entries": 45,
+        "largestIndividualBytes": 6812,
+        "meaning": "Individual compiler entries only; no Task/IRQ/whole runtime stack acceptance"
+      },
+      "inputFacts": 367,
+      "nativeCodegenAssemblerInspectorCommands": [
+        1,
+        1,
+        1
+      ],
+      "originalOwnedClosures": 3,
+      "producerIndex": 3,
+      "products": {
+        "unit-00.o": {
+          "bytes": 21692,
+          "sha256": "ac52fdbca04408f27830dea66c174e72c3021331e75ae3612ccb060ba7e1c23b"
+        },
+        "unit-00.s": {
+          "bytes": 80712,
+          "sha256": "89aa08ed965a3b84b517d5e31a51c7a86ebdf3c86b985aa25dd57725e1f7db66"
+        },
+        "unit-00.su": {
+          "bytes": 2815,
+          "sha256": "1c1ad522cc42da928091800f7bdf4a14ba6bff2030bd6bc1a42f94dd05233390"
+        }
+      },
+      "receipt": {
+        "bytes": 45032,
+        "sha256": "ce5e0acbcc7a06a7d96e188d78c0e420c6c2cd342a9127f7f404bc7fec25beca"
+      },
+      "requiredStrongDefinitions": [
+        "_pt_paula_play",
+        "_pt_paula_audition",
+        "_pt_paula_audition_progress",
+        "_pt_paula_stop_checked",
+        "_pt_paula_stop",
+        "_pt_paula_sync",
+        "_pt_paula_poll"
+      ],
+      "retainedOwners": 0,
+      "seconds": 2.484326207995764,
+      "sourceCohortBound": 174,
+      "stagedPreprocessedInputs": 1,
+      "state": "PASS_UNLINKED_OBJECT_ONLY",
+      "undefinedSymbolsObserved": 59
+    },
+    {
+      "component": "CIA retirement primitive",
+      "individualStackUsage": {
+        "entries": 8,
+        "largestIndividualBytes": 100,
+        "meaning": "Individual compiler entries only; no Task/IRQ/whole runtime stack acceptance"
+      },
+      "inputFacts": 349,
+      "nativeCodegenAssemblerInspectorCommands": [
+        1,
+        1,
+        1
+      ],
+      "originalOwnedClosures": 3,
+      "producerIndex": 70,
+      "products": {
+        "unit-00.o": {
+          "bytes": 4356,
+          "sha256": "b4cb028941978b94e6894272565d4d071c96852b30214ba0b8df141d1ce6096a"
+        },
+        "unit-00.s": {
+          "bytes": 13502,
+          "sha256": "faa2e306ba1f3a6fd9711be7cbd31de26a38c34314acf7d161e9be61e662731d"
+        },
+        "unit-00.su": {
+          "bytes": 609,
+          "sha256": "cbdf632887519112b6d5ce72f53a5a669ef35f6029b466986e0bb7a43ec06e3b"
+        }
+      },
+      "receipt": {
+        "bytes": 31356,
+        "sha256": "39e04b9d657777a353cb4938b4a6391458f836ba7078434204f46c4aecfa6a61"
+      },
+      "requiredStrongDefinitions": [
+        "_pt_native_replay_add_cia_vector",
+        "_pt_native_replay_cia_prepare_generation",
+        "_pt_native_replay_cia_cancel_generation",
+        "_pt_native_replay_cia_current_generation",
+        "_pt_native_replay_cia_retire"
+      ],
+      "retainedOwners": 0,
+      "seconds": 1.1711509169981582,
+      "sourceCohortBound": 174,
+      "stagedPreprocessedInputs": 1,
+      "state": "PASS_UNLINKED_OBJECT_ONLY",
+      "undefinedSymbolsObserved": 12
+    },
+    {
+      "component": "STOP editor glue",
+      "individualStackUsage": {
+        "entries": 3,
+        "largestIndividualBytes": 32,
+        "meaning": "Individual compiler entries only; no Task/IRQ/whole runtime stack acceptance"
+      },
+      "inputFacts": 381,
+      "nativeCodegenAssemblerInspectorCommands": [
+        1,
+        1,
+        1
+      ],
+      "originalOwnedClosures": 3,
+      "producerIndex": 71,
+      "products": {
+        "unit-00.o": {
+          "bytes": 824,
+          "sha256": "6fd48f7461cc0cc026a5e2e98dc855c3d32035f7d099701b6dfff8f45f2266e9"
+        },
+        "unit-00.s": {
+          "bytes": 1680,
+          "sha256": "80a8d730b8ce4a71dddf51f11ed50fd14b18d20dd16540f32fb75e2a63658832"
+        },
+        "unit-00.su": {
+          "bytes": 203,
+          "sha256": "a0831a38cfbbc65579c2035e564ce48e45e3fbea37e7aa606a4db993ab602206"
+        }
+      },
+      "receipt": {
+        "bytes": 39958,
+        "sha256": "00213b83616d6824acba9c69ab2e616c9e3b3e0c287e2d13afd08dff9cbc53d9"
+      },
+      "requiredStrongDefinitions": [
+        "_pt_paula_editor_bind_stop",
+        "_pt_paula_editor_stop_action"
+      ],
+      "retainedOwners": 0,
+      "seconds": 1.1433913329965435,
+      "sourceCohortBound": 174,
+      "stagedPreprocessedInputs": 1,
+      "state": "PASS_UNLINKED_OBJECT_ONLY",
+      "undefinedSymbolsObserved": 6
+    },
+    {
+      "component": "editor lifetime",
+      "individualStackUsage": {
+        "entries": 62,
+        "largestIndividualBytes": 1616,
+        "meaning": "Individual compiler entries only; no Task/IRQ/whole runtime stack acceptance"
+      },
+      "inputFacts": 375,
+      "nativeCodegenAssemblerInspectorCommands": [
+        1,
+        1,
+        1
+      ],
+      "originalOwnedClosures": 3,
+      "producerIndex": 4,
+      "products": {
+        "unit-00.o": {
+          "bytes": 35628,
+          "sha256": "f9c9c090461b695c9c924bd373d9ca24a92dd12f6de1c74fb52b297fd4c39f5b"
+        },
+        "unit-00.s": {
+          "bytes": 140172,
+          "sha256": "4578ae2ef22464b98faf86b7422eb86d3149f0eecdffab6c26413152a19b7fb6"
+        },
+        "unit-00.su": {
+          "bytes": 2926,
+          "sha256": "d5a599251dbafcfd0fafd843b4d69b45b84076f3b3488018bec3d4c1fc8bc4f2"
+        }
+      },
+      "receipt": {
+        "bytes": 40445,
+        "sha256": "c657895a6ad09742efdf859eed643edfedba5ebe5309ab139bf136e900b78be6"
+      },
+      "requiredStrongDefinitions": [
+        "_pt_editor_note",
+        "_pt_editor_status",
+        "_pt_editor_change_guard",
+        "_pt_editor_change_barrier",
+        "_pt_editor_prepare_change",
+        "_pt_editor_dispose",
+        "_pt_editor_source_load_with",
+        "_pt_editor_source_load",
+        "_pt_editor_wave_bounds",
+        "_pt_editor_sample_all",
+        "_pt_editor_sample_result",
+        "_pt_editor_render_options",
+        "_pt_editor_init",
+        "_pt_editor_dirty",
+        "_pt_editor_saved",
+        "_pt_editor_reveal_cursor",
+        "_pt_editor_follow_playback",
+        "_pt_editor_selection",
+        "_pt_editor_key",
+        "_pt_editor_click"
+      ],
+      "retainedOwners": 0,
+      "seconds": 1.5451590830052737,
+      "sourceCohortBound": 174,
+      "stagedPreprocessedInputs": 1,
+      "state": "PASS_UNLINKED_OBJECT_ONLY",
+      "undefinedSymbolsObserved": 51
+    }
+  ],
+  "preprocessing": [
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 68,
+      "actualSDKInputs": 90,
+      "component": "native frontend",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 0,
+      "receipt": {
+        "bytes": 77421,
+        "sha256": "dd6d4ac9432f598faea57a628944d61a51dd94cf22473f62de3dcb2171a1a6cf"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.2869580419937847,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 20,
+      "actualSDKInputs": 56,
+      "component": "Paula backend",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 3,
+      "receipt": {
+        "bytes": 42433,
+        "sha256": "d645b9a949ec480503752845c70fcc0c833414d583405d10c7996cd82d4a4c05"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.1407891660055611,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 2,
+      "actualSDKInputs": 32,
+      "component": "CIA retirement primitive",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 70,
+      "receipt": {
+        "bytes": 25826,
+        "sha256": "5ad75481d33c833019fb467480d77f94566034d008c321a1e95537c223893839"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.198441083994112,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 34,
+      "actualSDKInputs": 23,
+      "component": "STOP editor glue",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 71,
+      "receipt": {
+        "bytes": 37537,
+        "sha256": "0da9f4f04444dd757de16c2a8d3216de4f1d0136be4f4c2d17f7ede3bcb262ae"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.1475287500070408,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 28,
+      "actualSDKInputs": 29,
+      "component": "editor lifetime",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 4,
+      "receipt": {
+        "bytes": 36012,
+        "sha256": "cb7172781929ad5b44cc6fc46db62e76f2c74f52dfe1c4af67e80f2ea3cfb95c"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.158232500005397,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 31,
+      "actualSDKInputs": 73,
+      "component": "pattern display",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 1,
+      "receipt": {
+        "bytes": 54003,
+        "sha256": "7aec9f97e6e3f48250c1636acd272db3ef5f2740387c2d409cd7ac079013f286"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.7054173340002308,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 2,
+      "actualSDKInputs": 77,
+      "component": "file requester",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 2,
+      "receipt": {
+        "bytes": 41874,
+        "sha256": "8b95217b2ec66d3833ec9d4e66e1b18bdffd78e25d7b8177248f7528b9f4c3a9"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.231834375008475,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    },
+    {
+      "MEqualsI": true,
+      "actualProjectInputs": 9,
+      "actualSDKInputs": 20,
+      "component": "song model",
+      "inputFacts": 506,
+      "nativeCC1Commands": 2,
+      "originalOwnedClosures": 2,
+      "producerIndex": 5,
+      "receipt": {
+        "bytes": 24377,
+        "sha256": "aa2da7c7dfbc76d368c08308924d4280c12bd1e9bd665513c48e9433e1aef6c0"
+      },
+      "retainedOwners": 0,
+      "seconds": 1.097361958003603,
+      "stagedSourceFiles": 174,
+      "state": "PASS_PREPROCESS_ONLY"
+    }
+  ],
+  "progress": {
+    "nativeLinkCommands": 0,
+    "nativeObjects": 5,
+    "nativeToolInvocations": 31,
+    "plannedCProducers": 72,
+    "preprocessed": 8,
+    "remainingNativeObjects": 67,
+    "remainingPreprocess": 64,
+    "retainedOwners": 0
+  },
+  "protection": {
+    "allListedMapsRawGuardRawREADYEqual": true,
+    "metadataOnlyNotHydrated": 10,
+    "strictPreservedPaths": 68,
+    "targetOperations": 0,
+    "unrelatedDirtyPaths": 16
+  },
+  "schema": "pt24g-native-application-partial-build-v1",
+  "state": "PASS_FOR_LISTED_PREPROCESS_AND_UNLINKED_OBJECT_STEPS_ONLY"
+}

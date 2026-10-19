@@ -1,5 +1,18 @@
 # Sample memory and playback ownership
 
+## Private application compilation —19 October2026
+
+The private application composition now passes genuine native preprocessing for
+8 of its 72 C producers and object/assembly generation for five: the frontend,
+Paula backend, CIA retirement primitive, editor STOP glue and editor lifetime
+code. Every listed native worker completed with its original owned closure and
+unchanged input/preservation checks. The remaining 64 preprocessing and 67 object
+steps, replay/provider selection, full link/ABI review and complete application
+runtime are still pending. Compiler stack reports are individual frames, not a
+whole Task/OS/IRQ bound. This build work leaves the default frontend and accepted
+layout unchanged and grants no new Amiberry, A1200/AmiGUS or listening acceptance.
+See the [partial native build receipt](test-evidence/native_application_partial_build_20261019.json).
+
 ## Full-Paula failure capture and application lifetime models —19 October2026
 
 The separate full-Paula cleanup fixture's first Amiberry run did not confirm completion; that failure remains preserved. A distinct candidate with an explicitly owned diagnostic log ran once in Amiberry and returned a bounded 677-byte failure journal. It reached the first playback, then retained its owner when a FREE reply reported unit0/error0 while the conservative predicate requires unit15. The native FREE input mask and return code were not captured; successful channel release and full cleanup remain unqualified. Separate owned-process teardown, exact launcher restoration, independent absence and public release completed. Thirty HOST sanitizer groups now include three regressions that retain ownership for these zero-mask replies, with no change to the owner predicate. A1200 promotion remains unqualified. See [the earlier capture checks](test-evidence/native_paula_cleanup_diagnostics_host_20261019.json) and [the captured failure and refusal regressions](test-evidence/native_paula_cleanup_failure_capture_20261019.json).

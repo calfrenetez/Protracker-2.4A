@@ -1,0 +1,95 @@
+{
+  "blankApplicationObservations": {
+    "adapterPassed": false,
+    "applicationLaunches": 1,
+    "candidateBytesUnchanged": true,
+    "doneMarker": "done",
+    "exactReadyChannels": 4,
+    "exactReadyPatterns": 1,
+    "initialFrame": {
+      "channel": 0,
+      "dirty": 0,
+      "panel": 0,
+      "revision": 0,
+      "row": 0
+    },
+    "nativeTestReplayed": false,
+    "overallApplicationAcceptance": false,
+    "plannedEscapeTaps": 1,
+    "playbackActions": 0,
+    "privateEnvironmentRestored": true,
+    "projectLoads": 0,
+    "rc": 0,
+    "refusal": "Unexpected run output; retain evidence",
+    "state": "FUNCTIONAL_OBSERVATIONS_PASS_ADAPTER_REFUSAL_PRESERVED",
+    "terminal": "EDITOR EXIT clean",
+    "trigger": "Five emulator-created active-N.uaem metadata sidecars"
+  },
+  "boundedStatic": {
+    "externalProviderOriginRoutes": 124,
+    "hunkSections": 4,
+    "independentSavedReviewSha256": "c807c3d10a8ff10270c52edb8a02f93a7b8c007d6dc4c520f78371b966cdfd30",
+    "objectsReconstructed": 75,
+    "orderedLinkInputs": 82,
+    "relocations": 4069,
+    "state": "PASS",
+    "symbols": 688,
+    "wholeTaskIRQStackBound": "UNQUALIFIED"
+  },
+  "candidate": {
+    "bytes": 362864,
+    "crc32": "0BFB3F38",
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "date": "2026-10-19",
+  "distinctCorrectedStartup": {
+    "correction": "Existing bridge-readiness wait moved before first IPC PING",
+    "originalLocksGuardsEnvironmentDeadlinesPreserved": true,
+    "startupRC": 0,
+    "startupSourcePeerSha256": "b958955bf4b796e666d038c3591cf1b46bc2bbef15487e85ad198ddbfee3ec7c",
+    "state": "PASS"
+  },
+  "firstStartup": {
+    "applicationLaunched": false,
+    "applicationStaged": false,
+    "causeObserved": "Initial IPC PING timed out before guest bridge readiness",
+    "failurePreserved": true,
+    "globalPreferencesRestoration": "NOT_CLAIMED",
+    "independentFinalEmpty": "PASS",
+    "ownedCleanupAndPublicRelease": "PASS",
+    "state": "FAILED_BEFORE_APPLICATION"
+  },
+  "hostModels": {
+    "innerAdapterMethods": 16,
+    "nativeProof": false,
+    "outerCLIMethods": 13,
+    "realAdapterWithModeledGuest": true,
+    "state": "PASS"
+  },
+  "limits": {
+    "A1200": "NOT_RUN",
+    "AmiGUS": "NOT_RUN",
+    "amiberryBlankAcceptance": "PENDING_CORRECTED_ADAPTER_QUALIFICATION",
+    "defaultFrontendAdopted": false,
+    "listening": "NOT_RUN",
+    "newLoadPlaybackAndRepeatedGenerationRuntime": "UNQUALIFIED"
+  },
+  "scope": "Private complete application static and blank-native observations; default frontend unselected",
+  "separateCleanup": {
+    "absenceSamples": 9,
+    "allGeneratedEntriesPreserved": 20,
+    "browserControlAcquired": false,
+    "ctimeRestorationClaimed": false,
+    "exactOwnedStagingRemoved": true,
+    "forceSignals": 0,
+    "independentFinalEmpty": "PASS",
+    "launcherRestorationRoles": 2,
+    "metadataSidecarsPreserved": 5,
+    "onlyExactOwnedProcessesNormallyTerminated": true,
+    "originalInputsExact": 15,
+    "preservationMapExact": 68,
+    "priorReleaseArchivesPreserved": 183,
+    "publicRelease": "PASS",
+    "state": "PASS"
+  }
+}

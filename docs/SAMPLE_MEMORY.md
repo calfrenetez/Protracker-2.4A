@@ -9,8 +9,9 @@ workers completed with positive owned closure and unchanged input/preservation
 checks. The full private application also passes native static linking: its
 362,864-byte Amiga executable binds those 72 objects plus the separately qualified
 replay/stack/request support, with all 82 ordered LOADs and five original worker
-closures checked. Selected library provider/full ABI review and application
-runtime testing remain pending. Compiler stack reports describe individual
+closures checked. A bounded mechanical audit now reconstructs all 75 objects and checks the 124
+required external provider origin routes. Whole Task/IRQ behavior, runtime-library
+internals and stack high-water remain unqualified. Compiler stack reports describe individual
 frames, not a whole Task/OS/IRQ bound. The
 default frontend and accepted layout remain unchanged. These build results grant
 no new Amiberry, A1200/AmiGUS or listening acceptance. See the
@@ -18,6 +19,22 @@ no new Amiberry, A1200/AmiGUS or listening acceptance. See the
 See the separate [native link receipt](test-evidence/native_application_link_20261019.json).
 The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
 remains preserved with its original scope.
+
+## Complete private application blank observation —19 October2026
+
+The exact complete application opened a blank four-channel document in Amiberry,
+reported its clean initial frame, then exited after one planned Escape with
+`EDITOR EXIT clean` and RC0. Its staged bytes remained exact and private ENV
+settings were restored. The adapter then refused five emulator-created `.uaem`
+metadata sidecars before its normal cleanup; the original failed result remains
+preserved. Separately verified own-process termination, exact staging cleanup,
+launcher restoration and public release completed, followed by an independent
+EMPTY/absence check. This is a functional observation, with full blank-smoke
+acceptance pending the corrected adapter. No Load, playback, A1200, AmiGUS,
+listening or default-frontend acceptance follows. The earlier startup timeout
+before the application launched is preserved separately; a distinct run used
+the previously tested bridge-before-PING order with unchanged deadlines. See
+[the static, HOST and native observation receipt](test-evidence/native_application_blank_observation_20261019.json).
 
 ## Full-Paula failure capture and application lifetime models —19 October2026
 

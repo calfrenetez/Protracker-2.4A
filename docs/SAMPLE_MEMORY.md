@@ -6,12 +6,16 @@ The private application composition now passes genuine native preprocessing and
 object/assembly generation for all 72 C producers. Independent saved reviews
 bind every original result and source to its actual object; all 360 native tool
 workers completed with positive owned closure and unchanged input/preservation
-checks. Replay/runtime support admission, actual library provider selection,
-full application link/ABI review and runtime testing remain pending. Compiler
-stack reports describe individual frames, not a whole Task/OS/IRQ bound. The
+checks. The full private application also passes native static linking: its
+362,864-byte Amiga executable binds those 72 objects plus the separately qualified
+replay/stack/request support, with all 82 ordered LOADs and five original worker
+closures checked. Selected library provider/full ABI review and application
+runtime testing remain pending. Compiler stack reports describe individual
+frames, not a whole Task/OS/IRQ bound. The
 default frontend and accepted layout remain unchanged. These build results grant
 no new Amiberry, A1200/AmiGUS or listening acceptance. See the
 [complete C object build receipt](test-evidence/native_application_c_objects_20261019.json).
+See the separate [native link receipt](test-evidence/native_application_link_20261019.json).
 The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
 remains preserved with its original scope.
 

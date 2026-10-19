@@ -1,0 +1,120 @@
+{
+  "acceptance": {
+    "A1200": "NOT_RUN",
+    "AmiGUS": "NOT_RUN",
+    "Amiberry": "NOT_RUN",
+    "humanListening": "NOT_RUN",
+    "nativeApplicationRuntime": "NOT_RUN",
+    "nativeStaticLink": "PASS",
+    "selectedProviderAndFullABI": "PENDING",
+    "wholeTaskIRQStack": "NOT_QUALIFIED"
+  },
+  "applicationSource": {
+    "bodies": 174,
+    "canonicalAdoption": false,
+    "currentCProducers": 72,
+    "defaultFrontendEnabled": false,
+    "freeze": {
+      "bytes": 118435,
+      "sha256": "00b767bd1cab10ca158d61e2267a32ec8fae78d709130f7411aea2908526ee0e"
+    }
+  },
+  "buildSeconds": 2.721572375012329,
+  "candidate": {
+    "architecture": "m68k:68000",
+    "bytes": 362864,
+    "crc32": "0BFB3F38",
+    "format": "Amiga HUNK executable",
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "canonicalBaseCommit": "b0970b2a8dbbf1f115963f8f48b23fd391af7edd",
+  "date": "2026-10-19",
+  "evidence": {
+    "archiveIndex": {
+      "bytes": 58848,
+      "sha256": "04a7f7989d4f396131c253437e2eabbde20785ca95fc23952900dbec7e4f80f2"
+    },
+    "independentActualReview": {
+      "bytes": 10436,
+      "sha256": "13b6dd329b8423474dcfb0a3127a249fda47507c5725cd4fe4bd2c5b9abb5b97"
+    },
+    "independentSourceReview": {
+      "bytes": 5880,
+      "sha256": "9e66dfa39ccd7c018ad2238734e29218fb7d68d1c42dde5686d4e2d9770f87f7"
+    },
+    "map": {
+      "bytes": 167442,
+      "sha256": "b2adc261f510bfdfb98a0c685c6677de479293dcb98d7fff1c5543fa356c3e55"
+    },
+    "result": {
+      "bytes": 65765,
+      "sha256": "e9646b47536ac62fb0de6854c14a035908fa685cbdb49b2d5013fc62b2d68071"
+    },
+    "rootActualAcceptance": {
+      "bytes": 4040,
+      "sha256": "1f728eefd5532ed3c9fe204c4817df9e30a89f18352feceeffef521216d4b0e8"
+    }
+  },
+  "limits": [
+    "This is the full private application, built from the current72 C objects and exactly qualified retained replay/stack/request; no old C objects or qualifier-main substitution.",
+    "The retained replay contains unused diagnostic entry/counter symbols; it is not described as a regenerated ordinary replay.",
+    "Link success and resolved symbols do not establish actual selected provider/full ABI correctness, whole stack bounds or runtime cleanup.",
+    "No GUI, audio/DMA/card-RAM, musical timing, physical or listening acceptance follows from this build.",
+    "Source-only adapter schema findings were corrected before admission; the unadmitted source remains preserved."
+  ],
+  "linkInputs": {
+    "actualObjects": 75,
+    "actualOrderedLOADs": 82,
+    "currentCObjects": 72,
+    "originalNamedToolAndRuntimeFacts": 11,
+    "retainedReplayStackRequestObjects": 3,
+    "runtimeLOADs": 7,
+    "sourceEligibility": "Historical replay compiler copies and current source origins retain distinct metadata; exact source body bridge and retained product full facts checked.",
+    "unchangedInputFacts": 1518
+  },
+  "nativeStages": [
+    {
+      "label": "linker-origin",
+      "positiveOriginalOwnedClosure": true,
+      "retainedOwners": 0,
+      "returncode": 0
+    },
+    {
+      "label": "link-driver-vector",
+      "positiveOriginalOwnedClosure": true,
+      "retainedOwners": 0,
+      "returncode": 0
+    },
+    {
+      "label": "link",
+      "positiveOriginalOwnedClosure": true,
+      "retainedOwners": 0,
+      "returncode": 0
+    },
+    {
+      "label": "binary-format-symbol-relocations",
+      "positiveOriginalOwnedClosure": true,
+      "retainedOwners": 0,
+      "returncode": 0
+    },
+    {
+      "label": "binary-disassembly",
+      "positiveOriginalOwnedClosure": true,
+      "retainedOwners": 0,
+      "returncode": 0
+    }
+  ],
+  "preservation": {
+    "allInputPreservationGuardAndRawREADYEqual": true,
+    "archiveBodyBytes": 19636270,
+    "archiveBodyPairs": 60,
+    "metadataOnlyNotHydrated": 10,
+    "originalNamedFactsEqual": true,
+    "retainedOwners": 0,
+    "strictPaths": 68,
+    "targetOperations": 0,
+    "unrelatedDirtyPaths": 16
+  },
+  "schema": "pt24g-private-native-application-link-v1",
+  "state": "PASS_NATIVE_STATIC_APPLICATION_LINK_PROVIDER_ABI_AND_RUNTIME_PENDING"
+}

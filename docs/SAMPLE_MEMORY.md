@@ -20,6 +20,21 @@ See the separate [native link receipt](test-evidence/native_application_link_202
 The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
 remains preserved with its original scope.
 
+## Complete private application blank smoke —19 October2026
+
+The exact 362,864-byte complete private application now passes a distinct
+Amiberry blank-only smoke with the corrected adapter. Nineteen causal HOST
+methods and independent source review preceded one native launch: exact clean
+READY/frame, one planned Escape, clean EXIT/RC0, unchanged candidate, restored
+private ENV and saved metadata sidecars. Original DMA-off and nine path-absence
+checks passed, followed by normal owned-process shutdown, exact launcher
+restoration, independent absence, public release and separate final EMPTY.
+An independently reviewed, separately written Root settlement accepts this
+blank-only result. The earlier two failures and their original results remain
+unchanged. Native New/Load, repeated PLAY/STOP, physical hardware, visual pixels,
+listening and default adoption remain unqualified. See the
+[blank smoke acceptance receipt](test-evidence/native_application_blank_smoke_20261019.json).
+
 ## Complete private application blank observation —19 October2026
 
 The exact complete application opened a blank four-channel document in Amiberry,

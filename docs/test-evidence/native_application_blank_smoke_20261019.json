@@ -1,0 +1,86 @@
+{
+  "candidate": {
+    "bytes": 362864,
+    "crc32": "0BFB3F38",
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "date": "2026-10-19",
+  "historicalFailures": {
+    "failedTransactionReplayed": false,
+    "initialIPCStartupFailurePreserved": true,
+    "priorMetadataCleanupRefusalPreserved": true
+  },
+  "independentSettlement": {
+    "acceptedResultSha256": "98db50497799e103415e85545f5e1fc9cb32dd05ed483d5c6465042b34fac77e",
+    "browserControlAcquired": false,
+    "ctimeRestorationClaimed": false,
+    "exactLauncherRolesRestored": 2,
+    "nativeSavedReviewSha256": "8271e501475e10ad5a7173a28f4ad4af6c6a76c51c755e2d5fde7862dbff76b5",
+    "normalOwnedEmulatorStopRC": 0,
+    "normalOwnedServiceTermination": true,
+    "originalInputsUnchanged": 15,
+    "originalPublicReleaseVerified": true,
+    "originalResultsUnchanged": true,
+    "preservationMapExact": 68,
+    "priorReleaseArchivesPreserved": 184,
+    "rootSettlementSha256": "89d2070cf91190454363b6c5fe7a2f90a3b8d509b11252dbc2aabaeccc84db0a",
+    "separateFinalEmptyAndAbsenceVerified": true,
+    "state": "ROOT_SETTLED_BLANK_APPLICATION_SMOKE_ACCEPTED"
+  },
+  "limits": {
+    "A1200": "NOT_RUN",
+    "AmiGUS": "NOT_RUN",
+    "broaderApplicationAcceptance": false,
+    "defaultFrontendAdopted": false,
+    "listening": "NOT_RUN",
+    "nativeNewLoadAndRepeatedPlayback": "UNQUALIFIED",
+    "visualPixelAcceptance": "UNQUALIFIED",
+    "wholeTaskIRQStackBound": "UNQUALIFIED"
+  },
+  "native": {
+    "applicationLaunchesThisQualification": 1,
+    "applicationRC": 0,
+    "cleanupDMA": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "doneMarkerVerified": true,
+    "knownMetadataSidecarsSavedAndValidated": 5,
+    "originalAbsenceSamples": 9,
+    "originalCLIRC": 0,
+    "plannedEscapeTaps": 1,
+    "playbackActions": 0,
+    "privateEnvironmentRestored": true,
+    "projectLoads": 0,
+    "ready": {
+      "channel": 0,
+      "channels": 4,
+      "dirty": 0,
+      "panel": 0,
+      "patterns": 1,
+      "revision": 0,
+      "row": 0
+    },
+    "runAndLauncherRemovedOnce": true,
+    "stagedCandidateBytesAndOwnMetadataUnchanged": true,
+    "startupRC": 0,
+    "terminal": "EDITOR EXIT clean"
+  },
+  "scope": "Exact private complete application blank-only Amiberry acceptance",
+  "sourceQualification": {
+    "genuineNewCandidateAndAdmissionBindings": true,
+    "hostActualReviewSha256": "5bc6c2cc22d1f49c6886cb77681a6ff864ec072fd88c0d196fe88fe413d47be9",
+    "hostArtifactsUnchanged": 51,
+    "hostMethods": 19,
+    "hostMethodsPass": 19,
+    "innerAdapterRevision": 3,
+    "innerSourceFreezeSha256": "d12efb82de3528b5dccf15cce6aaa4c9e51b8567f23e1a0473c9ad44c730a68d",
+    "innerSourceReviewSha256": "cbc01bbe25b7f89731614caa29f8f5a2da5f40d8b9726b1abcc89a0e0d309068",
+    "originalSharedGuardsAndDeadlinesPreserved": true,
+    "outerAdapterRevision": 2,
+    "outerHostMethodsPreviouslyPassed": 13
+  },
+  "state": "PASS"
+}

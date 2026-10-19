@@ -1,0 +1,107 @@
+{
+  "acceptance": {
+    "defaultEnabled": false,
+    "effectiveOSIRQStackHighWater": "NOT_MEASURED",
+    "fullFrontend": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "nativeRuntime": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "physicalDMACompletion": "NOT_QUALIFIED"
+  },
+  "candidate": {
+    "bytes": 97436,
+    "crc32": "8FC95DA5",
+    "sha256": "f355fbaec72197188ada602cb2c874cf347716285d03fa6de06bde1df4f4b8cb"
+  },
+  "date": "2026-10-19",
+  "hostCarrier": {
+    "archivePairs": 31,
+    "closureReserveSeconds": 3,
+    "inputs": 100,
+    "methods": 17,
+    "originalOwnedClosureConfirmed": true,
+    "protectedMetadataOnly": 10,
+    "protectedResidentBodies": 58,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "seconds": 0.4770489579968853,
+    "sourceLeaves": 14,
+    "wholeSeconds": 40,
+    "workerInvocations": 1,
+    "workerSeconds": 5
+  },
+  "limits": [
+    "Private diagnostic sources and observation taps are not the production frontend or a clean application export.",
+    "Review authorship overlap is disclosed in private receipts; Root performed the actual builds/tests and separate saved-artifact checks.",
+    "The exact fixed-fixture C graph has 89 potential nodes and reported frame sum 13308; this is an inventory, not a Task/OS/IRQ stack bound.",
+    "No previous failed transaction is converted into a pass.",
+    "No physical completion, musical scheduling, device timing or human listening acceptance follows from static/HOST checks."
+  ],
+  "nativeBuild": {
+    "CTranslationUnits": 9,
+    "HUNK": {
+      "relocations": 1235,
+      "sections": 4,
+      "symbols": 209
+    },
+    "inputFacts": 192,
+    "linkedObjects": 12,
+    "orderedLOADs": 19,
+    "rawInstructionChecks": 69,
+    "rawRelocationChecks": 29,
+    "replayTranslationUnits": 1,
+    "selectedExternalProviders": 40,
+    "supportObjects": 2,
+    "wholeStaticAccepted": true
+  },
+  "plannedNativeFixture": {
+    "input": "Silent 32-frame signed eight-bit mono sample at classic rate",
+    "memoryScope": "Selective Chip cache, two-byte silence buffer and four playback workspaces. Authoritative PCM source remains retained.",
+    "sequence": [
+      "PLAY1",
+      "active PLAY2 restart",
+      "checked STOP2",
+      "idempotent STOP2",
+      "PLAY3",
+      "checked STOP3"
+    ],
+    "successOracleBytes": 463,
+    "successOracleSHA256": "813fc098b0ea25fb74747399b4a6b80e4b5fecae805170ce675744d90616c641"
+  },
+  "preservedPreflightFailures": [
+    {
+      "VMStarts": 0,
+      "attempt": 1,
+      "cause": "Sandbox denied process inspection before tool launch",
+      "originalOwnedClosureConfirmed": true,
+      "targetOperations": 0
+    },
+    {
+      "VMStarts": 0,
+      "attempt": 2,
+      "cause": "Process/TCP/kernel endpoint checks passed but socket filesystem node remained",
+      "originalOwnedClosureConfirmed": true,
+      "targetOperations": 0
+    }
+  ],
+  "receipts": {
+    "hostRoot": {
+      "bytes": 1575,
+      "sha256": "00b5589094c83652f71d485250704ead0ec10def0049f02a53060d072c2f53fc"
+    },
+    "hostSavedPeer": {
+      "bytes": 3132,
+      "sha256": "638725d1dc3cb847ea25a49884db1e3eb54b4fb8e25873dd2dd0165e90e10573"
+    },
+    "staticRoot": {
+      "bytes": 4680,
+      "sha256": "261e1844685e8aa238f92f467ef5cac6336eca074be49ebed98532871ccfa42b"
+    },
+    "staticSemanticPeer": {
+      "bytes": 6497,
+      "sha256": "51cdf5354a9e423e80a1adc6e1978926f562ea0d74c3d13db5ae4af6c4e91ed4"
+    }
+  },
+  "schema": 1,
+  "scope": "Private full-Paula cleanup fixture native build/static ABI and HOST carrier only"
+}

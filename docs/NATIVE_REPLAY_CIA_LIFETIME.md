@@ -57,3 +57,37 @@ A distinct failure-capture correction now passes all 17 HOST carrier methods, in
 A separate private application-lifetime composition also passes 17 HOST sanitizer groups. It exercises the actual editor barrier/disposal implementation, typed STOP/Apply consumer and proposed frontend lifetime helper: release refusals retain owners, staged New/Load failures preserve the live producer, and uncertain publication or exit cannot proceed to resource destruction. Backend, allocator, initialization and document endpoint responses are modeled. The first compile failed because the system-header root was not selected; its evidence is preserved. A distinct explicit genuine macOS SDK selection passes the unchanged model and oracle. The private 72-unit native application still needs its own build, link, ABI and frontend tests; the default frontend is unchanged. See [application lifetime HOST evidence](test-evidence/paula_editor_lifetime_host_20261019.json).
 
 Retirement during repeated full-application playback, Paula DMA completion, audio.device release, cache/master unpin, full-app exit, real A1200 behavior and listening acceptance remain unqualified. The standalone source protocol does not establish these wider lifetimes or physical register ordering. Repeated playback still needs native generation integration and acceptance. The private qualifiers and successors are not part of this module's publication. Existing exact musical scheduling and the accepted native baseline remain in place.
+
+## Private full-Paula final-Close fixture — 19 October 2026
+
+A distinct corrected successor now passes its exact Amiberry fixture once. The
+103,516-byte executable has SHA-256
+`6af3231456d73eb805baf20910c80080308a8f9d788152bd9848be0c39a68473`
+and CRC32 `FB002D90`. Its saved native log matches all 463 oracle bytes and eight
+unique lines; the separate saved control log confirms native RC0. The fixture
+uses one silent 32-frame signed 8-bit source and actual Paula/audio.device/CIA
+ownership. It checks PLAY, active restart, checked STOP, idempotent STOP and
+subsequent PLAY/STOP, including cache, silence-buffer and four playback-workspace
+lifetimes. These workspaces are not the authoritative sample masters.
+
+The successor consumes the exact terminal request replies before a guarded,
+one-attempt CloseDevice transition. Uncertain identity, context or close state
+retains the owner. Its successful fixture does not establish which permitted
+FREE reply-unit branch was taken: the successful per-IO diagnostic journal is
+not emitted. Earlier native failures remain failures and were not replayed.
+
+The original owned emulator was disposed of, launcher state restored, staging
+removed and ownership independently observed before public release. The exact
+owned disconnected service then received one normal SIGTERM; a separate final
+observation confirmed both original processes absent and ownership EMPTY.
+Two operator preparation refusals occurred before their relevant effects and
+remain preserved with the corrected input bindings. Raw native/control custody,
+220 archive body pairs and separate saved-result reviews are retained privately.
+The [compact native record](test-evidence/native_paula_final_close_amiberry_20261019.json)
+separates these results from the previous build/HOST-only records.
+
+This is a private fixed-fixture pass. The production application without
+diagnostic hooks, default frontend selection, full application exit, real A1200
+or AmiGUS, global device quiet, general musical timing and listening acceptance
+remain unqualified by this result. Recorded resource release is not clearance
+for another target operation.

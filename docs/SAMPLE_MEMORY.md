@@ -8098,3 +8098,11 @@ full app cleanup and native device/cache behavior remain unqualified. A separate
 16-case carrier model passes locally; the fresh exact CIA qualifier still needs
 Amiberry execution. Default backend selection and the accepted layout remain
 unchanged. See [the scope and compact evidence](NATIVE_REPLAY_CIA_LIFETIME.md).
+
+The distinct private final-Close full-Paula fixture now passes once in Amiberry
+with actual audio.device/CIA/cache cleanup and its complete 463-byte native
+oracle. It checks the four playback workspaces, rather than authoritative sample
+master disposal. Original VM/service absence, launcher restoration and public
+release passed separate checks. Untapped production application integration,
+physical hardware, general musical timing and listening remain separate gates.
+See [the exact native result and limits](test-evidence/native_paula_final_close_amiberry_20261019.json).

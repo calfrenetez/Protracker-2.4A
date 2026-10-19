@@ -1,0 +1,81 @@
+{
+  "schema": "PT24G_PRIVATE_FINAL_CLOSE_AMIBERRY_V1",
+  "date": "2026-10-19",
+  "scope": "Exact private full-Paula lifetime fixture; no default application selection",
+  "candidate": {
+    "bytes": 103516,
+    "sha256": "6af3231456d73eb805baf20910c80080308a8f9d788152bd9848be0c39a68473",
+    "crc32": "FB002D90",
+    "source_bodies": 40,
+    "source_units": 10
+  },
+  "native_execution": {
+    "target": "Amiberry 68030",
+    "launches": 1,
+    "returncode": 0,
+    "timed_out": false,
+    "root_seconds": 77.2377160830074,
+    "configured_stack_bytes": 2097152,
+    "native_limit_seconds": 90,
+    "guest_runner_limit_seconds": 140,
+    "outer_runner_limit_seconds": 250,
+    "native_log_bytes": 463,
+    "native_log_sha256": "813fc098b0ea25fb74747399b4a6b80e4b5fecae805170ce675744d90616c641",
+    "unique_complete_lines": 8,
+    "saved_raw_native_and_control_logs_verified": true,
+    "fixture": "One silent32-frame signed8-bit source; PLAY, active restart, checkedSTOP, idempotentSTOP and later PLAY/STOP"
+  },
+  "qualified_fixture_lifetimes": [
+    "Actual private Paula/audio.device/CIA owner and repeated generation protocol",
+    "Derived playback cache and silence-buffer cleanup",
+    "Four tracked playback-workspace allocations, distinct from authoritative sample masters",
+    "Exact terminal replies consumed before guarded one-attempt final CloseDevice"
+  ],
+  "host_execution_boundary": {
+    "fixed_input_maps": 1903,
+    "extra_facts": 79,
+    "protected_paths": 68,
+    "resident_body_pins": 58,
+    "metadata_only_paths": 10,
+    "input_maps_and_raw_admission_data_unchanged": true,
+    "original_supervisor_frames": 5,
+    "all_original_stream_EOF_and_owned_closure_confirmed": true,
+    "retained_original_supervisors": 0
+  },
+  "recorded_positive_settlement": {
+    "original_owned_VM_absent": true,
+    "original_launcher_lifecycle_and_configuration_restored": true,
+    "exact_staging_absent": true,
+    "independent_observation_before_public_release": true,
+    "public_release_verified": true,
+    "original_service_single_normal_SIGTERM": true,
+    "original_service_absent": true,
+    "independent_final_ownership_state": "EMPTY",
+    "future_target_clearance": false
+  },
+  "evidence": {
+    "raw_archive_pairs": 220,
+    "saved_native_result_review_sha256": "1d472c932e8a3e11ea5fa8b9a694f69974a055f6ddd1f1ba3fa859473fe2bf00",
+    "saved_settlement_review_sha256": "b6d30f7a7b2a4a5792ebd65e8b5f99cce05bed8fd4f8200bf62f5808abb292a4",
+    "saved_raw_custody_review_sha256": "9a50375d2e0f1c7e9277d93720e4c2715b0331e779db3d8b5c2f72cc82297f19",
+    "root_saved_acceptance_sha256": "c03ebdba449d77d291fd82f0f2f055ba359efd6c44a43f7376313e4cfd816122",
+    "review_authorship_disclosure": "Saved reviewers include subject/SOURCE authors; Root performed the actual operation and separately verified saved records. Saved reviews do not perform live target observations."
+  },
+  "preserved_refusals": [
+    "Read-only observer import preparation refused without the required interpreter option, before locks or target calls.",
+    "Service-stop preparation refused a receipt missing full metadata, before any stop claim, intent or signal.",
+    "Distinct corrected operator inputs retained all gates; exactly one actual normal service signal followed. No native transaction replay.",
+    "Saved-data acceptance preparation refusals remain separate from native execution; own archive-copy attribute readback does not relax subject input checks."
+  ],
+  "unqualified": {
+    "production_application_without_diagnostic_hooks": "NOT_RUN",
+    "full_GUI_application_and_exit": "NOT_RUN",
+    "default_frontend": "UNSELECTED",
+    "real_A1200_or_AmiGUS": "NOT_RUN",
+    "general_musical_timing": "NOT_ACCEPTED",
+    "listening": "NOT_ACCEPTED",
+    "global_device_quiet": "NOT_PROVED",
+    "whole_Task_OS_IRQ_stack_highwater": "NOT_MEASURED",
+    "successful_per_IO_FREE_unit_branch": "NOT_OBSERVED"
+  }
+}

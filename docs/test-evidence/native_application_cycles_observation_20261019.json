@@ -1,0 +1,101 @@
+{
+  "HOST": {
+    "actualReviewSha256": "634e93201c1b701191a915e7a4ecf5b5f76992ab3c15f68e42b343835b763bb6",
+    "innerFrozenArtifactsUnchanged": 56,
+    "innerMethodsPassed": 40,
+    "outerMethodsPreviouslyPassed": 18,
+    "sanitizerClaim": false,
+    "sourceFreezeSha256": "6e1fd68b91fd49ce1ce22ffc21843f0655330b328581312de4f54ffb6cddaed0",
+    "sourceReviewSha256": "acabbcbc9be825b34d400c0ba4084047bfb08407e85ebd783891ff3c1cbf0761"
+  },
+  "candidate": {
+    "bytes": 362864,
+    "crc32": "0BFB3F38",
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "date": "2026-10-19",
+  "fixture": {
+    "authoredForTest": true,
+    "bytes": 3164,
+    "channels": 4,
+    "patterns": 2,
+    "sha256": "d782ba62a3d31fd07b8c3869e6a1555eb6fb36a9c9b45d4634dc1700143e1b1d"
+  },
+  "limits": {
+    "A1200": "NOT_RUN",
+    "AmiGUS": "NOT_RUN",
+    "broaderApplicationAcceptance": false,
+    "defaultFrontendAdopted": false,
+    "listening": "NOT_RUN",
+    "scheduling": "EVENT_STATE_FUNCTIONALITY_ONLY_NO_JITTER_OR_TIMING_ACCEPTANCE",
+    "visualPixels": "UNQUALIFIED",
+    "wholeTaskIRQStackBound": "UNQUALIFIED"
+  },
+  "native": {
+    "allFourDMAOffAfterEachStop": true,
+    "applicationLaunches": 1,
+    "applicationRC": 0,
+    "eachPlayProgressed": true,
+    "knownMetadataSidecarsSavedAndValidated": 5,
+    "loadedShape": {
+      "channels": 4,
+      "dirty": 0,
+      "patterns": 2
+    },
+    "newCommits": 1,
+    "newShape": {
+      "channels": 4,
+      "dirty": 0,
+      "patterns": 1
+    },
+    "originalCLIRC": 0,
+    "originalCleanupAbsenceSamples": 9,
+    "originalResultSha256": "83717997b48b69047b9ef3ab593b08d4b3aeec5f02798c40b8ba05ed962d6306",
+    "originalResultUnchanged": true,
+    "ownRunFilesRemoved": true,
+    "plannedEscapeTaps": 1,
+    "playTaps": 3,
+    "privateEnvironmentRestored": true,
+    "privateRecentCRCVerified": true,
+    "privateRecentGenerations": [
+      1,
+      2
+    ],
+    "recentLoadCommits": 1,
+    "stopTaps": 3,
+    "terminal": "EDITOR EXIT clean"
+  },
+  "ownershipFinding": {
+    "claimedServiceSessionRC3IsNotTheApplicationRC0": true,
+    "fullOwnedSettlementAccepted": false,
+    "independentSavedReviewSha256": "6740c9e30feb9f8e2d12ca2abea3d88f23cbf93f770e24ca462530a5765a579f",
+    "listenerWasStoppedBeforeCreationOriginWasProved": true,
+    "managedKeepAliveServiceSubsequentlyObservedRunningAndDisconnected": true,
+    "priorRecordsRetainedUnchanged": true,
+    "rootSettlement": null,
+    "separateCorrectionRequired": true,
+    "serviceListenerAndClaimedSessionMismatch": true,
+    "serviceStartFailedToBind": true
+  },
+  "releaseObservations": {
+    "fullOwnedAcceptanceInferredFromRelease": false,
+    "originalInputFactsUnchanged": 15,
+    "originalPublicReleaseExecuted": true,
+    "priorJournalArchivesPreserved": 186,
+    "protectedMapUnchanged": 68,
+    "separateFinalEmptyAndAbsenceObserved": true,
+    "twoLauncherFilesRestoredExceptCtime": true
+  },
+  "scope": "Exact private complete application three Play/Stop cycles and stopped New/Recent Load in Amiberry; service provenance finding retained",
+  "stagedEndpoints": {
+    "allMetadataContinuityClaim": false,
+    "candidateAndFixtureBytesAndSha256Exact": true,
+    "ctimeCause": null,
+    "ctimeDifferencesRecorded": true,
+    "fullBeforeAfterFactsSaved": true,
+    "historicalAndWithinReadFull4ChecksUnchanged": true,
+    "otherMetadataFieldsEqual": 9,
+    "previousStricterGateRefusalPreserved": true
+  },
+  "state": "NATIVE_FUNCTIONAL_OBSERVATION_FULL_OWNED_SETTLEMENT_WITHHELD"
+}

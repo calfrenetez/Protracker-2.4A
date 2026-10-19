@@ -20,6 +20,28 @@ See the separate [native link receipt](test-evidence/native_application_link_202
 The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
 remains preserved with its original scope.
 
+## Complete private application playback and New/Load observations —19 October2026
+
+The unchanged complete private executable completed three Play/Stop cycles in
+Amiberry, with replay progress and all four DMA channels off after each stop.
+It then created a clean four-channel, one-pattern song, reopened the private
+four-channel, two-pattern test module through Recent, and exited cleanly with
+RC0 after one Escape. Private ENV restoration and original file-cleanup checks
+passed. Forty inner HOST methods and eighteen previously qualified outer methods
+preceded the distinct run. The staged candidate and fixture retained their exact
+bytes and nine identity fields; full endpoint facts record ctime differences
+without claiming their cause or uninterrupted metadata continuity. Historical
+full4 bindings and all ten-field checks within each read remain strict.
+
+Full owned settlement is withheld. Review found that the requested service
+startup failed to bind, while the listener used and later stopped had a different
+creation provenance. A macOS KeepAlive service was subsequently observed running
+and disconnected; that does not repair the earlier attribution. The original
+results, release observations and failed predecessor remain unchanged. Later
+windows must explicitly distinguish the managed service from run-owned resources.
+A1200/AmiGUS, listening, visual pixels, musical timing and default adoption remain
+unqualified. See the [functional observation and ownership finding](test-evidence/native_application_cycles_observation_20261019.json).
+
 ## Complete private application blank smoke —19 October2026
 
 The exact 362,864-byte complete private application now passes a distinct

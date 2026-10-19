@@ -20,6 +20,20 @@ See the separate [native link receipt](test-evidence/native_application_link_202
 The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
 remains preserved with its original scope.
 
+## Complete private application managed-service cycles acceptance —19 October2026
+
+A distinct run of the same complete private executable now has accepted Amiberry
+event/state and owned-window settlement evidence. Three Play/Stop cycles, stopped
+New, Recent Load and clean exit passed. Independent saved review verified private
+ENV restoration, exact run cleanup, the original guarded disconnect followed by
+the owned emulator stop, launcher restoration and a separate final EMPTY/absence
+check. The pre-existing managed service stayed running with the same observed
+identity; this window neither owned nor signalled it. Thirty-five lifecycle HOST
+methods preceded this run. The earlier run's full owned settlement remains
+withheld; its service-provenance finding is preserved. Physical A1200/AmiGUS,
+listening, visual pixels, musical timing and default adoption remain unqualified. See the
+[accepted managed-service cycles receipt](test-evidence/native_application_managed_cycles_20261019.json).
+
 ## Complete private application playback and New/Load observations —19 October2026
 
 The unchanged complete private executable completed three Play/Stop cycles in

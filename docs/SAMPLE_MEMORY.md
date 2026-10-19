@@ -1,5 +1,9 @@
 # Sample memory and playback ownership
 
+## Private three-generation CIA qualification — 19 October 2026
+
+The separate private CIA generation diagnostic passed once in Amiberry 030: exact 18,664-byte candidate, RC0, 448-byte/eight-line oracle and three same-Process cycles with real ISR entry/exit and stable post-retirement counters. Separate positive disposal, restoration, public release, normal owned-service stop and independent final EMPTY/absence checks passed. The canonical one-shot primitive and default frontend are unchanged. This does not qualify full Paula audio.device/DMA/cache/master cleanup, repeated full-app playback, real A1200/AmiGUS or listening. The full-Paula cleanup fixture is prepared SOURCE only, not built or run. See [CIA lifetime details](NATIVE_REPLAY_CIA_LIFETIME.md) and [compact evidence](test-evidence/native_replay_cia_generations_20261019.json).
+
 ## Checked CIA retirement qualification —18 October2026
 
 On19 October the separate acquisition diagnostic's saved native refusal was

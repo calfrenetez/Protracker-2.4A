@@ -1,0 +1,113 @@
+{
+  "candidate": {
+    "bytes": 18664,
+    "crc32": "77438B1F",
+    "sha256": "abafe7d7d83d08643e3fd425fe8ea4146653332fc72cd9a470081464e61d277f"
+  },
+  "date": "2026-10-19",
+  "emulator": {
+    "boundsSeconds": {
+      "child": 265,
+      "guest": 140,
+      "native": 90,
+      "parent": 285,
+      "runner": 250,
+      "whole": 280
+    },
+    "custody": {
+      "NativeTest": {
+        "bytes": 18664,
+        "sha256": "abafe7d7d83d08643e3fd425fe8ea4146653332fc72cd9a470081464e61d277f"
+      },
+      "Run-once": {
+        "bytes": 1090,
+        "sha256": "4f2e983f393b7b90d8c4eeacbfbc4b665db091557e425d6b1795b64cb7ada91b"
+      },
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "control.log": {
+        "bytes": 227,
+        "sha256": "475b433346b7d22d688d718aabf48738641fcc3620c9920e348926254ab40e38"
+      },
+      "native.log": {
+        "bytes": 448,
+        "sha256": "3f43dead3bb87afb0ecb73681aa0aff10da8be2d8d353f713b0b2616ceea4dd4"
+      }
+    },
+    "extraFacts": 109,
+    "fixedInputs": 1844,
+    "metadataOnlyProtectedFiles": 10,
+    "nativeLaunches": 1,
+    "nativeRC": 0,
+    "observations": [
+      "actual acquisition and ISR entry/exit in each generation",
+      "checked exact-server retirement and stable counters after each retirement"
+    ],
+    "observedStackBytes": 2097152,
+    "oracleBytes": 448,
+    "oracleLines": 8,
+    "oracleSHA256": "3f43dead3bb87afb0ecb73681aa0aff10da8be2d8d353f713b0b2616ceea4dd4",
+    "profile": "amiberry-030",
+    "rootSeconds": 54.797235250000085,
+    "runtimeArchivePairs": 194,
+    "sameProcessGenerationCycles": 3,
+    "strictProtectedFiles": 68,
+    "wholeIRQStackBoundProved": false
+  },
+  "evidenceDigests": {
+    "postArchive": "d1ca0097aed1fd71a8d80b7d5c3171570af9ae01e7c0ada3ddd21d691144f40c",
+    "rootFinal": "8c91c1b8279e01ac4125a0d5d8a9a04bda14c689995ed7ea791a7c94350befb0",
+    "rootRuntimeResult": "78c4995491166717912adfe7e2b85f082cd71df00cebc4c647d41df73cdbf222",
+    "runnerResult": "7ff25e74d45480bedd2226987ce2ca339f4b493a04ebfe57e52a822fe2c5a145",
+    "runtimeArchive": "1dcfd0eefd153f40c2038fd517bc7f6dc2f1758d6bc72bc06a04ce898b6a5fa0",
+    "runtimeIndependentSavedReview": "812351ba084b87d71eb660be38566bc73eed14056260897ce6057bb8c547976e",
+    "settlementIndependentSavedReview": "c0034dde561cab292e5e809a6627a1052bc7715dc4be4100acb105954f92d1ca"
+  },
+  "host": {
+    "carrierPassed": true,
+    "carrierTests": 17,
+    "sourceModelOuterTransaction": "FAILED_PRESERVED_UNEXPECTED_COMPILER_CACHE_ARTIFACT",
+    "sourceModelWorkerAssertionsPassed": true,
+    "wholeSourceModelHOSTPassClaimed": false
+  },
+  "limits": [
+    "Private standalone CIA source protocol only; canonical one-shot primitive and default frontend are unchanged.",
+    "Full Paula audio.device/DMA/cache/master cleanup and full-app repeated playback remain unqualified.",
+    "No pre-stop Exec Task absence, live RAM deletion, physical A1200/AmiGUS or listening acceptance.",
+    "Earlier failed native and HOST transactions remain preserved; this candidate and operation are distinct.",
+    "Source authorship overlap is disclosed; Root executed and accepted the native operation, with separate saved-evidence review."
+  ],
+  "schema": 1,
+  "settlement": {
+    "guardPhase": "EMPTY",
+    "holds": false,
+    "independentFinalAbsenceAndRestorationPassed": true,
+    "independentVMDisposalRestorationObserverPassed": true,
+    "inflight": false,
+    "ownedProcessesAbsent": true,
+    "ownedServiceForceKill": false,
+    "ownedServiceSignals": 1,
+    "postArchivePairs": 18,
+    "publicReleases": 1,
+    "reservation": false,
+    "signal": "SIGTERM"
+  },
+  "source": {
+    "defaultEnabled": false,
+    "generationProposalSHA256": "4cd157c9c55b613fda8cc36e1a0724c90a8f22939c848066255f1b2674278b2a",
+    "privateOptIn": true,
+    "sourceFiles": 13
+  },
+  "static": {
+    "externalProviders": 15,
+    "globals": 113,
+    "hunkSections": 4,
+    "linkedInputs": 66,
+    "relocations": 569,
+    "selectedLoads": 11,
+    "wholeABIReviewPassed": true
+  },
+  "status": "EXACT_PRIVATE_CIA_THREE_GENERATION_AMIBERRY_QUALIFIED_DEFAULT_UNCHANGED"
+}

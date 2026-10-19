@@ -1,0 +1,2733 @@
+{
+  "SDK": {
+    "allowedFiles": 127,
+    "nativeBuiltinsPerProducer": 10,
+    "privateSelectorsPerProducer": 3,
+    "profile": {
+      "bytes": 411240,
+      "sha256": "4a8761f1675d4280131c59d09d0e435c8464ec3468445c1ab3b2b700677eec60"
+    }
+  },
+  "applicationSource": {
+    "bodies": 174,
+    "canonicalAdoption": false,
+    "defaultFrontendEnabled": false,
+    "freeze": {
+      "bytes": 118435,
+      "sha256": "00b767bd1cab10ca158d61e2267a32ec8fae78d709130f7411aea2908526ee0e"
+    }
+  },
+  "canonicalBaseCommit": "02dd5a13f75fe347be09a2a1b40462bb1a3905b7",
+  "date": "2026-10-19",
+  "limits": [
+    "Current72 C object producers only; complete application link and actual runtime are still pending.",
+    "Retained replay/stack/request and actual library provider selection/full ABI require separate current link admission and review.",
+    "Individual compiler stack reports are not a whole Task/OS/IRQ bound or measured stack high-water acceptance.",
+    "No Amiberry/A1200/AmiGUS, DMA/card-RAM, exact timing or human listening acceptance follows from this C build.",
+    "Accepted layout, exact scheduling and unrelated work remain preserved; private frontend is not canonically adopted/default enabled."
+  ],
+  "preservedRefusal": {
+    "meaning": "Original attempt preserved and not replayed; distinct SOURCE3 courier plus fresh admission qualified object22 through29.",
+    "nativeWorkersStarted": 0,
+    "stage": "Earlier object22 SOURCE2 host prelaunch full-fact check"
+  },
+  "producers": [
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 5767,
+          "sha256": "1dcca5791d4c73645163663fd776afe9dd29009946746b9732b4b680eba03170"
+        },
+        "individualStackEntries": 28,
+        "largestIndividualStackBytes": 4232,
+        "object": {
+          "bytes": 34344,
+          "sha256": "8c46eb9023696b687db64631ac8c02fcd5ff084718d63836392275d3fedaf691"
+        },
+        "receipt": {
+          "bytes": 73053,
+          "sha256": "36028e7f472ddae5010c7a1d6b9fd8a5ce9db33526b968097c35c92f1caae743"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 68,
+        "actualSDKInputs": 90,
+        "independentReview": {
+          "bytes": 5152,
+          "sha256": "4e0132ace00916b6c929672f7c172a59803595cec28125923039dfd830a5e19e"
+        },
+        "receipt": {
+          "bytes": 77421,
+          "sha256": "dd6d4ac9432f598faea57a628944d61a51dd94cf22473f62de3dcb2171a1a6cf"
+        }
+      },
+      "producerIndex": 0,
+      "relative": "src/native/editor_main.c",
+      "source": {
+        "bytes": 53756,
+        "sha256": "02ee167ed36f2d5eea6f4adbceb7577a70aba3d00b01946daa2e37d4707f04b9"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10006,
+          "sha256": "8017e2ba7ab57c32512cdc5c0f1cc985303c0a26e20928f7687b6175f615e781"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 176,
+        "object": {
+          "bytes": 3992,
+          "sha256": "de018d64f2ba18429d20f09c416ef44edb3ac47caac236fd5d739939e47fb2d2"
+        },
+        "receipt": {
+          "bytes": 52812,
+          "sha256": "beffa2c3dfc910871b04f538389a83842c2fdc3087ca3c3a7fed4af59ecb66e8"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 31,
+        "actualSDKInputs": 73,
+        "independentReview": {
+          "bytes": 37423,
+          "sha256": "b8ae7e6f6e9188ff98d8c0c35ec535b0f511193359de0d5e19d9eaabb43e41f1"
+        },
+        "receipt": {
+          "bytes": 54003,
+          "sha256": "7aec9f97e6e3f48250c1636acd272db3ef5f2740387c2d409cd7ac079013f286"
+        }
+      },
+      "producerIndex": 1,
+      "relative": "src/native/pattern_display.c",
+      "source": {
+        "bytes": 6888,
+        "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9502,
+          "sha256": "c11bbf2338f87d5cd12fe669eb39568a607e936fea735d903ad521b66f89c472"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 2308,
+        "object": {
+          "bytes": 1616,
+          "sha256": "8524992fe4c54b8245a839b007f72aa0f079558f3af9b1d85144402a41d12594"
+        },
+        "receipt": {
+          "bytes": 43192,
+          "sha256": "cc13527f3217ff00a3f4f9e1a627909ab74ed603532c7ead0b3069b33bcfcd9c"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 77,
+        "independentReview": {
+          "bytes": 28288,
+          "sha256": "c25fd7d7bc16ce440ad525c48ab2fe898d35e365dcf67587aec4b18f97504da3"
+        },
+        "receipt": {
+          "bytes": 41874,
+          "sha256": "8b95217b2ec66d3833ec9d4e66e1b18bdffd78e25d7b8177248f7528b9f4c3a9"
+        }
+      },
+      "producerIndex": 2,
+      "relative": "src/native/file_request.c",
+      "source": {
+        "bytes": 2393,
+        "sha256": "f119330c6d522d958ce367b7aa45b1a62fa8730ff4803edb9f9de3eda7f55052"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 5770,
+          "sha256": "ee273bd8b54f8dcca44372b62613555f3cb10f4292ece6feab02735bac575aab"
+        },
+        "individualStackEntries": 45,
+        "largestIndividualStackBytes": 6812,
+        "object": {
+          "bytes": 21692,
+          "sha256": "ac52fdbca04408f27830dea66c174e72c3021331e75ae3612ccb060ba7e1c23b"
+        },
+        "receipt": {
+          "bytes": 45032,
+          "sha256": "ce5e0acbcc7a06a7d96e188d78c0e420c6c2cd342a9127f7f404bc7fec25beca"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 20,
+        "actualSDKInputs": 56,
+        "independentReview": {
+          "bytes": 5383,
+          "sha256": "b796e1edc4809fa2166a25180a2c4ac5784c8c6c5a103f672a3b58dec04d1dd9"
+        },
+        "receipt": {
+          "bytes": 42433,
+          "sha256": "d645b9a949ec480503752845c70fcc0c833414d583405d10c7996cd82d4a4c05"
+        }
+      },
+      "producerIndex": 3,
+      "relative": "src/native/paula.c",
+      "source": {
+        "bytes": 15858,
+        "sha256": "33454b6fa123cc4244e2ba6e3213f4b83704f50f234b0f8727f6fb98fd7bd138"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 14948,
+          "sha256": "fad4ffb8a71795e2603114d7024a28a91a19896fd010cd33b6b9f5458e8bb2ef"
+        },
+        "individualStackEntries": 62,
+        "largestIndividualStackBytes": 1616,
+        "object": {
+          "bytes": 35628,
+          "sha256": "f9c9c090461b695c9c924bd373d9ca24a92dd12f6de1c74fb52b297fd4c39f5b"
+        },
+        "receipt": {
+          "bytes": 40445,
+          "sha256": "c657895a6ad09742efdf859eed643edfedba5ebe5309ab139bf136e900b78be6"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 28,
+        "actualSDKInputs": 29,
+        "independentReview": {
+          "bytes": 23860,
+          "sha256": "e61227036e60aecfc24803a6dd8b3e8f70c7d15787dbfebb0430f046b0edc872"
+        },
+        "receipt": {
+          "bytes": 36012,
+          "sha256": "cb7172781929ad5b44cc6fc46db62e76f2c74f52dfe1c4af67e80f2ea3cfb95c"
+        }
+      },
+      "producerIndex": 4,
+      "relative": "src/editor/editor.c",
+      "source": {
+        "bytes": 70526,
+        "sha256": "838bf53139f504411eb7c2aa9c989adb8b12907af8eb7a1959bad023d854b59e"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9535,
+          "sha256": "35f7dcc2b1c7674f05d2791dd7a0fdfd1bfd1ab47a610f4edf062265afef03b4"
+        },
+        "individualStackEntries": 15,
+        "largestIndividualStackBytes": 1604,
+        "object": {
+          "bytes": 3548,
+          "sha256": "3783848dd167d13344c9ecfefd7130508a02b247a7fe8352bf323a675eda8c54"
+        },
+        "receipt": {
+          "bytes": 30101,
+          "sha256": "52ecf08886014359d6ad44abadadc66aef6a15c5c6a66e6d86a9334668494909"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 15089,
+          "sha256": "ba02e4626054604154fad9973d72c893c4177477aeb2d73a155937fee8f3fbea"
+        },
+        "receipt": {
+          "bytes": 24377,
+          "sha256": "aa2da7c7dfbc76d368c08308924d4280c12bd1e9bd665513c48e9433e1aef6c0"
+        }
+      },
+      "producerIndex": 5,
+      "relative": "src/editor/song.c",
+      "source": {
+        "bytes": 8937,
+        "sha256": "0e6c75429891da87865e3e2242057401db81129b87a4963dc3730f3f1786559c"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9697,
+          "sha256": "884598ee959ba14a5b6f4b0fc106c094287d7629df55ff7f5a21a676717e033a"
+        },
+        "individualStackEntries": 23,
+        "largestIndividualStackBytes": 1808,
+        "object": {
+          "bytes": 26096,
+          "sha256": "5c9446bca7f63f941f64764596726e67bbb3ab5a01ec928ff9dbc198b8231023"
+        },
+        "receipt": {
+          "bytes": 37730,
+          "sha256": "854356236b7850f2a7ee4824838c22537bb4d05062e63a4c7619586beffe7b4f"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 29,
+        "actualSDKInputs": 22,
+        "independentReview": {
+          "bytes": 22650,
+          "sha256": "d8d07ea2aa9b51160ded68f4923c33779ba3f118dbadcf405f5ee1b6ef2f7648"
+        },
+        "receipt": {
+          "bytes": 34199,
+          "sha256": "64e7f742b4baaa8188c29e7279028734781084dabeb5be39a4181ee91bf0a2b4"
+        }
+      },
+      "producerIndex": 6,
+      "relative": "src/editor/view.c",
+      "source": {
+        "bytes": 44217,
+        "sha256": "c8925fbb936a48304219be5f055327e083c309d0cc3b512d02e88c8703e31432"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 13856,
+          "sha256": "7723caff5fd9fc8e4bcbc1c81e88c51eaae48e100996c78c8cea7eff38b5c389"
+        },
+        "individualStackEntries": 71,
+        "largestIndividualStackBytes": 1640,
+        "object": {
+          "bytes": 26308,
+          "sha256": "995475a5ad6851c61f7c781a11ea68a2827a1a430648d062a950d58e8ebfcf9e"
+        },
+        "receipt": {
+          "bytes": 37057,
+          "sha256": "6cfa7662355478202b0a687bf7c954fc034a390e2845d569b8cabe2077e49c8d"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 20,
+        "actualSDKInputs": 24,
+        "independentReview": {
+          "bytes": 20189,
+          "sha256": "475439475f42ba5d9e2919f9c392ef9207e9fb8e398bf5b85066c4de7923c7d0"
+        },
+        "receipt": {
+          "bytes": 30931,
+          "sha256": "4805def32e0180ce36d5a4cc714708085c1d0dcfaa0180d1f16665dbe142c058"
+        }
+      },
+      "producerIndex": 7,
+      "relative": "src/editor/sampler.c",
+      "source": {
+        "bytes": 82424,
+        "sha256": "d3bba34d4725a6f9cc311fdf3ba2d2233ed84f9ba43d57dd1bc92226446bdc57"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9283,
+          "sha256": "78e4f28db5c5474897a9581765bc820082d199d7bd09c9cd7f0b69cd7afc6003"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 1560,
+        "object": {
+          "bytes": 1744,
+          "sha256": "0ff7619bd5a9afc691ae099f1a70c3f2d7ec2982b4342cebb4146f9d17a79307"
+        },
+        "receipt": {
+          "bytes": 31955,
+          "sha256": "2abb2c744c3d2fbfdcf6ae92f97e9794c6e6ab7163917351a2acb4a72bd5ff4a"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 14,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17019,
+          "sha256": "89ffd72ff12c0de963d0de57241c9a58c17ebf4786cf1e4134f2e6a687d50dc9"
+        },
+        "receipt": {
+          "bytes": 26725,
+          "sha256": "28e2554b3c21bbdd7d053f94e2276d5881d91826d4baa27e35191de8c3cca4c4"
+        }
+      },
+      "producerIndex": 8,
+      "relative": "src/editor/slots.c",
+      "source": {
+        "bytes": 4237,
+        "sha256": "ac9e10cdf165688b98d4a5562966fb7eee8e8a52376de065e3c61251f57045f8"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9250,
+          "sha256": "15bf16945f930a2ae608cf08269b0c42e7ff06e6b743892354f098e44b3de709"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 16572,
+        "object": {
+          "bytes": 18500,
+          "sha256": "3b391f8c167ffe0d893bf524f2e6938676ed6112fa8a2b90124e0759217bdfa9"
+        },
+        "receipt": {
+          "bytes": 28035,
+          "sha256": "5f1b378e49a54ddb7fc5c6886fad50e9513f23d337276260ee2aa1a958f693d4"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13222,
+          "sha256": "a903d630063518e10ea69fb4912a9ef0c60d8da76ea3d7ef08e4a4fc9a62538e"
+        },
+        "receipt": {
+          "bytes": 21686,
+          "sha256": "0e1b62bbfcaa23e38b7d51c379ae8ac7aca93cb9aa6c1194f034ef0125bce2f3"
+        }
+      },
+      "producerIndex": 9,
+      "relative": "src/core/pcm_filtered.c",
+      "source": {
+        "bytes": 4604,
+        "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9350,
+          "sha256": "b8494e4b4d2889f4b1469048afa4100063224c90bf180d1fbaafb4e63712aa5d"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 100,
+        "object": {
+          "bytes": 2540,
+          "sha256": "1ce9ffdd37e6205fe09958d65eb595e8602c8611fc0395963afa9bf5273ea4cf"
+        },
+        "receipt": {
+          "bytes": 27991,
+          "sha256": "d026818c1ea6c4f5a2a7e2f39c9e44e1bd013d93cf4e2bdcff48f3b09d4130bd"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13189,
+          "sha256": "7f744c0a2d7b38cad351a7c72899b4cb6c36c5df5bb36622a25a4699db39f793"
+        },
+        "receipt": {
+          "bytes": 21642,
+          "sha256": "c5049e3d8688a72b2b2e0eca1f277dcd3f90a93ac308c15be8201e94359981b4"
+        }
+      },
+      "producerIndex": 10,
+      "relative": "src/core/slices.c",
+      "source": {
+        "bytes": 6060,
+        "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9325,
+          "sha256": "6ba4e1cde168e7e43e2708db4c2c278858a28f083f227753ef1fdcc561d5635e"
+        },
+        "individualStackEntries": 10,
+        "largestIndividualStackBytes": 92,
+        "object": {
+          "bytes": 2672,
+          "sha256": "035379fc99b07f2466ef36044a0e2f5c3a16f08aa9e0d410b67400a8b0465c8b"
+        },
+        "receipt": {
+          "bytes": 27965,
+          "sha256": "653e0600c74881a6f907e874fb6ea64aee5029dcb7881d4eb915b63755511bec"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13171,
+          "sha256": "1213793101cad910f1b1d6851066e3ad83221c71fc48a58e3c40ae1f052620ec"
+        },
+        "receipt": {
+          "bytes": 21617,
+          "sha256": "eacfdc8e4a264cbc6498cd1396022ad1035a115b209a1f680679ecd74816e6e8"
+        }
+      },
+      "producerIndex": 11,
+      "relative": "src/core/wav.c",
+      "source": {
+        "bytes": 7200,
+        "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9359,
+          "sha256": "0a5e7f8ddee25fc802f95b5307a9519b530a8560938eda1d5abbe8452929308c"
+        },
+        "individualStackEntries": 12,
+        "largestIndividualStackBytes": 388,
+        "object": {
+          "bytes": 3368,
+          "sha256": "0c01bb17dc61b304308d3e2917dfd2c59d8b969d3117cd0d797145abf7152c83"
+        },
+        "receipt": {
+          "bytes": 27940,
+          "sha256": "9bc4d756184a4f839ea673233d110b0eb7fd1b62b43f13b4bae022acf66c8f8b"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13171,
+          "sha256": "b79b141f3a997cf958eb6faf6e4cc5a00d94544c7ad6aba443d89c05139cf197"
+        },
+        "receipt": {
+          "bytes": 21618,
+          "sha256": "9ccfdb7638874503d5089e9881885a6812767888dc26e115e15aab12c76cc268"
+        }
+      },
+      "producerIndex": 12,
+      "relative": "src/core/svx.c",
+      "source": {
+        "bytes": 7817,
+        "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9205,
+          "sha256": "a231eddcca1fbf72d3ac1d3ae598e2e559080f9c18ff735aa07a3cfa2711d19c"
+        },
+        "individualStackEntries": 7,
+        "largestIndividualStackBytes": 76,
+        "object": {
+          "bytes": 1888,
+          "sha256": "3f21f72565b9bf47ad20f541c0c2636c09e4cc169cb7d453399b4e6e0f3b83fc"
+        },
+        "receipt": {
+          "bytes": 24746,
+          "sha256": "11e602dfb4fa33cc21f9c69044c794013eee8ef6360d984a522b8043a6ec7909"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 9998,
+          "sha256": "7e216c50f317cb8c78fd3c2fa42d11c576fd1fb51fa949f9b37e41e371ff8c99"
+        },
+        "receipt": {
+          "bytes": 17416,
+          "sha256": "6a0da4c9f2999721607ed31822deacf84192888e044f4f3995a66f489bdc8453"
+        }
+      },
+      "producerIndex": 13,
+      "relative": "src/core/raw.c",
+      "source": {
+        "bytes": 3920,
+        "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9381,
+          "sha256": "e2d2bdd3bfea7b9c1e23595bb09685568207c6848f2d7cf14dfe7b0d7e574c8d"
+        },
+        "individualStackEntries": 15,
+        "largestIndividualStackBytes": 7160,
+        "object": {
+          "bytes": 3440,
+          "sha256": "8d3745f723cc1b071cbc303ef58ebbbe1688f63281150ff4e4fbe66d7d03c416"
+        },
+        "receipt": {
+          "bytes": 40937,
+          "sha256": "28a9d2a846fe535db850edc299a2a7476135165011f9cd6aa946fbd97a2c1fe9"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 62,
+        "independentReview": {
+          "bytes": 25986,
+          "sha256": "58dd703193585426cc0e7cc676e9fecc6bbf39f3de314c0f36d3a7406c2b1b13"
+        },
+        "receipt": {
+          "bytes": 38607,
+          "sha256": "e921cf1ebfb954ec5f7f23be49c93da9fbf4956ac9ab44a659d61f915f1ca390"
+        }
+      },
+      "producerIndex": 14,
+      "relative": "src/platform/file_save.c",
+      "source": {
+        "bytes": 8604,
+        "sha256": "a26119e3819bd3f18cbb05b2bfe474ae97cd375bf7aaf0264e4ddf64a0373989"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 8850,
+          "sha256": "1c4b60dc4f628d8ae0a810df04faefdb5542ff1092db16e44fda82bfb648d1f2"
+        },
+        "individualStackEntries": 1,
+        "largestIndividualStackBytes": 32,
+        "object": {
+          "bytes": 404,
+          "sha256": "fd85241a3a578434532d7e56a79682b47e33f7d86bed3a8c0daf5ef7a9b2d240"
+        },
+        "receipt": {
+          "bytes": 22760,
+          "sha256": "f39fcb1480866a061cf3db133e1dbab44ea3799267e66844f22799e03976c5c5"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 1,
+        "independentReview": {
+          "bytes": 8186,
+          "sha256": "214e4604f5589e24eee6c488385e626d43814f784905b9e32c78499988dcf5d2"
+        },
+        "receipt": {
+          "bytes": 15014,
+          "sha256": "968655820258c98ee76ab63699738c59d90b0960d951d848b9ac79a97632f680"
+        }
+      },
+      "producerIndex": 15,
+      "relative": "src/core/safe_save.c",
+      "source": {
+        "bytes": 885,
+        "sha256": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10315,
+          "sha256": "be55123bb22543b629a03eca621babe6770ecd61378c0eeb5f763e491d1381ba"
+        },
+        "individualStackEntries": 37,
+        "largestIndividualStackBytes": 1712,
+        "object": {
+          "bytes": 9848,
+          "sha256": "083e119a79b6cd5d86067f6d3a68f699d645c87fef7b83d4af8f6b7b1cf41583"
+        },
+        "receipt": {
+          "bytes": 30848,
+          "sha256": "0c684d9d2b319928aefac0a6d2bbdb55654bcca1b3d3ebfc627a105b598b7538"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 15334,
+          "sha256": "d005b8714a9ac0e66eb292e6c136a970571a593fb4f0cfb4d6c9239ee3431006"
+        },
+        "receipt": {
+          "bytes": 24490,
+          "sha256": "671796c703d1ccf0f42c391c95224b7bf97ec523d808af4c5d3ee4fc22e8ddb5"
+        }
+      },
+      "producerIndex": 16,
+      "relative": "src/core/document.c",
+      "source": {
+        "bytes": 33775,
+        "sha256": "64973ff3b3f2b2806ea523c752244689d3275aa9ec66b964bf4db74fea72e2b6"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9036,
+          "sha256": "a2eeb83a3b7ecd02c0e002a3d6e705f246b89b5b34ec05b32cc2d6a0b0b76da0"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 344,
+        "object": {
+          "bytes": 2392,
+          "sha256": "e34f08a3a3c5431c28ab0cf1afbd6c5bca3dace6f3f43849f2645f00ab4d4908"
+        },
+        "receipt": {
+          "bytes": 27515,
+          "sha256": "0722d3d161d3985a74c1d7419eb7fbcf0d618b64c23b4789978a1e42da4132dd"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 12847,
+          "sha256": "a11927f34a9cd75bb6fc80c8024a5fa266dacf325d93e85290f97c68f3c37a4d"
+        },
+        "receipt": {
+          "bytes": 21187,
+          "sha256": "a567e041328e870709e96d853dcd9de31b5b327c52d4f9ddc270a4e346548c18"
+        }
+      },
+      "producerIndex": 17,
+      "relative": "src/core/pp20.c",
+      "source": {
+        "bytes": 7187,
+        "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9755,
+          "sha256": "b7872d9757f50742f43f6d81541e2f159037e373964ccb49b80268f96c233a8e"
+        },
+        "individualStackEntries": 21,
+        "largestIndividualStackBytes": 416,
+        "object": {
+          "bytes": 6276,
+          "sha256": "ab6fbe52e60226788cd7cc7ef1bc37df4ab1e98f2fb28ccb9c34c19ff1c87f26"
+        },
+        "receipt": {
+          "bytes": 28954,
+          "sha256": "fb409e19965ac3bb551f375a3582a8b9bc3d0f9a564983ced46b52518fa02c45"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 5,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13882,
+          "sha256": "5b8bab869428b86d9f3925e1a27b8ed3b5f0a084e8d85eb6ce53535550543aeb"
+        },
+        "receipt": {
+          "bytes": 22562,
+          "sha256": "10ecaa1a66e0ce14d5fe9824576114574b60204d2355678c4fa304740a3bd566"
+        }
+      },
+      "producerIndex": 18,
+      "relative": "src/core/pattern.c",
+      "source": {
+        "bytes": 15753,
+        "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9824,
+          "sha256": "22ac8e6824ff57f14e3032cee37adf0f288020a6dfbc9461ec578e986094f2cf"
+        },
+        "individualStackEntries": 40,
+        "largestIndividualStackBytes": 2796,
+        "object": {
+          "bytes": 17068,
+          "sha256": "9b4c94fc56d192d0376190dc3a807ab322eba80bc1ea676473b5bd4294ee0b40"
+        },
+        "receipt": {
+          "bytes": 29012,
+          "sha256": "dfd1168ad8cef29d8d36034f4eccfca6b864a7bd6abb407a9c56ee0376b2f603"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 5,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 13899,
+          "sha256": "36463df6220bb1ad718a50803a1ec6c3804c1577b4285eb96b82312e9ea9c6e4"
+        },
+        "receipt": {
+          "bytes": 22584,
+          "sha256": "6532fb01073f2369c4ed67a7a007299766e2830ad237b5eb39928aa59198f4b7"
+        }
+      },
+      "producerIndex": 19,
+      "relative": "src/core/project.c",
+      "source": {
+        "bytes": 47003,
+        "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9902,
+          "sha256": "a5fe4e8c7c8864e429fe0d1a62bcc3fe869318b18754408414d3dbbff25b2883"
+        },
+        "individualStackEntries": 23,
+        "largestIndividualStackBytes": 3796,
+        "object": {
+          "bytes": 8268,
+          "sha256": "667e122c8a8a818445f94795b32dee0195842234c75c45b3589931bcc89bc0f4"
+        },
+        "receipt": {
+          "bytes": 29433,
+          "sha256": "07661b58d82282f2c5fc9ba0be6f438fa222d548087650750181fd59cde48af0"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 6,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14260,
+          "sha256": "945a393f3fe7c30cebd711cc9009cba5903fcaa900ce00a6f0a2fe01985c93c9"
+        },
+        "receipt": {
+          "bytes": 23064,
+          "sha256": "28b24f0553290edc5dfe63d8c9af63a141391c03cf9d6806ebe7e9ab49827afd"
+        }
+      },
+      "producerIndex": 20,
+      "relative": "src/core/mod_project.c",
+      "source": {
+        "bytes": 23640,
+        "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9010,
+          "sha256": "29c9707e14b6751311e3f429f0af3b9716aeeca0161980fd1aa06d183eb03218"
+        },
+        "individualStackEntries": 5,
+        "largestIndividualStackBytes": 1148,
+        "object": {
+          "bytes": 1216,
+          "sha256": "0a1d44236485da495d2ff605634917d0f1547fabaa868af641814546a13f871d"
+        },
+        "receipt": {
+          "bytes": 27546,
+          "sha256": "e431c79f7f77f0d53182bf116788f5c42ff382fb7abbc2ea1fd3d4382f064fd7"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 12889,
+          "sha256": "8c12c13906f2d4fb1a3601565f6d770931500d78c57526b74ba11245d4482841"
+        },
+        "receipt": {
+          "bytes": 21242,
+          "sha256": "df5554f08c27b4ac44e547a9b46e01f4a0d692c7fa2a7b9ea02303e3b8f3f142"
+        }
+      },
+      "producerIndex": 21,
+      "relative": "src/core/mod_inspect.c",
+      "source": {
+        "bytes": 3513,
+        "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 7123,
+          "sha256": "76730377bcd3ccd7bdf97113b9f0d9cbc8373dd717a310c0a2335ac12d3e0bfa"
+        },
+        "individualStackEntries": 12,
+        "largestIndividualStackBytes": 388,
+        "object": {
+          "bytes": 2168,
+          "sha256": "597f08a2f1ebc32d96689b297bb2dc5b5244b1f3e0882a0ac919099326b8739c"
+        },
+        "receipt": {
+          "bytes": 27759,
+          "sha256": "6bfc628f15d5d9c56166180aa96e2fa28c9e61f2a616658a6f73af3557d6b515"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 12871,
+          "sha256": "fefc3f02efb6d01c92346347c24c1de7628d1307004e676427a6b5e13acd8889"
+        },
+        "receipt": {
+          "bytes": 21220,
+          "sha256": "c95d71d264ca2fbfac5742bd774ecfd1affcff509cdf4ec4860b5a14c68c23ec"
+        }
+      },
+      "producerIndex": 22,
+      "relative": "src/core/channels.c",
+      "source": {
+        "bytes": 6996,
+        "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 7043,
+          "sha256": "00e07fee430bc25d07f4a21cb53ac75b0a3214aecbffc7ed44c5f44448a9a20e"
+        },
+        "individualStackEntries": 7,
+        "largestIndividualStackBytes": 132,
+        "object": {
+          "bytes": 2920,
+          "sha256": "93e1b13fed8fe12165f4f9e768c2097b01c58178184c0224b75012341303844b"
+        },
+        "receipt": {
+          "bytes": 26297,
+          "sha256": "d39c2be766528d624f48e5261ee83d1202de75980912c132f7420ffe627f7a67"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 13,
+        "independentReview": {
+          "bytes": 11485,
+          "sha256": "7e968e5d92802391e7dfcf5c1c328ec39f0ad538d450beb47d3205adbb6ce412"
+        },
+        "receipt": {
+          "bytes": 19383,
+          "sha256": "f8d505452f6b60db250a79b363966b73429990937f0d8b30d4f58858c6a57269"
+        }
+      },
+      "producerIndex": 23,
+      "relative": "src/core/pcm.c",
+      "source": {
+        "bytes": 7061,
+        "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 6972,
+          "sha256": "d0fd63bd37e972a7b3986e444520a75ce889a878c881ca0cb7b3e5e9330ba5c8"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 128,
+        "object": {
+          "bytes": 876,
+          "sha256": "ee42c1cf0c929883a37f2ad2c3fc4c2e9f6f5a46d44914c4eb9777fca4d8f112"
+        },
+        "receipt": {
+          "bytes": 29633,
+          "sha256": "66e1ec1a45a543a098881cd82a9581fd5aed248f440ce80ba78153936e3d1697"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14941,
+          "sha256": "467fd6c8950945d7778515f60a9cd72eed763537db36ff1becbcf38d8ea0dc0c"
+        },
+        "receipt": {
+          "bytes": 23967,
+          "sha256": "d9874efc39cadb1f37b2e4204d7106dd006571b345221a773bdc8faf031a6f2d"
+        }
+      },
+      "producerIndex": 24,
+      "relative": "src/platform/sample_file.c",
+      "source": {
+        "bytes": 1624,
+        "sha256": "c0b3d10681604f733e07cef5c7bfbba233d86d90174910707be9bc499f36f619"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 6952,
+          "sha256": "0a016b9c8e64b7a511b6bb6518c6a1b286fc2cf6d247018bfd1c7a2ab8288e8b"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 68,
+        "object": {
+          "bytes": 552,
+          "sha256": "e91775d4ef79d323fb69545cf652506061b283ca7592001e1b50be8a222646bb"
+        },
+        "receipt": {
+          "bytes": 26118,
+          "sha256": "7014f4f24c1d51aa21711a82f6656eb920ee6364bdf8826f7da544f602d715c3"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 11451,
+          "sha256": "81254644342426b0426f26b6e6dcbad103304044519710304889d2f9f9f64a27"
+        },
+        "receipt": {
+          "bytes": 19344,
+          "sha256": "978cedea8178653dd0219ad8735d8de334faa899fef9513b55b9210b86c0190d"
+        }
+      },
+      "producerIndex": 25,
+      "relative": "src/platform/sample_raw_file.c",
+      "source": {
+        "bytes": 914,
+        "sha256": "13c7ac94119e6857625615b30e022aa20e5f336cd8afc1a0c687c66c526efcae"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 6913,
+          "sha256": "527edb62be7038fad7f7b0301c35f17737b6786e17d96152ea7cccaf4a0d2a49"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 168,
+        "object": {
+          "bytes": 780,
+          "sha256": "afc6d1abdb7ccd5e0d272f876489bb7211215abed9db42ac0bdba14d3f24448f"
+        },
+        "receipt": {
+          "bytes": 29255,
+          "sha256": "5123259602184f4819d36aa4d283949dbcb32849a41c5bad996e22c59097367e"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14623,
+          "sha256": "3aeb9b3a5e03a8ac4db8c5af6e6e11212255a78509d654036bf5bf2d2bcbd169"
+        },
+        "receipt": {
+          "bytes": 23546,
+          "sha256": "16f1ca3af1108b45b7bcabc62b9678d65f2e4fd4235ba1677d9bfaeda2445d73"
+        }
+      },
+      "producerIndex": 26,
+      "relative": "src/platform/sample_svx_file.c",
+      "source": {
+        "bytes": 1448,
+        "sha256": "c256fe98f5a600a86e72f35875ef835a85caee0b6c1f5065d3e8ed13c17a87c8"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 6976,
+          "sha256": "ad1c7a4986d08d62ac9489a83429f52ef3ff95d06e44d9c0de8ccdaf949cc700"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 40,
+        "object": {
+          "bytes": 480,
+          "sha256": "52206e1b2ee14f76021b81c22f4de01c90c4664e00efd6d41b611a4f28b048df"
+        },
+        "receipt": {
+          "bytes": 26136,
+          "sha256": "8208cdf5e4a63e57bcbe3db971464eea2439ce850c7c95c173e09c24ae78ca76"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 11472,
+          "sha256": "79a62d8f3ed3906ef8ba2fe1d651efbefe2c73877406413e8716c351eaa4c3b5"
+        },
+        "receipt": {
+          "bytes": 19373,
+          "sha256": "6032d8d18ff712c5d90c286610b9987b86b240958b7b70bf95f670e2d55cc084"
+        }
+      },
+      "producerIndex": 27,
+      "relative": "src/platform/project_file.c",
+      "source": {
+        "bytes": 842,
+        "sha256": "fcd275495cd60b4cb92482081e21cf41d79957c48b247a811c56eb1bc3e84731"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 7729,
+          "sha256": "e51ca2e04b041a172d8c6f50a82d5f64da6d0f9a079859c785189b343ee5d809"
+        },
+        "individualStackEntries": 13,
+        "largestIndividualStackBytes": 2892,
+        "object": {
+          "bytes": 4612,
+          "sha256": "e8a22e9a6a7c3055bd3ddaa2ead6076ef59bc6eb42e3736f226015b09b51f5cb"
+        },
+        "receipt": {
+          "bytes": 42595,
+          "sha256": "69594e0c43576004871e7bf7cb5bff2d00a609ca5d296435d5ce814642da6508"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 16,
+        "actualSDKInputs": 57,
+        "independentReview": {
+          "bytes": 27329,
+          "sha256": "bff00b330b6e310c419193db99e39f5620ac01d24f38855850fa54eb776e8b96"
+        },
+        "receipt": {
+          "bytes": 40393,
+          "sha256": "ff52877f546daee7fd8573034f98659a36f540348213646eb1690d1aa41abb8a"
+        }
+      },
+      "producerIndex": 28,
+      "relative": "src/native/recovery.c",
+      "source": {
+        "bytes": 11567,
+        "sha256": "f79ba159d35bdde86202e731af919847a276b720f928d4fc09e9a8764705ec97"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 6822,
+          "sha256": "150e0e827574cee04140b897c5b10838668f2b547d0147c1a62a9c42f1d7fe7e"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 52,
+        "object": {
+          "bytes": 632,
+          "sha256": "20a0cda738a643054b07c223c73d44a6e1a75e5ff1d4cdd3d37b0442e7db276a"
+        },
+        "receipt": {
+          "bytes": 27476,
+          "sha256": "758a1c2f3e9f4d2ab2695e1a1da33171abd4bd52d48b8b22fd3731112f109159"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 12871,
+          "sha256": "84f4ec5f3973bffb3e685d5ff040354424e9a5e6f2c92b04cb5e8aaa81916422"
+        },
+        "receipt": {
+          "bytes": 21220,
+          "sha256": "58f38ca7dc17ed0ac8c8efa25c87de7a6e95c529a44eb1075f9ca6119e3c1aa0"
+        }
+      },
+      "producerIndex": 29,
+      "relative": "src/core/recovery.c",
+      "source": {
+        "bytes": 1395,
+        "sha256": "afcd236331f6cb8646e88512be9632395bcf2bc8340852f93fa8846ddf4a7878"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9325,
+          "sha256": "ef2e6676b19a3c7e0e71f87fdc624a1af2b504c4082d008928816c98c7d4f199"
+        },
+        "individualStackEntries": 7,
+        "largestIndividualStackBytes": 1924,
+        "object": {
+          "bytes": 2008,
+          "sha256": "f08ae0c0e72d25443490447ae6357c20f70ab6754e8958b9769f8c6bc8fe2a5d"
+        },
+        "receipt": {
+          "bytes": 31272,
+          "sha256": "41d83ab1f25ff382c714698e23a8752572a9e3ad7b00fcdd31254d9ca02037c3"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 12,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 19465,
+          "sha256": "fe4afc9d93e81b02e38b4b4d82d6c92ac7c6da485fa94bbe87869e71c6a96596"
+        },
+        "receipt": {
+          "bytes": 25940,
+          "sha256": "44de26abb4da10e0451d9b646c35d8c3c79985b3a8cd399e206b893e5ef75cef"
+        }
+      },
+      "producerIndex": 30,
+      "relative": "src/platform/recovery_file.c",
+      "source": {
+        "bytes": 4132,
+        "sha256": "4dc3ed93938f4ab9f1affb4a7072db378da7b272615b83bc7e5c3369bbfc4f4a"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9314,
+          "sha256": "fc65bdf37b02667c91beeca8f914ac06d7871b350773b7038790b1b72a2d10ac"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 1556,
+        "object": {
+          "bytes": 1208,
+          "sha256": "f5ba5756800c7f3b1c9b5b6f5754e4a568b98dc0fa3c85e10dbb87271c0e0e32"
+        },
+        "receipt": {
+          "bytes": 39640,
+          "sha256": "1fc1014ee7ed964fc39d897cd1fd6c894a5baa6115f01ec080fb9d436b7b38e7"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 13,
+        "actualSDKInputs": 51,
+        "independentReview": {
+          "bytes": 28250,
+          "sha256": "4f10ba319ffd5b2aea394de83fbbab110257dc92c5d3c6fe8322dccc8fdc032a"
+        },
+        "receipt": {
+          "bytes": 37066,
+          "sha256": "2e3fdf36a86f3362f3bca2299f1c461680e5e762d75441591e7386797e7dedfa"
+        }
+      },
+      "producerIndex": 31,
+      "relative": "src/platform/recovery_store.c",
+      "source": {
+        "bytes": 2418,
+        "sha256": "af61831d1e356ad78b8d5a1d7675050bcb1b7a88fb9c93ca3115642a61bbbeff"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9213,
+          "sha256": "e8696d5237840d9bb12159f72a2e3c99d36ad350054fdbc4d63b37c59875cd66"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 3228,
+        "object": {
+          "bytes": 1240,
+          "sha256": "25dcfebac91ae567076d38fdc8b051690f47b5abe4e0d3bc2884f3e7b9df9a08"
+        },
+        "receipt": {
+          "bytes": 32445,
+          "sha256": "2fc1e6f3eb44961f7bda06579fc85f6f99773253d10119c61ce6481c63b37467"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 14,
+        "actualSDKInputs": 22,
+        "independentReview": {
+          "bytes": 20681,
+          "sha256": "53218fd342b9e64c7fec718ce0cd55966aab1e211170f1dbb7984744cc45e5ae"
+        },
+        "receipt": {
+          "bytes": 27553,
+          "sha256": "ad8df85ee2a2ad1593a82e1d794cf6a9af752c94ec4f54338b1974b34b50ccbf"
+        }
+      },
+      "producerIndex": 32,
+      "relative": "src/platform/recovery_find.c",
+      "source": {
+        "bytes": 2416,
+        "sha256": "b6a59dc6ac650d7174d02d80a655622d17f6e776a289c3305d45a29f194dc5c2"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9922,
+          "sha256": "0567739a26e86da9ea6c5975be33d84bb8477115e28f461ed345ee906bd8a818"
+        },
+        "individualStackEntries": 11,
+        "largestIndividualStackBytes": 3012,
+        "object": {
+          "bytes": 2372,
+          "sha256": "92921dc413879106da323aef3cde4aea4abb373aff7d7bec1fff46e243cc3d6b"
+        },
+        "receipt": {
+          "bytes": 33277,
+          "sha256": "b562e50fe260718a6976493273ea71e923db18b52aa8782a0e345a3a7749b92a"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 17,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 21311,
+          "sha256": "81082d727d2a49956023c90111239a8e1026ae80231c373eb74b24baa1c2137c"
+        },
+        "receipt": {
+          "bytes": 28391,
+          "sha256": "6038f524230beb172379b86830612714776873a512575f95eb002265e715efc1"
+        }
+      },
+      "producerIndex": 33,
+      "relative": "src/native/recovery_preferences.c",
+      "source": {
+        "bytes": 6086,
+        "sha256": "d35cca0f444aeb4c855cf92d85c85758af4d473aab1805fcdd6f3c051db2a887"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9918,
+          "sha256": "9da85dbbc01bc439f63261b1007ce6791bced492ca248d4bff54a8d333dd722c"
+        },
+        "individualStackEntries": 11,
+        "largestIndividualStackBytes": 788,
+        "object": {
+          "bytes": 2796,
+          "sha256": "28406f9e94cb08575fdf5eeefafdd7b123cfdd8f3187de211981358624849e60"
+        },
+        "receipt": {
+          "bytes": 33738,
+          "sha256": "bd16c3bd2f98e0d006550fc2124f50ae5cfa46f955077c278f14d156999e782b"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 18,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 21703,
+          "sha256": "cf38a45dcf3cdb4b9a5571768f8ce612b5083687e792aeb5e751e3193f34e2cb"
+        },
+        "receipt": {
+          "bytes": 28911,
+          "sha256": "62c091b125376c7fad5156191cc967cd9c8296dc1948f0ebc6ca87c4b1c133df"
+        }
+      },
+      "producerIndex": 34,
+      "relative": "src/native/recovery_requester_model.c",
+      "source": {
+        "bytes": 7090,
+        "sha256": "3bc7a03355cae169122861c3903f398317a6aea979b2cbb5eb8aa1f048fb9835"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9592,
+          "sha256": "a2500105affbb5ec3adca3646850ed72cdc3d9b0dc19ebff0fe27287923f289b"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 548,
+        "object": {
+          "bytes": 3892,
+          "sha256": "5cc614b5de7614dc462f9e94c9cabf86a0e51fd72e3920ae182406e2fd7bf3b5"
+        },
+        "receipt": {
+          "bytes": 47635,
+          "sha256": "0a7d8b3c0894a521252ca4501a1025231d3388681754473d92e00709a6b4ff71"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 18,
+        "actualSDKInputs": 70,
+        "independentReview": {
+          "bytes": 35476,
+          "sha256": "49ebf1462f536207f4d78731d2aa5634daca00ba999e3f153bc4351aceb1605d"
+        },
+        "receipt": {
+          "bytes": 47175,
+          "sha256": "8382e8f873bc84eff8d910f7e52ac00fe4f65b552afaebfa93d12209f83c5f9e"
+        }
+      },
+      "producerIndex": 35,
+      "relative": "src/native/recovery_requester.c",
+      "source": {
+        "bytes": 8837,
+        "sha256": "56944eac2476bda23294c0252ec075a94de8d01a96c8ebc81aae88ce0b848c9e"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9025,
+          "sha256": "5975c47bcb373cf09a09e5c6a7df11c72d8387b4dbb5f8f0d11caf0bf7a6a779"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 64,
+        "object": {
+          "bytes": 568,
+          "sha256": "75762f4557a902fb65198e3212cf21802799f5765413081e2a9fcbc81cf2746f"
+        },
+        "receipt": {
+          "bytes": 26862,
+          "sha256": "b1673ff25be783ef6b47f0bda63ad53093eb51d4aa9e39fa1649e9d32fb7661e"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 15194,
+          "sha256": "cb66dd34dd404983977c8b68208729c4c8a365374cda725978207f086ef80ab5"
+        },
+        "receipt": {
+          "bytes": 20281,
+          "sha256": "d4b4b15e688c7ebcecc1839210ec2d73aee21d81ea921feb30be53f9b42fb8db"
+        }
+      },
+      "producerIndex": 36,
+      "relative": "src/platform/mod_file.c",
+      "source": {
+        "bytes": 1008,
+        "sha256": "8f8d7766a4fa128cfa52b0d029ec3310d5504b84fc1b88f03d47f63d83a87247"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9587,
+          "sha256": "72d8b818d5ec3d3f575e141579fdcd1aa948bfd23052970bf7badb83f5b8cb63"
+        },
+        "individualStackEntries": 10,
+        "largestIndividualStackBytes": 3156,
+        "object": {
+          "bytes": 2596,
+          "sha256": "e7b091242aed643ff08f14007c8bef442e8379603ccd2285956acc62e56c9e3c"
+        },
+        "receipt": {
+          "bytes": 35365,
+          "sha256": "c7030cdaba84121079a122ece4272b6c2d6c9ef3bc12b0abf17bcc9025395cbc"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 14,
+        "actualSDKInputs": 34,
+        "independentReview": {
+          "bytes": 23411,
+          "sha256": "b336ca57ad5671387b8b9519793e094d88d5e4cd28a6c5d5796d56567a9c89f9"
+        },
+        "receipt": {
+          "bytes": 31169,
+          "sha256": "c625c1bb6718fa0d0b07b9f2df4af63aa860cfbb096ba42e23d55a189a6edd86"
+        }
+      },
+      "producerIndex": 37,
+      "relative": "src/platform/raw_import.c",
+      "source": {
+        "bytes": 5153,
+        "sha256": "a4286e55accb510e4deedbb4f1a749c7a74010b3c3adb8318c3fbbf9be93c848"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9113,
+          "sha256": "f8e11089cb9b977ccce1bbb59bcee5350766d0ab9a25ea50267d6e6784e7c522"
+        },
+        "individualStackEntries": 5,
+        "largestIndividualStackBytes": 60,
+        "object": {
+          "bytes": 1180,
+          "sha256": "77189f470796bafb9797cf17e8efdc597569bfe95ae27851a63c8ab9bf0f79c7"
+        },
+        "receipt": {
+          "bytes": 33075,
+          "sha256": "332f3e023b147abc4bf5cbb20445cc74525ea709f1c8fab1532e7884c8ad2eb4"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 34,
+        "independentReview": {
+          "bytes": 21389,
+          "sha256": "7c3951331996b63f043837539e1168a4eeb74c7075afef228f6ee2b4bd031788"
+        },
+        "receipt": {
+          "bytes": 28487,
+          "sha256": "b036d5d5c9c09cd4024097fa7e6c6b23dea8df159e4aceb5a35dbe044443716d"
+        }
+      },
+      "producerIndex": 38,
+      "relative": "src/platform/mod_import.c",
+      "source": {
+        "bytes": 1860,
+        "sha256": "855e2d3633e83397cf3232aba83c89f044f64f0f09aa5345a9208a638ff870ba"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9281,
+          "sha256": "22c1b977461fceec17da9fd56e9472e566c69cf6e6c1b1cabe5ba4f83955fada"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 44,
+        "object": {
+          "bytes": 1176,
+          "sha256": "91bffff92818bcea6dff822d0d616d4e547357c41886867089bd328aa792ce25"
+        },
+        "receipt": {
+          "bytes": 35092,
+          "sha256": "29d7fb2e37e6387fbea8698a4b9f91727e9e49159640cd62e30e94e5f51cd8ea"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 32,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 23208,
+          "sha256": "639d9c8facfb0714d499b5b7ecc07712435cb82e2047ce1c19744db992d95a25"
+        },
+        "receipt": {
+          "bytes": 30918,
+          "sha256": "b3f9376ab24e7f548a6c5c6ee472e6cfb60bb44e8001e8a2ff7fe17aa15fe454"
+        }
+      },
+      "producerIndex": 39,
+      "relative": "src/platform/sample_import.c",
+      "source": {
+        "bytes": 1968,
+        "sha256": "0fee44980b58c88b55e48480b3a6e53807e36cbd47fce670bba53d00bd28e300"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9181,
+          "sha256": "65d69044a14415230e77ec6752faff65c8f326a68ddd3c2d6b84165cb2b58ba2"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 4168,
+        "object": {
+          "bytes": 1168,
+          "sha256": "e0f1970af267905131dfe0cf90d412836e32fae0a5e23d399363598a3b165999"
+        },
+        "receipt": {
+          "bytes": 33143,
+          "sha256": "062b92199c6a8eda2b5164f123fb5b90a680d9f35ccef768675dfd89d14b25d3"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 34,
+        "independentReview": {
+          "bytes": 21413,
+          "sha256": "b88599bd72cc5f6ea3f20503e2f0c0360d3b9c0ad520b9b043d11759d545f081"
+        },
+        "receipt": {
+          "bytes": 28519,
+          "sha256": "c92b9c7d64f4f4a383164bd3618fb59fa8aee7b2ad4062cef339803a0aed086d"
+        }
+      },
+      "producerIndex": 40,
+      "relative": "src/platform/project_import.c",
+      "source": {
+        "bytes": 2057,
+        "sha256": "05378be74d33324cf854217f23304f594e7bc04b4d1fe50d3ae8bfb688b76394"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9157,
+          "sha256": "a4fda6e3735a477a1c3f14f747e2b594d96a45dbd0524ec273bea2ff0a2614a9"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 4168,
+        "object": {
+          "bytes": 1196,
+          "sha256": "68a51127900887d3ea1a7b5de1e8d628230b2cdc5d6211b19a3a9234ce539c60"
+        },
+        "receipt": {
+          "bytes": 33118,
+          "sha256": "b21d586956a7e4f18ff9cea541b20eca41f3d7dc1849ead95573c1274ac1deec"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 34,
+        "independentReview": {
+          "bytes": 21396,
+          "sha256": "9081deb5444dcb617d8f72f248bdbc290ba88c0c531cc1cfef2a7eb04c7695d9"
+        },
+        "receipt": {
+          "bytes": 28496,
+          "sha256": "b15ec92355ca979f45a36871efd1d38f772cee2a1f094533805cb5f99ed317ed"
+        }
+      },
+      "producerIndex": 41,
+      "relative": "src/platform/pp20_import.c",
+      "source": {
+        "bytes": 2149,
+        "sha256": "1dcf59769e988a0ab802dbc808e45b8097f47cd46f53510dd4fd391c5c535822"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9443,
+          "sha256": "cf3fec232530767550e79c09788a8c406f300adda7201edbd3d3473aa0de30f1"
+        },
+        "individualStackEntries": 11,
+        "largestIndividualStackBytes": 72,
+        "object": {
+          "bytes": 1804,
+          "sha256": "179af75a91fc9841a8f3f208731a9736179509a76b9d9155fe5111f40d0d8c9e"
+        },
+        "receipt": {
+          "bytes": 28146,
+          "sha256": "fffd04f93d9601ecc08aa7499f165dc8685c69d0b595d002062c79fcbe75580c"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 22,
+        "independentReview": {
+          "bytes": 16418,
+          "sha256": "687e0eb9076aea628d10f0a647ca9c00be00666ddce9620e2b21a38f2d0aadee"
+        },
+        "receipt": {
+          "bytes": 21895,
+          "sha256": "a6a79576ac8787f90e03e7b4be4e1ef36bb96a504f8f57e582ed6ccddbe187ee"
+        }
+      },
+      "producerIndex": 42,
+      "relative": "src/core/sample_cache.c",
+      "source": {
+        "bytes": 4018,
+        "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10509,
+          "sha256": "c52c66e86e9deece4a55c57afc93cc76b5b6faca1153c6a8559be6c215515dc3"
+        },
+        "individualStackEntries": 20,
+        "largestIndividualStackBytes": 156,
+        "object": {
+          "bytes": 4840,
+          "sha256": "b4a1ab8bbc2bc1fb0e61a6a81df8c98e02b5a0b49fc564c28cb59bc2f2cf283c"
+        },
+        "receipt": {
+          "bytes": 30689,
+          "sha256": "58e415d297a45743298fda2f5593427128ac6157f9c9764ea82d38dc3c23baed"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 18482,
+          "sha256": "6afe2dd5569bcf2ad266f5a73fb7c3d261c9a2b34e95c1c247c3121580275908"
+        },
+        "receipt": {
+          "bytes": 24637,
+          "sha256": "2fe06534b88df848f680b56b7dc5a35cbcf6b6312019144e74967d591b1d4727"
+        }
+      },
+      "producerIndex": 43,
+      "relative": "src/core/playback_pcm.c",
+      "source": {
+        "bytes": 12122,
+        "sha256": "8c6847671c90fa8af25ba696cc16899e7a0104465c2cf9e4fc2dc269cda28c88"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9595,
+          "sha256": "34567e6d1271b36cda4e010a9ffef2e323e89cee907855b03777f6001b4c222c"
+        },
+        "individualStackEntries": 8,
+        "largestIndividualStackBytes": 6248,
+        "object": {
+          "bytes": 3844,
+          "sha256": "ac24146aea9abec40266c0e7aaf4741d9199cc3f2089c27258f53ad16819d39d"
+        },
+        "receipt": {
+          "bytes": 42436,
+          "sha256": "bc4ced39e35090b8360eb748140837ddb3d66ac78841fe9a1e5c8f47e5a9479f"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 13,
+        "actualSDKInputs": 62,
+        "independentReview": {
+          "bytes": 30397,
+          "sha256": "c378792f20db3b382869d6f17321b40b901358c14e070b8a813f0307ccd9de26"
+        },
+        "receipt": {
+          "bytes": 40429,
+          "sha256": "39ffca7fed971e4fff0ea3a4d1f007a8c978234fb0f0a1aa3dfaedbb7d3e990a"
+        }
+      },
+      "producerIndex": 44,
+      "relative": "src/platform/render_file.c",
+      "source": {
+        "bytes": 9147,
+        "sha256": "469d5ca4d7ffc71671687f66da3ec733dc3adbb623b82b9f93e6f0b6309fa093"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9473,
+          "sha256": "fc0213d970c3403bab6ebaf15d9e1dba9985451d2ce6c6b125dc8cf5b5bcb183"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 3628,
+        "object": {
+          "bytes": 2340,
+          "sha256": "9fd6bb45db384027431ddb62409ecb726ab916a81597373a60db586ee81ed8ad"
+        },
+        "receipt": {
+          "bytes": 41570,
+          "sha256": "51d74a63ca0744f7c43156a083a5424f80640ae96b8ca165a31f3dcc51e624dd"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 15,
+        "actualSDKInputs": 56,
+        "independentReview": {
+          "bytes": 30014,
+          "sha256": "7b1993a149c864502b200acafc31e10e4590ac03b6ef551015b86384e209ef86"
+        },
+        "receipt": {
+          "bytes": 39409,
+          "sha256": "7acb91422507606264aa4bee6620af5f85eb073eaaeaa3dd9273a2575c47be49"
+        }
+      },
+      "producerIndex": 45,
+      "relative": "src/platform/stem_file.c",
+      "source": {
+        "bytes": 6458,
+        "sha256": "47ad65ddfad270094ff52b5421fe9165163caa2aa70feebf81d4852a5045f1e1"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 8904,
+          "sha256": "62269f4316c7cd188054ccca3f4cb580493d58dda4c94382a4eeba47f7232117"
+        },
+        "individualStackEntries": 1,
+        "largestIndividualStackBytes": 112,
+        "object": {
+          "bytes": 512,
+          "sha256": "11d4a1c617fc73f624fdddc59cee4736c2baa2c56832ac4432e67eeed711043c"
+        },
+        "receipt": {
+          "bytes": 27801,
+          "sha256": "3e1f35066167599f78505b0acababd42d235ae0b3271a09a8fa242a46c8b0b56"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 3,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 16475,
+          "sha256": "54e0bd9c64fda799308448c725576985348f22ea285c7b65a02fae8985fea896"
+        },
+        "receipt": {
+          "bytes": 21654,
+          "sha256": "102a980504cea40aa2e80ac791b0bf08196cb856ed3c8ca3927dff7b9649004d"
+        }
+      },
+      "producerIndex": 46,
+      "relative": "src/core/stems.c",
+      "source": {
+        "bytes": 931,
+        "sha256": "2785dc8523f9c70a2f2b6d3ec7767e3b75603bb20bed844189082ebdcdb7add4"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 14354,
+          "sha256": "1599d3a3155ae9c6d040ca1e0f19b8dd06942f7458b051c03e10e63dea093bb3"
+        },
+        "individualStackEntries": 75,
+        "largestIndividualStackBytes": 5536,
+        "object": {
+          "bytes": 21848,
+          "sha256": "1f9b9471c1edf73f56c366fc03212cd2b6091ff1989786b37e2bd15c2bc427e6"
+        },
+        "receipt": {
+          "bytes": 34872,
+          "sha256": "f873b8350e1060086f207825520c77417c8a5de85d29b0a5dca16da38f4112f2"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 17,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 21381,
+          "sha256": "194de06d857a9a3d30bd15470faa7b25e50f84de4688022a56687ce47b8d8a01"
+        },
+        "receipt": {
+          "bytes": 28165,
+          "sha256": "7ef99b8a1147b64b69d94fd582628c6da8516b8ab2fc590e0f34b6f04d2646bd"
+        }
+      },
+      "producerIndex": 47,
+      "relative": "src/core/render.c",
+      "source": {
+        "bytes": 63608,
+        "sha256": "acc53af54275d5ec481ca2128dcf72fde305bf91ed28295fd781a81f42966936"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 8993,
+          "sha256": "0c7a8e811c345ab1896726be42bad022122772c4ebf9f14917ba49c46c232e83"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 68,
+        "object": {
+          "bytes": 3236,
+          "sha256": "2ed505376021040c829c2a94e18de95ba5c80d3d236068c55a05654c2aa0c25c"
+        },
+        "receipt": {
+          "bytes": 29204,
+          "sha256": "c4fc9d4721c90aa3fdb8d78b490b9e22cbc43e6e92b06103a96ab42b20114e33"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17837,
+          "sha256": "90dcd19d274a19ca46961cee3e61378f22b483d2bd033f932783025b1a8f55df"
+        },
+        "receipt": {
+          "bytes": 23461,
+          "sha256": "e5d9a52a75837d3126ad599f97d8e3ccaa1e230037e1b03c75d3859b5408d53c"
+        }
+      },
+      "producerIndex": 48,
+      "relative": "src/core/pitch.c",
+      "source": {
+        "bytes": 6193,
+        "sha256": "9088859aa6a2812510b3a28334420030add960afa5f2cca3b41946018f0c04d5"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9076,
+          "sha256": "6f6f594af5a28b7a803624350b723b275027e2ba96c1f08e51944e066ade06da"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 184,
+        "object": {
+          "bytes": 708,
+          "sha256": "b46406bcd9223872815373a987dcda99e51a596f97f4c53f294829a1353b66dd"
+        },
+        "receipt": {
+          "bytes": 29278,
+          "sha256": "eba91d95aaa923001f516f5552562560aea8b0a7757dc42baf3e00dd6aac0924"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17852,
+          "sha256": "68bb3311d06551a8092ef3273d91d8c5fd36dd81e2b3caa95a6eef2dc16f8cab"
+        },
+        "receipt": {
+          "bytes": 23482,
+          "sha256": "a6ce8d465a6130d0372e67d3caa4af680d6194b12872a131835b896f73e7f816"
+        }
+      },
+      "producerIndex": 49,
+      "relative": "src/core/timeline.c",
+      "source": {
+        "bytes": 1598,
+        "sha256": "2296df1f1d13336bacb40cd867268dbd1c52d1ed0353256f5022da536516effd"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9009,
+          "sha256": "9a4e3dde7d7a449a90728486217cbd714ec22b97e55f9bf76d24b8637052d040"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 80,
+        "object": {
+          "bytes": 612,
+          "sha256": "021205f213e2c31c167f17e41110f9ccd9b546d86d090855824930aea6c7730b"
+        },
+        "receipt": {
+          "bytes": 24347,
+          "sha256": "ac087a0000090d930133778e746c9b89faf06fe3a9bb2552c61e618117f17bfc"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 12994,
+          "sha256": "f3990e02ad35f7fd3abe4bed52e33a5dd9ca18716b26e6a3822479beebdd5386"
+        },
+        "receipt": {
+          "bytes": 17043,
+          "sha256": "b30e67c80a297f6f6e4019a85b6d93836b64a7b525722ca408c3eeda506c47f7"
+        }
+      },
+      "producerIndex": 50,
+      "relative": "src/core/frame_clock.c",
+      "source": {
+        "bytes": 1209,
+        "sha256": "e5d9c6c9dc7ea48daf6d099dc5ade8ec2260d8009f40eebd26fa32bd06490a22"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9419,
+          "sha256": "0503f6fb01b1afac8c892851ba7e68a60418a86f89f455258149cb7fcd88467d"
+        },
+        "individualStackEntries": 12,
+        "largestIndividualStackBytes": 2332,
+        "object": {
+          "bytes": 3096,
+          "sha256": "5f39d52477e75ebb978712d8f66fea9cf1aedfd19d21928a95ddf24a1b577a77"
+        },
+        "receipt": {
+          "bytes": 28730,
+          "sha256": "3e4b41d4aa5189981c5ab55d3b1e4abb15166fbebf9e303902f4b58bf55f0143"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 5,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17141,
+          "sha256": "446e356a77d73888c19a75c7141bff08e12a613b39455ab60829a4c04314abda"
+        },
+        "receipt": {
+          "bytes": 22537,
+          "sha256": "87ea7429bc4f623a45046e141f66d29dbec953c7a8731e0d5ae664f60e7d256a"
+        }
+      },
+      "producerIndex": 51,
+      "relative": "src/core/flow.c",
+      "source": {
+        "bytes": 8904,
+        "sha256": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9939,
+          "sha256": "9005d7465e09b10327617b9c1c4a0c790ecc2e3769a3c7799de60e86bd31efab"
+        },
+        "individualStackEntries": 16,
+        "largestIndividualStackBytes": 140,
+        "object": {
+          "bytes": 5048,
+          "sha256": "7ef1f4d49c41493139156204fd5172c47e3f64825c30fa6f0379f92647792cb2"
+        },
+        "receipt": {
+          "bytes": 28920,
+          "sha256": "b1d70639a04a2970f0c59df81c1bd03cfd2718c2b4e659c66928fa6ecd60dfd4"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 5,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17179,
+          "sha256": "58f26d62265c679091ad455af2dd54b28e89a5053892e0ab1e9504da2663491c"
+        },
+        "receipt": {
+          "bytes": 22589,
+          "sha256": "d290414661bd92e1246822e79e7398776a33692ce0460e4ea07442c31c72ed64"
+        }
+      },
+      "producerIndex": 52,
+      "relative": "src/core/voice.c",
+      "source": {
+        "bytes": 11427,
+        "sha256": "9da52c6a82f9ea753655ed4d196946198316cb5327078ffbf354a6dc66e48c68"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9152,
+          "sha256": "d6526f1d125d029263ab51e2e8e526d0970ec847ef16c634e13691215c34fb30"
+        },
+        "individualStackEntries": 5,
+        "largestIndividualStackBytes": 196,
+        "object": {
+          "bytes": 1444,
+          "sha256": "10c08152f0fa3bae6829471d7fc4a939786b2ca63a839611df8ebcdf52a56ef7"
+        },
+        "receipt": {
+          "bytes": 33079,
+          "sha256": "c6958aad42c0f38a78e035f9a27abe1eaf708e9ed59ab30c0e49459aa4aed232"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 18,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 21595,
+          "sha256": "87a7becdb0ed93ea9f5572a18bfa1cecbe40970c7a2686ba4bf8d904f8294470"
+        },
+        "receipt": {
+          "bytes": 28449,
+          "sha256": "f3b3f17e6205a01ce9aa597b66d2128da23a4f8efb9e7aa52ba92d53374c1feb"
+        }
+      },
+      "producerIndex": 53,
+      "relative": "src/editor/bounce.c",
+      "source": {
+        "bytes": 3825,
+        "sha256": "c37007d125d541c552aa1b549fd4a673306c71ce88c2588992b3e1fa439765fa"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9270,
+          "sha256": "51db1a7e740b614a553bbad52602f4a8c1c91fe9098c59236b8262b411a0d25c"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 10296,
+        "object": {
+          "bytes": 1920,
+          "sha256": "8ca20ee3ac31e2565d6917d89111197904a643f8a26051553bc2268443157110"
+        },
+        "receipt": {
+          "bytes": 27595,
+          "sha256": "4fb3896088a5ad5ebd8236f89c543c85b87094e87b51c6ed6f8cb72dfa7485c6"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 16136,
+          "sha256": "76a9e3bb33c4197c59d1a10e75ed16d05824a73b8f784ea2a4b68a81bccc2812"
+        },
+        "receipt": {
+          "bytes": 21203,
+          "sha256": "a27d4e75e1b94c263f49780aa532a283c7af71bbce7e20f263aa10e48fb3aba7"
+        }
+      },
+      "producerIndex": 54,
+      "relative": "src/core/recent.c",
+      "source": {
+        "bytes": 3688,
+        "sha256": "17aab0641c7f67b77fafc51de5345954a07beafe2da9ccc379f92e26813175bc"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9475,
+          "sha256": "1942e9b059c04091e1cb595954835a027d3be27411b8743488742a2d4703382e"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 60,
+        "object": {
+          "bytes": 2060,
+          "sha256": "819462a4533b78533012083627e002b95cae2b7ef849ac5412ac2799ec857e31"
+        },
+        "receipt": {
+          "bytes": 34797,
+          "sha256": "65a5375dc6bcb9ccf6f879a665076943858472737d937d9697e5bf46e0b23dc3"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 9,
+        "actualSDKInputs": 39,
+        "independentReview": {
+          "bytes": 23170,
+          "sha256": "5b38998d8c51209aa14ef8a102e0514113ebe3d3d108f1aedb1771970846e4c0"
+        },
+        "receipt": {
+          "bytes": 30530,
+          "sha256": "8aad48a4e0b7521854ff52f91c1e87c8f4e0188be8f15f667078b40c67c9ed97"
+        }
+      },
+      "producerIndex": 55,
+      "relative": "src/platform/recent_file.c",
+      "source": {
+        "bytes": 3877,
+        "sha256": "60bb032a4cd3a97ed1f339e7635e9c52815a676d89ff210f6bbb48b3553d48e8"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 8987,
+          "sha256": "1424d33dbb3881ff18f54088b054638f2b42beda52f8bfd2337a3f1b31bf13cb"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 72,
+        "object": {
+          "bytes": 488,
+          "sha256": "13a4a9896c3129d46e3bfa5c881ddf39b19acd8ff10c037583aecd0e9ec364f5"
+        },
+        "receipt": {
+          "bytes": 30548,
+          "sha256": "86344df94b41eef4d43ae2c566f8a3dce8b1c77876a8d1880eac40a0516dfc5b"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 20,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 19170,
+          "sha256": "cd250db2f88c034838556c5f7e1dbd619abea8c64f5b8e2bfe0881e44d72d565"
+        },
+        "receipt": {
+          "bytes": 25239,
+          "sha256": "f61aad47fa3a3da59d7b9a8af82d60271834a771d0633119971c12e2d8c9f7e0"
+        }
+      },
+      "producerIndex": 56,
+      "relative": "src/editor/bounce_invert.c",
+      "source": {
+        "bytes": 978,
+        "sha256": "cb5f23a299dce7c3619b836110d340e2855d7baa3a1c89b28ee6b0638c0f2212"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9144,
+          "sha256": "57feb6051911b6b996e3ebc2a537b078c5eef67d9d4b41645eca47f2dfe7665c"
+        },
+        "individualStackEntries": 4,
+        "largestIndividualStackBytes": 68,
+        "object": {
+          "bytes": 644,
+          "sha256": "0664f2206170f70b4cfcdb14e1937f8a1afafab48c4f4db8e6545c39d9bcdf17"
+        },
+        "receipt": {
+          "bytes": 28652,
+          "sha256": "6416e3f71b5fd536e9afe6a7eb71adf0743bf386ac50df4877b0b4735478eaed"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 14,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 17208,
+          "sha256": "53f7d633641e2bc003c14db3394a24c81f2f9a905c03ed509a599e202f51be66"
+        },
+        "receipt": {
+          "bytes": 22636,
+          "sha256": "2d3f04805ed8fa3ba2f058b72dfcd23e66d3ba65cf16585ebbee489d553d3a2d"
+        }
+      },
+      "producerIndex": 57,
+      "relative": "src/platform/render_invert_file.c",
+      "source": {
+        "bytes": 1420,
+        "sha256": "b90b56b0d4770acd756d7db00cd5762498bf7e4ad708f46d8356a94a9571bb6a"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10213,
+          "sha256": "8a9853119637376b3da79311a8d61331bb3d9f390b38c2959a993c7ac220a991"
+        },
+        "individualStackEntries": 13,
+        "largestIndividualStackBytes": 612,
+        "object": {
+          "bytes": 3824,
+          "sha256": "ed1dabdae8a28ecc2f9a47ac5c0f8133c812ff3d23ca8c56ea218706af0a9f81"
+        },
+        "receipt": {
+          "bytes": 34147,
+          "sha256": "0a2e542adca77b1e7aef9f52b974754785eeb736478ac264efdb2687339aaeec"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 19,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 22061,
+          "sha256": "704378aea2f21d96d478a9702831f6c783cc49c1625bce01fbc0faff9dd1ebed"
+        },
+        "receipt": {
+          "bytes": 29068,
+          "sha256": "e75f9910c019edaa8377a8d0b686f3a1b0996f52e0e5b9fba278a280695ef88c"
+        }
+      },
+      "producerIndex": 58,
+      "relative": "src/core/render_invert.c",
+      "source": {
+        "bytes": 11294,
+        "sha256": "aa36e316b315c85d357ab8e8ce9cd54d810899481c4ffafe313272d8bf34bc81"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9627,
+          "sha256": "b519d5e4c282f1cdad6fd1c3edb44b44f8df425afa0bcc559e3033055ead88d5"
+        },
+        "individualStackEntries": 8,
+        "largestIndividualStackBytes": 152,
+        "object": {
+          "bytes": 2824,
+          "sha256": "13e16d8c6021f827acd9b2f1999b219f9a0fb07b0a0672ea6c4fd711a00b6dcd"
+        },
+        "receipt": {
+          "bytes": 30970,
+          "sha256": "0ac1d6d2b42f7e2c1e2beb3cd596eaf37559eedeba4b8336aeb931ffd6e7e961"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 11,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 19279,
+          "sha256": "6c25a61bbc7e9fd2a1f0dc2f849b7ebb5257350a04580d636cbbff245dcd4801"
+        },
+        "receipt": {
+          "bytes": 25375,
+          "sha256": "573097b87b4bf42cec87418fe80d84c46c3d63cb7d67c96377b7688b8399bcff"
+        }
+      },
+      "producerIndex": 59,
+      "relative": "src/core/invert_bank.c",
+      "source": {
+        "bytes": 6792,
+        "sha256": "b374b4e88ead336b6c7566038c5a2f090552fc3e562751f9ef7ec2a931005d5f"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9059,
+          "sha256": "09cd24dea765bc85402c947b95091e259f1fae882b05d0c6184eb70673507633"
+        },
+        "individualStackEntries": 2,
+        "largestIndividualStackBytes": 64,
+        "object": {
+          "bytes": 984,
+          "sha256": "a95f511434068d34cf6938f523fe934569012acf21e3972fde8c2e008e7a6458"
+        },
+        "receipt": {
+          "bytes": 26520,
+          "sha256": "aa65910308829d6049ec6f3eba3a85ce4f507ebdd3bbde928aa140f157f1618c"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 7,
+        "independentReview": {
+          "bytes": 15073,
+          "sha256": "4050a55b3bfe59433e220532f744b86c9c2da954bbe41648dcd8a67d19eb8eab"
+        },
+        "receipt": {
+          "bytes": 19803,
+          "sha256": "b7266c5c71119b52099fc5cfcc761dc0c11a7fe21bc2d38da34c82c0a5e116b8"
+        }
+      },
+      "producerIndex": 60,
+      "relative": "src/core/invert_sequence.c",
+      "source": {
+        "bytes": 2132,
+        "sha256": "f290f38c685ba81b0b2503e52ae43071021d25f00c6c8ecc8eda12f95086fa51"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9575,
+          "sha256": "3b559bd09e68dec9734c6fe1e03f4a1d73143e016761fe88fb369dea74bba854"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 96,
+        "object": {
+          "bytes": 2144,
+          "sha256": "424bb5cbbcf4de3d3322d4a4d09dba8c2fd1be683d6c965983f7097708c55281"
+        },
+        "receipt": {
+          "bytes": 28782,
+          "sha256": "5d41a24570e83f976a34c2f2b21ec065819daf4e975f155979628e328ab782d6"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 5,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 17201,
+          "sha256": "a6fd9b1d899cd59cee454561ec26cd0262bd3de74e15cbe51b03fa98b5236e6e"
+        },
+        "receipt": {
+          "bytes": 22618,
+          "sha256": "33636fd0d3b195e54ed693a2a89ed32b97d4b77c5ae30549e6866187b0f32d24"
+        }
+      },
+      "producerIndex": 61,
+      "relative": "src/core/invert_pcm.c",
+      "source": {
+        "bytes": 4485,
+        "sha256": "f9b6b4259468f27cab2064831d1d62efd28c751c51de59073baf4b39e59c7404"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9081,
+          "sha256": "4d716ad7a00f637aa7ff5d5ed865378e4bca39cf40541c534be48d1b91a277eb"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 8,
+        "object": {
+          "bytes": 512,
+          "sha256": "972cb1efedd2cb28a0a3b90aaa89526bb487ab2b0b4d1dd96fe5f08019a98bf5"
+        },
+        "receipt": {
+          "bytes": 24125,
+          "sha256": "8ac19572a91ec3925c4b53cc2877170d2a0090a3c89ace84661ef87653af2c2e"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 6,
+        "independentReview": {
+          "bytes": 9486,
+          "sha256": "2d4655cdd344055b395f178ece9e31e9554f69e50a0f66209dba1856d0cb7bd0"
+        },
+        "receipt": {
+          "bytes": 16737,
+          "sha256": "fff941c48ba7ab30968165a1fc18efc02efbc5bbbaf899a6c4b9e375c0e3a29a"
+        }
+      },
+      "producerIndex": 62,
+      "relative": "src/core/invert_loop.c",
+      "source": {
+        "bytes": 887,
+        "sha256": "3df53bcdf5851e16aae2bdd34d2ee97c7c0b4ae4fd1333c53b4994f0a3c0e852"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 8958,
+          "sha256": "895c7c9c605ee048c42c35d56cb0dba81a7f92dcfb5edce9a12a66e071ef0fc9"
+        },
+        "individualStackEntries": 1,
+        "largestIndividualStackBytes": 60,
+        "object": {
+          "bytes": 680,
+          "sha256": "3de582686eb766bd69f737ad1360cba9ec2cd3c5771b197f0a7e542e1911f213"
+        },
+        "receipt": {
+          "bytes": 32508,
+          "sha256": "d4feef5e96070f423c41677f6265cc75dc343bae56db546c964edc0a525757bd"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 32,
+        "independentReview": {
+          "bytes": 17865,
+          "sha256": "2ef77b63b5f8dacce4f1c3d545d1bce9240d3260ffcdd24db1a35b9fb4ab6d2d"
+        },
+        "receipt": {
+          "bytes": 27843,
+          "sha256": "a767926c1a8d5445db050758f157c989c81adf8085cd3f7079066297e11e6e18"
+        }
+      },
+      "producerIndex": 63,
+      "relative": "src/platform/file_load.c",
+      "source": {
+        "bytes": 1290,
+        "sha256": "22eddb32e80cc16351d3772adf0e094ee948527bc763c9be1647f14515a07f19"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10207,
+          "sha256": "f7774b5140d37d1762ab497a0cd20764e6aa9df0eae9a9eb3228af354130831b"
+        },
+        "individualStackEntries": 16,
+        "largestIndividualStackBytes": 136,
+        "object": {
+          "bytes": 3292,
+          "sha256": "03ac9679d27239fd270cd2416497324ab079654343648d9f198c1c7f4993475a"
+        },
+        "receipt": {
+          "bytes": 31720,
+          "sha256": "6cffa0841f293dd66c34ff05932c1d31a8c1dec9bf2b6db9e993ff5221e76e75"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 13,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 16698,
+          "sha256": "a5de4df1a2a64eed306061ce2f5194f81b6bab79d5293edb001f09417b478019"
+        },
+        "receipt": {
+          "bytes": 26299,
+          "sha256": "e0cabd70437039bd10d34bb4783d8ae2080954d9e8f0d7c95dea72db6649423c"
+        }
+      },
+      "producerIndex": 64,
+      "relative": "src/editor/sampler_lifetime.c",
+      "source": {
+        "bytes": 8529,
+        "sha256": "975e50324af6d280b7d4c82a75a41d56d1bc940412a14ff2ba89a676887700bb"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9484,
+          "sha256": "1dc3edd3aad502c004895436f527574b9dd3c382a5e805dd1fc1ae4bd1a5ef7e"
+        },
+        "individualStackEntries": 8,
+        "largestIndividualStackBytes": 84,
+        "object": {
+          "bytes": 3152,
+          "sha256": "a71fcc4a2f110bd0f1d6ad04fe9937785eb5255e89ece2accf3e9e9218a720e3"
+        },
+        "receipt": {
+          "bytes": 29847,
+          "sha256": "382c45f8a9d4950d090b3d8ad510d9a9720f4695588bad831209ecf3e5e9a364"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14977,
+          "sha256": "9d8fdee878dc2a4a7c3271b3856031330b17f8deda368855363769131047cdbe"
+        },
+        "receipt": {
+          "bytes": 24016,
+          "sha256": "682f6e15c6989de2135c529ef7fb8b27e16aaa2cb1d1b36dd2979767822f9895"
+        }
+      },
+      "producerIndex": 65,
+      "relative": "src/core/sample_usage.c",
+      "source": {
+        "bytes": 8253,
+        "sha256": "14520084e266041ea257bc7e1b5145f9322c5549e4e4377f5b962232f089b160"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 10474,
+          "sha256": "df0866db56785d0b57484b6c403d1891a97ea2037adff1adb560db140516c402"
+        },
+        "individualStackEntries": 24,
+        "largestIndividualStackBytes": 540,
+        "object": {
+          "bytes": 12388,
+          "sha256": "30480c630271bc2ea1a2a702ad3fe27ebf94c012bd8c699e140363b3f55f2089"
+        },
+        "receipt": {
+          "bytes": 38226,
+          "sha256": "4082efa875a64f59b46afdeaa20561cb810f68967b326b3788dcbb2909dcb5d8"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 28,
+        "actualSDKInputs": 23,
+        "independentReview": {
+          "bytes": 22562,
+          "sha256": "c480bce31ede405dfb4255a48352f69f63900ca51a2b2909396b63c6449219da"
+        },
+        "receipt": {
+          "bytes": 34079,
+          "sha256": "fa55f390b10a33b384784db0396d3a924a6a482cd7eaae53ebdf60008e44b24b"
+        }
+      },
+      "producerIndex": 66,
+      "relative": "src/editor/workflow.c",
+      "source": {
+        "bytes": 24920,
+        "sha256": "768dba18085aeb8e5c815a558ecf233f57652bd5762bbbe866d0ffbce519b6ca"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9360,
+          "sha256": "d2aef79d2942f2b3d38b4141357a1afa95de2b2decc3885f19b8b8cc0d1b9c17"
+        },
+        "individualStackEntries": 9,
+        "largestIndividualStackBytes": 56,
+        "object": {
+          "bytes": 1888,
+          "sha256": "bdd9273f00a057184bf213e7cee0f9d01ac58ba228dceed3797f5bd24e72b48b"
+        },
+        "receipt": {
+          "bytes": 29026,
+          "sha256": "7468977c0e8cf9b7032c79525b39b1ee7fccb388aa3828f48479586d52fcca89"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 6,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14281,
+          "sha256": "5611505dcf1a88f9b568da5ec79a4fdf71f779c1169157a58d5f5078800c10fe"
+        },
+        "receipt": {
+          "bytes": 23092,
+          "sha256": "4805711eae14a081f2b85bbcd6b32d987e7ac6ed88aee4981d6a2e976868df40"
+        }
+      },
+      "producerIndex": 67,
+      "relative": "src/editor/sample_range.c",
+      "source": {
+        "bytes": 5626,
+        "sha256": "694e14d1a665f2a9b5c844a40e79a27ad1c56eedd5a2c6e379aace8f235980c4"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9383,
+          "sha256": "a844b3425a13ce420ebbe79cbbb91e7059fc6a8d70798fce511e2ee13016b547"
+        },
+        "individualStackEntries": 11,
+        "largestIndividualStackBytes": 180,
+        "object": {
+          "bytes": 3120,
+          "sha256": "07dac4c161c9d5f21ba6efb4ef3591b44526b604c5c35aeb962f5974c790af05"
+        },
+        "receipt": {
+          "bytes": 29433,
+          "sha256": "2fc28dfa693806eab4789996f239bbecd4961bc80e59563e0ad59a0329d9b54d"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 7,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14644,
+          "sha256": "182669a0bb8c1004586cb91fff1b178a61971dae75e1527cccf6324d565650e9"
+        },
+        "receipt": {
+          "bytes": 23574,
+          "sha256": "29da7960ba971083d6bb0a906d8b48e66688c0f0b599239ad2128eb4dc396d7b"
+        }
+      },
+      "producerIndex": 68,
+      "relative": "src/editor/wave_summary.c",
+      "source": {
+        "bytes": 8496,
+        "sha256": "3e4501324e5888cf6c7b3497c7c6dcb60ef8dcf75e4a53d4d57b1222ae06ff34"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 9504,
+          "sha256": "6b37bd1faf2b38a49afd1638c05ea0df03db7cbad201fa71bb1b78d99128b3d1"
+        },
+        "individualStackEntries": 11,
+        "largestIndividualStackBytes": 1532,
+        "object": {
+          "bytes": 4188,
+          "sha256": "9d218405b98f1775d08e22e8935caa63e2edf32832e4fe83408a212add319714"
+        },
+        "receipt": {
+          "bytes": 29901,
+          "sha256": "3f08a6ecd2f3cf5fe9f46550c2a543ea5e3fb69e5eebb0322c548ef168946169"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 8,
+        "actualSDKInputs": 20,
+        "independentReview": {
+          "bytes": 14950,
+          "sha256": "dce1735858fbfbe373459736dda769011669b55c6b343eb32466e7a6b363ddb6"
+        },
+        "receipt": {
+          "bytes": 23979,
+          "sha256": "ace84b09bff6b2f7105c16a5d1d4d8c9dea7c5751fe31e53596af642e8a175a4"
+        }
+      },
+      "producerIndex": 69,
+      "relative": "src/core/event_resource.c",
+      "source": {
+        "bytes": 11524,
+        "sha256": "77b4dd85cd2240c8ac0aa9037a5acfcbccc3fa7c70ae5e548c406fe063846970"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 14404,
+          "sha256": "755d5a08419fb0dc1b0b72bb4098f56e8587c834cd5b24fa804dec64413eaf88"
+        },
+        "individualStackEntries": 8,
+        "largestIndividualStackBytes": 100,
+        "object": {
+          "bytes": 4356,
+          "sha256": "b4cb028941978b94e6894272565d4d071c96852b30214ba0b8df141d1ce6096a"
+        },
+        "receipt": {
+          "bytes": 31356,
+          "sha256": "39e04b9d657777a353cb4938b4a6391458f836ba7078434204f46c4aecfa6a61"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 2,
+        "actualSDKInputs": 32,
+        "independentReview": {
+          "bytes": 16185,
+          "sha256": "c9aa1953fb1ef830648aba922569ce504eb4effbc968dc09d48154d2791bb898"
+        },
+        "receipt": {
+          "bytes": 25826,
+          "sha256": "5ad75481d33c833019fb467480d77f94566034d008c321a1e95537c223893839"
+        }
+      },
+      "producerIndex": 70,
+      "relative": "src/native/native_replay_cia_stop.c",
+      "source": {
+        "bytes": 14198,
+        "sha256": "add9468b719ea7f3b7185745e5ef6d2a4a2ba367becbb5af0dbdfdbf6ea5d7da"
+      }
+    },
+    {
+      "nativeObject": {
+        "independentReview": {
+          "bytes": 13008,
+          "sha256": "0189d002aa2b0287774770dc1245cdd70c97b9e2c4e64c9b6ce24dae05a81554"
+        },
+        "individualStackEntries": 3,
+        "largestIndividualStackBytes": 32,
+        "object": {
+          "bytes": 824,
+          "sha256": "6fd48f7461cc0cc026a5e2e98dc855c3d32035f7d099701b6dfff8f45f2266e9"
+        },
+        "receipt": {
+          "bytes": 39958,
+          "sha256": "00213b83616d6824acba9c69ab2e616c9e3b3e0c287e2d13afd08dff9cbc53d9"
+        }
+      },
+      "preprocess": {
+        "MEqualsI": true,
+        "actualProjectInputs": 34,
+        "actualSDKInputs": 23,
+        "independentReview": {
+          "bytes": 25004,
+          "sha256": "380ac3eaf7b84202862a3b1ce959ec33d8d2b237a11798b59d78edf27f902548"
+        },
+        "receipt": {
+          "bytes": 37537,
+          "sha256": "0da9f4f04444dd757de16c2a8d3216de4f1d0136be4f4c2d17f7ede3bcb262ae"
+        }
+      },
+      "producerIndex": 71,
+      "relative": "src/native/paula_stop_action.c",
+      "source": {
+        "bytes": 1321,
+        "sha256": "5330c1c93a544e92cb6f2d87feeb1f5b88dad35f964ef1524d226b3b86086a71"
+      }
+    }
+  ],
+  "progress": {
+    "nativeAssemblerCommands": 72,
+    "nativeCodegenCommands": 72,
+    "nativeLinkCommands": 0,
+    "nativeObjectInspectorCommands": 72,
+    "nativeObjects": 72,
+    "nativePreprocessCC1Commands": 144,
+    "originalPositiveOwnedClosures": 360,
+    "plannedCProducers": 72,
+    "preprocessed": 72,
+    "remainingCObjects": 0,
+    "remainingCPreprocess": 0,
+    "retainedOwners": 0
+  },
+  "protection": {
+    "allMapsRawGuardRawREADYEqual": true,
+    "metadataOnlyNotHydrated": 10,
+    "strictPreservedPaths": 68,
+    "targetOperations": 0,
+    "unrelatedDirtyPaths": 16
+  },
+  "qualificationManifests": {
+    "orderedCObjects": {
+      "bytes": 366628,
+      "sha256": "3ff47349731e86f8c54f9b8999e45da18360157a9b6a23089a9020468971e028"
+    },
+    "preprocess": {
+      "bytes": 87765,
+      "sha256": "5bf0d7f833aab97e3ea23a25c81b1d4fc7c0b008361d0b4aa91664011c9ad6dd"
+    }
+  },
+  "schema": "pt24g-native-application-c-object-build-v1",
+  "state": "PASS_ALL_72_NATIVE_C_PREPROCESS_AND_UNLINKED_OBJECT_STEPS_ONLY"
+}

@@ -2,16 +2,18 @@
 
 ## Private application compilation —19 October2026
 
-The private application composition now passes genuine native preprocessing for
-8 of its 72 C producers and object/assembly generation for five: the frontend,
-Paula backend, CIA retirement primitive, editor STOP glue and editor lifetime
-code. Every listed native worker completed with its original owned closure and
-unchanged input/preservation checks. The remaining 64 preprocessing and 67 object
-steps, replay/provider selection, full link/ABI review and complete application
-runtime are still pending. Compiler stack reports are individual frames, not a
-whole Task/OS/IRQ bound. This build work leaves the default frontend and accepted
-layout unchanged and grants no new Amiberry, A1200/AmiGUS or listening acceptance.
-See the [partial native build receipt](test-evidence/native_application_partial_build_20261019.json).
+The private application composition now passes genuine native preprocessing and
+object/assembly generation for all 72 C producers. Independent saved reviews
+bind every original result and source to its actual object; all 360 native tool
+workers completed with positive owned closure and unchanged input/preservation
+checks. Replay/runtime support admission, actual library provider selection,
+full application link/ABI review and runtime testing remain pending. Compiler
+stack reports describe individual frames, not a whole Task/OS/IRQ bound. The
+default frontend and accepted layout remain unchanged. These build results grant
+no new Amiberry, A1200/AmiGUS or listening acceptance. See the
+[complete C object build receipt](test-evidence/native_application_c_objects_20261019.json).
+The earlier [partial snapshot](test-evidence/native_application_partial_build_20261019.json)
+remains preserved with its original scope.
 
 ## Full-Paula failure capture and application lifetime models —19 October2026
 

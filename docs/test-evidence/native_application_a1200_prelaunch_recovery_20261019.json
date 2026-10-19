@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "scope": "Complete private application A1200 prelaunch attempt and separate owned recovery",
+  "candidate": {
+    "bytes": 362864,
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "priorAmiberryQualification": "Managed-service cycles receipt for the same bytes",
+  "physicalAttempt": {
+    "status": "FAILED_BEFORE_APPLICATION_LAUNCH",
+    "phase": "First guarded TCP connection",
+    "originalReturnCode": 1,
+    "applicationLaunches": 0,
+    "fileTransfers": 0,
+    "ENVChanges": 0,
+    "browserControlAcquired": false,
+    "connectionRetried": false,
+    "rootCause": "Unqualified; original connection returned an OSError"
+  },
+  "recovery": {
+    "status": "ACCEPTED_AFTER_INDEPENDENT_SAVED_REVIEW",
+    "allSixOriginalHoldsPreserved": true,
+    "firstScopedReleaseVerified": true,
+    "separateOriginalEmulatorReturn": [
+      "startup/connect/ping RC0",
+      "guarded disconnect RC0",
+      "owned emulator stop RC0"
+    ],
+    "savedLauncherFilesRestored": 2,
+    "bodyAndNineIdentityFieldsRestored": true,
+    "ctimeRestored": false,
+    "originalEndpointRestoredAndDisconnected": true,
+    "preexistingManagedServiceKeptRunning": true,
+    "independentFinalOwnedAbsenceAndPublicRelease": true,
+    "finalPhase": "EMPTY",
+    "finalArchiveCount": 190,
+    "rootAcceptedRecovery": true
+  },
+  "acceptance": {
+    "A1200Application": "NOT_RUN",
+    "AmiGUS": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "defaultFrontendAdoption": "NOT_QUALIFIED"
+  },
+  "preservation": {
+    "unrelatedDirtyPaths": 16,
+    "strictProtectedInputs": 68,
+    "metadataOnlyOriginalBodiesOpened": 0,
+    "failedOriginalEvidence": "PRESERVED"
+  },
+  "independentRecoveryReviewSHA256": "a70c8610356af8195ae26619ee4b2211473cb8fc568b60614aeebdb3d3b99a72"
+}

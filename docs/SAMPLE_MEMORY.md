@@ -1,5 +1,17 @@
 # Sample memory and playback ownership
 
+## Real A1200 prelaunch attempt —19 October2026
+
+The exact application already qualified in Amiberry did not launch on the A1200:
+the first guarded TCP connection failed. No file transfer, ENV change or browser
+control occurred, and the failed connection was not retried. Separate verified
+recovery preserved all six HOLD records, released the failed scope, restored the
+original emulator endpoint in a distinct window, restored the two launcher files,
+and released that window after independent absence checks. The pre-existing
+managed service stayed running. Independent saved review and a separate Root
+settlement accept recovery only. A1200 application, AmiGUS and listening remain
+untested. See the [prelaunch failure and recovery receipt](test-evidence/native_application_a1200_prelaunch_recovery_20261019.json).
+
 ## Private application compilation —19 October2026
 
 The private application composition now passes genuine native preprocessing and

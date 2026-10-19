@@ -181,6 +181,66 @@
       "private_diagnostic_supported_pre_add_guards": 19,
       "private_diagnostic_transform_methods": 15,
       "private_inputs_guard_preservation_unchanged": true,
+      "private_native_build": {
+        "amiberry": "NOT_RUN",
+        "default_native_selected": false,
+        "guard_inputs_preservation_unchanged": true,
+        "link": {
+          "candidate": {
+            "bytes": 17456,
+            "crc32": "FB4A0218",
+            "sha256": "e06e67260527ad46ba3417b3bd02e770e8b22a90debdab3e81255ab0c378edfe"
+          },
+          "final_api_abi": "PASS_STATIC_ONLY",
+          "independent_saved_review_sha256": "e85651b2e1ccb301d8c1254d118887713c53ecc45a0078aee9a968b325194386",
+          "loads": 11,
+          "objects": 4,
+          "root_receipt_sha256": "606a31d3868ea9452c80607bc84e337f6db4de912b2b552d48f058ccfee31878",
+          "workers": 5
+        },
+        "object": {
+          "bytes": 5844,
+          "independent_saved_review_sha256": "8ca2ef1915e3fe5f83c21bffbbe60d7413a8a88bce4df73fff5be9040368b66b",
+          "largest_individual_compiler_stack_bytes": 76,
+          "root_receipt_sha256": "0ad6d89ec323a7bf94903444a8db06084b460cd70d0449440889cc8214970af6",
+          "sha256": "c7970c0e8cc693c207b94068f9dfcc8b6c387ea46eab630b9eb589cdf93a002f",
+          "whole_irq_task_stack_qualified": false,
+          "workers": 3
+        },
+        "original_owned_closure": true,
+        "physical": "NOT_RUN",
+        "preprocess": {
+          "actual_platform_builtins": 9,
+          "dependency_line_marker_sets_equal": true,
+          "forced_platform_macros": false,
+          "independent_saved_review_sha256": "d48fe5b41286da5ac5cc7d586fbaf46f27f8e9a2f4c9922948ae145c5beb0830",
+          "project_sources": 4,
+          "root_receipt_sha256": "0c3565ce10234bcb85b910a74be4f88e2492812b4836e83148858c01cf98dc11",
+          "selected_sdk_headers": 46,
+          "workers": 2
+        },
+        "static_abi": {
+          "all_four_objects_exact_after_declared_relocations": true,
+          "current_opaque_resource_graphics_isr_unknown_refusal_paths_reviewed": true,
+          "diagnostic_ram_fields": 6,
+          "hunk_sections": 4,
+          "independent_saved_review_sha256": "78089e3fc95cd72efe5f9e4e3045caf83adc22ff19816037ef45db5eab946942",
+          "mechanical_host_inputs": 36,
+          "mechanical_host_worker_seconds": 0.152930500000366,
+          "mechanical_original_owned_closure": true,
+          "native_execution": "NOT_RUN",
+          "physical": "NOT_RUN",
+          "relocations": 477,
+          "reviewer_source_authorship_overlap_disclosed": true,
+          "root_receipt_sha256": "f1c6c45ca34dcec89534ee16106170cd5ab8b79377d3e1d6f79d0c7d82858eea",
+          "root_separate_acceptance": true,
+          "routes_use_section_and_relocation_target": true,
+          "selected_external_providers": 15,
+          "status": "PASS_STATIC_ONLY",
+          "symbols": 110
+        },
+        "status": "PASS_PRIVATE_NATIVE_BUILD_AND_STATIC_ABI_NOT_RUNTIME"
+      },
       "private_original_owned_closure": true,
       "status": "PASS_HOST_ONLY",
       "trace_reason8_slot6_reserved_unobserved": true,
@@ -351,7 +411,7 @@
     "symbols": 104
   },
   "pending": [
-    "Build and qualify a distinct exact native candidate for the corrected resource contract",
+    "Run the corrected resource-contract candidate once in exact Amiberry qualification, then separately on A1200 if eligible",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",

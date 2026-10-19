@@ -2,6 +2,14 @@
 
 ## Checked CIA retirement qualification —18 October2026
 
+On19 October the separate acquisition diagnostic's saved native refusal was
+traced to an unsupported assumption about a CIA resource Library header. The
+corrected opt-in primitive passes its opaque-resource HOST regression. Its
+distinct private diagnostic also passes genuine native preprocessing, object
+generation, static linking and HUNK-aware API/ABI and callgraph review. Exact
+Amiberry/A1200 execution remains pending. The default frontend stays unselected. Prior failures
+and their independently verified recovery/release evidence remain preserved.
+
 The default-off CIA ownership primitive now has passing HOST models, genuine
 native preprocessing/object and replay assembly, and a separate static-linked
 CIA-only qualifier. The saved audit checks actual API providers and all four
@@ -15,9 +23,10 @@ completion. A separate private generation successor passes 12 sequential CIA
 model cycles and 31 owner groups under HOST sanitizers. Actual native repeated
 PLAY, full cleanup and default frontend adoption remain open. A distinct acquisition
 refusal diagnostic passes its C model, 15 replay-transform methods, genuine native
-C/replay builds and HUNK-aware static link/ABI review. Its separate binary refusal
-decoder passes 24 pure HOST tests. Exact diagnostic emulator execution remains pending;
-no physical qualification follows from these build results. See
+C/replay builds and HUNK-aware static link/ABI review. Its one exact Amiberry
+attempt returned RC20; the saved bytes led to the correction above. Its separate
+binary refusal decoder passes 24 pure HOST tests. No physical qualification
+follows from these build results. See
 [the implementation and evidence limits](NATIVE_REPLAY_CIA_LIFETIME.md).
 
 ## Checked document commit boundary — 18 October 2026

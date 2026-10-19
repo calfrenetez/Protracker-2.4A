@@ -5,16 +5,21 @@
 On19 October the separate acquisition diagnostic's saved native refusal was
 traced to an unsupported assumption about a CIA resource Library header. The
 corrected opt-in primitive passes its opaque-resource HOST regression. Its
-distinct private diagnostic also passes genuine native preprocessing, object
-generation, static linking and HUNK-aware API/ABI and callgraph review. Exact
-Amiberry/A1200 execution remains pending. The default frontend stays unselected. Prior failures
+distinct 17,456-byte private diagnostic passes genuine native builds, static
+API/ABI review and one exact Amiberry run: RC0 with the complete 198-byte source
+oracle for ISR entry/exit, exact-server retirement and stable counters. Independent
+absence/restoration, one public release, one owned-service SIGTERM and a separate
+final EMPTY check passed. A1200 execution remains untested. The default frontend
+stays unselected. This standalone result does not qualify audio/DMA or cache/master
+release. Prior failures
 and their independently verified recovery/release evidence remain preserved.
 
 The default-off CIA ownership primitive now has passing HOST models, genuine
 native preprocessing/object and replay assembly, and a separate static-linked
 CIA-only qualifier. The saved audit checks actual API providers and all four
-HUNK sections using section-aware relocation routes. Its one exact Amiberry
-attempt returned RC20 without acquisition; no retirement pass is established.
+HUNK sections using section-aware relocation routes. The original 15,960-byte
+qualifier's Amiberry attempt returned RC20 without acquisition; that failed
+candidate has no retirement pass.
 Recovery and independent release completed, and the failed candidate is preserved.
 A private legacy Paula successor passes 21 owner and 12 typed STOP/Apply/
 status HOST groups; uncertain ownership retains state and cannot report STOPPED.

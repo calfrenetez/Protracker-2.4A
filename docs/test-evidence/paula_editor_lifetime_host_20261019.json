@@ -1,0 +1,88 @@
+{
+  "acceptance": {
+    "defaultEnabled": false,
+    "fullFrontend": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "nativeApplicationBuild": "NOT_RUN",
+    "nativeApplicationLinkAndABI": "NOT_RUN",
+    "nativeBackendRelease": "NOT_QUALIFIED",
+    "physical": "NOT_RUN",
+    "timing": "NOT_QUALIFIED"
+  },
+  "actualSelection": [
+    "Actual editor barrier and disposal implementation",
+    "Exact typed STOP and STOP/Apply consumer",
+    "Proposed application lifetime helper"
+  ],
+  "correctedToolSelection": "Qualified direct Clang with explicit genuine versioned macOS SDK root; five selected SDK body pins and five directory identities, not full transitive SDK qualification",
+  "date": "2026-10-19",
+  "host": {
+    "ASan": true,
+    "UBSan": true,
+    "allInputsProtectedGuardRawREADYEqual": true,
+    "archivePairs": 35,
+    "assertionsEnabled": true,
+    "closureReserveEachSeconds": 3,
+    "compilationCommands": 1,
+    "compileSeconds": 10,
+    "compilerAndSanitizerDiagnosticBytes": 0,
+    "groups": 17,
+    "inputFacts": 397,
+    "modelRuns": 1,
+    "originalOwnedClosureConfirmed": true,
+    "protectedEntries": 68,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "runSeconds": 2,
+    "seconds": 2.1946531670037075,
+    "sourceBodiesStaged": 174,
+    "stdoutBytes": 865,
+    "stdoutSHA256": "bb1c649001d262dbdf43f7ffebc2959fc1613a0e38b66c99988e3c8496761eda",
+    "warningsAsErrors": true,
+    "wholeSeconds": 40
+  },
+  "limits": [
+    "The 17 groups test composition with modeled endpoints; they cannot qualify real device, DMA, IRQ or cache completion.",
+    "The private 72-unit native application requires separate build, link and runtime evidence.",
+    "No historical failed run or prior standalone qualifier pass is relabeled as application acceptance."
+  ],
+  "modeledEndpoints": [
+    "Native audio backend",
+    "Allocator",
+    "Editor initialization",
+    "Document retirement",
+    "Lower destructors"
+  ],
+  "preservedFirstCompileFailure": {
+    "cause": "System header root not selected; stdio.h unavailable",
+    "diagnosticBytes": 230,
+    "modelRuns": 0,
+    "replayed": false
+  },
+  "receipts": {
+    "proposalSource": {
+      "bytes": 60622,
+      "sha256": "128eef24de9da35a03801876703097dbcdcd2fbc91e2b8b6b8baff353afcf3ca"
+    },
+    "root": {
+      "bytes": 2965,
+      "sha256": "d4ed3363c724cfd411dcfae2fed4714adc4cfa217a578d39f62a76b589330e90"
+    },
+    "savedReview": {
+      "bytes": 7378,
+      "sha256": "f18a5831f4e77faa9751846eba253b4948904e2a50533226607dfbf4e499f98f"
+    }
+  },
+  "schema": 1,
+  "scope": "Private frontend memory-lifetime composition HOST model only",
+  "verifiedBehaviors": [
+    "Unconfirmed audio release retains owners and prevents destructors",
+    "Actual mutation barrier veto preserves the project",
+    "Staged allocation or initialization failure preserves the live producer",
+    "Late barrier veto prevents frees",
+    "Uncertain document retirement cannot publish a replacement",
+    "Successful replacement rebinds the editor to the final document address",
+    "STOP/Apply applies work only after confirmed release",
+    "Exit refusal cannot reach destructors"
+  ]
+}

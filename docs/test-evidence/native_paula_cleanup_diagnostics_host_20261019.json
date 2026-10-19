@@ -1,0 +1,99 @@
+{
+  "acceptance": {
+    "DMAAndDeviceCompletion": "NOT_QUALIFIED",
+    "correctedCaptureNativeRuntime": "NOT_RUN",
+    "defaultEnabled": false,
+    "fullFrontend": "NOT_RUN",
+    "listening": "NOT_RUN",
+    "physical": "NOT_RUN"
+  },
+  "candidate": {
+    "bytes": 97436,
+    "crc32": "8FC95DA5",
+    "sha256": "f355fbaec72197188ada602cb2c874cf347716285d03fa6de06bde1df4f4b8cb"
+  },
+  "capturePolicy": {
+    "exactFiles": [
+      "native.log",
+      "control.log"
+    ],
+    "grantsCompletionOrReturnCodeOrCustody": false,
+    "maximumListedBytes": 8192,
+    "maximumPrefixBytesPerRequest": 2048,
+    "maximumRequestsPerFile": 1,
+    "readsAfterFailureOrHold": false,
+    "successOracleAndRC0StackFiveFileGatesUnchanged": true,
+    "transportBudgetSeconds": 2,
+    "trigger": "Only an oversized nonterminal native log during the original admitted operation"
+  },
+  "correctedCaptureHOST": {
+    "allInputsProtectedGuardRawREADYEqual": true,
+    "archivePairs": 31,
+    "causalFailureSubcases": 8,
+    "closureReserveSeconds": 3,
+    "inputFacts": 67,
+    "methods": 17,
+    "originalOwnedClosureConfirmed": true,
+    "protectedEntries": 68,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "seconds": 0.4426422079995973,
+    "sourceLeaves": 14,
+    "wholeSeconds": 40,
+    "workerInvocations": 1,
+    "workerSeconds": 5
+  },
+  "date": "2026-10-19",
+  "limits": [
+    "Directory size cannot establish the failed native log contents or failure cause.",
+    "The HOST endpoints and clock are memory models; the native capture remains untested.",
+    "Review authorship overlap is disclosed in private evidence; Root separately executed and checked results.",
+    "Historical build/HOST and failed transaction records are preserved unchanged."
+  ],
+  "preservedEmulatorAttempt": {
+    "archivePairs": 380,
+    "attempts": 1,
+    "emptyPrecreatedCompletionFileIsNotCompletion": true,
+    "listedNativeLogBytes": 581,
+    "nativeLogBodyCaptured": false,
+    "nativeReturnCode": null,
+    "outerReturnCode": 1,
+    "replayed": false,
+    "requiredSuccessBytes": 463,
+    "seconds": 156.516432417,
+    "status": "UNQUALIFIED"
+  },
+  "receipts": {
+    "captureHostRoot": {
+      "bytes": 2186,
+      "sha256": "7f961d75f892c7a065b75c754ff3912e9cfd2b961edbc0ec04f0afddfa6e6fe4"
+    },
+    "captureHostSavedReview": {
+      "bytes": 2914,
+      "sha256": "2cf001492c7f1352224b4de3e0ea06d6c6ad1ec2e730888438cbc75a054bcde4"
+    },
+    "failedRuntimeSavedReview": {
+      "bytes": 4494,
+      "sha256": "5d0d4b1a55d0cfe718b03885338b023039e19e31a77b0606dec339cca8fdeff1"
+    },
+    "recoveryRoot": {
+      "bytes": 3828,
+      "sha256": "ba28d813044cf068819a1c2f3305b3309cba2c6b9ea0201470d0cd84f2385410"
+    },
+    "recoverySavedReview": {
+      "bytes": 6161,
+      "sha256": "a529d98617e4b9672b88a387ef1e351f45ecb3285d1e88c67db10d4c8a24c91d"
+    }
+  },
+  "schema": 1,
+  "scope": "Private full-Paula failed emulator attempt, verified recovery and distinct HOST-only failure capture",
+  "separateRecovery": {
+    "archivePairs": 35,
+    "exactStagingRemoved": true,
+    "independentFinalEmpty": true,
+    "independentRestorationAndAbsenceVerified": true,
+    "publicOwnershipReleaseVerified": true,
+    "savedLauncherFilesRestored": 2,
+    "verifiedOwnedProcessesStopped": 2
+  }
+}

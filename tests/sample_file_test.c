@@ -25,7 +25,8 @@ int main(int argc,char **argv)
         assert(pt_wav_encode(&pcm,expected,70000,&w)==PT_WAV_OK && w==n);
         b.fail=1;assert(pt_sample_wav_save(argv[1],&pcm,&a)==PT_SAVE_MEMORY);assert(access(argv[1],F_OK)!=0);
         b.fail=0;assert(pt_sample_wav_save(argv[1],&pcm,&a)==PT_SAVE_OK && !b.live);
-        if(peak)assert(peak==b.peak);peak=b.peak;
+        if(peak)assert(peak==b.peak);
+        peak=b.peak;
         assert(pt_sample_wav_save(argv[1],&pcm,&a)==PT_SAVE_PUBLISH && !b.live);
         f=fopen(argv[1],"rb");assert(f && fread(actual,1,n,f)==n && fgetc(f)==EOF && !fclose(f));
         assert(!memcmp(expected,actual,n));

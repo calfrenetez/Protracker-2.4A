@@ -1,0 +1,324 @@
+{
+  "baseCommit": "da75ddffb98287a19a4df20e57ce2eaed6df9803",
+  "canonicalIntegration": {
+    "files": [
+      {
+        "path": "docs/format-hardening/README.md",
+        "tested": {
+          "bytes": 4598,
+          "sha256": "cfee160098590e36664e3bd0ec9e0dc0e96d33a9ae4775df67957b43e10644e9"
+        }
+      },
+      {
+        "path": "tests/fixtures/format-hardening/README.md",
+        "tested": {
+          "bytes": 1094,
+          "sha256": "907022dc19aaf6b5d30ba8592db8f944f824ea4d1f9f15ccec26a3db90248d8f"
+        }
+      },
+      {
+        "path": "tests/format_hardening/corpus_campaign.c",
+        "tested": {
+          "bytes": 9189,
+          "sha256": "884b3dbf299c858a6f8cc66a9b23e089e8fe3773a3acaf7c50bd4d87b99bd6a2"
+        }
+      },
+      {
+        "path": "tests/format_hardening/io_campaign.c",
+        "tested": {
+          "bytes": 18932,
+          "sha256": "6000f616955a00e623c641161620ae3ac6672e8c893b3403d39f9165aafaa959"
+        }
+      },
+      {
+        "path": "tests/format_hardening/io_faults.c",
+        "tested": {
+          "bytes": 3134,
+          "sha256": "c884222931ca8c327cfc6326e8ccad2c54e911f45be87440878b3014a91ed46d"
+        }
+      },
+      {
+        "path": "tests/format_hardening/io_faults.h",
+        "tested": {
+          "bytes": 1088,
+          "sha256": "98eb5ca270fcf6733f6b034e64fff820063e90c70e52635190fa8aa9e8e12b77"
+        }
+      },
+      {
+        "path": "tests/format_hardening/io_redirect.h",
+        "tested": {
+          "bytes": 203,
+          "sha256": "4e029af68761855f5dc610b426c43b4bb090ea75962275a8c122bf241e88dcd6"
+        }
+      },
+      {
+        "path": "tests/format_hardening/ledger.h",
+        "tested": {
+          "bytes": 1846,
+          "sha256": "ff94b57dc759edd7de65d74fc088f776a55c4b245ce667a632e6276cb0c1bdbc"
+        }
+      },
+      {
+        "path": "tests/format_hardening/make_corpus.py",
+        "tested": {
+          "bytes": 9926,
+          "sha256": "60b5a868f1b9b9c638c836a756df08db4c6a3caa01095aefb6d1d1825d3a55e7"
+        }
+      },
+      {
+        "path": "tests/sample_file_test.c",
+        "tested": {
+          "bytes": 2780,
+          "sha256": "d47a1da4fb88846477890ccffefc3b3cf340847ff1dc55da278dca7dfacd2d5a"
+        }
+      },
+      {
+        "path": "tests/sample_raw_file_test.c",
+        "tested": {
+          "bytes": 2690,
+          "sha256": "feca546739343d380181fd657f325160e43e65e4aee1fd80a0819ea0985308a2"
+        }
+      },
+      {
+        "path": "tests/sample_svx_file_test.c",
+        "tested": {
+          "bytes": 2573,
+          "sha256": "2cf0008178841dc338e9d2ee8064cb7dbb33bd30f1bf82ee54afd0b2005cce32"
+        }
+      },
+      {
+        "path": "tests/test_format_hardening.py",
+        "tested": {
+          "bytes": 9293,
+          "sha256": "f98e27b1634a4b243fcdf2e0432d6250d87105a02b6dd748f7057e9480c59813"
+        }
+      }
+    ],
+    "metadataOnlyPathsNotHydrated": 10,
+    "productionFilesUnchanged": 43,
+    "protectedUnrelatedPathsUnchanged": 16,
+    "strictPreservedPathsUnchanged": 68,
+    "testedPrivateBodiesEqualCanonical": true
+  },
+  "cohorts": [
+    {
+      "modules": 17,
+      "modulesSelected": [
+        "test_mod_inspect",
+        "test_project_validation",
+        "test_project_reader",
+        "test_mod_import",
+        "test_project_import",
+        "test_pp20",
+        "test_mod_stream",
+        "test_file_load",
+        "test_file_save_memory",
+        "test_sample_file",
+        "test_sample_svx_file",
+        "test_convert_cli",
+        "test_document",
+        "test_project_stream",
+        "test_sample_raw_file",
+        "test_mod_round8",
+        "test_format_hardening"
+      ],
+      "positiveTestMethods": 21,
+      "receipt": {
+        "bytes": 3740,
+        "sha256": "9d7210a98a8a00f4939b755f1c1da24c6382f9f94f571a089e65a50ebeba65fd"
+      },
+      "role": "exact returned revision; baseline plus original focused campaign",
+      "state": "PASS",
+      "tier": "HOST_ONLY"
+    },
+    {
+      "modules": 1,
+      "modulesSelected": [
+        "test_format_hardening"
+      ],
+      "positiveTestMethods": 4,
+      "receipt": {
+        "bytes": 792,
+        "sha256": "16d83a345d3eb19ef97919100f2d986b7bdc1e50af530e6aeda87750927c0335"
+      },
+      "role": "final amended focused campaign",
+      "state": "PASS",
+      "tier": "HOST_ONLY"
+    },
+    {
+      "modules": 2,
+      "modulesSelected": [
+        "test_raw_import",
+        "test_sample_dispatch"
+      ],
+      "positiveTestMethods": 2,
+      "receipt": {
+        "bytes": 976,
+        "sha256": "946480e7bf5498f1deb6a22f56f4adabf305074ebe2b6ecec24f29cbb119f977"
+      },
+      "role": "existing canonical RAW-import and sample-dispatch adapters",
+      "state": "PASS",
+      "tier": "HOST_ONLY"
+    }
+  ],
+  "date": "2026-10-19",
+  "finalFocused": {
+    "allocationPaths": 19,
+    "allocationTriggers": 50,
+    "commands": 116,
+    "commandsMatchedExpectedReturncode": true,
+    "corpusCases": 148,
+    "expectedReturncodeCounts": {
+      "0": 53,
+      "20": 63
+    },
+    "faultRecords": 812,
+    "materializedBytes": 342824,
+    "platform": "Darwin arm64",
+    "positiveTestMethods": 4,
+    "rawPins": {
+      "CORPUS_MANIFEST.json": {
+        "bytes": 94578,
+        "sha256": "4810c8d7bf4e5a4e64de853e8f6d226b517cf9ba495e4d43a5aed58d0f15dad2"
+      },
+      "HOST_ENVIRONMENT.json": {
+        "bytes": 737,
+        "sha256": "20d36872a72e3895a5d6042c5947ac873034489cd3b71acb28a330094230b791"
+      },
+      "commands.jsonl": {
+        "bytes": 62352,
+        "sha256": "86a244b37831a9d9fe2180e29d314bc544e1f681e6625a6caf2750a27f9577dc"
+      },
+      "corpus-campaign.stderr.log": {
+        "bytes": 2781,
+        "sha256": "a2ac0f81ce3bed503fbde36964122d1b40fa70b75cbbbfdf4fa77b0c925cc411"
+      },
+      "corpus-campaign.stdout.log": {
+        "bytes": 14271,
+        "sha256": "8021e336f01a0b4b6c7b662e3a1cff64eca8fe534861eac4c725f6c54267ddea"
+      },
+      "io-campaign.stderr.log": {
+        "bytes": 3936,
+        "sha256": "57a5505eabfad44b5f1ba5a93568b1ba8df416ea0aa7a704fd0d6e75c23c6a23"
+      },
+      "io-campaign.stdout.log": {
+        "bytes": 174608,
+        "sha256": "1062faeffd5acbd1744aea2ac650cc9668cd3f066182b0d7874f68ec31e1c578"
+      }
+    },
+    "recordCountsByPath": {
+      "MOD-direct": 42,
+      "MOD-round8": 42,
+      "MOD-round8-16bit": 40,
+      "MOD-round8-24bit": 40,
+      "MOD-tpdf8": 42,
+      "MOD-tpdf8-16bit": 40,
+      "MOD-tpdf8-24bit": 40,
+      "PTG": 54,
+      "PTG-16bit": 42,
+      "PTG-24bit": 42,
+      "RAW": 40,
+      "SVX": 40,
+      "WAV": 40,
+      "allocated": 38,
+      "file-load": 17,
+      "generated": 46,
+      "mod-16-2.mod": 53,
+      "pp20-skip-7.pp20": 30,
+      "ptg-rich.ptg": 28,
+      "streamed": 56
+    },
+    "refusalCases": 106,
+    "retainedTemporaryWarnings": 32,
+    "savePathLabels": [
+      "allocated",
+      "generated",
+      "streamed",
+      "PTG",
+      "MOD-direct",
+      "MOD-round8",
+      "MOD-tpdf8",
+      "WAV",
+      "RAW",
+      "SVX",
+      "PTG-16bit",
+      "MOD-round8-16bit",
+      "MOD-tpdf8-16bit",
+      "PTG-24bit",
+      "MOD-round8-24bit",
+      "MOD-tpdf8-24bit"
+    ],
+    "savePaths": 16,
+    "syscallTriggers": 499,
+    "validCases": 42
+  },
+  "freshEvidenceRefusal": {
+    "existingDirectoryRefused": true,
+    "receipt": {
+      "bytes": 267,
+      "sha256": "8cd277419c4c9e5b1bce0f7d8e020eba81d686b927f82a08b4a8a3ee975b345e"
+    },
+    "sentinelUnchanged": true,
+    "state": "PASS",
+    "subprocessCalls": 0
+  },
+  "incoming": {
+    "changedPaths": 13,
+    "existingTestFixesWhitespaceOnly": true,
+    "existingTestPortabilityFixes": 3,
+    "externalLinuxResult": "PASS for returned revision; not a run of the later root amendment",
+    "productionChanges": 0,
+    "zip": {
+      "bytes": 751634,
+      "sha256": "aa6704c36faecdd5b4a6e0e629fbf6d8c178493fab240493715120ae2bfee0a9"
+    }
+  },
+  "independentSavedResultReview": {
+    "pt24g-file-hardening-amended-host-independent-actual-review-r1.json": {
+      "bytes": 15379,
+      "sha256": "f1e07b1ddba7716b4b2f5f30b19c8fac3393ab02aed7dbd7c14794423e83d4b6",
+      "state": "PASS"
+    },
+    "pt24g-file-hardening-amended-host-independent-actual-review-r2.json": {
+      "bytes": 5536,
+      "sha256": "10b3878a0d7229d3917d6b0c69243595919eaa8906f2b7502c1333e5e4439861",
+      "state": "PASS"
+    }
+  },
+  "limits": [
+    "No new production defect was demonstrated; this change adds regression coverage.",
+    "The two canonical adapter methods are basic existing HOST integration, not exhaustive editor fault injection.",
+    "Root amendments were run on macOS; final amended Linux execution is NOT_RUN.",
+    "Amiberry, native ABI/runtime, A1200, AmiGUS, listening, process-crash and power-loss acceptance are NOT_RUN for this returned work."
+  ],
+  "rootAmendment": {
+    "freshEvidenceDirectoryRequired": true,
+    "fullOldExtentSnapshotsOnBudgetRefusal": true,
+    "precisionSavePaths": [
+      "PTG-16bit",
+      "MOD-round8-16bit",
+      "MOD-tpdf8-16bit",
+      "PTG-24bit",
+      "MOD-round8-24bit",
+      "MOD-tpdf8-24bit"
+    ],
+    "sourceDocumentAndMasterBytesCheckedAtEverySaveReturn": true,
+    "sourceReview": {
+      "receipt": {
+        "bytes": 10564,
+        "sha256": "030637a25646bb4ffe428f3f86bc4f1e3b4a9a51e2d6733ab84bee31904d8345"
+      },
+      "state": "PASS"
+    },
+    "truthfulPlatformFields": true
+  },
+  "sanitizers": {
+    "baselinePP20Ctypes": "separate unsanitized probe",
+    "focusedC": "ASan and UBSan, assertions and -Werror",
+    "leakSanitizer": "disabled on this Mac; explicit live-byte/pointer and descriptor assertions retained"
+  },
+  "schema": "pt24g-host-format-hardening-v1",
+  "state": "PASS",
+  "targetOperations": 0,
+  "tier": "HOST_ONLY"
+}

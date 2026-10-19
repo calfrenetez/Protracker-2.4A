@@ -1,0 +1,98 @@
+{
+  "acceptance": {
+    "A1200": "NOT_RUN",
+    "Amiberry": "NOT_RUN",
+    "nativeLink": "NOT_RUN",
+    "nativeStderr": "UNQUALIFIED",
+    "optionalNativeSourceCompilation": "PASS",
+    "originalObjectTransactions": {
+      "FAILED_ExpectedUnusedSysBaseReference": 1,
+      "PASS": 11
+    },
+    "selectedProviderABI": "NOT_QUALIFIED",
+    "separateCorrectedSavedOutputQualification": "PASS",
+    "wholeTaskIRQStack": "NOT_QUALIFIED"
+  },
+  "coverage": [
+    "Malformed/truncated MOD, PTG and PP20 refusal and every measured allocation failure preserve the full dirty 24-bit document/master.",
+    "Direct 16/24-bit MOD export refuses unchanged; explicit round8 and fixed TPDF export preserve all source storage.",
+    "Classic MOD 0/1/65535 sample-word boundaries, odd and 65536-word refusal, and loop-word encoding.",
+    "Native save producer/write/readback/existing-destination refusal checks with exact run-owned RAM paths."
+  ],
+  "date": "2026-10-19",
+  "evidence": {
+    "elevenObjectsAndOriginalRefusalReview": {
+      "bytes": 42075,
+      "sha256": "e93c8f1cc376fffd450aeb9ed83e669fcccaea909d074e26374b2a38cdfc751a"
+    },
+    "fixtureSourceFreeze": {
+      "bytes": 18845,
+      "sha256": "5bd66335e0f55e920bb424004b0bb7b7ebb71fdb84c1dda862201543e9fb32a2"
+    },
+    "independentPreprocessing": {
+      "bytes": 40845,
+      "sha256": "ced59e15b310735b88e1b01d9b2b075efd2e181836ba6e1a6015e9fc3ba70af2"
+    },
+    "objectArchive": {
+      "bodyBytes": 50743423,
+      "files": 1557,
+      "indexSHA256": "ce4305cb102aa16c3d0b47a2cda3fc589a1d059a991954bfd0f0da17638eefa1"
+    }
+  },
+  "limits": [
+    "This records source compilation and saved objects, not native execution or OS behavior.",
+    "No native short-I/O, EINTR, ENOSPC, fsync, postcommit-cleanup or power-loss fault injection is claimed.",
+    "Valid PP20 decoding, sample-file import, editor adoption, devices, timing and listening are outside this slice.",
+    "Native stderr is not separately captured by the prepared callback. Exact stdout/RC and cleanup require later independent observation.",
+    "The earlier Mac hardening campaign remains separate; its POSIX syscall wrappers do not qualify the Amiga DOS branch.",
+    "The test requires a fresh existing empty RAM directory under the established guarded workflow; an assertion failure preserves uncertain staging."
+  ],
+  "nativeCompilation": {
+    "CUnits": 12,
+    "codegenAssemblerInspectionWorkers": 36,
+    "metadataOnlyBodiesNotOpened": 10,
+    "originalToolReturnCodesAllZero": true,
+    "positiveOriginalOwnedClosures": 60,
+    "preprocessWorkers": 24,
+    "privateSDKHeaders": 128,
+    "retainedOwners": 0,
+    "sourceBodies": 28,
+    "strictPreservedPaths": 68,
+    "targetOperations": 0,
+    "unrelatedDirtyPathsPreserved": 16
+  },
+  "oracleCorrection": {
+    "correctedExecWitnesses": [
+      "AllocMem",
+      "AvailMem",
+      "FreeMem",
+      "TypeOfMem"
+    ],
+    "independentAssociation": {
+      "bytes": 7973,
+      "sha256": "d8df709877f154ebba731db8412b976edcaf57d6b2e70483740d8e2d5bd22b27"
+    },
+    "nativeWorkersReplayed": 0,
+    "originalFailedResult": {
+      "bytes": 39807,
+      "sha256": "60355e7a6eec9f28584f9fa2c3f2e28d62ff35841b5bb0d89ce3957055b8a1a0"
+    },
+    "originalFailurePreserved": true,
+    "reason": "The selected SDK uses ordinary external Exec function entrypoints. SysBase is declared but unused in this translation unit; an undefined SysBase reference is not a valid requirement.",
+    "savedProductQualification": {
+      "bytes": 6190,
+      "sha256": "c9bdce14e38d303932f4e636414c41ecbe913c37991da9d58fdee43cba5ba363"
+    },
+    "stackUsage": "Unit00 stack report has a new current pin, without an original published product pin; individual frames only."
+  },
+  "schema": "pt24g-optional-native32-hardening-source-and-object-v1",
+  "scope": {
+    "audioOrGUI": false,
+    "bytes": 13049,
+    "defaultBuildChanged": false,
+    "nativeDataModel": "8-bit bytes; 32-bit pointer, size_t, long and int",
+    "optionalTestSource": "tests/native_format_hardening32_test.c",
+    "productionSourcesChanged": 0,
+    "sha256": "a8f6d899c83601efe1db6f1158f4a2b95df3d47003abe1cd0b8557b38216297b"
+  }
+}

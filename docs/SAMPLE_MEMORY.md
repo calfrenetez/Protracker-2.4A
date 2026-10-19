@@ -1,5 +1,19 @@
 # Sample memory and playback ownership
 
+## Optional native file-hardening regression source —19 October2026
+
+The optional `tests/native_format_hardening32_test.c` checks malformed imports,
+allocation failures, explicit precision conversion, classic MOD word limits and
+native save refusal while preserving complete masters. Its twelve C units pass
+native preprocessing, code generation and assembly. Eleven object transactions
+passed normally; the remaining transaction preserved a false `_SysBase` symbol
+requirement. Independent checks and a separate qualification accept its existing
+output against the actual Exec function imports, with no compiler replay.
+Linking, selected provider ABI, Amiberry and A1200 execution remain pending.
+This test is not part of the default build. See the
+[native source and object receipt](test-evidence/native_format_hardening_32bit_objects_20261019.json).
+
+
 ## Real A1200 prelaunch attempt —19 October2026
 
 The exact application already qualified in Amiberry did not launch on the A1200:

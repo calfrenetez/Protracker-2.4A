@@ -1,0 +1,60 @@
+{
+  "acceptance": {
+    "a1200": "NOT_RUN",
+    "amiberryCurrentCandidate": "NOT_RUN",
+    "audioDeviceCleanup": "UNQUALIFIED",
+    "defaultFrontend": "UNSELECTED",
+    "host": "PASS",
+    "listening": "NOT_RUN"
+  },
+  "actual": {
+    "archiveBodyPairs": 32,
+    "beforeAfterInputAndProtectionEqual": true,
+    "bodyPinnedPaths": 58,
+    "inputFacts": 93,
+    "metadataOnlyPaths": 10,
+    "methods": 21,
+    "originalOwnedClosureConfirmed": true,
+    "protectedPaths": 68,
+    "rawREADYAndGuardUnchanged": true,
+    "retainedOwners": 0,
+    "returncode": 0,
+    "seconds": 0.463368625001749,
+    "workerInvocations": 1
+  },
+  "bounds": {
+    "closureReserveSeconds": 3,
+    "guestRunnerSeconds": 140,
+    "nativeFailureOutputBytes": 8192,
+    "nativeSeconds": 90,
+    "outerRunnerSeconds": 250,
+    "privateNativeTestCeilingBytes": 103516,
+    "sharedNativeTestCeilingBytes": 524288,
+    "wholeSeconds": 40,
+    "workerSeconds": 5
+  },
+  "candidate": {
+    "bytes": 103516,
+    "crc32": "FB002D90",
+    "role": "Inert compiled fixture; not executed by these HOST checks",
+    "sha256": "6af3231456d73eb805baf20910c80080308a8f9d788152bd9848be0c39a68473"
+  },
+  "date": "2026-10-19",
+  "implementedCorrection": {
+    "addedMethods": 1,
+    "causalRegression": "Actual selector and guard reject obsolete source count, qualifier bytes/hash and native-source hash",
+    "nativeSourceBodies": 40,
+    "nativeSourceUnits": 10,
+    "originalMethodsPreserved": 20,
+    "producerAndGuard": "Bind the exact current native source manifest and qualifier",
+    "stagedHOSTLeaves": 15
+  },
+  "preservation": "Prior unadmitted carrier source and native failure evidence remain preserved; no failed transaction replay.",
+  "reviews": {
+    "independentSOURCE": true,
+    "independentSavedActual": true,
+    "rootActual": true
+  },
+  "schema": "PT24G_FINAL_CLOSE_CARRIER_HOST_EVIDENCE_V1",
+  "scope": "HOST memory-model carrier qualification only"
+}

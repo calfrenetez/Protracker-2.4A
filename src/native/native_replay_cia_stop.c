@@ -63,7 +63,7 @@ static int ordinary(unsigned disabled)
 static int current_locked(void)
 {
     return ordinary(1) && cia_owner.resource && cia_owner.server &&
-        cia_owner.resource->lib_Version>=36 && cia_owner.bit<2 && cia_owner.chip<2 &&
+        cia_owner.bit<2 && cia_owner.chip<2 &&
         cia_owner.hardware==PT_REPLAY_STOP_HARDWARE(cia_owner.chip) &&
         cia_owner.control==(cia_owner.bit?&cia_owner.hardware->ciacrb:&cia_owner.hardware->ciacra) &&
         cia_owner.server->is_Code==cia_owner.server_snapshot.is_Code &&
@@ -91,11 +91,14 @@ uintptr_t pt_native_replay_add_cia_vector(struct Library *cia_resource,
     /* Non-NULL sentinel follows the original AddICRVector refusal branch.
      * Its exact generated call-site branch must be checked before integration. */
     uintptr_t refused=~(uintptr_t)0;
+    /* OpenResource returns an opaque CIA API handle, not a public Library
+     * header/version contract. Exec>=36 below selects the OS API semantics;
+     * the exact named-resource identity is still checked before acquisition. */
     if(cia_owner.phase!=CIA_STOP_NEW || cia_owner.add_issued || !SysBase ||
        SysBase->LibNode.lib_Version<36 ||
        (int)(signed char)SysBase->IDNestCnt!=-1 ||
        (int)(signed char)SysBase->TDNestCnt!=-1 ||
-       !cia_resource || cia_resource->lib_Version<36 || !server || !server->is_Code ||
+       !cia_resource || !server || !server->is_Code ||
        pt_replay_enabled || bit>=2)return refused;
     if(hardware==PT_REPLAY_STOP_HARDWARE(0))chip=0;
     else if(hardware==PT_REPLAY_STOP_HARDWARE(1))chip=1;

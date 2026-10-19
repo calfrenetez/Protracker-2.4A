@@ -6,6 +6,7 @@
 #include "native_replay_cia_stop_stubs.h"
 #include <assert.h>
 #include <string.h>
+#include <stdlib.h>
 struct ExecBase *SysBase;
 uintptr_t pt_replay_stop_stub_sp;
 volatile struct CIA pt_replay_stop_stub_hardware[2];
@@ -15,7 +16,9 @@ struct Library * volatile pt_replay_cia_base;
 
 static struct ExecBase exec;
 static struct Task task,foreign_task;
-static struct Library resources[2];
+/* Two separate one-byte allocations are opaque API handles: no Library
+ * header exists. ASan detects either acquisition or owned-state header read. */
+static struct Library *resources[2];
 static struct Interrupt server,foreign_server;
 static struct {
     unsigned chip,bit,mask,pending,add,remove,control,able,set,disable,enable;
@@ -30,17 +33,17 @@ void Enable(void) {assert(SysBase->IDNestCnt==0);--SysBase->IDNestCnt;++model.en
 void Wait(unsigned long bits) {(void)bits;assert(0&&"unexpected nonreturning owner hold");}
 struct Task *FindTask(const char *name) {assert(!name);return SysBase->ThisTask;}
 struct Library *OpenResource(CONST_STRPTR name)
-{return !strcmp((const char *)name,"ciab.resource")?&resources[0]:!strcmp((const char *)name,"ciaa.resource")?&resources[1]:NULL;}
+{return !strcmp((const char *)name,"ciab.resource")?resources[0]:!strcmp((const char *)name,"ciaa.resource")?resources[1]:NULL;}
 struct Interrupt *AddICRVector(struct Library *resource,unsigned bit,struct Interrupt *s)
 {
-    assert(resource==&resources[model.chip]&&bit==model.bit&&s==&server);
+    assert(resource==resources[model.chip]&&bit==model.bit&&s==&server);
     assert(SysBase->IDNestCnt==0);++model.add;
     if(model.foreign)return &foreign_server;
     model.mask|=1u<<bit;return NULL;
 }
 void RemICRVector(struct Library *resource,unsigned bit,struct Interrupt *s)
 {
-    assert(resource==&resources[model.chip]&&bit==model.bit&&s==&server);
+    assert(resource==resources[model.chip]&&bit==model.bit&&s==&server);
     assert(SysBase->IDNestCnt==0&&!pt_replay_enabled);
     assert(!((model.mask|model.pending)&(1u<<bit)));
     assert(!(*(bit?&pt_replay_stop_stub_hardware[model.chip].ciacrb:
@@ -50,7 +53,7 @@ void RemICRVector(struct Library *resource,unsigned bit,struct Interrupt *s)
 }
 WORD AbleICR(struct Library *resource,WORD mask)
 {
-    unsigned prior=model.mask;assert(resource==&resources[model.chip]);
+    unsigned prior=model.mask;assert(resource==resources[model.chip]);
     assert(SysBase->IDNestCnt==0);++model.able;
     if(mask) {
         assert((unsigned)mask==(1u<<model.bit));event(1);
@@ -61,7 +64,7 @@ WORD AbleICR(struct Library *resource,WORD mask)
 }
 WORD SetICR(struct Library *resource,WORD mask)
 {
-    unsigned prior=model.pending;assert(resource==&resources[model.chip]);
+    unsigned prior=model.pending;assert(resource==resources[model.chip]);
     assert(SysBase->IDNestCnt==0);++model.set;
     if(mask) {
         assert((unsigned)mask==(1u<<model.bit));event(3);
@@ -79,7 +82,6 @@ static void reset(unsigned chip,unsigned bit)
     memset(&cia_owner,0,sizeof(cia_owner)); /* test TU only; no production reset */
     memset(&model,0,sizeof(model));memset(&exec,0,sizeof(exec));
     memset((void *)pt_replay_stop_stub_hardware,0,sizeof(pt_replay_stop_stub_hardware));
-    resources[0].lib_Version=resources[1].lib_Version=39;
     task=(struct Task){{NT_PROCESS},(void *)(uintptr_t)0x1000,(void *)(uintptr_t)0x2000};
     foreign_task=task;exec.LibNode.lib_Version=39;exec.ThisTask=&task;
     exec.IDNestCnt=exec.TDNestCnt=-1;SysBase=&exec;pt_replay_stop_stub_sp=0x1800;
@@ -89,10 +91,10 @@ static void reset(unsigned chip,unsigned bit)
 }
 static void acquire(void)
 {
-    assert(!pt_native_replay_add_cia_vector(&resources[model.chip],model.bit,&server,
+    assert(!pt_native_replay_add_cia_vector(resources[model.chip],model.bit,&server,
                                            PT_REPLAY_STOP_HARDWARE(model.chip)));
     assert(cia_owner.phase==CIA_STOP_OWNED&&model.add==1&&!model.remove);
-    pt_replay_cia_base=&resources[model.chip];pt_replay_enabled=255;
+    pt_replay_cia_base=resources[model.chip];pt_replay_enabled=255;
     *(model.bit?&pt_replay_stop_stub_hardware[model.chip].ciacrb:
                  &pt_replay_stop_stub_hardware[model.chip].ciacra)=0xc1;
     model.pending|=1u<<model.bit;model.used=0;
@@ -104,13 +106,15 @@ static void unknown_once(void)
     calls=model.able+model.set+model.remove+model.control;
     assert(pt_native_replay_cia_retire()==-1);
     assert(model.able+model.set+model.remove+model.control==calls);
-    assert(pt_replay_cia_base==&resources[model.chip]);
+    assert(pt_replay_cia_base==resources[model.chip]);
     assert(exec.IDNestCnt==-1);
 }
 int main(void)
 {
     unsigned chip,bit,n;
     static const unsigned success_order[]={0,1,2,3,0,4,5,6,7};
+    resources[0]=malloc(1);resources[1]=malloc(1);
+    assert(resources[0]&&resources[1]&&resources[0]!=resources[1]);
     for(chip=0;chip<2;++chip)for(bit=0;bit<2;++bit) {
         reset(chip,bit);acquire();assert(pt_native_replay_cia_retire()==1);
         assert(cia_owner.phase==CIA_STOP_RETIRED&&model.remove==1);
@@ -122,18 +126,18 @@ int main(void)
         for(n=0;n<model.used;++n)assert(model.order[n]==success_order[n]);
         assert(model.disable==model.enable&&exec.IDNestCnt==-1);
         assert(pt_native_replay_cia_retire()==1&&model.remove==1); /* observe, no replay */
-        assert(pt_native_replay_add_cia_vector(&resources[chip],bit,&server,
+        assert(pt_native_replay_add_cia_vector(resources[chip],bit,&server,
                                              PT_REPLAY_STOP_HARDWARE(chip)));
         assert(model.add==1); /* intentionally one-shot; no generation reset API */
     }
     reset(0,0);pt_replay_stop_stub_hardware[0].ciacra=1;
-    assert(pt_native_replay_add_cia_vector(&resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0)));
+    assert(pt_native_replay_add_cia_vector(resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0)));
     assert(!model.add&&!model.remove&&!model.control&&!model.able&&!model.set);
     reset(0,0);model.foreign=1;
-    assert(pt_native_replay_add_cia_vector(&resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0))==(uintptr_t)&foreign_server);
+    assert(pt_native_replay_add_cia_vector(resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0))==(uintptr_t)&foreign_server);
     assert(model.add==1&&!model.remove&&!model.control&&!model.able&&!model.set);
     reset(0,0);pt_replay_enabled=1;
-    assert(pt_native_replay_add_cia_vector(&resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0))&&!model.add);
+    assert(pt_native_replay_add_cia_vector(resources[0],0,&server,PT_REPLAY_STOP_HARDWARE(0))&&!model.add);
     for(n=0;n<10;++n) {
         reset(n&1u,(n>>1)&1u);acquire();
         switch(n) {
@@ -141,7 +145,7 @@ int main(void)
         case 1:pt_replay_stop_stub_sp=0x2000;break;
         case 2:server.is_Code=other_code;break;
         case 3:server.is_Data=&foreign_task;break;
-        case 4:pt_replay_cia_base=&resources[!model.chip];break;
+        case 4:pt_replay_cia_base=resources[!model.chip];break;
         case 5:model.stuck_control=1;break;
         case 6:model.stuck_mask=1;break;
         case 7:model.stuck_pending=1;break;
@@ -157,5 +161,6 @@ int main(void)
         } else unknown_once();
         assert(model.remove==(n==9?1u:0u));
     }
+    free(resources[0]);free(resources[1]);
     return 0;
 }

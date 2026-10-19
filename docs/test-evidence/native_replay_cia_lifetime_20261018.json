@@ -2,7 +2,41 @@
   "acquisition_diagnostic_successor": {
     "acquisition_policy": "Original one-shot guards retained",
     "additional_cia_register_reads": 0,
-    "amiberry": "NOT_RUN",
+    "amiberry": "FAILED_RC20_RESOURCE_HEADER_ASSUMPTION",
+    "amiberry_diagnostic_attempt": {
+      "actual_complete_marker_observed": true,
+      "actual_control_returncode_observed": true,
+      "actual_success_oracle_observed": false,
+      "attempts": 1,
+      "diagnostic_rows": 2,
+      "entry_id_observed": -1,
+      "entry_td_observed": -1,
+      "exec_version_observed": 47,
+      "explicit_eof": true,
+      "failed_evidence_preserved": true,
+      "independent_saved_failure_review_sha256": "f87ad90eb75011fbe9947eb6a569d8a380f82a7020f7f37c5d9f0dd6931d8d27",
+      "legacy_reason": 8,
+      "legacy_reason_name": "RESOURCE_VERSION",
+      "native_bytes": 309,
+      "native_return_code": 20,
+      "native_sha256": "39c575263579c9e9f93d67e8323ff66855defd8382b2e2382ac4495b81553a5a",
+      "original_owned_closure": true,
+      "physical_promotion_qualified": false,
+      "recorded_add_issued": false,
+      "recorded_phase_after": "NEW",
+      "recovery_original_holds_archived": true,
+      "recovery_restoration_independent_absence_release": "VERIFIED",
+      "replayed": false,
+      "root_recovery_receipt_sha256": "3770389c265fa23802596b7f20803792f590a2633a074c221dadc2acae186469",
+      "root_runtime_result_sha256": "b629d3ceeb2554f007059d542f6e069c1f349f5c8e2dce1356a78f0f89701d36",
+      "saved_protocol_chunks": [
+        256,
+        53
+      ],
+      "scope": "Saved native bytes and control result explain the source refusal. No completed custody, acquisition/retirement, DMA or listening acceptance.",
+      "uncontracted_header_word_observed": 0,
+      "whole_runner_confirmed_reply": false
+    },
     "carrier_model": {
       "binary_bytes_preserved_before_rc20_rejection": true,
       "candidate_bytes": 17516,
@@ -23,6 +57,14 @@
       "tests": 17,
       "whole_seconds": 250,
       "worker_executions": 1
+    },
+    "carrier_namespace_correction": {
+      "change": "One staging basename literal",
+      "failed_prior_package_preserved": true,
+      "full_normal_import": "PASS",
+      "independent_saved_host_review_sha256": "eb7af23a163db8dcc60b9fe55bce76082e96fd4294a6c145c4e5faccf72f4237",
+      "status": "PASS_HOST_ONLY",
+      "tests": 17
     },
     "default_native_selected": false,
     "failure_record_bytes": 240,
@@ -66,7 +108,7 @@
       "status": "PASS_STATIC_ONLY",
       "symbols": 110
     },
-    "native_execution": "NOT_RUN",
+    "native_execution": "FAILED_RC20_RESOURCE_HEADER_ASSUMPTION",
     "native_object": {
       "bytes": 5888,
       "commands": {
@@ -121,6 +163,29 @@
       "status": "PASS_OBJECT_ONLY",
       "unresolved_checked_c_imports": 2
     },
+    "resource_contract_correction_proposal": {
+      "amiberry": "NOT_RUN",
+      "canonical_default_selected": false,
+      "canonical_source_changed": true,
+      "exec_os_version_gate_retained": true,
+      "foreign_timer_and_server_gates_retained": true,
+      "independent_source_review_sha256": "1b0ae47e26007d6aa3ed963580c30ccfafeec7b963f3fa9853717b1e80fafe31",
+      "named_resource_identity_retained": true,
+      "opaque_resource_regression_prepared": true,
+      "physical": "NOT_RUN",
+      "private_diagnostic_host_result_sha256": "cb66c1d97e42e184198698c4c8bdd3316007ac9ae46ec521e38604a4147e1c0f",
+      "private_diagnostic_host_status": "PASS_HOST_ONLY",
+      "private_diagnostic_input_count": 66,
+      "private_diagnostic_source_freeze_sha256": "06af379504676bceb0e2e0ed87d0db79088089a54c52d31834a9d70f217743c9",
+      "private_diagnostic_staged_leaves": 17,
+      "private_diagnostic_supported_pre_add_guards": 19,
+      "private_diagnostic_transform_methods": 15,
+      "private_inputs_guard_preservation_unchanged": true,
+      "private_original_owned_closure": true,
+      "status": "PASS_HOST_ONLY",
+      "trace_reason8_slot6_reserved_unobserved": true,
+      "unsupported_resource_header_reads_removed": 2
+    },
     "source_freeze_sha256": "f69e2996ac551eec099cffad879944cd4b28873c183e1b53c44a5e2af628616c",
     "status": "PASS_PRIVATE_STATIC_LINK_AND_ABI_NOT_RUNTIME",
     "success_oracle_bytes": 198,
@@ -152,10 +217,55 @@
       "chip_timer_success": 4,
       "retained_uncertainty": 10
     },
+    "native_execution": "NOT_RUN",
+    "opaque_resources": "Two separate one-byte allocations; no public Library header",
+    "physical": "NOT_RUN",
+    "report_sha256": "7c3e153b97f9f790b2bccce4cc06c90baf647795159a59e9ca9d66eb086a55e8",
     "sanitizers": [
       "address",
       "undefined"
     ],
+    "seconds": 0.6563809580002271,
+    "source_unchanged": true,
+    "status": "PASS_RESOURCE_CONTRACT_FIX_HOST_ONLY"
+  },
+  "canonical_host_before_resource_contract_fix": {
+    "assertions": true,
+    "commands": 2,
+    "compiler": "system cc",
+    "diagnostic_stream_bytes": 0,
+    "leak_detection": false,
+    "logical_case_groups": {
+      "acquisition_refusals": 3,
+      "chip_timer_success": 4,
+      "retained_uncertainty": 10
+    },
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "source_pins": {
+      "src/native/native_replay_cia_stop.c": {
+        "bytes": 8340,
+        "sha256": "062e3a405596bfaa044dec48624e4f921ed78039e985d7baa5d7e98fa155b802"
+      },
+      "src/native/native_replay_cia_stop.h": {
+        "bytes": 1855,
+        "sha256": "7e2f8795f4f8c8dabe77093919cd47747d0384bd68cff445e7890e8f7713f449"
+      },
+      "tests/native_replay_cia_stop_stubs.h": {
+        "bytes": 1394,
+        "sha256": "6097850ccb601167ab725c0e86a28c40d8e90a9233b04c124625f39d485ce553"
+      },
+      "tests/test_native_replay_cia_stop.c": {
+        "bytes": 7773,
+        "sha256": "60b7278986269fae1fb84248c6c73b4ff176c33a5c46bfc5c0b68a307867ac4a"
+      },
+      "tools/test_replay_cia_stop_host.py": {
+        "bytes": 6583,
+        "sha256": "69934490c14cdfcdce6c9cdca953ce55eb721dc7d17ba71f7cafe35340a71f93"
+      }
+    },
     "source_unchanged": true,
     "status": "PASS"
   },
@@ -241,7 +351,7 @@
     "symbols": 104
   },
   "pending": [
-    "Distinct acquisition-reason diagnostic exact Amiberry qualification",
+    "Build and qualify a distinct exact native candidate for the corrected resource contract",
     "Actual CIA retirement and ordering",
     "Paula DMA and audio.device retirement",
     "Active cache/master release and full app integration",
@@ -311,8 +421,8 @@
   "schema": 1,
   "source_pins": {
     "src/native/native_replay_cia_stop.c": {
-      "bytes": 8340,
-      "sha256": "062e3a405596bfaa044dec48624e4f921ed78039e985d7baa5d7e98fa155b802"
+      "bytes": 8502,
+      "sha256": "f7b3e619e1e02505adf285213820d4bfa550e2f61bc466c5c3e2b13df92c90fe"
     },
     "src/native/native_replay_cia_stop.h": {
       "bytes": 1855,
@@ -323,8 +433,8 @@
       "sha256": "6097850ccb601167ab725c0e86a28c40d8e90a9233b04c124625f39d485ce553"
     },
     "tests/test_native_replay_cia_stop.c": {
-      "bytes": 7773,
-      "sha256": "60b7278986269fae1fb84248c6c73b4ff176c33a5c46bfc5c0b68a307867ac4a"
+      "bytes": 8037,
+      "sha256": "e021ce0f1670045c9701960e3f00e919d8d8697d1d5df01ed8f7111ce21206ae"
     },
     "tools/test_replay_cia_stop_host.py": {
       "bytes": 6583,

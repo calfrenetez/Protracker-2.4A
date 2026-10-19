@@ -1,0 +1,82 @@
+{
+  "candidate": {
+    "bytes": 100156,
+    "crc32": "AE9DC56E",
+    "sha256": "eae0adaefc822ead8696b1a7b29114aadfd72dc00514c913cf292864eab51908"
+  },
+  "date": "2026-10-19",
+  "emulator": {
+    "attempts": 1,
+    "capturedCompleteJournalRows": 11,
+    "capturedFailureBytes": 677,
+    "capturedStages": [
+      "BEGIN",
+      "PLAY1_REAL_DEVICE_LOCK_CACHE_FOUR_MASTERS",
+      "UNKNOWN_OWNER_RETAINED"
+    ],
+    "cleanupAcceptance": false,
+    "freeReply": {
+      "command": 9,
+      "error": 0,
+      "flags": 0,
+      "unit": 0
+    },
+    "inputAndPreservationChecks": {
+      "extraFactsEqual": 79,
+      "protectedEntriesEqual": 68,
+      "rawReadinessEqual": true,
+      "runtimeInputsEqual": 1900
+    },
+    "journalRowBytes": 48,
+    "nativeCompletionConfirmed": false,
+    "nativeFreeInputMask": "NOT_CAPTURED",
+    "nativeReturnCode": null,
+    "runnerReturnCode": 1,
+    "runnerTimedOut": false,
+    "sourceInference": "Captured FREE reply fails the current conservative unit15 predicate during retirement; this is not proof of successful channel release",
+    "unchangedTransactionReplayed": false
+  },
+  "host": {
+    "additionalRefusalSubcases": 3,
+    "asan": true,
+    "assertions": true,
+    "compileReturnCode": 0,
+    "fixtureSHA256": "432653574c7275412d1e312d2ae6efe943e5f2bc55ded8b51775e4a2aa3c06a8",
+    "groups": 30,
+    "lsan": false,
+    "nativePredispatchMaskProved": false,
+    "ownerPredicateChanged": false,
+    "ownerSHA256": "7b4284493302d139a4340db2dfcf5033d297a7130c788850e0a9ba9e002e7990",
+    "runReturnCode": 0,
+    "sourceLeaves": 22,
+    "stderrBytes": 0,
+    "stdoutBytes": 972,
+    "stdoutSHA256": "60c90c701082487fd7392c2cf4d4d63f0d5bcfd4be2ff57a2630cf084a701073",
+    "subcases": [
+      "FREE unit0/error0 with FREE-before-LOCK reply order retains owner",
+      "FREE unit0/error0 with LOCK-before-FREE reply order retains owner",
+      "RESET unit0/error0 retains owner before FREE"
+    ],
+    "ubsan": true
+  },
+  "limits": [
+    "No native RC/END/COMPLETE or successful full cleanup oracle",
+    "No documented FREE-mask compatibility conclusion; conservative refusal retained",
+    "No default frontend, A1200, AmiGUS, musical timing or human listening acceptance"
+  ],
+  "recovery": {
+    "exactRunStagingRemoved": true,
+    "failedEvidenceAndHoldRecordsPreserved": true,
+    "forcedKillOfEmulatorOrService": false,
+    "guestRAMDisposition": "Lifetime ended by positive owned VM absence; no pre-stop Task absence claim",
+    "independentAbsenceVerified": true,
+    "independentFinalOwnership": "EMPTY",
+    "initialReadOnlyObserverAdmission": "Refused on ctime-only launcher metadata drift before observer effects; old binding preserved; distinct fresh admission passed without weakening full-fact gates",
+    "originalLauncherFilesRestored": 2,
+    "ownedProcessesNormallyStopped": 2,
+    "publicReleaseCalls": 1,
+    "socketNodeUnlinked": false
+  },
+  "schema": 1,
+  "scope": "Private full-Paula cleanup diagnostic and conservative HOST refusal regressions; shipping frontend unchanged"
+}

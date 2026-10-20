@@ -8231,3 +8231,36 @@ master disposal. Original VM/service absence, launcher restoration and public
 release passed separate checks. Untapped production application integration,
 physical hardware, general musical timing and listening remain separate gates.
 See [the exact native result and limits](test-evidence/native_paula_final_close_amiberry_20261019.json).
+
+
+## 20 October 2026 — private file-hardening guard integration and shared bridge refusal
+
+The finite own-staged-copy policy was integrated into the private native32 CLI
+callback bundle. Original canonical/input full4 capture checks remain strict;
+only the two runtime-owned copy comparisons use the previously qualified narrow
+policy. A separate HOST composition passed ten distinct cases: the genuine saved
+qualification chain accepts the exact callback, while mismatched maps, body
+identity, review associations/findings and withheld acceptance are refused.
+Negative decoded records were injected in memory only. HOST15 was not rerun.
+
+The next original emulator startup failed before RAM creation or native fixture
+execution. Saved logs identify protected R048: the borrowed shared service
+remembers a prior connection loss without explicit detachment and refuses the
+serial method before its original TCP call. The earlier connection-loss cause
+and a listener-readiness race are unproven. No failed transaction was replayed.
+
+Separate reviewed recovery sent one identity-verified SIGTERM to this run's VM,
+observed positive absence, restored the two saved same-inode launcher roles, and
+preserved the emulator log prefix. An independent observation and the original
+public release archived all four obligations; the separate final observed EMPTY
+at fence2219/archive193. The borrowed shared service stayed running, with its
+connection-loss refusal still requiring a separate service lifecycle decision.
+The socket filesystem node was preserved; its creator/preboot provenance is not
+claimed. No guest cleanup pass was invented for this prelaunch failure.
+
+This is HOST policy integration plus failed-startup recovery evidence. Native
+functional/full-fixture/stderr, full GUI, physical A1200/AmiGUS and listening
+acceptance receive no uplift. Candidate bytes, application/default-build source,
+accepted layout, exact scheduling, approved workflows and unrelated dirty paths
+were preserved. The redacted receipt is
+`docs/test-evidence/native_format_hardening_policy_gate_bridge_refusal_20261020.json`.

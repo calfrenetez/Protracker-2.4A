@@ -1,0 +1,108 @@
+{
+  "acceptance": {
+    "AmiGUS": "NOT_RUN",
+    "fullFixtureOracle": false,
+    "fullGUI": "NO_NEW_ACCEPTANCE",
+    "hostPolicyIntegration": true,
+    "humanListening": "NOT_RUN",
+    "nativeFunctionalThisAttempt": false,
+    "nativeStderr": "UNQUALIFIED",
+    "physicalA1200": "NOT_RUN"
+  },
+  "candidate": {
+    "bytes": 83016,
+    "kind": "Optional 32-bit native file-hardening fixture; separate from full GUI candidate",
+    "sha256": "2543faf68957b80b1329bb2bfa291dbb446248ddf3ef559b2e2579e0ec10e01c"
+  },
+  "dateUTC": "2026-10-20",
+  "formatVersion": 1,
+  "hostIntegration": {
+    "actual": {
+      "bytes": 2208,
+      "sha256": "669b4dc2bf850481a8a7cdd2c5d1d8bec15d3ab37842a3892fbd4fa661eb5a87"
+    },
+    "checks": [
+      "Genuine saved qualification chain accepts exact callback copy",
+      "Changed source or outer qualification map refused before capture",
+      "Changed callback identity or saved body refused",
+      "Changed source and HOST review associations or findings refused",
+      "Withheld HOST or Root acceptance refused"
+    ],
+    "independentSavedReview": {
+      "bytes": 5456,
+      "sha256": "60b2f5940c316cdd84d40f8ed018bf2bd965fc8dbdf9a592345fc5a7ed49664a"
+    },
+    "methods": 10,
+    "negativeFaults": "In-memory decoded fault injection only; never genuine historical captures",
+    "originalToolReturnCode": 0,
+    "passed": true,
+    "stderr": {
+      "bytes": 1457,
+      "sha256": "babf87af18e8bc2f3c88e86d19e45df4ff93ff2a84de2f4f3f8f647fd8c407ef"
+    },
+    "stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "nextRequiredDecision": "Reactivation of the existing borrowed shared bridge service after verified EMPTY. No restart or latch bypass authorized by this evidence.",
+  "ownedRecovery": {
+    "actual": {
+      "bytes": 16378,
+      "sha256": "0fb548b65bc2b914cbffe58d092e5bfbfdb7faedd95e35fa25364b0eef6d6e9c"
+    },
+    "borrowedServiceKeptRunning": true,
+    "ctimeRestorationClaim": false,
+    "independentSavedReview": {
+      "bytes": 6548,
+      "sha256": "955dba12678dd27e174b2b773190e92b0d636511ac4dc03a6fde088ad10bbcb4"
+    },
+    "oneIdentityVerifiedSIGTERM": true,
+    "originalLogPrefixPreserved": true,
+    "ownedVMPositiveAbsence": true,
+    "publicRelease": {
+      "actual": {
+        "bytes": 2520,
+        "sha256": "d17b0fcd5a57ce103616b2178e8e2e789f0800e6960667db2fd03da88b6e1e0a"
+      },
+      "archives": 193,
+      "fence": 2219,
+      "finalPhase": "EMPTY",
+      "originalHoldsArchived": 4,
+      "passed": true
+    },
+    "rootSettlement": {
+      "bytes": 2515,
+      "sha256": "e4420e4caa47d0e232568e90d9124117c9bde22e4438818086790a4109651238"
+    },
+    "sameInodeSavedLauncherRolesRestored": 2,
+    "separateFinal": {
+      "bytes": 6499,
+      "sha256": "db8d92f14694616a73bad47809303fd86cd7c36a05d6195ebb37abe454449e24"
+    },
+    "serviceLifecycleCalls": 0,
+    "socketFilesystemNode": "Preserved; creator and preboot provenance unclaimed",
+    "targetAndGuestCallsByRecovery": 0
+  },
+  "preservation": {
+    "applicationAndDefaultBuildSourceChanges": false,
+    "excludedTenVendorBodiesRead": false,
+    "failedEvidenceRetained": true,
+    "privateLeaseGuardBodiesOrRawServiceLogsPublished": false,
+    "unrelatedDirtyPathsCommitted": false
+  },
+  "startup": {
+    "RAMDirectoriesCreated": 0,
+    "diagnosis": {
+      "bytes": 5078,
+      "sha256": "1149ffc9eb037240e7a1335c65646583930fb531988dbf895082cf87300b2e21"
+    },
+    "earlierConnectionLossCause": "UNPROVEN",
+    "failedTransactionReplayed": false,
+    "immediateCause": "Protected R048: remembered previous bridge connection lost without recorded explicit detachment; serial method refused before original TCP call",
+    "nativeLaunches": 0,
+    "originalReturnCode": 1,
+    "readinessRace": "NOT_ESTABLISHED"
+  },
+  "state": "HOST_GATE_PASS_NATIVE_STARTUP_REFUSED_OWN_RECOVERY_PUBLIC_RELEASE_COMPLETE_SERVICE_DECISION_REQUIRED"
+}

@@ -1,0 +1,84 @@
+{
+  "state": "MOUSEHACK_READINESS_STANDALONE_HOST_PASS_SOURCE_PROPOSAL_UNAPPLIED",
+  "date": "2026-10-21",
+  "evidenceTier": "Standalone C++17 HOST test and independent source review",
+  "configuredSourceCommit": "8dec73501b5d2c2b3a6859b1d30a25291febb491",
+  "proposedProductionFiles": [
+    "src/inputdevice.cpp",
+    "src/include/inputdevice.h",
+    "src/osdep/amiberry_input_helpers.h",
+    "src/osdep/amiberry_ipc_socket.cpp"
+  ],
+  "proposal": {
+    "readOnlyOption": "GET_CONFIG mousehack_state",
+    "replyIsOneExistingValueField": true,
+    "snapshotFields": [
+      "initialized",
+      "live",
+      "ready"
+    ],
+    "getterStartsOrEnablesDriver": false,
+    "strictGUIAutomationStateSchemaUnchanged": true,
+    "existingModeFocusAndResponseSchemasUnchanged": true,
+    "readinessCheckedBeforeMotionAndButtonMutation": true,
+    "callbackRechecksReadiness": true,
+    "legacyRealTabletPathUnchanged": true,
+    "patchApplied": false
+  },
+  "HOST": {
+    "existingUpstreamStandaloneTestRetained": true,
+    "language": "C++17",
+    "flags": [
+      "-std=c++17",
+      "-pthread",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "compileReturnCode": 0,
+    "testReturnCode": 0,
+    "productionPurePredicateAndExistingGuardHelperUsed": true,
+    "syntheticCoverage": [
+      "mode only without initialization",
+      "initialized without positive live counter",
+      "stale live value without initialization",
+      "Mousehack mode restored off",
+      "playback or test suppression",
+      "ready state invokes input leaf once",
+      "readiness lost before callback mutation"
+    ],
+    "unreadyStatesReachedInputLeaf": false,
+    "wholeEmulatorBuild": false,
+    "inputdeviceAndIPCTranslationUnitsCompiledByThisTest": false,
+    "installationOrRuntimeActions": 0
+  },
+  "independentSourceReview": {
+    "materialFindings": [],
+    "declarationIncludesReplyShapeAndPreMutationOrderingReviewed": true
+  },
+  "acceptanceLimits": {
+    "actualGuestDriverReadinessQualified": false,
+    "positiveCounterProvesGuestConsumption": false,
+    "cursorPositionOrCoordinateMappingAccepted": false,
+    "wholeEmulatorCompilationOrABIQualified": false,
+    "physicalApplicationOrProductionAcceptance": false
+  },
+  "savedEvidenceCores": {
+    "sourceFreeze": {
+      "bytes": 6187,
+      "sha256": "6b8ae14d6907b14a7d67308ad85715388888ceee74e22c6b64564373d6f08eec"
+    },
+    "sourcePatch": {
+      "bytes": 7461,
+      "sha256": "6be290345021f0093177b1e23a69eb55c71d21a74d7bae977d9bbdd71172d1c2"
+    },
+    "RootActualHOSTResult": {
+      "bytes": 8781,
+      "sha256": "5e72ae7ec89dd2f58a02a4edcd113300d32c4156d36cc23f455bbde0b5450ce9"
+    },
+    "independentSourceReview": {
+      "bytes": 9554,
+      "sha256": "7757cbcf913bf04617831d54b1e00441138b89af4267d1f81fa1c022c5998584"
+    }
+  }
+}

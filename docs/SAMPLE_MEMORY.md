@@ -1,5 +1,30 @@
 # Sample memory and playback ownership
 
+## Prepared Copper diagnostic —21 October2026
+
+The private prepared-display diagnostic reached READY and its initial FRAME,
+then recorded 312 raw Copper pairs and one IPC image with no input.
+The lower pattern remains corrupted; no native-window comparison was made.
+Each field's first hardware END is at index 121; 34 copied capacity rows after
+it were ignored. The live prefixes show reversed user pointer-row parity across
+all four planes and user modulo 80 versus OS modulo 72. These observations
+support a narrow private comparison, not a proven complete cause or timing,
+lifetime, physical or functional acceptance. Original disconnect/owned stop,
+17-file custody, two saved-host restorations and public release passed. The
+earlier private-profile refusal remained a separate pre-Guest failed attempt.
+See the [redacted diagnostic and exact IPC image](test-evidence/native_prepared_copper_diagnostic_20261021.json).
+
+## Mousehack readiness HOST proposal —21 October2026
+
+The existing standalone C++17 suite passes with strict warnings for the proposed
+readiness predicate and guarded-input refusal cases. Independent source review
+found no material issue in the read-only `GET_CONFIG mousehack_state` option or
+the checks before motion/buttons; the strict GUI-state schema stays unchanged.
+The four-file native production proposal is unapplied. This HOST test does not
+compile the input-device or IPC translation units, build the emulator, or prove
+guest-driver readiness, pointer accuracy or UI acceptance. See the
+[HOST scope and source-review receipt](test-evidence/amiberry_mousehack_readiness_host_20261021.json).
+
 ## Workbench cursor isolation —20 October2026
 
 A separate Workbench-only diagnostic completed recording with return code zero

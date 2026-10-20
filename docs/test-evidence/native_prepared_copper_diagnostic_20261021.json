@@ -1,0 +1,140 @@
+{
+  "state": "AMIBERRY_PREPARED_COPPER_DIAGNOSTIC_RECORDED_IPC_RENDERING_CORRUPTION",
+  "date": "2026-10-21",
+  "evidenceTier": "Private Amiberry diagnostic; no physical or timing qualification",
+  "diagnosticRecordingReturnCode": 0,
+  "candidate": {
+    "bytes": 365624,
+    "sha256": "bdbc511a9def39c7fdfedd2cdbea482937e9d790ac8e2d6a24af9181fcba9d15",
+    "preparedDrawingEnabled": true,
+    "privateSnapshotDiagnosticOnly": true,
+    "productionAdoption": false
+  },
+  "actions": {
+    "applicationLaunches": 1,
+    "mouseMoves": 0,
+    "leftClicks": 0,
+    "rawKeys": 0,
+    "escapeTaps": 0,
+    "IPCImages": 1,
+    "independentNativeWindowObservations": 0
+  },
+  "nativeJournal": {
+    "bytes": 13481,
+    "sha256": "9baa689a160b2b774cd372b798f54b43a231b04dd83c5841cdca36ce9151e7ac",
+    "nativeREADYAndInitialFRAMEVerifiedSeparatelyFromCopperGrammar": true,
+    "stableDoubleCopyReported": true,
+    "copied16BitWords": 624,
+    "perField": [
+      {
+        "field": "long",
+        "reportedCapacity": 156,
+        "truncated": false,
+        "firstHardwareEndIndex": 121,
+        "copiedRawPairRecords": 156,
+        "hardwareTerminatedPrefixPairRecords": 122,
+        "copiedPairRecordsAfterEndIgnored": 34
+      },
+      {
+        "field": "short",
+        "reportedCapacity": 156,
+        "truncated": false,
+        "firstHardwareEndIndex": 121,
+        "copiedRawPairRecords": 156,
+        "hardwareTerminatedPrefixPairRecords": 122,
+        "copiedPairRecordsAfterEndIgnored": 34
+      }
+    ],
+    "tailAfterHardwareEndInterpreted": false,
+    "nextSegmentFollowed": false,
+    "copiedRawPairRecords": 312
+  },
+  "savedDumpInterpretation": {
+    "scope": "First hardware-terminated raw segment of each field only",
+    "allFourPlanesShowUserPointerRowParityReversedRelativeToTheirOSSetup": true,
+    "fieldRowOffsetsBytes": {
+      "OSSetup": {
+        "long": 0,
+        "short": 80
+      },
+      "preparedAtlasStart": {
+        "long": 80,
+        "short": 0
+      },
+      "returnToBaseBoundary": {
+        "long": 80,
+        "short": 0
+      }
+    },
+    "OSBitplaneModuloBytes": 72,
+    "userBitplaneModuloBytes": 80,
+    "moduloDifferenceBytesPerLine": 8,
+    "sameObservedFetchControlRegisters": true,
+    "exactFetchWidthMeasured": false,
+    "waitAndColorPlacementAppearsCoherentInCopiedPrefix": true,
+    "exactCauseOfAllVisibleCorruptionProven": false,
+    "supportsNarrowPrivateDisplayComparisonOnly": true
+  },
+  "image": {
+    "file": "native_prepared_copper_diagnostic_20261021.png",
+    "bytes": 18547,
+    "sha256": "90aceff8d82ea00b36689d1eecff48ba831583c574395f812ac5eb5dea6c9f49",
+    "width": 756,
+    "height": 576,
+    "logicalEditorLayout": {
+      "width": 640,
+      "height": 512
+    },
+    "IPCImageViewedByRoot": true,
+    "appearance": "Readable top controls; corrupted lower pattern area",
+    "nativeWindowObserved": false,
+    "renderComparisonAcceptance": false
+  },
+  "cleanup": {
+    "originalGuardedDisconnectReturnCode": 0,
+    "originalOwnedStopReturnCode": 0,
+    "exactOwnedBodiesPreservedBeforeRemoval": 17,
+    "savedHostBodiesRestored": 2,
+    "originalPublicReleaseVerified": true,
+    "guardAfter": {
+      "fence": 2560,
+      "holds": 0,
+      "archives": 209
+    },
+    "sameBorrowedBridgeDisconnected": true,
+    "ownedEmulatorIPCAndRunAbsent": true,
+    "nativeCleanupCommands": 0,
+    "nativeCleanExitOrRC0Claimed": false,
+    "nativeENVRestorationClaimed": false,
+    "failedTransactionReplayed": false,
+    "guardReset": false
+  },
+  "separateEarlierAttempt": {
+    "privateProfilePolicyRefusedBeforeGuest": true,
+    "applicationLaunches": 0,
+    "nativeInputs": 0,
+    "failedAttemptPreservedAndSeparatelyReleased": true,
+    "thisCaseWasNotAReplay": true
+  },
+  "acceptanceLimits": {
+    "graphicsListLifetimeOwnershipOrContiguityProven": false,
+    "hardwareTimingOrPhysicalAcceptance": false,
+    "functionalUIImportSaveClassicMODAcceptance": false,
+    "mouseMappingOrListeningAcceptance": false,
+    "defaultPreparedDrawingFixAccepted": false
+  },
+  "savedEvidenceCores": {
+    "adapterResult": {
+      "bytes": 33801,
+      "sha256": "dcfcfe859e7b2526673a146e14c39b7333fe54954f9ffdd20041eb075800152d"
+    },
+    "dumpAnalysis": {
+      "bytes": 23404,
+      "sha256": "aab5c79aeb180c304e7cb42795700e5c75c8e8d41108c3f1f7aff6d7411b7d6c"
+    },
+    "settlementResult": {
+      "bytes": 1398,
+      "sha256": "7af89fbc648a6169949f2cff8c9a6dfeeca3af54c76cb37f5398c92843350d7a"
+    }
+  }
+}

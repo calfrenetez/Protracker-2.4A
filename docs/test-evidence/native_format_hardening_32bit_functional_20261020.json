@@ -1,0 +1,136 @@
+{
+  "acceptance": {
+    "A1200": false,
+    "AmiGUS": false,
+    "audioOrListening": false,
+    "defaultBuildChanged": false,
+    "fullFixtureOracleAccepted": false,
+    "fullGUIApplication": false,
+    "native32FunctionalRuntime": true,
+    "nativeStderr": "UNQUALIFIED",
+    "ownedCleanupRestorationAndRelease": true,
+    "timingOrScheduling": false
+  },
+  "candidate": {
+    "artifact": "PT24GHardening32",
+    "bytes": 83016,
+    "crc32": "C533A56A",
+    "sha256": "2543faf68957b80b1329bb2bfa291dbb446248ddf3ef559b2e2579e0ec10e01c"
+  },
+  "history": {
+    "earlierMetadataWrapperFailurePreserved": true,
+    "earlierPrelaunchRefusalAndOwnedRecoveryPreserved": true,
+    "failedTransactionReplayed": false,
+    "specificEarlierUnsavedMetadataCause": "UNPROVEN"
+  },
+  "hostChecks": {
+    "HOSTEvidenceScope": "Separate qualified source/model/composition evidence. HOST method counts do not establish native or device acceptance.",
+    "approvedServiceCallbackCompositionHOSTCases": 3,
+    "callbackOriginalQualificationChainHOSTCases": 10,
+    "ownCopyPolicyHOSTMethods": 15,
+    "reactivatedManagedLifecycleHOSTMethods": 42
+  },
+  "limits": [
+    "Root accepts only the saved native functional result and separately verified owned cleanup, restoration and retained release archive. The original release wrapper remains failed; its child return code is unknown.",
+    "Eight expected stdout lines and return code zero, exact candidate bytes and verified owned cleanup are separate predicates. Native stderr remains unqualified and full fixture-oracle acceptance stays false.",
+    "This83KB fixture does not qualify the362KB full GUI application, real A1200/AmiGUS memory/device behavior, audio/listening or timing; default build remains unchanged.",
+    "Earlier failed transactions and their original result files remain immutable. A successful distinct attempt must not relabel or replay them."
+  ],
+  "nativeObservation": {
+    "candidateBodyPreserved": true,
+    "expectedStdoutBytes": 695,
+    "expectedStdoutLines": 8,
+    "nativeFixtureLaunches": 1,
+    "nativeReturnCode": 0,
+    "observedStdout": {
+      "bytes": 695,
+      "exactExpectedMarkers": true,
+      "lines": 8,
+      "sha256": "47de7f1aa427b3cae393541148390329e704c834d180e4e8817c5acc6e6f3748"
+    },
+    "originalFunctionalPass": true,
+    "originalResultRewritten": false,
+    "originalWholeOperationPassed": false
+  },
+  "ownedSettlement": {
+    "borrowedServiceKeptRunning": true,
+    "ctimeRestored": false,
+    "emulatorLogPrefixPreserved": true,
+    "guardedDisconnectBeforeOwnVMStop": true,
+    "guestFixtureCleanup": true,
+    "independentSavedReview": true,
+    "originalPublicReleaseCompleted": true,
+    "ownedEmulatorStopped": true,
+    "releaseEvidence": {
+      "originalChildReturnCode": null,
+      "originalChildStdoutRecovered": false,
+      "originalWrapperFailure": "Output log name collision after the original public release child returned",
+      "originalWrapperReturnCode": 1,
+      "originalWrapperRewritten": false,
+      "recoveryReleaseCalls": 0,
+      "separateReadOnlyArchiveAndFinalCheck": true
+    },
+    "savedLauncherRolesRestored": 2,
+    "separateFinalObservation": true,
+    "separateRootQualification": true
+  },
+  "publicationReady": true,
+  "schemaVersion": 1,
+  "separateServicePreparation": {
+    "genuineNewDisconnectedBaselineQualified": true,
+    "qualification": {
+      "bytes": 9189,
+      "sha256": "c416f48eff2994b1eae9b89c6dc8d18736a76bd5a434118cf79324ba5d6fb7d0"
+    },
+    "reactivationAttempts": 1,
+    "targetOrNativeAcceptanceGrantedByRestart": false,
+    "userApproved": true
+  },
+  "status": "NATIVE32_FUNCTIONAL_AND_OWN_RESOURCE_SETTLEMENT_ACCEPTED_ORIGINAL_RELEASE_WRAPPER_FAILURE_PRESERVED",
+  "supportingSavedEvidence": {
+    "fixtureCleanup": {
+      "bytes": 4420,
+      "sha256": "c604d0e0dff5bb74e07d4b5677604b12b009eb1d63ec25f0cd086e065e7ed2a5"
+    },
+    "independentBeforeRelease": {
+      "bytes": 7478,
+      "sha256": "acb7eee4060689e5c9f0e4cf84c40badacf8f265339cae6d037bcc0267bd975a"
+    },
+    "independentSavedReview": {
+      "bytes": 10258,
+      "sha256": "a861c880e9e5da6edaf9c890602d2ff01886b740e83c537791d47cc774b43046"
+    },
+    "launcherRestoration": {
+      "bytes": 1041,
+      "sha256": "70f498a63b1bc10e2056094ed9130ed0c3995bfa242eb0e5336c234936662640"
+    },
+    "nativeStdout": {
+      "bytes": 695,
+      "sha256": "47de7f1aa427b3cae393541148390329e704c834d180e4e8817c5acc6e6f3748"
+    },
+    "originalNativeResult": {
+      "bytes": 5322,
+      "sha256": "9250ea2b8e6b53bf0f5fb17632ef1ebaba0f5cfec88b0bddd485833e7fed5e18"
+    },
+    "originalReleaseWrapperFailure": {
+      "bytes": 755,
+      "sha256": "5f4b17aa700269379860a659c6e9f35785263f3ce871b07c4e0cd8e4af10c843"
+    },
+    "originalToolCompletion": {
+      "bytes": 222,
+      "sha256": "4d8ef8234fcbc233b6fb4079130ba9d39ae51b89922f8bd7716e1d133eabf733"
+    },
+    "retainedPublicReleaseArchive": {
+      "bytes": 1007,
+      "sha256": "953b738665f3095619417fea3b7bb35a5af382053771eeb1c5fe82d3f86862e7"
+    },
+    "rootFunctionalQualification": {
+      "bytes": 10874,
+      "sha256": "01846fafdfc68b75e46950882cf9bf67fc41ba74e9efbc55ab47ce65f260132a"
+    },
+    "separateRecoveredFinal": {
+      "bytes": 11956,
+      "sha256": "00140573972c8dcd999679f5327a771b8b6ddb34f0fb329eeba554830d0ffa5f"
+    }
+  }
+}

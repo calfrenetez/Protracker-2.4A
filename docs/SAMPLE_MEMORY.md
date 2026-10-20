@@ -8264,3 +8264,29 @@ acceptance receive no uplift. Candidate bytes, application/default-build source,
 accepted layout, exact scheduling, approved workflows and unrelated dirty paths
 were preserved. The redacted receipt is
 `docs/test-evidence/native_format_hardening_policy_gate_bridge_refusal_20261020.json`.
+
+
+## 20 October 2026 — private 32-bit file-hardening functional result
+
+A distinct Amiberry run of the exact 83,016-byte optional fixture passed its
+eight-line, 695-byte stdout check with native return code zero. It checked
+malformed MOD/PTG/PP20 imports, measured allocation refusals, dirty 24-bit master
+preservation, explicit 8-bit export preparation, classic MOD word/loop boundaries,
+and save allocation/write/verification/publication refusals. One native launch
+was observed. The fixture's own RAM directory and host run files were removed.
+
+Original guarded disconnect and owned emulator shutdown passed. Two saved
+launcher files were restored and the emulator log prefix was preserved. The
+public-release wrapper then failed while saving its output to an already-open
+log name. A separate read-only check verified the retained original release
+archive, proof, empty shared guard, owned-process absence and unchanged running
+borrowed bridge. The original wrapper remains failed, its child return code is
+unknown, and no release or native test was repeated. Independent saved review
+and separate Root qualification accept this narrow functional/resource result.
+
+Native stderr remains UNQUALIFIED and full fixture-oracle acceptance remains
+false. Original result flags and all earlier failed evidence are preserved. This
+fixture is separate from the full GUI application; physical A1200/AmiGUS,
+listening and musical timing receive no acceptance from it. Application source,
+accepted layout, scheduling and default build were unchanged. See the
+[compact native functional receipt](test-evidence/native_format_hardening_32bit_functional_20261020.json).

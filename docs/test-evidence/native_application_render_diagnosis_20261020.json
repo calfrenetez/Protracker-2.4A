@@ -1,0 +1,66 @@
+{
+  "candidate": {
+    "bytes": 362864,
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "capture": {
+    "acceptedLogicalLayout": {
+      "height": 512,
+      "width": 640
+    },
+    "actionable": true,
+    "coordinateSpace": "screenshot_pixels",
+    "croppedOrResized": false,
+    "imageHeight": 576,
+    "imageWidth": 756
+  },
+  "hostAtlasOracle": {
+    "RGBComparisons": 7741440,
+    "addressAndUndefinedSanitizers": "PASS",
+    "atlasRows": 84,
+    "mismatches": 0,
+    "realAmigaOSCopperMergeValidated": false,
+    "scope": "HOST only",
+    "states": 12
+  },
+  "images": {
+    "native_application_render_ipc_20261020.png": {
+      "bytes": 18589,
+      "sha256": "1e5b200e5651dd55992b871812cd8087a921e9414b6ecb05c22150981dc10944"
+    },
+    "native_application_render_window_20261020.png": {
+      "bytes": 384899,
+      "sha256": "e70d921e29dd7147069ca356c45eeb0796c269777af571fe96e5faf16e50e726"
+    }
+  },
+  "limits": [
+    "Both independent native-window capture and IPC capture show lower pattern corruption; this does not identify the exact native rendering cause.",
+    "Larger screenshot geometry is real; future mouse mapping must use current original capture geometry.",
+    "A private CPU drawing comparison is being prepared; no default product source change or hardware/listening acceptance.",
+    "Finder download-state changes and local preflight refusals are retained privately, without historical metadata continuity claims."
+  ],
+  "observations": {
+    "applicationAcceptance": false,
+    "applicationLaunches": 1,
+    "escapeTaps": 0,
+    "mouseClicks": 0,
+    "mouseMoves": 0,
+    "nativeCleanExitOrRC0Claimed": false,
+    "nativeENVRestorationClaimed": false,
+    "nativeReadyAndInitialFrame": true,
+    "nativeWindowAndIPCBothCorrupted": true,
+    "originalDiagnosticReturnCode": 0,
+    "rawKeys": 0,
+    "renderingCauseProven": false
+  },
+  "scope": "Amiberry display diagnosis only; application and UI acceptance withheld",
+  "settlement": {
+    "failedTransactionReplayed": false,
+    "guardReset": false,
+    "originalDisconnectAndOwnedEmulatorStop": true,
+    "originalPublicReleaseVerified": true,
+    "ownedRunFilesPreservedBeforeCleanup": 17,
+    "sameBorrowedNormalBridgeDisconnected": true,
+    "savedHostBodiesRestored": true
+  }
+}

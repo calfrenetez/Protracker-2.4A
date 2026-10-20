@@ -1,5 +1,28 @@
 # Sample memory and playback ownership
 
+## Independent emulator display diagnosis —20 October2026
+
+A distinct capture-only run of the unchanged application reached READY and
+returned zero from its diagnostic. Its IPC image and an independent screenshot
+of the actual Amiberry window both show lower-pattern corruption. The actionable
+capture is 756×576; the accepted logical editor layout remains 640×512. A HOST
+oracle matched all 84 pattern-atlas rows across 12 states with 7,741,440 RGB
+comparisons and zero mismatches, without qualifying AmigaOS Copper merging.
+The private CPU drawing diagnostic (362,544 bytes) passes native build and narrow
+static interface review. Its first emulator startup failed the five-second IPC
+PING before connection, application launch or input; that failure is preserved.
+A distinct guarded startup passed with one PING and a 30-second response deadline. The CPU
+candidate then launched once and produced clean, readable IPC and independent
+native-window images: row 0 centered with the expected blank rows above, and no
+blue/white pattern corruption. No mouse or keyboard input was sent. This
+implicates the prepared display path; the exact Copper or atlas cause remains
+unproven. Full UI, import/save/export, timing, listening and production adoption
+remain unqualified. Verified owned cleanup and original public release passed
+for both attempts, with the same borrowed bridge disconnected. Volatile session
+discard supplies no native clean EXIT or ENV-restoration claim. See the
+[original display diagnosis and images](test-evidence/native_application_render_diagnosis_20261020.json)
+and the [CPU comparison, images and preserved startup failure](test-evidence/native_application_render_comparison_20261020.json).
+
 ## First virtual-mouse capture and physical cleanup —20 October2026
 
 The complete private application reached READY in a distinct Amiberry run, but

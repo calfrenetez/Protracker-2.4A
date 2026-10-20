@@ -1,0 +1,242 @@
+{
+  "candidateB": {
+    "bytes": 362544,
+    "canonicalOrDefaultAdoption": false,
+    "role": "Private CPU fallback diagnostic; prepared-pattern atlas/Copper path bypassed",
+    "sha256": "4ff46fe8607016a89007a725ae59048d05f6692597b53b1a022c391c2ab29e94"
+  },
+  "comparisonConclusion": {
+    "basis": "A showed lower-pattern corruption in both independent native-window and IPC captures; the private CPU fallback B showed a clean readable initial blank editor in both captures.",
+    "exactCopperOrAtlasCauseProven": false,
+    "preparedPatternDisplayPathImplicated": true,
+    "productionPatchSelected": false
+  },
+  "distinctSuccessor": {
+    "applicationFunctionalAcceptance": false,
+    "capture": {
+      "IPCAppearance": "CLEAN",
+      "acceptedLogicalLayout": {
+        "height": 512,
+        "width": 640
+      },
+      "actionable": true,
+      "applicationLaunches": 1,
+      "captures": 1,
+      "comparisonClass": "CORRUPTION_NOT_REPRODUCED",
+      "coordinateSpace": "screenshot_pixels",
+      "croppedOrResized": false,
+      "dirty": false,
+      "expectedBlankRowsAboveInitialRow": true,
+      "explicitRawGUIStateQueries": 1,
+      "imageHeight": 576,
+      "imageWidth": 756,
+      "independentNativeWindowScreenshot": true,
+      "initialChannel": 0,
+      "initialRow": 0,
+      "mouseClicks": 0,
+      "mouseMoves": 0,
+      "nativeReadyAndInitialFrame": true,
+      "nativeWindowAppearance": "CLEAN",
+      "originalDiagnosticReturnCode": 0,
+      "rawKeysOrEscape": 0,
+      "revision": 0
+    },
+    "fullUIAcceptance": false,
+    "listeningAcceptance": false,
+    "physicalHardwareAcceptance": false,
+    "productionAdoption": false,
+    "savedEvidenceDigests": {
+      "adapterResult": {
+        "bytes": 26738,
+        "sha256": "a0325bb5d825c305efa931d05b83d7ac58aeb2cd48814e0db11e9b0c16cc4195"
+      },
+      "captureCLIActual": {
+        "bytes": 37,
+        "sha256": "7c0b18c5ce5b1ab77c49f1053427c562f1bf807c3acbf2d71de0616b7793a96e"
+      },
+      "captureMetadata": {
+        "bytes": 472,
+        "sha256": "518e5b58720568c879c364fa3765fc8ee165d11ee1b4e72be23840236b3e0601"
+      },
+      "captureResult": {
+        "bytes": 4018,
+        "sha256": "157db7cd25b14d2d80412098a5d0a218aee057c760eebb891e444033961e9b73"
+      },
+      "disconnectActual": {
+        "bytes": 37,
+        "sha256": "7c0b18c5ce5b1ab77c49f1053427c562f1bf807c3acbf2d71de0616b7793a96e"
+      },
+      "independentRootVisualObservation": {
+        "bytes": 1121,
+        "sha256": "ca3a1e9b00fb73632cfd687788fe5088ea19a8c501ab709546045bf522bd1373"
+      },
+      "ownedEmulatorStopActual": {
+        "bytes": 37,
+        "sha256": "7c0b18c5ce5b1ab77c49f1053427c562f1bf807c3acbf2d71de0616b7793a96e"
+      },
+      "ownedRunCustodyManifest": {
+        "bytes": 14994,
+        "sha256": "b8073437a092fdfde8d179492324f937139294eec81e96b465fb9ade2840da82"
+      },
+      "settlement": {
+        "bytes": 1394,
+        "sha256": "e48e983fc12bcbeca624afa1113cb43de9049ed7e63e677b41a2e3aa45927275"
+      },
+      "startupActual": {
+        "bytes": 71,
+        "sha256": "587ddbeea773d461924a47524d0c8fa703e55d9e82532d489c2b4b9ede2aad1d"
+      }
+    },
+    "settlement": {
+      "guard": {
+        "archives": 203,
+        "fence": 2511,
+        "state": "EMPTY"
+      },
+      "guardReset": false,
+      "nativeCleanExitOrRC0Claimed": false,
+      "nativeENVRestorationClaimed": false,
+      "oldFailureArchivesRetained": true,
+      "originalDisconnectReturnCode": 0,
+      "originalOwnedEmulatorStopReturnCode": 0,
+      "originalPublicReleaseVerified": true,
+      "ownedBodiesPreservedBeforeExactCleanup": 17,
+      "releaseReplayed": false,
+      "sameBorrowedNormalBridgeDisconnected": true
+    },
+    "startup": {
+      "canonicalHarnessChanged": false,
+      "earlierFailedTransactionReplayed": false,
+      "oneStartupPING": true,
+      "originalGuardsRetained": true,
+      "perIOPhaseTimeoutSeconds": 30,
+      "returnCode": 0,
+      "wholeStartupDeadlineClaimed": false
+    },
+    "status": "CAPTURE_ONLY_OBSERVATION_RECORDED",
+    "timingOrPerformanceAcceptance": false
+  },
+  "earlierReceiptHistoricalLimits": [
+    "The emulator startup failure is not a B application failure; B never launched and adds no rendering comparison result.",
+    "A and B runtime rendering cannot yet be compared; no actual AmigaOS Copper-merge cause is established.",
+    "The CPU fallback changes workload and supplies no timing, musical or performance-equivalence claim.",
+    "Full UI, import/save/classic MOD export, physical hardware, listening and production adoption remain unqualified.",
+    "A separate single-PING 30-second source proposal is prospective only; no result from it is included."
+  ],
+  "emulatorAttempt": {
+    "BRenderingComparison": "NOT_RUN",
+    "acknowledgementWithinDeadline": false,
+    "applicationLaunches": 0,
+    "failedTransactionReplayed": false,
+    "firstIPCPINGAcknowledgementDeadlineSeconds": 5,
+    "guestConnectionAfterFailure": false,
+    "mouseClicks": 0,
+    "mouseMoves": 0,
+    "originalStartupReturnCode": 1,
+    "rawKeys": 0,
+    "savedLogShowsPINGReceived": true,
+    "savedNativeWindowShows": "AmigaBridgeShell, not the B application",
+    "status": "FAILED_BEFORE_B_APPLICATION",
+    "underlyingStartupCauseProven": false
+  },
+  "emulatorAttemptRole": "Earlier original five-second startup failure; its saved facts and settlement below remain unchanged.",
+  "images": {
+    "native_application_render_cpu_ipc_20261020.png": {
+      "bytes": 15785,
+      "sha256": "795a3fd12909873593187a1dcd337410ed9c00e5b57c7cdc903730715d3fd4b0"
+    },
+    "native_application_render_cpu_window_20261020.png": {
+      "bytes": 305953,
+      "sha256": "84c93e9969270ab2d51d02ea9f42395b4476037d3383191423fd8c45e59962d0"
+    }
+  },
+  "limits": [
+    "The original B startup failure and its two archived holds remain preserved; the successful successor is a distinct reservation and transaction.",
+    "The clean CPU fallback implicates the prepared pattern display path but does not uniquely establish AmigaOS Copper merge, pointer, palette or atlas root cause.",
+    "The CPU fallback changes workload; musical timing, performance equivalence and listening remain unqualified.",
+    "One blank capture with zero input does not qualify mouse interaction, full UI, import/save/classic MOD export, physical hardware or production adoption.",
+    "Owned emulator-session discard supplies no native clean EXIT/RC0 or ENV-restoration claim."
+  ],
+  "nativeBuild": {
+    "allOwnedWorkerClosuresVerified": true,
+    "allToolReturnCodes": 0,
+    "changedObjects": 1,
+    "executableUnresolvedSymbols": 0,
+    "fullIndependentABIAudit": false,
+    "independentSavedActualReview": "PASS",
+    "narrowStaticInterfaceQualification": "PASS",
+    "newMainUndefinedSymbols": 127,
+    "onlyRemovedMainImports": [
+      "_pt_pattern_display_init",
+      "_pt_pattern_display_position",
+      "_pt_pattern_display_prepare"
+    ],
+    "orderedLinkInputs": 82,
+    "originalToolVectorsCompleted": 8,
+    "semanticSourceChanges": 2,
+    "status": "PASS",
+    "unchangedObjects": 74
+  },
+  "preservedEarlierPublishedReceipt": {
+    "bytes": 4089,
+    "sha256": "5be8309c5574683cbdecd3b2d1e7f7cb291a1e4f6f5a16d2f7b6eaf85bbf5627"
+  },
+  "redaction": "Private paths, process identifiers, owner/lease/nonce values and raw private records omitted.",
+  "referenceA": {
+    "acceptedLogicalLayout": {
+      "height": 512,
+      "width": 640
+    },
+    "nativeWindowAndIPCBothCorrupted": true,
+    "receipt": "native_application_render_diagnosis_20261020.json",
+    "renderingCauseProven": false
+  },
+  "savedEvidenceDigests": {
+    "failedStartupNativeWindowCapture": {
+      "bytes": 148654,
+      "sha256": "64834a4f919849927477161e2ed75d5561f3d2d04d4c646a218604c3ad67a4d6"
+    },
+    "independentSavedActualReview": {
+      "bytes": 31306,
+      "sha256": "cfcc7feb592d80f10aafc7dddd77a0a0bf363b24385096d8799bd32ca250a67e"
+    },
+    "independentSettlement": {
+      "bytes": 928,
+      "sha256": "64c15951c02629777e741dac01ae90798e308aed6372e323252037ce6f2e1fae"
+    },
+    "nativeBuildResult": {
+      "bytes": 62852,
+      "sha256": "d92bc4c77ff2f413c8f03ae13d5d849e58d02abdef2772ae5b3ea401a6f80a63"
+    },
+    "originalAppendedEmulatorLog": {
+      "bytes": 56,
+      "sha256": "5747eb6c295ece0410b25fd35681a243de671eccaf7e35a6c3f10c868a84e2e3"
+    },
+    "originalStartupActual": {
+      "bytes": 37,
+      "sha256": "36a27f1a038f9873c061ffebe30b6e2b30aaf20aacc7dc492c2e1c08fa55bca1"
+    },
+    "originalStartupStderr": {
+      "bytes": 3270,
+      "sha256": "1ba63a982b2380e7c419d2be59bf4fc29cab22f39540d7bfade8ac8b591936d8"
+    },
+    "rootStaticQualification": {
+      "bytes": 1711,
+      "sha256": "c371100472b3a8426c35eba20f080e8ff64d05d1da6eb6deae7e6d96ffe8d0e2"
+    }
+  },
+  "scope": "Private CPU-pattern comparison: native build/static PASS, preserved first startup failure, distinct capture-only runtime observation; no full application acceptance",
+  "settlement": {
+    "failedHoldRecordsArchived": 2,
+    "guard": {
+      "archives": 202,
+      "fence": 2501,
+      "state": "EMPTY"
+    },
+    "guardReset": false,
+    "nativeCleanEXITOrENVRestorationClaimed": false,
+    "ownedCleanupAndOriginalPublicRelease": "PASS",
+    "releaseReplayed": false,
+    "sameBorrowedNormalBridgeDisconnected": true
+  }
+}

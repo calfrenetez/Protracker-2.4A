@@ -1,5 +1,34 @@
 # Sample memory and playback ownership
 
+## Actual virtual-mouse positioning failure —20 October2026
+
+The focused private CPU diagnostic accepted one guarded move and left-click,
+with confirmed input cleanup. The actual 756×576 screenshot point selected by
+Root mapped through the installed service to SDL coordinates, but the visible
+guest pointer did not reach the intended pattern cell. Native row 0/channel 0
+remained unchanged; expected channel 1 never arrived. The actual click target
+was not independently logged. The original timeout and failed case are preserved. No Escape or retry
+was sent. All 17 exact owned run/launch bodies were preserved before cleanup,
+the saved host files restored, and independent original public release passed.
+Successful input transport does not establish guest-pointer positioning or UI
+acceptance. A separate cursor-only diagnostic and source investigation precede
+more application clicks. See the [failure receipt and actual images](test-evidence/native_application_mouse_wrong_position_20261020.json).
+
+## CPU drawing mouse readiness refusal —20 October2026
+
+The private CPU drawing diagnostic reached READY in a distinct Amiberry case.
+Its first GUI move request returned `input_not_ready` at readiness with execution
+`not_started` and no applied coordinates. No native move, click, key or Escape
+occurred; the failure and evidence remain preserved. Verified owned cleanup and
+original public release completed at EMPTY2518/archive204. The disconnected
+bridge's future guarded usability remained unqualified after connection loss.
+A separate refresh under the owner's existing authorization then verified a new
+healthy, disconnected normal bridge with source, configuration, plist and guard
+unchanged. The refresh sent no native command, application launch or input and
+is not a mouse-readiness pass. The reason for the original focus refusal remains
+unproven; full UI and input acceptance remain withheld. See the
+[readiness refusal and authorized bridge refresh](test-evidence/native_application_mouse_focus_readiness_20261020.json).
+
 ## Independent emulator display diagnosis —20 October2026
 
 A distinct capture-only run of the unchanged application reached READY and

@@ -1,0 +1,89 @@
+{
+  "candidate": {
+    "bytes": 362544,
+    "sha256": "4ff46fe8607016a89007a725ae59048d05f6692597b53b1a022c391c2ab29e94"
+  },
+  "failure": {
+    "GUIMoveRequestsAttempted": 1,
+    "applicationLaunches": 1,
+    "appliedCoordinateCount": 0,
+    "code": "input_not_ready",
+    "escapeTaps": 0,
+    "executionState": "not_started",
+    "failedTransactionReplayed": false,
+    "failurePhase": "readiness",
+    "inputFocusFailureCauseProven": false,
+    "leftClicks": 0,
+    "nativeInputEvents": 0,
+    "nativeMoveExecuted": false,
+    "nativeReadyAndInitialFrame": true,
+    "rawKeys": 0,
+    "status": "ORIGINAL_FAILED_ATTEMPT_PRESERVED",
+    "suggestedNextAction": "restore_focus"
+  },
+  "limits": [
+    "A refused GUI move request is not a native move: the original service reported not_started/readiness with no applied coordinates.",
+    "The observed readiness refusal does not prove why host-window input focus was unavailable.",
+    "The approved service refresh followed public release and supplied no target commands or UI test; health alone does not qualify future guarded target or mouse use.",
+    "The native screenshot point, mouse selection, full UI, import/save/classic MOD export, musical timing, physical hardware, listening and production adoption remain unqualified.",
+    "Earlier display captures, failed transactions and their archives remain preserved."
+  ],
+  "priorRenderingEvidence": "native_application_render_comparison_20261020.json",
+  "redaction": "Private paths, process identifiers, lease/owner/nonce values, exact screenshot point and raw service records omitted.",
+  "savedEvidenceDigests": {
+    "authorizedNormalBridgeRefresh": {
+      "bytes": 3582,
+      "sha256": "6f6a800be530029b5de20553fe6b3c2c29e95ea376db223bf4860963c5e41b89"
+    },
+    "initialCaptureAndNativeFrame": {
+      "bytes": 1643,
+      "sha256": "9ff99f91645cef97f507b162e13a47f9baead6a731091c0d361cbdf315c7e7e1"
+    },
+    "originalAdapterResult": {
+      "bytes": 21445,
+      "sha256": "e089689caee8d22229d6cd429300b20758afbcdc44f1374ef11ef325b05ed2a3"
+    },
+    "originalGUIMoveResult": {
+      "bytes": 609,
+      "sha256": "30b480d16cfb749c2cbb17706cb3cd36101ad99ba9d14c46423ff4eb503b411f"
+    },
+    "originalLeafFailure": {
+      "bytes": 1881,
+      "sha256": "8613a01dc756ed595d4fb97029a9184d16aee907c513343dc8b2f621c05adaa0"
+    },
+    "verifiedSettlement": {
+      "bytes": 1023,
+      "sha256": "ddc08ed9591e1b4f4eca2e028a9e9aaef46b69dfdbade52722a62732a77bf519"
+    }
+  },
+  "scope": "Private CPU diagnostic firstmouse readiness refusal and separately authorized normal-bridge refresh; no mouse or full UI acceptance",
+  "separateBridgeRefresh": {
+    "applicationLaunches": 0,
+    "bootoutAttempts": 1,
+    "bootstrapAttempts": 1,
+    "canonicalSourceConfigurationAndPlistUnchanged": true,
+    "healthyAndDisconnectedOnOriginalLoopbackEndpoint": true,
+    "inputEvents": 0,
+    "mouseReadinessAcceptance": false,
+    "nativeCommands": 0,
+    "newProcessIdentityVerified": true,
+    "originalGuardUnchanged": true,
+    "priorHumanAuthorizationUsed": true,
+    "recoveryActivationMarkerCreated": false,
+    "status": "VERIFIED_HOST_SERVICE_BASELINE_ONLY"
+  },
+  "settlement": {
+    "futureGuardedBridgeUsabilityAtThisBoundary": "UNQUALIFIED_AFTER_CONNECTION_LOSS",
+    "guard": {
+      "archives": 204,
+      "fence": 2518,
+      "state": "EMPTY"
+    },
+    "guardReset": false,
+    "nativeCleanEXITOrENVRestorationClaimed": false,
+    "normalBridgeObservedDisconnected": true,
+    "oldFailureArchivesRetained": true,
+    "releaseReplayed": false,
+    "verifiedOwnedCleanupAndOriginalPublicRelease": "PASS"
+  }
+}

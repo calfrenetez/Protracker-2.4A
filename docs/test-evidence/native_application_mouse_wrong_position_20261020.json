@@ -1,0 +1,117 @@
+{
+  "state": "ACTUAL_VIRTUAL_MOUSE_INPUT_WRONG_CONTROL_SELECTION_FAILED_CLEANUP_VERIFIED",
+  "date": "2026-10-20",
+  "evidenceTier": "Amiberry private CPU diagnostic; not physical or full UI acceptance",
+  "candidate": {
+    "bytes": 362544,
+    "sha256": "4ff46fe8607016a89007a725ae59048d05f6692597b53b1a022c391c2ab29e94",
+    "defaultRendererAccepted": false
+  },
+  "applicationLaunches": 1,
+  "RootObservedScreenshotPoint": {
+    "x": 289,
+    "y": 415,
+    "coordinateSpace": "screenshot_pixels",
+    "intendedVisibleControl": "channel 2 row 0 note cell"
+  },
+  "capture": {
+    "width": 756,
+    "height": 576,
+    "logicalLayoutWidth": 640,
+    "logicalLayoutHeight": 512,
+    "geometryUnchangedAfterMove": true,
+    "freshCaptureIDsAndNoncesVerified": true
+  },
+  "beforeMove": {
+    "focusReady": true,
+    "buttonMask": 0,
+    "geometryRevision": 10
+  },
+  "guardedGUIResults": {
+    "move": {
+      "ok": true,
+      "executionState": "completed",
+      "cleanupState": "confirmed",
+      "requestedScreenshotCoordinates": [
+        {
+          "x": 289,
+          "y": 415
+        }
+      ],
+      "reportedAppliedSDLCoordinates": [
+        {
+          "x": 275,
+          "y": 403
+        }
+      ]
+    },
+    "click": {
+      "ok": true,
+      "executionState": "completed",
+      "cleanupState": "confirmed",
+      "requestedScreenshotCoordinates": [
+        {
+          "x": 289,
+          "y": 415
+        }
+      ],
+      "reportedAppliedSDLCoordinates": [
+        {
+          "x": 275,
+          "y": 403
+        }
+      ]
+    }
+  },
+  "observedFailure": {
+    "expectedNativeRow": 0,
+    "expectedNativeChannel": 1,
+    "actualNativeRow": 0,
+    "actualNativeChannel": 0,
+    "actualRevision": 0,
+    "actualDirty": 0,
+    "visibleGuestCursorReachedIntendedPoint": false,
+    "expectedSelectionDeadline": "expired; original failure preserved",
+    "mappingCauseProven": false,
+    "transportCompletionDoesNotProveGuestPointerPosition": true,
+    "actualClickDestinationNotIndependentlyLogged": true,
+    "sampleCounterChangeNotAcceptanceEvidence": true
+  },
+  "actions": {
+    "buttonFreeMoves": 1,
+    "leftClicks": 1,
+    "EscapeTaps": 0,
+    "otherRawKeys": 0,
+    "retries": 0
+  },
+  "cleanup": {
+    "verifiedOwnedEmulatorStoppedOnce": true,
+    "all17ExactOwnRunAndLaunchBodiesPreservedBeforeRemoval": true,
+    "twoSavedHostBodiesRestored": true,
+    "originalPublicReleaseVerified": true,
+    "bothOriginalHoldsArchived": true,
+    "guardResetAttempted": false,
+    "failedTransactionReplayed": false,
+    "nativeCleanExitOrENVRestorationClaimed": false
+  },
+  "acceptance": {
+    "mouseSelection": false,
+    "fullUI": false,
+    "importSaveReopenMOD": false,
+    "physical": false,
+    "listening": false
+  },
+  "next": "Distinct Workbench-only one-move cursor-position diagnostic without click/application/key, using actual capture mapping and visible pointer observation. No guessed offset/scale fix.",
+  "images": {
+    "afterMove": {
+      "file": "native_application_mouse_wrong_position_after_move_20261020.png",
+      "bytes": 15724,
+      "sha256": "f5bd7d35b3f741bd8569ee1c96b6c35d78eadf875f947841af937bd3a621dd7b"
+    },
+    "nativeWindowAfterClick": {
+      "file": "native_application_mouse_wrong_position_after_click_20261020.png",
+      "bytes": 297753,
+      "sha256": "4d75ae5e325c38a8663f8d77bddfa98f7503559f48de5aeaa8cbb68caa403dc8"
+    }
+  }
+}

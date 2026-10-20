@@ -1,0 +1,57 @@
+{
+  "acceptance": {
+    "AmiGUS": false,
+    "exactTransferBytes": true,
+    "listening": false,
+    "physicalApplication": false,
+    "wholeRun": false
+  },
+  "candidate": {
+    "CRC32": "0BFB3F38",
+    "bytes": 362864,
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "guestCRCBeforeAfterExact": true,
+  "measuredCompleteReadback": {
+    "bytesPerSecond": 3174,
+    "chunks": 355,
+    "nativeCRCVerified": true,
+    "seconds": 114.3
+  },
+  "oneMiniFTPTransferCompleted": true,
+  "physicalTest": {
+    "ENVSetupReached": false,
+    "callbackNamespaceCreationReached": false,
+    "candidateLaunchAttempts": 0,
+    "effectivePullCappedBySetupRemaining": true,
+    "escapeAttempts": 0,
+    "failedTransactionReplayed": false,
+    "failure": "TimeoutError during first landing readback",
+    "localArgumentPrecisionRefusalSeparatelyPreserved": true,
+    "originalFailurePreserved": true,
+    "passed": false,
+    "pullNominalSeconds": 30,
+    "setupMaximumSeconds": 20
+  },
+  "privateRootQualification": {
+    "bytes": 25923,
+    "sha256": "21d61432862de69de4888f3a2d7914228313e693293fcf025fce4d620250ebe8"
+  },
+  "publication": "Redacted evidence only; no lease, token, address or raw guard history",
+  "resources": {
+    "MiniFTPNormallyClosed": true,
+    "RAMLandingCleanupVerified": false,
+    "borrowedServiceRestartedByTest": false,
+    "browserViewOnly": true,
+    "endpointReturn": "PENDING_SUPPORTED_RECOVERY",
+    "guard": "HOLD",
+    "inflight": null,
+    "physicalDisconnectVerified": false,
+    "publicReleaseAccepted": false,
+    "retainedHolds": 5,
+    "temporaryFTPStopped": true
+  },
+  "returnedHostSHA256Exact": true,
+  "schemaVersion": 1,
+  "scope": "Exact physical GUI transfer and preserved prelaunch harness failure"
+}

@@ -8290,3 +8290,22 @@ fixture is separate from the full GUI application; physical A1200/AmiGUS,
 listening and musical timing receive no acceptance from it. Application source,
 accepted layout, scheduling and default build were unchanged. See the
 [compact native functional receipt](test-evidence/native_format_hardening_32bit_functional_20261020.json).
+
+
+## 20 October 2026 — exact A1200 transfer; GUI test stopped before launch
+
+The qualified 362,864-byte GUI candidate completed one MiniFTP transfer to the
+physical A1200. Guest CRC before and after an independent return transfer matched;
+the complete returned SHA-256 matched the Amiberry-qualified candidate. The
+read-back took 114.3 seconds at 3,174 bytes/second. MiniFTP and the temporary file
+server were normally closed, and AmiConnect was returned to View Only.
+
+The separate physical GUI test failed on its first landing read-back. Its nominal
+30-second pull was capped by the remaining 20-second setup phase. Candidate launch
+and Escape attempts were both zero; callback namespace creation and ENV setup
+were not reached. The original failure was preserved and was not replayed.
+The shared guard retained five recovery holds. The transferred RAM landing,
+physical disconnection and endpoint return remain unresolved: the installed guard
+has no supported target recovery command while held. No cleanup/release or
+physical application/AmiGUS/listening acceptance is claimed. See the
+[redacted transfer and prelaunch-failure receipt](test-evidence/physical_gui_transfer_prelaunch_timeout_20261020.json).

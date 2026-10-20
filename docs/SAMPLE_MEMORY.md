@@ -1,6 +1,6 @@
 # Sample memory and playback ownership
 
-## Optional native file-hardening regression source —19 October2026
+## Optional native file-hardening regression —20 October2026
 
 The optional `tests/native_format_hardening32_test.c` checks malformed imports,
 allocation failures, explicit precision conversion, classic MOD word limits and
@@ -9,7 +9,19 @@ native preprocessing, code generation and assembly. Eleven object transactions
 passed normally; the remaining transaction preserved a false `_SysBase` symbol
 requirement. Independent checks and a separate qualification accept its existing
 output against the actual Exec function imports, with no compiler replay.
-Linking, selected provider ABI, Amiberry and A1200 execution remain pending.
+The exact 83,016-byte fixture links without unresolved symbols. Saved-byte
+checks reconstruct all twelve objects and cover 38 external provider routes;
+selected Exec/DOS/CRT interface checks also pass. One Amiberry execution produced
+the expected eight-line, 695-byte stdout and return code zero. Its wrapper then
+refused a staged-file metadata comparison; that failed result remains preserved.
+The missing before snapshot leaves the original metadata change unproven.
+Separate owned recovery preserved the evidence, restored both launcher files,
+removed only the five staged files, and archived both holds through the original
+public release, followed by an independent final check. A host-only probe
+reproduced ctime/flag changes with unchanged bytes; a proposed narrow own-copy
+policy passes 15 HOST cases and awaits pipeline integration. Native stderr,
+full fixture acceptance, A1200/AmiGUS and listening remain unqualified. See the
+[native build and runtime observations](test-evidence/native_format_hardening_32bit_link_host_20261020.json).
 This test is not part of the default build. See the
 [native source and object receipt](test-evidence/native_format_hardening_32bit_objects_20261019.json).
 

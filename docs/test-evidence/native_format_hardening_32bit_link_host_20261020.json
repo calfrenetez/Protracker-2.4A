@@ -1,0 +1,165 @@
+{
+  "acceptance": {
+    "A1200": false,
+    "AmiGUS": false,
+    "audioOrListening": false,
+    "defaultBuildChanged": false,
+    "native32FunctionalRuntime": false,
+    "nativeStderr": "UNQUALIFIED"
+  },
+  "candidate": {
+    "artifact": "PT24GHardening32",
+    "bytes": 83016,
+    "crc32": "C533A56A",
+    "sha256": "2543faf68957b80b1329bb2bfa291dbb446248ddf3ef559b2e2579e0ec10e01c"
+  },
+  "hostChecks": {
+    "certificateBundleBytes": 240216,
+    "certificateVerificationDisabled": false,
+    "installedCertificateBundleRECORDHashMatches": true,
+    "managedLifecycleModels": 42,
+    "newCurrentEndpointModels": 13,
+    "newLauncherSeamCases": 15,
+    "originalMCPHTTPClientConstructor": "PASS_NO_NETWORK",
+    "ownCopyPolicyHOSTMethods": 15,
+    "ownCopyPolicyPipelineIntegrated": false,
+    "ownCopyProbeBodyExact": true,
+    "ownCopyProbeChangedFields": [
+      "st_ctime_ns",
+      "st_flags"
+    ],
+    "ownCopyProbeDoesNotRecoverOriginalBeforeFacts": true,
+    "ownCopyProbeFlagTransition": [
+      0,
+      64
+    ],
+    "ownCopyProbeSamples": 26,
+    "sslLoadedCA": 121
+  },
+  "independentSavedRecoveryReview": "PASS_BOUNDED_SAVED_RECORD_ASSOCIATIONS_ONLY",
+  "limits": [
+    "Static build and selected saved-byte interface checks do not establish native runtime, whole application, device timing, physical memory or listening acceptance.",
+    "The earlier object transaction refusal and failed startup remain preserved; no original result was rewritten.",
+    "The later wrapper result remains failed. Saved native stdout/RC and candidate bytes are separately verified; native stderr and full fixture acceptance remain unqualified. Owned recovery was verified separately and does not turn the failed wrapper into a pass."
+  ],
+  "newAmiberryAttempt": {
+    "RAMDirectoriesCreated": 0,
+    "ctimeRestored": false,
+    "failedEvidencePreserved": true,
+    "failedTransactionReplayed": false,
+    "finalStateScope": "HISTORICAL_RECOVERED_ATTEMPT_ONLY",
+    "nativeFixtureLaunches": 0,
+    "originalHoldsArchived": 1,
+    "originalPublicRecoveryReleaseCompleted": true,
+    "ownedEmulatorStopped": true,
+    "ownedRecovery": "PASS_SEPARATE_SAVED_REVIEW_AND_ROOT_SETTLEMENT",
+    "savedLauncherRolesRestored": 2,
+    "separateFinalObservation": "PASS",
+    "setup": "FAILED_HOST_CERTIFICATE_BUNDLE_BEFORE_MCP_CONNECT"
+  },
+  "schemaVersion": 1,
+  "staticNativeBuild": {
+    "CUnits": 12,
+    "externalProviderRoutes": 38,
+    "hunks": 3,
+    "largestIndividualCompilerFrameBytes": 7160,
+    "linked": true,
+    "orderedLoads": 19,
+    "reconstructedObjects": 12,
+    "relocations": 881,
+    "selectedInterfaceReview": "Exec4/DOS5/CRT command line only",
+    "symbols": 223,
+    "unresolvedSymbols": 0,
+    "wholeABIQualified": false,
+    "wholeTaskStackQualified": false
+  },
+  "status": "STATIC_NATIVE_LINK_HOST_CHECKS_NATIVE_OUTPUT_OBSERVED_WRAPPER_FAILED_RECOVERY_COMPLETE",
+  "subsequentAmiberryAttempt": {
+    "borrowedServiceKeptRunning": true,
+    "cleanupAndRecovery": "PASS_SEPARATE_OBSERVER_ORIGINAL_PUBLIC_RELEASE_AND_FINAL",
+    "emptyOwnedRunDirectoryRemoved": true,
+    "failedResultPreserved": true,
+    "failedTransactionReplayed": false,
+    "functionalPass": false,
+    "furtherTargetActionsRefused": true,
+    "guestRAMLifetime": "ENDED_WITH_OWNED_EMULATOR_NO_GUEST_DIRECTORY_DELETE_CLAIM",
+    "independentSavedObservationReview": "MATCH_BOUNDED_OUTPUT_OBSERVATIONS_ONLY",
+    "nativeFixtureLaunchAttempts": 1,
+    "nativeStderr": "UNQUALIFIED",
+    "observedNativeOutput": {
+      "expectedMarkers": 8,
+      "launcherMatchesOriginalNativeLaunchScript": true,
+      "returnCode": 0,
+      "savedCandidateBodyMatchesExactLinkedCandidate": true,
+      "savedStdout": {
+        "bytes": 695,
+        "sha256": "47de7f1aa427b3cae393541148390329e704c834d180e4e8817c5acc6e6f3748"
+      },
+      "stdoutBytes": 695,
+      "terminalMarkerVerified": true
+    },
+    "originalHoldsArchived": 2,
+    "originalPublicRecoveryReleaseCompleted": true,
+    "originalResult": "REFUSED_OR_HOLD_NO_REPLAY",
+    "ownedEmulatorStopped": true,
+    "ownedFileBodiesPreserved": 5,
+    "ownedFilesRemoved": 5,
+    "preExecutionStagedMetadata": "NOT_SAVED",
+    "ramDirectoryDeleteAttempts": 0,
+    "savedLauncherRolesRestored": 2,
+    "separateFinalObservation": "PASS",
+    "specificMetadataChangeCause": "UNPROVEN",
+    "supportingRecovery": {
+      "independentObservation": {
+        "bytes": 15027,
+        "sha256": "6c77544176e5fb0ec905d37461ac013f089ba2a62f554780421d3d86d0060a22"
+      },
+      "publicRelease": {
+        "bytes": 2512,
+        "sha256": "f0f11f0e64cff6dddbb97fdbc19f06d1154c7468d0d012ecc93b3626a6cfb0ca"
+      },
+      "restoration": {
+        "bytes": 20490,
+        "sha256": "1e354d0eb0f53a48ac478a756351b753fee53a72c703e650ff5e1235cad48819"
+      },
+      "rootSettlement": {
+        "bytes": 2331,
+        "sha256": "f93d490545e48293a61b4a2587c0d013e47a7b395626f5f005ee8c854a7cbc4f"
+      },
+      "separateFinal": {
+        "bytes": 14223,
+        "sha256": "6a4456aa6ed9f2ad65eb9eb2c870736c799649d25b6edafabcd706ca208c17e7"
+      }
+    },
+    "supportingSavedObservation": {
+      "bytes": 8414,
+      "sha256": "175ebf198714defffb12e6ef2912de4cc40a83abea9ee43c53becc285ba1a628"
+    },
+    "supportingSavedResult": {
+      "bytes": 1012,
+      "sha256": "1c300eae21c976ce77d1f83db78bd70ea5e0ead6a1bce7900f552e919c380575"
+    }
+  },
+  "supportingSavedEvidence": {
+    "independentObservation": {
+      "bytes": 7067,
+      "sha256": "72312be3d4063fadcfe7cdda14ffa761d622badafb20a86abd989b0bfd362683"
+    },
+    "publicRelease": {
+      "bytes": 2506,
+      "sha256": "1ea7bf3c59b34ffe6ea74571801c76541fdebe6e2a2815eb80dd95a6a08ed526"
+    },
+    "restoration": {
+      "bytes": 8505,
+      "sha256": "d196105d2e73142689e0c1ecf77c2a78c7e840295605553f41d3a6aa19880f87"
+    },
+    "rootSettlement": {
+      "bytes": 1850,
+      "sha256": "d71b832c4859b56899cf867a67f73aa5db4fcc3bad203a5f2a00a88502a71f44"
+    },
+    "separateFinal": {
+      "bytes": 6263,
+      "sha256": "cfe03a7bf237ff4e241479c97e9008ef69d0bcc53270ccf5fa8b64b2fac53db5"
+    }
+  }
+}

@@ -1,5 +1,17 @@
 # Sample memory and playback ownership
 
+## Workbench cursor isolation —20 October2026
+
+A separate Workbench-only diagnostic completed recording with return code zero
+but did not pass cursor positioning. One button-free move requested screenshot
+(500, 450); the original service reported applied SDL (476, 434), while the
+visible Amiga pointer tip was at (206, 166). No 2.4G application, click or key
+was used. The original GUI settings restored successfully, and exact capture
+mapping remained unchanged. The mismatch therefore reproduces outside 2.4G;
+it establishes no calibration formula or exact conversion cause. Original
+disconnect/stop, saved-host restoration and independent public release passed.
+See the [diagnostic and exact before/after images](test-evidence/native_workbench_cursor_position_20261020.json).
+
 ## Actual virtual-mouse positioning failure —20 October2026
 
 The focused private CPU diagnostic accepted one guarded move and left-click,

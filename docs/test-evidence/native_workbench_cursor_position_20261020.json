@@ -1,0 +1,70 @@
+{
+  "state": "WORKBENCH_CURSOR_DIAGNOSTIC_RECORDED_POSITION_MISMATCH",
+  "date": "2026-10-20",
+  "evidenceTier": "Amiberry Workbench; no 2.4G application or physical operation",
+  "diagnosticRecordingReturnCode": 0,
+  "mouseMappingAccepted": false,
+  "applicationLaunches": 0,
+  "leftClicks": 0,
+  "rawKeys": 0,
+  "buttonFreeMoves": 1,
+  "requestedScreenshotPoint": [
+    500,
+    450
+  ],
+  "reportedAppliedSDLCoordinates": [
+    {
+      "x": 476,
+      "y": 434
+    }
+  ],
+  "RootObservedVisibleGuestPointerTip": [
+    206,
+    166
+  ],
+  "observedDeltaPixels": [
+    -294,
+    -284
+  ],
+  "exactObservedTipEqualsRequested": false,
+  "originalGUIStateRestored": true,
+  "capture": {
+    "width": 756,
+    "height": 578,
+    "geometryRevision": 8,
+    "mappingUnchangedAfterMove": true,
+    "freshCaptureIDsAndNonces": true
+  },
+  "scopeLimits": {
+    "singlePointOnly": true,
+    "arbitraryToleranceUsed": false,
+    "offsetOrScaleCorrectionDerived": false,
+    "exactNativeConversionCauseProven": false,
+    "nativeIntuitionPointerFieldsRead": false,
+    "fullUIAcceptance": false,
+    "physicalAcceptance": false
+  },
+  "cleanup": {
+    "originalGuardedDisconnectReturnCode": 0,
+    "originalOwnedStopReturnCode": 0,
+    "savedHostBodiesRestored": true,
+    "originalPublicReleaseVerified": true,
+    "ownedEmulatorAndIPCAbsent": true,
+    "sameBorrowedBridgeDisconnected": true,
+    "replay": false,
+    "guardReset": false
+  },
+  "implication": "The positioning mismatch reproduces without 2.4G. Investigate the emulator input path before more application clicks; a completed SDL acknowledgement does not establish guest pointer position.",
+  "images": {
+    "before": {
+      "file": "native_workbench_cursor_before_20261020.png",
+      "bytes": 7348,
+      "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+    },
+    "after": {
+      "file": "native_workbench_cursor_after_20261020.png",
+      "bytes": 7365,
+      "sha256": "ad23795482c59e3791215a71f1c264ebd37e36755f1b1042b2a7ad8632ec1450"
+    }
+  }
+}

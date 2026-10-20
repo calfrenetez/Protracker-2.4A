@@ -1,5 +1,19 @@
 # Sample memory and playback ownership
 
+## Prepared pattern field/stride comparison —21 October2026
+
+The distinct private D diagnostic swaps pointer-field selection and inherits
+the OS bitplane modulo. Native build and separate ABI checks passed. One
+zero-input Amiberry launch produced a clean, readable initial-pattern IPC image.
+Its raw dump matches each field's OS pointer parity across all four planes,
+retains OS modulo 72 without user overrides, and preserves C's WAIT/mode/colors.
+Both first ENDs are at index 117; 34 capacity rows per field were ignored.
+Original disconnect/owned stop, 17-file custody, two host restorations and public
+release passed. This is not full UI, mouse, native-window, timing, physical or
+listening acceptance. The working source remains unchanged; the exact two-change
+[review patch](patches/prepared-pattern-field-stride.patch) is preserved without
+default adoption. See the [redacted result and exact IPC image](test-evidence/native_prepared_pattern_fix_20261021.json).
+
 ## Prepared Copper diagnostic —21 October2026
 
 The private prepared-display diagnostic reached READY and its initial FRAME,

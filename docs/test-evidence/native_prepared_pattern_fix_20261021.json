@@ -1,0 +1,170 @@
+{
+  "state": "PRIVATE_PREPARED_PATTERN_COMPARISON_CLEAN_IPC_IMAGE_NO_DEFAULT_ADOPTION",
+  "date": "2026-10-21",
+  "evidenceTier": "Amiberry IPC image and saved raw Copper comparison only",
+  "diagnosticRecordingReturnCode": 0,
+  "candidate": {
+    "bytes": 365532,
+    "sha256": "a6fad3b48ac19a83f184ba9da6dfd53aac788d90608db310d2656d1b359cd9dd",
+    "preparedDrawingEnabled": true,
+    "unchangedDiagnosticMain": true,
+    "productionAdoption": false
+  },
+  "nativeQualification": {
+    "allEightNativeWorkersPassedAndClosed": true,
+    "retainedOwners": 0,
+    "patternUndefinedImports": 23,
+    "patternStrongExports": 6,
+    "unchangedOtherObjects": 74,
+    "rawLOADs": 82,
+    "RootReadOnlyABIQualified": true,
+    "actualCodeSections": 2,
+    "earlierLocalOneCodeSectionPredicateRefusalPreserved": true,
+    "compileOrLinkReplayed": false,
+    "wholeCallChainIRQStackOrHeapLifetimeAcceptance": false
+  },
+  "actions": {
+    "applicationLaunches": 1,
+    "mouseMoves": 0,
+    "leftClicks": 0,
+    "rawKeys": 0,
+    "escapeTaps": 0,
+    "IPCImages": 1,
+    "independentNativeWindowObservations": 0
+  },
+  "journal": {
+    "bytes": 13161,
+    "sha256": "e1e48c1e80cc2014678716c48a2e40636116f48d3cccf5cdaeaf24d1487d0ba9",
+    "READYAndInitialFRAMEVerifiedSeparately": true,
+    "stableDoubleCopyReported": true,
+    "copiedRawPairRecords": 304,
+    "perField": [
+      {
+        "field": "long",
+        "copiedRawPairRecords": 152,
+        "truncated": false,
+        "firstHardwareEndIndex": 117,
+        "copiedPairRecordsAfterEndIgnored": 34
+      },
+      {
+        "field": "short",
+        "copiedRawPairRecords": 152,
+        "truncated": false,
+        "firstHardwareEndIndex": 117,
+        "copiedPairRecordsAfterEndIgnored": 34
+      }
+    ],
+    "capacityTailInterpreted": false,
+    "nextSegmentFollowed": false
+  },
+  "savedComparisonToC": {
+    "allFourPlanesUserPointerRowParityMatchesOwnOSSetup": true,
+    "userBitplaneModuloOverridesAbsent": true,
+    "observedOSModuloBytes": 72,
+    "OSModuloValueNotHardcodedByChange": true,
+    "WAITModeAndColorValuesMatchC": true,
+    "logicalLayoutUnchanged": {
+      "width": 640,
+      "height": 512
+    },
+    "exactCauseOfAllPossibleRenderingFailuresProven": false,
+    "twoSourceChangesTestedTogether": true,
+    "individualCausalContributionIsolated": false
+  },
+  "image": {
+    "file": "native_prepared_pattern_fix_20261021.png",
+    "bytes": 15793,
+    "sha256": "011fbf771e25e396d9a4cf9c5a2cc9115b61e5ed043a849b668fd324262beb7c",
+    "width": 756,
+    "height": 576,
+    "IPCImageViewedByRoot": true,
+    "appearance": "Clean, readable initial pattern; prior blue/white corruption absent in this IPC image",
+    "nativeWindowObserved": false,
+    "renderComparisonAcceptance": false,
+    "sourceImageMetadataObservation": {
+      "onlyCtimeAdvancedAfterViewing": true,
+      "otherNineRecordedFactsAndBodyMatch": true,
+      "historicalFull4ContinuityClaimed": false,
+      "causeInferred": false,
+      "publicImageCopyUsesNewFileMetadata": true
+    }
+  },
+  "reviewableSourceArtifact": {
+    "file": "../patches/prepared-pattern-field-stride.patch",
+    "bytes": 763,
+    "sha256": "c7dd0f36294501e11cf8f6365c01d6dda8e40fd5a338d48f3965c14a346d4e7b",
+    "baseline": {
+      "file": "src/native/pattern_display.c",
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "workingSourceModified": false
+    },
+    "semanticChanges": [
+      "Swap existing per-field pointer-selection flags",
+      "Remove user bitplane modulo writes and inherit the OS-generated value"
+    ],
+    "semanticReplacementCount": 2,
+    "privateNativeSourceFreeze": {
+      "bytes": 6516,
+      "sha256": "c49762edb75a3ed98206982d768c142dd2b8fc6dbd1c4a50af87ef48dae81de0"
+    },
+    "privatePreprocessedBaseline": {
+      "bytes": 261798,
+      "sha256": "b6d3de312ba1354931564183ecafb1e268a50929d3559d1199f8602f1fe73eb6"
+    },
+    "privatePreprocessedD": {
+      "bytes": 261439,
+      "sha256": "c33213f05d79efa09e6447bc7e2fc81bc04e132f0ea21938e44e6918f883c02e"
+    },
+    "nativeRebuildChangedOnlyPatternObject": true,
+    "defaultSourceAdoption": false
+  },
+  "cleanup": {
+    "originalGuardedDisconnectReturnCode": 0,
+    "originalOwnedStopReturnCode": 0,
+    "exactOwnedBodiesPreservedBeforeRemoval": 17,
+    "savedHostBodiesRestored": 2,
+    "originalPublicReleaseVerified": true,
+    "guardAfter": {
+      "fence": 2570,
+      "holds": 0,
+      "archives": 210
+    },
+    "sameBorrowedBridgeDisconnected": true,
+    "ownedEmulatorIPCAndRunAbsent": true,
+    "nativeCleanExitOrRC0Claimed": false,
+    "nativeENVRestorationClaimed": false,
+    "failedTransactionReplayed": false,
+    "guardReset": false
+  },
+  "acceptanceLimits": {
+    "fullUIImportSaveClassicMODAccepted": false,
+    "mouseMappingAccepted": false,
+    "nativeWindowComparisonPerformed": false,
+    "hardwareTimingLifetimeOwnershipOrContiguityProven": false,
+    "physicalOrListeningAccepted": false,
+    "defaultImplementationAccepted": false
+  },
+  "savedEvidenceCores": {
+    "adapterResult": {
+      "bytes": 35672,
+      "sha256": "eb67ad2a83c86e72c68f661034289aa7196536250b081e04ce523de677c12c7f"
+    },
+    "DVersusCDecode": {
+      "bytes": 19508,
+      "sha256": "e87a3562a71c4c5d89a870cab31d1d2ef291060279535ed444641e9ba5dd5898"
+    },
+    "nativeBuild": {
+      "bytes": 60277,
+      "sha256": "cf287f449881ea475abb64f4e73b4cda4984b8811f06c7fc565151fa4b2a9fce"
+    },
+    "RootABI": {
+      "bytes": 19358,
+      "sha256": "003e48b3db60dd6949046b111b3d2f4db135843d312c2fee57e68f836994f35b"
+    },
+    "settlement": {
+      "bytes": 1403,
+      "sha256": "a4dfc09dbfce1835afb5ea7c912eb580ddad88028fe138a2d04112972ddb9930"
+    }
+  }
+}

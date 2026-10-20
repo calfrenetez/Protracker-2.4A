@@ -1,0 +1,13 @@
+--- a/src/native/pattern_display.c
++++ b/src/native/pattern_display.c
+@@ -35,8 +35,8 @@
+     for(end=0;end<2;++end) {
+         CWAIT(d->copper,end?PT_EDITOR_PATTERN_Y+PT_EDITOR_ROWS*12:PT_EDITOR_PATTERN_Y,0);
+         for(f=0;f<2;++f)for(i=0;i<4;++i)for(j=0;j<2;++j)
+-            move(d->copper,0xe0+i*4+j*2,0,f?CPR_NT_LOF:CPR_NT_SHT,&d->pointers[end][f][i][j]);
+-        move(d->copper,0x108,80,0,NULL);move(d->copper,0x10a,80,0,NULL);
++            move(d->copper,0xe0+i*4+j*2,0,f?CPR_NT_SHT:CPR_NT_LOF,&d->pointers[end][f][i][j]);
++        /* Inherit the OS-generated modulo: atlas and base both use80 bytes per row. */
+         if(!end)for(i=0;i<2;++i) {
+             static const unsigned pens[3]={0,2,4};
+             d->waits[i]=d->copper->CopList->CopPtr;

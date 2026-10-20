@@ -1,5 +1,25 @@
 # Sample memory and playback ownership
 
+## First virtual-mouse capture and physical cleanup —20 October2026
+
+The complete private application reached READY in a distinct Amiberry run, but
+the first mouse test stopped before any move or click. Its screenshot was
+756×576 rather than the case's required 640×512, and the saved image shows
+corruption in the lower pattern area. Capture geometry and native rendering
+remain separate unresolved issues. No mouse, full UI, import/save, physical or
+listening acceptance follows. The failed image and result remain preserved;
+the owned emulator was discarded, its exact files preserved before cleanup,
+and the original public release and separate normal-service return completed.
+See the [capture failure and image](test-evidence/native_application_mouse_ui_capture_20261020.json).
+
+The earlier physical application attempt also remains failed. Following the
+owner's approved and reported reboot, four distinct read-only recovery steps
+verified the target identity and complete owned RAM/ENV/temporary-file absence,
+then disconnected. Independent public release and normal-service return passed.
+The unread native log was discarded with the owner's approval; neither a full
+boot cycle nor native clean EXIT/RC0 was independently observed. See the
+[physical cleanup receipt](test-evidence/native_application_a1200_postlaunch_cleanup_20261020.json).
+
 ## Optional native file-hardening regression —20 October2026
 
 The optional `tests/native_format_hardening32_test.c` checks malformed imports,

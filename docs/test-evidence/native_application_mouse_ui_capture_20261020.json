@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "date": "2026-10-20",
+  "state": "CAPTURE_FAILED_BEFORE_VIRTUAL_MOUSE_INPUT_OWNED_SCOPE_CLEANED",
+  "scope": "Exact private application, first virtual-mouse selection case only",
+  "candidate": {
+    "bytes": 362864,
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "emulator": {
+    "version": "8.3.0",
+    "binaryBytes": 46443704,
+    "binarySHA256": "0b2011f7b7e5ba5bc60adf6ac925a202bf97f75e97ac5c8192953e784e4acf3d",
+    "distinctResidentAssetsStartupPassed": true,
+    "originalSinglePINGDeadlineUnchanged": true,
+    "priorStartupTimeoutPreserved": true,
+    "priorTimeoutCauseProven": false
+  },
+  "applicationObservation": {
+    "launchAttempts": 1,
+    "readyObserved": true,
+    "initialFrame": {"row": 0, "channel": 0, "revision": 0, "dirty": 0},
+    "mouseMoveAttempts": 0,
+    "mouseClickAttempts": 0,
+    "escapeTapAttempts": 0,
+    "visualObservationRequestPublished": false,
+    "error": "This finite native-coordinate case requires a genuine full 640x512 actionable capture",
+    "originalCaptureRegistryMetadataRetained": false,
+    "imageDimensionsAloneProveActionability": false
+  },
+  "savedImage": {
+    "path": "native_application_mouse_ui_capture_20261020.png",
+    "bytes": 18373,
+    "sha256": "ea18fa04e4d5a51c351e7d10dfbc0d7416f9fb56ae9a244843055f33ff027594",
+    "width": 756,
+    "height": 576,
+    "rootVisuallyObserved": true,
+    "observation": "Top editor controls are visible; lower pattern area appears corrupted",
+    "captureMappingAndRenderingDiagnosis": "PENDING_SEPARATE_QUALIFICATION"
+  },
+  "settlement": {
+    "ownedEmulatorDiscardedWithOneNormalTERM": true,
+    "volatileGuestRAMAndENVDiscarded": true,
+    "nativeEnvironmentRestoreScriptExecuted": false,
+    "nativeCleanExitOrRC0Claimed": false,
+    "exactOwnedRunAndLaunchScriptPreservedBeforeRemoval": true,
+    "savedHostLauncherFilesRestored": 2,
+    "sourcePlistConfigurationAndProtectedInputsPreserved": true,
+    "originalPublicReleaseIndependentlyVerified": true,
+    "allFailedHoldsRetainedInOriginalArchive": true,
+    "separateNormalServiceReturnIndependentlyVerified": true,
+    "normalServiceDisconnectedAtLocalBaseline": true,
+    "failedTransactionReplayed": false
+  },
+  "acceptance": {
+    "mouseSelection": false,
+    "fullUserInterface": false,
+    "importSaveReopenClassicMOD": false,
+    "physicalA1200AmiGUS": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  },
+  "redaction": "Private paths, addresses, leases, operation tokens and process identifiers omitted"
+}

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "date": "2026-10-20",
+  "state": "PHYSICAL_FAILED_APPLICATION_SCOPE_CLEANUP_ACCEPTED_ONLY",
+  "candidate": {
+    "bytes": 362864,
+    "sha256": "f0009678d5172643006cac6b674873e3d8a307de167dd65af90e26ae6e162db2"
+  },
+  "originalApplicationAttempt": {
+    "failed": true,
+    "failedEvidencePreserved": true,
+    "failedTransactionReplayed": false,
+    "applicationLaunchAttempts": 1,
+    "plannedEscapeAttempts": 0,
+    "applicationFunctionalAcceptance": false
+  },
+  "restorationMethod": "Owner-approved and owner-reported reboot followed by independent read-only namespace verification",
+  "rebootReportedByOwner": true,
+  "wholeBootCycleIndependentlyObserved": false,
+  "unreadNativeLogDiscardExplicitlyAuthorized": true,
+  "unreadNativeLogRecovered": false,
+  "nativeCleanExitOrRC0Claimed": false,
+  "readOnlyRecovery": {
+    "positiveSteps": ["connect", "system identity", "complete owned namespace absence", "disconnect"],
+    "identity": {"exec": "47.13", "cpu": "68030", "video": "PAL"},
+    "completeNativeInventories": ["RAM:", "ENV:", "T:"],
+    "exactOwnedDeviceAndLandingAbsent": true,
+    "fiveOriginallyAbsentPrivateENVNamesAbsent": true,
+    "priorOwnedNativeTemporaryPairAbsent": true,
+    "newScripts": 0,
+    "inputEvents": 0,
+    "applicationLaunches": 0,
+    "fileReads": 0,
+    "fileDeletions": 0
+  },
+  "hostAndOwnershipSettlement": {
+    "sourcePlistConfigurationAndProtectedInputsPreserved": true,
+    "browserObservedAuthenticatedViewOnly": true,
+    "independentOriginalPublicReleaseVerified": true,
+    "allOriginalFailureAndRecoveryHoldsPreservedInArchive": true,
+    "separateNormalServiceReturnVerified": true,
+    "normalServiceDisconnectedAtLocalBaseline": true,
+    "guardResetOrForceReleaseUsed": false
+  },
+  "acceptance": {
+    "cleanupOnly": true,
+    "applicationFunctional": false,
+    "fullEmulatorUI": false,
+    "physicalApplicationAmiGUS": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  },
+  "redaction": "Private paths, addresses, leases, operation tokens and process identifiers omitted"
+}

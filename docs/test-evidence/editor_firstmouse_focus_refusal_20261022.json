@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Actual current editor first-mouse attempt refused before input; fully settled; prospective test focus-order correction HOST checked",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "emulator": {
+    "distinctSession": true,
+    "startupSeconds": 32.40068666699881,
+    "completeMountedGuestReadbackMatched": true,
+    "blankPhase": "BLANK_LOG_AND_REGISTERED_CAPTURE_RECORDED",
+    "blankAttempts": {
+      "application-launch": 1,
+      "candidate-readback": 1,
+      "capture": 1,
+      "environment-setup": 1
+    },
+    "mousePhase": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+    "mousePhaseAttempts": {
+      "capture": 0,
+      "click": 0,
+      "move": 0,
+      "state": 1
+    },
+    "error": "Actual same-geometry focus and released buttons required",
+    "failedTransactionReplayed": false,
+    "image": {
+      "file": "editor_mouse_focus_refusal_20261022.png",
+      "bytes": 15549,
+      "sha256": "28d8deb93b120ad81a0bee2d47d4d46bee5bbafeed9aafde85102ae789009493",
+      "width": 756,
+      "height": 576
+    },
+    "rootViewedExactImageAndNativeBlankEditor": true,
+    "beforeMoveState": {
+      "button_mask": 0,
+      "effective_mouse_untrap": "middle",
+      "effective_tablet_mode": "mousehack",
+      "focus_ready": false,
+      "geometry_revision": 12,
+      "geometry_valid": true,
+      "input_config_revision": 1,
+      "monitor_id": 0,
+      "pending_effective_diverged": false,
+      "pending_mouse_untrap": "middle",
+      "pending_tablet_mode": "mousehack",
+      "schema_version": 1,
+      "supported_button_mask": 7
+    },
+    "actualMouseOrClickSuccessClaimed": false
+  },
+  "diagnosis": {
+    "testOutsideTransactionPredicateCheckedFocusTooEarly": true,
+    "originalAPISequence": "Observe current settings, enable minimum temporary mouse mode, wait for ready focus, use native guarded callback, release and restore original settings.",
+    "middleModeOutsideTransactionCanReportUnready": true,
+    "liveUnderlyingFocusCauseFullyEstablished": false,
+    "originalSharedAPIOrNativeGuardChanged": false
+  },
+  "hostCorrection": {
+    "phaseAndAdapterMethodsPassed": 27,
+    "actualInstalledOriginalGuiServiceMethodsPassed": 6,
+    "actualInstalledClassExecutedWithFakeIPCOnly": true,
+    "originalApiChecks": [
+      "Temporary MIDDLE-to-BOTH settings before input, then restore MIDDLE",
+      "Focus never ready: zero native input calls and original settings restored",
+      "Focus lost at native callback: refused without input",
+      "Config compare-and-set conflict and stale geometry: no input",
+      "Duplicate request ID: no second input"
+    ],
+    "focusGuardRemovedFromOriginalAPI": false,
+    "nativeFocusGuardRemoved": false,
+    "outsideTransactionFocusNowDiagnosticOnly": true,
+    "runtimeCorrectionNotYetTested": true,
+    "prospectivePhaseSHA256": "e2df90f694f4befdedbdc37e1ae2c2160c1306d7afc01044c8b37c5390f97dcd",
+    "originalGuiTestSHA256": "403c64a93eb9bb0ec1a5d52cfb343b34078d0480e781ef7ad890060966c2f32e"
+  },
+  "settlement": {
+    "singlePositivelyOwnedSIGTERM": true,
+    "guardHoldRetainedUntilNormalPublicRelease": true,
+    "applicationLaunches": 1,
+    "harnessMoveAndClickCommands": 0,
+    "generatedFilesPreservedBeforeExactRemoval": 15,
+    "localCandidateVolumeRetained": true,
+    "originalSavedHostRolesRestored": 3,
+    "appDataOriginalBodiesAndMtimesVerified": 31,
+    "knownThemeMtimesRestoredWithoutBodyWrites": 2,
+    "rawProtectedPathsVerified": 68,
+    "installedSourcesVerified": 10,
+    "normalReleaseSucceeded": true,
+    "historicalReleaseFence": 2670,
+    "originalFailureHoldsArchived": 1,
+    "phaseAtRelease": "EMPTY",
+    "snapshotIsNotFutureClearance": true,
+    "nativeCleanExitClaimed": false,
+    "guestEnvScriptRestoreClaimed": false
+  },
+  "service": {
+    "originalSharedServiceNotRestartedThisAttempt": true,
+    "genuineBridgeEOFObservedAfterOwnedVMStop": true,
+    "connectionLossBarrierMustNotBeBypassed": true,
+    "previousOneRestartApprovalConsumed": true,
+    "newSpecificOneRestartApprovalRequested": true,
+    "newApprovalRecordExists": false,
+    "newRestartDispatched": false,
+    "concreteGatedNewProposalPrepared": true,
+    "missingNewApprovalRefusesBeforePreflight": true,
+    "actualOldConsumedApprovalArgumentAlsoRefusedBeforeGuardOrServiceDispatch": true
+  },
+  "evidence": {
+    "durableOrdinaryFilesBodyVerified": 227,
+    "durableBytes": 10710249,
+    "privateLeaseTokenExcluded": true,
+    "oldFailuresAndSourcePreserved": true
+  },
+  "withheld": [
+    "Editor mouse positioning/click selection",
+    "Whole editor workflow and whole-application ABI/stack",
+    "Replay/backend/audio",
+    "Physical A1200/AmiGUS and human listening"
+  ]
+}

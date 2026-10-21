@@ -1,5 +1,46 @@
 # Sample memory and playback ownership
 
+## First editor mouse attempt and focus-order correction —22 October2026
+
+A fresh exact-candidate editor test reached the blank launch and registered
+capture, then refused before any mouse movement or click. The actual state had
+valid matching geometry, released buttons, settled mousehack/MIDDLE settings
+and `focus_ready=false`. The original failure and evidence were retained.
+
+The test's extra outside-transaction focus assertion ran before the installed
+GUI API could prepare its temporary mouse mode. The unchanged API first adds
+MAGIC capability (MIDDLE to BOTH), waits for focus, sends guarded input, then
+restores the original settings. A separate full installed-class HOST fixture
+passes six methods, including zero input when focus never becomes ready or is
+lost at the native callback, settings conflicts, stale geometry and replay
+deduplication. These are fake IPC endpoints, not emulator acceptance.
+
+A distinct prospective test phase now treats outside-transaction focus as a
+diagnostic. It retains geometry/button/config checks and delegates all actual
+input readiness to the unchanged original API and native guard. Its phase and
+adapter pass27 HOST methods. The live cause of the original focus state is
+not fully established, and this correction has not run in Amiberry yet.
+
+The failed owned emulator was stopped once, all15 generated files preserved
+before exact namespace removal, and the local input volume retained. Three
+saved host roles, all31 app-data bodies/original mtimes and raw68-path/10-source
+preservation checks passed. Normal public release archived the original failure
+at historical fence2670/EMPTY; no native clean exit is claimed.
+
+Stopping the failed VM produced genuine bridge EOF. The existing connection-loss
+protection prevents ordinary reuse, so a new specific one-idle-service-restart
+approval was requested. The earlier one-restart approval is consumed. A concrete
+gated proposal refuses the older approval and requires fresh idle ownership,
+both locks, unchanged service/source/config/guard and target absence. No new
+approval record or service restart exists. Continue source/HOST work while
+waiting; do not bypass the connection-loss guard or replay the failed test.
+
+See the [actual focus refusal and HOST correction](test-evidence/editor_firstmouse_focus_refusal_20261022.json)
+and [exact blank-editor image](test-evidence/editor_mouse_focus_refusal_20261022.png).
+The latest whole707 HOST verdict remains706 pass/one independent-provider gate
+failure/zero errors. Editor clicks/workflows, whole ABI/stack, playback/backend,
+physical hardware and listening remain unqualified.
+
 ## Mounted blank editor capture and settlement —21 October2026
 
 The exact current346404-byte candidate now completes a distinct Amiberry

@@ -2,6 +2,26 @@
 
 ## Capture-only attempt and local candidate volume —21 October2026
 
+A distinct mounted-candidate carrier now has12 passing HOST methods. It binds
+an already prepared local alias to the exact original profile beforeimage and
+active private mount, reads all guest bytes before execution, and never recopies
+the immutable candidate into Dev. Original no-input limits, strict full facts,
+log/capture checks and guarded APIs remain. Four further HOST methods exercise
+the prospective helper's actual patch/restore on temporary fixtures, including
+original bytes/mtimes and refusal/replay guards. No actual profile was changed.
+
+An actual installed serial-gate extraction passes three offline state fixtures:
+a previous connection lost without explicit detach refuses, while fresh and
+explicitly detached fixture states permit endpoint validation. This is source
+behavior, not inspection of the loaded service object's private fields.
+Automatic approval review rejected the proposed one-time idle shared DevBench
+restart before shell execution because this borrowed service requires explicit
+user authorization. A question is pending. Read-only checks confirm the same
+service is running, its cached endpoint is disconnected, no emulator exists and
+the guard remains EMPTY at observed2649. No restart or workaround was attempted.
+Continue HOST/source work while approval is pending. See the
+[mounted carrier HOST evidence](test-evidence/editor_mounted_capture_carrier_host_20261021.json).
+
 The exact current346404-byte editor candidate was read back completely through
 an owned Amiberry session and matched SHA256 `7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b`.
 The isolated five-variable ENV setup completed. Before any application launch,

@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "scope": "Distinct local-volume editor capture carrier SOURCE and HOST qualification only",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "source": {
+    "carrierSHA256": "59f84f0c239bc38e0c24c7ffb1a41a190b0120abf44571604bba3fcc9edbddaa",
+    "privateProfileHelperSHA256": "8c1fbc9f12b31fd846e37916d2178ab153f34477608c77378438ee43d9e8f15b",
+    "newAdmissionStateRequired": true,
+    "preparedAliasAndExactActiveProfileMountMustAgree": true,
+    "actorCandidateWrites": 0,
+    "completeGuestReadbackStillRequired": true,
+    "strictFullFactsBeforeAndAfterStillRequired": true,
+    "maximumApplicationLaunches": 1,
+    "mouseKeyPlaybackAndExitAttempts": 0,
+    "originalGuardedGuestIPCAndCaptureAPIsRetained": true,
+    "fullLifetimeGatesUnmodified": true
+  },
+  "host": {
+    "carrierUnittestMethods": 12,
+    "profileFileCycleUnittestMethods": 4,
+    "methodsPassed": 16,
+    "actualInstalledNestedGateFixtures": 3,
+    "gateFixturesPassed": true,
+    "testEndpointsExplicitlyFake": true,
+    "profileFileCyclesOnlyTemporaryFixtures": true,
+    "firstFixtureRun": {
+      "tests": 12,
+      "errors": 4,
+      "cause": "TemporaryDirectory can generate underscore; retained namespace policy correctly refused. Corrected fixture uses bounded hexadecimal names.",
+      "evidenceRetained": true
+    },
+    "lastWholeSuiteRemains": {
+      "tests": 707,
+      "passed": 706,
+      "failed": 1,
+      "errors": 0,
+      "overall": "FAILED"
+    }
+  },
+  "service": {
+    "readOnlyGuardObservation": "EMPTY",
+    "historicalFenceObservation": 2649,
+    "observationNotFutureClearance": true,
+    "cachedEndpointDisconnected": true,
+    "sharedServiceUnchanged": true,
+    "emulatorAbsent": true,
+    "restartAutoReview": "REJECTED_BEFORE_PROCESS_CREATION",
+    "restartDispatched": false,
+    "reason": "Borrowed shared service lifecycle needs explicit user authorization.",
+    "userApprovalPending": true,
+    "workaroundAttempted": false
+  },
+  "target": {
+    "newReservationOrLeaseCreated": false,
+    "newEmulatorStartup": false,
+    "guestCommands": 0,
+    "applicationLaunches": 0,
+    "inputActions": 0,
+    "profileWrites": 0,
+    "physicalActions": 0
+  },
+  "withheld": [
+    "Runtime mounting and exact mounted guest-byte verification",
+    "Editor native/IPC capture and visual comparison",
+    "Whole application ABI and stack",
+    "Playback and checked backend integration",
+    "Physical A1200/AmiGUS and human listening"
+  ],
+  "evidence": "Private exact sources, first failed HOST fixture transcript, corrected raw HOST transcripts, actual nested gate fixture and rejected-action/non-execution evidence are retained in project outputs."
+}

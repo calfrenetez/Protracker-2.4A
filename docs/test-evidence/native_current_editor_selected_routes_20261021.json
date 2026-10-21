@@ -1,0 +1,128 @@
+{
+  "schema": "pt24g-native-selected-hunk-routes-v1",
+  "date": "2026-10-21",
+  "state": "SELECTED_HUNK_ENTRY_AND_STARTUP_ROUTES_PASS_NOT_WHOLE_ABI_OR_RUNTIME",
+  "tier": "HOST_DECODER_AND_SELECTED_STATIC_NATIVE_ENTRY_REVIEW_ONLY",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "sections": [
+    {
+      "index": 0,
+      "kind": 1001,
+      "bytes": 302952,
+      "bodySHA256": "ff632319cba360c51a1c85cbf2295b2dde8ad38335eecd0cf7ea3af52f59d902",
+      "symbols": 499,
+      "relocations": 3067
+    },
+    {
+      "index": 1,
+      "kind": 1002,
+      "bytes": 6408,
+      "bodySHA256": "fc76eaefc9102c6bd658341606427e3a4b43309f19c9a0943e874ed103192382",
+      "symbols": 22,
+      "relocations": 216
+    },
+    {
+      "index": 2,
+      "kind": 1003,
+      "bytes": 52720,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "symbols": 52,
+      "relocations": 0
+    },
+    {
+      "index": 3,
+      "kind": 1001,
+      "bytes": 5888,
+      "bodySHA256": "4f220d79c16c38608bf2d8726965aece366c4a421b573772fb7afa95f97e1422",
+      "symbols": 15,
+      "relocations": 170
+    }
+  ],
+  "overlappingCodeVMASections": 2,
+  "symbolAndRelocationSectionIdentityRequired": true,
+  "disassemblerAnnotationLabelsAloneGrantAcceptance": false,
+  "decoder": {
+    "source": "tools/native_hunk_routes.py",
+    "bytes": 4049,
+    "sha256": "1eb7c9293344af0e6cc636cc12b5c6a8cf4c63c75f911bebe0cd8e95dde8f529",
+    "unitTestMethods": 8,
+    "malformedRecordSubcases": 23,
+    "equalVMAFixtureDistinguishesTargetSections": true,
+    "ambiguousCrossSectionSymbolRefuses": true
+  },
+  "selectedCABI": {
+    "main": {
+      "section": 0,
+      "offset": 10428,
+      "caller": {
+        "section": 0,
+        "offset": 92,
+        "targetSection": 0,
+        "targetOffset": 10428,
+        "opcode": "JSR_ABSOLUTE_LONG"
+      },
+      "linkFrameBytes": 3524,
+      "individualFrameIsNotWholeTaskOrIRQBound": true
+    },
+    "replay": {
+      "start": {
+        "section": 3,
+        "offset": 5296,
+        "caller": {
+          "section": 0,
+          "offset": 30830,
+          "targetSection": 3,
+          "targetOffset": 5296,
+          "opcode": "JSR_ABSOLUTE_LONG"
+        }
+      },
+      "stop": {
+        "section": 3,
+        "offset": 5620,
+        "caller": {
+          "section": 0,
+          "offset": 28650,
+          "targetSection": 3,
+          "targetOffset": 5620,
+          "opcode": "JSR_ABSOLUTE_LONG"
+        }
+      },
+      "calleeSavedBytes": 44,
+      "observedArgumentStackOffsets": [
+        48,
+        64
+      ],
+      "callerArgumentCleanupBytes": 20,
+      "backend": "LEGACY_DEFAULT_REPLAY_NOT_CHECKED_CIA_SUCCESSOR",
+      "checkedRetirementSymbolsLinked": false,
+      "playbackAdmitted": false
+    }
+  },
+  "startup": {
+    "stackRequestBytes": 65536,
+    "anchorTarget": {
+      "section": 0,
+      "offset": 282432
+    },
+    "initPriority": 58,
+    "exitPriority": 58,
+    "CRTTableAddressRelocationsAndEntriesChecked": true,
+    "actualTaskAllocationAndRestorationProved": false
+  },
+  "limitations": {
+    "wholeApplicationABI": false,
+    "wholeTaskOSAndIRQStackBound": false,
+    "checkedCIARetirementSelected": false,
+    "playbackAdmitted": false,
+    "emulatorAdmissionGranted": false,
+    "nativeWindowComparison": false,
+    "functionalUI": false,
+    "physicalAndListening": false,
+    "defaultAdoption": false
+  },
+  "targetOperations": 0,
+  "canonicalProductCSourceWrites": 0
+}

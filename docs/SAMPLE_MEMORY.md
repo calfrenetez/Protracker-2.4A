@@ -25,6 +25,21 @@ execution, native-window comparison and functional UI qualification before
 physical testing or default adoption. See the
 [native build evidence](test-evidence/native_current_editor_build_20261021.json).
 
+The subsequent section-aware review resolves the two code hunks' overlapping
+zero VMAs. The CRT calls main in HUNK0; the C frontend calls replay start/stop
+in HUNK3. Five-argument caller cleanup and the replay register-save/argument
+offsets agree. The actual startup anchor, init/exit table entries and65536-byte
+stack request are retained. Main's3524-byte LINK frame is an individual frame,
+not a whole Task/OS/IRQ bound. Eight decoder test methods cover equal-address
+providers, ambiguous-symbol refusal and23 malformed-record cases. The new
+decoder keeps section identity rather than trusting disassembler labels.
+
+This candidate links the legacy replay backend. The checked CIA retirement
+successor is absent, so no playback admission follows from these selected
+checks. Whole-application ABI, actual startup stack allocation/restoration,
+runtime UI and default adoption remain unqualified. See the
+[selected entry and startup routes](test-evidence/native_current_editor_selected_routes_20261021.json).
+
 ## Full HOST regression and post-reboot pointer observations —21 October2026
 
 The original full shared HOST selection ran707 tests in3374.564s:706 passed,

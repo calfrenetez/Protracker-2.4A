@@ -1,5 +1,30 @@
 # Sample memory and playback ownership
 
+## Current editor candidate rebuild —21 October2026
+
+A separate current-source editor candidate compiled and linked all72 C units
+plus the pinned replay object, with strict warnings and the late optimizer
+disabled. The private pattern copy applies the reviewed field-parity change
+and removes both user modulo writes; the original working files and default
+binary remain unchanged. The resulting Amiga HUNK is346404 bytes,
+SHA256 `7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b`.
+All289 selected input bodies/full facts matched before and after;228 owned
+native workers closed successfully. Read-only structure/disassembly and the
+zero-undefined-symbol check passed. Seven named runtime bodies were recorded;
+this does not establish a complete link map or whole-application ABI/stack proof.
+
+This is a new candidate, distinct from the earlier prepared diagnostic D.
+Its preprocessing, objects, executable and selected inputs were archived into
+one durable bundle and all1424 member bodies reopened and hash-verified.
+The first dependency-discovery timeout and a later strict refusal after a new
+private source's flag/ctime changed remain preserved. One exact122495-byte
+GCC DOS header was downloaded; active compilation then used local temporary
+storage with the same strict checks. No metadata waiver was applied.
+No target operation occurred: this candidate still needs fresh emulator
+execution, native-window comparison and functional UI qualification before
+physical testing or default adoption. See the
+[native build evidence](test-evidence/native_current_editor_build_20261021.json).
+
 ## Full HOST regression and post-reboot pointer observations —21 October2026
 
 The original full shared HOST selection ran707 tests in3374.564s:706 passed,

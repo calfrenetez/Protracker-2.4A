@@ -1,0 +1,96 @@
+{
+  "schema": "pt24g-current-editor-native-build-v1",
+  "date": "2026-10-21",
+  "tier": "NATIVE_COMPILE_AND_READ_ONLY_STRUCTURE_ONLY",
+  "state": "PASS_NOT_RUN",
+  "candidate": {
+    "name": "PT24GCurrentPatternCandidate",
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "sourceUnitCount": 72,
+  "pinnedReplayObject": {
+    "bytes": 7024,
+    "sha256": "4382069a6040133ae907d89724e8068ec9ce1f7d23ceec4a38411982bb7ffa52"
+  },
+  "selectedInputBodyCount": 289,
+  "namedCRTAndRuntimeBodyCount": 7,
+  "runtimeInputsAreNotCompleteLinkMap": true,
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-"
+  ],
+  "ownedNativeWorkersClosed": 228,
+  "allSelectedOriginalInputBodiesAndFullFactsEqualBeforeAfter": true,
+  "executableFormat": "Amiga HUNK",
+  "undefinedExecutableSymbols": 0,
+  "sourceChanges": {
+    "scope": "Private copy of current working pattern source only. Original working files preserved.",
+    "fieldParity": "Use CPR_NT_SHT for odd f and CPR_NT_LOF for even f so each OS field receives the matching row offset.",
+    "modulo": "Remove both user BPLMOD writes and inherit the OS-generated display stride. No constant 72 override.",
+    "originalPatternBody": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d"
+    },
+    "privatePatternBody": {
+      "bytes": 6903,
+      "sha256": "b0ff0269bf99b201f674297a85238c8b1757c0ce41610a0a404ce9d4804c44c4"
+    },
+    "reviewPatch": "../patches/prepared-pattern-field-stride.patch"
+  },
+  "historicalComparison": {
+    "isHistoricalPreparedDiagnosticD": false,
+    "reusesHistoricalRuntimeAcceptance": false,
+    "defaultEditorBinaryReplaced": false
+  },
+  "retainedEarlierFailures": [
+    {
+      "attempt": "r1",
+      "stage": "First source dependency discovery",
+      "timedOutSeconds": 45,
+      "compilerGroupClosed": true,
+      "objectCount": 0
+    },
+    {
+      "attempt": "r2",
+      "stage": "Strict repeated input comparison",
+      "compiledSourceCount": 3,
+      "change": "New private pattern source gained flag64 and a forward ctime; body and all other fields matched. Cause unproven.",
+      "waiverApplied": false
+    }
+  ],
+  "targetedDownload": {
+    "item": "GCC DOS inline SDK header",
+    "bytes": 122495,
+    "FoundationRequestAccepted": true,
+    "residentBeforeSuccessfulBuild": true,
+    "generalSyncSettingsChanged": false
+  },
+  "durableCustody": {
+    "archiveBytes": 3340121,
+    "archiveSHA256": "412b12927979c459362b5604d5c38e097904b1f8fd80302cceab7bac681d46da",
+    "verifiedMembers": 1424,
+    "payloadBytes": 16444388,
+    "sourceAndArtifactBodiesReopenedAndHashVerified": true,
+    "historicalDestinationMetadataContinuityClaimed": false
+  },
+  "acceptance": {
+    "wholeApplicationABI": false,
+    "wholeTaskAndIRQStack": false,
+    "emulatorCandidateExecuted": false,
+    "nativeWindowDisplayCompared": false,
+    "functionalUI": false,
+    "physicalHardware": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  },
+  "targetOperations": 0,
+  "canonicalProductSourceWrites": 0
+}

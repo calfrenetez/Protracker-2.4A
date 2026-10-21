@@ -1,0 +1,187 @@
+{
+  "state": "PRIVATE_MOUSEHACK_READINESS_PRODUCTION_BUILD_AND_STATIC_INVENTORY_COMPLETE_RUNTIME_PENDING",
+  "date": "2026-10-21",
+  "evidenceTier": "Real CMake configuration, two production translation units and symbols, followed by a separate private whole build and static linked-symbol/dependency inventory; no installation or launch",
+  "source": {
+    "officialCommit": "8dec73501b5d2c2b3a6859b1d30a25291febb491",
+    "officialArchive": {
+      "bytes": 18138743,
+      "sha256": "44b19a0470d0ab05eb4c96e82efaead652bda6b0fb8d361768538c93351bfd70"
+    },
+    "originalAndPatchedRegularFilesEach": 2062,
+    "exactChangedBodies": [
+      "src/include/inputdevice.h",
+      "src/inputdevice.cpp",
+      "src/osdep/amiberry_input_helpers.h",
+      "src/osdep/amiberry_ipc_socket.cpp",
+      "tests/ipc_gui_automation_test.cpp"
+    ],
+    "canonicalSourceEdits": 0
+  },
+  "realConfiguration": {
+    "returnCode": 0,
+    "buildType": "Release",
+    "architecture": "ARM64",
+    "compileDatabaseEntries": 489,
+    "productionDefinitions": [
+      "USE_IPC_SOCKET",
+      "USE_OPENGL",
+      "USE_SDL3",
+      "USE_IMGUI",
+      "CPU_AARCH64"
+    ],
+    "nativeFileDialogGitlinkPresent": false,
+    "upstreamFallback": "Bundled ImGuiFileDialog",
+    "exactInstalledReleaseFeatureEquivalenceClaimed": false
+  },
+  "twoProductionTranslationUnits": {
+    "files": [
+      "src/inputdevice.cpp",
+      "src/osdep/amiberry_ipc_socket.cpp"
+    ],
+    "originalGeneratedCompilerArgvUsedOnceEach": true,
+    "returnCodes": [
+      0,
+      0
+    ],
+    "seconds": 6.169,
+    "allOwnedWorkersClosed": true,
+    "retainedOwners": 0,
+    "originalAndPatchedSourceBodiesUnchanged": true,
+    "originalArgvRequestedMDOrMMD": false,
+    "completeTransitiveIncludeOrSDKHeaderGraphClaimed": false
+  },
+  "readOnlyObjectSymbols": {
+    "architecture": "ARM64",
+    "getterStrongDefinitionAndIPCUndefinedReferenceMatch": true,
+    "allOwnedWorkersClosed": true,
+    "retainedOwners": 0
+  },
+  "independentSavedReview": {
+    "scope": "Two production translation units and object symbols before the separate whole build",
+    "materialFindings": [],
+    "bytes": 13138,
+    "sha256": "194c8997ec1617b4ec43873582eeee80343e650a023442e4db61605c8955b00e"
+  },
+  "separateWholeBuild": {
+    "state": "BUILD_AND_STATIC_LINK_DEPENDENCY_INVENTORY_PASS_RUNTIME_PENDING",
+    "returnCode": 0,
+    "seconds": 184.069,
+    "timedOut": false,
+    "allThreeStreamsEOF": true,
+    "ownedWorkerClosed": true,
+    "retainedOwners": 0,
+    "privateBinary": {
+      "bytes": 46510024,
+      "sha256": "0353121da93ad2538717887000c2a595dfc2cfb9ba4e68dc55dd2447a844ca67"
+    },
+    "privateAppFilesOrSymlinks": 64,
+    "sourceBodiesAndInstalledBinaryProfileUnchanged": true,
+    "signingRequested": false,
+    "installNameToolWarnedPrivateDependencySignaturesInvalidated": true,
+    "signatureValidityOrDistributionPackagingAccepted": false,
+    "staticLinkAndDependencyReviewOutcome": "PASS",
+    "runtimeAcceptance": false,
+    "initialProspective900SecondRequestRefusedBeforeDispatch": true,
+    "originalSupervisorMaximumSeconds": 600,
+    "correctedBoundSeconds": 600,
+    "samePreviouslyUndispatchedStandardBuild": true,
+    "failedCompilerOrBuildReplayed": false,
+    "supervisorPolicyWeakened": false
+  },
+  "preservedLocalRefusals": {
+    "initialPartialCopyAccessTimeComparisonBeforeConfigureCompiler": true,
+    "twoTUPlanRelativeAbsoluteLookupBeforeCompiler": true,
+    "wholeBuild900SecondBoundBeforeDispatch": true,
+    "unrelatedPublicApplicationPatchGitCheckNotACompilerFailure": true
+  },
+  "durablePrivateEvidence": {
+    "tier": "Immutable snapshot before separate whole build",
+    "fileCount": 94,
+    "manifestBytes": 105357,
+    "manifestSHA256": "702a350d22b069b84440f41b53baecb931efa17489d3a400e2389ea9c9fdd09a",
+    "twoObjectsAndOwnedRecordsPreservedBeforeWholeBuild": true,
+    "originalRelativeEvidenceChainsRetained": true,
+    "expandedSourceTreeDuplicated": false,
+    "fullHistoryCopied": false,
+    "wholeBuildOutputContained": false
+  },
+  "historicalStandaloneHOSTRecord": {
+    "file": "amiberry_mousehack_readiness_host_20261021.json",
+    "unchanged": true,
+    "bytes": 2805,
+    "sha256": "dece03859bed3359268d4fd799f766a5bc1435fb79883e14f8cdf6ef1fc9feca"
+  },
+  "acceptanceLimits": {
+    "installedEmulatorReplaced": false,
+    "emulatorOrGuestStarted": false,
+    "actualDriverReadinessOrCursorMappingAccepted": false,
+    "fullUIImportSaveClassicMODAccepted": false,
+    "physicalListeningOrDefaultAdoptionAccepted": false
+  },
+  "savedEvidenceCores": {
+    "configure": {
+      "bytes": 3745,
+      "sha256": "6993487aaecfd12ca3fd5936579607503a8d7599baecdf1d4d8ddd9b33c9de2a"
+    },
+    "twoTUCompile": {
+      "bytes": 10476,
+      "sha256": "192df3c09465c79cbdbfd0ed151aef7afde251311c30a44a9bd8d41d8a60f1b6"
+    },
+    "objectSymbols": {
+      "bytes": 8924,
+      "sha256": "a79d06d39e9298b86dc8aabb716a3625ac8ce367d398e3abc9217b2407eba65e"
+    },
+    "wholeBuild": {
+      "bytes": 5403,
+      "sha256": "c73418a36701405815f1493e0c94df86dee6d84f0ca9be48f17821c43fe6b9e2"
+    },
+    "wholeBuildPreDispatchRefusal": {
+      "bytes": 430,
+      "sha256": "8d1510baf2f6021de6aaa5481d60a4cf1dcbb7e0ffd0cc3e691141781878d67c"
+    },
+    "wholeStaticInventory": {
+      "bytes": 59462,
+      "sha256": "8a7bda50365d2be4d680fa055077110bbda525e4a60e19b2e493bd382366a210"
+    }
+  },
+  "readOnlyWholeStaticInventory": {
+    "architecture": "ARM64",
+    "machOFiles": 33,
+    "linkedStrongGetterDefinitionPresent": true,
+    "newReadonlyConfigLiteralPresent": true,
+    "remainingBrewAbsoluteReferences": 0,
+    "readOnlyWorkers": 3,
+    "returnCodes": [
+      0,
+      0,
+      0
+    ],
+    "allOwnedWorkersClosed": true,
+    "retainedOwners": 0,
+    "rpathLoadCommandsRecorded": true,
+    "signatureValidityQualified": false,
+    "distributionOrLaunchAcceptance": false,
+    "runtimeOrMouseMappingAcceptance": false,
+    "observedExecutableRelativeLoadOrInstallNameRecords": 73,
+    "executableRelativeLC_LOAD_DYLIBRecords": 43,
+    "executableRelativeLC_ID_DYLIBSelfIdentifiers": 30,
+    "allObservedRelativeReferencedFilesExist": true,
+    "recordsAreNot73RuntimeLoadDependencies": true
+  },
+  "durableWholeBuildEvidence": {
+    "tier": "Separate whole-build and static-inventory snapshot",
+    "regularFileCountIncludingManifest": 113,
+    "privateAppRegularFiles": 64,
+    "symlinksObserved": 0,
+    "manifestBytes": 121232,
+    "manifestSHA256": "81102f1992f18fb5f8ea8adedb6a7b8ecedb7f628e9f03cec9f5f412df132157",
+    "sourceAppBodiesAndMetadataMatchedSavedInventoryDuringCopy": true,
+    "originalRelativeEvidenceChainsRetained": true,
+    "earlier94FileBundleUnchanged": true,
+    "archiveOrExpandedSourceDuplicated": false,
+    "installationLaunchSigningRuntimeEffects": 0,
+    "all112PayloadBodiesRehashed": true,
+    "priorOwnManifestAndREADMEWordingsPreserved": true
+  }
+}

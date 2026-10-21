@@ -1,5 +1,25 @@
 # Sample memory and playback ownership
 
+## Mousehack production compilation and private build —21 October2026
+
+Real CMake configured the exact full source with only five frozen body changes
+for ARM64/IPC/OpenGL/SDL3/ImGui. Both production input-device/IPC translation
+units compiled through their original generated commands; supervised symbol
+checks matched the getter definition and IPC reference. Independent saved-data
+review passed. No MD/MMD include closure was requested for those two commands;
+the complete SDK/header graph remains unqualified. Missing NativeFD uses the
+upstream ImGuiFileDialog fallback, not exact installed-feature equivalence.
+A separate private whole build then returned zero in 184.069 seconds with its
+owned worker closed. Its earlier 900-second request was refused before dispatch;
+the actual case respected the original 600-second bound. Static checks then
+recorded 33 Mach-O files, the linked readiness getter and config literal, and 73
+executable-relative load/install-name records: 43 load records and 30 self IDs.
+Referenced files exist, with no Brew absolute references. Private dependency signature warnings remain; signatures,
+distribution packaging and runtime behavior are unqualified.
+Nothing was installed or launched; mouse accuracy, full UI and physical/listening
+acceptance remain withheld. The earlier standalone HOST record stays historical.
+See the [production tiers and preserved evidence](test-evidence/amiberry_mousehack_readiness_production_20261021.json).
+
 ## Prepared pattern field/stride comparison —21 October2026
 
 The distinct private D diagnostic swaps pointer-field selection and inherits

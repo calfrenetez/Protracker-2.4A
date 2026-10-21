@@ -1,5 +1,14 @@
 # Sampler intrinsic lifetimes
 
+On 21 October, the current 37-unit, 90-body source closure passed the original
+16-case standalone qualifier with strict warnings and address/undefined
+sanitizers. The exact stdout oracle and behavior assertions are unchanged.
+Source review covers the later document ownership/staging guards, read-only
+cache identity checks and complete sampler retirement predicate. The separate
+private probe and canonical test both passed. This is Root source review and
+HOST evidence; downstream admission flags remain false. Historical graphs below
+retain their own scope. See [the current source pins and qualification](test-evidence/current_sampler_intrinsic_host_20261021.json).
+
 The sampler records live versions, slot/workflow/table/establishment storage and pending construction or retirement. These records retain actual allocation extents through allocator callbacks and final release. Bookkeeping storage is charged to the bounded allocation budget.
 
 Ordinary lifetime construction has no fixed node-count limit. Enhanced metadata checks inspect at most 4096 combined live/pending nodes and refuse unknown, inconsistent, overflowing or larger inventories. The idle and output-disjoint predicates allocate nothing, call no provider or allocator and scan no PCM values. They observe an alive, immutable owner-thread inventory; they are not persistent readiness or playback certificates.

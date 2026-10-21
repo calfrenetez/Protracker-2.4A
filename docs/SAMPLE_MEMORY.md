@@ -1,5 +1,35 @@
 # Sample memory and playback ownership
 
+## Capture-only attempt and local candidate volume —21 October2026
+
+The exact current346404-byte editor candidate was read back completely through
+an owned Amiberry session and matched SHA256 `7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b`.
+The isolated five-variable ENV setup completed. Before any application launch,
+the strict staged-file check refused a new flag64 and forward ctime; all bytes
+and other recorded facts remained identical. Cause is unproven. No editor
+capture, input, playback or native clean-exit result follows from this attempt.
+
+The failed case was retained and never replayed. Standing-authorized cleanup
+stopped only the positively verified owned VM with one SIGTERM, observed genuine
+bridge EOF, preserved all15 generated files and removed the exact own namespace.
+The three saved host roles,31 app-data bodies/original mtimes and raw68-path/
+10-source preservation checks passed. The original HOLD was archived through
+the normal public release at historical fence2649. This is no current clearance.
+No shared bridge-service lifecycle action was taken.
+
+A distinct private local candidate volume and additive profile suffix are now
+prepared outside the File Provider managed workspace. The suffix preserves the
+existing Dev mapping and uses the installed profile's paired directory syntax.
+Only APPEND and SESSION constants differ in the prospective private saved-file
+helper; the original helper and strict metadata/one-MiB bounds are unchanged.
+No canonical profile write, volume mount or runtime admission has occurred.
+The capture adapter passes11 HOST tests, plus a strict metadata-only staging
+regression that stops before any app dispatch. The pure suffix builder passes three
+HOST methods with synthetic fixtures and rejects altered profiles and unsafe
+paths. The next case still needs fresh original lifecycle/source admission,
+actual mounted-byte verification, capture and independent native-window view.
+See the [capture attempt and local-volume preparation](test-evidence/editor_capture_attempt_local_volume_20261021.json).
+
 ## Current editor candidate rebuild —21 October2026
 
 A separate current-source editor candidate compiled and linked all72 C units

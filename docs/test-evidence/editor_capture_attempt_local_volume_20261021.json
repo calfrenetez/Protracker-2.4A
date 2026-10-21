@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "scope": "Current-editor finite emulator capture attempt and local candidate-volume preparation",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "host": {
+    "captureAdapterTests": 11,
+    "captureAdapterPassed": true,
+    "additiveProfileBuilderTests": 3,
+    "additiveProfileBuilderPassed": true,
+    "profileBuilderUsesSyntheticHostFixture": true,
+    "lastWholeSuite": {
+      "tests": 707,
+      "passed": 706,
+      "failed": 1,
+      "errors": 0,
+      "overall": "FAILED",
+      "unchangedIndependentProviderAcceptanceGate": true
+    },
+    "metadataOnlyStagingRegressionTests": 1,
+    "metadataOnlyStagingRegressionPassed": true,
+    "focusedMethodsTotal": 15
+  },
+  "emulator": {
+    "startupSucceededOnce": true,
+    "ownedNativeWorkbenchActuallyViewed": true,
+    "candidateGuestReadbackBytes": 346404,
+    "candidateGuestReadbackSHA256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b",
+    "environmentSetupAttempts": 1,
+    "applicationLaunchAttempts": 0,
+    "captureAttempts": 0,
+    "mouseKeyPlaybackActions": 0,
+    "result": "FAILED_BEFORE_APPLICATION_LAUNCH",
+    "reason": "Staged candidate gained flag64 and forward ctime after first pin; all body bytes remained identical. Cause unproven. Strict refusal retained, no replay."
+  },
+  "settlement": {
+    "originalHoldArchivedByNormalPublicRelease": true,
+    "historicalReleaseFence": 2649,
+    "currentTargetAvailabilityClaimed": false,
+    "ownedSIGTERMCount": 1,
+    "genuineBridgeEOFObserved": true,
+    "bridgeServiceLifecycleActions": 0,
+    "savedHostRolesRestored": 3,
+    "allAppDataBodiesAndOriginalMtimesVerified": 31,
+    "protectedPathsRawFactsVerified": 68,
+    "installedSourceRawFactsVerified": 10,
+    "generatedFilesPreservedBeforeRemoval": 15,
+    "guestCleanExitClaimed": false,
+    "guestENVRestorationClaimed": false
+  },
+  "preparation": {
+    "state": "SOURCE_AND_LOCAL_ARTIFACT_ONLY_NOT_MOUNTED_OR_RUNTIME_ADMITTED",
+    "candidateOutsideFileProviderManagedWorkspace": true,
+    "privateCandidateBytes": 346404,
+    "privateCandidateSHA256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b",
+    "additiveProfileBytes": 5026,
+    "additiveProfileSHA256": "8f53320bf097d0e2b8f6dc0c5458e1a1874ac7fcdffa5a092fa659470b343984",
+    "existingDevMappingRetained": true,
+    "originalProfileWrites": 0,
+    "originalFileHelperSourceChanges": [
+      "APPEND",
+      "SESSION"
+    ],
+    "strictMetadataAndOneMiBBoundsRetained": true
+  },
+  "withheld": [
+    "Native editor startup, capture and visual layout comparison",
+    "Whole application ABI and stack",
+    "Legacy replay playback and checked backend adoption",
+    "Physical A1200/AmiGUS",
+    "Human listening",
+    "Runtime acceptance of private local candidate mount"
+  ],
+  "evidence": "Private raw streams, failed snapshots, full guest readback, preserved namespace, source diffs and normal release proof retained in project outputs."
+}

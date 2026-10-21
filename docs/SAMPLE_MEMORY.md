@@ -47,6 +47,31 @@ one independent-provider acceptance-gate failure, zero errors; no new full-suite
 pass is claimed. The next editor work is a distinct finite mouse case using
 fresh live admission and this actual capture's registry geometry.
 
+## First-mouse observation preparation —21 October2026
+
+A pure selection-log observer and cell-center helper now pass13 focused HOST
+methods, alongside all13 existing blank-log methods (26 total). The observer
+requires the actual complete blank baseline and only the planned row4/channel1
+selection with revision0/dirty0/panel0. Incomplete trailing records always wait;
+changed targets, reversion, replay/exit/error lines and bounds violations refuse.
+The point helper requires a fresh Root-observed unscaled640x512 editor rectangle,
+also requires the independently bound native screen size: a640x256 Workbench
+can paint the same640x512 image rectangle. That scaled case is refused, with
+no correction or tolerance.
+
+Four archived input bodies from the exact346404-byte build establish the
+native cell center(218,424): row4/channel1/field0 under the source hit test.
+The first strict comparison to historical canonical full facts refused:
+all four ctimes advanced, while bytes and nine other facts still match.
+That refusal is preserved. Source analysis instead uses freshly copied,
+hash-verified actual build archive members; it claims no historical metadata
+continuity and weakens no runtime pin. Cause remains unproven.
+
+This helper sends no input and grants no runtime authority. A fresh lifecycle,
+actual carrier/capture association and exact observed pointer equality are still
+required before the first click. No new VM, reservation or mouse test has run.
+See the [first-mouse protocol HOST evidence](test-evidence/editor_firstmouse_protocol_host_20261021.json).
+
 ## Current editor candidate rebuild —21 October2026
 
 A separate current-source editor candidate compiled and linked all72 C units

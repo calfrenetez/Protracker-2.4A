@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "scope": "Pure first-mouse selection observation protocol and source geometry; no runtime admission",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "host": {
+    "newMethods": 13,
+    "existingBlankMethods": 13,
+    "totalPassed": 26,
+    "fullSuiteRerun": false,
+    "checks": [
+      "Every partial selected frame waits, even after earlier success",
+      "Wrong row/channel/revision/dirty/panel/status and unknown or replay/exit records refuse",
+      "Frame reversion, wrong baseline/history, byte/line/frame limits refuse",
+      "Workbench scale, clipping, booleans, fractional and malformed geometry refuse",
+      "Same640x512 painted rectangle with native Workbench640x256 refuses"
+    ],
+    "reviewCorrection": "Native screen size is an explicit independent input; a painted rectangle alone cannot establish1x1 scaling."
+  },
+  "geometry": {
+    "sourceArchiveSHA256": "412b12927979c459362b5604d5c38e097904b1f8fd80302cceab7bac681d46da",
+    "actualBuildSourceBodiesReviewed": 4,
+    "nativeWidth": 640,
+    "nativeHeight": 512,
+    "patternY": 250,
+    "visibleRows": 20,
+    "initialFirstRow": -10,
+    "rowHeight": 12,
+    "channelStartX": 38,
+    "channelWidth": 150,
+    "plannedNativeCellCenter": [
+      218,
+      424
+    ],
+    "expectedRow": 4,
+    "expectedChannel": 1,
+    "expectedField": 0,
+    "sourceMouseCoordinatesPassedUnchanged": true,
+    "futureFreshRootObservedUnscaledScreenRectangleRequired": true,
+    "runtimeExactPointerEqualityStillRequiredBeforeAnyClick": true,
+    "empiricalOffsetOrTolerance": false,
+    "independentlyBoundActualNativeScreenSizeRequired": true
+  },
+  "sourceEndpointRefusal": {
+    "initialHistoricalFullFactsCheckRefused": true,
+    "evidencePreserved": true,
+    "namedCanonicalSources": 4,
+    "bytesAndNineOtherFactsEqual": true,
+    "onlyObservedDifference": "Forward ctime",
+    "causeEstablished": false,
+    "actualArchiveBodiesCopiedAndVerified": true,
+    "newCopyEndpointsRecorded": true,
+    "historicalFullFactsContinuityClaimed": false,
+    "runtimeStrictChecksWeakened": false
+  },
+  "sources": {
+    "tools/editor_mouse_capture_protocol.py": "051fac0a866317d3be0d82d21d5beec082b436477ab6d5d3fee566265eea50f0",
+    "tests/test_editor_mouse_capture_protocol.py": "5b3d07c83b597323876a799845ce00a60ae988ab106576fc465eb2ab0b6ba682"
+  },
+  "target": {
+    "newReservation": false,
+    "newEmulator": false,
+    "inputActions": 0,
+    "clicks": 0,
+    "mouseSelectionAcceptance": false,
+    "runnableWholeCaseAdmitted": false
+  },
+  "withheld": [
+    "Fresh guarded lifecycle and actual first-mouse carrier",
+    "Actual pointer position and row/channel selection",
+    "Remaining editor workflow, replay/backend, physical and listening acceptance"
+  ]
+}

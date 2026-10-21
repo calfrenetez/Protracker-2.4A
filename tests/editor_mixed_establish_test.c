@@ -1,6 +1,7 @@
 #define PT_TEST_EDITOR_MIXED_EXEC
 #include "editor_mixed_test.c"
 #include "../src/editor/editor_mixed_establish.h"
+#include "../src/editor/sampler_lifetime_internal.h"
 struct editor_establish_fixture {
     struct pt_editor_mixed_establish control;
     struct pt_editor_mixed binding;
@@ -120,7 +121,22 @@ static void editor_establish_alias(unsigned bits,unsigned mode)
         case 2:g->alias=&g->control;break;default:g->alias=&g->parent;break;}
     assert((master?editor_establish_step(g):pt_editor_mixed_establish_begin(&g->control,&g->binding,&g->parent,1))==PT_ESTABLISH_ALIAS);
     assert(!g->alias_releases&&g->live==master&&!g->editor->sampler.bytes);
-    /* Only private adoption bookkeeping changed; no editor/source initialization. */
+    /* Intrinsic registration is expected even when an allocator returns an
+     * alias. Verify those exact nodes, then compare every other editor byte. */
+    assert(!copy->sampler.pending_head&&!copy->sampler.pending_count&&
+        !copy->sampler.live_head&&!copy->sampler.live_count);
+    assert(g->editor->sampler.pending_head==&g->control.job.reservation&&
+        g->editor->sampler.pending_count==1&&
+        g->control.job.reservation.owner==&g->editor->sampler&&
+        g->control.job.reservation.kind==PT_PENDING_ESTABLISH&&
+        !g->control.job.reservation.previous&&!g->control.job.reservation.next);
+    copy->sampler.pending_head=&g->control.job.reservation;copy->sampler.pending_count=1;
+    if(master){struct pt_sampler_live *node=g->control.job.metadata_live;
+        assert(node&&node->owner==&g->editor->sampler&&node->kind==PT_LIVE_ESTABLISH&&
+            !node->previous&&!node->next&&node->count==1&&
+            node->spans[0].data==g->control.job.metadata&&
+            node->spans[0].bytes==g->control.job.metadata_bytes);
+        copy->sampler.live_head=node;copy->sampler.live_count=1;}
     assert(!memcmp(copy,g->editor,sizeof(*copy)));binding.preparation_close=g->binding.preparation_close;binding.preparation_context=g->binding.preparation_context;
     assert(!memcmp(&binding,&g->binding,sizeof(binding)));free(copy);editor_establish_drop(g);
 }

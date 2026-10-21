@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-21",
+  "scope": "HOST fixture bookkeeping; production source unchanged",
+  "repairs": [
+    {
+      "fixture": "tests/editor_mixed_establish_test.c",
+      "cause": "Whole-editor beforeimage predated intrinsic sampler reservations; valid alias refusal had registered the genuine pending establishment.",
+      "change": "Check exact reservation identity/kind/owner/links and the one optional metadata live node/extent; reconstruct only those expected fields in the beforeimage, then compare every remaining editor byte. Existing alias-return, zero-release and source-preservation assertions remain."
+    },
+    {
+      "fixtures": [
+        "tests/paula_readers_song_test.c",
+        "tests/paula_readers_song_workspace_test.c"
+      ],
+      "cause": "Intentional deletion freed orders and cleared pointers but left a nonzero capacity and allocated byte charge. Checked document disposal correctly refused that inconsistent ownership record.",
+      "change": "Retire exactly the known freed order capacity and charge. Keep stale-song refusal, immutable sample assertions and complete zero-allocation cleanup checks."
+    }
+  ],
+  "validation": {
+    "first_run": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "-v",
+        "test_editor_mixed_establish",
+        "test_paula_readers_song",
+        "test_paula_readers_song_workspace"
+      ],
+      "returncode": 1,
+      "elapsed_seconds": 38.53021895799975,
+      "index_selection": "HEAD plus exactly the two repaired fixture paths; actual user index unchanged"
+    },
+    "workspace_completion": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "-v",
+        "test_paula_readers_song_workspace"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 12.16819045900047
+    },
+    "result": "All three formerly aborting fixture groups now pass with original address/undefined sanitizers and strict warnings. The intermediate failure exposed the independent duplicated workspace fixture; preserved, then fixed and rerun once."
+  },
+  "inputs": {
+    "tests/editor_mixed_establish_test.c": {
+      "bytes": 10115,
+      "sha256": "bfb10249460c48afe8960c9718b8eab6a90b256af597d594346beed482c2641d"
+    },
+    "tests/paula_readers_song_test.c": {
+      "bytes": 57296,
+      "sha256": "0373bb6e35129f3f516a29d6ba894f091c3bd1a814f7d3fede07543293ec3470"
+    },
+    "tests/paula_readers_song_workspace_test.c": {
+      "bytes": 72911,
+      "sha256": "24890015d9ce1a321db781fdced9cba486abfd4095621638d867e3fdc5b3d11f"
+    }
+  },
+  "limits": "No full-suite after-repair pass yet. Exact intrinsic source-admission failures remain open. No native ABI, emulator UI, physical or listening acceptance."
+}

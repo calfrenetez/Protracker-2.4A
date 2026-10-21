@@ -521,7 +521,11 @@ static void song_stale_and_missing(void)
  for(variant=0;variant<3;++variant){struct song_fixture *source=song_fixture_new(16,1);struct fixture *f=&source->genuine;struct pt_paula_readers_song *s=fixture_song_begin(source);struct pt_paula_readers_song_status out,before;
    memset(&out,0x6b,sizeof(out));before=out;
    if(variant==1)++f->sampler.generation;
-   if(variant==2){release(&f->fast,f->document.storage.orders);f->document.storage.orders=NULL;f->document.project.orders=NULL;}
+   if(variant==2){size_t bytes=f->document.storage.order_capacity*sizeof(*f->document.storage.orders);
+     assert(bytes&&bytes<=f->document.allocated_bytes);
+     release(&f->fast,f->document.storage.orders);f->document.storage.orders=NULL;f->document.project.orders=NULL;
+     /* Match the deliberately freed extent in the surviving ownership ledger. */
+     f->document.storage.order_capacity=0;f->document.allocated_bytes-=bytes;}
    assert(pt_paula_readers_song_step(s,variant?1:2,256,&out)==PT_PAULA_READERS_SONG_STALE&&!memcmp(&out,&before,sizeof(out)));
    fixture_cancel_drain(source,&s);
  }

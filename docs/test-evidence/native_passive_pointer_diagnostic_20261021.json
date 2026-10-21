@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "state": "EXACT_PASSIVE_POINTER_CANDIDATE_EXECUTED_ONE_MOVE_MAPPING_UNQUALIFIED",
+  "scope": "Owned Amiberry 68030 Workbench diagnostic, original guarded FRAME and normal settlement",
+  "candidate": {
+    "bytes": 14348,
+    "sha256": "971e97c1b406517338d0641d15e3c69b407ca375797de22cfc1be7f14c9dddfd",
+    "sourceBytes": 2000,
+    "sourceSHA256": "bc9cba44fa1e2a8320baf31411109af3cb82e6c943f589523cc847cd8f7f2cc5",
+    "guestReadbackAllBytesEqualBeforeExecution": true,
+    "strictNativeCompilationRecorded": true,
+    "headersFullFactsEqualBeforeAfterCompile": 67,
+    "recordedRuntimeInputsEqualBeforeAfterCompile": 7,
+    "runtimeListNotFullLinkMap": true
+  },
+  "actions": {
+    "captures": 2,
+    "explicitGUIStateQueries": 2,
+    "buttonFreeMoves": 1,
+    "guestCandidateReadbacks": 1,
+    "passiveNativeExecutions": 1,
+    "clicks": 0,
+    "rawKeys": 0,
+    "applicationLaunches": 0,
+    "physicalActions": 0,
+    "retries": 0
+  },
+  "observation": {
+    "requestedScreenshotPoint": [
+      400,
+      350
+    ],
+    "appliedSDLPoint": [
+      381,
+      341
+    ],
+    "actuallyViewedVisibleTipEdge": [
+      401,
+      350
+    ],
+    "visibleEdgeDelta": [
+      1,
+      0
+    ],
+    "guestIntuitionSnapshot": {
+      "left": 0,
+      "mouse_x": 325,
+      "mouse_y": 156,
+      "screen_flags": 17937,
+      "screen_height": 256,
+      "screen_width": 640,
+      "top": 0,
+      "viewport_dx": 0,
+      "viewport_dy": 0,
+      "viewport_modes": 53248
+    },
+    "renderedTipIsNotProvenHotspot": true,
+    "guestToImageOriginNotMeasured": true,
+    "exactCursorMappingAccepted": false,
+    "runtimeCauseEstablished": false,
+    "constantOffsetCorrectionApplied": false
+  },
+  "sourceQualification": {
+    "pureParserAndAdmissionChecks": 23,
+    "originalPixelObservationAndFullFactPredicatesUnchanged": true,
+    "rootSourceReviewPassed": true,
+    "independentPeerReviewClaimed": false
+  },
+  "settlement": {
+    "temporaryGUISettingsRestored": true,
+    "originalGuardedDisconnectAndOwnedStopCompleted": true,
+    "allThreeSavedHostBodiesAndOriginalMtimesRestored": true,
+    "all31AppDataBodiesIdentitiesFlagsAndMtimesVerified": true,
+    "onlyTwoThemeMtimesRestoredNoThemeBodyWrites": true,
+    "runOwnedCandidateNamespacePreservedAndSharedNameReturnedToAbsence": true,
+    "ownedProcessGroupSocketAndListenerAbsent": true,
+    "protectedPathsRawEqualityCount": 68,
+    "immutableSourcesRawEqualityCount": 10,
+    "normalPublicGuardReleaseCompleted": true,
+    "historicalCtimeContinuityClaimed": false
+  },
+  "images": {
+    "native_passive_pointer_before_20261021.png": {
+      "bytes": 7348,
+      "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+    },
+    "native_passive_pointer_after_20261021.png": {
+      "bytes": 7344,
+      "sha256": "27a5f771070a5f6beaf233aba456ed86535826179cffc96012647ceb4fbdaa26"
+    }
+  },
+  "acceptance": {
+    "applicationUI": false,
+    "musicalScheduling": false,
+    "nativeAudioOrDeviceTiming": false,
+    "physicalHardware": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  },
+  "fullHostRegression": "Separate standard suite still running, final result pending."
+}

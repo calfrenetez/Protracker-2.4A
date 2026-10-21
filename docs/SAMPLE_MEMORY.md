@@ -1,5 +1,42 @@
 # Sample memory and playback ownership
 
+## Full HOST regression and post-reboot pointer observations —21 October2026
+
+The original full shared HOST selection ran707 tests in3374.564s:706 passed,
+one failed, and zero errored. The remaining provider case refuses at its
+explicit requirement for an independently reviewed future acceptance body pin;
+the actual intrinsic and future prerequisites execute before that refusal.
+The provider fixture is not reached by this canonical case. The complete run
+remains FAILED; no gate, expected output or native admission was relaxed.
+The earlier701-case run with15 failures/nine errors remains preserved.
+See the [full HOST result](test-evidence/host_full_regression_20261021.json).
+
+Three separately owned Workbench diagnostics completed with the original fixed
+emulator, guarded bridge/IPC frame and normal restoration/release. Each captured
+two images and sent one button-free move, with no click, key or application.
+The later two also read back every candidate byte through the guest before one
+passive Intuition snapshot execution. These are diagnostic binaries, not editor
+acceptance. See the [first cursor measurement](test-evidence/native_workbench_cursor_diagnostic_20261021.json),
+[passive screen-pointer snapshot](test-evidence/native_passive_pointer_diagnostic_20261021.json)
+and [window-origin measurement](test-evidence/native_pointer_origin_diagnostic_20261021.json).
+
+The last exact candidate reports the AmigaDOS window at guest(0,0),640×256,
+with screen and window pointer(325,156). Its actual image frame occupies
+(76,38),640×512, giving image scale1×2 and origin(76,38). Requested image(400,350)
+therefore corresponds to guest(324,156); the actual guest pointer and visible
+image edge(401,350) agree, one pixel to the right. This is a single-point
+measurement. General calibration and the runtime cause remain unqualified;
+no constant correction or tolerance was introduced.
+
+Temporary GUI settings, the three saved host bodies/original mtimes and all31
+app-data bodies/identities/flags/mtimes were verified restored. Only the two
+known theme mtimes needed restoration, without body writes. Own candidate
+namespaces were preserved with their shared names returned to absence.
+Raw68-path/ten-source preservation and normal release were verified for each
+session. Historical ctime continuity is not claimed. Full application UI,
+native audio/device timing, physical/listening and default adoption remain
+unaccepted.
+
 ## Cold canonical-profile Mousehack observation —21 October2026
 
 A fresh emulator session used the canonical profile with only the temporary

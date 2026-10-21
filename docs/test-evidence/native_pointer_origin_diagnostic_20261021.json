@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "state": "PASSIVE_WINDOW_ORIGIN_AND_GUEST_POINTER_RECONCILED_SINGLE_POINT_INPUT_DELTA_RECORDED",
+  "candidate": {
+    "bytes": 14928,
+    "sha256": "dcb005709e346845437104ef6120970ddfb9252521628d7f884004747a66b442"
+  },
+  "source": {
+    "bytes": 3547,
+    "sha256": "36a99d267aec98998fcd8f061c99f69ea264443207d5227d5243e6a3341c17bd"
+  },
+  "compile": {
+    "strictNativeFlags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fbbb=-"
+    ],
+    "headerBodyCount": 67,
+    "recordedRuntimeInputCount": 7,
+    "exactBodyAndFullFactsEqualBeforeAfter": true,
+    "runtimeListNotFullLinkMap": true
+  },
+  "actions": {
+    "candidateGuestReadbackAllBytesEqual": true,
+    "candidateGuestReadbacks": 1,
+    "passiveNativeExecutions": 1,
+    "captures": 2,
+    "explicitGUIStateQueries": 2,
+    "buttonFreeMoves": 1,
+    "clicks": 0,
+    "rawKeys": 0,
+    "applicationLaunches": 0,
+    "physicalActions": 0,
+    "retries": 0
+  },
+  "observation": {
+    "state": "ACTUAL_GUEST_AND_IMAGE_WINDOW_ORIGIN_RECONCILED_SINGLE_POINT_MAPPING_DELTA_RECORDED",
+    "image": {
+      "bytes": 7344,
+      "sha256": "27a5f771070a5f6beaf233aba456ed86535826179cffc96012647ceb4fbdaa26"
+    },
+    "actuallyViewedSoleShellAndPointer": true,
+    "rootViewedRegion": [
+      50,
+      20,
+      690,
+      540
+    ],
+    "segmentation": "All non-background RGB170 pixels within the actually viewed sole-window region; pointer is contained inside window.",
+    "nativeSnapshot": {
+      "first_window": {
+        "border_bottom": 2,
+        "border_left": 4,
+        "border_right": 18,
+        "border_top": 11,
+        "height": 256,
+        "left": 0,
+        "mouse_x": 325,
+        "mouse_y": 156,
+        "title": "AmigaDOS",
+        "title_hex": "416d696761444f53",
+        "top": 0,
+        "width": 640
+      },
+      "left": 0,
+      "mouse_x": 325,
+      "mouse_y": 156,
+      "screen_flags": 17937,
+      "screen_height": 256,
+      "screen_width": 640,
+      "top": 0,
+      "viewport_dx": 0,
+      "viewport_dy": 0,
+      "viewport_modes": 53248
+    },
+    "windowPaintBounds": {
+      "x": 76,
+      "y": 38,
+      "width": 640,
+      "height": 512
+    },
+    "imagePixelsPerGuestPixel": [
+      1,
+      2
+    ],
+    "guestOriginInImage": [
+      76,
+      38
+    ],
+    "requestedScreenshotPoint": [
+      400,
+      350
+    ],
+    "requestedPointInGuestCoordinates": [
+      324.0,
+      156.0
+    ],
+    "actualGuestPointer": [
+      325,
+      156
+    ],
+    "actualGuestPointerInImage": [
+      401,
+      350
+    ],
+    "actualVisibleFirstTipRow": [
+      {
+        "x": 401,
+        "y": 350,
+        "rgb": [
+          224,
+          64,
+          64
+        ]
+      },
+      {
+        "x": 402,
+        "y": 350,
+        "rgb": [
+          224,
+          64,
+          64
+        ]
+      },
+      {
+        "x": 403,
+        "y": 350,
+        "rgb": [
+          224,
+          224,
+          192
+        ]
+      },
+      {
+        "x": 404,
+        "y": 350,
+        "rgb": [
+          224,
+          224,
+          192
+        ]
+      }
+    ],
+    "deltaGuestPixels": [
+      1.0,
+      0.0
+    ],
+    "deltaScreenshotPixels": [
+      1,
+      0
+    ],
+    "windowAndScreenPointerFieldsAgree": true,
+    "actualGuestPointerAndVisibleEdgeAgreeForThisPoint": true,
+    "windowBoundsDerivedWithoutPointerCoordinateFitting": true,
+    "sourceRuntimeCauseEstablished": false,
+    "generalHotspotOrExactCursorAcceptance": false,
+    "constantCorrectionOrToleranceApplied": false,
+    "targetActions": 0
+  },
+  "qualification": {
+    "pureParserAdmissionChecks": 27,
+    "rootSourceReviewPassed": true,
+    "independentPeerReviewClaimed": false,
+    "exactCursorMappingAccepted": false,
+    "generalCalibrationAccepted": false,
+    "sourceRuntimeCauseEstablished": false,
+    "constantCorrectionOrToleranceApplied": false
+  },
+  "settlement": {
+    "originalGuardedDisconnectAndStopComplete": true,
+    "temporaryGUISettingsRestored": true,
+    "threeSavedHostBodiesAndOriginalMtimesRestored": true,
+    "all31AppDataBodiesIdentitiesFlagsAndMtimesVerified": true,
+    "twoThemeMtimesRestoredWithoutBodyWrites": true,
+    "ownNamespacePreservedAndSharedNameRestoredAbsent": true,
+    "ownedPIDGroupSocketAndListenerAbsent": true,
+    "protectedPathsRawEqualityCount": 68,
+    "immutableSourcesRawEqualityCount": 10,
+    "normalPublicGuardReleaseComplete": true,
+    "historicalCtimeContinuityClaimed": false
+  },
+  "images": {
+    "native_pointer_origin_before_20261021.png": {
+      "bytes": 7348,
+      "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+    },
+    "native_pointer_origin_after_20261021.png": {
+      "bytes": 7344,
+      "sha256": "27a5f771070a5f6beaf233aba456ed86535826179cffc96012647ceb4fbdaa26"
+    }
+  },
+  "acceptance": {
+    "applicationUI": false,
+    "nativeAudioDeviceTiming": false,
+    "physicalHardware": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "scope": "Original fixed Amiberry Workbench one button-free cursor diagnostic; no application",
+  "startup": {
+    "originalFourArguments": true,
+    "temporaryProfileAppend": "absolute_mouse=mousehack",
+    "singleStartupPingDeadlineSeconds": 30,
+    "originalGuestAdmissionCPU": "68030",
+    "workbenchStartupShellActuallyViewed": true
+  },
+  "actions": {
+    "registeredCaptures": 2,
+    "explicitGUIStateQueries": 2,
+    "buttonFreeMoves": 1,
+    "clicks": 0,
+    "rawKeys": 0,
+    "applicationLaunches": 0,
+    "physicalActions": 0
+  },
+  "cursor": {
+    "requestedScreenshotPoint": [
+      400,
+      350
+    ],
+    "appliedSDLPoint": [
+      381,
+      341
+    ],
+    "originalPublishedVisualEstimate": [
+      402,
+      350
+    ],
+    "originalVisualObservationPreserved": true,
+    "supplementalFirstColoredRow": [
+      {
+        "x": 401,
+        "y": 350,
+        "rgb": [
+          224,
+          64,
+          64
+        ]
+      },
+      {
+        "x": 402,
+        "y": 350,
+        "rgb": [
+          224,
+          64,
+          64
+        ]
+      },
+      {
+        "x": 403,
+        "y": 350,
+        "rgb": [
+          224,
+          224,
+          192
+        ]
+      },
+      {
+        "x": 404,
+        "y": 350,
+        "rgb": [
+          224,
+          224,
+          192
+        ]
+      }
+    ],
+    "leftmostVisibleTipEdge": [
+      401,
+      350
+    ],
+    "visibleEdgeDelta": [
+      1,
+      0
+    ],
+    "hotspotVerified": false,
+    "originalSourceTransformMatchesAppliedSDL": true,
+    "runtimeCauseEstablished": false,
+    "exactPositionAccepted": false,
+    "toleranceIntroduced": false,
+    "inputRetried": false
+  },
+  "settlement": {
+    "temporaryGUISettingsRestored": true,
+    "originalGuardedDisconnectAndStopCompleted": true,
+    "threeSavedHostBodiesAndOriginalMtimesRestored": true,
+    "all31AppDataBodiesIdentitiesFlagsAndMtimesVerified": true,
+    "twoThemeMtimesRestoredWithoutBodyWrites": true,
+    "ownedProcessGroupSocketAndListenerAbsent": true,
+    "protectedPathsRawEqualityCount": 68,
+    "immutableSourcesRawEqualityCount": 10,
+    "normalGuardReleaseCompleted": true,
+    "historicalCtimeContinuityClaimed": false
+  },
+  "images": {
+    "native_workbench_cursor_before_20261021.png": {
+      "bytes": 7286,
+      "sha256": "46e5980430913fbb78d357843ad62c18e9a46f54999a49b00ea5cee5b8365af8"
+    },
+    "native_workbench_cursor_after_20261021.png": {
+      "bytes": 7284,
+      "sha256": "c0d2b853b145b9ad625c182f81123608f6f7e4b812b81b9ede298d3fb9387ca2"
+    }
+  },
+  "acceptance": {
+    "applicationUI": false,
+    "nativeTiming": false,
+    "physicalHardware": false,
+    "humanListening": false,
+    "defaultAdoption": false
+  },
+  "preparationRefusals": {
+    "backupReaderBoundRefusedBeforeReservation": true,
+    "differentObserverProvenanceOriginRefusedBeforeGuestAdmission": true,
+    "distinctCorrectionsRetainedOriginalBoundsAndRawFactEquality": true,
+    "failedTargetTransactionReplayed": false
+  },
+  "hostRegression": "Separate full standard suite is still running; no final passing claim."
+}

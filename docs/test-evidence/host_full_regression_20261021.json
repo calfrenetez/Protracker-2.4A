@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "state": "HOST_REGRESSION_COMPLETE_ONE_INDEPENDENT_ACCEPTANCE_GATE_UNSATISFIED",
+  "testedSourceCommit": "ae2baa811a9153f95252314fe21c81fc17a05766",
+  "command": "shared scripts/amiga host-test --project protracker -> make test",
+  "selection": "Original full unittest selection; no exclusions",
+  "testsRun": 707,
+  "passed": 706,
+  "failures": 1,
+  "errors": 0,
+  "unittestSeconds": 3374.564,
+  "overallReturncode": 2,
+  "passedOverall": false,
+  "remainingFailure": {
+    "case": "test_genuine_geometry_provider_serialization (test_paula_segment_provider.PaulaTypedProviderSerializationHost.test_genuine_geometry_provider_serialization)",
+    "source": "tests/test_paula_segment_provider.py",
+    "line": 161,
+    "assertion": "actual independently reviewed acceptance body pin required",
+    "acceptancePin": null,
+    "actualIntrinsicAndFuturePrerequisitesRunBeforeRefusal": true,
+    "providerFixtureNotReachedByCanonicalCase": true,
+    "gateRelaxedOrForged": false
+  },
+  "previousFullRun": {
+    "testsRun": 701,
+    "failures": 15,
+    "errors": 9,
+    "stillPreserved": true
+  },
+  "fixesConfirmedByFullRerun": {
+    "allNinePreviousErrorsResolved": true,
+    "allButOnePreviousFailuresResolved": true,
+    "newSafeSourceListParserCases": 6
+  },
+  "evidence": {
+    "commandLogBytes": 227850,
+    "commandLogSHA256": "30557f497582a709444335c32371762be59da127612655538d7f3b2c83f032c3"
+  },
+  "acceptance": {
+    "hostOnly": true,
+    "fullSuitePassed": false,
+    "emulatorApplicationUI": false,
+    "physicalHardware": false,
+    "humanListening": false
+  }
+}

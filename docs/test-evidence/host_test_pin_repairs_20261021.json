@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "state": "HOST_TEST_INPUT_PIN_REPAIRS_VALIDATED",
+  "sourceCommitBeforeRepairs": "2af546b89f0ee9315707ba44f3468f4852c17457",
+  "originalFullHostSuite": {
+    "testsRun": 701,
+    "failures": 15,
+    "errors": 9,
+    "seconds": 3016.792,
+    "result": "FAILED"
+  },
+  "changes": [
+    {
+      "wrapper": "tests/test_document_policy.py",
+      "input": "src/editor/midi_setup_owner.h",
+      "oldSHA256": "5482af8449b8bec62f22d83bfaf432056af158cf4f62b573732373171b4ca17d",
+      "currentSHA256": "6ebb59f2a11f74e5b56779cd6d9dbe16805ae4c80d5d79e20e28d8f44fc8e290",
+      "reason": "Committed791ab6a7 added a separate unselected native GUI qualifier. HOST/document-HOST/RAM-selector preprocessing outputs are identical; selectors and behavior assertions are unchanged."
+    },
+    {
+      "wrapper": "tests/test_native_mixed_causal_rolling_irq_bridge.py",
+      "input": "tests/native_mixed_causal_ram_rolling_song_test.c",
+      "oldBytes": 64449,
+      "oldSHA256": "e20fd19804bab520bec419fe394f7a13da2de1d0828cf962d595828c9945edaf",
+      "currentBytes": 64802,
+      "currentSHA256": "11dbfba281ada716f8c4397c3c55ad0f3e54a34a725c78dadf4c9990cd571bef",
+      "reason": "Committed51e669b0 added optional observation hooks;2f24a8c7 generalized work while retaining the original17-unit wrapper. Current exact fixture passes the unchanged25-case contract."
+    }
+  ],
+  "canonicalFocusedValidation": {
+    "testsRun": 6,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 55.20417545800228,
+    "sanitizers": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ],
+    "documentPolicyBehaviorAndQuartetRefusalsPassed": true,
+    "rollingIRQ25CaseOraclePassed": true
+  },
+  "limits": {
+    "fullSuiteAfterCorrections": "NOT_RUN",
+    "otherOriginalUnresolvedCases": 22,
+    "nativeRuntime": "NOT_QUALIFIED",
+    "emulatorUI": "NOT_QUALIFIED",
+    "physical": "NOT_QUALIFIED",
+    "listening": "NOT_QUALIFIED"
+  }
+}

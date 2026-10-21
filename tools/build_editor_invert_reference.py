@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """Build ownership fixtures against committed editor sources, preserving local display work."""
-import argparse,ast,hashlib,io,json,subprocess,tarfile,tempfile
+import argparse,hashlib,io,json,subprocess,tarfile,tempfile
 from pathlib import Path
+from literal_source_list import literal_source_list
 ROOT=Path(__file__).resolve().parents[1]
 TESTS=['editor_invert_reference_test.c','native_exec_editor_invert_reference_test.c','invert_reference_oracle.h']
 def committed(name):return subprocess.check_output(['git','show','HEAD:'+name],cwd=ROOT)
 def constant(name,key):
-    tree=ast.parse(committed(name))
-    for node in tree.body:
-        if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id==key for t in node.targets):return ast.literal_eval(node.value)
-    raise AssertionError(key)
+    return literal_source_list(committed(name),key)
 def prepare(folder):
     folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
     raw=subprocess.check_output(['git','archive','HEAD','src'],cwd=ROOT)

@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-21",
+  "scope": "HOST build recipes only; no product source or target execution",
+  "problem": "Both build helpers selected only the initial literal SOURCES assignment and omitted seven later SOURCES += dependencies. Six real ownership fixtures failed to link.",
+  "change": "Parse top-level literal string-list assignments and += in order without importing or executing wrappers; refuse unsupported dynamic assignments and mutations.",
+  "parser_checks": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_literal_source_list.py",
+      "-v"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 0.1305267499992624
+  },
+  "six_real_fixture_checks": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "-v",
+      "test_editor_invert_reference",
+      "test_editor_mixed",
+      "test_editor_paula",
+      "test_editor_wavetable",
+      "test_native_editor_paula",
+      "test_native_paula_transport"
+    ],
+    "returncode": 0,
+    "elapsed_seconds": 117.34371262499917
+  },
+  "fixtures": [
+    "editor_invert_reference",
+    "editor_mixed",
+    "editor_paula",
+    "editor_wavetable",
+    "native_editor_paula",
+    "native_paula_transport"
+  ],
+  "validation": "Original C behavior assertions, -Wall -Wextra -Werror and address/undefined sanitizers retained. All six fixtures passed in 117.226 seconds; six parser tests passed.",
+  "inputs": {
+    "tools/literal_source_list.py": {
+      "bytes": 2139,
+      "sha256": "6ea7ad21c5caffec4b077d351a7c5178783c5f86e6f7bf9f52b35a21024f168f"
+    },
+    "tools/build_editor_invert_reference.py": {
+      "bytes": 2893,
+      "sha256": "744ae062f5f6c3198399c28c019e4014a84b5fd9c0781e064e904393a54261e4"
+    },
+    "tools/build_editor_wavetable.py": {
+      "bytes": 3664,
+      "sha256": "bdf62ebab70200b7b8521eeee5e1ab2d7661675feed68a02e252e3c81902f1e4"
+    },
+    "tests/test_literal_source_list.py": {
+      "bytes": 1816,
+      "sha256": "b9aa83628286c9a217c3bfce08d899d8dd61f6a0c79dbf9b244ba3c4d99f0382"
+    }
+  },
+  "remaining": "Other failures from the original 701-test run remain open; no full-suite pass, native ABI, emulator UI, physical or listening acceptance."
+}

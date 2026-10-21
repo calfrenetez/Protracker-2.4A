@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Validate staged/committed editor ownership without unrelated working-tree display edits."""
-import argparse,ast,hashlib,io,json,subprocess,tarfile,tempfile
+import argparse,hashlib,io,json,subprocess,tarfile,tempfile
 from pathlib import Path
+from literal_source_list import literal_source_list
 ROOT=Path(__file__).resolve().parents[1]
 def prepare(folder):
     tree=subprocess.check_output(['git','write-tree'],cwd=ROOT,text=True).strip()
@@ -9,7 +10,7 @@ def prepare(folder):
     raw=subprocess.check_output(['git','archive',tree,'src','tests'],cwd=ROOT)
     with tarfile.open(fileobj=io.BytesIO(raw)) as ar:ar.extractall(folder,filter='data')
     def constant(name,key):
-        return next(ast.literal_eval(n.value) for n in ast.parse((folder/name).read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id==key for t in n.targets))
+        return literal_source_list((folder/name).read_text(),key)
     sources=list(dict.fromkeys(constant('tests/test_editor.py','SOURCES')[1:]+constant('tests/test_editor_studio.py','EXTRA')+constant('tests/test_wavetable_dispatch.py','DISPATCH')+['src/editor/sampler_wavetable.c']+['src/core/'+n+'.c' for n in ['amigus_reservation','amigus_wavetable_cache','amigus_sample_ram','sample_cache','playback_pcm']]+['src/editor/editor_wavetable.c','src/platform/sample_import.c','src/platform/raw_import.c','src/platform/mod_import.c','src/platform/pp20_import.c']))
     return sources,tree
 

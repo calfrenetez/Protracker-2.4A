@@ -1,0 +1,332 @@
+{
+  "date": "2026-10-21",
+  "state": "HOST_REGRESSION_PREREQUISITES_QUALIFIED_PROVIDER_REVIEW_PENDING",
+  "scope": "HOST tests only; production C code unchanged",
+  "change": "Replace stored intrinsic/future pass booleans with execution of the actual current pinned sanitizer qualifiers. Driver identities remain in reviewed exact closure pins. Keep the provider independent acceptance-body-pin assertion intact.",
+  "sourceReview": "Root reviewed intrinsic/document staging and retirement, exact sample/source-side cache getters, provider precall stale guards with restoration obligations retained, guarded numeric parent/span queries, same-field inventory comparison, original voice/cache ownership and workflow refusal order. This is not an independent peer review.",
+  "privateCurrentGraphs": [
+    {
+      "module": "test_native_mixed_causal_rolling_timer_source",
+      "CUnits": 87,
+      "closureBodies": 229,
+      "changedOrAddedInputs": 24,
+      "sourceClosureSHA256": "189ff6c725ff1a972ff6e56b3ffc95d3e3f18a1ac66dd6830465899c1ecc16cf",
+      "stdoutOracleSHA256": "112dc03fa8c4576888d9c28b1889c005c9157dfe544b2ec5524a9e974918c631",
+      "privateCurrentProbe": {
+        "module": "test_native_mixed_causal_rolling_timer_source",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 229,
+        "changed_or_added_inputs": 24,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 31.2468370409988
+      },
+      "currentWrapperSHA256": "ccbcaa98872c12f4e39a26cbcffe99d056e9001f196a36c8698c69b9a0d0cbaf"
+    },
+    {
+      "module": "test_paula_delivery4_genuine_owner",
+      "CUnits": 29,
+      "closureBodies": 78,
+      "changedOrAddedInputs": 12,
+      "sourceClosureSHA256": "9568af5381e1c678f068246675db6d250dd95fe9c441c59d50b73a607b1d7317",
+      "stdoutOracleSHA256": "7698ea44e6b7e7d0786ee5c27a97fae4baa2e2494ae12f1b3686a2a113f5d952",
+      "privateCurrentProbe": {
+        "module": "test_paula_delivery4_genuine_owner",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 78,
+        "changed_or_added_inputs": 12,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 8.546902083002351
+      },
+      "currentWrapperSHA256": "673521a9d832363438361cb692d5fc4b978059481f1b6f84e1ead47c242fdaca"
+    },
+    {
+      "module": "test_paula_segment_boundary",
+      "CUnits": 34,
+      "closureBodies": 85,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "084440d7543c7c4b6ff87fb3380d0f67ce21b2bb3f4e7b96b1331f571866be5d",
+      "stdoutOracleSHA256": "37a114259a0dbe3ad0f643ec04c4707011a5766014a280f64714567f36fcb1c2",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_boundary",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 85,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 9.898582166999404
+      },
+      "currentWrapperSHA256": "db4a6d51d0cfdfe586ca885df120591a12f48dc2a46a99638b235d257926cfc7"
+    },
+    {
+      "module": "test_paula_segment_future",
+      "CUnits": 36,
+      "closureBodies": 89,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "8b34e8f6f28d8061cc5c53eab7d411ab13f79e172926ea576e3f7ddf0c20efac",
+      "stdoutOracleSHA256": "190df80074f1b6648d9615eb8abe8f124d175def6585ad41a0d0d04d753ff5c7",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_future",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 89,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 11.856428416998824
+      },
+      "currentWrapperSHA256": "ebcfca3d522f5832bac3712b92264204398d595d5cfe5f8d2ac5bc41edb158bc"
+    },
+    {
+      "module": "test_paula_segment_packet32",
+      "CUnits": 36,
+      "closureBodies": 91,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "ae116301cf923bd5a05187009ff9ea57047c7ba7f788227d19aa296c7908c153",
+      "stdoutOracleSHA256": "1fdcf9b22240d379f80a9f24dfce83b3161731d7e6726349dd168902b83858f9",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_packet32",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 91,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 10.916801584000495
+      },
+      "currentWrapperSHA256": "f37cd39b8101e23d739745dd307e58fe9a53926e13d8715945d382c815a8586d"
+    },
+    {
+      "module": "test_paula_segment_provider",
+      "CUnits": 37,
+      "closureBodies": 94,
+      "changedOrAddedInputs": 11,
+      "sourceClosureSHA256": "3f240b2bf4438c706103709dcd6dedb3b5b455fb00389cb4146b2914432ecb04",
+      "stdoutOracleSHA256": "c14be7d96baa5b12daad112d661920a6a7faa0687ec636c601c12083bc3b06cf",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_provider",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 94,
+        "changed_or_added_inputs": 11,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 11.569062791997567
+      },
+      "currentWrapperSHA256": "ec478067ea06c8279e2955c4c4558c57bfafd09a38c729d748db7f9eb0321209"
+    },
+    {
+      "module": "test_paula_segment_repeat_plan",
+      "CUnits": 24,
+      "closureBodies": 64,
+      "changedOrAddedInputs": 9,
+      "sourceClosureSHA256": "4259732649c4d2274265dbc5075f1166e00604f954ff7613a62438fa425e90dc",
+      "stdoutOracleSHA256": "d6d44c693fade13e161da20759a6514ba0c9760b0c6894845748139233aa3c47",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_repeat_plan",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 64,
+        "changed_or_added_inputs": 9,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 5.8618119999991904
+      },
+      "currentWrapperSHA256": "0b0c59d16fc35020843c58cbc86980b701ed274e5b5b409579840ae7908169bf"
+    },
+    {
+      "module": "test_paula_segment_repeat_readers",
+      "CUnits": 28,
+      "closureBodies": 74,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "02eed0cd151936ddc2a2608dbb6a3e778670d477175db82c1ebb43ea286a9ac9",
+      "stdoutOracleSHA256": "58e1d3022c0de36d55f204bc62628a2963c431882c64972de9cf70475e226846",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_repeat_readers",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 74,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 7.919138958000985
+      },
+      "currentWrapperSHA256": "9156820965d4e0e6d936b4d4917d7663f51f36caef150c3dde81491b208886c7"
+    },
+    {
+      "module": "test_paula_segment_sequence",
+      "CUnits": 35,
+      "closureBodies": 87,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "d5da4b38e98a2762f9dd1aaf734eb37b943bae0041e5501ed913aa02ea27dfa2",
+      "stdoutOracleSHA256": "0a6c55edf97c9999b5925f07a69a05bfb87fefec3e32c8e5b2e467dba389187f",
+      "privateCurrentProbe": {
+        "module": "test_paula_segment_sequence",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 87,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 10.43019433399968
+      },
+      "currentWrapperSHA256": "f713a9aa97d41162aba8996bded9048753a33a957696daeeffbfb2f28bc05e0d"
+    },
+    {
+      "module": "test_paula_delivery4_cache_binding",
+      "CUnits": 29,
+      "closureBodies": 79,
+      "changedOrAddedInputs": 3,
+      "sourceClosureSHA256": "d9959a3cc2cd85018052655ba9c1405063588282e886bd5de6084bf7923fd06c",
+      "stdoutOracleSHA256": "be50058f9c4a4b3352239d0fcec708fdfd4e0faaf443735a1f305e4a61b225d1",
+      "privateCurrentProbe": {
+        "module": "test_paula_delivery4_cache_binding",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 79,
+        "changed_or_added_inputs": 3,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 8.363168500000029
+      },
+      "currentWrapperSHA256": "be0053dbe1542b5d459e48eb7fbd76ecf032d1072a7765550fe62f567dd93749"
+    },
+    {
+      "module": "test_paula_owner4_checked_stop",
+      "CUnits": 37,
+      "closureBodies": 92,
+      "changedOrAddedInputs": 10,
+      "sourceClosureSHA256": "861d8224453a4b4942610fc39f650ef7be4cf961c45d3bb5df14bd0ea3e9abae",
+      "stdoutOracleSHA256": "d86bde4ced5e2a1aaabb6431463b4633d5c6f5bb183af53d0d9a76fb7b5c3c67",
+      "privateCurrentProbe": {
+        "module": "test_paula_owner4_checked_stop",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 92,
+        "changed_or_added_inputs": 10,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 11.711329041998397
+      },
+      "currentWrapperSHA256": "f233f164d460ae2acbc0836ed33b5a360aab4600b7edf7131688144d61e7758f"
+    },
+    {
+      "module": "test_paula_provider_callbacks",
+      "CUnits": 37,
+      "closureBodies": 95,
+      "changedOrAddedInputs": 3,
+      "sourceClosureSHA256": "a506fa3804bbdd59829787fa7de3d16e8fdcb7fcc69af5d4564ac15eec567e16",
+      "stdoutOracleSHA256": "05726b666306c6ab3b494eea1a482b7bfb080ce0654a7a00c50d962bf7fec0a0",
+      "privateCurrentProbe": {
+        "module": "test_paula_provider_callbacks",
+        "canonicalAdmission": false,
+        "runtimeAdmission": false,
+        "state": "PRIVATE_CURRENT_HOST_ORACLE_PASSED",
+        "compiler_returncode": 0,
+        "fixture_returncode": 0,
+        "closure_bodies": 95,
+        "changed_or_added_inputs": 3,
+        "protected68_and_sources_preserved": true,
+        "elapsed_seconds": 11.626713292000204
+      },
+      "currentWrapperSHA256": "65c969fcbcc0b88b6b5b1ab32f3d2a89048b383351143810e631c4622e78a5e4"
+    }
+  ],
+  "canonicalChecks": {
+    "firstGroup": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "-v",
+        "test_paula_segment_packet32",
+        "test_paula_segment_future",
+        "test_paula_segment_sequence",
+        "test_paula_delivery4_genuine_owner",
+        "test_paula_segment_boundary",
+        "test_paula_segment_repeat_plan",
+        "test_paula_segment_repeat_readers",
+        "test_paula_segment_provider",
+        "test_paula_owner4_checked_stop",
+        "test_paula_delivery4_cache_binding",
+        "test_paula_provider_callbacks"
+      ],
+      "returncode": 1,
+      "elapsed_seconds": 176.86092366699813,
+      "modules": [
+        "test_paula_segment_packet32",
+        "test_paula_segment_future",
+        "test_paula_segment_sequence",
+        "test_paula_delivery4_genuine_owner",
+        "test_paula_segment_boundary",
+        "test_paula_segment_repeat_plan",
+        "test_paula_segment_repeat_readers",
+        "test_paula_segment_provider",
+        "test_paula_owner4_checked_stop",
+        "test_paula_delivery4_cache_binding",
+        "test_paula_provider_callbacks"
+      ]
+    },
+    "firstGroupOutcome": "9 passed; genuine driver and provider stopped at additional historical Source gates; failure log preserved.",
+    "driverCompletion": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "-v",
+        "test_paula_delivery4_genuine_owner",
+        "test_paula_segment_provider"
+      ],
+      "returncode": 1,
+      "elapsed_seconds": 54.89033904199823
+    },
+    "driverCompletionOutcome": "Genuine owner passed. Provider intrinsic and real future prerequisites passed, then correctly refused missing independently reviewed acceptance body pin.",
+    "rollingTimer": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "-v",
+        "test_native_mixed_causal_rolling_timer_source"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 41.941371749999234
+    },
+    "rollingOutcome": "PASS: original36-case HOST model with actual intrinsic16 prerequisite."
+  },
+  "preservation": "Every private graph compared complete raw68-path and10 installed-source facts, without ctime/flags waivers. Original16 dirty/untracked paths preserved. Exact C selections, sanitizer flags, behavior assertions and complete stdout oracles retained.",
+  "remaining": {
+    "providerAcceptance": "PENDING: FUTURE_HOST_ACCEPTANCE_PIN remains None; not fabricated from private probe or Root review.",
+    "wholeHostSuiteAfterRepairs": "NOT_RUN_YET",
+    "nativeABI": "NOT_QUALIFIED",
+    "emulatorUI": "NOT_QUALIFIED",
+    "physical": "NOT_QUALIFIED",
+    "listening": "NOT_QUALIFIED"
+  }
+}

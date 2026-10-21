@@ -6,8 +6,11 @@ sanitizers. The exact stdout oracle and behavior assertions are unchanged.
 Source review covers the later document ownership/staging guards, read-only
 cache identity checks and complete sampler retirement predicate. The separate
 private probe and canonical test both passed. This is Root source review and
-HOST evidence; downstream admission flags remain false. Historical graphs below
-retain their own scope. See [the current source pins and qualification](test-evidence/current_sampler_intrinsic_host_20261021.json).
+HOST evidence. Regression consumers now execute this exact qualifier as a live
+prerequisite before their own pinned graphs; no stored True admission is used.
+The provider also runs its real future-backend prerequisite and still refuses
+a missing independently reviewed acceptance record. This grants no runtime,
+owner enrollment or native authority. Historical graphs below retain their own scope. See [the current source pins and qualification](test-evidence/current_sampler_intrinsic_host_20261021.json).
 
 The sampler records live versions, slot/workflow/table/establishment storage and pending construction or retirement. These records retain actual allocation extents through allocator callbacks and final release. Bookkeeping storage is charged to the bounded allocation budget.
 

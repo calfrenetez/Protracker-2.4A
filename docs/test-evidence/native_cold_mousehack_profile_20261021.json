@@ -1,0 +1,145 @@
+{
+  "state": "COLD_CANONICAL_PROFILE_MOUSEHACK_MODE_AND_READ_ONLY_GUEST_CAPTURE_RESTORED_AND_RELEASED",
+  "date": "2026-10-21",
+  "evidenceTier": "One original guarded Guest admission, mode/state queries and IPC startup-Shell capture; no application or input test",
+  "sessionProfile": {
+    "originalProfile": {
+      "bytes": 4828,
+      "sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+    },
+    "intentionalAppend": "absolute_mouse=mousehack\n",
+    "appendBytes": 25,
+    "temporaryProfile": {
+      "bytes": 4853,
+      "sha256": "6e2098c9e1a12db369a464780c2c66962b084d205447144737d11807d4152dec"
+    },
+    "sameCanonicalPathUsed": true,
+    "originalFourArgumentStartupShapeRetained": true,
+    "privateProfileOrCommandLineSettingOverride": false,
+    "installedEmulatorBinaryChanged": false,
+    "productionReadinessPatchInstalled": false
+  },
+  "observedReadOnlyActions": {
+    "originalGuestAdmissions": 1,
+    "tabletModeQueries": 1,
+    "explicitRawGUIStateQueries": 1,
+    "ipcCaptures": 1,
+    "captureServiceMayQueryStateInternally": true,
+    "applicationLaunches": 0,
+    "nativeInputEvents": 0,
+    "runtimeIPCConfigurationMutations": 0,
+    "resets": 0
+  },
+  "modeObservation": {
+    "rawModeFields": [
+      "mousehack"
+    ],
+    "pendingTabletMode": "mousehack",
+    "effectiveTabletMode": "mousehack",
+    "pendingEffectiveDiverged": false,
+    "focusReady": false,
+    "buttonMask": 0,
+    "configuredModeDoesNotProveGuestDriverReadiness": true
+  },
+  "capture": {
+    "file": "native_cold_mousehack_profile_20261021.png",
+    "bytes": 7348,
+    "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8",
+    "width": 756,
+    "height": 578,
+    "content": "Readable initial startup Shell",
+    "savedPixelsViewed": true,
+    "ipcMetadataReportedActionable": true,
+    "nativeWindowIndependentlyObserved": false,
+    "pointerMappingValidated": false
+  },
+  "restorationAndRelease": {
+    "originalDisconnectAndOwnedStopReturnCodes": [
+      0,
+      0
+    ],
+    "savedHostRoles": [
+      "canonicalProfile",
+      "emulatorState",
+      "bridgeEnabled"
+    ],
+    "originalThreeBodiesAndMtimesRestored": true,
+    "inodeModeOwnerGroupAndFlagsRetained": true,
+    "historicalFullMetadataContinuityClaimed": false,
+    "metadataChangeCauseClaimed": false,
+    "originalPublicReleaseReturnCode": 0,
+    "noHoldsRemain": true,
+    "ownedEmulatorIPCAndGuestListenerAbsent": true,
+    "ordinarySharedServiceObservedDisconnected": true,
+    "futureBridgeUsabilityClaimed": false,
+    "threeRestoredHostEndpointsBodyAndOtherNineFactsMatch": true,
+    "onlyForwardCtimeObservedForThreeRestoredHostEndpoints": true,
+    "releaseArchiveSavedBodyReview": {
+      "bodyAndOtherEightFactsExact": true,
+      "observedMetadataChanges": [
+        "forward ctime",
+        "flags"
+      ],
+      "historicalFullMetadataContinuityClaimed": false,
+      "causeClaimed": false,
+      "runtimePolicyWaiverOrNewAdmission": false
+    }
+  },
+  "preservedRefusals": {
+    "earlierCommandLineSettingOverrideCaseRetained": true,
+    "fileWriteOpenRefusedBeforeTruncation": true,
+    "remainingNeverDispatchedWriteUsedDistinctIntent": true,
+    "oldReservationOrFailedWriteReplayed": false,
+    "staleHistoricalEndpointReadsRetainedWithoutGlobalMetadataWaiver": true
+  },
+  "acceptanceLimits": {
+    "guestDriverInitialized": false,
+    "guestDriverLive": false,
+    "cursorAccuracy": false,
+    "fullUIImportSaveClassicMOD": false,
+    "timingOrPerformance": false,
+    "physicalOrListening": false,
+    "defaultProfileOrEmulatorAdoption": false
+  },
+  "durablePrivateEvidence": {
+    "fileCountIncludingManifest": 75,
+    "payloadsRehashed": 74,
+    "manifestBytes": 58161,
+    "manifestSHA256": "60ed0cfbb569e2c9347dad859921c8849db52b47c43f6cba67976aaa80eae4f7",
+    "selectedSourceAndProofSnapshot": true,
+    "leasesRawGuardTokensOrFullEnvironmentCopied": false,
+    "completeHistoryCopied": false
+  },
+  "savedEvidenceCores": {
+    "readOnlyCapture": {
+      "bytes": 7575,
+      "sha256": "b27f7cf31db5a8b6a60f7fbf2835e5e9b1d0dfc57963d953c2145af35ca25c02"
+    },
+    "mode": {
+      "bytes": 40,
+      "sha256": "2d395fd1d2c558a9859eb0be918a4eeeacbc2497df6ab7028e7e03122d61dc18"
+    },
+    "parsedGUIState": {
+      "bytes": 382,
+      "sha256": "0c00c7762a408dffb6850592c2c9ef41c99465482fb542af0b1e04ea3f122120"
+    },
+    "originalThreeFileRestoration": {
+      "bytes": 9965,
+      "sha256": "bb4c8ef98e3bf465493a3f3f2e4bc72983d3fb14f7087fe5566355b5ac6281e9"
+    },
+    "postRestorationCurrentEndpoints": {
+      "bytes": 3453,
+      "sha256": "5e995c60d89fb8cb2da55c6c71f0a1ecc3feb1561b19374e120da47d6d3d269a"
+    },
+    "originalPublicReleaseSettlement": {
+      "bytes": 1021,
+      "sha256": "9e885d18aa321e11f74c0e013a1ae01bd05033f87200a3fb3c44128e033a1f46"
+    }
+  },
+  "independentSavedReview": {
+    "materialFindings": [],
+    "bytes": 12679,
+    "sha256": "3a78b1ae1a60b47bca76eed623e33d07b491895633a0848de61b9f2e98abbb04",
+    "scope": "Saved Guest/mode/capture, three-file restoration and original public release; no new runtime acceptance"
+  }
+}

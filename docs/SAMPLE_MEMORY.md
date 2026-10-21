@@ -1,5 +1,20 @@
 # Sample memory and playback ownership
 
+## Cold canonical-profile Mousehack observation —21 October2026
+
+A fresh emulator session used the canonical profile with only the temporary
+`absolute_mouse=mousehack` append. The original four-argument startup and guarded
+Guest admission passed. One mode query reported Mousehack; pending and effective
+modes agreed, with focus false. One IPC capture shows a readable startup Shell.
+No application, mouse, button, key or reset was attempted. These observations
+do not prove driver initialization, liveness or cursor accuracy.
+Original disconnect and owned stop passed; all three saved host bodies and
+mtimes were restored, followed by the original public release. For the three host files, named endpoint checks disclosed forward ctime changes
+with bodies and nine other facts exact;
+no historical metadata continuity or cause is claimed. Full UI, timing,
+physical/listening and default adoption remain unaccepted. See the
+[redacted mode, capture and restoration evidence](test-evidence/native_cold_mousehack_profile_20261021.json).
+
 ## Mousehack production compilation and private build —21 October2026
 
 Real CMake configured the exact full source with only five frozen body changes

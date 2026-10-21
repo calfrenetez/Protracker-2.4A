@@ -1,0 +1,101 @@
+{
+  "schema": "pt24g-zero-audio-blank-log-protocol-v1",
+  "date": "2026-10-21",
+  "tier": "SOURCE_AND_HOST_PROTOCOL_ONLY",
+  "state": "PASS_PREPARATION_NOT_RUNTIME_ADAPTER_ADOPTION",
+  "helper": {
+    "name": "tools/editor_blank_capture_protocol.py",
+    "bytes": 4317,
+    "sha256": "0f3cfc399f023b85654d2fc4626d093d5ce22449194fb0f72f623ddec0108ce7"
+  },
+  "tests": {
+    "name": "tests/test_editor_blank_capture_protocol.py",
+    "bytes": 7126,
+    "sha256": "79b350320c020ef9a02476631ca49205df270f5587c0795ac1d9ef6fa1738c73",
+    "methods": 13,
+    "allStrictPrefixesTested": 253,
+    "fixtureLogSynthetic": true,
+    "nativeExecutionPerformed": false,
+    "rawUnittestStderrBytes": 2056,
+    "rawUnittestStderrSHA256": "58e9ba7bbc4644b6adccdc8270f3a4959b7f326e47f996a2f208f065ba851970"
+  },
+  "donorSourceRegression": {
+    "originalAdapterModified": false,
+    "originalAdapterModuleImported": false,
+    "actualNestedReadyPredicateExecutedWithSyntheticLogs": true,
+    "donorBytes": 16869,
+    "donorSHA256": "e21d6d39bb60c02dcaf5917f19db94801cd8f81c4a2db94f32f34d643e11ef43",
+    "observations": [
+      {
+        "syntheticTail": "EDITOR READY channels=4 patterns=1 bitmap_bytes=1 history_bytes=1\n",
+        "originalActualPredicateAccepted": false,
+        "newPredicateRefused": true,
+        "refusal": "Unexpected or out-of-order blank startup record"
+      },
+      {
+        "syntheticTail": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=1 extra\n",
+        "originalActualPredicateAccepted": true,
+        "newPredicateRefused": true,
+        "refusal": "Unexpected or out-of-order blank startup record"
+      },
+      {
+        "syntheticTail": "EDITOR: unexpected failure\n",
+        "originalActualPredicateAccepted": true,
+        "newPredicateRefused": true,
+        "refusal": "Unexpected or out-of-order blank startup record"
+      }
+    ],
+    "targetCalls": 0,
+    "firstRootPremiseFailureRetained": true,
+    "firstFailureExplanation": "A second valid-shaped READY row is already refused by the original predicate. Its malformed trailing-field row and an unrelated error are ignored and leave the original stale clean frame accepted."
+  },
+  "protocol": {
+    "maximumLogBytes": 16384,
+    "maximumLineBytes": 1024,
+    "maximumIdenticalCleanFrames": 32,
+    "requiredOrder": [
+      "Exact own recent namespace with loaded=0",
+      "Exact four-channel one-pattern native READY with candidate-bound sizes",
+      "One or more identical clean row0/channel0/revision0/dirty0/panel0 READY frames"
+    ],
+    "partialPrefixes": "WAITING only while still a prefix of an allowed next record",
+    "malformedUnexpectedReplayExitOrChangedStateRecords": "REFUSED",
+    "captureBracket": "Two complete actual bounded log reads must have identical bytes; read provenance and file/process identity remain the owning harness responsibility",
+    "historyBytesMustBeExplicitlyBound": true
+  },
+  "currentCandidateStaticConstants": {
+    "state": "EXACT_CURRENT_CANDIDATE_READY_PRINTF_CONSTANTS_STATICALLY_ASSOCIATED",
+    "candidate": {
+      "bytes": 346404,
+      "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+    },
+    "codeSection": 0,
+    "mainOffset": 10428,
+    "printfFormatOffset": 8407,
+    "PCRelativeFormatInstructionOffset": 12030,
+    "printfCallOperandOffset": 12036,
+    "printfProvider": {
+      "section": 0,
+      "offset": 287600
+    },
+    "historyBytesImmediatePushOffset": 12002,
+    "expectedHistoryBytes": 182388,
+    "bitmapBytesImmediatePushOffset": 12008,
+    "expectedBitmapBytes": 163840,
+    "protocolFixtureSynthetic": true,
+    "nativeExecutionPerformed": false,
+    "targetOperations": 0,
+    "UIAcceptance": false
+  },
+  "limits": {
+    "existingRuntimeAdapterChanged": false,
+    "runnableTargetEntryPointAdded": false,
+    "harnessOwnershipOrSourceAdmissionGranted": false,
+    "GUIReadinessProved": false,
+    "globalAudioQuietProved": false,
+    "physicalOrListeningAccepted": false,
+    "defaultAdoption": false
+  },
+  "targetOperations": 0,
+  "productCSourceWrites": 0
+}

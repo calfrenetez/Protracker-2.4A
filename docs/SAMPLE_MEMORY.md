@@ -40,6 +40,23 @@ checks. Whole-application ABI, actual startup stack allocation/restoration,
 runtime UI and default adoption remain unqualified. See the
 [selected entry and startup routes](test-evidence/native_current_editor_selected_routes_20261021.json).
 
+The new capture-log helper passes13 HOST test methods. A source-only regression
+executed the earlier private adapter's actual nested readiness predicate with
+synthetic logs: it accepts a malformed trailing-field READY or an unrelated
+error after its old clean frame. The new helper rejects these stale-prefix
+cases, requires the own namespace and exact ordered blank records, and checks
+unchanged complete bytes around capture. Partial records wait only while they
+can still become an allowed record; identical clean refresh frames are bounded.
+
+Its history-size argument must be explicitly bound to the candidate. The exact
+current HUNK0 code pushes182388 history bytes and163840 bitmap bytes into the
+READY printf; the PC-relative format and relocated printf call were checked.
+These are static constants, not observed native output. The helper has no target
+entry point and is not yet adopted by a runtime adapter. Existing full-lifetime
+gates and earlier source remain unchanged. Log checks do not establish process
+liveness, GUI readiness, audio quiet, clean exit or release. See the
+[capture protocol HOST evidence](test-evidence/editor_blank_capture_protocol_20261021.json).
+
 ## Full HOST regression and post-reboot pointer observations —21 October2026
 
 The original full shared HOST selection ran707 tests in3374.564s:706 passed,

@@ -1,54 +1,51 @@
 # Sample memory and playback ownership
 
-## Capture-only attempt and local candidate volume —21 October2026
+## Mounted blank editor capture and settlement —21 October2026
 
-A distinct mounted-candidate carrier now has12 passing HOST methods. It binds
-an already prepared local alias to the exact original profile beforeimage and
-active private mount, reads all guest bytes before execution, and never recopies
-the immutable candidate into Dev. Original no-input limits, strict full facts,
-log/capture checks and guarded APIs remain. Four further HOST methods exercise
-the prospective helper's actual patch/restore on temporary fixtures, including
-original bytes/mtimes and refusal/replay guards. No actual profile was changed.
+The exact current346404-byte candidate now completes a distinct Amiberry
+blank-editor test from a private local volume outside File Provider managed
+Documents. All guest bytes matched SHA256
+`7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b`
+before execution, and the local candidate's full facts stayed exact through
+capture. The carrier never recopied that executable into Dev.
 
-An actual installed serial-gate extraction passes three offline state fixtures:
-a previous connection lost without explicit detach refuses, while fresh and
-explicitly detached fixture states permit endpoint validation. This is source
-behavior, not inspection of the loaded service object's private fields.
-Automatic approval review rejected the proposed one-time idle shared DevBench
-restart before shell execution because this borrowed service requires explicit
-user authorization. A question is pending. Read-only checks confirm the same
-service is running, its cached endpoint is disconnected, no emulator exists and
-the guard remains EMPTY at observed2649. No restart or workaround was attempted.
-Continue HOST/source work while approval is pending. See the
-[mounted carrier HOST evidence](test-evidence/editor_mounted_capture_carrier_host_20261021.json).
+The single launch and registered756x576 capture succeeded. Identical251-byte
+logs before/after capture record READY, bitmap163840/history182388, four
+channels, row0/channel0/revision0/dirty0/panel0. Root viewed both the actual
+PNG and the native1322x1200 window: the blank editor content agreed. The native
+right edge was clipped; no pixel equality or full layout acceptance is claimed.
+There were zero mouse/key/playback/exit actions.
 
-The exact current346404-byte editor candidate was read back completely through
-an owned Amiberry session and matched SHA256 `7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b`.
-The isolated five-variable ENV setup completed. Before any application launch,
-the strict staged-file check refused a new flag64 and forward ctime; all bytes
-and other recorded facts remained identical. Cause is unproven. No editor
-capture, input, playback or native clean-exit result follows from this attempt.
+The user explicitly approved one idle shared DevBench restart after the earlier
+automatic-review rejection. Renewed locks, ownership, EMPTY/no-target and
+original source/configuration checks passed; the approved restart completed
+once with the guard/input facts unchanged. That single approval is consumed.
+Twelve new HOST readiness fixture methods passed; they do not prove runtime
+behavior. Earlier failed/rejected evidence remains preserved.
 
-The failed case was retained and never replayed. Standing-authorized cleanup
-stopped only the positively verified owned VM with one SIGTERM, observed genuine
-bridge EOF, preserved all15 generated files and removed the exact own namespace.
-The three saved host roles,31 app-data bodies/original mtimes and raw68-path/
-10-source preservation checks passed. The original HOLD was archived through
-the normal public release at historical fence2649. This is no current clearance.
-No shared bridge-service lifecycle action was taken.
+The completed test used the original guarded disconnect and owned emulator
+stop. All15 generated files were preserved before exact namespace removal;
+the local input volume was retained. Three saved host roles, all31 app-data
+bodies/original mtimes and raw68-path/10-source preservation checks passed.
+Only the known two theme mtimes required restoration, with no theme body writes.
+Normal public release completed at historical fence2662/EMPTY. This is not
+future clearance, native clean exit or guest ENV-script restoration.
 
-A distinct private local candidate volume and additive profile suffix are now
-prepared outside the File Provider managed workspace. The suffix preserves the
-existing Dev mapping and uses the installed profile's paired directory syntax.
-Only APPEND and SESSION constants differ in the prospective private saved-file
-helper; the original helper and strict metadata/one-MiB bounds are unchanged.
-No canonical profile write, volume mount or runtime admission has occurred.
-The capture adapter passes11 HOST tests, plus a strict metadata-only staging
-regression that stops before any app dispatch. The pure suffix builder passes three
-HOST methods with synthetic fixtures and rejects altered profiles and unsafe
-paths. The next case still needs fresh original lifecycle/source admission,
-actual mounted-byte verification, capture and independent native-window view.
-See the [capture attempt and local-volume preparation](test-evidence/editor_capture_attempt_local_volume_20261021.json).
+The earlier staged-file metadata refusal was not replayed or weakened. The
+new local mount succeeded with the same strict candidate/full-fact checks;
+the cause of the earlier flag/ctime change remains unproven. Previous HOST
+carrier/profile fixture and rejected-service evidence remain historical in the
+[mounted carrier HOST record](test-evidence/editor_mounted_capture_carrier_host_20261021.json)
+and [earlier attempt record](test-evidence/editor_capture_attempt_local_volume_20261021.json).
+See the [actual mounted capture and settlement](test-evidence/editor_mounted_blank_capture_20261021.json)
+and [exact captured image](test-evidence/editor_mounted_blank_capture_20261021.png).
+
+Mouse selection, edit/import/save/reopen/classic MOD export, whole-application
+ABI/stack, replay/backend playback, physical A1200/AmiGUS and human listening
+remain separate and unqualified. The last whole707 HOST run remains706 pass,
+one independent-provider acceptance-gate failure, zero errors; no new full-suite
+pass is claimed. The next editor work is a distinct finite mouse case using
+fresh live admission and this actual capture's registry geometry.
 
 ## Current editor candidate rebuild —21 October2026
 

@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "date": "2026-10-21",
+  "scope": "Exact mounted editor candidate, one no-input launch and capture, native-window comparison, complete owned-session settlement",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b",
+    "legacyReplayLinked": true,
+    "playbackAdmitted": false
+  },
+  "service": {
+    "explicitHumanApprovalReceived": true,
+    "approvedIdleManagedRestarts": 1,
+    "actualRestarts": 1,
+    "approvalConsumed": true,
+    "secondRestartAuthorized": false,
+    "originalSourceConfigurationAndGuardUnchangedByRestart": true,
+    "earlierAutoReviewRejectionPreserved": true
+  },
+  "host": {
+    "newServiceReadinessFixtureMethodsPassed": 12,
+    "syntheticFixturesOnly": true,
+    "newFullSuiteRun": false,
+    "lastWholeSuite": {
+      "tests": 707,
+      "passed": 706,
+      "failed": 1,
+      "errors": 0,
+      "overall": "FAILED",
+      "remainingFailure": "Independent future-provider source acceptance gate"
+    }
+  },
+  "emulator": {
+    "startupSucceeded": true,
+    "originalFixedBinaryAndFourArgumentStartup": true,
+    "startupSeconds": 33.06719533299838,
+    "distinctMountedSession": true,
+    "earlierFailedTransactionReplayed": false,
+    "all29FrozenSourcesVerified": true,
+    "candidateNeverRecopiedIntoDev": true,
+    "wholeGuestReadbackMatched": true,
+    "allCandidateFullFactsStayedExact": true,
+    "result": "BLANK_LOG_AND_REGISTERED_CAPTURE_RECORDED",
+    "attempts": {
+      "application-launch": 1,
+      "candidate-readback": 1,
+      "capture": 1,
+      "environment-setup": 1
+    },
+    "caseSeconds": 128.11840754199875,
+    "returncode": 0,
+    "logBytes": 251,
+    "logSHA256": "f820277ed2184e2ac95465d3a4791fe25787740bcbe224854bd5b919d7ff99bf",
+    "logUnchangedAcrossCapture": true,
+    "channels": 4,
+    "patterns": 1,
+    "bitmapBytes": 163840,
+    "historyBytes": 182388,
+    "row": 0,
+    "channel": 0,
+    "revision": 0,
+    "dirty": 0,
+    "panel": 0,
+    "mouseKeyPlaybackAndExitActions": 0
+  },
+  "visual": {
+    "registeredActionablePNG": true,
+    "registryAssociationVerified": true,
+    "width": 756,
+    "height": 576,
+    "bytes": 15793,
+    "sha256": "011fbf771e25e396d9a4cf9c5a2cc9115b61e5ed043a849b668fd324262beb7c",
+    "image": "editor_mounted_blank_capture_20261021.png",
+    "rootViewedPNGAndNativeWindow": true,
+    "nativeWidth": 1322,
+    "nativeHeight": 1200,
+    "nativeWindowRaisedOnceBeforeGuestCase": true,
+    "contentAgreed": true,
+    "nativeRightEdgeClipped": true,
+    "pixelEqualityOrFullLayoutAcceptanceClaimed": false,
+    "observed": "ProTracker 2.4G controls, four blank channels, row00/channel1 cursor, ALL RIGHT; preceding rows blank above row00."
+  },
+  "settlement": {
+    "originalGuardedDisconnectSucceeded": true,
+    "originalOwnedStopSIGTERMs": 1,
+    "ownedPIDGroupSocketAndPortAbsent": true,
+    "generatedFilesPreservedBeforeExactRemoval": 15,
+    "localInputVolumeRetained": true,
+    "originalSavedRolesRestored": 3,
+    "appDataOriginalBodiesAndMtimesVerified": 31,
+    "themeBodyWrites": 0,
+    "knownThemeMtimesRestored": 2,
+    "rawProtectedPathsVerified": 68,
+    "installedSourceBodiesVerified": 10,
+    "normalPublicReleaseSucceeded": true,
+    "historicalFenceObservation": 2662,
+    "phaseAtRelease": "EMPTY",
+    "failedHoldsArchivedThisSession": 0,
+    "historicalObservationNotCurrentClearance": true,
+    "nativeCleanExitClaimed": false,
+    "guestENVScriptRestorationClaimed": false
+  },
+  "withheld": [
+    "Mouse selection and remaining editor UI matrix",
+    "Edit/import/save/reopen/classic MOD export",
+    "Whole application ABI and stack",
+    "Legacy replay playback and checked backend composition",
+    "Physical A1200/AmiGUS and human listening"
+  ],
+  "evidence": {
+    "durableOrdinaryFilesBodyVerified": 163,
+    "durableBytes": 10111764,
+    "privateLeaseTokenExcluded": true,
+    "originalSocketPreservedSeparately": true,
+    "failedEarlierEvidenceRetained": true
+  }
+}

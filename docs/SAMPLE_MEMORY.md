@@ -1,6 +1,28 @@
 # Sample memory and playback ownership
 
 
+## Executable passive-parent preparation —22 October2026
+
+The new parent entry point passes26 focused HOST checks. It validates the
+distinct V2 source freeze, selected20 module paths, exact editor/probe/compile
+associations and fresh output before the original blank launch. It checks module
+resolution before import and actual module path/body afterward, then uses the
+existing command lock, current original owner and one original operation to
+compose the blank and mouse/probe phases in the same frame.
+
+Failure and cancellation propagate without retry or hidden cleanup/release.
+The actual harness Python clock check passes, and missing admission refuses
+before original target imports with zero socket/process attempts. An initial
+21-method run had six errors from an invalid synthetic run-label prefix; that
+failed evidence is retained and only the fixture was corrected.
+
+This entry point has not received a live admission. Fresh private inputs,
+source freeze and owned probe staging plus normal/failure settlement integration
+remain necessary. No service, VM, guest or physical operation occurred. The
+historical full-suite independent-provider gate failure remains unchanged.
+
+See the [parent HOST receipt](test-evidence/editor_passive_parent_host_20261022.json).
+
 ## Passive pointer carrier and mouse composition —22 October2026
 
 The finite V2 adapter and a distinct mouse-case composition now pass47 focused

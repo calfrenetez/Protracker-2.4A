@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only executable parent preparation for the passive V2 mouse case; no target admission",
+  "focusedHost": {
+    "methodsPassed": 26,
+    "unittestSeconds": 0.021,
+    "returncode": 0,
+    "elapsedSeconds": 0.1473232499997721
+  },
+  "initialFailedSuiteRetained": {
+    "methods": 21,
+    "errors": 6,
+    "returncode": 1,
+    "cause": "Synthetic fixture run label omitted unchanged required blank-capture prefix. Fixture corrected; original protocol not relaxed."
+  },
+  "actualBootstrap": {
+    "originalHarnessClockDomainVerified": true,
+    "missingAdmissionRefused": true,
+    "socketOrProcessAttempts": 0
+  },
+  "behavior": [
+    "Pins the distinct source freeze and20 selected module paths, checking resolution before import and body/path after import.",
+    "Checks exact editor, V2 source/native/staged bytes and compile receipt association before application launch.",
+    "Uses existing nonblocking command lock, current original READY owner and one original operation.",
+    "Composes the original blank carrier and same-frame mouse/probe; failure/cancellation propagates without retry or hidden cleanup."
+  ],
+  "hostCoverage": [
+    "Old scope/budgets/freeze, missing parent/module, drifted geometry/editor/probe/compile/namespace/output and source refusals.",
+    "Shadowed module resolution and changed imported path/source refusals.",
+    "Busy/unsafe command lock, READY/HOLD/inflight/owner changes, blank/probe failure and cancellation.",
+    "Actual resident file pins, changed bytes, symlink, size and reference-shape refusals."
+  ],
+  "preserved": {
+    "unrelatedDirtyPaths": 16,
+    "frozenFailedSession": true,
+    "candidateAndInstalledHarness": true
+  },
+  "withheld": {
+    "actualFreshSourceFreezeAndParentAdmission": false,
+    "ownedProbeStagingAndSettlementIntegration": false,
+    "nativeGuestExecution": false,
+    "pointerOrClickAcceptance": false,
+    "fullHostSuiteRerun": false,
+    "physicalAndListeningAcceptance": false
+  },
+  "priorFullHostVerdict": "Historical707 methods:706PASS,1independent-provider gate failure,0errors."
+}

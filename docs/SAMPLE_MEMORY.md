@@ -1,5 +1,26 @@
 # Sample memory and playback ownership
 
+## Finite probe-parent supervisor preparation —22 October2026
+
+The fresh dispatcher now requires the exact stage-plan parent binding, its own
+frozen source, the original current READY owner and the actual private lease.
+It refuses inherited authority and releases the checked command lock before
+spawning so the original parent can acquire it and recheck ownership itself.
+
+Its720-second budget includes stage60, unchanged blank300 and mouse240, plus
+120 seconds of supervision overhead. Root observation remains60 seconds.
+Timeout or interruption retains the child and evidence without signals, retry
+or release; an unsuccessful child result likewise cannot grant acceptance.
+
+All15 focused HOST methods pass using real private file/lock fixtures and
+synthetic original guards/children. No actual parent dispatch, source freeze,
+admission, service or VM operation occurred. Fresh binder and complete normal/
+failed settlement integration remain unfinished. The original16 dirty bodies
+and historical full-suite independent-provider gate failure are unchanged.
+
+See the [supervisor HOST receipt](test-evidence/editor_pointer_dispatch_host_20261022.json).
+
+
 ## Probe staging and stopped cleanup entrypoints —22 October2026
 
 The parent now accepts a distinct stage-plan scope: one probe stage under its

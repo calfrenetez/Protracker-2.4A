@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only source for one finite passive-probe stage-plan parent supervisor; no live dispatch",
+  "host": {
+    "methods": 15,
+    "unittestSeconds": 0.213,
+    "elapsedSeconds": 0.32531762500002515,
+    "returncode": 0
+  },
+  "behavior": [
+    "Requires the exact stage-plan binding, frozen dispatcher, original current READY owner and private lease.",
+    "One parent child receives only its actual private lease; inherited target authority refuses.",
+    "Existing command lock is checked and released before spawning so the original parent acquires it independently.",
+    "Supervisor720 seconds includes stage60, unchanged blank300, unchanged mouse240 and120 overhead; Root60 is unchanged.",
+    "Timeout, interruption, spawn failure or nonzero child preserves intent and evidence without signal, retry or release."
+  ],
+  "coverage": [
+    "Private files and lock operations are real; original guard and parent child are fake.",
+    "Wrong lease/HOLD, source drift, unfrozen source, alternate/dangling output, symlink window, inherited authority and shadowed original imports refuse.",
+    "Actual alternate interpreter refuses before application imports; successful, nonzero, timeout, interruption and spawn-error paths retain evidence."
+  ],
+  "protectedDirtyBodiesUnchanged": 16,
+  "withheld": {
+    "realParentDispatchOrTargetOperation": false,
+    "actualSourceFreezeOrAdmission": false,
+    "freshBinderOrFullSettlementIntegration": false,
+    "serviceRestartOrGuardRelease": false,
+    "fullHostSuiteRerun": false,
+    "livePointerClickPhysicalOrListeningAcceptance": false
+  }
+}

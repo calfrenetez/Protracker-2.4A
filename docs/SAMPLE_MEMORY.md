@@ -1,5 +1,33 @@
 # Sample memory and playback ownership
 
+## Bounded saved-image cursor inspection —22 October2026
+
+A new HOST utility reads a bounded saved PNG pair and reports a single changed
+cursor-colour component in original image pixels, with a small ASCII grid.
+Nine focused checks pass, including ambiguous components and invalid image,
+region, palette and resource-bound refusals. The actual retained r3 pair
+completes in0.0924s and reports176 painted pixels with first colour295,463.
+That observed duration is not a future deadline guarantee. The CLI requires
+Pillow; its packed-RGB core and focused tests do not.
+
+The utility neither establishes an OS hotspot nor accepts an expected target,
+publishes a Root observation, authorizes input or applies an offset. Root must
+still view the exact current image separately. This prepares faster inspection
+without replacing the original finite observation gate.
+
+Four selected instruction ranges from the exact configured Amiberry binary
+were also retained and reviewed. They contain integer/HiDPI conversions,
+source-origin/resolution branches and conditional hotspot compensation.
+Their runtime values were not recorded in the previous editor test, so the
+one-pixel difference remains unexplained. No emulator, service or physical
+operation occurred, and actual position/click acceptance is unchanged.
+
+See the [focused HOST and selected static evidence](test-evidence/editor_cursor_inspection_host_20261022.json)
+and the utility at tools/editor_cursor_pixels.py. A future source-bound passive
+guest observation in the same editor state can distinguish its true pointer
+coordinate from the painted sprite; no new runtime admission is implied.
+
+
 ## Real emulator mouse move; click remains unqualified —22 October2026
 
 A distinct r3 test completed the exact candidate readback, blank editor launch

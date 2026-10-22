@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only painted-cursor inspection and exact configured emulator selected static routes",
+  "host": {
+    "methodsPassed": 9,
+    "seconds": 0.001,
+    "finalSourceBodyPinsEqualBeforeAfter": true,
+    "checks": [
+      "Connected boundary/grid in original pixels",
+      "Unchanged colours ignored",
+      "Disconnected/diagonal components refuse",
+      "Off-region/unlisted colours not fitted",
+      "Invalid dimensions, lengths, rectangle, palette and budgets refuse",
+      "Expected hotspot/approval cannot be supplied"
+    ],
+    "savedHistoricalPairCLISeconds": 0.09239979200356174,
+    "firstPaintedPixel": [
+      295,
+      463
+    ],
+    "paintedBounds": [
+      295,
+      463,
+      22,
+      22
+    ],
+    "changedPalettePixels": 176,
+    "osHotspotEstablished": false,
+    "clickAuthorized": false,
+    "rootObservationPublished": false,
+    "targetCalls": 0,
+    "pngCLIRequiresPillow": true,
+    "coreRequiresPillow": false,
+    "sources": {
+      "tools/editor_cursor_pixels.py": {
+        "bytes": 6985,
+        "sha256": "c0d6db31c84d2e8f62df931740e8637fd41bf9bd7b70c7d3a4118ddf272732c9"
+      },
+      "tests/test_editor_cursor_pixels.py": {
+        "bytes": 4370,
+        "sha256": "232825ae2c241f3d9ff0a1c667cdaf654890fc2581af3f15fa731a39a1b1672a"
+      }
+    }
+  },
+  "selectedBinaryStaticReview": {
+    "binaryBytes": 46443704,
+    "binarySHA256": "0b2011f7b7e5ba5bc60adf6ac925a202bf97f75e97ac5c8192953e784e4acf3d",
+    "selectedRanges": 4,
+    "ranges": [
+      "native coordinate conversion",
+      "pointer hotspot/residual and last-absolute getter",
+      "mousehack helper",
+      "SDL mouse-motion handler"
+    ],
+    "rawSelectedInstructionBytesRetained": true,
+    "originalFullFactsEqualBeforeAfter": true,
+    "observations": [
+      "Integer truncation and conditional HiDPI scaling",
+      "Native buffer source-origin and resolution conversion",
+      "Conditional host hotspot and native-origin compensation before delivered coordinates"
+    ],
+    "liveInternalBranchValuesKnown": false,
+    "wholeSourceTreeParityClaimed": false,
+    "onePixelCauseEstablished": false,
+    "binaryExecuted": false
+  },
+  "qualification": {
+    "actualMouseResultUnchanged": "One real move previously completed; exact position and click selection remain unqualified.",
+    "wholeHostSuiteRerun": false,
+    "empiricalOffsetOrToleranceApplied": false,
+    "candidateOrInstalledSourceChanged": false,
+    "emulatorOrServiceLifecycleActions": 0,
+    "physicalOrListeningAcceptance": false
+  }
+}

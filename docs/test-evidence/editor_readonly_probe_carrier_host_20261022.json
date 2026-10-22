@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Distinct read-only passive V2 source freeze, one-shot carrier and stopped immutable-input retention; HOST only",
+  "sourceFreeze": {
+    "selectedModulePaths": 23,
+    "distinctRootReviewedPlanAndFrozenStateRequired": true,
+    "exactReadonlyPreparationBound": true,
+    "fullOriginalLifecycleSourceSelectionRequired": true,
+    "qualifiedSavedFileHelperCoreRequiredBeforeUse": true,
+    "originalApprovedReadinessUnderBothOriginalLocksRequired": true,
+    "newExclusiveFreezeNoRuntimeWindowCreated": true,
+    "runtimeAdmissionCreated": false
+  },
+  "carrier": {
+    "distinctChildAdmissionRequired": true,
+    "sameOriginalOwnerAndFrameRequired": true,
+    "exactReadonlyEndpoint": "PTProbe:PTEditorPointerV2",
+    "originalCompleteGuestReadbackBeforeNativeExecution": true,
+    "maximumReadbacks": 1,
+    "maximumNativeExecutions": 1,
+    "wholeSeconds": 20,
+    "scriptSeconds": 10,
+    "wholeBudgetIncludesInputValidation": true,
+    "activeCompletePairedProfileAndAllPreparedInputPinsRechecked": true,
+    "sameWindowEvidenceEndpointRequired": true,
+    "originalParserAndNonAuthorityResultRetained": true,
+    "metadataToleranceOrRetryAdded": false
+  },
+  "stoppedInput": {
+    "originalIndependentStoppedOwnerAndCommandLockRequired": true,
+    "normalAndFailedModesCovered": true,
+    "inputAndPreparationCopiedBeforeFacts": true,
+    "originalReadonlyVolumeRetained": true,
+    "inputFilesOrDirectoriesRemoved": 0,
+    "retainedInputCannotImpersonatePreservedCopy": true,
+    "postRestorationRetentionFactsAreNotRuntimeAdmission": true,
+    "guardReleaseImplemented": false
+  },
+  "host": {
+    "methods": 139,
+    "unittestSeconds": 3.755,
+    "elapsedSeconds": 3.9575645830009307,
+    "returncode": 0,
+    "realPrivateFilesAndInputPins": true,
+    "ownerFrameServiceReadinessIOAndActiveProfileAreSynthetic": true,
+    "initial14Then119And120PassingStreamsRetained": true,
+    "legacyProbeMouseParentBindingAndPreparationChecksPass": true
+  },
+  "preserved": {
+    "originalDirtyBodies": 16,
+    "rawProtectedRecords": 68,
+    "installedImmutableSourceRecords": 10,
+    "excludedVendorBodyOpenAttempts": 0,
+    "legacyNativeAndGUIBehaviorUnchanged": true
+  },
+  "liveBoundary": {
+    "productionFreezeAdmissionOrLeaseCreated": false,
+    "sharedServiceOrGuardMutation": false,
+    "canonicalProfileWrite": false,
+    "guestNativeProbeExecution": false,
+    "mouseOrPhysicalAction": false,
+    "newReadonlyMountQualified": false,
+    "oldFailedCaseOrRecoveryReplayed": false,
+    "stagingMetadataCauseEstablished": false,
+    "existingParentAndActualStartBinderStillRejectNewChildOrFreeze": true,
+    "historicalFullSuiteFailureUnchanged": true
+  },
+  "next": "Wire distinct actual-start binding, freshly reviewed paired-profile blank capture and Root observation source, guarded parent/mouse adapter, dispatcher and complete stopped restoration/release. Validate readonly input before every GUI action. Only then consider a fresh admitted live test; no restart authorization remains."
+}

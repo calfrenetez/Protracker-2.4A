@@ -26,6 +26,7 @@ from editor_capture_volume import profile_append
 from editor_probe_namespace import save, directory_ref
 
 PLAN = 'ROOT_REVIEWED_PASSIVE_V2_FRESH_SOURCE_PLAN_NOT_FROZEN'
+READONLY_PLAN = 'ROOT_REVIEWED_READONLY_PASSIVE_V2_FRESH_SOURCE_PLAN_NOT_FROZEN'
 BIND = 'ROOT_ACCEPTED_PASSIVE_V2_ACTUAL_START_BINDING_ONLY'
 EXTRA = ('fresh_preservation', 'canonical_profile_session_files', 'service_readiness')
 LIFECYCLE = ('editor_pointer_binding', 'editor_pointer_parent', 'editor_pointer_dispatch',
@@ -148,6 +149,37 @@ def freeze_sources(plan, dependencies=None):
         return save(session / 'SOURCE-FREEZE.json', record)
 
 
+def freeze_readonly_sources(plan, dependencies=None):
+    """Distinct 23-module source freeze; no runtime binding or target action."""
+    parent.need(plan['state'] == READONLY_PLAN and plan['acceptedByRoot'] is True,
+                'Actual newly reviewed complete read-only source plan required')
+    path = str(parent.TOOLS / 'editor_readonly_probe.py')
+    ro = checked_module('editor_readonly_probe', path, plan['sources'])
+    session, window = ro.source_shape(plan)
+    required = {str(parent.TOOLS / (n + '.py')) for n in LIFECYCLE}
+    required |= {str(session / n) for n in ('SOURCE-PROVENANCE.json', 'publish_mouse_observation.py', 'clock_runtime.py')}
+    parent.need(required <= set(plan['sources'])
+                and parent.digest(parent.pinned(plan['sources'][str(session / 'canonical_profile_session_files.py')]))
+                    == SAVED_FILE_HELPER, 'Complete read-only lifecycle and unchanged saved-file helper required')
+    prepared = ro.volume.verify(plan['readonlyPreparationRef'])
+    parent.need(prepared['preparationSource'] == plan['sources'][str(parent.TOOLS / 'editor_probe_volume.py')]
+                and not os.path.lexists(window) and not os.path.lexists(session / 'SOURCE-FREEZE.json'),
+                'Same selected input preparation and fresh freeze/window required; no replay')
+    d = dependencies if dependencies is not None else {
+        n: checked_module(n, plan['extraModulePaths'][n], plan['sources']) for n in EXTRA}
+    with d['canonical_profile_session_files'].locks():
+        d['service_readiness'].require_human_approved_service(
+            ['--service-readiness-ref', json.dumps(plan['serviceReadinessRef'])])
+        ro.source_shape(plan); ro.volume.verify(plan['readonlyPreparationRef'])
+        parent.need(not os.path.lexists(window) and not os.path.lexists(session / 'SOURCE-FREEZE.json'),
+                    'Read-only freeze/window appeared before publication')
+        record = {'state': ro.FROZEN_STATE, 'sources': plan['sources'],
+            'modulePaths': plan['modulePaths'], 'extraModulePaths': plan['extraModulePaths'],
+            'newWindow': str(window), 'actualApprovedServiceReadinessRef': plan['serviceReadinessRef'],
+            'readonlyPreparationRef': plan['readonlyPreparationRef'], 'targetOperations': 0, 'runtimeAdmission': False}
+        return save(session / 'SOURCE-FREEZE.json', record)
+
+
 def validate_actual(record):
     parent.need(record['state'] == BIND and record['acceptedByRoot'] is True
                 and record['allowedActions'] == {'guestCPUAdmissions': 1, 'bindingWrites': 2,
@@ -267,10 +299,13 @@ def execute(record, dependencies=None):
 
 def main():
     os.umask(0o077); sys.dont_write_bytecode = True
-    parent.need(len(sys.argv) == 3 and sys.argv[1] in ('--freeze-plan-ref', '--actual-binding-ref'),
+    parent.need(len(sys.argv) == 3 and sys.argv[1] in
+                ('--freeze-plan-ref', '--freeze-readonly-plan-ref', '--actual-binding-ref'),
                 'Actual newly reviewed freeze or start-binding record required')
     ref = json.loads(sys.argv[2]); record = json.loads(parent.pinned(ref))
-    result = freeze_sources(record) if sys.argv[1] == '--freeze-plan-ref' else execute(record)
+    if sys.argv[1] == '--freeze-readonly-plan-ref': result = freeze_readonly_sources(record)
+    elif sys.argv[1] == '--freeze-plan-ref': result = freeze_sources(record)
+    else: result = execute(record)
     print(json.dumps({'ref': result, 'applicationLaunches': 0, 'lifecyclePending': True}))
 
 

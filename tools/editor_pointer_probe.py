@@ -72,6 +72,26 @@ class EditorPointerProbe:
         self.io = io if io is not None else OriginalFrameProbeIO(original, binding['ownerRunID'])
         self.started = False
 
+    def validate_endpoint(self):
+        b = self.binding
+        directory = 'pt24g-editor-pointer-' + b['ownerRunID']
+        need(b['guestCandidate'] == 'Dev:Tests/' + directory + '/PTEditorPointerV2'
+             and b['stagedCandidate']['path']
+             == str(HARNESS / 'runtime/Dev/Tests' / directory / 'PTEditorPointerV2'),
+             'Separate owner-bound probe namespace required')
+
+    def validate_input_namespace(self):
+        b = self.binding
+        from editor_probe_namespace import validate_stage
+        self.original.pinned(b['namespaceStageRef'])
+        stage = validate_stage(b, b['namespaceStageRef'])
+        need(stage['stagedCandidate'] == b['stagedCandidate'],
+             'Actual owned stage receipt must bind the execution endpoint')
+
+    def validate_output(self, out):
+        need(out.is_absolute() and '..' not in out.parts and not out.exists()
+             and not out.is_symlink(), 'Fresh separate probe evidence directory required')
+
     async def run(self, out, parent_deadline):
         need(not self.started, 'Never replay a passive pointer probe')
         self.started = True
@@ -82,14 +102,9 @@ class EditorPointerProbe:
         need(type(b['ownerRunID']) is str
              and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,95}', b['ownerRunID']),
              'Explicit safe original owner required')
-        directory = 'pt24g-editor-pointer-' + b['ownerRunID']
-        need(b['guestCandidate'] == 'Dev:Tests/' + directory + '/PTEditorPointerV2'
-             and b['stagedCandidate']['path']
-             == str(HARNESS / 'runtime/Dev/Tests' / directory / 'PTEditorPointerV2'),
-             'Separate owner-bound probe namespace required')
+        self.validate_endpoint()
         out = Path(out)
-        need(out.is_absolute() and '..' not in out.parts and not out.exists()
-             and not out.is_symlink(), 'Fresh separate probe evidence directory required')
+        self.validate_output(out)
 
         def current():
             self.original.owner(b['ownerRunID'])
@@ -109,11 +124,8 @@ class EditorPointerProbe:
                  'Actual private V2 compile receipt association required')
             need(digest(self.original.pinned(b['editorCandidate'])) == EDITOR,
                  'Exact current editor candidate required')
-            from editor_probe_namespace import validate_stage
-            self.original.pinned(b['namespaceStageRef'])
-            stage = validate_stage(b, b['namespaceStageRef'])
-            need(stage['stagedCandidate'] == b['stagedCandidate'],
-                 'Actual owned stage receipt must bind the execution endpoint')
+            self.validate_input_namespace()
+            need(self.original.clock() < deadline, 'Passive probe deadline exhausted during input validation; no replay')
             return native
 
         async def bounded(call):

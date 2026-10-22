@@ -1,5 +1,46 @@
 # Sample memory and playback ownership
 
+## Read-only V2 carrier and input retention —22 October2026, HOST only
+
+A distinct source-plan/freezer now selects23 canonical module paths, original
+private helpers and complete lifecycle sources. It binds the exact read-only
+preparation, verifies the qualified saved-file helper before use, and requires
+current original approved readiness under both original locks. Exclusive source
+publication creates neither a runtime window nor an admission or lease.
+
+The new read-only probe child requires its distinct freeze/admission, exact
+PTProbe endpoint, same original owner/FRAME, prepared source/native/editor
+associations and actual complete paired profile. It reuses the original one-shot
+carrier, complete guest readback before native execution, parser,20/10-second
+budgets and non-authority result. Input validation now also finishes inside the
+whole budget. The legacy Dev endpoint/namespace checks remain the default.
+Tracking flags, directory times, source/profile drift, owner loss, cancellation
+and bad readback still refuse without retry. Evidence stays in the exact window.
+
+Stopped-only helpers copy both probe and preparation evidence while retaining
+the original read-only volume unchanged. Normal READY and failed HOLD require
+the caller's independent stopped-owner proof and actual existing command FD.
+Fresh retention facts remain verifiable after separate profile restoration;
+they grant no runtime admission or guard release. Input deletion count is zero.
+A retained source cannot impersonate its preserved evidence copy.
+
+All139 focused HOST methods pass. Files and input pins are real private fixtures;
+owner/FRAME, service readiness, active profile and target IO are synthetic.
+Legacy probe/mouse/parent/binding/preparation checks still pass. Original16
+bodies and raw68 protected records plus ten installed immutable-source records
+remain exact; excluded vendor body-open attempts0. No production freeze,
+lease, service/guard change, canonical write, guest/mouse/physical action or
+failed transaction replay occurred. Read-only mounting and mouse qualification
+remain unproven; the previous metadata cause remains unresolved.
+
+Next: distinct actual-start binder and executable parent integration, including
+a fresh reviewed paired-profile blank capture/publisher source, validating the
+read-only input before every GUI action, dispatcher and complete stopped
+restoration/release. Existing executable parent and actual-start binder still
+reject the new child/freeze. No new restart authority exists.
+
+See the [read-only carrier HOST receipt](test-evidence/editor_readonly_probe_carrier_host_20261022.json).
+
 ## Isolated read-only probe input preparation —22 October2026, HOST only
 
 A new host-only preparer builds a separate sole-file PTProbe input under a fresh

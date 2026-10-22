@@ -1,5 +1,31 @@
 # Sample memory and playback ownership
 
+## Passive same-editor pointer observer preparation —22 October2026
+
+The old Workbench probe requires a nonempty first-window title; the current
+editor supplies no WA_Title for its borderless backdrop. A separate V2 observer
+now copies existing window fields even when its title is absent or empty, and
+records the screen's DefaultTitle separately. It copies under LockIBase and
+formats output only after unlocking and closing the library. It creates no
+window, opens no input device and sends no input events or MMIO.
+
+The new15232-byte private candidate compiles with the established strict
+m68000/soft-float flags in0.1067s. All67 discovered source/header bodies and
+seven selected runtime inputs retain their exact bodies/full facts through
+compilation; that selected runtime list is not a full link map. The V2 parser
+passes11 synthetic HOST methods for exact editor identity, untitled window
+states, coordinate coherence and malformed/wrong-screen/modal/range refusals.
+
+No guest execution or new target admission occurred. The old observer/parser,
+editor candidate and installed harness remain unchanged. A distinct finite
+same-frame adapter and parent still need implementation and HOST composition
+before one exact-byte probe readback/execution can be admitted in the editor.
+Original Root60-second, ownership, focus/button and geometry guards remain.
+
+See the [private compile and HOST preparation receipt](test-evidence/editor_passive_pointer_preparation_20261022.json).
+This preparation gives no pointer-hotspot, click, physical or listening acceptance.
+
+
 ## Bounded saved-image cursor inspection —22 October2026
 
 A new HOST utility reads a bounded saved PNG pair and reports a single changed

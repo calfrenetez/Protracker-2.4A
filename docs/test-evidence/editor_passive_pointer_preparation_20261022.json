@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST/private-native-compile preparation for passive same-editor pointer observation; no execution or target admission",
+  "finding": "The old Workbench observer requires a nonempty first-window title. The current editor supplies no WA_Title. The new V2 observer explicitly records absent and empty window titles.",
+  "newObserver": {
+    "binary": {
+      "bytes": 15232,
+      "sha256": "344b2f009f7674a4cb0ffcbaa6a480c442dd0988acacb3f4a04d4b4f209804bb"
+    },
+    "source": {
+      "bytes": 4461,
+      "sha256": "059067346eb818a5bcb220163131aded2a84172182483293086b6a8d397bc938"
+    },
+    "privateCompileSeconds": 0.10674816699611256,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fbbb=-"
+    ],
+    "discoveredSourceAndHeaderBodies": 67,
+    "selectedRuntimeInputs": 7,
+    "inputBodiesAndFullFactsEqualBeforeAfter": true,
+    "selectedRuntimeListNotFullLinkMap": true,
+    "readsExistingScreenAndWindowOnly": true,
+    "copiesUnderLockIBase": true,
+    "formatsOnlyAfterUnlockAndLibraryClose": true,
+    "opensWindowOrInputDevice": false,
+    "sendsInputEventsOrMMIO": false,
+    "screenIdentityUsesDefaultTitleSeparately": true,
+    "nullEmptyAndTruncatedTitlesDistinct": true,
+    "actualNativeExecution": false
+  },
+  "parserHOST": {
+    "methodsPassed": 11,
+    "seconds": 0.003,
+    "returncode": 0,
+    "syntheticAcceptancesAreNotRuntimeAdmission": true,
+    "checks": [
+      "Explicit absent and empty window title handling",
+      "Exact optional OK envelope and two canonical bounded ASCII records",
+      "640x512 custom HIRES LACE editor identity, borderless backdrop and coherent screen/window coordinates",
+      "Wrong screen, titled modal, borders, origin, flags, dimensions or pointer relation refuse",
+      "Malformed/truncated titles, duplicate/partial/noisy/failure records and invalid numeric bounds refuse",
+      "No input-authority constructor override"
+    ]
+  },
+  "preserved": {
+    "oldWorkbenchObserverAndParserUnchanged": true,
+    "currentEditorCandidateAndInstalledHarnessUnchanged": true,
+    "originalUnrelatedDirtyFilesUnchanged": true
+  },
+  "withheld": {
+    "parentAndLifecycleAdmissionPresent": false,
+    "newProbeGuestReadbackOrExecution": false,
+    "pointerHotspotOrMappingAccepted": false,
+    "clickSelectionAccepted": false,
+    "physicalOrListeningAcceptance": false,
+    "wholeHostSuiteRerun": false
+  },
+  "durableManifestMembers": 61
+}

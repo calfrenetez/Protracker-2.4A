@@ -1,5 +1,46 @@
 # Sample memory and playback ownership
 
+## Fresh bound emulator case and stopped restoration —22 October2026
+
+A newly authorized single idle-service restart, complete source freeze,
+reservation, original startup and actual-start binding succeeded. The complete
+346404-byte editor guest readback matched. Root viewed the blank editor and
+published the initial observation within60seconds. One button-free move was
+sent; zero clicks, keys or playback actions followed.
+
+The passive V2 probe refused its initial strict staged-file reference. Its
+bytes, inode, owner, mode, size and mtime were unchanged; UF_TRACKED and ctime
+changed. The same sole-file directory had time drift. The cause is unproven.
+No probe readback/native execution, after-move image, pointer equality or
+selection acceptance was established. The failed transaction was not replayed.
+
+The standard full settlement was not attempted against that known stale pin.
+A distinct stopped-only custody admission preserved the original stage receipt
+and actual current references, allowing only the exact disclosed metadata delta
+for preservation/removal after positively verified own stop. It never waived a
+runtime check. Fourteen private HOST methods passed, including actual original
+saved-file functions and public guard release in a failed fixture. The live
+stopped actor then preserved both namespaces, restored three original host roles
+and all31 app-data bodies/mtimes, and verified one original public release and
+its archived failure hold. Independent subsequent idle/restoration checks passed.
+All68 protected records plus ten installed immutable-source records remained
+exact; ten excluded vendor bodies were metadata-only with zero open attempts.
+
+Initial probe preflight refusals now also retain their own result file with
+zero readback/execution counters. The two regression checks reproduce missing
+receipts against the archived old source; all127 focused integration methods
+pass after the correction. Strict metadata, owner and deadline checks remain.
+The receipt correction has not been run in the emulator. All51 frozen inputs
+were archived before repository edits; unrelated16 dirty bodies remain exact.
+
+The one-restart authorization is consumed. Fresh staging provenance and a
+reviewed source correction remain before another live case. Native pointer,
+click, physical/listening and whole-application acceptance remain outstanding;
+the historical full-suite gate failure is unchanged. Earlier entries describe
+their historical HOST checkpoints, not current availability or authorization.
+
+See the [redacted emulator and restoration receipt](test-evidence/editor_pointer_staged_metadata_20261022.json).
+
 ## Fresh binding and full restoration/release integration —22 October2026
 
 The new source-freeze and actual-start binder keep the original21 selected

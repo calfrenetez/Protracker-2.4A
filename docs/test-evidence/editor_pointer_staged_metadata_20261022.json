@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Fresh bound emulator case, preserved staged-metadata refusal, verified distinct stopped-only restoration/release, and initial probe failure receipt correction",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "emulator": {
+    "freshHumanApprovedServiceRestarts": 1,
+    "restartAuthorizationConsumed": true,
+    "originalStartupSucceeded": true,
+    "freshSourceFreezeAndActualStartBindingPassed": true,
+    "completeEditorGuestReadbackMatched": true,
+    "blankEditorActuallyViewed": true,
+    "beforeMoveObservationPublishedInside60Seconds": true,
+    "buttonFreeMoves": 1,
+    "clicks": 0,
+    "keysAndPlayback": 0,
+    "result": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+    "failure": "Initial V2 staged-input full-fact pin refused before probe guest readback or native execution.",
+    "stagedFile": {
+      "bodyAndIdentityEqual": true,
+      "changedFacts": [
+        "st_ctime_ns",
+        "st_flags"
+      ],
+      "flagsTransition": {
+        "before": 0,
+        "after": 64,
+        "name": "UF_TRACKED"
+      },
+      "directoryChangedFacts": [
+        "st_ctime_ns",
+        "st_mtime_ns"
+      ],
+      "causeEstablished": false
+    },
+    "afterMoveImageOrNativePointerSnapshotAvailable": false,
+    "selectionOrMappingAccepted": false,
+    "failedTransactionReplayed": false
+  },
+  "restoration": {
+    "standardFullSettlementAttempted": false,
+    "reason": "Known original strict stage reference no longer matched; original runtime admission not waived.",
+    "distinctStoppedOnlyCustodyAdmission": true,
+    "originalStageAndActualCustodyReferencesPreserved": true,
+    "positivelyOwnedSIGTERM": 1,
+    "genuineBridgeEOFObserved": true,
+    "probeAndApplicationNamespacesPreservedBeforeRemoval": true,
+    "originalHostRolesRestored": 3,
+    "appDataBodiesAndOriginalMtimesVerified": 31,
+    "originalPublicGuardReleaseAndArchiveVerified": true,
+    "archivedFailureHolds": 1,
+    "independentCurrentIdleVerificationPassed": true,
+    "guardResetOrHistoricalAuthorityReconstructed": false
+  },
+  "sourceCorrection": {
+    "behavior": "Initial exact-input or owner refusal now retains a probe result with zero readback/execution counters.",
+    "sameStrictChecksBeforeTargetIO": true,
+    "runtimeMetadataToleranceAdded": false,
+    "liveExecuted": false
+  },
+  "host": {
+    "focusedIntegration": {
+      "methods": 127,
+      "returncode": 0,
+      "unittestSeconds": 2.764
+    },
+    "distinctStoppedCustodyRecovery": {
+      "methods": 14,
+      "returncode": 0,
+      "actualOriginalGuardAndSavedFileFunctionsInPrivateFixture": true
+    },
+    "oldSourceRegression": {
+      "methods": 2,
+      "errors": 2,
+      "reason": "Original source omitted result file for initial refusals; retained before fix."
+    },
+    "initialFixtureFailureRetained": true,
+    "fullHostSuiteRerun": false,
+    "historicalIndependentProviderGateFailureUnchanged": true
+  },
+  "preservation": {
+    "all51FrozenSourcesArchivedBeforeRepositoryEdits": true,
+    "durableInitialMembers": 208,
+    "leaseTokenCopiedOrPublished": false,
+    "unrelatedDirtyBodies": 16,
+    "protectedPathsCompared": 68,
+    "installedImmutableSourcesCompared": 10,
+    "explicitUnselectedMetadataOnlyVendorFiles": 10,
+    "unselectedVendorBodyOpenAttempts": 0
+  },
+  "acceptance": {
+    "wholeApplicationABI": false,
+    "nativePointerEquality": false,
+    "row4Channel1MouseSelection": false,
+    "physicalHardware": false,
+    "humanListening": false
+  },
+  "next": "Determine and correct the staging metadata transition under a fresh reviewed source plan; do not replay this case or consume another restart without new authorization."
+}

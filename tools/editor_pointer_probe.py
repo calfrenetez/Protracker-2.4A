@@ -125,13 +125,15 @@ class EditorPointerProbe:
             current()
             return value
 
-        native = current()
-        need(bool(b['sourcePins']), 'Actual parent source pins required')
         out.mkdir(mode=0o700)
         result = {'state': 'PASSIVE_EDITOR_PROBE_STARTED', 'readbackAttempts': 0,
                   'executionAttempts': 0, 'retryAllowed': False, 'inputAuthorized': False,
                   'hotspotMappingAccepted': False, 'lifecyclePending': True}
         try:
+            # Retain a zero-dispatch receipt when the initial exact input or
+            # owner check refuses. The same strict checks precede target I/O.
+            native = current()
+            need(bool(b['sourcePins']), 'Actual parent source pins required')
             path = out / 'probe-guest-readback.bin'
             self.original.save(out / 'readback-intent.json',
                                {'guestCandidate': b['guestCandidate'], 'localPath': str(path),

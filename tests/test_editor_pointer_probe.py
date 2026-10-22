@@ -8,7 +8,9 @@ from contextlib import asynccontextmanager
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
+import stat
 import sys
 import tempfile
 import time
@@ -178,6 +180,39 @@ class PointerProbeTests(unittest.TestCase):
         with self.assertRaises(RuntimeError): self.run_probe()
         self.assertEqual(self.api.events, [])
 
+    def test_initial_real_metadata_drift_retains_zero_dispatch_receipt(self):
+        import editor_pointer_parent as files
+        if not hasattr(stat, 'UF_TRACKED') or not hasattr(os, 'chflags'):
+            self.skipTest('Darwin tracked-file metadata regression')
+        harness = Path(self.temp.name) / 'harness'
+        staged = harness / 'runtime/Dev/Tests/pt24g-editor-pointer-fixture-owner/PTEditorPointerV2'
+        staged.parent.mkdir(parents=True); staged.write_bytes(NATIVE)
+        before = files.read(staged)[1]
+        b = copy.deepcopy(self.b); b['stagedCandidate'] = before
+        original_pinned = self.api.pinned
+        self.api.pinned = lambda pin: files.pinned(pin) if pin['path'] == str(staged) else original_pinned(pin)
+        os.chflags(staged, stat.UF_TRACKED)
+        self.assertEqual(files.read(staged)[0], NATIVE)
+        with patch.object(probe, 'HARNESS', harness):
+            carrier = probe.EditorPointerProbe(b, self.api, io=self.io)
+            with self.assertRaisesRegex(RuntimeError, 'pinned input changed'):
+                asyncio.run(carrier.run(self.out, 200.))
+            result = json.loads((self.out / 'result.json').read_text())
+            self.assertEqual(result['state'], 'PASSIVE_EDITOR_PROBE_FAILED_RETAINED')
+            self.assertEqual((result['readbackAttempts'], result['executionAttempts']), (0, 0))
+            self.assertFalse(result['hotspotMappingAccepted']); self.assertFalse(result['retryAllowed'])
+            self.assertEqual(self.api.events, [])
+            with self.assertRaisesRegex(RuntimeError, 'Never replay'):
+                asyncio.run(carrier.run(self.out, 200.))
+
+    def test_owner_loss_before_preflight_retains_zero_dispatch_receipt(self):
+        self.api.alive = False
+        with self.assertRaisesRegex(RuntimeError, 'owner loss'): self.run_probe()
+        result = json.loads((self.out / 'result.json').read_text())
+        self.assertEqual((result['readbackAttempts'], result['executionAttempts']), (0, 0))
+        self.assertEqual(result['state'], 'PASSIVE_EDITOR_PROBE_FAILED_RETAINED')
+        self.assertEqual(self.api.events, [])
+
     def test_wrong_guest_or_host_namespace_refuses_without_dispatch(self):
         for key in ('guestCandidate', 'stagedCandidate'):
             with self.subTest(key=key):
@@ -197,7 +232,10 @@ class PointerProbeTests(unittest.TestCase):
                 self.api.inputs[pin['path']] = altered
                 self.b[key] = ref(pin['path'], altered)
                 carrier = probe.EditorPointerProbe(self.b, self.api, io=self.io)
-                with self.assertRaises(RuntimeError): asyncio.run(carrier.run(self.out, 200.))
+                out = self.out.with_name(self.out.name + '-' + key)
+                with self.assertRaises(RuntimeError): asyncio.run(carrier.run(out, 200.))
+                result = json.loads((out / 'result.json').read_text())
+                self.assertEqual((result['readbackAttempts'], result['executionAttempts']), (0, 0))
                 self.api.inputs[pin['path']] = body; self.b[key] = pin
         self.assertEqual(self.api.events, [])
 

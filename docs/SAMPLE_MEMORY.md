@@ -9190,3 +9190,27 @@ physical disconnection and endpoint return remain unresolved: the installed guar
 has no supported target recovery command while held. No cleanup/release or
 physical application/AmiGUS/listening acceptance is claimed. See the
 [redacted transfer and prelaunch-failure receipt](test-evidence/physical_gui_transfer_prelaunch_timeout_20261020.json).
+
+
+### Native focus diagnosis and finite host Raise preparation —22 October2026
+
+Four exact production focus functions were extracted from the pinned configured
+Amiberry source archive and passed2596 HOST assertions under ASan/UBSan. Read-only
+disassembly of the exact installed fixed binary confirms the reviewed predicate:
+positive focus plus either captured mouse or tablet/MAGIC/live guest heartbeat.
+The retained aggregate failure cannot identify the individual failed term. A
+window Raise alone does not prove readiness; the outside-transaction MIDDLE state
+is not the temporary BOTH configuration used by the original GUI service.
+
+70 focused Python HOST methods qualify offline diagnosis, the finite Root Raise
+gate, original-observer adapter, fresh lifecycle and specific service actor. The
+gate is mandatory when selected by the fresh binder source freeze. It holds
+both original locks, rechecks current ownership/process/socket/service
+and immutable sources, accepts only actual Root before/action/after evidence,
+and refuses replay. It issues no UI or guest input itself and grants no native
+readiness. Fresh registered capture and both original GUI/native guards remain
+mandatory. Fresh private readonly inputs and a49-pin/23-module source selection
+are prepared; no source freeze, new service approval, emulator launch or target
+operation occurred. Full original restoration/release remains part of the next
+case. Initial source-copy and count-receipt corrections are retained privately.
+See [the qualification and limits](test-evidence/editor_native_focus_diagnosis_20261022.json).

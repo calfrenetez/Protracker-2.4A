@@ -1,0 +1,73 @@
+{
+  "state": "HOST_FOCUS_DIAGNOSIS_AND_FINITE_HOST_RAISE_PREPARATION_ONLY",
+  "date": "2026-10-22",
+  "priorCompletedRun": "editor_readonly_focus_refusal_full_release_20261022.json",
+  "installedBinary": {
+    "bytes": 46443704,
+    "sha256": "0b2011f7b7e5ba5bc60adf6ac925a202bf97f75e97ac5c8192953e784e4acf3d"
+  },
+  "productionSourceCommit": "8dec73501b5d2c2b3a6859b1d30a25291febb491",
+  "evidence": {
+    "actualProductionFunctionsExtracted": 4,
+    "actualSourceHostChecks": 2596,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "installedBinaryDisassembledWithoutExecution": true,
+    "wholeBuildReproducibilityClaimed": false,
+    "focusedPythonHostMethods": 70,
+    "groups": {
+      "offlineDiagnosis": 8,
+      "finiteRaiseGate": 12,
+      "originalObserverAdapter": 8,
+      "specificServiceActor": 12,
+      "freshRootLifecycle": 8,
+      "readonlyLifecycleCompatibility": 22
+    }
+  },
+  "finding": {
+    "nativePredicate": "positive focus AND (captured mouse OR tablet+MAGIC+live guest heartbeat)",
+    "outsideTransactionMiddleMayReportFalse": true,
+    "individualFailedTermObserved": false,
+    "rootCauseEstablished": false,
+    "hostRaiseAloneProvesReadiness": false
+  },
+  "preparedNextCase": {
+    "freshPrivateInputs": true,
+    "sourceSelectionPins": 49,
+    "modules": 23,
+    "sourceFreezeCreated": false,
+    "serviceReadinessPending": true,
+    "hostRaisesMaximum": 1,
+    "hostRaiseHoldsBothOriginalLocks": true,
+    "currentOwnerProcessSocketServiceAndSourcesRechecked": true,
+    "actualRootBeforeActionAfterEvidenceRequired": true,
+    "automaticNativeUIActions": 0,
+    "guestInputFromRaiseGate": 0,
+    "originalGUIReadinessAndNativeCallbackStillRequired": true,
+    "freshRegisteredCaptureBeforeGuestInputStillRequired": true,
+    "originalFullRestorationAndPublicReleaseStillRequired": true,
+    "selectedGateIsMandatoryBeforeOriginalActualBinder": true
+  },
+  "preservedPreparationCorrections": [
+    "Initial native result receipt had incorrect hardcoded matrix count; unchanged actual stdout records2596; original receipt retained and corrected without rerun.",
+    "Initial source-only copy included old app-data preparation and service proposal records; quarantined before any admission, replaced geometry candidate associations with fresh private data pins.",
+    "Initial lifecycle HOST suite stopped on own binder ctime-only drift; body/size/mtime/flags matched, cause unproven; no waiver. Fresh current-source fixture qualification recorded separately."
+  ],
+  "serviceRestarts": 0,
+  "emulatorLaunches": 0,
+  "targetOperations": 0,
+  "guestInput": 0,
+  "runtimeAdmission": false,
+  "nativePointerOrSelectionAccepted": false,
+  "physicalAcceptance": false,
+  "listeningAcceptance": false,
+  "preservation": {
+    "originalDirtyBodies": 16,
+    "protectedRawRecords": 68,
+    "installedImmutableSourceRecords": 10,
+    "unselectedVendorBodyOpens": 0
+  },
+  "durableEvidenceDirectory": "ProTracker-2.4G-editor-focus-diagnosis-20261022-r1"
+}

@@ -1,5 +1,32 @@
 # Sample memory and playback ownership
 
+## Probe staging and stopped cleanup entrypoints —22 October2026
+
+The parent now accepts a distinct stage-plan scope: one probe stage under its
+original operation frame and command lock, followed by a child binding made
+from the actual completed stage receipt. A failed or expired stage refuses
+before the blank-editor phase and cannot be replayed.
+
+The stopped entrypoint checks the original current owner and normal/held mode,
+selected service identity and independent process/group/socket/port absence.
+It preserves the exact probe and stage receipt before removing its one-file
+namespace, then records probe-only cleanup facts. A fresh check supplies the
+mandatory probe addition for either future original cleanup record. It sends
+no signal or target command and cannot release the guard.
+
+All34 parent and81 probe/namespace/stopped/existing-mouse HOST checks pass.
+Filesystem operations use private fixtures; guard, frame, VM and service checks
+are synthetic. The original16 dirty bodies remain unchanged. Earlier passed
+source revisions and raw runs are retained.
+
+Fresh binder, source freeze, dispatcher and full app restoration/release-record
+integration remain unfinished. No production namespace, admission, service or
+VM operation occurred. Live pointer/click, physical and listening acceptance
+remain withheld; the historical full-suite gate failure is unchanged.
+
+See the [entrypoint HOST receipt](test-evidence/editor_probe_entrypoints_host_20261022.json).
+
+
 
 ## Owned passive-probe staging and cleanup preparation —22 October2026
 

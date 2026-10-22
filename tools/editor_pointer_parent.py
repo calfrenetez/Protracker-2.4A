@@ -1,9 +1,11 @@
 """Prospective executable parent for one newly admitted editor/probe case.
 
 Source preparation alone cannot create an admission, lease or service epoch.
-No staging, restart, reservation, recovery, cleanup or release is implemented.
+An explicit stage-plan scope permits one guarded probe stage. No restart,
+reservation, recovery, cleanup or release is implemented here.
 """
 import asyncio
+import copy
 from contextlib import contextmanager
 import fcntl
 import hashlib
@@ -22,6 +24,7 @@ TOOLS = Path(__file__).resolve().parent
 FACTS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid',
          'st_size', 'st_mtime_ns', 'st_ctime_ns', 'st_flags')
 FROZEN_STATE = 'ROOT_FROZEN_EDITOR_PASSIVE_V2_SESSION_SOURCE_NOT_EXECUTED'
+STAGE_PLAN_STATE = 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2_STAGE_PLAN'
 MODULES = ('capture_runner', 'capture_case_mounted', 'first_mouse_api',
            'launcher_guard', 'launcher_access', 'amiberry_mcp.gui_automation',
            'editor_mouse_probe_case', 'editor_pointer_probe', 'editor_pointer_snapshot',
@@ -54,6 +57,9 @@ if __name__ == '__main__':
 from editor_mouse_probe_case import ALLOWED, LIMITS
 from editor_pointer_probe import NATIVE, SOURCE, EDITOR, digest
 from editor_blank_capture_protocol import recent_line
+
+STAGE_PLAN_ALLOWED = dict(ALLOWED, hostProbeFileWrites=1)
+STAGE_PLAN_LIMITS = dict(LIMITS, probeStage=60)
 
 
 def read(path, maximum=2097152):
@@ -112,12 +118,13 @@ def command_lock(path):
         os.close(fd)
 
 
-def validate_binding(binding, *, pin=pinned):
+def validate_binding(binding, *, pin=pinned, stage_plan=False):
     """Read-only validation; no imported harness, guard or target operation."""
     b = binding
-    need(b['state'] == 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2'
+    need(b['state'] == (STAGE_PLAN_STATE if stage_plan else 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
          and b['acceptedByRoot'] is True and b['target'] == 'amiberry-030'
-         and b['allowedActions'] == ALLOWED and b['limits'] == LIMITS
+         and b['allowedActions'] == (STAGE_PLAN_ALLOWED if stage_plan else ALLOWED)
+         and b['limits'] == (STAGE_PLAN_LIMITS if stage_plan else LIMITS)
          and b['nativeSize'] == [640, 512], 'Distinct exact parent admission required')
     freeze = json.loads(pin(b['sourceFreezeRef']))
     need(freeze['state'] == FROZEN_STATE and freeze['sources'] == b['sourcePins']
@@ -183,9 +190,11 @@ def validate_binding(binding, *, pin=pinned):
          and digest(pin(b['mountedCandidate'])) == EDITOR, 'Exact current editor bytes required')
     pin(blank['activeProfile'])
     need(digest(pin(probe['nativeSource'])) == SOURCE
-         and digest(pin(probe['nativeCandidate'])) == NATIVE
-         and pin(probe['stagedCandidate']) == pin(probe['nativeCandidate']),
+         and digest(pin(probe['nativeCandidate'])) == NATIVE,
          'Exact V2 source/native/staged bytes required before application launch')
+    if not stage_plan:
+        need(pin(probe['stagedCandidate']) == pin(probe['nativeCandidate']),
+             'Actual staged candidate differs from exact native bytes')
     receipt = json.loads(pin(probe['compileReceipt']))
     need(receipt['state'] == 'PASSIVE_EDITOR_V2_SOURCE_AND_NATIVE_COMPILE_HOST_CHECKED_NOT_EXECUTED'
          and receipt['binary'] == {'bytes': NATIVE[0], 'sha256': NATIVE[1]}
@@ -196,14 +205,20 @@ def validate_binding(binding, *, pin=pinned):
          and all(c.isascii() and (c.isalnum() or c in '_-') for c in b['ownerRunID'])
          and len(b['ownerRunID']) <= 96, 'Safe original probe owner required')
     directory = 'pt24g-editor-pointer-' + b['ownerRunID']
-    need(probe['guestCandidate'] == 'Dev:Tests/' + directory + '/PTEditorPointerV2'
-         and probe['stagedCandidate']['path']
-         == str(HARNESS / 'runtime/Dev/Tests' / directory / 'PTEditorPointerV2'),
+    need(probe['guestCandidate'] == 'Dev:Tests/' + directory + '/PTEditorPointerV2',
          'Separate exact owned passive probe namespace required')
-    from editor_probe_namespace import validate_stage
-    staged = validate_stage(probe, probe['namespaceStageRef'])
-    need(staged['stagedCandidate'] == probe['stagedCandidate'],
-         'Actual owned stage receipt must bind the parent probe endpoint')
+    if stage_plan:
+        need('namespaceStageRef' not in probe and 'stagedCandidate' not in probe
+             and not os.path.lexists(HARNESS / 'runtime/Dev/Tests' / directory),
+             'Stage plan must not adopt an existing or guessed namespace endpoint')
+    else:
+        need(probe['stagedCandidate']['path']
+             == str(HARNESS / 'runtime/Dev/Tests' / directory / 'PTEditorPointerV2'),
+             'Actual owned staged endpoint path differs')
+        from editor_probe_namespace import validate_stage
+        staged = validate_stage(probe, probe['namespaceStageRef'])
+        need(staged['stagedCandidate'] == probe['stagedCandidate'],
+             'Actual owned stage receipt must bind the parent probe endpoint')
     return freeze
 
 
@@ -238,14 +253,20 @@ def load_original_modules(binding, freeze):
         mouse_api=modules['first_mouse_api'].FirstMouseAPI,
         move_request=modules['amiberry_mcp.gui_automation'].MoveRequest,
         click_request=modules['amiberry_mcp.gui_automation'].ClickRequest,
-        composed_case=modules['editor_mouse_probe_case'].run_editor_mouse_probe)
+        composed_case=modules['editor_mouse_probe_case'].run_editor_mouse_probe,
+        namespace_stage=modules['editor_probe_namespace'].stage,
+        namespace_validate=modules['editor_probe_namespace'].validate_stage)
 
 
 def execute(binding, dependencies):
     """One existing reservation/command lock/operation; failures propagate to HOLD."""
     d, b = dependencies, binding
-    with command_lock(HARNESS / 'runtime/test.lock'):
-        validate_binding(b)
+    stage_plan = b.get('state') == STAGE_PLAN_STATE
+    with command_lock(HARNESS / 'runtime/test.lock') as lock_fd:
+        if stage_plan:
+            validate_binding(b, stage_plan=True)
+        else:
+            validate_binding(b)
         guard = d.guard(HARNESS)
         lease = d.lease_input(HARNESS, 'amiberry-030')
         status = guard.status()
@@ -255,10 +276,33 @@ def execute(binding, dependencies):
             guard._owner(state, lease, 'amiberry-030')
         d.install_client(); d.install_ipc(HARNESS)
         with d.operation(HARNESS, 'amiberry-030',
-                         'Exact mounted editor one move, passive V2 readback/execution and at most one click',
+                         ('One owned probe stage; ' if stage_plan else '')
+                         + 'exact mounted editor one move, passive V2 readback/execution and at most one click',
                          may_leave_running=True) as frame:
             original = d.original_api(b['blankBinding'], frame)
             original.owner(b['ownerRunID'])
+            if stage_plan:
+                deadline = time.monotonic() + STAGE_PLAN_LIMITS['probeStage']
+                def current_stage_owner(owner):
+                    need(time.monotonic() < deadline, 'Probe stage deadline exhausted; retain without replay')
+                    original.owner(owner)
+                    need(time.monotonic() < deadline, 'Probe stage deadline exhausted after owner check')
+                window = Path(b['outputDirectory']).parent
+                stage_ref = d.namespace_stage(b['passiveProbe'], window / 'passive-probe-stage',
+                    SimpleNamespace(stage_owner=current_stage_owner), lock_fd=lock_fd)
+                current_stage_owner(b['ownerRunID'])
+                stage = d.namespace_validate(b['passiveProbe'], stage_ref)
+                # This child data is a subset of the accepted stage+mouse scope.
+                # Its endpoint references come only from the actual completed stage.
+                child = copy.deepcopy(b)
+                child.update(state='ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2',
+                             allowedActions=copy.deepcopy(ALLOWED), limits=copy.deepcopy(LIMITS))
+                child['passiveProbe'].update(namespaceStageRef=stage_ref,
+                                             stagedCandidate=stage['stagedCandidate'])
+                validate_binding(child)
+                from editor_probe_namespace import save
+                save(window / 'mouse-parent-staged-binding.json', child)
+                b = child
 
             async def run():
                 captured = await d.blank_case(b['blankBinding'], Path(b['outputDirectory']), original)
@@ -279,7 +323,7 @@ def main():
          'Actual newly admitted parent binding reference required')
     ref = json.loads(sys.argv[2])
     binding = json.loads(pinned(ref))
-    freeze = validate_binding(binding)
+    freeze = validate_binding(binding, stage_plan=binding.get('state') == STAGE_PLAN_STATE)
     need(ref['path'] == str(Path(binding['outputDirectory']).parent / 'mouse-parent-binding.json'),
          'Binding must be the actual new private case admission')
     dependencies = load_original_modules(binding, freeze)

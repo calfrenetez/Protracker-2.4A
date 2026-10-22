@@ -183,6 +183,26 @@ class ParentBindingTests(unittest.TestCase):
         self.b['passiveProbe']['namespaceStageRef'] = self.jsonref(ref['path'], {'stagedCandidate': {'path': '/other'}})
         with self.assertRaises(RuntimeError): self.validate()
 
+    def plan(self):
+        b=copy.deepcopy(self.b)
+        b.update(state=parent.STAGE_PLAN_STATE,allowedActions=copy.deepcopy(parent.STAGE_PLAN_ALLOWED),
+                 limits=copy.deepcopy(parent.STAGE_PLAN_LIMITS))
+        del b['passiveProbe']['stagedCandidate'];del b['passiveProbe']['namespaceStageRef']
+        return b
+
+    def test_stage_plan_validates_only_its_distinct_explicit_scope(self):
+        b=self.plan()
+        parent.validate_binding(b,pin=self.pin,stage_plan=True)
+        with self.assertRaises(RuntimeError):parent.validate_binding(b,pin=self.pin)
+
+    def test_stage_plan_cannot_adopt_an_existing_or_guessed_endpoint(self):
+        b=self.plan();b['passiveProbe']['stagedCandidate']=self.b['passiveProbe']['stagedCandidate']
+        with self.assertRaises(RuntimeError):parent.validate_binding(b,pin=self.pin,stage_plan=True)
+
+    def test_stage_plan_without_extra_host_write_scope_refuses(self):
+        b=self.plan();b['allowedActions']=copy.deepcopy(parent.ALLOWED)
+        with self.assertRaises(RuntimeError):parent.validate_binding(b,pin=self.pin,stage_plan=True)
+
 
 class ParentExecutionTests(unittest.TestCase):
     def setUp(self):
@@ -245,7 +265,7 @@ class ParentExecutionTests(unittest.TestCase):
             install_ipc=lambda *a: self.events.append('ipc-hook'), operation=operation,
             original_api=Original, blank_case=blank, mouse_api=mouse,
             move_request=object(), click_request=object(), composed_case=composed)
-        p = patch.object(parent, 'validate_binding', side_effect=lambda b: self.events.append('validated'))
+        p = patch.object(parent, 'validate_binding', side_effect=lambda b,**kw: self.events.append('validated'))
         p.start(); self.addCleanup(p.stop)
 
     def test_one_original_operation_composes_blank_then_mouse_in_same_frame(self):
@@ -306,6 +326,42 @@ class ParentExecutionTests(unittest.TestCase):
         with self.assertRaises(RuntimeError): parent.execute(self.b, self.d)
         self.assertEqual(self.lock.read_bytes(), b'unexpected')
         self.assertEqual(self.events, [])
+
+    def staged_dependencies(self, *, fail=False):
+        window=Path(self.temp.name)/'window';window.mkdir()
+        self.b.update(state=parent.STAGE_PLAN_STATE, outputDirectory=str(window/'blank-capture-fixture-r1'),
+                      passiveProbe={'ownerRunID':'fixture-owner','windowDirectory':str(window)})
+        def stage(binding,out,api,*,lock_fd):
+            self.events.append('stage')
+            self.assertEqual(os.fstat(lock_fd).st_ino,self.lock.lstat().st_ino)
+            api.stage_owner('fixture-owner')
+            if fail:raise RuntimeError('synthetic failed stage')
+            return {'path':'FAKE_HOST_STAGE_ONLY','sha256':'FAKE'}
+        self.d.namespace_stage=stage
+        self.d.namespace_validate=lambda b,ref: {'stagedCandidate':{'path':'FAKE_HOST_NATIVE_ONLY'}}
+        return window
+
+    def test_actual_stage_result_is_bound_before_blank_in_original_frame(self):
+        window=self.staged_dependencies()
+        parent.execute(self.b,self.d)
+        self.assertLess(self.events.index('stage'),self.events.index('blank'))
+        self.assertEqual(self.events.count('operation-enter'),1)
+        child=json.loads((window/'mouse-parent-staged-binding.json').read_text())
+        self.assertEqual(child['passiveProbe']['namespaceStageRef']['path'],'FAKE_HOST_STAGE_ONLY')
+        self.assertEqual(child['state'],'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
+        self.assertNotIn('namespaceStageRef',self.b['passiveProbe'])
+
+    def test_stage_failure_propagates_without_blank_or_retry(self):
+        self.staged_dependencies(fail=True)
+        with self.assertRaises(RuntimeError):parent.execute(self.b,self.d)
+        self.assertEqual(self.events.count('stage'),1);self.assertNotIn('blank',self.events)
+        self.assertEqual(self.events[-1],'operation-error')
+
+    def test_stage_deadline_refuses_before_stage_owner_dispatch(self):
+        self.staged_dependencies()
+        with patch.object(parent.time,'monotonic',side_effect=[100.,200.]):
+            with self.assertRaises(RuntimeError):parent.execute(self.b,self.d)
+        self.assertNotIn('blank',self.events);self.assertEqual(self.events.count('stage'),1)
 
 
 class BootstrapFileTests(unittest.TestCase):

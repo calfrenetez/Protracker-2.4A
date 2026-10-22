@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only probe stage-plan parent and stopped cleanup entrypoints; not live admission",
+  "host": {
+    "parent": {
+      "methods": 34,
+      "unittestSeconds": 0.122,
+      "elapsedSeconds": 0.2430828329997894,
+      "returncode": 0
+    },
+    "probeNamespaceStoppedAndExistingMouseCarrier": {
+      "methods": 81,
+      "unittestSeconds": 0.693,
+      "elapsedSeconds": 0.816936249999344,
+      "returncode": 0
+    }
+  },
+  "behavior": [
+    "A distinct explicit stage-plan scope permits one owner-checked probe stage in the original operation frame and command lock.",
+    "The child binding uses only the actual completed stage receipt and endpoint; no guessed staged references.",
+    "Normal and failed stopped bindings verify current original owner, guard mode, service identity, and emulator process/group/socket/port absence before probe preservation and removal.",
+    "Saved probe facts must match a fresh stopped-owner and preserved-body check before addition to either original cleanup record.",
+    "No signals, target commands, service changes, guard release, retry, or whole-application acceptance in the stopped entrypoint."
+  ],
+  "coverage": [
+    "Real private filesystem/command-lock fixtures; synthetic original frame, lease, guard and host observations.",
+    "Stage scope, actual receipt binding, stage failure and deadline refusal before blank.",
+    "Normal and held stopped modes; changed service, live VM/group/socket/port, bridge connection, guard/source/lease drift, replay and cleanup-fact tampering.",
+    "Bounded read-only host observations and actual alternate-interpreter refusal before application cleanup imports."
+  ],
+  "preserved": {
+    "unrelatedDirtyPaths": 16,
+    "exactEditorAndProbeCandidates": true,
+    "installedHarnessAndHistoricalFailedEvidence": true
+  },
+  "withheld": {
+    "fullLifecycleBinderDispatcherAndReleaseRecordIntegration": false,
+    "actualSourceFreezeOrAdmission": false,
+    "productionNamespaceStaging": false,
+    "serviceOrVMOperation": false,
+    "livePointerOrClickQualification": false,
+    "guardRelease": false,
+    "fullHostSuiteRerun": false,
+    "physicalOrListeningAcceptance": false
+  }
+}

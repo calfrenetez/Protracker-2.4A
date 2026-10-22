@@ -33,13 +33,14 @@ INHERITED_AUTHORITY = ('AMIGA_LAUNCH_LEASE', 'AMIGA_LAUNCH_INFLIGHT')
 
 def validate(ref):
     binding = json.loads(parent.pinned(ref))
-    freeze = parent.validate_binding(binding, stage_plan=True)
+    readonly = binding.get('state') == parent.READONLY_STATE
+    freeze = parent.validate_binding(binding, readonly=True) if readonly else parent.validate_binding(binding, stage_plan=True)
     window = Path(binding['outputDirectory']).parent
     parent.need(ref['path'] == str(window / 'mouse-parent-binding.json')
                 and str(Path(__file__)) in binding['sourcePins'],
                 'Exact new parent binding and frozen dispatcher required')
     directory_ref(window)
-    parent.need(SUPERVISOR_SECONDS >= binding['limits']['probeStage']
+    parent.need(SUPERVISOR_SECONDS >= (0 if readonly else binding['limits']['probeStage'])
                 + binding['limits']['whole'] + binding['blankBinding']['limits']['whole'] + 120,
                 'Supervisor must include every unchanged finite subphase plus overhead')
     parent.need(not any(name in os.environ for name in INHERITED_AUTHORITY),
@@ -88,9 +89,10 @@ def execute(ref, dependencies=None):
     with parent.command_lock(HARNESS / 'runtime/test.lock'):
         owner()
         save(window / 'capture-dispatch-intent.json', {
-            'state': 'ONE_PASSIVE_V2_STAGE_PLAN_PARENT_DISPATCH_INTENT',
+            'state': ('ONE_READONLY_PASSIVE_V2_PARENT_DISPATCH_INTENT' if binding['state'] == parent.READONLY_STATE
+                      else 'ONE_PASSIVE_V2_STAGE_PLAN_PARENT_DISPATCH_INTENT'),
             'bindingRef': ref, 'supervisorSeconds': SUPERVISOR_SECONDS,
-            'probeStagesMaximum': 1, 'applicationLaunchesMaximum': 1,
+            'probeStagesMaximum': 0 if binding['state'] == parent.READONLY_STATE else 1, 'applicationLaunchesMaximum': 1,
             'buttonFreeMovesMaximum': 1, 'leftClicksMaximum': 1,
             'keysPlaybackSignalsServiceChangesAndRelease': 0, 'retryAllowed': False})
     env = dict(os.environ); env['AMIGA_LAUNCH_LEASE'] = str(window / 'private-lease.json')

@@ -1,5 +1,47 @@
 # Sample memory and playback ownership
 
+## Paired-volume runtime and full settlement integration —22 October2026, HOST only
+
+A distinct actual-start entry now binds the complete paired profile, reviewed
+blank-capture and Root image-publisher templates, original current owner/FRAME
+and exact probe preparation. The executable parent and supervisor admit that
+specific new scope with zero Dev probe stages. Legacy entry points still refuse
+the new admission. Fresh private capture/publisher copies must equal their
+selected repository templates; old frozen source packages are never modified.
+
+The blank phase retains its300-second whole budget and one editor readback,
+environment setup, application launch and capture. The mouse phase retains240
+seconds, actual60-second Root image gates, one button-free move, at most one
+click, and exact source/native pointer equality. Complete paired input/profile
+pins are checked before and after every original GUI/Root boundary. No offset
+fitting, metadata normalization, retries, keys or playback were added.
+
+The distinct stopped route retains the read-only volume, copies probe and
+preparation evidence, preserves/removes only the original app namespace, and
+uses the same complete paired suffix for original file restoration. It verifies
+all31 app-data files and three host roles, then rechecks retained-input facts
+before the four release hashes and again before original public guard release.
+Normal READY and failed HOLD modes use the original independent stopped owner
+and command descriptor. Historical clean exit or runtime acceptance is not
+inferred. Partial failures retain evidence and cannot be replayed.
+
+All205 focused HOST methods pass, including22 new lifecycle checks and both
+new normal/failed private fixtures running unchanged original saved-file and
+public guard functions. Sources, files and copies are real; target/service,
+FRAME, approval, image and GUI/IO observations are synthetic. Failed streams
+remain preserved, including a strict new-template ctime drift with unchanged
+body/inode/flags/mtime; cause unproven, no tolerance added. Original16 bodies,
+raw68 protected records and ten installed immutable-source records remain
+exact; forbidden vendor body opens0. Full707 suite/gate failure not rerun.
+
+No production preparation/freeze/admission, actual shared lock/lease/service/
+guard/canonical write, guest/mouse/physical/Safari operation occurred. Next is
+a fresh reviewed private source/input package and current admission before an
+exact-candidate live test. Previous restart approval is consumed; historical
+fences, PIDs and old r4/r5 actors confer no clearance and must not be replayed.
+
+See the [paired lifecycle HOST receipt](test-evidence/editor_readonly_lifecycle_host_20261022.json).
+
 ## Read-only V2 carrier and input retention —22 October2026, HOST only
 
 A distinct source-plan/freezer now selects23 canonical module paths, original

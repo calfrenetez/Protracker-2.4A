@@ -28,6 +28,9 @@ from editor_pointer_parent import pinned, need, command_lock, FROZEN_STATE
 from editor_probe_namespace import settle_stopped, release_cleanup_facts, save, checked_command_lock
 
 STATE = 'ROOT_ADMITTED_STOPPED_EDITOR_PROBE_NAMESPACE_ONLY'
+READONLY_STATE = 'ROOT_ADMITTED_STOPPED_EDITOR_READONLY_PROBE_RETENTION_ONLY'
+READONLY_ALLOWED = {'probeFilesRemoved': 0, 'probeDirectoriesRemoved': 0, 'inputPreservations': 1,
+    'targetCommands': 0, 'signals': 0, 'serviceChanges': 0, 'guardReleases': 0}
 
 
 class HostObservations:
@@ -57,23 +60,41 @@ class HostObservations:
 
 def validate(binding):
     b = binding
-    need(b['state'] == STATE and b['acceptedByRoot'] is True and b['target'] == 'amiberry-030'
+    readonly = b.get('state') == READONLY_STATE
+    if readonly:
+        import editor_readonly_probe as ro
+    need(b['state'] == (READONLY_STATE if readonly else STATE) and b['acceptedByRoot'] is True and b['target'] == 'amiberry-030'
          and b['mode'] in ('normal', 'failed') and b['limits'] == {'whole': 60}
-         and b['allowedActions'] == {'probeFilesRemoved': 1, 'probeDirectoriesRemoved': 1,
-              'targetCommands': 0, 'signals': 0, 'serviceChanges': 0, 'guardReleases': 0},
+         and b['allowedActions'] == (READONLY_ALLOWED if readonly else {'probeFilesRemoved': 1, 'probeDirectoriesRemoved': 1,
+              'targetCommands': 0, 'signals': 0, 'serviceChanges': 0, 'guardReleases': 0}),
          'Distinct stopped-probe-only admission required')
     parent = json.loads(pinned(b['parentBindingRef']))
     probe = parent['passiveProbe']; window = Path(probe['windowDirectory'])
     need(window.is_absolute() and '..' not in window.parts
          and str(window).startswith('/private/tmp/pt24g-')
-         and b['parentBindingRef']['path'] == str(window / 'mouse-parent-staged-binding.json')
-         and parent['state'] == 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2'
+         and b['parentBindingRef']['path'] == str(window / ('mouse-parent-binding.json' if readonly else 'mouse-parent-staged-binding.json'))
+         and parent['state'] == (ro.PARENT_STATE if readonly else 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
          and parent['ownerRunID'] == probe['ownerRunID'] == b['ownerRunID']
          and b['windowDirectory'] == str(window), 'Actual same-owner staged-parent record required')
     freeze = json.loads(pinned(parent['sourceFreezeRef']))
-    need(freeze['state'] == FROZEN_STATE and freeze['sources'] == parent['sourcePins']
+    need(freeze['state'] == (ro.FROZEN_STATE if readonly else FROZEN_STATE) and freeze['sources'] == parent['sourcePins']
          and str(Path(__file__)) in parent['sourcePins'], 'Current cleanup entry point must be frozen')
     for ref in parent['sourcePins'].values(): pinned(ref)
+    if readonly:
+        ro.prepared_input(probe)
+        from editor_pointer_binding import readonly_source_shape
+        readonly_source_shape(freeze)
+        from editor_mouse_probe_case import ALLOWED, LIMITS
+        need(parent['acceptedByRoot'] is True and parent['target'] == 'amiberry-030'
+             and parent['allowedActions'] == ALLOWED and parent['limits'] == LIMITS
+             and parent['sourceFreezeRef'] == probe['sourceFreezeRef']
+             and parent['blankBinding']['state'] == ro.BLANK_STATE
+             and parent['blankBinding']['readonlyProbe'] == probe
+             and parent['blankBinding']['ownerRunID'] == parent['ownerRunID']
+             and parent['blankBinding']['sourcePins'] == parent['sourcePins']
+             and parent['mountedCandidate'] == probe['editorCandidate'] == parent['blankBinding']['mountedCandidate']
+             and parent['outputDirectory'] == parent['blankBinding']['outputDirectory'] == str(window / probe['runLabel'])
+             and parent['runLabel'] == probe['runLabel'], 'Exact stopped read-only parent associations required')
     need(b['guardRef']['path'] == str(HARNESS / 'runtime/launcher-guard/state.json'),
          'Exact current original guard endpoint required')
     pinned(b['guardRef'])
@@ -167,10 +188,17 @@ def execute(binding, dependencies=None):
         result = {'state': 'STOPPED_PROBE_CLEANUP_STARTED', 'mode': b['mode'],
                   'targetOperations': 0, 'guardReleaseClaimed': False, 'retryAllowed': False}
         try:
-            probe = verified[1]; stage_ref = probe['namespaceStageRef']
-            settled = settle_stopped(probe, stage_ref, window / 'passive-probe-settlement',
-                                     owner, mode=b['mode'], lock_fd=fd)
-            facts = release_cleanup_facts(probe, stage_ref, settled, owner, mode=b['mode'], lock_fd=fd)
+            probe = verified[1]
+            if b['state'] == READONLY_STATE:
+                import editor_readonly_probe as ro
+                settled = ro.preserve_stopped(probe, window / 'preserved-readonly-probe-input',
+                                             owner, mode=b['mode'], lock_fd=fd)
+                facts = ro.release_facts(probe, settled, owner, mode=b['mode'], lock_fd=fd)
+            else:
+                stage_ref = probe['namespaceStageRef']
+                settled = settle_stopped(probe, stage_ref, window / 'passive-probe-settlement',
+                                         owner, mode=b['mode'], lock_fd=fd)
+                facts = release_cleanup_facts(probe, stage_ref, settled, owner, mode=b['mode'], lock_fd=fd)
             fact_ref = save(window / 'probe-cleanup-fact.json', facts)
             result.update(state='STOPPED_PROBE_CLEANUP_FACT_RECORDED_NO_RELEASE', probeCleanupFactRef=fact_ref)
             return fact_ref
@@ -210,6 +238,12 @@ def release_cleanup_supplement(binding, fact_ref, dependencies=None, *, lock_fd=
         need(fact_ref['path'] == str(Path(b['windowDirectory']) / 'probe-cleanup-fact.json'),
              'Actual original stopped-probe fact record required')
         actual = json.loads(pinned(fact_ref))
+        if b['state'] == READONLY_STATE:
+            import editor_readonly_probe as ro
+            fresh = ro.release_facts(verified[1], actual['readonlyProbeInput']['resultRef'],
+                                     owner, mode=b['mode'], lock_fd=fd)
+            need(actual == fresh, 'Read-only input fact differs from current independently checked evidence')
+            return {'readonlyProbeInputRetention': {'factRef': fact_ref, 'facts': fresh}}
         fresh = release_cleanup_facts(verified[1], verified[1]['namespaceStageRef'],
             actual['probeSettlementRef'], owner, mode=b['mode'], lock_fd=fd)
         need(actual == fresh, 'Probe cleanup fact differs from current independently checked evidence')

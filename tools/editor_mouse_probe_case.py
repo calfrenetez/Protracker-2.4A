@@ -67,7 +67,7 @@ def settings_restored(before, after):
          'Original bounded GUI settings restoration differs')
 
 
-async def run_selection(binding, blank, out, api):
+async def run_selection(binding, blank, out, api, *, readonly=False):
     """All api observations, capture registry and bounded Root gates are mandatory.
 
     api.root_observation must verify an actual current immutable request/image,
@@ -75,7 +75,8 @@ async def run_selection(binding, blank, out, api):
     It must not auto-publish an observation or infer a pointer position.
     The prospective concrete adapter must separately be reviewed and tested.
     """
-    need(binding['state'] == 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2'
+    from editor_pointer_parent import READONLY_STATE
+    need(binding['state'] == (READONLY_STATE if readonly else 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
          and binding['acceptedByRoot'] is True
          and binding['allowedActions'] == ALLOWED and binding['limits'] == LIMITS
          and binding['nativeSize'] == [640,512],
@@ -99,6 +100,7 @@ async def run_selection(binding, blank, out, api):
         for source in binding['sourcePins'].values():
             api.pinned(source)
         api.pinned(binding['mountedCandidate'])
+        need(api.clock() < deadline, 'Mouse deadline exhausted during strict input validation')
 
     async def observe(stage, capture, point=None):
         current()
@@ -260,3 +262,34 @@ async def run_editor_mouse_probe(binding, blank, out, mouse_api, original_api):
          'Passive probe must share exact editor/source/owner pins')
     probe = EditorPointerProbe(probe_binding, original_api)
     return await run_selection(binding, blank, out, EditorMouseProbeAPI(mouse_api, probe))
+
+
+class ReadonlyMouseProbeAPI(EditorMouseProbeAPI):
+    """Exact paired input before and after every original GUI/Root boundary."""
+    def owner(self, owner):
+        from editor_readonly_probe import require_current_mounted_input
+        need(owner == self.probe.binding['ownerRunID'], 'Same read-only mouse owner required')
+        require_current_mounted_input(self.probe.binding, self.probe.original)
+
+    async def checked(self, method, *args):
+        self.owner(self.probe.binding['ownerRunID'])
+        value = await getattr(self.mouse, method)(*args)
+        self.owner(self.probe.binding['ownerRunID'])
+        return value
+
+    async def state_query(self, *args): return await self.checked('state_query', *args)
+    async def capture(self, *args): return await self.checked('capture', *args)
+    async def move(self, *args): return await self.checked('move', *args)
+    async def click(self, *args): return await self.checked('click', *args)
+    async def root_observation(self, *args): return await self.checked('root_observation', *args)
+
+
+async def run_readonly_editor_mouse_probe(binding, blank, out, mouse_api, original_api):
+    """Distinct admission in the same original operation; no Dev probe staging."""
+    from editor_readonly_probe import ReadonlyEditorPointerProbe, require_current_mounted_input, PARENT_STATE
+    need(binding['state'] == PARENT_STATE and mouse_api.original is original_api
+         and mouse_api.frame is original_api.frame and mouse_api.binding is binding
+         and original_api.binding is binding['blankBinding'], 'Same actual original read-only API/FRAME required')
+    probe = ReadonlyEditorPointerProbe(binding['passiveProbe'], original_api)
+    require_current_mounted_input(probe.binding, original_api)
+    return await run_selection(binding, blank, out, ReadonlyMouseProbeAPI(mouse_api, probe), readonly=True)

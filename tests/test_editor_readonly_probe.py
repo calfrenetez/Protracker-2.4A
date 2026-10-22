@@ -274,6 +274,12 @@ class ReadonlyFreezeTests(unittest.TestCase):
             path = self.root / name
             path.write_bytes(b'{"HOST_ONLY":true}\n' if path.suffix == '.json' else b'# HOST source; never imported\n')
             sources[str(path)] = parent.read(path)[1]
+        for local, template in (('capture_case_mounted.py', 'editor_readonly_capture.py'),
+                                ('publish_mouse_observation.py', 'editor_readonly_observation.py')):
+            canonical = parent.TOOLS / template; private = self.root / local
+            private.write_bytes(canonical.read_bytes())
+            sources[str(canonical)] = parent.read(canonical)[1]
+            sources[str(private)] = parent.read(private)[1]
         ready_ref = volume.save(self.root / 'HOST-SYNTHETIC-READINESS.json', {'HOST_ONLY_NOT_APPROVAL': True})
         self.plan = dict(self.freeze, state=binder.READONLY_PLAN, acceptedByRoot=True,
             sources=sources, serviceReadinessRef=ready_ref,

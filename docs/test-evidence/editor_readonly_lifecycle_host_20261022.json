@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Distinct paired-volume actual-start, blank capture, guarded mouse/dispatcher and full stopped restoration/release integration; HOST only",
+  "binding": {
+    "distinctActualStartAndParentScopes": true,
+    "selectedModules": 23,
+    "privateBlankAndRootPublisherMustEqualPinnedReviewedTemplates": true,
+    "completeCurrentPairedProfileChecked": true,
+    "originalLeaseGuardFrameAndServiceIdentityRequired": true,
+    "legacyEntryPointStillRejectsNewAdmission": true,
+    "probeDevNamespaceStages": 0
+  },
+  "runtimeProtocol": {
+    "blankWholeSeconds": 300,
+    "mouseWholeSeconds": 240,
+    "probeWholeSeconds": 20,
+    "probeScriptSeconds": 10,
+    "rootImageObservationMaximumSeconds": 60,
+    "maximumButtonFreeMoves": 1,
+    "maximumLeftClicks": 1,
+    "maximumNativeReadbacks": 1,
+    "maximumPassiveExecutions": 1,
+    "readonlyInputCheckedBeforeAndAfterEveryGUIBoundary": true,
+    "actualImageAndExactNativePointerEqualityRequiredBeforeClick": true,
+    "retryOrMetadataToleranceAdded": false
+  },
+  "stoppedProtocol": {
+    "distinctFullAndStoppedScopesRequired": true,
+    "normalAndFailedOriginalOwnerModes": true,
+    "sameOriginalCommandDescriptorChecked": true,
+    "probeAndPreparationCopiedAndOriginalInputRetained": true,
+    "probeFilesOrDirectoriesRemoved": 0,
+    "sameCompletePairedSuffixForOriginalFileHelper": true,
+    "appDataFilesVerified": 31,
+    "hostRolesRestored": 3,
+    "freshInputRetentionFactsBeforeFourReleaseFactHashesAndAgainBeforeRelease": true,
+    "originalPublicReleaseAndChecksumArchiveVerification": true,
+    "partialFailureNeverReplayed": true
+  },
+  "host": {
+    "methods": 205,
+    "newLifecycleMethods": 22,
+    "returncode": 0,
+    "unittestSeconds": 24.466,
+    "elapsedSeconds": 24.635089166000398,
+    "realPrivateFilesSourcesCopiesAndLocks": true,
+    "unchangedOriginalSavedFileAndPublicGuardFunctionsRunInBothNewNormalAndFailedPrivateFixtures": true,
+    "targetIdentityServiceFrameGUIIOAndApprovalAreSynthetic": true,
+    "initialFailedAndPassingStreamsRetained": true,
+    "failedSuiteMetadataObservation": "A new own template retained identical body, inode, mode, flags and mtime while ctime advanced; strict refusal retained. Cause unproven. Separate fixture import/API, redundant chmod and transport-lock permission errors corrected."
+  },
+  "preservation": {
+    "originalDirtyBodies": 16,
+    "rawProtectedRecords": 68,
+    "installedImmutableSourceRecords": 10,
+    "excludedVendorBodyOpenAttempts": 0,
+    "historicalFull707SuiteGateFailureNotRerunOrWaived": true
+  },
+  "liveBoundary": {
+    "productionPreparationSourceFreezeOrAdmissionCreated": false,
+    "actualSharedLockLeaseServiceOrGuardMutation": false,
+    "canonicalProfileWrite": false,
+    "emulatorOrGuestOperation": false,
+    "mousePhysicalOrSafariAction": false,
+    "oldFailedTransactionOrRecoveryReplayed": false,
+    "readonlyMountOrMouseSelectionQualified": false,
+    "stagingMetadataCauseEstablished": false,
+    "newRestartAuthorizationAvailable": false
+  },
+  "next": "Prepare a fresh reviewable private paired-volume source package and inputs. Recheck current ownership, locks, target and recovery state. Establish a genuinely new approved service epoch only through its concrete admission procedure; do not reuse old restart approval or replay r4/r5 actors. Then run exact-candidate emulator test and genuine stopped full settlement."
+}

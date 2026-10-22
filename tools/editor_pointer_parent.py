@@ -25,6 +25,7 @@ FACTS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid',
          'st_size', 'st_mtime_ns', 'st_ctime_ns', 'st_flags')
 FROZEN_STATE = 'ROOT_FROZEN_EDITOR_PASSIVE_V2_SESSION_SOURCE_NOT_EXECUTED'
 STAGE_PLAN_STATE = 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2_STAGE_PLAN'
+READONLY_STATE = 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_READONLY_PASSIVE_V2'
 MODULES = ('capture_runner', 'capture_case_mounted', 'first_mouse_api',
            'launcher_guard', 'launcher_access', 'amiberry_mcp.gui_automation',
            'editor_mouse_probe_case', 'editor_pointer_probe', 'editor_pointer_snapshot',
@@ -118,18 +119,21 @@ def command_lock(path):
         os.close(fd)
 
 
-def validate_binding(binding, *, pin=pinned, stage_plan=False):
+def validate_binding(binding, *, pin=pinned, stage_plan=False, readonly=False):
     """Read-only validation; no imported harness, guard or target operation."""
     b = binding
-    need(b['state'] == (STAGE_PLAN_STATE if stage_plan else 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
+    need(not (readonly and stage_plan), 'Read-only parent cannot stage a Dev probe')
+    if readonly:
+        import editor_readonly_probe as ro
+    need(b['state'] == (READONLY_STATE if readonly else STAGE_PLAN_STATE if stage_plan else 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2')
          and b['acceptedByRoot'] is True and b['target'] == 'amiberry-030'
          and b['allowedActions'] == (STAGE_PLAN_ALLOWED if stage_plan else ALLOWED)
          and b['limits'] == (STAGE_PLAN_LIMITS if stage_plan else LIMITS)
          and b['nativeSize'] == [640, 512], 'Distinct exact parent admission required')
     freeze = json.loads(pin(b['sourceFreezeRef']))
-    need(freeze['state'] == FROZEN_STATE and freeze['sources'] == b['sourcePins']
+    need(freeze['state'] == (ro.FROZEN_STATE if readonly else FROZEN_STATE) and freeze['sources'] == b['sourcePins']
          and freeze['modulePaths'] == b['blankBinding']['modulePaths']
-         and set(freeze['modulePaths']) == set(MODULES),
+         and set(freeze['modulePaths']) == set(ro.MODULES if readonly else MODULES),
          'Actual distinct source freeze association required')
     sources = b['sourcePins']
     need(bool(sources) and all(k == v['path'] for k, v in sources.items()),
@@ -168,7 +172,7 @@ def validate_binding(binding, *, pin=pinned, stage_plan=False):
     for source in proof['nativeSourceCopies'].values():
         pin(source['newCopy'])
     blank = b['blankBinding']
-    need(blank['state'] == 'ROOT_ADMITTED_LOCAL_VOLUME_EDITOR_CAPTURE_ONLY'
+    need(blank['state'] == (ro.BLANK_STATE if readonly else 'ROOT_ADMITTED_LOCAL_VOLUME_EDITOR_CAPTURE_ONLY')
          and blank['ownerRunID'] == b['ownerRunID'] and blank['sourcePins'] == sources
          and blank['mountedCandidate'] == b['mountedCandidate']
          and blank['outputDirectory'] == b['outputDirectory']
@@ -204,6 +208,21 @@ def validate_binding(binding, *, pin=pinned, stage_plan=False):
          and b['ownerRunID'][0].isascii() and b['ownerRunID'][0].isalnum()
          and all(c.isascii() and (c.isalnum() or c in '_-') for c in b['ownerRunID'])
          and len(b['ownerRunID']) <= 96, 'Safe original probe owner required')
+    if readonly:
+        from editor_pointer_binding import readonly_source_shape
+        readonly_source_shape(freeze)
+        prepared = ro.prepared_input(probe, pin=pin)
+        active = pin(probe['activeProfile'])
+        need(active == pin(probe['originalProfileBeforeimage']) + prepared['appendASCII'].encode('ascii')
+             and probe['activeProfile']['path'] == str(HARNESS / 'runtime/amiberry/Configurations/A1200-030-DEV.uae'),
+             'Complete actual paired profile required before parent admission')
+        need(blank['readonlyProbe'] == probe and probe['runLabel'] == b['runLabel']
+             and probe['sourceFreezeRef'] == b['sourceFreezeRef']
+             and probe['originalProfileBeforeimage'] == blank['originalProfileBeforeimage']
+             and probe['activeProfile'] == blank['activeProfile']
+             and probe['capturePreparationRef'] == blank['localVolumePreparation'],
+             'Same paired-profile child must protect blank and mouse phases')
+        return freeze
     directory = 'pt24g-editor-pointer-' + b['ownerRunID']
     need(probe['guestCandidate'] == 'Dev:Tests/' + directory + '/PTEditorPointerV2',
          'Separate exact owned passive probe namespace required')
@@ -253,7 +272,8 @@ def load_original_modules(binding, freeze):
         mouse_api=modules['first_mouse_api'].FirstMouseAPI,
         move_request=modules['amiberry_mcp.gui_automation'].MoveRequest,
         click_request=modules['amiberry_mcp.gui_automation'].ClickRequest,
-        composed_case=modules['editor_mouse_probe_case'].run_editor_mouse_probe,
+        composed_case=(modules['editor_mouse_probe_case'].run_readonly_editor_mouse_probe
+            if binding['state'] == READONLY_STATE else modules['editor_mouse_probe_case'].run_editor_mouse_probe),
         namespace_stage=modules['editor_probe_namespace'].stage,
         namespace_validate=modules['editor_probe_namespace'].validate_stage)
 
@@ -262,8 +282,12 @@ def execute(binding, dependencies):
     """One existing reservation/command lock/operation; failures propagate to HOLD."""
     d, b = dependencies, binding
     stage_plan = b.get('state') == STAGE_PLAN_STATE
+    readonly = b.get('state') == READONLY_STATE
     with command_lock(HARNESS / 'runtime/test.lock') as lock_fd:
-        if stage_plan:
+        need('AMIGA_LAUNCH_INFLIGHT' not in os.environ, 'Parent cannot borrow an inherited FRAME')
+        if readonly:
+            validate_binding(b, readonly=True)
+        elif stage_plan:
             validate_binding(b, stage_plan=True)
         else:
             validate_binding(b)
@@ -323,7 +347,8 @@ def main():
          'Actual newly admitted parent binding reference required')
     ref = json.loads(sys.argv[2])
     binding = json.loads(pinned(ref))
-    freeze = validate_binding(binding, stage_plan=binding.get('state') == STAGE_PLAN_STATE)
+    freeze = validate_binding(binding, stage_plan=binding.get('state') == STAGE_PLAN_STATE,
+                              readonly=binding.get('state') == READONLY_STATE)
     need(ref['path'] == str(Path(binding['outputDirectory']).parent / 'mouse-parent-binding.json'),
          'Binding must be the actual new private case admission')
     dependencies = load_original_modules(binding, freeze)

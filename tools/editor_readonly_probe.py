@@ -1,7 +1,7 @@
 """Distinct read-only V2 carrier and stopped input-retention facts.
 
 No reservation, FRAME creation, service change, staging, signal or release.
-The existing executable parent does not admit this new carrier yet. Runtime
+The distinct executable parent admits only a separately reviewed binding. Runtime
 use requires the caller's original current owner/FRAME and a distinct freeze.
 """
 import json
@@ -14,6 +14,8 @@ from editor_probe_namespace import checked_command_lock, directory_ref, put, sav
 
 FROZEN_STATE = 'ROOT_FROZEN_EDITOR_READONLY_PASSIVE_V2_SESSION_SOURCE_NOT_EXECUTED'
 INPUT_STATE = 'ROOT_ADMITTED_PASSIVE_V2_READONLY_PROBE_INPUT_ONLY'
+PARENT_STATE = parent.READONLY_STATE
+BLANK_STATE = 'ROOT_ADMITTED_PAIRED_VOLUME_EDITOR_CAPTURE_WITH_READONLY_PASSIVE_V2'
 MODULES = parent.MODULES + ('editor_probe_volume', 'editor_readonly_probe')
 ALLOWED = {'guestReadbacks': 1, 'passiveNativeExecutions': 1, 'input': 0,
            'hostInputWrites': 0, 'serviceChanges': 0, 'guardReleases': 0}

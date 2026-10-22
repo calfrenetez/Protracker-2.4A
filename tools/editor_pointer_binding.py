@@ -28,6 +28,7 @@ from editor_probe_namespace import save, directory_ref
 PLAN = 'ROOT_REVIEWED_PASSIVE_V2_FRESH_SOURCE_PLAN_NOT_FROZEN'
 READONLY_PLAN = 'ROOT_REVIEWED_READONLY_PASSIVE_V2_FRESH_SOURCE_PLAN_NOT_FROZEN'
 BIND = 'ROOT_ACCEPTED_PASSIVE_V2_ACTUAL_START_BINDING_ONLY'
+READONLY_BIND = 'ROOT_ACCEPTED_READONLY_PASSIVE_V2_ACTUAL_START_BINDING_ONLY'
 EXTRA = ('fresh_preservation', 'canonical_profile_session_files', 'service_readiness')
 LIFECYCLE = ('editor_pointer_binding', 'editor_pointer_parent', 'editor_pointer_dispatch',
              'editor_probe_stopped', 'editor_capture_settlement', 'editor_capture_namespace')
@@ -149,18 +150,36 @@ def freeze_sources(plan, dependencies=None):
         return save(session / 'SOURCE-FREEZE.json', record)
 
 
+def readonly_source_shape(record):
+    ro = checked_module('editor_readonly_probe', str(parent.TOOLS / 'editor_readonly_probe.py'), record['sources'])
+    session, window = ro.source_shape(record)
+    sources = record['sources']
+    required = {str(parent.TOOLS / (n + '.py')) for n in LIFECYCLE}
+    required |= {str(session / n) for n in ('SOURCE-PROVENANCE.json', 'publish_mouse_observation.py', 'clock_runtime.py')}
+    required |= {str(parent.TOOLS / (n + '.py')) for n in ('editor_readonly_capture', 'editor_readonly_observation')}
+    parent.need(required <= set(sources)
+        and parent.digest(parent.pinned(sources[str(session / 'canonical_profile_session_files.py')])) == SAVED_FILE_HELPER,
+        'Complete read-only lifecycle and unchanged saved-file helper required')
+    for actual, template in (('capture_case_mounted.py', 'editor_readonly_capture.py'),
+                             ('publish_mouse_observation.py', 'editor_readonly_observation.py')):
+        parent.need(parent.pinned(sources[str(session / actual)]) == parent.pinned(sources[str(parent.TOOLS / template)]),
+                    'Fresh read-only capture/publisher must match selected reviewed template')
+    return session, window
+
+
+def load_readonly_extras(record):
+    session, _ = readonly_source_shape(record)
+    sys.path[:0] = [str(session), str(HARNESS / 'scripts'), str(parent.TOOLS)]
+    return {n: checked_module(n, record['extraModulePaths'][n], record['sources']) for n in EXTRA}
+
+
 def freeze_readonly_sources(plan, dependencies=None):
     """Distinct 23-module source freeze; no runtime binding or target action."""
     parent.need(plan['state'] == READONLY_PLAN and plan['acceptedByRoot'] is True,
                 'Actual newly reviewed complete read-only source plan required')
     path = str(parent.TOOLS / 'editor_readonly_probe.py')
     ro = checked_module('editor_readonly_probe', path, plan['sources'])
-    session, window = ro.source_shape(plan)
-    required = {str(parent.TOOLS / (n + '.py')) for n in LIFECYCLE}
-    required |= {str(session / n) for n in ('SOURCE-PROVENANCE.json', 'publish_mouse_observation.py', 'clock_runtime.py')}
-    parent.need(required <= set(plan['sources'])
-                and parent.digest(parent.pinned(plan['sources'][str(session / 'canonical_profile_session_files.py')]))
-                    == SAVED_FILE_HELPER, 'Complete read-only lifecycle and unchanged saved-file helper required')
+    session, window = readonly_source_shape(plan)
     prepared = ro.volume.verify(plan['readonlyPreparationRef'])
     parent.need(prepared['preparationSource'] == plan['sources'][str(parent.TOOLS / 'editor_probe_volume.py')]
                 and not os.path.lexists(window) and not os.path.lexists(session / 'SOURCE-FREEZE.json'),
@@ -170,7 +189,7 @@ def freeze_readonly_sources(plan, dependencies=None):
     with d['canonical_profile_session_files'].locks():
         d['service_readiness'].require_human_approved_service(
             ['--service-readiness-ref', json.dumps(plan['serviceReadinessRef'])])
-        ro.source_shape(plan); ro.volume.verify(plan['readonlyPreparationRef'])
+        readonly_source_shape(plan); ro.volume.verify(plan['readonlyPreparationRef'])
         parent.need(not os.path.lexists(window) and not os.path.lexists(session / 'SOURCE-FREEZE.json'),
                     'Read-only freeze/window appeared before publication')
         record = {'state': ro.FROZEN_STATE, 'sources': plan['sources'],
@@ -181,13 +200,27 @@ def freeze_readonly_sources(plan, dependencies=None):
 
 
 def validate_actual(record):
-    parent.need(record['state'] == BIND and record['acceptedByRoot'] is True
+    return _validate_actual(record, readonly=False)
+
+
+def validate_readonly_actual(record):
+    return _validate_actual(record, readonly=True)
+
+
+def _validate_actual(record, *, readonly):
+    parent.need(record['state'] == (READONLY_BIND if readonly else BIND) and record['acceptedByRoot'] is True
                 and record['allowedActions'] == {'guestCPUAdmissions': 1, 'bindingWrites': 2,
                      'applicationLaunches': 0, 'input': 0, 'serviceChanges': 0, 'guardReleases': 0}
                 and record['limits'] == {'whole': 60}, 'Distinct actual-start binder scope required')
     freeze = json.loads(parent.pinned(record['sourceFreezeRef']))
-    parent.need(freeze['state'] == parent.FROZEN_STATE, 'Actual new V2 source freeze required')
-    session, window = source_shape(freeze); directory_ref(window)
+    if readonly:
+        ro = checked_module('editor_readonly_probe', str(parent.TOOLS / 'editor_readonly_probe.py'), freeze['sources'])
+        parent.need(freeze['state'] == ro.FROZEN_STATE, 'Actual distinct read-only source freeze required')
+        session, window = readonly_source_shape(freeze)
+    else:
+        parent.need(freeze['state'] == parent.FROZEN_STATE, 'Actual new V2 source freeze required')
+        session, window = source_shape(freeze)
+    directory_ref(window)
     parent.need(record['sourceFreezeRef']['path'] == str(session / 'SOURCE-FREEZE.json')
                 and record['windowDirectory'] == str(window), 'Actual same-window freeze required')
     fixed = {'reservationRef': 'reserve-result.json', 'startupResultRef': 'startup-result.json',
@@ -226,10 +259,22 @@ def validate_actual(record):
                 and preparation['targetOperations'] == preparation['canonicalProfileWrites'] == 0,
                 'Original fresh local-volume preparation required')
     before = rows['originalProfileRef']; suffix = profile_append(before, str(Path(preparation['privateCandidate']['path']).parent))
+    if readonly:
+        parent.need(record['readonlyPreparationRef'] == freeze['readonlyPreparationRef'], 'Same frozen read-only preparation required')
+        prepared = ro.volume.verify(record['readonlyPreparationRef'])
+        parent.need(record['readonlyPreparationRef'] == freeze['readonlyPreparationRef']
+            and prepared['inputs']['capturePreparation'] == record['preparationRef']
+            and parent.pinned(prepared['inputs']['originalProfile']) == before
+            and prepared['inputs']['nativeCandidate'] == record['probeNativeRef']
+            and prepared['inputs']['nativeSource'] == record['probeSourceRef']
+            and prepared['inputs']['compileReceipt'] == record['probeCompileRef'],
+            'Exact frozen read-only preparation and actual-start associations required')
+        suffix = prepared['appendASCII'].encode('ascii')
     active = parent.pinned(record['activeProfileRef'])
+    profile_preparation = prepared if readonly else preparation
     parent.need(record['activeProfileRef']['path'] == str(HARNESS / 'runtime/amiberry/Configurations/A1200-030-DEV.uae')
-                and active == before + suffix and preparation['appendASCII'] == suffix.decode('ascii')
-                and preparation['proposedProfile'] == {'bytes': len(active), 'sha256': parent.digest(active)[1]},
+                and active == before + suffix and profile_preparation['appendASCII'] == suffix.decode('ascii')
+                and profile_preparation['proposedProfile'] == {'bytes': len(active), 'sha256': parent.digest(active)[1]},
                 'Exact new additive profile association required')
     for leaf in ('mounted-guest-admission-intent.json', 'capture-binding.json', 'mouse-parent-binding.json'):
         parent.need(not os.path.lexists(window / leaf), 'Never replay actual Guest admission or binding')
@@ -237,10 +282,20 @@ def validate_actual(record):
 
 
 def execute(record, dependencies=None):
-    freeze, rows, ready, prep, owner = validate_actual(record)
-    session, window = source_shape(freeze)
+    return _execute(record, dependencies, readonly=False)
+
+
+def execute_readonly(record, dependencies=None):
+    return _execute(record, dependencies, readonly=True)
+
+
+def _execute(record, dependencies, *, readonly):
+    freeze, rows, ready, prep, owner = _validate_actual(record, readonly=readonly)
+    session, window = readonly_source_shape(freeze) if readonly else source_shape(freeze)
+    if readonly:
+        ro = checked_module('editor_readonly_probe', str(parent.TOOLS / 'editor_readonly_probe.py'), freeze['sources'])
     if dependencies is None:
-        extras = load_extras(freeze)
+        extras = load_readonly_extras(freeze) if readonly else load_extras(freeze)
         modules = {n: checked_module(n, p, freeze['sources']) for n, p in freeze['modulePaths'].items()}
         dependencies = SimpleNamespace(extras=extras, guard=modules['launcher_guard'].LauncherGuard,
             lease_input=modules['launcher_access'].lease_input, operation=modules['launcher_access'].operation,
@@ -268,8 +323,20 @@ def execute(record, dependencies=None):
         limits=copy.deepcopy(parent.STAGE_PLAN_LIMITS), nativeSize=[640, 512], blankBinding=blank,
         passiveProbe=probe, sourceFreezeRef=record['sourceFreezeRef'],
         nativeGeometryProofRef=record['geometryProofRef'], runLabel=record['runLabel'])
+    if readonly:
+        prepared = ro.volume.verify(record['readonlyPreparationRef'])
+        probe.update(state=ro.INPUT_STATE, acceptedByRoot=True, target='amiberry-030',
+            allowedActions=dict(ro.ALLOWED), limits=dict(ro.LIMITS), sourceFreezeRef=record['sourceFreezeRef'],
+            readonlyPreparationRef=record['readonlyPreparationRef'], capturePreparationRef=record['preparationRef'],
+            originalProfileBeforeimage=record['originalProfileRef'], activeProfile=record['activeProfileRef'],
+            runLabel=record['runLabel'], stagedCandidate=prepared['candidate'], guestCandidate='PTProbe:PTEditorPointerV2')
+        blank.update(state=ro.BLANK_STATE, readonlyProbe=probe)
+        binding.update(state=ro.PARENT_STATE, allowedActions=copy.deepcopy(parent.ALLOWED),
+                       limits=copy.deepcopy(parent.LIMITS))
+    def validate_binding():
+        return parent.validate_binding(binding, readonly=True) if readonly else parent.validate_binding(binding, stage_plan=True)
     with parent.command_lock(HARNESS / 'runtime/test.lock'):
-        parent.validate_binding(binding, stage_plan=True)
+        validate_binding()
         state = guard.status()
         parent.need(state['phase'] == 'READY' and not state['holds'] and state['inflight'] is None,
                     'Current original normal owned session required')
@@ -292,7 +359,8 @@ def execute(record, dependencies=None):
             parent.need(time.monotonic() < deadline, 'Actual binder deadline exhausted before Guest')
             d.guest(HARNESS, window); api.owner(owner)
             parent.need(time.monotonic() < deadline, 'Actual binder deadline exhausted after Guest')
-        parent.validate_binding(binding, stage_plan=True)
+        validate_binding()
+        parent.need(time.monotonic() < deadline, 'Actual binder deadline exhausted before publishing bindings')
         save(window / 'capture-binding.json', blank)
         return save(window / 'mouse-parent-binding.json', binding)
 
@@ -300,11 +368,12 @@ def execute(record, dependencies=None):
 def main():
     os.umask(0o077); sys.dont_write_bytecode = True
     parent.need(len(sys.argv) == 3 and sys.argv[1] in
-                ('--freeze-plan-ref', '--freeze-readonly-plan-ref', '--actual-binding-ref'),
+                ('--freeze-plan-ref', '--freeze-readonly-plan-ref', '--actual-binding-ref', '--actual-readonly-binding-ref'),
                 'Actual newly reviewed freeze or start-binding record required')
     ref = json.loads(sys.argv[2]); record = json.loads(parent.pinned(ref))
     if sys.argv[1] == '--freeze-readonly-plan-ref': result = freeze_readonly_sources(record)
     elif sys.argv[1] == '--freeze-plan-ref': result = freeze_sources(record)
+    elif sys.argv[1] == '--actual-readonly-binding-ref': result = execute_readonly(record)
     else: result = execute(record)
     print(json.dumps({'ref': result, 'applicationLaunches': 0, 'lifecyclePending': True}))
 

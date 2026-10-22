@@ -25,6 +25,7 @@ import editor_capture_namespace as app_namespace
 from editor_probe_namespace import save, directory_ref
 
 STATE = 'ROOT_ACCEPTED_FULL_STOPPED_PASSIVE_V2_RESTORATION_AND_RELEASE'
+READONLY_STATE = 'ROOT_ACCEPTED_FULL_STOPPED_READONLY_PASSIVE_V2_RESTORATION_AND_RELEASE'
 APP_ROOT = Path('/Users/james1/Documents/Amiberry')
 ORIGINAL_HELPER = (10249, '8c1fbc9f12b31fd846e37916d2178ab153f34477608c77378438ee43d9e8f15b')
 THEMES = {'Visuals/Themes/Dark.theme', 'Visuals/Themes/Default.theme'}
@@ -41,11 +42,13 @@ def large_pin(ref):
 
 def validate(binding):
     b = binding
-    parent.need(b['state'] == STATE and b['acceptedByRoot'] is True
+    readonly = b.get('state') == READONLY_STATE
+    parent.need(b['state'] == (READONLY_STATE if readonly else STATE) and b['acceptedByRoot'] is True
                 and b['allowedActions'] == ALLOWED and b['limits'] == {'whole': 180},
                 'Distinct full stopped restoration/release scope required')
     sb = json.loads(parent.pinned(b['stoppedBindingRef'])); verified = stopped.validate(sb)
     p = verified[0]; window = Path(sb['windowDirectory']); directory_ref(window)
+    parent.need((sb['state'] == stopped.READONLY_STATE) == readonly, 'Full settlement and stopped input scopes differ')
     parent.need(b['ownerRunID'] == sb['ownerRunID'] == p['ownerRunID']
                 and b['mode'] == sb['mode'] and b['windowDirectory'] == str(window)
                 and b['stoppedBindingRef']['path'] == str(window / 'probe-stopped-binding.json')
@@ -62,10 +65,16 @@ def validate(binding):
 
 def load_dependencies(binding, verified):
     p = verified[0]; freeze = json.loads(parent.pinned(p['sourceFreezeRef']))
-    extras = binding_source.load_extras(freeze)
+    readonly = binding['state'] == READONLY_STATE
+    extras = binding_source.load_readonly_extras(freeze) if readonly else binding_source.load_extras(freeze)
     f = extras['canonical_profile_session_files']
-    binding_source.configure_saved_files(f, p['sourcePins'], p['blankBinding']['localVolumePreparation'],
-                                         p['blankBinding']['originalProfileBeforeimage'])
+    if readonly:
+        binding_source.configure_readonly_probe_saved_files(f, p['sourcePins'],
+            p['blankBinding']['localVolumePreparation'], p['passiveProbe']['readonlyPreparationRef'],
+            p['blankBinding']['originalProfileBeforeimage'])
+    else:
+        binding_source.configure_saved_files(f, p['sourcePins'], p['blankBinding']['localVolumePreparation'],
+                                             p['blankBinding']['originalProfileBeforeimage'])
     d = stopped.load_dependencies(p)
     d.files = f; d.preservation = extras['fresh_preservation']
     return d
@@ -173,7 +182,7 @@ def execute(binding, dependencies=None):
         return check
 
     owner(); rows = app_data_rows(b, p)
-    save(window / 'full-settlement-intent.json', {'state': STATE, 'ownerRunID': b['ownerRunID'],
+    save(window / 'full-settlement-intent.json', {'state': b['state'], 'ownerRunID': b['ownerRunID'],
          'mode': b['mode'], 'allowedActions': ALLOWED, 'retryAllowed': False})
     result = {'state': 'FULL_STOPPED_SETTLEMENT_STARTED', 'mode': b['mode'],
               'targetOperations': 0, 'nativeCleanExitClaimed': False, 'runtimeAcceptance': False,

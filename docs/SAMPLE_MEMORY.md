@@ -1,5 +1,48 @@
 # Sample memory and playback ownership
 
+## Fresh emulator focus refusal; complete restoration/release verified —22 October2026
+
+The fresh paired-volume source package and inputs were prepared, with41 HOST
+checks passing for the service/lifecycle/publisher. The user's new direct
+“approved” reply authorized one verified idle-service restart, performed once;
+that approval is consumed. Fresh original reservation, same complete paired
+profile patch, exact030 startup and distinct actual-start binding succeeded.
+Root actually viewed the owned native startup screen. No old actor was replayed.
+
+The full346404-byte editor guest readback matched the exact candidate. One
+setup/launch produced a clean blank log and registered image. Root actually
+viewed that image and published within60seconds: screen76,39,640,512; planned
+source point294,463. The original move API refused input_not_ready at readiness,
+“Amiberry input focus is not ready”, execution not_started, applied coordinates
+empty, cleanup confirmed. Actual moves0, clicks0, passive probe invocations0.
+No retry, synthetic focus success, offset fitting or selection acceptance.
+
+The genuine owned failed stop verified the original HOLD, PID/group/socket,
+at most oneSIGTERM, bridgeEOF and absence. The DISTINCT read-only full stopped
+integration then completed successfully: probe/preparation copies and retained
+unchanged input, own app namespace preserved/removed, all31appdata original
+bodies/mtimes and three saved host roles restored, fresh retention facts before
+four proof hashes and again before original public release. The checksum
+archive/lease/proof and subsequent empty ownership/disconnected bridge/target
+absence were independently verified under both original locks. One failure
+HOLD archived. This proves this failed-session restoration path; native clean
+exit and whole application acceptance remain unqualified.
+
+Three focused post-runtime HOST checks pass. Initial failed HOST expectation,
+qualification-name and pre-admission import/lease refusals remain preserved;
+no failed target transaction was replayed. Original16 bodies and raw68 plus ten
+installed immutable-source records remain exact; forbidden vendor reads0. The
+private lease stays only in its original window. No physical/Safari action.
+
+Installed GUI source waits for focus_ready and refuses before input when it
+remains false. Actual native focus failure cause is not established. Next is
+exact fixed-build focus-source review and a bounded activation design if
+needed, retaining focus and pointer/image guards. Read-only probe guest readback
+and execution, pointer selection, ABI, physical and listening remain pending.
+No fresh admission or restart authority follows from the completed release.
+
+See the [focus refusal and full release receipt](test-evidence/editor_readonly_focus_refusal_full_release_20261022.json).
+
 ## Paired-volume runtime and full settlement integration —22 October2026, HOST only
 
 A distinct actual-start entry now binds the complete paired profile, reviewed

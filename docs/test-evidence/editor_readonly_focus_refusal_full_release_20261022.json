@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Fresh paired-volume exact-editor emulator run; focus refusal retained; actual full read-only stopped restoration and original public release verified",
+  "source": {
+    "repositoryRevision": "f0dca0119c4bd273ffe579402cd1298b44694a98",
+    "selectedModulePaths": 23,
+    "selectedPinnedSources": 49,
+    "oldFailedCaseOrRecoveryReplayed": false
+  },
+  "host": {
+    "servicePreparationMethods": 12,
+    "rootLifecycleMethods": 8,
+    "publisherObservationMethods": 21,
+    "postRuntimeFocusedMethods": 3,
+    "latestScopedResultsPass": true,
+    "initialFailedHostStreamsRetained": true,
+    "historicalFull707SuiteFailureNotRerunOrWaived": true
+  },
+  "actualPreparation": {
+    "oneNewDirectHumanApprovalUsedForOneIdleServiceRestart": true,
+    "remainingRestartAuthorization": 0,
+    "bothOriginalLocksAndEmptyGuardVerifiedBeforeRestart": true,
+    "freshPrivateInputsAnd31AppDataBackups": true,
+    "readonlySourceFreezeAndFreshOriginalReservation": true,
+    "sameCompletePairedProfilePatchedByOriginalSavedFileHelper": true,
+    "originalExactOwned030StartupSeconds": 34.34161145899998,
+    "nativeWorkbenchActuallyViewedBeforeBinding": true,
+    "distinctActualStartBindingSucceeded": true
+  },
+  "editorEvidence": {
+    "candidateBytes": 346404,
+    "candidateSHA256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b",
+    "completeGuestReadbackMatched": true,
+    "oneEnvironmentSetupAndApplicationLaunch": true,
+    "blankLogAndRegisteredImageRecorded": true,
+    "rootActuallyViewedExactImageWithin60Seconds": true,
+    "screenRectangle": [
+      76,
+      39,
+      640,
+      512
+    ],
+    "sourceDerivedPoint": [
+      294,
+      463
+    ]
+  },
+  "mouseOutcome": {
+    "state": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+    "moveRequests": 1,
+    "moveCode": "input_not_ready",
+    "failurePhase": "readiness",
+    "executionState": "not_started",
+    "appliedCoordinates": [],
+    "cleanupState": "confirmed",
+    "message": "Amiberry input focus is not ready",
+    "actualMovesApplied": 0,
+    "clickAttempts": 0,
+    "passiveProbeInvocations": 0,
+    "selectedResultAccepted": false,
+    "retryPerformed": false,
+    "nativeFocusRootCauseEstablished": false
+  },
+  "actualStoppedSettlement": {
+    "mode": "failed",
+    "genuineOwnedStopAndBridgeEOFVerified": true,
+    "maximumOwnedSIGTERM": 1,
+    "readonlyProbeAndPreparationEvidenceCopied": true,
+    "originalReadonlyInputRetainedUnchanged": true,
+    "probeFilesOrDirectoriesRemoved": 0,
+    "ownedAppNamespacePreservedAndAbsent": true,
+    "restoredHostRoles": 3,
+    "originalAppDataBodiesAndMtimesVerified": 31,
+    "freshRetentionFactsBeforeFourProofHashesAndAgainBeforeRelease": true,
+    "originalPublicReleaseSucceeded": true,
+    "archiveChecksumLeaseAndProofIndependentlyVerified": true,
+    "archivedFailureHolds": 1,
+    "bothOriginalLocksEmptyOwnershipNoResidentTargetAndDisconnectedBridgeIndependentlyObserved": true,
+    "observationsAreFutureClearance": false,
+    "nativeCleanExitOrRuntimeAcceptanceClaimed": false
+  },
+  "preservation": {
+    "originalUnrelatedDirtyBodies": 16,
+    "rawProtectedRecords": 68,
+    "installedImmutableSourceRecords": 10,
+    "excludedVendorBodyReads": 0,
+    "noMetadataToleranceAdded": true,
+    "privateLeaseBodyNotCopiedToDurableEvidence": true
+  },
+  "remaining": "Determine native input-focus readiness prerequisites from the exact fixed-build implementation and define a freshly reviewed bounded activation approach if needed. Preserve focus guards and exact native-pointer/Root gates. A future test requires new original admission; no restart approval remains. Readonly native readback/execution, pointer selection, application ABI, physical and listening acceptance remain unqualified."
+}

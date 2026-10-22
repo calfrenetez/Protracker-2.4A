@@ -1,5 +1,67 @@
 # Sample memory and playback ownership
 
+## Real emulator mouse move; click remains unqualified —22 October2026
+
+A distinct r3 test completed the exact candidate readback, blank editor launch
+and capture, then one real button-free mouse move. Root's initial image
+observation was published within its original60-second deadline using the
+corrected pinned runtime. The unchanged GUI service and native guards accepted
+the move and confirmed cleanup; buttons were released and the original
+mousehack/MIDDLE settings restored. Requested screenshot294,462 mapped to
+window280,447, matching the original source's pixel-center mapping.
+
+Root viewed the after-move image but did not adjudicate its exact integer
+pointer tip before the next60-second deadline. A late publication was refused;
+no after-move observation or click intent was written. The original failure
+was retained. Offline pixel inspection finds the first painted cursor colour
+at295,463; this is not proof of the OS hotspot or a justified offset. Exact
+position and click selection remain unqualified, and no guard was relaxed.
+
+The own session was fully settled: one verified SIGTERM,15 files preserved
+before removal, three saved host roles and all31 app-data bodies/mtimes restored,
+raw68-path/10-source checks equal, normal public release at historical EMPTY2686.
+No native clean exit or guest ENV-script restoration is claimed. The latest
+specific one-restart approval was used once before this case and is consumed.
+
+See the [actual move and refused click receipt](test-evidence/editor_firstmouse_postmove_refusal_20261022.json)
+and [saved after-move capture](test-evidence/editor_mouse_move_20261022.png).
+Next work is source qualification of the pointer hotspot/rendering contract;
+no guessed offsets, tolerance changes or replay. Whole editor/workflow/ABI/stack,
+playback/backend, physical hardware and listening acceptance remain unchanged.
+
+
+## Second mouse attempt: clock refusal and runtime correction —22 October2026
+
+The exact current candidate completed a fresh full guest readback, one blank
+editor launch and registered capture. Root viewed the image, but no mouse input
+occurred: the publisher used the Mac's Python3.9 runtime, whose observed clock
+origin differed from the harness Python3.14 parent. Its timestamp was refused.
+A subsequent publication using the correct runtime missed the original finite
+deadline. Neither attempt wrote an observation; no target transaction was
+replayed, deadline extended or observation backdated.
+
+The failed owned VM was stopped once. Fifteen generated files were preserved
+before removal; three saved host roles, all31 app-data bodies/original mtimes
+and raw68-path/10-source preservation checks passed. Normal public release
+archived the original failure at historical EMPTY2678. This is no native clean
+exit or guest ENV-script restoration claim.
+
+A separate prospective correction adds a local exact-runtime precondition
+before original imports in both parent and publisher. Its nine runtime and
+synthetic publication checks plus twelve unchanged observation checks pass21
+HOST methods in0.501s. The actual harness child clock falls between its parent
+timestamps; the actual system runtime refuses both entrypoints. Expired
+requests, changed images, missing view assertions and duplicate publication
+still refuse. The original finite60-second protocol, GUI focus/geometry guards,
+candidate and installed harness sources are unchanged.
+
+See the [clock refusal and HOST correction](test-evidence/editor_firstmouse_clock_refusal_20261022.json).
+Actual mouse selection, whole editor ABI/stack/workflows, playback, physical
+hardware and listening remain unqualified. Service restarts require the
+current specific human authorization and live idle checks; historical release
+fences and prior approvals are never future clearance.
+
+
 ## Further mouse composition and stack HOST checks —22 October2026
 
 Five additional HOST methods compose the prospective mouse phase and actual

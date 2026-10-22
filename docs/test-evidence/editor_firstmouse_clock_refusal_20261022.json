@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Exact-candidate r2 blank editor capture; mouse observation clock refusal before input; complete own settlement; prospective HOST runtime correction",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "emulator": {
+    "distinctRun": "r2",
+    "completeGuestCandidateReadbackMatched": true,
+    "applicationLaunches": 1,
+    "registeredBlankCaptures": 1,
+    "rootActuallyViewedCurrentPNG": true,
+    "image": {
+      "bytes": 15793,
+      "sha256": "011fbf771e25e396d9a4cf9c5a2cc9115b61e5ed043a849b668fd324262beb7c",
+      "width": 756,
+      "height": 576
+    },
+    "mouseAttempts": {
+      "state": 0,
+      "move": 0,
+      "click": 0,
+      "capture": 0
+    },
+    "error": "Actual Root observation deadline exhausted; no input/retry",
+    "observationWritten": false,
+    "failedTargetOrPhaseTransactionReplayed": false,
+    "mouseControlAcceptance": false
+  },
+  "clockDiagnosis": {
+    "firstPublisherUsedSystemPython39": true,
+    "firstPublisherRejectedBeforeObservationWrite": true,
+    "firstPublisherTimestampNotRetained": true,
+    "laterProbeObservedDifferentMonotonicOrigins": true,
+    "bothClockInfoImplementationStringsWereMachAbsoluteTime": true,
+    "correctRuntimePublicationAttemptMissedOriginalFiniteDeadline": true,
+    "deadlineExtendedOrBackdated": false
+  },
+  "settlement": {
+    "singleOwnedSIGTERM": true,
+    "genuineBridgeEOFObserved": true,
+    "generatedOwnFilesPreservedBeforeExactRemoval": 15,
+    "savedHostRolesRestored": 3,
+    "appDataOriginalBodiesAndMtimesVerified": 31,
+    "themeMtimeRestorationBodyWrites": 0,
+    "rawProtectedPathsVerified": 68,
+    "installedSourcesVerified": 10,
+    "normalPublicReleaseSucceeded": true,
+    "historicalFence": 2678,
+    "originalFailureHoldsArchived": 1,
+    "phaseAtRelease": "EMPTY",
+    "nativeCleanExitClaimed": false,
+    "guestENVScriptRestoreClaimed": false,
+    "snapshotIsNotFutureClearance": true
+  },
+  "hostCorrection": {
+    "methodsPassed": 21,
+    "newRuntimeAndSyntheticPublisherMethods": 9,
+    "unchangedRootProtocolMethods": 12,
+    "seconds": 0.501,
+    "parentAndPublisherRequireSamePinnedHarnessCPython314BeforeOriginalImports": true,
+    "originalProtocolAndFinite60SecondDeadlineUnchanged": true,
+    "actualCorrectRuntimeChildClockBracketedByParent": true,
+    "actualWrongInterpreterRefusesBothEntryPointsBeforeOriginalImports": true,
+    "expiredRequestChangedImageMissingViewAndDuplicateRefuse": true,
+    "syntheticPublicationDoesNotProveActualRootObservation": true,
+    "original49FrozenSourcePinsReverifiedUnchanged": true,
+    "installedHarnessSourceChanged": false,
+    "candidateChanged": false
+  },
+  "durableEvidence": {
+    "failedSessionFiles": 211,
+    "failedSessionBytes": 10425943,
+    "hostFixManifestMembers": 22,
+    "privateLeaseBodiesCopied": 0
+  },
+  "withheld": [
+    "Editor mouse positioning and selection",
+    "Whole editor workflow and ABI/stack",
+    "Replay/backend/audio",
+    "Physical A1200/AmiGUS and human listening"
+  ]
+}

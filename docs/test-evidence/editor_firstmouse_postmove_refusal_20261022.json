@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Distinct r3 real Amiberry button-free mouse move completed; finite after-move observation deadline failed; zero clicks; fully settled",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "actualEmulator": {
+    "completeGuestCandidateReadbackMatched": true,
+    "applicationLaunches": 1,
+    "blankCaptureSucceeded": true,
+    "beforeMoveImageActuallyViewedAndObservationPublishedWithinOriginal60Seconds": true,
+    "mousePhaseAttempts": {
+      "capture": 1,
+      "click": 0,
+      "move": 1,
+      "state": 2
+    },
+    "moveRequestedScreenshotPoint": [
+      294,
+      462
+    ],
+    "moveAppliedWindowPoint": [
+      280,
+      447
+    ],
+    "moveExecutionState": "completed",
+    "moveCleanupConfirmed": true,
+    "beforeAndAfterButtonsReleased": true,
+    "originalMousehackAndMiddleSettingsRestored": true,
+    "originalGuiAndNativeFocusGuardsRetained": true,
+    "afterMovePNGActuallyViewed": true,
+    "failure": "Actual Root observation deadline exhausted; no input/retry",
+    "afterMoveObservationWritten": false,
+    "clickIntentOrDispatch": false,
+    "deadlineExtendedOrObservationBackdated": false,
+    "targetOrPhaseTransactionReplayed": false,
+    "exactPointerPositionOrSelectionAcceptance": false,
+    "image": {
+      "file": "editor_mouse_move_20261022.png",
+      "bytes": 15676,
+      "sha256": "a79918ad4474d2b8c117d5c3cfd4c58b3a2ad2eb777f14ce1ff67b4f55ec695c",
+      "width": 756,
+      "height": 576
+    }
+  },
+  "offlineDiagnostic": {
+    "originalSourcePixelCenterMappingAgreesWithActualReceipt": true,
+    "firstVisibleChangedCursorColourPixel": [
+      295,
+      463
+    ],
+    "visibleColourPixelNotProvedOSHotspot": true,
+    "cursorInsetOrMappingCauseEstablished": false,
+    "empiricalOffsetsOrToleranceChanges": false,
+    "lateDiagnosticDoesNotReplaceFiniteObservation": true
+  },
+  "settlement": {
+    "oneOwnedSIGTERM": true,
+    "genuineBridgeEOF": true,
+    "generatedFilesPreservedBeforeExactRemoval": 15,
+    "savedHostRolesRestored": 3,
+    "allAppDataBodiesAndMtimesVerified": 31,
+    "themeMtimeRestorationBodyWrites": 0,
+    "rawProtectedPathsVerified": 68,
+    "installedSourcesVerified": 10,
+    "normalReleaseSucceeded": true,
+    "historicalFence": 2686,
+    "failureHoldsArchived": 1,
+    "phaseAtRelease": "EMPTY",
+    "nativeCleanExitOrGuestENVScriptRestoreClaimed": false,
+    "snapshotIsNotFutureClearance": true
+  },
+  "hostRuntimeCorrection": {
+    "methodsPassed": 21,
+    "actualFirstFiniteObservationPublishedUsingPinnedRuntime": true,
+    "originalRootProtocolAnd60SecondLimitUnchanged": true,
+    "wholeHostSuiteRerun": false
+  },
+  "service": {
+    "actualNewExplicitOneRestartAuthorizationUsedOnceBeforeThisCase": true,
+    "furtherRestartAuthorized": false,
+    "noServiceRestartDuringFailureSettlement": true,
+    "connectionLossGuardMustNotBeBypassed": true
+  },
+  "evidence": {
+    "durableFiles": 233,
+    "durableBytes": 10462977,
+    "privateLeaseBodiesCopied": 0
+  },
+  "withheld": [
+    "Exact pointer hotspot/position and click selection",
+    "Editor workflows and whole ABI/stack",
+    "Playback/backend/audio",
+    "Physical A1200/AmiGUS and human listening"
+  ]
+}

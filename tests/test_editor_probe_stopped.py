@@ -23,7 +23,8 @@ class StoppedProbeTests(unittest.TestCase):
             p=patch.object(module,'HARNESS',self.h);p.start();self.addCleanup(p.stop)
         (self.h/'runtime/Dev/Tests').mkdir(parents=True)
         (self.h/'runtime/test.lock').touch();(self.h/'runtime/launcher-guard').mkdir()
-        self.window=self.root/'window';self.window.mkdir()
+        self.window_temp=tempfile.TemporaryDirectory(prefix='pt24g-stopped-window-HOST-',dir='/private/tmp')
+        self.addCleanup(self.window_temp.cleanup);self.window=Path(self.window_temp.name)
         self.owner='HOST_FIXTURE_OWNER';native=b'HOST native';source=b'HOST source'
         for name,body in [('NATIVE',native),('SOURCE',source)]:
             p=patch.object(ns,name,ns.digest(body));p.start();self.addCleanup(p.stop)

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Fresh passive-pointer source binding and full stopped restoration/public-release integration; HOST qualification only",
+  "host": {
+    "settlement": {
+      "methods": 16,
+      "unittestSeconds": 1.477,
+      "elapsedSeconds": 1.6931386669984931,
+      "returncode": 0
+    },
+    "binding-parent-dispatch": {
+      "methods": 96,
+      "unittestSeconds": 0.64,
+      "elapsedSeconds": 0.7547177090000332,
+      "returncode": 0
+    },
+    "probe-mouse": {
+      "methods": 81,
+      "unittestSeconds": 0.81,
+      "elapsedSeconds": 0.9205652919990825,
+      "returncode": 0
+    }
+  },
+  "uniqueMethodsPassed": 170,
+  "methodExecutions": 193,
+  "overlappingMethodsExecutedTwice": 23,
+  "behavior": [
+    "Fresh source freeze requires reviewed complete selected sources and current approved service readiness under both original locks.",
+    "Fresh actual-start binder checks original reservation, successful startup, Root-viewed Workbench, exact new profile/editor/probe/geometry associations, and current original owner/frame before one original Guest CPU admission.",
+    "One finite full settlement supports normal READY and failed HOLD without manufacturing a frame; it preserves probe and app namespaces before removal.",
+    "Unchanged qualified saved-file helper is parameterized from the actual paired mount for both patch and restore, never a historical temporary-volume literal.",
+    "All31 app-data bodies/inventory/identities and original mtimes are checked; only the two established unchanged theme bodies can have their own run-modified mtimes restored.",
+    "Three original host roles are restored; both cleanup records require freshly checked probe and app evidence before hashing and one original public guard release/archive verification.",
+    "Source, copy, body, owner, inventory, service, absence or restoration drift retains failure evidence without replay."
+  ],
+  "coverage": {
+    "normalAndFailedFullPaths": true,
+    "actualOriginalSavedFileFunctionsAndPublicGuardInTemporaryFixtures": 2,
+    "actualPrivateFilesystemAndLocks": true,
+    "VMServiceAndRootObservationsSynthetic": true,
+    "borrowedCommandLockNotClosedOrReacquired": true,
+    "noHiddenTargetOrSignalInStoppedSettlement": true
+  },
+  "retainedFailures": [
+    {
+      "suite": "Initial binding11",
+      "passed": 8,
+      "errors": 3,
+      "reason": "Synthetic file-reader fixture did not override the real validator default reader; fixture corrected."
+    },
+    {
+      "suite": "First original-helper integration14",
+      "passed": 12,
+      "failures": 2,
+      "reason": "Synthetic window was nested; original helper requires a direct private temporary window. Fixture corrected; original requirement unchanged."
+    }
+  ],
+  "preserved": {
+    "unrelatedDirtyBodies": 16,
+    "selectedSourceBodiesEqualBeforeAfter": 10,
+    "selectedOriginalHelperGuardBodiesAndFullFactsEqual": 2,
+    "exactEditorAndV2ProbeCandidates": true,
+    "installedHarnessAndHistoricalEvidence": true
+  },
+  "liveBoundary": {
+    "sourceFreezeOrActualBindingCreated": false,
+    "serviceRestart": false,
+    "emulatorOrGuestExecution": false,
+    "productionNamespaceMutation": false,
+    "liveGuardRelease": false,
+    "physicalOrListeningAcceptance": false,
+    "fullHostSuiteRerun": false,
+    "historicalIndependentProviderGateFailureUnchanged": true
+  },
+  "next": "A specific fresh idle-service action is prepared and refusal checked; prior single-restart approval was consumed. Fresh human authorization and current admission are still required before live testing."
+}

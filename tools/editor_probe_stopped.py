@@ -4,6 +4,7 @@ Only after a new explicit stopped-case binding and actual stop evidence exist.
 Uses the original guard owner API without creating a FRAME, including HOLD mode.
 """
 import http.client
+from contextlib import contextmanager
 import importlib
 import importlib.util
 import json
@@ -24,7 +25,7 @@ if __name__ == '__main__':
         raise RuntimeError('Original harness clock required before cleanup imports')
 
 from editor_pointer_parent import pinned, need, command_lock, FROZEN_STATE
-from editor_probe_namespace import settle_stopped, release_cleanup_facts, save
+from editor_probe_namespace import settle_stopped, release_cleanup_facts, save, checked_command_lock
 
 STATE = 'ROOT_ADMITTED_STOPPED_EDITOR_PROBE_NAMESPACE_ONLY'
 
@@ -107,6 +108,7 @@ def load_dependencies(parent):
         pinned(parent['sourcePins'][path]); modules[name] = module
     return SimpleNamespace(guard=modules['launcher_guard'].LauncherGuard,
                            lease_input=modules['launcher_access'].lease_input,
+                           decode=modules['launcher_guard']._decode,
                            observations=HostObservations())
 
 
@@ -181,14 +183,27 @@ def execute(binding, dependencies=None):
             save(window / 'probe-stopped-observations.json', result)
 
 
-def release_cleanup_supplement(binding, fact_ref, dependencies=None):
+@contextmanager
+def cleanup_lock(lock_fd):
+    if lock_fd is None:
+        with command_lock(HARNESS / 'runtime/test.lock') as fd:
+            yield fd
+    else:
+        checked_command_lock(lock_fd)
+        try:
+            yield lock_fd
+        finally:
+            checked_command_lock(lock_fd)
+
+
+def release_cleanup_supplement(binding, fact_ref, dependencies=None, *, lock_fd=None):
     """Required fresh probe addition to either original cleanup release record.
 
     The caller adds this data before hashing its original cleanup record. This
     does not write the other app facts, construct their proof, or release a guard.
     """
     b = binding
-    with command_lock(HARNESS / 'runtime/test.lock') as fd:
+    with cleanup_lock(lock_fd) as fd:
         verified = validate(b)
         d = dependencies if dependencies is not None else load_dependencies(verified[0])
         owner = StoppedOwner(b, verified, d)

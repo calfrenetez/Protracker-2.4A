@@ -1,5 +1,45 @@
 # Sample memory and playback ownership
 
+## Fresh binding and full restoration/release integration —22 October2026
+
+The new source-freeze and actual-start binder keep the original21 selected
+module paths and include the new lifecycle sources plus original helpers.
+They require actual current service readiness, reservation, startup and Root
+Workbench evidence. The binder performs one original guarded Guest CPU
+admission, then creates the explicit stage-plan binding without guessed
+future probe endpoints. No live freeze or binding has been created yet.
+
+Normal READY and retained failed HOLD now share a full stopped settlement.
+It preserves the exact probe and complete original app namespace before removal,
+verifies all31 app-data bodies and metadata, restores only the two established
+theme mtimes when their unchanged bodies/identities are exact, and calls the
+unchanged saved-file helper to restore the three original host files. The
+helper receives the actual new paired mount for both patch and restore.
+
+Both release paths freshly check preserved app/probe evidence and include the
+mandatory probe supplement in cleanup facts before hashing. One original
+public guard release is verified against its checksum-protected archive.
+There is no guard reset, manufactured HOLD frame, target action, hidden signal
+or replay in stopped settlement. Partial work/failures retain their evidence.
+
+All170 distinct focused HOST methods pass across193 executions, including two
+complete private fixtures using the actual original saved-file functions and
+public guard. VM/service/Root observations remain simulated. Initial synthetic
+reader and nested-window fixture failures are retained; original guards were
+unchanged. The original16 dirty bodies remain exact.
+
+Four original helper/provenance copies and four geometry-source copies from
+the actual candidate archive were freshly prepared. No canonical profile,
+service, VM, production namespace or live guard state was changed. Current
+read-only shared-resource checks show an idle service epoch different from the
+historical run. A newly pinned one-restart proposal has three zero-effect
+refusal checks; it still needs a new specific human approval. The prior approval
+was single-use and consumed. Live pointer/click, physical/listening and the
+historical full-suite independent-provider gate remain unqualified.
+
+See the [full integration HOST receipt](test-evidence/editor_full_settlement_host_20261022.json).
+
+
 ## Finite probe-parent supervisor preparation —22 October2026
 
 The fresh dispatcher now requires the exact stage-plan parent binding, its own

@@ -1,6 +1,29 @@
 # Sample memory and playback ownership
 
 
+## Parent pre-import runtime correction and fresh inputs —22 October2026
+
+A direct alternate-interpreter check found that the initial parent reached a
+pure app protocol's modern annotation before its runtime condition. System
+Python3.9 raised TypeError; no original target import or operation occurred.
+The executable entry now checks the original runtime before app-protocol
+imports. All27 focused parent HOST methods pass, including the actual alternate
+interpreter refusal. The earlier26-pass source and actual failure are retained.
+
+New private editor/probe inputs were prepared from the retained exact346404/
+15232-byte bodies, with new file references. No historical authority was
+adopted. The canonical profile's body/full facts remain unchanged. Ten source
+copies are preserved; the publisher's only production delta is its distinct
+source-freeze state literal. Twenty focused runtime/publisher/Root HOST checks
+pass; synthetic publications are not actual Root observations.
+
+No source freeze, lease or live admission was created. Separate shared probe
+staging and normal/failure settlement integration still precede any new emulator
+case. Service, VM, native execution, mapping/click, physical and listening
+acceptance remain unchanged.
+
+See the [runtime correction and fresh-input receipt](test-evidence/editor_passive_parent_runtime_host_20261022.json).
+
 ## Executable passive-parent preparation —22 October2026
 
 The new parent entry point passes26 focused HOST checks. It validates the

@@ -17,10 +17,6 @@ import sys
 import time
 from types import SimpleNamespace
 
-from editor_mouse_probe_case import ALLOWED, LIMITS
-from editor_pointer_probe import NATIVE, SOURCE, EDITOR, digest
-from editor_blank_capture_protocol import recent_line
-
 HARNESS = Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 TOOLS = Path(__file__).resolve().parent
 FACTS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid',
@@ -48,6 +44,16 @@ def require_harness_runtime():
          and sys.implementation.name == 'cpython' and sys.platform == 'darwin'
          and clock.monotonic is True and clock.adjustable is False,
          'Original harness Python3.14 clock domain required before target imports')
+
+
+if __name__ == '__main__':
+    # Keep the precondition ahead of even pure app-protocol imports: Python3.9
+    # cannot evaluate their modern annotations and must refuse here first.
+    require_harness_runtime()
+
+from editor_mouse_probe_case import ALLOWED, LIMITS
+from editor_pointer_probe import NATIVE, SOURCE, EDITOR, digest
+from editor_blank_capture_protocol import recent_line
 
 
 def read(path, maximum=2097152):

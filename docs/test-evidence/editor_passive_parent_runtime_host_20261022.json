@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST pre-import runtime correction and fresh private input/publisher preparation; no target admission",
+  "parentHost": {
+    "methodsPassed": 27,
+    "unittestSeconds": 0.106,
+    "returncode": 0,
+    "elapsedSeconds": 0.3157069579997369
+  },
+  "publisherHost": {
+    "methodsPassed": 20,
+    "unittestSeconds": 0.395,
+    "returncode": 0,
+    "elapsedSeconds": 0.5087557910001124
+  },
+  "retainedFailure": "Actual system Python3.9 reached a pure app annotation before the runtime condition; original target imports and operations were not reached.",
+  "fix": "The executable entry now checks the original runtime before app-protocol imports. Alternate-interpreter refusal is tested directly.",
+  "freshInputs": {
+    "editorBytes": 346404,
+    "probeBytes": 15232,
+    "exactRetainedBodiesVerified": true,
+    "newFileReferencesCreated": true,
+    "historicalAuthorityAdopted": false,
+    "originalProfileBodyAndFullFactsUnchanged": true,
+    "sourceCopies": 10,
+    "publisherChange": "Single distinct source-freeze state literal; original clock and finite Root protocol retained."
+  },
+  "evidence": {
+    "parentManifestMembers": 40,
+    "inputManifestMembers": 29,
+    "failedAndPriorPassedEvidenceRetained": true
+  },
+  "withheld": {
+    "actualSourceFreezeOrParentAdmission": false,
+    "sharedProbeNamespaceStaged": false,
+    "normalAndFailedSettlementIntegration": false,
+    "serviceVMOrGuestOperation": false,
+    "nativePointerOrClickAcceptance": false,
+    "physicalOrListeningAcceptance": false,
+    "fullHostSuiteRerun": false
+  }
+}

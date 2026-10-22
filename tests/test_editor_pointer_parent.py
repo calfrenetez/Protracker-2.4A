@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -299,6 +300,16 @@ class ParentExecutionTests(unittest.TestCase):
 
 
 class BootstrapFileTests(unittest.TestCase):
+    @unittest.skipUnless(Path('/usr/bin/python3').is_file(), 'No alternate system Python')
+    def test_actual_other_interpreter_refuses_before_app_annotation_imports(self):
+        child = subprocess.run(['/usr/bin/python3', '-B', parent.__file__, '--help'],
+                               capture_output=True, text=True, timeout=20)
+        self.assertNotEqual(child.returncode, 0)
+        self.assertEqual(child.stdout, '')
+        self.assertIn('Original harness Python3.14 clock domain required before target imports', child.stderr)
+        self.assertNotIn('TypeError', child.stderr)
+        self.assertNotIn('ModuleNotFoundError', child.stderr)
+
     def test_actual_file_pin_then_body_drift_and_symlink_refusals(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)/'input'; path.write_bytes(b'original')

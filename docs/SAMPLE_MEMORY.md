@@ -1,5 +1,38 @@
 # Sample memory and playback ownership
 
+## Isolated read-only probe input preparation —22 October2026, HOST only
+
+A new host-only preparer builds a separate sole-file PTProbe input under a fresh
+private temporary path. It retains the existing PTCapture profile suffix and
+adds paired read-only DH4/uaehf3 lines. The native/source/compile association,
+complete file and directory facts, sole-file inventories and preparation source
+are pinned. New host input permissions are0500; this is preparation, not proof
+of guest mounting or runtime immutability. No tracking flags or timestamps are
+normalized or ignored. Partial failures remain preserved and cannot be retried.
+
+A prospective saved-file configuration helper requires that new module's exact
+selected source, the same capture preparation and original profile bytes. It
+sets the same complete paired suffix for future patch and restoration through
+the original qualified helper. It performs neither transaction. Existing live
+bindings and executable routes are unchanged; they reject this preparation as
+runtime admission and still use the original Dev namespace.
+
+All51 focused HOST methods pass, covering the new preparation/configuration,
+existing capture and binding behavior, and original standard restoration
+fixtures. The new read-only helper configuration has not executed a profile
+transaction. All16 unrelated bodies and raw68 protected records plus ten
+installed immutable sources remain exact; excluded vendor body-open attempts0.
+No production preparation, freeze, lease, service restart, guest/physical action
+or canonical write occurred. The earlier metadata cause and native mouse
+qualification remain unresolved; this is a prospective carrier improvement.
+
+Next: integrate a distinct read-only carrier into the accepted source plan,
+actual-start binder, parent/probe and stopped settlement. Keep strict pins,
+original current admission and exact guest readback. Existing restart authority
+is consumed; no new restart is requested by this source-only step.
+
+See the [read-only probe input HOST receipt](test-evidence/editor_readonly_probe_volume_host_20261022.json).
+
 ## Fresh bound emulator case and stopped restoration —22 October2026
 
 A newly authorized single idle-service restart, complete source freeze,

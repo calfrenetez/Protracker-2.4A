@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "Prospective isolated read-only passive-probe input preparation and paired saved-file configuration; HOST only",
+  "sourceBehavior": {
+    "sameExactOriginalProfileRequired": true,
+    "existingCaptureSuffixRetainedByteForByte": true,
+    "probeMounts": {
+      "filesystem2": "ro,DH4:PTProbe",
+      "uaehf3": "dir,ro,DH4:PTProbe"
+    },
+    "freshDirectPrivatePathsRequired": true,
+    "soleProbeFilename": "PTEditorPointerV2",
+    "newHostFileAndDirectoryMode": "0500",
+    "soleFileEditorCaptureVolumeUnchanged": true,
+    "exactNativeSourceBinaryAndCompileAssociationRequired": true,
+    "allBodyIdentityMetadataPinsRemainStrict": true,
+    "trackingFlagsOrTimesNormalized": false,
+    "partialFailuresRetainedNoReplay": true,
+    "actualPreparationSourceExplicitlyPinned": true,
+    "preparationRecordCannotServeAsExistingRuntimeAdmission": true
+  },
+  "savedFileConfiguration": {
+    "originalHelperBodyStillRequired": true,
+    "newPreparationModuleMustBeSelectedAndPinned": true,
+    "sameCapturePreparationAndBeforeimageBytesRequired": true,
+    "sameCompleteTwoVolumeSuffixForFuturePatchAndRestore": true,
+    "noFileTransactionPerformed": true
+  },
+  "host": {
+    "methods": 51,
+    "unittestSeconds": 2.831,
+    "elapsedSeconds": 3.0326031670010707,
+    "returncode": 0,
+    "privateFixturesOnly": true,
+    "readonlyConfigurationTestsUseQualifiedHelperSourceIdentityButDoNotExecuteAFileTransaction": true,
+    "existingStandardRestorationFixturesStillPass": true,
+    "partialCopyAndMetadataDriftRefusalsCovered": true,
+    "wrongInitialPermissionsRetainFailureWithoutCompletedReceipt": true
+  },
+  "preservation": {
+    "originalDirtyBodiesEqual": 16,
+    "rawProtectedRecordsEqual": 68,
+    "installedImmutableSourceRecordsEqual": 10,
+    "excludedVendorBodyOpenAttempts": 0
+  },
+  "liveBoundary": {
+    "productionPreparationCreated": false,
+    "sourceFreezeOrAdmissionCreated": false,
+    "serviceRestartOrReservation": false,
+    "canonicalProfileWrites": false,
+    "emulatorGuestOrPhysicalAction": false,
+    "newReadonlyMountQualified": false,
+    "causeOfPreviousMetadataDriftEstablished": false,
+    "previousFailedCaseReplayed": false,
+    "historicalFullSuiteGateFailureUnchanged": true
+  },
+  "next": "Add a distinct accepted read-only carrier to the source freeze, actual-start binder, parent, probe and stopped settlement. Qualify exact mounted bytes and strict current pins before any later input. Current executable routes still use the original Dev namespace and refuse this preparation as an admission."
+}

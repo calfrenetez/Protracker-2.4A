@@ -54,6 +54,31 @@ def configure_saved_files(f, sources, preparation_ref, before_ref):
     return f
 
 
+def configure_readonly_probe_saved_files(f, sources, preparation_ref, probe_ref, before_ref):
+    """Prospective paired-volume configuration, never a patch or admission.
+
+    The new preparation source must be explicitly selected. No existing live
+    binding is routed here; a future distinct carrier must admit the ro volume.
+    Both patch and restoration must use this same complete suffix.
+    """
+    path = str(parent.TOOLS / 'editor_probe_volume.py')
+    module = checked_module('editor_probe_volume', path, sources)
+    prepared = module.verify(probe_ref)
+    parent.need(prepared['inputs']['capturePreparation'] == preparation_ref
+                and parent.pinned(prepared['inputs']['originalProfile']) == parent.pinned(before_ref),
+                'Same actual editor preparation and original profile bytes required')
+    capture = json.loads(parent.pinned(preparation_ref)); before = parent.pinned(before_ref)
+    suffix = module.profile_append(before, str(Path(capture['privateCandidate']['path']).parent),
+                                   prepared['volumePath'])
+    parent.need(prepared['appendASCII'] == suffix.decode('ascii')
+                and prepared['proposedProfile'] == {'bytes': len(before + suffix),
+                    'sha256': parent.digest(before + suffix)[1]},
+                'Complete prospective paired-profile preparation differs')
+    configure_saved_files(f, sources, preparation_ref, before_ref)
+    f.APPEND = suffix; f.SESSION = parent.digest(before + suffix)
+    return f
+
+
 def checked_module(name, path, sources):
     parent.need(path in sources, 'Selected imported source omitted from freeze')
     parent.pinned(sources[path])

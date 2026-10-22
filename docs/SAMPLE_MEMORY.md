@@ -1,5 +1,28 @@
 # Sample memory and playback ownership
 
+
+## Passive pointer carrier and mouse composition —22 October2026
+
+The finite V2 adapter and a distinct mouse-case composition now pass47 focused
+HOST checks. One exact guest readback precedes one passive execution, with a
+20-second aggregate budget and a10-second script limit. The original owner,
+source, staged/native/editor bodies and private compile association are checked
+around awaits. Failures, timeout and cancellation retain evidence without replay.
+
+A clean original GUI move must precede the probe; its snapshot precedes the
+fresh after-move capture and actual Root observation. The original240-second
+whole and60-second Root budgets, focus/button/geometry checks and image pointer
+check remain. An additional native-coordinate mismatch vetoes a click, even
+when the image tip matches. No offset or tolerance is fitted to the pointer.
+
+These are source/HOST preparations. A fresh executable parent admission,
+source freeze, owned probe staging and normal/failure settlement integration
+are still required. Earlier temporary input paths are absent; future inputs
+must be newly prepared from retained exact bytes. No emulator/service/guest or
+physical operation occurred and the historical full-suite gate failure remains.
+
+See the [focused carrier and composition receipt](test-evidence/editor_passive_carrier_host_20261022.json).
+
 ## Passive same-editor pointer observer preparation —22 October2026
 
 The old Workbench probe requires a nonempty first-window title; the current

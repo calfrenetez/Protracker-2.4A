@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only passive V2 adapter and same-FRAME mouse-case composition; no target admission",
+  "focusedHost": {
+    "methodsPassed": 47,
+    "unittestSeconds": 0.099,
+    "returncode": 0,
+    "elapsedSeconds": 0.2394954169999437
+  },
+  "exactInputs": {
+    "native": {
+      "bytes": 15232,
+      "sha256": "344b2f009f7674a4cb0ffcbaa6a480c442dd0988acacb3f4a04d4b4f209804bb"
+    },
+    "source": {
+      "bytes": 4461,
+      "sha256": "059067346eb818a5bcb220163131aded2a84172182483293086b6a8d397bc938"
+    },
+    "editorArchivedGuestReadback": {
+      "bytes": 346404,
+      "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+    }
+  },
+  "behavior": [
+    "One complete guest probe readback before at most one10-second passive execution inside20-second aggregate budget.",
+    "Existing guarded file/script routes; original owner, source/body and compile associations checked around awaits.",
+    "Distinct future mouse case preserves240-second whole/60-second Root budgets and original focus/button/geometry checks.",
+    "Original clean move precedes probe; probe precedes fresh after-move capture and actual Root observation.",
+    "Native coordinate mismatch or unidentified/mismatched image pointer records diagnosis without clicking.",
+    "Failures, cancellation and timeout retain evidence without replay."
+  ],
+  "hostCoverage": [
+    "Exact positive and wrong-byte readback, transport failure, malformed native reply, owner/source/readback drift.",
+    "Aggregate and shorter parent deadlines, real async timeout and cancellation.",
+    "Original guarded route arguments/reply guard and owner loss during initialization.",
+    "Distinct scope and same-FRAME composition, original Root/capture/selection/log/refusal checks."
+  ],
+  "originalUnrelatedDirtyPathsPreserved": 16,
+  "withheld": {
+    "executableParentAndLifecycleAdmission": false,
+    "guestExecution": false,
+    "pointerMappingAccepted": false,
+    "clickSelectionAccepted": false,
+    "fullHostSuiteRerun": false,
+    "wholeApplicationPhysicalOrListeningAcceptance": false
+  },
+  "priorFullHostVerdict": "Historical707 methods:706PASS,1independent-provider gate failure,0errors."
+}

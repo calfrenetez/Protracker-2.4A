@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "tier": "HOST_ONLY",
+  "scope": "Additional composed mouse API fixture and selected native stack static review; no target execution",
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "mouseComposition": {
+    "testMethodsPassed": 5,
+    "seconds": 1.136,
+    "unchangedExecutedLayers": [
+      "prospective phase",
+      "actual adapter bounded/state/move/click",
+      "installed GUI move and click",
+      "routing locks",
+      "capture registry",
+      "request ledger",
+      "temporary settings transaction",
+      "focus readiness",
+      "guarded receipt checks",
+      "release/settings restoration"
+    ],
+    "simulatedLayers": [
+      "IPC client",
+      "capture image",
+      "guest log",
+      "Root image observation"
+    ],
+    "scenarios": {
+      "selection": {
+        "simulatedPhaseState": "ROW4_CHANNEL1_MOUSE_SELECTION_RECORDED",
+        "fakeAppliedMasks": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "finalFakeMask": 0,
+        "finalFakeUntrap": "middle"
+      },
+      "never-focus": {
+        "simulatedPhaseState": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+        "fakeAppliedMasks": [],
+        "finalFakeMask": 0,
+        "finalFakeUntrap": "middle"
+      },
+      "move-callback-focus-loss": {
+        "simulatedPhaseState": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+        "fakeAppliedMasks": [],
+        "finalFakeMask": 0,
+        "finalFakeUntrap": "middle"
+      },
+      "click-callback-focus-loss": {
+        "simulatedPhaseState": "FIRST_MOUSE_PHASE_FAILED_RETAINED",
+        "fakeAppliedMasks": [
+          0
+        ],
+        "finalFakeMask": 0,
+        "finalFakeUntrap": "middle"
+      },
+      "pointer-mismatch": {
+        "simulatedPhaseState": "POINTER_MISMATCH_RECORDED_NO_CLICK",
+        "fakeAppliedMasks": [
+          0
+        ],
+        "finalFakeMask": 0,
+        "finalFakeUntrap": "middle"
+      }
+    },
+    "socketAndSubprocessCreationForbiddenDuringSimulatedPhase": true,
+    "eventLoopCreatedBeforeSocketGuard": true,
+    "selectedSourceAssociationsObservedAfterRunOnly": true,
+    "installedSelectedImportsMatchedPreservedOriginalFullFacts": true
+  },
+  "selectedStackReview": {
+    "layoutAssertionsPassed": 8,
+    "compileToAssemblySeconds": 0.3070643339997332,
+    "layout": {
+      "ExecBase.ThisTask": 276,
+      "Task.tc_SPReg": 54,
+      "Task.tc_SPLower": 58,
+      "Task.tc_SPUpper": 62,
+      "StackSwapStruct.stk_Lower": 0,
+      "StackSwapStruct.stk_Upper": 4,
+      "StackSwapStruct.stk_Pointer": 8,
+      "StackSwapStruct.size": 12
+    },
+    "requestBytes": 65536,
+    "requestRemainsExperimental": true,
+    "sdkLibraryVectors": {
+      "Disable": -120,
+      "Enable": -126,
+      "AllocVec": -684,
+      "FreeVec": -690
+    },
+    "staticObservations": [
+      "Existing Task full stack span >= request branches to restored-register return",
+      "Otherwise request is rounded to four bytes; AllocVec vector uses D0=size,D1=1",
+      "Allocation-zero path calls actual request helper then actual CRT exit with argument20",
+      "Successful initialization and destruction call the same PC-relative swap helper",
+      "Manual helper exchanges Task lower/upper/SP fields under Disable/Enable",
+      "Destruction bypasses swap/free if original allocation pointer is zero",
+      "Destruction passes the original allocation pointer to the FreeVec vector"
+    ],
+    "limits": [
+      "Selected static code and eight layout assertions only",
+      "No Task startup/allocation-failure/restoration path executed",
+      "No whole Task/OS/IRQ call-graph or stack-capacity bound",
+      "64KiB remains experimental; no shipping size choice made",
+      "Compiler transitive include closure is not fully enumerated here"
+    ],
+    "initialLiveStdoutManifestLimitPreservedAndFinalizedAfterExit": true
+  },
+  "evidence": [
+    {
+      "artifact": "ProTracker-2.4G-firstmouse-api-composition-host-20261022-r1",
+      "manifest": "MANIFEST.json",
+      "manifestSHA256": "36d8cc79b34d0b86c597de0e5cc54ff898cdf7a9bc704ba6a49be050545e4872",
+      "verifiedMembers": 20
+    },
+    {
+      "artifact": "ProTracker-2.4G-current-editor-stack-static-20261022-r1",
+      "manifest": "FINAL-MANIFEST.json",
+      "manifestSHA256": "01650facf33ae6a472cf2d0e960c9c028b3253800a59421a22b65e5890891418",
+      "verifiedMembers": 21
+    }
+  ],
+  "actualTargetOperations": 0,
+  "serviceLifecycleActions": 0,
+  "candidateOrInstalledSourceMutations": 0,
+  "newRestartApprovalReceived": false,
+  "whole707HostVerdictUnchanged": {
+    "passed": 706,
+    "failedIndependentProviderGate": 1,
+    "errors": 0
+  },
+  "withheld": [
+    "Actual editor mouse/click retest",
+    "Whole Task/OS/IRQ stack bound",
+    "Runtime allocation failure and Task stack restoration",
+    "Whole editor workflow and whole application ABI",
+    "Playback/backend/device qualification",
+    "Physical A1200/AmiGUS and human listening"
+  ]
+}

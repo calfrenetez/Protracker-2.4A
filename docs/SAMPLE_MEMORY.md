@@ -1,5 +1,26 @@
 # Sample memory and playback ownership
 
+## Further mouse composition and stack HOST checks —22 October2026
+
+Five additional HOST methods compose the prospective mouse phase and actual
+adapter with the unchanged installed GUI service. IPC, captures, guest logs
+and Root image observations are simulated. The initial unready MIDDLE mode
+can complete one simulated move/click and restore its settings. Readiness and
+callback failures still prevent input or presses, and a pointer mismatch
+prevents the click. These results do not establish actual editor mouse control.
+
+A separate compile to assembly passes eight NDK stack-layout assertions.
+Section-associated instruction/relocation checks record the current candidate's
+selected allocation, swap and destruction routes. The 64 KiB request remains
+experimental; runtime startup, allocation failure, restoration and aggregate
+Task/OS/IRQ capacity remain unproved. Neither check changed the candidate or
+installed sources, used a target, or consumed service-restart authority.
+
+See the [additional HOST evidence](test-evidence/editor_mouse_composition_and_stack_host_20261022.json).
+The pending specific restart approval and previous failed-test evidence remain
+unchanged; the whole707 HOST verdict is still706 pass/one independent-provider
+gate failure/zero errors.
+
 ## First editor mouse attempt and focus-order correction —22 October2026
 
 A fresh exact-candidate editor test reached the blank launch and registered

@@ -16,11 +16,12 @@
     ],
     "installedBinaryDisassembledWithoutExecution": true,
     "wholeBuildReproducibilityClaimed": false,
-    "focusedPythonHostMethods": 70,
+    "focusedPythonHostMethods": 86,
     "groups": {
       "offlineDiagnosis": 8,
-      "finiteRaiseGate": 12,
-      "originalObserverAdapter": 8,
+      "finiteRaiseProtocol": 10,
+      "sameFrameObserversRecaptureAndFullRelease": 18,
+      "actualRootPublisher": 8,
       "specificServiceActor": 12,
       "freshRootLifecycle": 8,
       "readonlyLifecycleCompatibility": 22
@@ -48,12 +49,21 @@
     "originalGUIReadinessAndNativeCallbackStillRequired": true,
     "freshRegisteredCaptureBeforeGuestInputStillRequired": true,
     "originalFullRestorationAndPublicReleaseStillRequired": true,
-    "selectedGateIsMandatoryBeforeOriginalActualBinder": true
+    "selectedGateMandatoryInsideOriginalParent": true,
+    "phase": "after genuine blank capture, before mouse",
+    "sameOriginalFrameAndCommandLockDescriptor": true,
+    "rootObservationBindsOriginalOperationNonceHash": true,
+    "hostRaiseAndOneFreshRegisteredCaptureWholeSeconds": 60,
+    "originalSupervisorSeconds": 720,
+    "earlyGateFailureUsesAlreadyCreatedBlankNamespaceForFullSettlement": true,
+    "originalGuardFailureHoldAndFullSavedFileRestorationReleaseHostQualified": true
   },
   "preservedPreparationCorrections": [
     "Initial native result receipt had incorrect hardcoded matrix count; unchanged actual stdout records2596; original receipt retained and corrected without rerun.",
     "Initial source-only copy included old app-data preparation and service proposal records; quarantined before any admission, replaced geometry candidate associations with fresh private data pins.",
-    "Initial lifecycle HOST suite stopped on own binder ctime-only drift; body/size/mtime/flags matched, cause unproven; no waiver. Fresh current-source fixture qualification recorded separately."
+    "Initial lifecycle HOST suite stopped on own binder ctime-only drift; body/size/mtime/flags matched, cause unproven; no waiver. Fresh current-source fixture qualification recorded separately.",
+    "The source-only pre-binder Raise placement was replaced before live use with the same-FRAME after-blank route; its unexecuted adapter is retained.",
+    "Initial same-FRAME HOST fixture omitted its setup helper, then did not map the original guard to the private root; both failures retained. The guard read refused before operation; no shared mutation occurred. Corrected private original guard test passed through actual HOLD and full public release."
   ],
   "serviceRestarts": 0,
   "emulatorLaunches": 0,
@@ -69,5 +79,6 @@
     "installedImmutableSourceRecords": 10,
     "unselectedVendorBodyOpens": 0
   },
-  "durableEvidenceDirectory": "ProTracker-2.4G-editor-focus-diagnosis-20261022-r1"
+  "durableEvidenceDirectory": "ProTracker-2.4G-editor-focus-diagnosis-20261022-r1",
+  "updated": "2026-10-23"
 }

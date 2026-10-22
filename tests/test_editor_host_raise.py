@@ -19,7 +19,8 @@ class HostRaiseTests(unittest.TestCase):
         self.root=Path(self.tmp.name);self.out=self.root/'host-window-raise'
         self.b={'state':gate.STATE,'acceptedByRoot':True,'allowedActions':dict(gate.ALLOWED),
             'wholeSeconds':60,'ownerRunID':'HOST-owner','appPath':'/HOST/Amiberry.app',
-            'windowTitle':'Amiberry - [HOST-030]','sourceFreezeRef':{'path':'HOST-freeze'}}
+            'windowTitle':'Amiberry - [HOST-030]','sourceFreezeRef':{'path':'HOST-freeze'},
+            'operationNonceSHA256':'a'*64}
         self.process={'pid':999999,'socket_inode':123,'argv':['HOST_VM']}
         self.now=100.;self.events=[];self.current_calls=0;self.failure=None
         self.change_owner=False;self.change_receipt=None;self.expired=False
@@ -56,6 +57,7 @@ class HostRaiseTests(unittest.TestCase):
         value={'state':'ROOT_ACTUALLY_OBSERVED_ONE_NATIVE_WINDOW_RAISE',
             'actuallyPerformedNativeRaise':True,'requestSHA256':ref['sha256'],
             'ownerRunID':request['ownerRunID'],'process':request['process'],
+            'operationNonceSHA256':request['operationNonceSHA256'],
             'appPath':request['appPath'],'windowTitle':request['windowTitle'],
             'action':'Raise','actionCount':1,'guestMoves':0,'guestClicks':0,'keys':0,
             'observedMonotonic':101}
@@ -128,42 +130,9 @@ class HostRaiseTests(unittest.TestCase):
         self.assertEqual(self.events,[])
         self.assertFalse(self.out.exists())
 
-    def test_completed_evidence_is_bound_to_fresh_owner_process_freeze_and_window(self):
-        result=self.run_gate();ref=self.save(self.out/'HOST-copy.json',result)
-        ref['path']=str(self.out/'result.json')
-        self.assertEqual(gate.verify_completed(ref,self.b['sourceFreezeRef'],'HOST-owner',
-            self.process,self.root,self.pinned,103)['state'],result['state'])
-        for owner,process,freeze,now in [('other',self.process,self.b['sourceFreezeRef'],103),
-            ('HOST-owner',{'pid':1},self.b['sourceFreezeRef'],103),
-            ('HOST-owner',self.process,{'path':'other'},103),
-            ('HOST-owner',self.process,self.b['sourceFreezeRef'],163)]:
-            with self.subTest(owner=owner,now=now):
-                with self.assertRaises(RuntimeError):
-                    gate.verify_completed(ref,freeze,owner,process,self.root,self.pinned,now)
-
-    def test_selected_binder_gate_is_mandatory_and_unselected_receipt_refused(self):
-        import editor_pointer_binding as binder
-        path=str(binder.parent.TOOLS/'editor_host_raise.py')
-        from unittest.mock import patch
-        with patch.object(binder,'checked_module',return_value=gate):
-            with self.assertRaisesRegex(RuntimeError,'must complete'):
-                binder.require_selected_host_raise({}, {'sources':{path:{}}},'HOST-owner',self.process)
-        with self.assertRaisesRegex(RuntimeError,'Unselected'):
-            binder.require_selected_host_raise({'hostRaiseResultRef':{}},{'sources':{}},'HOST-owner',self.process)
-        binder.require_selected_host_raise({}, {'sources':{}},'HOST-owner',self.process)
-
-    def test_selected_binder_consumes_actual_completed_file_checks(self):
-        import editor_pointer_binding as binder
-        from unittest.mock import patch
-        result=self.run_gate();ref=self.save(self.out/'HOST-copy.json',result)
-        ref['path']=str(self.out/'result.json')
-        record={'hostRaiseResultRef':ref,'sourceFreezeRef':self.b['sourceFreezeRef'],
-                'windowDirectory':str(self.root)}
-        path=str(binder.parent.TOOLS/'editor_host_raise.py')
-        with patch.object(binder,'checked_module',return_value=gate), \
-             patch.object(binder.parent,'pinned',side_effect=self.pinned), \
-             patch.object(binder.time,'monotonic',return_value=103):
-            binder.require_selected_host_raise(record,{'sources':{path:{}}},'HOST-owner',self.process)
+    def test_other_original_frame_refused(self):
+        self.change_receipt=lambda value,ref:value.update(operationNonceSHA256='b'*64)
+        with self.assertRaises(RuntimeError):self.run_gate()
 
 
 if __name__=='__main__':unittest.main()

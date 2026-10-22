@@ -207,18 +207,6 @@ def validate_readonly_actual(record):
     return _validate_actual(record, readonly=True)
 
 
-def require_selected_host_raise(record, freeze, owner, owned):
-    """New selected host gate is mandatory; legacy unselected cases unchanged."""
-    path = str(parent.TOOLS / 'editor_host_raise.py')
-    if path not in freeze['sources']:
-        parent.need('hostRaiseResultRef' not in record, 'Unselected host Raise cannot grant admission')
-        return
-    module = checked_module('editor_host_raise', path, freeze['sources'])
-    parent.need('hostRaiseResultRef' in record, 'Selected host Raise gate must complete before actual binder')
-    module.verify_completed(record['hostRaiseResultRef'], record['sourceFreezeRef'], owner,
-        owned, record['windowDirectory'], parent.pinned, time.monotonic())
-
-
 def _validate_actual(record, *, readonly):
     parent.need(record['state'] == (READONLY_BIND if readonly else BIND) and record['acceptedByRoot'] is True
                 and record['allowedActions'] == {'guestCPUAdmissions': 1, 'bindingWrites': 2,
@@ -246,8 +234,6 @@ def _validate_actual(record, *, readonly):
         parent.need(record[key]['path'] == str(window / leaf), 'Actual new binder endpoint differs')
         body = parent.pinned(record[key]); rows[key] = body if key == 'originalProfileRef' else json.loads(body)
     reserve = rows['reservationRef']; owner = reserve['run_id']; owned = rows['ownedProcessRef']
-    if readonly:
-        require_selected_host_raise(record, freeze, owner, owned)
     parent.need(reserve['state'] == 'FRESH_OWN_RESERVATION_NO_LAUNCH_OR_INPUT'
                 and reserve['window'] == str(window) and reserve['target'] == 'amiberry-030'
                 and reserve['serviceReadinessRef'] == freeze['actualApprovedServiceReadinessRef'],

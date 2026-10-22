@@ -331,6 +331,12 @@ def execute(binding, dependencies):
             async def run():
                 captured = await d.blank_case(b['blankBinding'], Path(b['outputDirectory']), original)
                 original.owner(b['ownerRunID'])
+                gate_path = str(TOOLS / 'editor_host_raise.py')
+                if readonly and gate_path in b['sourcePins']:
+                    from editor_pointer_binding import checked_module
+                    host_gate = checked_module('editor_host_raise', gate_path, b['sourcePins'])
+                    captured = await host_gate.run_same_frame(b, captured, original, frame, lock_fd)
+                    original.owner(b['ownerRunID'])
                 mouse = d.mouse_api(original, b, frame,
                                     move_request=d.move_request, click_request=d.click_request)
                 return await d.composed_case(b, captured,

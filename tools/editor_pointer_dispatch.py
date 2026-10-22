@@ -41,7 +41,8 @@ def validate(ref):
                 'Exact new parent binding and frozen dispatcher required')
     directory_ref(window)
     parent.need(SUPERVISOR_SECONDS >= (0 if readonly else binding['limits']['probeStage'])
-                + binding['limits']['whole'] + binding['blankBinding']['limits']['whole'] + 120,
+                + binding['limits']['whole'] + binding['blankBinding']['limits']['whole'] + 120
+                + (60 if readonly and str(parent.TOOLS / 'editor_host_raise.py') in binding['sourcePins'] else 0),
                 'Supervisor must include every unchanged finite subphase plus overhead')
     parent.need(not any(name in os.environ for name in INHERITED_AUTHORITY),
                 'Unexpected inherited target authority; no dispatch')

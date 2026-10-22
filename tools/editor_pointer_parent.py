@@ -28,7 +28,7 @@ MODULES = ('capture_runner', 'capture_case_mounted', 'first_mouse_api',
            'capture_support', 'root_observation', 'bridge_checks', 'shared_guest',
            'shared_infra_render_files', 'amiberry_mcp.ipc_client', 'amiberry_mcp.shared_state',
            'editor_blank_capture_protocol', 'editor_capture_volume',
-           'editor_mouse_capture_protocol', 'emulator')
+           'editor_mouse_capture_protocol', 'emulator', 'editor_probe_namespace')
 
 
 def need(ok, why):
@@ -107,7 +107,7 @@ def command_lock(path):
         fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
         need(identity(before) == identity(os.fstat(fd)) == identity(path.lstat()),
              'Original command lock identity changed')
-        yield
+        yield fd
     finally:
         os.close(fd)
 
@@ -134,7 +134,7 @@ def validate_binding(binding, *, pin=pinned):
         need(freeze['modulePaths'][name] in sources, 'Every selected imported module must be pinned')
     for name in ('editor_mouse_probe_case', 'editor_pointer_probe', 'editor_pointer_snapshot',
                  'editor_blank_capture_protocol', 'editor_capture_volume',
-                 'editor_mouse_capture_protocol', 'shared_infra_render_files'):
+                 'editor_mouse_capture_protocol', 'shared_infra_render_files', 'editor_probe_namespace'):
         need(freeze['modulePaths'][name] == str(TOOLS / (name + '.py')),
              'Repository-owned composed module path differs')
     session = Path(freeze['modulePaths']['capture_runner']).parent
@@ -176,7 +176,8 @@ def validate_binding(binding, *, pin=pinned):
          'Fresh exact private case output required; never replay')
     probe = b['passiveProbe']
     need(probe['ownerRunID'] == b['ownerRunID'] and probe['sourcePins'] == sources
-         and probe['editorCandidate'] == b['mountedCandidate'],
+         and probe['editorCandidate'] == b['mountedCandidate']
+         and probe['windowDirectory'] == str(out.parent),
          'Probe must share exact original owner/source/editor pins')
     need(digest(pin(blank['candidate'])) == EDITOR
          and digest(pin(b['mountedCandidate'])) == EDITOR, 'Exact current editor bytes required')
@@ -199,6 +200,10 @@ def validate_binding(binding, *, pin=pinned):
          and probe['stagedCandidate']['path']
          == str(HARNESS / 'runtime/Dev/Tests' / directory / 'PTEditorPointerV2'),
          'Separate exact owned passive probe namespace required')
+    from editor_probe_namespace import validate_stage
+    staged = validate_stage(probe, probe['namespaceStageRef'])
+    need(staged['stagedCandidate'] == probe['stagedCandidate'],
+         'Actual owned stage receipt must bind the parent probe endpoint')
     return freeze
 
 

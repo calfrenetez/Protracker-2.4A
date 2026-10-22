@@ -109,6 +109,11 @@ class EditorPointerProbe:
                  'Actual private V2 compile receipt association required')
             need(digest(self.original.pinned(b['editorCandidate'])) == EDITOR,
                  'Exact current editor candidate required')
+            from editor_probe_namespace import validate_stage
+            self.original.pinned(b['namespaceStageRef'])
+            stage = validate_stage(b, b['namespaceStageRef'])
+            need(stage['stagedCandidate'] == b['stagedCandidate'],
+                 'Actual owned stage receipt must bind the execution endpoint')
             return native
 
         async def bounded(call):

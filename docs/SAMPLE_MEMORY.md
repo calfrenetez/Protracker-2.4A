@@ -1,6 +1,29 @@
 # Sample memory and playback ownership
 
 
+## Owned passive-probe staging and cleanup preparation —22 October2026
+
+The probe now has a separate owner-bound one-file namespace carrier. It requires
+the exact existing command-lock descriptor and original owner/absence callbacks.
+After verified stop, normal and failed modes preserve the complete binary and
+stage receipt before removal. Partial failures retain their evidence without
+replay; changed content, ownership, copies or reappeared paths block cleanup
+facts. The helper never releases the guard or claims native clean exit.
+
+The parent and execution carrier now require the actual stage receipt before
+launch and around awaited probe operations. Sixty-eight focused probe/namespace/
+mouse HOST checks and28 parent checks pass, using private filesystem fixtures
+and synthetic guard/absence callbacks. The source mapping selects21 modules.
+The prior passed source revisions are retained.
+
+No production namespace, target/service operation, source freeze or admission
+was created. Fresh binder and normal/failed settlement entrypoints still need
+wiring to the original actual owner/frame and independently verified absence.
+HOST fixture results do not qualify that live integration, pointer/click behavior,
+physical hardware or listening. The historical full-suite gate failure remains.
+
+See the [namespace HOST receipt](test-evidence/editor_probe_namespace_host_20261022.json).
+
 ## Parent pre-import runtime correction and fresh inputs —22 October2026
 
 A direct alternate-interpreter check found that the initial parent reached a

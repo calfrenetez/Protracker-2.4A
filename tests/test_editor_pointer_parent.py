@@ -56,11 +56,15 @@ class ParentBindingTests(unittest.TestCase):
                  'modulePaths': self.modules, 'activeProfile': self.ref('/fixture/profile', b'profile'),
                  'allowedActions': {'fixture': 1}, 'limits': {'fixture': 2}}
         probe = {'ownerRunID': 'fixture-owner', 'sourcePins': sources, 'editorCandidate': mounted,
+                 'windowDirectory': self.freeze['newWindow'],
                  'nativeSource': self.ref('/fixture/probe.c', self.source),
                  'nativeCandidate': self.ref('/fixture/probe', self.native),
                  'stagedCandidate': self.ref(parent.HARNESS / 'runtime/Dev/Tests/pt24g-editor-pointer-fixture-owner/PTEditorPointerV2', self.native),
                  'compileReceipt': self.jsonref('/fixture/compile', receipt),
                  'guestCandidate': 'Dev:Tests/pt24g-editor-pointer-fixture-owner/PTEditorPointerV2'}
+        probe['namespaceStageRef'] = self.jsonref('/fixture/stage', {'stagedCandidate': probe['stagedCandidate']})
+        p = patch('editor_probe_namespace.validate_stage', side_effect=lambda b, ref: json.loads(self.pin(ref)))
+        p.start(); self.addCleanup(p.stop)
         self.b = {'state': 'ROOT_ADMITTED_EDITOR_MOUSE_WITH_PASSIVE_V2', 'acceptedByRoot': True,
                   'target': 'amiberry-030', 'allowedActions': copy.deepcopy(parent.ALLOWED),
                   'limits': copy.deepcopy(parent.LIMITS), 'nativeSize': [640, 512],
@@ -173,6 +177,11 @@ class ParentBindingTests(unittest.TestCase):
         self.b['outputDirectory'] = self.freeze['newWindow'] + '/other-label'
         self.b['blankBinding']['outputDirectory'] = self.b['outputDirectory']
         with self.assertRaises(ValueError): self.validate()
+
+    def test_stage_receipt_drift_or_other_endpoint_refuses_before_import(self):
+        ref = self.b['passiveProbe']['namespaceStageRef']
+        self.b['passiveProbe']['namespaceStageRef'] = self.jsonref(ref['path'], {'stagedCandidate': {'path': '/other'}})
+        with self.assertRaises(RuntimeError): self.validate()
 
 
 class ParentExecutionTests(unittest.TestCase):

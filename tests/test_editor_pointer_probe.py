@@ -124,6 +124,12 @@ class PointerProbeTests(unittest.TestCase):
             self.api.inputs[path] = body
             self.b[name] = ref(path, body)
         self.b['sourcePins']['fixture'] = self.b['nativeSource']
+        stage_body = json.dumps({'stagedCandidate': self.b['stagedCandidate']}).encode()
+        self.api.inputs['/fixture/stage'] = stage_body
+        self.b['namespaceStageRef'] = ref('/fixture/stage', stage_body)
+        p = patch('editor_probe_namespace.validate_stage',
+                  side_effect=lambda b, pin: json.loads(self.api.pinned(pin)))
+        p.start(); self.addCleanup(p.stop)
         self.carrier = probe.EditorPointerProbe(self.b, self.api, io=self.io)
 
     def run_probe(self, deadline=200.):

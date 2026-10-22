@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "date": "2026-10-22",
+  "scope": "HOST-only owned passive-probe staging and preservation/removal preparation; no production activation",
+  "host": {
+    "probeNamespaceAndExistingMouseCarrier": {
+      "methodsPassed": 68,
+      "unittestSeconds": 0.386,
+      "elapsedSeconds": 0.6168464170004881,
+      "returncode": 0
+    },
+    "parent": {
+      "methodsPassed": 28,
+      "unittestSeconds": 0.168,
+      "elapsedSeconds": 0.2982067909997568,
+      "returncode": 0
+    }
+  },
+  "behavior": [
+    "One separate owner-bound exact probe file; source/native/compile associations checked before staging.",
+    "Exact existing command-lock descriptor and original owner/absence callbacks required around operations.",
+    "Complete binary and stage receipt preserved before removal after independently verified stop.",
+    "Normal and failed modes both return probe cleanup facts; no automatic guard release or hidden replay.",
+    "Parent and execution carrier require the exact stage receipt; unexpected content, drift, partial cleanup or reappearance refuses further progress."
+  ],
+  "coverage": [
+    "Real filesystem and lock operations only in private temporary fixtures.",
+    "Existing namespace/evidence, wrong owner/body/path, symlink root, wrong/competing lock descriptors and callback failures.",
+    "Preservation-before-removal, failed-copy refusal, ownership/body change and interruption after unlink.",
+    "Normal/held-mode distinction, source/copy drift, reappearance and refusal to adopt exit/release/retry claims."
+  ],
+  "preserved": {
+    "unrelatedDirtyPaths": 16,
+    "candidateAndNativeObserverBytes": true,
+    "installedHarnessAndFrozenFailures": true
+  },
+  "withheld": {
+    "productionNamespaceStaging": false,
+    "actualOwnerAbsenceCallbackQualification": false,
+    "binderAndSettlementEntrypointWiring": false,
+    "actualSourceFreezeOrAdmission": false,
+    "targetServiceOrReleaseOperation": false,
+    "nativePointerClickPhysicalOrListeningAcceptance": false,
+    "fullHostSuiteRerun": false
+  }
+}

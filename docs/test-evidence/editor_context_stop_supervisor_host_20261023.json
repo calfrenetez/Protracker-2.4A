@@ -21,5 +21,17 @@
   "sourceSha256": {
     "tools/editor_context_stop.py": "480132aa698bb347fef5379a950810d243ffc55c1fa2bb7f24a5143d8cf52d99",
     "tests/test_editor_context_stop.py": "4ce3cd440f7b5d0a00aee9799318dd8ccb4422877df8c6704af522357dfa19a5"
+  },
+  "freshPreparedConfirmationPlan": {
+    "selectedSources": 57,
+    "modules": 33,
+    "privateServicePins": 62,
+    "canonicalInputs": 9,
+    "appDataFiles": 31,
+    "lifecycleScopeChecks": 10,
+    "specificServiceActorChecks": 14,
+    "totalFocusedHOSTChecksIncludingSupervisorAndRegression": 58,
+    "sourceFreezeOrReservationOrProfileWriteOrTargetAction": false,
+    "humanReplyRequiredBeforeBorrowedServiceRestart": true
   }
 }

@@ -9448,3 +9448,15 @@ intent and all guards remain unchanged; the supervisor must be selected before a
 fresh freeze and cannot be applied to released r5 or either failed stop intent.
 Its live normal lifecycle confirmation remains pending. See the [HOST stop
 supervisor qualification](test-evidence/editor_context_stop_supervisor_host_20261023.json).
+
+
+A distinct r6 normal-lifecycle confirmation package/plan is now prepared:57
+selected sources/33 modules,62 private service pins,9 canonical inputs and31
+settings/backups. The scope-specific original lifecycle helper changes only the
+new window/label constants (10 HOST checks); the specific service actor passes14
+more. Together with supervisor12 and unchanged lifecycle22,58 focused HOST checks
+pass. Fresh current both-lock checks found idle EMPTY2739/disconnected030 and the
+unchanged approved service, with no target/recovery. These observations grant no
+future admission. No freeze, reservation, profile write or restart has occurred.
+The r5 one-use approval was consumed; a new actual reply is required for the
+concrete r6 borrowed-service restart before live normal-path confirmation.

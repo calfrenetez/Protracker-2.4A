@@ -9483,3 +9483,25 @@ This confirms the normal-stop/restoration integration; it does not establish
 native clean application exit, default system-cursor hotspot, the one-pixel
 native conversion cause, input/selection, full editor ABI, physical memory/device
 or listening acceptance. See the [actual normal-lifecycle receipt](test-evidence/editor_context_normal_stop_emulator_20261023.json).
+
+
+### Private coordinate-conversion recorder HOST checked —23 October2026
+
+The next source-only diagnostic observes the existing absolute-input conversion
+route: host/HiDPI scaling, GFX offsets, drawing terms, native origin and hotspot
+compensation before delivery. A separate private Amiberry patch adds bounded
+scalar logging only; removing marked observation blocks restores every original
+byte of the three source files. The installed emulator and original coordinate
+formulas/input vetoes remain unchanged. Eight compiled recorder HOST cases, all
+three production translation-unit syntax checks with format checking and a
+zero-fuzz patch/application roundtrip passed.
+
+No diagnostic emulator has been linked or run. Offline configuration failed
+without a useful error message; iCloud header-copy timeouts and an initial
+thin-header omission are retained. The corrected inputdevice syntax check used
+exact production readiness headers and passed. Run-owned temporary source trees
+were cleaned only after preserving their manifests, changed source bodies and
+failed evidence. More local storage or another build location is needed before
+a full private build; no unrelated cleanup was performed. The trace remains
+diagnostic timing overhead, with no native mismatch-cause, input, ABI, hardware
+or listening acceptance. See the [HOST receipt](test-evidence/amiberry_coordinate_trace_host_20261023.json) and [private diagnostic instructions](../tools/diagnostics/README-coordinate-trace.md).

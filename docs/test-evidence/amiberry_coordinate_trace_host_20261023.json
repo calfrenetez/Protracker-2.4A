@@ -1,0 +1,69 @@
+{
+  "state": "PRIVATE_COORDINATE_TRACE_SOURCE_AND_HOST_QUALIFIED_NO_EMULATOR_BINARY",
+  "date": "2026-10-23",
+  "evidenceArtifact": "ProTracker-2.4G-amiberry-coordinate-trace-host-20261023-r1",
+  "hostRecorderTests": 8,
+  "productionTranslationUnitSyntaxChecks": 3,
+  "formatWarningsAreErrors": true,
+  "patchDryRunAndZeroFuzzApplicationPassed": true,
+  "allOriginalCoordinateStatementsByteEqualAfterRemovingObservationBlocks": true,
+  "existingInputGuardsUnchanged": true,
+  "maximumScopesPerProcess": 8,
+  "maximumRowsPerScope": 32,
+  "scope": "Only inside existing synchronous absolute input route; no new guest reads, target commands or pointer addresses",
+  "traceSink": "existing write_log; timing overhead is diagnostic",
+  "productionBaselines": [
+    {
+      "path": "src/inputdevice.cpp",
+      "productionBaselineSha256": "9d5d16421d91eea49637b4355fd45632497e16c4ed514d9a503e3cdddbe15c37"
+    },
+    {
+      "path": "src/drawing.cpp",
+      "productionBaselineSha256": "b63132f9e784caf039c5480fdf254d6287369cdf0a0c78f88a8ddda2d75635ee"
+    },
+    {
+      "path": "src/osdep/amiberry.cpp",
+      "productionBaselineSha256": "18990c56540db71361d4357de5127921bad4ad636a4a278f5a47bccaa35d3061"
+    }
+  ],
+  "latestDiagnosticSources": [
+    {
+      "path": "src/inputdevice.cpp",
+      "bytes": 308417,
+      "sha256": "12e204acfa80d7adae57834a5b07abda330c1d0a8fee18617a0a29a6a5a374b6"
+    },
+    {
+      "path": "src/drawing.cpp",
+      "bytes": 229771,
+      "sha256": "97bfa71c1d9d61616237ca5cc85d4a164a3cb2b19f874cf95b87aff8ec51c1c1"
+    },
+    {
+      "path": "src/osdep/amiberry.cpp",
+      "bytes": 400308,
+      "sha256": "944c3d49370abe773bc0cc3a037b3062ffbd0dccf85e7a8f56d08780a62d4a5e"
+    },
+    {
+      "path": "src/include/pt24g_coordinate_trace.h",
+      "bytes": 1548,
+      "sha256": "328ca928b687e9ad2910c2529ef6fc08f3bb60ac1bdc07194e7799e3de5bc94c"
+    }
+  ],
+  "emulatorBinaryLinked": false,
+  "emulatorInstalledOrLaunched": false,
+  "newTargetActions": 0,
+  "sharedEmulatorOrProfileChanged": false,
+  "failedOfflineConfigurationPreserved": true,
+  "initialThinHeaderOmissionAndCorrectedPassPreserved": true,
+  "iCloudGeneratedHeaderReadTimeoutPreserved": true,
+  "storageDecisionPending": true,
+  "unrelatedFilesRemoved": 0,
+  "nativeConversionCauseEstablished": false,
+  "nativeInputAcceptance": false,
+  "physicalOrListeningAcceptance": false,
+  "sourceSha256": {
+    "tools/diagnostics/amiberry_coordinate_trace.h": "328ca928b687e9ad2910c2529ef6fc08f3bb60ac1bdc07194e7799e3de5bc94c",
+    "tools/diagnostics/amiberry-coordinate-trace.patch": "4fe53df8bb44013e0e53d552c1b61d9913a8943aca3c8b6b0e2ac8367a627f68",
+    "tests/test_amiberry_coordinate_trace.py": "c5d3366888c948292e75944cc3af03b2f7b2fc886f16fd2892df29319c67d1d5",
+    "tools/diagnostics/README-coordinate-trace.md": "5aa620bf15f3525d75206ac8afd3e5fb4fc72d131c7bc03745bffbcd8c3eebe6"
+  }
+}

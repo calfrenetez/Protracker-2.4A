@@ -1,0 +1,181 @@
+--- a/src/inputdevice.cpp
++++ b/src/inputdevice.cpp
+@@ -23,6 +23,9 @@
+ 
+ #include "sysconfig.h"
+ #include "sysdeps.h"
++// PT24G_COORD_TRACE_BEGIN
++#include "pt24g_coordinate_trace.h"
++// PT24G_COORD_TRACE_END
+ 
+ #include "options.h"
+ #include "keyboard.h"
+@@ -2778,6 +2781,9 @@
+ 	y = iny;
+ 
+ 	getgfxoffset(monid, &fdx, &fdy, &fmx, &fmy);
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("GFX", "in_x=%d in_y=%d dx=%.9g dy=%.9g mx=%.9g my=%.9g picasso=%d resolution=%d", inx, iny, static_cast<double>(fdx), static_cast<double>(fdy), static_cast<double>(fmx), static_cast<double>(fmy), ad->picasso_on, currprefs.gfx_resolution);
++// PT24G_COORD_TRACE_END
+ 
+ #ifdef PICASSO96
+ 	if (ad->picasso_on) {
+@@ -2835,6 +2841,9 @@
+ 		mousehack_native_source_origin_valid = source_origin_valid;
+ 		mousehack_position_is_native = true;
+ 	}
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("NATIVE", "x=%d y=%d origin_x=%d origin_y=%d source_origin_valid=%d native=%d valid=%d", x, y, mousehack_native_origin_x, mousehack_native_origin_y, mousehack_native_source_origin_valid, mousehack_position_is_native, !ob);
++// PT24G_COORD_TRACE_END
+ 	*xp = x;
+ 	*yp = y;
+ 	return ob == false;
+@@ -3131,6 +3140,9 @@
+ 
+ static void inputdevice_mh_abs (int x, int y, uae_u32 buttonbits, bool position_valid)
+ {
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("BEFORE_COMPENSATION", "x=%d y=%d offset_x=%d offset_y=%d uses_hotspot=%d residual_x=%d residual_y=%d buttons=%u valid=%d", x, y, mouseoffset_x, mouseoffset_y, mousehack_host_cursor_uses_hotspot, mousehack_host_cursor_residual_x, mousehack_host_cursor_residual_y, buttonbits, position_valid);
++// PT24G_COORD_TRACE_END
+ #ifdef AMIBERRY
+ 	if (mousehack_host_cursor_uses_hotspot) {
+ 		x -= mousehack_host_cursor_residual_x + mouseoffset_x + 1;
+@@ -3151,6 +3163,9 @@
+ 		screen_offset_x = static_cast<uae_s16>(get_word(viewlord + 14)) * 2;
+ 		screen_offset_y = static_cast<uae_s16>(get_word(viewlord + 12)) * 2;
+ 	}
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("SCREEN_ORIGIN", "valid=%d x=%d y=%d", screen_offset_valid, screen_offset_x, screen_offset_y);
++// PT24G_COORD_TRACE_END
+ 	if (mousehack_position_is_native) {
+ 		if (screen_offset_valid) {
+ 			x += amiberry_input_native_mousehack_origin_compensation(
+@@ -3170,6 +3185,9 @@
+ 	// Keep the coordinate delivered after native screen-origin and host-hotspot
+ 	// compensation. The guest positions its native sprite from this coordinate,
+ 	// so their delta is the cursor hotspot.
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("DELIVER", "x=%d y=%d native=%d source_origin_valid=%d resolution=%d", x, y, mousehack_position_is_native, mousehack_native_source_origin_valid, detected_screen_resolution);
++// PT24G_COORD_TRACE_END
+ 	mousehack_last_abs_x = x;
+ 	mousehack_last_abs_y = y;
+ 	mousehack_last_abs_valid = position_valid && mousehack_address;
+--- a/src/drawing.cpp
++++ b/src/drawing.cpp
+@@ -13,6 +13,9 @@
+ 
+ #include "sysconfig.h"
+ #include "sysdeps.h"
++// PT24G_COORD_TRACE_BEGIN
++#include "pt24g_coordinate_trace.h"
++// PT24G_COORD_TRACE_END
+ 
+ #include <algorithm>
+ #include <atomic>
+@@ -628,6 +631,9 @@
+ 
+ int coord_native_to_amiga_x(int x)
+ {
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("DRAW_X", "x=%d denise_hdelay=%d pixel_start=%d doublescan=%d", x, denise_hdelay, internal_pixel_start_cnt, doublescan);
++// PT24G_COORD_TRACE_END
+ 	int x1 = (denise_hdelay << (RES_MAX + 1)) / 2;
+ 	int x2 = internal_pixel_start_cnt >> (doublescan ? 2 : 1);
+ 	x += x1;
+@@ -637,6 +643,9 @@
+ 
+ int coord_native_to_amiga_y(int y)
+ {
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("DRAW_Y", "y=%d firstline=%d after_vsync=%d linedbl=%d", y, minfirstline_linear, LINES_AFTER_VSYNC, linedbl);
++// PT24G_COORD_TRACE_END
+ 	y += (minfirstline_linear + LINES_AFTER_VSYNC) << linedbl;
+ 	y >>= linedbl;
+ 	return y;
+--- a/src/osdep/amiberry.cpp
++++ b/src/osdep/amiberry.cpp
+@@ -33,6 +33,9 @@
+ #include <vector>
+ 
+ #include "sysdeps.h"
++// PT24G_COORD_TRACE_BEGIN
++#include "pt24g_coordinate_trace.h"
++// PT24G_COORD_TRACE_END
+ #include "options.h"
+ #include "audio.h"
+ #include "sounddep/sound.h"
+@@ -3430,6 +3433,9 @@
+ 		return false;
+ 
+ 	const int midx = get_mouse_index_from_sdl_id(event.motion.which);
++// PT24G_COORD_TRACE_BEGIN
++	PT24G_COORD_TRACE("HOST", "x=%.9g y=%.9g renderer=%d hidpi=%d sx=%.9g sy=%.9g", static_cast<double>(event.motion.x), static_cast<double>(event.motion.y), mon->amiga_renderer != nullptr, mon->hidpi_needs_scaling, static_cast<double>(mon->hidpi_scale_x), static_cast<double>(mon->hidpi_scale_y));
++// PT24G_COORD_TRACE_END
+ 
+ 	int32_t x = event.motion.x;
+ 	int32_t y = event.motion.y;
+@@ -3463,6 +3469,9 @@
+ 
+ 	if (currprefs.input_tablet >= TABLET_MOUSEHACK)
+ 	{
++// PT24G_COORD_TRACE_BEGIN
++		PT24G_COORD_TRACE("DRAWABLE", "x=%d y=%d", x, y);
++// PT24G_COORD_TRACE_END
+ 		setmousestate(midx, 0, x, 1);
+ 		setmousestate(midx, 1, y, 1);
+ 	}
+@@ -3531,6 +3540,10 @@
+ 	event.motion.which = 0;
+ 	event.motion.x = static_cast<float>(x);
+ 	event.motion.y = static_cast<float>(y);
++// PT24G_COORD_TRACE_BEGIN
++	pt24g_coordinate_trace::Scope pt24g_scope;
++	PT24G_COORD_TRACE("IPC_ABS", "monitor=%d x=%d y=%d window_w=%d window_h=%d", monid, x, y, window_width, window_height);
++// PT24G_COORD_TRACE_END
+ 	return handle_mouse_motion_event(event, mon);
+ }
+ 
+--- /dev/null
++++ b/src/include/pt24g_coordinate_trace.h
+@@ -0,0 +1,41 @@
++#ifndef PT24G_AMIBERRY_COORDINATE_TRACE_H
++#define PT24G_AMIBERRY_COORDINATE_TRACE_H
++// Private diagnostic only. No input, guest reads, file opens or IPC commands.
++// The original caller supplies write_log/_T after its normal sysdeps.h include.
++#include <atomic>
++namespace pt24g_coordinate_trace {
++inline std::atomic<unsigned> requests{0};
++inline thread_local bool active = false;
++inline thread_local unsigned sequence = 0;
++inline thread_local unsigned rows = 0;
++class Scope {
++    const bool previous_active = active;
++    const unsigned previous_sequence = sequence;
++    const unsigned previous_rows = rows;
++public:
++    Scope() {
++        active = false;
++        if (previous_active) return; // Do not mix nested requests.
++        unsigned count = requests.load(std::memory_order_relaxed);
++        while (count < 8) {
++            if (requests.compare_exchange_weak(count, count + 1, std::memory_order_relaxed)) {
++                sequence = count + 1; rows = 0; active = true; return;
++            }
++        }
++    }
++    ~Scope() { active = previous_active; sequence = previous_sequence; rows = previous_rows; }
++    Scope(const Scope&) = delete;
++    Scope& operator=(const Scope&) = delete;
++};
++inline bool take() {
++    if (!active || rows >= 32) return false;
++    ++rows;
++    return true;
++}
++}
++#define PT24G_COORD_TRACE(stage, format, ...) do { \
++    if (pt24g_coordinate_trace::take()) \
++        write_log(_T("PT24G_COORD_V1 seq=%u stage=" stage " " format "\n"), \
++                  pt24g_coordinate_trace::sequence, __VA_ARGS__); \
++} while (0)
++#endif

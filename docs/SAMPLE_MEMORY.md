@@ -9460,3 +9460,26 @@ unchanged approved service, with no target/recovery. These observations grant no
 future admission. No freeze, reservation, profile write or restart has occurred.
 The r5 one-use approval was consumed; a new actual reply is required for the
 concrete r6 borrowed-service restart before live normal-path confirmation.
+
+
+### Fresh V3 normal stop and full restoration/release confirmed —23 October2026
+
+The fresh r6 run consumed one actual restart approval, froze61 selected sources,
+started the owned030 emulator and completed one exact editor capture/V3 passive
+readback/execution with zero GUI input or Raise. The corrected stop supervisor
+received no inherited lease/FRAME, called the original normal stop once, and
+verified the actual disconnect and process/group/socket/port absence. No failed
+recovery or replay was needed.
+
+Original full settlement succeeded in normal mode: retained V3 input, preserved
+and removed the owned app namespace, restored three saved host files, verified
+all31 app-data files and used the original four-proof public release once with
+zero HOLDs archived. Independent locked checks verified empty ownership, genuine
+target absence/disconnected bridge, four release hashes,61 exact source pins and
+all68 protected paths/current installed10 raw records. Private lease/token-bearing
+archive excluded from evidence.58 focused HOST checks preceded the live run.
+
+This confirms the normal-stop/restoration integration; it does not establish
+native clean application exit, default system-cursor hotspot, the one-pixel
+native conversion cause, input/selection, full editor ABI, physical memory/device
+or listening acceptance. See the [actual normal-lifecycle receipt](test-evidence/editor_context_normal_stop_emulator_20261023.json).

@@ -1,0 +1,78 @@
+{
+  "state": "ACTUAL_FRESH_V3_DIAGNOSTIC_NORMAL_STOP_FULL_RESTORATION_AND_PUBLIC_RELEASE_VERIFIED",
+  "date": "2026-10-23",
+  "evidenceArtifact": "ProTracker-2.4G-editor-context-normal-stop-runtime-20261023-r1",
+  "freshExplicitOneUseRestartApprovalConsumedOnce": true,
+  "serviceRestarts": 1,
+  "frozenSourcePins": 61,
+  "focusedHOSTChecksBeforeLiveTest": 58,
+  "candidate": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "passiveNative": {
+    "bytes": 15736,
+    "sha256": "6c06b197dc304dd2c49c3c1535974b68670a86f523b77b0a84168f8c1c6824b1"
+  },
+  "startupSeconds": 31.588882791998913,
+  "parent": {
+    "state": "EDITOR_CONTEXT_V3_DIAGNOSTIC_DATA_RECORDED_NO_INPUT",
+    "editorReadbacks": 1,
+    "nativeReadbacks": 1,
+    "nativeExecutions": 1,
+    "guiInputEvents": 0,
+    "hostRaises": 0,
+    "context": {
+      "active_screen": 1,
+      "active_window": 1,
+      "intuition_mouse_x": 0,
+      "intuition_mouse_y": 0,
+      "view_dx": 129,
+      "view_dy": 44,
+      "window_pointer_height": 0,
+      "window_pointer_override": 0,
+      "window_pointer_width": 0,
+      "window_pointer_x_offset": 0,
+      "window_pointer_y_offset": 0
+    }
+  },
+  "normalStop": {
+    "state": "ORIGINAL_NORMAL_STOP_RETURNED_RESTORATION_AND_RELEASE_PENDING",
+    "returncode": 0,
+    "inheritedLeaseOrFramePassed": false,
+    "originalStopCalls": 1,
+    "supervisorSignals": 0,
+    "originalGuardedDisconnectAndStopSucceeded": true,
+    "genuineProcessGroupSocketPortAbsence": true,
+    "failedRecoveryNeeded": false,
+    "retries": 0
+  },
+  "restoration": {
+    "state": "FULL_STOPPED_EDITOR_AND_PROBE_RESTORED_AND_RELEASED",
+    "mode": "normal",
+    "restoredRoles": 3,
+    "appDataFiles": 31,
+    "archivedHolds": 0,
+    "originalFourFactPublicRelease": true,
+    "releaseProofHashesIndependentlyVerified": 4,
+    "targetCommandsDuringSettlement": 0,
+    "guardEmpty": true,
+    "ownerHoldInflightResidentAbsent": true,
+    "targetAbsent": true,
+    "bridgeDisconnected": true,
+    "protectedPathsRawFactsExact": 68,
+    "unselectedVendorBodyReads": 0,
+    "frozenSourcesStillExact": 61,
+    "privateLeaseOrTokenBearingArchiveCopied": false
+  },
+  "nativeCleanExitClaimed": false,
+  "defaultSystemPointerHotspotProved": false,
+  "nativeConversionCauseEstablished": false,
+  "selectionOrInputAcceptance": false,
+  "wholeApplicationAcceptance": false,
+  "physicalMemoryDeviceOrListeningAcceptance": false,
+  "sourceSha256": {
+    "tools/editor_context_stop.py": "480132aa698bb347fef5379a950810d243ffc55c1fa2bb7f24a5143d8cf52d99",
+    "tests/test_editor_context_stop.py": "4ce3cd440f7b5d0a00aee9799318dd8ccb4422877df8c6704af522357dfa19a5"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "state": "V3_PRE_OPERATION_REFUSAL_RESTORED_AND_RELEASED_NOT_RUNTIME_ACCEPTANCE",
+  "date": "2026-10-23",
+  "host": {
+    "newIndependentCleanupTests": 14,
+    "unchangedV3LifecycleRegressionTests": 22,
+    "targetProcessAndBridgeObservations": "SYNTHETIC_IN_HOST_TESTS",
+    "originalGuardAndSavedFileAlgorithms": "PRIVATE_FIXTURES"
+  },
+  "actualEmulator": {
+    "approvedIdleServiceRestarts": 1,
+    "ownedStartupSucceeded": true,
+    "rootWorkbenchView": true,
+    "originalCPUAdmission": true,
+    "parentRefusedBeforeOperation": true,
+    "profileDrift": [
+      "st_ctime_ns"
+    ],
+    "profileBodyAndOtherNineFactsEqual": true,
+    "metadataChangeCause": "UNKNOWN",
+    "editorLaunches": 0,
+    "passiveV3Executions": 0,
+    "guiInputEvents": 0,
+    "hostRaises": 0,
+    "failedTransactionReplayed": false
+  },
+  "actualCleanup": {
+    "separateSourceAndHostAdmission": true,
+    "savedHostFilesRestored": 3,
+    "appDataOriginalBodiesAndMtimesVerified": 31,
+    "themeMtimesRestored": 2,
+    "applicationNamespaceDeletions": 0,
+    "contextInputRetained": true,
+    "ownedSIGTERMCount": 1,
+    "genuineBridgeEOFObserved": true,
+    "originalPublicReleaseCount": 1,
+    "archivedOriginalHolds": 1,
+    "guardEmptyIndependentlyObserved": true,
+    "historicalReleaseFence": 2730,
+    "protectedPathsExact": 68,
+    "installedSourceFactsExact": 10,
+    "unselectedVendorBodyReads": 0,
+    "runtimeFreezeSourcesExact": 56
+  },
+  "boundaries": {
+    "nativeCleanExitClaimed": false,
+    "passiveContextDiagnosticAcceptance": false,
+    "selectionHotspotOrInputAcceptance": false,
+    "fullEditorABIQualification": false,
+    "physicalAcceptance": false,
+    "listeningAcceptance": false
+  },
+  "evidenceArtifact": "ProTracker-2.4G-editor-context-runtime-20261023-r1",
+  "sourceSha256": {
+    "tools/editor_context_preapplication_settlement.py": "b73d1eb008281d8647495470ec7a742ba5f897cb6c29539eb79bc0700d5648f0",
+    "tests/test_editor_context_preapplication_settlement.py": "dd7bc2fe0275d26a1a6f98c6a38fe0b4f10975abec1f398e9af6b4e88cb634ba"
+  },
+  "postreleaseEvidenceSha256": "6be14174b464d715e1dbe121bae9db2ac148b9e91971902c0f7f5bce64eff4b9"
+}

@@ -9343,3 +9343,24 @@ V3 native execution has occurred. Prepare the concrete new private session and
 idle-service action before requesting any necessary restart decision. Original
 V2 sources, exact selection contract and68 protected/10 installed-source facts
 remain unchanged. See the [HOST start/runtime qualification](test-evidence/editor_context_start_host_20261023.json).
+
+
+### V3 pre-operation refusal and independent stopped restoration —23 October2026
+
+One newly approved idle-service restart, fresh source freeze, owned emulator
+startup, Root Workbench observation and original CPU admission completed. The
+V3 parent then refused a changed canonical-profile ctime before its operation:
+body and other nine facts stayed equal; cause unknown. No editor launch, V3
+native execution, GUI input or Raise occurred, and the failed run was not replayed.
+
+A separate preapplication stopped cleanup now verifies exact failed-run evidence
+and absent app output/run/launcher without deleting an application namespace.
+It passed14 HOST checks, including original guard/restorer private fixtures;
+22 unchanged V3 lifecycle checks also pass. With fresh live original ownership,
+service, locks and absence checks, it restored three saved host files, verified
+all31 app-data original bodies/mtimes, retained V3 input and used the original
+four-record public release once. One original HOLD is archived; guard EMPTY was
+independently observed. Current68 protected/10 installed-source facts and56 frozen
+runtime sources remained exact. No metadata waiver or runtime acceptance follows.
+The one-use restart approval is consumed. Any later test requires a distinct fresh
+session/admission. See the [redacted runtime/restoration receipt](test-evidence/editor_context_preapplication_runtime_20261023.json).

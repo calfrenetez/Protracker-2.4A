@@ -9429,3 +9429,22 @@ facts independently verified. No native clean exit claimed. Future normal-stop
 CLI calls must have NO inherited lease/FRAME; full stopped settlement separately
 requires its exact original lease path. See the [redacted emulator/restoration
 receipt](test-evidence/editor_context_v3_emulator_20261023.json).
+
+
+### Normal-stop supervisor rejects authority before intent —23 October2026
+
+A distinct optional supervisor now rejects inherited lease/FRAME before reading
+caller records, importing a target guard or writing any intent. It requires the
+exact completed zero-input parent, selected original lifecycle helper/context,
+current original READY owner and approved service start identity. It invokes one
+original stop-normal child with no inherited authority; the helper sets its own
+lease. Timeout/failure retains the child/evidence without signals or replay. A
+successful exit needs the exact own normal-stop receipt. Restoration/public
+release remain separate original operations.
+
+Twelve new HOST cases and22 unchanged V3 lifecycle cases pass. Children, host
+process/service and target observations are fakes. Original helpers, normal-stop
+intent and all guards remain unchanged; the supervisor must be selected before a
+fresh freeze and cannot be applied to released r5 or either failed stop intent.
+Its live normal lifecycle confirmation remains pending. See the [HOST stop
+supervisor qualification](test-evidence/editor_context_stop_supervisor_host_20261023.json).

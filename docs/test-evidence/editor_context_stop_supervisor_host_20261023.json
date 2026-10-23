@@ -1,0 +1,25 @@
+{
+  "state": "FRESH_NORMAL_STOP_SUPERVISOR_HOST_QUALIFIED_NOT_EXECUTED",
+  "tests": {
+    "newSupervisor": 12,
+    "unchangedV3Lifecycle": 22
+  },
+  "total": 34,
+  "targetObservations": "SYNTHETIC_ONLY",
+  "childProcesses": "FAKE_ONLY",
+  "newLiveExecution": false,
+  "originalLifecycleHelpersAndGuardsUnchanged": true,
+  "scope": "Reject inherited authority before any record read/imported target guard/intent/child; then one selected original normal-stop child with no inherited lease or FRAME; current original READY owner and actual approved service identity required",
+  "signalsFromSupervisor": 0,
+  "guardReleases": 0,
+  "supervisorSeconds": 180,
+  "sourceMustBeSelectedBeforeFreshFreeze": true,
+  "priorR5RunCannotBeReplayed": true,
+  "publicEmulatorResult": "editor_context_v3_emulator_20261023.json",
+  "date": "2026-10-23",
+  "evidenceArtifact": "ProTracker-2.4G-editor-context-normal-stop-host-20261023-r1",
+  "sourceSha256": {
+    "tools/editor_context_stop.py": "480132aa698bb347fef5379a950810d243ffc55c1fa2bb7f24a5143d8cf52d99",
+    "tests/test_editor_context_stop.py": "4ce3cd440f7b5d0a00aee9799318dd8ccb4422877df8c6704af522357dfa19a5"
+  }
+}

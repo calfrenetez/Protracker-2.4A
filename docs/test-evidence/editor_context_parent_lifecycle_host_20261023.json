@@ -1,0 +1,106 @@
+{
+  "composition": {
+    "blankCaptureBeforeV3ReadbackAndExecution": true,
+    "blankSeconds": 300,
+    "guiInputEvents": 0,
+    "hostRaises": 0,
+    "originalCommandLockOwnerAndFRAME": true,
+    "probeSeconds": 20,
+    "retryAllowed": false,
+    "scriptSeconds": 10,
+    "wholeSeconds": 360
+  },
+  "counts": {
+    "test_editor_context_lifecycle": 22,
+    "test_editor_context_probe": 29,
+    "test_editor_context_volume": 16,
+    "test_editor_pointer_context": 10,
+    "test_editor_pointer_probe": 25,
+    "test_editor_pointer_snapshot": 11,
+    "test_editor_probe_volume": 19,
+    "test_editor_readonly_lifecycle": 22
+  },
+  "date": "2026-10-23",
+  "durableEvidenceDirectory": "ProTracker-2.4G-editor-context-parent-host-20261023-r1",
+  "initialFailure": {
+    "cause": "Redundant fixture chmod changed a pinned backup ctime. Avoided redundant mutation; no metadata waiver.",
+    "errors": 2,
+    "evidenceRetained": true,
+    "tests": 15
+  },
+  "limits": [
+    "HOST evidence only; no V3 native or application execution in emulator",
+    "No actual-start binder, runtime loader or command entry point yet",
+    "No new live service epoch, source freeze, reservation or restart authorization",
+    "V2 exact selection contract unchanged; no input, focus or hotspot acceptance",
+    "No full application, physical device or human listening acceptance"
+  ],
+  "preservation": {
+    "ctimeAndFlagsIgnored": false,
+    "historicalMetadataContinuityClaimed": false,
+    "prior50SourcePinsExact": true,
+    "protectedPaths": 68,
+    "rawMetadataCompared": true,
+    "runtimeAdmission": false,
+    "selectedVendorBodiesVerified": 41,
+    "state": "FRESH_CURRENT_PRESERVATION_RECORDS_EQUAL",
+    "unselectedBodyReads": 0,
+    "unselectedMetadataOnlyInputs": 10
+  },
+  "publicationCandidate": {
+    "allPassed": true,
+    "amendment": "Removed one blank EOF line found by staged whitespace check. All qualified source ASTs remain identical.",
+    "focusedRecheckTests": 22
+  },
+  "sourceBodies": {
+    "tests/test_editor_context_lifecycle.py": {
+      "bytes": 32995,
+      "sha256": "7d2d471f52d926a1c39fa9146070ba56f72bf4c019ffcd3240bdce475317fb9b"
+    },
+    "tools/editor_context_binding.py": {
+      "bytes": 8136,
+      "sha256": "da9abd3a863d0266cb87203c19a22ecdb100753fef807f816b15b0beb95ceb83"
+    },
+    "tools/editor_context_blank.py": {
+      "bytes": 9902,
+      "sha256": "b6f3def848d9f7407cecbf810b864b3d8dec2f711ac1eec81ca42d95d377c5ff"
+    },
+    "tools/editor_context_parent.py": {
+      "bytes": 6542,
+      "sha256": "ee0e113f1e5a58b90e0bd20208f4c0186680ead2738ecdc1d31b28ff41f88185"
+    },
+    "tools/editor_context_probe.py": {
+      "bytes": 10372,
+      "sha256": "626b40110f0469e804fb3d5338190cd22b9700c81407301598dd4cadaaefe670"
+    },
+    "tools/editor_context_retention.py": {
+      "bytes": 4273,
+      "sha256": "d2a02f0ae70575e35a675394089f5645fa6d701a7441d1102da8e4432c4129b5"
+    },
+    "tools/editor_context_settlement.py": {
+      "bytes": 15512,
+      "sha256": "34514d2ae2f1943331f60c3a99df37350e405f3f69376e7aa27e65f08a618174"
+    },
+    "tools/editor_context_stopped.py": {
+      "bytes": 6169,
+      "sha256": "2dbd7f50ccda59cb2839cb5f9b010f29521f1a8aedaab211cac9d2a97fc20165"
+    },
+    "tools/editor_context_volume.py": {
+      "bytes": 8693,
+      "sha256": "6cfd59a86e3821d1c139163588ec67b5084e5e30a1e096a3134490ec2c47b50b"
+    }
+  },
+  "state": "V3_ZERO_INPUT_DIAGNOSTIC_COMPOSITION_AND_FULL_STOPPED_RESTORATION_HOST_CHECKED_NOT_ADMITTED",
+  "stoppedSettlement": {
+    "forcedRelease": false,
+    "inputVolumeRetained": true,
+    "normalAndFailedModes": true,
+    "originalPublicReleaseMaximum": 1,
+    "privateOriginalGuardAndSavedFileFixturesPassed": true,
+    "releaseRecords": 4,
+    "restoredRoles": 3,
+    "sameOriginalStoppedOwner": true,
+    "verifiedAppDataFiles": 31
+  },
+  "tests": 154
+}

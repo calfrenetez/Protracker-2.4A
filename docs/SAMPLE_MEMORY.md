@@ -9305,3 +9305,23 @@ installed-source records remain exact. Actual V3 mounting/execution and the
 distinct parent/full lifecycle integration are still unfinished. The planned
 diagnostic parent will read context after blank capture with no GUI move, click,
 key or Raise. See the [HOST carrier qualification](test-evidence/editor_context_carrier_host_20261023.json).
+
+### V3 diagnostic composition and full stopped lifecycle —23 October2026
+
+The distinct V3 parent now composes the original blank capture and one passive
+context readback/execution within one original owner/FRAME, with zero GUI input
+or Raise. Its separate stopped protocol retains the V3 input, preserves/removes
+the owned application namespace, restores three saved host files, verifies all31
+app-data files and uses the original public release once. Both normal and failed
+HOLD modes pass private fixtures using the unchanged original guard and saved-file
+helper. Old V2 validators continue refusing the new V3 scope.
+
+The focused HOST suite passes154 checks, including22 new lifecycle/composition
+cases and22 unchanged V2 lifecycle cases. An initial fixture unnecessarily
+chmodded a pinned backup; its resulting two ctime refusals remain preserved.
+The fixture avoids that redundant mutation; no metadata guard was weakened.
+All50 earlier runtime source pins and68 protected/10 installed-source facts remain
+exact. This is HOST preparation only. A distinct actual-start binder/runtime
+loader and a new live plan/service epoch still remain; no V3 execution, selection,
+default cursor hotspot, full application, physical or listening acceptance follows.
+See the [diagnostic/lifecycle qualification](test-evidence/editor_context_parent_lifecycle_host_20261023.json).

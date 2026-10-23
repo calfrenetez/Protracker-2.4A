@@ -26,6 +26,51 @@ MODULES = {name: str(TOOLS / (name + '.py')) for name in
            ('editor_context_probe', 'editor_context_volume', 'editor_pointer_context',
             'editor_pointer_snapshot', 'editor_pointer_probe')}
 
+def prepared_input(binding, *, pin=None):
+    """Exact retained V3 input evidence; usable after actual stopped restoration."""
+    if pin is None:
+        from editor_pointer_parent import pinned
+        pin = pinned
+    b = binding
+    need(str(Path(__file__).resolve()) == MODULES['editor_context_probe']
+         and str(Path(volume.__file__).resolve()) == MODULES['editor_context_volume']
+         and b['state'] == INPUT_STATE and b['acceptedByRoot'] is True
+         and b['target'] == 'amiberry-030' and b['allowedActions'] == ALLOWED
+         and b['limits'] == LIMITS and b['guestCandidate'] == 'PTContext:PTEditorPointerContextV3'
+         and 'namespaceStageRef' not in b, 'Distinct retained V3 input evidence required')
+    freeze = json.loads(pin(b['sourceFreezeRef']))
+    need(freeze['state'] == FROZEN_STATE and freeze['sources'] == b['sourcePins']
+         and freeze['newWindow'] == b['windowDirectory']
+         and freeze['contextPreparationRef'] == b['contextPreparationRef'],
+         'Distinct V3 diagnostic source freeze required')
+    for name, path in MODULES.items():
+        need(freeze['contextModulePaths'][name] == path and path in b['sourcePins'],
+             'Actual selected V3/unchanged V2 transport source required')
+        pin(b['sourcePins'][path])
+    prepared = volume.verify(b['contextPreparationRef'])
+    refs = prepared['inputs']
+    need(all(b[k] == refs[k] for k in ('nativeSource', 'nativeCandidate', 'compileReceipt'))
+         and b['stagedCandidate'] == prepared['candidate']
+         and b['capturePreparationRef'] == refs['capturePreparation'],
+         'Actual same prepared V3 source/native/editor association required')
+    capture = json.loads(pin(refs['capturePreparation']))
+    need(b['editorCandidate'] == capture['privateCandidate'], 'Exact V3 diagnostic editor required')
+    need(pin(b['originalProfileBeforeimage']) == pin(refs['originalProfile']),
+         'Exact original prepared context profile body required')
+    return prepared
+
+
+def require_current_mounted_input(binding, api):
+    api.owner(binding['ownerRunID'])
+    prepared = prepared_input(binding, pin=api.pinned)
+    before = api.pinned(binding['originalProfileBeforeimage'])
+    need(binding['activeProfile']['path'] == str(HARNESS / 'runtime/amiberry/Configurations/A1200-030-DEV.uae')
+         and api.pinned(binding['activeProfile']) == before + prepared['appendASCII'].encode('ascii'),
+         'Exact original profile plus paired readonly V3 mount required')
+    api.owner(binding['ownerRunID'])
+    return prepared
+
+
 class EditorPointerContextProbe:
     """Consumes one attempt even on refusal/cancellation; never retries."""
     def __init__(self, binding, original, *, io=None):
@@ -46,31 +91,7 @@ class EditorPointerContextProbe:
              and 'namespaceStageRef' not in b, 'Distinct read-only V3 diagnostic input required')
 
     def validate_input_namespace(self):
-        b = self.binding
-        self.original.owner(b['ownerRunID'])
-        freeze = json.loads(self.original.pinned(b['sourceFreezeRef']))
-        need(freeze['state'] == FROZEN_STATE and freeze['sources'] == b['sourcePins']
-             and freeze['newWindow'] == b['windowDirectory']
-             and freeze['contextPreparationRef'] == b['contextPreparationRef'],
-             'Distinct V3 diagnostic source freeze required')
-        for name, path in MODULES.items():
-            need(freeze['contextModulePaths'][name] == path and path in b['sourcePins'],
-                 'Actual selected V3/unchanged V2 transport source required')
-            self.original.pinned(b['sourcePins'][path])
-        prepared = volume.verify(b['contextPreparationRef'])
-        refs = prepared['inputs']
-        need(all(b[k] == refs[k] for k in ('nativeSource', 'nativeCandidate', 'compileReceipt'))
-             and b['stagedCandidate'] == prepared['candidate']
-             and b['capturePreparationRef'] == refs['capturePreparation'],
-             'Actual same prepared V3 source/native/editor association required')
-        capture = json.loads(self.original.pinned(refs['capturePreparation']))
-        need(b['editorCandidate'] == capture['privateCandidate'], 'Exact V3 diagnostic editor required')
-        before = self.original.pinned(b['originalProfileBeforeimage'])
-        need(before == self.original.pinned(refs['originalProfile'])
-             and b['activeProfile']['path'] == str(HARNESS / 'runtime/amiberry/Configurations/A1200-030-DEV.uae')
-             and self.original.pinned(b['activeProfile']) == before + prepared['appendASCII'].encode('ascii'),
-             'Exact original profile plus paired readonly V3 mount required')
-        self.original.owner(b['ownerRunID'])
+        require_current_mounted_input(self.binding, self.original)
 
     def validate_output(self, out):
         b = self.binding

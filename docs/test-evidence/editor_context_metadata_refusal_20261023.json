@@ -1,0 +1,46 @@
+{
+  "state": "APPROVED_R3_PREFLIGHT_REFUSED_BEFORE_RESTART_REPLACEMENT_PLAN_PREPARED",
+  "date": "2026-10-23",
+  "actual": {
+    "humanOneRestartReplyReceived": true,
+    "restartApprovalConsumed": false,
+    "authorizationRecordWritten": false,
+    "restartActorInvoked": false,
+    "serviceRestarts": 0,
+    "targetActions": 0,
+    "newReservationOrProfileWrite": false,
+    "selectedInputsWithCtimeOnlyChanges": 14,
+    "sameBodyAndOtherNineFactsForChangedSelectedInputs": true,
+    "installedPreservationSourcesWithCtimeOnlyChanges": 10,
+    "protectedRepoPathsExact": 68,
+    "sourceBodyChangeDetected": false,
+    "metadataCause": "UNKNOWN",
+    "oldPlanReplayed": false,
+    "historicalMetadataContinuityClaimed": false
+  },
+  "replacement": {
+    "freshPrivateEndpoints": true,
+    "sourceProposalPins": 54,
+    "modules": 33,
+    "privateServicePlanPins": 59,
+    "canonicalInputs": 9,
+    "appDataFiles": 31,
+    "sourceFreeze": false,
+    "liveAdmission": false,
+    "humanDecisionRequiredBeforeUsingReplacementPlan": true
+  },
+  "host": {
+    "projectChecksPassed": 81,
+    "specificServiceActorChecksPassed": 14,
+    "targetObservations": "SYNTHETIC_ONLY"
+  },
+  "failedPrivatePreparation": {
+    "retained": true,
+    "cause": "Incorrect historical candidate path from broad suffix replacement",
+    "fix": "Separate fresh endpoints and explicit existing hash-verified candidate source",
+    "sharedWrites": 0,
+    "replayed": false
+  },
+  "evidenceArtifact": "ProTracker-2.4G-editor-context-sequence-runtime-20261023-r1",
+  "runtimeOrPhysicalOrListeningAcceptance": false
+}

@@ -9383,3 +9383,23 @@ prepared, with no freeze, reservation, restart or target action. Its separate
 service actor passes14 private HOST cases. A new actual human one-use restart
 reply is required before that borrowed service action. See the [HOST sequence
 qualification](test-evidence/editor_context_sequence_host_20261023.json).
+
+
+### Shared-input metadata refusal before restart —23 October2026
+
+The next actual one-restart reply was received, but fresh r3 preflight refused
+before recording authorization or invoking the restart actor. Fourteen selected
+shared inputs had ctime-only changes: body and other nine facts equal, cause
+unknown. All ten installed preservation-source records also have timestamp-only
+discontinuities; the68 protected repository paths remain exact. The one-restart
+approval was not consumed. No restart, reservation, target action or profile write
+occurred, and the refused plan was not replayed.
+
+Separate current raw snapshots are stable; a replacement private r5 source/input
+package and concrete service plan use their OWN current facts, with no historical
+metadata continuity claim or weaker pin. All81 focused project HOST tests and14
+specific service actor checks pass. A private r4 preparation with a bad historical
+candidate path remains retained; r5 uses the explicit existing hash-verified input.
+The replacement plan is not runtime admission. A human decision is required before
+applying the unused approval to that different plan. See the [redacted refusal and
+replacement qualification](test-evidence/editor_context_metadata_refusal_20261023.json).

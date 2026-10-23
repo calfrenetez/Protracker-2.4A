@@ -1,0 +1,120 @@
+{
+  "checks": [
+    "actual-start evidence/paired input joins",
+    "source freeze requires original both locks and actual approved service epoch",
+    "same original owner/FRAME for Guest CPU admission",
+    "profile/service drift and deadlines prevent publication",
+    "old V2 scope rejected",
+    "generated binding passes full private restoration/public release",
+    "selected original loader routes and wrong-runtime early refusal",
+    "single child, inherited authority/replay/timeout/refusal without signals",
+    "current service observation and immutable approval-chain recheck"
+  ],
+  "counts": {
+    "test_editor_context_dispatch": 8,
+    "test_editor_context_lifecycle": 22,
+    "test_editor_context_probe": 29,
+    "test_editor_context_start": 23,
+    "test_editor_context_volume": 16,
+    "test_editor_pointer_context": 10,
+    "test_editor_pointer_probe": 25,
+    "test_editor_pointer_snapshot": 11,
+    "test_editor_probe_volume": 19,
+    "test_editor_readonly_lifecycle": 22
+  },
+  "date": "2026-10-23",
+  "durableEvidenceDirectory": "ProTracker-2.4G-editor-context-start-host-20261023-r1",
+  "evidenceLimits": [
+    "HOST fixtures only; live owner/process/service/Guest/FRAME and supervisor child are fakes",
+    "Original guard/saved-file restoration algorithms exercised only in private fixtures",
+    "System Python refusal subprocesses perform no target import/action",
+    "No new actual human restart approval, live plan, source freeze, reservation or emulator/native execution",
+    "No V2 selection, cursor hotspot, full application/ABI, physical or listening acceptance"
+  ],
+  "preservation": {
+    "ctimeAndFlagsIgnored": false,
+    "historicalMetadataContinuityClaimed": false,
+    "prior50SourcePinsExact": true,
+    "protectedPaths": 68,
+    "rawMetadataCompared": true,
+    "runtimeAdmission": false,
+    "selectedVendorBodiesVerified": 41,
+    "state": "FRESH_CURRENT_PRESERVATION_RECORDS_EQUAL",
+    "unselectedBodyReads": 0,
+    "unselectedMetadataOnlyInputs": 10
+  },
+  "qualifiedSourceBodies": {
+    "tests/test_editor_context_dispatch.py": {
+      "bytes": 5314,
+      "sha256": "94ec62baeef8434a2b90e37a3aa03fd8fb459bd7cd21573ad737eba845893e14"
+    },
+    "tests/test_editor_context_lifecycle.py": {
+      "bytes": 33156,
+      "sha256": "f9018fed6f1892fdff963c81311a314ff1704d530530f4cc9dcc13940047a6e8"
+    },
+    "tests/test_editor_context_start.py": {
+      "bytes": 17473,
+      "sha256": "17c635866b8631c445b2df7250b1acad29603656586b6085986bc39f1d520808"
+    },
+    "tools/editor_context_binding.py": {
+      "bytes": 8391,
+      "sha256": "fa1d145238a4f36c81def465b1c05acde2600904044c6da8cb1d8af9963e6fd5"
+    },
+    "tools/editor_context_blank.py": {
+      "bytes": 9902,
+      "sha256": "b6f3def848d9f7407cecbf810b864b3d8dec2f711ac1eec81ca42d95d377c5ff"
+    },
+    "tools/editor_context_dispatch.py": {
+      "bytes": 7099,
+      "sha256": "9d739f5934da2dcec5812dc753453fd7d8e7300d87cdeea618bbea893651a551"
+    },
+    "tools/editor_context_parent.py": {
+      "bytes": 7773,
+      "sha256": "1dee8768b58c08a70095737475ae4239c63ddeba0fd161c21b7f342f312dced2"
+    },
+    "tools/editor_context_probe.py": {
+      "bytes": 10372,
+      "sha256": "626b40110f0469e804fb3d5338190cd22b9700c81407301598dd4cadaaefe670"
+    },
+    "tools/editor_context_retention.py": {
+      "bytes": 4273,
+      "sha256": "d2a02f0ae70575e35a675394089f5645fa6d701a7441d1102da8e4432c4129b5"
+    },
+    "tools/editor_context_runtime.py": {
+      "bytes": 2698,
+      "sha256": "cc72a90f53bb15a3415fa2b69892c2312b873975c3c77f4b85c50f20f311fcba"
+    },
+    "tools/editor_context_settlement.py": {
+      "bytes": 15512,
+      "sha256": "34514d2ae2f1943331f60c3a99df37350e405f3f69376e7aa27e65f08a618174"
+    },
+    "tools/editor_context_start.py": {
+      "bytes": 13243,
+      "sha256": "83b965394c55fb63558e4e09f1c5db2537c978c275e3859407e6002f4f0ea0d4"
+    },
+    "tools/editor_context_stopped.py": {
+      "bytes": 6169,
+      "sha256": "2dbd7f50ccda59cb2839cb5f9b010f29521f1a8aedaab211cac9d2a97fc20165"
+    },
+    "tools/editor_context_volume.py": {
+      "bytes": 8693,
+      "sha256": "6cfd59a86e3821d1c139163588ec67b5084e5e30a1e096a3134490ec2c47b50b"
+    }
+  },
+  "scope": {
+    "applicationLaunchesByBinder": 0,
+    "binderSeconds": 60,
+    "bindingWrites": 2,
+    "diagnosticParentSeconds": 360,
+    "guestCPUAdmissionsMaximum": 1,
+    "guiInputEvents": 0,
+    "hostRaises": 0,
+    "retryAllowed": false,
+    "sharedServiceChanges": 0,
+    "signals": 0,
+    "supervisorSeconds": 480
+  },
+  "seconds": 26.254,
+  "state": "DISTINCT_V3_ACTUAL_START_RUNTIME_LOADER_AND_SUPERVISOR_HOST_CHECKED_NOT_LIVE_ADMITTED",
+  "tests": 185
+}

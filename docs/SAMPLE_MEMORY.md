@@ -9325,3 +9325,21 @@ exact. This is HOST preparation only. A distinct actual-start binder/runtime
 loader and a new live plan/service epoch still remain; no V3 execution, selection,
 default cursor hotspot, full application, physical or listening acceptance follows.
 See the [diagnostic/lifecycle qualification](test-evidence/editor_context_parent_lifecycle_host_20261023.json).
+
+### V3 actual-start binding and finite runtime path —23 October2026
+
+Distinct V3 source-freeze/start commands, a pinned runtime loader/service observer
+and a finite supervisor now pass185 focused HOST checks. The start binder requires
+actual new reservation/startup/socket/Root-viewed Workbench evidence, the exact
+paired profile and original current owner/FRAME for one Guest CPU admission.
+Profile/service drift through admission prevents binding publication. The new
+runtime parent keeps zero GUI move/click/key/Raise; its supervisor forwards only
+the original lease and leaves timed-out children unsignalled. The generated binding
+also passes the private full restoration/public-release fixture.
+
+The freeze still requires the original both-lock helper and an actual separately
+approved service epoch. No new live plan, service restart, reservation, freeze or
+V3 native execution has occurred. Prepare the concrete new private session and
+idle-service action before requesting any necessary restart decision. Original
+V2 sources, exact selection contract and68 protected/10 installed-source facts
+remain unchanged. See the [HOST start/runtime qualification](test-evidence/editor_context_start_host_20261023.json).

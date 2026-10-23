@@ -1,11 +1,21 @@
 """One original FRAME: blank capture then passive V3 data, with zero GUI input.
 
-No runtime CLI, reservation, startup, restart, stop or release. Actual-start
-binding remains a separate prerequisite; HOST qualification is not admission.
+No reservation, startup, restart, stop or release. The distinct actual-start
+binding is a separate prerequisite; HOST qualification is not admission.
 """
 import asyncio
 import os
 from pathlib import Path
+import sys
+import time
+
+if __name__ == '__main__':
+    harness_python = '/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python'
+    clock = time.get_clock_info('monotonic')
+    if not (sys.executable == harness_python and tuple(sys.version_info[:3]) == (3, 14, 0)
+            and sys.platform == 'darwin' and sys.implementation.name == 'cpython'
+            and clock.monotonic and not clock.adjustable):
+        raise RuntimeError('Original harness clock required before V3 imports')
 
 import editor_pointer_parent as original
 import editor_context_binding as binding_source
@@ -110,3 +120,21 @@ def execute(binding, dependencies):
                     api.owner(b['ownerRunID']); d.current_service(b)
                     return result
             return asyncio.run(run())
+
+
+def main():
+    original.require_harness_runtime()
+    os.umask(0o077); sys.dont_write_bytecode = True
+    original.need(len(sys.argv) == 3 and sys.argv[1] == '--binding-ref',
+                  'Actual newly admitted V3 diagnostic parent reference required')
+    import json
+    import editor_context_runtime as runtime
+    ref = json.loads(sys.argv[2]); b = json.loads(original.pinned(ref))
+    freeze = binding_source.validate(b)
+    original.need(ref['path'] == str(Path(b['outputDirectory']).parent / 'context-parent-binding.json'),
+                  'Exact newly admitted V3 parent path required')
+    d = runtime.load(freeze); original.pinned(ref)
+    print(json.dumps(execute(b, d)))
+
+
+if __name__ == '__main__': main()

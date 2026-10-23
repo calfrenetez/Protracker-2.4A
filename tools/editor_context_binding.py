@@ -19,14 +19,15 @@ ALLOWED = dict(blank.ALLOWED, passiveNativeExecutions=1, nativeGuestReadbacks=1,
 LIMITS = {'whole': 360, 'blank': 300, 'probe': 20, 'script': 10}
 OWN = ('editor_context_binding', 'editor_context_parent', 'editor_context_blank',
        'editor_context_probe', 'editor_context_volume', 'editor_pointer_context',
-       'editor_context_retention', 'editor_context_stopped', 'editor_context_settlement')
+       'editor_context_retention', 'editor_context_stopped', 'editor_context_settlement',
+       'editor_context_start', 'editor_context_runtime', 'editor_context_dispatch')
 # Original imported transport/utility dependencies remain selected, even where
 # their mouse entry points are unused. No V2 admission is invoked or converted.
 MODULES = original.MODULES + tuple(n for n in OWN if n not in original.MODULES)
 EXTRA = saved.EXTRA
 
 
-def source_shape(record, *, pin=None):
+def source_shape(record, *, pin=None, window_must_exist=True):
     pin = pin or original.pinned
     modules, sources = record['modulePaths'], record['sources']
     original.need(set(modules) == set(MODULES) and type(sources) is dict and sources
@@ -37,7 +38,8 @@ def source_shape(record, *, pin=None):
         original.need(path.parent == Path('/private/tmp') and path.name.startswith('pt24g-')
                       and '..' not in path.parts, 'Separate direct-private V3 endpoints required')
     original.need(session != window, 'V3 source and runtime window must differ')
-    directory_ref(session); directory_ref(window)
+    directory_ref(session)
+    if window_must_exist: directory_ref(window)
     local = {'capture_runner', 'capture_case_mounted', 'first_mouse_api', 'capture_support', 'root_observation'}
     shared = {'launcher_guard', 'launcher_access', 'bridge_checks', 'shared_guest', 'emulator'}
     for name, path in modules.items():
@@ -51,6 +53,7 @@ def source_shape(record, *, pin=None):
     required = set(extras.values()) | {str(original.TOOLS / (n + '.py')) for n in
         ('editor_pointer_parent', 'editor_pointer_binding', 'editor_probe_stopped',
          'editor_capture_settlement', 'editor_capture_namespace')}
+    required.add(str(session / 'SOURCE-PROVENANCE.json'))
     original.need(record['extraModulePaths'] == extras and required <= sources.keys()
                   and record['contextModulePaths'] == probe.MODULES,
                   'Original saved-file helpers and distinct V3 lifecycle must be selected')
@@ -105,8 +108,8 @@ def validate(binding, *, pin=None):
     return freeze
 
 
-def load_extras(record):
-    session, _ = source_shape(record)
+def load_extras(record, *, window_must_exist=True):
+    session, _ = source_shape(record, window_must_exist=window_must_exist)
     sys.path[:0] = [str(session), str(original.HARNESS / 'scripts'), str(original.TOOLS)]
     return {n: saved.checked_module(n, record['extraModulePaths'][n], record['sources']) for n in EXTRA}
 

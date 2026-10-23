@@ -95,6 +95,8 @@ class ContextLifecycleTests(unittest.TestCase):
         for name in binder.EXTRA:
             path = self.root / (name + '.py'); volume.put(path, (historical / path.name).read_bytes())
             extras[name] = str(path); sources[str(path)] = original.read(path)[1]
+        path = self.root / 'SOURCE-PROVENANCE.json'
+        volume.put(path, (historical / path.name).read_bytes()); sources[str(path)] = original.read(path)[1]
         for name in ('editor_pointer_parent', 'editor_pointer_binding', 'editor_probe_stopped',
                      'editor_capture_settlement', 'editor_capture_namespace'):
             path = original.TOOLS / (name + '.py'); sources[str(path)] = original.read(path)[1]

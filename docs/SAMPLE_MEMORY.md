@@ -9246,3 +9246,27 @@ changed some raw file metadata; original bodies and a fresh current preservation
 baseline were verified without claiming historical metadata continuity. Earlier
 preparation failures and partial backups remain preserved. See the
 [runtime result, restoration and HOST correction](test-evidence/editor_raise_observer_path_refusal_20261023.json).
+
+### Live capture fix and native pointer mismatch —23 October2026
+
+A fresh, explicitly approved service epoch and original reservation qualified the
+capture-path correction in Amiberry. Root performed one native Raise, viewed the
+fresh case-directory PNG and published the original bounded observation. The
+original GUI readiness checks then admitted one button-free move. Its screenshot
+pointer tip exactly matched the requested image point, but the passive V2 probe
+reported coherent screen/window coordinates219,424 instead of the source-bound
+218,424. The unchanged native-coordinate veto prevented a click; selection and
+whole-application acceptance remain unqualified.
+
+The parent returned the normal no-click mismatch outcome. Original disconnect,
+owned stop, full three-role/all31-file restoration and public release succeeded;
+independent locked checks verified the archive proof, empty guard, target absence,
+disconnected bridge and exact68 protected/10 installed-source records. All50 frozen
+source pins and actual run evidence are preserved without copying the private
+lease. The existing mismatch-veto and lifecycle suites passed46 HOST checks.
+
+Source review reproduces the actual Python mapping294,463 ->280,448. It does not
+establish which native conversion term causes the one-pixel difference. No offset,
+tolerance, probe change, emulator replacement or replay was introduced. Further
+input acceptance needs native-conversion diagnosis. See the
+[live result and acceptance boundaries](test-evidence/editor_native_pointer_mismatch_20261023.json).

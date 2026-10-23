@@ -9270,3 +9270,20 @@ establish which native conversion term causes the one-pixel difference. No offse
 tolerance, probe change, emulator replacement or replay was introduced. Further
 input acceptance needs native-conversion diagnosis. See the
 [live result and acceptance boundaries](test-evidence/editor_native_pointer_mismatch_20261023.json).
+
+### Passive coordinate-context V3 HOST preparation —23 October2026
+
+A separate V3 diagnostic copies public ViewLord/global mouse coordinates and
+active-screen/window flags under LockIBase, together with the window's pointer
+override presence, dimensions and offsets. It unlocks/closes before formatting;
+it does not dereference or publish a pointer address, create resources or send
+input. When the window has no pointer override, its metadata does not establish
+the system-default cursor's hotspot.
+
+The original V2 source/parser and input acceptance route remain unchanged. The
+V3 parser preserves their strict editor-screen/window checks and never grants
+focus, mapping or input authority. Ten new V3 and11 unchanged V2 HOST checks pass.
+The private68000 soft-float diagnostic compiled with67 source/header bodies and
+seven selected runtime inputs verified exactly before/after. It has not run in
+Amiberry; a distinct finite carrier/parent and fresh admission remain unfinished.
+See the [HOST qualification and limits](test-evidence/editor_pointer_context_v3_host_20261023.json).

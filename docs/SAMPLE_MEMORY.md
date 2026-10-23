@@ -9403,3 +9403,29 @@ candidate path remains retained; r5 uses the explicit existing hash-verified inp
 The replacement plan is not runtime admission. A human decision is required before
 applying the unused approval to that different plan. See the [redacted refusal and
 replacement qualification](test-evidence/editor_context_metadata_refusal_20261023.json).
+
+
+### Exact-candidate V3 passive context recorded in Amiberry —23 October2026
+
+The actually approved r5 service restart, fresh60-source binding and consecutive
+binder/dispatch completed. One editor readback/capture and one exact15736-byte
+V3 native readback/execution succeeded. The editor screen/window were active,
+640x512 with zero borders/origins, ViewLord offsets129/44, mouse coordinates0/0,
+and no window pointer override. No GUI input or host Raise occurred. These are
+passive context observations; default system-cursor hotspot, mapping, selection,
+full editor ABI, physical and listening acceptance remain unqualified.
+
+Normal cleanup refused before disconnect/signal because the caller supplied a
+lease environment variable that the helper explicitly sets itself. Do not replay
+that failed intent. A separate qualified stop also refused before signal when a
+new output qualification JSON changed ctime/flags with identical bytes. Both are
+retained. A distinct private-local12-test-qualified cleanup verified both zero-
+signal failures and original HOLD ownership, then sent exactly one SIGTERM and
+verified genuine EOF/absence. The unchanged full settlement preserved/removed the
+actual owned namespace, retained V3 input, restored three saved files/all31 app-data
+bodies/mtimes and used original public release once. One HOLD archived at historical
+fence2739; current EMPTY/no target and all60 sources/protected68/current installed10
+facts independently verified. No native clean exit claimed. Future normal-stop
+CLI calls must have NO inherited lease/FRAME; full stopped settlement separately
+requires its exact original lease path. See the [redacted emulator/restoration
+receipt](test-evidence/editor_context_v3_emulator_20261023.json).

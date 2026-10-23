@@ -9287,3 +9287,21 @@ The private68000 soft-float diagnostic compiled with67 source/header bodies and
 seven selected runtime inputs verified exactly before/after. It has not run in
 Amiberry; a distinct finite carrier/parent and fresh admission remain unfinished.
 See the [HOST qualification and limits](test-evidence/editor_pointer_context_v3_host_20261023.json).
+
+### Distinct V3 readonly volume and finite carrier —23 October2026
+
+Separate V3 helpers prepare a sole-file0500 input volume with paired read-only
+DH4:PTContext mounts, and consume at most one exact guest readback followed by
+one passive execution within20 seconds/script10. The carrier requires the
+distinct V3 source freeze, selected compile/source/native/editor, original current
+owner/FRAME and exact original profile plus prepared suffix. It grants no input,
+focus or mapping authority, creates no operation/lease and never retries.
+
+The V3 carrier/volume passed45 HOST cases; unchanged V2 carrier/volume and both
+parsers bring the focused total to110. Initial synthetic run-label refusals and
+their source/log evidence are retained; the fixture was corrected without changing
+the original label guard. All50 earlier runtime source pins and68 protected/10
+installed-source records remain exact. Actual V3 mounting/execution and the
+distinct parent/full lifecycle integration are still unfinished. The planned
+diagnostic parent will read context after blank capture with no GUI move, click,
+key or Raise. See the [HOST carrier qualification](test-evidence/editor_context_carrier_host_20261023.json).

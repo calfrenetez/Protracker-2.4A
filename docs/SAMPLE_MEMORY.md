@@ -9364,3 +9364,22 @@ independently observed. Current68 protected/10 installed-source facts and56 froz
 runtime sources remained exact. No metadata waiver or runtime acceptance follows.
 The one-use restart approval is consumed. Any later test requires a distinct fresh
 session/admission. See the [redacted runtime/restoration receipt](test-evidence/editor_context_preapplication_runtime_20261023.json).
+
+
+### Immediate fresh binding and dispatch —23 October2026
+
+A distinct optional wrapper runs one original actual-start binder immediately
+before the original finite dispatcher. The binder keeps60 seconds/180 supervisor;
+the parent keeps360/480, with a30-second maximum automatic gap. No pin is refreshed:
+body or ctime drift, changed ownership, inherited authority, wrong output, long gap
+or failure prevents dispatch. Timed-out children are retained without a signal.
+The wrapper must be selected before a fresh source freeze and never replays either
+actor. It passed14 HOST cases; original binder/runtime23 and dispatcher8 also pass.
+All target/child observations are fake. The cause of the actual profile timestamp
+change remains unknown; this removes a manual gap without claiming a metadata fix.
+
+A distinct private r3 input/source proposal and specific idle-service plan are
+prepared, with no freeze, reservation, restart or target action. Its separate
+service actor passes14 private HOST cases. A new actual human one-use restart
+reply is required before that borrowed service action. See the [HOST sequence
+qualification](test-evidence/editor_context_sequence_host_20261023.json).

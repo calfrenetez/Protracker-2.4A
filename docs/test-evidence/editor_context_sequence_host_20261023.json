@@ -1,0 +1,46 @@
+{
+  "state": "IMMEDIATE_V3_BIND_DISPATCH_HOST_QUALIFIED_NOT_LIVE_TESTED",
+  "date": "2026-10-23",
+  "hostChecks": {
+    "sequence": 14,
+    "existingBinderAndRuntime": 23,
+    "existingDispatcher": 8,
+    "separateBorrowedServiceActor": 14
+  },
+  "purpose": "Run the existing fresh binder and dispatcher consecutively, removing a manual gap while retaining all original full-facts pins. It does not repair or tolerate the unexplained timestamp discontinuity.",
+  "limits": {
+    "binderWhole": 60,
+    "binderSupervisor": 180,
+    "parentWhole": 360,
+    "parentSupervisor": 480,
+    "automaticGapMaximum": 30,
+    "signals": 0,
+    "profilePinRefreshes": 0
+  },
+  "originalRuntimeActorsUnchanged": true,
+  "sourceMustBeSelectedBeforeFreeze": true,
+  "failedTransactionsNeverReplayed": true,
+  "hostTargetObservations": "SYNTHETIC_ONLY",
+  "newLiveExecution": false,
+  "priorRunRestoredAndPubliclyReleased": true,
+  "priorRuntimeEvidence": "editor_context_preapplication_runtime_20261023.json",
+  "freshPrivateProposal": {
+    "sourcePins": 54,
+    "modules": 33,
+    "appDataFiles": 31,
+    "freezeOrReservationOrTargetOperation": false,
+    "newHumanReplyRequiredBeforeBorrowedServiceRestart": true
+  },
+  "evidenceArtifact": "ProTracker-2.4G-editor-context-sequence-host-20261023-r1",
+  "sourceSha256": {
+    "tools/editor_context_sequence.py": "d0a7dd32addb24b5cacb30bffc29fc7530d19082a4d61bef0a4f74f51f8ea0a3",
+    "tests/test_editor_context_sequence.py": "48735ef6f5040316101386913fb716640975b111bbf25cd1fccc409f1280ae0c"
+  },
+  "boundaries": {
+    "metadataCauseKnown": false,
+    "contextDiagnosticAccepted": false,
+    "inputSelectionHotspotAccepted": false,
+    "physicalAccepted": false,
+    "listeningAccepted": false
+  }
+}

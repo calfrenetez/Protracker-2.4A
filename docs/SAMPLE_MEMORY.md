@@ -9224,3 +9224,25 @@ Fresh private readonly inputs and a49-pin/23-module source selection are ready;
 no source freeze, new service approval, emulator launch or target operation has
 occurred. Initial fixture/metadata refusals and superseded unexecuted preparation
 are retained. See [the qualification and limits](test-evidence/editor_native_focus_diagnosis_20261022.json).
+
+### Actual native Raise and full failed-run release —23 October2026
+
+One newly approved idle-service restart established a fresh emulator session.
+Root performed one actual native window Raise inside the original FRAME and
+locks. The original registered recapture produced a new capture ID and nonce
+with the same controller and unchanged blank log. The unchanged image observer
+then refused its location in the Raise receipt subdirectory, before any mouse
+move, click, state query or passive probe invocation. The failed run was not
+replayed. Original failed stop, complete three-role/all31-file restoration and
+public release passed, followed by independent locked proof/absence checks.
+
+The scoped source correction saves that fresh image in the existing case
+directory. Exact copies of the runtime observer/support reproduce the refusal
+before the fix;91 focused HOST tests pass afterward. The original observer,
+native readiness checks, deadlines and action limits remain unchanged. The
+corrected path still needs a fresh emulator run. Mouse selection, whole ABI,
+physical hardware and listening remain unqualified. Normal iCloud retrieval
+changed some raw file metadata; original bodies and a fresh current preservation
+baseline were verified without claiming historical metadata continuity. Earlier
+preparation failures and partial backups remain preserved. See the
+[runtime result, restoration and HOST correction](test-evidence/editor_raise_observer_path_refusal_20261023.json).

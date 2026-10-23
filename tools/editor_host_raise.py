@@ -196,7 +196,10 @@ async def run_same_frame(binding,blank,original,frame,lock_fd):
     # guarded exchanges. Command FD and actual original FRAME remain unchanged.
     api.current(admission);need(time.monotonic()<deadline,'Host Raise whole deadline exhausted before recapture')
     async with asyncio.timeout(deadline-time.monotonic()):
-        capture=await original.capture(out/'after-raise.png')
+        # The unchanged Root image observer admits images in the case or mouse
+        # directory. Keep the Raise receipts separate without moving its image
+        # outside that existing observation scope.
+        capture=await original.capture(case/'after-raise.png')
     api.current(admission);need(time.monotonic()<deadline,'Host Raise whole deadline exhausted after recapture')
     need(capture['captureID']!=blank['capture']['captureID']
          and capture['controllerID']==blank['capture']['controllerID']

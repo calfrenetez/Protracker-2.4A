@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "state": "NATIVE_RAISE_AND_RECAPTURE_RECORDED_OBSERVER_PATH_REFUSED_FULLY_RELEASED_HOST_FIX_PASSED",
+  "runtimeSourceCommit": "c1ecfa1cb63414835959071224b2fea65a5f848d",
+  "exactEditor": {
+    "bytes": 346404,
+    "sha256": "7cb674a6f8fd0353690ff177972593be45fb96fba31d54bfd0935449d9e75a9b"
+  },
+  "runtime": {
+    "explicitlyApprovedIdleServiceRestarts": 1,
+    "startupReturncode": 0,
+    "startupSeconds": 37.65351808300329,
+    "rootActuallyViewedOwnedStartup": true,
+    "rootActuallyPerformedNativeWindowRaises": 1,
+    "sameOriginalFrameAndCommandLockRetained": true,
+    "freshRegisteredRecapturesAfterRaise": 1,
+    "freshCaptureSHA256": "011fbf771e25e396d9a4cf9c5a2cc9115b61e5ed043a849b668fd324262beb7c",
+    "sameControllerNewCaptureIDAndNonceRequired": true,
+    "originalBlankLogUnchanged": true,
+    "nativeInputReadinessAcceptedByRaise": false,
+    "failure": "Observation request case/image/deadline association differs",
+    "cause": "Fresh image was inside the Raise receipt subdirectory, outside the unchanged Root image observer scope",
+    "parentReturncode": 1,
+    "parentSeconds": 181.1094282080012,
+    "rootViewedExactFreshPNG": true,
+    "rootBeforeMoveObservationPublished": false,
+    "mousePhaseAttempts": {
+      "capture": 0,
+      "click": 0,
+      "move": 0,
+      "probeInvocation": 0,
+      "state": 0
+    },
+    "failedTransactionReplayed": false
+  },
+  "restoration": {
+    "verifiedOwnFailedStop": true,
+    "ownedProcessGroupSocketAndPortAbsent": true,
+    "originalBridgeEOFObserved": true,
+    "restoredSavedRoles": 3,
+    "originalAppDataFilesVerified": 31,
+    "readonlyProbeRetained": true,
+    "readonlyProbeDeletions": 0,
+    "originalPublicReleaseVerified": true,
+    "failureHoldsArchived": 1,
+    "independentBothLockEmptyGuardAndProofVerification": true,
+    "privateLeaseCopiedOrPublished": false
+  },
+  "hostFix": {
+    "behavior": "Save the one fresh post-Raise capture in the existing case directory",
+    "originalObserverAndInputGuardsChanged": false,
+    "originalBudgetsAndActionCountsChanged": false,
+    "unchangedRuntimeObserverSHA256": "891944870f007288f823926669dcc9545514071bb579667b595fdf80b63dfa8f",
+    "unchangedRuntimeSupportSHA256": "d50a82781815ced87a33238dc5d59bb31915cbde90a185bc0c8489723a93f1ed",
+    "newCrossModuleRegressionBeforeFix": "one matching path refusal; original out-of-scope rejection passed",
+    "focusedHostTestsAfterFix": 91,
+    "focusedHostFailuresAfterFix": 0,
+    "fixedRouteExecutedInEmulator": false
+  },
+  "preparation": {
+    "normalFileProviderRetrievalPerformed": true,
+    "selectedOriginalBodiesMatched": true,
+    "historicalRawMetadataContinuityClaimed": false,
+    "freshProtected68PathBaselineStable": true,
+    "unselectedVendorBodyReads": 0,
+    "failedPartialBackupFilesRetained": 7,
+    "distinctFreshCompleteBackupFiles": 31,
+    "earlierPreparationRefusalsRetained": true
+  },
+  "acceptance": {
+    "mouseSelection": false,
+    "nativeInputReadiness": false,
+    "nativeCleanExit": false,
+    "wholeApplicationABI": false,
+    "physicalHardware": false,
+    "humanListening": false,
+    "historicalFull707ReviewGateRerunOrWaived": false
+  }
+}

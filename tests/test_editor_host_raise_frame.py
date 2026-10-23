@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
-from types import SimpleNamespace
+from types import ModuleType,SimpleNamespace
 import unittest
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
@@ -178,6 +178,49 @@ class SameFrameRecaptureTests(unittest.TestCase):
         self.drift=True
         with self.assertRaises(ValueError):self.run_case()
         self.assertFalse((self.case/'host-window-raise/post-raise-capture.json').exists())
+
+    def actual_image_observer(self):
+        # Byte-for-byte copies of the validators used by the failed live run.
+        # Loading their pure code here does not import the shared harness.
+        fixtures=Path(__file__).parent/'fixtures/editor_observation'
+        support=ModuleType('capture_support')
+        source=(fixtures/'capture_support.py').read_bytes()
+        self.assertEqual(hashlib.sha256(source).hexdigest(),
+                         'd50a82781815ced87a33238dc5d59bb31915cbde90a185bc0c8489723a93f1ed')
+        exec(compile(source,str(fixtures/'capture_support.py'),'exec'),support.__dict__)
+        observer=ModuleType('actual_root_image_observer')
+        source=(fixtures/'root_observation.py').read_bytes()
+        self.assertEqual(hashlib.sha256(source).hexdigest(),
+                         '891944870f007288f823926669dcc9545514071bb579667b595fdf80b63dfa8f')
+        with patch.dict(sys.modules,{'capture_support':support}):
+            exec(compile(source,str(fixtures/'root_observation.py'),'exec'),observer.__dict__)
+        return observer
+
+    def image_request(self,capture):
+        return {'state':'ROOT_EDITOR_MOUSE_IMAGE_OBSERVATION_REQUIRED',
+            'stage':'before-move','caseDirectory':str(self.case),
+            'observationPath':str(self.case/'mouse-phase/before-move-observation.json'),
+            'capture':capture,'requestedMonotonic':100.,'deadlineMonotonic':160.}
+
+    def test_actual_recapture_path_passes_unchanged_root_image_observer(self):
+        async def capture(path):
+            value=copy.deepcopy(self.next_capture)
+            path.write_bytes(b'\x89PNG\r\n\x1a\nHOST-image')
+            value['image']=parent.read(path)[1]
+            return value
+        self.original.capture=capture
+        result=self.run_case()
+        observer=self.actual_image_observer()
+        request=self.image_request(result['capture'])
+        ref={'path':str(self.case/'mouse-phase/before-move-request.json')}
+        self.assertIs(observer.validate_request(request,ref),request)
+
+    def test_original_observer_still_refuses_private_gate_image_directory(self):
+        observer=self.actual_image_observer()
+        request=self.image_request({'image':{'path':str(self.case/'host-window-raise/after-raise.png')}})
+        ref={'path':str(self.case/'mouse-phase/before-move-request.json')}
+        with self.assertRaisesRegex(RuntimeError,'case/image/deadline'):
+            observer.validate_request(request,ref)
 
 
 class ParentRaiseIntegrationTests(unittest.TestCase):

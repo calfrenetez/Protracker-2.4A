@@ -13,6 +13,7 @@ int main(void)
     struct pt_native_amigus_ram_bus bus={0};
     assert(memory && !((uintptr_t)memory&3));
     for(i=0;i<8;++i)memory[i]=0xa5000000UL+i;
+    memory[0]=0; /* No FIFO fault, in either native byte order. */
     memcpy(snapshot,memory,sizeof(snapshot));
     card.agus_TypeId=AmiGUS_mini;card.agus_FirmwareRev=0x7ea663e7UL;
     card.agus_WavetableBase=(APTR)memory;
@@ -109,6 +110,31 @@ int main(void)
         assert(pt_amigus_wavetable_cache_unpin(&cache,lease));
         assert(pt_amigus_wavetable_cache_detach(&cache));
         assert(pt_native_amigus_ram_bus_clear(&bus) && !r.access);
+    }
+    /* A FIFO failure at the data port must prevent publishing a usable cache
+       lease. Later calls must refuse even if the hardware flag clears. */
+    {
+        struct pt_amigus_wavetable_cache cache={0};
+        struct pt_cache_lease lease;
+        int32_t data[2]={100,200};
+        const struct pt_pcm pcm={data,2,2,48000,1,16};
+        const struct pt_playback_format format={16,0,0,0};
+        uint8_t staging[4];
+        uint16_t status=0x0100;
+        memcpy(memory,&status,sizeof(status));
+        assert(pt_native_amigus_ram_bus_bind(&bus,&r,16,16));
+        assert(pt_amigus_wavetable_cache_attach(&cache,&r,16,16,16,&bus,
+            pt_native_amigus_ram_bus_owned,pt_native_amigus_ram_bus_write32));
+        assert(pt_amigus_wavetable_cache_acquire(&cache,&pcm,1,1,&format,
+            staging,sizeof(staging),&lease)!=PT_CACHE_LOAD);
+        assert(bus.faulted && memory[0x14/4]==16 &&
+            memory[0x10/4]==0x006400c8UL);
+        memory[0]=0;
+        memcpy(snapshot,memory,sizeof(snapshot));
+        assert(!pt_native_amigus_ram_bus_write32(&bus,0x14,20));
+        assert(!memcmp(memory,snapshot,sizeof(snapshot)));
+        assert(pt_amigus_wavetable_cache_detach(&cache));
+        assert(pt_native_amigus_ram_bus_clear(&bus));
     }
     /* The upper25-bit address boundary fits only an entire four-byte word. */
     assert(pt_native_amigus_ram_bus_bind(&bus,&r,0x01fffffcUL,4));

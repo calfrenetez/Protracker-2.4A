@@ -1,14 +1,18 @@
 #include "mixed_preflight.h"
 #include <limits.h>
 #include <string.h>
-struct workspace {struct pt_render_plan all,paula,amigus;unsigned index[2][PT_RENDER_ACTIONS];};
+struct workspace {
+    struct pt_routed_render_plan all;
+    struct pt_render_plan paula,amigus;
+    unsigned index[2][PT_RENDER_ACTIONS];
+};
 struct pt_mixed_preflight {
     struct workspace batch;struct pt_allocator allocator;
     const struct pt_project *project;struct pt_render_options options;
     struct pt_paula_render_caps caps;struct pt_playback_format format;
     struct pt_render_sequence *sequence;struct pt_render_interval span;
     struct pt_mixed_report report;uint16_t held[2];uint32_t remaining;
-    unsigned pc,ac,phase;
+    unsigned pc,ac,phase,routed;
     struct pt_render_sequence_setup *startup;
     struct pt_project setup_header;
     const struct pt_paula_render_caps *caps_source;
@@ -44,8 +48,8 @@ static enum pt_mixed_result batch(const struct pt_project *p,unsigned rate,struc
     struct pt_paula_preflight_report pr;struct pt_wavetable_preflight_report ar;
     uint16_t next[2]={held[0],held[1]};unsigned i,k,pi=UINT_MAX,ai=UINT_MAX;
     w->paula.count=w->amigus.count=0;
-    for(i=0;i<w->all.count;++i) {
-        const struct pt_render_action *a=&w->all.action[i];unsigned route;
+    for(i=0;i<w->all.audio.count;++i) {
+        const struct pt_render_action *a=&w->all.audio.action[i];unsigned route;
         if(a->channel>=p->channels.count){r->action=i;r->channel=a->channel;return PT_MIXED_ROUTE;}
         route=p->channels.track[a->channel].route;
         if(route!=PT_PAULA && route!=PT_AMIGUS){r->action=i;r->channel=a->channel;r->kind=a->kind;return PT_MIXED_ROUTE;}
@@ -60,15 +64,16 @@ static enum pt_mixed_result batch(const struct pt_project *p,unsigned rate,struc
     if(r->paula!=PT_PAULA_COMPATIBLE || r->amigus!=PT_WAVETABLE_COMPATIBLE) {
         unsigned backend=r->paula!=PT_PAULA_COMPATIBLE && (r->amigus==PT_WAVETABLE_COMPATIBLE || pi<=ai)?0:1;
         r->action=backend?ai:pi;
-        if(r->action<w->all.count){r->channel=w->all.action[r->action].channel;r->kind=w->all.action[r->action].kind;}
+        if(r->action<w->all.audio.count){r->channel=w->all.audio.action[r->action].channel;r->kind=w->all.audio.action[r->action].kind;}
         return backend?PT_MIXED_AMIGUS:PT_MIXED_PAULA;
     }
     for(i=0;i<PT_PROJECT_SAMPLES;++i){r->samples[0][i]|=pr.samples[i];r->samples[1][i]|=ar.samples[i];}
     held[0]=next[0];held[1]=next[1];return PT_MIXED_OK;
 }
-enum pt_mixed_result pt_mixed_preflight_begin(const struct pt_project *p,const struct pt_render_options *o,
+static enum pt_mixed_result preflight_begin(const struct pt_project *p,const struct pt_render_options *o,
     const int8_t *previous,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
-    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_mixed_preflight **work)
+    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,
+    struct pt_mixed_preflight **work,unsigned routed)
 {
     struct pt_mixed_report r;struct pt_mixed_preflight *w=NULL;unsigned i;
     init(&r);if(!out)return PT_MIXED_INVALID;
@@ -77,20 +82,33 @@ enum pt_mixed_result pt_mixed_preflight_begin(const struct pt_project *p,const s
        f->channel || f->word_pad || f->little_endian>1 || pt_project_validate(p,NULL)!=PT_PROJECT_OK ||
        pt_channels_paula_map(&p->channels,previous,r.map)!=PT_CHANNEL_OK)goto done;
     if(o->row_range){r.result=PT_MIXED_RANGE;goto done;}
-    for(i=0;i<p->channels.count;++i)if((o->tracks&(1U<<i)) &&
-       p->channels.track[i].route!=PT_PAULA && p->channels.track[i].route!=PT_AMIGUS){r.result=PT_MIXED_ROUTE;r.channel=i;goto done;}
+    for(i=0;i<p->channels.count;++i) {
+        unsigned route=p->channels.track[i].route;
+        if((o->tracks&(1U<<i)) && route!=PT_PAULA && route!=PT_AMIGUS && !(routed && route==PT_MIDI)) {
+            r.result=PT_MIXED_ROUTE;r.channel=i;goto done;
+        }
+    }
     w=a->allocate(a->context,sizeof(*w));if(!w){r.result=PT_MIXED_MEMORY;goto done;}
     memset(w,0,sizeof(*w));w->allocator=*a;
-    r.render_result=pt_render_sequence_begin(p,o,a,&w->sequence);
+    r.render_result=routed?pt_render_sequence_begin_routed(p,o,a,&w->sequence):
+        pt_render_sequence_begin(p,o,a,&w->sequence);
     if(r.render_result!=PT_RENDER_OK) {
         r.result=r.render_result==PT_RENDER_MEMORY?PT_MIXED_MEMORY:PT_MIXED_RENDER;
         pt_mixed_preflight_close(&w);goto done;
     }
-    w->project=p;w->options=*o;w->caps=*caps;w->format=*f;w->pc=pc;w->ac=ac;
+    w->project=p;w->options=*o;w->caps=*caps;w->format=*f;w->pc=pc;w->ac=ac;w->routed=routed;
     r.result=PT_MIXED_PENDING;w->report=r;*work=w;
 done:
     report(&r,out);return r.result;
 }
+enum pt_mixed_result pt_mixed_preflight_begin(const struct pt_project *p,const struct pt_render_options *o,
+    const int8_t *previous,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
+    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_mixed_preflight **work)
+{return preflight_begin(p,o,previous,caps,f,pc,ac,a,out,work,0);}
+enum pt_mixed_result pt_mixed_preflight_begin_routed(const struct pt_project *p,const struct pt_render_options *o,
+    const int8_t *previous,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
+    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_mixed_preflight **work)
+{return preflight_begin(p,o,previous,caps,f,pc,ac,a,out,work,1);}
 enum pt_mixed_result pt_mixed_preflight_step(struct pt_mixed_preflight *w,struct pt_mixed_report *out)
 {
     struct pt_mixed_report *r;unsigned ready;
@@ -116,7 +134,8 @@ enum pt_mixed_result pt_mixed_preflight_step(struct pt_mixed_preflight *w,struct
         break;
     }
     case 3:
-        r->render_result=pt_render_sequence_complete(w->sequence,&w->batch.all);
+        r->render_result=w->routed?pt_render_sequence_complete_routed(w->sequence,&w->batch.all):
+            pt_render_sequence_complete(w->sequence,&w->batch.all.audio);
         if(r->render_result!=PT_RENDER_OK)break;
         r->result=batch(w->project,w->options.rate,&w->batch,&w->caps,&w->format,w->pc,w->ac,w->held,r);
         if(r->result==PT_MIXED_OK && !w->span.end){r->result=PT_MIXED_PENDING;w->phase=1;}

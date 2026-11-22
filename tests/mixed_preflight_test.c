@@ -119,6 +119,45 @@ static void fixture(unsigned bits,unsigned cache_bits)
     p.channels.track[7].route=PT_AMIGUS;
     for(i=1;i<=2;++i){fail=calls+i;s=sentinel;
         assert(pt_mixed_preflight(&p,&o,NULL,&caps,&format,1,1,&a,&r,&s)==PT_MIXED_MEMORY && !live && s==sentinel);fail=0;}
+    if(bits==8) {
+        struct pt_mixed_preflight *work=NULL;
+        struct pt_routed_render_plan *routed=malloc(sizeof(*routed));
+        enum pt_mixed_result result;
+        unsigned attempt,steps;
+        assert(routed);
+        o.bits=16;
+        o.tracks|=1U<<10;
+        p.channels.track[10].route=PT_MIDI;
+        events[10]=(struct pt_event){.kind=PT_NOTE_MIDI,.pitch=64};
+        assert(pt_mixed_preflight_begin_routed(&p,&o,NULL,&caps,&format,1,1,&a,&r,&work)==PT_MIXED_RENDER);
+        assert(!work && !live);
+        strcpy(p.midi_output[10],"keys.out");
+        for(attempt=0;attempt<2;++attempt) {
+            if(attempt)events[32+7]=(struct pt_event){.kind=PT_NOTE_PERIOD,.pitch=428,.instrument=3};
+            assert(pt_mixed_preflight_begin_routed(&p,&o,NULL,&caps,&format,1,1,&a,&r,&work)==PT_MIXED_PENDING);
+            steps=0;
+            do {
+                assert(++steps<1000);
+                result=pt_mixed_preflight_step(work,&r);
+            }while(result==PT_MIXED_PENDING);
+            if(attempt) {
+                assert(result==PT_MIXED_AMIGUS && r.channel==7);
+                assert(!r.samples[0][0] && !r.samples[1][1]);
+                s=sentinel;
+                assert(!pt_mixed_preflight_take(work,&s) && s==sentinel);
+            } else {
+                assert(result==PT_MIXED_OK && r.samples[0][0] && r.samples[1][1]);
+                assert(pt_mixed_preflight_take(work,&s));
+                assert(pt_render_sequence_next(s,&span)==PT_RENDER_OK && !span.frames);
+                assert(pt_render_sequence_complete_routed(s,routed)==PT_RENDER_OK);
+                assert(routed->audio.count && routed->midi_count==1 && routed->midi[0].track==10);
+                pt_render_sequence_close(s);
+            }
+            pt_mixed_preflight_close(&work);
+            assert(!work && !live);
+        }
+        free(routed);
+    }
     /* Public AmiGUS batch gate rejects a foreign descriptor before reading it,
      * and never commits the first trigger's held bit or source mask on refusal. */
     assert(pt_voice_init(&v,&samples[1].pcm,0,16,PT_VOICE_ONCE,0,0,((uint64_t)8000<<32)/48000,0)==PT_PCM_OK);

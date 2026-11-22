@@ -24,7 +24,9 @@ int pt_native_amigus_ram_bus_owned(void *);
 /* Cache callback: requires exactly one live access lease and no interrupt.
  * Only paired address0x14/data0x10 numeric longword stores; full four-byte address
  * must fit the supplied region. Any refusal latches, preventing later writes.
- * Success means synchronous CPU store completion, not verified device contents. */
+ * Data stores each read status once to pace the FIFO. A full indication
+ * latches refusal after the attempted store and prevents cache publication.
+ * Success means CPU store plus no full indication, not verified device contents. */
 int pt_native_amigus_ram_bus_write32(void *,unsigned,uint32_t);
 /* No I/O. Refuses while access/interrupt ownership may still use this context. */
 int pt_native_amigus_ram_bus_clear(struct pt_native_amigus_ram_bus *);

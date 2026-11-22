@@ -41,6 +41,14 @@ struct pt_mixed_preflight;
 enum pt_mixed_result pt_mixed_preflight_begin(const struct pt_project *,const struct pt_render_options *,
     const int8_t *,const struct pt_paula_render_caps *,const struct pt_playback_format *,
     unsigned,unsigned,const struct pt_allocator *,struct pt_mixed_report *,struct pt_mixed_preflight **);
+/* Same audit and transfer, with a routed sequence. Requires selected MIDI and
+ * audio tracks, Wavetable mode and the 16-bit render options. Checks MIDI route
+ * configuration and event support before the audit. Endpoint availability and
+ * delivery are the playback owner's responsibility. Take returns a sequence
+ * requiring the routed completion/lookahead API. */
+enum pt_mixed_result pt_mixed_preflight_begin_routed(const struct pt_project *,const struct pt_render_options *,
+    const int8_t *,const struct pt_paula_render_caps *,const struct pt_playback_format *,
+    unsigned,unsigned,const struct pt_allocator *,struct pt_mixed_report *,struct pt_mixed_preflight **);
 enum pt_mixed_result pt_mixed_preflight_step(struct pt_mixed_preflight *,struct pt_mixed_report *);
 int pt_mixed_preflight_take(struct pt_mixed_preflight *,struct pt_render_sequence **);
 void pt_mixed_preflight_close(struct pt_mixed_preflight **);

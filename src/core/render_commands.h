@@ -71,6 +71,28 @@ enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *,uns
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *,struct pt_render_interval *);
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uint32_t frames);
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);
+/* Mixed wavetable playback planning. Audio actions retain their tracker channel
+ * (route through the immutable project). MIDI actions are Note On or explicit
+ * Note Off; the consumer resolves the track's configured endpoint and channel.
+ * Every action in a batch targets the same absolute frame of this sequence.
+ * At end != 0 the consumer must stop all three destinations. A plan owns no
+ * hardware, endpoint, cache or scheduling capability. */
+struct pt_routed_midi_action {uint8_t track,kind,note,velocity;};
+struct pt_routed_render_plan {
+    struct pt_render_plan audio;
+    uint64_t frame;
+    unsigned end,midi_count;
+    struct pt_routed_midi_action midi[PT_CHANNEL_LIMIT];
+};
+/* Requires audio and MIDI tracks in one wavetable project. Supports MIDI notes,
+ * velocity, OFF, EDx note delay and the existing shared flow commands. Rejects
+ * unsupported MIDI effects and clock options before exposing a sequence.
+ * Use the usual prepare / next / consume protocol with complete_routed only. */
+enum pt_render_result pt_render_sequence_begin_routed(const struct pt_project *,
+    const struct pt_render_options *,const struct pt_allocator *,struct pt_render_sequence **);
+enum pt_render_result pt_render_sequence_complete_routed(struct pt_render_sequence *,
+    struct pt_routed_render_plan *);
+
 /* Exact software voice state at the beginning of a pending interval, before
  * any consume. Use after next (including zero-frame/end spans), never after
  * consume/complete. Refusal preserves output. No allocation, source reads or

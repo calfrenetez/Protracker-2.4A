@@ -23,9 +23,14 @@ struct pt_render_lookahead {
     struct pt_render_sequence *sequence;uint64_t interval;
     struct pt_render_command_state commands;struct pt_render_plan plan;
     uint32_t remaining;unsigned ready,failed;
+    uint16_t midi_pending;
 };
 enum pt_render_result pt_render_lookahead_begin(struct pt_render_lookahead *,struct pt_render_sequence *);
 enum pt_render_result pt_render_lookahead_step(struct pt_render_lookahead *,unsigned frames,struct pt_render_plan *,unsigned *ready);
+/* A routed owner forecasts its complete audio and MIDI batch together.
+ * Use this step instead of the audio-only step. Commit advances both exactly once. */
+enum pt_render_result pt_render_lookahead_step_routed(struct pt_render_lookahead *,unsigned frames,
+    struct pt_routed_render_plan *,unsigned *ready);
 enum pt_render_result pt_render_lookahead_commit(struct pt_render_lookahead *);
 void pt_render_lookahead_cancel(struct pt_render_lookahead *);
 #endif

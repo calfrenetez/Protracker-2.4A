@@ -3,6 +3,11 @@
 #include <amigus/amigus.h>
 #include <string.h>
 
+#define WAVETABLE_STATUS 0x00U
+#define WAVETABLE_FIFO_FULL 0x0100U
+#define WAVETABLE_RAM_DATA 0x10U
+#define WAVETABLE_RAM_ADDRESS 0x14U
+
 static int registers(const struct pt_amigus_reservation *r,uintptr_t *base)
 {
     const struct AmiGUS *c;
@@ -37,14 +42,22 @@ int pt_native_amigus_ram_bus_write32(void *v,unsigned offset,uint32_t value)
     struct pt_native_amigus_ram_bus *n=v;
     if(!pt_native_amigus_ram_bus_owned(n))return 0;
     if(n->owner->access!=1 ||
-       (offset!=0x14 && offset!=0x10) ||
-       (offset==0x14 && (n->addressed || (value&3) || value<n->first ||
+       (offset!=WAVETABLE_RAM_ADDRESS && offset!=WAVETABLE_RAM_DATA) ||
+       (offset==WAVETABLE_RAM_ADDRESS && (n->addressed || (value&3) || value<n->first ||
                          value-n->first>n->bytes-4)) ||
-       (offset==0x10 && !n->addressed)) {
+       (offset==WAVETABLE_RAM_DATA && !n->addressed)) {
         n->faulted=1;return 0;
     }
-    n->addressed=offset==0x14;
+    n->addressed=offset==WAVETABLE_RAM_ADDRESS;
     *(volatile uint32_t *)(n->registers+offset)=value;
+    /* Match the per-longword pacing read in PT4 v4.1.2.1 pt_AgusPut
+       (akustikrausch/protracker4 src/sys/amigus41.asm). Inspect the same
+       FIFO-full indication on every word and leave recovery to the owner. */
+    if(offset==WAVETABLE_RAM_DATA &&
+       (*(volatile uint16_t *)(n->registers+WAVETABLE_STATUS)&WAVETABLE_FIFO_FULL)) {
+        n->faulted=1;
+        return 0;
+    }
     return 1;
 }
 int pt_native_amigus_ram_bus_clear(struct pt_native_amigus_ram_bus *n)

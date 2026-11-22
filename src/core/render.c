@@ -470,7 +470,7 @@ struct pt_render_sequence {
     uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;uint64_t interval;
     struct pt_render_mutation mutation;
     struct pt_flow checked_initial;struct pt_project checked_header;
-    uint16_t checked_offsets;unsigned checked_reset,checked_closing;
+    uint16_t checked_offsets,midi_tracks,midi_pending;unsigned checked_reset,checked_closing;
 };
 
 /* Opaque initial control: this is the only owner of its genuinely progressed
@@ -858,11 +858,67 @@ static enum pt_render_result sequence_begin(const struct pt_project *p,const str
 enum pt_render_result pt_render_sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out)
 {return sequence_begin(p,o,a,out,NULL);}
+static int routed_midi_events_valid(const struct pt_project *p,
+    const struct pt_render_options *o,uint16_t tracks)
+{
+    uint8_t used[PT_PROJECT_PATTERNS]={0};
+    unsigned pat,row,ch;
+    for(ch=0;ch<p->channels.count;++ch)
+        if((tracks&(1U<<ch)) && !p->midi_output[ch][0])return 0;
+    if(o->pattern_only)used[o->pattern]=1;
+    else for(pat=0;pat<p->order_count;++pat)used[p->orders[pat]]=1;
+    for(pat=0;pat<p->pattern_count;++pat)if(used[pat])
+        for(row=0;row<PT_PROJECT_ROWS;++row)for(ch=0;ch<p->channels.count;++ch)if(tracks&(1U<<ch)) {
+            const struct pt_event *e=p->events+((size_t)pat*PT_PROJECT_ROWS+row)*p->channels.count+ch;
+            const unsigned sub=e->parameter>>4;
+            /* The editor retains the selected sample number when entering
+               MIDI notes. It is not a MIDI Program Change. */
+            if(e->slice || e->kind==PT_NOTE_PERIOD)return 0;
+            switch(e->effect) {
+            case 0: if(e->parameter)return 0;break;
+            case 11: case 13: case 15: break; /* Shared position, break, speed and tempo. */
+            case 14:
+                if(sub==6 || sub==14 || (sub==13 && e->kind==PT_NOTE_MIDI))break;
+                return 0;
+            default: return 0;
+            }
+        }
+    return 1;
+}
+
+enum pt_render_result pt_render_sequence_begin_routed(const struct pt_project *p,
+    const struct pt_render_options *o,const struct pt_allocator *a,struct pt_render_sequence **out)
+{
+    struct pt_render_options audio;
+    struct pt_render_sequence *s=NULL;
+    enum pt_render_result result;
+    uint16_t midi=0;
+    unsigned ch;
+    if(!p || !o || !a || !out || p->channels.count<1 || p->channels.count>PT_CHANNEL_LIMIT ||
+       p->mode!=PT_MODE_WAVETABLE || o->bits!=16 || o->row_range)return PT_RENDER_INVALID;
+    if(!setup_apart(out,sizeof(*out),o,sizeof(*o)) ||
+       !setup_apart(out,sizeof(*out),a,sizeof(*a)))return PT_RENDER_INVALID;
+    if(p->midi_flags)return PT_RENDER_EFFECT;
+    for(ch=0;ch<p->channels.count;++ch)
+        if(p->channels.track[ch].route==PT_MIDI)midi|=(uint16_t)(1U<<ch);
+    midi&=o->tracks;
+    audio=*o;audio.tracks&=(uint16_t)~midi;
+    if(!midi || !audio.tracks)return PT_RENDER_ROUTE;
+    result=sequence_begin(p,&audio,a,&s,NULL);
+    if(result!=PT_RENDER_OK)return result;
+    if(!setup_apart(s,sizeof(*s),out,sizeof(*out)) ||
+       !setup_source_apart(p,out,sizeof(*out)))result=PT_RENDER_INVALID;
+    else if(!routed_midi_events_valid(p,o,midi))result=PT_RENDER_EFFECT;
+    if(result!=PT_RENDER_OK){pt_render_sequence_close(s);return result;}
+    s->midi_tracks=midi;*out=s;return PT_RENDER_OK;
+}
+
 enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *s,unsigned ticks,unsigned *ready)
 {
     struct pt_tick_span span;unsigned i,end;enum pt_render_result result;
     if(!s || !ready || !ticks || ticks>256 || s->failed || s->pending || s->done ||
        !pt_render_sequence_output_disjoint(s,ready,sizeof(*ready)))return PT_RENDER_INVALID;
+    if(s->midi_tracks && !setup_source_apart(s->project,ready,sizeof(*ready)))return PT_RENDER_INVALID;
     if(!s->preparing){*ready=1;return PT_RENDER_OK;}
     for(i=0;i<ticks;++i) {
         result=next_tick(&s->run,&span,&end);
@@ -931,6 +987,8 @@ enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struc
 {
     struct pt_tick_span span;enum pt_render_result result;
     if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,out,sizeof(*out)))return PT_RENDER_INVALID;
+    if(s&&s->midi_tracks&&(!out || !setup_apart(s,sizeof(*s),out,sizeof(*out)) ||
+       !setup_source_apart(s->project,out,sizeof(*out))))return PT_RENDER_INVALID;
     if(!s || !out || s->preparing || s->pending || s->done || s->failed || s->interval==UINT64_MAX)return PT_RENDER_INVALID;
     result=next_tick(&s->run,&span,&s->end);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
@@ -944,7 +1002,7 @@ enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,ui
     if(pt_voice_advance(s->commands.voice,s->project->channels.count,frames)!=PT_PCM_OK) {s->failed=1;return PT_RENDER_SAMPLE;}
     s->remaining-=frames;s->consumed=1;return PT_RENDER_OK;
 }
-enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,struct pt_render_plan *plan)
+static enum pt_render_result sequence_complete_audio(struct pt_render_sequence *s,struct pt_render_plan *plan)
 {
     enum pt_render_result result;
     if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,plan,sizeof(*plan)))return PT_RENDER_INVALID;
@@ -957,9 +1015,62 @@ enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,s
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
     s->pending=0;return PT_RENDER_OK;
 }
+enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,struct pt_render_plan *plan)
+{
+    if(s && s->midi_tracks)return PT_RENDER_ROUTE;
+    return sequence_complete_audio(s,plan);
+}
+
+static uint16_t route_midi(const struct pt_render_sequence *s,struct pt_routed_render_plan *plan)
+{
+    const struct pt_flow *flow;
+    const struct pt_event *row;
+    uint16_t pending=s->midi_pending;
+    unsigned track;
+    plan->frame=s->run.frames;plan->end=s->end;plan->midi_count=0;
+    flow=&s->run.timeline.flow;
+    if(flow->fresh || flow->delayed || s->end)pending=0;
+    if(s->end || (!flow->fresh && !pending))return pending;
+    row=flow->project->events+((size_t)flow->project->orders[flow->played_order]*PT_PROJECT_ROWS+
+        flow->played_row)*s->project->channels.count;
+    for(track=0;track<s->project->channels.count;++track) {
+        const struct pt_event *e=row+track;
+        const uint16_t bit=(uint16_t)(1U<<track);
+        unsigned delay=e->effect==14 && (e->parameter>>4)==13?e->parameter&15:0;
+        unsigned velocity=(e->flags&1)?e->velocity:127;
+        if(!(s->midi_tracks&bit) || !pt_channel_audible(&s->project->channels,track,PT_MIDI))continue;
+        if(flow->fresh) {
+            if(e->kind==PT_NOTE_NONE)continue;
+            if(delay){pending|=bit;continue;}
+        } else {
+            if(!(pending&bit) || delay!=flow->counter)continue;
+            pending&=(uint16_t)~bit;
+        }
+        if(e->kind==PT_NOTE_OFF || !velocity)
+            plan->midi[plan->midi_count++]=(struct pt_routed_midi_action){track,PT_NOTE_OFF,0,0};
+        else plan->midi[plan->midi_count++]=(struct pt_routed_midi_action){track,PT_NOTE_MIDI,e->pitch,velocity};
+    }
+    return pending;
+}
+
+enum pt_render_result pt_render_sequence_complete_routed(struct pt_render_sequence *s,
+    struct pt_routed_render_plan *plan)
+{
+    enum pt_render_result result;
+    if(!s || !s->midi_tracks || !s->pending || s->remaining || s->failed || !plan ||
+       !setup_apart(s,sizeof(*s),plan,sizeof(*plan)) ||
+       !setup_source_apart(s->project,plan,sizeof(*plan)))return PT_RENDER_INVALID;
+    result=sequence_complete_audio(s,&plan->audio);
+    if(result!=PT_RENDER_OK){plan->midi_count=0;return result;}
+    s->midi_pending=route_midi(s,plan);
+    return PT_RENDER_OK;
+}
+
 enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequence *s,struct pt_render_snapshot *out)
 {
     if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,out,sizeof(*out)))return PT_RENDER_INVALID;
+    if(s&&s->midi_tracks&&(!out || !setup_apart(s,sizeof(*s),out,sizeof(*out)) ||
+       !setup_source_apart(s->project,out,sizeof(*out))))return PT_RENDER_INVALID;
     if(!s || !out || s->mutation.tick || !s->pending || s->consumed || s->failed)return PT_RENDER_INVALID;
     memset(out,0,sizeof(*out));out->channels=s->project->channels.count;
     memcpy(out->voice,s->commands.voice,sizeof(out->voice));
@@ -970,7 +1081,7 @@ enum pt_render_result pt_render_sequence_rewind(struct pt_render_sequence *s)
     if(s&&s->checked_reset&&(s->checked_closing||!sequence_checked_current(s)))return PT_RENDER_INVALID;
     if(!s || s->mutation.tick || !s->done || s->failed || s->pending || s->preparing)return PT_RENDER_INVALID;
     if(!(s->checked_reset?sequence_checked_reset(s):start_run(&s->run,s->project,&s->options,0))){s->failed=1;return PT_RENDER_INVALID;}
-    pt_render_commands_init(&s->commands);s->remaining=0;s->end=s->done=s->consumed=0;
+    pt_render_commands_init(&s->commands);s->remaining=0;s->end=s->done=s->consumed=s->midi_pending=0;
     return PT_RENDER_OK;
 }
 void pt_render_sequence_close(struct pt_render_sequence *s)
@@ -991,32 +1102,67 @@ void pt_render_lookahead_cancel(struct pt_render_lookahead *w)
 {if(w)memset(w,0,sizeof(*w));}
 enum pt_render_result pt_render_lookahead_begin(struct pt_render_lookahead *w,struct pt_render_sequence *s)
 {
-    if(!w || w->sequence || !s || s->mutation.tick || s->preparing || s->failed || s->done || !s->pending)return PT_RENDER_INVALID;
+    if(!w || w->sequence || !s || s->mutation.tick || s->preparing || s->failed || s->done || !s->pending)
+        return PT_RENDER_INVALID;
+    if(s->midi_tracks && (!setup_apart(s,sizeof(*s),w,sizeof(*w)) ||
+       !setup_source_apart(s->project,w,sizeof(*w))))return PT_RENDER_INVALID;
     memset(w,0,sizeof(*w));w->sequence=s;w->interval=s->interval;w->commands=s->commands;w->remaining=s->remaining;
     return PT_RENDER_OK;
 }
-enum pt_render_result pt_render_lookahead_step(struct pt_render_lookahead *w,unsigned frames,struct pt_render_plan *out,unsigned *ready)
+static enum pt_render_result lookahead_step(struct pt_render_lookahead *w,unsigned frames,unsigned *ready)
 {
-    enum pt_render_result result;struct pt_render_sequence *s;
-    if(!w || !frames || frames>256 || !out || !ready || !lookahead_current(w))return PT_RENDER_INVALID;
-    s=w->sequence;
-    if(w->ready){*out=w->plan;*ready=1;return PT_RENDER_OK;}
+    struct pt_render_sequence *s=w->sequence;
+    if(w->ready){*ready=1;return PT_RENDER_OK;}
     if(w->remaining) {
         unsigned n=w->remaining>frames?frames:w->remaining;
         if(pt_voice_advance(w->commands.voice,s->project->channels.count,n)!=PT_PCM_OK){w->failed=1;return PT_RENDER_SAMPLE;}
         w->remaining-=n;*ready=0;return PT_RENDER_OK;
     }
     if(!s->end) {
-        result=commands_plan(s->project,&s->options,&s->run.timeline.flow,&s->run.pitch,
+        enum pt_render_result result=commands_plan(s->project,&s->options,&s->run.timeline.flow,&s->run.pitch,
             s->run.range,s->run.offset_tracks,&w->commands,&w->plan,1);
         if(result!=PT_RENDER_OK){w->failed=1;return result;}
     }
-    w->ready=1;*out=w->plan;*ready=1;return PT_RENDER_OK;
+    w->ready=1;*ready=1;return PT_RENDER_OK;
 }
+
+enum pt_render_result pt_render_lookahead_step(struct pt_render_lookahead *w,unsigned frames,
+    struct pt_render_plan *out,unsigned *ready)
+{
+    enum pt_render_result result;
+    if(!w || !frames || frames>256 || !out || !ready || !lookahead_current(w) || w->sequence->midi_tracks)
+        return PT_RENDER_INVALID;
+    result=lookahead_step(w,frames,ready);
+    if(result==PT_RENDER_OK && *ready)*out=w->plan;
+    return result;
+}
+
+enum pt_render_result pt_render_lookahead_step_routed(struct pt_render_lookahead *w,unsigned frames,
+    struct pt_routed_render_plan *out,unsigned *ready)
+{
+    struct pt_render_sequence *s;
+    enum pt_render_result result;
+    if(!w || !frames || frames>256 || !out || !ready || !lookahead_current(w))return PT_RENDER_INVALID;
+    s=w->sequence;
+    if(!s->midi_tracks || !setup_apart(out,sizeof(*out),ready,sizeof(*ready)) ||
+       !setup_apart(w,sizeof(*w),out,sizeof(*out)) || !setup_apart(w,sizeof(*w),ready,sizeof(*ready)) ||
+       !setup_apart(s,sizeof(*s),out,sizeof(*out)) || !setup_apart(s,sizeof(*s),ready,sizeof(*ready)) ||
+       !setup_source_apart(s->project,out,sizeof(*out)) || !setup_source_apart(s->project,ready,sizeof(*ready)))
+        return PT_RENDER_INVALID;
+    result=lookahead_step(w,frames,ready);
+    if(result==PT_RENDER_OK && *ready) {
+        out->audio=w->plan;
+        w->midi_pending=route_midi(s,out);
+    }
+    return result;
+}
+
 enum pt_render_result pt_render_lookahead_commit(struct pt_render_lookahead *w)
 {
     struct pt_render_sequence *s;
     if(!w || !w->ready || !lookahead_current(w) || w->sequence->remaining)return PT_RENDER_INVALID;
-    s=w->sequence;s->commands=w->commands;s->pending=0;if(s->end)s->done=1;
+    s=w->sequence;s->commands=w->commands;
+    if(s->midi_tracks)s->midi_pending=w->midi_pending;
+    s->pending=0;if(s->end)s->done=1;
     pt_render_lookahead_cancel(w);return PT_RENDER_OK;
 }

@@ -217,6 +217,7 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
     event->first = first;
     event->last = last;
     event->batch = batch;
+    schedule->cancel_requested = 0;
     schedule->busy = 1;
     result = schedule->provider.submit(schedule->provider.context, event);
     schedule->busy = 0;
@@ -237,6 +238,24 @@ static int same_key(const struct pt_routed_midi_key *a, const struct pt_routed_m
 {
     return a->session == b->session && a->generation == b->generation &&
         a->frame == b->frame && a->serial == b->serial;
+}
+
+enum pt_routed_midi_schedule_result pt_routed_midi_schedule_request_cancel(struct pt_routed_midi_schedule *schedule)
+{
+    struct pt_routed_midi_key key;
+    int result;
+    if (!schedule_ready(schedule) || !schedule->held || schedule->event.batch->stop ||
+        schedule->cancel_requested)
+        return PT_ROUTED_MIDI_INVALID;
+    schedule->cancel_requested = 1;
+    schedule->faulted = 1;
+    if (!schedule->provider.request_cancel)
+        return PT_ROUTED_MIDI_WAITING;
+    key = schedule->event.key;
+    schedule->busy = 1;
+    result = schedule->provider.request_cancel(schedule->provider.context, &key);
+    schedule->busy = 0;
+    return result == 0 || result == 1 ? PT_ROUTED_MIDI_WAITING : PT_ROUTED_MIDI_UNCERTAIN;
 }
 
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *schedule)

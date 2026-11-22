@@ -10,8 +10,8 @@ struct provider_model {
     struct pt_routed_midi_schedule *schedule;
     uint64_t now;
     uint32_t frequency;
-    unsigned reads, submissions, observations;
-    int accept;
+    unsigned reads, submissions, observations, cancel_calls;
+    int accept, cancel_result;
     enum pt_routed_midi_delivery delivery;
 };
 
@@ -55,6 +55,17 @@ static enum pt_routed_midi_delivery observe(void *context, const struct pt_route
     return model->delivery;
 }
 
+static int request_cancel(void *context, const struct pt_routed_midi_key *key)
+{
+    struct provider_model *model = context;
+    assert(key->session == model->key.session && key->generation == model->key.generation &&
+           key->serial == model->key.serial && key->frame == model->key.frame);
+    assert(++model->cancel_calls == 1);
+    assert(pt_routed_midi_schedule_request_cancel(model->schedule) == PT_ROUTED_MIDI_INVALID);
+    assert(pt_routed_midi_schedule_observe(model->schedule) == PT_ROUTED_MIDI_INVALID);
+    return model->cancel_result;
+}
+
 static void fixture(unsigned mode)
 {
     struct pt_project project = {0};
@@ -62,7 +73,9 @@ static void fixture(unsigned mode)
     struct pt_routed_render_plan *plan = calloc(1, sizeof(*plan));
     struct pt_routed_midi_schedule schedule = {0};
     struct provider_model model = {.schedule=&schedule, .now=99, .frequency=709379, .accept=1};
-    const struct pt_routed_midi_provider api = {&model, sizeof(model), read_clock, submit, observe};
+    const struct pt_routed_midi_provider api = {
+        &model, sizeof(model), read_clock, submit, observe, mode == 11 ? NULL : request_cancel
+    };
     const struct pt_routed_midi_batch *stop;
     assert(midi && plan);
     pt_channels_init(&project.channels);
@@ -72,6 +85,7 @@ static void fixture(unsigned mode)
     assert(pt_routed_midi_init(midi, &project, 15));
     assert(pt_routed_midi_schedule_init(&schedule, midi, &api, 7, 11, 100, 709379, 48000));
     assert(!pt_routed_midi_schedule_init(&schedule, midi, &api, 7, 11, 100, 709379, 48000));
+    assert(pt_routed_midi_schedule_request_cancel(&schedule) == PT_ROUTED_MIDI_INVALID);
     plan->midi_count = 1;
     plan->midi[0] = (struct pt_routed_midi_action){2, PT_NOTE_MIDI, 60, 100};
     assert(pt_routed_midi_prepare(midi, plan));
@@ -96,9 +110,25 @@ static void fixture(unsigned mode)
         assert(midi->pending && !pt_routed_midi_schedule_discard(&schedule));
         assert(!pt_routed_midi_prepare_stop(midi, 960));
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_WAITING);
-        if (mode == 4) {
+        if (mode >= 8) {
+            model.cancel_result = mode == 8 ? 1 : mode == 10 ? -1 : 0;
+            assert(pt_routed_midi_schedule_request_cancel(&schedule) ==
+                   (mode == 10 ? PT_ROUTED_MIDI_UNCERTAIN : PT_ROUTED_MIDI_WAITING));
+            assert(pt_routed_midi_schedule_request_cancel(&schedule) == PT_ROUTED_MIDI_INVALID);
+            assert(model.cancel_calls == (unsigned)(mode != 11));
+            assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_WAITING);
+            assert(midi->pending && schedule.held && !pt_routed_midi_schedule_discard(&schedule));
+            assert(!pt_routed_midi_prepare_stop(midi, 960));
+        }
+        if (mode == 4 || mode == 8) {
             model.delivery = PT_ROUTED_MIDI_NOT_ISSUED;
             model.receipt.activated = model.receipt.count = 0;
+            if (mode == 8) {
+                model.receipt.key.generation++;
+                assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_UNCERTAIN);
+                assert(schedule.held && midi->pending);
+                model.receipt.key = model.key;
+            }
             assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_REFUSED);
             assert(!midi->accepted[2].active);
         } else {
@@ -116,7 +146,7 @@ static void fixture(unsigned mode)
             }
             model.receipt.activated = mode == 6 ? tick_for(1) : mode == 7 ? model.now : tick_for(1)-1;
             assert(pt_routed_midi_schedule_observe(&schedule) ==
-                   (mode >= 6 ? PT_ROUTED_MIDI_OUTSIDE_WINDOW : PT_ROUTED_MIDI_SETTLED));
+                   (mode == 6 || mode == 7 ? PT_ROUTED_MIDI_OUTSIDE_WINDOW : PT_ROUTED_MIDI_SETTLED));
             assert(midi->accepted[2].active);
             assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_INVALID);
         }
@@ -129,7 +159,7 @@ static void fixture(unsigned mode)
         assert(pt_routed_midi_schedule_discard(&schedule));
     }
     stop = pt_routed_midi_prepare_stop(midi, 960);
-    assert(stop && stop->stop && stop->count == (unsigned)(mode == 0 || mode == 3 || mode >= 5));
+    assert(stop && stop->stop && stop->count == (unsigned)(mode == 0 || mode == 3 || (mode >= 5 && mode != 8)));
     if (stop->count)
         assert(stop->messages[0].bytes[0] == 0x85 && stop->messages[0].bytes[1] == 60);
     model.accept = 1;
@@ -139,6 +169,7 @@ static void fixture(unsigned mode)
     }
     model.now = tick_for(1);
     assert(pt_routed_midi_schedule_submit(&schedule) == PT_ROUTED_MIDI_QUEUED);
+    assert(pt_routed_midi_schedule_request_cancel(&schedule) == PT_ROUTED_MIDI_INVALID);
     model.delivery = PT_ROUTED_MIDI_ISSUED;
     assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
     assert(midi->stopped && !midi->accepted[2].active && !schedule.held);
@@ -150,7 +181,7 @@ static void fixture(unsigned mode)
 int main(void)
 {
     unsigned mode;
-    for (mode = 0; mode < 8; ++mode)
+    for (mode = 0; mode < 12; ++mode)
         fixture(mode);
     puts("Routed MIDI schedule: prestart queue, exact proof, early and stale refusal, uncertain retirement and owned Stop");
     return 0;

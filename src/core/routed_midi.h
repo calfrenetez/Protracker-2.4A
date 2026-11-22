@@ -97,6 +97,11 @@ struct pt_routed_midi_provider {
     int (*submit)(void *, const struct pt_routed_midi_event *);
     enum pt_routed_midi_delivery (*observe)(void *, const struct pt_routed_midi_key *,
                                              struct pt_routed_midi_receipt *);
+    /* Optional cancellation request for the exact queued batch. Return 1 when
+     * requested, 0 if refused, or -1 if the request outcome is unknown.
+     * The key is borrowed during the call only. Every result still requires
+     * an independent terminal observe receipt. */
+    int (*request_cancel)(void *, const struct pt_routed_midi_key *);
 };
 
 struct pt_routed_midi_schedule {
@@ -105,7 +110,7 @@ struct pt_routed_midi_schedule {
     struct pt_elapsed_clock grid;
     struct pt_routed_midi_event event;
     uint64_t last_read;
-    unsigned busy, held, clock_seen, faulted;
+    unsigned busy, held, clock_seen, faulted, cancel_requested;
 };
 
 /* Bind a zeroed schedule before preparing the first batch. The session must
@@ -125,6 +130,11 @@ int pt_routed_midi_schedule_init(struct pt_routed_midi_schedule *, struct pt_rou
  * It never qualifies the timing. No immediate-send fallback. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_routed_midi_schedule *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);
+/* Begin draining a queued non-Stop batch before an owned Stop. Request
+ * cancellation at most once and keep the batch borrowed through observe,
+ * including if the request is refused or activation has already won. Without
+ * a cancellation callback, wait for the original batch's terminal receipt. */
+enum pt_routed_midi_schedule_result pt_routed_midi_schedule_request_cancel(struct pt_routed_midi_schedule *);
 int pt_routed_midi_schedule_discard(struct pt_routed_midi_schedule *);
 
 #endif

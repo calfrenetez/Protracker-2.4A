@@ -34,6 +34,13 @@ Stop and reports a timing failure. The software fixture uses a provider model.
 This timed interface has yet to be bound to a native CAMD provider or to the
 combined Paula/AmiGUS delivery path.
 
+To stop with a queued MIDI batch, the task can ask the provider to cancel its
+exact key once. The schedule blocks further note submissions and waits for the
+same terminal delivery receipt whether the cancellation was accepted, refused
+or uncertain. If activation won the race, the receipt records the issued notes
+before Stop prepares their releases. Providers without a cancellation request
+still settle the existing batch before Stop.
+
 The AmiGUS Mini RAM adapter follows the per-longword pacing read used by
 [ProTracker 4.1.2.1](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L478-L505).
 The existing 2.4G C adapter reads FIFO status after each RAM data write and

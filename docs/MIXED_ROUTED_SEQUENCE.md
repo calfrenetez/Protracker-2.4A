@@ -68,3 +68,10 @@ checks the guest's CPU and the staged bytes before execution. It preserves the
 output and verifies the guest exit code before removing its staged files.
 Starting, stopping, restoring and releasing the guest remain the session
 owner's responsibility. A pass qualifies the core assertions in Amiberry.
+
+Both MIDI fixtures also completed in the shared Amiberry 68030 profile using
+a private DOS-only disk with the guest bridge disabled. The guest copied back
+the exact executables, returned zero, and produced both complete assertion
+logs. The owned guest stopped normally. The shared files were restored and the
+reservation was released.
+[Offline 030 test receipt](test-evidence/routed_midi_offline_amiberry_20261122.json)

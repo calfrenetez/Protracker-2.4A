@@ -1,0 +1,30 @@
+{
+  "date_utc": "2026-11-22",
+  "tested_source": "2e66683ca144aa48d7d6b186c8f77140b217a69d",
+  "target": "amiberry-030",
+  "guest_cpu_confirmation": "System: 68030",
+  "boot": "Private DOS-only disk overlay, guest bridge disabled",
+  "fixtures": [
+    {
+      "name": "PTRoutedMidiWire",
+      "candidate_and_guest_readback_sha256": "858481450e18a838223d9d7c52f86e7b0aeeb5162e48aada8f2a6432b19098a0",
+      "guest_log_sha256": "02d7b69a1ac9b1dccb65e68b37d021dac1aeda7471992d59978ec92e45e64c5f",
+      "exit_code": 0,
+      "exact_complete_log": true
+    },
+    {
+      "name": "PTRoutedMidiSchedule",
+      "candidate_and_guest_readback_sha256": "bc66af6aaba86ff3b45c5c1615e3e09e9204646cf59f26b6f96a0c96c58cb4e1",
+      "guest_log_sha256": "29e8b6609dc221e743358051536eb7dcc5f7fd89d3c466948a9691ef60d051ca",
+      "exit_code": 0,
+      "exact_complete_log": true
+    }
+  ],
+  "restoration": {
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
+  "scope": "Native software fixture execution in Amiberry, with modeled MIDI provider receipts. Live CAMD, Paula and AmiGUS audio output, the full editor and physical listening remain untested."
+}

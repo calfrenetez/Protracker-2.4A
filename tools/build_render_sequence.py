@@ -1,17 +1,33 @@
 #!/usr/bin/env python3
-"""Build bounded renderer snapshot or exact cache-restore fixtures."""
+"""Build bounded rendering, cache-restore or mixed frame-zero fixtures."""
 import argparse,ast,json,subprocess
 from pathlib import Path
 from build_diagnostic import digest,runtime_inputs,compiler_safety_flags
 ROOT=Path(__file__).resolve().parents[1]
+FIXTURES = {
+    'render-sequence': ('test_render_sequence.py', 'PTExecRenderSequenceTest'),
+    'amigus-restore': ('test_amigus_restore.py', 'PTAmiGusRestoreTest'),
+    'mixed-causal': ('test_mixed_readers_causal.py', 'PTMixedCausalTest'),
+    'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
+}
+
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--cc',required=True);parser.add_argument('--fixture',choices=['render-sequence','amigus-restore'],default='render-sequence');args=parser.parse_args()
-    test='test_render_sequence.py' if args.fixture=='render-sequence' else 'test_amigus_restore.py'
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--cc', required=True)
+    parser.add_argument('--fixture', choices=FIXTURES, default='render-sequence')
+    args = parser.parse_args()
+    test, executable = FIXTURES[args.fixture]
     tree=ast.parse((ROOT/'tests'/test).read_text())
     sources=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SOURCES' for t in n.targets))
-    if args.fixture=='render-sequence':sources=['tests/native_exec_render_sequence_test.c',*sources[1:]]
-    flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core',*compiler_safety_flags(args.cc)]
-    out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/('PTExecRenderSequenceTest' if args.fixture=='render-sequence' else 'PTAmiGusRestoreTest')
+    if args.fixture == 'render-sequence':
+        sources[0] = 'tests/native_exec_render_sequence_test.c'
+    if args.fixture == 'mixed-frame-zero':
+        sources[0] = 'tests/native_mixed_frame_zero_test.c'
+    flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
+    if args.fixture in ('mixed-causal', 'mixed-frame-zero'):
+        flags.extend(['-I.', '-UNDEBUG'])
+    flags.extend(compiler_safety_flags(args.cc))
+    out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
     subprocess.run([args.cc,*flags,*sources,'-o',str(binary)],cwd=ROOT,check=True)
     syntax=['src/editor/wavetable_dispatch.c'] if args.fixture=='amigus-restore' else []
     for source in syntax:subprocess.run([args.cc,*flags,'-fsyntax-only',source],cwd=ROOT,check=True)

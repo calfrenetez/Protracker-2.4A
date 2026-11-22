@@ -1,0 +1,37 @@
+{
+  "date_utc": "2026-11-22",
+  "core_source_commit": "fa1963cb7c11712f11ee3400cf9e398da01beca3",
+  "target": "Amiberry 68030 with a private DOS-only disk",
+  "failed_original": {
+    "candidate_sha256": "57a035b5df1122df0a5fb677347f67eab99f448c174aacba5a88e5db1b751a67",
+    "guest_log_sha256": "62fb3ff3050ec06bb24f1513b4ddf6d5b51df58d6f515c3a77ec0eb962853df8",
+    "assertion": "pt_sampler_paula_location in tests/mixed_scheduled_readers_test.c:101",
+    "route_loop": "The compare post-increments the track pointer before an explicit 22-byte increment. Native track records are 22 bytes. The resulting 23-byte stride falsely invalidates an unchanged route snapshot.",
+    "disassembly_sha256": "eccc3d99be8dbaba87c062d6c04d159182f8778ee53d380ff7d942979bd8029b"
+  },
+  "full_fixture_with_compiler_mitigation": {
+    "candidate_sha256": "805e58edb8fefbde29b79c00a045c286647406128dac5a94c9ce9482920145f4",
+    "compiler_flag": "-fbbb=-",
+    "disassembly_sha256": "6e4df94b5e7dc30e55b075a34d7c894613b078f0f9e3ff9b79589d7f221e2856",
+    "result": "INCOMPLETE",
+    "exact_guest_copy": true,
+    "guest_exit_code": null,
+    "guest_log_bytes": 0,
+    "observation_seconds_after_start_wrapper": 42
+  },
+  "bounded_fixture": {
+    "source": "tests/native_mixed_frame_zero_test.c",
+    "candidate_sha256": "32aee7c95d7f8ec312085ef235f073b06fcf36935d138a773d6c42f59aee0239",
+    "build_receipt_sha256": "02b75858e2ee35e6ee141e0ded00761467cbcbb34f8f4aefbac0c0aac3fd7dd7",
+    "guest_log_sha256": "bee16415feaf52299234459e1f0f99eee72155734214532d366fffa666e46096",
+    "host_sanitizer_log_matches_guest": true,
+    "exact_guest_copy": true,
+    "guest_exit_code": 0,
+    "guest_startup_completed": true,
+    "cases": ["exact frame zero and successor", "refuse submission at the deadline", "refuse first excluded counter tick", "refuse counter regression"],
+    "saved_files_verified": 39,
+    "normal_stop": true,
+    "restoration_and_release_verified": true
+  },
+  "scope": "Software playback queue with modeled output. Physical devices, actual audio and CAMD delivery were not exercised."
+}

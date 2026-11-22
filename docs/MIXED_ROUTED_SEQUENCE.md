@@ -75,3 +75,19 @@ the exact executables, returned zero, and produced both complete assertion
 logs. The owned guest stopped normally. The shared files were restored and the
 reservation was released.
 [Offline 030 test receipt](test-evidence/routed_midi_offline_amiberry_20261122.json)
+
+Build the full causal queue fixture with `tools/build_render_sequence.py
+--cc <amiga-compiler> --fixture mixed-causal`. Use `--fixture mixed-frame-zero`
+for the four first-frame assertions with a flushed progress marker per case.
+Both use the project's standard native compiler flags. The original frame-zero
+candidate used the compiler's extra optimizer. Its Paula route-check loop
+stepped 23 bytes through 22-byte channel records, falsely invalidating the
+newly acquired sample cache entry. The standard compiler mitigation preserves
+the 22-byte stride.
+
+The full rebuilt fixture reached the 68030 guest and matched its staged bytes.
+Its observation window ended without a completion marker. The separate
+four-case fixture returned zero in Amiberry and matched the host sanitizer
+log. It covered exact frame-zero activation and refusal of submission at the
+deadline, activation at the first excluded tick, and clock regression.
+[Frame-zero 030 test receipt](test-evidence/mixed_frame_zero_amiberry_20261122.json)

@@ -26,5 +26,21 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "cancellation_follow_up": {
+    "tested_source": "185824f658dcadf446152a4b7d743731c64b123a",
+    "name": "PTRoutedMidiCancel",
+    "candidate_and_guest_readback_sha256": "74f193658a186a943e86dd8b90116e1a5c697da8a89e35576c2808708ae31fa7",
+    "build_receipt_sha256": "e8b47ca634e4e2945bf752898bca11b9d6f3d3c626add50109937a574a69e608",
+    "guest_log_sha256": "29e8b6609dc221e743358051536eb7dcc5f7fd89d3c466948a9691ef60d051ca",
+    "cases": 12,
+    "additional_cases": ["confirmed cancellation", "refused request and activation wins", "uncertain request and activation wins", "provider without request support"],
+    "exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Native software fixture execution in Amiberry, with modeled MIDI provider receipts. Live CAMD, Paula and AmiGUS audio output, the full editor and physical listening remain untested."
 }

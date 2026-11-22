@@ -15,9 +15,13 @@ from pathlib import Path
 
 MIDI_PASS = "Routed MIDI: endpoint identity, exact frame, shared note, cancellation, full batch and owned Stop plans"
 REPLAY_PASS = "Routed sequence: same Paula/AmiGUS attack frame, MIDI delay after Fxx, OFF, mute, F00 cleanup and replay via lookahead"
+SCHEDULE_PASS = "Routed MIDI schedule: prestart queue, exact proof, early and stale refusal, uncertain retirement and owned Stop"
 TARGET = "amiberry-030"
-EXECUTABLE = "PTRoutedMidiWire"
 GUEST_LOG = "routed-midi.log"
+FIXTURES = {
+    "wire": ("PTRoutedMidiWire", [REPLAY_PASS, MIDI_PASS]),
+    "schedule": ("PTRoutedMidiSchedule", [SCHEDULE_PASS]),
+}
 
 
 def digest(data):
@@ -31,8 +35,8 @@ def read_regular(path, maximum):
     return path.read_bytes()
 
 
-def check_completion(reply, log):
-    if reply.splitlines().count("PT-ROUTED-RC 0") != 1 or log.splitlines() != [REPLAY_PASS, MIDI_PASS]:
+def check_completion(reply, log, expected):
+    if reply.splitlines().count("PT-ROUTED-RC 0") != 1 or log.splitlines() != expected:
         raise RuntimeError("Routed MIDI fixture did not report clean completion")
 
 
@@ -52,6 +56,7 @@ async def run(args, binary, out):
     from mcp import ClientSession
     from mcp.client.streamable_http import streamable_http_client
 
+    executable, expected = FIXTURES[args.fixture]
     profile = R / "runtime/amiberry/Configurations" / (PROFILES[TARGET] + ".uae")
     share = R / "runtime/Dev/Tests"
     if share.resolve(strict=True) != share or out.is_relative_to(R):
@@ -78,14 +83,15 @@ async def run(args, binary, out):
         guest = "Dev:Tests/" + key
         (out / "intent.json").write_text(json.dumps({
             "candidate_sha256": args.sha256, "profile_sha256": args.profile_sha256,
-            "target": TARGET, "owned_pid": args.pid, "service_pid": args.service_pid, "guest_path": guest,
+            "target": TARGET, "fixture": args.fixture, "owned_pid": args.pid,
+            "service_pid": args.service_pid, "guest_path": guest,
         }, indent=2) + "\n")
         with operation(R, TARGET, "Routed MIDI native fixture", may_leave_running=True):
             with transport(R, TARGET):
                 verify_target()
                 local.mkdir(mode=0o700)
                 original_dir = local.stat()
-                staged = local / EXECUTABLE
+                staged = local / executable
                 with staged.open("xb") as file:
                     file.write(binary)
                 original_file = staged.lstat()
@@ -104,10 +110,10 @@ async def run(args, binary, out):
                     identity = await call("identity", "amiga_run_script", {"script": "CPU", "timeout": 10})
                     if not re.search(r"(?m)^System: 68030\b", identity):
                         raise RuntimeError("Guest CPU verification failed")
-                    crc = await call("checksum", "amiga_checksum", {"path": guest + "/" + EXECUTABLE})
+                    crc = await call("checksum", "amiga_checksum", {"path": guest + "/" + executable})
                     checksum(crc, binary)
                     text = await call("execution", "amiga_run_script", {
-                        "script": f"Stack 65536\nCD {guest}\n{EXECUTABLE} >{GUEST_LOG}\nEcho PT-ROUTED-RC $RC",
+                        "script": f"Stack 65536\nCD {guest}\n{executable} >{GUEST_LOG}\nEcho PT-ROUTED-RC $RC",
                         "timeout": 30,
                     })
 
@@ -118,24 +124,25 @@ async def run(args, binary, out):
                     original_dir.st_dev, original_dir.st_ino
                 ):
                     raise RuntimeError("Run directory changed")
-                if set(p.name for p in local.iterdir()) != {EXECUTABLE, GUEST_LOG}:
+                if set(p.name for p in local.iterdir()) != {executable, GUEST_LOG}:
                     raise RuntimeError("Run directory contains unexpected files")
                 log = read_regular(local / GUEST_LOG, 65536)
                 (out / GUEST_LOG).write_bytes(log)
-                check_completion(text, log.decode("ascii"))
+                check_completion(text, log.decode("ascii"), expected)
                 if staged.lstat().st_ino != original_file.st_ino or read_regular(staged, 1048576) != binary:
                     raise RuntimeError("Staged executable changed")
                 staged.unlink()
                 (local / GUEST_LOG).unlink()
                 local.rmdir()
             (out / "result.json").write_text(json.dumps({
-                "candidate_sha256": args.sha256, "core_assertions_passed": True,
+                "candidate_sha256": args.sha256, "fixture": args.fixture, "core_assertions_passed": True,
                 "guest_exit_code": 0, "run_directory_removed": True,
             }, indent=2) + "\n")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--fixture", choices=tuple(FIXTURES), default="wire")
     parser.add_argument("--candidate", type=Path, required=True)
     parser.add_argument("--sha256", required=True)
     parser.add_argument("--profile-sha256", required=True)

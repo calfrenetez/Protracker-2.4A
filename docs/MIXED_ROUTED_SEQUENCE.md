@@ -58,10 +58,12 @@ and physical A1200 timing and listening checks remain open. The
 [exact native scheduling decision](NATIVE_TIMING_DECISION.md) governs that work.
 
 The routed MIDI fixture has a logs-only Amiberry runner in
-`tools/test_routed_midi_emulator.py`. It takes the exact cross-built executable
-and SHA-256, the current profile SHA-256, the emulator and DevBench PIDs and a
-new evidence directory. Run it using the shared harness Python, its scripts on
-`PYTHONPATH` and the lease for the currently admitted 030 guest. The runner
+`tools/test_routed_midi_emulator.py`. Use `--fixture wire` for the render
+fixture and `--fixture schedule` for the timed provider model. It takes the
+exact cross-built executable and SHA-256, the current profile SHA-256, the
+emulator and DevBench PIDs and a new evidence directory. Run it using the
+shared harness Python, its scripts on `PYTHONPATH` and the lease for the
+currently admitted 030 guest. The runner
 checks the guest's CPU and the staged bytes before execution. It preserves the
 output and verifies the guest exit code before removing its staged files.
 Starting, stopping, restoring and releasing the guest remain the session

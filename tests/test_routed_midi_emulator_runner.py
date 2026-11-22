@@ -30,11 +30,12 @@ class RoutedMidiEmulatorRunner(unittest.TestCase):
         self.profile.write_bytes(b"test profile")
         (self.root / "runtime/test.lock").touch()
         self.binary = b"test executable"
-        self.args = SimpleNamespace(pid=32, service_pid=37, sha256=runner.digest(self.binary),
+        self.args = SimpleNamespace(fixture="wire", pid=32, service_pid=37, sha256=runner.digest(self.binary),
                                     profile_sha256=runner.digest(self.profile.read_bytes()))
         self.calls = []
         self.checksum_ok = True
         self.completion = "PT-ROUTED-RC 0"
+        self.guest_lines = [runner.REPLAY_PASS, runner.MIDI_PASS]
         self.service_current = True
 
         @contextmanager
@@ -91,16 +92,18 @@ class RoutedMidiEmulatorRunner(unittest.TestCase):
         self.calls.append(name)
         run_dirs = list(self.share.iterdir())
         self.assertEqual(len(run_dirs), 1)
-        staged = run_dirs[0] / runner.EXECUTABLE
+        executable = runner.FIXTURES[self.args.fixture][0]
+        staged = run_dirs[0] / executable
         self.assertEqual(staged.read_bytes(), self.binary)
         if arguments.get("script") == "CPU":
             text = "System: 68030"
         elif name == "amiga_checksum":
-            self.assertEqual(arguments["path"], f"Dev:Tests/{run_dirs[0].name}/{runner.EXECUTABLE}")
+            self.assertEqual(arguments["path"], f"Dev:Tests/{run_dirs[0].name}/{executable}")
             text = "expected checksum"
         else:
             self.assertIn(f"CD Dev:Tests/{run_dirs[0].name}", arguments["script"])
-            (run_dirs[0] / runner.GUEST_LOG).write_text(runner.REPLAY_PASS + "\n" + runner.MIDI_PASS + "\n")
+            self.assertIn(f"{executable} >{runner.GUEST_LOG}", arguments["script"])
+            (run_dirs[0] / runner.GUEST_LOG).write_text("\n".join(self.guest_lines) + "\n")
             text = self.completion
         return SimpleNamespace(content=[SimpleNamespace(text=text)])
 
@@ -126,6 +129,21 @@ class RoutedMidiEmulatorRunner(unittest.TestCase):
         self.assertTrue((self.out / runner.GUEST_LOG).exists())
         self.assertFalse((self.out / "result.json").exists())
         self.assertEqual(len(list(self.share.iterdir())), 1)
+
+    def test_schedule_fixture_requires_its_own_completion(self):
+        self.args.fixture = "schedule"
+        with self.assertRaisesRegex(RuntimeError, "did not report clean completion"):
+            asyncio.run(runner.run(self.args, self.binary, self.out))
+        self.assertTrue((self.out / runner.GUEST_LOG).exists())
+        self.assertFalse((self.out / "result.json").exists())
+        self.assertEqual(len(list(self.share.iterdir())), 1)
+
+    def test_schedule_fixture_preserves_its_completion(self):
+        self.args.fixture = "schedule"
+        self.guest_lines = [runner.SCHEDULE_PASS]
+        asyncio.run(runner.run(self.args, self.binary, self.out))
+        self.assertEqual(list(self.share.iterdir()), [])
+        self.assertEqual(json.loads((self.out / "result.json").read_text())["fixture"], "schedule")
 
     def test_replaced_service_refuses_before_staging(self):
         self.service_current = False

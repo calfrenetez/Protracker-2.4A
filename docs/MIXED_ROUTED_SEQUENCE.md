@@ -15,6 +15,16 @@ delivery belong to the consumer. Unsupported MIDI effects and MIDI clock flags
 fail preflight. This work uses the 16-bit render options and leaves the existing
 sample masters intact.
 
+The MIDI preparation code converts routed notes to complete messages ahead of
+their frame. It binds endpoint names and MIDI channels from the project and
+uses the existing note owner to count shared notes. Only a confirmed batch for
+the original frame and preparation serial advances the accepted note state.
+Cancelling a refused batch leaves accepted notes intact, so Stop can release
+exactly the notes that were accepted. The existing CAMD interface still needs
+a delivery backend. CAMD's documented timestamps apply to received messages
+and do not schedule outgoing messages.
+[CAMD documentation](https://wiki.amigaos.net/wiki/Camd_Library#MIDI_Timestamps)
+
 The AmiGUS Mini RAM adapter follows the per-longword pacing read used by
 [ProTracker 4.1.2.1](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L478-L505).
 The existing 2.4G C adapter reads FIFO status after each RAM data write and

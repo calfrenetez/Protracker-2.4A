@@ -22,14 +22,15 @@ SOURCES = ['tests/mixed_readers_causal_test.c', 'src/core/mixed_readers_causal.c
            'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c',
            'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c',
            'src/core/playback_pcm.c', 'src/editor/sampler_lifetime.c', 'src/core/sample_usage.c']
-ORACLE = ('MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 '
+ORACLE = ('MIXED CAUSAL TWO TRIGGER PASS:30 genuine heap cases;12 two16 mixed4/12 '
           '8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;'
           'early successor before/after completion;actual original clocks/adoption/tombstone;'
           'poisoned disposed predecessor C;'
           '32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;'
           'raw first partial/zero/malformed/late/reentry and wrong fire order suppression;'
           'expected-only R and unknown second proof;once shutdown then read-only quiet;'
-          'master beforeimages;SOFTWARE_ONLY\n')
+          'master beforeimages;frame zero prepublication and exact activation;'
+          'prestart regression and late refusal;SOFTWARE_ONLY\n')
 
 
 class MixedCausalSoftware(unittest.TestCase):
@@ -48,7 +49,8 @@ class MixedCausalSoftware(unittest.TestCase):
             self.assertEqual(compiled.stdout, b'')
             self.assertEqual(compiled.stderr, b'')
             observed = subprocess.run([str(executable)], cwd=ROOT, env=environment,
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, timeout=30)
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
+            self.assertEqual(observed.returncode, 0, observed.stderr.decode('utf-8', 'replace'))
             self.assertEqual(observed.stderr, b'')
             self.assertEqual(observed.stdout, ORACLE.encode('ascii'))
 

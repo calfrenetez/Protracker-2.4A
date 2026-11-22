@@ -309,6 +309,38 @@ static void ct_expected_only(unsigned unknown)
     for(i=1;i<6;++i)assert(pt_mixed_causal_service_reader(c->owner,first,i,1,NULL)==(unknown?PT_MIXED_READERS_BACKEND:PT_MIXED_READERS_OK));
     ct_retire_readers(c,second,6,unknown);ct_drop(c,0);
 }
+static void ct_first_frame(unsigned mode)
+{
+    struct ct_case *c=ct_make(8,8);
+    uint64_t ticket=0, successor;
+    trigger_input(c->trial,5,0,0);
+    assert(pt_mixed_causal_enqueue(c->owner,c->trial->input,&ticket)==PT_MIXED_READERS_OK);
+    if(mode==1) {
+        assert(pt_mixed_causal_publish(c->owner,ticket)==PT_MIXED_READERS_LATE);
+        assert(!c->port.publications && !c->port.effects);
+        (void)pt_mixed_causal_stop(c->owner);
+        ct_drop(c,0);
+        return;
+    }
+    c->port.ticks=oracle(0)-1;
+    assert(pt_mixed_causal_publish(c->owner,ticket)==PT_MIXED_READERS_OK);
+    assert(c->port.publications==1 && !c->port.effects);
+    successor=ct_second(c,ticket,5);
+    assert(pt_mixed_causal_fire(c->owner,ticket)==PT_MIXED_CAUSAL_EARLY && !c->port.commits);
+    if(mode>=2) {
+        c->port.ticks=mode==2?oracle(1):oracle(0)-2;
+        assert(pt_mixed_causal_fire(c->owner,ticket)==PT_MIXED_CAUSAL_FAILED);
+        assert(!c->port.commits && !c->port.effects);
+        ct_finish(c,ticket,successor,5,0,0,1);
+    } else {
+        c->port.ticks=oracle(0);
+        assert(pt_mixed_causal_fire(c->owner,ticket)==PT_MIXED_CAUSAL_COMMITTED && c->port.effects==5);
+        c->port.ticks=oracle(1920);
+        assert(pt_mixed_causal_fire(c->owner,successor)==PT_MIXED_CAUSAL_COMMITTED && c->port.effects==10);
+        ct_finish(c,ticket,successor,5,0,0,0);
+    }
+    ct_drop(c,0);
+}
 #ifndef PT_MIXED_CAUSAL_TEST_MAIN
 #define PT_MIXED_CAUSAL_TEST_MAIN main
 #endif
@@ -318,7 +350,9 @@ int PT_MIXED_CAUSAL_TEST_MAIN(void)
     for(bits=8;bits<=24;bits+=8)for(cache_bits=8;cache_bits<=16;cache_bits+=8)for(order=0;order<2;++order)ct_success(bits,cache_bits,order);
     for(mode=0;mode<3;++mode)ct_refusal(mode);
     ct_third_refusal();for(mode=0;mode<8;++mode)ct_failed_first(mode);
-    ct_expected_only(0);ct_expected_only(1);assert(ct_cases==26);
-    puts("MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;early successor before/after completion;actual original clocks/adoption/tombstone;poisoned disposed predecessor C;32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;raw first partial/zero/malformed/late/reentry and wrong fire order suppression;expected-only R and unknown second proof;once shutdown then read-only quiet;master beforeimages;SOFTWARE_ONLY");
+    ct_expected_only(0);ct_expected_only(1);
+    for(mode=0;mode<4;++mode)ct_first_frame(mode);
+    assert(ct_cases==30);
+    puts("MIXED CAUSAL TWO TRIGGER PASS:30 genuine heap cases;12 two16 mixed4/12 8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;early successor before/after completion;actual original clocks/adoption/tombstone;poisoned disposed predecessor C;32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;raw first partial/zero/malformed/late/reentry and wrong fire order suppression;expected-only R and unknown second proof;once shutdown then read-only quiet;master beforeimages;frame zero prepublication and exact activation;prestart regression and late refusal;SOFTWARE_ONLY");
     return 0;
 }

@@ -164,7 +164,7 @@ static struct activation_reader *find_reader(struct pt_mixed_causal_owner *b,con
 static int clock_read(struct pt_mixed_causal_owner *b,uint64_t *out)
 {
     uint64_t ticks=0;uint32_t frequency=0;int r=b->port.read_clock(b->port.context,&ticks,&frequency);
-    if(r!=1||b->failed||frequency!=b->grid.frequency||ticks<b->grid.epoch||(b->clock_seen&&ticks<b->last_ticks))return 0;
+    if(r!=1||b->failed||frequency!=b->grid.frequency||(b->clock_seen&&ticks<b->last_ticks))return 0;
     b->clock_seen=1;b->last_ticks=ticks;*out=ticks;return 1;
 }
 static int backend_clock(void *context,uint64_t *ticks,uint32_t *frequency)

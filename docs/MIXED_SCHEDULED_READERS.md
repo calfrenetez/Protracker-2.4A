@@ -11,6 +11,9 @@ slot)`: Paula slots are 0..3 and AmiGUS slots 0..15. A key includes the complete
 queue, fresh session, generation, original trigger ticket, action, route, slot,
 owner and serial. Admission preserves strict original frame order. The common
 grid maps the original frame to its immutable half-open absolute clock window.
+The epoch is the start of frame zero. Publication precedes the first tick of
+the requested frame, so a frame-zero batch must be queued before the epoch.
+Clock observations before the epoch still participate in regression detection.
 There is no jitter allowance, deadline rebasing, catch-up or automatic retry.
 
 The backend declares both routes, atomic whole-batch publication, independent

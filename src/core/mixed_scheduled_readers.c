@@ -271,7 +271,8 @@ enum pt_mixed_readers_result pt_mixed_readers_publish(struct pt_mixed_readers_ou
     if(!targets_current(q,e))return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;
     q->busy=1;result=q->backend.read_clock(q->backend.context,&now,&frequency);q->busy=0;
     if(q->failed)return PT_MIXED_READERS_BACKEND;
-    if(result!=1||frequency!=q->grid.frequency||now<q->grid.epoch||(q->clock_seen&&now<q->last_ticks)){q->failed=1;return PT_MIXED_READERS_CLOCK;}
+    /* The epoch is the target time for frame zero. Publication can precede it. */
+    if(result!=1||frequency!=q->grid.frequency||(q->clock_seen&&now<q->last_ticks)){q->failed=1;return PT_MIXED_READERS_CLOCK;}
     q->last_ticks=now;q->clock_seen=1;
     if(now>=e->event.first){q->failed=1;return PT_MIXED_READERS_LATE;}
     if(!targets_current(q,e))return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;

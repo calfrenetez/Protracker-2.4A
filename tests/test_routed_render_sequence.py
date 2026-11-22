@@ -11,7 +11,7 @@ class RoutedRenderSequence(unittest.TestCase):
         sources = ['tests/routed_render_sequence_test.c'] + [
             f'src/core/{name}.c' for name in
             ('render', 'pitch', 'timeline', 'frame_clock', 'flow', 'voice',
-             'project', 'channels', 'pcm', 'midi', 'routed_midi')
+             'project', 'channels', 'pcm', 'midi', 'elapsed_clock', 'routed_midi')
         ]
         with tempfile.TemporaryDirectory() as tmp:
             binary = Path(tmp) / 'routed'

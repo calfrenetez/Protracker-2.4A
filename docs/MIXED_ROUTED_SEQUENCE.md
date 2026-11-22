@@ -25,6 +25,15 @@ a delivery backend. CAMD's documented timestamps apply to received messages
 and do not schedule outgoing messages.
 [CAMD documentation](https://wiki.amigaos.net/wiki/Camd_Library#MIDI_Timestamps)
 
+The timed MIDI owner derives the same half-open counter window as the audio
+queue from the shared epoch, rate and counter frequency. It submits the whole
+prepared batch before the window and waits for the provider's exact session,
+generation, frame and serial receipt. An uncertain or incomplete receipt
+retains the batch. A proven early or late issue retains the actual notes for
+Stop and reports a timing failure. The software fixture uses a provider model.
+This timed interface has yet to be bound to a native CAMD provider or to the
+combined Paula/AmiGUS delivery path.
+
 The AmiGUS Mini RAM adapter follows the per-longword pacing read used by
 [ProTracker 4.1.2.1](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L478-L505).
 The existing 2.4G C adapter reads FIFO status after each RAM data write and

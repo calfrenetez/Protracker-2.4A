@@ -20,13 +20,44 @@ def tone(frequency, frame, level=5000):
 
 
 class AmiGUSWaveCapture(unittest.TestCase):
-    def check(self, render, channels=1, windows=WINDOWS):
+    @staticmethod
+    def write(path, render, channels):
+        with wave.open(str(path), "wb") as output:
+            output.setparams((channels, 2, RATE, 0, "NONE", "PCM"))
+            output.writeframes(b"".join(struct.pack(f"<{channels}h", *render(i)) for i in range(1200)))
+
+    def check(self, render, channels=1, windows=WINDOWS, reference=None):
         with TemporaryDirectory() as tmp:
             path = Path(tmp) / "wave.wav"
-            with wave.open(str(path), "wb") as output:
-                output.setparams((channels, 2, RATE, 0, "NONE", "PCM"))
-                output.writeframes(b"".join(struct.pack(f"<{channels}h", *render(i)) for i in range(1200)))
-            return check_capture(path, windows, TONE, -55, -35, 0.85)
+            self.write(path, render, channels)
+            reference_path = None
+            if reference is not None:
+                reference_path = Path(tmp) / "reference.wav"
+                self.write(reference_path, reference, channels)
+            return check_capture(path, windows, TONE, -55, -35, 0.85, reference_path)
+
+    def test_stop_requires_a_matched_voice_that_would_still_be_playing(self):
+        def stopped(i):
+            return (tone(TONE, i) if 400 <= i < 800 else 0,)
+
+        def uninterrupted(i):
+            return (tone(TONE, i) if i >= 400 else 0,)
+
+        self.assertIsNone(self.check(stopped)["stop_comparison_passed"])
+        report = self.check(stopped, reference=uninterrupted)
+        self.assertTrue(report["stop_comparison_passed"])
+        self.assertFalse(report["sample_ram_quiet_qualified"])
+        self.assertFalse(self.check(stopped, reference=stopped)["stop_comparison_passed"])
+        self.assertFalse(self.check(uninterrupted, reference=uninterrupted)["stop_comparison_passed"])
+
+    def test_reference_must_show_the_after_tone_on_the_same_channel(self):
+        def stopped(i):
+            return (tone(TONE, i), 0) if 400 <= i < 800 else (0, 0)
+
+        def reference(i):
+            return (0, tone(TONE, i)) if i >= 400 else (0, 0)
+
+        self.assertFalse(self.check(stopped, channels=2, reference=reference)["stop_comparison_passed"])
 
     def test_tone_with_independent_left_and_right_phase(self):
         def recording(i):

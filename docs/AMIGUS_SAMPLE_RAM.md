@@ -678,10 +678,14 @@ check. Give it the mono or stereo 16-bit PCM WAV, expected tone frequency,
 and the before, active and after frame ranges from the independent capture
 timing log. Use the levels agreed for that capture. The report measures
 the quiet-window peaks and the active tone level and energy fraction per
-channel. A one-shot that ends by itself can give the same audio result as a
-stopped voice. To check that Stop caused silence, use an owned test voice
-scheduled to continue past Stop and keep the separate register and memory
-evidence.
+channel. For the Stop comparison, also pass `--uninterrupted-reference`
+with a matched capture of the same voice allowed to play through the after
+interval. Align both captures to the same Start frame, with the same sample
+rate, channel assignment, gain and voice settings. The comparison requires
+the after interval to be quiet in the Stop capture while the reference still
+has the expected tone on the same channel. This guards against registering
+the natural end of the one-shot as an early Stop. Keep the separate register
+and sample-memory evidence.
 
 Use `AmiGUSTest --record-status` to observe recorder setup on the specified
 Mini firmware. It takes an exclusive PCM reservation, reads the current

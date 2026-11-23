@@ -22,6 +22,7 @@ FIXTURES = {
     'routed-mixed-wait': ('test_mixed_readers_causal.py', 'PTRoutedMixedWait'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
+    'cia-reload': (None, 'PTCIAReload'),
     'cia-local-activation': (None, 'PTCIALocalActivate'),
     'countdown-window': ('test_countdown_window.py', 'PTCountdownWindow'),
 }
@@ -37,6 +38,9 @@ def main():
     paula_alarm = tracker_alarm or args.fixture == 'routed-paula-alarm'
     if args.fixture == 'cia-direct-clock':
         sources = ['tests/native_cia_direct_clock_test.c', 'tests/native_cia_direct_clock.s']
+    elif args.fixture == 'cia-reload':
+        sources = ['tests/native_cia_reload_test.c', 'tests/native_cia_reload_irq.s',
+                   'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c']
     elif args.fixture == 'cia-local-activation':
         sources = ['tests/native_cia_local_activation_test.c', 'tests/native_cia_local_activation.s',
                    'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c', 'src/core/elapsed_clock.c']

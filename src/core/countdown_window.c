@@ -1,5 +1,18 @@
 #include "countdown_window.h"
 
+int pt_countdown_extend(struct pt_countdown_observation *observation, uint32_t reloads, uint16_t count)
+{
+    if (!observation || reloads < observation->reloads)
+        return 0;
+    uint64_t elapsed = ((uint64_t)(reloads - observation->reloads) << 16) + observation->count;
+    if (elapsed < count || elapsed - count > UINT64_MAX - observation->tick)
+        return 0;
+    observation->tick += elapsed - count;
+    observation->reloads = reloads;
+    observation->count = count;
+    return 1;
+}
+
 int pt_countdown_window_prepare(uint64_t anchor_tick, uint16_t anchor_count,
     uint64_t first, uint64_t end, struct pt_countdown_window *out)
 {

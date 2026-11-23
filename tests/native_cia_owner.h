@@ -74,7 +74,7 @@ static int pt_diagnostic_cia_acquire(struct pt_diagnostic_cia *t,void (*code)(vo
 /* Caller publishes handler state and clears ONLY its own signal under the same
  * brief exclusion before arm. Relative count is a hardware countdown, not an
  * absolute-start guarantee. No finished/pending IO, allocation or task wait. */
-static inline int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned count)
+static inline int pt_diagnostic_cia_arm_mode(struct pt_diagnostic_cia *t,unsigned count,unsigned continuous)
 {
     struct Library *cia_resource;
     if(!pt_diagnostic_cia_current(t) || !count || count>65535)return 0;
@@ -85,11 +85,13 @@ static inline int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned cou
     SetICR(cia_resource,(WORD)(1U<<t->bit));
     *t->low=(UBYTE)count;*t->high=(UBYTE)(count>>8);
     AbleICR(cia_resource,(WORD)(0x80U|(1U<<t->bit)));
-    /* One-shot, force load, EClock input, no timer-driven peripheral output.
+    /* Force load, EClock input, no timer-driven peripheral output.
      * Retain unrelated serial/TOD bits from original stopped control. */
-    PT_CIA_CONTROL_WRITE(t->control,(t->saved_control&(t->bit?0x80U:0xc0U))|0x19U);
+    PT_CIA_CONTROL_WRITE(t->control,(t->saved_control&(t->bit?0x80U:0xc0U))|(continuous?0x11U:0x19U));
     Enable();return 1;
 }
+static inline int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned count)
+{return pt_diagnostic_cia_arm_mode(t,count,0);}
 /* Separate absolute-arm experiment. Stop/mask/pending setup precedes the
  * fresh actual clock sample; never subtract a calibrated programming offset.
  * read must be a bounded IRQ-safe clock reader, with no owner mutation. Caller

@@ -14,6 +14,20 @@ enum pt_countdown_status {
 
 struct pt_countdown_bracket { uint64_t first, last; };
 
+struct pt_countdown_observation {
+    uint64_t tick;
+    uint32_t reloads;
+    uint16_t count;
+};
+
+/* Extend an observation of a continuous 16-bit countdown that reloads to
+ * UINT16_MAX. The caller proves that the coherent count and independently
+ * observed reload number belonged to the same instant and original owner.
+ * Equal observations are allowed. Counter regressions, reload number wrap
+ * and absolute tick overflow refuse. The original observation may be updated
+ * in place and is preserved on failure. */
+int pt_countdown_extend(struct pt_countdown_observation *, uint32_t reloads, uint16_t count);
+
 /* Lower an existing half-open tick window for one already observed countdown.
  * anchor_tick and anchor_count are the same actual instant. The countdown
  * must keep its original ownership, direction and frequency and must not

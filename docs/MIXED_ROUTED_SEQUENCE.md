@@ -215,6 +215,11 @@ provider until its frame and Stop receipts settle. While the lease is
 held, a receiver refresh can block new route snapshots but cannot replace
 or close those links. Amiberry verified temporary receiver loss and
 return with the same sender, and explicit release followed by teardown.
+The combined publication checks the lease against the event's immutable
+project-order names before it uses the slots to prepare the frame. The
+fixture refuses a reversed mapping even when both senders are live and
+the counts match. It retains the original links through the six audio
+reader retirements and the two modeled MIDI Note Offs at owned Stop.
 
 `pt_routed_activation_prepare` copies the Paula DMA geometry and builds the
 ordered AmiGUS register programs alongside the MIDI packet during the original

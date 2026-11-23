@@ -23,11 +23,11 @@ SOURCES = ('tests/camd_control_test.c', 'src/platform/camd_control.c', 'src/plat
 CFLAGS = ('-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror', '-UNDEBUG',
           '-fsanitize=address,undefined', '-Isrc/core', '-Itests', '-I.')
 FROZEN = {
-    'tests/camd_control_test.c': 'f394412f0778386ca72d84901c8b88e4211cb90bc767b7c0ba6179e35e33b11d',
+    'tests/camd_control_test.c': '330702befae0cbc761b647a72468bb1edf2645a87b684ca65441ad699a735d66',
     'src/platform/camd_control.c': '7c2189d03267194d2e9b3eab52636b5fbbf6e868cc8c0793c91d1a1378446dc0',
     'src/platform/camd_control.h': 'c9df3bbb90478b5015939e7f5a5db3c5846d89b444a8d6eed8be39e9e1d40ab7',
-    'src/platform/camd_routes.c': 'd1c5571cf884f7d57c93dd705cf68d693af1f29c248bbf2e30b98bcb6eafb710',
-    'src/platform/camd_routes.h': '27873e09e03fcd3c83c0114e6fcae594aafe5acba61b1f7afa97cdc7fe357ba7',
+    'src/platform/camd_routes.c': 'f06b4ad2af7de4013ca16180f501400728224911b1554a277e7324fdf1e4034d',
+    'src/platform/camd_routes.h': '82b379cf90ae7bebbf46dee87835b063c4d698a25a011553748dfa34ac7c8efd',
     'src/platform/midi_endpoints.c': 'acf4bc39492a65a48940670c31566ec566969e543bed4976409416551d7c7b2e',
     'src/platform/midi_endpoints.h': '89af1d6d0cd3824e825f3d6b6823bd24d5896db69e8408f004f43dabb5ea5eda',
     'src/core/midi.c': '128612f5b7111e64f7656e7376a33136d985db9720cdf5b87b4797f9ac7aa28f',

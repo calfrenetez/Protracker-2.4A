@@ -61,7 +61,8 @@ int pt_camd_routes_borrow(struct pt_camd_control *control,
     return 1;
 }
 
-int pt_camd_routes_snapshot(const struct pt_camd_route_lease *lease, struct pt_camd_routes *out)
+static int snapshot(const struct pt_camd_route_lease *lease, const char (*names)[PT_MIDI_ENDPOINT],
+    unsigned count, struct pt_camd_routes *out)
 {
     if (!lease || pt_camd_control_state(lease->owner) != PT_CAMD_READY)
         return 0;
@@ -70,17 +71,32 @@ int pt_camd_routes_snapshot(const struct pt_camd_route_lease *lease, struct pt_c
         (uintptr_t)out % _Alignof(struct pt_camd_routes) ||
         !disjoint(out, sizeof(*out), lease, sizeof(*lease)) ||
         !disjoint(out, sizeof(*out), control, sizeof(*control)) ||
-        !disjoint(out, sizeof(*out), control->context, control->context_bytes))
+        !disjoint(out, sizeof(*out), control->context, control->context_bytes) ||
+        (names && (count != lease->routes.count ||
+                   !disjoint(out, sizeof(*out), names, count * sizeof(*names)))))
         return 0;
 
     const struct pt_midi_endpoints *registry = pt_camd_control_registry(control);
     for (unsigned i = 0; i < lease->routes.count; ++i) {
         unsigned slot = lease->routes.slot[i];
-        if (!pt_midi_endpoints_available(registry, slot) || !control->links[slot])
+        if (!pt_midi_endpoints_available(registry, slot) || !control->links[slot] ||
+            (names && (!memchr(names[i], 0, sizeof(names[i])) ||
+                       strcmp(control->link_names[slot].identity, names[i]))))
             return 0;
     }
     *out = lease->routes;
     return 1;
+}
+
+int pt_camd_routes_snapshot(const struct pt_camd_route_lease *lease, struct pt_camd_routes *out)
+{
+    return snapshot(lease, NULL, 0, out);
+}
+
+int pt_camd_routes_snapshot_for(const struct pt_camd_route_lease *lease,
+    const char (*names)[PT_MIDI_ENDPOINT], unsigned count, struct pt_camd_routes *out)
+{
+    return names && snapshot(lease, names, count, out);
 }
 
 int pt_camd_routes_release(struct pt_camd_route_lease *lease)

@@ -13,6 +13,9 @@
 #ifndef PT_ROUTED_ACTIVATION_TEST_CONTROL
 #define PT_ROUTED_ACTIVATION_TEST_CONTROL 1
 #endif
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+#include "routed_camd_fixture.h"
+#endif
 
 struct routed_port_model {
     struct paired_ram *audio;
@@ -22,6 +25,9 @@ struct routed_port_model {
     char endpoint[PT_MIDI_PORTS][PT_MIDI_ENDPOINT];
     struct pt_routed_midi_receipt receipt;
     unsigned queued, issued, detached, publishes;
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+    struct fixture_camd *camd, *reversed;
+#endif
 };
 
 static struct routed_port_model *routed_port;
@@ -266,20 +272,28 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
     assert(pt_routed_activation_prepare(p->schedule, midi, packet->registration.owner, packet, &queued));
     assert(queued.midi.audio_ticket == packet->ticket && queued.midi.first == packet->first && queued.midi.last == packet->last);
     assert(queued.midi.key.frame == packet->frame && queued.audio_count == packet->count);
-    if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+    {
+        struct pt_camd_routes routes = {.count = 99};
+        assert(!pt_camd_routes_snapshot_for(&p->reversed->lease, midi->endpoint, midi->endpoint_count, &routes));
+        assert(routes.count == 99);
+        assert(!pt_camd_routes_snapshot_for(&p->camd->lease, midi->endpoint, midi->endpoint_count - 1, &routes));
+        assert(routes.count == 99);
+        assert(pt_camd_routes_snapshot_for(&p->camd->lease, midi->endpoint, midi->endpoint_count, &routes));
+        assert(routes.count == 2 && routes.slot[0] == 1 && routes.slot[1] == 0);
+        assert(pt_camd_control_close_step(&p->camd->owner) == PT_CAMD_IN_USE);
         assert(queued.paula_active == (packet->frame == 0 ? 0U : 15U));
         assert(queued.amigus_active == (packet->frame == 0 ? 0U : 3U));
         if (packet->frame != 0) {
-            static const uint8_t routed_slots[] = {11, 4};
             struct pt_routed_frame_program frame;
-            assert(pt_routed_frame_prepare(&queued, 15, 3, routed_slots, 2, &frame));
+            assert(pt_routed_frame_prepare(&queued, 15, 3, routes.slot, routes.count, &frame));
             assert(frame.audio_ticket == packet->ticket && frame.key.frame == packet->frame);
             assert(frame.first == packet->first && frame.last == packet->last &&
                    frame.midi_count == queued.midi.count && frame.stop == queued.midi.stop);
             assert(!frame.paula.preload_count && !frame.card_preload_count);
             if (frame.stop) {
                 assert(frame.paula.frame_count == 1 && frame.card_frame_count == 4);
-                assert(frame.midi_count == 2 && frame.midi[0].slot == 11 && frame.midi[1].slot == 4);
+                assert(frame.midi_count == 2 && frame.midi[0].slot == 1 && frame.midi[1].slot == 0);
             } else {
                 assert(frame.paula.frame_count == 8 && frame.card_frame_count == 10);
             }
@@ -292,6 +306,7 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
                 assert(paula.frame_count == PT_PAULA_DMA_FRAME_WRITES);
         }
     }
+#endif
     assert(queued.midi.count == midi->batch->count && queued.midi.endpoint_count == 2 && queued.midi.stop == midi->batch->stop);
     for (unsigned i = queued.midi.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
         assert(!queued.midi.messages[i].endpoint && !queued.midi.messages[i].bytes[0] &&
@@ -507,6 +522,13 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     strcpy(project->midi_output[14], "synth.a");
     strcpy(project->midi_output[15], "synth.b");
     assert(pt_routed_midi_init(midi, project, 0xc000));
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+    model.camd = calloc(1, sizeof(*model.camd));
+    model.reversed = calloc(1, sizeof(*model.reversed));
+    assert(model.camd && model.reversed);
+    fixture_camd_start(model.camd, (const char (*)[PT_MIDI_ENDPOINT])midi->endpoint);
+    fixture_camd_start(model.reversed, fixture_camd_clusters);
+#endif
     assert(pt_routed_midi_schedule_init(&schedule, midi, &provider, 19, 17, 100, 709379, 48000));
     routed_port = &model;
     c->config.port.publish = routed_publish;
@@ -527,6 +549,20 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
         PT_ROUTED_ACTIVATION_REPORT("AmiGUS inactive voice preload and reselect verified");
     settle_routed(c, &model, first, 0);
     assert(c->ram.effects == 6 && midi->accepted[14].active && midi->accepted[15].active);
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+    {
+        struct pt_camd_routes routes = {.count = 99};
+        const void *original = model.camd->owner.links[1];
+        model.camd->links.receivers = 1;
+        assert(pt_camd_control_refresh(&model.camd->owner) == PT_CAMD_OK);
+        assert(!pt_camd_routes_snapshot_for(&model.camd->lease, schedule.event.endpoint, 2, &routes));
+        assert(routes.count == 99 && model.camd->owner.links[1] == original);
+        model.camd->links.receivers = 3;
+        assert(pt_camd_control_refresh(&model.camd->owner) == PT_CAMD_OK);
+        assert(pt_camd_routes_snapshot_for(&model.camd->lease, schedule.event.endpoint, 2, &routes));
+        assert(routes.slot[0] == 1 && model.camd->owner.links[1] == original);
+    }
+#endif
     if (PT_ROUTED_ACTIVATION_TEST_CONTROL)
         exercise_control(c, &model, plan);
     assert(pt_routed_midi_prepare_stop(midi, stop_frame));
@@ -553,6 +589,13 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
         assert(pt_mixed_activation_service_reader(c->owner, stop.key[i].trigger,
             stop.key[i].action, 1, NULL) == PT_MIXED_READERS_OK);
     assert(pt_mixed_activation_close(&c->owner));
+#if PT_ROUTED_ACTIVATION_TEST_CONTROL
+    fixture_camd_finish(model.camd);
+    fixture_camd_finish(model.reversed);
+    free(model.camd);
+    free(model.reversed);
+    PT_ROUTED_ACTIVATION_REPORT("Routed CAMD endpoints matched the original publication and retained Stop");
+#endif
     routed_port = NULL;
     a_destroy(c);
     free(plan);

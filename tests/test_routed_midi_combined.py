@@ -15,12 +15,14 @@ ACTIVATION_PASS = (
     'Routed activation frame zero queued\n'
     'AmiGUS inactive voice preload and reselect verified\n'
     'Routed activation controls queued\nRouted activation owned Stop queued\n'
+    'Routed CAMD endpoints matched the original publication and retained Stop\n'
     'Routed activation: shared frame zero and exact Stop for six audio readers and two MIDI destinations; SOFTWARE_ONLY\n'
 )
 ACTIVATION_UNITS = [
     'src/core/mixed_readers_activation.c', 'src/core/routed_activation.c', 'src/core/amigus_voice_staged.c',
     'src/core/routed_frame_program.c',
 ]
+CAMD_UNITS = ['src/platform/camd_control.c', 'src/platform/camd_routes.c', 'src/platform/midi_endpoints.c']
 TRACKER_UNITS = [
     'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
     'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',
@@ -39,7 +41,7 @@ class RoutedMidiCombined(unittest.TestCase):
         self.run_fixture('routed_tracker_playback_test', TRACKER_UNITS, TRACKER_PASS)
 
     def test_activation_owner_publishes_frame_zero_and_owned_stop_once(self):
-        self.run_fixture('routed_activation_test', ACTIVATION_UNITS, ACTIVATION_PASS, activation_regression=True)
+        self.run_fixture('routed_activation_test', ACTIVATION_UNITS + CAMD_UNITS, ACTIVATION_PASS, activation_regression=True)
 
     def run_fixture(self, fixture, extra, expected, activation_regression=False):
         with tempfile.TemporaryDirectory() as temporary:

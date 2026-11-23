@@ -234,7 +234,8 @@ static void routes_loopback(void)
     assert(!pt_camd_routes_borrow(&control, project, 2, &alternate));
     assert(!pt_camd_routes_release(&copy));
     assert(!pt_camd_routes_snapshot(&copy, &witness) && witness.count == 99);
-    assert(pt_camd_routes_snapshot(&borrowed, &map) && map.count == 2);
+    assert(!pt_camd_routes_snapshot_for(&borrowed, cluster, 2, &witness) && witness.count == 99);
+    assert(pt_camd_routes_snapshot_for(&borrowed, project, 2, &map) && map.count == 2);
     assert(pt_camd_control_retire(&control, (unsigned)ports[0]) == PT_CAMD_IN_USE);
     assert(pt_camd_control_close_step(&control) == PT_CAMD_IN_USE);
 
@@ -248,7 +249,7 @@ static void routes_loopback(void)
     (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[0], NULL);
     assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && control.links[ports[0]]);
     assert(!pt_camd_routes_resolve(&control, project, 2, &map));
-    assert(!pt_camd_routes_snapshot(&borrowed, &witness) && witness.count == 99);
+    assert(!pt_camd_routes_snapshot_for(&borrowed, project, 2, &witness) && witness.count == 99);
     assert(pt_camd_control_retire(&control, (unsigned)ports[0]) == PT_CAMD_IN_USE);
     assert(control.links[ports[0]] == original_sender);
     assert(map.count == 2 && map.slot[0] == ports[1] && map.slot[1] == ports[0]);

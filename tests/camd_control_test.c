@@ -272,6 +272,8 @@ static void callback_reentry(void)
 static void retained_routes(void)
 {
     const char names[2][PT_MIDI_ENDPOINT] = {"Port 1", "Port 0"};
+    const char reversed[2][PT_MIDI_ENDPOINT] = {"Port 0", "Port 1"};
+    const char different[2][PT_MIDI_ENDPOINT] = {"Port 1", "Port 2"};
     struct rig *f = &rigs[14];
     struct pt_camd_control *control = &f->control;
     struct pt_camd_route_lease lease = {0}, other = {0};
@@ -292,7 +294,11 @@ static void retained_routes(void)
     assert(!pt_camd_routes_snapshot(&copy, &observed) && observed.count == 99);
     assert(!pt_camd_routes_release(&copy));
     assert(!pt_camd_routes_snapshot(&lease, &lease.routes));
-    assert(pt_camd_routes_snapshot(&lease, &observed) && observed.count == 2 &&
+    assert(!pt_camd_routes_snapshot_for(&lease, reversed, 2, &observed));
+    assert(!pt_camd_routes_snapshot_for(&lease, different, 2, &observed));
+    assert(!pt_camd_routes_snapshot_for(&lease, names, 1, &observed));
+    assert(observed.count == 99);
+    assert(pt_camd_routes_snapshot_for(&lease, names, 2, &observed) && observed.count == 2 &&
            observed.slot[0] == first && observed.slot[1] == second);
     assert(pt_camd_control_link(control, index_of(f, "Port 2")) == PT_CAMD_IN_USE);
     assert(pt_camd_control_retire(control, first) == PT_CAMD_IN_USE);
@@ -302,7 +308,7 @@ static void retained_routes(void)
     f->model.clusters[1].receivers = NULL;
     assert(pt_camd_control_refresh(control) == PT_CAMD_OK && control->links[first] == original);
     observed.count = 99;
-    assert(!pt_camd_routes_snapshot(&lease, &observed) && observed.count == 99);
+    assert(!pt_camd_routes_snapshot_for(&lease, names, 2, &observed) && observed.count == 99);
     assert(pt_camd_control_retire(control, first) == PT_CAMD_IN_USE);
     assert(pt_camd_control_close_step(control) == PT_CAMD_IN_USE);
     f->model.clusters[1].receivers = &f->model.receivers[1];

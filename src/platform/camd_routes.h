@@ -29,6 +29,10 @@ int pt_camd_routes_resolve(const struct pt_camd_control *,
 int pt_camd_routes_borrow(struct pt_camd_control *, const char (*names)[PT_MIDI_ENDPOINT],
     unsigned count, struct pt_camd_route_lease *);
 int pt_camd_routes_snapshot(const struct pt_camd_route_lease *, struct pt_camd_routes *);
+/* Match a publication's original project-order names before exposing the
+ * live slots. Equal endpoint counts alone do not identify the destinations. */
+int pt_camd_routes_snapshot_for(const struct pt_camd_route_lease *,
+    const char (*names)[PT_MIDI_ENDPOINT], unsigned count, struct pt_camd_routes *);
 /* Call only when every frame and the Stop/cleanup using these slots has been
  * settled by its original provider. This release does not prove delivery or
  * device quiet. Copies and moved leases have no authority. */

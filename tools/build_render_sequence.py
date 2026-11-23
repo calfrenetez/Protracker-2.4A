@@ -55,8 +55,12 @@ def main():
         sources = [f'tests/{source}', *sources[2:], 'src/core/routed_midi.c', 'src/core/midi.c']
         if extra:
             tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
-            sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
-                                and any(isinstance(target, ast.Name) and target.id == extra for target in node.targets)))
+            units = [extra]
+            if args.fixture == 'routed-activation':
+                units.append('CAMD_UNITS')
+            for unit in units:
+                sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
+                                    and any(isinstance(target, ast.Name) and target.id == unit for target in node.targets)))
     if args.fixture == 'camd-control':
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
                    'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]

@@ -438,7 +438,9 @@ int pt_routed_midi_schedule_copy_packet(const struct pt_routed_midi_schedule *sc
         !disjoint(schedule->midi, sizeof(*schedule->midi), out, sizeof(*out)))
         return 0;
     batch = &schedule->midi->batch;
-    if (event->batch != batch || batch->count > PT_ROUTED_MIDI_MESSAGES)
+    if (event->batch != batch || batch->count > PT_ROUTED_MIDI_MESSAGES ||
+        event->endpoint != (const char (*)[PT_MIDI_ENDPOINT])schedule->midi->endpoint ||
+        event->endpoint_count != schedule->midi->endpoint_count || event->endpoint_count > PT_MIDI_PORTS)
         return 0;
     struct pt_routed_midi_packet packet = {
         .key = event->key, .first = event->first, .last = event->last, .audio_ticket = schedule->audio_ticket,

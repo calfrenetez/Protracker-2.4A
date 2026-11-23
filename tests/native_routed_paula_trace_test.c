@@ -4,6 +4,13 @@
 #include <proto/dos.h>
 #include <stdio.h>
 
+#ifdef PT_PAULA_TIMED_TRACE
+#include "../src/core/countdown_window.h"
+#include "../src/core/elapsed_clock.h"
+#include "../src/native/eclock.h"
+#include "native_cia_countdown.h"
+#endif
+
 /* Private emulator diagnostic. The allocation and live lock cover every
  * audio register used here. All sample data and mixer volumes are zero. */
 enum {
@@ -160,6 +167,17 @@ static int hold(void)
         Delay(50);
 }
 
+#ifdef PT_PAULA_TIMED_TRACE
+#include "native_routed_paula_window.h"
+#else
+static int apply_grouped_transition(const struct pt_native_paula_reservation *owner,
+    const struct pt_paula_dma_write *word, unsigned before, unsigned after)
+{
+    (void)before;
+    return apply(owner, word, 1, after);
+}
+#endif
+
 int main(void)
 {
     struct pt_native_paula_reservation owner = {0};
@@ -203,7 +221,7 @@ int main(void)
         goto finish;
 
     stage = 3;
-    if (out.frame_count != 1 || !apply(&owner, out.frame, out.frame_count, ALL) ||
+    if (out.frame_count != 1 || !apply_grouped_transition(&owner, out.frame, 0, ALL) ||
         !observe_new_fetches(&owner, ALL))
         goto finish;
 
@@ -219,7 +237,7 @@ int main(void)
 
     stage = 6;
     if (!prepare(&input, chip, REMAINING, REMAINING, PT_MIXED_READERS_STOP, &out) || out.frame_count != 1 ||
-        !apply(&owner, out.frame, out.frame_count, 0) || !observe_new_fetches(&owner, 0))
+        !apply_grouped_transition(&owner, out.frame, REMAINING, 0) || !observe_new_fetches(&owner, 0))
         goto finish;
     rc = 0;
 
@@ -253,6 +271,9 @@ finish:;
     if (chip)
         FreeMem(chip, CHIP_BYTES);
     report_observations();
+#ifdef PT_PAULA_TIMED_TRACE
+    report_windows();
+#endif
     printf("Paula trace finished stage=%u rc=%d owned-closed=1\n", outcome_stage, rc);
     if (rc)
         return rc;

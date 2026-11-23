@@ -271,6 +271,15 @@ The frame encoder prepares the three output lists together and keeps the
 original frame, window and command identity. It groups Paula DMA writes,
 splits inactive AmiGUS starts into preload and frame writes, and puts the
 already resolved MIDI destinations into the message bytes' dispatch list.
+
+The private `routed-paula-window` fixture issued the grouped DMA Start and
+final Stop from two fresh local CIA countdowns in Amiberry 68030. Each
+actual register write was bracketed by six E-clock ticks inside its
+original 15-tick local sample window. DMA and fresh audio-request
+readbacks verified the silent Start, Control, selective Stop and final
+Stop. The original audio lock, Chip storage and CIA timer were released.
+The transitions used separate local anchors. Mixed song-epoch timing and
+audible output still require dedicated validation.
 A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource

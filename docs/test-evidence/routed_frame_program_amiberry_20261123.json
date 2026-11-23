@@ -1,0 +1,22 @@
+{
+  "source": "d6971a2fd436db5c095f4fd29d7d675ddeafd83f",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "68d0756d0fcb9f7cebef2dae15c4a7fa10beacc528297292103cf20bfc084f98",
+  "build_receipt_sha256": "abd7174638c02c3aebb1be266e4c24328c3eac34406d7bede89f9c2c95c94cde",
+  "guest_log_sha256": "201e585cc8d22ea86325846b66daf9939dc9135886860ec7c0d53febc2ad630c",
+  "validated_build_inputs": 88,
+  "focused_host_methods": 11,
+  "guest_exit_code": 0,
+  "checks": [
+    "preserve original start and exclusive ticks and one original command identity",
+    "prepare grouped Paula writes, split safe AmiGUS preload and frame writes, and preserve complete MIDI bytes in resolved slot order",
+    "validate the whole terminal Stop against both original active voice masks",
+    "reject out-of-domain geometry, active retriggers, invalid mapping and incomplete Stop with unchanged output",
+    "exercise maximum audio and MIDI program list sizes and a genuine combined schedule's control and Stop"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Provider-side prepared lists and genuine software owner scheduling on native 68k. Physical dispatch, timing and listening are separate."
+}

@@ -1,0 +1,36 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "passed": false,
+  "candidate_and_guest_readback_sha256": "9591bdfa83fb7e2e448880ec0647c9ff13a64778a88f8106a29b7cb1ee497c29",
+  "build_receipt_sha256": "65e2719c82feca1413e3eaa122cd1dbbc0442cfc388115ef643aea4758891cde",
+  "guest_log_sha256": "ee2da0860d3fd60170f6127179c7fb43af390c5d7c77c4520dae9ab0025e8006",
+  "validated_build_inputs": 127,
+  "guest_rc": "20",
+  "reason": "Start and full MIDI readback succeeded. The run closed before the separate Paula fetch observation and F00 issue. The extra task delay after serial readback is a possible cause.",
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening were not tested.",
+  "observed_start": {
+    "frame": 0,
+    "window": [
+      8192,
+      8207
+    ],
+    "observed_ticks": [
+      8194,
+      8203
+    ],
+    "serial_received": "953c5a",
+    "byte_readback_ticks": [
+      10761,
+      12922,
+      12965
+    ],
+    "completion_ticks_after_frame_start": 4773,
+    "uart_request_restored": true
+  },
+  "f00_issued": false
+}

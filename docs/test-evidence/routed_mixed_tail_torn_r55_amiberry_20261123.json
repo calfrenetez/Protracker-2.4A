@@ -1,0 +1,28 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "cf9485d705926bfad9f962f355ea5a897f1b9843554f6da663cf3a62e3516999",
+  "build_receipt_sha256": "568cbab0f40a0a2e9dcd5c746b663b30b5733c632fa8ef98d426bab340bd7bc8",
+  "guest_log_sha256": "40c578645079d05f0cd3869099ad2aa9bff64c2c3b60af3a508104188743b678",
+  "validated_build_inputs": 125,
+  "start_window": [
+    8758,
+    8773
+  ],
+  "start_observed_issue_bracket": [
+    8759,
+    8766
+  ],
+  "torn_wait_entry": "fcfffb",
+  "original_start_and_f00_frames": [
+    0,
+    3840
+  ],
+  "f00_arm_observed": false,
+  "owned_cleanup_dma_clear_observed": true,
+  "guest_rc": 20,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Exact Start issued with a valid bracket. A torn pre-wait read refused progress before any F00 arming. The original owner performed its separately identified cleanup."
+}

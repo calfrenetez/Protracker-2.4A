@@ -1,0 +1,89 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening remain pending.",
+  "fixtures": {
+    "clock": {
+      "passed": true,
+      "guest_rc": "0",
+      "candidate_sha256": "1f8ac0ca12e012e55facde207b07cccbff81c32e500520c7cf9dfae3cba36c21",
+      "validated_build_inputs": 127,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "7b1fe7191b91a73f19c9765422d7e04cbcb53c42fe0d58e5ab22187f0455cdb2",
+      "guest_log_sha256": "77f4299d958466a5a4cd0f5e3005d9ad47da6244f4cf87eff7b73a1a42c62c05",
+      "independent_replay_sha256": "9562516a3c18989a8a247615c67a5e4ddf1d8ee5c0f98030fd1b7519b82ad0d1",
+      "writes": [
+        {
+          "frame": 0,
+          "window": [
+            8192,
+            8207
+          ],
+          "observed": [
+            8193,
+            8201
+          ],
+          "card_ram_and_midi_receive": [
+            0,
+            32768,
+            26557530
+          ],
+          "verdict": "issued_in_frame",
+          "serial_loopback": {
+            "first_word": 405,
+            "receive": "953c5a",
+            "byte_readback_ticks": [
+              10976,
+              11564,
+              12039
+            ],
+            "completion_ticks_after_frame_start": 3847
+          }
+        },
+        {
+          "frame": 1920,
+          "window": [
+            36568,
+            36582
+          ],
+          "observed": [
+            36570,
+            36578
+          ],
+          "card_ram_and_midi_receive": [
+            0,
+            0,
+            25508864
+          ],
+          "verdict": "issued_in_frame",
+          "serial_loopback": {
+            "first_word": 389,
+            "receive": "853c00",
+            "byte_readback_ticks": [
+              36884,
+              36927,
+              36970
+            ],
+            "completion_ticks_after_frame_start": 402
+          }
+        }
+      ],
+      "serial_request_restored": true,
+      "counter_hz": 709379
+    },
+    "reload": {
+      "passed": false,
+      "guest_rc": "20",
+      "candidate_sha256": "84b079475f495d44917dec731cb8366184ca0ac90b98a6f93b0238ffa3c9ac60",
+      "validated_build_inputs": 128,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "285d4eec5f2757b4a580a919d49a8cd4ca31d8696c0a66ebf829fe202acc6709",
+      "guest_log_sha256": "ab5d999b8b3cbf60d5ecf678e82e9cddc4886c7240cae68786efe7b2d7abc269",
+      "reason": "The guest exited before an IRQ window was recorded or a callback delivered. Exact reason within reload setup remains unobserved."
+    }
+  }
+}

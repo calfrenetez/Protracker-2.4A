@@ -1,0 +1,80 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "d63964caa2aa1b8da42af901b3fbd558c7818295b98bb6962c15133b771275c9",
+  "build_receipt_sha256": "d9804b868eaa88a7adcf1c1086e8772ea3445d3ba451baf081ad6a6d4130a7f1",
+  "guest_log_sha256": "9a8e2e617985c965c9e150f534fefabbbd64dd8341ba24d6da4c36967367903a",
+  "validated_build_inputs": 24,
+  "independent_replay_sha256": "f06f9e80e958335906fd998fd397b46eb839a1f8de5b2f2e00b13be9b67ff0a1",
+  "camd_library_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+  "private_midi_driver_directory_empty": true,
+  "observations": {
+    "counter_hz": 709379,
+    "local_receipts": 32,
+    "groups": [
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 10224,
+        "coherent": 4
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 13170,
+        "coherent": 2
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 11925,
+        "coherent": 3
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 10634,
+        "coherent": 3
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 12557,
+        "coherent": 2
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 13786,
+        "coherent": 3
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 11323,
+        "coherent": 2
+      },
+      {
+        "clock_chip": 0,
+        "clock_timer": 0,
+        "independent_ticks": 10308,
+        "coherent": 3
+      }
+    ],
+    "coherent_pairs": 22,
+    "baseline_ticks": [
+      6,
+      6
+    ],
+    "put_bracket_ticks": [
+      379,
+      2785
+    ],
+    "put_brackets_narrower_than_maximum_frame": 0,
+    "closed": true
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Actual public CAMD calls to one local software queue. Exact sample-frame output requires a separate scheduled transport."
+}

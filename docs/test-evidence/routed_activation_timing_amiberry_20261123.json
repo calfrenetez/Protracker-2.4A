@@ -1,0 +1,59 @@
+{
+  "tested_source": "794cc663f506991f1df562deeea4679990710edf",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "44381e064179cd91f5ad3497476a707eb21e8ac1b413b06bce696650d68953ef",
+  "build_receipt_sha256": "7d68f2bd2bb4f002298087381e1b2eac3178c20201582c96c4dd097aa7821981",
+  "guest_log_sha256": "c5e92ebda4dc9d73dd0891222fd3e34c1c5415477342b77c1037e5d740c901d7",
+  "focused_host_methods": 11,
+  "validated_build_inputs": 85,
+  "real_eclock_brackets": {
+    "attempts": 24,
+    "empty": {
+      "bracket_ticks": [
+        44,
+        1009
+      ],
+      "in_start_frame": 0
+    },
+    "fire_start": {
+      "bracket_ticks": [
+        5225,
+        28430
+      ],
+      "in_start_frame": 0
+    },
+    "fire_stop": {
+      "bracket_ticks": [
+        5411,
+        18617
+      ],
+      "in_start_frame": 0
+    },
+    "publish_start": {
+      "bracket_ticks": [
+        51850,
+        110346
+      ],
+      "in_start_frame": 0
+    },
+    "publish_stop": {
+      "bracket_ticks": [
+        51704,
+        88319
+      ],
+      "in_start_frame": 0
+    },
+    "sample_rate": 48000,
+    "sample_ticks": [
+      14,
+      15
+    ],
+    "ticks_per_second": 709379
+  },
+  "guest_exit_code": 0,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Finite emulated E-clock brackets around an ordinary-RAM fixture with a controlled scheduling counter. No separate instruction timing, IRQ bound, physical output or listening proof."
+}

@@ -201,3 +201,21 @@ includes the exact frame, window, generation, serial, audio ticket and all
 message bytes. Its numeric endpoint indexes retain the original destination
 mapping. A scheduled consumer can use this copy without reading the renderer,
 live MIDI planner or project strings.
+
+The ordinary-RAM activation diagnostic also measured 24 runs on the native
+709,379 Hz E-clock in Amiberry. At 48 kHz, one sample frame spans 14 or 15
+ticks. Every measured bracket crossed its start frame, including the
+standalone adjacent reads used as a comparison.
+
+| Bracket | Observed E-clock ticks |
+| --- | ---: |
+| Adjacent task reads | 44–1,009 |
+| Publish start | 51,850–110,346 |
+| Activate start | 5,225–28,430 |
+| Publish Stop | 51,704–88,319 |
+| Activate Stop | 5,411–18,617 |
+
+The brackets include clock-reading overhead, owner checks and fixture work.
+The controlled counter still supplies the fixture's correctness checks. The
+measured path needs a prepared, shorter live dispatch before it can use the
+original sample window. [Native timing receipt](test-evidence/routed_activation_timing_amiberry_20261123.json)

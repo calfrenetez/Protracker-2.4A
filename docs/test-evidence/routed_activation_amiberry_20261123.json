@@ -29,5 +29,24 @@
   "canonical_disk_unchanged": true,
   "saved_files_verified": 39,
   "guard_release_verified": true,
-  "scope": "Genuine activation and scheduled ownership in Amiberry with a modeled counter and output. Live MIDI, physical audio and listening remain open."
+  "scope": "Genuine activation and scheduled ownership in Amiberry with a modeled counter and output. Live MIDI, physical audio and listening remain open.",
+  "midi_packet_follow_up": {
+    "tested_source": "84a6aa8259220740e6d64f2741d3e2ec49f1b6a9",
+    "candidate_and_guest_readback_sha256": "e8f8675516721a14d3b5011384520a930d4222d826fd93515de415ef01bbcd2a",
+    "build_receipt_sha256": "4d77586238a8a6dbb047173be2e9d139cabf6034825cd83f66fdc108d9aa908c",
+    "guest_log_sha256": "827c6905c2001bfeaf39b07ebe5983c3022772ee7957893f7881757f74481d11",
+    "validated_build_inputs": 83,
+    "focused_host_methods": 11,
+    "additional_checks": [
+      "one original publication copies complete MIDI bytes and the matching audio ticket",
+      "an identical event copy and calls outside submission are refused",
+      "all unfilled packet slots are clear",
+      "queued exact start and Stop for two distinct destinations"
+    ],
+    "guest_exit_code": 0,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  }
 }

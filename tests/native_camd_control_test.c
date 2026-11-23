@@ -10,8 +10,9 @@
 #include <string.h>
 #include <utility/tagitem.h>
 
-/* Native CLI fixture for a private image with empty DEVS:MIDI. Sends only to
- * its own temporary local receiver. No playback provider is registered. */
+/* The loopback fixtures send only to their own temporary local receivers in
+ * a driver-free image. Discovery can inspect an existing CAMD configuration
+ * without creating any links. No playback provider is registered. */
 static struct pt_native_camd native;
 static struct pt_camd_control control;
 static const char receiver_name[] = "PT24G local loopback";
@@ -49,6 +50,38 @@ static void missing_library(void)
     assert(!native.library && !control.node && pt_camd_control_state(&control) == PT_CAMD_EMPTY);
     finish();
     puts("CAMD native control: missing library refused and closed");
+}
+
+static int discover_outputs(void)
+{
+    const enum pt_camd_result activation = pt_camd_control_activate(&control);
+    if (activation != PT_CAMD_OK) {
+        finish();
+        printf("CAMD output discovery: activation failed result=%d closed=1\n", activation);
+        return 5;
+    }
+
+    const enum pt_camd_result refresh = pt_camd_control_refresh(&control);
+    const struct pt_midi_endpoints *registry = pt_camd_control_registry(&control);
+    if (refresh != PT_CAMD_OK || !registry) {
+        finish();
+        printf("CAMD output discovery: scan failed result=%d closed=1\n", refresh);
+        return 5;
+    }
+
+    unsigned count = 0;
+    for (unsigned port = 0; port < PT_MIDI_PORTS; ++port) {
+        if (pt_midi_endpoints_available(registry, port) != 1)
+            continue;
+        const struct pt_midi_endpoint_name *name = pt_midi_endpoints_name(registry, port);
+        assert(name && !registry->link_active && !control.links[port]);
+        printf("CAMD output %u: %s\n", ++count, name->identity);
+    }
+    const unsigned version = native.library->lib_Version;
+    const unsigned revision = native.library->lib_Revision;
+    finish();
+    printf("CAMD output discovery: library=%u.%u outputs=%u closed=1\n", version, revision, count);
+    return 0;
 }
 
 static void *link_to(struct Library *library, void *node, unsigned type, const char *name)
@@ -290,6 +323,8 @@ int main(int argc, char **argv)
     assert(argc == 2 && pt_native_camd_control_init(&native, &control));
     if (!strcmp(argv[1], "absent"))
         missing_library();
+    else if (!strcmp(argv[1], "outputs"))
+        return discover_outputs();
     else if (!strcmp(argv[1], "loopback"))
         return local_loopback(0);
 #ifdef PT_CAMD_DIRECT_COUNT_TEST

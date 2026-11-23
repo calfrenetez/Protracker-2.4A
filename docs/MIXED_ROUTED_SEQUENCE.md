@@ -409,6 +409,13 @@ CAMD endpoint routing and physical MIDI output remain separate work.
 [Commodore serial interface](https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_8.html)
 [Amiberry loopback implementation](https://github.com/BlitterStudio/amiberry/blob/8dec73501b5d2c2b3a6859b1d30a25291febb491/src/osdep/amiberry_serial.cpp)
 
+The native diagnostic `PTCamdControl outputs` gives the CAMD cluster names
+with an existing receiver, using the normal CAMD library and discovery
+adapter. It reports zero when CAMD is present and has no receiving
+clusters, or returns RC5 when it cannot activate CAMD or read the snapshot.
+It creates no MIDI links, sends no notes and closes its own node and
+library handle. Listing a cluster confirms software availability.
+
 In the canonical cycle-exact Amiberry profile, the first Note On
 write was bracketed at ticks [8195, 8201] within [8192, 8207).
 The UART then stayed busy and returned zero loopback bytes.

@@ -2,6 +2,7 @@
 #include "../src/native/camd_vectors.h"
 #include "../src/native/eclock.h"
 #include "../src/core/elapsed_clock.h"
+#include "../src/platform/camd_routes.h"
 #include <assert.h>
 #include <exec/libraries.h>
 #include <proto/dos.h>
@@ -178,6 +179,75 @@ static void local_loopback(unsigned timing)
         puts("CAMD native control: 40.5 receiver discovery, local note on/off and original handles closed");
 }
 
+static void routes_loopback(void)
+{
+    static const char cluster[2][PT_MIDI_ENDPOINT] = {"PT24G.test.a", "PT24G.test.b"};
+    static const char project[2][PT_MIDI_ENDPOINT] = {"PT24G.test.b", "PT24G.test.a"};
+    static const char duplicate[2][PT_MIDI_ENDPOINT] = {"PT24G.test.b", "PT24G.test.b"};
+    static const char wrong_case[2][PT_MIDI_ENDPOINT] = {"pt24g.test.b", "PT24G.test.a"};
+    static const char receiver_names[2][PT_MIDI_ENDPOINT] = {"PT24G receive A", "PT24G receive B"};
+    struct pt_camd_routes map;
+    struct Library *library;
+    const struct pt_midi_endpoints *registry;
+    void *nodes[2], *receivers[2];
+    int ports[2];
+    uint32_t message[2];
+    const uint32_t notes[2] = {UINT32_C(0x903c3200), UINT32_C(0x91406400)};
+    const uint32_t releases[2] = {UINT32_C(0x803c0000), UINT32_C(0x81400000)};
+    unsigned i;
+
+    assert(pt_camd_control_activate(&control) == PT_CAMD_OK);
+    library = native.library;
+    assert(library && library->lib_Version == 40 && library->lib_Revision == 5);
+    assert(pt_camd_control_refresh(&control) == PT_CAMD_OK);
+    registry = pt_camd_control_registry(&control);
+    assert(registry && !registry->available);
+
+    for (i = 0; i < 2; ++i) {
+        const struct TagItem tags[] = {
+            {PT_CAMD_NODE_NAME_TAG, (ULONG)(uintptr_t)receiver_names[i]},
+            {PT_CAMD_RECEIVE_QUEUE_TAG, 4}, {TAG_DONE, 0}
+        };
+        nodes[i] = (void *)(uintptr_t)pt_native_camd_vector(library, PT_CAMD_CREATE_NODE, 0, tags, NULL);
+        assert(nodes[i]);
+        receivers[i] = link_to(library, nodes[i], PT_CAMD_RECEIVER, cluster[i]);
+        assert(receivers[i]);
+        assert(pt_camd_control_refresh(&control) == PT_CAMD_OK);
+        ports[i] = pt_midi_endpoints_find(registry, cluster[i], strlen(cluster[i]) + 1);
+        assert(ports[i] >= 0);
+    }
+    assert(ports[0] < ports[1]);
+    map.count = 99;
+    assert(!pt_camd_routes_resolve(&control, project, 2, &map) && map.count == 99);
+    for (i = 0; i < 2; ++i)
+        assert(pt_camd_control_link(&control, (unsigned)ports[i]) == PT_CAMD_OK);
+
+    assert(!pt_camd_routes_resolve(&control, duplicate, 2, &map) && map.count == 99);
+    assert(!pt_camd_routes_resolve(&control, wrong_case, 2, &map) && map.count == 99);
+    assert(pt_camd_routes_resolve(&control, project, 2, &map) && map.count == 2);
+    assert(map.slot[0] == ports[1] && map.slot[1] == ports[0]);
+
+    for (i = 0; i < map.count; ++i) {
+        local_note(library, control.links[map.slot[i]], nodes[1 - i], notes[i]);
+        local_note(library, control.links[map.slot[i]], nodes[1 - i], releases[i]);
+        assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, nodes[0], message));
+        assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, nodes[1], message));
+    }
+    assert(!registry->link_active);
+    (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[0], NULL);
+    assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && control.links[ports[0]]);
+    assert(!pt_camd_routes_resolve(&control, project, 2, &map));
+    assert(map.count == 2 && map.slot[0] == ports[1] && map.slot[1] == ports[0]);
+    (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[1], NULL);
+    for (i = 0; i < 2; ++i) {
+        assert(pt_camd_control_retire(&control, (unsigned)ports[i]) == PT_CAMD_OK);
+        (void)pt_native_camd_vector(library, PT_CAMD_DELETE_NODE, 0, nodes[i], NULL);
+    }
+    assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && !registry->available);
+    finish();
+    puts("CAMD native routes: project order preserved, both local receivers verified, missing receiver refused");
+}
+
 int main(int argc, char **argv)
 {
     assert(argc == 2 && pt_native_camd_control_init(&native, &control));
@@ -185,6 +255,8 @@ int main(int argc, char **argv)
         missing_library();
     else if (!strcmp(argv[1], "loopback"))
         local_loopback(0);
+    else if (!strcmp(argv[1], "routes"))
+        routes_loopback();
     else {
         assert(!strcmp(argv[1], "timing"));
         local_loopback(1);

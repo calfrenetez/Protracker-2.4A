@@ -44,7 +44,8 @@ def main():
                                 and any(isinstance(target, ast.Name) and target.id == extra for target in node.targets)))
     if args.fixture == 'camd-control':
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
-                   'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]
+                   'src/native/camd_vectors.s', 'src/core/elapsed_clock.c',
+                   'src/platform/camd_routes.c', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
     if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])

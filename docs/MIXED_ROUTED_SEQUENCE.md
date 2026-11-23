@@ -202,6 +202,14 @@ message bytes. Its numeric endpoint indexes retain the original destination
 mapping. A scheduled consumer can use this copy without reading the renderer,
 live MIDI planner or project strings.
 
+`pt_camd_routes_resolve` maps those project-order indexes to CAMD sender slots
+before playback. Every name must match an owned sender and a receiver in the
+latest CAMD scan. A missing receiver blocks the whole map even if its sender
+is still open. Resolve again after a scan or link change. The native fixture
+checks reversed destination order and distinct Note On and Note Off delivery
+to two temporary local receivers. Scheduled CAMD delivery has a separate
+timing requirement.
+
 `pt_routed_activation_prepare` copies the Paula DMA geometry and builds the
 ordered AmiGUS register programs alongside the MIDI packet during the original
 publication. The provider gets one complete prepared object after validation.

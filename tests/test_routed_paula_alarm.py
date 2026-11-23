@@ -8,6 +8,7 @@ from replay_tracker_paula_alarm import replay as replay_tracker
 from replay_mixed_frame_aperture import observe as observe_mixed, replay as replay_mixed
 from replay_mixed_frame_wait import replay as replay_wait
 from replay_mixed_frame_reload import replay as replay_reload
+from replay_mixed_wire import replay as replay_wire
 from replay_mixed_frame_tail import replay as replay_tail
 from replay_mixed_tail_refusal import replay as replay_refusal
 
@@ -117,6 +118,29 @@ class PaulaAlarmReplay(unittest.TestCase):
             replay_wait(text.replace("alarm=1", "alarm=0", 1))
         with self.assertRaises(ValueError):
             replay_wait(text.replace(f"before={triplet(65523 - 8192 + 300)}", f"before={triplet(65523 - 8193)}", 1))
+
+    def test_mixed_serial_receipt_cannot_substitute_ram_or_claim_a_late_write(self):
+        waits = []
+        for index, first in enumerate((8192, 36568)):
+            waits.append(f"Paula wait {index} before={triplet(65523 - first + 300)} "
+                         f"after={triplet(65523 - first - 80)} alarm=1")
+        receipts = ("Mixed UART 0 tx=195/13c/15a rx=953c5a received=3 idle=1\n"
+                    "Mixed UART 1 tx=185/13c/100 rx=853c00 received=3 idle=1\n"
+                    "Mixed UART cleanup restored=1 request=0001/0001 uart=3000 period=113\n")
+        text = receipts + "\n".join(waits) + "\n" + mixed_fixture().replace("Mixed IRQ RAM", "Mixed IRQ wire")
+        proof = replay_wire(text)
+        self.assertEqual([row["serial_loopback"]["receive"] for row in proof["mixed_wire_observations"]],
+                         ["953c5a", "853c00"])
+        for original, changed in (
+            ("Mixed IRQ wire", "Mixed IRQ RAM"),
+            ("rx=953c5a", "rx=953c00"),
+            ("received=3", "received=2"),
+            ("request=0001/0001", "request=0001/0000"),
+            ("period=113", "period=112"),
+            (f"rawafter={triplet(65523 - 8199)}", f"rawafter={triplet(65523 - 8207)}"),
+        ):
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                replay_wire(text.replace(original, changed, 1))
 
     def test_mixed_wait_crosses_one_original_reload(self):
         start_count, later_count = 65523, 65000

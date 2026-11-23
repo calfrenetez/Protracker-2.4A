@@ -13,6 +13,9 @@ struct paula_window_raw {
     uint32_t bank, control, midi;
     volatile uint16_t observed_bank, observed_control;
     volatile uint32_t observed_midi;
+#ifdef PT_PAULA_MIDI_WIRE
+    uint16_t wire_first;
+#endif
 #endif
 };
 
@@ -23,6 +26,9 @@ _Static_assert(offsetof(struct paula_window_raw, bank) == 16 &&
     offsetof(struct paula_window_raw, observed_midi) == 32, "Mixed IRQ diagnostic RAM fields");
 #else
 typedef char paula_window_size[(sizeof(struct paula_window_raw) == 14) ? 1 : -1];
+#endif
+#ifdef PT_PAULA_MIDI_WIRE
+_Static_assert(offsetof(struct paula_window_raw, wire_first) == 36, "Mixed IRQ serial word");
 #endif
 typedef char paula_marker_offset[(offsetof(struct paula_window_raw, marker) == 6) ? 1 : -1];
 typedef char paula_before_offset[(offsetof(struct paula_window_raw, before) == 8) ? 1 : -1];

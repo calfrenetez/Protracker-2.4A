@@ -17,13 +17,16 @@ RAM = re.compile(
     r"Mixed IRQ RAM (\d) bank=([\da-f]{4})/([\da-f]{4}) control=([\da-f]{4})/([\da-f]{4}) "
     r"midi=([\da-f]{8})/([\da-f]{8})"
 )
+WIRE = re.compile(RAM.pattern.replace("IRQ RAM ", "IRQ wire "))
 EXPECTED = ((0, 0x8000, 0x01953C5A), (0, 0, 0x01853C00))
 UNWRITTEN = (0xFFFF, 0xFFFF, 0xFFFFFFFF)
 
 
-def observe(text):
+def observe(text, *, wire=False):
     lines = text.splitlines()
-    ram = [RAM.fullmatch(line) for line in lines if line.startswith("Mixed IRQ RAM ")]
+    pattern = WIRE if wire else RAM
+    heading = "Mixed IRQ wire " if wire else "Mixed IRQ RAM "
+    ram = [pattern.fullmatch(line) for line in lines if line.startswith(heading)]
     windows = [ROW.fullmatch(line) for line in lines if line.startswith("Paula window ")]
     if not 1 <= len(ram) <= 2 or len(ram) != len(windows) or not all(ram + windows):
         raise ValueError("Missing paired raw RAM and clock observations")
@@ -64,16 +67,17 @@ def observe(text):
         if row["in_frame"] == "1" and verdict != "issued_in_frame":
             raise ValueError("Claimed timing contradicts raw results")
         observations.append({"frame": frame, "window": [first, excluded], "observed": observed,
-                             "card_bank_control_and_midi_ram": list(readback), "verdict": verdict})
+                             ("card_ram_and_midi_receive" if wire else "card_bank_control_and_midi_ram"):
+                                 list(readback), "verdict": verdict})
     return observations
 
 
-def replay(text):
-    observed = observe(text)
+def replay(text, *, wire=False):
+    observed = observe(text, wire=wire)
     result = replay_tracker(text)
     if len(observed) != 2 or any(row["verdict"] != "issued_in_frame" for row in observed):
-        raise ValueError("Mixed RAM effects exceed the original activation window")
-    result["mixed_ram_observations"] = observed
+        raise ValueError("Mixed writes exceeded or could not prove the original activation window")
+    result["mixed_wire_observations" if wire else "mixed_ram_observations"] = observed
     return result
 
 

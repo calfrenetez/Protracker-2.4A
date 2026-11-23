@@ -2,7 +2,7 @@
 /* C stack ABI. The 64 coherent-read attempts use the original precomputed
  * descending window. An expired or exhausted attempt writes no marker.
  * The diagnostic Paula form measures a single fixed register write. */
-        .macro local_activate name, paula=0, mixed=0, tail=0, serial=0
+        .macro local_activate name, paula=0, mixed=0, tail=0, serial=0, wire=0
         .globl \name
 \name:
         .if \mixed
@@ -18,7 +18,11 @@
         .if \mixed
         movea.l 16(%a2),%a3
         movea.l 20(%a2),%a4
+        .if \wire
+        movea.w 36(%a2),%a5
+        .else
         movea.l 24(%a2),%a5
+        .endif
         .endif
         .if \paula
         move.l local_args\@+12(%sp),%d6
@@ -32,11 +36,19 @@
         bra.w local_return\@
 valid_word\@:
         .endif
-        .if \serial
+        .if \serial+\wire
+        .if \wire
+        /* Preserve the Paula word and validate the first serial word separately. */
+        move.l %a5,%d0
+        cmpi.l #0x180,%d0
+        blo.w serial_refused\@
+        cmpi.l #0x19f,%d0
+        .else
         move.l local_args\@+12(%sp),%d6
         cmpi.l #0x180,%d6
         blo.w serial_refused\@
         cmpi.l #0x19f,%d6
+        .endif
         bhi.w serial_refused\@
         move.w 0xdff018,%d0
         andi.w #0xf000,%d0
@@ -86,11 +98,14 @@ local_poll\@:
         .if \paula
         move.w %d6,0xdff096
         .if \mixed
-        /* Two individual card words and the queued MIDI slot/message.
-         * The destinations are fields in the original diagnostic RAM row. */
+        /* These two stores still model the AmiGUS registers in RAM. */
         move.w %a3,28(%a2)
         move.w %a4,30(%a2)
+        .if \wire
+        move.w %a5,0xdff030
+        .else
         move.l %a5,32(%a2)
+        .endif
         .endif
         .else
         .if \serial
@@ -136,7 +151,7 @@ local_mixed_tail_refused\@:
         moveq #3,%d0
         .endif
         .endif
-        .if \serial
+        .if \serial+\wire
         bra.b local_return\@
 serial_refused\@:
         moveq #3,%d0
@@ -156,6 +171,9 @@ local_return\@:
         .endif
         local_activate _pt_cia_local_paula_dma,1
         local_activate _pt_cia_local_mixed_dma,1,1
+        .ifdef pt_exp_mixed_wire
+        local_activate _pt_cia_local_mixed_wire,1,1,0,0,1
+        .endif
         .ifdef pt_exp_cia_tail
         local_activate _pt_cia_local_tail,0,0,1
         .endif
@@ -166,7 +184,7 @@ local_return\@:
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0, tail=0, serial=0
+        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0, tail=0, serial=0, wire=0
         .globl \name
 \name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
@@ -214,7 +232,11 @@ local_return\@:
         bra.b local_mixed_done\@
 local_mixed_start\@:
         .endif
+        .if \wire
+        jsr _pt_cia_local_mixed_wire
+        .else
         jsr _pt_cia_local_mixed_dma
+        .endif
         .if \tail
 local_mixed_done\@:
         .endif
@@ -267,6 +289,9 @@ local_irq_done\@:
         local_alarm_irq _pt_cia_local_alarm_irq
         local_alarm_irq _pt_cia_local_paula_alarm_irq,1
         local_alarm_irq _pt_cia_local_mixed_alarm_irq,1,1
+        .ifdef pt_exp_mixed_wire
+        local_alarm_irq _pt_cia_local_mixed_wire_irq,1,1,0,0,0,1
+        .endif
         local_alarm_irq _pt_cia_local_epoch_alarm_irq,0,0,1
         .ifdef pt_exp_cia_tail
         local_alarm_irq _pt_cia_local_tail_irq,0,0,1,1

@@ -8,8 +8,17 @@
 #include <string.h>
 #include "routed_camd_fixture.h"
 
-/* Card and MIDI work in this diagnostic is entirely numeric. The fixture
- * plans the real messages, but commits a private forecast ledger only. */
+#ifdef PT_PAULA_MIDI_WIRE
+#include "native_midi_loopback.h"
+
+enum { MIXED_LOOPBACK_SLOT = 1, MIXED_RECEIVE_SLACK = 5000 };
+static struct pt_routed_midi_wire mixed_wire[2];
+static struct pt_test_midi_receipt mixed_receipts[2];
+static struct pt_test_midi_uart mixed_uart;
+#endif
+
+/* The forecast ledger is private. Card words go to RAM and the port is
+ * a loopback only in the explicitly enabled serial fixture. */
 static struct pt_routed_activation_program mixed_source[2];
 static struct pt_routed_midi *mixed_midi_forecast;
 static struct fixture_camd *mixed_camd;
@@ -107,6 +116,11 @@ static int mixed_prepare_words(const struct pt_elapsed_clock *grid, const struct
             frame.card_frame[0].offset != 0x1e || frame.card_frame[1].offset != 0x20 ||
             frame.midi_count != 1)
             return 0;
+#ifdef PT_PAULA_MIDI_WIRE
+        if (!pt_routed_midi_wire_prepare(&frame, MIXED_LOOPBACK_SLOT, mixed_wire + i))
+            return 0;
+        raw->wire_first = mixed_wire[i].word[0];
+#endif
         raw->bank = frame.card_frame[0].value;
         raw->control = frame.card_frame[1].value;
         const struct pt_routed_frame_midi *message = frame.midi;
@@ -118,6 +132,19 @@ static int mixed_prepare_words(const struct pt_elapsed_clock *grid, const struct
     return 1;
 }
 
+#ifdef PT_PAULA_MIDI_WIRE
+static void receive_mixed_wire(const struct pt_diagnostic_cia *clock, unsigned i)
+{
+    struct paula_window_raw *raw = &timed[i].raw;
+    struct pt_test_midi_receipt *receipt = &mixed_receipts[i];
+    if (raw->end <= MIXED_RECEIVE_SLACK ||
+        !serial_receive(clock, raw->end - MIXED_RECEIVE_SLACK, mixed_wire + i, receipt))
+        return;
+    raw->observed_midi = (uint32_t)MIXED_LOOPBACK_SLOT << 24 | (uint32_t)receipt->bytes[0] << 16 |
+        (uint32_t)receipt->bytes[1] << 8 | receipt->bytes[2];
+}
+#endif
+
 static int mixed_words_issued(const struct paula_window_raw *raw)
 {
     return raw->observed_bank == raw->bank && raw->observed_control == raw->control &&
@@ -128,9 +155,26 @@ static void report_mixed_words(void)
 {
     for (unsigned i = 0; i < timed_count; ++i) {
         const struct paula_window_raw *raw = &timed[i].raw;
+#ifdef PT_PAULA_MIDI_WIRE
+        printf("Mixed IRQ wire %u bank=%04lx/%04x control=%04lx/%04x midi=%08lx/%08lx\n", i,
+#else
         printf("Mixed IRQ RAM %u bank=%04lx/%04x control=%04lx/%04x midi=%08lx/%08lx\n", i,
+#endif
             (unsigned long)raw->bank, (unsigned)raw->observed_bank, (unsigned long)raw->control,
             (unsigned)raw->observed_control, (unsigned long)raw->midi, (unsigned long)raw->observed_midi);
+#ifdef PT_PAULA_MIDI_WIRE
+        const struct pt_routed_midi_wire *wire = &mixed_wire[i];
+        const struct pt_test_midi_receipt *receipt = &mixed_receipts[i];
+        printf("Mixed UART %u tx=%03x/%03x/%03x rx=%02x%02x%02x received=%u idle=%u\n", i,
+            (unsigned)wire->word[0], (unsigned)wire->word[1], (unsigned)wire->word[2],
+            (unsigned)receipt->bytes[0], (unsigned)receipt->bytes[1], (unsigned)receipt->bytes[2],
+            receipt->received, receipt->idle);
+#endif
     }
+#ifdef PT_PAULA_MIDI_WIRE
+    printf("Mixed UART cleanup restored=%u request=%04x/%04x uart=%04x period=%u\n",
+        mixed_uart.restored, (unsigned)mixed_uart.original_requests, (unsigned)mixed_uart.final_requests,
+        mixed_uart.status, mixed_uart.period);
+#endif
 }
 #endif

@@ -2,21 +2,13 @@
 #include "../src/core/elapsed_clock.h"
 #include "../src/core/routed_midi_wire.h"
 #include "native_cia_alarm_lifecycle.h"
-#include <hardware/intbits.h>
-#include <proto/misc.h>
-#include <resources/misc.h>
 #include <stdio.h>
 #include <string.h>
 
-enum {
-    SERIAL_STATUS = 0x018, SERIAL_DATA = 0x030, SERIAL_PERIOD = 0x032,
-    INT_REQUEST = 0x01e, INT_ENABLE = 0x01c, INT_WRITE = 0x09c, ADK_READ = 0x010,
-    SERIAL_REQUESTS = INTF_TBE | INTF_RBF, BUFFER_EMPTY = 0x2000, TRANSMIT_IDLE = 0x3000,
-    RX_FULL = 0x4000, RX_OVERRUN = 0x8000, RECEIVE_VALID = 0x0100,
-    LEAD = 128, EPOCH = 8192, RATE = 48000
-};
+#include "native_midi_loopback.h"
 
-struct Library *MiscBase;
+enum { LEAD = 128, EPOCH = 8192, RATE = 48000 };
+
 extern void pt_cia_local_serial_midi_irq(void);
 
 struct serial_entry {
@@ -31,47 +23,9 @@ struct serial_case {
     struct pt_routed_midi_wire message;
     struct pt_cia_clock_pair arm;
     struct serial_entry raw;
-    unsigned frame, delay, status, calls, received, idle;
-    uint8_t bytes[3];
+    unsigned frame, delay, status, calls;
+    struct pt_test_midi_receipt receipt;
 };
-
-static volatile UWORD *reg(unsigned offset)
-{
-    return (volatile UWORD *)(uintptr_t)(0xdff000UL + offset);
-}
-
-static int quiet(void)
-{
-    return (*reg(SERIAL_STATUS) & 0xf000) == TRANSMIT_IDLE;
-}
-
-static unsigned sample_count(const struct pt_diagnostic_cia *clock)
-{
-    const unsigned high = *clock->high;
-    const unsigned low = *clock->low;
-    return high == *clock->high ? high * 256 + low : 0;
-}
-
-/* Wait for this fixture's own receive byte while the original countdown runs.
- * Only the IRQ issues the first transmit word. The task drains the remaining
- * two bytes in the same message before the port can admit another frame. */
-static int receive_byte(const struct pt_diagnostic_cia *clock, unsigned limit, uint8_t *out)
-{
-    for (unsigned i = 0; i < 32768; ++i) {
-        unsigned count = sample_count(clock);
-        if ((count && count < limit) || !(*clock->control & 1U))
-            return 0;
-        UWORD status = *reg(SERIAL_STATUS);
-        if (status & RX_OVERRUN)
-            return 0;
-        if (status & RX_FULL) {
-            *reg(INT_WRITE) = INTF_RBF;
-            *out = (uint8_t)status;
-            return (status & RECEIVE_VALID) != 0;
-        }
-    }
-    return 0;
-}
 
 static int prepare(struct serial_case *row, const struct pt_elapsed_clock *grid,
     uint16_t anchor, unsigned frame, unsigned index, unsigned status, int stop)
@@ -94,7 +48,7 @@ static int issue(struct local_alarm *alarm, const struct pt_diagnostic_cia *cloc
 {
     struct local_alarm_data *irq = &alarm->data;
     Disable();
-    if (!quiet() || !pt_diagnostic_cia_current(clock) || irq->armed || irq->entry || irq->stray ||
+    if (!serial_quiet() || !pt_diagnostic_cia_current(clock) || irq->armed || irq->entry || irq->stray ||
         irq->calls != alarm->delivered) {
         Enable();
         return 0;
@@ -132,36 +86,17 @@ static int issue(struct local_alarm *alarm, const struct pt_diagnostic_cia *cloc
     Enable();
 
     if (expired) {
-        row->idle = quiet();
+        row->receipt.idle = serial_quiet();
         const unsigned before = pt_cia_stable_count(row->raw.before);
         return row->status == 2 && !row->raw.marker && before && before <= row->raw.excluded &&
-            row->idle && !(*reg(INT_REQUEST) & INTF_RBF);
+            row->receipt.idle && !(*serial_register(INT_REQUEST) & INTF_RBF);
     }
     if (row->status != 1 || row->raw.marker != 0x4752)
         return 0;
-    for (unsigned i = 0; i < 3; ++i) {
-        if (i) {
-            if (!(*reg(SERIAL_STATUS) & BUFFER_EMPTY))
-                return 0;
-            *reg(SERIAL_DATA) = row->message.word[i];
-        }
-        if (!receive_byte(clock, row->raw.excluded - 5000, row->bytes + i))
-            return 0;
-        ++row->received;
-        if (row->bytes[i] != (uint8_t)row->message.word[i])
-            return 0;
-    }
-    for (unsigned i = 0; i < 32768; ++i) {
-        unsigned remaining = sample_count(clock);
-        if ((remaining && remaining < row->raw.excluded - 5000U) || !(*clock->control & 1U))
-            break;
-        if (quiet()) {
-            row->idle = 1;
-            break;
-        }
-    }
+    if (!serial_receive(clock, row->raw.excluded - 5000U, &row->message, &row->receipt))
+        return 0;
     struct pt_countdown_bracket bracket;
-    return row->idle && pt_countdown_window_bracket(&row->window, pt_cia_stable_count(row->raw.before),
+    return pt_countdown_window_bracket(&row->window, pt_cia_stable_count(row->raw.before),
         pt_cia_stable_count(row->raw.after), &bracket);
 }
 
@@ -177,16 +112,16 @@ static void report(const struct serial_case *row, unsigned index)
         row->calls, row->status, (unsigned)r->attempts, (unsigned)r->before[0], (unsigned)r->before[1],
         (unsigned)r->before[2], (unsigned)r->after[0], (unsigned)r->after[1], (unsigned)r->after[2],
         (unsigned)r->marker, (unsigned)row->message.word[0], (unsigned)row->message.word[1],
-        (unsigned)row->message.word[2], (unsigned)row->bytes[0], (unsigned)row->bytes[1], (unsigned)row->bytes[2],
-        row->received, row->idle);
+        (unsigned)row->message.word[2], (unsigned)row->receipt.bytes[0], (unsigned)row->receipt.bytes[1], (unsigned)row->receipt.bytes[2],
+        row->receipt.received, row->receipt.idle);
 }
 
 static int hold(const char *reason, unsigned owned) __attribute__((noreturn));
 static int hold(const char *reason, unsigned owned)
 {
     printf("MIDI wire HOLD reason=%s uart=%04x request=%04x enabled=%04x\n", reason,
-        owned ? (unsigned)*reg(SERIAL_STATUS) : 0, owned ? (unsigned)(*reg(INT_REQUEST) & SERIAL_REQUESTS) : 0,
-        owned ? (unsigned)(*reg(INT_ENABLE) & SERIAL_REQUESTS) : 0);
+        owned ? (unsigned)*serial_register(SERIAL_STATUS) : 0, owned ? (unsigned)(*serial_register(INT_REQUEST) & SERIAL_REQUESTS) : 0,
+        owned ? (unsigned)(*serial_register(INT_ENABLE) & SERIAL_REQUESTS) : 0);
     fflush(stdout);
     for (;;)
         Delay(50);
@@ -194,7 +129,6 @@ static int hold(const char *reason, unsigned owned)
 
 int main(int argc, char **argv)
 {
-    const char name[] = "PT private serial loopback diagnostic";
     if (argc != 2 || strcmp(argv[1], "internal-loopback"))
         return 20;
     struct pt_native_eclock timebase = {0};
@@ -206,26 +140,17 @@ int main(int argc, char **argv)
     volatile ULONG strays = 0;
     uint64_t now;
     uint32_t hz = 0;
-    UWORD original_requests = 0;
-    unsigned owned = 0, configured = 0, period = 0;
+    struct pt_test_midi_uart uart = {0};
     int rc = 20;
 
-    MiscBase = (struct Library *)OpenResource((CONST_STRPTR)MISCNAME);
-    if (!MiscBase || AllocMiscResource(MR_SERIALPORT, (CONST_STRPTR)name))
-        goto finish;
-    owned = 1;
-    original_requests = *reg(INT_REQUEST) & SERIAL_REQUESTS;
-    if ((*reg(INT_ENABLE) & SERIAL_REQUESTS) || (*reg(ADK_READ) & 0x0800) || (original_requests & INTF_RBF) ||
-        !quiet() || !pt_native_eclock_open(&timebase) || !pt_native_eclock_read(&timebase, &now, &hz) ||
+    if (!serial_reserve(&uart) || !pt_native_eclock_open(&timebase) || !pt_native_eclock_read(&timebase, &now, &hz) ||
         (hz != 709379 && hz != 715909) || now > UINT64_MAX - hz ||
         !pt_diagnostic_cia_acquire(&clock, pt_cia_direct_clock_stray, (void *)&strays) ||
         !open_alarm(&alarm, &clock, now + hz, pt_cia_local_serial_midi_irq) ||
         pt_elapsed_clock_init(&grid, hz, RATE, EPOCH, 0) != PT_ELAPSED_OK)
         goto finish;
 
-    period = (hz * 5 + 15625) / 31250 - 1;
-    *reg(SERIAL_PERIOD) = period;
-    configured = 1;
+    serial_configure(&uart, hz);
     if (!pt_cia_start_masked_countdown(&clock))
         goto finish;
     pt_cia_direct_clock_pair(clock.high, clock.low, &origin);
@@ -247,39 +172,19 @@ finish:;
         rc = 20;
     printf("MIDI wire clock hz=%lu timer=%u/%u alarm=%u/%u anchor=%02x%02x%02x epoch=%u period=%u\n",
         (unsigned long)hz, clock.chip, clock.bit, alarm.timer.chip, alarm.timer.bit, (unsigned)origin.after[0],
-        (unsigned)origin.after[1], (unsigned)origin.after[2], EPOCH, period);
+        (unsigned)origin.after[1], (unsigned)origin.after[2], EPOCH, uart.period);
     for (unsigned i = 0; i < 3; ++i)
         report(rows + i, i);
     fflush(stdout);
     if (!alarm_closed || !clock_closed)
-        return hold("timer", owned);
+        return hold("timer", uart.owned);
 
-    if (configured) {
-        for (unsigned i = 0; !quiet(); ++i) {
-            if (i == 49 || (*reg(INT_ENABLE) & SERIAL_REQUESTS))
-                return hold("drain", owned);
-            const UWORD status = *reg(SERIAL_STATUS);
-            if (status & (RX_FULL | RX_OVERRUN))
-                *reg(INT_WRITE) = INTF_RBF;
-            Delay(1);
-        }
-        const UWORD current = *reg(INT_REQUEST) & SERIAL_REQUESTS;
-        if (current & ~original_requests)
-            *reg(INT_WRITE) = current & ~original_requests;
-        if (original_requests & ~current)
-            *reg(INT_WRITE) = INTF_SETCLR | (original_requests & ~current);
-        /* Verify the request readback once the custom-chip write has settled.
-         * A changed port or unconfirmed restore retains ownership. */
-        for (unsigned i = 0; (*reg(INT_REQUEST) & SERIAL_REQUESTS) != original_requests; ++i) {
-            if (i == 4 || (*reg(INT_ENABLE) & SERIAL_REQUESTS))
-                return hold("requests", owned);
-            Delay(1);
-        }
-        printf("MIDI wire cleanup request=%04x/%04x uart=%04x\n", (unsigned)original_requests,
-            (unsigned)(*reg(INT_REQUEST) & SERIAL_REQUESTS), (unsigned)*reg(SERIAL_STATUS));
-    }
-    if (owned)
-        FreeMiscResource(MR_SERIALPORT);
+    const char *failure = serial_release(&uart);
+    if (failure)
+        return hold(failure, uart.owned);
+    if (uart.restored)
+        printf("MIDI wire cleanup request=%04x/%04x uart=%04x\n", (unsigned)uart.original_requests,
+            (unsigned)uart.final_requests, uart.status);
     printf("MIDI wire finished callbacks=%lu stray=%lu/%lu closed=1 rc=%d\n",
         (unsigned long)alarm.data.calls, (unsigned long)alarm.data.stray, (unsigned long)strays, rc);
     return rc;

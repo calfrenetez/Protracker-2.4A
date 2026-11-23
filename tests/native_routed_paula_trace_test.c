@@ -184,8 +184,16 @@ static int apply_grouped_transition(const struct pt_native_paula_reservation *ow
 }
 #endif
 
+#ifdef PT_PAULA_MIDI_WIRE
+int main(int argc, char **argv)
+#else
 int main(void)
+#endif
 {
+#ifdef PT_PAULA_MIDI_WIRE
+    if (argc != 2 || strcmp(argv[1], "internal-loopback"))
+        return 20;
+#endif
     struct pt_native_paula_reservation owner = {0};
     struct pt_routed_activation_program input = {0};
     struct pt_paula_dma_program out;

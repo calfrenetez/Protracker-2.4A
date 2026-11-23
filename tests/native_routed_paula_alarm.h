@@ -13,6 +13,9 @@ struct paula_alarm_schedule {
 #ifdef PT_PAULA_MIXED_IRQ
 #include "native_tracker_mixed_words.h"
 extern void pt_cia_local_mixed_alarm_irq(void);
+#ifdef PT_PAULA_MIDI_WIRE
+extern void pt_cia_local_mixed_wire_irq(void);
+#endif
 #endif
 
 /* The IRQ checks the still-pending request itself, since ADCMD_LOCK can
@@ -28,7 +31,7 @@ struct paula_alarm_row {
 #ifdef PT_PAULA_WAIT_IRQ
     struct pt_cia_clock_pair wait_before, wait_after;
     unsigned alarm_signal_only;
-#ifdef PT_PAULA_TAIL_IRQ
+#if defined(PT_PAULA_TAIL_IRQ) || defined(PT_PAULA_MIDI_WIRE)
     unsigned before_attempts, after_attempts;
 #endif
 #endif
@@ -62,15 +65,6 @@ static uint64_t refused_frame_first, refused_frame_end;
 static unsigned refused_aperture;
 extern void pt_cia_local_mixed_tail_irq(void);
 
-static unsigned sample_wait_pair(const struct pt_diagnostic_cia *clock, struct pt_cia_clock_pair *point)
-{
-    for (unsigned attempt = 1; attempt <= 4; ++attempt) {
-        pt_cia_direct_clock_pair(clock->high, clock->low, point);
-        if (point->marker == 0x2452 && pt_cia_stable_count(point->after))
-            return attempt;
-    }
-    return 0;
-}
 #endif
 
 #ifndef PT_PAULA_TAIL_IRQ
@@ -98,6 +92,18 @@ static int capture_epoch(struct paula_window_observation *obs, const struct pt_d
         obs->raw.first < UINT16_MAX - CLOCK_RELOAD_MARGIN;
 }
 #endif
+#endif
+
+#if defined(PT_PAULA_TAIL_IRQ) || defined(PT_PAULA_MIDI_WIRE)
+static unsigned sample_wait_pair(const struct pt_diagnostic_cia *clock, struct pt_cia_clock_pair *point)
+{
+    for (unsigned attempt = 1; attempt <= 4; ++attempt) {
+        pt_cia_direct_clock_pair(clock->high, clock->low, point);
+        if (point->marker == 0x2452 && pt_cia_stable_count(point->after))
+            return attempt;
+    }
+    return 0;
+}
 #endif
 
 static unsigned sample_count(const struct pt_diagnostic_cia *clock)
@@ -167,7 +173,7 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         return 0;
 
 #ifdef PT_PAULA_WAIT_IRQ
-#ifdef PT_PAULA_TAIL_IRQ
+#if defined(PT_PAULA_TAIL_IRQ) || defined(PT_PAULA_MIDI_WIRE)
     receipt->before_attempts = sample_wait_pair(clock, &receipt->wait_before);
 #else
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_before);
@@ -186,7 +192,7 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
     } else
 #endif
         receipt->alarm_signal_only = wake == irq->signal;
-#ifdef PT_PAULA_TAIL_IRQ
+#if defined(PT_PAULA_TAIL_IRQ) || defined(PT_PAULA_MIDI_WIRE)
     receipt->after_attempts = sample_wait_pair(clock, &receipt->wait_after);
 #else
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_after);
@@ -219,6 +225,10 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         snapshot(owner, "after-registers", 1, word);
     Enable();
     obs->in_frame = paula_window_inside(obs);
+#ifdef PT_PAULA_MIDI_WIRE
+    if (obs->status == 1 && obs->raw.marker == PAULA_WRITE_MARKER)
+        receive_mixed_wire(clock, timed_count - 1);
+#endif
 #ifdef PT_PAULA_RELOAD_IRQ
     unsigned required_generation = obs->reload;
 #ifdef PT_PAULA_TAIL_IRQ
@@ -238,6 +248,10 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         (stage != 6 && waking > pt_cia_stable_count(obs->raw.after)))
         return 0;
 #else
+#ifdef PT_PAULA_MIDI_WIRE
+    if (!receipt->before_attempts || !receipt->after_attempts)
+        return 0;
+#endif
     if (waking > pt_cia_stable_count(obs->raw.after))
         return 0;
 #endif
@@ -288,6 +302,8 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     void (*handler)(void) = pt_cia_local_mixed_tail_irq;
 #elif defined(PT_PAULA_RELOAD_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_reload_irq;
+#elif defined(PT_PAULA_MIDI_WIRE)
+    void (*handler)(void) = pt_cia_local_mixed_wire_irq;
 #elif defined(PT_PAULA_MIXED_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_alarm_irq;
 #else
@@ -317,6 +333,11 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
         goto finish;
 #endif
 
+#ifdef PT_PAULA_MIDI_WIRE
+    if (!serial_reserve(&mixed_uart))
+        goto finish;
+    serial_configure(&mixed_uart, hz);
+#endif
     alarm_chip = alarm.timer.chip;
     alarm_timer = alarm.timer.bit;
 #ifndef PT_PAULA_WAIT_IRQ
@@ -435,6 +456,15 @@ finish:
     passed = passed && routed_clock.reloads == (expected_alarms != 0);
 #endif
     pt_native_eclock_close(&timebase);
+#ifdef PT_PAULA_MIDI_WIRE
+    const char *serial_failure = serial_release(&mixed_uart);
+    if (serial_failure) {
+        printf("Mixed UART HOLD reason=%s uart=%04x request=%04x enabled=%04x\n", serial_failure,
+            (unsigned)*serial_register(SERIAL_STATUS), (unsigned)(*serial_register(INT_REQUEST) & SERIAL_REQUESTS),
+            (unsigned)(*serial_register(INT_ENABLE) & SERIAL_REQUESTS));
+        return hold();
+    }
+#endif
     alarm_calls = alarm.data.calls;
     alarm_strays = alarm.data.stray;
     alarm_closed = 1;

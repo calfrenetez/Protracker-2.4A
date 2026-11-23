@@ -1,0 +1,15 @@
+{
+  "qualification": "host and native cross-build",
+  "fixture": "PTRoutedMixedWire",
+  "candidate_sha256": "cbc3fc7ba019f77a12c67b6bd4d790b23c98f3d017530b6a337237ecc9ce4d6a",
+  "validated_build_inputs": 127,
+  "build_receipt_sha256": "c8b65669d50d11d286771d0526e0ea38bd5117903f0cb52b98a61f249d8781f1",
+  "host_methods": {
+    "routed_including_mixed_wire_replay": 21,
+    "cia": 25
+  },
+  "existing_mixed_wait_tail_and_refusal_byte_identical": true,
+  "amiberry_execution": "pending",
+  "physical_execution": "pending",
+  "scope": "A single owned CIA IRQ is intended to issue Paula DMA, two modeled AmiGUS RAM stores and the first MIDI serial word at original tracker Start and F00. The private guest must receive every byte, verify serial interrupt restoration and close its owners. This is not live AmiGUS output."
+}

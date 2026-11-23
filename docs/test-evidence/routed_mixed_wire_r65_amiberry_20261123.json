@@ -1,0 +1,61 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "passed": true,
+  "candidate_and_guest_readback_sha256": "d4474f322b55c9cc8fb1ebd6e194c42917e106da6f5b9f6822c2c39e72c9ef1c",
+  "build_receipt_sha256": "09cad7ef611e50ddbf10e61045ed313193ed22e4e33ebb5c19f9f4269c2ba7e4",
+  "guest_log_sha256": "63ba670bf991edc3832ed8fff9c9a5b9646854266d42ba36b62078ac49f5ceef",
+  "validated_build_inputs": 127,
+  "guest_rc": "0",
+  "independent_replay_sha256": "a0b3b00780bbe3cbd5b2d501fd38fac9109baeedc0127838072cd9c11d0001f2",
+  "writes": [
+    {
+      "frame": 0,
+      "window": [
+        8192,
+        8207
+      ],
+      "observed": [
+        8192,
+        8201
+      ],
+      "card_ram_and_midi_receive": [
+        0,
+        32768,
+        26557530
+      ],
+      "verdict": "issued_in_frame",
+      "serial_loopback": {
+        "first_word": 405,
+        "receive": "953c5a"
+      }
+    },
+    {
+      "frame": 1920,
+      "window": [
+        36568,
+        36582
+      ],
+      "observed": [
+        36570,
+        36579
+      ],
+      "card_ram_and_midi_receive": [
+        0,
+        0,
+        25508864
+      ],
+      "verdict": "issued_in_frame",
+      "serial_loopback": {
+        "first_word": 389,
+        "receive": "853c00"
+      }
+    }
+  ],
+  "serial_request_restored": true,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening were not tested."
+}

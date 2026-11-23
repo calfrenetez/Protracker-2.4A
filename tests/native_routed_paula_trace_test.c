@@ -171,6 +171,9 @@ static int hold(void)
 #include "native_routed_paula_window.h"
 #ifdef PT_PAULA_TIMED_IRQ
 #include "native_routed_paula_alarm.h"
+#ifdef PT_PAULA_TRACKER_IRQ
+#include "native_tracker_paula_forecast.h"
+#endif
 #endif
 #else
 static int apply_grouped_transition(const struct pt_native_paula_reservation *owner,
@@ -190,6 +193,11 @@ int main(void)
     int rc = 20, masked = 0;
     stage = 1;
     unsigned original_enable = 0;
+#ifdef PT_PAULA_TRACKER_IRQ
+    struct paula_alarm_schedule schedule = {.epoch = TRACKER_PAULA_EPOCH};
+#elif defined(PT_PAULA_TIMED_IRQ)
+    const struct paula_alarm_schedule schedule = {0, PAULA_TEST_FRAME, PAULA_STOP_FRAME};
+#endif
 
     if (!pt_native_paula_reservation_open(&owner))
         goto finish;
@@ -205,9 +213,15 @@ int main(void)
     stage = 2;
     chip = AllocMem(CHIP_BYTES, MEMF_CHIP | MEMF_PUBLIC | MEMF_CLEAR);
     if (!chip || !(TypeOfMem(chip) & MEMF_CHIP) ||
-        !(TypeOfMem((UBYTE *)chip + CHIP_BYTES - 1) & MEMF_CHIP) ||
-        !prepare(&input, chip, ALL, 0, PT_MIXED_READERS_TRIGGER, &out))
+        !(TypeOfMem((UBYTE *)chip + CHIP_BYTES - 1) & MEMF_CHIP))
         goto finish;
+#ifdef PT_PAULA_TRACKER_IRQ
+    if (!prepare_tracker_forecast(chip, &out, &schedule))
+        goto finish;
+#else
+    if (!prepare(&input, chip, ALL, 0, PT_MIXED_READERS_TRIGGER, &out))
+        goto finish;
+#endif
 
     Disable();
     snapshot(&owner, "initial-owned-state", 0, NULL);
@@ -225,7 +239,7 @@ int main(void)
 
     stage = 3;
 #ifdef PT_PAULA_TIMED_IRQ
-    if (out.frame_count != 1 || !run_irq_transitions(&owner, &input, chip, out.frame) ||
+    if (out.frame_count != 1 || !run_irq_transitions(&owner, &input, chip, out.frame, &schedule) ||
         !observe_new_fetches(&owner, 0))
         goto finish;
 #else
@@ -283,6 +297,9 @@ finish:;
     report_observations();
 #ifdef PT_PAULA_TIMED_TRACE
 #ifdef PT_PAULA_TIMED_IRQ
+#ifdef PT_PAULA_TRACKER_IRQ
+    report_tracker_forecast(&schedule);
+#endif
     report_irq_transitions();
 #endif
     report_windows();

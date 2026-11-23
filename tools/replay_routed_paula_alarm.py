@@ -47,8 +47,9 @@ def replay_device(lines):
         raise ValueError("Owned device command or original interrupt mask changed")
 
 
-def replay(text):
-    evidence = replay_windows(text, ((3, 512, 0x800F, 0x200, 0x20F), (6, 1280, 0x000F, 0x20F, 0x200)))
+def replay_alarm_pair(text, start_frame, stop_frame, epoch=0):
+    evidence = replay_windows(text, ((3, start_frame, 0x800F, 0x200, 0x20F),
+                                     (6, stop_frame, 0x000F, 0x20F, 0x200)), epoch)
     lines = text.splitlines()
     windows = [ROW.fullmatch(line).groupdict() for line in lines if line.startswith("Paula window ")]
     anchors = {(row["anchor"], row["hz"], row["chip"], row["timer"]) for row in windows}
@@ -80,6 +81,9 @@ def replay(text):
     evidence["device_guest_closed"] = True
     return evidence
 
+
+def replay(text):
+    return replay_alarm_pair(text, 512, 1280)
 
 if __name__ == "__main__":
     try:

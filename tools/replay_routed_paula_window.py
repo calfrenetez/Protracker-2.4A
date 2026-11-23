@@ -23,7 +23,7 @@ def stable(raw):
     return high * 256 + low
 
 
-def replay_windows(text, operations):
+def replay_windows(text, operations, epoch=0):
     lines = text.splitlines()
     if lines[-2:] != ["Paula windows closed stray=0 rows=2",
                        "Paula trace finished stage=6 rc=0 owned-closed=1"]:
@@ -47,7 +47,7 @@ def replay_windows(text, operations):
             raise ValueError("Actual DMA state does not match the grouped operation")
         anchor = stable(row["anchor"])
         first, excluded = (edge * hz + 47999 for edge in (frame, frame + 1))
-        first, excluded = first // 48000, excluded // 48000
+        first, excluded = epoch + first // 48000, epoch + excluded // 48000
         if (int(row["first"]), int(row["end"])) != (anchor - first, anchor - excluded):
             raise ValueError("Countdown does not map to the original local sample frame")
         pre = anchor - stable(row["before"])

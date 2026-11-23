@@ -4,13 +4,14 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from replay_routed_paula_alarm import replay
+from replay_tracker_paula_alarm import replay as replay_tracker
 
 
 def triplet(count):
     return f"{count:04x}{count >> 8:02x}"
 
 
-def fixture():
+def fixture(frames=(512, 1280), epoch=0):
     anchor = 65523
     rate = 709379
     lines = []
@@ -30,9 +31,9 @@ def fixture():
             f"Paula trace {i:02d} stage={stage} point={point} dma={dma:04x} req={request:04x} "
             f"ena={enabled:04x} adk=0000 owned=1 writes={writes} reg={reg:04x} value={value:04x}"
         )
-    for i, (stage, frame, word, before, after) in enumerate(((3, 512, 0x800F, 0x200, 0x20F),
-                                                          (6, 1280, 0x000F, 0x20F, 0x200))):
-        first, end = (anchor - (edge * rate + 47999) // 48000 for edge in (frame, frame + 1))
+    for i, (stage, frame, word, before, after) in enumerate(((3, frames[0], 0x800F, 0x200, 0x20F),
+                                                          (6, frames[1], 0x000F, 0x20F, 0x200))):
+        first, end = (anchor - epoch - (edge * rate + 47999) // 48000 for edge in (frame, frame + 1))
         probe = first + 500
         arms.append(f"Paula alarm {i} sample={triplet(probe)} lead={first+128} delay=372 calls={i+1}")
         windows.append(
@@ -63,3 +64,14 @@ class PaulaAlarmReplay(unittest.TestCase):
         ):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 replay(fixture().replace(original, changed, 1))
+
+    def test_tracker_epoch_and_f00_cannot_be_shifted(self):
+        forecast = "Paula tracker epoch=8192 start=0 stop=1920 paula=4 amigus=1 midi=1 f00=1"
+        text = forecast + "\n" + fixture((0, 1920), 8192)
+        evidence = replay_tracker(text)
+        self.assertEqual(evidence["writes"][0]["frame_ticks"], [8192, 8207])
+        self.assertEqual(evidence["writes"][1]["frame_ticks"], [36568, 36582])
+        with self.assertRaises(ValueError):
+            replay_tracker(text.replace("stop=1920", "stop=1919", 1))
+        with self.assertRaises(ValueError):
+            replay_tracker(forecast + "\n" + fixture((0, 1920), 8191))

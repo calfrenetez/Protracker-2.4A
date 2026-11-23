@@ -24,10 +24,10 @@ struct paula_window_observation {
 };
 
 static int prepare_paula_window(struct paula_window_observation *obs, const struct pt_elapsed_clock *grid,
-    unsigned frame)
+    uint64_t frame)
 {
     uint64_t first, end;
-    if (pt_elapsed_clock_deadline(grid, frame, &first) != PT_ELAPSED_OK ||
+    if (frame == UINT64_MAX || pt_elapsed_clock_deadline(grid, frame, &first) != PT_ELAPSED_OK ||
         pt_elapsed_clock_deadline(grid, frame + 1, &end) != PT_ELAPSED_OK ||
         !pt_countdown_window_prepare(0, obs->anchor, first, end, &obs->window))
         return 0;

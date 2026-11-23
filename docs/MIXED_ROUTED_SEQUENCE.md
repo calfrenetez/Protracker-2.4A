@@ -301,6 +301,15 @@ the fresh fetch requests between transitions, then zero DMA and fresh
 requests after Stop. Both CIA timers and the audio allocation closed.
 This verifies a local Paula schedule. A shared tracker song epoch,
 concurrent AmiGUS/MIDI delivery and listening remain open.
+
+The `routed-paula-tracker` fixture used the six-track renderer forecast to
+select the original frame-zero Start and frame-1920 F00. Its four Paula
+channels issued and stopped on the same new song epoch in Amiberry. The
+one AmiGUS attack and one MIDI note were present in the same forecast.
+Only Paula issued device commands in this fixture. Silent 16-bit source
+samples converted to zero 8-bit Chip bytes for the supported one-shot
+path. The classic silent 8-bit segment/repeat refusal remains covered by
+the retained initial host run.
 A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource

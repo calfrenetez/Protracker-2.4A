@@ -6,6 +6,10 @@
 enum { PAULA_STOP_FRAME = 1280, PAULA_ALARM_LEAD = 128, PAULA_ALARM_SPINS = 65536 };
 extern void pt_cia_local_paula_alarm_irq(void);
 
+struct paula_alarm_schedule {
+    uint64_t epoch, start_frame, stop_frame;
+};
+
 /* The IRQ checks the still-pending request itself, since ADCMD_LOCK can
  * complete on loss of its allocation. It uses no audio.device call. */
 _Static_assert(NT_MESSAGE == 5 &&
@@ -117,7 +121,8 @@ static int observe_started_fetches(const struct pt_native_paula_reservation *own
 }
 
 static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
-    struct pt_routed_activation_program *input, const void *chip, const struct pt_paula_dma_write *start)
+    struct pt_routed_activation_program *input, const void *chip, const struct pt_paula_dma_write *start,
+    const struct paula_alarm_schedule *schedule)
 {
     struct pt_paula_dma_program stop;
     struct pt_native_eclock timebase = {0};
@@ -153,9 +158,9 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
             timed[i].hz = hz;
         }
         if (anchor.marker == 0x2452 && timed[0].anchor &&
-            pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, 0, 0) == PT_ELAPSED_OK &&
-            prepare_paula_window(timed, &grid, PAULA_TEST_FRAME) &&
-            prepare_paula_window(timed + 1, &grid, PAULA_STOP_FRAME) &&
+            pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, schedule->epoch, 0) == PT_ELAPSED_OK &&
+            prepare_paula_window(timed, &grid, schedule->start_frame) &&
+            prepare_paula_window(timed + 1, &grid, schedule->stop_frame) &&
             run_irq_word(owner, &alarm, &clock, start, 0, ALL) &&
             observe_started_fetches(owner, &clock, (unsigned)timed[1].raw.first + 512)) {
             stage = 6;

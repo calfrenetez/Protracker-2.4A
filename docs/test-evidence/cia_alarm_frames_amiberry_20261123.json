@@ -1,0 +1,38 @@
+{
+  "source": "f66ef777c91708e46eb7c61aae0d08ec4b05e153",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "b7d776dc04d096727278e60985582c979cc4a285fb9a1b0ed2227843b0ff4e47",
+  "build_receipt_sha256": "bb92240b3923c54c0377d21a1f45c6dcc92fb18a8a7735afe2d62b884ea20b1f",
+  "guest_log_sha256": "12e34f4c1888c7ea596509973f8d31ec272d2027cef3225406361fb85b0b9aec",
+  "independent_replay_sha256": "c7e709211c1a8e22cb227b793276e9ef829ffed0033a8682b8a40a60d690a8a7",
+  "validated_build_inputs": 12,
+  "focused_host_methods": 28,
+  "observation_complete": true,
+  "all_target_frames_admitted": true,
+  "timing": {
+    "counter_hz": 709379,
+    "outer_elapsed_ticks": 32847,
+    "clock_anchor_count": 65523,
+    "timed_frames": 12,
+    "inside": 12,
+    "issued_outside_or_torn": 0,
+    "missed_before_write": 0,
+    "deliberate_no_write_refusals": 2,
+    "alarm_source": {
+      "chip": 0,
+      "timer": 1,
+      "callbacks": 14,
+      "closed": true,
+      "original_clock_distinct": true
+    }
+  },
+  "inside_bracket_ticks": [
+    6,
+    6
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Separate owned CIA alarm and masked countdown in a 68030 Amiberry guest. Twelve RAM marker writes fit their original local sample frames. Original song epoch, native devices and sustained playback require separate evidence."
+}

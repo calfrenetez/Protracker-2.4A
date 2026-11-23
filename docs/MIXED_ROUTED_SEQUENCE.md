@@ -132,3 +132,10 @@ ownership paths. Build it with `tools/build_render_sequence.py
 --cc <amiga-compiler> --fixture routed-tracker`.
 The Amiberry 68030 run completed at the same three frame boundaries.
 [Routed tracker 030 test receipt](test-evidence/routed_tracker_amiberry_20261123.json)
+
+`pt_routed_playback_prepare` binds the ready forecast to its prepared batch.
+`pt_routed_playback_commit` advances that original interval only after live
+consumption and the exact complete output receipt. Idle forecasts require no
+output receipt. F00 with active audio requires the original audio queue's Stop
+as part of the combined publication. Any held outputs retain their own
+cancellation and retirement obligations if the render binding is abandoned.

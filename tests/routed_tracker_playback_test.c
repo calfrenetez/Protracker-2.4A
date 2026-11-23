@@ -1,7 +1,7 @@
 #define PT_ROUTED_COMBINED_TEST_MAIN other_combined_cases
 #include "routed_midi_combined_test.c"
 #include "../src/core/amigus_trigger_levels.h"
-#include "../src/core/render_lookahead.h"
+#include "../src/core/routed_playback.h"
 #include "../src/editor/mixed_readers_plan_normalize.h"
 
 static void tracker_project(struct trial *t, int32_t pcm[2][1024])
@@ -141,6 +141,7 @@ int main(void)
     struct pt_mixed_plan_origin origins[PT_MIXED_PLAN_RECORDS] = {{0}};
     struct pt_sample_version *master[2] = {NULL, NULL};
     struct pt_routed_midi_schedule schedule = {0};
+    struct pt_routed_playback_frame playback = {0};
     struct combined_model m = {.audio = &t->model, .schedule = &schedule};
     const struct pt_routed_midi_provider api = {
         .context = &m, .context_bytes = sizeof(m), .read_clock = combined_clock,
@@ -183,16 +184,19 @@ int main(void)
         do {
             assert(pt_render_lookahead_step_routed(ahead, 73, plan, &ready) == PT_RENDER_OK);
         } while (!ready);
+        assert(pt_routed_playback_prepare(&playback, ahead, &schedule, plan) == PT_RENDER_OK);
         if (!plan->end && !plan->audio.count && !plan->midi_count) {
             assert(!boundary && !interval.frames && !plan->frame && ++idle_ticks == 1);
-            assert(!pt_routed_midi_prepare(midi, plan) && !m.submissions);
-            assert(pt_render_lookahead_commit(ahead) == PT_RENDER_OK);
+            assert(!midi->pending && !m.submissions);
+            assert(pt_routed_playback_commit(&playback) == PT_RENDER_OK);
             continue;
         }
         assert(plan->frame == boundary * UINT64_C(960));
         assert(!!plan->end == (boundary == 2) && !!plan->midi_count == (boundary == 0));
-        midi_batch = pt_routed_midi_prepare(midi, plan);
-        assert(midi_batch && midi_batch->count == (unsigned)(boundary != 1));
+        midi_batch = &midi->batch;
+        assert(midi->pending && midi_batch->serial == playback.serial && midi_batch->count == (unsigned)(boundary != 1));
+        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
+        assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
         if (plan->end) {
             assert(plan->end == PT_RENDER_F00 + 1 && !plan->audio.count);
             ticket = publish_stop(t, original, plan->frame, boundary);
@@ -206,20 +210,24 @@ int main(void)
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_WAITING);
         settle_audio(t, &m, ticket, 1, 0);
         settle_midi(&m, boundary != 1);
-        assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
-        assert(midi->accepted[15].active == (boundary != 2));
         remaining = interval.frames;
         while (remaining) {
             uint32_t chunk = remaining > 73 ? 73 : remaining;
             assert(pt_render_sequence_consume(sequence, chunk) == PT_RENDER_OK);
             remaining -= chunk;
         }
-        assert(pt_render_lookahead_commit(ahead) == PT_RENDER_OK);
+        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
+        assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
+        assert(midi->accepted[15].active == (boundary != 2));
+        assert(!pt_routed_midi_schedule_settled(&schedule, plan->frame, playback.serial + 1));
+        assert(pt_routed_playback_commit(&playback) == PT_RENDER_OK);
+        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
         if (!plan->end)
             memcpy(origins, batch->normalized.next, sizeof(origins));
         ++boundary;
     }
     assert(idle_ticks == 1 && midi->stopped && !schedule.held && t->model.effects == 15);
+    assert(pt_routed_playback_abandon(&playback));
     assert(!pt_mixed_readers_commands_held(t->queue));
     for (i = 0; i < 5; ++i)
         assert(pt_mixed_readers_service_reader(t->queue, original, i, 1, NULL) == PT_MIXED_READERS_OK);

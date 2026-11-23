@@ -132,7 +132,7 @@ struct pt_routed_midi_schedule {
     const struct pt_mixed_readers_output *audio_queue;
     uint64_t audio_ticket, last_audio_ticket;
     uint64_t last_read;
-    unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested;
+    unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested, settled;
 };
 
 /* Bind a zeroed schedule before preparing the first batch. The session must
@@ -163,6 +163,8 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);
+/* Read-only proof for the last exact complete batch of this schedule. */
+int pt_routed_midi_schedule_settled(const struct pt_routed_midi_schedule *, uint64_t frame, uint64_t serial);
 /* Begin draining a queued non-Stop batch before an owned Stop. Request
  * cancellation at most once and keep the batch borrowed through observe,
  * including if the request is refused or activation has already won. Without

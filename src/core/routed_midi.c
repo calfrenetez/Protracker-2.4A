@@ -266,6 +266,7 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
         schedule->last_audio_ticket = ticket;
     }
     schedule->cancel_requested = 0;
+    schedule->settled = 0;
     schedule->busy = 1;
     if (combined)
         result = schedule->provider.submit_combined(schedule->provider.context, event, audio);
@@ -377,7 +378,15 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_OUTSIDE_WINDOW;
     }
+    schedule->settled = 1;
     return PT_ROUTED_MIDI_SETTLED;
+}
+
+int pt_routed_midi_schedule_settled(const struct pt_routed_midi_schedule *schedule, uint64_t frame, uint64_t serial)
+{
+    return schedule_ready(schedule) && schedule->settled && !schedule->held && !schedule->midi->pending &&
+        serial && schedule->event.key.frame == frame && schedule->event.key.serial == serial &&
+        schedule->midi->last_frame == frame && schedule->midi->batch.serial == serial;
 }
 
 int pt_routed_midi_schedule_discard(struct pt_routed_midi_schedule *schedule)

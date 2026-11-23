@@ -13,7 +13,7 @@ TRACKER_UNITS = [
     'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
     'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',
     'src/core/amigus_render_voice.c', 'src/core/amigus_trigger_levels.c',
-    'src/editor/mixed_readers_plan_normalize.c',
+    'src/editor/mixed_readers_plan_normalize.c', 'src/core/routed_playback.c',
 ]
 
 

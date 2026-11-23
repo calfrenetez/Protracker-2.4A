@@ -11,6 +11,7 @@ FIXTURES = {
     'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
     'routed-combined': ('test_mixed_readers_causal.py', 'PTRoutedCombined'),
     'routed-tracker': ('test_mixed_readers_causal.py', 'PTRoutedTracker'),
+    'camd-control': ('test_camd_control.py', 'PTCamdControl'),
 }
 
 def main():
@@ -32,8 +33,11 @@ def main():
         tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
         sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
                             and any(isinstance(target, ast.Name) and target.id == 'TRACKER_UNITS' for target in node.targets)))
+    if args.fixture == 'camd-control':
+        sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
+                   'src/native/camd_vectors.s', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined', 'routed-tracker'):
+    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined', 'routed-tracker', 'camd-control'):
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
@@ -42,6 +46,9 @@ def main():
     for source in syntax:subprocess.run([args.cc,*flags,'-fsyntax-only',source],cwd=ROOT,check=True)
     deps=set()
     for source in sources+syntax:
+        if source.endswith('.s'):
+            deps.add(source)
+            continue
         raw=subprocess.check_output([args.cc,*flags,'-MM',source],cwd=ROOT,text=True).replace('\\\n',' ')
         deps.update(str((ROOT/p).resolve().relative_to(ROOT)) for p in raw.split(':',1)[1].split())
     report=dict(syntax_only=syntax,flags=flags,inputs={p:digest(ROOT/p) for p in sorted(deps)},compiler_sha256=digest(Path(args.cc)),runtime_inputs=runtime_inputs(args.cc),binary_sha256=digest(binary),binary_bytes=binary.stat().st_size)

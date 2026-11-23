@@ -9,6 +9,7 @@ from replay_mixed_frame_aperture import observe as observe_mixed, replay as repl
 from replay_mixed_frame_wait import replay as replay_wait
 from replay_mixed_frame_reload import replay as replay_reload
 from replay_mixed_frame_tail import replay as replay_tail
+from replay_mixed_tail_refusal import replay as replay_refusal
 
 
 def triplet(count):
@@ -171,3 +172,22 @@ class PaulaAlarmReplay(unittest.TestCase):
                               ("before=2 after=1", "before=5 after=1")):
             with self.subTest(changed=after), self.assertRaises(ValueError):
                 replay_tail(text.replace(before, after, 1))
+
+    def test_mixed_short_aperture_refuses_before_any_dma_enable(self):
+        quiet_device = [line for line in fixture().splitlines() if line.startswith("Paula trace ")]
+        quiet_device = [quiet_device[0], quiet_device[1].replace("stage=2", "stage=3"), quiet_device[6]]
+        text = "\n".join(quiet_device + [
+            "Paula tracker epoch=8765 start=0 stop=3840 paula=4 amigus=1 midi=1 f00=1",
+            "Paula reload clock callbacks=0",
+            "Paula tail refusal hz=709379 anchor=fff3ff frame=65516/65531 min_span=7 refused=1",
+            "Paula alarm closed=1 chip=0 timer=1 calls=0 stray=0",
+            "Paula windows closed stray=0 rows=0",
+            "Paula trace finished stage=3 rc=0 owned-closed=1",
+        ])
+        result = replay_refusal(text)
+        self.assertEqual(result["available_pre_and_post_ticks"], [6, 7])
+        self.assertTrue(result["owned_dma_stayed_clear"])
+        for before, after in (("calls=0", "calls=1"), ("frame=65516/65531", "frame=65516/65532"),
+                              ("dma=0200", "dma=0201"), ("reg=0000", "reg=0096")):
+            with self.subTest(changed=after), self.assertRaises(ValueError):
+                replay_refusal(text.replace(before, after, 1))

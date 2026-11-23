@@ -52,7 +52,14 @@ _Static_assert(offsetof(__typeof__(routed_clock), signal) == 4 &&
 extern void pt_cia_reload_irq(void);
 extern void pt_cia_local_mixed_reload_irq(void);
 #ifdef PT_PAULA_TAIL_IRQ
-enum { MIXED_TAIL_FIRST = 13, MIXED_TAIL_SPAN = 7 };
+enum { MIXED_TAIL_SPAN = 7 };
+#ifdef PT_PAULA_TAIL_REFUSE
+enum { MIXED_TAIL_FIRST = 7, MIXED_TAIL_EXPECT_REFUSAL = 1 };
+#else
+enum { MIXED_TAIL_FIRST = 13, MIXED_TAIL_EXPECT_REFUSAL = 0 };
+#endif
+static uint64_t refused_frame_first, refused_frame_end;
+static unsigned refused_aperture;
 extern void pt_cia_local_mixed_tail_irq(void);
 
 static unsigned sample_wait_pair(const struct pt_diagnostic_cia *clock, struct pt_cia_clock_pair *point)
@@ -276,6 +283,7 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     uint64_t now;
     uint32_t hz;
     int passed = 0;
+    unsigned expected_alarms = 2;
 #ifdef PT_PAULA_TAIL_IRQ
     void (*handler)(void) = pt_cia_local_mixed_tail_irq;
 #elif defined(PT_PAULA_RELOAD_IRQ)
@@ -342,9 +350,20 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
         if (!prepare_paula_window(timed, &grid, schedule->start_frame) ||
             pt_elapsed_clock_deadline(&grid, schedule->stop_frame, &first) != PT_ELAPSED_OK ||
             pt_elapsed_clock_deadline(&grid, schedule->stop_frame + 1, &end) != PT_ELAPSED_OK ||
-            end <= (uint64_t)timeline.count + 1 ||
-            !pt_countdown_window_intersect(&timeline, first, end, MIXED_TAIL_SPAN, &timed[1].window) ||
-            timed[1].window.first_count != MIXED_TAIL_FIRST || timed[1].window.end_count != 1)
+            end <= (uint64_t)timeline.count + 1)
+            goto finish;
+        const int prepared = pt_countdown_window_intersect(&timeline, first, end, MIXED_TAIL_SPAN,
+            &timed[1].window);
+        if (MIXED_TAIL_EXPECT_REFUSAL) {
+            expected_alarms = 0;
+            refused_frame_first = first;
+            refused_frame_end = end;
+            refused_aperture = !prepared && !timed[1].window.first && !timed[1].window.end &&
+                end - ((uint64_t)timeline.count + 1) <= MIXED_TAIL_SPAN;
+            passed = refused_aperture && !alarm.data.armed && !alarm.data.entry && !routed_clock.reloads;
+            goto finish;
+        }
+        if (!prepared || timed[1].window.first_count != MIXED_TAIL_FIRST || timed[1].window.end_count != 1)
             goto finish;
         timed[1].raw.first = timed[1].window.first_count;
         timed[1].raw.end = timed[1].window.end_count;
@@ -413,13 +432,13 @@ finish:
         SetSignal(0, routed_clock.signal);
         FreeSignal(reload_signal);
     }
-    passed = passed && routed_clock.reloads == 1;
+    passed = passed && routed_clock.reloads == (expected_alarms != 0);
 #endif
     pt_native_eclock_close(&timebase);
     alarm_calls = alarm.data.calls;
     alarm_strays = alarm.data.stray;
     alarm_closed = 1;
-    return passed && alarm_calls == 2 && !alarm_strays && !timer_strays &&
+    return passed && alarm_calls == expected_alarms && !alarm_strays && !timer_strays &&
         !alarm.timer.held && !clock.held && !timebase.opened;
 }
 
@@ -445,6 +464,13 @@ static void report_irq_transitions(void)
         printf("Paula reload %u tick=%lu planned=%u issued=%u\n", i,
             (unsigned long)timed[i].anchor_tick, timed[i].reload, armed_at[i].issued_reload);
     printf("Paula reload clock callbacks=%lu\n", (unsigned long)routed_clock.reloads);
+#ifdef PT_PAULA_TAIL_IRQ
+    if (MIXED_TAIL_EXPECT_REFUSAL)
+        printf("Paula tail refusal hz=%lu anchor=%02x%02x%02x frame=%lu/%lu min_span=%u refused=%u\n",
+            (unsigned long)timed[0].hz, (unsigned)timed[0].anchor_sample.after[0],
+            (unsigned)timed[0].anchor_sample.after[1], (unsigned)timed[0].anchor_sample.after[2],
+            (unsigned long)refused_frame_first, (unsigned long)refused_frame_end, MIXED_TAIL_SPAN, refused_aperture);
+#endif
 #endif
     printf("Paula alarm closed=%u chip=%u timer=%u calls=%u stray=%u\n",
         alarm_closed, alarm_chip, alarm_timer, alarm_calls, alarm_strays);

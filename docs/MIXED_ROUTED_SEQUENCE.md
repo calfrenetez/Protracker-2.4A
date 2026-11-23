@@ -389,3 +389,10 @@ preserved separately. The exact scheduled card and MIDI outputs
 remain pending.
 [Mixed crossing-frame receipt](test-evidence/routed_mixed_tail_amiberry_20261123.json)
 [Prior torn sample receipt](test-evidence/routed_mixed_tail_torn_r55_amiberry_20261123.json)
+
+The separate `routed-mixed-tail-refusal` fixture gave the original
+F00 window [65517, 65532) six usable ticks before reload and seven
+after. The seven-tick observation needed both endpoints inside one
+half-open aperture. The fixture refused before arming its first alarm.
+Paula DMA stayed clear and the original interrupt state was restored.
+[Mixed refusal receipt](test-evidence/routed_mixed_tail_refusal_amiberry_20261123.json)

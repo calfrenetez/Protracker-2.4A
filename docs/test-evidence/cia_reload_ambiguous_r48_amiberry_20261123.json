@@ -1,0 +1,30 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "1ab75f9a0e449e9034c0b61902ee23f32d15ab53558aa487316ce056a13c46a4",
+  "build_receipt_sha256": "4460c48faf0457858a3c85ad14c84b75a212c1d70330fe2d00da012b7f48c97e",
+  "guest_log_sha256": "fd6edf66cdb054aa6424879f4f733e3b22b03131b9b709b26a6c545b300061f4",
+  "validated_build_inputs": 9,
+  "observation": {
+    "counter_hz": 709379,
+    "clock_chip": 0,
+    "clock_timer": 0,
+    "observed_reloads": 48,
+    "independent_elapsed_bounds": [
+      3145847,
+      3145967
+    ],
+    "elapsed_for_candidate_periods": {
+      "65535": 3145859,
+      "65536": 3145907,
+      "65537": 3145955
+    },
+    "closed": true,
+    "rc": 20,
+    "selected_period": null
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "All three neighboring periods fit the independent E-clock interval after 48 owned reloads. The returned refusal remains inconclusive on cadence."
+}

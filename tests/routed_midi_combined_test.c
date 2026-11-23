@@ -2,11 +2,14 @@
 #include "mixed_scheduled_readers_test.c"
 #include "routed_midi.h"
 
+struct pt_sampler_mixed_pool;
 struct combined_model {
     struct model *audio;
     struct pt_routed_midi_schedule *schedule;
     struct pt_routed_midi_receipt receipt;
     enum pt_routed_midi_delivery delivery;
+    struct pt_sampler_mixed_pool *pool;
+    unsigned expected_audio_count;
     unsigned submissions, cancels, checked_admission;
 };
 
@@ -37,7 +40,7 @@ static int publish_combined(void *context, const struct pt_routed_midi_event *mi
     }
     assert(audio->session == midi->key.session && audio->batch.generation == midi->key.generation);
     assert(audio->batch.frame == midi->key.frame && audio->first == midi->first && audio->last == midi->last);
-    assert(audio->batch.count == 5);
+    assert(audio->batch.count == (m->expected_audio_count ? m->expected_audio_count : 5));
     m->receipt.audio.queue = audio->queue;
     m->receipt.audio.ticket = audio->ticket;
     return model_submit(m->audio, audio);

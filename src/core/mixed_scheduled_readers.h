@@ -24,6 +24,11 @@ struct pt_mixed_readers_key {
     uint64_t session,generation,trigger,owner,serial;
     unsigned action,route,slot;
 };
+struct pt_mixed_readers_stop_keys {
+    uint64_t frame;
+    unsigned count;
+    struct pt_mixed_readers_key key[PT_MIXED_READERS_ACTIONS];
+};
 /* Numeric card range and opaque identities, NEVER CPU pointer spans. Logical
  * bytes exclude allocation padding. All full_capacity bytes remain protected
  * by the genuine independent cache lease until exact reader retirement. */

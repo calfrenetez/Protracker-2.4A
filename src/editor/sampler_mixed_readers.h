@@ -141,6 +141,11 @@ struct pt_sampler_mixed_normalized_batch {
 };
 enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler_mixed_pool *,uint32_t,
     const struct pt_sampler_mixed_normalized_batch *,struct pt_sampler_mixed_command_handle *);
+/* Construct a zero-geometry Stop from original adopted keys. The factory
+ * recovers each track and source from its own registration. An empty key set
+ * needs no factory command. */
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_stop_keys(struct pt_sampler_mixed_pool *,uint32_t,
+    const struct pt_mixed_readers_stop_keys *,struct pt_sampler_mixed_command_handle *);
 /* One transition/action OR <=256 derived cache bytes, never bulk promotion.
  * Each persistent master pin is distinct from prepared-job TEMP pins. HIT/LOAD,
  * completion/cancel of the TEMP job cannot retire the persistent pin.

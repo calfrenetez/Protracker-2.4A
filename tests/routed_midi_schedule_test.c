@@ -76,7 +76,8 @@ static void fixture(unsigned mode)
     struct pt_routed_midi_schedule schedule = {0};
     struct provider_model model = {.schedule=&schedule, .now=99, .frequency=709379, .accept=1};
     const struct pt_routed_midi_provider api = {
-        &model, sizeof(model), read_clock, submit, observe, mode == 11 ? NULL : request_cancel, NULL
+        .context = &model, .context_bytes = sizeof(model), .read_clock = read_clock,
+        .submit = submit, .observe = observe, .request_cancel = mode == 11 ? NULL : request_cancel
     };
     const struct pt_routed_midi_batch *stop;
     assert(midi && plan);

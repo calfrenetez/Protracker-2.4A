@@ -191,13 +191,13 @@ static enum pt_mixed_readers_reply model_reader_service(void *context,const stru
 {struct model *m=context;struct model_reader *r=model_reader(m,&d->key);unsigned index;
  ++m->reader_calls;assert(r);model_hook(m,4);if(m->reader_pending)return PT_MIXED_REPLY_PENDING;
  memset(out,0,sizeof(*out));out->domain=PT_MIXED_READER_DOMAIN;out->key=d->key;out->reference=d;out->binding=d->binding;
- if(cancel){r->state=PT_MIXED_READER_RETIRED;r->retired=1;r->reference=NULL;
+ if(cancel||r->state==PT_MIXED_READER_RETIRED){r->state=PT_MIXED_READER_RETIRED;r->retired=1;r->reference=NULL;
   index=d->key.route==PT_MIXED_READERS_PAULA?d->key.slot:4+d->key.slot;
   if(keys_equal(m->active+index,&d->key))memset(m->active+index,0,sizeof(*m->active));}
  out->state=(enum pt_mixed_readers_state)r->state;out->adoption=(enum pt_mixed_readers_adoption)r->adopted;out->observed=r->observed;out->issued=r->issued;
  if(m->malformed==3)out->key.route=0;
  if(m->malformed==4)out->state=PT_MIXED_READER_UNKNOWN;
- return cancel?PT_MIXED_READER_RETIRE_PROOF:PT_MIXED_OBSERVATION;}
+ return r->retired?PT_MIXED_READER_RETIRE_PROOF:PT_MIXED_OBSERVATION;}
 struct trial {
  struct resources *resources;struct allocation allocator;struct model model;
  struct pt_mixed_readers_config config;struct pt_mixed_readers_output *queue;void *workspace;

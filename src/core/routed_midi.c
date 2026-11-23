@@ -159,6 +159,7 @@ int pt_routed_midi_schedule_init(struct pt_routed_midi_schedule *schedule, struc
         !disjoint(midi, sizeof(*midi), provider, sizeof(*provider)) ||
         schedule->midi || !idle(midi) || midi->started || midi->schedule || !session || !generation ||
         !provider->read_clock || ((provider->submit == NULL) == (provider->submit_combined == NULL)) ||
+        (provider->observe_audio_retirement && !provider->submit_combined) ||
         !provider->observe || frequency < rate ||
         pt_elapsed_clock_init(&grid, frequency, rate, epoch, 0) != PT_ELAPSED_OK)
         return 0;
@@ -197,6 +198,69 @@ static int same_audio_key(const struct pt_mixed_readers_key *a, const struct pt_
     return a->queue == b->queue && a->session == b->session && a->generation == b->generation &&
         a->trigger == b->trigger && a->owner == b->owner && a->serial == b->serial &&
         a->action == b->action && a->route == b->route && a->slot == b->slot;
+}
+
+int pt_routed_midi_schedule_stop_keys(const struct pt_routed_midi_schedule *schedule,
+    struct pt_mixed_readers_stop_keys *out)
+{
+    struct pt_mixed_readers_stop_keys keys = {0};
+    unsigned slot;
+    if (!schedule_ready(schedule) || schedule->held || !schedule->provider.submit_combined ||
+        !schedule->midi->pending || !schedule->midi->batch.stop ||
+        (uintptr_t)out % _Alignof(struct pt_mixed_readers_stop_keys) ||
+        !disjoint(schedule, sizeof(*schedule), out, sizeof(*out)) ||
+        !disjoint(schedule->midi, sizeof(*schedule->midi), out, sizeof(*out)) ||
+        (schedule->provider.context && !disjoint(schedule->provider.context,
+            schedule->provider.context_bytes, out, sizeof(*out))))
+        return 0;
+    keys.frame = schedule->midi->batch.frame;
+    for (slot = 0; slot < PT_ROUTED_AUDIO_SLOTS; ++slot) {
+        if (!(schedule->audio_owned & (UINT32_C(1) << slot)))
+            continue;
+        if (keys.count == PT_MIXED_READERS_ACTIONS)
+            return 0;
+        keys.key[keys.count++] = schedule->audio_active[slot];
+    }
+    *out = keys;
+    return 1;
+}
+
+static void drop_audio_key(struct pt_routed_midi_schedule *schedule, unsigned slot)
+{
+    memset(schedule->audio_active + slot, 0, sizeof(*schedule->audio_active));
+    schedule->audio_owned &= ~(UINT32_C(1) << slot);
+}
+
+enum pt_mixed_readers_result pt_routed_midi_schedule_observe_audio_retirement(
+    struct pt_routed_midi_schedule *schedule, unsigned route, unsigned route_slot)
+{
+    const unsigned slot = audio_slot(route, route_slot);
+    struct pt_mixed_readers_reader_receipt receipt = {0};
+    struct pt_mixed_readers_key key;
+    enum pt_mixed_readers_result result;
+    if (!schedule_ready(schedule) || schedule->held || schedule->midi->pending ||
+        !schedule->provider.observe_audio_retirement || slot == PT_ROUTED_AUDIO_SLOTS ||
+        !(schedule->audio_owned & (UINT32_C(1) << slot)))
+        return PT_MIXED_READERS_INVALID;
+    key = schedule->audio_active[slot];
+    schedule->busy = 1;
+    result = schedule->provider.observe_audio_retirement(schedule->provider.context, &key, &receipt);
+    schedule->busy = 0;
+    if (result == PT_MIXED_READERS_PENDING)
+        return result;
+    if (result != PT_MIXED_READERS_OK) {
+        schedule->faulted = 1;
+        return result;
+    }
+    if (receipt.domain != PT_MIXED_READER_DOMAIN || receipt.state != PT_MIXED_READER_RETIRED ||
+        receipt.adoption != PT_MIXED_ADOPTED || !receipt.reference ||
+        receipt.observed > receipt.issued || receipt.issued > schedule->last_read ||
+        !same_audio_key(&receipt.key, &key)) {
+        schedule->faulted = 1;
+        return PT_MIXED_READERS_BACKEND;
+    }
+    drop_audio_key(schedule, slot);
+    return PT_MIXED_READERS_OK;
 }
 
 static int audio_matches(const struct pt_routed_midi_schedule *schedule,
@@ -395,8 +459,7 @@ static void accept_audio(struct pt_routed_midi_schedule *schedule)
             schedule->audio_active[slot] = change->key;
             schedule->audio_owned |= bit;
         } else if (change->kind == PT_MIXED_READERS_STOP) {
-            memset(schedule->audio_active + slot, 0, sizeof(*schedule->audio_active));
-            schedule->audio_owned &= ~bit;
+            drop_audio_key(schedule, slot);
         }
     }
 }

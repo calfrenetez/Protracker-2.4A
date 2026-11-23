@@ -8,7 +8,7 @@ from test_mixed_readers_causal import SOURCES as AUDIO_SOURCES
 
 ROOT = Path(__file__).resolve().parents[1]
 COMBINED_PASS = 'Combined schedule: exact Paula, AmiGUS and MIDI admission, all owned Stop keys and independent partial receipts; SOFTWARE_ONLY\n'
-TRACKER_PASS = 'Routed tracker playback: factory-owned attack, audio-only CONTROL and F00 Stop at 0/960/1920; SOFTWARE_ONLY\n'
+TRACKER_PASS = 'Routed tracker playback: exact factory Stop of live keys, including independent AmiGUS retirement; SOFTWARE_ONLY\n'
 TRACKER_UNITS = [
     'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
     'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',

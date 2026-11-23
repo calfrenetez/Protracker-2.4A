@@ -3,16 +3,17 @@
 #include "../src/core/routed_playback.h"
 #include "../src/editor/sampler_mixed_readers.h"
 
-static void tracker_project(struct trial *t, int32_t pcm[2][1024])
+static void tracker_project(struct trial *t, int32_t pcm[2][1024], unsigned short_card)
 {
     struct pt_project *p = &t->resources->document.project;
     unsigned i, j;
     p->bpm = 125;
     p->speed = 2;
     for (i = 0; i < 2; ++i) {
+        const unsigned frames = i && short_card ? 64 : 1024;
         for (j = 0; j < 1024; ++j)
             pcm[i][j] = t->resources->original[i][j % 64];
-        p->samples[i].pcm = (struct pt_pcm){pcm[i], 1024, 1024, 8000, 1, 8};
+        p->samples[i].pcm = (struct pt_pcm){pcm[i], frames, frames, 8000, 1, 8};
     }
     for (i = 0; i < 5; ++i) {
         p->channels.track[i].pan = i == 0 || i == 3 ? 0 : 255;
@@ -53,7 +54,7 @@ static void check_actions(const struct trial *t, const struct pt_mixed_plan_batc
                           const struct model_command *command)
 {
     unsigned i;
-    assert(batch->count == 5 && command->batch.count == batch->count);
+    assert(command->batch.count == batch->count);
     for (i = 0; i < batch->count; ++i) {
         const struct pt_mixed_plan_record *record = batch->record + i;
         const struct pt_mixed_readers_action *action = command->batch.action + i;
@@ -73,7 +74,8 @@ static void check_actions(const struct trial *t, const struct pt_mixed_plan_batc
             const struct pt_amigus_voice_plan *image = &action->geometry.amigus;
             if (record->kind == PT_MIXED_PLAN_TRIGGER) {
                 assert(image->rate == record->image.rate && image->left == record->image.left &&
-                       image->right == record->image.right && image->end_exclusive - image->start == 1024);
+                       image->right == record->image.right && image->end_exclusive - image->start ==
+                       t->resources->document.project.samples[1].pcm.frames);
                 assert(t->resources->card.ram[image->start] == t->resources->original[1][0] &&
                        t->resources->card.ram[image->end_exclusive - 1] == t->resources->original[1][63]);
             } else {
@@ -84,7 +86,14 @@ static void check_actions(const struct trial *t, const struct pt_mixed_plan_batc
     }
 }
 
-int main(void)
+static enum pt_mixed_readers_result observe_retirement(void *context,
+    const struct pt_mixed_readers_key *key, struct pt_mixed_readers_reader_receipt *receipt)
+{
+    struct combined_model *m = context;
+    return pt_sampler_mixed_service_reader(m->pool, key->trigger, key->action, 0, receipt);
+}
+
+static void tracker_case(unsigned short_card)
 {
     const struct pt_render_options options = {
         .rate = 48000, .bits = 16, .tracks = 0x801f, .gain_q16 = 65536, .tick_limit = 64, .frame_limit = 100000
@@ -112,16 +121,17 @@ int main(void)
     struct combined_model m = {.audio = &t->model, .schedule = &schedule};
     const struct pt_routed_midi_provider api = {
         .context = &m, .context_bytes = sizeof(m), .read_clock = combined_clock,
-        .observe = observe_combined, .submit_combined = publish_combined
+        .observe = observe_combined, .submit_combined = publish_combined,
+        .observe_audio_retirement = observe_retirement
     };
     size_t capacity = pt_mixed_plan_normalizer_workspace_size(), saved_size;
     void *workspace = calloc(1, capacity);
     int32_t (*pcm)[1024] = malloc(2 * sizeof(*pcm));
     uint8_t *saved;
     uint64_t original = 0;
-    unsigned ready = 0, boundary, idle_ticks = 0, i, steps;
+    unsigned ready = 0, boundary, idle_ticks = 0, effects = 0, i, steps;
     assert(ahead && plan && midi && batch && workspace && factory_workspace && pcm);
-    tracker_project(t, pcm);
+    tracker_project(t, pcm, short_card);
     for (i = 0; i < project->sample_count; ++i) {
         struct pt_pcm pinned;
         struct pt_sampler *sampler = &t->resources->sampler;
@@ -155,6 +165,7 @@ int main(void)
                      {&t->allocator, sizeof(t->allocator)}, {&m, sizeof(m)}}
     };
     assert(pt_sampler_mixed_open(&config, 37, factory_workspace, factory_capacity, &pool) == PT_SAMPLER_MIXED_PENDING);
+    m.pool = pool;
     steps = 0;
     do {
         assert(++steps < 1024);
@@ -166,6 +177,7 @@ int main(void)
         struct pt_render_interval interval;
         const struct pt_routed_midi_batch *midi_batch;
         struct pt_mixed_readers_command_receipt receipt;
+        struct pt_mixed_readers_stop_keys stop = {0};
         struct pt_mixed_plan_batch *normalized = &batch->plan.normalized;
         uint64_t ticket;
         uint32_t remaining;
@@ -188,48 +200,50 @@ int main(void)
         assert(midi->pending && midi_batch->serial == playback.serial && midi_batch->count == (unsigned)(boundary != 1));
         assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
-        memset(batch, 0, sizeof(*batch));
+        const unsigned allocations = factory_allocator.calls;
+        const unsigned count = short_card && boundary ? 4 : 5;
         if (plan->end) {
             assert(plan->end == PT_RENDER_F00 + 1 && !plan->audio.count);
-            normalized->frame = plan->frame;
-            normalized->count = 5;
-            for (i = 0; i < normalized->count; ++i) {
-                assert(origins[i].present);
-                normalized->record[i] = (struct pt_mixed_plan_record){
-                    .kind = PT_MIXED_PLAN_STOP, .track = i, .route = project->channels.track[i].route,
-                    .slot = keys[i].slot, .sample = origins[i].sample, .channel = origins[i].channel
-                };
-            }
+            assert(pt_routed_midi_schedule_stop_keys(&schedule, &stop));
+            assert(stop.frame == plan->frame && stop.count == count);
+            for (i = 0; i < stop.count; ++i)
+                assert(keys_equal(stop.key + i, keys + i));
+            ++stop.key[0].serial;
+            assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_INVALID);
+            --stop.key[0].serial;
+            assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
+            assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_PENDING);
         } else {
+            assert(!pt_routed_midi_schedule_stop_keys(&schedule, &stop) && !stop.count);
+            memset(batch, 0, sizeof(*batch));
             normalize(project, plan, origins, &batch->plan, workspace, capacity);
-        }
-        assert(normalized->count == 5);
-        for (i = 0; i < normalized->count; ++i) {
-            const struct pt_mixed_plan_record *record = normalized->record + i;
-            assert(record->track == i && record->sample < 2);
-            if (!boundary) {
-                assert(record->kind == PT_MIXED_PLAN_TRIGGER);
-                batch->source[i].master = master[record->sample];
-            } else {
-                assert(record->kind == (plan->end ? PT_MIXED_PLAN_STOP : PT_MIXED_PLAN_CONTROL));
-                batch->source[i].active = keys[record->track];
+            assert(normalized->count == count);
+            for (i = 0; i < normalized->count; ++i) {
+                const struct pt_mixed_plan_record *record = normalized->record + i;
+                assert(record->track == i && record->sample < 2);
+                if (!boundary) {
+                    assert(record->kind == PT_MIXED_PLAN_TRIGGER);
+                    batch->source[i].master = master[record->sample];
+                } else {
+                    assert(record->kind == PT_MIXED_PLAN_CONTROL);
+                    batch->source[i].active = keys[record->track];
+                }
             }
+            if (!boundary) {
+                ++normalized->record[4].slot;
+                assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+                --normalized->record[4].slot;
+                batch->source[4].master = master[0];
+                assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+                batch->source[4].master = master[1];
+            } else {
+                ++batch->source[0].active.serial;
+                assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+                --batch->source[0].active.serial;
+            }
+            assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
+            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_PENDING);
         }
-        const unsigned allocations = factory_allocator.calls;
-        if (!boundary) {
-            ++normalized->record[4].slot;
-            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
-            --normalized->record[4].slot;
-            batch->source[4].master = master[0];
-            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
-            batch->source[4].master = master[1];
-        } else {
-            ++batch->source[4].active.serial;
-            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
-            --batch->source[4].active.serial;
-        }
-        assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
-        assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_PENDING);
         steps = 0;
         do {
             assert(++steps < 64);
@@ -240,11 +254,22 @@ int main(void)
             for (i = 0; i < 5; ++i)
                 assert(pt_sampler_mixed_reader(pool, handle, i, readers + i) == PT_SAMPLER_MIXED_OK);
         assert(pt_sampler_mixed_enqueue(pool, 37, handle, &ticket) == PT_MIXED_READERS_OK);
+        m.expected_audio_count = count;
         assert(pt_sampler_mixed_publish(pool, ticket) == PT_MIXED_READERS_OK);
-        check_actions(t, normalized, model_command(&t->model, ticket));
-        assert(m.submissions == boundary + 1 && t->model.effects == boundary * 5);
+        const struct model_command *command = model_command(&t->model, ticket);
+        if (plan->end) {
+            assert(command->batch.count == stop.count);
+            for (i = 0; i < stop.count; ++i) {
+                assert(command->batch.action[i].kind == PT_MIXED_READERS_STOP);
+                assert(keys_equal(command->key + i, stop.key + i));
+            }
+        } else {
+            check_actions(t, normalized, command);
+        }
+        assert(m.submissions == boundary + 1 && t->model.effects == effects);
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_WAITING);
         fire(&t->model, ticket);
+        effects += count;
         assert(pt_sampler_mixed_service_command(pool, ticket, 0, &receipt) == PT_MIXED_READERS_OK);
         record_audio_receipt(&m, &receipt, 1);
         if (!boundary) {
@@ -270,12 +295,29 @@ int main(void)
         assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
         if (!plan->end)
             memcpy(origins, normalized->next, sizeof(origins));
+        if (short_card && !boundary) {
+            const uint32_t before = schedule.audio_owned;
+            struct model_reader *card = model_reader(&t->model, keys + 4);
+            assert(card && card->state == PT_MIXED_READER_ACTIVE);
+            assert(pt_routed_midi_schedule_observe_audio_retirement(&schedule, PT_MIXED_READERS_AMIGUS, 0) ==
+                   PT_MIXED_READERS_PENDING && schedule.audio_owned == before);
+            t->model.ticks = oracle(640);
+            card->state = PT_MIXED_READER_RETIRED;
+            assert(pt_routed_midi_schedule_observe_audio_retirement(&schedule, PT_MIXED_READERS_AMIGUS, 0) ==
+                   PT_MIXED_READERS_OK);
+            assert(schedule.audio_owned == (before & ~(UINT32_C(1) << PT_ROUTED_PAULA_SLOTS)));
+            assert(pt_routed_midi_schedule_observe_audio_retirement(&schedule, PT_MIXED_READERS_AMIGUS, 0) ==
+                   PT_MIXED_READERS_INVALID);
+            assert(pt_sampler_mixed_reader_close(pool, readers + 4));
+            memset(origins + 4, 0, sizeof(*origins));
+        }
         ++boundary;
     }
-    assert(idle_ticks == 1 && midi->stopped && !schedule.held && t->model.effects == 15);
+    assert(idle_ticks == 1 && midi->stopped && !schedule.held && !schedule.audio_owned);
+    assert(effects == (short_card ? 13 : 15) && t->model.effects == effects);
     assert(pt_routed_playback_abandon(&playback));
     assert(!pt_mixed_readers_commands_held(t->queue));
-    for (i = 0; i < 5; ++i) {
+    for (i = 0; i < (short_card ? 4U : 5U); ++i) {
         assert(pt_sampler_mixed_service_reader(pool, original, i, 1, NULL) == PT_MIXED_READERS_OK);
         assert(pt_sampler_mixed_reader_close(pool, readers + i));
     }
@@ -295,6 +337,12 @@ int main(void)
     free(midi);
     free(plan);
     free(ahead);
-    puts("Routed tracker playback: factory-owned attack, audio-only CONTROL and F00 Stop at 0/960/1920; SOFTWARE_ONLY");
+}
+
+int main(void)
+{
+    tracker_case(0);
+    tracker_case(1);
+    puts("Routed tracker playback: exact factory Stop of live keys, including independent AmiGUS retirement; SOFTWARE_ONLY");
     return 0;
 }

@@ -537,6 +537,16 @@ return NULL;
 static int key_same(const struct pt_mixed_readers_key *a,const struct pt_mixed_readers_key *b)
 {return a->queue==b->queue&&a->session==b->session&&a->generation==b->generation&&a->trigger==b->trigger&&a->owner==b->owner&&a->serial==b->serial&&a->action==b->action&&a->route==b->route&&a->slot==b->slot;
 }
+static struct pt_sampler_mixed_reader *live_reader_for_key(struct pt_sampler_mixed_pool *p,
+ const struct pt_mixed_readers_key *key)
+{
+ unsigned i;
+ for(i=0;i<p->config.maximum_readers;++i){
+    struct pt_sampler_mixed_reader *r=p->readers[i];
+    if(r&&r->state==LIVE&&r->key_seen&&key_same(&r->key,key))return r;
+ }
+ return NULL;
+}
 static int key_zero(const struct pt_mixed_readers_key *k)
 {return !k->queue&&!k->session&&!k->generation&&!k->trigger&&!k->owner&&!k->serial&&!k->action&&!k->route&&!k->slot;
 }
@@ -584,12 +594,9 @@ if(rt==PT_MIXED_READERS_PAULA){if(!x[i].geometry.paula.period||x[i].geometry.pau
 }else if((x[i].geometry.amigus.bits!=8&&x[i].geometry.amigus.bits!=16)||x[i].geometry.amigus.little_endian>1||x[i].geometry.amigus.trigger.volume>64||x[i].geometry.amigus.trigger.pan>256||x[i].geometry.amigus.rate||x[i].geometry.amigus.left||x[i].geometry.amigus.right||!x[i].geometry.amigus.trigger.rate_numerator||!x[i].geometry.amigus.trigger.rate_denominator)return 0;
 (*triggers)++;
 }
- else {unsigned j;
-struct pt_sampler_mixed_reader *r=NULL;
+ else {struct pt_sampler_mixed_reader *r;
 if(x[i].expected||(x[i].kind!=PT_MIXED_READERS_CONTROL&&x[i].kind!=PT_MIXED_READERS_STOP)||x[i].key.queue!=p->config.queue||x[i].key.route!=rt||x[i].key.slot!=sl)return 0;
-for(j=0;j<p->config.maximum_readers;++j)if(p->readers[j]&&p->readers[j]->state==LIVE&&p->readers[j]->key_seen&&key_same(&p->readers[j]->key,&x[i].key)){r=p->readers[j];
-break;
-}
+r=live_reader_for_key(p,&x[i].key);
 if(!r||r->track!=x[i].track||r->sample!=x[i].sample||r->channel!=x[i].channel||r->frame>=frame)return 0;
 if(rt==PT_MIXED_READERS_AMIGUS&&(x[i].geometry.amigus.bits||x[i].geometry.amigus.little_endian||!voice_zero(&x[i].geometry.amigus.trigger)))return 0;
 if(x[i].kind==PT_MIXED_READERS_STOP&&((rt==PT_MIXED_READERS_PAULA&&(x[i].geometry.paula.period||x[i].geometry.paula.volume))||(rt==PT_MIXED_READERS_AMIGUS&&(x[i].geometry.amigus.rate||x[i].geometry.amigus.left||x[i].geometry.amigus.right))))return 0;
@@ -740,6 +747,17 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_
  !apart(batch,sizeof(*batch),out,sizeof(*out)))return PT_SAMPLER_MIXED_INVALID;
  return begin_private(p,revision,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),NULL,out);
 }
+static int converted_apart(struct pt_sampler_mixed_pool *p,uint32_t revision,
+ const void *input,size_t input_bytes,uintptr_t scratch,struct pt_sampler_mixed_command_handle *out)
+{
+ const void *staging=(const void *)scratch;
+ size_t staging_bytes=sizeof(struct pt_sampler_mixed_quantized_batch);
+ return p&&(uintptr_t)out%_Alignof(struct pt_sampler_mixed_command_handle)==0&&
+    output_apart(p,input,input_bytes)&&output_apart(p,out,sizeof(*out))&&
+    apart(input,input_bytes,out,sizeof(*out))&&fixed_current(p,revision)&&
+    p->state==OPEN&&!p->causal_binding&&output_address_apart(p,scratch,staging_bytes)&&
+    apart(input,input_bytes,staging,staging_bytes)&&apart(out,sizeof(*out),staging,staging_bytes);
+}
 enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_normalized_batch *input,
  struct pt_sampler_mixed_command_handle *out)
@@ -749,13 +767,8 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler
  const struct pt_mixed_plan_batch *plan;
  unsigned i;
 
- if(!p||(uintptr_t)input%_Alignof(struct pt_sampler_mixed_normalized_batch)||
-    (uintptr_t)out%_Alignof(struct pt_sampler_mixed_command_handle)||
-    !output_apart(p,input,sizeof(*input))||!output_apart(p,out,sizeof(*out))||
-    !apart(input,sizeof(*input),out,sizeof(*out))||!fixed_current(p,revision)||
-    p->state!=OPEN||p->causal_binding||!output_address_apart(p,scratch,sizeof(converted))||
-    !apart(input,sizeof(*input),(const void *)scratch,sizeof(converted))||
-    !apart(out,sizeof(*out),(const void *)scratch,sizeof(converted)))return PT_SAMPLER_MIXED_INVALID;
+ if((uintptr_t)input%_Alignof(struct pt_sampler_mixed_normalized_batch)||
+    !converted_apart(p,revision,input,sizeof(*input),scratch,out))return PT_SAMPLER_MIXED_INVALID;
 
  plan=&input->plan.normalized;
  if(!plan->count||plan->count>PT_MIXED_PLAN_RECORDS||plan->count>PT_SAMPLER_MIXED_ACTIONS)
@@ -810,6 +823,27 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler
  }
  return begin_private(p,revision,plan->frame,converted.action,plan->count,converted.levels,
     input,sizeof(*input),&converted,out);
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_stop_keys(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_mixed_readers_stop_keys *keys,struct pt_sampler_mixed_command_handle *out)
+{
+ struct pt_sampler_mixed_quantized_batch converted;
+ unsigned i;
+ if((uintptr_t)keys%_Alignof(struct pt_mixed_readers_stop_keys)||
+    !converted_apart(p,revision,keys,sizeof(*keys),(uintptr_t)&converted,out)||
+    !keys->count||keys->count>PT_SAMPLER_MIXED_ACTIONS)return PT_SAMPLER_MIXED_INVALID;
+ memset(&converted,0,sizeof(converted));
+ for(i=0;i<keys->count;++i){
+    const struct pt_sampler_mixed_reader *r=live_reader_for_key(p,keys->key+i);
+    struct pt_sampler_mixed_request *request=converted.action+i;
+    if(!r)return PT_SAMPLER_MIXED_INVALID;
+    request->kind=PT_MIXED_READERS_STOP;
+    request->track=r->track;
+    request->sample=r->sample;
+    request->channel=r->channel;
+    request->key=keys->key[i];
+ }
+ return begin_private(p,revision,keys->frame,converted.action,keys->count,NULL,keys,sizeof(*keys),&converted,out);
 }
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_stop_begin(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_causal_stop_batch *batch,

@@ -122,6 +122,11 @@ struct pt_routed_midi_provider {
      * awaiting either proof. */
     int (*submit_combined)(void *, const struct pt_routed_midi_event *,
                           const struct pt_mixed_readers_event *);
+    /* Optional natural retirement observation through the original audio
+     * owner. PENDING still owns the supplied exact key. OK supplies the
+     * owner's independently verified full reader-retirement receipt. */
+    enum pt_mixed_readers_result (*observe_audio_retirement)(void *, const struct pt_mixed_readers_key *,
+                                                             struct pt_mixed_readers_reader_receipt *);
 };
 
 #define PT_ROUTED_PAULA_SLOTS 4U
@@ -176,6 +181,14 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);
+/* Snapshot the keys for the original pending, unsubmitted terminal frame.
+ * A zero count requests no audio command. The factory still binds and
+ * validates the real adopted readers independently. */
+int pt_routed_midi_schedule_stop_keys(const struct pt_routed_midi_schedule *, struct pt_mixed_readers_stop_keys *);
+/* Observe one original active reader between batches. Only independent
+ * retirement of that same reader removes it from a later terminal Stop. */
+enum pt_mixed_readers_result pt_routed_midi_schedule_observe_audio_retirement(
+    struct pt_routed_midi_schedule *, unsigned route, unsigned slot);
 /* Read-only proof for the last exact complete batch of this schedule. */
 int pt_routed_midi_schedule_settled(const struct pt_routed_midi_schedule *, uint64_t frame, uint64_t serial);
 /* Begin draining a queued non-Stop batch before an owned Stop. Request

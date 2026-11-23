@@ -1,0 +1,73 @@
+{
+  "source": "ab8a10ba4d2a7a5ad7ea1eea3b387ba33202fbb1",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "5bbb98ae69c8a6a2b6e912f9d24460362629f17bb0f806116ef0f926cdfc91b0",
+  "build_receipt_sha256": "47816626dac14a0acc91d2803c971cb0ddc732a046d655e55cd95751bd978652",
+  "guest_log_sha256": "bf659966557414d4e28d0185ea1797dc2fe5627707bbae15b5359eb323fd79f2",
+  "independent_replay_sha256": "70401338f3a9141a20768305bd85e44c3abc3fdf5a18d9db4e1bb30014d63fb1",
+  "validated_build_inputs": 116,
+  "host_routed_methods": 13,
+  "host_countdown_methods": 1,
+  "host_sanitized_forecast_passed": true,
+  "initial_classic_segment_refusal_retained": true,
+  "timing": {
+    "writes": [
+      {
+        "stage": 3,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 32783,
+        "dma_before": 512,
+        "dma_after": 527,
+        "frame_ticks": [
+          8192,
+          8207
+        ],
+        "observed_ticks": [
+          8195,
+          8201
+        ]
+      },
+      {
+        "stage": 6,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 15,
+        "dma_before": 527,
+        "dma_after": 512,
+        "frame_ticks": [
+          36568,
+          36582
+        ],
+        "observed_ticks": [
+          36570,
+          36577
+        ]
+      }
+    ],
+    "guest_closed": true,
+    "clock_anchor_count": 65522,
+    "alarm": {
+      "chip": 0,
+      "timer": 1,
+      "callbacks": 2,
+      "closed": true
+    },
+    "device_guest_closed": true,
+    "song_epoch_ticks": 8192,
+    "forecast_start_frame": 0,
+    "forecast_f00_frame": 1920,
+    "forecast_actions": {
+      "paula": 4,
+      "amigus": 1,
+      "midi": 1
+    }
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Original frame-zero Start and frame-1920 F00 from the six-track renderer, real silent Paula device commands in Amiberry, planned-only AmiGUS and MIDI actions. No physical or listening confirmation."
+}

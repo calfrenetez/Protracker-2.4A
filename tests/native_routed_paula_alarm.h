@@ -405,7 +405,9 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     if (pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1) &&
         capture_epoch(timed, &clock, &grid, schedule->start_frame, 0, &timeline) &&
         run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
+#ifndef PT_PAULA_MIDI_WIRE_CLOCK
         Delay(1);
+#endif
         if (!routed_clock.reloads && observe_started_fetches(owner, &clock, CLOCK_RELOAD_MARGIN) &&
             Wait(routed_clock.signal | alarm.deadline_signal | SIGBREAKF_CTRL_C) == routed_clock.signal &&
             capture_epoch(timed + 1, &clock, &grid, schedule->stop_frame, 1, &timeline)) {
@@ -429,9 +431,11 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
             prepare_paula_window(timed, &grid, schedule->start_frame) &&
             prepare_paula_window(timed + 1, &grid, schedule->stop_frame) &&
             run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
-#ifdef PT_PAULA_WAIT_IRQ
+#if defined(PT_PAULA_WAIT_IRQ) && !defined(PT_PAULA_MIDI_WIRE_CLOCK)
             Delay(1);
 #endif
+            /* Serial readback already waits for the wire. Let the fetch
+             * check use the original countdown budget immediately. */
             if (observe_started_fetches(owner, &clock, (unsigned)timed[1].raw.first + 512)) {
                 stage = 6;
                 passed = run_irq_word(owner, &alarm, &clock, stop.frame, ALL, 0);

@@ -254,3 +254,15 @@ The brackets include clock-reading overhead, owner checks and fixture work.
 The controlled counter still supplies the fixture's correctness checks. The
 measured path needs a prepared, shorter live dispatch before it can use the
 original sample window. [Native timing receipt](test-evidence/routed_activation_timing_amiberry_20261123.json)
+
+The private `routed-paula-trace` fixture exercises the prepared Paula words
+on the Amiberry custom-chip model. It locks all four channels through
+audio.device and uses zeroed Chip buffers and zero volume. It checks the same
+INTREQR sample that it records, so request clearing and status readback use
+their respective registers. The corrected exact run observed DMA and fresh
+request masks of zero at preload, all four at Start and Control, only the
+two remaining channels after selective Stop, and zero at final Stop.
+The device reset, original owned interrupt state and Chip cleanup completed.
+The earlier diagnostics and their mistaken write-register check are retained.
+Live musical-frame dispatch and listening have separate acceptance checks.
+[AmigaOS audio.device](https://wiki.amigaos.net/wiki/Audio_Device)

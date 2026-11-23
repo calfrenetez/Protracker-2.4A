@@ -14,6 +14,7 @@ FIXTURES = {
     'routed-tracker': ('test_mixed_readers_causal.py', 'PTRoutedTracker'),
     'routed-activation': ('test_mixed_readers_causal.py', 'PTRoutedActivation'),
     'routed-activation-timing': ('test_mixed_readers_causal.py', 'PTRoutedActivationTime'),
+    'routed-paula-trace': ('test_mixed_readers_causal.py', 'PTRoutedPaulaTrace'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-local-activation': (None, 'PTCIALocalActivate'),
@@ -43,6 +44,7 @@ def main():
         'routed-tracker': ('routed_tracker_playback_test.c', 'TRACKER_UNITS'),
         'routed-activation': ('routed_activation_test.c', 'ACTIVATION_UNITS'),
         'routed-activation-timing': ('native_routed_activation_timing_test.c', 'ACTIVATION_UNITS'),
+        'routed-paula-trace': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
     }
     if args.fixture in routed_sources:
         source, extra = routed_sources[args.fixture]

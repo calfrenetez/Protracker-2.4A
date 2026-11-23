@@ -81,7 +81,7 @@ static inline int pt_native_paula_reservation_open(struct pt_native_paula_reserv
     r->lock=(struct IOAudio *)CreateIORequest(r->port,sizeof(*r->lock));
     if(!r->command || !r->lock)goto failed;
     r->command->ioa_Length=0;r->command->ioa_AllocKey=0;
-    if(OpenDevice(AUDIONAME,0,(struct IORequest *)r->command,0))goto failed;
+    if(OpenDevice((const void *)AUDIONAME,0,(struct IORequest *)r->command,0))goto failed;
     r->opened=1;r->channels=15;r->phase=r->closing=r->failed=0;return 1;
 failed:pt_native_paula_reservation_close(r);return 0;
 }

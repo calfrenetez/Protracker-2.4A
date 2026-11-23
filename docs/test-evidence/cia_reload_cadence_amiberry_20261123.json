@@ -1,0 +1,27 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "2dd7249f29f2ff6304897347a50f7cb3f4c67ab8fbf85fcc92569e1e6b0351fa",
+  "build_receipt_sha256": "71ea74f99dbd0d4584887b8386cf78f6d2d354b0f752acc8ade81849eff65dcd",
+  "guest_log_sha256": "cec684fd892fca8ef91c6f0eabcc323245bc8ee26c849806f7b2ee63b30a15e9",
+  "validated_build_inputs": 9,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "original_observations": {
+    "hz": 709379,
+    "clock_chip": 0,
+    "clock_timer": 0,
+    "reloads": 1024,
+    "wake_observations": 1022,
+    "selected_period_ticks": 65536,
+    "independent_elapsed_bounds": [
+      67108856,
+      67108972
+    ],
+    "reconstructed_elapsed_ticks": 67108914,
+    "closed": true
+  },
+  "independent_replay_sha256": "698b7ab1c140b5bc243b7b8abe2a3ce97c9cbe18e5f876c59a0ea69c220e81c9",
+  "scope": "A PAL Amiberry measurement isolates the 65536-tick reload cadence and separates counted CIA callbacks from coalesced task wakes."
+}

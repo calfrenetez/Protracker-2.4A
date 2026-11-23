@@ -1,0 +1,63 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a6a38ebd030417b96dcf4041f56b8e649a6c5d35fa66295f382240bbe381d879",
+  "build_receipt_sha256": "745697548c474491247f8a6231441eeb4dab3c7cc97760b331d87c6ed5d84946",
+  "guest_log_sha256": "51183f57dfcb4109058913bb48f7ed73efefec38c3da76baf31f0ccb8cfc9fb9",
+  "validated_build_inputs": 13,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "observations": [
+    {
+      "case": 0,
+      "frame": 0,
+      "original_window": [
+        8192,
+        8207
+      ],
+      "expected_reload": 0,
+      "observed_reload": 0,
+      "attempts": 7,
+      "marker": 18258,
+      "status": 1,
+      "observed_bracket": [
+        8192,
+        8198
+      ]
+    },
+    {
+      "case": 1,
+      "frame": 0,
+      "original_window": [
+        8192,
+        8207
+      ],
+      "expected_reload": 0,
+      "observed_reload": 1,
+      "attempts": 0,
+      "marker": 0,
+      "status": 3
+    },
+    {
+      "case": 2,
+      "frame": 4608,
+      "original_window": [
+        76293,
+        76308
+      ],
+      "expected_reload": 1,
+      "observed_reload": 1,
+      "attempts": 9,
+      "marker": 18258,
+      "status": 1,
+      "observed_bracket": [
+        76304,
+        76310
+      ]
+    }
+  ],
+  "reload_observation_tick": 65006,
+  "guest_rc": 20,
+  "scope": "Original pre-reload store was bracketed and old-generation bounds were rejected before polling. The post-reload RAM store bracket ended past the original frame, so the exact candidate failed."
+}

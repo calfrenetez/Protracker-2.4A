@@ -21,4 +21,21 @@ int pt_native_amigus_wavetable_read16(struct pt_native_amigus_wavetable_read *,
  * write-only selector is untouched. A control word alone proves neither
  * the bank identity nor that access to its sample RAM has quiesced. */
 int pt_native_amigus_wavetable_read_selected_control(struct pt_native_amigus_wavetable_read *, uint16_t *);
+
+enum {
+    PT_AMIGUS_VOICE_CONTROL_OFFSET = 0x20,
+    PT_AMIGUS_VOICE_RELEASE_OFFSET = 0x3c,
+    PT_AMIGUS_VOICE_SNAPSHOT_WORDS = (PT_AMIGUS_VOICE_RELEASE_OFFSET - PT_AMIGUS_VOICE_CONTROL_OFFSET) / 2 + 1
+};
+
+struct pt_amigus_voice_snapshot {
+    uint16_t words[PT_AMIGUS_VOICE_SNAPSHOT_WORDS];
+};
+
+/* Sample the currently selected bank's documented control and setup registers.
+ * The caller serializes selector access. A control change or lost lease refuses
+ * the entire snapshot and leaves the output untouched. This neither names the
+ * selected voice nor observes its current sample position or memory activity. */
+int pt_native_amigus_wavetable_read_selected_voice(struct pt_native_amigus_wavetable_read *,
+                                                  struct pt_amigus_voice_snapshot *);
 #endif

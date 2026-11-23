@@ -41,9 +41,29 @@ int pt_native_amigus_wavetable_read16(struct pt_native_amigus_wavetable_read *n,
 
 int pt_native_amigus_wavetable_read_selected_control(struct pt_native_amigus_wavetable_read *n, uint16_t *value)
 {
-    enum { VOICE_CONTROL = 0x20 };
     uintptr_t base=owned_registers(n);
-    if (!base || !value || base>UINTPTR_MAX-(VOICE_CONTROL+sizeof(*value)-1)) return 0;
-    *value=*(volatile uint16_t *)(base+VOICE_CONTROL);
+    if (!base || !value || base>UINTPTR_MAX-(PT_AMIGUS_VOICE_CONTROL_OFFSET+sizeof(*value)-1)) return 0;
+    *value=*(volatile uint16_t *)(base+PT_AMIGUS_VOICE_CONTROL_OFFSET);
+    return 1;
+}
+
+int pt_native_amigus_wavetable_read_selected_voice(struct pt_native_amigus_wavetable_read *n,
+                                                  struct pt_amigus_voice_snapshot *out)
+{
+    struct pt_amigus_voice_snapshot snapshot;
+    uintptr_t base = owned_registers(n);
+    if (!base || !out || base > UINTPTR_MAX - (PT_AMIGUS_VOICE_RELEASE_OFFSET + sizeof(uint16_t) - 1))
+        return 0;
+
+    const volatile uint16_t *registers = (const volatile uint16_t *)(base + PT_AMIGUS_VOICE_CONTROL_OFFSET);
+    for (unsigned i = 0; i < PT_AMIGUS_VOICE_SNAPSHOT_WORDS; ++i) {
+        if (owned_registers(n) != base) return 0;
+        snapshot.words[i] = registers[i];
+    }
+
+    uint16_t control;
+    if (!pt_native_amigus_wavetable_read_selected_control(n, &control) || control != snapshot.words[0])
+        return 0;
+    *out = snapshot;
     return 1;
 }

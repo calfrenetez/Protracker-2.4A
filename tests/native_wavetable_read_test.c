@@ -9,9 +9,11 @@ int main(void)
     struct AmiGUS card={0};
     struct pt_amigus_reservation r={0};
     struct pt_native_amigus_wavetable_read n={0};
-    uint16_t registers[17]={0},copy[17],value;
+    struct pt_amigus_voice_snapshot snapshot, original;
+    uint16_t registers[31]={0},copy[31],value;
     unsigned i;
     for (i=0;i<8;++i) registers[i]=(uint16_t)(0xa500+i);
+    for (i=16;i<31;++i) registers[i]=(uint16_t)(0xb600+i);
     registers[16]=0x8003;
     memcpy(copy,registers,sizeof(copy));
     card.agus_TypeId=AmiGUS_mini; card.agus_FirmwareRev=0x7ea663e7UL;
@@ -28,6 +30,14 @@ int main(void)
         assert(!pt_native_amigus_wavetable_read16(&n,i,&value) && value==0x1234);
     }
     assert(pt_native_amigus_wavetable_read_selected_control(&n,&value) && value==0x8003);
+    assert(pt_native_amigus_wavetable_read_selected_voice(&n,&snapshot));
+    assert(snapshot.words[0]==0x8003);
+    assert(snapshot.words[PT_AMIGUS_VOICE_SNAPSHOT_WORDS-1]==0xb61e);
+    assert(!memcmp(snapshot.words,&registers[16],sizeof(snapshot.words)));
+    original=snapshot;
+    assert(!pt_native_amigus_wavetable_read_selected_voice(&n,NULL));
+    assert(!pt_native_amigus_wavetable_read_selected_voice(NULL,&snapshot));
+    assert(!memcmp(snapshot.words,original.words,sizeof(snapshot.words)));
     assert(!pt_native_amigus_wavetable_read_selected_control(&n,NULL));
     assert(!pt_native_amigus_wavetable_read_selected_control(NULL,&value));
     assert(!pt_native_amigus_wavetable_read16(&n,0,NULL));
@@ -62,6 +72,8 @@ int main(void)
         value=0x1234;
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value) && value==0x1234 && active.faulted);
         assert(!pt_native_amigus_wavetable_read_selected_control(&active,&value) && value==0x1234);
+        assert(!pt_native_amigus_wavetable_read_selected_voice(&active,&snapshot));
+        assert(!memcmp(snapshot.words,original.words,sizeof(snapshot.words)));
         /* Even restoring the owner cannot resume a faulted reader. */
         r.card=&card; r.opened=r.reserved=r.access=1; r.interrupt=0; r.resource=PT_AMIGUS_WAVETABLE;
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value));
@@ -88,8 +100,10 @@ int main(void)
         value=0x1234;
         assert(pt_native_amigus_wavetable_read_bind(&near_end,&r));
         assert(!pt_native_amigus_wavetable_read_selected_control(&near_end,&value) && value==0x1234);
+        assert(!pt_native_amigus_wavetable_read_selected_voice(&near_end,&snapshot));
+        assert(!memcmp(snapshot.words,original.words,sizeof(snapshot.words)));
         card=saved;
     }
-    puts("WAVETABLE READ PASS: global and selected-control reads, unsafe offsets refused, descriptor/lease loss latched, no writes; synthetic storage only");
+    puts("WAVETABLE READ PASS: global and selected-voice reads, unsafe offsets refused, descriptor/lease loss latched, no writes; synthetic storage only");
     return 0;
 }

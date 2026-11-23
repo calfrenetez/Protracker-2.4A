@@ -7,7 +7,7 @@
 #include <proto/dos.h>
 #include <stdio.h>
 
-int pt_wavetable_probe(int selected_control)
+int pt_wavetable_probe(enum pt_wavetable_probe_mode mode)
 {
     struct Library *pin;
     struct pt_native_amigus_library native={0};
@@ -15,12 +15,16 @@ int pt_wavetable_probe(int selected_control)
     struct pt_amigus_reservation_api api=pt_native_amigus_reservation_api(&native);
     struct pt_native_amigus_wavetable_read n={0};
     enum pt_amigus_reservation_result opened;
-    unsigned i=0, reads=selected_control ? 1U : 8U;
+    unsigned i=0, reads=mode==PT_WAVETABLE_SELECTED_CONTROL ? 1U : 8U;
     unsigned long release_code;
     int result=PT_SKIP;
     const char *reason="register-contract-unavailable";
-    if (selected_control)
+    if (mode==PT_WAVETABLE_SELECTED_CONTROL)
         puts("WAVETABLE-PROBE scope=Mini-7ea663e7-selected-control writes=NO bank_select=NO bank_identity=UNKNOWN voices_stopped=NOT_QUALIFIED");
+    else if (mode==PT_WAVETABLE_SELECTED_VOICE) {
+        puts("WAVETABLE-PROBE scope=Mini-7ea663e7-selected-voice writes=NO bank_select=NO bank_identity=UNKNOWN sample_ram_quiet=NOT_QUALIFIED");
+        reads=PT_AMIGUS_VOICE_SNAPSHOT_WORDS;
+    }
     else
         puts("WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED");
     pin=OpenLibrary((CONST_STRPTR)"amigus.library",1);
@@ -39,10 +43,18 @@ int pt_wavetable_probe(int selected_control)
     if (pt_amigus_reservation_begin(&r)) {
         if (pt_native_amigus_wavetable_read_bind(&n,&r)) {
             result=PT_FAIL; reason="read-refused";
-            for (i=0;i<reads;++i) {
+            if (mode==PT_WAVETABLE_SELECTED_VOICE) {
+                struct pt_amigus_voice_snapshot snapshot;
+                if (SetSignal(0,0)&SIGBREAKF_CTRL_C) reason="cancelled";
+                else if (pt_native_amigus_wavetable_read_selected_voice(&n,&snapshot)) {
+                    for (;i<reads;++i)
+                        printf("WAVETABLE VOICE offset=0x%02x value=0x%04x\n",
+                               PT_AMIGUS_VOICE_CONTROL_OFFSET+i*2,(unsigned)snapshot.words[i]);
+                }
+            } else for (i=0;i<reads;++i) {
                 uint16_t value=0;
                 if (SetSignal(0,0)&SIGBREAKF_CTRL_C) { reason="cancelled"; break; }
-                if (selected_control) {
+                if (mode==PT_WAVETABLE_SELECTED_CONTROL) {
                     if (!pt_native_amigus_wavetable_read_selected_control(&n,&value)) break;
                     printf("WAVETABLE SELECTED CONTROL offset=0x20 value=0x%04x\n",(unsigned)value);
                 } else {

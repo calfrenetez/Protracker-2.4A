@@ -124,8 +124,9 @@ int main(int argc, char **argv)
     int registers = reset || (argc==2 && !strcmp(argv[1], "--idle-registers"));
     const char *label = observe ? "IDLE-CAPACITY-OBSERVE" : capacity ? "IDLE-CAPACITY" : fifo ? "IDLE-FIFO" : reset ? "IDLE-RESET" : registers ? "IDLE-REGISTERS" : "IDLE-OWNERSHIP";
     char *ownership_args[] = {argv[0], "--ownership"};
-    if (argc==2 && !strcmp(argv[1],"--wavetable-status")) return pt_wavetable_probe(0);
-    if (argc==2 && !strcmp(argv[1],"--wavetable-selected-control")) return pt_wavetable_probe(1);
+    if (argc==2 && !strcmp(argv[1],"--wavetable-status")) return pt_wavetable_probe(PT_WAVETABLE_GLOBAL_STATUS);
+    if (argc==2 && !strcmp(argv[1],"--wavetable-selected-control")) return pt_wavetable_probe(PT_WAVETABLE_SELECTED_CONTROL);
+    if (argc==2 && !strcmp(argv[1],"--wavetable-selected-voice")) return pt_wavetable_probe(PT_WAVETABLE_SELECTED_VOICE);
     if (!registers && (argc != 2 || strcmp(argv[1], "--idle-ownership")))
         return diagnostic(argc, argv);
     printf("%s scope=unused-RC6-020-AHI-only audio=NOT_TESTED\n",label);

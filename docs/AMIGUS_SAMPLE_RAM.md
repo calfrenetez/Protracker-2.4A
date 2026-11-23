@@ -636,4 +636,24 @@ the exact mode, offset, return code and original exclusive lease release.
 In r71, the exact Amiberry 68030 build passed the synthetic reader and
 returned the expected missing-library refusal in the real diagnostic mode.
 The canonical profile and all 39 saved files were independently restored.
-The physical selected-control readback remains pending.
+The r5 physical A1200 run read `0x0000` and returned RC0 with confirmed lease
+release. See [the physical result](test-evidence/amigus_selected_control_a1200_20261123.json).
+
+## Selected voice setup snapshot
+
+`AmiGUSTest --wavetable-selected-voice` reads the 15 documented SHIVA words
+from control at `0x20` through envelope release at `0x3c`. It reports the
+raw words in offset order after rechecking control, with the existing
+firmware and exclusive lease checks. This provides a baseline for comparing
+an owned test voice's settings before and after a future playback test.
+The selector is write-only and this mode leaves it untouched.
+Use `tools/replay_amigus_selected_control.py LOG --returncode RC --selected-voice`
+to verify the ordered offsets and confirmed lease release.
+
+The address and data write ports do not expose the previous sample contents.
+The register map identifies the FIFO-full flag and voice IRQ bits, and gives
+no sample upload completion acknowledgement or indication that a voice has
+finished reading sample RAM. A cleared Start bit alone leaves that question
+open. A one-voice playback test still needs an independently owned scratch
+region and an independent completion observation before sample memory can
+be returned for reuse. [AmiGUS Mini SHIVA register map](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx)

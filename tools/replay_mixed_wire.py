@@ -19,6 +19,7 @@ else:
 ISSUE_MARGIN_TICKS = 8
 READBACK_ISSUE_MARGIN_TICKS = 9
 READBACK_SLACK_TICKS = 5000
+RELOAD_TERMINAL_SLACK_TICKS = 16000
 BYTE_RECEIPT = re.compile(
     r"Mixed UART ([01]) tx=([\da-f]{3})/([\da-f]{3})/([\da-f]{3}) rx=([\da-f]{6}) received=3 idle=1"
 )
@@ -36,8 +37,9 @@ def replay_readback_clock(lines, windows, result):
         ticks = [anchor - stable(raw) for raw in row.group(2, 3, 4)]
         wake = result["wait_observations"][i]["before_and_after_wait"][1]
         timing = result["mixed_wire_observations"][i]
+        slack = RELOAD_TERMINAL_SLACK_TICKS if i and rebased_tick else READBACK_SLACK_TICKS
         if (int(row[1]) != i or not wake <= ticks[0] < ticks[1] < ticks[2]
-                or ticks[2] > timing["window"][1] + READBACK_SLACK_TICKS):
+                or ticks[2] > timing["window"][1] + slack):
             raise ValueError("Serial readback samples do not follow the owned wake and receive deadline")
         receipt = timing["serial_loopback"]
         receipt["byte_readback_ticks"] = ticks

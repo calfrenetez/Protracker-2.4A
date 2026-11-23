@@ -15,6 +15,10 @@ enum { MIXED_LOOPBACK_SLOT = 1, MIXED_RECEIVE_SLACK = 5000 };
 static struct pt_routed_midi_wire mixed_wire[2];
 static struct pt_test_midi_receipt mixed_receipts[2];
 static struct pt_test_midi_uart mixed_uart;
+#ifdef PT_PAULA_RELOAD_IRQ
+enum { MIXED_TERMINAL_RECEIVE_SLACK = 16000 };
+static unsigned terminal_receive_failure_count, terminal_receive_failure_status;
+#endif
 #endif
 
 /* The forecast ledger is private. Card words go to RAM and the port is
@@ -137,9 +141,24 @@ static void receive_mixed_wire(const struct pt_diagnostic_cia *clock, unsigned i
 {
     struct paula_window_raw *raw = &timed[i].raw;
     struct pt_test_midi_receipt *receipt = &mixed_receipts[i];
+#ifdef PT_PAULA_RELOAD_IRQ
+    /* No future note is armed after F00. Keep this receipt deadline
+     * distinct from the IRQ's unchanged frame deadline. */
+    const unsigned slack = i ? MIXED_TERMINAL_RECEIVE_SLACK : MIXED_RECEIVE_SLACK;
+    if (raw->end <= slack)
+        return;
+    if (!serial_receive(clock, raw->end - slack, mixed_wire + i, receipt)) {
+        if (i) {
+            terminal_receive_failure_count = serial_count(clock);
+            terminal_receive_failure_status = *serial_register(SERIAL_STATUS);
+        }
+        return;
+    }
+#else
     if (raw->end <= MIXED_RECEIVE_SLACK ||
         !serial_receive(clock, raw->end - MIXED_RECEIVE_SLACK, mixed_wire + i, receipt))
         return;
+#endif
     raw->observed_midi = (uint32_t)MIXED_LOOPBACK_SLOT << 24 | (uint32_t)receipt->bytes[0] << 16 |
         (uint32_t)receipt->bytes[1] << 8 | receipt->bytes[2];
 }
@@ -180,6 +199,10 @@ static void report_mixed_words(void)
 #endif
     }
 #ifdef PT_PAULA_MIDI_WIRE
+#ifdef PT_PAULA_RELOAD_IRQ
+    printf("Mixed UART terminal failure count=%u uart=%04x\n",
+        terminal_receive_failure_count, terminal_receive_failure_status);
+#endif
     printf("Mixed UART cleanup restored=%u request=%04x/%04x uart=%04x period=%u\n",
         mixed_uart.restored, (unsigned)mixed_uart.original_requests, (unsigned)mixed_uart.final_requests,
         mixed_uart.status, mixed_uart.period);

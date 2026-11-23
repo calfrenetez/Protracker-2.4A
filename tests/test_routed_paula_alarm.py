@@ -204,7 +204,7 @@ class PaulaAlarmReplay(unittest.TestCase):
         ]
         for i, (base, anchor, first) in enumerate(((0, initial, 8192), (rebased, later, stop))):
             count = base + anchor - first
-            clock = "/".join(triplet(count - dt) for dt in (300, 550, 890))
+            clock = "/".join(triplet(count - dt) for dt in (300, 550, 6000 if i else 890))
             rows.extend((
                 f"Paula reload {i} tick={base} planned={i} issued={i}",
                 f"Paula wait {i} before={triplet(count+300)} after={triplet(count-80)} alarm=1",
@@ -215,7 +215,11 @@ class PaulaAlarmReplay(unittest.TestCase):
         result = replay_wire(text, require_byte_clock=True, reload=True)
         self.assertEqual(result["clock_reload"]["original_callbacks"], 1)
         self.assertEqual(result["mixed_wire_observations"][1]["serial_loopback"]["byte_readback_ticks"],
-                         [stop + 300, stop + 550, stop + 890])
+                         [stop + 300, stop + 550, stop + 6000])
+        with self.assertRaises(ValueError):
+            late = text.replace(triplet(rebased + later - stop - 6000),
+                                triplet(rebased + later - stop - 16500), 1)
+            replay_wire(late, require_byte_clock=True, reload=True)
         with self.assertRaises(ValueError):
             replay_wire(text.replace("issued=1", "issued=0"), require_byte_clock=True, reload=True)
         with self.assertRaises(ValueError):

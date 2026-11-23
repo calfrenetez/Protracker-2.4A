@@ -22,5 +22,19 @@
   "canonical_disk_unchanged": true,
   "saved_files_verified": 39,
   "guard_release_verified": true,
+  "receipt_gate_follow_up": {
+    "tested_source": "2653edcf380776a8fb63d5e802781d60d78be3ff",
+    "candidate_and_guest_readback_sha256": "c78c5db9bf5da4f621cfe2fd978e5a0ec42a42f6ffb2f18016d3ef90e3809e73",
+    "build_receipt_sha256": "3b86c86d86b00b3bd4ddd889f9686ee967d35cf326fd59dea9f1d9dcc4f75804",
+    "guest_log_sha256": "b2de8d26b55ff1da0f494718667ffb241829b2d98d5de29d933c4aa2132a2e94",
+    "additional_checks": ["fully consumed interval held before exact output proof", "duplicate and wrong-serial completion refuse", "active audio requires F00 Stop publication"],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

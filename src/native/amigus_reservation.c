@@ -5,7 +5,7 @@ static int library_open(void *ctx)
 {
     struct pt_native_amigus_library *n = ctx;
     if (n->base) return 0; /* Do not replace another live library reference. */
-    n->base = OpenLibrary("amigus.library", 1);
+    n->base = OpenLibrary((CONST_STRPTR)"amigus.library", 1);
     return n->base != 0;
 }
 static void library_close(void *ctx)

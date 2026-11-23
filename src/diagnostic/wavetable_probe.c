@@ -7,7 +7,7 @@
 #include <proto/dos.h>
 #include <stdio.h>
 
-int pt_wavetable_probe(void)
+int pt_wavetable_probe(int selected_control)
 {
     struct Library *pin;
     struct pt_native_amigus_library native={0};
@@ -15,12 +15,15 @@ int pt_wavetable_probe(void)
     struct pt_amigus_reservation_api api=pt_native_amigus_reservation_api(&native);
     struct pt_native_amigus_wavetable_read n={0};
     enum pt_amigus_reservation_result opened;
-    unsigned i=0;
+    unsigned i=0, reads=selected_control ? 1U : 8U;
     unsigned long release_code;
     int result=PT_SKIP;
     const char *reason="register-contract-unavailable";
-    puts("WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED");
-    pin=OpenLibrary("amigus.library",1);
+    if (selected_control)
+        puts("WAVETABLE-PROBE scope=Mini-7ea663e7-selected-control writes=NO bank_select=NO bank_identity=UNKNOWN voices_stopped=NOT_QUALIFIED");
+    else
+        puts("WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED");
+    pin=OpenLibrary((CONST_STRPTR)"amigus.library",1);
     if (!pin) { puts("WAVETABLE result=SKIP reason=library-unavailable rc=5"); return PT_SKIP; }
     if (pin->lib_Version!=1 || pin->lib_Revision!=1) {
         CloseLibrary(pin);
@@ -36,13 +39,18 @@ int pt_wavetable_probe(void)
     if (pt_amigus_reservation_begin(&r)) {
         if (pt_native_amigus_wavetable_read_bind(&n,&r)) {
             result=PT_FAIL; reason="read-refused";
-            for (i=0;i<8;++i) {
+            for (i=0;i<reads;++i) {
                 uint16_t value=0;
                 if (SetSignal(0,0)&SIGBREAKF_CTRL_C) { reason="cancelled"; break; }
-                if (!pt_native_amigus_wavetable_read16(&n,i*2,&value)) break;
-                printf("WAVETABLE STATUS offset=0x%02x value=0x%04x\n",i*2,value);
+                if (selected_control) {
+                    if (!pt_native_amigus_wavetable_read_selected_control(&n,&value)) break;
+                    printf("WAVETABLE SELECTED CONTROL offset=0x20 value=0x%04x\n",(unsigned)value);
+                } else {
+                    if (!pt_native_amigus_wavetable_read16(&n,i*2,&value)) break;
+                    printf("WAVETABLE STATUS offset=0x%02x value=0x%04x\n",i*2,value);
+                }
             }
-            if (i==8) { result=PT_PASS; reason="observed"; }
+            if (i==reads) { result=PT_PASS; reason="observed"; }
         }
         if (!pt_amigus_reservation_end(&r)) {
             puts("WAVETABLE HOLD: access end unconfirmed; Task/library/card retained");

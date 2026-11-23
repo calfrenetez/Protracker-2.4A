@@ -12,7 +12,7 @@ static struct pt_driver_snapshot snapshot(void *context)
     struct pt_native_driver *d = context;
     struct pt_driver_snapshot s = {0,0,0,0,0};
     struct Library *lib = (struct Library *)FindName(&SysBase->LibList, (STRPTR)d->name);
-    struct Device *ahi = (struct Device *)FindName(&SysBase->DeviceList, "ahi.device");
+    struct Device *ahi = (struct Device *)FindName(&SysBase->DeviceList, (CONST_STRPTR)"ahi.device");
     if (ahi) s.ahi_users = ahi->dd_Library.lib_OpenCnt;
     if (lib) {
         s.present = 1;

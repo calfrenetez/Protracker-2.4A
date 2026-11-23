@@ -9,9 +9,10 @@ int main(void)
     struct AmiGUS card={0};
     struct pt_amigus_reservation r={0};
     struct pt_native_amigus_wavetable_read n={0};
-    uint16_t registers[8],copy[8],value;
+    uint16_t registers[17]={0},copy[17],value;
     unsigned i;
     for (i=0;i<8;++i) registers[i]=(uint16_t)(0xa500+i);
+    registers[16]=0x8003;
     memcpy(copy,registers,sizeof(copy));
     card.agus_TypeId=AmiGUS_mini; card.agus_FirmwareRev=0x7ea663e7UL;
     card.agus_WavetableBase=(APTR)registers;
@@ -26,6 +27,9 @@ int main(void)
         value=0x1234;
         assert(!pt_native_amigus_wavetable_read16(&n,i,&value) && value==0x1234);
     }
+    assert(pt_native_amigus_wavetable_read_selected_control(&n,&value) && value==0x8003);
+    assert(!pt_native_amigus_wavetable_read_selected_control(&n,NULL));
+    assert(!pt_native_amigus_wavetable_read_selected_control(NULL,&value));
     assert(!pt_native_amigus_wavetable_read16(&n,0,NULL));
     assert(!pt_native_amigus_wavetable_read16(NULL,0,&value));
     assert(!pt_native_amigus_wavetable_read_bind(NULL,&r));
@@ -57,6 +61,7 @@ int main(void)
         r=bad;
         value=0x1234;
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value) && value==0x1234 && active.faulted);
+        assert(!pt_native_amigus_wavetable_read_selected_control(&active,&value) && value==0x1234);
         /* Even restoring the owner cannot resume a faulted reader. */
         r.card=&card; r.opened=r.reserved=r.access=1; r.interrupt=0; r.resource=PT_AMIGUS_WAVETABLE;
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value));
@@ -76,6 +81,15 @@ int main(void)
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value));
         assert(!memcmp(registers,copy,sizeof(copy)));
     }
-    puts("WAVETABLE READ PASS: eight global reads, all unsafe offsets refused, descriptor/lease loss latched, no writes; synthetic storage only");
+    {
+        const struct AmiGUS saved=card;
+        struct pt_native_amigus_wavetable_read near_end={0};
+        card.agus_WavetableBase=(APTR)(UINTPTR_MAX-31);
+        value=0x1234;
+        assert(pt_native_amigus_wavetable_read_bind(&near_end,&r));
+        assert(!pt_native_amigus_wavetable_read_selected_control(&near_end,&value) && value==0x1234);
+        card=saved;
+    }
+    puts("WAVETABLE READ PASS: global and selected-control reads, unsafe offsets refused, descriptor/lease loss latched, no writes; synthetic storage only");
     return 0;
 }

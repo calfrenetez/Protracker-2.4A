@@ -616,3 +616,19 @@ remained View Only with no control taken. See
 `../evidence/enhanced-editor/amigus-wavetable-status-physical/`. This does not clear
 another task's playback/listening gate or qualify sample-RAM capacity, transfer
 completion/order, all-voice stop or audio. No sample upload occurred.
+
+## Selected voice control readback
+
+`AmiGUSTest --wavetable-selected-control` reads the SHIVA control word at
+offset `0x20` under the existing exclusive Mini wavetable lease. It leaves
+the write-only bank selector untouched, so a standalone invocation reports
+the current bank with unknown identity. The register map assigns bit 15 to
+playback Start and Stop. A future owned playback path can use this read
+after selecting its known voice and separately establish whether the
+hardware has finished reading that voice's sample RAM.
+[AmiGUS Mini register map, SHIVA rows 94–108](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx)
+
+The synthetic reader test checks the actual offset, unchanged register
+storage, refusal after lease loss and address overflow. Both the probe and
+the synthetic fixture cross-build with the pinned SDK. Emulator and physical
+execution of the selected-control mode remain pending.

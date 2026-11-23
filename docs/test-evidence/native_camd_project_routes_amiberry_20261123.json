@@ -1,0 +1,49 @@
+{
+  "source": "d2277e1070f4d780d0013cfdd90740aebd3196d4",
+  "target": "amiberry-030",
+  "candidates": {
+    "Control": {
+      "candidate_and_guest_readback_sha256": "79e9292e06a7e7bc697be0b4afb2cd72f848487ad3f62f99e7d00e02aded7e97",
+      "build_receipt_sha256": "b96e7c552ccec436841969bf1d6ea503fc3d8002ed30a00e3b0cee0ac1f66892",
+      "validated_build_inputs": 19
+    },
+    "Tracker": {
+      "candidate_and_guest_readback_sha256": "ea24e5ff0dd37087d0f928834daad8c16f81be28c3a7aea5fc4c82283bdc26bc",
+      "build_receipt_sha256": "d96be4fe519c67c1d7c9966facee34b04824b07c978c01db6a4b4861d3b9cfcf",
+      "validated_build_inputs": 120
+    }
+  },
+  "guest_stdout_sha256": {
+    "Absent": "40b8391fe768fb4430921e1eba8b10c29c0acd29c21dc7b432114079ab6eaac6",
+    "Loopback": "bd6ec31acba9c62bdee69cd6a09a43c22698abc5e855620d3778931007acde01",
+    "Routes": "52fdead04a879cbeae7b73d8cf5c295081cee006866ffd8fa14efc1b109c4af3",
+    "Tracker": "6ad5a5e6bdde11d7ac857decd2978a832c256fd35959c7623029428cf58fbac5"
+  },
+  "library": {
+    "version": "40.5",
+    "upstream_commit": "55a2f589bba0277bb7e779547a0e6d9a15aff2c0",
+    "guest_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+    "driver_directory_empty": true
+  },
+  "host": "Sanitizers passed the eight existing control groups and additional project-order, complete refusal, revalidation and owner preservation checks.",
+  "overall_run_passed": false,
+  "camd_cases_passed": true,
+  "tracker_fixture": {
+    "exit_code": 0,
+    "original_assertion_log_match": false,
+    "reason": "The auxiliary tracker oracle expected the historical banner. The current exact source prints the observed different banner.",
+    "original_oracle_sha256": "de89ee98bb7f7638fa47a7cb3625e1445ec62c7596a19c84363d4e7dd6301766"
+  },
+  "checks": [
+    "map two original project-order indexes to existing CAMD senders in reversed discovery order",
+    "two isolated local CAMD receivers each accept their own Note On and Note Off",
+    "missing receiver refuses complete map even while its original sender link is retained",
+    "duplicate and wrong-case names and unlinked receivers refuse",
+    "existing absent-library and single local loopback fixtures pass"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Private native CAMD library, local control mapping and loopback in Amiberry. Scheduled output, physical MIDI, audio devices and listening remain open."
+}

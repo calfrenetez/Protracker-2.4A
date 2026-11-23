@@ -672,3 +672,13 @@ recording settings. Its evidence concerns audible output. Sample-RAM
 reclamation still requires the separate completion observation above.
 [AmiGUS Mini guide](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS%20mini.guide#L729-L734)
 [SDK recorder](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Software/Tools/Record/Record.c#L276-L306)
+
+Run `tools/check_amigus_wave_capture.py --help` for the offline recording
+check. Give it the mono or stereo 16-bit PCM WAV, expected tone frequency,
+and the before, active and after frame ranges from the independent capture
+timing log. Use the levels agreed for that capture. The report measures
+the quiet-window peaks and the active tone level and energy fraction per
+channel. A one-shot that ends by itself can give the same audio result as a
+stopped voice. To check that Stop caused silence, use an owned test voice
+scheduled to continue past Stop and keep the separate register and memory
+evidence.

@@ -194,3 +194,10 @@ command has settled or been abandoned with proof. A pending command keeps
 its original ownership, and Stop leaves the renderer's next interval in
 place. The fixture stops at frame 960 before its original F00 at frame 1920
 and checks the complete Note Off and reader releases.
+
+During the original publication callback, the provider can copy the entire
+prepared MIDI event with `pt_routed_midi_schedule_copy_packet`. The copy
+includes the exact frame, window, generation, serial, audio ticket and all
+message bytes. Its numeric endpoint indexes retain the original destination
+mapping. A scheduled consumer can use this copy without reading the renderer,
+live MIDI planner or project strings.

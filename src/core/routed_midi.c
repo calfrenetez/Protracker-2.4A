@@ -397,10 +397,12 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
     schedule->cancel_requested = 0;
     schedule->settled = 0;
     schedule->busy = 1;
+    schedule->publishing = 1;
     if (combined)
         result = schedule->provider.submit_combined(schedule->provider.context, event, audio);
     else
         result = schedule->provider.submit(schedule->provider.context, event);
+    schedule->publishing = 0;
     schedule->busy = 0;
     if (result == 1) {
         schedule->held = 1;
@@ -424,6 +426,27 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *schedule, const struct pt_mixed_readers_event *audio)
 {
     return submit_batch(schedule, audio, 1);
+}
+
+int pt_routed_midi_schedule_copy_packet(const struct pt_routed_midi_schedule *schedule,
+    const struct pt_routed_midi_event *event, struct pt_routed_midi_packet *out)
+{
+    const struct pt_routed_midi_batch *batch;
+    if (!schedule || !schedule->publishing || !schedule->busy || event != &schedule->event ||
+        !schedule->midi || (uintptr_t)out % _Alignof(struct pt_routed_midi_packet) ||
+        !disjoint(schedule, sizeof(*schedule), out, sizeof(*out)) ||
+        !disjoint(schedule->midi, sizeof(*schedule->midi), out, sizeof(*out)))
+        return 0;
+    batch = &schedule->midi->batch;
+    if (event->batch != batch || batch->count > PT_ROUTED_MIDI_MESSAGES)
+        return 0;
+    struct pt_routed_midi_packet packet = {
+        .key = event->key, .first = event->first, .last = event->last, .audio_ticket = schedule->audio_ticket,
+        .count = batch->count, .endpoint_count = event->endpoint_count, .stop = batch->stop
+    };
+    memcpy(packet.messages, batch->messages, batch->count * sizeof(*packet.messages));
+    *out = packet;
+    return 1;
 }
 
 int pt_routed_midi_schedule_audio_receipt(const struct pt_routed_midi_schedule *schedule,

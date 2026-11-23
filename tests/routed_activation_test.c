@@ -14,7 +14,7 @@ struct routed_port_model {
     struct paired_ram *audio;
     struct pt_routed_midi_schedule *schedule;
     const struct pt_mixed_activation_packet *publication;
-    struct pt_routed_midi_batch batch;
+    struct pt_routed_midi_packet midi;
     char endpoint[PT_MIDI_PORTS][PT_MIDI_ENDPOINT];
     struct pt_routed_midi_receipt receipt;
     unsigned queued, issued, detached, publishes;
@@ -33,12 +33,23 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
 {
     struct routed_port_model *p = context;
     const struct pt_mixed_activation_packet *packet = p->publication;
+    const struct pt_routed_midi_event copied_event = *midi;
+    struct pt_routed_midi_packet queued = {0};
     assert(packet && !p->queued && audio == pt_mixed_activation_publication_event(packet->registration.owner, packet));
     assert(packet->first == midi->first && packet->last == midi->last && packet->frame == midi->key.frame);
     assert(midi->endpoint_count == 2 && midi->batch->count == 2);
+    queued.audio_ticket = UINT64_MAX;
+    assert(!pt_routed_midi_schedule_copy_packet(p->schedule, &copied_event, &queued));
+    assert(queued.audio_ticket == UINT64_MAX);
+    assert(pt_routed_midi_schedule_copy_packet(p->schedule, midi, &queued));
+    assert(queued.audio_ticket == packet->ticket && queued.first == packet->first && queued.last == packet->last);
+    assert(queued.count == 2 && queued.endpoint_count == 2 && queued.stop == midi->batch->stop);
+    for (unsigned i = queued.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
+        assert(!queued.messages[i].endpoint && !queued.messages[i].bytes[0] &&
+               !queued.messages[i].bytes[1] && !queued.messages[i].bytes[2]);
     if (a_publish_model(p->audio, p->audio->owner, packet) != 1)
         return 0;
-    p->batch = *midi->batch;
+    p->midi = queued;
     memcpy(p->endpoint, midi->endpoint, sizeof(p->endpoint[0]) * midi->endpoint_count);
     p->receipt = (struct pt_routed_midi_receipt){.key = midi->key};
     p->issued = p->detached = 0;
@@ -67,18 +78,18 @@ static int routed_commit(void *context, const struct pt_mixed_activation_packet 
     int result;
     assert(p && p->audio == context && p->queued && !p->issued);
     assert(!pt_mixed_activation_publication_event(packet->registration.owner, packet));
-    assert(p->batch.frame == packet->frame && p->batch.serial == p->receipt.key.serial);
+    assert(p->midi.key.frame == packet->frame && p->midi.key.serial == p->receipt.key.serial);
     assert(!strcmp(p->endpoint[0], "synth.a") && !strcmp(p->endpoint[1], "synth.b"));
-    assert(p->batch.messages[0].endpoint == 0 && p->batch.messages[1].endpoint == 1);
-    assert(p->batch.messages[0].bytes[0] == (p->batch.stop ? 0x82 : 0x92));
-    assert(p->batch.messages[1].bytes[0] == (p->batch.stop ? 0x85 : 0x95));
-    assert(p->batch.messages[0].bytes[1] == 60 && p->batch.messages[1].bytes[1] == 67);
-    assert(p->batch.messages[0].bytes[2] == (p->batch.stop ? 0 : 91));
-    assert(p->batch.messages[1].bytes[2] == (p->batch.stop ? 0 : 102));
+    assert(p->midi.messages[0].endpoint == 0 && p->midi.messages[1].endpoint == 1);
+    assert(p->midi.messages[0].bytes[0] == (p->midi.stop ? 0x82 : 0x92));
+    assert(p->midi.messages[1].bytes[0] == (p->midi.stop ? 0x85 : 0x95));
+    assert(p->midi.messages[0].bytes[1] == 60 && p->midi.messages[1].bytes[1] == 67);
+    assert(p->midi.messages[0].bytes[2] == (p->midi.stop ? 0 : 91));
+    assert(p->midi.messages[1].bytes[2] == (p->midi.stop ? 0 : 102));
     result = a_commit_model(context, packet, actual);
     if (result == 1) {
         p->receipt.activated = p->audio->ticks;
-        p->receipt.count = p->batch.count;
+        p->receipt.count = p->midi.count;
         p->issued = 1;
     }
     return result;
@@ -100,7 +111,10 @@ static void settle_routed(struct activation_case *c, struct routed_port_model *p
 {
     struct pt_mixed_readers_command_receipt receipt;
     const struct paired_ram_command *queued = a_command(&c->ram, ticket);
+    struct pt_routed_midi_packet outside = {0};
     assert(queued && !pt_mixed_activation_publication_event(c->owner, &queued->packet));
+    assert(!pt_routed_midi_schedule_copy_packet(p->schedule, &p->schedule->event, &outside));
+    assert(!outside.audio_ticket);
     assert(pt_routed_midi_schedule_observe(p->schedule) == PT_ROUTED_MIDI_WAITING);
     c->ram.ticks = oracle(frame) - 1;
     assert(pt_mixed_activation_fire(c->owner, ticket) == PT_MIXED_ACTIVATION_EARLY);

@@ -79,6 +79,16 @@ struct pt_routed_midi_event {
     unsigned endpoint_count;
 };
 
+/* One complete queued MIDI batch. Endpoint indexes refer to the provider's
+ * original resolved destinations for this session. This packet owns no
+ * endpoint, audio reader, device or clock. It holds no borrowed pointers. */
+struct pt_routed_midi_packet {
+    struct pt_routed_midi_key key;
+    uint64_t first, last, audio_ticket;
+    unsigned count, endpoint_count, stop;
+    struct pt_routed_midi_message messages[PT_ROUTED_MIDI_MESSAGES];
+};
+
 struct pt_routed_audio_receipt {
     const struct pt_mixed_readers_output *queue;
     uint64_t ticket, first_issued, last_issued;
@@ -150,7 +160,7 @@ struct pt_routed_midi_schedule {
     struct pt_mixed_readers_key audio_active[PT_ROUTED_AUDIO_SLOTS];
     struct pt_routed_audio_change audio_pending[PT_MIXED_READERS_ACTIONS];
     uint32_t audio_owned;
-    unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested, settled;
+    unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested, settled, publishing;
 };
 
 /* Bind a zeroed schedule before preparing the first batch. The session must
@@ -182,6 +192,11 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
  * when audio is present. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
+/* Copy the exact original event while executing this schedule's submit
+ * callback. The destination belongs to the task-side provider. It remains
+ * unchanged on refusal. Endpoint resolution precedes acceptance. */
+int pt_routed_midi_schedule_copy_packet(const struct pt_routed_midi_schedule *,
+    const struct pt_routed_midi_event *, struct pt_routed_midi_packet *);
 /* Project a genuine audio owner's detached-command receipt into the combined
  * proof. Pass the original service result and its output before observing the
  * combined schedule or closing the detached command handle. The event and

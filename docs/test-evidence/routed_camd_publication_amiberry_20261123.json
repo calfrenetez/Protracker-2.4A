@@ -1,0 +1,25 @@
+{
+  "source": "7f1e6478589661ec3eb4b77e1d9e2eb37fa64431",
+  "target": "amiberry-030",
+  "mixed_fixture": {
+    "candidate_and_guest_readback_sha256": "add53dba98020923501333a01d78ea894c2708bcb775709a1507cd762e240410",
+    "build_receipt_sha256": "7d7b3c7a294ce5cb05c7fdcce7f91f7d74acb64835c8b5bd64cd51d35ebfe090",
+    "guest_log_sha256": "2d403ee519481402e9ad15527865b749dd152c1c39b55e74014c020a0db08b0a",
+    "validated_build_inputs": 95,
+    "passed": true
+  },
+  "camd_fixture": {
+    "candidate_and_guest_readback_sha256": "b6c4d327fd5119e79d29e0c888845b5c12ced041250b965bcf6b7aa4b6a6b48d",
+    "build_receipt_sha256": "99b06949ae5c63f0e69a934e72bcea7019cf2ca5fdf7bfbd0579229624884218",
+    "guest_log_sha256": "a7a4dc7121e6ec34592d01a8b24d2a7af49a91f856bd002f05c5e9016d79c741",
+    "validated_build_inputs": 19,
+    "passed_both_cases": true
+  },
+  "host_routed_methods": 12,
+  "host_camd_model_groups": 9,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Genuine software mixed publication with original held MIDI destination order, refusal of reordered slots, and owned Stop. Separate native CAMD local queues exercised the same name check. Both hardware delivery and exact musical timing remain unqualified."
+}

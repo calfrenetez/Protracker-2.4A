@@ -1,0 +1,42 @@
+{
+  "source": "d4f23b2e39a6e686dd4bd104eaa72349f4143719",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "7e5bfdf0a0d482f6e31f549986bb0fc171b75119d2408a3c6037c9782f6df9a1",
+  "build_receipt_sha256": "32587578aa5fd572da0f5a2e257652062152b86861f8e15983eade678992b10c",
+  "guest_log_sha256": "b9562666f0aae4ad1461ab3be03ee064fbb4dea41c1f02ecc47c312f3092f0e3",
+  "replay_tool_sha256": "1607227c58eede11c069e5ae2698531abb48e3be30341de7d829026cba67dd6b",
+  "counted_build_inputs": 84,
+  "guest_exit_code": 0,
+  "read_register": "INTREQR at 0xdff01e",
+  "dma_and_audio_request_masks": {
+    "preload": [
+      0,
+      0
+    ],
+    "group_start": [
+      15,
+      15
+    ],
+    "control": [
+      15,
+      15
+    ],
+    "selective_stop": [
+      10,
+      10
+    ],
+    "final_stop": [
+      0,
+      0
+    ],
+    "closure": [
+      0,
+      0
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Actual silent Paula DMA, reload requests and owned audio.device cleanup in Amiberry. No sample-frame dispatch, full mixed delivery, real-device timing or listening acceptance."
+}

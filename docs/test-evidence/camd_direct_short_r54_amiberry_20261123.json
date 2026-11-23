@@ -1,0 +1,29 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "5b4b7cf53c7d968af7ca2a0ec3852e2d673c1aa1eefff0a7584f29bdec2c2a44",
+  "build_receipt_sha256": "04b89b266236cf941d8ceda3ebb348df8e33c94cadb3dc44a48ed8df4d6b8ac9",
+  "guest_log_sha256": "de7cc3870688b10c5cb008c97c034106c26055f44140bfb80c2df5b2deb43f5d",
+  "validated_build_inputs": 24,
+  "local_camd_library_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+  "private_midi_driver_directory_empty": true,
+  "observations": {
+    "local_messages_and_timestamps": 23,
+    "coherent_pair_rows": 15,
+    "partial_baseline_ticks": [
+      6,
+      6
+    ],
+    "partial_put_bracket_ticks": [
+      671,
+      2333
+    ],
+    "complete_independent_interval": false,
+    "closed": true,
+    "rc": 20
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "The finite one-shot observation ended before all requested rows. Raw pairs and local receipt evidence are partial. A complete timer-bracketed measurement remains pending."
+}

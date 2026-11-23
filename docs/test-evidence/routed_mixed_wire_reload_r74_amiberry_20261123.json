@@ -1,0 +1,40 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening remain pending.",
+  "fixtures": {
+    "reload": {
+      "passed": false,
+      "guest_rc": "20",
+      "candidate_sha256": "a61062fcdff3e93aaa775249d81c268cf71a4c0cefecc923f2fb375a9908834c",
+      "validated_build_inputs": 128,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "8557c25533c5e1beafec91873e366db0d97fa3f4cb22367484e3996f7b8cc046",
+      "guest_log_sha256": "a1c149294144eca226c4b1d816d1f44a778b154a36466ca24b5d4069034bb688",
+      "reason": "Reload setup passed. Start was refused inside the protected nine-tick end margin.",
+      "reload_setup": {
+        "counter_armed": true,
+        "coherent_capture_attempts": [
+          1,
+          0
+        ],
+        "alarm_callbacks": 1
+      },
+      "start_refusal": {
+        "window": [
+          8192,
+          8207
+        ],
+        "pre_sample": 8199,
+        "remaining_ticks": 8,
+        "paula_dma_issued": false,
+        "uart_issued": false,
+        "card_ram_stores_observed": false
+      }
+    }
+  }
+}

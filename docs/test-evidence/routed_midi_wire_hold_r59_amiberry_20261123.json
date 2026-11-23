@@ -1,0 +1,14 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "ce3718ceb8da361a3cbca4a27a2577065dd3e51145b728881070b4ed1a26b251",
+  "build_receipt_sha256": "ef92ff0231223c8386145c48d488c9d8967e91e20f147767890c2675c3747e2c",
+  "guest_log_sha256": "eea1d8e1100e83fd36e95f57b2c28307ff55e13e7f108f60eade92262da9fd1f",
+  "validated_build_inputs": 37,
+  "guest_outcome": "HOLD",
+  "terminal_timing_observations": false,
+  "guest_reason_detail": "original timer or UART retained",
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true
+}

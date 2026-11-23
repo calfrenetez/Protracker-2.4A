@@ -119,4 +119,5 @@ and a MIDI note through the same frame-zero publication. It checks both partial
 outcomes, confirmed cancellation, stale and incomplete audio proofs, timing,
 and exact Stop after an audio-only stop result.
 The exact native fixture returned zero and completed all seven cases on the
-Amiberry 68030. [Combined 030 test receipt](test-evidence/routed_combined_amiberry_20261123.json)
+Amiberry 68030. The expanded nine-case build also completed there, adding
+audio-only publication and cancellation. [Combined 030 test receipt](test-evidence/routed_combined_amiberry_20261123.json)

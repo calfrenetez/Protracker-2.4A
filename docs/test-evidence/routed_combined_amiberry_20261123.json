@@ -24,5 +24,20 @@
   "canonical_disk_unchanged": true,
   "saved_files_verified": 39,
   "guard_release_verified": true,
+  "audio_only_follow_up": {
+    "tested_source": "2471e3f9d111419bb299e5daa47ec64075ce8b99",
+    "candidate_and_guest_readback_sha256": "cd2da42ef12bd90c64f4014bbebaab4a5162ec423ee8722af541ffb0b78af8a2",
+    "build_receipt_sha256": "70e5fee562cdc89cd193ea5a69d79936fe661dd4855e7a82658a17466383a69b",
+    "guest_log_sha256": "c08f75a9f45cb39041dad75fd1b301567f89280b724028ce4c14e87e942ca50a",
+    "cases": 9,
+    "additional_cases": ["audio-only frame and Stop with zero MIDI messages", "audio-only frame canceled before activation"],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Genuine ProTracker audio queue with modeled Paula, AmiGUS and MIDI output. The full editor, live CAMD, physical devices and listening remain untested."
 }

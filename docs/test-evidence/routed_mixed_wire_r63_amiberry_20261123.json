@@ -1,0 +1,32 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "passed": false,
+  "candidate_and_guest_readback_sha256": "cbc3fc7ba019f77a12c67b6bd4d790b23c98f3d017530b6a337237ecc9ce4d6a",
+  "build_receipt_sha256": "c8b65669d50d11d286771d0526e0ea38bd5117903f0cb52b98a61f249d8781f1",
+  "guest_log_sha256": "e5a6665920294e6a018a6a04f20463f7323b1cc68b282d488477fdfdfabde85a",
+  "validated_build_inputs": 127,
+  "guest_rc": "20",
+  "reason": "Start was issued and MIDI loopback completed. The final clock sample was at the excluded end, so the shared-frame bracket failed and the fixture closed before F00.",
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening were not tested.",
+  "observed_start": {
+    "frame": 0,
+    "window": [
+      8192,
+      8207
+    ],
+    "observed_ticks": [
+      8199,
+      8207
+    ],
+    "paula_dma_channels_started": 4,
+    "serial_received": "953c5a",
+    "uart_request_restored": true,
+    "guest_retired": true
+  },
+  "f00_issued": false
+}

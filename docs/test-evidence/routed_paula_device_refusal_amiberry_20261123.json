@@ -1,0 +1,18 @@
+{
+  "base_source": "7e8103ca",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "da400a67c873650fa7a1690ee0ae918d19fa13713da8295b739dcabf6771af29",
+  "diagnostic_source_sha256": "373bfbba5121a7a5b4181c08050336043dff372172c5dc0f219c99abab4643d2",
+  "build_receipt_sha256": "7609241746c9179dced0c1422a70ff179a8f1c3d59d9d7bc61f1454edd32cadf",
+  "guest_log_sha256": "d572c749f84cbd31280378be2c19795a0550acac579df3a62b2a7d86cd1ea7d2",
+  "validated_build_inputs": 84,
+  "host_methods_passed": 5,
+  "guest_exit_code": 20,
+  "overall_passed": false,
+  "observed": "Refused at the grouped Start and fresh reload-request stage. Guest reports resources released. The original log does not distinguish the failing predicate.",
+  "retained": "The exact private source, command-input hashes, expected and actual output and failed observed disk were preserved.",
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true
+}

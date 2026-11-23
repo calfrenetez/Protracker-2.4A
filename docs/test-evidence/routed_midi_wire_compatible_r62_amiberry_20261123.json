@@ -1,0 +1,55 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility profile",
+  "internal_serial_loopback": true,
+  "cycle_exact_profile_flags": {
+    "cpu_cycle_exact": false,
+    "cpu_memory_cycle_exact": false,
+    "blitter_cycle_exact": false,
+    "cycle_exact": false
+  },
+  "candidate_and_guest_readback_sha256": "b3fbba44199bba70cab8366f9b2e63869b4da1e4aacb6d810a3a01d9df7033ef",
+  "build_receipt_sha256": "dcfccb1e109a90d1d09ab6675291d181c522d7b290e7cd9512f6bc71880c9a06",
+  "guest_log_sha256": "307ed5c99ed0659d3398d256528430e990634d09ac933c5e960893ad623de3db",
+  "validated_build_inputs": 37,
+  "independent_replay_sha256": "ef41d55e0b5a14115108a3694f8a49f3d9ec70aed0f49c7a5989a5aa93a85dc3",
+  "observations": {
+    "counter_hz": 709379,
+    "uart_period": 113,
+    "notes": [
+      {
+        "frame": 0,
+        "window": [
+          8192,
+          8207
+        ],
+        "first_write_ticks": [
+          8193,
+          8201
+        ],
+        "loopback": "953c5a"
+      },
+      {
+        "frame": 1920,
+        "window": [
+          36568,
+          36582
+        ],
+        "first_write_ticks": [
+          36570,
+          36578
+        ],
+        "loopback": "853c00"
+      }
+    ],
+    "expired_frame": 3000,
+    "expired_without_send": true,
+    "closed": true
+  },
+  "normal_owned_stop": true,
+  "canonical_profile_restored": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "First transmit-register writes are timed. Three-byte messages are independently read back after each write."
+}

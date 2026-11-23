@@ -408,3 +408,26 @@ after the remaining bytes arrive. Scheduled multi-message dispatch,
 CAMD endpoint routing and physical MIDI output remain separate work.
 [Commodore serial interface](https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_8.html)
 [Amiberry loopback implementation](https://github.com/BlitterStudio/amiberry/blob/8dec73501b5d2c2b3a6859b1d30a25291febb491/src/osdep/amiberry_serial.cpp)
+
+In the canonical cycle-exact Amiberry profile, the first Note On
+write was bracketed at ticks [8195, 8201] within [8192, 8207).
+The UART then stayed busy and returned zero loopback bytes.
+The guest retained the UART and the harness independently
+restored and released the shared emulator. The pinned Amiberry
+source sets a nonzero shifter state before calling a transfer
+routine that requires the shifter to be empty. This path is consistent
+with the observed cycle-exact stall.
+[Cycle-exact drain receipt](test-evidence/routed_midi_wire_drain_r60_amiberry_20261123.json)
+[Amiberry transmit code](https://github.com/BlitterStudio/amiberry/blob/8dec73501b5d2c2b3a6859b1d30a25291febb491/src/osdep/amiberry_serial.cpp#L1446-L1497)
+
+The same exact binary passed in a separately admitted private 68030
+profile with the cycle-exact flags disabled and internal loopback
+enabled. Note On began within [8192, 8207) at [8193, 8201]. Note Off
+began within [36568, 36582) at [36570, 36578]. Both complete messages
+came back with their original bytes and drained. The deliberately
+expired frame produced no send. UART requests and resource closure
+passed, and the shared cycle-exact profile was restored. This result
+qualifies serial compatibility loopback for two single-message frames.
+The original cycle-exact transport and full mixed device playback
+remain pending.
+[Serial compatibility receipt](test-evidence/routed_midi_wire_compatible_r62_amiberry_20261123.json)

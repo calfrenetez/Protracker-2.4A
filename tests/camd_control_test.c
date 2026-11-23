@@ -1,4 +1,5 @@
 #include "src/platform/camd_control.h"
+#include "src/platform/camd_routes.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -268,10 +269,56 @@ static void callback_reentry(void)
     assert(pt_camd_control_retire(&f->control,a)==PT_CAMD_OK);close_all(f);
     assert(f->model.reentry_checks==f->model.calls&&f->model.reentry_checks>=12);
 }
+static void retained_routes(void)
+{
+    const char names[2][PT_MIDI_ENDPOINT] = {"Port 1", "Port 0"};
+    struct rig *f = &rigs[14];
+    struct pt_camd_control *control = &f->control;
+    struct pt_camd_route_lease lease = {0}, other = {0};
+    struct pt_camd_routes observed = {.count = 99};
+    setup(f);
+    clusters(f, 3, 7);
+    assert(pt_camd_control_activate(control) == PT_CAMD_OK);
+    assert(pt_camd_control_refresh(control) == PT_CAMD_OK);
+    assert(!pt_camd_routes_borrow(control, names, 2, &lease) && !lease.owner);
+    unsigned first = index_of(f, names[0]), second = index_of(f, names[1]);
+    assert(pt_camd_control_link(control, first) == PT_CAMD_OK);
+    assert(pt_camd_control_link(control, second) == PT_CAMD_OK);
+    void *original = control->links[first];
+    assert(pt_camd_routes_borrow(control, names, 2, &lease));
+    struct pt_camd_route_lease copy = lease;
+    unsigned calls = f->model.calls;
+    assert(!pt_camd_routes_borrow(control, names, 2, &other));
+    assert(!pt_camd_routes_snapshot(&copy, &observed) && observed.count == 99);
+    assert(!pt_camd_routes_release(&copy));
+    assert(!pt_camd_routes_snapshot(&lease, &lease.routes));
+    assert(pt_camd_routes_snapshot(&lease, &observed) && observed.count == 2 &&
+           observed.slot[0] == first && observed.slot[1] == second);
+    assert(pt_camd_control_link(control, index_of(f, "Port 2")) == PT_CAMD_IN_USE);
+    assert(pt_camd_control_retire(control, first) == PT_CAMD_IN_USE);
+    assert(pt_camd_control_close_step(control) == PT_CAMD_IN_USE);
+    assert(calls == f->model.calls);
+
+    f->model.clusters[1].receivers = NULL;
+    assert(pt_camd_control_refresh(control) == PT_CAMD_OK && control->links[first] == original);
+    observed.count = 99;
+    assert(!pt_camd_routes_snapshot(&lease, &observed) && observed.count == 99);
+    assert(pt_camd_control_retire(control, first) == PT_CAMD_IN_USE);
+    assert(pt_camd_control_close_step(control) == PT_CAMD_IN_USE);
+    f->model.clusters[1].receivers = &f->model.receivers[1];
+    assert(pt_camd_control_refresh(control) == PT_CAMD_OK && control->links[first] == original);
+    assert(pt_camd_routes_snapshot(&lease, &observed) && observed.slot[0] == first);
+    assert(pt_camd_routes_release(&lease) && !pt_camd_routes_release(&lease));
+    assert(!control->route_lease && !pt_camd_routes_snapshot(&copy, &observed));
+    assert(pt_camd_control_retire(control, first) == PT_CAMD_OK && !control->links[first]);
+    close_all(f);
+}
+
 int main(void)
 {
     assert(PT_MIDI_PORTS==16&&PT_MIDI_ENDPOINT==64);
     activation_and_guards();receiver_snapshot();snapshot_atomicity();acquisition_failures();retirement_and_reuse();known_nonconsumption();uncertain_consumption();callback_reentry();
-    puts("CAMD CONTROL HOST PASS:8 groups;copied16-cluster snapshots;actual model node/link custody;receiver-only availability;4 retained UNKNOWN contexts;NO ABI/DELIVERY/CONNECT/TIMING AUTHORITY");
+    retained_routes();
+    puts("CAMD CONTROL HOST PASS:9 groups;copied16-cluster snapshots;actual model node/link custody;receiver-only availability;retained route lease;4 retained UNKNOWN contexts;NO ABI/DELIVERY/CONNECT/TIMING AUTHORITY");
     return 0;
 }

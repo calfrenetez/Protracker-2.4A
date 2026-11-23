@@ -210,6 +210,12 @@ checks reversed destination order and distinct Note On and Note Off delivery
 to two temporary local receivers. Scheduled CAMD delivery has a separate
 timing requirement.
 
+The CAMD route lease keeps the original sender links available to their
+provider until its frame and Stop receipts settle. While the lease is
+held, a receiver refresh can block new route snapshots but cannot replace
+or close those links. Amiberry verified temporary receiver loss and
+return with the same sender, and explicit release followed by teardown.
+
 `pt_routed_activation_prepare` copies the Paula DMA geometry and builds the
 ordered AmiGUS register programs alongside the MIDI packet during the original
 publication. The provider gets one complete prepared object after validation.

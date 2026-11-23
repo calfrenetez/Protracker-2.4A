@@ -17,6 +17,7 @@ enum pt_camd_state {PT_CAMD_EMPTY,PT_CAMD_READY,PT_CAMD_PARTIAL,
 enum pt_camd_result {PT_CAMD_OK,PT_CAMD_REFUSED,PT_CAMD_INVALID,
     PT_CAMD_BUSY,PT_CAMD_CAPACITY,PT_CAMD_IN_USE,PT_CAMD_HOLD,PT_CAMD_MORE,PT_CAMD_FINISHED};
 struct pt_camd_view {const void *cursor;char name[PT_MIDI_ENDPOINT];unsigned receivers;};
+struct pt_camd_route_lease;
 struct pt_camd_ops {
     /* Synchronous original pointer/NULL: NULL grants no caller-owned child.
      * Open is explicit library/driver activation, never passive discovery. */
@@ -45,6 +46,7 @@ struct pt_camd_control {
     void *library,*node,*lock,*links[PT_MIDI_PORTS];
     char node_name[PT_MIDI_ENDPOINT];
     struct pt_midi_endpoint_name link_names[PT_MIDI_PORTS];
+    const struct pt_camd_route_lease *route_lease;
     enum pt_camd_state state;
     unsigned busy;
 };

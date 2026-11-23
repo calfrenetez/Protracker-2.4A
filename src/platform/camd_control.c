@@ -81,7 +81,7 @@ enum pt_camd_result pt_camd_control_link(struct pt_camd_control *c,unsigned p)
     if(a!=PT_CAMD_OK)return a;
     if(c->state!=PT_CAMD_READY)return PT_CAMD_REFUSED;
     if(p>=PT_MIDI_PORTS||!(name=pt_midi_endpoints_name(&c->endpoints,p)))return PT_CAMD_INVALID;
-    if(c->links[p])return PT_CAMD_IN_USE;
+    if(c->route_lease||c->links[p])return PT_CAMD_IN_USE;
     if(used(c,p))return PT_CAMD_IN_USE;
     c->link_names[p]=*name;c->busy=1;
     c->links[p]=c->ops.add_sender(c->context,c->library,c->node,c->link_names[p].identity);
@@ -93,7 +93,7 @@ enum pt_camd_result pt_camd_control_retire(struct pt_camd_control *c,unsigned p)
     if(a!=PT_CAMD_OK)return a;
     if(c->state!=PT_CAMD_READY)return PT_CAMD_REFUSED;
     if(p>=PT_MIDI_PORTS||!pt_midi_endpoints_name(&c->endpoints,p))return PT_CAMD_INVALID;
-    if(used(c,p))return PT_CAMD_IN_USE;
+    if(c->route_lease||used(c,p))return PT_CAMD_IN_USE;
     c->busy=1;
     if(c->links[p]){
         done=c->ops.remove_link(c->context,c->library,c->links[p]);
@@ -109,6 +109,7 @@ enum pt_camd_result pt_camd_control_close_step(struct pt_camd_control *c)
     unsigned p;enum pt_camd_done done;enum pt_camd_result a=admission(c);
     if(a!=PT_CAMD_OK)return a;
     if(c->state==PT_CAMD_CLOSED)return PT_CAMD_FINISHED;
+    if(c->route_lease)return PT_CAMD_IN_USE;
     if(c->state!=PT_CAMD_CLOSING){
         for(p=0;p<PT_MIDI_PORTS;++p)if(used(c,p))return PT_CAMD_IN_USE;
         c->state=PT_CAMD_CLOSING;

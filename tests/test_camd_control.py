@@ -1,7 +1,7 @@
 """CAMD control-only HOST model; no native ABI or MIDI delivery.
 
-Four selected TUs and ten literal bodies include unchanged genuine registry/core.
-Eight groups use actual original HOST model resources, four retained UNKNOWN
+Five selected TUs and twelve literal bodies include unchanged genuine registry/core.
+Nine groups use actual original HOST model resources, four retained UNKNOWN
 contexts and bounded copied snapshots.
 """
 from pathlib import Path
@@ -18,14 +18,28 @@ ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT
 HELPER = CANONICAL / 'tests/test_native_mixed_causal_rolling_entry.py'
 HELPER_SHA = 'f73a23edf8c4591dceb44ade3b08d2e1c4c75cd54301b58267d27753f16d58c1'
-SOURCES = ('tests/camd_control_test.c', 'src/platform/camd_control.c', 'src/platform/midi_endpoints.c', 'src/core/midi.c')
+SOURCES = ('tests/camd_control_test.c', 'src/platform/camd_control.c', 'src/platform/camd_routes.c',
+           'src/platform/midi_endpoints.c', 'src/core/midi.c')
 CFLAGS = ('-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror', '-UNDEBUG',
           '-fsanitize=address,undefined', '-Isrc/core', '-Itests', '-I.')
-FROZEN = {'tests/camd_control_test.c': 'd3c3dc4c181a4ab4a9e1710c1a44cffaff0509745da6ffb838e4a425f7ede36f', 'src/platform/camd_control.c': '0349b579c30e472bf168cce6f83ac465a9c96a02bc4a51112f03ce0909f500aa', 'src/platform/camd_control.h': '2b5d4005f2d6838217ad5dff8600fad92630969061473f4f507e5f910fe9727f', 'src/platform/midi_endpoints.c': 'acf4bc39492a65a48940670c31566ec566969e543bed4976409416551d7c7b2e', 'src/platform/midi_endpoints.h': '89af1d6d0cd3824e825f3d6b6823bd24d5896db69e8408f004f43dabb5ea5eda', 'src/core/midi.c': '128612f5b7111e64f7656e7376a33136d985db9720cdf5b87b4797f9ac7aa28f', 'src/core/midi.h': '0d1cf918cef5a9f53ef2f097e84648be7b753f150e662953db71108025065056', 'src/core/project.h': 'e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a', 'src/core/channels.h': '9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517', 'src/core/pcm.h': '9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e'}
+FROZEN = {
+    'tests/camd_control_test.c': 'f394412f0778386ca72d84901c8b88e4211cb90bc767b7c0ba6179e35e33b11d',
+    'src/platform/camd_control.c': '7c2189d03267194d2e9b3eab52636b5fbbf6e868cc8c0793c91d1a1378446dc0',
+    'src/platform/camd_control.h': 'c9df3bbb90478b5015939e7f5a5db3c5846d89b444a8d6eed8be39e9e1d40ab7',
+    'src/platform/camd_routes.c': 'd1c5571cf884f7d57c93dd705cf68d693af1f29c248bbf2e30b98bcb6eafb710',
+    'src/platform/camd_routes.h': '27873e09e03fcd3c83c0114e6fcae594aafe5acba61b1f7afa97cdc7fe357ba7',
+    'src/platform/midi_endpoints.c': 'acf4bc39492a65a48940670c31566ec566969e543bed4976409416551d7c7b2e',
+    'src/platform/midi_endpoints.h': '89af1d6d0cd3824e825f3d6b6823bd24d5896db69e8408f004f43dabb5ea5eda',
+    'src/core/midi.c': '128612f5b7111e64f7656e7376a33136d985db9720cdf5b87b4797f9ac7aa28f',
+    'src/core/midi.h': '0d1cf918cef5a9f53ef2f097e84648be7b753f150e662953db71108025065056',
+    'src/core/project.h': 'e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a',
+    'src/core/channels.h': '9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517',
+    'src/core/pcm.h': '9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e',
+}
 CORE_INPUTS = ('src/core/midi.c', 'src/core/midi.h', 'src/core/project.h',
                'src/core/channels.h', 'src/core/pcm.h')
-ORACLE = 'CAMD CONTROL HOST PASS:8 groups;copied16-cluster snapshots;actual model node/link custody;receiver-only availability;4 retained UNKNOWN contexts;NO ABI/DELIVERY/CONNECT/TIMING AUTHORITY\n'
-ORACLE_BYTES = 186
+ORACLE = 'CAMD CONTROL HOST PASS:9 groups;copied16-cluster snapshots;actual model node/link custody;receiver-only availability;retained route lease;4 retained UNKNOWN contexts;NO ABI/DELIVERY/CONNECT/TIMING AUTHORITY\n'
+ORACLE_BYTES = 207
 REGISTRY_INPUTS = ('src/platform/midi_endpoints.c', 'src/platform/midi_endpoints.h')
 
 
@@ -69,9 +83,9 @@ class CamdControlHost(unittest.TestCase):
         private_inputs = {}
         pins = {}
         try:
-            self.assertEqual(len(SOURCES), 4)
-            self.assertEqual(len(set(SOURCES)), 4)
-            self.assertEqual(len(FROZEN), 10)
+            self.assertEqual(len(SOURCES), 5)
+            self.assertEqual(len(set(SOURCES)), 5)
+            self.assertEqual(len(FROZEN), 12)
             self.assertEqual(len(ORACLE.encode('ascii')), ORACLE_BYTES)
             for relative in CORE_INPUTS:
                 fact, _ = base.ordinary_pin(CANONICAL / relative)
@@ -119,15 +133,15 @@ class CamdControlHost(unittest.TestCase):
                                  (0, ORACLE.encode('ascii'), b''))
                 base.evidence('camd-control-inputs.json', {
                     'sources': pins, 'orderedTranslationUnits': list(SOURCES),
-                    'literalProjectInputs': 10, 'frozenSelectedInputsSha256': FROZEN,
+                    'literalProjectInputs': 12, 'frozenSelectedInputsSha256': FROZEN,
                     'canonicalGenuineCoreInputs': canonical_inputs,
                     'canonicalGenuineRegistryInputs': registry_inputs,
                     'originalHelperPin': helper_before, 'wrapperPin': wrapper_before,
                     'compileSeconds': compile_seconds, 'runSeconds': run_seconds,
                     'compileTimeoutSeconds': 120, 'runTimeoutSeconds': 30,
-                    'groups': 8, 'retainedUnknownContexts': 4, 'oracleBytes': ORACLE_BYTES,
+                    'groups': 9, 'retainedUnknownContexts': 4, 'oracleBytes': ORACLE_BYTES,
                     'ownership': 'Original HOST model library/node/link/list objects and genuine unchanged endpoint registry/core; no copied live owners, fake MIDI debts or music acquisition',
-                    'scope': 'Portable serialized control-only HOST model: explicit activation, complete <=16-cluster snapshot before filtering, receiver-list observation, actual original node/link lifecycle, known nonconsumption vs UNKNOWN retention, and rejected reentry. Never connection1 or MIDI delivery; no native CAMD ABI/runtime, physical activation/health/quiet, musical timing or listening acceptance. No full system-header/toolchain closure qualification'})
+                    'scope': 'Portable serialized control-only HOST model: explicit activation, complete <=16-cluster snapshot before filtering, receiver-list observation, actual original node/link lifecycle, known nonconsumption vs UNKNOWN retention, rejected reentry and retained routed links. Never connection1 or MIDI delivery; no native CAMD ABI/runtime, physical activation/health/quiet, musical timing or listening acceptance. No full system-header/toolchain closure qualification'})
                 base.verify_sources(pins)
         finally:
             base.ROOT = ROOT

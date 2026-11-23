@@ -42,3 +42,53 @@ int pt_camd_routes_resolve(const struct pt_camd_control *control,
     *out = resolved;
     return 1;
 }
+
+int pt_camd_routes_borrow(struct pt_camd_control *control,
+    const char (*names)[PT_MIDI_ENDPOINT], unsigned count, struct pt_camd_route_lease *lease)
+{
+    struct pt_camd_routes resolved;
+
+    if (!count || count > PT_MIDI_PORTS || pt_camd_control_state(control) != PT_CAMD_READY ||
+        control->route_lease || (uintptr_t)lease % _Alignof(struct pt_camd_route_lease) ||
+        !disjoint(lease, sizeof(*lease), control, sizeof(*control)) ||
+        !disjoint(lease, sizeof(*lease), control->context, control->context_bytes) ||
+        !disjoint(lease, sizeof(*lease), names, count * sizeof(*names)) || lease->owner ||
+        !pt_camd_routes_resolve(control, names, count, &resolved))
+        return 0;
+
+    *lease = (struct pt_camd_route_lease){.owner = control, .routes = resolved};
+    control->route_lease = lease;
+    return 1;
+}
+
+int pt_camd_routes_snapshot(const struct pt_camd_route_lease *lease, struct pt_camd_routes *out)
+{
+    if (!lease || pt_camd_control_state(lease->owner) != PT_CAMD_READY)
+        return 0;
+    const struct pt_camd_control *control = lease->owner;
+    if (control->route_lease != lease || !lease->routes.count || lease->routes.count > PT_MIDI_PORTS ||
+        (uintptr_t)out % _Alignof(struct pt_camd_routes) ||
+        !disjoint(out, sizeof(*out), lease, sizeof(*lease)) ||
+        !disjoint(out, sizeof(*out), control, sizeof(*control)) ||
+        !disjoint(out, sizeof(*out), control->context, control->context_bytes))
+        return 0;
+
+    const struct pt_midi_endpoints *registry = pt_camd_control_registry(control);
+    for (unsigned i = 0; i < lease->routes.count; ++i) {
+        unsigned slot = lease->routes.slot[i];
+        if (!pt_midi_endpoints_available(registry, slot) || !control->links[slot])
+            return 0;
+    }
+    *out = lease->routes;
+    return 1;
+}
+
+int pt_camd_routes_release(struct pt_camd_route_lease *lease)
+{
+    if (!lease || pt_camd_control_state(lease->owner) != PT_CAMD_READY ||
+        lease->owner->route_lease != lease)
+        return 0;
+    lease->owner->route_lease = NULL;
+    *lease = (struct pt_camd_route_lease){0};
+    return 1;
+}

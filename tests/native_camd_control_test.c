@@ -187,6 +187,7 @@ static void routes_loopback(void)
     static const char wrong_case[2][PT_MIDI_ENDPOINT] = {"pt24g.test.b", "PT24G.test.a"};
     static const char receiver_names[2][PT_MIDI_ENDPOINT] = {"PT24G receive A", "PT24G receive B"};
     struct pt_camd_routes map;
+    struct pt_camd_route_lease borrowed = {0}, alternate = {0};
     struct Library *library;
     const struct pt_midi_endpoints *registry;
     void *nodes[2], *receivers[2];
@@ -226,6 +227,16 @@ static void routes_loopback(void)
     assert(!pt_camd_routes_resolve(&control, wrong_case, 2, &map) && map.count == 99);
     assert(pt_camd_routes_resolve(&control, project, 2, &map) && map.count == 2);
     assert(map.slot[0] == ports[1] && map.slot[1] == ports[0]);
+    assert(pt_camd_routes_borrow(&control, project, 2, &borrowed));
+    struct pt_camd_route_lease copy = borrowed;
+    struct pt_camd_routes witness = {.count = 99};
+    void *original_sender = control.links[ports[0]];
+    assert(!pt_camd_routes_borrow(&control, project, 2, &alternate));
+    assert(!pt_camd_routes_release(&copy));
+    assert(!pt_camd_routes_snapshot(&copy, &witness) && witness.count == 99);
+    assert(pt_camd_routes_snapshot(&borrowed, &map) && map.count == 2);
+    assert(pt_camd_control_retire(&control, (unsigned)ports[0]) == PT_CAMD_IN_USE);
+    assert(pt_camd_control_close_step(&control) == PT_CAMD_IN_USE);
 
     for (i = 0; i < map.count; ++i) {
         local_note(library, control.links[map.slot[i]], nodes[1 - i], notes[i]);
@@ -237,7 +248,17 @@ static void routes_loopback(void)
     (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[0], NULL);
     assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && control.links[ports[0]]);
     assert(!pt_camd_routes_resolve(&control, project, 2, &map));
+    assert(!pt_camd_routes_snapshot(&borrowed, &witness) && witness.count == 99);
+    assert(pt_camd_control_retire(&control, (unsigned)ports[0]) == PT_CAMD_IN_USE);
+    assert(control.links[ports[0]] == original_sender);
     assert(map.count == 2 && map.slot[0] == ports[1] && map.slot[1] == ports[0]);
+    receivers[0] = link_to(library, nodes[0], PT_CAMD_RECEIVER, cluster[0]);
+    assert(receivers[0] && pt_camd_control_refresh(&control) == PT_CAMD_OK &&
+           pt_camd_routes_snapshot(&borrowed, &witness) && witness.count == 2);
+    assert(control.links[ports[0]] == original_sender);
+    assert(pt_camd_routes_release(&borrowed) && !pt_camd_routes_release(&borrowed));
+    assert(!pt_camd_routes_snapshot(&copy, &witness));
+    (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[0], NULL);
     (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receivers[1], NULL);
     for (i = 0; i < 2; ++i) {
         assert(pt_camd_control_retire(&control, (unsigned)ports[i]) == PT_CAMD_OK);
@@ -246,6 +267,7 @@ static void routes_loopback(void)
     assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && !registry->available);
     finish();
     puts("CAMD native routes: project order preserved, both local receivers verified, missing receiver refused");
+    puts("CAMD route lease: original links retained during Stop, temporary receiver loss refused, release confirmed");
 }
 
 int main(int argc, char **argv)

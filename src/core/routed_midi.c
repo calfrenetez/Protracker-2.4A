@@ -200,6 +200,16 @@ static int same_audio_key(const struct pt_mixed_readers_key *a, const struct pt_
         a->action == b->action && a->route == b->route && a->slot == b->slot;
 }
 
+const struct pt_mixed_readers_key *pt_routed_midi_schedule_audio_key(
+    const struct pt_routed_midi_schedule *schedule, unsigned route, unsigned route_slot)
+{
+    const unsigned slot = audio_slot(route, route_slot);
+    if (!schedule_ready(schedule) || schedule->held || slot == PT_ROUTED_AUDIO_SLOTS ||
+        !(schedule->audio_owned & (UINT32_C(1) << slot)))
+        return NULL;
+    return schedule->audio_active + slot;
+}
+
 int pt_routed_midi_schedule_stop_keys(const struct pt_routed_midi_schedule *schedule,
     struct pt_mixed_readers_stop_keys *out)
 {

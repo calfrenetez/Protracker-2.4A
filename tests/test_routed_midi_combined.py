@@ -8,12 +8,13 @@ from test_mixed_readers_causal import SOURCES as AUDIO_SOURCES
 
 ROOT = Path(__file__).resolve().parents[1]
 COMBINED_PASS = 'Combined schedule: exact Paula, AmiGUS and MIDI admission, all owned Stop keys and independent partial receipts; SOFTWARE_ONLY\n'
-TRACKER_PASS = 'Routed tracker playback: whole-song audit, exact Stop, independent retirement and AmiGUS retrigger; SOFTWARE_ONLY\n'
+TRACKER_PASS = 'Routed sampler boundary: exact Stop, retrigger and stale preparation discarded before publication; SOFTWARE_ONLY\n'
 TRACKER_UNITS = [
     'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
     'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',
     'src/core/amigus_render_voice.c', 'src/core/amigus_trigger_levels.c',
     'src/editor/mixed_readers_plan_normalize.c', 'src/editor/routed_preflight.c', 'src/core/routed_playback.c',
+    'src/editor/routed_sampler_boundary.c',
     'src/editor/sampler_mixed_readers.c', 'src/core/mixed_readers_causal.c',
 ]
 

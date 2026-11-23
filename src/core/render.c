@@ -913,6 +913,12 @@ enum pt_render_result pt_render_sequence_begin_routed(const struct pt_project *p
     s->midi_tracks=midi;*out=s;return PT_RENDER_OK;
 }
 
+int pt_render_sequence_routed_source_matches(const struct pt_render_sequence *s, const struct pt_project *p,
+    unsigned rate)
+{
+    return s && s->midi_tracks && s->project == p && s->options.rate == rate;
+}
+
 enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *s,unsigned ticks,unsigned *ready)
 {
     struct pt_tick_span span;unsigned i,end;enum pt_render_result result;

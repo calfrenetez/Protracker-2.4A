@@ -1,8 +1,7 @@
 #define PT_ROUTED_COMBINED_TEST_MAIN other_combined_cases
 #include "routed_midi_combined_test.c"
-#include "../src/core/routed_playback.h"
 #include "../src/editor/routed_preflight.h"
-#include "../src/editor/sampler_mixed_readers.h"
+#include "../src/editor/routed_sampler_boundary.h"
 
 static const struct pt_render_options options = {
     .rate = 48000, .bits = 16, .tracks = 0x801f, .gain_q16 = 65536, .tick_limit = 64, .frame_limit = 100000
@@ -104,29 +103,6 @@ static void refuse_late_paula_loop(void)
     free(pcm);
 }
 
-static void normalize(const struct pt_project *project, const struct pt_routed_render_plan *plan,
-    const struct pt_mixed_plan_origin origins[PT_MIXED_PLAN_RECORDS],
-    struct pt_mixed_plan_quantized_batch *batch, void *workspace, size_t capacity)
-{
-    const struct pt_paula_render_caps caps = {3546895, 124, 65535};
-    const struct pt_playback_format format = {8, 0, 0, 0};
-    const struct pt_mixed_plan_inputs inputs = {
-        .project = project, .plan = &plan->audio, .origins = origins, .caps = &caps, .format = &format,
-        .rate = 48000, .frame = plan->frame, .revision = 37, .generation = 17
-    };
-    struct pt_mixed_plan_normalizer *job = NULL;
-    enum pt_mixed_plan_result result;
-    unsigned steps = 0;
-    assert(pt_mixed_plan_normalizer_begin_quantized_in_workspace(workspace, capacity, &inputs, &job) == PT_MIXED_PLAN_PENDING);
-    do {
-        assert(++steps < 64);
-        result = pt_mixed_plan_normalizer_step(job, 37, 17, 7);
-    } while (result == PT_MIXED_PLAN_PENDING);
-    assert(result == PT_MIXED_PLAN_READY);
-    assert(pt_mixed_plan_normalizer_get_quantized(job, 37, 17, batch) == PT_MIXED_PLAN_READY);
-    assert(pt_mixed_plan_normalizer_close(&job) && !job);
-}
-
 static void check_actions(const struct trial *t, const struct pt_mixed_plan_batch *batch,
                           const struct model_command *command)
 {
@@ -170,7 +146,7 @@ static enum pt_mixed_readers_result observe_retirement(void *context,
     return pt_sampler_mixed_service_reader(m->pool, key->trigger, key->action, 0, receipt);
 }
 
-static void tracker_case(unsigned short_card, unsigned retrigger)
+static void tracker_case(unsigned short_card, unsigned retrigger, unsigned abandon_first)
 {
     struct allocation render_memory = {0};
     const struct pt_allocator allocator = {&render_memory, ordinary, ordinary_release};
@@ -179,7 +155,8 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
     struct pt_project *project = &t->resources->document.project;
     struct pt_render_sequence *sequence = NULL;
     struct pt_render_lookahead *ahead = calloc(1, sizeof(*ahead));
-    struct pt_routed_render_plan *plan = calloc(1, sizeof(*plan));
+    struct pt_routed_sampler_boundary *joint = calloc(1, sizeof(*joint));
+    struct pt_routed_render_plan *plan = joint ? &joint->plan : NULL;
     struct pt_routed_midi *midi = calloc(1, sizeof(*midi));
     struct pt_sampler_mixed_normalized_batch *batch = calloc(1, sizeof(*batch));
     struct pt_sampler_mixed_pool *pool = NULL;
@@ -195,7 +172,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
     struct pt_mixed_plan_origin origins[PT_MIXED_PLAN_RECORDS] = {{0}};
     struct pt_sample_version *master[PT_PROJECT_SAMPLES] = {NULL};
     struct pt_routed_midi_schedule schedule = {0};
-    struct pt_routed_playback_frame playback = {0};
+    enum pt_routed_sampler_result prepared;
     struct combined_model m = {.audio = &t->model, .schedule = &schedule};
     const struct pt_routed_midi_provider api = {
         .context = &m, .context_bytes = sizeof(m), .read_clock = combined_clock,
@@ -255,6 +232,14 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
     } while (factory_result == PT_SAMPLER_MIXED_PENDING);
     assert(factory_result == PT_SAMPLER_MIXED_OK && !t->model.submits && !t->resources->card.writes);
 
+    const struct pt_routed_sampler_config coordinator = {
+        .project = project, .pool = pool, .masters = master, .origins = origins,
+        .caps = {3546895, 124, 65535}, .format = {8, 0, 0, 0},
+        .workspace = workspace, .workspace_bytes = capacity, .rate = options.rate, .revision = 37, .generation = 17
+    };
+    struct pt_project other_project = *project;
+    struct pt_routed_sampler_config mismatched = coordinator;
+    mismatched.project = &other_project;
     for (boundary = 0; boundary < 3;) {
         struct pt_render_interval interval;
         const struct pt_routed_midi_batch *midi_batch;
@@ -269,24 +254,30 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
         do {
             assert(pt_render_lookahead_step_routed(ahead, 73, plan, &ready) == PT_RENDER_OK);
         } while (!ready);
-        assert(pt_routed_playback_prepare(&playback, ahead, &schedule, plan) == PT_RENDER_OK);
+        assert(pt_routed_sampler_begin(joint, &mismatched, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
+        assert(!joint->config && !midi->pending);
+        prepared = pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule);
+        assert(pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
         if (!plan->end && !plan->audio.count && !plan->midi_count) {
             assert(!boundary && !interval.frames && !plan->frame && ++idle_ticks == 1);
-            assert(!midi->pending && !m.submissions);
-            assert(pt_routed_playback_commit(&playback) == PT_RENDER_OK);
+            assert(prepared == PT_ROUTED_SAMPLER_READY && !midi->pending && !m.submissions);
+            assert(!pt_routed_sampler_publish(joint, 37, 17));
+            assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_OK);
             continue;
         }
+        assert(prepared == PT_ROUTED_SAMPLER_PENDING);
+        assert(!pt_routed_sampler_publish(joint, 37, 17));
         assert(plan->frame == boundary * UINT64_C(960));
         assert(!!plan->end == (boundary == 2) && !!plan->midi_count == (boundary == 0));
         midi_batch = &midi->batch;
-        assert(midi->pending && midi_batch->serial == playback.serial && midi_batch->count == (unsigned)(boundary != 1));
-        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
+        assert(midi->pending && midi_batch->serial == joint->playback.serial && midi_batch->count == (unsigned)(boundary != 1));
+        assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
         const unsigned allocations = factory_allocator.calls;
         const unsigned count = short_card && boundary ? 4 : 5;
         if (plan->end) {
             assert(plan->end == PT_RENDER_F00 + 1 && !plan->audio.count);
-            assert(pt_routed_midi_schedule_stop_keys(&schedule, &stop));
+            stop = joint->stop;
             assert(stop.frame == plan->frame && stop.count == count);
             for (i = 0; i < stop.count; ++i)
                 assert(keys_equal(stop.key + i, keys + i));
@@ -299,21 +290,24 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
                 stop.key[4] = keys[4];
             }
             assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
-            assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_PENDING);
         } else {
             assert(!pt_routed_midi_schedule_stop_keys(&schedule, &stop) && !stop.count);
-            memset(batch, 0, sizeof(*batch));
-            normalize(project, plan, origins, &batch->plan, workspace, capacity);
+            steps = 0;
+            while (joint->normalizer) {
+                assert(++steps < 64);
+                assert(pt_routed_sampler_step(joint, 37, 17, 7) == PT_ROUTED_SAMPLER_PENDING);
+            }
+            *batch = joint->batch;
             assert(normalized->count == count);
             for (i = 0; i < normalized->count; ++i) {
                 const struct pt_mixed_plan_record *record = normalized->record + i;
                 assert(record->track == i && record->sample < 2);
                 if (!boundary || (retrigger && record->track == 4)) {
                     assert(record->kind == PT_MIXED_PLAN_TRIGGER);
-                    batch->source[i].master = master[record->sample];
+                    assert(batch->source[i].master == master[record->sample]);
                 } else {
                     assert(record->kind == PT_MIXED_PLAN_CONTROL);
-                    batch->source[i].active = keys[record->track];
+                    assert(keys_equal(&batch->source[i].active, keys + record->track));
                 }
             }
             if (!boundary) {
@@ -329,23 +323,35 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
                 --batch->source[0].active.serial;
             }
             assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
-            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_PENDING);
         }
         steps = 0;
         do {
             assert(++steps < 64);
-            factory_result = pt_sampler_mixed_advance(pool, 37, handle, NULL);
-        } while (factory_result == PT_SAMPLER_MIXED_PENDING);
-        assert(factory_result == PT_SAMPLER_MIXED_OK);
+            prepared = pt_routed_sampler_step(joint, 37, 17, 7);
+        } while (prepared == PT_ROUTED_SAMPLER_PENDING);
+        assert(prepared == PT_ROUTED_SAMPLER_READY);
+        if (abandon_first) {
+            assert(!boundary && midi->pending && joint->command.address);
+            assert(!pt_routed_sampler_publish(joint, 38, 17));
+            assert(pt_routed_sampler_step(joint, 37, 17, 7) == PT_ROUTED_SAMPLER_STALE);
+            assert(!pt_routed_sampler_publish(joint, 37, 17));
+            assert(pt_routed_sampler_abandon(joint));
+            assert(!joint->config && !midi->pending);
+            assert(!t->model.submits && !m.submissions && !pt_mixed_readers_readers_held(t->queue));
+            assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
+            break;
+        }
         if (!boundary) {
             for (i = 0; i < 5; ++i)
-                assert(pt_sampler_mixed_reader(pool, handle, i, readers + i) == PT_SAMPLER_MIXED_OK);
+                assert(pt_sampler_mixed_reader(pool, joint->command, i, readers + i) == PT_SAMPLER_MIXED_OK);
         } else if (retrigger && boundary == 1) {
-            assert(pt_sampler_mixed_reader(pool, handle, 4, &replacement) == PT_SAMPLER_MIXED_OK);
+            assert(pt_sampler_mixed_reader(pool, joint->command, 4, &replacement) == PT_SAMPLER_MIXED_OK);
         }
-        assert(pt_sampler_mixed_enqueue(pool, 37, handle, &ticket) == PT_MIXED_READERS_OK);
         m.expected_audio_count = count;
-        assert(pt_sampler_mixed_publish(pool, ticket) == PT_MIXED_READERS_OK);
+        assert(pt_routed_sampler_publish(joint, 37, 17));
+        ticket = joint->ticket;
+        assert(ticket && !pt_routed_sampler_publish(joint, 37, 17));
+        assert(!pt_routed_sampler_abandon(joint));
         const struct model_command *command = model_command(&t->model, ticket);
         if (plan->end) {
             assert(command->batch.count == stop.count);
@@ -384,7 +390,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
             keys[4] = fresh;
             replacement = (struct pt_sampler_mixed_reader_handle){0};
         }
-        assert(pt_sampler_mixed_command_close(pool, &handle));
+        assert(pt_sampler_mixed_command_close(pool, &joint->command));
         settle_midi(&m, boundary != 1);
         remaining = interval.frames;
         while (remaining) {
@@ -392,14 +398,19 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
             assert(pt_render_sequence_consume(sequence, chunk) == PT_RENDER_OK);
             remaining -= chunk;
         }
-        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
+        assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
         assert(midi->accepted[15].active == (boundary != 2));
-        assert(!pt_routed_midi_schedule_settled(&schedule, plan->frame, playback.serial + 1));
-        assert(pt_routed_playback_commit(&playback) == PT_RENDER_OK);
-        assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
-        if (!plan->end)
-            memcpy(origins, normalized->next, sizeof(origins));
+        assert(!pt_routed_midi_schedule_settled(&schedule, plan->frame, joint->playback.serial + 1));
+        assert(pt_routed_sampler_commit(joint, 38, 17) == PT_RENDER_INVALID);
+        assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_OK);
+        assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
+        if (boundary < 2) {
+            for (i = 0; i < PT_MIXED_PLAN_RECORDS; ++i) {
+                assert(origins[i].present == normalized->next[i].present && origins[i].sample == normalized->next[i].sample &&
+                       origins[i].channel == normalized->next[i].channel && origins[i].frame == normalized->next[i].frame);
+            }
+        }
         if (short_card && !boundary) {
             const uint32_t before = schedule.audio_owned;
             struct model_reader *card = model_reader(&t->model, keys + 4);
@@ -418,11 +429,12 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
         }
         ++boundary;
     }
-    assert(idle_ticks == 1 && midi->stopped && !schedule.held && !schedule.audio_owned);
-    assert(effects == (short_card ? 13 : 15) && t->model.effects == effects);
-    assert(pt_routed_playback_abandon(&playback));
+    assert(idle_ticks == 1 && midi->stopped == !abandon_first && !schedule.held && !schedule.audio_owned);
+    assert(effects == (abandon_first ? 0 : short_card ? 13 : 15) && t->model.effects == effects);
+    for (i = 0; i < PT_MIXED_PLAN_RECORDS; ++i)
+        assert(!origins[i].present);
     assert(!pt_mixed_readers_commands_held(t->queue));
-    for (i = 0; i < (short_card ? 4U : 5U); ++i) {
+    for (i = 0; i < (abandon_first ? 0U : short_card ? 4U : 5U); ++i) {
         assert(pt_sampler_mixed_service_reader(pool, keys[i].trigger, keys[i].action, 1, NULL) == PT_MIXED_READERS_OK);
         assert(pt_sampler_mixed_reader_close(pool, readers + i));
     }
@@ -441,16 +453,17 @@ static void tracker_case(unsigned short_card, unsigned retrigger)
     free(factory_workspace);
     free(batch);
     free(midi);
-    free(plan);
+    free(joint);
     free(ahead);
 }
 
 int main(void)
 {
     refuse_late_paula_loop();
-    tracker_case(0, 0);
-    tracker_case(1, 0);
-    tracker_case(0, 1);
-    puts("Routed tracker playback: whole-song audit, exact Stop, independent retirement and AmiGUS retrigger; SOFTWARE_ONLY");
+    tracker_case(0, 0, 0);
+    tracker_case(1, 0, 0);
+    tracker_case(0, 1, 0);
+    tracker_case(0, 0, 1);
+    puts("Routed sampler boundary: exact Stop, retrigger and stale preparation discarded before publication; SOFTWARE_ONLY");
     return 0;
 }

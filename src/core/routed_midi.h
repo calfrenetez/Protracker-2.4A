@@ -185,6 +185,9 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
  * A zero count requests no audio command. The factory still binds and
  * validates the real adopted readers independently. */
 int pt_routed_midi_schedule_stop_keys(const struct pt_routed_midi_schedule *, struct pt_mixed_readers_stop_keys *);
+/* Borrow an adopted key for preparation before publishing the next batch. */
+const struct pt_mixed_readers_key *pt_routed_midi_schedule_audio_key(
+    const struct pt_routed_midi_schedule *, unsigned route, unsigned slot);
 /* Observe one original active reader between batches. Only independent
  * retirement of that same reader removes it from a later terminal Stop. */
 enum pt_mixed_readers_result pt_routed_midi_schedule_observe_audio_retirement(

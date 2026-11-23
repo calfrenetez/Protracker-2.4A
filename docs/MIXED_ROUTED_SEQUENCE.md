@@ -161,3 +161,13 @@ reader keys. The audio owner retires the old key from its original
 registration, and the factory rejects a Stop for that retired key before
 allocating. F00 stops the replacement at frame 1920 while the held MIDI note
 also reaches its scheduled release. [Routed retrigger receipt](test-evidence/routed_tracker_amiberry_20261123.json)
+
+`pt_routed_sampler_boundary` binds one ready lookahead to the original
+project and sample grid. It advances the quantizer and factory in bounded
+steps, resolves controls against adopted reader keys, and submits the
+resulting command through the combined provider once. F00 uses the
+schedule's complete set of owned keys. A stale preparation can be abandoned
+before submission. After submission, the caller services the original
+ticket and retains reader handles through their independent retirement. The
+coordinator advances the render interval and its sample origins only after
+source consumption and exact combined settlement.

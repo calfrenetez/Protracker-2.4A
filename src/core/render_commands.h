@@ -92,6 +92,8 @@ enum pt_render_result pt_render_sequence_begin_routed(const struct pt_project *,
     const struct pt_render_options *,const struct pt_allocator *,struct pt_render_sequence **);
 enum pt_render_result pt_render_sequence_complete_routed(struct pt_render_sequence *,
     struct pt_routed_render_plan *);
+/* Check the original source and sample grid before binding live outputs. */
+int pt_render_sequence_routed_source_matches(const struct pt_render_sequence *, const struct pt_project *, unsigned rate);
 
 /* Exact software voice state at the beginning of a pending interval, before
  * any consume. Use after next (including zero-frame/end spans), never after

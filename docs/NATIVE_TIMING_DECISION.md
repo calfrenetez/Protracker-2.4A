@@ -225,3 +225,12 @@ overlapping and unrepresentable cases refuse. The independent host and
 68k fixture covers the original PAL and NTSC frame calculations,
 low-word rollover, and the last representable absolute tick. The encoder
 requires the same live timer with no wrap or restart through the bracket.
+
+The native local-activation fixture takes a fresh coherent sample from the
+owned countdown as its diagnostic epoch. It prepares twelve original 48 kHz
+windows before polling. A bounded 68k loop waits for a coherent count inside
+the selected window, writes one ordinary RAM word, and captures the raw
+post-write count. An excluded or torn post-write sample keeps proof that the
+write happened and withholds frame acceptance. The fixture also records one
+deliberately early exhausted attempt and one expired attempt without writes.
+Its report can be replayed independently from the native calculations.

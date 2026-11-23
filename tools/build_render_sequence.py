@@ -16,6 +16,7 @@ FIXTURES = {
     'routed-activation-timing': ('test_mixed_readers_causal.py', 'PTRoutedActivationTime'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
+    'cia-local-activation': (None, 'PTCIALocalActivate'),
     'countdown-window': ('test_countdown_window.py', 'PTCountdownWindow'),
 }
 
@@ -27,6 +28,9 @@ def main():
     test, executable = FIXTURES[args.fixture]
     if args.fixture == 'cia-direct-clock':
         sources = ['tests/native_cia_direct_clock_test.c', 'tests/native_cia_direct_clock.s']
+    elif args.fixture == 'cia-local-activation':
+        sources = ['tests/native_cia_local_activation_test.c', 'tests/native_cia_local_activation.s',
+                   'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c', 'src/core/elapsed_clock.c']
     else:
         tree=ast.parse((ROOT/'tests'/test).read_text())
         sources=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SOURCES' for t in n.targets))

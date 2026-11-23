@@ -1,0 +1,124 @@
+{
+  "source": "b2461feb8804299aa3816ff6992c8245b4a7068d",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "1444a0b67798eb3c8e3ca9c80b6f8982a1c27a5767ed3744d4000cfbac987305",
+  "build_receipt_sha256": "243b8625484a77f7fdd9ffe753dfcd7fc0e27f5d19688ea1469f8be4bb494757",
+  "guest_log_sha256": "7e5c41ea4e65b4cdb9d8ad1dfadd829ed60b5c8225c9e30f6e8aded3913ee836",
+  "independent_replay_sha256": "d8fcd7ebb62a5cac5f61b3dd397589dda336257ec07dad1a01c34c050daa25d6",
+  "validated_build_inputs": 124,
+  "host_routed_methods": 15,
+  "timing": {
+    "writes": [
+      {
+        "stage": 3,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 32783,
+        "dma_before": 512,
+        "dma_after": 527,
+        "frame_ticks": [
+          8192,
+          8207
+        ],
+        "observed_ticks": [
+          8192,
+          8199
+        ]
+      },
+      {
+        "stage": 6,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 15,
+        "dma_before": 527,
+        "dma_after": 512,
+        "frame_ticks": [
+          36568,
+          36582
+        ],
+        "observed_ticks": [
+          36571,
+          36578
+        ]
+      }
+    ],
+    "guest_closed": true,
+    "clock_anchor_count": 64676,
+    "alarm": {
+      "chip": 0,
+      "timer": 1,
+      "callbacks": 2,
+      "closed": true
+    },
+    "device_guest_closed": true,
+    "song_epoch_ticks": 8192,
+    "forecast_start_frame": 0,
+    "forecast_f00_frame": 1920,
+    "forecast_actions": {
+      "paula": 4,
+      "amigus": 1,
+      "midi": 1
+    },
+    "mixed_ram_observations": [
+      {
+        "frame": 0,
+        "window": [
+          8192,
+          8207
+        ],
+        "observed": [
+          8192,
+          8199
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          32768,
+          26557530
+        ],
+        "verdict": "issued_in_frame"
+      },
+      {
+        "frame": 1920,
+        "window": [
+          36568,
+          36582
+        ],
+        "observed": [
+          36571,
+          36578
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          0,
+          25508864
+        ],
+        "verdict": "issued_in_frame"
+      }
+    ],
+    "wait_observations": [
+      {
+        "frame": 0,
+        "before_and_after_wait": [
+          1632,
+          8717
+        ],
+        "owned_alarm_signal_only": true
+      },
+      {
+        "frame": 1920,
+        "before_and_after_wait": [
+          29461,
+          37261
+        ],
+        "owned_alarm_signal_only": true
+      }
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Exec waits returned the original alarm signal after both measured tracker bursts. Silent Paula writes were real in Amiberry; AmiGUS and MIDI stores targeted RAM. No physical, sustained timing or listening acceptance."
+}

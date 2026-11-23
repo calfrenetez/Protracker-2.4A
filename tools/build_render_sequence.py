@@ -27,6 +27,7 @@ FIXTURES = {
     'camd-direct': ('test_camd_control.py', 'PTCamdDirect'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-reload': (None, 'PTCIAReload'),
+    'midi-wire': (None, 'PTMidiWire'),
     'cia-tail': (None, 'PTCIATail'),
     'cia-local-activation': (None, 'PTCIALocalActivate'),
     'countdown-window': ('test_countdown_window.py', 'PTCountdownWindow'),
@@ -44,6 +45,10 @@ def main():
     paula_alarm = tracker_alarm or args.fixture == 'routed-paula-alarm'
     if args.fixture == 'cia-direct-clock':
         sources = ['tests/native_cia_direct_clock_test.c', 'tests/native_cia_direct_clock.s']
+    elif args.fixture == 'midi-wire':
+        sources = ['tests/native_midi_wire_test.c', 'tests/native_cia_direct_clock.s',
+                   'tests/native_cia_local_activation.s', 'src/core/countdown_window.c',
+                   'src/core/elapsed_clock.c', 'src/core/routed_midi_wire.c']
     elif args.fixture == 'cia-reload':
         sources = ['tests/native_cia_reload_test.c', 'tests/native_cia_reload_irq.s',
                    'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c']
@@ -116,6 +121,8 @@ def main():
     if args.fixture in ('routed-mixed-reload', 'routed-mixed-tail', 'routed-mixed-tail-refusal'):
         flags.extend(['-DPT_PAULA_RELOAD_IRQ', '-Wa,--defsym,pt_exp_mixed_reload=1'])
         sources.append('tests/native_cia_reload_irq.s')
+    if args.fixture == 'midi-wire':
+        flags.append('-Wa,--defsym,pt_exp_serial_midi=1')
     if args.fixture == 'cia-tail':
         flags.append('-Wa,--defsym,pt_exp_cia_tail=1')
     if args.fixture in ('routed-mixed-tail', 'routed-mixed-tail-refusal'):

@@ -1,0 +1,15 @@
+{
+  "qualification": "host and native cross-build",
+  "fixture": "PTMidiWire",
+  "target_candidate_sha256": "ce3718ceb8da361a3cbca4a27a2577065dd3e51145b728881070b4ed1a26b251",
+  "validated_build_inputs": 37,
+  "build_receipt_sha256": "ef92ff0231223c8386145c48d488c9d8967e91e20f147767890c2675c3747e2c",
+  "host_methods": {
+    "routed_including_wire": 20,
+    "cia": 25
+  },
+  "prior_mixed_wait_tail_and_refusal_rebuilt_byte_identically": true,
+  "amiberry_execution": "pending",
+  "physical_execution": "pending",
+  "scope": "A private loopback diagnostic stages one three-byte MIDI note, measures the first UART write, reads back the full message and checks drain. An expired window must refuse without a UART write."
+}

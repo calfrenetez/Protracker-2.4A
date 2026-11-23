@@ -2,7 +2,7 @@
 /* C stack ABI. The 64 coherent-read attempts use the original precomputed
  * descending window. An expired or exhausted attempt writes no marker.
  * The diagnostic Paula form measures a single fixed register write. */
-        .macro local_activate name, paula=0, mixed=0, tail=0
+        .macro local_activate name, paula=0, mixed=0, tail=0, serial=0
         .globl \name
 \name:
         .if \mixed
@@ -31,6 +31,17 @@
         moveq #3,%d0
         bra.w local_return\@
 valid_word\@:
+        .endif
+        .if \serial
+        move.l local_args\@+12(%sp),%d6
+        cmpi.l #0x180,%d6
+        blo.w serial_refused\@
+        cmpi.l #0x19f,%d6
+        bhi.w serial_refused\@
+        move.w 0xdff018,%d0
+        andi.w #0xf000,%d0
+        cmpi.w #0x3000,%d0
+        bne.w serial_refused\@
         .endif
         move.w 0(%a2),%d0
         move.w 2(%a2),%d1
@@ -82,7 +93,11 @@ local_poll\@:
         move.l %a5,32(%a2)
         .endif
         .else
+        .if \serial
+        move.w %d6,0xdff030
+        .else
         move.w #0x4752,6(%a2)
+        .endif
         .endif
         move.b (%a0),%d5
         move.b (%a1),%d6
@@ -90,7 +105,7 @@ local_poll\@:
         move.b %d5,11(%a2)
         move.b %d6,12(%a2)
         move.b %d1,13(%a2)
-        .if \paula
+        .if \paula+\serial
         move.w #0x4752,6(%a2)
         .endif
         moveq #1,%d0
@@ -121,6 +136,11 @@ local_mixed_tail_refused\@:
         moveq #3,%d0
         .endif
         .endif
+        .if \serial
+        bra.b local_return\@
+serial_refused\@:
+        moveq #3,%d0
+        .endif
 local_return\@:
         .if \mixed
         movem.l (%sp)+,%d2-%d7/%a2-%a5
@@ -131,6 +151,9 @@ local_return\@:
         .endm
 
         local_activate _pt_cia_local_activate
+        .ifdef pt_exp_serial_midi
+        local_activate _pt_cia_local_serial_midi,0,0,0,1
+        .endif
         local_activate _pt_cia_local_paula_dma,1
         local_activate _pt_cia_local_mixed_dma,1,1
         .ifdef pt_exp_cia_tail
@@ -143,7 +166,7 @@ local_return\@:
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0, tail=0
+        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0, tail=0, serial=0
         .globl \name
 \name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
@@ -176,6 +199,9 @@ local_return\@:
         bne.b local_irq_refused\@
         move.l 40(%a2),-(%sp)
         .endif
+        .if \serial
+        move.l 40(%a2),-(%sp)
+        .endif
         move.l 8(%a2),-(%sp)
         move.l 4(%a2),-(%sp)
         move.l 0(%a2),-(%sp)
@@ -204,9 +230,17 @@ local_irq_result\@:
         .if \tail
         jsr _pt_cia_local_tail
         .else
+        .if \serial
+        jsr _pt_cia_local_serial_midi
+        .else
         jsr _pt_cia_local_activate
         .endif
+        .endif
+        .if \serial
+        lea 16(%sp),%sp
+        .else
         lea 12(%sp),%sp
+        .endif
         .endif
         .if \epoch
         bra.b local_irq_epoch_result\@
@@ -242,4 +276,9 @@ local_irq_done\@:
         .endif
         .ifdef pt_exp_mixed_tail
         local_alarm_irq _pt_cia_local_mixed_tail_irq,1,1,1,1
+        .endif
+
+
+        .ifdef pt_exp_serial_midi
+        local_alarm_irq _pt_cia_local_serial_midi_irq,0,0,0,0,1
         .endif

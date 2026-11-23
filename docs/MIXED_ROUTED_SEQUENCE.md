@@ -396,3 +396,15 @@ after. The seven-tick observation needed both endpoints inside one
 half-open aperture. The fixture refused before arming its first alarm.
 Paula DMA stayed clear and the original interrupt state was restored.
 [Mixed refusal receipt](test-evidence/routed_mixed_tail_refusal_amiberry_20261123.json)
+
+The `midi-wire` diagnostic prepares a single three-byte note for an
+explicit UART slot. The original CIA alarm checks transmit idle and
+writes the status byte while the original frame is open. The task reads
+the loopback status, note and velocity bytes and checks transmit drain.
+An expired third frame must leave the UART quiet. The private guest
+uses Amiberry's internal serial loopback. The test measures the first
+write against the tracker window. The receiver interprets the note
+after the remaining bytes arrive. Scheduled multi-message dispatch,
+CAMD endpoint routing and physical MIDI output remain separate work.
+[Commodore serial interface](https://www.theflatnet.de/pub/cbm/amiga/AmigaDevDocs/hard_8.html)
+[Amiberry loopback implementation](https://github.com/BlitterStudio/amiberry/blob/8dec73501b5d2c2b3a6859b1d30a25291febb491/src/osdep/amiberry_serial.cpp)

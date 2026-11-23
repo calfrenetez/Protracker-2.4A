@@ -599,12 +599,14 @@ if(x[i].kind==PT_MIXED_READERS_CONTROL){if(rt==PT_MIXED_READERS_PAULA){if(!x[i].
  }
 return 1;
 }
-static void *allocate(struct pt_sampler_mixed_pool *p,size_t n,const void *input,size_t input_bytes,const void *out,size_t out_bytes)
+static void *allocate(struct pt_sampler_mixed_pool *p,size_t n,const void *input,size_t input_bytes,
+ const struct pt_sampler_mixed_quantized_batch *converted,const void *out,size_t out_bytes)
 {
  void *v;
 if(p->failed||n>p->config.control_budget-p->bytes)return NULL;
 v=p->config.allocator.allocate(p->config.allocator.context,n);
- if(!v||!output_apart(p,v,n)||!apart(v,n,input,input_bytes)||!apart(v,n,out,out_bytes))return NULL;
+ if(!v||!output_apart(p,v,n)||!apart(v,n,input,input_bytes)||
+    (converted&&!apart(v,n,converted,sizeof(*converted)))||!apart(v,n,out,out_bytes))return NULL;
  if((uintptr_t)v%_Alignof(struct pt_sampler_mixed_reader)||!fixed_current(p,p->revision)||!backend_fixed(p)){p->config.allocator.release(p->config.allocator.context,v);
 return NULL;
 }
@@ -653,6 +655,7 @@ c->source[i].token=0;
 static enum pt_sampler_mixed_result begin_private(struct pt_sampler_mixed_pool *p,uint32_t revision,
  uint64_t frame,const struct pt_sampler_mixed_request *x,unsigned n,
  const struct pt_sampler_mixed_trigger_levels *levels,const void *input,size_t input_bytes,
+ const struct pt_sampler_mixed_quantized_batch *converted,
  struct pt_sampler_mixed_command_handle *out)
 {
  unsigned i,ci,rc=0,free_readers=0,triggers;
@@ -683,7 +686,7 @@ else memset(p->level_scratch,0,sizeof(p->level_scratch));
 p->busy=0;
 return PT_SAMPLER_MIXED_STALE;
 }
- c=allocate(p,sizeof(*c),input,input_bytes,out,sizeof(*out));
+ c=allocate(p,sizeof(*c),input,input_bytes,converted,out,sizeof(*out));
 if(!c){p->busy=0;
 return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_CAPACITY;
 }
@@ -698,7 +701,7 @@ if(p->lineage_binding||p->rolling_binding)p->lineage_root_token=c->token;
 c->source[i].request=p->scratch[i];
 c->source[i].levels=p->level_scratch[i];
 if(p->scratch[i].kind!=PT_MIXED_READERS_TRIGGER)continue;
-for(rc=0;rc<p->config.maximum_readers&&p->readers[rc];++rc){}r=allocate(p,sizeof(*r),input,input_bytes,out,sizeof(*out));
+for(rc=0;rc<p->config.maximum_readers&&p->readers[rc];++rc){}r=allocate(p,sizeof(*r),input,input_bytes,converted,out,sizeof(*out));
 if(!r){partial(c,1);
 command_free(p,c);
 p->busy=0;
@@ -726,7 +729,7 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin(struct pt_sampler_mixed_pool
  uint64_t frame,const struct pt_sampler_mixed_request *x,unsigned n,struct pt_sampler_mixed_command_handle *out)
 {
  if(!p||!n||n>PT_SAMPLER_MIXED_ACTIONS)return PT_SAMPLER_MIXED_INVALID;
- return begin_private(p,revision,frame,x,n,NULL,x,(size_t)n*sizeof(*x),out);
+ return begin_private(p,revision,frame,x,n,NULL,x,(size_t)n*sizeof(*x),NULL,out);
 }
 enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_mixed_pool *p,uint32_t revision,
  uint64_t frame,const struct pt_sampler_mixed_quantized_batch *batch,struct pt_sampler_mixed_command_handle *out)
@@ -735,7 +738,78 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_
  if(!p||(uintptr_t)batch%_Alignof(struct pt_sampler_mixed_quantized_batch)||
  !output_apart(p,batch,sizeof(*batch))||!output_apart(p,out,sizeof(*out))||
  !apart(batch,sizeof(*batch),out,sizeof(*out)))return PT_SAMPLER_MIXED_INVALID;
- return begin_private(p,revision,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),out);
+ return begin_private(p,revision,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),NULL,out);
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler_mixed_pool *p,
+ uint32_t revision,const struct pt_sampler_mixed_normalized_batch *input,
+ struct pt_sampler_mixed_command_handle *out)
+{
+ struct pt_sampler_mixed_quantized_batch converted;
+ uintptr_t scratch=(uintptr_t)&converted;
+ const struct pt_mixed_plan_batch *plan;
+ unsigned i;
+
+ if(!p||(uintptr_t)input%_Alignof(struct pt_sampler_mixed_normalized_batch)||
+    (uintptr_t)out%_Alignof(struct pt_sampler_mixed_command_handle)||
+    !output_apart(p,input,sizeof(*input))||!output_apart(p,out,sizeof(*out))||
+    !apart(input,sizeof(*input),out,sizeof(*out))||!fixed_current(p,revision)||
+    p->state!=OPEN||p->causal_binding||!output_address_apart(p,scratch,sizeof(converted))||
+    !apart(input,sizeof(*input),(const void *)scratch,sizeof(converted))||
+    !apart(out,sizeof(*out),(const void *)scratch,sizeof(converted)))return PT_SAMPLER_MIXED_INVALID;
+
+ plan=&input->plan.normalized;
+ if(!plan->count||plan->count>PT_MIXED_PLAN_RECORDS||plan->count>PT_SAMPLER_MIXED_ACTIONS)
+    return PT_SAMPLER_MIXED_INVALID;
+ memset(&converted,0,sizeof(converted));
+ for(i=0;i<plan->count;++i){
+    const struct pt_mixed_plan_record *record=plan->record+i;
+    const struct pt_mixed_plan_trigger_levels *levels=input->plan.levels+i;
+    struct pt_sampler_mixed_request *request=converted.action+i;
+    if(record->track>=p->header.channels.count||
+       record->route!=p->header.channels.track[record->track].route||
+       (record->route!=PT_PAULA&&record->route!=PT_AMIGUS)||
+       record->slot!=(unsigned)p->slot[record->track])return PT_SAMPLER_MIXED_INVALID;
+
+    request->track=record->track;
+    request->sample=record->sample;
+    request->channel=record->channel;
+    switch(record->kind){
+    case PT_MIXED_PLAN_TRIGGER:
+       request->kind=PT_MIXED_READERS_TRIGGER;
+       request->expected=input->source[i].master;
+       break;
+    case PT_MIXED_PLAN_CONTROL:
+       request->kind=PT_MIXED_READERS_CONTROL;
+       request->key=input->source[i].active;
+       break;
+    case PT_MIXED_PLAN_STOP:
+       request->kind=PT_MIXED_READERS_STOP;
+       request->key=input->source[i].active;
+       break;
+    default:
+       return PT_SAMPLER_MIXED_INVALID;
+    }
+    if(record->route==PT_AMIGUS&&record->kind==PT_MIXED_PLAN_TRIGGER){
+       if(levels->mode!=PT_MIXED_PLAN_LEVEL_QUANTIZED)return PT_SAMPLER_MIXED_INVALID;
+       converted.levels[i]=(struct pt_sampler_mixed_trigger_levels){
+          PT_SAMPLER_MIXED_TRIGGER_QUANTIZED,levels->left,levels->right};
+    }else if(levels->mode!=PT_MIXED_PLAN_LEVEL_LEGACY||levels->left||levels->right){
+       return PT_SAMPLER_MIXED_INVALID;
+    }
+    if(record->route==PT_PAULA){
+       request->geometry.paula.period=record->geometry.paula.period;
+       request->geometry.paula.volume=record->geometry.paula.volume;
+    }else{
+       request->geometry.amigus.bits=record->geometry.amigus.bits;
+       request->geometry.amigus.little_endian=record->geometry.amigus.little_endian;
+       request->geometry.amigus.trigger=record->geometry.amigus.trigger;
+       request->geometry.amigus.rate=record->geometry.amigus.rate;
+       request->geometry.amigus.left=record->geometry.amigus.left;
+       request->geometry.amigus.right=record->geometry.amigus.right;
+    }
+ }
+ return begin_private(p,revision,plan->frame,converted.action,plan->count,converted.levels,
+    input,sizeof(*input),&converted,out);
 }
 enum pt_sampler_mixed_result pt_sampler_mixed_causal_stop_begin(struct pt_sampler_mixed_pool *p,
  uint32_t revision,const struct pt_sampler_mixed_causal_stop_batch *batch,

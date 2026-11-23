@@ -1,6 +1,7 @@
 #ifndef PT_SAMPLER_MIXED_READERS_H
 #define PT_SAMPLER_MIXED_READERS_H
 #include "sampler.h"
+#include "mixed_readers_plan_normalize.h"
 #include "../core/mixed_scheduled_readers.h"
 #include "../core/amigus_wavetable_cache.h"
 #define PT_SAMPLER_MIXED_COMMANDS 2U
@@ -127,6 +128,19 @@ enum pt_sampler_mixed_result pt_sampler_mixed_begin(struct pt_sampler_mixed_pool
  */
 enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_mixed_pool *,uint32_t,
     uint64_t frame,const struct pt_sampler_mixed_quantized_batch *,struct pt_sampler_mixed_command_handle *);
+/* Bind a normalized batch to the sampler's current held masters and original
+ * ACTIVE keys, indexed by record. Origins, sample masks and predicted card
+ * addresses carry no ownership. The factory validates and prepares the real
+ * resources through the same quantized request path. */
+struct pt_sampler_mixed_normalized_batch {
+    struct pt_mixed_plan_quantized_batch plan;
+    union {
+        struct pt_sample_version *master;
+        struct pt_mixed_readers_key active;
+    } source[PT_MIXED_PLAN_RECORDS];
+};
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_normalized(struct pt_sampler_mixed_pool *,uint32_t,
+    const struct pt_sampler_mixed_normalized_batch *,struct pt_sampler_mixed_command_handle *);
 /* One transition/action OR <=256 derived cache bytes, never bulk promotion.
  * Each persistent master pin is distinct from prepared-job TEMP pins. HIT/LOAD,
  * completion/cancel of the TEMP job cannot retire the persistent pin.

@@ -100,28 +100,34 @@ static int cancel_combined(void *context, const struct pt_routed_midi_key *key)
     return 1;
 }
 
-static void settle_audio(struct trial *t, struct combined_model *m, uint64_t ticket,
-                          unsigned fire_audio, unsigned cancel)
+static void record_audio_receipt(struct combined_model *m,
+    const struct pt_mixed_readers_command_receipt *receipt, unsigned fired)
 {
-    struct pt_mixed_readers_command_receipt receipt;
     unsigned i;
-    if (fire_audio)
-        fire(&t->model, ticket);
-    assert(pt_mixed_readers_service_command(t->queue, ticket, cancel, &receipt) == PT_MIXED_READERS_OK);
-    assert(receipt.queue == m->receipt.audio.queue && receipt.ticket == m->receipt.audio.ticket);
-    m->receipt.audio.delivery = receipt.action[0].command;
-    if (fire_audio) {
-        m->receipt.audio.count = receipt.count;
-        m->receipt.audio.first_issued = receipt.action[0].issued;
-        m->receipt.audio.last_issued = receipt.action[0].issued;
-        for (i = 1; i < receipt.count; ++i) {
-            uint64_t issued = receipt.action[i].issued;
+    assert(receipt->queue == m->receipt.audio.queue && receipt->ticket == m->receipt.audio.ticket);
+    m->receipt.audio.delivery = receipt->action[0].command;
+    if (fired) {
+        m->receipt.audio.count = receipt->count;
+        m->receipt.audio.first_issued = receipt->action[0].issued;
+        m->receipt.audio.last_issued = receipt->action[0].issued;
+        for (i = 1; i < receipt->count; ++i) {
+            uint64_t issued = receipt->action[i].issued;
             if (issued < m->receipt.audio.first_issued)
                 m->receipt.audio.first_issued = issued;
             if (issued > m->receipt.audio.last_issued)
                 m->receipt.audio.last_issued = issued;
         }
     }
+}
+
+static void settle_audio(struct trial *t, struct combined_model *m, uint64_t ticket,
+                          unsigned fire_audio, unsigned cancel)
+{
+    struct pt_mixed_readers_command_receipt receipt;
+    if (fire_audio)
+        fire(&t->model, ticket);
+    assert(pt_mixed_readers_service_command(t->queue, ticket, cancel, &receipt) == PT_MIXED_READERS_OK);
+    record_audio_receipt(m, &receipt, fire_audio);
 }
 
 static void settle_midi(struct combined_model *m, unsigned issue)

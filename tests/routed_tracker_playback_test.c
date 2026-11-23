@@ -1,8 +1,7 @@
 #define PT_ROUTED_COMBINED_TEST_MAIN other_combined_cases
 #include "routed_midi_combined_test.c"
-#include "../src/core/amigus_trigger_levels.h"
 #include "../src/core/routed_playback.h"
-#include "../src/editor/mixed_readers_plan_normalize.h"
+#include "../src/editor/sampler_mixed_readers.h"
 
 static void tracker_project(struct trial *t, int32_t pcm[2][1024])
 {
@@ -50,79 +49,39 @@ static void normalize(const struct pt_project *project, const struct pt_routed_r
     assert(pt_mixed_plan_normalizer_close(&job) && !job);
 }
 
-static void prepare_trigger(struct trial *t, const struct pt_mixed_plan_record *record,
-                            const struct pt_mixed_plan_trigger_levels *levels, unsigned i)
-{
-    struct pt_mixed_readers_action *action = t->input->batch.action + i;
-    struct holder *reader = t->reader + i;
-    struct resources *resources = t->resources;
-    struct pt_mixed_readers_owner *owner = t->input->reader + i;
-    assert(record->kind == PT_MIXED_PLAN_TRIGGER && record->channel == 0);
-    *owner = source(reader, resources, action->route, record->slot, record->sample, 1000 + i);
-    reader->queue = t->queue;
-    action->kind = PT_MIXED_READERS_TRIGGER;
-    if (action->route == PT_MIXED_READERS_PAULA) {
-        const uint8_t *data;
-        size_t length;
-        assert(record->track == record->slot && levels->mode == PT_MIXED_PLAN_LEVEL_LEGACY);
-        assert(pt_sampler_paula_location(&resources->paula, record->track, reader->lease, &data, &length));
-        assert(length == 1024 && record->geometry.paula.volume == 64);
-        action->geometry.paula.data = data;
-        action->geometry.paula.words = (uint16_t)(length / 2);
-        action->geometry.paula.period = record->geometry.paula.period;
-        action->geometry.paula.volume = record->geometry.paula.volume;
-    } else {
-        const struct pt_playback_format format = {record->geometry.amigus.bits, record->channel,
-                                                  record->geometry.amigus.little_endian, 0};
-        const struct pt_amigus_trigger_levels_request request = {
-            record->geometry.amigus.trigger, levels->left, levels->right
-        };
-        const struct pt_sample *sample = resources->document.project.samples + record->sample;
-        assert(record->track == 4 && levels->mode == PT_MIXED_PLAN_LEVEL_QUANTIZED);
-        assert(pt_amigus_trigger_levels_prepare(sample, &format, &request, owner->card.address,
-                                                owner->card.logical_bytes, &action->geometry.amigus));
-        assert(action->geometry.amigus.rate == record->image.rate &&
-               action->geometry.amigus.left == record->image.left && action->geometry.amigus.right == record->image.right);
-    }
-}
-
-static uint64_t publish_plan(struct trial *t, const struct pt_mixed_plan_quantized_batch *batch,
-                             uint64_t original, unsigned command)
+static void check_actions(const struct trial *t, const struct pt_mixed_plan_batch *batch,
+                          const struct model_command *command)
 {
     unsigned i;
-    uint64_t ticket;
-    assert(batch->normalized.count == 5);
-    memset(t->input, 0, sizeof(*t->input));
-    holder_init(t->command + command, 100 + command);
-    t->input->command = control_of(t->command + command);
-    t->input->batch.frame = batch->normalized.frame;
-    t->input->batch.generation = 17;
-    t->input->batch.count = batch->normalized.count;
-    for (i = 0; i < batch->normalized.count; ++i) {
-        const struct pt_mixed_plan_record *record = batch->normalized.record + i;
-        struct pt_mixed_readers_action *action = t->input->batch.action + i;
-        action->route = record->route == PT_PAULA ? PT_MIXED_READERS_PAULA : PT_MIXED_READERS_AMIGUS;
-        action->slot = record->slot;
-        if (!original) {
-            prepare_trigger(t, record, batch->levels + i, i);
-            continue;
-        }
-        assert(record->kind == PT_MIXED_PLAN_CONTROL);
-        assert(pt_mixed_readers_reader_key(t->queue, original, i, t->input->target + i) == PT_MIXED_READERS_OK);
-        action->kind = PT_MIXED_READERS_CONTROL;
-        if (action->route == PT_MIXED_READERS_PAULA) {
-            action->geometry.paula.period = record->geometry.paula.period;
-            action->geometry.paula.volume = record->geometry.paula.volume;
-            assert(action->geometry.paula.volume == 63);
+    assert(batch->count == 5 && command->batch.count == batch->count);
+    for (i = 0; i < batch->count; ++i) {
+        const struct pt_mixed_plan_record *record = batch->record + i;
+        const struct pt_mixed_readers_action *action = command->batch.action + i;
+        assert(action->slot == record->slot && action->route ==
+            (record->route == PT_PAULA ? PT_MIXED_READERS_PAULA : PT_MIXED_READERS_AMIGUS));
+        if (record->kind == PT_MIXED_PLAN_STOP) {
+            assert(action->kind == PT_MIXED_READERS_STOP);
+        } else if (record->route == PT_PAULA) {
+            assert(action->geometry.paula.period == record->geometry.paula.period);
+            assert(action->geometry.paula.volume == (record->kind == PT_MIXED_PLAN_TRIGGER ? 64 : 63));
+            if (record->kind == PT_MIXED_PLAN_TRIGGER) {
+                const uint8_t *data = action->geometry.paula.data;
+                assert(action->geometry.paula.words == 512 && t->resources->chips == 1);
+                assert(data[0] == t->resources->original[0][0] && data[1023] == t->resources->original[0][63]);
+            }
         } else {
-            action->geometry.amigus.rate = record->geometry.amigus.rate;
-            action->geometry.amigus.left = record->geometry.amigus.left;
-            action->geometry.amigus.right = record->geometry.amigus.right;
+            const struct pt_amigus_voice_plan *image = &action->geometry.amigus;
+            if (record->kind == PT_MIXED_PLAN_TRIGGER) {
+                assert(image->rate == record->image.rate && image->left == record->image.left &&
+                       image->right == record->image.right && image->end_exclusive - image->start == 1024);
+                assert(t->resources->card.ram[image->start] == t->resources->original[1][0] &&
+                       t->resources->card.ram[image->end_exclusive - 1] == t->resources->original[1][63]);
+            } else {
+                assert(image->rate == record->geometry.amigus.rate &&
+                       image->left == record->geometry.amigus.left && image->right == record->geometry.amigus.right);
+            }
         }
     }
-    assert(pt_mixed_readers_enqueue(t->queue, t->input, &ticket) == PT_MIXED_READERS_OK);
-    assert(pt_mixed_readers_publish(t->queue, ticket) == PT_MIXED_READERS_OK);
-    return ticket;
 }
 
 int main(void)
@@ -137,9 +96,17 @@ int main(void)
     struct pt_render_lookahead *ahead = calloc(1, sizeof(*ahead));
     struct pt_routed_render_plan *plan = calloc(1, sizeof(*plan));
     struct pt_routed_midi *midi = calloc(1, sizeof(*midi));
-    struct pt_mixed_plan_quantized_batch *batch = calloc(1, sizeof(*batch));
+    struct pt_sampler_mixed_normalized_batch *batch = calloc(1, sizeof(*batch));
+    struct pt_sampler_mixed_pool *pool = NULL;
+    struct pt_sampler_mixed_command_handle handle = {0};
+    struct pt_sampler_mixed_reader_handle readers[5] = {{0}};
+    struct pt_mixed_readers_key keys[5] = {{0}};
+    struct allocation factory_allocator = {0};
+    const size_t factory_capacity = pt_sampler_mixed_workspace_size();
+    void *factory_workspace = calloc(1, factory_capacity);
+    enum pt_sampler_mixed_result factory_result;
     struct pt_mixed_plan_origin origins[PT_MIXED_PLAN_RECORDS] = {{0}};
-    struct pt_sample_version *master[2] = {NULL, NULL};
+    struct pt_sample_version *master[PT_PROJECT_SAMPLES] = {NULL};
     struct pt_routed_midi_schedule schedule = {0};
     struct pt_routed_playback_frame playback = {0};
     struct combined_model m = {.audio = &t->model, .schedule = &schedule};
@@ -152,10 +119,10 @@ int main(void)
     int32_t (*pcm)[1024] = malloc(2 * sizeof(*pcm));
     uint8_t *saved;
     uint64_t original = 0;
-    unsigned ready = 0, boundary, idle_ticks = 0, i;
-    assert(ahead && plan && midi && batch && workspace && pcm);
+    unsigned ready = 0, boundary, idle_ticks = 0, i, steps;
+    assert(ahead && plan && midi && batch && workspace && factory_workspace && pcm);
     tracker_project(t, pcm);
-    for (i = 0; i < 2; ++i) {
+    for (i = 0; i < project->sample_count; ++i) {
         struct pt_pcm pinned;
         struct pt_sampler *sampler = &t->resources->sampler;
         assert(pt_sampler_pin(sampler, project, i, sampler->generation, &pinned, master + i) == PT_EDIT_OK);
@@ -173,9 +140,33 @@ int main(void)
     };
     t->model.ticks = 99;
     open_trial(t);
+    const struct pt_sampler_mixed_config config = {
+        .allocator = {&factory_allocator, ordinary, ordinary_release},
+        .sampler = &t->resources->sampler, .project = project, .queue = t->queue,
+        .backend = &t->resources->card.cache,
+        .chip_context = &t->resources->chips, .chip_allocate = chip_new, .chip_release = chip_drop,
+        .control_budget = pt_sampler_mixed_pool_size() + pt_sampler_mixed_command_size() +
+                          5 * pt_sampler_mixed_reader_size(),
+        .chip_budget = 4096, .generation = 17, .maximum_commands = 1, .maximum_readers = 5,
+        .context_count = 5,
+        .contexts = {{&factory_allocator, sizeof(factory_allocator)},
+                     {&t->resources->chips, sizeof(t->resources->chips)},
+                     {&t->resources->card, sizeof(t->resources->card)},
+                     {&t->allocator, sizeof(t->allocator)}, {&m, sizeof(m)}}
+    };
+    assert(pt_sampler_mixed_open(&config, 37, factory_workspace, factory_capacity, &pool) == PT_SAMPLER_MIXED_PENDING);
+    steps = 0;
+    do {
+        assert(++steps < 1024);
+        factory_result = pt_sampler_mixed_advance_validation(pool, 37, 256);
+    } while (factory_result == PT_SAMPLER_MIXED_PENDING);
+    assert(factory_result == PT_SAMPLER_MIXED_OK && !t->model.submits && !t->resources->card.writes);
+
     for (boundary = 0; boundary < 3;) {
         struct pt_render_interval interval;
         const struct pt_routed_midi_batch *midi_batch;
+        struct pt_mixed_readers_command_receipt receipt;
+        struct pt_mixed_plan_batch *normalized = &batch->plan.normalized;
         uint64_t ticket;
         uint32_t remaining;
         assert(pt_render_sequence_next(sequence, &interval) == PT_RENDER_OK);
@@ -197,18 +188,73 @@ int main(void)
         assert(midi->pending && midi_batch->serial == playback.serial && midi_batch->count == (unsigned)(boundary != 1));
         assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
+        memset(batch, 0, sizeof(*batch));
         if (plan->end) {
             assert(plan->end == PT_RENDER_F00 + 1 && !plan->audio.count);
-            ticket = publish_stop(t, original, plan->frame, boundary);
+            normalized->frame = plan->frame;
+            normalized->count = 5;
+            for (i = 0; i < normalized->count; ++i) {
+                assert(origins[i].present);
+                normalized->record[i] = (struct pt_mixed_plan_record){
+                    .kind = PT_MIXED_PLAN_STOP, .track = i, .route = project->channels.track[i].route,
+                    .slot = keys[i].slot, .sample = origins[i].sample, .channel = origins[i].channel
+                };
+            }
         } else {
-            normalize(project, plan, origins, batch, workspace, capacity);
-            ticket = publish_plan(t, batch, original, boundary);
-            if (!original)
-                original = ticket;
+            normalize(project, plan, origins, &batch->plan, workspace, capacity);
         }
+        assert(normalized->count == 5);
+        for (i = 0; i < normalized->count; ++i) {
+            const struct pt_mixed_plan_record *record = normalized->record + i;
+            assert(record->track == i && record->sample < 2);
+            if (!boundary) {
+                assert(record->kind == PT_MIXED_PLAN_TRIGGER);
+                batch->source[i].master = master[record->sample];
+            } else {
+                assert(record->kind == (plan->end ? PT_MIXED_PLAN_STOP : PT_MIXED_PLAN_CONTROL));
+                batch->source[i].active = keys[record->track];
+            }
+        }
+        const unsigned allocations = factory_allocator.calls;
+        if (!boundary) {
+            ++normalized->record[4].slot;
+            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+            --normalized->record[4].slot;
+            batch->source[4].master = master[0];
+            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+            batch->source[4].master = master[1];
+        } else {
+            ++batch->source[4].active.serial;
+            assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_INVALID);
+            --batch->source[4].active.serial;
+        }
+        assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
+        assert(pt_sampler_mixed_begin_normalized(pool, 37, batch, &handle) == PT_SAMPLER_MIXED_PENDING);
+        steps = 0;
+        do {
+            assert(++steps < 64);
+            factory_result = pt_sampler_mixed_advance(pool, 37, handle, NULL);
+        } while (factory_result == PT_SAMPLER_MIXED_PENDING);
+        assert(factory_result == PT_SAMPLER_MIXED_OK);
+        if (!boundary)
+            for (i = 0; i < 5; ++i)
+                assert(pt_sampler_mixed_reader(pool, handle, i, readers + i) == PT_SAMPLER_MIXED_OK);
+        assert(pt_sampler_mixed_enqueue(pool, 37, handle, &ticket) == PT_MIXED_READERS_OK);
+        assert(pt_sampler_mixed_publish(pool, ticket) == PT_MIXED_READERS_OK);
+        check_actions(t, normalized, model_command(&t->model, ticket));
         assert(m.submissions == boundary + 1 && t->model.effects == boundary * 5);
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_WAITING);
-        settle_audio(t, &m, ticket, 1, 0);
+        fire(&t->model, ticket);
+        assert(pt_sampler_mixed_service_command(pool, ticket, 0, &receipt) == PT_MIXED_READERS_OK);
+        record_audio_receipt(&m, &receipt, 1);
+        if (!boundary) {
+            original = ticket;
+            for (i = 0; i < 5; ++i) {
+                assert(pt_sampler_mixed_service_reader(pool, original, i, 0, NULL) == PT_MIXED_READERS_PENDING);
+                assert(pt_sampler_mixed_reader_key(pool, readers[i], keys + i) == PT_MIXED_READERS_OK);
+            }
+        }
+        assert(pt_sampler_mixed_command_close(pool, &handle));
         settle_midi(&m, boundary != 1);
         remaining = interval.frames;
         while (remaining) {
@@ -223,26 +269,32 @@ int main(void)
         assert(pt_routed_playback_commit(&playback) == PT_RENDER_OK);
         assert(pt_routed_playback_commit(&playback) == PT_RENDER_INVALID);
         if (!plan->end)
-            memcpy(origins, batch->normalized.next, sizeof(origins));
+            memcpy(origins, normalized->next, sizeof(origins));
         ++boundary;
     }
     assert(idle_ticks == 1 && midi->stopped && !schedule.held && t->model.effects == 15);
     assert(pt_routed_playback_abandon(&playback));
     assert(!pt_mixed_readers_commands_held(t->queue));
-    for (i = 0; i < 5; ++i)
-        assert(pt_mixed_readers_service_reader(t->queue, original, i, 1, NULL) == PT_MIXED_READERS_OK);
+    for (i = 0; i < 5; ++i) {
+        assert(pt_sampler_mixed_service_reader(pool, original, i, 1, NULL) == PT_MIXED_READERS_OK);
+        assert(pt_sampler_mixed_reader_close(pool, readers + i));
+    }
+    assert(pt_sampler_mixed_close(&pool) && !pool && !t->resources->chips);
+    assert(factory_allocator.calls == factory_allocator.releases);
+    assert(!pt_mixed_readers_readers_held(t->queue));
     same_save(t->resources, saved, saved_size);
     pt_render_sequence_close(sequence);
-    for (i = 0; i < 2; ++i)
+    for (i = 0; i < project->sample_count; ++i)
         pt_sampler_unpin(master[i]);
     trial_drop(t);
     free(pcm);
     free(saved);
     free(workspace);
+    free(factory_workspace);
     free(batch);
     free(midi);
     free(plan);
     free(ahead);
-    puts("Routed tracker playback: normalized attack, audio-only CONTROL and owned F00 Stop at 0/960/1920; SOFTWARE_ONLY");
+    puts("Routed tracker playback: factory-owned attack, audio-only CONTROL and F00 Stop at 0/960/1920; SOFTWARE_ONLY");
     return 0;
 }

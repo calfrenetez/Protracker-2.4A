@@ -1,0 +1,59 @@
+{
+  "base_source": "ca843a6338e0d3a70b574f3fd6c9f4729f8f0ddc",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "776c0ccf3adb7e25f04a87decc9044a2c122491156d612c7007de1050b27e0dd",
+  "build_receipt_sha256": "efd8c3ffd3104e4a343e52e5e48c0ed195ae433bdb6ccd591f972e06a0aed780",
+  "guest_log_sha256": "d6f9f5b7387945f757e09103bd6d55154f59ab35873810e37694c9884fa58a6b",
+  "partial_check_sha256": "397980c77b984fc83de958d415a037151c77a6a579460710276df2447bf72b05",
+  "validated_build_inputs": 12,
+  "guest_exit_code": 20,
+  "planned_rows": 14,
+  "captured_rows": 3,
+  "original_fixture_passed": false,
+  "partial_observations": [
+    {
+      "frame": 512,
+      "original_window": [
+        7567,
+        7582
+      ],
+      "observed_bracket": [
+        7567,
+        7573
+      ],
+      "irq_arm_delta": 6478
+    },
+    {
+      "frame": 640,
+      "original_window": [
+        9459,
+        9474
+      ],
+      "observed_bracket": [
+        9464,
+        9470
+      ],
+      "irq_arm_delta": 89
+    },
+    {
+      "frame": 768,
+      "original_window": [
+        11351,
+        11365
+      ],
+      "observed_bracket": [
+        11351,
+        11357
+      ],
+      "irq_arm_delta": 488
+    }
+  ],
+  "outer_elapsed_sample_missing": true,
+  "incomplete_cause": "Native report ended before the fourth row and did not record its admission reason.",
+  "guest_reported_both_timers_closed": true,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Partial native IRQ diagnostic in Amiberry. The original incomplete result does not qualify exact dispatch or a whole clock sequence."
+}

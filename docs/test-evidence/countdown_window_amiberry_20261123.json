@@ -1,0 +1,21 @@
+{
+  "source": "c0844bfd5e3f8feca728f773b964dd5bc3a59353",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "fa8756f0a070ca2182f7046aafae6a4894e61f3919063a3fa1c4c17d7e711d77",
+  "build_receipt_sha256": "2712c73bd723e92e3202a7fe3792e729892f811f58ca8e991cee9933d342b80c",
+  "guest_log_sha256": "46c54cce619e4856c71e08926dce9ba236f8f2ae39144a82f0aacc96322020c9",
+  "validated_build_inputs": 5,
+  "guest_exit_code": 0,
+  "host_sanitizer_method": true,
+  "original_frames_checked": 1998,
+  "checks": [
+    "PAL and NTSC original frame grids, including half-open first and last tick",
+    "warm clock anchors crossing the low 32-bit word and near maximum absolute tick",
+    "refuse early, expired, reversed or overlapping brackets"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Countdown conversion arithmetic on native 68k. Actual frame binding, clock delivery, output timing and devices require separate tests."
+}

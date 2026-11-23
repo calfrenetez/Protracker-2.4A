@@ -10,6 +10,7 @@ FIXTURES = {
     'mixed-causal': ('test_mixed_readers_causal.py', 'PTMixedCausalTest'),
     'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
     'routed-combined': ('test_mixed_readers_causal.py', 'PTRoutedCombined'),
+    'routed-tracker': ('test_mixed_readers_causal.py', 'PTRoutedTracker'),
 }
 
 def main():
@@ -24,10 +25,15 @@ def main():
         sources[0] = 'tests/native_exec_render_sequence_test.c'
     if args.fixture == 'mixed-frame-zero':
         sources[0] = 'tests/native_mixed_frame_zero_test.c'
-    if args.fixture == 'routed-combined':
-        sources = ['tests/routed_midi_combined_test.c', *sources[2:], 'src/core/routed_midi.c', 'src/core/midi.c']
+    if args.fixture in ('routed-combined', 'routed-tracker'):
+        source = 'routed_tracker_playback_test.c' if args.fixture == 'routed-tracker' else 'routed_midi_combined_test.c'
+        sources = [f'tests/{source}', *sources[2:], 'src/core/routed_midi.c', 'src/core/midi.c']
+    if args.fixture == 'routed-tracker':
+        tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
+        sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
+                            and any(isinstance(target, ast.Name) and target.id == 'TRACKER_UNITS' for target in node.targets)))
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined'):
+    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined', 'routed-tracker'):
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable

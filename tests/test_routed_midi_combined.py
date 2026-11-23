@@ -8,19 +8,32 @@ from test_mixed_readers_causal import SOURCES as AUDIO_SOURCES
 
 ROOT = Path(__file__).resolve().parents[1]
 COMBINED_PASS = 'Combined schedule: exact Paula, AmiGUS and MIDI admission, partial receipts and owned Stop; SOFTWARE_ONLY\n'
+TRACKER_PASS = 'Routed tracker playback: normalized attack, audio-only CONTROL and owned F00 Stop at 0/960/1920; SOFTWARE_ONLY\n'
+TRACKER_UNITS = [
+    'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
+    'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',
+    'src/core/amigus_render_voice.c', 'src/core/amigus_trigger_levels.c',
+    'src/editor/mixed_readers_plan_normalize.c',
+]
 
 
 class RoutedMidiCombined(unittest.TestCase):
     def test_one_publication_and_independent_terminal_proofs(self):
+        self.run_fixture('routed_midi_combined_test', [], COMBINED_PASS)
+
+    def test_tracker_forecast_uses_the_same_schedule_for_attack_control_and_stop(self):
+        self.run_fixture('routed_tracker_playback_test', TRACKER_UNITS, TRACKER_PASS)
+
+    def run_fixture(self, fixture, extra, expected):
         with tempfile.TemporaryDirectory() as temporary:
-            binary = Path(temporary) / 'combined'
+            binary = Path(temporary) / fixture
             subprocess.run([
                 'cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror', '-UNDEBUG',
                 '-fsanitize=address,undefined', '-Isrc/core', '-I.',
-                'tests/routed_midi_combined_test.c', *AUDIO_SOURCES[2:],
-                'src/core/routed_midi.c', 'src/core/midi.c', '-o', str(binary),
+                f'tests/{fixture}.c', *AUDIO_SOURCES[2:],
+                'src/core/routed_midi.c', 'src/core/midi.c', *extra, '-o', str(binary),
             ], cwd=ROOT, check=True, timeout=120)
             run = subprocess.run([str(binary)], cwd=ROOT, capture_output=True, text=True, timeout=30)
             self.assertEqual(run.returncode, 0, run.stderr)
             self.assertEqual(run.stderr, '')
-            self.assertEqual(run.stdout, COMBINED_PASS)
+            self.assertEqual(run.stdout, expected)

@@ -121,3 +121,12 @@ and exact Stop after an audio-only stop result.
 The exact native fixture returned zero and completed all seven cases on the
 Amiberry 68030. The expanded nine-case build also completed there, adding
 audio-only publication and cancellation. [Combined 030 test receipt](test-evidence/routed_combined_amiberry_20261123.json)
+
+The routed tracker fixture uses a complete pattern as its input. Its real
+lookahead produces the attacks at frame 0, a volume-slide control at frame 960
+while the MIDI note is held, and F00 at frame 1920. The existing normalizer
+derives the audio commands, and the modeled joint provider settles them through
+the genuine audio queue before the fixture commits the corresponding render
+interval. The audio readers and MIDI note are released through their existing
+ownership paths. Build it with `tools/build_render_sequence.py
+--cc <amiga-compiler> --fixture routed-tracker`.

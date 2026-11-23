@@ -134,15 +134,15 @@ static void settle_midi(struct combined_model *m, unsigned issue)
         m->receipt.count = 0;
 }
 
-static uint64_t publish_stop(struct trial *t, uint64_t first)
+static uint64_t publish_stop(struct trial *t, uint64_t first, uint64_t frame, unsigned command)
 {
     unsigned i;
     uint64_t stop;
     memset(t->input, 0, sizeof(*t->input));
-    holder_init(t->command + 1, 101);
-    t->input->command = control_of(t->command + 1);
+    holder_init(t->command + command, 100 + command);
+    t->input->command = control_of(t->command + command);
     t->input->batch.generation = 17;
-    t->input->batch.frame = 960;
+    t->input->batch.frame = frame;
     t->input->batch.count = 5;
     for (i = 0; i < 5; ++i) {
         struct pt_mixed_readers_key *key = &t->input->target[i];
@@ -238,7 +238,7 @@ static void combined_case(enum combined_case which)
     stop = pt_routed_midi_prepare_stop(midi, 960);
     assert(stop && stop->count == midi_issued);
     if (audio_issued) {
-        uint64_t stop_ticket = publish_stop(t, first);
+        uint64_t stop_ticket = publish_stop(t, first, 960, 1);
         settle_audio(t, &m, stop_ticket, 1, 0);
     } else {
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_QUEUED);
@@ -261,7 +261,10 @@ static void combined_case(enum combined_case which)
     free(midi);
 }
 
-int main(void)
+#ifndef PT_ROUTED_COMBINED_TEST_MAIN
+#define PT_ROUTED_COMBINED_TEST_MAIN main
+#endif
+int PT_ROUTED_COMBINED_TEST_MAIN(void)
 {
     combined_case(BOTH_ISSUE);
     combined_case(AUDIO_ONLY);

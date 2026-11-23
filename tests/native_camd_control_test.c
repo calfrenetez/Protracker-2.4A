@@ -126,8 +126,13 @@ static void measure_loopback(struct Library *library, void *sender, void *receiv
            (unsigned long)span.min, (unsigned long)span.max, send_inside, receive_inside);
 }
 
-static void local_loopback(unsigned timing)
+#ifdef PT_CAMD_DIRECT_COUNT_TEST
+#include "native_camd_direct_clock.h"
+#endif
+
+static int local_loopback(unsigned timing)
 {
+    int rc = 0;
     ULONG stamp = 0;
     const struct TagItem node_tags[] = {
         { PT_CAMD_NODE_NAME_TAG, (ULONG)(uintptr_t)receiver_name },
@@ -158,8 +163,12 @@ static void local_loopback(unsigned timing)
     assert(pt_camd_control_link(&control, (unsigned)port) == PT_CAMD_OK && control.links[port]);
     assert(pt_camd_control_link(&control, (unsigned)port) == PT_CAMD_IN_USE);
 
-    if (timing) {
+    if (timing == 1) {
         measure_loopback(library, control.links[port], node, &stamp);
+#ifdef PT_CAMD_DIRECT_COUNT_TEST
+    } else if (timing == 2) {
+        rc = measure_direct(library, control.links[port], node, &stamp);
+#endif
     } else {
         local_note(library, control.links[port], node, UINT32_C(0x963c6400));
         local_note(library, control.links[port], node, UINT32_C(0x863c0000));
@@ -173,10 +182,15 @@ static void local_loopback(unsigned timing)
     (void)pt_native_camd_vector(library, PT_CAMD_DELETE_NODE, 0, node, NULL);
     assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && !registry->available);
     finish();
-    if (timing)
+    if (timing == 1)
         puts("CAMD native timing: local messages and receive timestamps verified; original handles closed");
+#ifdef PT_CAMD_DIRECT_COUNT_TEST
+    else if (timing == 2)
+        printf("CAMD direct closed: original clock, library, node and links released rc=%d\n", rc);
+#endif
     else
         puts("CAMD native control: 40.5 receiver discovery, local note on/off and original handles closed");
+    return rc;
 }
 
 static void routes_loopback(void)
@@ -277,12 +291,16 @@ int main(int argc, char **argv)
     if (!strcmp(argv[1], "absent"))
         missing_library();
     else if (!strcmp(argv[1], "loopback"))
-        local_loopback(0);
+        return local_loopback(0);
+#ifdef PT_CAMD_DIRECT_COUNT_TEST
+    else if (!strcmp(argv[1], "direct"))
+        return local_loopback(2);
+#endif
     else if (!strcmp(argv[1], "routes"))
         routes_loopback();
     else {
         assert(!strcmp(argv[1], "timing"));
-        local_loopback(1);
+        return local_loopback(1);
     }
     return 0;
 }

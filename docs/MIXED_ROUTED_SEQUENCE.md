@@ -363,3 +363,15 @@ The original window was [65499, 65514) and the usable aperture was
 enough ticks for its six-tick observation criterion. Write-duration
 bounds and device activation across a reload remain to be measured.
 [Crossing-frame receipt](test-evidence/cia_tail_frame_amiberry_20261123.json)
+
+The `camd-direct` fixture measures the real public CAMD
+`PutMidi` call with direct CIA samples from the calling task.
+In the Amiberry run, eight independently bounded countdowns
+covered 32 local software-queue receipts and their receive
+timestamps. Twenty-two rows had coherent paired samples.
+The baseline brackets were six ticks and the call brackets were
+379–2785 ticks. Each measured call bracket exceeded the original
+14–15-tick sample window at 48 kHz. These finite observations
+include the clock samples and any intervening task delay.
+The scheduled MIDI transport still needs its own acceptance proof.
+[Direct CAMD receipt](test-evidence/camd_direct_groups_amiberry_20261123.json)

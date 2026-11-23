@@ -22,6 +22,7 @@ FIXTURES = {
     'routed-mixed-wait': ('test_mixed_readers_causal.py', 'PTRoutedMixedWait'),
     'routed-mixed-reload': ('test_mixed_readers_causal.py', 'PTRoutedMixedReload'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
+    'camd-direct': ('test_camd_control.py', 'PTCamdDirect'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-reload': (None, 'PTCIAReload'),
     'cia-tail': (None, 'PTCIATail'),
@@ -81,12 +82,16 @@ def main():
             for unit in units:
                 sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
                                     and any(isinstance(target, ast.Name) and target.id == unit for target in node.targets)))
-    if args.fixture == 'camd-control':
+    if args.fixture in ('camd-control', 'camd-direct'):
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
                    'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]
+    if args.fixture == 'camd-direct':
+        sources.extend(['tests/native_camd_direct_clock.s', 'tests/native_cia_direct_clock.s'])
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
     if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control', 'countdown-window') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])
+    if args.fixture == 'camd-direct':
+        flags.extend(['-DPT_CAMD_DIRECT_COUNT_TEST', '-UNDEBUG'])
     if paula_alarm or args.fixture == 'routed-paula-window':
         flags.append('-DPT_PAULA_TIMED_TRACE')
         sources.extend(['tests/native_cia_direct_clock.s', 'tests/native_cia_local_activation.s',

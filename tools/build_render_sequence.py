@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 FIXTURES = {
     'render-sequence': ('test_render_sequence.py', 'PTExecRenderSequenceTest'),
     'amigus-restore': ('test_amigus_restore.py', 'PTAmiGusRestoreTest'),
+    'amigus-voice-plan': ('test_amigus_voice_plan.py', 'PTAmiGusVoicePlan'),
     'mixed-causal': ('test_mixed_readers_causal.py', 'PTMixedCausalTest'),
     'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
     'routed-combined': ('test_mixed_readers_causal.py', 'PTRoutedCombined'),
@@ -45,7 +46,7 @@ def main():
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
                    'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'camd-control') or args.fixture in routed_sources:
+    if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable

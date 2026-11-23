@@ -2,6 +2,53 @@
 #include <stdio.h>
 #include <string.h>
 #include "amigus_voice_plan.h"
+
+static void check_voice_registers(void)
+{
+    struct pt_amigus_voice_plan plan = {
+        .start = 0x10002, .loop = 0x10004, .end_exclusive = 0x20000, .rate = 0x12345678,
+        .control = 0x800f, .left = 4321, .right = 1234
+    };
+    static const struct pt_amigus_voice_register_write looped[] = {
+        {0x1e,31}, {0x20,0}, {0x26,1}, {0x28,4}, {0x22,1}, {0x24,2},
+        {0x2a,1}, {0x2c,0xfffe}, {0x2e,0x1234}, {0x30,0x5678}, {0x32,4321}, {0x34,1234}, {0x20,0x800f}
+    };
+    struct pt_amigus_voice_register_program program, previous;
+    unsigned i;
+    assert(pt_amigus_voice_trigger_registers(31, &plan, &program));
+    assert(program.count == sizeof(looped) / sizeof(*looped));
+    for (i = 0; i < program.count; ++i) {
+        assert(program.write[i].offset == looped[i].offset);
+        assert(program.write[i].value == looped[i].value);
+    }
+    assert(plan.end_exclusive == 0x20000);
+
+    plan.start = 0x1fffe;
+    plan.control = 0x8000;
+    assert(pt_amigus_voice_trigger_registers(0, &plan, &program));
+    assert(program.count == 11 && program.write[2].offset == 0x22);
+    assert(program.write[3].offset == 0x24 && program.write[3].value == 0xfffe);
+    assert(program.write[5].offset == 0x2c && program.write[5].value == 0xfffe);
+    assert(program.write[10].offset == 0x20 && program.write[10].value == 0x8000);
+    assert(pt_amigus_voice_stop_registers(5, &program));
+    assert(program.count == 2 && program.write[0].offset == 0x1e && program.write[0].value == 5);
+    assert(program.write[1].offset == 0x20 && !program.write[1].value);
+    for (i = program.count; i < PT_AMIGUS_VOICE_REGISTER_WRITES; ++i)
+        assert(!program.write[i].offset && !program.write[i].value);
+    memcpy(&previous, &program, sizeof(program));
+    assert(!pt_amigus_voice_stop_registers(32, &program));
+    assert(!pt_amigus_voice_trigger_registers(32, &plan, &program));
+    --plan.start;
+    assert(!pt_amigus_voice_trigger_registers(5, &plan, &program));
+    ++plan.start;
+    plan.control |= 8;
+    assert(!pt_amigus_voice_trigger_registers(5, &plan, &program));
+    plan.control = 0x8000;
+    plan.end_exclusive = plan.start;
+    assert(!pt_amigus_voice_trigger_registers(5, &plan, &program));
+    assert(!memcmp(&program, &previous, sizeof(program)));
+}
+
 static int voice_plan_fixture_main(void)
 {
     struct pt_sample s={0};struct pt_playback_format f={16,0,0,0};
@@ -57,6 +104,7 @@ static int voice_plan_fixture_main(void)
         assert((uint64_t)p.rate*192000<=(uint64_t)i*1073741824);
         assert((uint64_t)(p.rate+1)*192000>(uint64_t)i*1073741824);
     }
+    check_voice_registers();
     puts("AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O");return 0;
 }
 #ifndef PT_VOICE_PLAN_NATIVE

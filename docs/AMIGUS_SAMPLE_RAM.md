@@ -244,13 +244,18 @@ Register facts come from the pinned SDK's `AmiGUS_Register_Map.xlsx`, sheet
 formula. Source hashes and exact cell references are retained in
 `evidence/enhanced-editor/amigus-voice-plan/source-observations.json`.
 
-The maps do not explain inclusive/exclusive end-pointer behavior or establish
-that control-bit readback fences all sample-memory reads. The plan therefore
-keeps an explicit HALF-OPEN software end bound; mapping it to an actual end
-register requires further protocol verification. The utility and maps also
-conflict on envelope-enable bit4 versus bit5; this code enables neither. Native
-start/stop dispatch stays disabled. No physical capacity or playback acceptance
-is claimed from this preparation layer.
+The software plan retains its half-open end. The register encoder uses the
+last word address, two bytes before that bound. This follows the one-shot
+and loop programming in ProTracker 4.1.2.1. The encoder applies the documented
+high and low register widths, selects the voice, and places activation after
+the geometry and levels. A Stop program selects the original voice and clears
+its control word. The encoder emits no bus writes. [PT4 one-shot programming](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L898-L907),
+[PT4 loop programming](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L994-L1018),
+[AmiGUS Mini register map](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx).
+
+Hardware ordering and positive reader quiet still need independent proof.
+The utility and register maps disagree on the envelope enable bit, which the
+encoded commands leave clear. Native start/stop dispatch stays disabled.
 
 The preparation layer passes11 related AmiGUS host fixtures (5.692s), the final
 three wavetable integration fixtures (8.238s), and shared030 run

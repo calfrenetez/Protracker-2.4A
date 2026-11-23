@@ -47,6 +47,25 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
     for (unsigned i = queued.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
         assert(!queued.messages[i].endpoint && !queued.messages[i].bytes[0] &&
                !queued.messages[i].bytes[1] && !queued.messages[i].bytes[2]);
+    for (unsigned i = 0; i < packet->count; ++i) {
+        const struct pt_mixed_readers_action *action = packet->action + i;
+        struct pt_amigus_voice_register_program registers;
+        if (action->route != PT_MIXED_READERS_AMIGUS)
+            continue;
+        if (action->kind == PT_MIXED_READERS_TRIGGER) {
+            const struct pt_amigus_voice_plan *voice = &action->geometry.amigus;
+            assert(pt_amigus_voice_trigger_registers(action->slot, voice, &registers));
+            const unsigned end = (voice->control & 2) ? 6 : 4;
+            assert(registers.write[end].offset == 0x2a && registers.write[end + 1].offset == 0x2c);
+            assert((uint32_t)registers.write[end].value * 65536 + registers.write[end + 1].value ==
+                   voice->end_exclusive - 2);
+            assert(registers.write[registers.count - 1].value == voice->control);
+        } else {
+            assert(action->kind == PT_MIXED_READERS_STOP);
+            assert(pt_amigus_voice_stop_registers(action->slot, &registers));
+            assert(registers.count == 2 && registers.write[0].value == action->slot && !registers.write[1].value);
+        }
+    }
     if (a_publish_model(p->audio, p->audio->owner, packet) != 1)
         return 0;
     p->midi = queued;

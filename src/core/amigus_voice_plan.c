@@ -34,3 +34,44 @@ int pt_amigus_voice_plan_prepare(const struct pt_sample *s,const struct pt_playb
     p.right=(uint16_t)(((uint64_t)65535*r->volume*r->pan+8192)/16384);
     *out=p;return 1;
 }
+
+enum voice_register {
+    VOICE_BANK = 0x1e, VOICE_CONTROL = 0x20, VOICE_START = 0x22, VOICE_LOOP = 0x26,
+    VOICE_END = 0x2a, VOICE_RATE = 0x2e, VOICE_LEFT = 0x32, VOICE_RIGHT = 0x34
+};
+
+static void register_long(struct pt_amigus_voice_register_program *program, uint16_t offset, uint32_t value)
+{
+    program->write[program->count++] = (struct pt_amigus_voice_register_write){offset, (uint16_t)(value >> 16)};
+    program->write[program->count++] = (struct pt_amigus_voice_register_write){offset + 2, (uint16_t)value};
+}
+
+int pt_amigus_voice_stop_registers(unsigned voice, struct pt_amigus_voice_register_program *out)
+{
+    if (!out || voice >= 32)
+        return 0;
+    *out = (struct pt_amigus_voice_register_program){2, {{VOICE_BANK, (uint16_t)voice}, {VOICE_CONTROL, 0}}};
+    return 1;
+}
+
+int pt_amigus_voice_trigger_registers(unsigned voice, const struct pt_amigus_voice_plan *plan,
+    struct pt_amigus_voice_register_program *out)
+{
+    struct pt_amigus_voice_register_program program;
+    if (!plan || !out || plan->start >= plan->end_exclusive || plan->loop >= plan->end_exclusive ||
+        plan->end_exclusive >= PT_AMIGUS_RAM_ADDRESS_SPACE || ((plan->start | plan->loop | plan->end_exclusive) & 1) ||
+        !(plan->control & 0x8000) || (plan->control & ~0x800f) ||
+        ((plan->control & 8) && !(plan->control & 1)) || !plan->rate || plan->rate > 0x40000000UL ||
+        !pt_amigus_voice_stop_registers(voice, &program))
+        return 0;
+    if (plan->control & 2)
+        register_long(&program, VOICE_LOOP, plan->loop);
+    register_long(&program, VOICE_START, plan->start);
+    register_long(&program, VOICE_END, plan->end_exclusive - 2);
+    register_long(&program, VOICE_RATE, plan->rate);
+    program.write[program.count++] = (struct pt_amigus_voice_register_write){VOICE_LEFT, plan->left};
+    program.write[program.count++] = (struct pt_amigus_voice_register_write){VOICE_RIGHT, plan->right};
+    program.write[program.count++] = (struct pt_amigus_voice_register_write){VOICE_CONTROL, plan->control};
+    *out = program;
+    return 1;
+}

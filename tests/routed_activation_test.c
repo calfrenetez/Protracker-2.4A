@@ -2,6 +2,7 @@
 #define PT_MIXED_ACTIVATION_TEST_ENTRY static void mixed_activation_fixture(void)
 #include "mixed_readers_activation_test.c"
 #include "../src/core/routed_activation.h"
+#include "../src/core/routed_frame_program.h"
 
 #ifndef PT_ROUTED_ACTIVATION_TEST_MAIN
 #define PT_ROUTED_ACTIVATION_TEST_MAIN main
@@ -143,6 +144,107 @@ static void verify_amigus_staged_start(void)
     assert(!memcmp(prior, &output, sizeof(prior)));
 }
 
+static void verify_frame_program(void)
+{
+    static const uint8_t original_order[] = {9, 2}, duplicate[] = {9, 9};
+    const struct pt_amigus_voice_plan voice = {0x10002, 0x10004, 0x20000, 0x12345678, 0x800f, 4321, 1234};
+    struct pt_routed_activation_program source = {
+        .midi = {.key = {100, 17, 960, 2}, .first = 12100, .last = 12115, .audio_ticket = 3,
+                 .count = 2, .endpoint_count = 2, .messages = {{1, {0x91, 62, 43}}, {0, {0x90, 60, 127}}}},
+        .audio_count = 4,
+        .amigus_active = 8,
+        .audio = {
+            {PT_MIXED_READERS_AMIGUS, 2, PT_MIXED_READERS_TRIGGER, {.amigus = {0}}},
+            {PT_MIXED_READERS_PAULA, 0, PT_MIXED_READERS_TRIGGER, {.paula = {0x1004, 5, 400, 32}}},
+            {PT_MIXED_READERS_AMIGUS, 3, PT_MIXED_READERS_CONTROL, {.amigus = {0}}},
+            {PT_MIXED_READERS_AMIGUS, 7, PT_MIXED_READERS_TRIGGER, {.amigus = {0}}},
+        },
+    };
+    struct pt_routed_frame_program frame;
+    unsigned char before[sizeof(frame)];
+
+    assert(pt_amigus_voice_trigger_registers(2, &voice, &source.audio[0].output.amigus));
+    assert(pt_amigus_voice_control_registers(3, 1, 244, 356, &source.audio[2].output.amigus));
+    assert(pt_amigus_voice_trigger_registers(7, &voice, &source.audio[3].output.amigus));
+    assert(pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    assert(frame.key.session == 100 && frame.key.generation == 17 && frame.key.frame == 960 && frame.key.serial == 2);
+    assert(frame.first == 12100 && frame.last == 12115 && frame.audio_ticket == 3 && frame.audio_count == 4);
+    assert(!frame.stop && frame.paula.preload_slots == 1 && frame.paula.preload_count == 5);
+    assert(frame.paula.frame_count == 1 && frame.paula.frame[0].offset == 0x096 && frame.paula.frame[0].value == 0x8001);
+    assert(frame.card_preload_slots == 0x84 && frame.card_preload_count == 22 && frame.card_frame_count == 9);
+    assert(frame.card_preload[0].offset == 0x1e && frame.card_preload[0].value == 2);
+    assert(frame.card_preload[11].offset == 0x1e && frame.card_preload[11].value == 7);
+    for (unsigned i = 0; i < frame.card_preload_count; ++i)
+        assert(frame.card_preload[i].offset != 0x20);
+    assert(frame.card_frame[0].value == 2 && frame.card_frame[1].value == 0x800f);
+    assert(frame.card_frame[2].value == 3 && frame.card_frame[6].value == 356);
+    assert(frame.card_frame[7].value == 7 && frame.card_frame[8].value == 0x800f);
+    assert(frame.midi_count == 2 && frame.midi[0].slot == 2 && frame.midi[1].slot == 9);
+    assert(!memcmp(frame.midi[0].bytes, source.midi.messages[0].bytes, 3));
+    assert(!memcmp(frame.midi[1].bytes, source.midi.messages[1].bytes, 3));
+
+    memcpy(before, &frame, sizeof(before));
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, duplicate, 2, &frame));
+    assert(!pt_routed_frame_prepare(&source, 15, 0x0c, original_order, 2, &frame));
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 1, &frame));
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, frame.midi[0].bytes, 2, &frame));
+    const unsigned saved = source.amigus_active;
+    source.amigus_active |= 4;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    source.amigus_active = saved;
+    source.audio[2].output.amigus.write[3].offset = 0x20;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    assert(pt_amigus_voice_control_registers(3, 1, 244, 356, &source.audio[2].output.amigus));
+    source.midi.messages[0].bytes[2] = 128;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    source.midi.messages[0].bytes[2] = 43;
+    source.midi.audio_ticket = 0;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    source.midi.audio_ticket = 3;
+    source.midi.stop = 1;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    for (unsigned i = 0; i < 2; ++i)
+        source.midi.messages[i].bytes[0] -= 0x10;
+    source.paula_active = 1;
+    source.audio[1].kind = PT_MIXED_READERS_STOP;
+    memset(&source.audio[1].output.paula, 0, sizeof(source.audio[1].output.paula));
+    source.audio_count = 2;
+    source.audio[0] = source.audio[2];
+    source.audio[0].kind = PT_MIXED_READERS_STOP;
+    assert(pt_amigus_voice_stop_registers(3, &source.audio[0].output.amigus));
+    source.amigus_active |= 4;
+    assert(!pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    assert(!memcmp(before, &frame, sizeof(before)));
+    source.amigus_active = 8;
+    assert(pt_routed_frame_prepare(&source, 15, 0x8c, original_order, 2, &frame));
+    assert(frame.stop && !frame.card_preload_count && frame.card_frame_count == 2);
+    assert(frame.card_frame[0].value == 3 && !frame.card_frame[1].value);
+    assert(!frame.paula.preload_count && frame.paula.frame_count == 1 && frame.paula.frame[0].value == 1);
+    assert(frame.midi_count == 2 && frame.midi[0].bytes[0] == 0x81 && frame.midi[1].bytes[0] == 0x80);
+
+    source.midi.stop = 0;
+    source.audio_count = PT_MIXED_READERS_ACTIONS;
+    source.midi.count = PT_ROUTED_MIDI_MESSAGES;
+    source.amigus_active = source.paula_active = 0;
+    for (unsigned i = 0; i < source.audio_count; ++i) {
+        source.audio[i] = (struct pt_routed_audio_program){.route = PT_MIXED_READERS_AMIGUS,
+            .kind = PT_MIXED_READERS_TRIGGER, .slot = i};
+        assert(pt_amigus_voice_trigger_registers(i, &voice, &source.audio[i].output.amigus));
+    }
+    for (unsigned i = 0; i < source.midi.count; ++i)
+        source.midi.messages[i] = (struct pt_routed_midi_message){i % 2, {0x91, i, 80}};
+    assert(pt_routed_frame_prepare(&source, 0, 0xffff, original_order, 2, &frame));
+    assert(frame.card_preload_count == PT_ROUTED_CARD_PRELOAD_WRITES &&
+           frame.card_frame_count == 2 * source.audio_count && frame.midi_count == PT_ROUTED_MIDI_MESSAGES);
+    source.amigus_active = 0xffff;
+    for (unsigned i = 0; i < source.audio_count; ++i) {
+        source.audio[i].kind = PT_MIXED_READERS_CONTROL;
+        assert(pt_amigus_voice_control_registers(i, 1, i, 64, &source.audio[i].output.amigus));
+    }
+    assert(pt_routed_frame_prepare(&source, 0, 0xffff, original_order, 2, &frame));
+    assert(!frame.card_preload_count && frame.card_frame_count == PT_ROUTED_CARD_FRAME_WRITES);
+}
+
 static int routed_clock(void *context, uint64_t *ticks, uint32_t *frequency)
 {
     struct routed_port_model *p = context;
@@ -168,6 +270,20 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
         assert(queued.paula_active == (packet->frame == 0 ? 0U : 15U));
         assert(queued.amigus_active == (packet->frame == 0 ? 0U : 3U));
         if (packet->frame != 0) {
+            static const uint8_t routed_slots[] = {11, 4};
+            struct pt_routed_frame_program frame;
+            assert(pt_routed_frame_prepare(&queued, 15, 3, routed_slots, 2, &frame));
+            assert(frame.audio_ticket == packet->ticket && frame.key.frame == packet->frame);
+            assert(frame.first == packet->first && frame.last == packet->last &&
+                   frame.midi_count == queued.midi.count && frame.stop == queued.midi.stop);
+            assert(!frame.paula.preload_count && !frame.card_preload_count);
+            if (frame.stop) {
+                assert(frame.paula.frame_count == 1 && frame.card_frame_count == 4);
+                assert(frame.midi_count == 2 && frame.midi[0].slot == 11 && frame.midi[1].slot == 4);
+            } else {
+                assert(frame.paula.frame_count == 8 && frame.card_frame_count == 10);
+            }
+
             struct pt_paula_dma_program paula;
             assert(pt_routed_paula_dma_prepare(&queued, 15, &paula) && !paula.preload_count);
             if (queued.midi.stop)
@@ -364,6 +480,8 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
         verify_paula_dma_preparation();
         verify_amigus_staged_start();
+        verify_frame_program();
+        PT_ROUTED_ACTIVATION_REPORT("Mixed frame program preserves writes and destination slots");
         PT_ROUTED_ACTIVATION_REPORT("Paula DMA preload and exact frame words verified");
     }
     struct activation_case *c = a_make(8, 8);

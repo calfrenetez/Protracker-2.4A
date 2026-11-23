@@ -266,3 +266,12 @@ The device reset, original owned interrupt state and Chip cleanup completed.
 The earlier diagnostics and their mistaken write-register check are retained.
 Live musical-frame dispatch and listening have separate acceptance checks.
 [AmigaOS audio.device](https://wiki.amigaos.net/wiki/Audio_Device)
+
+The frame encoder prepares the three output lists together and keeps the
+original frame, window and command identity. It groups Paula DMA writes,
+splits inactive AmiGUS starts into preload and frame writes, and puts the
+already resolved MIDI destinations into the message bytes' dispatch list.
+A terminal frame must stop every originally active audio slot. Bad routing,
+unsupported retriggers, missing ownership and incomplete Stop leave the
+entire destination unchanged. The backend must keep the original resource
+bindings live and determine whether it can issue the prepared work in time.

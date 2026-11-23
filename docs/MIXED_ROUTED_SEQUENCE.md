@@ -171,3 +171,9 @@ before submission. After submission, the caller services the original
 ticket and retains reader handles through their independent retirement. The
 coordinator advances the render interval and its sample origins only after
 source consumption and exact combined settlement.
+
+Use `pt_routed_midi_schedule_audio_receipt` on the typed audio owner's
+positive detach result before closing the command handle. The schedule checks
+the original command and every action key, then derives the earliest and
+latest issue tick from the actions. A waiting command stays owned even if its
+individual actions have already issued.

@@ -116,21 +116,28 @@ static int cancel_combined(void *context, const struct pt_routed_midi_key *key)
 static void record_audio_receipt(struct combined_model *m,
     const struct pt_mixed_readers_command_receipt *receipt, unsigned fired)
 {
-    unsigned i;
-    assert(receipt->queue == m->receipt.audio.queue && receipt->ticket == m->receipt.audio.ticket);
-    m->receipt.audio.delivery = receipt->action[0].command;
-    if (fired) {
-        m->receipt.audio.count = receipt->count;
-        m->receipt.audio.first_issued = receipt->action[0].issued;
-        m->receipt.audio.last_issued = receipt->action[0].issued;
-        for (i = 1; i < receipt->count; ++i) {
-            uint64_t issued = receipt->action[i].issued;
-            if (issued < m->receipt.audio.first_issued)
-                m->receipt.audio.first_issued = issued;
-            if (issued > m->receipt.audio.last_issued)
-                m->receipt.audio.last_issued = issued;
-        }
-    }
+    struct pt_mixed_readers_command_receipt wrong = *receipt;
+    struct pt_routed_audio_receipt proof = {0};
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_PENDING, receipt, &proof));
+    ++wrong.owner;
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, &wrong, &proof));
+    wrong = *receipt;
+    wrong.event = NULL;
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, &wrong, &proof));
+    wrong = *receipt;
+    ++wrong.binding.context_bytes;
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, &wrong, &proof));
+    wrong = *receipt;
+    ++wrong.action[wrong.count - 1].key.serial;
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, &wrong, &proof));
+    wrong = *receipt;
+    wrong.action[wrong.count - 1].issued = m->schedule->event.last;
+    assert(!pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, &wrong, &proof));
+    assert(!proof.ticket);
+    assert(pt_routed_midi_schedule_audio_receipt(m->schedule, PT_MIXED_READERS_OK, receipt, &proof));
+    assert(proof.queue == m->receipt.audio.queue && proof.ticket == m->receipt.audio.ticket);
+    assert(proof.count == (fired ? receipt->count : 0));
+    m->receipt.audio = proof;
 }
 
 static void settle_audio(struct trial *t, struct combined_model *m, uint64_t ticket,

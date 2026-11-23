@@ -329,6 +329,7 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
     const struct pt_routed_midi_batch *batch;
     const struct pt_mixed_readers_output *queue = NULL;
     struct pt_routed_audio_change changes[PT_MIXED_READERS_ACTIONS];
+    struct pt_mixed_readers_binding binding = {0};
     uint64_t ticket = 0, owner = 0;
     uint64_t now = 0, first, last;
     uint32_t frequency = 0;
@@ -354,6 +355,7 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
         ticket = audio->ticket;
         owner = audio->command_owner;
         count = audio->batch.count;
+        binding = audio->binding;
     }
     schedule->busy = 1;
     result = schedule->provider.read_clock(schedule->provider.context, &now, &frequency);
@@ -371,6 +373,7 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
     }
     if (audio && (audio->queue != queue || audio->ticket != ticket ||
                   audio->command_owner != owner || audio->batch.count != count ||
+                  audio->binding.context != binding.context || audio->binding.context_bytes != binding.context_bytes ||
                   !audio_matches(schedule, audio, first, last, changes, 1))) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_INVALID;
@@ -383,6 +386,9 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
     event->batch = batch;
     schedule->audio_ticket = ticket;
     schedule->audio_count = count;
+    schedule->audio_owner = owner;
+    schedule->audio_event = audio;
+    schedule->audio_binding = binding;
     if (audio) {
         schedule->audio_queue = queue;
         schedule->last_audio_ticket = ticket;
@@ -418,6 +424,50 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *schedule, const struct pt_mixed_readers_event *audio)
 {
     return submit_batch(schedule, audio, 1);
+}
+
+int pt_routed_midi_schedule_audio_receipt(const struct pt_routed_midi_schedule *schedule,
+    enum pt_mixed_readers_result result, const struct pt_mixed_readers_command_receipt *receipt,
+    struct pt_routed_audio_receipt *out)
+{
+    struct pt_routed_audio_receipt proof = {0};
+    unsigned i, issued;
+    if (result != PT_MIXED_READERS_OK || !schedule_ready(schedule) || !schedule->held || !schedule->audio_ticket ||
+        !receipt || !disjoint(schedule, sizeof(*schedule), out, sizeof(*out)) ||
+        !disjoint(schedule->midi, sizeof(*schedule->midi), out, sizeof(*out)) ||
+        !disjoint(receipt, sizeof(*receipt), out, sizeof(*out)) ||
+        receipt->domain != PT_MIXED_COMMAND_DOMAIN || receipt->queue != schedule->audio_queue ||
+        receipt->ticket != schedule->audio_ticket || receipt->owner != schedule->audio_owner ||
+        receipt->session != schedule->event.key.session || receipt->generation != schedule->event.key.generation ||
+        receipt->event != schedule->audio_event || receipt->binding.context != schedule->audio_binding.context ||
+        receipt->binding.context_bytes != schedule->audio_binding.context_bytes ||
+        !receipt->count || receipt->count > PT_MIXED_READERS_ACTIONS || receipt->count != schedule->audio_count)
+        return 0;
+    proof.queue = receipt->queue;
+    proof.ticket = receipt->ticket;
+    proof.delivery = receipt->action[0].command;
+    issued = proof.delivery == PT_MIXED_COMMAND_ISSUED || proof.delivery == PT_MIXED_COMMAND_CANCELLED_AFTER;
+    if (!issued && proof.delivery != PT_MIXED_COMMAND_CANCELLED_BEFORE)
+        return 0;
+    for (i = 0; i < receipt->count; ++i) {
+        const struct pt_mixed_readers_action_receipt *action = receipt->action + i;
+        if (action->command != proof.delivery || !same_audio_key(&action->key, &schedule->audio_pending[i].key))
+            return 0;
+        if (issued) {
+            if (action->observed < schedule->event.first || action->issued < action->observed ||
+                action->issued >= schedule->event.last)
+                return 0;
+            if (!i || action->issued < proof.first_issued)
+                proof.first_issued = action->issued;
+            if (action->issued > proof.last_issued)
+                proof.last_issued = action->issued;
+        } else if (action->issued || action->observed) {
+            return 0;
+        }
+    }
+    proof.count = issued ? receipt->count : 0;
+    *out = proof;
+    return 1;
 }
 
 static int same_key(const struct pt_routed_midi_key *a, const struct pt_routed_midi_key *b)
@@ -505,6 +555,9 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
     if (event->batch->stop && schedule->audio_owned)
         schedule->midi->stopped = 0;
     schedule->held = 0;
+    schedule->audio_event = NULL;
+    schedule->audio_owner = 0;
+    schedule->audio_binding = (struct pt_mixed_readers_binding){0};
     schedule->midi->pending = 0;
     if (midi_issued || audio_issued)
         schedule->last_read = receipt.activated > receipt.audio.last_issued ? receipt.activated : receipt.audio.last_issued;

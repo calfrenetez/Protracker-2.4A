@@ -143,7 +143,9 @@ struct pt_routed_midi_schedule {
     struct pt_elapsed_clock grid;
     struct pt_routed_midi_event event;
     const struct pt_mixed_readers_output *audio_queue;
-    uint64_t audio_ticket, last_audio_ticket;
+    const struct pt_mixed_readers_event *audio_event;
+    struct pt_mixed_readers_binding audio_binding;
+    uint64_t audio_ticket, last_audio_ticket, audio_owner;
     uint64_t last_read;
     struct pt_mixed_readers_key audio_active[PT_ROUTED_AUDIO_SLOTS];
     struct pt_routed_audio_change audio_pending[PT_MIXED_READERS_ACTIONS];
@@ -180,6 +182,14 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
  * when audio is present. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
+/* Project a genuine audio owner's detached-command receipt into the combined
+ * proof. Pass the original service result and its output before observing the
+ * combined schedule or closing the detached command handle. The event and
+ * binding addresses are treated as opaque identities.
+ * Refusal leaves out intact. An observation for a still-owned command is
+ * insufficient even if every action has already issued. */
+int pt_routed_midi_schedule_audio_receipt(const struct pt_routed_midi_schedule *,
+    enum pt_mixed_readers_result, const struct pt_mixed_readers_command_receipt *, struct pt_routed_audio_receipt *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);
 /* Snapshot the keys for the original pending, unsubmitted terminal frame.
  * A zero count requests no audio command. The factory still binds and

@@ -191,6 +191,35 @@ class PaulaAlarmReplay(unittest.TestCase):
                 replay_reload(text.replace(original, changed, 1))
 
 
+    def test_mixed_wire_rebases_serial_receipts_after_the_original_reload(self):
+        initial, later, stop_frame = 65523, 65000, 5760
+        rebased = 65536 + initial - later
+        stop = 8192 + (stop_frame * 709379 + 47999) // 48000
+        rows = [
+            "Paula reload clock callbacks=1",
+            "Mixed UART 0 tx=195/13c/15a rx=953c5a received=3 idle=1",
+            "Mixed UART 1 tx=185/13c/100 rx=853c00 received=3 idle=1",
+            "Mixed UART cleanup restored=1 request=0000/0000 uart=3000 period=113",
+        ]
+        for i, (base, anchor, first) in enumerate(((0, initial, 8192), (rebased, later, stop))):
+            count = base + anchor - first
+            clock = "/".join(triplet(count - dt) for dt in (300, 550, 890))
+            rows.extend((
+                f"Paula reload {i} tick={base} planned={i} issued={i}",
+                f"Paula wait {i} before={triplet(count+300)} after={triplet(count-80)} alarm=1",
+                f"Mixed UART readback {i} samples={clock}",
+            ))
+        body = mixed_fixture(stop_frame, ((0, initial), (rebased, later)))
+        text = "\n".join(rows) + "\n" + body.replace("Mixed IRQ RAM", "Mixed IRQ wire")
+        result = replay_wire(text, require_byte_clock=True, reload=True)
+        self.assertEqual(result["clock_reload"]["original_callbacks"], 1)
+        self.assertEqual(result["mixed_wire_observations"][1]["serial_loopback"]["byte_readback_ticks"],
+                         [stop + 300, stop + 550, stop + 890])
+        with self.assertRaises(ValueError):
+            replay_wire(text.replace("issued=1", "issued=0"), require_byte_clock=True, reload=True)
+        with self.assertRaises(ValueError):
+            replay_wire(text, require_byte_clock=True)
+
     def test_mixed_f00_uses_an_aperture_before_its_crossing(self):
         anchor, stop_frame = 65523, 3840
         first = anchor - 13

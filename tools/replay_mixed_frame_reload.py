@@ -6,12 +6,12 @@ import re
 import sys
 
 if __package__:
-    from .replay_mixed_frame_aperture import EXPECTED, RAM
+    from .replay_mixed_frame_aperture import EXPECTED, RAM, WIRE
     from .replay_mixed_frame_wait import replay_waits
     from .replay_routed_paula_alarm import replay_alarm_pair
     from .replay_routed_paula_window import ROW, stable
 else:
-    from replay_mixed_frame_aperture import EXPECTED, RAM
+    from replay_mixed_frame_aperture import EXPECTED, RAM, WIRE
     from replay_mixed_frame_wait import replay_waits
     from replay_routed_paula_alarm import replay_alarm_pair
     from replay_routed_paula_window import ROW, stable
@@ -23,24 +23,28 @@ FRAMES = (0, 5760)
 MARGIN = 4096
 
 
-def add_mixed_ram(text, result, frames):
-    ram = [RAM.fullmatch(line) for line in text.splitlines() if line.startswith("Mixed IRQ RAM ")]
+def add_mixed_ram(text, result, frames, *, wire=False):
+    pattern = WIRE if wire else RAM
+    heading = "Mixed IRQ wire " if wire else "Mixed IRQ RAM "
+    ram = [pattern.fullmatch(line) for line in text.splitlines() if line.startswith(heading)]
     if len(ram) != 2 or not all(ram):
         raise ValueError("Incomplete mixed RAM readback")
-    result["mixed_ram_observations"] = []
+    observations = []
+    result["mixed_wire_observations" if wire else "mixed_ram_observations"] = observations
     for index, (row, timing) in enumerate(zip(ram, result["writes"])):
         prepared = tuple(int(row[col], 16) for col in (2, 4, 6))
         observed = tuple(int(row[col], 16) for col in (3, 5, 7))
         if int(row[1]) != index or prepared != EXPECTED[index] or observed != prepared:
             raise ValueError("Original mixed values and RAM readback disagree")
-        result["mixed_ram_observations"].append({
+        observations.append({
             "frame": frames[index], "window": timing["frame_ticks"], "observed": timing["observed_ticks"],
-            "card_bank_control_and_midi_ram": list(observed), "verdict": "issued_in_frame",
+            ("card_ram_and_midi_receive" if wire else "card_bank_control_and_midi_ram"): list(observed),
+            "verdict": "issued_in_frame",
         })
     return result
 
 
-def replay(text):
+def replay(text, *, wire=False):
     lines = text.splitlines()
     forecast = [line for line in lines if line.startswith("Paula tracker ")]
     if forecast != ["Paula tracker epoch=8192 start=0 stop=5760 paula=4 amigus=1 midi=1 f00=1"]:
@@ -60,9 +64,10 @@ def replay(text):
         if not MARGIN < int(window["end"]) < int(window["first"]) < 65535 - MARGIN:
             raise ValueError("The write window reaches the reload guard margin")
     result = replay_alarm_pair(text, *FRAMES, EPOCH, offsets)
-    add_mixed_ram(text, result, FRAMES)
+    add_mixed_ram(text, result, FRAMES, wire=wire)
     result["clock_reload"] = {"origin_sample_tick": rebased_tick, "original_callbacks": 1}
-    return replay_waits(text, result, offsets)
+    return replay_waits(text, result, offsets,
+                        observations="mixed_wire_observations" if wire else "mixed_ram_observations")
 
 
 if __name__ == "__main__":

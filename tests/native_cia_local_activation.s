@@ -331,6 +331,9 @@ local_irq_done\@:
         .ifdef pt_exp_mixed_wire
         local_alarm_irq _pt_cia_local_mixed_wire_irq,1,1,0,0,0,1
         .endif
+        .ifdef pt_exp_mixed_wire_reload
+        local_alarm_irq _pt_cia_local_mixed_wire_reload_irq,1,1,1,0,0,1
+        .endif
         local_alarm_irq _pt_cia_local_epoch_alarm_irq,0,0,1
         .ifdef pt_exp_cia_tail
         local_alarm_irq _pt_cia_local_tail_irq,0,0,1,1

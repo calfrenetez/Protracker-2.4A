@@ -15,6 +15,9 @@ struct paula_alarm_schedule {
 extern void pt_cia_local_mixed_alarm_irq(void);
 #ifdef PT_PAULA_MIDI_WIRE
 extern void pt_cia_local_mixed_wire_irq(void);
+#ifdef PT_PAULA_RELOAD_IRQ
+extern void pt_cia_local_mixed_wire_reload_irq(void);
+#endif
 #endif
 #endif
 
@@ -300,6 +303,8 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     unsigned expected_alarms = 2;
 #ifdef PT_PAULA_TAIL_IRQ
     void (*handler)(void) = pt_cia_local_mixed_tail_irq;
+#elif defined(PT_PAULA_MIDI_WIRE) && defined(PT_PAULA_RELOAD_IRQ)
+    void (*handler)(void) = pt_cia_local_mixed_wire_reload_irq;
 #elif defined(PT_PAULA_RELOAD_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_reload_irq;
 #elif defined(PT_PAULA_MIDI_WIRE)

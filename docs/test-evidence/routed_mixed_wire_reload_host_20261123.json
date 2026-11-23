@@ -1,0 +1,15 @@
+{
+  "qualification": "host and native cross-build",
+  "fixture": "PTRoutedWireReload",
+  "candidate_sha256": "bd94dc30240686bfd18229f99ced3b07719836951682e35ac4b07937325c77ee",
+  "validated_build_inputs": 128,
+  "build_receipt_sha256": "443f78aed3fd2f3d0aeaf5992236a8cede277634412b3216373cb92737af821a",
+  "host_methods": {
+    "routed": 23,
+    "cia": 25
+  },
+  "previous_mixed_clock_candidate_rebuilt_byte_identically": true,
+  "existing_mixed_tail_refusal_rebuilt_byte_identically": true,
+  "amiberry_execution": "pending",
+  "scope": "Uses the original CIA generation and tracker frame across one reload to time Paula DMA and the first serial word. Replays subsequent guest byte reads on the same song epoch. AmiGUS stores are modeled in RAM."
+}

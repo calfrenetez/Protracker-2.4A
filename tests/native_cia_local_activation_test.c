@@ -100,7 +100,8 @@ int main(int argc, char **argv)
     chip = timer.chip;
     bit = timer.bit;
     if (!pt_native_eclock_read(&clock, &before, &hz) || (hz != 709379 && hz != 715909) ||
-        (irq_mode && (before > UINT64_MAX - hz || !open_alarm(&alarm, &timer, before + hz))) ||
+        (irq_mode && (before > UINT64_MAX - hz ||
+                      !open_alarm(&alarm, &timer, before + hz, pt_cia_local_alarm_irq))) ||
         !pt_native_eclock_read(&clock, &before, &end_hz) || end_hz != hz ||
         !pt_cia_start_masked_countdown(&timer))
         goto finish;

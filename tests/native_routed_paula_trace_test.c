@@ -169,6 +169,9 @@ static int hold(void)
 
 #ifdef PT_PAULA_TIMED_TRACE
 #include "native_routed_paula_window.h"
+#ifdef PT_PAULA_TIMED_IRQ
+#include "native_routed_paula_alarm.h"
+#endif
 #else
 static int apply_grouped_transition(const struct pt_native_paula_reservation *owner,
     const struct pt_paula_dma_write *word, unsigned before, unsigned after)
@@ -221,6 +224,11 @@ int main(void)
         goto finish;
 
     stage = 3;
+#ifdef PT_PAULA_TIMED_IRQ
+    if (out.frame_count != 1 || !run_irq_transitions(&owner, &input, chip, out.frame) ||
+        !observe_new_fetches(&owner, 0))
+        goto finish;
+#else
     if (out.frame_count != 1 || !apply_grouped_transition(&owner, out.frame, 0, ALL) ||
         !observe_new_fetches(&owner, ALL))
         goto finish;
@@ -239,6 +247,7 @@ int main(void)
     if (!prepare(&input, chip, REMAINING, REMAINING, PT_MIXED_READERS_STOP, &out) || out.frame_count != 1 ||
         !apply_grouped_transition(&owner, out.frame, REMAINING, 0) || !observe_new_fetches(&owner, 0))
         goto finish;
+#endif
     rc = 0;
 
 finish:;
@@ -248,7 +257,8 @@ finish:;
         const struct pt_paula_dma_write clear = {DMA_SET_CLEAR, ALL};
         /* After a failure only the still-original owner can clear its DMA.
          * A positive final Stop already issued and must not be replayed. */
-        if ((rc && !apply(&owner, &clear, 1, 0)) || !observe_new_fetches(&owner, 0) ||
+        if ((rc && (*custom_word(DMA_READ) & ALL) && !apply(&owner, &clear, 1, 0)) ||
+            !observe_new_fetches(&owner, 0) ||
             !reset_owned_channels(&owner))
             return hold();
         Disable();
@@ -272,6 +282,9 @@ finish:;
         FreeMem(chip, CHIP_BYTES);
     report_observations();
 #ifdef PT_PAULA_TIMED_TRACE
+#ifdef PT_PAULA_TIMED_IRQ
+    report_irq_transitions();
+#endif
     report_windows();
 #endif
     printf("Paula trace finished stage=%u rc=%d owned-closed=1\n", outcome_stage, rc);

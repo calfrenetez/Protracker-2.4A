@@ -23,7 +23,7 @@ def stable(raw):
     return high * 256 + low
 
 
-def replay(text):
+def replay_windows(text, operations):
     lines = text.splitlines()
     if lines[-2:] != ["Paula windows closed stray=0 rows=2",
                        "Paula trace finished stage=6 rc=0 owned-closed=1"]:
@@ -37,8 +37,7 @@ def replay(text):
         if not match:
             raise ValueError("Malformed raw Paula observation")
         row = match.groupdict()
-        stage, command, dma_before, dma_after = ((3, 0x800F, 0x200, 0x20F),
-                                                 (6, 0x000A, 0x20A, 0x200))[index]
+        stage, frame, command, dma_before, dma_after = operations[index]
         hz = int(row["hz"])
         if (int(row["index"]) != index or int(row["stage"]) != stage or hz not in (709379, 715909)
                 or int(row["word"], 16) != command or int(row["status"]) != 1
@@ -47,7 +46,7 @@ def replay(text):
         if (int(row["dma_before"], 16) & 0x20F, int(row["dma_after"], 16) & 0x20F) != (dma_before, dma_after):
             raise ValueError("Actual DMA state does not match the grouped operation")
         anchor = stable(row["anchor"])
-        first, excluded = (frame * hz + 47999 for frame in (512, 513))
+        first, excluded = (edge * hz + 47999 for edge in (frame, frame + 1))
         first, excluded = first // 48000, excluded // 48000
         if (int(row["first"]), int(row["end"])) != (anchor - first, anchor - excluded):
             raise ValueError("Countdown does not map to the original local sample frame")
@@ -59,6 +58,10 @@ def replay(text):
                      "command": command, "dma_before": dma_before, "dma_after": dma_after,
                      "frame_ticks": [first, excluded], "observed_ticks": [pre, post]})
     return {"writes": rows, "guest_closed": True}
+
+
+def replay(text):
+    return replay_windows(text, ((3, 512, 0x800F, 0x200, 0x20F), (6, 512, 0x000A, 0x20A, 0x200)))
 
 
 if __name__ == "__main__":

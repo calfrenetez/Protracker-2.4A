@@ -15,6 +15,8 @@
         beq.b valid_word\@
         cmpi.l #0x000a,%d6
         beq.b valid_word\@
+        cmpi.l #0x000f,%d6
+        beq.b valid_word\@
         moveq #3,%d0
         movem.l (%sp)+,%d2-%d7/%a2
         rts
@@ -74,21 +76,47 @@ local_record\@:
         local_activate _pt_cia_local_activate
         local_activate _pt_cia_local_paula_dma,1
 
-        .globl _pt_cia_local_alarm_irq
-
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-_pt_cia_local_alarm_irq:
+        .macro local_alarm_irq name, paula=0
+        .globl \name
+\name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
         move.l %a1,%a2
         tst.l 20(%a2)
-        beq.b local_irq_unarmed
+        beq.w local_irq_unarmed\@
+        .if \paula
+        tst.l 36(%a2)
+        beq.b local_irq_refused\@
+        movea.l 36(%a2),%a0
+        cmpi.b #5,8(%a0)
+        bne.b local_irq_refused\@
+        cmpi.l #15,24(%a0)
+        bne.b local_irq_refused\@
+        move.w 44(%a2),%d0
+        cmp.w 32(%a0),%d0
+        bne.b local_irq_refused\@
+        move.w 0xdff002,%d0
+        andi.w #0x020f,%d0
+        cmp.w 46(%a2),%d0
+        bne.b local_irq_refused\@
+        move.l 40(%a2),-(%sp)
+        .endif
         move.l 8(%a2),-(%sp)
         move.l 4(%a2),-(%sp)
         move.l 0(%a2),-(%sp)
+        .if \paula
+        jsr _pt_cia_local_paula_dma
+        lea 16(%sp),%sp
+        bra.b local_irq_result\@
+local_irq_refused\@:
+        moveq #3,%d0
+local_irq_result\@:
+        .else
         jsr _pt_cia_local_activate
         lea 12(%sp),%sp
+        .endif
         move.l %d0,28(%a2)
         clr.l 20(%a2)
         addq.l #1,24(%a2)
@@ -96,10 +124,14 @@ _pt_cia_local_alarm_irq:
         move.l 16(%a2),%d0
         move.l 4.w,%a6
         jsr -324(%a6)
-        bra.b local_irq_done
-local_irq_unarmed:
+        bra.b local_irq_done\@
+local_irq_unarmed\@:
         addq.l #1,32(%a2)
-local_irq_done:
+local_irq_done\@:
         movem.l (%sp)+,%d2-%d7/%a2-%a6
         moveq #0,%d0
         rts
+        .endm
+
+        local_alarm_irq _pt_cia_local_alarm_irq
+        local_alarm_irq _pt_cia_local_paula_alarm_irq,1

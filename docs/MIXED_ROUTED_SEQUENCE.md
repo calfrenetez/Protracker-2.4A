@@ -280,6 +280,16 @@ readbacks verified the silent Start, Control, selective Stop and final
 Stop. The original audio lock, Chip storage and CIA timer were released.
 The transitions used separate local anchors. Mixed song-epoch timing and
 audible output still require dedicated validation.
+
+The `routed-paula-alarm` diagnostic ran both silent transitions in a single
+local countdown from an independent owned CIA timer interrupt. Start at
+frame 512 and all-channel Stop at frame 1280 each fit its original 48 kHz
+window in Amiberry. The IRQ checked the pending original audio lock,
+allocation key and expected DMA mask before the write. The guest observed
+the fresh fetch requests between transitions, then zero DMA and fresh
+requests after Stop. Both CIA timers and the audio allocation closed.
+This verifies a local Paula schedule. A shared tracker song epoch,
+concurrent AmiGUS/MIDI delivery and listening remain open.
 A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource

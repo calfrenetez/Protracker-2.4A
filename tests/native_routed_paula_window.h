@@ -23,10 +23,32 @@ struct paula_window_observation {
     unsigned stage, chip, timer, anchor, status, command, dma_before, dma_after, in_frame;
 };
 
+static int prepare_paula_window(struct paula_window_observation *obs, const struct pt_elapsed_clock *grid,
+    unsigned frame)
+{
+    uint64_t first, end;
+    if (pt_elapsed_clock_deadline(grid, frame, &first) != PT_ELAPSED_OK ||
+        pt_elapsed_clock_deadline(grid, frame + 1, &end) != PT_ELAPSED_OK ||
+        !pt_countdown_window_prepare(0, obs->anchor, first, end, &obs->window))
+        return 0;
+    obs->raw.first = obs->window.first_count;
+    obs->raw.end = obs->window.end_count;
+    return 1;
+}
+
+static int paula_window_inside(const struct paula_window_observation *obs)
+{
+    struct pt_countdown_bracket bracket;
+    return obs->status == 1 && obs->raw.marker == PAULA_WRITE_MARKER &&
+        pt_countdown_window_bracket(&obs->window, pt_cia_stable_count(obs->raw.before),
+            pt_cia_stable_count(obs->raw.after), &bracket);
+}
+
 static struct paula_window_observation timed[2];
 static unsigned timed_count;
 static volatile ULONG timer_strays;
 
+#ifndef PT_PAULA_TIMED_IRQ
 extern int pt_cia_local_paula_dma(volatile UBYTE *, volatile UBYTE *, struct paula_window_raw *, uint32_t);
 
 static int approach_window(const struct pt_diagnostic_cia *timer, uint16_t first)
@@ -49,8 +71,7 @@ static int apply_grouped_transition(const struct pt_native_paula_reservation *ow
     struct pt_native_eclock clock = {0};
     struct pt_diagnostic_cia timer = {0};
     struct pt_elapsed_clock grid;
-    struct pt_countdown_bracket bracket;
-    uint64_t ticks, first, end;
+    uint64_t ticks;
     if (timed_count >= sizeof(timed) / sizeof(timed[0]))
         return 0;
     struct paula_window_observation *obs = timed + timed_count++;
@@ -74,12 +95,8 @@ static int apply_grouped_transition(const struct pt_native_paula_reservation *ow
     obs->anchor = pt_cia_stable_count(obs->anchor_sample.after);
     if (obs->anchor_sample.marker != 0x2452 || !obs->anchor ||
         pt_elapsed_clock_init(&grid, obs->hz, PAULA_TEST_RATE, 0, 0) != PT_ELAPSED_OK ||
-        pt_elapsed_clock_deadline(&grid, PAULA_TEST_FRAME, &first) != PT_ELAPSED_OK ||
-        pt_elapsed_clock_deadline(&grid, PAULA_TEST_FRAME + 1, &end) != PT_ELAPSED_OK ||
-        !pt_countdown_window_prepare(0, obs->anchor, first, end, &obs->window))
+        !prepare_paula_window(obs, &grid, PAULA_TEST_FRAME))
         goto finish;
-    obs->raw.first = obs->window.first_count;
-    obs->raw.end = obs->window.end_count;
     if (!approach_window(&timer, obs->raw.first) || !pt_diagnostic_cia_current(&timer))
         goto finish;
     Disable();
@@ -91,9 +108,7 @@ static int apply_grouped_transition(const struct pt_native_paula_reservation *ow
             snapshot(owner, "after-registers", 1, word);
     }
     Enable();
-    obs->in_frame = obs->status == 1 && obs->raw.marker == PAULA_WRITE_MARKER &&
-        pt_countdown_window_bracket(&obs->window, pt_cia_stable_count(obs->raw.before),
-            pt_cia_stable_count(obs->raw.after), &bracket);
+    obs->in_frame = paula_window_inside(obs);
 
 finish:
     if (!pt_diagnostic_cia_close(&timer))
@@ -102,6 +117,7 @@ finish:
     return obs->in_frame && (obs->dma_after & (DMA_MASTER | ALL)) == (DMA_MASTER | after) &&
         !timer_strays && !timer.held && !clock.opened && owns_channels(owner);
 }
+#endif
 
 static void report_windows(void)
 {

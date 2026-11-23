@@ -1,0 +1,14 @@
+{
+  "qualification": "host and native cross-build",
+  "fixture": "PTRoutedMixedClock",
+  "candidate_sha256": "9591bdfa83fb7e2e448880ec0647c9ff13a64778a88f8106a29b7cb1ee497c29",
+  "validated_build_inputs": 127,
+  "build_receipt_sha256": "65e2719c82feca1413e3eaa122cd1dbbc0442cfc388115ef643aea4758891cde",
+  "host_methods": {
+    "routed_including_readback_clock": 22,
+    "cia": 25
+  },
+  "existing_mixed_wire_binary_byte_identical": true,
+  "amiberry_execution": "pending",
+  "scope": "Optionally timestamps each received byte with the same owned countdown and independently checks wake order and receive deadline. Reports guest readback time separately from first-write aperture and physical MIDI onset."
+}

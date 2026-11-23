@@ -21,6 +21,7 @@ FIXTURES = {
     'routed-mixed-alarm': ('test_mixed_readers_causal.py', 'PTRoutedMixedAlarm'),
     'routed-mixed-wait': ('test_mixed_readers_causal.py', 'PTRoutedMixedWait'),
     'routed-mixed-wire': ('test_mixed_readers_causal.py', 'PTRoutedMixedWire'),
+    'routed-mixed-wire-clock': ('test_mixed_readers_causal.py', 'PTRoutedMixedClock'),
     'routed-mixed-reload': ('test_mixed_readers_causal.py', 'PTRoutedMixedReload'),
     'routed-mixed-tail': ('test_mixed_readers_causal.py', 'PTRoutedMixedTail'),
     'routed-mixed-tail-refusal': ('test_mixed_readers_causal.py', 'PTRoutedMixedRefusal'),
@@ -40,8 +41,9 @@ def main():
     parser.add_argument('--fixture', choices=FIXTURES, default='render-sequence')
     args = parser.parse_args()
     test, executable = FIXTURES[args.fixture]
-    mixed_alarm = args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait', 'routed-mixed-reload',
-                                   'routed-mixed-tail', 'routed-mixed-tail-refusal', 'routed-mixed-wire')
+    mixed_wire = args.fixture in ('routed-mixed-wire', 'routed-mixed-wire-clock')
+    mixed_alarm = mixed_wire or args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait', 'routed-mixed-reload',
+                                                 'routed-mixed-tail', 'routed-mixed-tail-refusal')
     tracker_alarm = mixed_alarm or args.fixture == 'routed-paula-tracker'
     paula_alarm = tracker_alarm or args.fixture == 'routed-paula-alarm'
     if args.fixture == 'cia-direct-clock':
@@ -79,6 +81,7 @@ def main():
         'routed-mixed-alarm': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-wait': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-wire': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
+        'routed-mixed-wire-clock': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-reload': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-tail': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-tail-refusal': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
@@ -118,17 +121,19 @@ def main():
                         'src/editor/mixed_readers_plan_normalize.c'])
     if mixed_alarm:
         flags.append('-DPT_PAULA_MIXED_IRQ')
-    if args.fixture in ('routed-mixed-wait', 'routed-mixed-reload', 'routed-mixed-tail',
-                        'routed-mixed-tail-refusal', 'routed-mixed-wire'):
+    if mixed_wire or args.fixture in ('routed-mixed-wait', 'routed-mixed-reload', 'routed-mixed-tail',
+                                       'routed-mixed-tail-refusal'):
         flags.append('-DPT_PAULA_WAIT_IRQ')
     if args.fixture in ('routed-mixed-reload', 'routed-mixed-tail', 'routed-mixed-tail-refusal'):
         flags.extend(['-DPT_PAULA_RELOAD_IRQ', '-Wa,--defsym,pt_exp_mixed_reload=1'])
         sources.append('tests/native_cia_reload_irq.s')
     if args.fixture == 'midi-wire':
         flags.append('-Wa,--defsym,pt_exp_serial_midi=1')
-    if args.fixture == 'routed-mixed-wire':
+    if mixed_wire:
         flags.extend(['-DPT_PAULA_MIDI_WIRE', '-Wa,--defsym,pt_exp_mixed_wire=1'])
         sources.append('src/core/routed_midi_wire.c')
+    if args.fixture == 'routed-mixed-wire-clock':
+        flags.append('-DPT_PAULA_MIDI_WIRE_CLOCK')
     if args.fixture == 'cia-tail':
         flags.append('-Wa,--defsym,pt_exp_cia_tail=1')
     if args.fixture in ('routed-mixed-tail', 'routed-mixed-tail-refusal'):

@@ -144,6 +144,28 @@ class PaulaAlarmReplay(unittest.TestCase):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 replay_wire(text.replace(original, changed, 1))
 
+    def test_mixed_readback_clock_measures_completion_after_the_owned_wake(self):
+        rows = []
+        for i, frame_first in enumerate((8192, 36568)):
+            rows.append(f"Paula wait {i} before={triplet(65523 - frame_first + 300)} "
+                        f"after={triplet(65523 - frame_first - 80)} alarm=1")
+            clock = "/".join(triplet(65523 - frame_first - dt) for dt in (300, 550, 890))
+            rows.append(f"Mixed UART readback {i} samples={clock}")
+        rows.extend(("Mixed UART 0 tx=195/13c/15a rx=953c5a received=3 idle=1",
+                     "Mixed UART 1 tx=185/13c/100 rx=853c00 received=3 idle=1",
+                     "Mixed UART cleanup restored=1 request=0000/0000 uart=3000 period=113"))
+        text = "\n".join(rows) + "\n" + mixed_fixture().replace("Mixed IRQ RAM", "Mixed IRQ wire")
+        receipt = replay_wire(text, require_byte_clock=True)["mixed_wire_observations"][0]["serial_loopback"]
+        self.assertEqual(receipt["byte_readback_ticks"], [8492, 8742, 9082])
+        self.assertEqual(receipt["completion_ticks_after_frame_start"], 890)
+        for changed in (
+            text.replace("Mixed UART readback 0", "Mixed UART sample 0", 1),
+            text.replace(triplet(65523 - 8192 - 550), triplet(65523 - 8192 - 250), 1),
+            text.replace(triplet(65523 - 8192 - 890), triplet(65523 - 8192 - 5100), 1),
+        ):
+            with self.assertRaises(ValueError):
+                replay_wire(changed, require_byte_clock=True)
+
     def test_mixed_wait_crosses_one_original_reload(self):
         start_count, later_count = 65523, 65000
         later_tick = 65536 + start_count - later_count

@@ -23,6 +23,9 @@ struct pt_test_midi_uart {
 struct pt_test_midi_receipt {
     unsigned received, idle;
     uint8_t bytes[3];
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+    struct pt_cia_clock_pair readback[3];
+#endif
 };
 
 static volatile UWORD *serial_register(unsigned offset)
@@ -116,6 +119,22 @@ static int receive_byte(const struct pt_diagnostic_cia *clock, unsigned limit, u
     return 0;
 }
 
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+/* Sample the same countdown immediately after the task reads a byte.
+ * This timestamps guest readback, including time spent waiting for the task. */
+static int serial_readback_clock(const struct pt_diagnostic_cia *clock, unsigned limit,
+    struct pt_cia_clock_pair *sample)
+{
+    for (unsigned i = 0; i < 4; ++i) {
+        pt_cia_direct_clock_pair(clock->high, clock->low, sample);
+        const unsigned count = pt_cia_stable_count(sample->after);
+        if (sample->marker == 0x2452 && count)
+            return count >= limit && (*clock->control & 1U);
+    }
+    return 0;
+}
+#endif
+
 /* Only the alarm IRQ transmits the first byte. The task must receive
  * each byte before submitting its successor. */
 static int serial_receive(const struct pt_diagnostic_cia *clock, unsigned limit,
@@ -132,6 +151,10 @@ static int serial_receive(const struct pt_diagnostic_cia *clock, unsigned limit,
         ++receipt->received;
         if (receipt->bytes[i] != (uint8_t)message->word[i])
             return 0;
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+        if (!serial_readback_clock(clock, limit, receipt->readback + i))
+            return 0;
+#endif
     }
     for (unsigned i = 0; i < 32768; ++i) {
         unsigned remaining = serial_count(clock);

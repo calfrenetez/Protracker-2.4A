@@ -169,6 +169,14 @@ static void report_mixed_words(void)
             (unsigned)wire->word[0], (unsigned)wire->word[1], (unsigned)wire->word[2],
             (unsigned)receipt->bytes[0], (unsigned)receipt->bytes[1], (unsigned)receipt->bytes[2],
             receipt->received, receipt->idle);
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+        printf("Mixed UART readback %u samples=", i);
+        for (unsigned byte = 0; byte < 3; ++byte) {
+            const uint8_t *raw = receipt->readback[byte].after;
+            printf("%s%02x%02x%02x", byte ? "/" : "", (unsigned)raw[0], (unsigned)raw[1], (unsigned)raw[2]);
+        }
+        putchar('\n');
+#endif
 #endif
     }
 #ifdef PT_PAULA_MIDI_WIRE

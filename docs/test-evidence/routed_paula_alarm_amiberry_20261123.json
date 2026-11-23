@@ -1,0 +1,62 @@
+{
+  "source": "8b0bd3926116699d4339ed2be781fcea14b554db",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "5206aec1799e27324f44d8364466317caf36751a3cdcbc697629141041bea11b",
+  "build_receipt_sha256": "935946758ba32ff5b70a3ba133958b09579a95b1ec80c71d6eb99eef237ffa85",
+  "guest_log_sha256": "2d048047fa4d9651a0bd515c87ae4f258468e0fd9f8803601b758f1f12726c54",
+  "independent_replay_sha256": "ccda97dc7dfdb03f87ab526e122e810710e3abf6df8cee40564af9a268f87726",
+  "validated_build_inputs": 97,
+  "focused_host_methods": 35,
+  "timing": {
+    "alarm": {
+      "callbacks": 2,
+      "chip": 0,
+      "closed": true,
+      "timer": 1
+    },
+    "clock_anchor_count": 65523,
+    "device_guest_closed": true,
+    "guest_closed": true,
+    "writes": [
+      {
+        "chip": 0,
+        "clock_hz": 709379,
+        "command": 32783,
+        "dma_after": 527,
+        "dma_before": 512,
+        "frame_ticks": [
+          7567,
+          7582
+        ],
+        "observed_ticks": [
+          7570,
+          7577
+        ],
+        "stage": 3,
+        "timer": 0
+      },
+      {
+        "chip": 0,
+        "clock_hz": 709379,
+        "command": 15,
+        "dma_after": 512,
+        "dma_before": 527,
+        "frame_ticks": [
+          18917,
+          18932
+        ],
+        "observed_ticks": [
+          18918,
+          18924
+        ],
+        "stage": 6,
+        "timer": 0
+      }
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Two original local 48 kHz windows with one masked countdown, separate CIA alarm callbacks, full grouped Paula DMA Start and Stop and device request evidence. No shared tracker song epoch, other device timing, or audible acceptance."
+}

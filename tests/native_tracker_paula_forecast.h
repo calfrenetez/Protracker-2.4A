@@ -38,6 +38,9 @@ static int forecast_start(const struct pt_project *project, const struct pt_rout
     struct pt_mixed_plan_quantized_batch *batch = malloc(sizeof(*batch));
     struct pt_mixed_plan_normalizer *job = NULL;
     struct pt_routed_activation_program audio = {0};
+#ifdef PT_PAULA_MIXED_IRQ
+    const struct pt_mixed_plan_record *card = NULL;
+#endif
     int passed = 0;
     if (!space || !batch || plan->midi_count != 1 || plan->midi[0].track != 5 ||
         plan->midi[0].kind != PT_NOTE_MIDI || plan->midi[0].note != 60)
@@ -57,6 +60,9 @@ static int forecast_start(const struct pt_project *project, const struct pt_rout
         if (record->kind != PT_MIXED_PLAN_TRIGGER || record->sample || record->channel)
             goto finish;
         if (record->route == PT_AMIGUS && record->track == 4) {
+#ifdef PT_PAULA_MIXED_IRQ
+            card = record;
+#endif
             ++forecast_amigus;
             continue;
         }
@@ -72,6 +78,9 @@ static int forecast_start(const struct pt_project *project, const struct pt_rout
     forecast_paula = audio.audio_count;
     passed = forecast_paula == 4 && forecast_amigus == 1 &&
         pt_routed_paula_dma_prepare(&audio, ALL, out) && out->preload_slots == ALL;
+#ifdef PT_PAULA_MIXED_IRQ
+    passed = passed && mixed_forecast_start(&audio, card, plan);
+#endif
 finish:
     if (!pt_mixed_plan_normalizer_close(&job))
         return hold();
@@ -105,7 +114,13 @@ static int prepare_tracker_forecast(const void *chip, struct pt_paula_dma_progra
     if (!lookahead || !plan || pt_channels_resize(&project.channels, TRACKER_TEST_TRACKS) != PT_CHANNEL_OK ||
         pt_channels_route(&project.channels, 5, PT_MIDI) != PT_CHANNEL_OK)
         goto finish;
+#ifdef PT_PAULA_MIXED_IRQ
+    memcpy(project.midi_output[5], "synth.a", sizeof("synth.a"));
+    if (!mixed_forecast_open(&project))
+        goto finish;
+#else
     memcpy(project.midi_output[5], "test.forecast", sizeof("test.forecast"));
+#endif
     for (unsigned i = 0; i < 5; ++i)
         events[i] = (struct pt_event){.kind = PT_NOTE_PERIOD, .pitch = 428, .instrument = 1};
     events[5] = (struct pt_event){.kind = PT_NOTE_MIDI, .pitch = 60, .flags = 1, .velocity = 90};
@@ -143,6 +158,9 @@ static int prepare_tracker_forecast(const void *chip, struct pt_paula_dma_progra
             schedule->stop_frame = plan->frame;
             forecast_f00 = 1;
             passed = started && schedule->stop_frame > schedule->start_frame;
+#ifdef PT_PAULA_MIXED_IRQ
+            passed = passed && mixed_forecast_stop(schedule->stop_frame);
+#endif
             break;
         }
     }

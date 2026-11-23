@@ -2,15 +2,26 @@
 /* C stack ABI. The 64 coherent-read attempts use the original precomputed
  * descending window. An expired or exhausted attempt writes no marker.
  * The diagnostic Paula form measures a single fixed register write. */
-        .macro local_activate name, paula=0
+        .macro local_activate name, paula=0, mixed=0
         .globl \name
 \name:
+        .if \mixed
+        movem.l %d2-%d7/%a2-%a5,-(%sp)
+        .set local_args\@,44
+        .else
         movem.l %d2-%d7/%a2,-(%sp)
-        move.l 32(%sp),%a0
-        move.l 36(%sp),%a1
-        move.l 40(%sp),%a2
+        .set local_args\@,32
+        .endif
+        move.l local_args\@(%sp),%a0
+        move.l local_args\@+4(%sp),%a1
+        move.l local_args\@+8(%sp),%a2
+        .if \mixed
+        movea.l 16(%a2),%a3
+        movea.l 20(%a2),%a4
+        movea.l 24(%a2),%a5
+        .endif
         .if \paula
-        move.l 44(%sp),%d6
+        move.l local_args\@+12(%sp),%d6
         cmpi.l #0x800f,%d6
         beq.b valid_word\@
         cmpi.l #0x000a,%d6
@@ -18,8 +29,7 @@
         cmpi.l #0x000f,%d6
         beq.b valid_word\@
         moveq #3,%d0
-        movem.l (%sp)+,%d2-%d7/%a2
-        rts
+        bra.w local_return\@
 valid_word\@:
         .endif
         move.w 0(%a2),%d0
@@ -41,6 +51,13 @@ local_poll\@:
         bls.b local_expired\@
         .if \paula
         move.w %d6,0xdff096
+        .if \mixed
+        /* Two individual card words and the queued MIDI slot/message.
+         * The destinations are fields in the original diagnostic RAM row. */
+        move.w %a3,28(%a2)
+        move.w %a4,30(%a2)
+        move.l %a5,32(%a2)
+        .endif
         .else
         move.w #0x4752,6(%a2)
         .endif
@@ -69,17 +86,23 @@ local_record\@:
         moveq #64,%d1
         sub.w %d7,%d1
         move.w %d1,4(%a2)
+local_return\@:
+        .if \mixed
+        movem.l (%sp)+,%d2-%d7/%a2-%a5
+        .else
         movem.l (%sp)+,%d2-%d7/%a2
+        .endif
         rts
         .endm
 
         local_activate _pt_cia_local_activate
         local_activate _pt_cia_local_paula_dma,1
+        local_activate _pt_cia_local_mixed_dma,1,1
 
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-        .macro local_alarm_irq name, paula=0
+        .macro local_alarm_irq name, paula=0, mixed=0
         .globl \name
 \name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
@@ -107,7 +130,11 @@ local_record\@:
         move.l 4(%a2),-(%sp)
         move.l 0(%a2),-(%sp)
         .if \paula
+        .if \mixed
+        jsr _pt_cia_local_mixed_dma
+        .else
         jsr _pt_cia_local_paula_dma
+        .endif
         lea 16(%sp),%sp
         bra.b local_irq_result\@
 local_irq_refused\@:
@@ -135,3 +162,4 @@ local_irq_done\@:
 
         local_alarm_irq _pt_cia_local_alarm_irq
         local_alarm_irq _pt_cia_local_paula_alarm_irq,1
+        local_alarm_irq _pt_cia_local_mixed_alarm_irq,1,1

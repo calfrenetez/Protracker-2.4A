@@ -310,6 +310,14 @@ Only Paula issued device commands in this fixture. Silent 16-bit source
 samples converted to zero 8-bit Chip bytes for the supported one-shot
 path. The classic silent 8-bit segment/repeat refusal remains covered by
 the retained initial host run.
+
+The private `routed-mixed-alarm` case used the same tracker Start and F00
+windows. Its interrupt issued each actual silent Paula DMA word followed
+by the prepared AmiGUS bank and control words and mapped MIDI message
+into owned RAM. Each whole bracket took seven E-clock ticks in Amiberry.
+The readbacks distinguish the modeled AmiGUS enable and disable, and
+the original MIDI Note On and Note Off on the same slot. Card bus timing,
+CAMD dispatch and audible playback require their own qualification.
 A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource

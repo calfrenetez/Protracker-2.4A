@@ -10,6 +10,11 @@ struct paula_alarm_schedule {
     uint64_t epoch, start_frame, stop_frame;
 };
 
+#ifdef PT_PAULA_MIXED_IRQ
+#include "native_tracker_mixed_words.h"
+extern void pt_cia_local_mixed_alarm_irq(void);
+#endif
+
 /* The IRQ checks the still-pending request itself, since ADCMD_LOCK can
  * complete on loss of its allocation. It uses no audio.device call. */
 _Static_assert(NT_MESSAGE == 5 &&
@@ -101,6 +106,10 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         snapshot(owner, "after-registers", 1, word);
     Enable();
     obs->in_frame = paula_window_inside(obs);
+#ifdef PT_PAULA_MIXED_IRQ
+    if (!mixed_words_issued(&obs->raw))
+        return 0;
+#endif
     return obs->in_frame && (obs->dma_after & (DMA_MASTER | ALL)) == (DMA_MASTER | after) &&
         owns_channels(owner);
 }
@@ -133,11 +142,20 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     uint64_t now;
     uint32_t hz;
     int passed = 0;
+#ifdef PT_PAULA_MIXED_IRQ
+    void (*handler)(void) = pt_cia_local_mixed_alarm_irq;
+#else
+    void (*handler)(void) = pt_cia_local_paula_alarm_irq;
+#endif
     if (!prepare(input, chip, ALL, ALL, PT_MIXED_READERS_STOP, &stop) || stop.frame_count != 1 ||
         !pt_native_eclock_open(&timebase) || !pt_native_eclock_read(&timebase, &now, &hz) ||
         (hz != 709379 && hz != 715909) || now > UINT64_MAX - hz ||
+        pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, schedule->epoch, 0) != PT_ELAPSED_OK ||
+#ifdef PT_PAULA_MIXED_IRQ
+        !mixed_prepare_words(&grid, start, stop.frame) ||
+#endif
         !pt_diagnostic_cia_acquire(&clock, pt_cia_direct_clock_stray, (void *)&timer_strays) ||
-        !open_alarm(&alarm, &clock, now + hz, pt_cia_local_paula_alarm_irq))
+        !open_alarm(&alarm, &clock, now + hz, handler))
         goto finish;
 
     alarm_chip = alarm.timer.chip;
@@ -158,7 +176,6 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
             timed[i].hz = hz;
         }
         if (anchor.marker == 0x2452 && timed[0].anchor &&
-            pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, schedule->epoch, 0) == PT_ELAPSED_OK &&
             prepare_paula_window(timed, &grid, schedule->start_frame) &&
             prepare_paula_window(timed + 1, &grid, schedule->stop_frame) &&
             run_irq_word(owner, &alarm, &clock, start, 0, ALL) &&

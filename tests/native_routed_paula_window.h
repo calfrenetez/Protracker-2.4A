@@ -8,9 +8,22 @@ enum { PAULA_TEST_FRAME = 512, PAULA_TEST_RATE = 48000, PAULA_WRITE_MARKER = 0x4
 struct paula_window_raw {
     uint16_t first, end, attempts, marker;
     uint8_t before[3], after[3];
+#ifdef PT_PAULA_MIXED_IRQ
+    uint16_t padding;
+    uint32_t bank, control, midi;
+    volatile uint16_t observed_bank, observed_control;
+    volatile uint32_t observed_midi;
+#endif
 };
 
+#ifdef PT_PAULA_MIXED_IRQ
+_Static_assert(offsetof(struct paula_window_raw, bank) == 16 &&
+    offsetof(struct paula_window_raw, control) == 20 && offsetof(struct paula_window_raw, midi) == 24 &&
+    offsetof(struct paula_window_raw, observed_bank) == 28 && offsetof(struct paula_window_raw, observed_control) == 30 &&
+    offsetof(struct paula_window_raw, observed_midi) == 32, "Mixed IRQ diagnostic RAM fields");
+#else
 typedef char paula_window_size[(sizeof(struct paula_window_raw) == 14) ? 1 : -1];
+#endif
 typedef char paula_marker_offset[(offsetof(struct paula_window_raw, marker) == 6) ? 1 : -1];
 typedef char paula_before_offset[(offsetof(struct paula_window_raw, before) == 8) ? 1 : -1];
 typedef char paula_after_offset[(offsetof(struct paula_window_raw, after) == 11) ? 1 : -1];

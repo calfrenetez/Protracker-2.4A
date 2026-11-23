@@ -300,6 +300,10 @@ finish:;
 #ifdef PT_PAULA_TRACKER_IRQ
     report_tracker_forecast(&schedule);
 #endif
+#ifdef PT_PAULA_MIXED_IRQ
+    report_mixed_words();
+    mixed_forecast_close();
+#endif
     report_irq_transitions();
 #endif
     report_windows();

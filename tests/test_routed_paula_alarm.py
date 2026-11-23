@@ -5,6 +5,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from replay_routed_paula_alarm import replay
 from replay_tracker_paula_alarm import replay as replay_tracker
+from replay_mixed_frame_aperture import observe as observe_mixed, replay as replay_mixed
 
 
 def triplet(count):
@@ -75,3 +76,21 @@ class PaulaAlarmReplay(unittest.TestCase):
             replay_tracker(text.replace("stop=1920", "stop=1919", 1))
         with self.assertRaises(ValueError):
             replay_tracker(forecast + "\n" + fixture((0, 1920), 8191))
+
+    def test_mixed_ram_readbacks_and_irreversible_late_issue(self):
+        text = (
+            "Paula tracker epoch=8192 start=0 stop=1920 paula=4 amigus=1 midi=1 f00=1\n"
+            "Mixed IRQ RAM 0 bank=0000/0000 control=8000/8000 midi=01953c5a/01953c5a\n"
+            "Mixed IRQ RAM 1 bank=0000/0000 control=0000/0000 midi=01853c00/01853c00\n"
+            + fixture((0, 1920), 8192)
+        )
+        result = replay_mixed(text)
+        self.assertEqual([r["verdict"] for r in result["mixed_ram_observations"]], ["issued_in_frame"] * 2)
+        after = "mark=4752 command=800f dma=0200/020f"
+        late = text.replace(f"rawafter={triplet(65523 - 8199)} {after} in_frame=1",
+                            f"rawafter={triplet(65523 - 8207)} {after} in_frame=0", 1)
+        self.assertEqual(observe_mixed(late)[0]["verdict"], "issued_outside")
+        with self.assertRaises(ValueError):
+            replay_mixed(late)
+        with self.assertRaises(ValueError):
+            replay_mixed(text.replace("01953c5a/01953c5a", "01953c5a/00953c5a", 1))

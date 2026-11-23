@@ -526,8 +526,8 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     model.camd = calloc(1, sizeof(*model.camd));
     model.reversed = calloc(1, sizeof(*model.reversed));
     assert(model.camd && model.reversed);
-    fixture_camd_start(model.camd, (const char (*)[PT_MIDI_ENDPOINT])midi->endpoint);
-    fixture_camd_start(model.reversed, fixture_camd_clusters);
+    fixture_camd_start(model.camd, (const char (*)[PT_MIDI_ENDPOINT])midi->endpoint, midi->endpoint_count);
+    fixture_camd_start(model.reversed, fixture_camd_clusters, 2);
 #endif
     assert(pt_routed_midi_schedule_init(&schedule, midi, &provider, 19, 17, 100, 709379, 48000));
     routed_port = &model;

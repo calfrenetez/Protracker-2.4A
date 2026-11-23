@@ -18,6 +18,7 @@ FIXTURES = {
     'routed-paula-window': ('test_mixed_readers_causal.py', 'PTRoutedPaulaWindow'),
     'routed-paula-alarm': ('test_mixed_readers_causal.py', 'PTRoutedPaulaAlarm'),
     'routed-paula-tracker': ('test_mixed_readers_causal.py', 'PTRoutedPaulaTracker'),
+    'routed-mixed-alarm': ('test_mixed_readers_causal.py', 'PTRoutedMixedAlarm'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-local-activation': (None, 'PTCIALocalActivate'),
@@ -51,6 +52,7 @@ def main():
         'routed-paula-window': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-paula-alarm': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-paula-tracker': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
+        'routed-mixed-alarm': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
     }
     if args.fixture in routed_sources:
         source, extra = routed_sources[args.fixture]
@@ -58,7 +60,7 @@ def main():
         if extra:
             tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
             units = [extra]
-            if args.fixture == 'routed-activation':
+            if args.fixture in ('routed-activation', 'routed-mixed-alarm'):
                 units.append('CAMD_UNITS')
             for unit in units:
                 sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
@@ -69,18 +71,20 @@ def main():
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
     if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control', 'countdown-window') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])
-    if args.fixture in ('routed-paula-window', 'routed-paula-alarm', 'routed-paula-tracker'):
+    if args.fixture in ('routed-paula-window', 'routed-paula-alarm', 'routed-paula-tracker', 'routed-mixed-alarm'):
         flags.append('-DPT_PAULA_TIMED_TRACE')
         sources.extend(['tests/native_cia_direct_clock.s', 'tests/native_cia_local_activation.s',
                         'src/core/countdown_window.c'])
-    if args.fixture in ('routed-paula-alarm', 'routed-paula-tracker'):
+    if args.fixture in ('routed-paula-alarm', 'routed-paula-tracker', 'routed-mixed-alarm'):
         flags.append('-DPT_PAULA_TIMED_IRQ')
-    if args.fixture == 'routed-paula-tracker':
+    if args.fixture in ('routed-paula-tracker', 'routed-mixed-alarm'):
         flags.append('-DPT_PAULA_TRACKER_IRQ')
         sources.extend(['src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
                         'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',
                         'src/core/amigus_render_voice.c', 'src/core/amigus_trigger_levels.c',
                         'src/editor/mixed_readers_plan_normalize.c'])
+    if args.fixture == 'routed-mixed-alarm':
+        flags.append('-DPT_PAULA_MIXED_IRQ')
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
     subprocess.run([args.cc,*flags,*sources,'-o',str(binary)],cwd=ROOT,check=True)

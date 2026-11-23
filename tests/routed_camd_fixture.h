@@ -88,7 +88,7 @@ static enum pt_camd_done fixture_camd_close(void *context, void *library)
     return PT_CAMD_DONE;
 }
 
-static void fixture_camd_start(struct fixture_camd *fixture, const char (*names)[PT_MIDI_ENDPOINT])
+static void fixture_camd_start(struct fixture_camd *fixture, const char (*names)[PT_MIDI_ENDPOINT], unsigned count)
 {
     const struct pt_camd_ops ops = {fixture_camd_open, fixture_camd_node, fixture_camd_sender, fixture_camd_lock,
         fixture_camd_next, fixture_camd_unlock, fixture_camd_remove, fixture_camd_delete, fixture_camd_close};
@@ -98,7 +98,7 @@ static void fixture_camd_start(struct fixture_camd *fixture, const char (*names)
     assert(pt_camd_control_refresh(&fixture->owner) == PT_CAMD_OK);
     assert(pt_camd_control_link(&fixture->owner, 0) == PT_CAMD_OK);
     assert(pt_camd_control_link(&fixture->owner, 1) == PT_CAMD_OK);
-    assert(pt_camd_routes_borrow(&fixture->owner, names, 2, &fixture->lease));
+    assert(pt_camd_routes_borrow(&fixture->owner, names, count, &fixture->lease));
 }
 
 static void fixture_camd_finish(struct fixture_camd *fixture)

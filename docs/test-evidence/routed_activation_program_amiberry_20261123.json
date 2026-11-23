@@ -1,0 +1,33 @@
+{
+  "source": "ac012a7c5233addcc901066ef3895fa7be8a842e",
+  "target": "amiberry-030",
+  "candidates": {
+    "Voice": {
+      "candidate_and_guest_readback_sha256": "0eeff4a2c361a25be287c6c3fbd262e26574dbd92b4c88e916f2c7c92f43fa59",
+      "build_receipt_sha256": "4d12dc711d64378946d4fc3ad8cd31dcc6770ae6ff37bbf29367debaf7822ff2",
+      "guest_log_sha256": "1180a507e3a7dd401e4a0259ddc6489bdcd6fe3ff35044ba9899541ebf8989b6",
+      "validated_build_inputs": 8,
+      "guest_exit_code": 0
+    },
+    "Activation": {
+      "candidate_and_guest_readback_sha256": "41d9073c4921c7e734347cb1c5b5ed3b7bc2aa59ce6a2efef6679ca4122faa76",
+      "build_receipt_sha256": "3109f43ab8ca93f3b80aa12d0a210d5e88ff50b70666ef2bdc9d7c4467544a03",
+      "guest_log_sha256": "1dc2da5703acfaa249da67408f506b56ffc1f8187ce9da1478fb93ca9c0ebd50",
+      "validated_build_inputs": 84,
+      "guest_exit_code": 0
+    }
+  },
+  "focused_host_methods": 12,
+  "final_activation_host_method_repeated": true,
+  "checks": [
+    "copy one exact Paula, AmiGUS and MIDI program from the genuine combined publication",
+    "reject re-created or aliased publication and preserve prior output",
+    "encode AmiGUS in-place rate and stereo volume without start, loop, end or activation register writes",
+    "verify modeled frame zero, audio Control and exact Stop across six audio readers and two MIDI destinations"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Prepared commands and ordinary-RAM scheduling in Amiberry. Physical delivery, timing and listening remain open."
+}

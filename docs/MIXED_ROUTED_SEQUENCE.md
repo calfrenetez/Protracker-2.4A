@@ -154,3 +154,10 @@ the audio owner supplies a complete retirement proof for its original key.
 The fixture exercises that path with a short AmiGUS sample and holds the MIDI
 note through the next audio-only boundary. Any held outputs retain their
 own cancellation and retirement obligations if the render binding is abandoned.
+
+The Amiberry retrigger follow-up adds a real `E91` command at frame 960.
+The old and replacement readers share one AmiGUS slot and retain independent
+reader keys. The audio owner retires the old key from its original
+registration, and the factory rejects a Stop for that retired key before
+allocating. F00 stops the replacement at frame 1920 while the held MIDI note
+also reaches its scheduled release. [Routed retrigger receipt](test-evidence/routed_tracker_amiberry_20261123.json)

@@ -33,5 +33,42 @@
   "canonical_disk_unchanged": true,
   "saved_files_verified": 39,
   "guard_release_verified": true,
+  "timing_follow_up": {
+    "tested_source": "242c3576e3f2310199ff8978aade4a3c06ea25a9",
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true,
+    "candidate_and_guest_readback_sha256": "678c1f6501784b4e92a4bb8afbc1acd4c9f89c2b8a1a55e81f83e7b86bb5b112",
+    "build_receipt_sha256": "dbfc87f5357bf8ee23d4fddaba14e3b4b0a658ff7294b34245c0383597ae56fb",
+    "guest_timing_log_sha256": "0df56e122750b3b5ad347c5a5333620a815a93315a1b5cc2c2ded55382a8e692",
+    "eclock_owner_host_sanitizer_methods": 4,
+    "local_receive_timestamp_markers_verified": 32,
+    "observations": {
+      "frame_ticks": [
+        14,
+        15
+      ],
+      "put_bracket_ticks": [
+        95,
+        506
+      ],
+      "put_brackets_in_start_frame": 0,
+      "receive_bracket_ticks": [
+        53,
+        55
+      ],
+      "sample_rate": 48000,
+      "samples": 32,
+      "ticks_per_second": 709379,
+      "total_bracket_ticks": [
+        148,
+        561
+      ],
+      "total_brackets_in_start_frame": 0
+    },
+    "bracket_scope": "Call and receive brackets on a local no-driver CAMD queue. Timestamp markers prove receive-queue sampling only. Physical and scheduled output were not exercised."
+  },
   "scope": "Native CAMD resource discovery and local no-driver loopback only. Exact scheduled CAMD output, full editor playback, physical devices and listening remain pending."
 }

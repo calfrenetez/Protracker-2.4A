@@ -98,5 +98,24 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "retrigger_follow_up": {
+    "tested_source": "242c3576e3f2310199ff8978aade4a3c06ea25a9",
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true,
+    "candidate_and_guest_readback_sha256": "05de4adbc55310ec6ebbf0542be3e828039777adfb48add71f46a93359b364b3",
+    "build_receipt_sha256": "0d9c928d1c91c8101c51072cd576aa5f46359e7d8bb13df762c7bc5769f2a503",
+    "guest_log_sha256": "de89ee98bb7f7638fa47a7cb3625e1445ec62c7596a19c84363d4e7dd6301766",
+    "focused_host_methods": 10,
+    "additional_checks": [
+      "real tracker E91 retriggers the AmiGUS route at frame 960 in the modeled provider",
+      "old and replacement readers are distinct registrations on the same slot",
+      "old reader can retire independently, its stale F00 key refuses and the replacement stops at frame 1920"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

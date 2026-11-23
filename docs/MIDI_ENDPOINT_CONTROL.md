@@ -44,6 +44,14 @@ cluster, and verified a note-on and note-off through the local receiver queue.
 The original links, node and library reference closed. [Upstream CAMD 40.5](https://github.com/kmatheussen/camd/tree/55a2f589bba0277bb7e779547a0e6d9a15aff2c0),
 [native test receipt](test-evidence/native_camd_control_amiberry_20261123.json)
 
+The local loopback timing follow-up used the native 709,379 Hz E-clock and
+48 kHz sample grid. Across 32 note messages, the bracket around `PutMidi`
+spanned 95 to 506 E-clock ticks. Send and receive together spanned 148 to 561
+ticks. Each start frame was 14 or 15 ticks wide, and every measured send
+bracket crossed its start frame. The receiving node copied the application
+timestamp marker during the call. These brackets measure the task calls and
+local queue readback. [Native timing receipt](test-evidence/native_camd_control_amiberry_20261123.json)
+
 Opening CAMD can activate drivers. Editor setup and exact scheduled delivery
 remain separate integration work. The tested public send call can block on a
 full hardware buffer. The combined schedule still needs a provider that can

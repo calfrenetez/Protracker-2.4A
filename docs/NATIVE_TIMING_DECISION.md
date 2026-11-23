@@ -208,3 +208,11 @@ cia-direct-clock` and replay the report with
 against the unchanged 48 kHz frame widths. The countdown's origin is
 local to the observation. Exact epoch binding, interrupt entry, scheduled
 output and device or listening acceptance require separate evidence.
+
+The exact Amiberry 68030 run completed 48 observations at 709,379 Hz. The
+independent replay retained two torn pairs and measured six ticks in every
+one of the 46 stable brackets. Outer ReadEClock elapsed time was 972
+ticks. Six ticks leaves room inside the 14- or 15-tick frame for further
+experiments. A finite local bracket around a RAM marker gives no bound on
+late interrupt entry or the full output sequence.
+[Direct counter receipt](test-evidence/cia_direct_clock_amiberry_20261123.json)

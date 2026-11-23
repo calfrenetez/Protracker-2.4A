@@ -1,0 +1,34 @@
+{
+  "source": "b2404086f67e6a1401ffd31f28af9fe5c71a8757",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "538941e3cfa0575c8ff5ab0df0f5261a4816b16921947a9afa927262e8262a77",
+  "build_receipt_sha256": "0c9a8050435e67b731ec285301b9763f86b90fc80e21c13e84e767c7bf114c37",
+  "guest_log_sha256": "72d126260cc316f5ff77ae5c61ff58c7ca6b0c18163cf07fc834ccfbf75b04ae",
+  "replay_tool_sha256": "4fbaa8bcec478394064c2168612b621da504e859dddf6d26036e3e61c241d347",
+  "validated_build_inputs": 4,
+  "guest_exit_code": 0,
+  "focused_host_methods": 18,
+  "observation": {
+    "pairs_captured": 48,
+    "stable_pairs": 46,
+    "torn_or_zero": 2,
+    "outer_elapsed_ticks": 972,
+    "counter_hz": 709379,
+    "chip": 0,
+    "timer": 0,
+    "min_ticks": 6,
+    "max_ticks": 6,
+    "frame_ticks": [
+      14,
+      15
+    ],
+    "shorter_than_minimum_frame_width": 46,
+    "at_least_maximum_frame_width": 0,
+    "closed": true
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Direct countdown observation around one RAM write in Amiberry. Six ticks is a measured finite bracket, not whole dispatch timing or an upper bound. Original musical epoch, IRQ and device output are not qualified."
+}

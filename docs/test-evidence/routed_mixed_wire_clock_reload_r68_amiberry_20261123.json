@@ -1,0 +1,61 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening remain pending.",
+  "fixtures": {
+    "clock": {
+      "passed": false,
+      "guest_rc": "20",
+      "candidate_sha256": "18ab75c84b66fd2698fd0eb8889ba463d46fadb08a47282bd453346cf59044bc",
+      "validated_build_inputs": 127,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "60d12e4808dda1c410e3f11be48ffb6d7f11ab90736c7707400e00eef65ac542",
+      "guest_log_sha256": "ee613a418acc77b834055dac7e02478d28d862c2e4e377d00df833298a186d22",
+      "reason": "Missing both timed cases or verified guest closure",
+      "start": {
+        "window": [
+          8192,
+          8207
+        ],
+        "observed_ticks": [
+          8194,
+          8203
+        ],
+        "midi_received": "953c5a"
+      },
+      "f00_refusal": {
+        "window": [
+          36568,
+          36582
+        ],
+        "count_from_and_until_excluded": [
+          28419,
+          28405
+        ],
+        "reason": "The original countdown window spans two low-byte pages and the guarded fast path refused before issue."
+      }
+    },
+    "reload": {
+      "passed": false,
+      "guest_rc": "20",
+      "candidate_sha256": "0f62805c79bd1b5b2518f4cedbdb4b57c816a6a9b0b99c518d1ed6cb6fb9455d",
+      "validated_build_inputs": 128,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "ef730acc3b420a9b0d8ef8d71672e6f23b95da4ad0d54c6049d1f603e0c18287",
+      "guest_log_sha256": "fba8dc687fecc263e6527cdfde24b088c79ddf3fe774aea51939046cb1d0eb7e",
+      "reason": "Incomplete generation, raw clock or mixed RAM evidence",
+      "start_refusal": {
+        "window": [
+          8192,
+          8207
+        ],
+        "pre_sample": 8199,
+        "reason": "The sample reached the protected eight-tick end margin. No writes were observed."
+      }
+    }
+  }
+}

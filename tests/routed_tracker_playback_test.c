@@ -170,7 +170,7 @@ static enum pt_mixed_readers_result observe_retirement(void *context,
     return pt_sampler_mixed_service_reader(m->pool, key->trigger, key->action, 0, receipt);
 }
 
-static void tracker_case(unsigned short_card)
+static void tracker_case(unsigned short_card, unsigned retrigger)
 {
     struct allocation render_memory = {0};
     const struct pt_allocator allocator = {&render_memory, ordinary, ordinary_release};
@@ -186,6 +186,8 @@ static void tracker_case(unsigned short_card)
     struct pt_sampler_mixed_command_handle handle = {0};
     struct pt_sampler_mixed_reader_handle readers[5] = {{0}};
     struct pt_mixed_readers_key keys[5] = {{0}};
+    struct pt_sampler_mixed_reader_handle replacement = {0};
+    struct pt_mixed_readers_key original_card = {0};
     struct allocation factory_allocator = {0};
     const size_t factory_capacity = pt_sampler_mixed_workspace_size();
     void *factory_workspace = calloc(1, factory_capacity);
@@ -208,6 +210,10 @@ static void tracker_case(unsigned short_card)
     unsigned ready = 0, boundary, idle_ticks = 0, effects = 0, i, steps;
     assert(ahead && plan && midi && batch && workspace && factory_workspace && pcm);
     tracker_project(t, pcm, short_card);
+    if (retrigger) {
+        project->events[4].effect = 14;
+        project->events[4].parameter = 0x91;
+    }
     for (i = 0; i < project->sample_count; ++i) {
         struct pt_pcm pinned;
         struct pt_sampler *sampler = &t->resources->sampler;
@@ -232,8 +238,8 @@ static void tracker_case(unsigned short_card)
         .backend = &t->resources->card.cache,
         .chip_context = &t->resources->chips, .chip_allocate = chip_new, .chip_release = chip_drop,
         .control_budget = pt_sampler_mixed_pool_size() + pt_sampler_mixed_command_size() +
-                          5 * pt_sampler_mixed_reader_size(),
-        .chip_budget = 4096, .generation = 17, .maximum_commands = 1, .maximum_readers = 5,
+                          (5 + retrigger) * pt_sampler_mixed_reader_size(),
+        .chip_budget = 4096, .generation = 17, .maximum_commands = 1, .maximum_readers = 5 + retrigger,
         .context_count = 5,
         .contexts = {{&factory_allocator, sizeof(factory_allocator)},
                      {&t->resources->chips, sizeof(t->resources->chips)},
@@ -287,6 +293,11 @@ static void tracker_case(unsigned short_card)
             ++stop.key[0].serial;
             assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_INVALID);
             --stop.key[0].serial;
+            if (retrigger) {
+                stop.key[4] = original_card;
+                assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_INVALID);
+                stop.key[4] = keys[4];
+            }
             assert(!handle.address && !handle.token && factory_allocator.calls == allocations);
             assert(pt_sampler_mixed_begin_stop_keys(pool, 37, &stop, &handle) == PT_SAMPLER_MIXED_PENDING);
         } else {
@@ -297,7 +308,7 @@ static void tracker_case(unsigned short_card)
             for (i = 0; i < normalized->count; ++i) {
                 const struct pt_mixed_plan_record *record = normalized->record + i;
                 assert(record->track == i && record->sample < 2);
-                if (!boundary) {
+                if (!boundary || (retrigger && record->track == 4)) {
                     assert(record->kind == PT_MIXED_PLAN_TRIGGER);
                     batch->source[i].master = master[record->sample];
                 } else {
@@ -326,9 +337,12 @@ static void tracker_case(unsigned short_card)
             factory_result = pt_sampler_mixed_advance(pool, 37, handle, NULL);
         } while (factory_result == PT_SAMPLER_MIXED_PENDING);
         assert(factory_result == PT_SAMPLER_MIXED_OK);
-        if (!boundary)
+        if (!boundary) {
             for (i = 0; i < 5; ++i)
                 assert(pt_sampler_mixed_reader(pool, handle, i, readers + i) == PT_SAMPLER_MIXED_OK);
+        } else if (retrigger && boundary == 1) {
+            assert(pt_sampler_mixed_reader(pool, handle, 4, &replacement) == PT_SAMPLER_MIXED_OK);
+        }
         assert(pt_sampler_mixed_enqueue(pool, 37, handle, &ticket) == PT_MIXED_READERS_OK);
         m.expected_audio_count = count;
         assert(pt_sampler_mixed_publish(pool, ticket) == PT_MIXED_READERS_OK);
@@ -354,6 +368,21 @@ static void tracker_case(unsigned short_card)
                 assert(pt_sampler_mixed_service_reader(pool, original, i, 0, NULL) == PT_MIXED_READERS_PENDING);
                 assert(pt_sampler_mixed_reader_key(pool, readers[i], keys + i) == PT_MIXED_READERS_OK);
             }
+        } else if (retrigger && boundary == 1) {
+            struct pt_mixed_readers_key fresh = {0};
+            original_card = keys[4];
+            assert(pt_mixed_readers_readers_held(t->queue) == 6);
+            assert(pt_sampler_mixed_reader_key(pool, readers[4], &fresh) == PT_MIXED_READERS_STALE);
+            assert(pt_sampler_mixed_reader_key(pool, replacement, &fresh) == PT_MIXED_READERS_OK);
+            assert(fresh.trigger == ticket && fresh.serial != original_card.serial);
+            assert(fresh.route == original_card.route && fresh.slot == original_card.slot);
+            assert(pt_sampler_mixed_service_reader(pool, original_card.trigger, original_card.action, 1, NULL) ==
+                   PT_MIXED_READERS_OK);
+            assert(pt_sampler_mixed_reader_close(pool, readers + 4));
+            assert(pt_mixed_readers_readers_held(t->queue) == 5);
+            readers[4] = replacement;
+            keys[4] = fresh;
+            replacement = (struct pt_sampler_mixed_reader_handle){0};
         }
         assert(pt_sampler_mixed_command_close(pool, &handle));
         settle_midi(&m, boundary != 1);
@@ -394,7 +423,7 @@ static void tracker_case(unsigned short_card)
     assert(pt_routed_playback_abandon(&playback));
     assert(!pt_mixed_readers_commands_held(t->queue));
     for (i = 0; i < (short_card ? 4U : 5U); ++i) {
-        assert(pt_sampler_mixed_service_reader(pool, original, i, 1, NULL) == PT_MIXED_READERS_OK);
+        assert(pt_sampler_mixed_service_reader(pool, keys[i].trigger, keys[i].action, 1, NULL) == PT_MIXED_READERS_OK);
         assert(pt_sampler_mixed_reader_close(pool, readers + i));
     }
     assert(pt_sampler_mixed_close(&pool) && !pool && !t->resources->chips);
@@ -419,8 +448,9 @@ static void tracker_case(unsigned short_card)
 int main(void)
 {
     refuse_late_paula_loop();
-    tracker_case(0);
-    tracker_case(1);
-    puts("Routed tracker playback: whole-song quantized audit, exact factory Stop and independent AmiGUS retirement; SOFTWARE_ONLY");
+    tracker_case(0, 0);
+    tracker_case(1, 0);
+    tracker_case(0, 1);
+    puts("Routed tracker playback: whole-song audit, exact Stop, independent retirement and AmiGUS retrigger; SOFTWARE_ONLY");
     return 0;
 }

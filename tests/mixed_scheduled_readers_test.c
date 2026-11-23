@@ -178,7 +178,7 @@ static enum pt_mixed_readers_reply model_command_service(void *context,uint64_t 
  out->ticket=e->ticket;out->owner=e->command_owner;out->count=e->batch.count;out->event=e;out->binding=e->binding;
  for(i=0;i<out->count;++i){struct model_reader *r=model_reader(m,c->key+i);assert(r);out->action[i].key=r->key;
   out->action[i].command=c->issued?(c->cancelled?PT_MIXED_COMMAND_CANCELLED_AFTER:PT_MIXED_COMMAND_ISSUED):(c->cancelled?PT_MIXED_COMMAND_CANCELLED_BEFORE:PT_MIXED_COMMAND_WAITING);
-  out->action[i].reader=(enum pt_mixed_readers_state)(c->issued?r->state:PT_MIXED_READER_NONE);
+  out->action[i].reader=(enum pt_mixed_readers_state)(c->issued||c->batch.action[i].kind!=PT_MIXED_READERS_TRIGGER?r->state:PT_MIXED_READER_NONE);
   out->action[i].adoption=(enum pt_mixed_readers_adoption)r->adopted;
   if(c->issued&&i<c->fired)out->action[i].observed=out->action[i].issued=c->first;
   if(c->issued&&i>=c->fired)out->action[i].command=PT_MIXED_COMMAND_UNKNOWN;

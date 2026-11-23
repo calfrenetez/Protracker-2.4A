@@ -63,6 +63,16 @@ static int publish_audio(void *context, const struct pt_mixed_readers_event *aud
         wrong.queue = (const struct pt_mixed_readers_output *)m;
         assert(pt_routed_midi_schedule_submit_combined(m->schedule, &wrong) == PT_ROUTED_MIDI_INVALID);
     }
+    if (audio->batch.action[0].kind == PT_MIXED_READERS_STOP) {
+        struct pt_mixed_readers_domain stale = *audio->reader[0];
+        wrong = *audio;
+        --wrong.batch.count;
+        assert(pt_routed_midi_schedule_submit_combined(m->schedule, &wrong) == PT_ROUTED_MIDI_INVALID);
+        wrong = *audio;
+        ++stale.key.serial;
+        wrong.reader[0] = &stale;
+        assert(pt_routed_midi_schedule_submit_combined(m->schedule, &wrong) == PT_ROUTED_MIDI_INVALID);
+    }
     assert(m->audio->reads == reads && m->submissions == submissions);
     result = pt_routed_midi_schedule_submit_combined(m->schedule, audio);
     assert(result == PT_ROUTED_MIDI_QUEUED);
@@ -163,7 +173,7 @@ static uint64_t publish_stop(struct trial *t, uint64_t first, uint64_t frame, un
 }
 
 enum combined_case { BOTH_ISSUE, AUDIO_ONLY, MIDI_ONLY, BOTH_CANCEL, WRONG_RECEIPT,
-                     LATE_AUDIO_RECEIPT, STOP_AUDIO_ONLY, AUDIO_FRAME, AUDIO_FRAME_CANCEL };
+                     LATE_AUDIO_RECEIPT, STOP_AUDIO_ONLY, STOP_MIDI_ONLY, AUDIO_FRAME, AUDIO_FRAME_CANCEL };
 
 static void combined_case(enum combined_case which)
 {
@@ -242,10 +252,11 @@ static void combined_case(enum combined_case which)
     assert(t->model.effects == 5 * audio_issued && pt_mixed_readers_readers_held(t->queue) == 5);
 
     stop = pt_routed_midi_prepare_stop(midi, 960);
-    assert(stop && stop->count == midi_issued);
+    assert(stop && stop->count == midi_issued && stop->needs_audio == audio_issued);
     if (audio_issued) {
+        assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
         uint64_t stop_ticket = publish_stop(t, first, 960, 1);
-        settle_audio(t, &m, stop_ticket, 1, 0);
+        settle_audio(t, &m, stop_ticket, which != STOP_MIDI_ONLY, which == STOP_MIDI_ONLY);
     } else {
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_QUEUED);
     }
@@ -257,9 +268,20 @@ static void combined_case(enum combined_case which)
         assert(stop && stop->count == 1);
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_QUEUED);
         settle_midi(&m, 1);
+    } else if (which == STOP_MIDI_ONLY) {
+        uint64_t later;
+        assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_PARTIAL);
+        assert(!midi->stopped && !midi->accepted[15].active && schedule.audio_owned && !schedule.held);
+        assert(!pt_routed_midi_schedule_settled(&schedule, 960, stop->serial));
+        stop = pt_routed_midi_prepare_stop(midi, 1920);
+        assert(stop && !stop->count && stop->needs_audio);
+        assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
+        later = publish_stop(t, first, 1920, 2);
+        settle_audio(t, &m, later, 1, 0);
+        settle_midi(&m, 0);
     }
     assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
-    assert(midi->stopped && !midi->accepted[15].active && !schedule.held);
+    assert(midi->stopped && !midi->accepted[15].active && !schedule.held && !schedule.audio_owned);
     for (i = 0; i < 5; ++i)
         assert(pt_mixed_readers_service_reader(t->queue, first, i, 1, NULL) == PT_MIXED_READERS_OK);
     trial_drop(t);
@@ -279,8 +301,9 @@ int PT_ROUTED_COMBINED_TEST_MAIN(void)
     combined_case(WRONG_RECEIPT);
     combined_case(LATE_AUDIO_RECEIPT);
     combined_case(STOP_AUDIO_ONLY);
+    combined_case(STOP_MIDI_ONLY);
     combined_case(AUDIO_FRAME);
     combined_case(AUDIO_FRAME_CANCEL);
-    puts("Combined schedule: exact Paula, AmiGUS and MIDI admission, partial receipts and owned Stop; SOFTWARE_ONLY");
+    puts("Combined schedule: exact Paula, AmiGUS and MIDI admission, all owned Stop keys and independent partial receipts; SOFTWARE_ONLY");
     return 0;
 }

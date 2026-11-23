@@ -124,6 +124,14 @@ struct pt_routed_midi_provider {
                           const struct pt_mixed_readers_event *);
 };
 
+#define PT_ROUTED_PAULA_SLOTS 4U
+#define PT_ROUTED_AUDIO_SLOTS (PT_ROUTED_PAULA_SLOTS + PT_CHANNEL_LIMIT)
+
+struct pt_routed_audio_change {
+    struct pt_mixed_readers_key key;
+    enum pt_mixed_readers_kind kind;
+};
+
 struct pt_routed_midi_schedule {
     struct pt_routed_midi *midi;
     struct pt_routed_midi_provider provider;
@@ -132,6 +140,9 @@ struct pt_routed_midi_schedule {
     const struct pt_mixed_readers_output *audio_queue;
     uint64_t audio_ticket, last_audio_ticket;
     uint64_t last_read;
+    struct pt_mixed_readers_key audio_active[PT_ROUTED_AUDIO_SLOTS];
+    struct pt_routed_audio_change audio_pending[PT_MIXED_READERS_ACTIONS];
+    uint32_t audio_owned;
     unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested, settled;
 };
 
@@ -157,9 +168,11 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
  * explicit MIDI-only batch for the same combined provider. With an audio
  * leg, both terminal receipts must agree on the original identity. Two issues
  * inside the same logical frame settle. One issue is PARTIAL and blocks new
- * notes while retaining any actual MIDI notes for Stop. A terminal Stop is
- * complete only when both legs are settled by the common provider. A MIDI
- * batch with zero messages follows the audio receipt when audio is present. */
+ * notes while retaining actual audio keys and MIDI notes for Stop. A terminal
+ * Stop must cover every audio key still owned by the schedule. Only exact
+ * issued audio changes alter those keys. Reader retirement stays with the
+ * audio owner. A MIDI batch with zero messages follows the audio receipt
+ * when audio is present. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);

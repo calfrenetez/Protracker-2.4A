@@ -67,16 +67,29 @@ static int zero_owner(const struct pt_mixed_readers_owner *o)
 static int current(struct pt_mixed_readers_output *q,const struct pt_mixed_readers_control *o)
 {int good;q->busy=1;good=o->current(o->context,o->token,q->grid.generation);q->busy=0;
  if(good!=1){q->failed=q->stale=1;}return good==1&&!q->failed;}
-static int active(struct pt_mixed_readers_output *q,const struct reader_entry *r,uint64_t frame,int admission)
+static int successor_pending(const struct pt_mixed_readers_output *q,const struct reader_entry *r,
+    uint64_t frame,const struct command_entry *except)
 {
     unsigned i,j;
-    if(!r||!r->held||!r->submitted||!r->adopted||!r->timed||r->retired||r->superseded||r->cancel_requested||r->state!=PT_MIXED_READER_ACTIVE||r->frame>=frame||(admission&&r->closed))return 0;
-    for(i=0;i<q->commands;++i)if(q->command[i].held&&q->command[i].event.batch.frame>r->frame&&q->command[i].event.batch.frame<frame)
-        for(j=0;j<q->command[i].event.batch.count;++j){
-            const struct pt_mixed_readers_action *a=q->command[i].event.batch.action+j;
-            if(a->route==r->domain.key.route&&a->slot==r->domain.key.slot&&(a->kind==PT_MIXED_READERS_TRIGGER||a->kind==PT_MIXED_READERS_STOP))return 0;
+    for(i=0;i<q->commands;++i){
+        const struct command_entry *e=q->command+i;
+        if(e==except||!e->held||e->event.batch.frame<=r->frame||e->event.batch.frame>=frame)continue;
+        for(j=0;j<e->event.batch.count;++j){
+            const struct pt_mixed_readers_action *a=e->event.batch.action+j;
+            if(a->route==r->domain.key.route&&a->slot==r->domain.key.slot&&
+               (a->kind==PT_MIXED_READERS_TRIGGER||a->kind==PT_MIXED_READERS_STOP))return 1;
         }
-    return 1;
+    }
+    return 0;
+}
+static int reader_active(const struct reader_entry *r)
+{
+    return r&&r->held&&r->submitted&&r->adopted&&r->timed&&!r->retired&&
+        !r->superseded&&!r->cancel_requested&&r->state==PT_MIXED_READER_ACTIVE;
+}
+static int active(struct pt_mixed_readers_output *q,const struct reader_entry *r,uint64_t frame,int admission)
+{
+    return reader_active(r)&&r->frame<frame&&(!admission||!r->closed)&&!successor_pending(q,r,frame,NULL);
 }
 static size_t queue_alignment(void)
 {struct aligned {char byte;struct pt_mixed_readers_output value;};return offsetof(struct aligned,value);}
@@ -360,6 +373,21 @@ static void advance(struct pt_mixed_readers_output *q,const struct command_entry
         if(a->reader>=PT_MIXED_READER_STOP_PENDING)r->closed=1;
     }
 }
+static void detach_unissued_stop(struct pt_mixed_readers_output *q,const struct command_entry *e,
+    const struct pt_mixed_readers_command_receipt *receipt)
+{
+    unsigned i;
+    if(q->closing||q->failed||q->stale||receipt->action[0].command!=PT_MIXED_COMMAND_CANCELLED_BEFORE)return;
+    for(i=0;i<receipt->count;++i){
+        struct reader_entry *r=q->reader+e->reader[i];
+        /* The issued receipt path never reopens admission. For an unissued
+         * detached STOP, a still-active original reader can accept a later
+         * frame while its genuine ownership remains unchanged. */
+        if(e->event.batch.action[i].kind==PT_MIXED_READERS_STOP&&r->valid&&
+           reader_active(r)&&!successor_pending(q,r,UINT64_MAX,e))r->closed=0;
+    }
+}
+
 int pt_mixed_readers_output_disjoint(const struct pt_mixed_readers_output *q,const void *out,size_t bytes)
 {return q&&output_apart(q,out,bytes);}
 int pt_mixed_readers_admission_valid(struct pt_mixed_readers_output *q,const struct pt_mixed_readers_inputs *input,uint64_t *out)
@@ -377,7 +405,10 @@ static enum pt_mixed_readers_result command_check(struct pt_mixed_readers_output
     if((reply!=PT_MIXED_OBSERVATION&&reply!=PT_MIXED_COMMAND_DETACHED)||!command_envelope(q,e,&receipt)){q->failed=1;return PT_MIXED_READERS_BACKEND;}
     good=command_valid(q,e,&receipt,reply==PT_MIXED_COMMAND_DETACHED);if(!good)q->failed=1;
     if(good)advance(q,e,&receipt);
-    if(reply==PT_MIXED_COMMAND_DETACHED)command_release(q,e,good,0);
+    if(reply==PT_MIXED_COMMAND_DETACHED){
+        if(good)detach_unissued_stop(q,e,&receipt);
+        command_release(q,e,good,0);
+    }
     else if(good){e->last=receipt;e->seen=1;}
     if(!good||q->failed)return PT_MIXED_READERS_BACKEND;
     if(out)*out=receipt;
@@ -502,7 +533,7 @@ enum pt_mixed_readers_result pt_mixed_readers_reader_key(struct pt_mixed_readers
 enum pt_mixed_readers_result pt_mixed_readers_reader_readiness(
     struct pt_mixed_readers_output *q,uint64_t t,unsigned action)
 {
-    struct reader_entry *r;unsigned i,j;
+    struct reader_entry *r;
     if(!q||!t||action>=PT_MIXED_READERS_ACTIONS)return PT_MIXED_READERS_INVALID;
     if(reentry(q))return PT_MIXED_READERS_BACKEND;
     if(q->closing||q->failed||q->stale||!(r=reader(q,t,action)))
@@ -513,14 +544,7 @@ enum pt_mixed_readers_result pt_mixed_readers_reader_readiness(
     if(!r->valid||r->retired||r->closed||r->superseded||r->cancel_requested||
        r->frame==UINT64_MAX||r->state>PT_MIXED_READER_ACTIVE)
         return PT_MIXED_READERS_STALE;
-    for(i=0;i<q->commands;++i)if(q->command[i].held&&
-        q->command[i].event.batch.frame>r->frame&&q->command[i].event.batch.frame<UINT64_MAX)
-        for(j=0;j<q->command[i].event.batch.count;++j){
-            const struct pt_mixed_readers_action *a=q->command[i].event.batch.action+j;
-            if(a->route==r->domain.key.route&&a->slot==r->domain.key.slot&&
-               (a->kind==PT_MIXED_READERS_TRIGGER||a->kind==PT_MIXED_READERS_STOP))
-                return PT_MIXED_READERS_STALE;
-        }
+    if(successor_pending(q,r,UINT64_MAX,NULL))return PT_MIXED_READERS_STALE;
     /* Only genuine clean pre-adoption states can wait. A valid ISSUED TRIGGER
      * observation can record timing before adoption; retain that real timing
      * while waiting for adoption. ACTIVE without adoption is uncertainty. */

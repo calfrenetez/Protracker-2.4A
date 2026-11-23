@@ -167,6 +167,8 @@ enum pt_mixed_readers_result pt_mixed_readers_publish(struct pt_mixed_readers_ou
  * despite invalid classification (terminal valid0); output remains unchanged.
  * NULL out explicitly drains without publishing. Actual effect/proof replies
  * are retained, never converted into invented non-issued/retirement evidence.
+ * A detached CANCELLED_BEFORE STOP with a still-active original reader can
+ * reopen admission for a later frame, provided no successor has taken its place.
  */
 enum pt_mixed_readers_result pt_mixed_readers_service_command(struct pt_mixed_readers_output *,uint64_t,unsigned,struct pt_mixed_readers_command_receipt *);
 enum pt_mixed_readers_result pt_mixed_readers_service_reader(struct pt_mixed_readers_output *,uint64_t,unsigned,unsigned,struct pt_mixed_readers_reader_receipt *);

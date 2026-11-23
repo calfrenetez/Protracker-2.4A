@@ -15,7 +15,7 @@ enum pt_render_result pt_routed_playback_prepare(struct pt_routed_playback_frame
     const struct pt_routed_midi_batch *batch = NULL;
     struct pt_routed_midi *midi;
     enum pt_render_result result;
-    unsigned ready = 0, i;
+    unsigned ready = 0;
     if (!frame || !lookahead || !schedule || !plan || !lookahead->ready || !lookahead->sequence ||
         !schedule->provider.submit_combined || schedule->held || schedule->busy ||
         !(midi = schedule->midi) || midi->schedule != schedule || midi->pending || midi->stopped ||
@@ -44,10 +44,6 @@ enum pt_render_result pt_routed_playback_prepare(struct pt_routed_playback_frame
         batch = pt_routed_midi_prepare(midi, plan);
         if (!batch)
             return PT_RENDER_INVALID;
-        if (plan->end)
-            for (i = 0; i < PT_CHANNEL_LIMIT; ++i)
-                if (lookahead->commands.voice[i].active)
-                    midi->batch.needs_audio = 1;
     }
     *frame = (struct pt_routed_playback_frame){frame, lookahead->sequence, lookahead, schedule,
                                               lookahead->interval, plan->frame, batch ? batch->serial : 0};

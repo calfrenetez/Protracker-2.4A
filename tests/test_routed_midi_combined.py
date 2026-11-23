@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 COMBINED_PASS = 'Combined schedule: exact Paula, AmiGUS and MIDI admission, all owned Stop keys and independent partial receipts; SOFTWARE_ONLY\n'
 TRACKER_PASS = 'Routed sampler boundary: exact Stop, retrigger and stale preparation discarded before publication; SOFTWARE_ONLY\n'
 ACTIVATION_PASS = (
-    'Routed activation fixture entered\nRouted activation frame zero queued\n'
+    'Routed activation fixture entered\nPaula DMA preload and exact frame words verified\n'
+    'Routed activation frame zero queued\n'
     'Routed activation controls queued\nRouted activation owned Stop queued\n'
     'Routed activation: shared frame zero and exact Stop for six audio readers and two MIDI destinations; SOFTWARE_ONLY\n'
 )

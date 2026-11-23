@@ -25,6 +25,90 @@ struct routed_port_model {
 
 static struct routed_port_model *routed_port;
 
+static void verify_paula_dma_words(const struct pt_paula_dma_write *actual,
+    const struct pt_paula_dma_write *expected, unsigned count)
+{
+    for (unsigned i = 0; i < count; ++i) {
+        assert(actual[i].offset == expected[i].offset);
+        assert(actual[i].value == expected[i].value);
+    }
+}
+
+static void verify_paula_dma_preparation(void)
+{
+    struct pt_routed_activation_program input = {
+        .audio_count = 5, .paula_active = 6,
+        .audio = {
+            {PT_MIXED_READERS_PAULA, 3, PT_MIXED_READERS_TRIGGER, {.paula = {0x1ffffe, 1, 500, 64}}},
+            {PT_MIXED_READERS_PAULA, 1, PT_MIXED_READERS_STOP, {.paula = {0}}},
+            {PT_MIXED_READERS_PAULA, 2, PT_MIXED_READERS_CONTROL, {.paula = {0, 0, 400, 32}}},
+            {PT_MIXED_READERS_PAULA, 0, PT_MIXED_READERS_TRIGGER, {.paula = {0x01fffc, 3, 600, 1}}},
+            {PT_MIXED_READERS_AMIGUS, 21, PT_MIXED_READERS_TRIGGER, {.amigus = {0}}},
+        }
+    };
+    static const struct pt_paula_dma_write preload[] = {
+        {0x0d0, 0x001f}, {0x0d2, 0xfffe}, {0x0d4, 1}, {0x0d6, 500}, {0x0d8, 64},
+        {0x0a0, 0x0001}, {0x0a2, 0xfffc}, {0x0a4, 3}, {0x0a6, 600}, {0x0a8, 1}
+    };
+    static const struct pt_paula_dma_write on_frame[] = {
+        {0x096, 0x0002}, {0x0c6, 400}, {0x0c8, 32}, {0x096, 0x8009}
+    };
+    struct pt_paula_dma_program output;
+    unsigned char previous[sizeof(output)];
+
+    assert(pt_routed_paula_dma_prepare(&input, 15, &output));
+    assert(output.preload_count == 10 && output.frame_count == 4 && output.preload_slots == 9);
+    verify_paula_dma_words(output.preload, preload, output.preload_count);
+    verify_paula_dma_words(output.frame, on_frame, output.frame_count);
+    memcpy(previous, &output, sizeof(previous));
+    assert(!pt_routed_paula_dma_prepare(&input, 7, &output));
+    assert(!pt_routed_paula_dma_prepare(&input, 31, &output));
+
+    input.paula_active = 14;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.paula_active = 6;
+    input.audio[0].output.paula.words = 2;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.audio[0].output.paula.words = 1;
+    input.audio[0].output.paula.location = 0x1fffff;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.audio[0].output.paula.location = 0x1ffffe;
+    input.audio[3].slot = 3;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.audio[3].slot = 0;
+    input.audio[1].output.paula.volume = 1;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.audio[1].output.paula.volume = 0;
+    input.audio[2].output.paula.period = 0;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, &output));
+    input.audio[2].output.paula.period = 400;
+    assert(!pt_routed_paula_dma_prepare(&input, 15, (struct pt_paula_dma_program *)(void *)&input));
+    assert(!memcmp(previous, &output, sizeof(previous)));
+
+    for (unsigned slot = 0; slot < 4; ++slot) {
+        input.audio[slot] = (struct pt_routed_audio_program){
+            PT_MIXED_READERS_PAULA, slot, PT_MIXED_READERS_TRIGGER, {.paula = {0x1002, 2, 400, 32}}
+        };
+    }
+    input.audio_count = 4;
+    input.paula_active = 0;
+    assert(pt_routed_paula_dma_prepare(&input, 15, &output));
+    assert(output.preload_count == PT_PAULA_DMA_PRELOAD_WRITES && output.frame_count == 1);
+    assert(output.preload_slots == 15 && output.frame[0].offset == 0x096 && output.frame[0].value == 0x800f);
+    for (unsigned slot = 0; slot < 4; ++slot) {
+        input.audio[slot].kind = PT_MIXED_READERS_CONTROL;
+        input.audio[slot].output.paula.location = 0;
+        input.audio[slot].output.paula.words = 0;
+    }
+    input.paula_active = 15;
+    assert(pt_routed_paula_dma_prepare(&input, 15, &output));
+    assert(!output.preload_slots && !output.preload_count && output.frame_count == PT_PAULA_DMA_FRAME_WRITES);
+    for (unsigned slot = 0; slot < 4; ++slot) {
+        assert(output.frame[slot * 2].offset == 0x0a6 + slot * 16 && output.frame[slot * 2].value == 400);
+        assert(output.frame[slot * 2 + 1].offset == 0x0a8 + slot * 16 && output.frame[slot * 2 + 1].value == 32);
+    }
+}
+
 static int routed_clock(void *context, uint64_t *ticks, uint32_t *frequency)
 {
     struct routed_port_model *p = context;
@@ -46,6 +130,17 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
     assert(pt_routed_activation_prepare(p->schedule, midi, packet->registration.owner, packet, &queued));
     assert(queued.midi.audio_ticket == packet->ticket && queued.midi.first == packet->first && queued.midi.last == packet->last);
     assert(queued.midi.key.frame == packet->frame && queued.audio_count == packet->count);
+    if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
+        assert(queued.paula_active == (packet->frame == 0 ? 0U : 15U));
+        if (packet->frame != 0) {
+            struct pt_paula_dma_program paula;
+            assert(pt_routed_paula_dma_prepare(&queued, 15, &paula) && !paula.preload_count);
+            if (queued.midi.stop)
+                assert(paula.frame_count == 1 && paula.frame[0].offset == 0x096 && paula.frame[0].value == 15);
+            else
+                assert(paula.frame_count == PT_PAULA_DMA_FRAME_WRITES);
+        }
+    }
     assert(queued.midi.count == midi->batch->count && queued.midi.endpoint_count == 2 && queued.midi.stop == midi->batch->stop);
     for (unsigned i = queued.midi.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
         assert(!queued.midi.messages[i].endpoint && !queued.midi.messages[i].bytes[0] &&
@@ -216,6 +311,10 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
         mixed_activation_fixture();
     }
     PT_ROUTED_ACTIVATION_REPORT("Routed activation fixture entered");
+    if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
+        verify_paula_dma_preparation();
+        PT_ROUTED_ACTIVATION_REPORT("Paula DMA preload and exact frame words verified");
+    }
     struct activation_case *c = a_make(8, 8);
     struct pt_project *project = &c->trial->resources->document.project;
     struct pt_routed_midi *midi = calloc(1, sizeof(*midi));

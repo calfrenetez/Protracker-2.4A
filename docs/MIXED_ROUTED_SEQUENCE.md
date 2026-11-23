@@ -218,6 +218,17 @@ activation fixture applies a rate and level change at frame 960 while both
 MIDI notes and the original audio readers stay active, then stops them at
 frame 1920.
 
+The Paula DMA program separates register preparation for inactive owned
+channels from the writes due in the selected frame. Up to four starts share
+one DMACON set word and up to four stops share one clear word. Control changes
+only period and volume on the original active channel. The master DMA bit and
+unrelated channel bits stay untouched. An active-slot retrigger cannot use
+this preload path. The encoder checks word alignment and the complete sample
+extent within the 2 MiB Chip address range. Before issuing any writes, a
+native adapter still needs genuine Chip memory and channel ownership, DMA
+readiness, safe register staging and cancellation, and measured timing.
+[Commodore Amiga Hardware Reference Manual, audio and DMA control](https://www.ikod.se/wp-content/uploads/2020/08/Amiga_Hardware_Reference_Manual_3rd_Edition.pdf)
+
 The ordinary-RAM activation diagnostic also measured 24 runs on the native
 709,379 Hz E-clock in Amiberry. At 48 kHz, one sample frame spans 14 or 15
 ticks. Every measured bracket crossed its start frame, including the

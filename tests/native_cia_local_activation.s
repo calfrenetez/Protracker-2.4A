@@ -2,7 +2,7 @@
 /* C stack ABI. The 64 coherent-read attempts use the original precomputed
  * descending window. An expired or exhausted attempt writes no marker.
  * The diagnostic Paula form measures a single fixed register write. */
-        .macro local_activate name, paula=0, mixed=0
+        .macro local_activate name, paula=0, mixed=0, tail=0
         .globl \name
 \name:
         .if \mixed
@@ -34,6 +34,11 @@ valid_word\@:
         .endif
         move.w 0(%a2),%d0
         move.w 2(%a2),%d1
+        .if \tail
+        /* Keep a whole six-tick observation inside the chosen aperture. */
+        move.w %d1,%d6
+        addq.w #6,%d6
+        .endif
         moveq #63,%d7
 local_poll\@:
         moveq #0,%d2
@@ -45,6 +50,14 @@ local_poll\@:
         move.w %d2,%d5
         lsl.w #8,%d5
         move.b %d3,%d5
+        .if \tail
+        /* The separately armed alert starts near zero. An upper sample
+         * can indicate rollover before the owner's callback is dispatched. */
+        cmpi.w #512,%d5
+        bhi.b local_tail_stale\@
+        cmp.w %d6,%d5
+        bls.b local_expired\@
+        .endif
         cmp.w %d0,%d5
         bhi.b local_retry\@
         cmp.w %d1,%d5
@@ -79,6 +92,11 @@ local_retry\@:
         bra.b local_record\@
 local_expired\@:
         moveq #2,%d0
+        .if \tail
+        bra.b local_record\@
+local_tail_stale\@:
+        moveq #3,%d0
+        .endif
 local_record\@:
         move.b %d2,8(%a2)
         move.b %d3,9(%a2)
@@ -98,11 +116,14 @@ local_return\@:
         local_activate _pt_cia_local_activate
         local_activate _pt_cia_local_paula_dma,1
         local_activate _pt_cia_local_mixed_dma,1,1
+        .ifdef pt_exp_cia_tail
+        local_activate _pt_cia_local_tail,0,0,1
+        .endif
 
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0
+        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0, tail=0
         .globl \name
 \name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
@@ -150,7 +171,11 @@ local_irq_refused\@:
         moveq #3,%d0
 local_irq_result\@:
         .else
+        .if \tail
+        jsr _pt_cia_local_tail
+        .else
         jsr _pt_cia_local_activate
+        .endif
         lea 12(%sp),%sp
         .endif
         .if \epoch
@@ -179,6 +204,9 @@ local_irq_done\@:
         local_alarm_irq _pt_cia_local_paula_alarm_irq,1
         local_alarm_irq _pt_cia_local_mixed_alarm_irq,1,1
         local_alarm_irq _pt_cia_local_epoch_alarm_irq,0,0,1
+        .ifdef pt_exp_cia_tail
+        local_alarm_irq _pt_cia_local_tail_irq,0,0,1,1
+        .endif
         .ifdef pt_exp_mixed_reload
         local_alarm_irq _pt_cia_local_mixed_reload_irq,1,1,1
         .endif

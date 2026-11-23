@@ -28,6 +28,19 @@ int pt_countdown_window_prepare(uint64_t anchor_tick, uint16_t anchor_count,
     return 1;
 }
 
+int pt_countdown_window_intersect(const struct pt_countdown_observation *anchor, uint64_t frame_first,
+    uint64_t frame_end, uint16_t min_span, struct pt_countdown_window *out)
+{
+    if (!anchor || frame_first >= frame_end || anchor->tick >= frame_end || anchor->count < 2)
+        return 0;
+    uint64_t first = frame_first > anchor->tick ? frame_first : anchor->tick + 1;
+    uint64_t end = frame_end;
+    if (frame_end - anchor->tick >= anchor->count)
+        end = anchor->tick + anchor->count - 1;
+    return first < end && end - first > min_span &&
+        pt_countdown_window_prepare(anchor->tick, anchor->count, first, end, out);
+}
+
 static int valid(const struct pt_countdown_window *window)
 {
     return window && window->first < window->end &&

@@ -24,6 +24,7 @@ FIXTURES = {
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-reload': (None, 'PTCIAReload'),
+    'cia-tail': (None, 'PTCIATail'),
     'cia-local-activation': (None, 'PTCIALocalActivate'),
     'countdown-window': ('test_countdown_window.py', 'PTCountdownWindow'),
 }
@@ -42,6 +43,10 @@ def main():
     elif args.fixture == 'cia-reload':
         sources = ['tests/native_cia_reload_test.c', 'tests/native_cia_reload_irq.s',
                    'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c']
+    elif args.fixture == 'cia-tail':
+        sources = ['tests/native_cia_tail_test.c', 'tests/native_cia_reload_irq.s',
+                   'tests/native_cia_local_activation.s', 'tests/native_cia_direct_clock.s',
+                   'src/core/countdown_window.c', 'src/core/elapsed_clock.c']
     elif args.fixture == 'cia-local-activation':
         sources = ['tests/native_cia_local_activation_test.c', 'tests/native_cia_local_activation.s',
                    'tests/native_cia_direct_clock.s', 'src/core/countdown_window.c', 'src/core/elapsed_clock.c']
@@ -101,6 +106,8 @@ def main():
     if args.fixture == 'routed-mixed-reload':
         flags.extend(['-DPT_PAULA_RELOAD_IRQ', '-Wa,--defsym,pt_exp_mixed_reload=1'])
         sources.append('tests/native_cia_reload_irq.s')
+    if args.fixture == 'cia-tail':
+        flags.append('-Wa,--defsym,pt_exp_cia_tail=1')
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
     subprocess.run([args.cc,*flags,*sources,'-o',str(binary)],cwd=ROOT,check=True)

@@ -36,6 +36,15 @@ int pt_countdown_extend(struct pt_countdown_observation *, uint32_t reloads, uin
 int pt_countdown_window_prepare(uint64_t anchor_tick, uint16_t anchor_count,
     uint64_t first, uint64_t end, struct pt_countdown_window *out);
 
+/* Take only the part of an original frame that fits this observed generation.
+ * Both endpoints of a bracket of min_span ticks must fit strictly before the
+ * exclusive end. This only establishes available space, not a duration bound.
+ * Keep the output above zero and preserve it on refusal. Before issuing, the
+ * caller rechecks that the alarm and coherent counts use the original owner
+ * and the same generation. */
+int pt_countdown_window_intersect(const struct pt_countdown_observation *, uint64_t frame_first,
+    uint64_t frame_end, uint16_t min_span, struct pt_countdown_window *out);
+
 /* Pass complete coherent samples from the same original bounded countdown. */
 enum pt_countdown_status pt_countdown_window_status(const struct pt_countdown_window *, uint16_t count);
 

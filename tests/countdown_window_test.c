@@ -71,6 +71,41 @@ static void verify_reloads(void)
     assert(bracket.first == 76293 && bracket.last == end - 1);
 }
 
+static void verify_intersection(void)
+{
+    struct pt_countdown_observation anchor = {1000, 7, 100};
+    struct pt_countdown_window aperture;
+    struct pt_countdown_bracket bracket;
+    uint64_t original_first = 1088, original_end = 1103;
+
+    assert(!pt_countdown_window_prepare(anchor.tick, anchor.count, original_first, original_end, &aperture));
+    assert(pt_countdown_window_intersect(&anchor, original_first, original_end, 7, &aperture));
+    assert(aperture.first == 1088 && aperture.end == 1099 && aperture.first_count == 12 && aperture.end_count == 1);
+    assert(pt_countdown_window_bracket(&aperture, 12, 5, &bracket));
+    assert(bracket.first == original_first && bracket.last == original_first + 7);
+    assert(!pt_countdown_window_bracket(&aperture, 6, 65533, &bracket));
+
+    struct pt_countdown_window saved = aperture;
+    assert(!pt_countdown_window_intersect(&anchor, 1094, 1109, 7, &aperture));
+    assert(!pt_countdown_window_intersect(&anchor, 1092, 1107, 7, &aperture));
+    assert(!pt_countdown_window_intersect(&anchor, 1101, 1116, 0, &aperture));
+    assert(!memcmp(&aperture, &saved, sizeof(aperture)));
+
+    assert(pt_countdown_extend(&anchor, 8, 65535) && anchor.tick == 1101);
+    assert(!pt_countdown_window_intersect(&anchor, original_first, original_end, 7, &aperture));
+    assert(pt_countdown_window_intersect(&anchor, 1099, 1114, 7, &aperture));
+    assert(aperture.first == 1102 && aperture.end == 1114);
+    assert(pt_countdown_window_bracket(&aperture, 65534, 65527, &bracket));
+    assert(bracket.first == 1102 && bracket.last == 1109);
+
+    anchor = (struct pt_countdown_observation){UINT64_MAX - 20, UINT32_MAX, 25};
+    assert(pt_countdown_window_intersect(&anchor, UINT64_MAX - 15, UINT64_MAX, 7, &aperture));
+    assert(aperture.first == UINT64_MAX - 15 && aperture.end == UINT64_MAX);
+    assert(!pt_countdown_window_intersect(&anchor, UINT64_MAX, UINT64_MAX, 0, &aperture));
+    anchor.tick = UINT64_MAX;
+    assert(!pt_countdown_window_intersect(&anchor, UINT64_MAX - 10, UINT64_MAX, 0, &aperture));
+}
+
 int main(void)
 {
     struct pt_countdown_window window, before;
@@ -91,6 +126,7 @@ int main(void)
     verify(709379, UINT64_C(0x1fffffff0), 60000);
     verify(715909, UINT64_C(0xfffffffffff00000), 60000);
     verify_reloads();
+    verify_intersection();
     puts("Countdown window: exact PAL and NTSC frame boundaries and original tick brackets verified");
     return 0;
 }

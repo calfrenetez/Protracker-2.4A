@@ -9,6 +9,7 @@ FIXTURES = {
     'amigus-restore': ('test_amigus_restore.py', 'PTAmiGusRestoreTest'),
     'mixed-causal': ('test_mixed_readers_causal.py', 'PTMixedCausalTest'),
     'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
+    'routed-combined': ('test_mixed_readers_causal.py', 'PTRoutedCombined'),
 }
 
 def main():
@@ -23,8 +24,10 @@ def main():
         sources[0] = 'tests/native_exec_render_sequence_test.c'
     if args.fixture == 'mixed-frame-zero':
         sources[0] = 'tests/native_mixed_frame_zero_test.c'
+    if args.fixture == 'routed-combined':
+        sources = ['tests/routed_midi_combined_test.c', *sources[2:], 'src/core/routed_midi.c', 'src/core/midi.c']
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('mixed-causal', 'mixed-frame-zero'):
+    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined'):
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable

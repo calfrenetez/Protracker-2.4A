@@ -31,8 +31,16 @@ prepared batch before the window and waits for the provider's exact session,
 generation, frame and serial receipt. An uncertain or incomplete receipt
 retains the batch. A proven early or late issue retains the actual notes for
 Stop and reports a timing failure. The software fixture uses a provider model.
-This timed interface has yet to be bound to a native CAMD provider or to the
-combined Paula/AmiGUS delivery path.
+
+The combined provider accepts one audio queue event and its MIDI batch in one
+publication. It checks the original session, generation, frame and counter
+window, binds the audio queue for the session, and requires advancing audio
+tickets. Audio and MIDI receipts must account for every issued action and the
+whole activation interval inside the shared logical frame. A partial result
+blocks further note submissions and preserves the actual note ownership for
+Stop. The audio queue retains responsibility for its reader retirement.
+The combined fixture uses the genuine audio queue and a modeled provider.
+Binding that provider to Paula, AmiGUS and native CAMD delivery remains open.
 
 To stop with a queued MIDI batch, the task can ask the provider to cancel its
 exact key once. The schedule blocks further note submissions and waits for the
@@ -98,3 +106,9 @@ four-case fixture returned zero in Amiberry and matched the host sanitizer
 log. It covered exact frame-zero activation and refusal of submission at the
 deadline, activation at the first excluded tick, and clock regression.
 [Frame-zero 030 test receipt](test-evidence/mixed_frame_zero_amiberry_20261122.json)
+
+Build the combined fixture with `tools/build_render_sequence.py
+--cc <amiga-compiler> --fixture routed-combined`. It drives both audio routes
+and a MIDI note through the same frame-zero publication. It checks both partial
+outcomes, confirmed cancellation, stale and incomplete audio proofs, timing,
+and exact Stop after an audio-only stop result.

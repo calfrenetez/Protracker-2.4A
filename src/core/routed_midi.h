@@ -3,6 +3,7 @@
 
 #include "elapsed_clock.h"
 #include "midi.h"
+#include "mixed_scheduled_readers.h"
 #include "render_commands.h"
 
 #define PT_ROUTED_MIDI_MESSAGES (2U * PT_MIDI_TRACKS)
@@ -59,7 +60,8 @@ void pt_routed_midi_cancel(struct pt_routed_midi *);
 enum pt_routed_midi_schedule_result {
     PT_ROUTED_MIDI_QUEUED, PT_ROUTED_MIDI_WAITING, PT_ROUTED_MIDI_SETTLED,
     PT_ROUTED_MIDI_REFUSED, PT_ROUTED_MIDI_INVALID, PT_ROUTED_MIDI_CLOCK,
-    PT_ROUTED_MIDI_LATE, PT_ROUTED_MIDI_OUTSIDE_WINDOW, PT_ROUTED_MIDI_UNCERTAIN
+    PT_ROUTED_MIDI_LATE, PT_ROUTED_MIDI_OUTSIDE_WINDOW, PT_ROUTED_MIDI_UNCERTAIN,
+    PT_ROUTED_MIDI_PARTIAL
 };
 
 enum pt_routed_midi_delivery {
@@ -76,10 +78,18 @@ struct pt_routed_midi_event {
     unsigned endpoint_count;
 };
 
+struct pt_routed_audio_receipt {
+    const struct pt_mixed_readers_output *queue;
+    uint64_t ticket, first_issued, last_issued;
+    unsigned count;
+    enum pt_mixed_readers_command delivery;
+};
+
 struct pt_routed_midi_receipt {
     struct pt_routed_midi_key key;
     uint64_t activated;
     unsigned count;
+    struct pt_routed_audio_receipt audio;
 };
 
 /* Serialized task-side provider. The clock and actual activation proof must
@@ -102,6 +112,15 @@ struct pt_routed_midi_provider {
      * The key is borrowed during the call only. Every result still requires
      * an independent terminal observe receipt. */
     int (*request_cancel)(void *, const struct pt_routed_midi_key *);
+    /* Alternative to submit. One provider accepts both legs or neither.
+     * Return values follow submit. Copy any needed audio command values in
+     * the call. The actual audio owner keeps its readers and resolves their
+     * quiet separately. Observe reports both legs under the original key,
+     * attesting the total audio action count and the first and last issue
+     * ticks. Non-issue reports zero actions and ticks. Return PENDING while
+     * awaiting either proof. */
+    int (*submit_combined)(void *, const struct pt_routed_midi_event *,
+                          const struct pt_mixed_readers_event *);
 };
 
 struct pt_routed_midi_schedule {
@@ -109,8 +128,10 @@ struct pt_routed_midi_schedule {
     struct pt_routed_midi_provider provider;
     struct pt_elapsed_clock grid;
     struct pt_routed_midi_event event;
+    const struct pt_mixed_readers_output *audio_queue;
+    uint64_t audio_ticket, last_audio_ticket;
     uint64_t last_read;
-    unsigned busy, held, clock_seen, faulted, cancel_requested;
+    unsigned audio_count, busy, held, clock_seen, faulted, cancel_requested;
 };
 
 /* Bind a zeroed schedule before preparing the first batch. The session must
@@ -129,6 +150,16 @@ int pt_routed_midi_schedule_init(struct pt_routed_midi_schedule *, struct pt_rou
  * receipt records the actual owned notes for Stop and returns OUTSIDE_WINDOW.
  * It never qualifies the timing. No immediate-send fallback. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_routed_midi_schedule *);
+/* Call from the audio owner's publication path with its original event.
+ * Session, generation, frame and both counter bounds must match. The first
+ * audio event binds its queue for the session. Tickets must advance. NULL is an
+ * explicit MIDI-only batch for the same combined provider. With an audio
+ * leg, both terminal receipts must agree on the original identity. Two issues
+ * inside the same logical frame settle. One issue is PARTIAL and blocks new
+ * notes while retaining any actual MIDI notes for Stop. A terminal Stop is
+ * complete only when both legs are settled by the common provider. */
+enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
+    struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);
 /* Begin draining a queued non-Stop batch before an owned Stop. Request
  * cancellation at most once and keep the batch borrowed through observe,

@@ -154,7 +154,8 @@ int pt_routed_midi_schedule_init(struct pt_routed_midi_schedule *schedule, struc
         !disjoint(schedule, sizeof(*schedule), provider, sizeof(*provider)) ||
         !disjoint(midi, sizeof(*midi), provider, sizeof(*provider)) ||
         schedule->midi || !idle(midi) || midi->started || midi->schedule || !session || !generation ||
-        !provider->read_clock || !provider->submit || !provider->observe || frequency < rate ||
+        !provider->read_clock || ((provider->submit == NULL) == (provider->submit_combined == NULL)) ||
+        !provider->observe || frequency < rate ||
         pt_elapsed_clock_init(&grid, frequency, rate, epoch, 0) != PT_ELAPSED_OK)
         return 0;
     if ((provider->context == NULL) != (provider->context_bytes == 0) ||
@@ -178,14 +179,38 @@ static int schedule_ready(const struct pt_routed_midi_schedule *schedule)
     return schedule && schedule->midi && schedule->midi->schedule == schedule && !schedule->busy;
 }
 
-enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_routed_midi_schedule *schedule)
+static int audio_matches(const struct pt_routed_midi_schedule *schedule,
+                         const struct pt_mixed_readers_event *audio, uint64_t first, uint64_t last)
+{
+    unsigned i;
+    if (!disjoint(schedule, sizeof(*schedule), audio, sizeof(*audio)) ||
+        !disjoint(schedule->midi, sizeof(*schedule->midi), audio, sizeof(*audio)) ||
+        !audio->queue || (schedule->audio_queue && schedule->audio_queue != audio->queue) ||
+        audio->ticket <= schedule->last_audio_ticket || !audio->command_owner || !audio->batch.count ||
+        audio->batch.count > PT_MIXED_READERS_ACTIONS || audio->session != schedule->event.key.session ||
+        audio->batch.generation != schedule->event.key.generation ||
+        audio->batch.frame != schedule->midi->batch.frame || audio->first != first || audio->last != last)
+        return 0;
+    if (schedule->midi->batch.stop)
+        for (i = 0; i < audio->batch.count; ++i)
+            if (audio->batch.action[i].kind != PT_MIXED_READERS_STOP)
+                return 0;
+    return 1;
+}
+
+static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_schedule *schedule,
+    const struct pt_mixed_readers_event *audio, int combined)
 {
     struct pt_routed_midi_event *event;
     const struct pt_routed_midi_batch *batch;
+    const struct pt_mixed_readers_output *queue = NULL;
+    uint64_t ticket = 0, owner = 0;
     uint64_t now = 0, first, last;
     uint32_t frequency = 0;
+    unsigned count = 0;
     int result;
-    if (!schedule_ready(schedule) || schedule->held || !schedule->midi->pending)
+    if (!schedule_ready(schedule) || schedule->held || !schedule->midi->pending ||
+        combined != (schedule->provider.submit_combined != NULL))
         return PT_ROUTED_MIDI_INVALID;
     batch = &schedule->midi->batch;
     if (schedule->faulted && !batch->stop)
@@ -196,6 +221,14 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
         first >= last) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_CLOCK;
+    }
+    if (audio) {
+        if (!audio_matches(schedule, audio, first, last))
+            return PT_ROUTED_MIDI_INVALID;
+        queue = audio->queue;
+        ticket = audio->ticket;
+        owner = audio->command_owner;
+        count = audio->batch.count;
     }
     schedule->busy = 1;
     result = schedule->provider.read_clock(schedule->provider.context, &now, &frequency);
@@ -211,15 +244,30 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_LATE;
     }
+    if (audio && (!audio_matches(schedule, audio, first, last) ||
+                  audio->queue != queue || audio->ticket != ticket ||
+                  audio->command_owner != owner || audio->batch.count != count)) {
+        schedule->faulted = 1;
+        return PT_ROUTED_MIDI_INVALID;
+    }
     event = &schedule->event;
     event->key.frame = batch->frame;
     event->key.serial = batch->serial;
     event->first = first;
     event->last = last;
     event->batch = batch;
+    schedule->audio_ticket = ticket;
+    schedule->audio_count = count;
+    if (audio) {
+        schedule->audio_queue = queue;
+        schedule->last_audio_ticket = ticket;
+    }
     schedule->cancel_requested = 0;
     schedule->busy = 1;
-    result = schedule->provider.submit(schedule->provider.context, event);
+    if (combined)
+        result = schedule->provider.submit_combined(schedule->provider.context, event, audio);
+    else
+        result = schedule->provider.submit(schedule->provider.context, event);
     schedule->busy = 0;
     if (result == 1) {
         schedule->held = 1;
@@ -232,6 +280,17 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
     }
     schedule->held = 1;
     return PT_ROUTED_MIDI_UNCERTAIN;
+}
+
+enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_routed_midi_schedule *schedule)
+{
+    return submit_batch(schedule, NULL, 0);
+}
+
+enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
+    struct pt_routed_midi_schedule *schedule, const struct pt_mixed_readers_event *audio)
+{
+    return submit_batch(schedule, audio, 1);
 }
 
 static int same_key(const struct pt_routed_midi_key *a, const struct pt_routed_midi_key *b)
@@ -258,11 +317,26 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_request_cancel(struc
     return result == 0 || result == 1 ? PT_ROUTED_MIDI_WAITING : PT_ROUTED_MIDI_UNCERTAIN;
 }
 
+static int audio_receipt_valid(const struct pt_routed_midi_schedule *schedule,
+                               const struct pt_routed_audio_receipt *audio, int issued)
+{
+    const int no_effect = !audio->count && !audio->first_issued && !audio->last_issued;
+    if (audio->ticket != schedule->audio_ticket)
+        return 0;
+    if (!schedule->audio_ticket)
+        return !audio->queue && audio->delivery == PT_MIXED_COMMAND_WAITING && no_effect;
+    return audio->queue == schedule->audio_queue &&
+        ((issued && audio->count == schedule->audio_count && audio->first_issued >= schedule->last_read &&
+          audio->first_issued <= audio->last_issued) ||
+         (audio->delivery == PT_MIXED_COMMAND_CANCELLED_BEFORE && no_effect));
+}
+
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *schedule)
 {
     struct pt_routed_midi_receipt receipt = {0};
     const struct pt_routed_midi_event *event;
     enum pt_routed_midi_delivery delivery;
+    int midi_issued, audio_issued;
     if (!schedule_ready(schedule) || !schedule->held)
         return PT_ROUTED_MIDI_INVALID;
     event = &schedule->event;
@@ -271,27 +345,34 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
     schedule->busy = 0;
     if (delivery == PT_ROUTED_MIDI_PENDING)
         return PT_ROUTED_MIDI_WAITING;
-    if (same_key(&receipt.key, &event->key)) {
-        if (delivery == PT_ROUTED_MIDI_ISSUED && receipt.count == event->batch->count &&
-            receipt.activated >= schedule->last_read &&
-            commit(schedule->midi, event->key.frame, event->key.serial)) {
-            schedule->last_read = receipt.activated;
-            schedule->held = 0;
-            if (receipt.activated < event->first || receipt.activated >= event->last) {
-                schedule->faulted = 1;
-                return PT_ROUTED_MIDI_OUTSIDE_WINDOW;
-            }
-            return PT_ROUTED_MIDI_SETTLED;
-        }
-        if (delivery == PT_ROUTED_MIDI_NOT_ISSUED && !receipt.count && !receipt.activated) {
-            schedule->held = 0;
-            schedule->midi->pending = 0;
-            schedule->faulted = 1;
-            return PT_ROUTED_MIDI_REFUSED;
-        }
+    midi_issued = delivery == PT_ROUTED_MIDI_ISSUED;
+    audio_issued = receipt.audio.delivery == PT_MIXED_COMMAND_ISSUED ||
+                   receipt.audio.delivery == PT_MIXED_COMMAND_CANCELLED_AFTER;
+    if (!same_key(&receipt.key, &event->key) || !audio_receipt_valid(schedule, &receipt.audio, audio_issued) ||
+        (midi_issued ? receipt.count != event->batch->count || receipt.activated < schedule->last_read :
+                       delivery != PT_ROUTED_MIDI_NOT_ISSUED || receipt.count || receipt.activated) ||
+        (midi_issued && !commit(schedule->midi, event->key.frame, event->key.serial))) {
+        schedule->faulted = 1;
+        return PT_ROUTED_MIDI_UNCERTAIN;
     }
-    schedule->faulted = 1;
-    return PT_ROUTED_MIDI_UNCERTAIN;
+    schedule->held = 0;
+    schedule->midi->pending = 0;
+    if (midi_issued || audio_issued)
+        schedule->last_read = receipt.activated > receipt.audio.last_issued ? receipt.activated : receipt.audio.last_issued;
+    if (schedule->audio_ticket && midi_issued != audio_issued) {
+        schedule->faulted = 1;
+        return PT_ROUTED_MIDI_PARTIAL;
+    }
+    if (!midi_issued) {
+        schedule->faulted = 1;
+        return PT_ROUTED_MIDI_REFUSED;
+    }
+    if (receipt.activated < event->first || receipt.activated >= event->last ||
+        (audio_issued && (receipt.audio.first_issued < event->first || receipt.audio.last_issued >= event->last))) {
+        schedule->faulted = 1;
+        return PT_ROUTED_MIDI_OUTSIDE_WINDOW;
+    }
+    return PT_ROUTED_MIDI_SETTLED;
 }
 
 int pt_routed_midi_schedule_discard(struct pt_routed_midi_schedule *schedule)

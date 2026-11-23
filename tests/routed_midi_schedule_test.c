@@ -40,7 +40,9 @@ static int submit(void *context, const struct pt_routed_midi_event *event)
     assert(!pt_routed_midi_schedule_discard(model->schedule));
     assert(pt_routed_midi_schedule_submit(model->schedule) == PT_ROUTED_MIDI_INVALID);
     model->key = event->key;
-    model->receipt = (struct pt_routed_midi_receipt){event->key, event->first, event->batch->count};
+    model->receipt = (struct pt_routed_midi_receipt){
+        .key = event->key, .activated = event->first, .count = event->batch->count
+    };
     return model->accept;
 }
 
@@ -74,7 +76,7 @@ static void fixture(unsigned mode)
     struct pt_routed_midi_schedule schedule = {0};
     struct provider_model model = {.schedule=&schedule, .now=99, .frequency=709379, .accept=1};
     const struct pt_routed_midi_provider api = {
-        &model, sizeof(model), read_clock, submit, observe, mode == 11 ? NULL : request_cancel
+        &model, sizeof(model), read_clock, submit, observe, mode == 11 ? NULL : request_cancel, NULL
     };
     const struct pt_routed_midi_batch *stop;
     assert(midi && plan);

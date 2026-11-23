@@ -8,10 +8,11 @@
  * reset, capacity assumption, start or interrupt operation is exposed. */
 int pt_native_amigus_pcm_read16(const struct pt_amigus_reservation *, unsigned,
                                uint16_t *);
-/* Recorder status on the same PCM lease. The FIFO data and reset ports are
+/* Recorder status on the same PCM lease. The recorder interrupt flags are
+ * reported without acknowledgement. The FIFO data and reset ports are
  * excluded. A changed control word or a failed read leaves the output intact. */
 struct pt_native_amigus_record_status {
-    uint16_t irq_mask, format, control, volume_left, volume_right, watermark, pending_words;
+    uint16_t irq_mask, pending_irq, format, control, volume_left, volume_right, watermark, pending_words;
 };
 int pt_native_amigus_pcm_record_status(const struct pt_amigus_reservation *,
                                        struct pt_native_amigus_record_status *);

@@ -85,8 +85,9 @@ int pt_record_status_probe(int with_wavetable)
             result = PT_FAIL;
         } else if (pt_native_amigus_pcm_record_status(&reservation, &status)) {
             const int idle = !(status.control & 0x8000) && !(status.irq_mask & 0x70) && !status.pending_words;
-            printf("RECORD STATUS mask=0x%04x format=0x%04x control=0x%04x left=0x%04x right=0x%04x watermark=%u pending_words=%u\n",
-                   (unsigned)status.irq_mask, (unsigned)status.format, (unsigned)status.control,
+            printf("RECORD STATUS mask=0x%04x pending_irq=0x%04x format=0x%04x control=0x%04x left=0x%04x right=0x%04x watermark=%u pending_words=%u\n",
+                   (unsigned)status.irq_mask, (unsigned)status.pending_irq,
+                   (unsigned)status.format, (unsigned)status.control,
                    (unsigned)status.volume_left, (unsigned)status.volume_right,
                    (unsigned)status.watermark, (unsigned)status.pending_words);
             reason = idle ? "idle" : "not-idle";

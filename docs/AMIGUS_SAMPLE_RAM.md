@@ -689,12 +689,15 @@ and sample-memory evidence.
 
 Use `AmiGUSTest --record-status` to observe recorder setup on the specified
 Mini firmware. It takes an exclusive PCM reservation, reads the current
-format, rate and control, gains, IRQ mask, watermark and pending word
+format, rate and control, gains, IRQ mask, recorder IRQ flags, watermark and pending word
 count, and checks control again. The status reports idle when recording
 and its IRQ enables are clear and the FIFO has no pending words. This
 mode leaves the rate, interrupt configuration and FIFO intact and refuses
 if PCM is already owned. The map marks the FIFO reset as a write-only
 strobe and its data reads as consuming ports, so the snapshot excludes both.
+The recorder flags contain any latched empty, full and watermark events.
+Their baseline is needed to distinguish new events during a future capture
+and preserve events that were already pending.
 
 `AmiGUSTest --wavetable-record-status` also holds a distinct WAVETABLE
 reservation on the same card during the snapshot. The diagnostic acquires

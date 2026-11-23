@@ -30,6 +30,7 @@ int pt_native_amigus_pcm_record_status(const struct pt_amigus_reservation *r,
     if (!out || !pcm_address(r, &address) || address > UINTPTR_MAX - 0x92) return 0;
     const volatile uint16_t *registers = (const volatile uint16_t *)address;
     status.control = registers[0x82 / 2];
+    status.pending_irq = registers[0x00 / 2] & 0x70;
     status.irq_mask = registers[0x02 / 2];
     status.format = registers[0x80 / 2];
     status.volume_left = registers[0x84 / 2];

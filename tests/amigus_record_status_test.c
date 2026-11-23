@@ -12,6 +12,7 @@ void pt_test_record_status(void)
     struct pt_native_amigus_record_status status;
     for (unsigned i = 0; i < sizeof(registers) / sizeof(*registers); ++i)
         registers[i] = (uint16_t)(0x3200 + i * 2);
+    registers[0] = 0x0035;
     memcpy(before, registers, sizeof(registers));
     card.agus_TypeId = AmiGUS_mini;
     card.agus_FirmwareRev = 0x7ea663e7UL;
@@ -21,6 +22,7 @@ void pt_test_record_status(void)
     reservation.resource = PT_AMIGUS_PCM;
     assert(pt_native_amigus_pcm_record_status(&reservation, &status));
     assert(status.irq_mask == 0x3202 && status.format == 0x3280 && status.control == 0x3282);
+    assert(status.pending_irq == 0x0030);
     assert(status.volume_left == 0x3284 && status.volume_right == 0x3286);
     assert(status.watermark == 0x328a && status.pending_words == 0x3290);
     assert(!memcmp(registers, before, sizeof(registers)));
@@ -33,5 +35,5 @@ void pt_test_record_status(void)
     card.agus_PcmBase = (APTR)registers;
     reservation.access = 0;
     assert(!pt_native_amigus_pcm_record_status(&reservation, &status));
-    puts("PCM RECORD STATUS PASS: seven status words, no register writes; synthetic storage only");
+    puts("PCM RECORD STATUS PASS: eight status words, no register writes; synthetic storage only");
 }

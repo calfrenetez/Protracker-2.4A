@@ -16,6 +16,7 @@ FIXTURES = {
     'routed-activation-timing': ('test_mixed_readers_causal.py', 'PTRoutedActivationTime'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
+    'countdown-window': ('test_countdown_window.py', 'PTCountdownWindow'),
 }
 
 def main():
@@ -51,7 +52,7 @@ def main():
                    'src/native/camd_vectors.s', 'src/core/elapsed_clock.c',
                    'src/platform/camd_routes.c', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control') or args.fixture in routed_sources:
+    if args.fixture in ('amigus-voice-plan', 'mixed-causal', 'mixed-frame-zero', 'camd-control', 'countdown-window') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable

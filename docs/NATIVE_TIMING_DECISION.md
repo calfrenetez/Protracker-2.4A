@@ -216,3 +216,12 @@ ticks. Six ticks leaves room inside the 14- or 15-tick frame for further
 experiments. A finite local bracket around a RAM marker gives no bound on
 late interrupt entry or the full output sequence.
 [Direct counter receipt](test-evidence/cia_direct_clock_amiberry_20261123.json)
+
+The countdown window encoder converts an existing half-open frame only
+after a known coherent count and its matching original clock tick. It
+compares descending counts against that window and maps a proven write
+bracket back to the same absolute ticks. Early, expired, backwards,
+overlapping and unrepresentable cases refuse. The independent host and
+68k fixture covers the original PAL and NTSC frame calculations,
+low-word rollover, and the last representable absolute tick. The encoder
+requires the same live timer with no wrap or restart through the bracket.

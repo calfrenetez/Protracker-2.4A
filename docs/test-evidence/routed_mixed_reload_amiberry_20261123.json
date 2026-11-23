@@ -1,0 +1,118 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a4946ace367afe37174a0aebcd5cee21328efcb6231c0476451a04237263d0ba",
+  "build_receipt_sha256": "7d3eb0864a83ccc367acaf90d9e16885ab39d0d224c39b25699cb94d73f46ae7",
+  "guest_log_sha256": "9a9ed3dabca4b5beaca626f87163ff3bc7cc96b32a249adfd49d80d697e70ade",
+  "validated_build_inputs": 125,
+  "independent_replay_sha256": "0806f2547c485c8e798a673abb87e4a58a05c05d82dbb99a9c99fea977f16c19",
+  "original_observations": {
+    "writes": [
+      {
+        "stage": 3,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 32783,
+        "dma_before": 512,
+        "dma_after": 527,
+        "frame_ticks": [
+          8192,
+          8207
+        ],
+        "observed_ticks": [
+          8197,
+          8204
+        ]
+      },
+      {
+        "stage": 6,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 15,
+        "dma_before": 527,
+        "dma_after": 512,
+        "frame_ticks": [
+          93318,
+          93333
+        ],
+        "observed_ticks": [
+          93318,
+          93325
+        ]
+      }
+    ],
+    "guest_closed": true,
+    "clock_anchor_count": 65511,
+    "alarm": {
+      "chip": 0,
+      "timer": 1,
+      "callbacks": 2,
+      "closed": true
+    },
+    "device_guest_closed": true,
+    "mixed_ram_observations": [
+      {
+        "frame": 0,
+        "window": [
+          8192,
+          8207
+        ],
+        "observed": [
+          8197,
+          8204
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          32768,
+          26557530
+        ],
+        "verdict": "issued_in_frame"
+      },
+      {
+        "frame": 5760,
+        "window": [
+          93318,
+          93333
+        ],
+        "observed": [
+          93318,
+          93325
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          0,
+          25508864
+        ],
+        "verdict": "issued_in_frame"
+      }
+    ],
+    "clock_reload": {
+      "origin_sample_tick": 67125,
+      "original_callbacks": 1
+    },
+    "wait_observations": [
+      {
+        "frame": 0,
+        "before_and_after_wait": [
+          205,
+          8383
+        ],
+        "owned_alarm_signal_only": true
+      },
+      {
+        "frame": 5760,
+        "before_and_after_wait": [
+          68030,
+          93594
+        ],
+        "owned_alarm_signal_only": true
+      }
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Silent native Paula DMA and exact AmiGUS and MIDI RAM values at two unchanged forecast frames on opposite sides of one original countdown reload. No physical card, MIDI output or listening test."
+}

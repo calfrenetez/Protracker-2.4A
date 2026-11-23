@@ -177,3 +177,13 @@ positive detach result before closing the command handle. The schedule checks
 the original command and every action key, then derives the earliest and
 latest issue tick from the actions. A waiting command stays owned even if its
 individual actions have already issued.
+
+The audio activation owner exposes its original event only during the
+task-side callback for the exact prepared packet. That callback can use
+`pt_routed_activation_publish` to hand off the copied audio and MIDI
+commands together. The audio owner now accepts counter reads before the
+grid epoch, allowing the frame-zero command to queue before its unchanged
+activation window. In the routed activation fixture, one software port
+queues four Paula readers, two AmiGUS readers and notes for two distinct
+MIDI destinations, then applies their exact Stop from the held keys and
+notes. The device output and activation counter are modeled in this fixture.

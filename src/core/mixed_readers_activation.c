@@ -39,6 +39,7 @@ struct pt_mixed_readers_activation {
     struct constructor *construction;
     struct pt_mixed_readers_key slot[PT_MIXED_ACTIVATION_SLOTS];unsigned mask;
     struct activation_command command[PT_MIXED_ACTIVATION_COMMANDS],staged;
+    const struct activation_command *publishing;
     struct activation_reader reader[PT_MIXED_ACTIVATION_READERS];
     struct activation_reader staged_reader[PT_MIXED_READERS_ACTIONS];
 };
@@ -105,7 +106,7 @@ static struct activation_reader *find_reader(struct pt_mixed_readers_activation 
 static int clock_read(struct pt_mixed_readers_activation *b,uint64_t *out)
 {
     uint64_t ticks=0;uint32_t frequency=0;int r=b->port.read_clock(b->port.context,&ticks,&frequency);
-    if(r!=1||b->failed||frequency!=b->grid.frequency||ticks<b->grid.epoch||(b->clock_seen&&ticks<b->last_ticks))return 0;
+    if(r!=1||b->failed||frequency!=b->grid.frequency||(b->clock_seen&&ticks<b->last_ticks))return 0;
     b->clock_seen=1;b->last_ticks=ticks;*out=ticks;return 1;
 }
 static int backend_clock(void *context,uint64_t *ticks,uint32_t *frequency)
@@ -212,6 +213,17 @@ static int candidate_guard(const struct pt_mixed_readers_activation *b,const str
     }
     return 1;
 }
+
+const struct pt_mixed_readers_event *pt_mixed_activation_publication_event(
+    const struct pt_mixed_readers_activation *b, const struct pt_mixed_activation_packet *packet)
+{
+    const struct activation_command *c;
+    if (!b || !b->busy || b->failed || !(c = b->publishing) || packet != &c->packet ||
+        memcmp(packet, &b->staged.packet, sizeof(*packet)))
+        return NULL;
+    return c->identity.event;
+}
+
 static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
 {
     struct pt_mixed_readers_activation *b=context;struct activation_command *c;
@@ -232,7 +244,10 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
     if(!clock_read(b,&now)||now>=c->packet.first){c->unknown=1;c->command=PT_MIXED_COMMAND_UNKNOWN;b->failed=1;b->busy=0;return -1;}
     c->port_refs=1;for(i=0;i<n;++i)b->reader[assigned[i]].port_refs=1;
     /* Staging is already transferred and cleared; busy excludes reuse. */
-    memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));result=b->port.publish(b->port.context,b,&c->packet);
+    memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));
+    b->publishing=c;
+    result=b->port.publish(b->port.context,b,&c->packet);
+    b->publishing=NULL;
     if(memcmp(&b->staged.packet,&c->packet,sizeof(c->packet))){memcpy(&c->packet,&b->staged.packet,sizeof(c->packet));fault(b);}
     memset(&b->staged.packet,0,sizeof(b->staged.packet));c->publication_outcome=result;
     if(result==0&&!b->failed){for(i=0;i<n;++i)memset(b->reader+assigned[i],0,sizeof(b->reader[i]));memset(c,0,sizeof(*c));b->busy=0;return 0;}

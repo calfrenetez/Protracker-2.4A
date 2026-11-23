@@ -50,6 +50,7 @@ struct pt_mixed_activation_actual {
  * require caller-owned whole-entry task/activation exclusion; no concurrency,
  * input edits or callback reentry. Flags are declarations, not qualification.
  * read_clock: bounded honest actual clock/frequency, task AND fire pre/post.
+ * The sample grid may start in the future for frame-zero publication.
  * publish: atomically COPY the entire paired packet and callback owner/ticket
  * identity, before original first; 1 accepted,0 no references/effects,-1 unknown.
  * A clean0 is absence only with unchanged packet/identity and no NEW callback
@@ -148,6 +149,12 @@ enum pt_mixed_readers_result pt_mixed_activation_stop(struct pt_mixed_readers_ac
  * It prevents later fire, but proves no command/reader/source quiet and never
  * changes an actual callback reply or transfers ownership. */
 void pt_mixed_activation_fail_closed(struct pt_mixed_readers_activation *);
+/* Only inside the serialized task-side publish callback for this exact
+ * original packet and owner. The event is read-only and expires on return
+ * from the callback. Use it for joint scheduling and copy only the prepared
+ * activation values needed by the queued port. Fire must never call this. */
+const struct pt_mixed_readers_event *pt_mixed_activation_publication_event(
+    const struct pt_mixed_readers_activation *, const struct pt_mixed_activation_packet *);
 /* Independently scheduled exact-ticket invocation, never an automatic timer.
  * Fire traverses copied values only; early preserves original invocation,
  * late/uncertainty/reentry latch failure without erasing possible effects. */

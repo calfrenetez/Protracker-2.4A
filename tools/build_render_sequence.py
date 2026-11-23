@@ -11,6 +11,7 @@ FIXTURES = {
     'mixed-frame-zero': ('test_mixed_readers_causal.py', 'PTMixedFrameZero'),
     'routed-combined': ('test_mixed_readers_causal.py', 'PTRoutedCombined'),
     'routed-tracker': ('test_mixed_readers_causal.py', 'PTRoutedTracker'),
+    'routed-activation': ('test_mixed_readers_causal.py', 'PTRoutedActivation'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
 }
 
@@ -26,18 +27,23 @@ def main():
         sources[0] = 'tests/native_exec_render_sequence_test.c'
     if args.fixture == 'mixed-frame-zero':
         sources[0] = 'tests/native_mixed_frame_zero_test.c'
-    if args.fixture in ('routed-combined', 'routed-tracker'):
-        source = 'routed_tracker_playback_test.c' if args.fixture == 'routed-tracker' else 'routed_midi_combined_test.c'
+    routed_sources = {
+        'routed-combined': ('routed_midi_combined_test.c', None),
+        'routed-tracker': ('routed_tracker_playback_test.c', 'TRACKER_UNITS'),
+        'routed-activation': ('routed_activation_test.c', 'ACTIVATION_UNITS'),
+    }
+    if args.fixture in routed_sources:
+        source, extra = routed_sources[args.fixture]
         sources = [f'tests/{source}', *sources[2:], 'src/core/routed_midi.c', 'src/core/midi.c']
-    if args.fixture == 'routed-tracker':
-        tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
-        sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
-                            and any(isinstance(target, ast.Name) and target.id == 'TRACKER_UNITS' for target in node.targets)))
+        if extra:
+            tree = ast.parse((ROOT / 'tests/test_routed_midi_combined.py').read_text())
+            sources.extend(next(ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign)
+                                and any(isinstance(target, ast.Name) and target.id == extra for target in node.targets)))
     if args.fixture == 'camd-control':
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
                    'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
-    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined', 'routed-tracker', 'camd-control'):
+    if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'camd-control') or args.fixture in routed_sources:
         flags.extend(['-I.', '-UNDEBUG'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable

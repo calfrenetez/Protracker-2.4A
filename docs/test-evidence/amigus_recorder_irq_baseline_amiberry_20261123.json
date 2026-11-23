@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-23",
+  "target": "amiberry-030",
+  "scope": "Exact read-only recorder IRQ diagnostic and synthetic register fixtures",
+  "diagnostic_sha256": "a69f3723d7af57994f6ade8f9d554ca24b20c50495cd593522fcf787d21dfc93",
+  "synthetic_sha256": "b424ef5c4fe12f9ced8fee228c9db9f10661340d810adda5436d513296f945ec",
+  "diagnostic_log": [
+    "RECORD-PROBE scope=Mini-7ea663e7 writes=NO fifo_data_reads=NO audio=NOT_TESTED",
+    "RECORD result=SKIP reason=library-unavailable rc=5"
+  ],
+  "synthetic_log": [
+    "PCM RECORD STATUS PASS: eight status words, no register writes; synthetic storage only",
+    "PCM READ PASS: five status reads, sixteen refusal guards, no memory writes",
+    "PCM QUIESCE PASS: four exact disable/reset stores, one-shot begin, read-only pending/lost-owner polls; synthetic memory only",
+    "PCM FIFO STORE PASS: native MSB-first long store and six no-write refusals; synthetic memory only",
+    "PCM CAPACITY GUARD PASS: 2048-store independent ceiling, FULL/count/owner refusal, fault latch and read-only full confirmation; synthetic memory only"
+  ],
+  "guest_results": {
+    "cpu_68030": true,
+    "exact_guest_copy": true,
+    "exact_log": true,
+    "expected_missing_library": true,
+    "passed": true,
+    "physical_devices_exercised": false,
+    "rc": "5",
+    "startup_complete": true,
+    "startup_entered": true,
+    "synthetic_guest_exact": true,
+    "synthetic_oracle": true,
+    "target": "amiberry-030"
+  },
+  "restoration": {
+    "canonical_profile": true,
+    "fence": 25956,
+    "files_verified": 39,
+    "phase": "EMPTY",
+    "service_disconnected": true,
+    "target_absent": true
+  },
+  "real_hardware_capture": false
+}

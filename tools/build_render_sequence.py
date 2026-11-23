@@ -136,7 +136,7 @@ def main():
         flags.extend(['-DPT_PAULA_MIDI_WIRE', '-Wa,--defsym,pt_exp_mixed_wire=1'])
         sources.append('src/core/routed_midi_wire.c')
     if args.fixture in ('routed-mixed-wire-clock', 'routed-mixed-wire-reload'):
-        flags.append('-DPT_PAULA_MIDI_WIRE_CLOCK')
+        flags.extend(['-DPT_PAULA_MIDI_WIRE_CLOCK', '-Wa,--defsym,pt_exp_mixed_wire_clock_fast=1'])
     if args.fixture == 'routed-mixed-wire-reload':
         flags.append('-Wa,--defsym,pt_exp_mixed_wire_reload=1')
     if args.fixture == 'cia-tail':

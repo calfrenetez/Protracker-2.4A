@@ -17,6 +17,7 @@ else:
     from replay_routed_paula_window import ROW, stable
 
 ISSUE_MARGIN_TICKS = 8
+READBACK_ISSUE_MARGIN_TICKS = 9
 READBACK_SLACK_TICKS = 5000
 BYTE_RECEIPT = re.compile(
     r"Mixed UART ([01]) tx=([\da-f]{3})/([\da-f]{3})/([\da-f]{3}) rx=([\da-f]{6}) received=3 idle=1"
@@ -51,6 +52,8 @@ def replay(text, *, require_byte_clock=False, reload=False):
     lines = text.splitlines()
     rows = [BYTE_RECEIPT.fullmatch(line) for line in lines if re.match(r"Mixed UART \d", line)]
     cleanup = [CLEANUP.fullmatch(line) for line in lines if line.startswith("Mixed UART cleanup")]
+    with_clock = require_byte_clock or any(line.startswith("Mixed UART readback ") for line in lines)
+    margin = READBACK_ISSUE_MARGIN_TICKS if with_clock else ISSUE_MARGIN_TICKS
     windows = [ROW.fullmatch(line) for line in lines if line.startswith("Paula window ")]
     period = (int(windows[0]["hz"]) * 5 + 15625) // 31250 - 1
     if len(cleanup) != 1 or not cleanup[0] or int(cleanup[0][3]) != period or len(rows) != 2 or not all(rows):
@@ -61,10 +64,10 @@ def replay(text, *, require_byte_clock=False, reload=False):
         if int(row[1]) != i or words != [0x100 | byte for byte in message] or bytes.fromhex(row[5]) != message:
             raise ValueError("UART receipt differs from the frozen tracker route")
         timing = result["mixed_wire_observations"][i]
-        if timing["window"][1] - timing["observed"][0] <= ISSUE_MARGIN_TICKS:
+        if timing["window"][1] - timing["observed"][0] <= margin:
             raise ValueError("Mixed IRQ began inside the protected end margin")
         timing["serial_loopback"] = {"first_word": words[0], "receive": row[5]}
-    if require_byte_clock or any(line.startswith("Mixed UART readback ") for line in lines):
+    if with_clock:
         replay_readback_clock(lines, windows, result)
     result["serial_request_restored"] = True
     return result

@@ -5,11 +5,19 @@
         .macro local_activate name, paula=0, mixed=0, tail=0, serial=0, wire=0
         .globl \name
 \name:
+        .set .Lwire_clock_fast\@,0
+        .ifdef pt_exp_mixed_wire_clock_fast
+        .set .Lwire_clock_fast\@,\wire
+        .endif
         .if \mixed
         .if \wire
         movem.l %d2-%d7/%a2-%a6,-(%sp)
         .set local_args\@,48
+        .if .Lwire_clock_fast\@
+        lea 0xdff030,%a6
+        .else
         lea 0xdff000,%a6
+        .endif
         .else
         movem.l %d2-%d7/%a2-%a5,-(%sp)
         .set local_args\@,44
@@ -22,8 +30,18 @@
         move.l local_args\@+4(%sp),%a1
         move.l local_args\@+8(%sp),%a2
         .if \mixed
+        .if .Lwire_clock_fast\@
+        /* Pack the two modeled card words into one RAM write. Keep the
+         * two real custom-register addresses ready before the aperture. */
+        move.l 16(%a2),%d0
+        swap %d0
+        move.w 22(%a2),%d0
+        movea.l %d0,%a3
+        lea 0xdff096,%a4
+        .else
         movea.l 16(%a2),%a3
         movea.l 20(%a2),%a4
+        .endif
         .if \wire
         movea.w 36(%a2),%a5
         .else
@@ -64,18 +82,25 @@ valid_word\@:
         move.w 0(%a2),%d0
         move.w 2(%a2),%d1
         .if \wire
-        /* Reserve the eight ticks observed for the previous issue and
-         * bracket. Refuse rather than start inside that end margin.
-         * Match the high byte once and use the two low-byte limits in
-         * the IRQ loop. A page-straddling window needs a different path. */
+        /* Reserve the observed issue-and-bracket span. The fast path
+         * compares low bytes after matching the high byte. A window
+         * that straddles a low-byte boundary needs the full counter. */
+        .if .Lwire_clock_fast\@
+        addi.w #9,%d1
+        .else
         addq.w #8,%d1
+        .endif
         bcs.w serial_refused\@
         cmp.w %d1,%d0
         bls.w serial_refused\@
         move.w %d0,%d5
         eor.w %d1,%d5
         andi.w #0xff00,%d5
+        .if .Lwire_clock_fast\@
+        bne.w wire_full_setup\@
+        .else
         bne.w serial_refused\@
+        .endif
         move.w %d0,%d5
         lsr.w #8,%d5
         .endif
@@ -127,12 +152,19 @@ local_poll\@:
         cmp.w %d1,%d5
         bls.b local_expired\@
         .endif
+local_issue\@:
         .if \paula
         .if \wire
+        .if .Lwire_clock_fast\@
+        move.w %d6,(%a4)
+        move.l %a3,28(%a2)
+        move.w %a5,(%a6)
+        .else
         move.w %d6,0x96(%a6)
         /* A3 then A4 to the two contiguous modeled card fields. */
         movem.w %a3-%a4,28(%a2)
         move.w %a5,0x30(%a6)
+        .endif
         .else
         move.w %d6,0xdff096
         .if \mixed
@@ -202,6 +234,32 @@ local_return\@:
         movem.l (%sp)+,%d2-%d7/%a2
         .endif
         rts
+        .if .Lwire_clock_fast\@
+        /* Only a window crossing the low-byte boundary takes this path.
+         * Keep both original bounds and the same early-stop margin. */
+wire_full_setup\@:
+        moveq #63,%d7
+wire_full_poll\@:
+        moveq #0,%d2
+        move.b (%a0),%d2
+        move.b (%a1),%d3
+        move.b (%a0),%d4
+        cmp.b %d2,%d4
+        bne.b wire_full_retry\@
+        move.w %d2,%d5
+        lsl.w #8,%d5
+        move.b %d3,%d5
+        cmp.w %d0,%d5
+        bhi.b wire_full_retry\@
+        cmp.w %d1,%d5
+        bls.w local_expired\@
+        bra.w local_issue\@
+wire_full_retry\@:
+        dbra %d7,wire_full_poll\@
+        moveq #0,%d7
+        moveq #0,%d0
+        bra.w local_record\@
+        .endif
         .endm
 
         local_activate _pt_cia_local_activate

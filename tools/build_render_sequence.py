@@ -15,6 +15,7 @@ FIXTURES = {
     'routed-activation': ('test_mixed_readers_causal.py', 'PTRoutedActivation'),
     'routed-activation-timing': ('test_mixed_readers_causal.py', 'PTRoutedActivationTime'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
+    'cia-direct-clock': (None, 'PTCIADirectClock'),
 }
 
 def main():
@@ -23,8 +24,11 @@ def main():
     parser.add_argument('--fixture', choices=FIXTURES, default='render-sequence')
     args = parser.parse_args()
     test, executable = FIXTURES[args.fixture]
-    tree=ast.parse((ROOT/'tests'/test).read_text())
-    sources=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SOURCES' for t in n.targets))
+    if args.fixture == 'cia-direct-clock':
+        sources = ['tests/native_cia_direct_clock_test.c', 'tests/native_cia_direct_clock.s']
+    else:
+        tree=ast.parse((ROOT/'tests'/test).read_text())
+        sources=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='SOURCES' for t in n.targets))
     if args.fixture == 'render-sequence':
         sources[0] = 'tests/native_exec_render_sequence_test.c'
     if args.fixture == 'mixed-frame-zero':

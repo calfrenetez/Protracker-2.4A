@@ -49,7 +49,7 @@ static int pt_diagnostic_cia_acquire(struct pt_diagnostic_cia *t,void (*code)(vo
      * inherited pending bit invoking it before the acquired timer is quiet. */
     Disable();
     for(chip=0;chip<2;++chip) {
-        cia_resource=(struct Library *)OpenResource(chip?"ciaa.resource":"ciab.resource");
+        cia_resource=(struct Library *)OpenResource((const void *)(chip?"ciaa.resource":"ciab.resource"));
         if(!cia_resource)continue;
         hardware=PT_CIA_HARDWARE(chip);
         for(bit=0;bit<2;++bit) {

@@ -189,3 +189,22 @@ A separate task-only adjacent ReadEClock diagnostic is now implemented and cross
 
 
 The distinct task-only clock-pair candidate919196b8 completed once in exact030 Amiberry:16valid raw pairs, RC0/OBSERVATION_COMPLETE, sampling deltas19..21ticks at709379Hz. Those finite intervals exceed prior14/15tick frame windows in this profile; they neither isolate full call duration nor prove a universal minimum or actual output time. Exact custody/closure/restoration/publicrelease/ownedservicestop/separatefinalidle passed (recordedEMPTY1675/83, not futureavailability). No output/provider/scheduling policy change. CurrentSafari check stillfoundMaclocked; no physical operation acquired. See [clock observations](CLOCK_READ_OBSERVATIONS.md).
+
+## Direct interval-timer observation
+
+The direct-clock fixture acquires a stopped CIA interval timer through the
+existing resource owner. It leaves the timer interrupt masked and runs a
+single E-clock countdown. An assembly routine samples high, low and high
+around an ordinary RAM marker write. It saves both complete read groups.
+A changed high byte makes that group unusable. A separate outer ReadEClock
+observation bounds the entire run within the one-shot horizon and checks
+the progression of the accepted samples. The fixture releases its own
+timer and prints every raw read after sampling.
+[Commodore 8520 interval timer specification](https://studylib.net/doc/27757407/cia--318029-01-02-03--specification---commodore)
+
+Build with `tools/build_render_sequence.py --cc <amiga-compiler> --fixture
+cia-direct-clock` and replay the report with
+`tools/replay_cia_direct_clock.py`. The report compares observed brackets
+against the unchanged 48 kHz frame widths. The countdown's origin is
+local to the observation. Exact epoch binding, interrupt entry, scheduled
+output and device or listening acceptance require separate evidence.

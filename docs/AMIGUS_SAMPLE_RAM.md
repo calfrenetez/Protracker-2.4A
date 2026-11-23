@@ -633,4 +633,7 @@ storage, refusal after lease loss and address overflow. Both the probe and
 the synthetic fixture cross-build with the pinned SDK. For a captured run,
 `tools/replay_amigus_selected_control.py LOG --returncode RC` verifies
 the exact mode, offset, return code and original exclusive lease release.
-Emulator and physical execution of the selected-control mode remain pending.
+In r71, the exact Amiberry 68030 build passed the synthetic reader and
+returned the expected missing-library refusal in the real diagnostic mode.
+The canonical profile and all 39 saved files were independently restored.
+The physical selected-control readback remains pending.

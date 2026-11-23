@@ -360,7 +360,6 @@ original window for verification. In Amiberry, one RAM marker had
 a six-tick bracket [65502, 65508] before reload at tick 65513.
 The original window was [65499, 65514) and the usable aperture was
 [65499, 65511). The diagnostic refused a separate plan that lacked
-enough ticks for its six-tick observation criterion. The result
-applies to that RAM-only case. It does not establish a write-duration
-bound or qualify device activation across a reload.
+enough ticks for its six-tick observation criterion. Write-duration
+bounds and device activation across a reload remain to be measured.
 [Crossing-frame receipt](test-evidence/cia_tail_frame_amiberry_20261123.json)

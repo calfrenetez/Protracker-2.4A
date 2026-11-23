@@ -1,0 +1,35 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a0a31bfefd3cc6cb872bc7540e3c474ef3ed55988fd6d0e70135479b88698032",
+  "build_receipt_sha256": "9f37c3e10091cb42b3e82cccdb9bafdd5204100f20147bc112cbc220e2fbc201",
+  "guest_log_sha256": "718acc66bda28ac630b3ba5de201e41301faa1688ba8a7b69d066989166470e1",
+  "validated_build_inputs": 13,
+  "independent_replay_sha256": "642d7c40ec7c9bc273c872ab2f08f2041efa531f054afc18760bc0ab5d32b66f",
+  "observations": {
+    "counter_hz": 709379,
+    "original_frame": [
+      65499,
+      65514
+    ],
+    "reload_tick": 65513,
+    "later_observed_tick": 66265,
+    "aperture": [
+      65499,
+      65511
+    ],
+    "observed_ticks": [
+      65502,
+      65508
+    ],
+    "insufficient_aperture_refused": [
+      65507,
+      65522
+    ],
+    "closed": true
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Original synthetic sample frame spans one continuous CIA reload. A same-generation aperture bracketed one RAM marker. An undersized aperture did not arm. No audio or MIDI output."
+}

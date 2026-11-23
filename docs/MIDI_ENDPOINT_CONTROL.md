@@ -31,13 +31,23 @@ ASan, UBSan and warnings treated as errors. These tests cover portable ownership
 and control behavior. Separate 68000 object compilation checks the selected source for that
 compiler target; it does not link or run a CAMD provider.
 
-Native CAMD activation, installed-library compatibility, discovery and delivery,
-the MIDI setup page, frontend/transport wiring and exact musical scheduling still
-need integration and runtime qualification. No Amiberry CAMD runtime, real MIDI
-device, hardware quiet, output timing or human listening acceptance follows from
-these HOST or object-only checks. Opening CAMD may activate a driver and must be
-an explicit operation, not a passive audit. This work changes neither the chosen
-exact musical schedule nor the exclusive Paula/AmiGUS/MIDI route model.
+The classic 68k adapter binds that owner to CAMD's public library vectors. It
+copies cluster names and checks receiver presence under the original CAMD lock.
+Sender creation checks the cluster before and after linking. The adapter uses
+the classic public cluster prefix so receive drivers are counted alongside
+application links. [Classic vector table](https://github.com/cnvogelg/amiditools/blob/b45aa4d91815e56f432dbeb5f2ca0e59c63ec379/amiga/fd/camd_lib.fd)
+
+The exact `PTCamdControl` fixture ran on Amiberry 68030 with the library absent
+first, then with CAMD 40.5 installed in the private disk. The driver's directory
+was empty. The fixture discovered a local receiver, filtered out a sender-only
+cluster, and verified a note-on and note-off through the local receiver queue.
+The original links, node and library reference closed. [Upstream CAMD 40.5](https://github.com/kmatheussen/camd/tree/55a2f589bba0277bb7e779547a0e6d9a15aff2c0),
+[native test receipt](test-evidence/native_camd_control_amiberry_20261123.json)
+
+Opening CAMD can activate drivers. Editor setup and exact scheduled delivery
+remain separate integration work. The tested public send call can block on a
+full hardware buffer. The combined schedule still needs a provider that can
+prequeue work and prove exactly when it issued. [CAMD 40.5 send implementation](https://github.com/kmatheussen/camd/blob/55a2f589bba0277bb7e779547a0e6d9a15aff2c0/src/putmidi.c)
 
 See [MIDI_RECORDING_CORE.md](MIDI_RECORDING_CORE.md) for note co-ownership,
 recording and the complete-message sink contract.

@@ -662,3 +662,13 @@ finished reading sample RAM. A cleared Start bit alone leaves that question
 open. A one-voice playback test still needs an independently owned scratch
 region and an independent completion observation before sample memory can
 be returned for reuse. [AmiGUS Mini SHIVA register map](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx)
+
+The AmiGUS Mini guide documents Wave and mixer recording as separate audio
+sources. The SDK recorder exposes both and uses the PCM reservation. A
+bounded capture of Wave output can check that an isolated known voice
+becomes audible after Start and falls silent after Stop. Capture would
+need its own positively owned PCM path and verified restoration of the
+recording settings. Its evidence concerns audible output. Sample-RAM
+reclamation still requires the separate completion observation above.
+[AmiGUS Mini guide](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Documentation/AmiGUS_mini/AmiGUS%20mini.guide#L729-L734)
+[SDK recorder](https://github.com/necronomfive/AmiGUS-pub/blob/d8c9a0429f41cd5f3dbadae34ef438e45c9c3718/Software/Tools/Record/Record.c#L276-L306)

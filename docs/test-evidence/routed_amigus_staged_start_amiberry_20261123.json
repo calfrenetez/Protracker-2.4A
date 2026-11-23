@@ -1,0 +1,21 @@
+{
+  "source": "daf6caf86c9dcd085266b773820d2561b7451dcf",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "146abc9288c1492370357d4069b7524442d48837f7aadf59701ebfb5690fe492",
+  "build_receipt_sha256": "de81433c1efaf6ef70a3cdb61a2ed8ebdf326dbe42682147cb0ca4990f62dc65",
+  "guest_log_sha256": "4abbc324a1b320684a1c777d22db96c4974545deabf1cd66d5d667e856ce62e4",
+  "validated_build_inputs": 86,
+  "guest_exit_code": 0,
+  "focused_host_methods": 11,
+  "checks": [
+    "looped and one-shot AmiGUS preload contains no voice-control write",
+    "two writes at activation explicitly reselect and enable the original voice",
+    "refuse uncaptured, unowned, active, overlapping and malformed preparation",
+    "same mixed boundary still carries Paula preloads, six owned audio readers, two MIDI notes and exact Stop"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Software register preparation on native 68k in Amiberry. Register access, staging cancellation, exact-time device execution and physical listening remain unqualified."
+}

@@ -1,6 +1,7 @@
 #ifndef PT_ROUTED_ACTIVATION_H
 #define PT_ROUTED_ACTIVATION_H
 
+#include "amigus_voice_staged.h"
 #include "mixed_readers_activation.h"
 #include "routed_midi.h"
 
@@ -15,7 +16,7 @@ struct pt_routed_audio_program {
 
 struct pt_routed_activation_program {
     struct pt_routed_midi_packet midi;
-    unsigned audio_count, paula_active;
+    unsigned audio_count, paula_active, amigus_active;
     struct pt_routed_audio_program audio[PT_MIXED_READERS_ACTIONS];
 };
 
@@ -64,5 +65,12 @@ struct pt_paula_dma_program {
  * No writes or allocation. The destination is unchanged on refusal. */
 int pt_routed_paula_dma_prepare(const struct pt_routed_activation_program *, unsigned owned_slots,
     struct pt_paula_dma_program *);
+
+/* Resolve one exact inactive trigger from the prepared audio program. The
+ * caller supplies the voices held under its original card reservation. The
+ * active snapshot blocks prestaging an existing reader. Real voice quiet,
+ * unchanged registers and retained program ownership require separate proof. */
+int pt_routed_amigus_start_prepare(const struct pt_routed_activation_program *, unsigned slot,
+    unsigned owned_voices, struct pt_amigus_voice_staged_start *);
 
 #endif

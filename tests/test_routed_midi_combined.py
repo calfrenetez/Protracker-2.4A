@@ -12,10 +12,13 @@ TRACKER_PASS = 'Routed sampler boundary: exact Stop, retrigger and stale prepara
 ACTIVATION_PASS = (
     'Routed activation fixture entered\nPaula DMA preload and exact frame words verified\n'
     'Routed activation frame zero queued\n'
+    'AmiGUS inactive voice preload and reselect verified\n'
     'Routed activation controls queued\nRouted activation owned Stop queued\n'
     'Routed activation: shared frame zero and exact Stop for six audio readers and two MIDI destinations; SOFTWARE_ONLY\n'
 )
-ACTIVATION_UNITS = ['src/core/mixed_readers_activation.c', 'src/core/routed_activation.c']
+ACTIVATION_UNITS = [
+    'src/core/mixed_readers_activation.c', 'src/core/routed_activation.c', 'src/core/amigus_voice_staged.c',
+]
 TRACKER_UNITS = [
     'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c',
     'src/core/flow.c', 'src/core/voice.c', 'src/core/paula_render_voice.c',

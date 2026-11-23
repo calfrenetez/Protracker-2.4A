@@ -53,6 +53,7 @@ int pt_routed_activation_prepare(const struct pt_routed_midi_schedule *schedule,
         return 0;
     program.audio_count = audio->count;
     program.paula_active = audio->expected_mask & ((1U << PT_ROUTED_PAULA_SLOTS) - 1U);
+    program.amigus_active = audio->expected_mask >> PT_ROUTED_PAULA_SLOTS;
     for (i = 0; i < program.audio_count; ++i)
         if (!prepare_audio(audio->action + i, program.audio + i))
             return 0;
@@ -141,4 +142,26 @@ int pt_routed_paula_dma_prepare(const struct pt_routed_activation_program *progr
         paula_write(pending.frame, &pending.frame_count, PAULA_DMACON, PAULA_DMA_SET | (uint16_t)pending.preload_slots);
     *out = pending;
     return 1;
+}
+
+int pt_routed_amigus_start_prepare(const struct pt_routed_activation_program *program, unsigned slot,
+    unsigned owned, struct pt_amigus_voice_staged_start *out)
+{
+    const unsigned mask = (1U << PT_CHANNEL_LIMIT) - 1U;
+    const struct pt_amigus_voice_register_program *start = NULL;
+
+    if (slot >= PT_CHANNEL_LIMIT || (owned & ~mask) || !(owned & (1U << slot)) ||
+        !disjoint(program, sizeof(*program), out, sizeof(*out)) ||
+        (program->amigus_active & (1U << slot)) || program->audio_count > PT_MIXED_READERS_ACTIONS)
+        return 0;
+
+    for (unsigned i = 0; i < program->audio_count; ++i) {
+        const struct pt_routed_audio_program *action = program->audio + i;
+        if (action->route != PT_MIXED_READERS_AMIGUS || action->slot != slot)
+            continue;
+        if (start || action->kind != PT_MIXED_READERS_TRIGGER || action->output.amigus.write[0].value != slot)
+            return 0;
+        start = &action->output.amigus;
+    }
+    return pt_amigus_voice_split_start_registers(start, out);
 }

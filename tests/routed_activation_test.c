@@ -109,6 +109,40 @@ static void verify_paula_dma_preparation(void)
     }
 }
 
+static void verify_amigus_staged_start(void)
+{
+    struct pt_amigus_voice_plan voice = {0x10002, 0x10004, 0x20000, 0x12345678, 0x800f, 4321, 1234};
+    struct pt_amigus_voice_register_program source;
+    struct pt_amigus_voice_staged_start output;
+    unsigned char prior[sizeof(output)];
+
+    assert(pt_amigus_voice_trigger_registers(31, &voice, &source));
+    assert(pt_amigus_voice_split_start_registers(&source, &output));
+    assert(output.preload.count == 11 && output.preload.write[0].offset == 0x1e && output.preload.write[0].value == 31);
+    for (unsigned i = 1; i < output.preload.count; ++i) {
+        assert(output.preload.write[i].offset == source.write[i + 1].offset);
+        assert(output.preload.write[i].value == source.write[i + 1].value);
+    }
+    assert(output.frame[0].offset == 0x1e && output.frame[0].value == 31);
+    assert(output.frame[1].offset == 0x20 && output.frame[1].value == 0x800f);
+    voice.control = 0x8000;
+    assert(pt_amigus_voice_trigger_registers(0, &voice, &source));
+    assert(pt_amigus_voice_split_start_registers(&source, &output));
+    assert(output.preload.count == 9 && output.preload.write[1].offset == 0x22);
+    assert(output.frame[0].value == 0 && output.frame[1].value == 0x8000);
+
+    memcpy(prior, &output, sizeof(prior));
+    assert(!pt_amigus_voice_split_start_registers(&source, (struct pt_amigus_voice_staged_start *)(void *)&source));
+    source.write[3].offset = 0x20;
+    assert(!pt_amigus_voice_split_start_registers(&source, &output));
+    source.write[3].offset = 0x24;
+    source.write[5].value = 3;
+    assert(!pt_amigus_voice_split_start_registers(&source, &output));
+    assert(pt_amigus_voice_stop_registers(0, &source));
+    assert(!pt_amigus_voice_split_start_registers(&source, &output));
+    assert(!memcmp(prior, &output, sizeof(prior)));
+}
+
 static int routed_clock(void *context, uint64_t *ticks, uint32_t *frequency)
 {
     struct routed_port_model *p = context;
@@ -132,6 +166,7 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
     assert(queued.midi.key.frame == packet->frame && queued.audio_count == packet->count);
     if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
         assert(queued.paula_active == (packet->frame == 0 ? 0U : 15U));
+        assert(queued.amigus_active == (packet->frame == 0 ? 0U : 3U));
         if (packet->frame != 0) {
             struct pt_paula_dma_program paula;
             assert(pt_routed_paula_dma_prepare(&queued, 15, &paula) && !paula.preload_count);
@@ -162,6 +197,21 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
             assert((uint32_t)registers->write[end].value * 65536 + registers->write[end + 1].value ==
                    voice->end_exclusive - 2);
             assert(registers->write[registers->count - 1].value == voice->control);
+            if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
+                struct pt_amigus_voice_staged_start staged;
+                const unsigned owned = 1U << action->slot;
+                assert(pt_routed_amigus_start_prepare(&queued, action->slot, owned, &staged));
+                assert(staged.preload.count == registers->count - 2);
+                assert(staged.preload.write[0].value == action->slot);
+                assert(staged.frame[0].offset == 0x1e && staged.frame[0].value == action->slot);
+                assert(staged.frame[1].offset == 0x20 && staged.frame[1].value == voice->control);
+                const unsigned captured = staged.preload.count;
+                assert(!pt_routed_amigus_start_prepare(&queued, action->slot, 0, &staged));
+                queued.amigus_active |= owned;
+                assert(!pt_routed_amigus_start_prepare(&queued, action->slot, owned, &staged));
+                queued.amigus_active &= ~owned;
+                assert(staged.preload.count == captured);
+            }
         } else if (action->kind == PT_MIXED_READERS_CONTROL) {
             assert(registers->count == 5 && registers->write[1].offset == 0x2e && registers->write[2].offset == 0x30);
             assert(registers->write[3].offset == 0x32 && registers->write[4].offset == 0x34);
@@ -313,6 +363,7 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     PT_ROUTED_ACTIVATION_REPORT("Routed activation fixture entered");
     if (PT_ROUTED_ACTIVATION_TEST_CONTROL) {
         verify_paula_dma_preparation();
+        verify_amigus_staged_start();
         PT_ROUTED_ACTIVATION_REPORT("Paula DMA preload and exact frame words verified");
     }
     struct activation_case *c = a_make(8, 8);
@@ -354,6 +405,8 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     assert(PT_ROUTED_ACTIVATION_PUBLISH(c->owner, first, 0) == PT_MIXED_READERS_OK);
     assert(model.publishes == 1 && !c->ram.effects && !model.issued);
     PT_ROUTED_ACTIVATION_REPORT("Routed activation frame zero queued");
+    if (PT_ROUTED_ACTIVATION_TEST_CONTROL)
+        PT_ROUTED_ACTIVATION_REPORT("AmiGUS inactive voice preload and reselect verified");
     settle_routed(c, &model, first, 0);
     assert(c->ram.effects == 6 && midi->accepted[14].active && midi->accepted[15].active);
     if (PT_ROUTED_ACTIVATION_TEST_CONTROL)

@@ -229,6 +229,14 @@ native adapter still needs genuine Chip memory and channel ownership, DMA
 readiness, safe register staging and cancellation, and measured timing.
 [Commodore Amiga Hardware Reference Manual, audio and DMA control](https://www.ikod.se/wp-content/uploads/2020/08/Amiga_Hardware_Reference_Manual_3rd_Edition.pdf)
 
+For an inactive owned AmiGUS voice, the prepared trigger similarly puts
+geometry, rate and level writes in the preload. The frame then needs two
+writes per started voice, one to reselect its bank and one to enable it.
+Reselection lets other voices be staged in between. An existing active
+reader keeps the full trigger path and is ineligible for this preload.
+The native adapter must establish real voice quiet and account for staged
+register writes on cancellation before releasing sample leases.
+
 The ordinary-RAM activation diagnostic also measured 24 runs on the native
 709,379 Hz E-clock in Amiberry. At 48 kHz, one sample frame spans 14 or 15
 ticks. Every measured bracket crossed its start frame, including the

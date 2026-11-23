@@ -1,0 +1,39 @@
+{
+  "source": "0bcdc01c875d3b5bdd4baf5d02f830cd6994f3ab",
+  "target": "amiberry-030",
+  "candidates": {
+    "Voice": {
+      "candidate_and_guest_readback_sha256": "8e0813830882814ab11f8cb3fb9d2aed03d47fc0d1554c16015e44beb3debce6",
+      "build_receipt_sha256": "adb9762123ae4f9b68f095ff30f4a20fae071c60d1e7e94d4612c6cc63ba8188",
+      "guest_log_sha256": "1180a507e3a7dd401e4a0259ddc6489bdcd6fe3ff35044ba9899541ebf8989b6",
+      "validated_build_inputs": 8,
+      "guest_exit_code": 0
+    },
+    "Activation": {
+      "candidate_and_guest_readback_sha256": "4ddf6bf73634e11563a2f68a3b0de05fe1b95a167293d2aa52ed906486e08ffe",
+      "build_receipt_sha256": "375c1d3e203fe954a20b034a4eb23c798ad8e66a8ca16a06ba7e543f271a9eaf",
+      "guest_log_sha256": "827c6905c2001bfeaf39b07ebe5983c3022772ee7957893f7881757f74481d11",
+      "validated_build_inputs": 83,
+      "guest_exit_code": 0
+    }
+  },
+  "reference_observations": {
+    "pt4_4_1_2_1_amigus41_blob_sha": "fa9004a291c5b443f9f03abf0b272715750020bc",
+    "pinned_shiva_map_sha256": "a30e0cdf966b293c0d5411604a62442a3db98ca4973d2b6bf12961cdc988dd51",
+    "pinned_hagen_map_sha256": "b3eba3e122ab1a5349a09f26c3f10e9de87016825f0f269bdd83d82478abef1c"
+  },
+  "focused_host_methods": 12,
+  "additional_wavetable_and_ram_host_methods": 2,
+  "checks": [
+    "last-word encoding for one-shot and loop with the original half-open sample end",
+    "correct upper and lower register words across a 64 KiB boundary",
+    "voice-bank selection, activation last, and exact selected-voice Stop",
+    "odd bounds, unsupported flags and out-of-range voice reject before changing output",
+    "genuine routed trigger and Stop yield pure register sequences during preparation"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Register encoding and ordinary-RAM routed scheduling in Amiberry. Device execution, bus ordering, reader quiet and physical output remain open."
+}

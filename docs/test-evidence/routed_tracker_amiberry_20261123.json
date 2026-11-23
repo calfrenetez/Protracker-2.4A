@@ -141,5 +141,25 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "detached_audio_receipt_follow_up": {
+    "tested_source": "216a5aee97382453f6166b83c122a3f3ef2a77f8",
+    "candidate_and_guest_readback_sha256": "9f927b18858903f1a73299b54e5b4cc52b04dc1dd1be24e3fd68a618bc0a6597",
+    "build_receipt_sha256": "ab1dee91207ad2e5f9852082d2179ab2f26a471b59ce993966094e90878f19c0",
+    "guest_log_sha256": "6ad5a5e6bdde11d7ac857decd2978a832c256fd35959c7623029428cf58fbac5",
+    "focused_host_methods": 10,
+    "validated_build_inputs": 120,
+    "additional_checks": [
+      "original complete command identity and successful detach",
+      "waiting result, mismatched event or binding, stale final-action key and late final-action tick refused",
+      "first and last actual audio issue ticks derived from all actions",
+      "valid complete issue or cancel-before evidence"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

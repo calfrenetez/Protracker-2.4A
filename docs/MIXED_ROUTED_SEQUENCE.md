@@ -328,3 +328,27 @@ A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource
 bindings live and determine whether it can issue the prepared work in time.
+
+The original continuous CIA counter needs 65,536 E-clock ticks per
+reload in the PAL Amiberry profile. After 1,024 callbacks, a separate
+E-clock sample bounded elapsed ticks to [67,108,856, 67,108,972].
+The 65,536-tick reconstruction was 67,108,914. Both neighboring
+periods fall outside that interval. The task saw 1,022 wake
+observations, so it used the CIA callback count to track reloads.
+[Exact cadence receipt](test-evidence/cia_reload_cadence_amiberry_20261123.json)
+
+The private `routed-mixed-reload` fixture derived its own six-track
+Start and F00 from the renderer at frames 0 and 5760. One original
+counter reload separated the two writes. The IRQ checked the
+expected reload before the audio lock, allocation key and DMA state.
+The actual Paula write and AmiGUS and MIDI RAM stores fit the
+original windows [8192, 8207) and [93318, 93333), with observed
+brackets [8197, 8204] and [93318, 93325]. Both waits returned the
+original alarm signal. The audio lock, buffers and both timers closed.
+This finite case uses windows entirely within their respective
+countdown generations. A separate RAM-only attempt rejected stale
+generation bounds but failed its post-reload window when the measured
+bracket ended two ticks past it. Windows that span a reload, scheduled
+card and CAMD delivery, and listening still require qualification.
+[Mixed reload receipt](test-evidence/routed_mixed_reload_amiberry_20261123.json)
+[Late RAM receipt](test-evidence/cia_epoch_late_r49_amiberry_20261123.json)

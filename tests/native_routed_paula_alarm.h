@@ -29,10 +29,50 @@ struct paula_alarm_row {
     struct pt_cia_clock_pair wait_before, wait_after;
     unsigned alarm_signal_only;
 #endif
+#ifdef PT_PAULA_RELOAD_IRQ
+    unsigned issued_reload;
+#endif
 };
 
 static struct paula_alarm_row armed_at[2];
 static unsigned alarm_chip, alarm_timer, alarm_calls, alarm_strays, alarm_closed;
+
+#ifdef PT_PAULA_RELOAD_IRQ
+enum { CLOCK_RELOAD_MARGIN = 4096 };
+static struct {
+    struct Task *task;
+    ULONG signal;
+    volatile ULONG reloads;
+} routed_clock;
+_Static_assert(offsetof(__typeof__(routed_clock), signal) == 4 &&
+    offsetof(__typeof__(routed_clock), reloads) == 8, "Owned CIA reload interrupt layout");
+extern void pt_cia_reload_irq(void);
+extern void pt_cia_local_mixed_reload_irq(void);
+
+static int capture_epoch(struct paula_window_observation *obs, const struct pt_diagnostic_cia *clock,
+    const struct pt_elapsed_clock *grid, uint64_t frame, unsigned reload,
+    struct pt_countdown_observation *timeline)
+{
+    if (routed_clock.reloads != reload || !pt_diagnostic_cia_current(clock))
+        return 0;
+    pt_cia_direct_clock_pair(clock->high, clock->low, &obs->anchor_sample);
+    obs->anchor = pt_cia_stable_count(obs->anchor_sample.after);
+    if (routed_clock.reloads != reload || obs->anchor_sample.marker != 0x2452 ||
+        obs->anchor <= CLOCK_RELOAD_MARGIN)
+        return 0;
+    if (!reload)
+        timeline->count = obs->anchor;
+    else if (!pt_countdown_extend(timeline, reload, obs->anchor))
+        return 0;
+    obs->anchor_tick = timeline->tick;
+    obs->reload = reload;
+    obs->chip = clock->chip;
+    obs->timer = clock->bit;
+    obs->hz = grid->frequency;
+    return prepare_paula_window(obs, grid, frame) && obs->raw.end > CLOCK_RELOAD_MARGIN &&
+        obs->raw.first < UINT16_MAX - CLOCK_RELOAD_MARGIN;
+}
+#endif
 
 static unsigned sample_count(const struct pt_diagnostic_cia *clock)
 {
@@ -82,6 +122,16 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
     irq->command = word->value;
     irq->entry = &obs->raw;
     irq->result = UINT32_MAX;
+#ifdef PT_PAULA_RELOAD_IRQ
+    if (routed_clock.reloads != obs->reload) {
+        irq->entry = NULL;
+        Enable();
+        return 0;
+    }
+    irq->reload = &routed_clock.reloads;
+    irq->expected_reload = obs->reload;
+    irq->observed_reload = UINT32_MAX;
+#endif
     irq->armed = 1;
     int armed = pt_diagnostic_cia_arm(&alarm->timer, receipt->delay);
     if (!armed)
@@ -92,7 +142,11 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
 
 #ifdef PT_PAULA_WAIT_IRQ
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_before);
-    ULONG wake = Wait(irq->signal | alarm->deadline_signal | SIGBREAKF_CTRL_C);
+    ULONG wait_mask = irq->signal | alarm->deadline_signal | SIGBREAKF_CTRL_C;
+#ifdef PT_PAULA_RELOAD_IRQ
+    wait_mask |= routed_clock.signal;
+#endif
+    ULONG wake = Wait(wait_mask);
     receipt->alarm_signal_only = wake == irq->signal;
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_after);
 #else
@@ -104,6 +158,9 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
 #endif
     Disable();
     receipt->calls = irq->calls;
+#ifdef PT_PAULA_RELOAD_IRQ
+    receipt->issued_reload = irq->observed_reload;
+#endif
     if (irq->armed || irq->calls != alarm->delivered + 1 || irq->stray || irq->result > 3) {
         /* Keep the vector and its original data live until it can be closed.
          * A pending notification after this point must issue no write. */
@@ -120,6 +177,10 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         snapshot(owner, "after-registers", 1, word);
     Enable();
     obs->in_frame = paula_window_inside(obs);
+#ifdef PT_PAULA_RELOAD_IRQ
+    if (receipt->issued_reload != obs->reload || routed_clock.reloads != obs->reload)
+        return 0;
+#endif
 #ifdef PT_PAULA_WAIT_IRQ
     const unsigned entering = pt_cia_stable_count(receipt->wait_before.after);
     const unsigned waking = pt_cia_stable_count(receipt->wait_after.after);
@@ -159,11 +220,18 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     struct pt_diagnostic_cia clock = {0};
     struct local_alarm alarm = {.signal = -1};
     struct pt_elapsed_clock grid;
+#ifdef PT_PAULA_RELOAD_IRQ
+    struct pt_countdown_observation timeline = {0};
+    BYTE reload_signal = -1;
+#else
     struct pt_cia_clock_pair anchor;
+#endif
     uint64_t now;
     uint32_t hz;
     int passed = 0;
-#ifdef PT_PAULA_MIXED_IRQ
+#ifdef PT_PAULA_RELOAD_IRQ
+    void (*handler)(void) = pt_cia_local_mixed_reload_irq;
+#elif defined(PT_PAULA_MIXED_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_alarm_irq;
 #else
     void (*handler)(void) = pt_cia_local_paula_alarm_irq;
@@ -175,9 +243,20 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
 #ifdef PT_PAULA_MIXED_IRQ
         !mixed_prepare_words(&grid, start, stop.frame) ||
 #endif
+#ifdef PT_PAULA_RELOAD_IRQ
+        !(routed_clock.task = FindTask(NULL)) || (reload_signal = AllocSignal(-1)) < 0 || reload_signal >= 32)
+        goto finish;
+    routed_clock.signal = 1UL << reload_signal;
+    if ((routed_clock.signal & SIGBREAKF_CTRL_C) ||
+        !pt_diagnostic_cia_acquire(&clock, pt_cia_reload_irq, &routed_clock) ||
+        !open_alarm(&alarm, &clock, now + hz, handler) ||
+        (routed_clock.signal & (alarm.data.signal | alarm.deadline_signal)))
+        goto finish;
+#else
         !pt_diagnostic_cia_acquire(&clock, pt_cia_direct_clock_stray, (void *)&timer_strays) ||
         !open_alarm(&alarm, &clock, now + hz, handler))
         goto finish;
+#endif
 
     alarm_chip = alarm.timer.chip;
     alarm_timer = alarm.timer.bit;
@@ -187,6 +266,19 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
      * the caller. The handler also checks the original audio lock and DMA. */
     Forbid();
 #endif
+#ifdef PT_PAULA_RELOAD_IRQ
+    if (pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1) &&
+        capture_epoch(timed, &clock, &grid, schedule->start_frame, 0, &timeline) &&
+        run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
+        Delay(1);
+        if (!routed_clock.reloads && observe_started_fetches(owner, &clock, CLOCK_RELOAD_MARGIN) &&
+            Wait(routed_clock.signal | alarm.deadline_signal | SIGBREAKF_CTRL_C) == routed_clock.signal &&
+            capture_epoch(timed + 1, &clock, &grid, schedule->stop_frame, 1, &timeline)) {
+            stage = 6;
+            passed = run_irq_word(owner, &alarm, &clock, stop.frame, ALL, 0);
+        }
+    }
+#else
     if (pt_cia_start_masked_countdown(&clock)) {
         Disable();
         pt_cia_direct_clock_pair(clock.high, clock.low, &anchor);
@@ -221,9 +313,18 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     Permit();
 #endif
 
+#endif
+
 finish:
     if (!close_alarm(&alarm) || !pt_diagnostic_cia_close(&clock))
         return hold();
+#ifdef PT_PAULA_RELOAD_IRQ
+    if (reload_signal >= 0 && reload_signal < 32) {
+        SetSignal(0, routed_clock.signal);
+        FreeSignal(reload_signal);
+    }
+    passed = passed && routed_clock.reloads == 1;
+#endif
     pt_native_eclock_close(&timebase);
     alarm_calls = alarm.data.calls;
     alarm_strays = alarm.data.stray;
@@ -246,6 +347,12 @@ static void report_irq_transitions(void)
             (unsigned)after[0], (unsigned)after[1], (unsigned)after[2], row->alarm_signal_only);
 #endif
     }
+#ifdef PT_PAULA_RELOAD_IRQ
+    for (unsigned i = 0; i < timed_count; ++i)
+        printf("Paula reload %u tick=%lu planned=%u issued=%u\n", i,
+            (unsigned long)timed[i].anchor_tick, timed[i].reload, armed_at[i].issued_reload);
+    printf("Paula reload clock callbacks=%lu\n", (unsigned long)routed_clock.reloads);
+#endif
     printf("Paula alarm closed=%u chip=%u timer=%u calls=%u stray=%u\n",
         alarm_closed, alarm_chip, alarm_timer, alarm_calls, alarm_strays);
 }

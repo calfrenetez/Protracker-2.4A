@@ -20,6 +20,7 @@ FIXTURES = {
     'routed-paula-tracker': ('test_mixed_readers_causal.py', 'PTRoutedPaulaTracker'),
     'routed-mixed-alarm': ('test_mixed_readers_causal.py', 'PTRoutedMixedAlarm'),
     'routed-mixed-wait': ('test_mixed_readers_causal.py', 'PTRoutedMixedWait'),
+    'routed-mixed-reload': ('test_mixed_readers_causal.py', 'PTRoutedMixedReload'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
     'cia-reload': (None, 'PTCIAReload'),
@@ -33,7 +34,7 @@ def main():
     parser.add_argument('--fixture', choices=FIXTURES, default='render-sequence')
     args = parser.parse_args()
     test, executable = FIXTURES[args.fixture]
-    mixed_alarm = args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait')
+    mixed_alarm = args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait', 'routed-mixed-reload')
     tracker_alarm = mixed_alarm or args.fixture == 'routed-paula-tracker'
     paula_alarm = tracker_alarm or args.fixture == 'routed-paula-alarm'
     if args.fixture == 'cia-direct-clock':
@@ -62,6 +63,7 @@ def main():
         'routed-paula-tracker': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-alarm': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-wait': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
+        'routed-mixed-reload': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
     }
     if args.fixture in routed_sources:
         source, extra = routed_sources[args.fixture]
@@ -94,8 +96,11 @@ def main():
                         'src/editor/mixed_readers_plan_normalize.c'])
     if mixed_alarm:
         flags.append('-DPT_PAULA_MIXED_IRQ')
-    if args.fixture == 'routed-mixed-wait':
+    if args.fixture in ('routed-mixed-wait', 'routed-mixed-reload'):
         flags.append('-DPT_PAULA_WAIT_IRQ')
+    if args.fixture == 'routed-mixed-reload':
+        flags.extend(['-DPT_PAULA_RELOAD_IRQ', '-Wa,--defsym,pt_exp_mixed_reload=1'])
+        sources.append('tests/native_cia_reload_irq.s')
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
     subprocess.run([args.cc,*flags,*sources,'-o',str(binary)],cwd=ROOT,check=True)

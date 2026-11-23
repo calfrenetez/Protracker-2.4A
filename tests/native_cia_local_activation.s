@@ -102,13 +102,22 @@ local_return\@:
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
  * The invoked bounded aperture uses the same actual countdown and prepared
  * frame as the task experiment. No task or timer APIs run here except Signal. */
-        .macro local_alarm_irq name, paula=0, mixed=0
+        .macro local_alarm_irq name, paula=0, mixed=0, epoch=0
         .globl \name
 \name:
         movem.l %d2-%d7/%a2-%a6,-(%sp)
         move.l %a1,%a2
         tst.l 20(%a2)
         beq.w local_irq_unarmed\@
+        .if \epoch
+        tst.l 48(%a2)
+        beq.b local_irq_stale\@
+        move.l 48(%a2),%a0
+        move.l (%a0),%d0
+        move.l %d0,56(%a2)
+        cmp.l 52(%a2),%d0
+        bne.b local_irq_stale\@
+        .endif
         .if \paula
         tst.l 36(%a2)
         beq.b local_irq_refused\@
@@ -144,6 +153,12 @@ local_irq_result\@:
         jsr _pt_cia_local_activate
         lea 12(%sp),%sp
         .endif
+        .if \epoch
+        bra.b local_irq_epoch_result\@
+local_irq_stale\@:
+        moveq #3,%d0
+local_irq_epoch_result\@:
+        .endif
         move.l %d0,28(%a2)
         clr.l 20(%a2)
         addq.l #1,24(%a2)
@@ -163,3 +178,7 @@ local_irq_done\@:
         local_alarm_irq _pt_cia_local_alarm_irq
         local_alarm_irq _pt_cia_local_paula_alarm_irq,1
         local_alarm_irq _pt_cia_local_mixed_alarm_irq,1,1
+        local_alarm_irq _pt_cia_local_epoch_alarm_irq,0,0,1
+        .ifdef pt_exp_mixed_reload
+        local_alarm_irq _pt_cia_local_mixed_reload_irq,1,1,1
+        .endif

@@ -7,14 +7,14 @@ from replay_routed_paula_alarm import replay
 from replay_tracker_paula_alarm import replay as replay_tracker
 from replay_mixed_frame_aperture import observe as observe_mixed, replay as replay_mixed
 from replay_mixed_frame_wait import replay as replay_wait
+from replay_mixed_frame_reload import replay as replay_reload
 
 
 def triplet(count):
     return f"{count:04x}{count >> 8:02x}"
 
 
-def fixture(frames=(512, 1280), epoch=0):
-    anchor = 65523
+def fixture(frames=(512, 1280), epoch=0, anchors=((0, 65523), (0, 65523))):
     rate = 709379
     lines = []
     arms = []
@@ -35,7 +35,9 @@ def fixture(frames=(512, 1280), epoch=0):
         )
     for i, (stage, frame, word, before, after) in enumerate(((3, frames[0], 0x800F, 0x200, 0x20F),
                                                           (6, frames[1], 0x000F, 0x20F, 0x200))):
-        first, end = (anchor - epoch - (edge * rate + 47999) // 48000 for edge in (frame, frame + 1))
+        anchor_tick, anchor = anchors[i]
+        first, end = (anchor_tick + anchor - epoch - (edge * rate + 47999) // 48000
+                      for edge in (frame, frame + 1))
         probe = first + 500
         arms.append(f"Paula alarm {i} sample={triplet(probe)} lead={first+128} delay=372 calls={i+1}")
         windows.append(
@@ -47,12 +49,12 @@ def fixture(frames=(512, 1280), epoch=0):
                      windows + ["Paula windows closed stray=0 rows=2", "Paula trace finished stage=6 rc=0 owned-closed=1"])
 
 
-def mixed_fixture():
+def mixed_fixture(stop=1920, anchors=((0, 65523), (0, 65523))):
     return (
-        "Paula tracker epoch=8192 start=0 stop=1920 paula=4 amigus=1 midi=1 f00=1\n"
+        f"Paula tracker epoch=8192 start=0 stop={stop} paula=4 amigus=1 midi=1 f00=1\n"
         "Mixed IRQ RAM 0 bank=0000/0000 control=8000/8000 midi=01953c5a/01953c5a\n"
         "Mixed IRQ RAM 1 bank=0000/0000 control=0000/0000 midi=01853c00/01853c00\n"
-        + fixture((0, 1920), 8192)
+        + fixture((0, stop), 8192, anchors)
     )
 
 
@@ -113,3 +115,27 @@ class PaulaAlarmReplay(unittest.TestCase):
             replay_wait(text.replace("alarm=1", "alarm=0", 1))
         with self.assertRaises(ValueError):
             replay_wait(text.replace(f"before={triplet(65523 - 8192 + 300)}", f"before={triplet(65523 - 8193)}", 1))
+
+    def test_mixed_wait_crosses_one_original_reload(self):
+        start_count, later_count = 65523, 65000
+        later_tick = 65536 + start_count - later_count
+        stop_frame = 5760
+        stop_tick = 8192 + (stop_frame * 709379 + 47999) // 48000
+        rows = ["Paula reload clock callbacks=1"]
+        for index, (tick, count, target) in enumerate(((0, start_count, 8192), (later_tick, later_count, stop_tick))):
+            rows.extend((
+                f"Paula reload {index} tick={tick} planned={index} issued={index}",
+                f"Paula wait {index} before={triplet(tick+count-target+300)} "
+                f"after={triplet(tick+count-target-80)} alarm=1",
+            ))
+        text = "\n".join(rows) + "\n" + mixed_fixture(stop_frame, ((0, start_count), (later_tick, later_count)))
+        result = replay_reload(text)
+        self.assertEqual(result["clock_reload"], {"origin_sample_tick": later_tick, "original_callbacks": 1})
+        self.assertEqual(result["wait_observations"][1]["before_and_after_wait"], [stop_tick - 300, stop_tick + 80])
+        self.assertEqual(result["writes"][1]["observed_ticks"], [stop_tick + 1, stop_tick + 7])
+        for original, changed in (("planned=1 issued=1", "planned=1 issued=0"),
+                                  (f"tick={later_tick}", f"tick={later_tick+1}"),
+                                  ("clock callbacks=1", "clock callbacks=2"),
+                                  ("stop=5760", "stop=5759")):
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                replay_reload(text.replace(original, changed, 1))

@@ -23,7 +23,7 @@ def stable(raw):
     return high * 256 + low
 
 
-def replay_windows(text, operations, epoch=0):
+def replay_windows(text, operations, epoch=0, anchor_ticks=(0, 0)):
     lines = text.splitlines()
     if lines[-2:] != ["Paula windows closed stray=0 rows=2",
                        "Paula trace finished stage=6 rc=0 owned-closed=1"]:
@@ -45,13 +45,13 @@ def replay_windows(text, operations, epoch=0):
             raise ValueError("Original operation, timer or bounded write evidence changed")
         if (int(row["dma_before"], 16) & 0x20F, int(row["dma_after"], 16) & 0x20F) != (dma_before, dma_after):
             raise ValueError("Actual DMA state does not match the grouped operation")
-        anchor = stable(row["anchor"])
+        origin = anchor_ticks[index] + stable(row["anchor"])
         first, excluded = (edge * hz + 47999 for edge in (frame, frame + 1))
         first, excluded = epoch + first // 48000, epoch + excluded // 48000
-        if (int(row["first"]), int(row["end"])) != (anchor - first, anchor - excluded):
+        if (int(row["first"]), int(row["end"])) != (origin - first, origin - excluded):
             raise ValueError("Countdown does not map to the original local sample frame")
-        pre = anchor - stable(row["before"])
-        post = anchor - stable(row["after"])
+        pre = origin - stable(row["before"])
+        post = origin - stable(row["after"])
         if not (first <= pre < post < excluded and row["in_frame"] == "1"):
             raise ValueError("DMA write is not bounded by an in-frame CIA bracket")
         rows.append({"stage": stage, "clock_hz": hz, "chip": int(row["chip"]), "timer": int(row["timer"]),

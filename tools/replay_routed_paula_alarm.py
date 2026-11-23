@@ -47,15 +47,16 @@ def replay_device(lines):
         raise ValueError("Owned device command or original interrupt mask changed")
 
 
-def replay_alarm_pair(text, start_frame, stop_frame, epoch=0):
+def replay_alarm_pair(text, start_frame, stop_frame, epoch=0, anchor_ticks=(0, 0)):
     evidence = replay_windows(text, ((3, start_frame, 0x800F, 0x200, 0x20F),
-                                     (6, stop_frame, 0x000F, 0x20F, 0x200)), epoch)
+                                     (6, stop_frame, 0x000F, 0x20F, 0x200)), epoch, anchor_ticks)
     lines = text.splitlines()
     windows = [ROW.fullmatch(line).groupdict() for line in lines if line.startswith("Paula window ")]
-    anchors = {(row["anchor"], row["hz"], row["chip"], row["timer"]) for row in windows}
-    if len(anchors) != 1:
-        raise ValueError("Start and Stop do not share the original clock anchor")
-    anchor_raw, _, chip, timer = anchors.pop()
+    clocks = {(row["hz"], row["chip"], row["timer"]) for row in windows}
+    if len(clocks) != 1 or (anchor_ticks[1] == 0 and windows[1]["anchor"] != windows[0]["anchor"]):
+        raise ValueError("Start and Stop do not share the original clock")
+    _, chip, timer = clocks.pop()
+    anchor_raw = windows[0]["anchor"]
     closed = [line for line in lines if line.startswith("Paula alarm closed")]
     alarm = CLOSED.fullmatch(closed[0]) if len(closed) == 1 else None
     if not alarm or alarm.groups() == (chip, timer):
@@ -70,6 +71,8 @@ def replay_alarm_pair(text, start_frame, stop_frame, epoch=0):
             raise ValueError("Malformed arm sample")
         i, raw, lead, delay, calls = match.groups()
         count = stable(raw)
+        if index and anchor_ticks[index] != anchor_ticks[index - 1]:
+            previous = stable(windows[index]["anchor"])
         if (int(i) != index or int(calls) != index + 1 or
                 int(lead) != int(windows[index]["first"]) + 128 or
                 not int(lead) < count < previous or int(delay) != count - int(lead)):

@@ -7,6 +7,11 @@
 #include <string.h>
 
 enum { TRACKER_PAULA_EPOCH = 8192, TRACKER_TEST_TRACKS = 6, TRACKER_TEST_WORDS = 16 };
+#ifdef PT_PAULA_RELOAD_IRQ
+enum { TRACKER_STOP_ROW = 3 };
+#else
+enum { TRACKER_STOP_ROW = 1 };
+#endif
 
 static unsigned forecast_paula, forecast_amigus, forecast_midi, forecast_f00;
 static struct pt_mixed_plan_report forecast_normalizer;
@@ -124,7 +129,7 @@ static int prepare_tracker_forecast(const void *chip, struct pt_paula_dma_progra
     for (unsigned i = 0; i < 5; ++i)
         events[i] = (struct pt_event){.kind = PT_NOTE_PERIOD, .pitch = 428, .instrument = 1};
     events[5] = (struct pt_event){.kind = PT_NOTE_MIDI, .pitch = 60, .flags = 1, .velocity = 90};
-    events[TRACKER_TEST_TRACKS].effect = 15; /* F00 sets the original termination boundary. */
+    events[TRACKER_STOP_ROW * TRACKER_TEST_TRACKS].effect = 15; /* F00 sets the original termination boundary. */
 
     if (pt_render_sequence_begin_routed(&project, &options, &allocator, &sequence) != PT_RENDER_OK ||
         pt_render_sequence_prepare(sequence, options.tick_limit, &ready) != PT_RENDER_OK || !ready)

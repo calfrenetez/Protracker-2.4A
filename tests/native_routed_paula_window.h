@@ -33,16 +33,23 @@ struct paula_window_observation {
     struct pt_cia_clock_pair anchor_sample;
     struct paula_window_raw raw;
     uint32_t hz;
+#ifdef PT_PAULA_RELOAD_IRQ
+    uint64_t anchor_tick;
+    unsigned reload;
+#endif
     unsigned stage, chip, timer, anchor, status, command, dma_before, dma_after, in_frame;
 };
 
 static int prepare_paula_window(struct paula_window_observation *obs, const struct pt_elapsed_clock *grid,
     uint64_t frame)
 {
-    uint64_t first, end;
+    uint64_t first, end, anchor_tick = 0;
+#ifdef PT_PAULA_RELOAD_IRQ
+    anchor_tick = obs->anchor_tick;
+#endif
     if (frame == UINT64_MAX || pt_elapsed_clock_deadline(grid, frame, &first) != PT_ELAPSED_OK ||
         pt_elapsed_clock_deadline(grid, frame + 1, &end) != PT_ELAPSED_OK ||
-        !pt_countdown_window_prepare(0, obs->anchor, first, end, &obs->window))
+        !pt_countdown_window_prepare(anchor_tick, obs->anchor, first, end, &obs->window))
         return 0;
     obs->raw.first = obs->window.first_count;
     obs->raw.end = obs->window.end_count;

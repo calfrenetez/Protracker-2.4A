@@ -15,6 +15,9 @@ struct local_alarm_data {
     const struct IOAudio *audio_lock;
     ULONG command;
     UWORD allocation_key, dma_before;
+    const volatile ULONG *reload;
+    ULONG expected_reload;
+    volatile ULONG observed_reload;
 };
 
 #define LOCAL_IRQ_OFFSET(field, offset) \
@@ -32,6 +35,9 @@ LOCAL_IRQ_OFFSET(audio_lock, 36);
 LOCAL_IRQ_OFFSET(command, 40);
 LOCAL_IRQ_OFFSET(allocation_key, 44);
 LOCAL_IRQ_OFFSET(dma_before, 46);
+LOCAL_IRQ_OFFSET(reload, 48);
+LOCAL_IRQ_OFFSET(expected_reload, 52);
+LOCAL_IRQ_OFFSET(observed_reload, 56);
 #undef LOCAL_IRQ_OFFSET
 
 struct local_alarm {

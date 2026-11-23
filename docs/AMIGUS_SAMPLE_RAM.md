@@ -650,6 +650,11 @@ The selector is write-only and this mode leaves it untouched.
 Use `tools/replay_amigus_selected_control.py LOG --returncode RC --selected-voice`
 to verify the ordered offsets and confirmed lease release.
 
+In Amiberry on the 68030 profile, the exact synthetic reader passed and
+both diagnostic modes reported the expected missing-library refusal. The
+session stopped normally and all 39 original files were verified after
+restoration. [Amiberry result](test-evidence/amigus_selected_voice_amiberry_20261123.json)
+
 The address and data write ports do not expose the previous sample contents.
 The register map identifies the FIFO-full flag and voice IRQ bits, and gives
 no sample upload completion acknowledgement or indication that a voice has

@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-23",
+  "source_revision": "fd75dc755b10f6038892e3904fc9b4b082636cfc",
+  "fixture_sha256": {
+    "Reader": "bdec61cd500af51a883f9c3939f0571d866a971d2f235bb01144693baa834949",
+    "Voice": "9c0c65bdd293acc1d9e54b4c2b4995b0ae444819591f167438c9d2610f2caef7",
+    "Control": "9c0c65bdd293acc1d9e54b4c2b4995b0ae444819591f167438c9d2610f2caef7"
+  },
+  "emulation": {
+    "cpu_68030": true,
+    "fixtures": {
+      "Control": {
+        "copy_complete": true,
+        "exact_guest_copy": true,
+        "full_log": true,
+        "pass": true,
+        "rc": "5",
+        "timing": {
+          "outcome": "library-unavailable",
+          "selected_control_observed": false
+        }
+      },
+      "Reader": {
+        "copy_complete": true,
+        "exact_guest_copy": true,
+        "full_log": true,
+        "pass": true,
+        "rc": "0",
+        "timing": {
+          "synthetic_storage": true,
+          "writes": 0
+        }
+      },
+      "Voice": {
+        "copy_complete": true,
+        "exact_guest_copy": true,
+        "full_log": true,
+        "pass": true,
+        "rc": "5",
+        "timing": {
+          "outcome": "library-unavailable",
+          "selected_voice_observed": false
+        }
+      }
+    },
+    "passed": true,
+    "physical_devices_exercised": false,
+    "startup_complete": true,
+    "startup_entered": true,
+    "target": "amiberry-030"
+  },
+  "restoration": {
+    "normal_stop": true,
+    "independent_release": {
+      "canonical_profile": true,
+      "fence": 25653,
+      "files_verified": 39,
+      "phase": "EMPTY",
+      "service_disconnected": true,
+      "target_absent": true
+    },
+    "canonical_disk_sha256": "66fe06fa041c25db392b083ca18597286bfcdcd19139d029c03322e7360f9f7b"
+  },
+  "outcomes": {
+    "first_window_admitted": false,
+    "fresh_window_used": true,
+    "physical_snapshot": "pending; no software transferred during disconnected Safari preflight",
+    "physical_playback": "not run"
+  },
+  "scope": "Synthetic register storage and no-library refusal in Amiberry. No card observer, sample memory, playback or listening claim."
+}

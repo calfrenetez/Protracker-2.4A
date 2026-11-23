@@ -1,0 +1,64 @@
+{
+  "source": "071ebe251ae254c64b696821bca1fd7b594fdf90",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "8f1c7274528590fe1291215f4fc01712a71acd91e18d8359d8e8e42dc5384811",
+  "build_receipt_sha256": "b80530477572388ceff179adfd6eba09e0022815de310275e679610bc25bd5d2",
+  "guest_log_sha256": "c2c503ca1729365f507f7f40cdb3e53cceeb6e7df4ed0b521b4ba424999107d5",
+  "independent_replay_sha256": "3cd07373fbb58019c689e944925d124935c7e9d2a7181111842a4836765a4605",
+  "validated_build_inputs": 94,
+  "focused_host_methods": 34,
+  "synthetic_replay_cases": 4,
+  "timing": {
+    "device_guest_closed": true,
+    "device_stages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "guest_closed": true,
+    "writes": [
+      {
+        "chip": 0,
+        "clock_hz": 709379,
+        "command": 32783,
+        "dma_after": 527,
+        "dma_before": 512,
+        "frame_ticks": [
+          7567,
+          7582
+        ],
+        "observed_ticks": [
+          7572,
+          7578
+        ],
+        "stage": 3,
+        "timer": 0
+      },
+      {
+        "chip": 0,
+        "clock_hz": 709379,
+        "command": 10,
+        "dma_after": 512,
+        "dma_before": 522,
+        "frame_ticks": [
+          7567,
+          7582
+        ],
+        "observed_ticks": [
+          7572,
+          7578
+        ],
+        "stage": 6,
+        "timer": 0
+      }
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Silent Amiberry Paula Start and final Stop each used a fresh local CIA anchor. Control and selective Stop were untimed. No shared song epoch, mixed-device runtime timing or listening evidence."
+}

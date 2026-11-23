@@ -416,6 +416,15 @@ clusters, or returns RC5 when it cannot activate CAMD or read the snapshot.
 It creates no MIDI links, sends no notes and closes its own node and
 library handle. Listing a cluster confirms software availability.
 
+For a connected receiver, run `PTCamdControl note-pair "output name" channel`
+with the exact name from `outputs` and a MIDI channel from 1 through 16.
+The diagnostic connects to that single cluster and asks CAMD for one middle C
+at velocity 48, followed by an explicit Note Off on the same channel.
+It refuses an unavailable cluster or invalid channel. A second receiver or
+MIDI monitor should check both messages at the cable. The diagnostic reports
+the CAMD requests and handle closure. Its task-level delay sets a short
+audible note and supplies no tracker-frame timing measurement.
+
 In the canonical cycle-exact Amiberry profile, the first Note On
 write was bracketed at ticks [8195, 8201] within [8192, 8207).
 The UART then stayed busy and returned zero loopback bytes.

@@ -7,6 +7,7 @@
 #include <exec/libraries.h>
 #include <proto/dos.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <utility/tagitem.h>
 
@@ -81,6 +82,48 @@ static int discover_outputs(void)
     const unsigned revision = native.library->lib_Revision;
     finish();
     printf("CAMD output discovery: library=%u.%u outputs=%u closed=1\n", version, revision, count);
+    return 0;
+}
+
+static int send_note_pair(const char *output, unsigned channel)
+{
+    const struct pt_midi_endpoints *registry;
+    int port;
+
+    if (pt_camd_control_refresh(&control) != PT_CAMD_OK ||
+        !(registry = pt_camd_control_registry(&control)))
+        return 0;
+    port = pt_midi_endpoints_find(registry, output, strlen(output) + 1);
+    if (port < 0 || pt_midi_endpoints_available(registry, (unsigned)port) != 1 ||
+        pt_camd_control_link(&control, (unsigned)port) != PT_CAMD_OK ||
+        pt_camd_control_refresh(&control) != PT_CAMD_OK ||
+        pt_midi_endpoints_available(registry, (unsigned)port) != 1)
+        return 0;
+    const uint32_t channel_bits = (uint32_t)(channel - 1) << 24;
+    void *link = control.links[port];
+    (void)pt_native_camd_vector(native.library, PT_CAMD_PUT, 0x903c3000UL | channel_bits, link, NULL);
+    Delay(10);
+    (void)pt_native_camd_vector(native.library, PT_CAMD_PUT, 0x803c0000UL | channel_bits, link, NULL);
+    Delay(5);
+    return 1;
+}
+
+static int note_pair(const char *output, const char *channel_arg)
+{
+    char *end;
+    const unsigned long channel = strtoul(channel_arg, &end, 10);
+    if (*channel_arg < '0' || *channel_arg > '9' || *end || channel < 1 || channel > 16) {
+        puts("CAMD note pair: expected a MIDI channel from 1 to 16");
+        return 5;
+    }
+    const int sent = pt_camd_control_activate(&control) == PT_CAMD_OK &&
+                     send_note_pair(output, (unsigned)channel);
+    finish();
+    if (!sent) {
+        puts("CAMD note pair: output unavailable; closed=1");
+        return 5;
+    }
+    printf("CAMD note pair: requested channel=%lu note=60 velocity=48; closed=1\n", channel);
     return 0;
 }
 
@@ -209,6 +252,19 @@ static int local_loopback(unsigned timing)
     assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
     assert(!registry->link_active && !registry->midi.ports[port].connected);
     assert(pt_camd_control_retire(&control, (unsigned)port) == PT_CAMD_OK && !control.links[port]);
+    if (!timing) {
+        assert(!send_note_pair(sender_only_name, 7));
+        assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
+        assert(send_note_pair(endpoint_name, 7));
+        assert((BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
+        assert(tail[0] >> 8 == 0x963c30UL);
+        assert((BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
+        assert(tail[0] >> 8 == 0x863c00UL);
+        assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
+        assert(!(UBYTE)pt_native_camd_vector(library, PT_CAMD_GET_ERROR, 0, node, NULL));
+        assert(pt_camd_control_retire(&control, (unsigned)port) == PT_CAMD_OK && !control.links[port]);
+        puts("CAMD named note pair: sender-only cluster refused; one Note On and one Note Off verified");
+    }
 
     (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, receiver, NULL);
     (void)pt_native_camd_vector(library, PT_CAMD_REMOVE_LINK, 0, decoy, NULL);
@@ -320,7 +376,14 @@ static void routes_loopback(void)
 
 int main(int argc, char **argv)
 {
-    assert(argc == 2 && pt_native_camd_control_init(&native, &control));
+    if (!pt_native_camd_control_init(&native, &control))
+        return 5;
+    if (argc == 4 && !strcmp(argv[1], "note-pair"))
+        return note_pair(argv[2], argv[3]);
+    if (argc != 2) {
+        puts("Usage: PTCamdControl note-pair \"output name\" channel");
+        return 5;
+    }
     if (!strcmp(argv[1], "absent"))
         missing_library();
     else if (!strcmp(argv[1], "outputs"))

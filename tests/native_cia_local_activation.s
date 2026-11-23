@@ -6,6 +6,10 @@
         .globl \name
 \name:
         .set .Lwire_clock_fast\@,0
+        .set .Lwire_reload_low_poll\@,0
+        .ifdef pt_exp_mixed_wire_reload
+        .set .Lwire_reload_low_poll\@,\wire
+        .endif
         .ifdef pt_exp_mixed_wire_clock_fast
         .set .Lwire_clock_fast\@,\wire
         .endif
@@ -117,6 +121,32 @@ valid_word\@:
         .endif
         moveq #63,%d7
 local_poll\@:
+        .if .Lwire_reload_low_poll\@
+        /* In this one-page path, sample low at a shorter interval
+         * while the original high byte is selected. Confirm high again
+         * after the candidate low sample before issuing any writes. */
+        move.b (%a0),%d2
+        cmp.b %d5,%d2
+        bhi.b local_retry\@
+        blo.b wire_reload_expired\@
+wire_reload_poll_low\@:
+        move.b (%a1),%d3
+        cmp.b %d0,%d3
+        dbls %d7,wire_reload_poll_low\@
+        bhi.b local_exhausted\@
+        move.b (%a0),%d4
+        cmp.b %d2,%d4
+        bne.b local_retry\@
+        cmp.b %d1,%d3
+        bls.b local_expired\@
+        bra.b local_issue\@
+wire_reload_expired\@:
+        move.b (%a1),%d3
+        move.b (%a0),%d4
+        cmp.b %d2,%d4
+        bne.b local_retry\@
+        bra.b local_expired\@
+        .else
         moveq #0,%d2
         move.b (%a0),%d2
         move.b (%a1),%d3
@@ -151,6 +181,7 @@ local_poll\@:
         bhi.b local_retry\@
         cmp.w %d1,%d5
         bls.b local_expired\@
+        .endif
         .endif
 local_issue\@:
         .if \paula
@@ -194,6 +225,12 @@ local_issue\@:
         bra.b local_record\@
 local_retry\@:
         dbra %d7,local_poll\@
+local_exhausted\@:
+        .if .Lwire_reload_low_poll\@
+        moveq #0,%d2
+        moveq #0,%d3
+        moveq #0,%d4
+        .endif
         moveq #0,%d7
         moveq #0,%d0
         bra.b local_record\@

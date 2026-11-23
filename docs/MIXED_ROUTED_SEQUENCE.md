@@ -141,6 +141,10 @@ The Amiberry 68030 run completed at the same three frame boundaries.
 `pt_routed_playback_prepare` binds the ready forecast to its prepared batch.
 `pt_routed_playback_commit` advances that original interval only after live
 consumption and the exact complete output receipt. Idle forecasts require no
-output receipt. F00 with active audio requires the original audio queue's Stop
-as part of the combined publication. Any held outputs retain their own
-cancellation and retirement obligations if the render binding is abandoned.
+output receipt. For F00, the schedule snapshots its exact outstanding reader
+keys. The sampler factory builds the audio Stop from its original track and
+sample registrations. A one-shot that ends early leaves this list only when
+the audio owner supplies a complete retirement proof for its original key.
+The fixture exercises that path with a short AmiGUS sample and holds the MIDI
+note through the next audio-only boundary. Any held outputs retain their
+own cancellation and retirement obligations if the render binding is abandoned.

@@ -56,5 +56,26 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "independent_retirement_follow_up": {
+    "tested_source": "d8b3491c81280df9ef5b1ec644c6d3c3feecbb09",
+    "candidate_and_guest_readback_sha256": "193748e6afb4903009a27d469612b91c29fd0f5f46f3c180def6886e72977e1f",
+    "build_receipt_sha256": "8cbbffd1a6611a4caa4169e18d35271a962059fc351a7ac8b85712e2307e7dea",
+    "guest_log_sha256": "54120c50f9944ded2a1c793a7d0b3bfbdd1669a98cac90b44c5b8fc0a00bfb0a",
+    "focused_host_methods": 10,
+    "mixed_queue_regression_methods": 6,
+    "legacy_queue_sanitizer_fixture": "PASS",
+    "additional_checks": [
+      "F00 takes exact Stop keys from the schedule and the sampler resolves original registrations",
+      "pending AmiGUS one-shot retirement preserves its key",
+      "independent retirement removes the original AmiGUS key from F00 while MIDI stays owned until Stop"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

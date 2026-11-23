@@ -318,6 +318,12 @@ into owned RAM. Each whole bracket took seven E-clock ticks in Amiberry.
 The readbacks distinguish the modeled AmiGUS enable and disable, and
 the original MIDI Note On and Note Off on the same slot. Card bus timing,
 CAMD dispatch and audible playback require their own qualification.
+
+The `routed-mixed-wait` case left task scheduling available during both
+alarms. Coherent samples before each Exec wait and after the original
+alarm signal independently bracketed both seven-tick issue bursts.
+Paula readbacks and owned closure passed again. The AmiGUS words and
+MIDI message still went through the same RAM targets.
 A terminal frame must stop every originally active audio slot. Bad routing,
 unsupported retriggers, missing ownership and incomplete Stop leave the
 entire destination unchanged. The backend must keep the original resource

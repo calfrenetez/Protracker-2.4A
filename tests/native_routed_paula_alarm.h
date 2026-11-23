@@ -25,6 +25,10 @@ _Static_assert(NT_MESSAGE == 5 &&
 struct paula_alarm_row {
     struct pt_cia_clock_pair arm;
     unsigned lead_count, delay, calls;
+#ifdef PT_PAULA_WAIT_IRQ
+    struct pt_cia_clock_pair wait_before, wait_after;
+    unsigned alarm_signal_only;
+#endif
 };
 
 static struct paula_alarm_row armed_at[2];
@@ -69,6 +73,9 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         return 0;
     }
     receipt->delay = probe - receipt->lead_count;
+#ifdef PT_PAULA_WAIT_IRQ
+    SetSignal(0, irq->signal);
+#endif
     irq->audio_lock = owner->lock;
     irq->allocation_key = (UWORD)owner->key;
     irq->dma_before = DMA_MASTER | before;
@@ -83,11 +90,18 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
     if (!armed)
         return 0;
 
+#ifdef PT_PAULA_WAIT_IRQ
+    pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_before);
+    ULONG wake = Wait(irq->signal | alarm->deadline_signal | SIGBREAKF_CTRL_C);
+    receipt->alarm_signal_only = wake == irq->signal;
+    pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_after);
+#else
     for (unsigned i = 0; i < PAULA_ALARM_SPINS && irq->armed; ++i) {
         unsigned now = sample_count(clock);
         if ((now && now <= obs->raw.end) || !(*clock->control & 1U))
             break;
     }
+#endif
     Disable();
     receipt->calls = irq->calls;
     if (irq->armed || irq->calls != alarm->delivered + 1 || irq->stray || irq->result > 3) {
@@ -106,6 +120,13 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         snapshot(owner, "after-registers", 1, word);
     Enable();
     obs->in_frame = paula_window_inside(obs);
+#ifdef PT_PAULA_WAIT_IRQ
+    const unsigned entering = pt_cia_stable_count(receipt->wait_before.after);
+    const unsigned waking = pt_cia_stable_count(receipt->wait_after.after);
+    if (!receipt->alarm_signal_only || entering <= obs->raw.first || entering >= probe ||
+        !waking || waking > pt_cia_stable_count(obs->raw.after))
+        return 0;
+#endif
 #ifdef PT_PAULA_MIXED_IRQ
     if (!mixed_words_issued(&obs->raw))
         return 0;
@@ -160,10 +181,12 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
 
     alarm_chip = alarm.timer.chip;
     alarm_timer = alarm.timer.bit;
+#ifndef PT_PAULA_WAIT_IRQ
     /* On a single CPU this short diagnostic excludes allocation by other
      * tasks. The busy waits leave hardware IRQs enabled and cannot reschedule
      * the caller. The handler also checks the original audio lock and DMA. */
     Forbid();
+#endif
     if (pt_cia_start_masked_countdown(&clock)) {
         Disable();
         pt_cia_direct_clock_pair(clock.high, clock.low, &anchor);
@@ -178,17 +201,25 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
         if (anchor.marker == 0x2452 && timed[0].anchor &&
             prepare_paula_window(timed, &grid, schedule->start_frame) &&
             prepare_paula_window(timed + 1, &grid, schedule->stop_frame) &&
-            run_irq_word(owner, &alarm, &clock, start, 0, ALL) &&
-            observe_started_fetches(owner, &clock, (unsigned)timed[1].raw.first + 512)) {
-            stage = 6;
-            passed = run_irq_word(owner, &alarm, &clock, stop.frame, ALL, 0);
+            run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
+#ifdef PT_PAULA_WAIT_IRQ
+            Delay(1);
+#endif
+            if (observe_started_fetches(owner, &clock, (unsigned)timed[1].raw.first + 512)) {
+                stage = 6;
+                passed = run_irq_word(owner, &alarm, &clock, stop.frame, ALL, 0);
+            }
         }
     }
     if (!pt_diagnostic_cia_close(&alarm.timer)) {
+#ifndef PT_PAULA_WAIT_IRQ
         Permit();
+#endif
         return hold();
     }
+#ifndef PT_PAULA_WAIT_IRQ
     Permit();
+#endif
 
 finish:
     if (!close_alarm(&alarm) || !pt_diagnostic_cia_close(&clock))
@@ -208,6 +239,12 @@ static void report_irq_transitions(void)
         const uint8_t *raw = row->arm.after;
         printf("Paula alarm %u sample=%02x%02x%02x lead=%u delay=%u calls=%u\n", i,
             (unsigned)raw[0], (unsigned)raw[1], (unsigned)raw[2], row->lead_count, row->delay, row->calls);
+#ifdef PT_PAULA_WAIT_IRQ
+        const uint8_t *before = row->wait_before.after, *after = row->wait_after.after;
+        printf("Paula wait %u before=%02x%02x%02x after=%02x%02x%02x alarm=%u\n", i,
+            (unsigned)before[0], (unsigned)before[1], (unsigned)before[2],
+            (unsigned)after[0], (unsigned)after[1], (unsigned)after[2], row->alarm_signal_only);
+#endif
     }
     printf("Paula alarm closed=%u chip=%u timer=%u calls=%u stray=%u\n",
         alarm_closed, alarm_chip, alarm_timer, alarm_calls, alarm_strays);

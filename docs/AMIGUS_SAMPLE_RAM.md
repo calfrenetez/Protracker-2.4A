@@ -630,5 +630,7 @@ hardware has finished reading that voice's sample RAM.
 
 The synthetic reader test checks the actual offset, unchanged register
 storage, refusal after lease loss and address overflow. Both the probe and
-the synthetic fixture cross-build with the pinned SDK. Emulator and physical
-execution of the selected-control mode remain pending.
+the synthetic fixture cross-build with the pinned SDK. For a captured run,
+`tools/replay_amigus_selected_control.py LOG --returncode RC` verifies
+the exact mode, offset, return code and original exclusive lease release.
+Emulator and physical execution of the selected-control mode remain pending.

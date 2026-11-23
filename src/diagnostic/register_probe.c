@@ -3,9 +3,85 @@
 #include "amigus_calls.h"
 #include "../native/amigus_pcm_read.h"
 #include "../native/amigus_reservation.h"
+#include <exec/libraries.h>
 #include <proto/exec.h>
 #include <proto/dos.h>
 #include <stdio.h>
+
+static void end_access(struct pt_amigus_reservation *reservation)
+{
+    if (!pt_amigus_reservation_end(reservation)) {
+        puts("REGISTER HOLD: access end unconfirmed; Task/library/card retained");
+        fflush(stdout); for (;;) Delay(50);
+    }
+}
+
+static void release_registers(struct pt_native_amigus_library *native,
+                              struct pt_amigus_reservation *reservation)
+{
+    struct Library *AmiGUS_Base = native->base;
+    PT_Free(reservation->card, AMIGUS_FLAG_PCM, reservation);
+    const unsigned long release_code = PT_Reserve(reservation->card, AMIGUS_FLAG_PCM, NULL);
+    printf("REGISTER RELEASE confirmed=%u retained=%u driver=0x%08lx\n",
+           release_code==0,release_code!=0,release_code);
+    if (release_code) {
+        puts("REGISTER HOLD: release unconfirmed; Task/library/card/owner retained");
+        fflush(stdout); for (;;) Delay(50);
+    }
+    /* Suppress the core's unacknowledged release callback after verified release. */
+    reservation->reserved=0;
+    if (!pt_amigus_reservation_close(reservation)) {
+        puts("REGISTER HOLD: library close unconfirmed; Task retained");
+        fflush(stdout); for (;;) Delay(50);
+    }
+}
+
+int pt_record_status_probe(void)
+{
+    puts("RECORD-PROBE scope=Mini-7ea663e7 writes=NO fifo_data_reads=NO audio=NOT_TESTED");
+    struct Library *pin = OpenLibrary((CONST_STRPTR)"amigus.library", 1);
+    if (!pin) {
+        puts("RECORD result=SKIP reason=library-unavailable rc=5");
+        return PT_SKIP;
+    }
+    if (pin->lib_Version != 1 || pin->lib_Revision != 1) {
+        CloseLibrary(pin);
+        puts("RECORD result=SKIP reason=unsupported-ownership-contract rc=5");
+        return PT_SKIP;
+    }
+    struct pt_native_amigus_library native = {0};
+    struct pt_amigus_reservation reservation = {0};
+    struct pt_amigus_reservation_api api = pt_native_amigus_reservation_api(&native);
+    const enum pt_amigus_reservation_result opened = pt_amigus_reservation_open(&reservation, &api, 0);
+    if (opened != PT_AMIGUS_RESERVED) {
+        CloseLibrary(pin);
+        printf("RECORD result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
+        return PT_SKIP;
+    }
+    const char *reason = "register-contract-unavailable";
+    int result = PT_SKIP;
+    if (pt_amigus_reservation_begin(&reservation)) {
+        struct pt_native_amigus_record_status status;
+        if (SetSignal(0, 0) & SIGBREAKF_CTRL_C) {
+            reason = "cancelled";
+            result = PT_FAIL;
+        } else if (pt_native_amigus_pcm_record_status(&reservation, &status)) {
+            const int idle = !(status.control & 0x8000) && !(status.irq_mask & 0x70) && !status.pending_words;
+            printf("RECORD STATUS mask=0x%04x format=0x%04x control=0x%04x left=0x%04x right=0x%04x watermark=%u pending_words=%u\n",
+                   (unsigned)status.irq_mask, (unsigned)status.format, (unsigned)status.control,
+                   (unsigned)status.volume_left, (unsigned)status.volume_right,
+                   (unsigned)status.watermark, (unsigned)status.pending_words);
+            reason = idle ? "idle" : "not-idle";
+            result = idle ? PT_PASS : PT_SKIP;
+        }
+        end_access(&reservation);
+    }
+    release_registers(&native, &reservation);
+    CloseLibrary(pin);
+    printf("RECORD result=%s reason=%s rc=%d\n",
+           result == PT_PASS ? "PASS" : result == PT_SKIP ? "SKIP" : "FAIL", reason, result);
+    return result;
+}
 
 int pt_register_probe(int reset)
 {
@@ -16,7 +92,6 @@ int pt_register_probe(int reset)
     uint16_t values[5] = {0,0,0,0,0};
     unsigned i;
     struct pt_native_amigus_quiesce quiesce={0};
-    unsigned long release_code;
     int result = PT_SKIP;
     const char *reason = "register-contract-unavailable";
     printf("REGISTER-PROBE scope=Mini-7ea663e7-%s interrupts=NO audio=NOT_TESTED\n",
@@ -119,29 +194,9 @@ int pt_register_probe(int reset)
                 }
             }
         }
-        if (!pt_amigus_reservation_end(&r)) {
-            puts("REGISTER HOLD: access end unconfirmed; Task/library/card retained");
-            fflush(stdout); for (;;) Delay(50);
-        }
+        end_access(&r);
     }
-    {
-        struct Library *AmiGUS_Base = native.base;
-        PT_Free(r.card, AMIGUS_FLAG_PCM, &r);
-        release_code = PT_Reserve(r.card, AMIGUS_FLAG_PCM, NULL);
-    }
-    printf("REGISTER RELEASE confirmed=%u retained=%u driver=0x%08lx\n",
-           release_code==0,release_code!=0,release_code);
-    if (release_code) {
-        puts("REGISTER HOLD: release unconfirmed; Task/library/card/owner retained");
-        fflush(stdout); for (;;) Delay(50);
-    }
-    /* Own release was verified before ending the library lifetime. Suppress
-     * the core's unacknowledged release callback on this diagnostic path. */
-    r.reserved=0;
-    if (!pt_amigus_reservation_close(&r)) {
-        puts("REGISTER HOLD: library close unconfirmed; Task retained");
-        fflush(stdout); for (;;) Delay(50);
-    }
+    release_registers(&native, &r);
     printf("REGISTERS result=%s reason=%s rc=%d\n",
            result==PT_PASS ? "PASS" : result==PT_SKIP ? "SKIP" : "FAIL",reason,result);
     return result;

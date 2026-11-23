@@ -682,3 +682,12 @@ channel. A one-shot that ends by itself can give the same audio result as a
 stopped voice. To check that Stop caused silence, use an owned test voice
 scheduled to continue past Stop and keep the separate register and memory
 evidence.
+
+Use `AmiGUSTest --record-status` to observe recorder setup on the specified
+Mini firmware. It takes an exclusive PCM reservation, reads the current
+format, rate and control, gains, IRQ mask, watermark and pending word
+count, and checks control again. The status reports idle when recording
+and its IRQ enables are clear and the FIFO has no pending words. This
+mode leaves the rate, interrupt configuration and FIFO intact and refuses
+if PCM is already owned. The map marks the FIFO reset as a write-only
+strobe and its data reads as consuming ports, so the snapshot excludes both.

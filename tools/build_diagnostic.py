@@ -72,7 +72,7 @@ def main():
                    'src/diagnostic/native_driver_window.h']
     if args.tool == 'PTPcmReadTest':
         flags += ['-Isrc/native']
-        inputs = ['tests/native_pcm_read_test.c', 'src/native/amigus_pcm_read.c']
+        inputs = ['tests/native_pcm_read_test.c', 'tests/amigus_record_status_test.c', 'src/native/amigus_pcm_read.c']
         headers = ['src/native/amigus_pcm_read.h', 'src/core/amigus_reservation.h']
     if args.tool == 'PTWavetableReadTest':
         flags += ['-Isrc/native']

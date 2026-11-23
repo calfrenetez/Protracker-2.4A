@@ -3,8 +3,12 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+
+void pt_test_record_status(void);
+
 int main(void)
 {
+    pt_test_record_status();
     struct AmiGUS card;
     struct pt_amigus_reservation r;
     uint16_t registers[9], copy[9], value;

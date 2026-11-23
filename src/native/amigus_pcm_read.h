@@ -8,6 +8,13 @@
  * reset, capacity assumption, start or interrupt operation is exposed. */
 int pt_native_amigus_pcm_read16(const struct pt_amigus_reservation *, unsigned,
                                uint16_t *);
+/* Recorder status on the same PCM lease. The FIFO data and reset ports are
+ * excluded. A changed control word or a failed read leaves the output intact. */
+struct pt_native_amigus_record_status {
+    uint16_t irq_mask, format, control, volume_left, volume_right, watermark, pending_words;
+};
+int pt_native_amigus_pcm_record_status(const struct pt_amigus_reservation *,
+                                       struct pt_native_amigus_record_status *);
 /* Separate silent qualification: writes only rate-disable, playback IRQ clears
  * and FIFO reset. No capacity/data/format/enable operation. Begin is issued once;
  * poll reads only. Any unconfirmed result retains the caller's access/owner. */

@@ -22,6 +22,25 @@ int pt_native_amigus_pcm_read16(const struct pt_amigus_reservation *r,
     *value = *(volatile uint16_t *)(address+offset);
     return 1;
 }
+int pt_native_amigus_pcm_record_status(const struct pt_amigus_reservation *r,
+                                       struct pt_native_amigus_record_status *out)
+{
+    uintptr_t address, current;
+    struct pt_native_amigus_record_status status;
+    if (!out || !pcm_address(r, &address) || address > UINTPTR_MAX - 0x92) return 0;
+    const volatile uint16_t *registers = (const volatile uint16_t *)address;
+    status.control = registers[0x82 / 2];
+    status.irq_mask = registers[0x02 / 2];
+    status.format = registers[0x80 / 2];
+    status.volume_left = registers[0x84 / 2];
+    status.volume_right = registers[0x86 / 2];
+    status.watermark = registers[0x8a / 2];
+    status.pending_words = registers[0x90 / 2];
+    if (!pcm_address(r, &current) || current != address || registers[0x82 / 2] != status.control)
+        return 0;
+    *out = status;
+    return 1;
+}
 int pt_native_amigus_quiesce_begin(struct pt_native_amigus_quiesce *q,
                                   const struct pt_amigus_reservation *r)
 {

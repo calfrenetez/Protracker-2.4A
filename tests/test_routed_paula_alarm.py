@@ -8,6 +8,7 @@ from replay_tracker_paula_alarm import replay as replay_tracker
 from replay_mixed_frame_aperture import observe as observe_mixed, replay as replay_mixed
 from replay_mixed_frame_wait import replay as replay_wait
 from replay_mixed_frame_reload import replay as replay_reload
+from replay_mixed_frame_tail import replay as replay_tail
 
 
 def triplet(count):
@@ -139,3 +140,34 @@ class PaulaAlarmReplay(unittest.TestCase):
                                   ("stop=5760", "stop=5759")):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 replay_reload(text.replace(original, changed, 1))
+
+
+    def test_mixed_f00_uses_an_aperture_before_its_crossing(self):
+        anchor, stop_frame = 65523, 3840
+        first = anchor - 13
+        rate = 709379
+        epoch = first - (stop_frame * rate + 47999) // 48000
+        original = mixed_fixture(stop_frame).splitlines()[:3]
+        original[0] = original[0].replace("epoch=8192", f"epoch={epoch}")
+        rows = original + [
+            f"Paula wait 0 before={triplet(anchor-epoch+300)} after={triplet(anchor-epoch-80)} alarm=1",
+            f"Paula wait 1 before={triplet(13+300)} after={triplet(65400)} alarm=1",
+            "Paula tail samples 0 before=2 after=1",
+            "Paula tail samples 1 before=1 after=3",
+            "Paula reload 0 tick=0 planned=0 issued=0",
+            "Paula reload 1 tick=0 planned=0 issued=0",
+            "Paula reload clock callbacks=1",
+        ]
+        windows = fixture((0, stop_frame), epoch)
+        windows = windows.replace("count=13/-2", "count=13/1")
+        text = "\n".join(rows) + "\n" + windows
+        result = replay_tail(text)
+        self.assertEqual(result["clock_reload"], {"reload_tick": anchor + 1, "stop_aperture": [first, anchor - 1]})
+        self.assertEqual(result["writes"][1]["frame_ticks"], [first, first + 15])
+        self.assertEqual(result["wait_observations"][1]["before_and_after_wait"][1], anchor + 65536 - 65400)
+        for before, after in (("count=13/1", "count=13/0"), ("stop=3840", "stop=3839"),
+                              ("tick=0 planned=0 issued=0", "tick=0 planned=0 issued=1"),
+                              ("clock callbacks=1", "clock callbacks=0"), ("alarm=1", "alarm=0"),
+                              ("before=2 after=1", "before=5 after=1")):
+            with self.subTest(changed=after), self.assertRaises(ValueError):
+                replay_tail(text.replace(before, after, 1))

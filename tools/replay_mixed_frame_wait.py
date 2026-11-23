@@ -18,7 +18,7 @@ else:
 WAIT = re.compile(r"Paula wait (\d) before=([\da-f]{6}) after=([\da-f]{6}) alarm=([01])")
 
 
-def replay_waits(text, evidence, anchor_ticks=(0, 0)):
+def replay_waits(text, evidence, anchor_ticks=(0, 0), wake_offsets=(0, 0)):
     lines = text.splitlines()
     original_arm = [ALARM.fullmatch(line) for line in lines if re.match(r"Paula alarm \d", line)]
     waits = [WAIT.fullmatch(line) for line in lines if line.startswith("Paula wait ")]
@@ -29,13 +29,14 @@ def replay_waits(text, evidence, anchor_ticks=(0, 0)):
     for index, (wait, arm, window) in enumerate(zip(waits, original_arm, windows)):
         entry = stable(wait[2])
         waking = stable(wait[3])
-        if (int(wait[1]) != index or wait[4] != "1" or not int(window["first"]) < entry < stable(arm[2])
-                or not 0 < waking <= stable(window["after"])):
-            raise ValueError("Exec wait did not span the original writes and return the owned alarm signal")
         origin = anchor_ticks[index] + stable(window["anchor"])
+        waking_tick = origin + wake_offsets[index] - waking
+        if (int(wait[1]) != index or wait[4] != "1" or not int(window["first"]) < entry < stable(arm[2])
+                or not waking or waking_tick < origin - stable(window["after"])):
+            raise ValueError("The original Exec alarm wait did not span the writes")
         result.append({"frame": evidence["mixed_ram_observations"][index]["frame"],
-                       "before_and_after_wait": [origin - entry, origin - waking],
-                       "owned_alarm_signal_only": True})
+                       "before_and_after_wait": [origin - entry, waking_tick],
+                       "owned_alarm_signal_only": wake_offsets[index] == 0})
     evidence["wait_observations"] = result
     return evidence
 

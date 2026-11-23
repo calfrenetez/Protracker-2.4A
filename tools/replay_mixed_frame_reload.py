@@ -23,6 +23,23 @@ FRAMES = (0, 5760)
 MARGIN = 4096
 
 
+def add_mixed_ram(text, result, frames):
+    ram = [RAM.fullmatch(line) for line in text.splitlines() if line.startswith("Mixed IRQ RAM ")]
+    if len(ram) != 2 or not all(ram):
+        raise ValueError("Incomplete mixed RAM readback")
+    result["mixed_ram_observations"] = []
+    for index, (row, timing) in enumerate(zip(ram, result["writes"])):
+        prepared = tuple(int(row[col], 16) for col in (2, 4, 6))
+        observed = tuple(int(row[col], 16) for col in (3, 5, 7))
+        if int(row[1]) != index or prepared != EXPECTED[index] or observed != prepared:
+            raise ValueError("Original mixed values and RAM readback disagree")
+        result["mixed_ram_observations"].append({
+            "frame": frames[index], "window": timing["frame_ticks"], "observed": timing["observed_ticks"],
+            "card_bank_control_and_midi_ram": list(observed), "verdict": "issued_in_frame",
+        })
+    return result
+
+
 def replay(text):
     lines = text.splitlines()
     forecast = [line for line in lines if line.startswith("Paula tracker ")]
@@ -30,8 +47,7 @@ def replay(text):
         raise ValueError("Original tracker Start and F00 forecast is missing")
     reloads = [RELOAD.fullmatch(line) for line in lines if re.match(r"Paula reload \d", line)]
     windows = [ROW.fullmatch(line) for line in lines if line.startswith("Paula window ")]
-    ram = [RAM.fullmatch(line) for line in lines if line.startswith("Mixed IRQ RAM ")]
-    if any(len(rows) != 2 or not all(rows) for rows in (reloads, windows, ram)):
+    if any(len(rows) != 2 or not all(rows) for rows in (reloads, windows)):
         raise ValueError("Incomplete generation, raw clock or mixed RAM evidence")
     if [line for line in lines if line.startswith("Paula reload clock ")] != ["Paula reload clock callbacks=1"]:
         raise ValueError("Expected one original countdown reload before closure")
@@ -44,16 +60,7 @@ def replay(text):
         if not MARGIN < int(window["end"]) < int(window["first"]) < 65535 - MARGIN:
             raise ValueError("The write window reaches the reload guard margin")
     result = replay_alarm_pair(text, *FRAMES, EPOCH, offsets)
-    result["mixed_ram_observations"] = []
-    for index, (row, timing) in enumerate(zip(ram, result["writes"])):
-        prepared = tuple(int(row[col], 16) for col in (2, 4, 6))
-        observed = tuple(int(row[col], 16) for col in (3, 5, 7))
-        if int(row[1]) != index or prepared != EXPECTED[index] or observed != prepared:
-            raise ValueError("Original mixed values and RAM readback disagree")
-        result["mixed_ram_observations"].append({
-            "frame": FRAMES[index], "window": timing["frame_ticks"], "observed": timing["observed_ticks"],
-            "card_bank_control_and_midi_ram": list(observed), "verdict": "issued_in_frame",
-        })
+    add_mixed_ram(text, result, FRAMES)
     result["clock_reload"] = {"origin_sample_tick": rebased_tick, "original_callbacks": 1}
     return replay_waits(text, result, offsets)
 

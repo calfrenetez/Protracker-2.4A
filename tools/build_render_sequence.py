@@ -21,6 +21,7 @@ FIXTURES = {
     'routed-mixed-alarm': ('test_mixed_readers_causal.py', 'PTRoutedMixedAlarm'),
     'routed-mixed-wait': ('test_mixed_readers_causal.py', 'PTRoutedMixedWait'),
     'routed-mixed-reload': ('test_mixed_readers_causal.py', 'PTRoutedMixedReload'),
+    'routed-mixed-tail': ('test_mixed_readers_causal.py', 'PTRoutedMixedTail'),
     'camd-control': ('test_camd_control.py', 'PTCamdControl'),
     'camd-direct': ('test_camd_control.py', 'PTCamdDirect'),
     'cia-direct-clock': (None, 'PTCIADirectClock'),
@@ -36,7 +37,7 @@ def main():
     parser.add_argument('--fixture', choices=FIXTURES, default='render-sequence')
     args = parser.parse_args()
     test, executable = FIXTURES[args.fixture]
-    mixed_alarm = args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait', 'routed-mixed-reload')
+    mixed_alarm = args.fixture in ('routed-mixed-alarm', 'routed-mixed-wait', 'routed-mixed-reload', 'routed-mixed-tail')
     tracker_alarm = mixed_alarm or args.fixture == 'routed-paula-tracker'
     paula_alarm = tracker_alarm or args.fixture == 'routed-paula-alarm'
     if args.fixture == 'cia-direct-clock':
@@ -70,6 +71,7 @@ def main():
         'routed-mixed-alarm': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-wait': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
         'routed-mixed-reload': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
+        'routed-mixed-tail': ('native_routed_paula_trace_test.c', 'ACTIVATION_UNITS'),
     }
     if args.fixture in routed_sources:
         source, extra = routed_sources[args.fixture]
@@ -106,13 +108,15 @@ def main():
                         'src/editor/mixed_readers_plan_normalize.c'])
     if mixed_alarm:
         flags.append('-DPT_PAULA_MIXED_IRQ')
-    if args.fixture in ('routed-mixed-wait', 'routed-mixed-reload'):
+    if args.fixture in ('routed-mixed-wait', 'routed-mixed-reload', 'routed-mixed-tail'):
         flags.append('-DPT_PAULA_WAIT_IRQ')
-    if args.fixture == 'routed-mixed-reload':
+    if args.fixture in ('routed-mixed-reload', 'routed-mixed-tail'):
         flags.extend(['-DPT_PAULA_RELOAD_IRQ', '-Wa,--defsym,pt_exp_mixed_reload=1'])
         sources.append('tests/native_cia_reload_irq.s')
     if args.fixture == 'cia-tail':
         flags.append('-Wa,--defsym,pt_exp_cia_tail=1')
+    if args.fixture == 'routed-mixed-tail':
+        flags.extend(['-DPT_PAULA_TAIL_IRQ', '-Wa,--defsym,pt_exp_mixed_tail=1'])
     flags.extend(compiler_safety_flags(args.cc))
     out=ROOT/'build/dev';out.mkdir(parents=True,exist_ok=True);binary=out/executable
     subprocess.run([args.cc,*flags,*sources,'-o',str(binary)],cwd=ROOT,check=True)

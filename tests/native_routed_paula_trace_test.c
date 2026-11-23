@@ -196,7 +196,7 @@ int main(void)
 #ifdef PT_PAULA_TRACKER_IRQ
     struct paula_alarm_schedule schedule = {.epoch = TRACKER_PAULA_EPOCH};
 #elif defined(PT_PAULA_TIMED_IRQ)
-    const struct paula_alarm_schedule schedule = {0, PAULA_TEST_FRAME, PAULA_STOP_FRAME};
+    struct paula_alarm_schedule schedule = {0, PAULA_TEST_FRAME, PAULA_STOP_FRAME};
 #endif
 
     if (!pt_native_paula_reservation_open(&owner))

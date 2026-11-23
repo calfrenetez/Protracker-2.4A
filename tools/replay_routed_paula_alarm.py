@@ -47,9 +47,9 @@ def replay_device(lines):
         raise ValueError("Owned device command or original interrupt mask changed")
 
 
-def replay_alarm_pair(text, start_frame, stop_frame, epoch=0, anchor_ticks=(0, 0)):
+def replay_alarm_pair(text, start_frame, stop_frame, epoch=0, anchor_ticks=(0, 0), cutoffs=(None, None)):
     evidence = replay_windows(text, ((3, start_frame, 0x800F, 0x200, 0x20F),
-                                     (6, stop_frame, 0x000F, 0x20F, 0x200)), epoch, anchor_ticks)
+                                     (6, stop_frame, 0x000F, 0x20F, 0x200)), epoch, anchor_ticks, cutoffs)
     lines = text.splitlines()
     windows = [ROW.fullmatch(line).groupdict() for line in lines if line.startswith("Paula window ")]
     clocks = {(row["hz"], row["chip"], row["timer"]) for row in windows}

@@ -23,7 +23,7 @@ def stable(raw):
     return high * 256 + low
 
 
-def replay_windows(text, operations, epoch=0, anchor_ticks=(0, 0)):
+def replay_windows(text, operations, epoch=0, anchor_ticks=(0, 0), cutoffs=(None, None)):
     lines = text.splitlines()
     if lines[-2:] != ["Paula windows closed stray=0 rows=2",
                        "Paula trace finished stage=6 rc=0 owned-closed=1"]:
@@ -48,11 +48,14 @@ def replay_windows(text, operations, epoch=0, anchor_ticks=(0, 0)):
         origin = anchor_ticks[index] + stable(row["anchor"])
         first, excluded = (edge * hz + 47999 for edge in (frame, frame + 1))
         first, excluded = epoch + first // 48000, epoch + excluded // 48000
-        if (int(row["first"]), int(row["end"])) != (origin - first, origin - excluded):
+        aperture_end = excluded if cutoffs[index] is None else cutoffs[index]
+        if not first < aperture_end <= excluded:
+            raise ValueError("The aperture exceeds the original sample frame")
+        if (int(row["first"]), int(row["end"])) != (origin - first, origin - aperture_end):
             raise ValueError("Countdown does not map to the original local sample frame")
         pre = origin - stable(row["before"])
         post = origin - stable(row["after"])
-        if not (first <= pre < post < excluded and row["in_frame"] == "1"):
+        if not (first <= pre < post < aperture_end and row["in_frame"] == "1"):
             raise ValueError("DMA write is not bounded by an in-frame CIA bracket")
         rows.append({"stage": stage, "clock_hz": hz, "chip": int(row["chip"]), "timer": int(row["timer"]),
                      "command": command, "dma_before": dma_before, "dma_after": dma_after,

@@ -35,9 +35,15 @@ valid_word\@:
         move.w 0(%a2),%d0
         move.w 2(%a2),%d1
         .if \tail
+        .if \mixed
+        /* This fixture only arms with the owner's one-count end guard. */
+        cmpi.w #1,%d1
+        bne.w local_mixed_tail_refused\@
+        .else
         /* Keep a whole six-tick observation inside the chosen aperture. */
         move.w %d1,%d6
         addq.w #6,%d6
+        .endif
         .endif
         moveq #63,%d7
 local_poll\@:
@@ -55,7 +61,11 @@ local_poll\@:
          * can indicate rollover before the owner's callback is dispatched. */
         cmpi.w #512,%d5
         bhi.b local_tail_stale\@
+        .if \mixed
+        cmpi.w #8,%d5
+        .else
         cmp.w %d6,%d5
+        .endif
         bls.b local_expired\@
         .endif
         cmp.w %d0,%d5
@@ -104,6 +114,13 @@ local_record\@:
         moveq #64,%d1
         sub.w %d7,%d1
         move.w %d1,4(%a2)
+        .if \tail
+        .if \mixed
+        bra.b local_return\@
+local_mixed_tail_refused\@:
+        moveq #3,%d0
+        .endif
+        .endif
 local_return\@:
         .if \mixed
         movem.l (%sp)+,%d2-%d7/%a2-%a5
@@ -118,6 +135,9 @@ local_return\@:
         local_activate _pt_cia_local_mixed_dma,1,1
         .ifdef pt_exp_cia_tail
         local_activate _pt_cia_local_tail,0,0,1
+        .endif
+        .ifdef pt_exp_mixed_tail
+        local_activate _pt_cia_local_mixed_tail_dma,1,1,1
         .endif
 
 /* CIA resource interrupt ABI, A1 is the immutable owned state address.
@@ -161,7 +181,17 @@ local_return\@:
         move.l 0(%a2),-(%sp)
         .if \paula
         .if \mixed
+        .if \tail
+        cmpi.l #0x000f,40(%a2)
+        bne.b local_mixed_start\@
+        jsr _pt_cia_local_mixed_tail_dma
+        bra.b local_mixed_done\@
+local_mixed_start\@:
+        .endif
         jsr _pt_cia_local_mixed_dma
+        .if \tail
+local_mixed_done\@:
+        .endif
         .else
         jsr _pt_cia_local_paula_dma
         .endif
@@ -209,4 +239,7 @@ local_irq_done\@:
         .endif
         .ifdef pt_exp_mixed_reload
         local_alarm_irq _pt_cia_local_mixed_reload_irq,1,1,1
+        .endif
+        .ifdef pt_exp_mixed_tail
+        local_alarm_irq _pt_cia_local_mixed_tail_irq,1,1,1,1
         .endif

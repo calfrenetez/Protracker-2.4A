@@ -7,7 +7,9 @@
 #include <string.h>
 
 enum { TRACKER_PAULA_EPOCH = 8192, TRACKER_TEST_TRACKS = 6, TRACKER_TEST_WORDS = 16 };
-#ifdef PT_PAULA_RELOAD_IRQ
+#ifdef PT_PAULA_TAIL_IRQ
+enum { TRACKER_STOP_ROW = 2 };
+#elif defined(PT_PAULA_RELOAD_IRQ)
 enum { TRACKER_STOP_ROW = 3 };
 #else
 enum { TRACKER_STOP_ROW = 1 };

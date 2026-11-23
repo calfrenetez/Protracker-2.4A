@@ -28,6 +28,9 @@ struct paula_alarm_row {
 #ifdef PT_PAULA_WAIT_IRQ
     struct pt_cia_clock_pair wait_before, wait_after;
     unsigned alarm_signal_only;
+#ifdef PT_PAULA_TAIL_IRQ
+    unsigned before_attempts, after_attempts;
+#endif
 #endif
 #ifdef PT_PAULA_RELOAD_IRQ
     unsigned issued_reload;
@@ -48,7 +51,22 @@ _Static_assert(offsetof(__typeof__(routed_clock), signal) == 4 &&
     offsetof(__typeof__(routed_clock), reloads) == 8, "Owned CIA reload interrupt layout");
 extern void pt_cia_reload_irq(void);
 extern void pt_cia_local_mixed_reload_irq(void);
+#ifdef PT_PAULA_TAIL_IRQ
+enum { MIXED_TAIL_FIRST = 13, MIXED_TAIL_SPAN = 7 };
+extern void pt_cia_local_mixed_tail_irq(void);
 
+static unsigned sample_wait_pair(const struct pt_diagnostic_cia *clock, struct pt_cia_clock_pair *point)
+{
+    for (unsigned attempt = 1; attempt <= 4; ++attempt) {
+        pt_cia_direct_clock_pair(clock->high, clock->low, point);
+        if (point->marker == 0x2452 && pt_cia_stable_count(point->after))
+            return attempt;
+    }
+    return 0;
+}
+#endif
+
+#ifndef PT_PAULA_TAIL_IRQ
 static int capture_epoch(struct paula_window_observation *obs, const struct pt_diagnostic_cia *clock,
     const struct pt_elapsed_clock *grid, uint64_t frame, unsigned reload,
     struct pt_countdown_observation *timeline)
@@ -72,6 +90,7 @@ static int capture_epoch(struct paula_window_observation *obs, const struct pt_d
     return prepare_paula_window(obs, grid, frame) && obs->raw.end > CLOCK_RELOAD_MARGIN &&
         obs->raw.first < UINT16_MAX - CLOCK_RELOAD_MARGIN;
 }
+#endif
 #endif
 
 static unsigned sample_count(const struct pt_diagnostic_cia *clock)
@@ -141,14 +160,30 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
         return 0;
 
 #ifdef PT_PAULA_WAIT_IRQ
+#ifdef PT_PAULA_TAIL_IRQ
+    receipt->before_attempts = sample_wait_pair(clock, &receipt->wait_before);
+#else
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_before);
+#endif
     ULONG wait_mask = irq->signal | alarm->deadline_signal | SIGBREAKF_CTRL_C;
 #ifdef PT_PAULA_RELOAD_IRQ
     wait_mask |= routed_clock.signal;
 #endif
     ULONG wake = Wait(wait_mask);
-    receipt->alarm_signal_only = wake == irq->signal;
+#ifdef PT_PAULA_TAIL_IRQ
+    if (stage == 6) {
+        receipt->alarm_signal_only = (wake == irq->signal || wake == (irq->signal | routed_clock.signal)) &&
+            ((wake & routed_clock.signal) ||
+             Wait(routed_clock.signal | alarm->deadline_signal | SIGBREAKF_CTRL_C) == routed_clock.signal) &&
+            routed_clock.reloads == 1;
+    } else
+#endif
+        receipt->alarm_signal_only = wake == irq->signal;
+#ifdef PT_PAULA_TAIL_IRQ
+    receipt->after_attempts = sample_wait_pair(clock, &receipt->wait_after);
+#else
     pt_cia_direct_clock_pair(clock->high, clock->low, &receipt->wait_after);
+#endif
 #else
     for (unsigned i = 0; i < PAULA_ALARM_SPINS && irq->armed; ++i) {
         unsigned now = sample_count(clock);
@@ -178,15 +213,27 @@ static int run_irq_word(const struct pt_native_paula_reservation *owner, struct 
     Enable();
     obs->in_frame = paula_window_inside(obs);
 #ifdef PT_PAULA_RELOAD_IRQ
-    if (receipt->issued_reload != obs->reload || routed_clock.reloads != obs->reload)
+    unsigned required_generation = obs->reload;
+#ifdef PT_PAULA_TAIL_IRQ
+    if (stage == 6)
+        ++required_generation;
+#endif
+    if (receipt->issued_reload != obs->reload || routed_clock.reloads != required_generation)
         return 0;
 #endif
 #ifdef PT_PAULA_WAIT_IRQ
     const unsigned entering = pt_cia_stable_count(receipt->wait_before.after);
     const unsigned waking = pt_cia_stable_count(receipt->wait_after.after);
-    if (!receipt->alarm_signal_only || entering <= obs->raw.first || entering >= probe ||
-        !waking || waking > pt_cia_stable_count(obs->raw.after))
+    if (!receipt->alarm_signal_only || entering <= obs->raw.first || entering >= probe || !waking)
         return 0;
+#ifdef PT_PAULA_TAIL_IRQ
+    if (!receipt->before_attempts || !receipt->after_attempts ||
+        (stage != 6 && waking > pt_cia_stable_count(obs->raw.after)))
+        return 0;
+#else
+    if (waking > pt_cia_stable_count(obs->raw.after))
+        return 0;
+#endif
 #endif
 #ifdef PT_PAULA_MIXED_IRQ
     if (!mixed_words_issued(&obs->raw))
@@ -213,7 +260,7 @@ static int observe_started_fetches(const struct pt_native_paula_reservation *own
 
 static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     struct pt_routed_activation_program *input, const void *chip, const struct pt_paula_dma_write *start,
-    const struct paula_alarm_schedule *schedule)
+    struct paula_alarm_schedule *schedule)
 {
     struct pt_paula_dma_program stop;
     struct pt_native_eclock timebase = {0};
@@ -229,7 +276,9 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     uint64_t now;
     uint32_t hz;
     int passed = 0;
-#ifdef PT_PAULA_RELOAD_IRQ
+#ifdef PT_PAULA_TAIL_IRQ
+    void (*handler)(void) = pt_cia_local_mixed_tail_irq;
+#elif defined(PT_PAULA_RELOAD_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_reload_irq;
 #elif defined(PT_PAULA_MIXED_IRQ)
     void (*handler)(void) = pt_cia_local_mixed_alarm_irq;
@@ -239,9 +288,11 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
     if (!prepare(input, chip, ALL, ALL, PT_MIXED_READERS_STOP, &stop) || stop.frame_count != 1 ||
         !pt_native_eclock_open(&timebase) || !pt_native_eclock_read(&timebase, &now, &hz) ||
         (hz != 709379 && hz != 715909) || now > UINT64_MAX - hz ||
+#ifndef PT_PAULA_TAIL_IRQ
         pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, schedule->epoch, 0) != PT_ELAPSED_OK ||
 #ifdef PT_PAULA_MIXED_IRQ
         !mixed_prepare_words(&grid, start, stop.frame) ||
+#endif
 #endif
 #ifdef PT_PAULA_RELOAD_IRQ
         !(routed_clock.task = FindTask(NULL)) || (reload_signal = AllocSignal(-1)) < 0 || reload_signal >= 32)
@@ -266,7 +317,46 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
      * the caller. The handler also checks the original audio lock and DMA. */
     Forbid();
 #endif
-#ifdef PT_PAULA_RELOAD_IRQ
+#ifdef PT_PAULA_TAIL_IRQ
+    if (pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1)) {
+        struct pt_cia_clock_pair anchor;
+        uint64_t stop_offset, first, end;
+        pt_cia_direct_clock_pair(clock.high, clock.low, &anchor);
+        timeline.count = pt_cia_stable_count(anchor.after);
+        if (anchor.marker != 0x2452 || routed_clock.reloads ||
+            pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, 0, 0) != PT_ELAPSED_OK ||
+            pt_elapsed_clock_deadline(&grid, schedule->stop_frame, &stop_offset) != PT_ELAPSED_OK ||
+            stop_offset + MIXED_TAIL_FIRST >= timeline.count)
+            goto finish;
+        schedule->epoch = timeline.count - stop_offset - MIXED_TAIL_FIRST;
+        if (pt_elapsed_clock_init(&grid, hz, PAULA_TEST_RATE, schedule->epoch, 0) != PT_ELAPSED_OK ||
+            !mixed_prepare_words(&grid, start, stop.frame))
+            goto finish;
+        for (unsigned i = 0; i < 2; ++i) {
+            timed[i].anchor_sample = anchor;
+            timed[i].anchor = timeline.count;
+            timed[i].chip = clock.chip;
+            timed[i].timer = clock.bit;
+            timed[i].hz = hz;
+        }
+        if (!prepare_paula_window(timed, &grid, schedule->start_frame) ||
+            pt_elapsed_clock_deadline(&grid, schedule->stop_frame, &first) != PT_ELAPSED_OK ||
+            pt_elapsed_clock_deadline(&grid, schedule->stop_frame + 1, &end) != PT_ELAPSED_OK ||
+            end <= (uint64_t)timeline.count + 1 ||
+            !pt_countdown_window_intersect(&timeline, first, end, MIXED_TAIL_SPAN, &timed[1].window) ||
+            timed[1].window.first_count != MIXED_TAIL_FIRST || timed[1].window.end_count != 1)
+            goto finish;
+        timed[1].raw.first = timed[1].window.first_count;
+        timed[1].raw.end = timed[1].window.end_count;
+        if (run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
+            Delay(1);
+            if (!routed_clock.reloads && observe_started_fetches(owner, &clock, MIXED_TAIL_FIRST + 512)) {
+                stage = 6;
+                passed = run_irq_word(owner, &alarm, &clock, stop.frame, ALL, 0);
+            }
+        }
+    }
+#elif defined(PT_PAULA_RELOAD_IRQ)
     if (pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1) &&
         capture_epoch(timed, &clock, &grid, schedule->start_frame, 0, &timeline) &&
         run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
@@ -345,6 +435,9 @@ static void report_irq_transitions(void)
         printf("Paula wait %u before=%02x%02x%02x after=%02x%02x%02x alarm=%u\n", i,
             (unsigned)before[0], (unsigned)before[1], (unsigned)before[2],
             (unsigned)after[0], (unsigned)after[1], (unsigned)after[2], row->alarm_signal_only);
+#ifdef PT_PAULA_TAIL_IRQ
+        printf("Paula tail samples %u before=%u after=%u\n", i, row->before_attempts, row->after_attempts);
+#endif
 #endif
     }
 #ifdef PT_PAULA_RELOAD_IRQ

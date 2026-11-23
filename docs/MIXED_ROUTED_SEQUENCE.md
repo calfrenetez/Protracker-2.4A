@@ -375,3 +375,17 @@ The baseline brackets were six ticks and the call brackets were
 include the clock samples and any intervening task delay.
 The scheduled MIDI transport still needs its own acceptance proof.
 [Direct CAMD receipt](test-evidence/camd_direct_groups_amiberry_20261123.json)
+
+The `routed-mixed-tail` fixture scheduled tracker Start and F00 at
+frames 0 and 3840 on the same continuous countdown. The F00 frame
+[65509, 65524) crossed the reload at 65523. Its pre-reload aperture
+was [65509, 65521). The observed whole F00 burst [65510, 65517]
+included the actual Paula DMA clear and the prepared AmiGUS disable
+and MIDI Note Off in RAM. Start and F00 each took seven ticks. The
+owner released the audio lock, Chip buffers and both CIA timers.
+A bounded task-side read retry produced a coherent sample before
+the first wait. The prior torn sample's refusal and cleanup are
+preserved separately. The exact scheduled card and MIDI outputs
+remain pending.
+[Mixed crossing-frame receipt](test-evidence/routed_mixed_tail_amiberry_20261123.json)
+[Prior torn sample receipt](test-evidence/routed_mixed_tail_torn_r55_amiberry_20261123.json)

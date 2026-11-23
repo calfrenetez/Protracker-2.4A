@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-23",
+  "target": "Owner A1200 via PicoWyfy and Safari AmiConnect",
+  "kickstart": "47.115",
+  "workbench": "47.5",
+  "installed": {
+    "path": "LIBS:camd.library",
+    "previously_absent": true,
+    "source": "https://ftp.fau.de/mirrors/aminet/mus/midi/camd40.lha",
+    "sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+    "matches_exact_amiberry_qualified_bytes": true,
+    "native_md5": "04d99629194ea9c689dbdd02806f4f01",
+    "runtime_library_version": "40.5",
+    "embedded_file_version_tag": "40.4"
+  },
+  "transfer": {
+    "archive_bytes_delivered": 101782,
+    "host_archive_sha256": "d9fa48ad5f34579faca70e7df30d5f885605d8e282f45f27761f3284a07b3673",
+    "native_archive_md5": "6d5607e1a190ab9aa73b2faa59166f33",
+    "native_archive_integrity": "Both files OK",
+    "diagnostic_sha256": "a944ab315e4ab2145c0669c8f96e1fd2162ec1f9f5b0def50aa0e445c83f18db",
+    "native_diagnostic_md5": "9ae888b7ff2975d4a9a1247377abedcc",
+    "one_file_server_exit": 0
+  },
+  "native_results": {
+    "outputs": {"rc": 0, "receiving_clusters": 0, "closed": true},
+    "loopback": {"rc": 0, "note_on_hex": "96 3c 64", "note_off_hex": "86 3c 00", "closed": true},
+    "existing_midi_driver_filenames": ["emu10kx"],
+    "connected_wire_route_verified": false,
+    "physical_midi_bytes_observed": false,
+    "mac_coremidi_inputs": 0,
+    "mac_coremidi_outputs": 0
+  },
+  "restoration": {
+    "stack_bytes": 4096,
+    "amiconnect": "Authenticated — View Only",
+    "physical_lane_independent": "EMPTY",
+    "historical_release_fence": 141
+  }
+}

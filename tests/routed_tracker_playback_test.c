@@ -1,7 +1,12 @@
 #define PT_ROUTED_COMBINED_TEST_MAIN other_combined_cases
 #include "routed_midi_combined_test.c"
 #include "../src/core/routed_playback.h"
+#include "../src/editor/routed_preflight.h"
 #include "../src/editor/sampler_mixed_readers.h"
+
+static const struct pt_render_options options = {
+    .rate = 48000, .bits = 16, .tracks = 0x801f, .gain_q16 = 65536, .tick_limit = 64, .frame_limit = 100000
+};
 
 static void tracker_project(struct trial *t, int32_t pcm[2][1024], unsigned short_card)
 {
@@ -25,6 +30,78 @@ static void tracker_project(struct trial *t, int32_t pcm[2][1024], unsigned shor
     strcpy(p->midi_output[15], "synth.out");
     p->events[15] = (struct pt_event){.kind = PT_NOTE_MIDI, .pitch = 60, .flags = 1, .velocity = 100};
     p->events[p->channels.count] = (struct pt_event){.effect = 15};
+}
+
+static enum pt_routed_preflight_result audit_song(const struct pt_project *project,
+    const struct pt_allocator *allocator, void *normalizer, size_t normalizer_bytes,
+    struct pt_routed_preflight_report *report, struct pt_render_sequence **sequence)
+{
+    const struct pt_routed_preflight_inputs inputs = {
+        .project = project, .options = options, .caps = {3546895, 124, 65535}, .format = {8, 0, 0, 0},
+        .allocator = *allocator, .normalizer_workspace = normalizer, .normalizer_capacity = normalizer_bytes,
+        .revision = 37, .generation = 17
+    };
+    const size_t bytes = pt_routed_preflight_workspace_size();
+    void *workspace = calloc(1, bytes);
+    struct pt_routed_preflight *audit = NULL;
+    struct pt_render_sequence *second = NULL;
+    enum pt_routed_preflight_result result;
+    unsigned steps = 0;
+    assert(workspace);
+    assert(pt_routed_preflight_begin(workspace, bytes, &inputs, &audit) == PT_ROUTED_PREFLIGHT_PENDING);
+    assert(!pt_routed_preflight_take(audit, 37, 17, sequence) && !*sequence);
+    report->frame = UINT64_MAX;
+    assert(pt_routed_preflight_step(audit, 38, 17, 73, report) == PT_ROUTED_PREFLIGHT_STALE);
+    assert(report->frame == UINT64_MAX);
+    do {
+        assert(++steps < 1024);
+        result = pt_routed_preflight_step(audit, 37, 17, 73, report);
+    } while (result == PT_ROUTED_PREFLIGHT_PENDING);
+    if (result == PT_ROUTED_PREFLIGHT_READY) {
+        assert(pt_routed_preflight_take(audit, 37, 17, sequence) && *sequence);
+        assert(!pt_routed_preflight_take(audit, 37, 17, &second) && !second);
+    } else {
+        assert(!pt_routed_preflight_take(audit, 37, 17, sequence) && !*sequence);
+    }
+    assert(pt_routed_preflight_close(&audit) && !audit);
+    free(workspace);
+    return result;
+}
+
+static void refuse_late_paula_loop(void)
+{
+    struct trial *t = trial_make(8, 8);
+    struct pt_project *project = &t->resources->document.project;
+    struct pt_render_sequence *sequence = NULL;
+    struct pt_routed_preflight_report report = {0};
+    struct allocation render_memory = {0};
+    const struct pt_allocator allocator = {&render_memory, ordinary, ordinary_release};
+    const size_t capacity = pt_mixed_plan_normalizer_workspace_size();
+    void *normalizer = calloc(1, capacity);
+    int32_t (*pcm)[1024] = malloc(2 * sizeof(*pcm));
+    size_t bytes;
+    uint8_t *before;
+    assert(normalizer && pcm);
+    tracker_project(t, pcm, 0);
+    project->samples[1].loop = PT_LOOP_FORWARD;
+    project->samples[1].loop_start = 8;
+    project->samples[1].loop_end = 64;
+    project->events[project->channels.count] = (struct pt_event){
+        .kind = PT_NOTE_PERIOD, .pitch = 428, .instrument = 2
+    };
+    project->events[2 * project->channels.count] = (struct pt_event){.effect = 15};
+    before = save(t->resources, &bytes);
+    assert(audit_song(project, &allocator, normalizer, capacity, &report, &sequence) == PT_ROUTED_PREFLIGHT_REFUSED);
+    assert(!sequence && report.frame == 1920 && report.audio_boundaries == 2 && report.render == PT_RENDER_OK);
+    assert(report.plan.result == PT_MIXED_PLAN_REFUSED && report.plan.reason == PT_MIXED_PLAN_REASON_PAULA &&
+           report.plan.track == 0);
+    assert(render_memory.calls == 1 && render_memory.releases == 1);
+    assert(!t->model.reads && !t->model.submits && !t->model.effects && !t->resources->card.writes && !t->resources->chips);
+    same_save(t->resources, before, bytes);
+    trial_drop(t);
+    free(before);
+    free(normalizer);
+    free(pcm);
 }
 
 static void normalize(const struct pt_project *project, const struct pt_routed_render_plan *plan,
@@ -95,10 +172,9 @@ static enum pt_mixed_readers_result observe_retirement(void *context,
 
 static void tracker_case(unsigned short_card)
 {
-    const struct pt_render_options options = {
-        .rate = 48000, .bits = 16, .tracks = 0x801f, .gain_q16 = 65536, .tick_limit = 64, .frame_limit = 100000
-    };
-    const struct pt_allocator allocator = {NULL, master_alloc, master_free};
+    struct allocation render_memory = {0};
+    const struct pt_allocator allocator = {&render_memory, ordinary, ordinary_release};
+    struct pt_routed_preflight_report audit_report = {0};
     struct trial *t = trial_make(8, 8);
     struct pt_project *project = &t->resources->document.project;
     struct pt_render_sequence *sequence = NULL;
@@ -138,10 +214,10 @@ static void tracker_case(unsigned short_card)
         assert(pt_sampler_pin(sampler, project, i, sampler->generation, &pinned, master + i) == PT_EDIT_OK);
     }
     saved = save(t->resources, &saved_size);
-    assert(pt_render_sequence_begin_routed(project, &options, &allocator, &sequence) == PT_RENDER_OK);
-    do {
-        assert(pt_render_sequence_prepare(sequence, 2, &ready) == PT_RENDER_OK);
-    } while (!ready);
+    assert(audit_song(project, &allocator, workspace, capacity, &audit_report, &sequence) == PT_ROUTED_PREFLIGHT_READY);
+    assert(audit_report.frame == 1920 && audit_report.audio_boundaries == 2);
+    assert(render_memory.calls == 1 && !render_memory.releases && render_memory.last == sequence);
+    assert(!t->model.reads && !t->model.submits && !t->resources->card.writes && !t->resources->chips);
     assert(pt_routed_midi_init(midi, project, options.tracks));
     assert(pt_routed_midi_schedule_init(&schedule, midi, &api, 19, 17, 100, 709379, options.rate));
     t->config.backend = (struct pt_mixed_readers_backend){
@@ -326,6 +402,7 @@ static void tracker_case(unsigned short_card)
     assert(!pt_mixed_readers_readers_held(t->queue));
     same_save(t->resources, saved, saved_size);
     pt_render_sequence_close(sequence);
+    assert(render_memory.releases == 1);
     for (i = 0; i < project->sample_count; ++i)
         pt_sampler_unpin(master[i]);
     trial_drop(t);
@@ -341,8 +418,9 @@ static void tracker_case(unsigned short_card)
 
 int main(void)
 {
+    refuse_late_paula_loop();
     tracker_case(0);
     tracker_case(1);
-    puts("Routed tracker playback: exact factory Stop of live keys, including independent AmiGUS retirement; SOFTWARE_ONLY");
+    puts("Routed tracker playback: whole-song quantized audit, exact factory Stop and independent AmiGUS retirement; SOFTWARE_ONLY");
     return 0;
 }

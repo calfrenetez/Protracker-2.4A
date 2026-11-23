@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-23",
+  "target": "Owner A1200 via PicoWyfy and Safari AmiConnect",
+  "kickstart": "47.115",
+  "workbench": "47.5",
+  "hardware": "AmiGUS Mini hardware revision 0, firmware 7ea663e7",
+  "transfer": {
+    "host_archive_sha256": "e2cc2ef6c54734d75c573185eb702f83f1c3a79b807976f6b9ad94802923f0ff",
+    "archive_bytes_delivered": 93907,
+    "amiga_archive_and_member_md5": {
+      "archive": "5e51ef018a90706c0037b52118e8aaef",
+      "PTVoiceRead": "d0058e5ae8277b4f9330896b15e8483f",
+      "PTRecordStatus": "cc8b866033bc962a53ee2a10d451737e",
+      "PTCamdControl": "9ae888b7ff2975d4a9a1247377abedcc"
+    },
+    "native_archive_integrity": "All three files OK",
+    "entry_sha256": {
+      "PTVoiceRead": "9c0c65bdd293acc1d9e54b4c2b4995b0ae444819591f167438c9d2610f2caef7",
+      "PTRecordStatus": "4cd6883a140c6ed1040e335f13d90908ebfda04321e08c4999ae8192dada1785",
+      "PTCamdControl": "a944ab315e4ab2145c0669c8f96e1fd2162ec1f9f5b0def50aa0e445c83f18db"
+    }
+  },
+  "shell_return_codes": {
+    "voice": 0,
+    "record": 0,
+    "camd": 5
+  },
+  "amigus_selected_voice": {
+    "selected_voice_observed": true,
+    "register_words": {
+      "0x20": 0,
+      "0x22": 0,
+      "0x24": 0,
+      "0x26": 32640,
+      "0x28": 0,
+      "0x2a": 0,
+      "0x2c": 0,
+      "0x2e": 0,
+      "0x30": 0,
+      "0x32": 0,
+      "0x34": 0,
+      "0x36": 0,
+      "0x38": 0,
+      "0x3a": 0,
+      "0x3c": 0
+    },
+    "playback_control_bit": false,
+    "bank_identity": null,
+    "original_release_confirmed": true,
+    "sample_ram_quiet_qualified": false
+  },
+  "amigus_recorder": {
+    "idle": true,
+    "format": 0,
+    "control": 0,
+    "irq_mask": 0,
+    "left_gain": 32768,
+    "right_gain": 32768,
+    "watermark_words": 0,
+    "pending_words": 0,
+    "original_release_confirmed": true
+  },
+  "camd": {
+    "closed": true,
+    "activation_result": 1,
+    "library_path_found": false,
+    "devs_midi_listing": [
+      "emu10kx"
+    ],
+    "messages_sent": 0
+  },
+  "final_state": {
+    "stack_restored_bytes": 4096,
+    "view_only_verified": true,
+    "transfer_service_exited": true,
+    "retained_in_ram": "RAM:PT24GD2317",
+    "independently_verified_guard": {
+      "phase": "EMPTY",
+      "fence": 137,
+      "hold": false,
+      "resident": false
+    }
+  },
+  "scope": "Native read-only card and software discovery through the real A1200. Text transcribed from the native Shell display and checked by the host. No wavetable writes, playback, MIDI output or listening qualification."
+}

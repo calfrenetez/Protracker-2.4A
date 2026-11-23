@@ -691,3 +691,8 @@ and its IRQ enables are clear and the FIFO has no pending words. This
 mode leaves the rate, interrupt configuration and FIFO intact and refuses
 if PCM is already owned. The map marks the FIFO reset as a write-only
 strobe and its data reads as consuming ports, so the snapshot excludes both.
+
+The real A1200 run read all 15 selected-voice words and returned RC0.
+The recorder returned RC0 with capture disabled, zero pending words and
+no enabled recording interrupts. Both card reservations were confirmed
+released. [A1200 read-only results](test-evidence/amigus_camd_readonly_a1200_20261123.json)

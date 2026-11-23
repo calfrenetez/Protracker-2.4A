@@ -1,0 +1,36 @@
+{
+  "target": "amiberry-030",
+  "profile": "private cycle-exact DOS boot",
+  "passed": true,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "physical_device_access": false,
+  "fixtures": {
+    "wavetable-read-test": {
+      "passed": true,
+      "guest_rc": "0",
+      "candidate_sha256": "1bbbcfe4b8bf887604405c734cc464e8564f39d935761163ee6f7c07875f3a17",
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "067f4e63cfbe43ca55217b555229bee54d7842ba67ad278ba8403ddc4bfa9531",
+      "guest_log_sha256": "878e25b8045abb7ee27a06912e4c32c9ca47968901318557b6034d1b08dfbeae",
+      "observations": {
+        "synthetic_register_readback": true,
+        "writes": 0
+      }
+    },
+    "amigus-selected-control": {
+      "passed": true,
+      "guest_rc": "5",
+      "candidate_sha256": "4fc176bfc464323117722a7c8ed1fca94d22d2f4e5f53a055b30df6a342fcaad",
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "4ffdc2066fa4ac510499c7351a8ad864ac32041afb041dbcc50b8e0c5abef6f6",
+      "guest_log_sha256": "8db7b309597231ed6aabb0a24a37ef4e823ec29ceccbc4d670046ad5c00b7725",
+      "observations": {
+        "library_available": false,
+        "matching_probe_mode": true,
+        "writes": 0
+      }
+    }
+  }
+}

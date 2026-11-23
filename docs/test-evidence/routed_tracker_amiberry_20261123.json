@@ -117,5 +117,29 @@
     "guest_exit_code": 0,
     "exact_complete_log": true
   },
+  "sampler_boundary_follow_up": {
+    "tested_source": "1d3962a0ac6bb8700e1861d6e4222240678128e6",
+    "candidate_and_guest_readback_sha256": "2257ee98f4073dd6e14a6753b93f52258afb00daeba533486dd4b4f5a9f61a42",
+    "build_receipt_sha256": "827891c7d7f66174631f4da4723e4976373bb127e112cd3dc1899a39c185662a",
+    "guest_log_sha256": "6ad5a5e6bdde11d7ac857decd2978a832c256fd35959c7623029428cf58fbac5",
+    "focused_host_methods": 10,
+    "validated_build_inputs": 120,
+    "additional_checks": [
+      "same source and sample grid before preparation",
+      "bounded quantizer and factory progression",
+      "adopted keys and single publication",
+      "whole-song F00 and replacement reader ownership",
+      "wrong revision cannot advance or publish",
+      "stale unpublished command relinquishes its preparation without output or borrowed reader",
+      "exact commit requires source consumption and output settlement"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

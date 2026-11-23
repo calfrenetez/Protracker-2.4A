@@ -17,11 +17,11 @@ static void end_access(struct pt_amigus_reservation *reservation)
 }
 
 static void release_registers(struct pt_native_amigus_library *native,
-                              struct pt_amigus_reservation *reservation)
+                              struct pt_amigus_reservation *reservation, ULONG resource)
 {
     struct Library *AmiGUS_Base = native->base;
-    PT_Free(reservation->card, AMIGUS_FLAG_PCM, reservation);
-    const unsigned long release_code = PT_Reserve(reservation->card, AMIGUS_FLAG_PCM, NULL);
+    PT_Free(reservation->card, resource, reservation);
+    const unsigned long release_code = PT_Reserve(reservation->card, resource, NULL);
     printf("REGISTER RELEASE confirmed=%u retained=%u driver=0x%08lx\n",
            release_code==0,release_code!=0,release_code);
     if (release_code) {
@@ -36,7 +36,7 @@ static void release_registers(struct pt_native_amigus_library *native,
     }
 }
 
-int pt_record_status_probe(void)
+int pt_record_status_probe(int with_wavetable)
 {
     puts("RECORD-PROBE scope=Mini-7ea663e7 writes=NO fifo_data_reads=NO audio=NOT_TESTED");
     struct Library *pin = OpenLibrary((CONST_STRPTR)"amigus.library", 1);
@@ -52,15 +52,33 @@ int pt_record_status_probe(void)
     struct pt_native_amigus_library native = {0};
     struct pt_amigus_reservation reservation = {0};
     struct pt_amigus_reservation_api api = pt_native_amigus_reservation_api(&native);
+    struct pt_native_amigus_library wave_native = {0};
+    struct pt_amigus_reservation wave = {0};
+    if (with_wavetable) {
+        struct pt_amigus_reservation_api wave_api = pt_native_amigus_reservation_api(&wave_native);
+        const enum pt_amigus_reservation_result opened =
+            pt_amigus_reservation_open_resource(&wave, &wave_api, 0, PT_AMIGUS_WAVETABLE);
+        if (opened != PT_AMIGUS_RESERVED) {
+            CloseLibrary(pin);
+            printf("RECORD result=SKIP reason=wavetable-reservation-unavailable status=%u rc=5\n", opened);
+            return PT_SKIP;
+        }
+    }
     const enum pt_amigus_reservation_result opened = pt_amigus_reservation_open(&reservation, &api, 0);
     if (opened != PT_AMIGUS_RESERVED) {
+        if (with_wavetable)
+            release_registers(&wave_native, &wave, AMIGUS_FLAG_WAVETABLE);
         CloseLibrary(pin);
         printf("RECORD result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
         return PT_SKIP;
     }
     const char *reason = "register-contract-unavailable";
     int result = PT_SKIP;
-    if (pt_amigus_reservation_begin(&reservation)) {
+    if (with_wavetable && wave.card != reservation.card) {
+        reason = "card-mismatch";
+    } else if (pt_amigus_reservation_begin(&reservation)) {
+        if (with_wavetable)
+            puts("RECORD simultaneous ownership: PCM and WAVETABLE held on the same card");
         struct pt_native_amigus_record_status status;
         if (SetSignal(0, 0) & SIGBREAKF_CTRL_C) {
             reason = "cancelled";
@@ -76,7 +94,11 @@ int pt_record_status_probe(void)
         }
         end_access(&reservation);
     }
-    release_registers(&native, &reservation);
+    release_registers(&native, &reservation, AMIGUS_FLAG_PCM);
+    if (with_wavetable) {
+        release_registers(&wave_native, &wave, AMIGUS_FLAG_WAVETABLE);
+        puts("RECORD release confirmed: PCM and WAVETABLE");
+    }
     CloseLibrary(pin);
     printf("RECORD result=%s reason=%s rc=%d\n",
            result == PT_PASS ? "PASS" : result == PT_SKIP ? "SKIP" : "FAIL", reason, result);
@@ -196,7 +218,7 @@ int pt_register_probe(int reset)
         }
         end_access(&r);
     }
-    release_registers(&native, &r);
+    release_registers(&native, &r, AMIGUS_FLAG_PCM);
     printf("REGISTERS result=%s reason=%s rc=%d\n",
            result==PT_PASS ? "PASS" : result==PT_SKIP ? "SKIP" : "FAIL",reason,result);
     return result;

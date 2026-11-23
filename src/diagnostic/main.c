@@ -127,7 +127,8 @@ int main(int argc, char **argv)
     if (argc==2 && !strcmp(argv[1],"--wavetable-status")) return pt_wavetable_probe(PT_WAVETABLE_GLOBAL_STATUS);
     if (argc==2 && !strcmp(argv[1],"--wavetable-selected-control")) return pt_wavetable_probe(PT_WAVETABLE_SELECTED_CONTROL);
     if (argc==2 && !strcmp(argv[1],"--wavetable-selected-voice")) return pt_wavetable_probe(PT_WAVETABLE_SELECTED_VOICE);
-    if (argc==2 && !strcmp(argv[1],"--record-status")) return pt_record_status_probe();
+    if (argc==2 && !strcmp(argv[1],"--record-status")) return pt_record_status_probe(0);
+    if (argc==2 && !strcmp(argv[1],"--wavetable-record-status")) return pt_record_status_probe(1);
     if (!registers && (argc != 2 || strcmp(argv[1], "--idle-ownership")))
         return diagnostic(argc, argv);
     printf("%s scope=unused-RC6-020-AHI-only audio=NOT_TESTED\n",label);

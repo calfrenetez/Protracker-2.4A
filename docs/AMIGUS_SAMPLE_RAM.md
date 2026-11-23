@@ -696,6 +696,13 @@ mode leaves the rate, interrupt configuration and FIFO intact and refuses
 if PCM is already owned. The map marks the FIFO reset as a write-only
 strobe and its data reads as consuming ports, so the snapshot excludes both.
 
+`AmiGUSTest --wavetable-record-status` also holds a distinct WAVETABLE
+reservation on the same card during the snapshot. The diagnostic acquires
+WAVETABLE first and checks the card identity before reading PCM registers.
+If a reservation fails, it releases any part it obtained. A completed trial
+checks both releases, in reverse order. This tests whether a future Wave
+capture can hold both parts of that card while it prepares one voice.
+
 The real A1200 run read all 15 selected-voice words and returned RC0.
 The recorder returned RC0 with capture disabled, zero pending words and
 no enabled recording interrupts. Both card reservations were confirmed

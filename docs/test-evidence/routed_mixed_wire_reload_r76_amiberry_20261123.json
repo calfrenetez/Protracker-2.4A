@@ -1,0 +1,82 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening remain pending.",
+  "fixtures": {
+    "reload": {
+      "passed": true,
+      "guest_rc": "0",
+      "candidate_sha256": "92cc440e57115f5d0e2c9045faec0fa488e0c8b1fbe3f0efa65b94547f7b6a25",
+      "validated_build_inputs": 128,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "773c78504e66a2406086873f07813cbe205ba8088f281258f3b0ea28a391d970",
+      "guest_log_sha256": "2d8dce579c325d6cd9bba07b9fa0b63146bac75eea48b328d70d7950f04c13ad",
+      "independent_replay_sha256": "b62573c20de43e2c831b23986e3183da81558dc60cc47f62c3ed0ae716dd6d39",
+      "writes": [
+        {
+          "frame": 0,
+          "window": [
+            8192,
+            8207
+          ],
+          "observed": [
+            8193,
+            8200
+          ],
+          "card_ram_and_midi_receive": [
+            0,
+            32768,
+            26557530
+          ],
+          "verdict": "issued_in_frame",
+          "serial_loopback": {
+            "first_word": 405,
+            "receive": "953c5a",
+            "byte_readback_ticks": [
+              8407,
+              8453,
+              8499
+            ],
+            "completion_ticks_after_frame_start": 307
+          }
+        },
+        {
+          "frame": 5760,
+          "window": [
+            93318,
+            93333
+          ],
+          "observed": [
+            93319,
+            93326
+          ],
+          "card_ram_and_midi_receive": [
+            0,
+            0,
+            25508864
+          ],
+          "verdict": "issued_in_frame",
+          "serial_loopback": {
+            "first_word": 389,
+            "receive": "853c00",
+            "byte_readback_ticks": [
+              93599,
+              93645,
+              93691
+            ],
+            "completion_ticks_after_frame_start": 373
+          }
+        }
+      ],
+      "serial_request_restored": true,
+      "clock_reload": {
+        "origin_sample_tick": 65752,
+        "original_callbacks": 1
+      }
+    }
+  }
+}

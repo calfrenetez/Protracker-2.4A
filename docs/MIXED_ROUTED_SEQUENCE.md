@@ -112,3 +112,5 @@ Build the combined fixture with `tools/build_render_sequence.py
 and a MIDI note through the same frame-zero publication. It checks both partial
 outcomes, confirmed cancellation, stale and incomplete audio proofs, timing,
 and exact Stop after an audio-only stop result.
+The exact native fixture returned zero and completed all seven cases on the
+Amiberry 68030. [Combined 030 test receipt](test-evidence/routed_combined_amiberry_20261123.json)

@@ -1,0 +1,28 @@
+{
+  "date_utc": "2026-11-23",
+  "tested_source": "686bfb0f1702652e66eff2d42a2c63c80dfdf4c7",
+  "target": "amiberry-030",
+  "guest_cpu_confirmation": "System: 68030",
+  "fixture": "PTRoutedCombined",
+  "candidate_and_guest_readback_sha256": "41af275fc8feb6fd175b2bc347097e3aea7d0c52e2ba52641871ac327607ca1b",
+  "build_receipt_sha256": "fef651c047122ece530db5f46a433c35be2c52710cc2e9ca0e32b97b5690e08e",
+  "guest_log_sha256": "c08f75a9f45cb39041dad75fd1b301567f89280b724028ce4c14e87e942ca50a",
+  "cases": [
+    "shared frame-zero publication and owned Stop",
+    "audio issues and MIDI cancels",
+    "MIDI issues and audio cancels",
+    "both cancel before activation",
+    "wrong ticket and incomplete audio proof retain the batch",
+    "audio issue interval crosses the exact frame window",
+    "partial Stop retains the remaining MIDI note until its own Stop proof"
+  ],
+  "focused_host_methods": 9,
+  "guest_exit_code": 0,
+  "exact_complete_log": true,
+  "guest_startup_completed": true,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Genuine ProTracker audio queue with modeled Paula, AmiGUS and MIDI output. The full editor, live CAMD, physical devices and listening remain untested."
+}

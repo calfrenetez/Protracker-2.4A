@@ -1,0 +1,20 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "053b1e3cd17b607ac2dacadfd0a3a5042677007904240fd1ac21bf26e7f87dcc",
+  "build_receipt_sha256": "9d67a268e5849ee75c2f2724c70880f5e7b60cb3a2623413ea3f4feb8347d0b3",
+  "guest_log_sha256": "f4e98c0fa3a01cd4353cead028f38e76434a89d9307895808a9b129086d08f6e",
+  "validated_build_inputs": 9,
+  "observation": {
+    "counter_hz": 709379,
+    "counted_task_wakes": 57,
+    "counted_irq_callbacks": 59,
+    "closed": true,
+    "rc": 20,
+    "selected_period": null
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Two or more timer callbacks occurred before the task validated its next wake. The diagnostic refused before sampling the final endpoint. Cadence remains unqualified by this run."
+}

@@ -234,3 +234,13 @@ post-write count. An excluded or torn post-write sample keeps proof that the
 write happened and withholds frame acceptance. The fixture also records one
 deliberately early exhausted attempt and one expired attempt without writes.
 Its report can be replayed independently from the native calculations.
+
+The exact Amiberry 68030 run recorded eleven of twelve RAM writes fully
+inside their original local frame. Each admitted bracket was six E-clock
+ticks. The other frame, 1920, was already expired on the first bounded
+entry and left its word untouched. That first sample was 780 ticks after
+the scheduled first tick. Both deliberate negative cases also wrote
+nothing. The run completed the observation and closed the owned timer.
+It did not qualify reliable in-frame dispatch. The raw report retains
+the sampled counts and the missed frame.
+[Local CIA activation receipt](test-evidence/cia_local_activation_amiberry_20261123.json)

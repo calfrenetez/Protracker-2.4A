@@ -1,0 +1,38 @@
+{
+  "source": "beda5ac1125754c7a0f2672999f15afea861adb8",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "ee20b2ccb1750cd11481f249eee84ec85b028d12c9fadfeae98cc6c342f16b5a",
+  "build_receipt_sha256": "ee13f35604a13564ce6a219b051092842fb8afe1d7485247b9121222b53d4430",
+  "guest_log_sha256": "5d2bf71895fd2c1a80c8985b66e7cd774113f5823364689597700de33d927209",
+  "replay_tool_sha256": "6f01775ba64cc912b803126edc17a940d80789f4b902f501165e62a7ef040961",
+  "validated_build_inputs": 10,
+  "focused_host_methods": 22,
+  "observation_complete": true,
+  "all_target_frames_admitted": false,
+  "timing": {
+    "counter_hz": 709379,
+    "outer_elapsed_ticks": 31017,
+    "clock_anchor_count": 65523,
+    "timed_frames": 12,
+    "inside": 11,
+    "issued_outside_or_torn": 0,
+    "missed_before_write": 1,
+    "deliberate_no_write_refusals": 2
+  },
+  "missed_frame": {
+    "frame": 1920,
+    "first": 28376,
+    "excluded": 28390,
+    "first_observed": 29156,
+    "marker_writes": 0
+  },
+  "inside_bracket_ticks": [
+    6,
+    6
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Owned masked CIA local epoch and ordinary RAM marker observed on a native 68030 guest. The missed frame remains a strict refusal. Sustained, original song-epoch, IRQ, audio and MIDI timing require separate evidence."
+}

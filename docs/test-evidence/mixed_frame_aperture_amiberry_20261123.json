@@ -1,0 +1,107 @@
+{
+  "source": "9845c6ab2b9501fd24c2e97a601f5e4917b24560",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a118a6904a82fb52527c5b459fb822eeb747f11e271093e4cd88767d2a6c58a2",
+  "build_receipt_sha256": "086220ffbecc1207efbedd0e48a4522900304f7f6547288b402c2a1efa1d3676",
+  "guest_log_sha256": "7c3c2fb4d08d3d063cc679b36b358d21d5bd2b46cb46bb121cfaa6825041fb12",
+  "independent_replay_sha256": "664b82a5013823926d84d5b7c86742cce2888fab7cd81693c886f9cf706300d1",
+  "validated_build_inputs": 124,
+  "host_routed_methods": 14,
+  "host_sanitized_mixed_forecast_passed": true,
+  "timing": {
+    "writes": [
+      {
+        "stage": 3,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 32783,
+        "dma_before": 512,
+        "dma_after": 527,
+        "frame_ticks": [
+          8192,
+          8207
+        ],
+        "observed_ticks": [
+          8193,
+          8200
+        ]
+      },
+      {
+        "stage": 6,
+        "clock_hz": 709379,
+        "chip": 0,
+        "timer": 0,
+        "command": 15,
+        "dma_before": 527,
+        "dma_after": 512,
+        "frame_ticks": [
+          36568,
+          36582
+        ],
+        "observed_ticks": [
+          36570,
+          36577
+        ]
+      }
+    ],
+    "guest_closed": true,
+    "clock_anchor_count": 65523,
+    "alarm": {
+      "chip": 0,
+      "timer": 1,
+      "callbacks": 2,
+      "closed": true
+    },
+    "device_guest_closed": true,
+    "song_epoch_ticks": 8192,
+    "forecast_start_frame": 0,
+    "forecast_f00_frame": 1920,
+    "forecast_actions": {
+      "paula": 4,
+      "amigus": 1,
+      "midi": 1
+    },
+    "mixed_ram_observations": [
+      {
+        "frame": 0,
+        "window": [
+          8192,
+          8207
+        ],
+        "observed": [
+          8193,
+          8200
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          32768,
+          26557530
+        ],
+        "verdict": "issued_in_frame"
+      },
+      {
+        "frame": 1920,
+        "window": [
+          36568,
+          36582
+        ],
+        "observed": [
+          36570,
+          36577
+        ],
+        "card_bank_control_and_midi_ram": [
+          0,
+          0,
+          25508864
+        ],
+        "verdict": "issued_in_frame"
+      }
+    ]
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Original tracker Start and F00, direct silent Paula MMIO and ordered AmiGUS/MIDI RAM stores, Amiberry only. No native AmiGUS register acceptance, CAMD delivery, sustained playback or listening qualification."
+}

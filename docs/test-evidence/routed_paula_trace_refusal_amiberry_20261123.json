@@ -1,0 +1,23 @@
+{
+  "base_source": "beda5ac1125754c7a0f2672999f15afea861adb8",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a117e6a988390071d91fd8bcf401f6a68786cc5f45a0208ad50096afca92890e",
+  "build_receipt_sha256": "b0755060169979a68179f5d699f95d3000671a8e88a8256b4cdbd63f6f53f6f4",
+  "guest_log_sha256": "933d3cd59ce51cdc40e42820ce2ac307e278a51d2bb3a8320a818608be5c04aa",
+  "diagnostic_source_sha256": "de0927395dfd9e44d02b70f3f8c727b3a28e8cd75e5fe497e2fc10423eb13523",
+  "compiler_listing_sha256": "4d067d7c778bfac27d5be5966c5be8ab320c00802b4da1cafbd5a11778c68e0c",
+  "guest_exit_code": 20,
+  "original_passed": false,
+  "grouped_dma_readback": "0x02df",
+  "audio_request_mask_before_clear_after_clear_after_wait": [
+    "0x0780",
+    "0x0000",
+    "0x0780"
+  ],
+  "cause": "The decision read the INTREQ write register at 0xdff09c. The independent trace used INTREQR at 0xdff01e and captured all four requests.",
+  "original_evidence_preserved": true,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true
+}

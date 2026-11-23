@@ -1,0 +1,30 @@
+{
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "a18ae353ebeadce2d9c8d72642ced5813aab03262a4cd2319e572b8fc191adb6",
+  "build_receipt_sha256": "9745db006a785e466d4fab04050356198c25458ed5888cde73b1661239753645",
+  "guest_log_sha256": "6066ba9f1d2dfd5672469b534f5a7a09a3d1acdbb1e58b4b2015d51cbf4da347",
+  "validated_build_inputs": 125,
+  "independent_replay_sha256": "df6bf69a8ae2c4cba04f73946cd3e381f9d52ee73bfb6a7394baae35dfeed051",
+  "observations": {
+    "counter_hz": 709379,
+    "f00_frame": 3840,
+    "original_window": [
+      65517,
+      65532
+    ],
+    "reload_tick": 65525,
+    "available_pre_and_post_ticks": [
+      6,
+      7
+    ],
+    "required_bracket_ticks": 7,
+    "alarm_callbacks": 0,
+    "owned_dma_stayed_clear": true,
+    "guest_closed": true
+  },
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Original F00 frame crosses the selected test countdown with inadequate space on either side. The diagnostic refused before its first alarm with Paula DMA clear throughout."
+}

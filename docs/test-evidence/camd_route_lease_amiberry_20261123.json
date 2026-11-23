@@ -1,0 +1,19 @@
+{
+  "source": "533270766916546308ef8a198569bc09396d80b0",
+  "target": "amiberry-030",
+  "candidate_and_guest_readback_sha256": "ff1039b9227b72b06ce5e576190cb2b1a5e0d6d27e7386df0342a6703478d346",
+  "build_receipt_sha256": "a0d69412796f7f4e7821690b57bb66ec06b8a10edcfb5c81239473dbb5a1221c",
+  "camd_library_guest_copy_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+  "guest_route_log_sha256": "a7a4dc7121e6ec34592d01a8b24d2a7af49a91f856bd002f05c5e9016d79c741",
+  "validated_build_inputs": 19,
+  "host_model_groups": 9,
+  "host_frozen_inputs": 12,
+  "absent_library_case": true,
+  "original_route_lease_case": true,
+  "private_driver_directory_empty": true,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Driver-free local CAMD queues. Original sender links survive receiver absence and return under a retained software lease; explicit release precedes teardown. No exact scheduled send, physical endpoint or listening evidence."
+}

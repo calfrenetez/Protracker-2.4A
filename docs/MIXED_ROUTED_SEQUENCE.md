@@ -187,3 +187,10 @@ activation window. In the routed activation fixture, one software port
 queues four Paula readers, two AmiGUS readers and notes for two distinct
 MIDI destinations, then applies their exact Stop from the held keys and
 notes. The device output and activation counter are modeled in this fixture.
+
+Explicit transport Stop uses the same scheduled path and owned reader keys
+as F00. It submits for the requested absolute frame after the preceding
+command has settled or been abandoned with proof. A pending command keeps
+its original ownership, and Stop leaves the renderer's next interval in
+place. The fixture stops at frame 960 before its original F00 at frame 1920
+and checks the complete Note Off and reader releases.

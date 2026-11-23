@@ -28,6 +28,7 @@ struct pt_routed_sampler_config {
  * The caller services the exact ticket and keeps every adopted reader alive
  * through its own independent retirement. */
 struct pt_routed_sampler_boundary {
+    const struct pt_routed_sampler_boundary *owner;
     struct pt_routed_playback_frame playback;
     struct pt_routed_render_plan plan;
     struct pt_mixed_plan_inputs inputs;
@@ -36,7 +37,8 @@ struct pt_routed_sampler_boundary {
     struct pt_mixed_readers_stop_keys stop;
     struct pt_sampler_mixed_command_handle command;
     const struct pt_routed_sampler_config *config;
-    uint64_t ticket;
+    struct pt_routed_midi_schedule *schedule;
+    uint64_t ticket, stop_serial;
     enum pt_routed_sampler_result phase;
     unsigned publish_attempted, published;
 };
@@ -45,13 +47,19 @@ struct pt_routed_sampler_boundary {
  * abandon it before starting a separate recovery or playback operation. */
 enum pt_routed_sampler_result pt_routed_sampler_begin(struct pt_routed_sampler_boundary *,
     const struct pt_routed_sampler_config *, struct pt_render_lookahead *, struct pt_routed_midi_schedule *);
+/* Explicit transport Stop after the previous boundary has settled or been
+ * abandoned on exact proof. Use the requested absolute frame on the existing
+ * schedule. No renderer is advanced. A pending publication must first receive
+ * its own terminal proof, including when cancellation and activation race. */
+enum pt_routed_sampler_result pt_routed_sampler_begin_stop(struct pt_routed_sampler_boundary *,
+    const struct pt_routed_sampler_config *, struct pt_routed_midi_schedule *, uint64_t frame);
 /* At most one bounded normalizer step or factory transition. */
 enum pt_routed_sampler_result pt_routed_sampler_step(struct pt_routed_sampler_boundary *,
     uint32_t revision, uint32_t generation, unsigned work);
 /* Enqueue and attempt the exact common publication once. On any uncertain
  * result, retain the original command, ticket and schedule for settlement. */
 int pt_routed_sampler_publish(struct pt_routed_sampler_boundary *, uint32_t revision, uint32_t generation);
-/* Requires source consumption, command detach and the exact combined receipt.
+/* Requires source consumption for a forecast, command detach and exact combined receipt.
  * Only a successful commit updates origins. Between boundaries the caller
  * removes origins for readers independently proved retired. */
 enum pt_render_result pt_routed_sampler_commit(struct pt_routed_sampler_boundary *, uint32_t revision, uint32_t generation);

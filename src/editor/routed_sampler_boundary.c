@@ -1,23 +1,44 @@
 #include <string.h>
 #include "routed_sampler_boundary.h"
 
+static int available(const struct pt_routed_sampler_boundary *boundary,
+    const struct pt_routed_sampler_config *config, const struct pt_routed_midi_schedule *schedule)
+{
+    return boundary && !boundary->owner && config && config->pool && config->project &&
+        config->masters && config->origins && schedule && config->generation == schedule->event.key.generation &&
+        config->rate == schedule->grid.rate && schedule->provider.submit_combined;
+}
+
+static uint64_t serial(const struct pt_routed_sampler_boundary *boundary)
+{
+    return boundary->stop_serial ? boundary->stop_serial : boundary->playback.serial;
+}
+
+static enum pt_routed_sampler_result prepare_stop(struct pt_routed_sampler_boundary *boundary)
+{
+    if (!pt_routed_midi_schedule_stop_keys(boundary->schedule, &boundary->stop))
+        boundary->phase = PT_ROUTED_SAMPLER_REFUSED;
+    else
+        boundary->phase = boundary->stop.count ? PT_ROUTED_SAMPLER_PENDING : PT_ROUTED_SAMPLER_READY;
+    return boundary->phase;
+}
+
 enum pt_routed_sampler_result pt_routed_sampler_begin(struct pt_routed_sampler_boundary *boundary,
     const struct pt_routed_sampler_config *config, struct pt_render_lookahead *lookahead,
     struct pt_routed_midi_schedule *schedule)
 {
-    if (!boundary || boundary->config || !config || !config->pool || !config->project ||
-        !config->masters || !config->origins || !schedule || config->generation != schedule->event.key.generation ||
-        config->rate != schedule->grid.rate || !lookahead ||
+    if (!available(boundary, config, schedule) || !lookahead ||
         !pt_render_sequence_routed_source_matches(lookahead->sequence, config->project, config->rate) ||
         pt_routed_playback_prepare(&boundary->playback, lookahead, schedule, &boundary->plan) != PT_RENDER_OK)
         return PT_ROUTED_SAMPLER_INVALID;
 
+    boundary->owner = boundary;
     boundary->config = config;
+    boundary->schedule = schedule;
+    if (boundary->plan.end)
+        return prepare_stop(boundary);
     boundary->phase = PT_ROUTED_SAMPLER_REFUSED;
-    if (boundary->plan.end) {
-        if (!pt_routed_midi_schedule_stop_keys(schedule, &boundary->stop))
-            return boundary->phase;
-    } else if (boundary->plan.audio.count) {
+    if (boundary->plan.audio.count) {
         boundary->inputs = (struct pt_mixed_plan_inputs){
             .project = config->project, .plan = &boundary->plan.audio, .origins = config->origins,
             .caps = &config->caps, .format = &config->format, .rate = config->rate,
@@ -27,9 +48,25 @@ enum pt_routed_sampler_result pt_routed_sampler_begin(struct pt_routed_sampler_b
                 &boundary->inputs, &boundary->normalizer) != PT_MIXED_PLAN_PENDING)
             return boundary->phase;
     }
-    boundary->phase = boundary->normalizer || boundary->stop.count ?
-        PT_ROUTED_SAMPLER_PENDING : PT_ROUTED_SAMPLER_READY;
+    boundary->phase = boundary->normalizer ? PT_ROUTED_SAMPLER_PENDING : PT_ROUTED_SAMPLER_READY;
     return boundary->phase;
+}
+
+enum pt_routed_sampler_result pt_routed_sampler_begin_stop(struct pt_routed_sampler_boundary *boundary,
+    const struct pt_routed_sampler_config *config, struct pt_routed_midi_schedule *schedule, uint64_t frame)
+{
+    const struct pt_routed_midi_batch *batch;
+    if (!available(boundary, config, schedule) || schedule->held || schedule->busy || !schedule->midi ||
+        schedule->midi->schedule != schedule || frame == UINT64_MAX)
+        return PT_ROUTED_SAMPLER_INVALID;
+    batch = pt_routed_midi_prepare_stop(schedule->midi, frame);
+    if (!batch)
+        return PT_ROUTED_SAMPLER_INVALID;
+    boundary->owner = boundary;
+    boundary->config = config;
+    boundary->schedule = schedule;
+    boundary->stop_serial = batch->serial;
+    return prepare_stop(boundary);
 }
 
 static int bind_sources(struct pt_routed_sampler_boundary *boundary)
@@ -43,7 +80,7 @@ static int bind_sources(struct pt_routed_sampler_boundary *boundary)
         } else {
             const unsigned route = record->route == PT_PAULA ? PT_MIXED_READERS_PAULA : PT_MIXED_READERS_AMIGUS;
             const struct pt_mixed_readers_key *key = pt_routed_midi_schedule_audio_key(
-                boundary->playback.schedule, route, record->slot);
+                boundary->schedule, route, record->slot);
             if (!key)
                 return 0;
             boundary->batch.source[i].active = *key;
@@ -57,7 +94,7 @@ enum pt_routed_sampler_result pt_routed_sampler_step(struct pt_routed_sampler_bo
 {
     const struct pt_routed_sampler_config *config;
     enum pt_sampler_mixed_result factory;
-    if (!boundary || boundary->playback.owner != &boundary->playback || !(config = boundary->config) ||
+    if (!boundary || boundary->owner != boundary || !(config = boundary->config) ||
         !work || work > PT_MIXED_PLAN_WORK_MAX)
         return PT_ROUTED_SAMPLER_INVALID;
     if (revision != config->revision || generation != config->generation)
@@ -94,8 +131,8 @@ enum pt_routed_sampler_result pt_routed_sampler_step(struct pt_routed_sampler_bo
 int pt_routed_sampler_publish(struct pt_routed_sampler_boundary *boundary, uint32_t revision, uint32_t generation)
 {
     const struct pt_routed_sampler_config *config;
-    if (!boundary || boundary->playback.owner != &boundary->playback || !(config = boundary->config) ||
-        boundary->phase != PT_ROUTED_SAMPLER_READY || !boundary->playback.serial || boundary->publish_attempted)
+    if (!boundary || boundary->owner != boundary || !(config = boundary->config) ||
+        boundary->phase != PT_ROUTED_SAMPLER_READY || !serial(boundary) || boundary->publish_attempted)
         return 0;
     if (revision != config->revision || generation != config->generation) {
         boundary->phase = PT_ROUTED_SAMPLER_STALE;
@@ -107,7 +144,7 @@ int pt_routed_sampler_publish(struct pt_routed_sampler_boundary *boundary, uint3
             return 0;
         boundary->published = pt_sampler_mixed_publish(config->pool, boundary->ticket) == PT_MIXED_READERS_OK;
     } else {
-        boundary->published = pt_routed_midi_schedule_submit_combined(boundary->playback.schedule, NULL) == PT_ROUTED_MIDI_QUEUED;
+        boundary->published = pt_routed_midi_schedule_submit_combined(boundary->schedule, NULL) == PT_ROUTED_MIDI_QUEUED;
     }
     return boundary->published;
 }
@@ -116,15 +153,19 @@ enum pt_render_result pt_routed_sampler_commit(struct pt_routed_sampler_boundary
     uint32_t revision, uint32_t generation)
 {
     enum pt_render_result result;
-    if (!boundary || boundary->playback.owner != &boundary->playback || boundary->phase != PT_ROUTED_SAMPLER_READY ||
+    if (!boundary || boundary->owner != boundary || boundary->phase != PT_ROUTED_SAMPLER_READY ||
         revision != boundary->config->revision || generation != boundary->config->generation ||
-        boundary->command.address || boundary->command.token || (boundary->playback.serial && !boundary->published) ||
-        (boundary->ticket && boundary->playback.schedule->audio_ticket != boundary->ticket))
+        boundary->command.address || boundary->command.token || (serial(boundary) && !boundary->published) ||
+        (boundary->ticket && boundary->schedule->audio_ticket != boundary->ticket))
         return PT_RENDER_INVALID;
-    result = pt_routed_playback_commit(&boundary->playback);
+    if (boundary->stop_serial)
+        result = pt_routed_midi_schedule_settled(boundary->schedule, boundary->stop.frame, boundary->stop_serial) ?
+            PT_RENDER_OK : PT_RENDER_INVALID;
+    else
+        result = pt_routed_playback_commit(&boundary->playback);
     if (result == PT_RENDER_OK) {
         const size_t bytes = sizeof(boundary->batch.plan.normalized.next);
-        if (boundary->plan.end)
+        if (boundary->stop_serial || boundary->plan.end)
             memset(boundary->config->origins, 0, bytes);
         else if (boundary->plan.audio.count)
             memcpy(boundary->config->origins, boundary->batch.plan.normalized.next, bytes);
@@ -136,16 +177,16 @@ enum pt_render_result pt_routed_sampler_commit(struct pt_routed_sampler_boundary
 int pt_routed_sampler_abandon(struct pt_routed_sampler_boundary *boundary)
 {
     struct pt_routed_midi_schedule *schedule;
-    if (!boundary || !boundary->config || boundary->playback.owner != &boundary->playback)
+    if (!boundary || boundary->owner != boundary)
         return 0;
-    schedule = boundary->playback.schedule;
+    schedule = boundary->schedule;
     if (schedule->held || schedule->busy || !pt_mixed_plan_normalizer_close(&boundary->normalizer))
         return 0;
     if (boundary->command.address &&
         (boundary->ticket || pt_sampler_mixed_cancel(boundary->config->pool, boundary->command) != PT_SAMPLER_MIXED_OK ||
          !pt_sampler_mixed_command_close(boundary->config->pool, &boundary->command)))
         return 0;
-    if (schedule->midi->pending && (schedule->midi->batch.serial != boundary->playback.serial ||
+    if (schedule->midi->pending && (schedule->midi->batch.serial != serial(boundary) ||
                                    !pt_routed_midi_schedule_discard(schedule)))
         return 0;
     memset(boundary, 0, sizeof(*boundary));

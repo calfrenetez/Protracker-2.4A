@@ -146,7 +146,7 @@ static enum pt_mixed_readers_result observe_retirement(void *context,
     return pt_sampler_mixed_service_reader(m->pool, key->trigger, key->action, 0, receipt);
 }
 
-static void tracker_case(unsigned short_card, unsigned retrigger, unsigned abandon_first)
+static void tracker_case(unsigned short_card, unsigned retrigger, unsigned abandon_first, unsigned stop_early)
 {
     struct allocation render_memory = {0};
     const struct pt_allocator allocator = {&render_memory, ordinary, ordinary_release};
@@ -157,6 +157,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
     struct pt_render_lookahead *ahead = calloc(1, sizeof(*ahead));
     struct pt_routed_sampler_boundary *joint = calloc(1, sizeof(*joint));
     struct pt_routed_render_plan *plan = joint ? &joint->plan : NULL;
+    struct pt_routed_sampler_boundary *blocked = stop_early ? calloc(1, sizeof(*blocked)) : NULL;
     struct pt_routed_midi *midi = calloc(1, sizeof(*midi));
     struct pt_sampler_mixed_normalized_batch *batch = calloc(1, sizeof(*batch));
     struct pt_sampler_mixed_pool *pool = NULL;
@@ -185,7 +186,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
     uint8_t *saved;
     uint64_t original = 0;
     unsigned ready = 0, boundary, idle_ticks = 0, effects = 0, i, steps;
-    assert(ahead && plan && midi && batch && workspace && factory_workspace && pcm);
+    assert(ahead && plan && midi && batch && workspace && factory_workspace && pcm && (!stop_early || blocked));
     tracker_project(t, pcm, short_card);
     if (retrigger) {
         project->events[4].effect = 14;
@@ -241,44 +242,56 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
     struct pt_routed_sampler_config mismatched = coordinator;
     mismatched.project = &other_project;
     for (boundary = 0; boundary < 3;) {
-        struct pt_render_interval interval;
+        const unsigned manual_stop = stop_early && boundary == 1;
+        const unsigned is_stop = manual_stop || boundary == 2;
+        const uint64_t frame = boundary * UINT64_C(960);
+        struct pt_render_interval interval = {0};
         const struct pt_routed_midi_batch *midi_batch;
         struct pt_mixed_readers_command_receipt receipt;
         struct pt_mixed_readers_stop_keys stop = {0};
         struct pt_mixed_plan_batch *normalized = &batch->plan.normalized;
         uint64_t ticket;
         uint32_t remaining;
-        assert(pt_render_sequence_next(sequence, &interval) == PT_RENDER_OK);
-        assert(pt_render_lookahead_begin(ahead, sequence) == PT_RENDER_OK);
-        ready = 0;
-        do {
-            assert(pt_render_lookahead_step_routed(ahead, 73, plan, &ready) == PT_RENDER_OK);
-        } while (!ready);
-        assert(pt_routed_sampler_begin(joint, &mismatched, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
-        assert(!joint->config && !midi->pending);
-        prepared = pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule);
-        assert(pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
-        if (!plan->end && !plan->audio.count && !plan->midi_count) {
-            assert(!boundary && !interval.frames && !plan->frame && ++idle_ticks == 1);
-            assert(prepared == PT_ROUTED_SAMPLER_READY && !midi->pending && !m.submissions);
-            assert(!pt_routed_sampler_publish(joint, 37, 17));
-            assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_OK);
-            continue;
+        if (manual_stop) {
+            prepared = pt_routed_sampler_begin_stop(joint, &coordinator, &schedule, frame);
+            assert(!joint->playback.owner && joint->stop_serial && joint->stop.frame == frame);
+        } else {
+            assert(pt_render_sequence_next(sequence, &interval) == PT_RENDER_OK);
+            assert(pt_render_lookahead_begin(ahead, sequence) == PT_RENDER_OK);
+            ready = 0;
+            do {
+                assert(pt_render_lookahead_step_routed(ahead, 73, plan, &ready) == PT_RENDER_OK);
+            } while (!ready);
+            assert(pt_routed_sampler_begin(joint, &mismatched, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
+            assert(!joint->config && !midi->pending);
+            prepared = pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule);
+            assert(pt_routed_sampler_begin(joint, &coordinator, ahead, &schedule) == PT_ROUTED_SAMPLER_INVALID);
+            if (!plan->end && !plan->audio.count && !plan->midi_count) {
+                assert(!boundary && !interval.frames && !plan->frame && ++idle_ticks == 1);
+                assert(prepared == PT_ROUTED_SAMPLER_READY && !midi->pending && !m.submissions);
+                assert(!pt_routed_sampler_publish(joint, 37, 17));
+                assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_OK);
+                continue;
+            }
+            assert(plan->frame == frame && !!plan->end == is_stop && !!plan->midi_count == !boundary);
         }
         assert(prepared == PT_ROUTED_SAMPLER_PENDING);
         assert(!pt_routed_sampler_publish(joint, 37, 17));
-        assert(plan->frame == boundary * UINT64_C(960));
-        assert(!!plan->end == (boundary == 2) && !!plan->midi_count == (boundary == 0));
+        const uint64_t serial = manual_stop ? joint->stop_serial : joint->playback.serial;
         midi_batch = &midi->batch;
-        assert(midi->pending && midi_batch->serial == joint->playback.serial && midi_batch->count == (unsigned)(boundary != 1));
+        assert(midi->pending && midi_batch->serial == serial && midi_batch->count == (!boundary || is_stop));
+        if (blocked && !boundary) {
+            assert(pt_routed_sampler_begin_stop(blocked, &coordinator, &schedule, 960) == PT_ROUTED_SAMPLER_INVALID);
+            assert(!blocked->owner && midi->batch.serial == serial);
+        }
         assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
         const unsigned allocations = factory_allocator.calls;
         const unsigned count = short_card && boundary ? 4 : 5;
-        if (plan->end) {
-            assert(plan->end == PT_RENDER_F00 + 1 && !plan->audio.count);
+        if (is_stop) {
+            assert(manual_stop || (plan->end == PT_RENDER_F00 + 1 && !plan->audio.count));
             stop = joint->stop;
-            assert(stop.frame == plan->frame && stop.count == count);
+            assert(stop.frame == frame && stop.count == count);
             for (i = 0; i < stop.count; ++i)
                 assert(keys_equal(stop.key + i, keys + i));
             ++stop.key[0].serial;
@@ -351,9 +364,13 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
         assert(pt_routed_sampler_publish(joint, 37, 17));
         ticket = joint->ticket;
         assert(ticket && !pt_routed_sampler_publish(joint, 37, 17));
+        if (blocked && !boundary) {
+            assert(pt_routed_sampler_begin_stop(blocked, &coordinator, &schedule, 960) == PT_ROUTED_SAMPLER_INVALID);
+            assert(!blocked->owner && schedule.audio_ticket == ticket && schedule.held);
+        }
         assert(!pt_routed_sampler_abandon(joint));
         const struct model_command *command = model_command(&t->model, ticket);
-        if (plan->end) {
+        if (is_stop) {
             assert(command->batch.count == stop.count);
             for (i = 0; i < stop.count; ++i) {
                 assert(command->batch.action[i].kind == PT_MIXED_READERS_STOP);
@@ -391,7 +408,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
             replacement = (struct pt_sampler_mixed_reader_handle){0};
         }
         assert(pt_sampler_mixed_command_close(pool, &joint->command));
-        settle_midi(&m, boundary != 1);
+        settle_midi(&m, !boundary || is_stop);
         remaining = interval.frames;
         while (remaining) {
             uint32_t chunk = remaining > 73 ? 73 : remaining;
@@ -400,12 +417,12 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
         }
         assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_SETTLED);
-        assert(midi->accepted[15].active == (boundary != 2));
-        assert(!pt_routed_midi_schedule_settled(&schedule, plan->frame, joint->playback.serial + 1));
+        assert(midi->accepted[15].active == !is_stop);
+        assert(!pt_routed_midi_schedule_settled(&schedule, frame, serial + 1));
         assert(pt_routed_sampler_commit(joint, 38, 17) == PT_RENDER_INVALID);
         assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_OK);
         assert(pt_routed_sampler_commit(joint, 37, 17) == PT_RENDER_INVALID);
-        if (boundary < 2) {
+        if (!is_stop) {
             for (i = 0; i < PT_MIXED_PLAN_RECORDS; ++i) {
                 assert(origins[i].present == normalized->next[i].present && origins[i].sample == normalized->next[i].sample &&
                        origins[i].channel == normalized->next[i].channel && origins[i].frame == normalized->next[i].frame);
@@ -427,12 +444,25 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
             assert(pt_sampler_mixed_reader_close(pool, readers + 4));
             memset(origins + 4, 0, sizeof(*origins));
         }
+        if (manual_stop)
+            break;
         ++boundary;
     }
     assert(idle_ticks == 1 && midi->stopped == !abandon_first && !schedule.held && !schedule.audio_owned);
-    assert(effects == (abandon_first ? 0 : short_card ? 13 : 15) && t->model.effects == effects);
+    assert(effects == (abandon_first ? 0 : stop_early ? 10 : short_card ? 13 : 15) && t->model.effects == effects);
     for (i = 0; i < PT_MIXED_PLAN_RECORDS; ++i)
         assert(!origins[i].present);
+    if (stop_early) {
+        struct pt_render_interval following;
+        assert(pt_render_sequence_next(sequence, &following) == PT_RENDER_OK && !following.end);
+        assert(pt_render_lookahead_begin(ahead, sequence) == PT_RENDER_OK);
+        ready = 0;
+        do {
+            assert(pt_render_lookahead_step_routed(ahead, 73, plan, &ready) == PT_RENDER_OK);
+        } while (!ready);
+        assert(plan->frame == 960 && plan->audio.count && !plan->end && m.submissions == 2);
+        pt_render_lookahead_cancel(ahead);
+    }
     assert(!pt_mixed_readers_commands_held(t->queue));
     for (i = 0; i < (abandon_first ? 0U : short_card ? 4U : 5U); ++i) {
         assert(pt_sampler_mixed_service_reader(pool, keys[i].trigger, keys[i].action, 1, NULL) == PT_MIXED_READERS_OK);
@@ -453,6 +483,7 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
     free(factory_workspace);
     free(batch);
     free(midi);
+    free(blocked);
     free(joint);
     free(ahead);
 }
@@ -460,10 +491,11 @@ static void tracker_case(unsigned short_card, unsigned retrigger, unsigned aband
 int main(void)
 {
     refuse_late_paula_loop();
-    tracker_case(0, 0, 0);
-    tracker_case(1, 0, 0);
-    tracker_case(0, 1, 0);
-    tracker_case(0, 0, 1);
+    tracker_case(0, 0, 0, 0);
+    tracker_case(1, 0, 0, 0);
+    tracker_case(0, 1, 0, 0);
+    tracker_case(0, 0, 1, 0);
+    tracker_case(0, 0, 0, 1);
     puts("Routed sampler boundary: exact Stop, retrigger and stale preparation discarded before publication; SOFTWARE_ONLY");
     return 0;
 }

@@ -616,7 +616,10 @@ static void a_packet_consecutive_reuse(void)
     assert(pt_mixed_activation_close(&c->owner));
     same_save(c->trial->resources,saved,n);free(saved);a_destroy(c);
 }
-static void __attribute__((constructor)) mixed_activation_fixture(void)
+#ifndef PT_MIXED_ACTIVATION_TEST_ENTRY
+#define PT_MIXED_ACTIVATION_TEST_ENTRY static void __attribute__((constructor)) mixed_activation_fixture(void)
+#endif
+PT_MIXED_ACTIVATION_TEST_ENTRY
 {
     unsigned bits,cache_bits,order,mode,phase,reentry;int raw;
     for(phase=1;phase<=2;++phase)for(mode=0;mode<8;++mode)

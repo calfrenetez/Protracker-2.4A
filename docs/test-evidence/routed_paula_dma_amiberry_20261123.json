@@ -1,0 +1,33 @@
+{
+  "source": "756e5ea62da4e0e492eb465ecdb59b465b2cd242",
+  "target": "amiberry-030",
+  "candidates": {
+    "Activation": {
+      "candidate_and_guest_readback_sha256": "2f8ebb4abcda842280333140b79e2080b507cab3c8c42e6abd7b77af9576e479",
+      "build_receipt_sha256": "ba8a114b168a1bc35f95db18bb13202af1d1bd76f027c95565f7c865a6aaafab",
+      "guest_log_sha256": "2ec7b363fdd9689aedf2b07870da658648a33ab5b4e6a54dcfe6e4a68cae89ec",
+      "validated_build_inputs": 84,
+      "exit_code": 0
+    },
+    "Tracker": {
+      "candidate_and_guest_readback_sha256": "ea24e5ff0dd37087d0f928834daad8c16f81be28c3a7aea5fc4c82283bdc26bc",
+      "build_receipt_sha256": "d96be4fe519c67c1d7c9966facee34b04824b07c978c01db6a4b4861d3b9cfcf",
+      "guest_log_sha256": "6ad5a5e6bdde11d7ac857decd2978a832c256fd35959c7623029428cf58fbac5",
+      "validated_build_inputs": 120,
+      "exit_code": 0
+    }
+  },
+  "focused_host_methods": 3,
+  "checks": [
+    "prepare location, length, period and volume for each inactive owned Paula channel",
+    "group four Start or Stop DMA bits into one write without changing master or unrelated bits",
+    "preserve current DMA when writing active period and volume controls",
+    "reject active retrigger, wrong ownership, malformed fields or sample extent, duplicates and overlap before output",
+    "exact current tracker auxiliary oracle passes in a separate fresh transaction"
+  ],
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Native 68k ordinary-RAM validation of software register preparation and mixed schedule in Amiberry. Does not exercise custom-chip registers, exact-time device output, or listening."
+}

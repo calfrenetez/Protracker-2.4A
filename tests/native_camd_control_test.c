@@ -1,5 +1,7 @@
 #include "../src/native/camd_adapter.h"
 #include "../src/native/camd_vectors.h"
+#include "../src/native/eclock.h"
+#include "../src/core/elapsed_clock.h"
 #include <assert.h>
 #include <exec/libraries.h>
 #include <proto/dos.h>
@@ -14,6 +16,17 @@ static struct pt_camd_control control;
 static const char receiver_name[] = "PT24G local loopback";
 static const char endpoint_name[] = "PT24G.test.loopback";
 static const char sender_only_name[] = "PT24G.test.sender-only";
+
+struct range {uint32_t min, max;};
+
+static void include_ticks(struct range *range, uint64_t ticks)
+{
+    assert(ticks <= UINT32_MAX);
+    if (ticks < range->min)
+        range->min = (uint32_t)ticks;
+    if (ticks > range->max)
+        range->max = (uint32_t)ticks;
+}
 
 static void finish(void)
 {
@@ -57,11 +70,67 @@ static void local_note(struct Library *library, void *sender, void *receiver, ui
     assert(!(UBYTE)pt_native_camd_vector(library, PT_CAMD_GET_ERROR, 0, receiver, NULL));
 }
 
-static void local_loopback(void)
+static uint64_t read_ticks(struct pt_native_eclock *clock, uint32_t frequency)
 {
+    uint64_t ticks;
+    uint32_t rate;
+    assert(pt_native_eclock_read(clock, &ticks, &rate) && rate == frequency);
+    return ticks;
+}
+
+static void measure_loopback(struct Library *library, void *sender, void *receiver, ULONG *stamp)
+{
+    enum {COUNT = 32, RATE = 48000};
+    struct pt_native_eclock clock = {0};
+    struct pt_elapsed_clock grid;
+    struct range send = {UINT32_MAX, 0}, receive = {UINT32_MAX, 0}, span = {UINT32_MAX, 0};
+    uint64_t epoch, previous;
+    uint32_t frequency;
+    unsigned i, send_inside = 0, receive_inside = 0;
+
+    assert(pt_native_eclock_open(&clock));
+    assert(pt_native_eclock_read(&clock, &epoch, &frequency) && frequency >= RATE);
+    assert(pt_elapsed_clock_init(&grid, frequency, RATE, epoch, 0) == PT_ELAPSED_OK);
+    previous = epoch;
+    for (i = 0; i < COUNT; ++i) {
+        const uint32_t packed = i & 1 ? UINT32_C(0x863c0000) : UINT32_C(0x963c6400);
+        const ULONG marker = UINT32_C(0xcad00000) | i;
+        uint32_t message[2] = {0};
+        uint64_t before, after_send, after_receive, frame, excluded;
+        *stamp = marker;
+        before = read_ticks(&clock, frequency);
+        (void)pt_native_camd_vector(library, PT_CAMD_PUT, packed, sender, NULL);
+        after_send = read_ticks(&clock, frequency);
+        *stamp = ~marker;
+        assert((BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, receiver, message));
+        after_receive = read_ticks(&clock, frequency);
+        assert(message[0] >> 8 == packed >> 8 && message[1] == marker);
+        assert(!(UBYTE)pt_native_camd_vector(library, PT_CAMD_GET_ERROR, 0, receiver, NULL));
+        assert(previous <= before && before <= after_send && after_send <= after_receive);
+        previous = after_receive;
+
+        assert(pt_elapsed_clock_advance(&grid, frequency, before, &frame) == PT_ELAPSED_OK);
+        assert(pt_elapsed_clock_deadline(&grid, frame + 1, &excluded) == PT_ELAPSED_OK && excluded > before);
+        send_inside += after_send < excluded;
+        receive_inside += after_receive < excluded;
+        include_ticks(&send, after_send - before);
+        include_ticks(&receive, after_receive - after_send);
+        include_ticks(&span, after_receive - before);
+    }
+    pt_native_eclock_close(&clock);
+    assert(!clock.opened && !clock.port && !clock.request && receive_inside <= send_inside);
+    printf("CAMD native timing: samples=%u hz=%lu rate=%u send=%lu/%lu receive=%lu/%lu total=%lu/%lu send_in_frame=%u receipt_in_frame=%u\n",
+           (unsigned)COUNT, (unsigned long)frequency, (unsigned)RATE, (unsigned long)send.min,
+           (unsigned long)send.max, (unsigned long)receive.min, (unsigned long)receive.max,
+           (unsigned long)span.min, (unsigned long)span.max, send_inside, receive_inside);
+}
+
+static void local_loopback(unsigned timing)
+{
+    ULONG stamp = 0;
     const struct TagItem node_tags[] = {
         { PT_CAMD_NODE_NAME_TAG, (ULONG)(uintptr_t)receiver_name },
-        { PT_CAMD_RECEIVE_QUEUE_TAG, 4 }, { TAG_DONE, 0 }
+        { PT_CAMD_RECEIVE_QUEUE_TAG, 4 }, { PT_CAMD_RECEIVE_STAMP_TAG, (ULONG)(uintptr_t)&stamp }, { TAG_DONE, 0 }
     };
     struct Library *library;
     void *node, *receiver, *decoy;
@@ -88,8 +157,12 @@ static void local_loopback(void)
     assert(pt_camd_control_link(&control, (unsigned)port) == PT_CAMD_OK && control.links[port]);
     assert(pt_camd_control_link(&control, (unsigned)port) == PT_CAMD_IN_USE);
 
-    local_note(library, control.links[port], node, UINT32_C(0x963c6400));
-    local_note(library, control.links[port], node, UINT32_C(0x863c0000));
+    if (timing) {
+        measure_loopback(library, control.links[port], node, &stamp);
+    } else {
+        local_note(library, control.links[port], node, UINT32_C(0x963c6400));
+        local_note(library, control.links[port], node, UINT32_C(0x863c0000));
+    }
     assert(!(BOOL)pt_native_camd_vector(library, PT_CAMD_GET, 0, node, tail));
     assert(!registry->link_active && !registry->midi.ports[port].connected);
     assert(pt_camd_control_retire(&control, (unsigned)port) == PT_CAMD_OK && !control.links[port]);
@@ -99,7 +172,10 @@ static void local_loopback(void)
     (void)pt_native_camd_vector(library, PT_CAMD_DELETE_NODE, 0, node, NULL);
     assert(pt_camd_control_refresh(&control) == PT_CAMD_OK && !registry->available);
     finish();
-    puts("CAMD native control: 40.5 receiver discovery, local note on/off and original handles closed");
+    if (timing)
+        puts("CAMD native timing: local messages and receive timestamps verified; original handles closed");
+    else
+        puts("CAMD native control: 40.5 receiver discovery, local note on/off and original handles closed");
 }
 
 int main(int argc, char **argv)
@@ -107,9 +183,11 @@ int main(int argc, char **argv)
     assert(argc == 2 && pt_native_camd_control_init(&native, &control));
     if (!strcmp(argv[1], "absent"))
         missing_library();
+    else if (!strcmp(argv[1], "loopback"))
+        local_loopback(0);
     else {
-        assert(!strcmp(argv[1], "loopback"));
-        local_loopback();
+        assert(!strcmp(argv[1], "timing"));
+        local_loopback(1);
     }
     return 0;
 }

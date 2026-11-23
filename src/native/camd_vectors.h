@@ -19,6 +19,7 @@ enum pt_native_camd_type { PT_CAMD_RECEIVER = 0, PT_CAMD_SENDER = 1 };
 #define PT_CAMD_NODE_NAME_TAG UINT32_C(0x80000041)
 #define PT_CAMD_LINK_LOCATION_TAG UINT32_C(0x80000041)
 #define PT_CAMD_RECEIVE_QUEUE_TAG UINT32_C(0x80000047)
+#define PT_CAMD_RECEIVE_STAMP_TAG UINT32_C(0x80000049)
 
 uint32_t pt_native_camd_vector(struct Library *, int32_t offset, uint32_t d0,
     const void *a0, const void *a1);

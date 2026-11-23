@@ -24,7 +24,7 @@ static inline int pt_native_eclock_open(struct pt_native_eclock *c)
     if(!c || c->port || c->request || c->opened || SysBase->LibNode.lib_Version<36)return 0;
     c->port=CreateMsgPort();if(!c->port)return 0;
     c->request=(struct timerequest *)CreateIORequest(c->port,sizeof(*c->request));
-    if(!c->request || OpenDevice(TIMERNAME,UNIT_ECLOCK,(struct IORequest *)c->request,0))goto failed;
+    if(!c->request || OpenDevice((const void *)TIMERNAME,UNIT_ECLOCK,(struct IORequest *)c->request,0))goto failed;
     c->opened=1;
     if(c->request->tr_node.io_Device->dd_Library.lib_Version<36)goto failed;
     return 1;

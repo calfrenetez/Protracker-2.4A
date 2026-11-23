@@ -35,7 +35,7 @@ def main():
                             and any(isinstance(target, ast.Name) and target.id == 'TRACKER_UNITS' for target in node.targets)))
     if args.fixture == 'camd-control':
         sources = ['tests/native_camd_control_test.c', 'src/native/camd_adapter.c',
-                   'src/native/camd_vectors.s', *sources[1:]]
+                   'src/native/camd_vectors.s', 'src/core/elapsed_clock.c', *sources[1:]]
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core']
     if args.fixture in ('mixed-causal', 'mixed-frame-zero', 'routed-combined', 'routed-tracker', 'camd-control'):
         flags.extend(['-I.', '-UNDEBUG'])

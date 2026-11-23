@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-23",
+  "recorder_status_source": "2c014b8f02a03bb4277bf5019a9839922fa3133d",
+  "camd_control_sha256": "a944ab315e4ab2145c0669c8f96e1fd2162ec1f9f5b0def50aa0e445c83f18db",
+  "camd_40_5_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+  "record_cases": {
+    "RecordFixture": {
+      "binary": "PTPcmReadTest",
+      "sha256": "4be2898e8723289c964ead3aa0f35dfee9852ba91d94c2ad4e5f6a3a04c4b02a",
+      "rc": 0
+    },
+    "RecordDiagnostic": {
+      "binary": "AmiGUSTest",
+      "sha256": "4cd6883a140c6ed1040e335f13d90908ebfda04321e08c4999ae8192dada1785",
+      "rc": 5
+    }
+  },
+  "amiberry": {
+    "cases": {
+      "Absent": {
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      },
+      "AbsentOutputs": {
+        "full_log": true,
+        "pass": true,
+        "rc": "5"
+      },
+      "EmptyOutputs": {
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      },
+      "Loopback": {
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      },
+      "RecordDiagnostic": {
+        "exact_guest_copy": true,
+        "full_log": true,
+        "pass": true,
+        "rc": "5"
+      },
+      "RecordFixture": {
+        "exact_guest_copy": true,
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      }
+    },
+    "cpu_68030": true,
+    "exact_camd_library_guest_copy": true,
+    "exact_guest_copy": true,
+    "initial_library_absent": true,
+    "passed": true,
+    "physical_devices_exercised": false,
+    "private_driver_directory_empty": true,
+    "startup_complete": true,
+    "startup_entered": true,
+    "target": "amiberry-030"
+  },
+  "normal_stop": true,
+  "canonical_disk_sha256": "66fe06fa041c25db392b083ca18597286bfcdcd19139d029c03322e7360f9f7b",
+  "independent_release": {
+    "canonical_profile": true,
+    "fence": 25745,
+    "files_verified": 39,
+    "phase": "EMPTY",
+    "service_disconnected": true,
+    "target_absent": true
+  },
+  "scope": "Exact guarded native fixtures in Amiberry. CAMD missing-library refusal, empty output scan and local loopback. AmiGUS recorder register reads in synthetic storage and the diagnostic missing-library refusal. Physical audio, sample RAM, hardware MIDI and listening are still open."
+}

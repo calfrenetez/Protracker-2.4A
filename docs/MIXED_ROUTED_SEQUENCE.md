@@ -424,6 +424,7 @@ It refuses an unavailable cluster or invalid channel. A second receiver or
 MIDI monitor should check both messages at the cable. The diagnostic reports
 the CAMD requests and handle closure. Its task-level delay sets a short
 audible note and supplies no tracker-frame timing measurement.
+[Amiberry named note-pair result](test-evidence/camd_named_note_pair_amiberry_20261123.json)
 
 In the canonical cycle-exact Amiberry profile, the first Note On
 write was bracketed at ticks [8195, 8201] within [8192, 8207).

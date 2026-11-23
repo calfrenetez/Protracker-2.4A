@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-23",
+  "scope": "Amiberry MIDI message delivery inside CAMD and refusal with no driver-enabled hardware endpoints",
+  "binary_sha256": "b31e4a7bb4f945371172403f67bc600bbf8fb73297a1a0a7f1cc7bda97409a61",
+  "library_sha256": "03617ab20e14104b8618083a68024cedb7efe9114d6b531cf7236cd53c06db7d",
+  "guest_results": {
+    "cases": {
+      "Absent": {
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      },
+      "BadChannel": {
+        "full_log": true,
+        "pass": true,
+        "rc": "5"
+      },
+      "Loopback": {
+        "full_log": true,
+        "pass": true,
+        "rc": "0"
+      },
+      "NoOutput": {
+        "full_log": true,
+        "pass": true,
+        "rc": "5"
+      }
+    },
+    "cpu_68030": true,
+    "exact_camd_library_guest_copy": true,
+    "exact_guest_copy": true,
+    "initial_library_absent": true,
+    "passed": true,
+    "physical_devices_exercised": false,
+    "private_driver_directory_empty": true,
+    "startup_complete": true,
+    "startup_entered": true,
+    "target": "amiberry-030"
+  },
+  "loopback_log": [
+    "CAMD named note pair: sender-only cluster refused; one Note On and one Note Off verified",
+    "CAMD native control: 40.5 receiver discovery, local note on/off and original handles closed"
+  ],
+  "restoration": {
+    "canonical_profile": true,
+    "fence": 25793,
+    "files_verified": 39,
+    "phase": "EMPTY",
+    "service_disconnected": true,
+    "target_absent": true
+  },
+  "external_receiver_tested": false
+}

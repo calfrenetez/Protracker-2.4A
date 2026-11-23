@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-23",
+  "executable_sha256": "65f02f984a532e936bad73f96a7d77ca1f8ff8aadf00c732d3a523940f80deaa",
+  "emulator": {
+    "guest_results": {
+      "cpu_68030": true,
+      "exact_guest_copy": true,
+      "exact_log": true,
+      "expected_missing_library": true,
+      "passed": true,
+      "physical_devices_exercised": false,
+      "rc": "5",
+      "startup_complete": true,
+      "startup_entered": true,
+      "target": "amiberry-030"
+    },
+    "restoration": {
+      "canonical_profile": true,
+      "fence": 25799,
+      "files_verified": 39,
+      "phase": "EMPTY",
+      "service_disconnected": true,
+      "target_absent": true
+    }
+  },
+  "physical": {
+    "target": "Owner A1200 via PicoWyfy and Safari AmiConnect",
+    "kickstart": "47.115",
+    "workbench": "47.5",
+    "card": "AmiGUS Mini revision 0 firmware 7ea663e7",
+    "transfer": {
+      "archive_bytes": 27853,
+      "archive_sha256": "a866d5748b873402caffac1de8a0d108a60f7ef9e8ea2862e0c4be8adfde2fd3",
+      "native_archive_md5": "89c8504db095f38bcb6403b61eb5cfb4",
+      "native_executable_md5": "af415b5211f3830d68ac3db384f0436c",
+      "native_archive_integrity": "All files OK"
+    },
+    "command": "RAM:PT24GW2319/PTWaveRecord --wavetable-record-status",
+    "return_code": 0,
+    "simultaneous_pcm_and_wavetable": true,
+    "same_card": true,
+    "recorder_status": {
+      "irq_mask": 0,
+      "format": 0,
+      "control": 0,
+      "left_gain": 32768,
+      "right_gain": 32768,
+      "watermark_words": 0,
+      "pending_words": 0
+    },
+    "release_confirmed": [
+      "PCM",
+      "WAVETABLE"
+    ],
+    "restoration": {
+      "phase": "EMPTY",
+      "fence": 145,
+      "independent_verification": true,
+      "device_owner_absent": true,
+      "stack_bytes": 4096,
+      "amiconnect": "Authenticated \u2014 View Only"
+    },
+    "registers_written": false,
+    "fifo_data_reads": false,
+    "audio_exercised": false,
+    "sample_ram_tested": false
+  }
+}

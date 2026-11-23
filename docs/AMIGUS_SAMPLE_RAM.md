@@ -702,6 +702,8 @@ WAVETABLE first and checks the card identity before reading PCM registers.
 If a reservation fails, it releases any part it obtained. A completed trial
 checks both releases, in reverse order. This tests whether a future Wave
 capture can hold both parts of that card while it prepares one voice.
+The real A1200 returned RC0 with the recorder idle and both original
+releases confirmed. [A1200 and Amiberry ownership result](test-evidence/amigus_wave_recorder_ownership_20261123.json)
 
 The real A1200 run read all 15 selected-voice words and returned RC0.
 The recorder returned RC0 with capture disabled, zero pending words and

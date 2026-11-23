@@ -161,5 +161,27 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "explicit_stop_follow_up": {
+    "tested_source": "1400ec3e96c3c542574e2beca8a7ba3af1ae9268",
+    "candidate_and_guest_readback_sha256": "2f3b8f0acec8747789433808b4f2862c35fb599b0df9a146b329c0325303e93d",
+    "build_receipt_sha256": "07e8dea40006a3233e9f8e5b15f941269796ae7dbc7074cf14b8241b74948eb8",
+    "guest_log_sha256": "6ad5a5e6bdde11d7ac857decd2978a832c256fd35959c7623029428cf58fbac5",
+    "focused_host_methods": 11,
+    "validated_build_inputs": 120,
+    "additional_checks": [
+      "explicit Stop at frame 960 before the original frame 1920 F00",
+      "Stop refuses while the original attack is prepared or published",
+      "complete original audio keys and held MIDI note stop on the same window",
+      "the unchanged original frame 960 software render forecast remains available",
+      "normal F00, same-slot retrigger and early natural retirement still pass"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

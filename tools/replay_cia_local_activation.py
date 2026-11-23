@@ -15,7 +15,7 @@ HEADER = re.compile(
 )
 ROW = re.compile(
     r"CIA frame (\d{2}) frame=(\d+) bounds=(\d+)/(\d+) count=(\d+)/(\d+) "
-    r"attempts=(\d+) status=([012]) pre=([\da-f]{6}) post=([\da-f]{6}) mark=([\da-f]{4})"
+    r"attempts=(\d+) status=([0123]) pre=([\da-f]{6}) post=([\da-f]{6}) mark=([\da-f]{4})"
 )
 SUMMARY = re.compile(r"CIA local finished on=(\d+) outside=(\d+) missed=(\d+) stray=0 closed=1 rc=0")
 
@@ -25,7 +25,7 @@ def sample(text):
     return high * 256 + low if high == high_again else None
 
 
-def replay(text):
+def replay(text, *, allow_before_arm_refusal=False):
     lines = text.splitlines()
     if len(lines) != len(FRAMES) + 2:
         raise ValueError("Incomplete local activation report")
@@ -54,7 +54,8 @@ def replay(text):
         expected = ((frame * hz + RATE - 1) // RATE, ((frame + 1) * hz + RATE - 1) // RATE)
         if (ordinal != index or actual_frame != frame or (first, end) != expected
                 or (first_count, end_count) != (anchor - first, anchor - end)
-                or not 0 < end_count < first_count < anchor or not 1 <= attempts <= 64):
+                or not 0 < end_count < first_count < anchor or not 0 <= attempts <= 64 or
+                bool(attempts) != (status != 3)):
             raise ValueError("Original frame, window or attempt count changed")
         if pre is not None:
             if not 0 < pre <= previous:
@@ -81,7 +82,12 @@ def replay(text):
                 raise ValueError("Exhausted attempt did not remain early or torn")
             if status == 2 and (pre is None or pre > end_count):
                 raise ValueError("Expired attempt has no expired sample")
-            verdict = "exhausted" if status == 0 else "expired"
+            if status == 3:
+                if not allow_before_arm_refusal:
+                    raise ValueError("Task-side arm refusal requires its independent alarm observation")
+                verdict = "refused_before_arm"
+            else:
+                verdict = "exhausted" if status == 0 else "expired"
             missed += index < 12
 
         if index >= 12 and status != (0 if index == 12 else 2):

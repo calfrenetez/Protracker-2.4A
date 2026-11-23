@@ -51,3 +51,33 @@ local_record:
         move.w %d1,4(%a2)
         movem.l (%sp)+,%d2-%d7/%a2
         rts
+
+        .globl _pt_cia_local_alarm_irq
+
+/* CIA resource interrupt ABI, A1 is the immutable owned state address.
+ * The invoked bounded aperture uses the same actual countdown and prepared
+ * frame as the task experiment. No task or timer APIs run here except Signal. */
+_pt_cia_local_alarm_irq:
+        movem.l %d2-%d7/%a2-%a6,-(%sp)
+        move.l %a1,%a2
+        tst.l 20(%a2)
+        beq.b local_irq_unarmed
+        move.l 8(%a2),-(%sp)
+        move.l 4(%a2),-(%sp)
+        move.l 0(%a2),-(%sp)
+        jsr _pt_cia_local_activate
+        lea 12(%sp),%sp
+        move.l %d0,28(%a2)
+        clr.l 20(%a2)
+        addq.l #1,24(%a2)
+        move.l 12(%a2),%a1
+        move.l 16(%a2),%d0
+        move.l 4.w,%a6
+        jsr -324(%a6)
+        bra.b local_irq_done
+local_irq_unarmed:
+        addq.l #1,32(%a2)
+local_irq_done:
+        movem.l (%sp)+,%d2-%d7/%a2-%a6
+        moveq #0,%d0
+        rts

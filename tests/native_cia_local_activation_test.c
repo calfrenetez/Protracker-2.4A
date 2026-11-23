@@ -4,6 +4,7 @@
 #include "native_cia_countdown.h"
 #include <proto/dos.h>
 #include <stdio.h>
+#include <string.h>
 
 enum { POSITIVE = 12, RECORDS = POSITIVE + 2, RATE = 48000, MARK = 0x4752, ANCHOR_MARK = 0x2452 };
 
@@ -24,6 +25,8 @@ typedef char local_after_offset[(offsetof(struct local_entry, after) == 11) ? 1 
 
 extern int pt_cia_local_activate(volatile UBYTE *high, volatile UBYTE *low, struct local_entry *);
 static volatile ULONG unexpected_irqs;
+
+#include "native_cia_local_alarm.h"
 
 static int hold(void) __attribute__((noreturn));
 static int hold(void)
@@ -73,8 +76,11 @@ static int issue(const struct pt_diagnostic_cia *timer, struct local_result *row
     return 1;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    const int irq_mode = argc == 2 && !strcmp(argv[1], "irq");
+    struct local_alarm alarm = {.signal = -1};
+    struct local_alarm_example arm[RECORDS] = {0};
     struct pt_native_eclock clock = {0};
     struct pt_diagnostic_cia timer = {0};
     struct pt_elapsed_clock epoch;
@@ -83,15 +89,19 @@ int main(void)
     uint64_t before = 0, after = 0;
     uint32_t hz = 0, end_hz = 0;
     unsigned count = 0, chip = 0, bit = 0, captured = 0, on_frame = 0, outside = 0, missed = 0;
-    unsigned observation_complete = 0;
+    unsigned observation_complete = 0, attempted = 0;
     int rc = 20;
 
+    if (argc != 1 && !irq_mode)
+        goto finish;
     if (!pt_native_eclock_open(&clock) ||
         !pt_diagnostic_cia_acquire(&timer, pt_cia_direct_clock_stray, (void *)&unexpected_irqs))
         goto finish;
     chip = timer.chip;
     bit = timer.bit;
     if (!pt_native_eclock_read(&clock, &before, &hz) || (hz != 709379 && hz != 715909) ||
+        (irq_mode && (before > UINT64_MAX - hz || !open_alarm(&alarm, &timer, before + hz))) ||
+        !pt_native_eclock_read(&clock, &before, &end_hz) || end_hz != hz ||
         !pt_cia_start_masked_countdown(&timer))
         goto finish;
     Disable();
@@ -111,19 +121,18 @@ int main(void)
 
     for (; captured < RECORDS; ++captured) {
         struct local_result *r = row + captured;
-        const int approach = captured >= POSITIVE || wait_near(&timer, r->window.first_count);
-        if (!approach || !issue(&timer, r))
-            goto finish;
-        if (captured < POSITIVE) {
-            struct pt_countdown_bracket bracket;
-            const unsigned pre = pt_cia_stable_count(r->raw.before), post = pt_cia_stable_count(r->raw.after);
-            if (r->raw.marker == MARK && pre && post &&
-                pt_countdown_window_bracket(&r->window, pre, post, &bracket))
-                ++on_frame;
-            else if (r->raw.marker == MARK)
-                ++outside;
-            else
-                ++missed;
+        attempted = captured + 1;
+        if (irq_mode) {
+            r->status = 4;
+            int observed = alarm_issue(&alarm, &timer, r, captured, arm + captured);
+            if (!observed)
+                goto finish;
+            if (observed == 2)
+                r->status = 3;
+        } else {
+            const int approach = captured >= POSITIVE || wait_near(&timer, r->window.first_count);
+            if (!approach || !issue(&timer, r))
+                goto finish;
         }
     }
     if (!pt_native_eclock_read(&clock, &after, &end_hz) || end_hz != hz || after <= before ||
@@ -135,11 +144,26 @@ int main(void)
         rc = 0;
 
 finish:
-    if (!pt_diagnostic_cia_close(&timer))
+    if ((irq_mode && !close_alarm(&alarm)) || !pt_diagnostic_cia_close(&timer))
         return hold();
     pt_native_eclock_close(&clock);
     if (unexpected_irqs || timer.held || timer.resource || clock.opened)
         rc = 20;
+
+    /* Read and classify complete raw rows only after the timed work and
+     * original source are closed. Leave partial rows available in the report. */
+    for (unsigned i = 0; i < captured && i < POSITIVE; ++i) {
+        const struct local_result *r = row + i;
+        struct pt_countdown_bracket bracket;
+        const unsigned pre = pt_cia_stable_count(r->raw.before), post = pt_cia_stable_count(r->raw.after);
+        if (r->raw.marker == MARK && pre && post &&
+            pt_countdown_window_bracket(&r->window, pre, post, &bracket))
+            ++on_frame;
+        else if (r->raw.marker == MARK)
+            ++outside;
+        else
+            ++missed;
+    }
 
     printf("CIA local hz=%lu end_hz=%lu first=%08lx:%08lx last=%08lx:%08lx "
         "chip=%u timer=%u anchor=%02x%02x%02x captured=%u complete=%u\n",
@@ -148,7 +172,7 @@ finish:
         (unsigned long)(after >> 32), (unsigned long)after, chip, bit,
         (unsigned)anchor.after[0], (unsigned)anchor.after[1], (unsigned)anchor.after[2],
         captured, observation_complete);
-    for (unsigned i = 0; i < captured; ++i) {
+    for (unsigned i = 0; i < attempted; ++i) {
         const struct local_result *r = row + i;
         const struct local_entry *p = &r->raw;
         printf("CIA frame %02u frame=%u bounds=%lu/%lu count=%u/%u attempts=%u status=%u "
@@ -160,5 +184,14 @@ finish:
     }
     printf("CIA local finished on=%u outside=%u missed=%u stray=%lu closed=1 rc=%d\n",
         on_frame, outside, missed, (unsigned long)unexpected_irqs, rc);
+    if (irq_mode) {
+        for (unsigned i = 0; i < attempted; ++i)
+            printf("CIA alarm %02u probe=%u raw=%02x%02x%02x wake_at=%u delta=%u wake=%u phase=%u calls=%u\n",
+                i, arm[i].probe, (unsigned)arm[i].raw[0], (unsigned)arm[i].raw[1], (unsigned)arm[i].raw[2],
+                arm[i].threshold, arm[i].delta, arm[i].wake, arm[i].phase, arm[i].calls);
+        printf("CIA alarm closed chip=%u timer=%u calls=%lu stray=%lu attempted=%u\n",
+            alarm.timer.chip, alarm.timer.bit, (unsigned long)alarm.data.calls,
+            (unsigned long)alarm.data.stray, attempted);
+    }
     return rc;
 }

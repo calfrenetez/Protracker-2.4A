@@ -46,7 +46,7 @@ static inline int pt_native_alarm_open(struct pt_native_alarm *a)
     if(!a || a->port || a->request || a->opened || a->pending || SysBase->LibNode.lib_Version<36)return 0;
     a->port=CreateMsgPort();if(!a->port)return 0;
     a->request=(struct timerequest *)CreateIORequest(a->port,sizeof(*a->request));
-    if(!a->request || OpenDevice(TIMERNAME,UNIT_WAITECLOCK,(struct IORequest *)a->request,0))goto failed;
+    if(!a->request || OpenDevice((const void *)TIMERNAME,UNIT_WAITECLOCK,(struct IORequest *)a->request,0))goto failed;
     a->opened=1;
     if(a->request->tr_node.io_Device->dd_Library.lib_Version<36)goto failed;
     a->cancelling=a->closing=a->failed=0;a->observed_ticks=a->attempted_deadline=0;return 1;

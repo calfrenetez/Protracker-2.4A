@@ -57,6 +57,10 @@ _Static_assert(offsetof(__typeof__(routed_clock), signal) == 4 &&
     offsetof(__typeof__(routed_clock), reloads) == 8, "Owned CIA reload interrupt layout");
 extern void pt_cia_reload_irq(void);
 extern void pt_cia_local_mixed_reload_irq(void);
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+static unsigned reload_arm_ok, reload_capture_attempts[2];
+static unsigned sample_wait_pair(const struct pt_diagnostic_cia *, struct pt_cia_clock_pair *);
+#endif
 #ifdef PT_PAULA_TAIL_IRQ
 enum { MIXED_TAIL_SPAN = 7 };
 #ifdef PT_PAULA_TAIL_REFUSE
@@ -77,7 +81,13 @@ static int capture_epoch(struct paula_window_observation *obs, const struct pt_d
 {
     if (routed_clock.reloads != reload || !pt_diagnostic_cia_current(clock))
         return 0;
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+    reload_capture_attempts[reload] = sample_wait_pair(clock, &obs->anchor_sample);
+    if (!reload_capture_attempts[reload])
+        return 0;
+#else
     pt_cia_direct_clock_pair(clock->high, clock->low, &obs->anchor_sample);
+#endif
     obs->anchor = pt_cia_stable_count(obs->anchor_sample.after);
     if (routed_clock.reloads != reload || obs->anchor_sample.marker != 0x2452 ||
         obs->anchor <= CLOCK_RELOAD_MARGIN)
@@ -402,7 +412,12 @@ static int run_irq_transitions(const struct pt_native_paula_reservation *owner,
         }
     }
 #elif defined(PT_PAULA_RELOAD_IRQ)
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+    reload_arm_ok = pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1);
+    if (reload_arm_ok &&
+#else
     if (pt_diagnostic_cia_arm_mode(&clock, UINT16_MAX, 1) &&
+#endif
         capture_epoch(timed, &clock, &grid, schedule->start_frame, 0, &timeline) &&
         run_irq_word(owner, &alarm, &clock, start, 0, ALL)) {
 #ifndef PT_PAULA_MIDI_WIRE_CLOCK
@@ -503,6 +518,10 @@ static void report_irq_transitions(void)
         printf("Paula reload %u tick=%lu planned=%u issued=%u\n", i,
             (unsigned long)timed[i].anchor_tick, timed[i].reload, armed_at[i].issued_reload);
     printf("Paula reload clock callbacks=%lu\n", (unsigned long)routed_clock.reloads);
+#ifdef PT_PAULA_MIDI_WIRE_CLOCK
+    printf("Paula reload setup armed=%u capture-attempts=%u/%u\n",
+        reload_arm_ok, reload_capture_attempts[0], reload_capture_attempts[1]);
+#endif
 #ifdef PT_PAULA_TAIL_IRQ
     if (MIXED_TAIL_EXPECT_REFUSAL)
         printf("Paula tail refusal hz=%lu anchor=%02x%02x%02x frame=%lu/%lu min_span=%u refused=%u\n",

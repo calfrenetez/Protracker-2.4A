@@ -3,6 +3,13 @@
 #include "mixed_readers_activation_test.c"
 #include "../src/core/routed_activation.h"
 
+#ifndef PT_ROUTED_ACTIVATION_TEST_MAIN
+#define PT_ROUTED_ACTIVATION_TEST_MAIN main
+#define PT_ROUTED_ACTIVATION_PUBLISH(owner, ticket, stop) pt_mixed_activation_publish(owner, ticket)
+#define PT_ROUTED_ACTIVATION_FIRE(owner, ticket, stop) pt_mixed_activation_fire(owner, ticket)
+#define PT_ROUTED_ACTIVATION_REPORT(message) do { puts(message); fflush(stdout); } while (0)
+#endif
+
 struct routed_port_model {
     struct paired_ram *audio;
     struct pt_routed_midi_schedule *schedule;
@@ -99,7 +106,7 @@ static void settle_routed(struct activation_case *c, struct routed_port_model *p
     assert(pt_mixed_activation_fire(c->owner, ticket) == PT_MIXED_ACTIVATION_EARLY);
     assert(!p->issued && !p->detached);
     c->ram.ticks = oracle(frame);
-    assert(pt_mixed_activation_fire(c->owner, ticket) == PT_MIXED_ACTIVATION_COMMITTED);
+    assert(PT_ROUTED_ACTIVATION_FIRE(c->owner, ticket, frame != 0) == PT_MIXED_ACTIVATION_COMMITTED);
     assert(p->issued && pt_routed_midi_schedule_observe(p->schedule) == PT_ROUTED_MIDI_WAITING);
     const enum pt_mixed_readers_result status = pt_mixed_activation_service_command(c->owner, ticket, 0, &receipt);
     assert(status == PT_MIXED_READERS_OK);
@@ -109,14 +116,13 @@ static void settle_routed(struct activation_case *c, struct routed_port_model *p
     assert(!p->queued);
 }
 
-int main(int argc, char **argv)
+int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
 {
     if (argc == 2) {
         assert(!strcmp(argv[1], "regression"));
         mixed_activation_fixture();
     }
-    puts("Routed activation fixture entered");
-    fflush(stdout);
+    PT_ROUTED_ACTIVATION_REPORT("Routed activation fixture entered");
     struct activation_case *c = a_make(8, 8);
     struct pt_project *project = &c->trial->resources->document.project;
     struct pt_routed_midi *midi = calloc(1, sizeof(*midi));
@@ -151,10 +157,9 @@ int main(int argc, char **argv)
     plan->midi[1] = (struct pt_routed_midi_action){15, PT_NOTE_MIDI, 67, 102};
     assert(pt_routed_midi_prepare(midi, plan));
     first = a_enqueue(c, 6, 0, 0);
-    assert(pt_mixed_activation_publish(c->owner, first) == PT_MIXED_READERS_OK);
+    assert(PT_ROUTED_ACTIVATION_PUBLISH(c->owner, first, 0) == PT_MIXED_READERS_OK);
     assert(model.publishes == 1 && !c->ram.effects && !model.issued);
-    puts("Routed activation frame zero queued");
-    fflush(stdout);
+    PT_ROUTED_ACTIVATION_REPORT("Routed activation frame zero queued");
     settle_routed(c, &model, first, 0);
     assert(c->ram.effects == 6 && midi->accepted[14].active && midi->accepted[15].active);
     assert(pt_routed_midi_prepare_stop(midi, 960));
@@ -171,10 +176,9 @@ int main(int argc, char **argv)
         c->trial->input->target[i] = stop.key[i];
     }
     assert(pt_mixed_activation_enqueue(c->owner, c->trial->input, &terminal) == PT_MIXED_READERS_OK);
-    assert(pt_mixed_activation_publish(c->owner, terminal) == PT_MIXED_READERS_OK);
+    assert(PT_ROUTED_ACTIVATION_PUBLISH(c->owner, terminal, 1) == PT_MIXED_READERS_OK);
     assert(model.publishes == 2 && c->ram.effects == 6);
-    puts("Routed activation owned Stop queued");
-    fflush(stdout);
+    PT_ROUTED_ACTIVATION_REPORT("Routed activation owned Stop queued");
     settle_routed(c, &model, terminal, 960);
     assert(midi->stopped && !midi->accepted[14].active && !midi->accepted[15].active);
     assert(!c->ram.mask && !schedule.audio_owned && c->ram.effects == 12);
@@ -186,6 +190,6 @@ int main(int argc, char **argv)
     a_destroy(c);
     free(plan);
     free(midi);
-    puts("Routed activation: shared frame zero and exact Stop for six audio readers and two MIDI destinations; SOFTWARE_ONLY");
+    PT_ROUTED_ACTIVATION_REPORT("Routed activation: shared frame zero and exact Stop for six audio readers and two MIDI destinations; SOFTWARE_ONLY");
     return 0;
 }

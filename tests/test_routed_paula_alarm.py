@@ -138,6 +138,8 @@ class PaulaAlarmReplay(unittest.TestCase):
             ("request=0001/0001", "request=0001/0000"),
             ("period=113", "period=112"),
             (f"rawafter={triplet(65523 - 8199)}", f"rawafter={triplet(65523 - 8207)}"),
+            (f"rawbefore={triplet(65523 - 8193)} rawafter={triplet(65523 - 8199)}",
+             f"rawbefore={triplet(65523 - 8199)} rawafter={triplet(65523 - 8203)}"),
         ):
             with self.subTest(changed=changed), self.assertRaises(ValueError):
                 replay_wire(text.replace(original, changed, 1))

@@ -6,8 +6,14 @@
         .globl \name
 \name:
         .if \mixed
+        .if \wire
+        movem.l %d2-%d7/%a2-%a6,-(%sp)
+        .set local_args\@,48
+        lea 0xdff000,%a6
+        .else
         movem.l %d2-%d7/%a2-%a5,-(%sp)
         .set local_args\@,44
+        .endif
         .else
         movem.l %d2-%d7/%a2,-(%sp)
         .set local_args\@,32
@@ -57,6 +63,22 @@ valid_word\@:
         .endif
         move.w 0(%a2),%d0
         move.w 2(%a2),%d1
+        .if \wire
+        /* Reserve the eight ticks observed for the previous issue and
+         * bracket. Refuse rather than start inside that end margin.
+         * Match the high byte once and use the two low-byte limits in
+         * the IRQ loop. A page-straddling window needs a different path. */
+        addq.w #8,%d1
+        bcs.w serial_refused\@
+        cmp.w %d1,%d0
+        bls.w serial_refused\@
+        move.w %d0,%d5
+        eor.w %d1,%d5
+        andi.w #0xff00,%d5
+        bne.w serial_refused\@
+        move.w %d0,%d5
+        lsr.w #8,%d5
+        .endif
         .if \tail
         .if \mixed
         /* This fixture only arms with the owner's one-count end guard. */
@@ -76,6 +98,15 @@ local_poll\@:
         move.b (%a0),%d4
         cmp.b %d2,%d4
         bne.b local_retry\@
+        .if \wire
+        cmp.b %d5,%d2
+        bhi.b local_retry\@
+        blo.b local_expired\@
+        cmp.b %d0,%d3
+        bhi.b local_retry\@
+        cmp.b %d1,%d3
+        bls.b local_expired\@
+        .else
         move.w %d2,%d5
         lsl.w #8,%d5
         move.b %d3,%d5
@@ -95,15 +126,19 @@ local_poll\@:
         bhi.b local_retry\@
         cmp.w %d1,%d5
         bls.b local_expired\@
+        .endif
         .if \paula
+        .if \wire
+        move.w %d6,0x96(%a6)
+        /* A3 then A4 to the two contiguous modeled card fields. */
+        movem.w %a3-%a4,28(%a2)
+        move.w %a5,0x30(%a6)
+        .else
         move.w %d6,0xdff096
         .if \mixed
         /* These two stores still model the AmiGUS registers in RAM. */
         move.w %a3,28(%a2)
         move.w %a4,30(%a2)
-        .if \wire
-        move.w %a5,0xdff030
-        .else
         move.l %a5,32(%a2)
         .endif
         .endif
@@ -158,7 +193,11 @@ serial_refused\@:
         .endif
 local_return\@:
         .if \mixed
+        .if \wire
+        movem.l (%sp)+,%d2-%d7/%a2-%a6
+        .else
         movem.l (%sp)+,%d2-%d7/%a2-%a5
+        .endif
         .else
         movem.l (%sp)+,%d2-%d7/%a2
         .endif

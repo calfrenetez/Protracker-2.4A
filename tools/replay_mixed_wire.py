@@ -14,6 +14,7 @@ else:
     from replay_mixed_frame_wait import replay_waits
     from replay_routed_paula_window import ROW
 
+ISSUE_MARGIN_TICKS = 8
 BYTE_RECEIPT = re.compile(
     r"Mixed UART ([01]) tx=([\da-f]{3})/([\da-f]{3})/([\da-f]{3}) rx=([\da-f]{6}) received=3 idle=1"
 )
@@ -33,7 +34,10 @@ def replay(text):
         words = [int(value, 16) for value in row.group(2, 3, 4)]
         if int(row[1]) != i or words != [0x100 | byte for byte in message] or bytes.fromhex(row[5]) != message:
             raise ValueError("UART receipt differs from the frozen tracker route")
-        result["mixed_wire_observations"][i]["serial_loopback"] = {"first_word": words[0], "receive": row[5]}
+        timing = result["mixed_wire_observations"][i]
+        if timing["window"][1] - timing["observed"][0] <= ISSUE_MARGIN_TICKS:
+            raise ValueError("Mixed IRQ began inside the protected end margin")
+        timing["serial_loopback"] = {"first_word": words[0], "receive": row[5]}
     result["serial_request_restored"] = True
     return result
 

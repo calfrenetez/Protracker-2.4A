@@ -73,6 +73,7 @@ static void begin_batch(struct pt_routed_midi *midi, uint64_t frame, unsigned st
     midi->batch.frame = frame;
     midi->batch.stop = stop;
     midi->batch.count = 0;
+    midi->batch.needs_audio = 0;
 }
 
 const struct pt_routed_midi_batch *pt_routed_midi_prepare_stop(struct pt_routed_midi *midi, uint64_t frame)
@@ -90,16 +91,18 @@ const struct pt_routed_midi_batch *pt_routed_midi_prepare_stop(struct pt_routed_
 const struct pt_routed_midi_batch *pt_routed_midi_prepare(struct pt_routed_midi *midi,
     const struct pt_routed_render_plan *plan)
 {
-    unsigned i;
+    unsigned i, audio;
     uint16_t seen = 0;
     if (!idle(midi) || !disjoint(midi, sizeof(*midi), plan, sizeof(*plan)) ||
         (midi->started && plan->frame <= midi->last_frame) || plan->midi_count > PT_MIDI_TRACKS)
         return NULL;
     if (plan->end)
         return plan->midi_count || plan->audio.count ? NULL : pt_routed_midi_prepare_stop(midi, plan->frame);
-    if (!plan->midi_count)
+    audio = midi->schedule && midi->schedule->provider.submit_combined && plan->audio.count;
+    if ((!plan->midi_count && !audio) || (audio && plan->audio.count > PT_RENDER_ACTIONS))
         return NULL;
     begin_batch(midi, plan->frame, 0);
+    midi->batch.needs_audio = audio;
     for (i = 0; i < plan->midi_count; ++i) {
         const struct pt_routed_midi_action *action = &plan->midi[i];
         const unsigned track = action->track;
@@ -213,7 +216,7 @@ static enum pt_routed_midi_schedule_result submit_batch(struct pt_routed_midi_sc
         combined != (schedule->provider.submit_combined != NULL))
         return PT_ROUTED_MIDI_INVALID;
     batch = &schedule->midi->batch;
-    if (schedule->faulted && !batch->stop)
+    if ((schedule->faulted && !batch->stop) || (batch->needs_audio && !audio))
         return PT_ROUTED_MIDI_INVALID;
     if (batch->frame == UINT64_MAX ||
         pt_elapsed_clock_deadline(&schedule->grid, batch->frame, &first) != PT_ELAPSED_OK ||
@@ -336,7 +339,7 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
     struct pt_routed_midi_receipt receipt = {0};
     const struct pt_routed_midi_event *event;
     enum pt_routed_midi_delivery delivery;
-    int midi_issued, audio_issued;
+    int midi_issued, audio_issued, silent_midi;
     if (!schedule_ready(schedule) || !schedule->held)
         return PT_ROUTED_MIDI_INVALID;
     event = &schedule->event;
@@ -348,10 +351,12 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
     midi_issued = delivery == PT_ROUTED_MIDI_ISSUED;
     audio_issued = receipt.audio.delivery == PT_MIXED_COMMAND_ISSUED ||
                    receipt.audio.delivery == PT_MIXED_COMMAND_CANCELLED_AFTER;
+    silent_midi = schedule->audio_ticket && !event->batch->count;
     if (!same_key(&receipt.key, &event->key) || !audio_receipt_valid(schedule, &receipt.audio, audio_issued) ||
         (midi_issued ? receipt.count != event->batch->count || receipt.activated < schedule->last_read :
                        delivery != PT_ROUTED_MIDI_NOT_ISSUED || receipt.count || receipt.activated) ||
-        (midi_issued && !commit(schedule->midi, event->key.frame, event->key.serial))) {
+        ((silent_midi ? audio_issued : midi_issued) &&
+         !commit(schedule->midi, event->key.frame, event->key.serial))) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_UNCERTAIN;
     }
@@ -359,15 +364,15 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_ro
     schedule->midi->pending = 0;
     if (midi_issued || audio_issued)
         schedule->last_read = receipt.activated > receipt.audio.last_issued ? receipt.activated : receipt.audio.last_issued;
-    if (schedule->audio_ticket && midi_issued != audio_issued) {
+    if (schedule->audio_ticket && !silent_midi && midi_issued != audio_issued) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_PARTIAL;
     }
-    if (!midi_issued) {
+    if (!(silent_midi ? audio_issued : midi_issued)) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_REFUSED;
     }
-    if (receipt.activated < event->first || receipt.activated >= event->last ||
+    if ((!silent_midi && (receipt.activated < event->first || receipt.activated >= event->last)) ||
         (audio_issued && (receipt.audio.first_issued < event->first || receipt.audio.last_issued >= event->last))) {
         schedule->faulted = 1;
         return PT_ROUTED_MIDI_OUTSIDE_WINDOW;

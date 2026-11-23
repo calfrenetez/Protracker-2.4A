@@ -157,7 +157,7 @@ static uint64_t publish_stop(struct trial *t, uint64_t first)
 }
 
 enum combined_case { BOTH_ISSUE, AUDIO_ONLY, MIDI_ONLY, BOTH_CANCEL, WRONG_RECEIPT,
-                     LATE_AUDIO_RECEIPT, STOP_AUDIO_ONLY };
+                     LATE_AUDIO_RECEIPT, STOP_AUDIO_ONLY, AUDIO_FRAME, AUDIO_FRAME_CANCEL };
 
 static void combined_case(enum combined_case which)
 {
@@ -172,9 +172,10 @@ static void combined_case(enum combined_case which)
         .observe = observe_combined, .request_cancel = cancel_combined, .submit_combined = publish_combined
     };
     const struct pt_routed_midi_batch *stop;
-    unsigned audio_issued = which != MIDI_ONLY && which != BOTH_CANCEL;
-    unsigned midi_issued = which != AUDIO_ONLY && which != BOTH_CANCEL;
-    unsigned cancel = which == MIDI_ONLY || which == BOTH_CANCEL || which == AUDIO_ONLY;
+    unsigned audio_frame = which == AUDIO_FRAME || which == AUDIO_FRAME_CANCEL;
+    unsigned audio_issued = which != MIDI_ONLY && which != BOTH_CANCEL && which != AUDIO_FRAME_CANCEL;
+    unsigned midi_issued = which != AUDIO_ONLY && which != BOTH_CANCEL && !audio_frame;
+    unsigned cancel = which == MIDI_ONLY || which == BOTH_CANCEL || which == AUDIO_ONLY || which == AUDIO_FRAME_CANCEL;
     unsigned i;
     uint64_t first;
     assert(plan && midi);
@@ -189,10 +190,15 @@ static void combined_case(enum combined_case which)
     };
     t->model.ticks = 99;
     open_trial(t);
-    plan->midi_count = 1;
-    plan->midi[0] = (struct pt_routed_midi_action){15, PT_NOTE_MIDI, 60, 100};
+    assert(!pt_routed_midi_prepare(midi, plan));
+    plan->audio.count = 5;
+    if (!audio_frame) {
+        plan->midi_count = 1;
+        plan->midi[0] = (struct pt_routed_midi_action){15, PT_NOTE_MIDI, 60, 100};
+    }
     assert(pt_routed_midi_prepare(midi, plan));
     assert(pt_routed_midi_schedule_submit(&schedule) == PT_ROUTED_MIDI_INVALID);
+    assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_INVALID);
     trigger_input(t, 5, 0, 0);
     assert(pt_mixed_readers_enqueue(t->queue, t->input, &first) == PT_MIXED_READERS_OK);
     assert(pt_mixed_readers_publish(t->queue, first) == PT_MIXED_READERS_OK);
@@ -221,9 +227,12 @@ static void combined_case(enum combined_case which)
     }
     assert(pt_routed_midi_schedule_observe(&schedule) ==
            (which == LATE_AUDIO_RECEIPT ? PT_ROUTED_MIDI_OUTSIDE_WINDOW :
+            audio_frame ? (audio_issued ? PT_ROUTED_MIDI_SETTLED : PT_ROUTED_MIDI_REFUSED) :
             audio_issued != midi_issued ? PT_ROUTED_MIDI_PARTIAL :
             midi_issued ? PT_ROUTED_MIDI_SETTLED : PT_ROUTED_MIDI_REFUSED));
     assert(midi->accepted[15].active == midi_issued);
+    if (audio_frame)
+        assert(midi->started == audio_issued);
     assert(t->model.effects == 5 * audio_issued && pt_mixed_readers_readers_held(t->queue) == 5);
 
     stop = pt_routed_midi_prepare_stop(midi, 960);
@@ -234,7 +243,7 @@ static void combined_case(enum combined_case which)
     } else {
         assert(pt_routed_midi_schedule_submit_combined(&schedule, NULL) == PT_ROUTED_MIDI_QUEUED);
     }
-    settle_midi(&m, which != STOP_AUDIO_ONLY);
+    settle_midi(&m, which != STOP_AUDIO_ONLY && which != AUDIO_FRAME);
     if (which == STOP_AUDIO_ONLY) {
         assert(pt_routed_midi_schedule_observe(&schedule) == PT_ROUTED_MIDI_PARTIAL);
         assert(!midi->stopped && midi->accepted[15].active);
@@ -261,6 +270,8 @@ int main(void)
     combined_case(WRONG_RECEIPT);
     combined_case(LATE_AUDIO_RECEIPT);
     combined_case(STOP_AUDIO_ONLY);
+    combined_case(AUDIO_FRAME);
+    combined_case(AUDIO_FRAME_CANCEL);
     puts("Combined schedule: exact Paula, AmiGUS and MIDI admission, partial receipts and owned Stop; SOFTWARE_ONLY");
     return 0;
 }

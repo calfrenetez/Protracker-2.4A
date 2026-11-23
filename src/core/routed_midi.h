@@ -15,7 +15,7 @@ struct pt_routed_midi_message {
 
 struct pt_routed_midi_batch {
     uint64_t frame, serial;
-    unsigned stop, count;
+    unsigned stop, count, needs_audio;
     struct pt_routed_midi_message messages[PT_ROUTED_MIDI_MESSAGES];
 };
 
@@ -40,7 +40,8 @@ struct pt_routed_midi {
 int pt_routed_midi_init(struct pt_routed_midi *, const struct pt_project *, uint16_t tracks);
 
 /* Prepare a batch against the last accepted notes. Empty nonterminal ticks
- * require no batch; a terminal tick contains the remaining owned Note Offs.
+ * require no batch. A combined provider also prepares audio-only boundaries.
+ * A terminal tick contains the remaining owned Note Offs.
  * Return NULL on refusal, including if another batch awaits settlement.
  * The returned pointer is borrowed until commit or cancel. */
 const struct pt_routed_midi_batch *pt_routed_midi_prepare(struct pt_routed_midi *,
@@ -157,7 +158,8 @@ enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit(struct pt_rou
  * leg, both terminal receipts must agree on the original identity. Two issues
  * inside the same logical frame settle. One issue is PARTIAL and blocks new
  * notes while retaining any actual MIDI notes for Stop. A terminal Stop is
- * complete only when both legs are settled by the common provider. */
+ * complete only when both legs are settled by the common provider. A MIDI
+ * batch with zero messages follows the audio receipt when audio is present. */
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_submit_combined(
     struct pt_routed_midi_schedule *, const struct pt_mixed_readers_event *);
 enum pt_routed_midi_schedule_result pt_routed_midi_schedule_observe(struct pt_routed_midi_schedule *);

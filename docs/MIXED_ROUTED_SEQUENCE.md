@@ -42,6 +42,12 @@ Stop. The audio queue retains responsibility for its reader retirement.
 The combined fixture uses the genuine audio queue and a modeled provider.
 Binding that provider to Paula, AmiGUS and native CAMD delivery remains open.
 
+A tracker frame with audio commands and zero MIDI messages can use the same
+combined queue. The prepared boundary requires its audio event. The audio
+receipt settles that boundary without reporting fictitious MIDI delivery.
+The note ledger carries its accepted voices forward until later note events
+or the owned Stop release them.
+
 To stop with a queued MIDI batch, the task can ask the provider to cancel its
 exact key once. The schedule blocks further note submissions and waits for the
 same terminal delivery receipt whether the cancellation was accepted, refused

@@ -138,6 +138,12 @@ paths. Build it with `tools/build_render_sequence.py
 The Amiberry 68030 run completed at the same three frame boundaries.
 [Routed tracker 030 test receipt](test-evidence/routed_tracker_amiberry_20261123.json)
 
+`pt_routed_preflight` audits every reached audio boundary with the same
+quantized normalizer used for playback. Only a complete pass can transfer
+the original renderer, rewound once for playback. The fixture verifies that
+a later looped Paula trigger refuses routed playback before any output
+submission, even after earlier mixed boundaries pass the audit.
+
 `pt_routed_playback_prepare` binds the ready forecast to its prepared batch.
 `pt_routed_playback_commit` advances that original interval only after live
 consumption and the exact complete output receipt. Idle forecasts require no

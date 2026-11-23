@@ -77,5 +77,26 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "whole_song_audit_follow_up": {
+    "tested_source": "8e41237fc82a97ae5f707e421b8d2534675af967",
+    "candidate_and_guest_readback_sha256": "13b374eed6297e8bf7e08964b7ca8b35bf8c147b23d054332d0977f0612192f2",
+    "build_receipt_sha256": "d9e77d1c39738a6ac6b14659d4cff85cc13a9f7a4aaf80a6736f29f39b6928bd",
+    "guest_log_sha256": "58a9b6a598ff24c4b0ab2ba60e44a65134256e50c4d2dd900aaa7dc0a9bfaf22",
+    "focused_host_methods": 10,
+    "legacy_preflight_and_render_methods": 2,
+    "additional_checks": [
+      "entire routed song audited through the exact playback normalizer before output",
+      "Paula loop rejected on track zero at frame 1920 after two valid boundaries",
+      "refusal preserves project bytes and submits zero output",
+      "successful audit transfers one original allocation rewound once for playback"
+    ],
+    "guest_exit_code": 0,
+    "exact_complete_log": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
 }

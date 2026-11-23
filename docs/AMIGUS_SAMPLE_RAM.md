@@ -257,6 +257,11 @@ Hardware ordering and positive reader quiet still need independent proof.
 The utility and register maps disagree on the envelope enable bit, which the
 encoded commands leave clear. Native start/stop dispatch stays disabled.
 
+The CONTROL program selects the current voice and updates its two rate words
+and stereo levels. The current start, loop, end and activation registers
+stay unchanged. The fixture checks the split rate and both levels while the
+original reader remains active. [PT4 rate and level updates](https://github.com/akustikrausch/protracker4/blob/v4.1.2.1/src/sys/amigus41.asm#L1045-L1125).
+
 The preparation layer passes11 related AmiGUS host fixtures (5.692s), the final
 three wavetable integration fixtures (8.238s), and shared030 run
 `render-files-1790475765845129000` (RC0 within90s). The native fixture returns all

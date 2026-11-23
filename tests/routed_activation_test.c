@@ -9,12 +9,15 @@
 #define PT_ROUTED_ACTIVATION_FIRE(owner, ticket, stop) pt_mixed_activation_fire(owner, ticket)
 #define PT_ROUTED_ACTIVATION_REPORT(message) do { puts(message); fflush(stdout); } while (0)
 #endif
+#ifndef PT_ROUTED_ACTIVATION_TEST_CONTROL
+#define PT_ROUTED_ACTIVATION_TEST_CONTROL 1
+#endif
 
 struct routed_port_model {
     struct paired_ram *audio;
     struct pt_routed_midi_schedule *schedule;
     const struct pt_mixed_activation_packet *publication;
-    struct pt_routed_midi_packet midi;
+    struct pt_routed_activation_program program;
     char endpoint[PT_MIDI_PORTS][PT_MIDI_ENDPOINT];
     struct pt_routed_midi_receipt receipt;
     unsigned queued, issued, detached, publishes;
@@ -34,41 +37,49 @@ static int publish_routed_packet(void *context, const struct pt_routed_midi_even
     struct routed_port_model *p = context;
     const struct pt_mixed_activation_packet *packet = p->publication;
     const struct pt_routed_midi_event copied_event = *midi;
-    struct pt_routed_midi_packet queued = {0};
+    struct pt_routed_activation_program queued = {0};
     assert(packet && !p->queued && audio == pt_mixed_activation_publication_event(packet->registration.owner, packet));
-    assert(packet->first == midi->first && packet->last == midi->last && packet->frame == midi->key.frame);
-    assert(midi->endpoint_count == 2 && midi->batch->count == 2);
-    queued.audio_ticket = UINT64_MAX;
-    assert(!pt_routed_midi_schedule_copy_packet(p->schedule, &copied_event, &queued));
-    assert(queued.audio_ticket == UINT64_MAX);
-    assert(pt_routed_midi_schedule_copy_packet(p->schedule, midi, &queued));
-    assert(queued.audio_ticket == packet->ticket && queued.first == packet->first && queued.last == packet->last);
-    assert(queued.count == 2 && queued.endpoint_count == 2 && queued.stop == midi->batch->stop);
-    for (unsigned i = queued.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
-        assert(!queued.messages[i].endpoint && !queued.messages[i].bytes[0] &&
-               !queued.messages[i].bytes[1] && !queued.messages[i].bytes[2]);
+    queued.midi.audio_ticket = UINT64_MAX;
+    assert(!pt_routed_activation_prepare(p->schedule, &copied_event, packet->registration.owner, packet, &queued));
+    assert(!pt_routed_activation_prepare(p->schedule, midi, NULL, NULL, &queued));
+    assert(queued.midi.audio_ticket == UINT64_MAX);
+    assert(pt_routed_activation_prepare(p->schedule, midi, packet->registration.owner, packet, &queued));
+    assert(queued.midi.audio_ticket == packet->ticket && queued.midi.first == packet->first && queued.midi.last == packet->last);
+    assert(queued.midi.key.frame == packet->frame && queued.audio_count == packet->count);
+    assert(queued.midi.count == midi->batch->count && queued.midi.endpoint_count == 2 && queued.midi.stop == midi->batch->stop);
+    for (unsigned i = queued.midi.count; i < PT_ROUTED_MIDI_MESSAGES; ++i)
+        assert(!queued.midi.messages[i].endpoint && !queued.midi.messages[i].bytes[0] &&
+               !queued.midi.messages[i].bytes[1] && !queued.midi.messages[i].bytes[2]);
     for (unsigned i = 0; i < packet->count; ++i) {
         const struct pt_mixed_readers_action *action = packet->action + i;
-        struct pt_amigus_voice_register_program registers;
-        if (action->route != PT_MIXED_READERS_AMIGUS)
-            continue;
-        if (action->kind == PT_MIXED_READERS_TRIGGER) {
+        const struct pt_routed_audio_program *program = queued.audio + i;
+        const struct pt_amigus_voice_register_program *registers = &program->output.amigus;
+        assert(program->route == action->route && program->slot == action->slot && program->kind == action->kind);
+        if (action->route == PT_MIXED_READERS_PAULA) {
+            assert(program->output.paula.location == (uintptr_t)action->geometry.paula.data);
+            assert(program->output.paula.words == action->geometry.paula.words);
+            assert(program->output.paula.period == action->geometry.paula.period &&
+                   program->output.paula.volume == action->geometry.paula.volume);
+        } else if (action->kind == PT_MIXED_READERS_TRIGGER) {
             const struct pt_amigus_voice_plan *voice = &action->geometry.amigus;
-            assert(pt_amigus_voice_trigger_registers(action->slot, voice, &registers));
             const unsigned end = (voice->control & 2) ? 6 : 4;
-            assert(registers.write[end].offset == 0x2a && registers.write[end + 1].offset == 0x2c);
-            assert((uint32_t)registers.write[end].value * 65536 + registers.write[end + 1].value ==
+            assert(registers->write[end].offset == 0x2a && registers->write[end + 1].offset == 0x2c);
+            assert((uint32_t)registers->write[end].value * 65536 + registers->write[end + 1].value ==
                    voice->end_exclusive - 2);
-            assert(registers.write[registers.count - 1].value == voice->control);
+            assert(registers->write[registers->count - 1].value == voice->control);
+        } else if (action->kind == PT_MIXED_READERS_CONTROL) {
+            assert(registers->count == 5 && registers->write[1].offset == 0x2e && registers->write[2].offset == 0x30);
+            assert(registers->write[3].offset == 0x32 && registers->write[4].offset == 0x34);
+            assert(registers->write[3].value == action->geometry.amigus.left &&
+                   registers->write[4].value == action->geometry.amigus.right);
         } else {
             assert(action->kind == PT_MIXED_READERS_STOP);
-            assert(pt_amigus_voice_stop_registers(action->slot, &registers));
-            assert(registers.count == 2 && registers.write[0].value == action->slot && !registers.write[1].value);
+            assert(registers->count == 2 && registers->write[0].value == action->slot && !registers->write[1].value);
         }
     }
     if (a_publish_model(p->audio, p->audio->owner, packet) != 1)
         return 0;
-    p->midi = queued;
+    p->program = queued;
     memcpy(p->endpoint, midi->endpoint, sizeof(p->endpoint[0]) * midi->endpoint_count);
     p->receipt = (struct pt_routed_midi_receipt){.key = midi->key};
     p->issued = p->detached = 0;
@@ -97,18 +108,21 @@ static int routed_commit(void *context, const struct pt_mixed_activation_packet 
     int result;
     assert(p && p->audio == context && p->queued && !p->issued);
     assert(!pt_mixed_activation_publication_event(packet->registration.owner, packet));
-    assert(p->midi.key.frame == packet->frame && p->midi.key.serial == p->receipt.key.serial);
+    const struct pt_routed_midi_packet *midi = &p->program.midi;
+    assert(midi->key.frame == packet->frame && midi->key.serial == p->receipt.key.serial);
     assert(!strcmp(p->endpoint[0], "synth.a") && !strcmp(p->endpoint[1], "synth.b"));
-    assert(p->midi.messages[0].endpoint == 0 && p->midi.messages[1].endpoint == 1);
-    assert(p->midi.messages[0].bytes[0] == (p->midi.stop ? 0x82 : 0x92));
-    assert(p->midi.messages[1].bytes[0] == (p->midi.stop ? 0x85 : 0x95));
-    assert(p->midi.messages[0].bytes[1] == 60 && p->midi.messages[1].bytes[1] == 67);
-    assert(p->midi.messages[0].bytes[2] == (p->midi.stop ? 0 : 91));
-    assert(p->midi.messages[1].bytes[2] == (p->midi.stop ? 0 : 102));
+    if (midi->count) {
+        assert(midi->count == 2 && midi->messages[0].endpoint == 0 && midi->messages[1].endpoint == 1);
+        assert(midi->messages[0].bytes[0] == (midi->stop ? 0x82 : 0x92));
+        assert(midi->messages[1].bytes[0] == (midi->stop ? 0x85 : 0x95));
+        assert(midi->messages[0].bytes[1] == 60 && midi->messages[1].bytes[1] == 67);
+        assert(midi->messages[0].bytes[2] == (midi->stop ? 0 : 91));
+        assert(midi->messages[1].bytes[2] == (midi->stop ? 0 : 102));
+    }
     result = a_commit_model(context, packet, actual);
     if (result == 1) {
-        p->receipt.activated = p->audio->ticks;
-        p->receipt.count = p->midi.count;
+        p->receipt.activated = midi->count ? p->audio->ticks : 0;
+        p->receipt.count = midi->count;
         p->issued = 1;
     }
     return result;
@@ -123,17 +137,17 @@ static enum pt_routed_midi_delivery observe_routed(void *context, const struct p
         return PT_ROUTED_MIDI_PENDING;
     *out = p->receipt;
     p->queued = 0;
-    return PT_ROUTED_MIDI_ISSUED;
+    return p->receipt.count ? PT_ROUTED_MIDI_ISSUED : PT_ROUTED_MIDI_NOT_ISSUED;
 }
 
 static void settle_routed(struct activation_case *c, struct routed_port_model *p, uint64_t ticket, uint64_t frame)
 {
     struct pt_mixed_readers_command_receipt receipt;
     const struct paired_ram_command *queued = a_command(&c->ram, ticket);
-    struct pt_routed_midi_packet outside = {0};
+    struct pt_routed_activation_program outside = {0};
     assert(queued && !pt_mixed_activation_publication_event(c->owner, &queued->packet));
-    assert(!pt_routed_midi_schedule_copy_packet(p->schedule, &p->schedule->event, &outside));
-    assert(!outside.audio_ticket);
+    assert(!pt_routed_activation_prepare(p->schedule, &p->schedule->event, c->owner, &queued->packet, &outside));
+    assert(!outside.midi.audio_ticket);
     assert(pt_routed_midi_schedule_observe(p->schedule) == PT_ROUTED_MIDI_WAITING);
     c->ram.ticks = oracle(frame) - 1;
     assert(pt_mixed_activation_fire(c->owner, ticket) == PT_MIXED_ACTIVATION_EARLY);
@@ -147,6 +161,52 @@ static void settle_routed(struct activation_case *c, struct routed_port_model *p
     p->detached = 1;
     assert(pt_routed_midi_schedule_observe(p->schedule) == PT_ROUTED_MIDI_SETTLED);
     assert(!p->queued);
+}
+
+static void exercise_control(struct activation_case *c, struct routed_port_model *model,
+    struct pt_routed_render_plan *plan)
+{
+    uint64_t ticket;
+    struct pt_mixed_readers_inputs *inputs = c->trial->input;
+    struct pt_routed_midi *midi = model->schedule->midi;
+    plan->frame = 960;
+    plan->midi_count = 0;
+    const struct pt_routed_midi_batch *batch = pt_routed_midi_prepare(midi, plan);
+    assert(batch && !batch->count && batch->needs_audio && !batch->stop);
+    memset(inputs, 0, sizeof(*inputs));
+    holder_init(c->trial->command + 1, 101);
+    inputs->command = control_of(c->trial->command + 1);
+    inputs->batch = (struct pt_mixed_readers_batch){17, plan->frame, 6, {{0}}};
+    for (unsigned i = 0; i < inputs->batch.count; ++i) {
+        const unsigned route = i < 4 ? PT_MIXED_READERS_PAULA : PT_MIXED_READERS_AMIGUS;
+        const unsigned slot = i < 4 ? i : i - 4;
+        const struct pt_mixed_readers_key *key = pt_routed_midi_schedule_audio_key(model->schedule, route, slot);
+        struct pt_mixed_readers_action *action = inputs->batch.action + i;
+        assert(key);
+        inputs->target[i] = *key;
+        action->kind = PT_MIXED_READERS_CONTROL;
+        action->route = route;
+        action->slot = slot;
+        if (route == PT_MIXED_READERS_PAULA) {
+            action->geometry.paula.period = 400;
+            action->geometry.paula.volume = 32;
+        } else {
+            action->geometry.amigus.rate = 0x123456;
+            action->geometry.amigus.left = 2048;
+            action->geometry.amigus.right = 1024;
+        }
+    }
+    assert(pt_mixed_activation_enqueue(c->owner, inputs, &ticket) == PT_MIXED_READERS_OK);
+    assert(pt_mixed_activation_publish(c->owner, ticket) == PT_MIXED_READERS_OK);
+    assert(model->publishes == 2 && c->ram.effects == 6);
+    PT_ROUTED_ACTIVATION_REPORT("Routed activation controls queued");
+    settle_routed(c, model, ticket, plan->frame);
+    assert(c->ram.effects == 12 && midi->accepted[14].active && midi->accepted[15].active);
+    for (unsigned i = 4; i < inputs->batch.count; ++i) {
+        const struct paired_ram_reader *reader = a_reader(&c->ram, inputs->target + i);
+        assert(reader && reader->active && reader->action.geometry.amigus.rate == 0x123456);
+        assert(reader->action.geometry.amigus.left == 2048 && reader->action.geometry.amigus.right == 1024);
+    }
 }
 
 int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
@@ -167,6 +227,8 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
         .observe = observe_routed, .submit_combined = publish_routed_packet
     };
     struct pt_mixed_readers_stop_keys stop = {0};
+    const uint64_t stop_frame = PT_ROUTED_ACTIVATION_TEST_CONTROL ? 1920 : 960;
+    const unsigned stop_command = PT_ROUTED_ACTIVATION_TEST_CONTROL ? 2 : 1;
     uint64_t first, terminal;
     unsigned i;
     assert(midi && plan);
@@ -195,11 +257,13 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     PT_ROUTED_ACTIVATION_REPORT("Routed activation frame zero queued");
     settle_routed(c, &model, first, 0);
     assert(c->ram.effects == 6 && midi->accepted[14].active && midi->accepted[15].active);
-    assert(pt_routed_midi_prepare_stop(midi, 960));
-    assert(pt_routed_midi_schedule_stop_keys(&schedule, &stop) && stop.count == 6 && stop.frame == 960);
+    if (PT_ROUTED_ACTIVATION_TEST_CONTROL)
+        exercise_control(c, &model, plan);
+    assert(pt_routed_midi_prepare_stop(midi, stop_frame));
+    assert(pt_routed_midi_schedule_stop_keys(&schedule, &stop) && stop.count == 6 && stop.frame == stop_frame);
     memset(c->trial->input, 0, sizeof(*c->trial->input));
-    holder_init(c->trial->command + 1, 101);
-    c->trial->input->command = control_of(c->trial->command + 1);
+    holder_init(c->trial->command + stop_command, 100 + stop_command);
+    c->trial->input->command = control_of(c->trial->command + stop_command);
     c->trial->input->batch = (struct pt_mixed_readers_batch){17, stop.frame, stop.count, {{0}}};
     for (i = 0; i < stop.count; ++i) {
         struct pt_mixed_readers_action *action = c->trial->input->batch.action + i;
@@ -210,11 +274,11 @@ int PT_ROUTED_ACTIVATION_TEST_MAIN(int argc, char **argv)
     }
     assert(pt_mixed_activation_enqueue(c->owner, c->trial->input, &terminal) == PT_MIXED_READERS_OK);
     assert(PT_ROUTED_ACTIVATION_PUBLISH(c->owner, terminal, 1) == PT_MIXED_READERS_OK);
-    assert(model.publishes == 2 && c->ram.effects == 6);
+    assert(model.publishes == stop_command + 1 && c->ram.effects == 6 * stop_command);
     PT_ROUTED_ACTIVATION_REPORT("Routed activation owned Stop queued");
-    settle_routed(c, &model, terminal, 960);
+    settle_routed(c, &model, terminal, stop_frame);
     assert(midi->stopped && !midi->accepted[14].active && !midi->accepted[15].active);
-    assert(!c->ram.mask && !schedule.audio_owned && c->ram.effects == 12);
+    assert(!c->ram.mask && !schedule.audio_owned && c->ram.effects == 6 * (stop_command + 1));
     for (i = 0; i < stop.count; ++i)
         assert(pt_mixed_activation_service_reader(c->owner, stop.key[i].trigger,
             stop.key[i].action, 1, NULL) == PT_MIXED_READERS_OK);

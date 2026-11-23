@@ -4,6 +4,21 @@
 #include "mixed_readers_activation.h"
 #include "routed_midi.h"
 
+struct pt_routed_audio_program {
+    unsigned route, slot;
+    enum pt_mixed_readers_kind kind;
+    union {
+        struct { uintptr_t location; uint16_t words, period; uint8_t volume; } paula;
+        struct pt_amigus_voice_register_program amigus;
+    } output;
+};
+
+struct pt_routed_activation_program {
+    struct pt_routed_midi_packet midi;
+    unsigned audio_count;
+    struct pt_routed_audio_program audio[PT_MIXED_READERS_ACTIONS];
+};
+
 /* Delegate the genuine activation port's task publication to its routed
  * schedule. The combined provider copies the prepared audio packet and the
  * complete MIDI event before returning. There is no separate audio publish.
@@ -20,5 +35,13 @@ static inline int pt_routed_activation_publish(struct pt_routed_midi_schedule *s
         return 1;
     return result == PT_ROUTED_MIDI_UNCERTAIN ? -1 : 0;
 }
+
+/* Prepare the audio program and accompanying MIDI bytes inside the original
+ * audio publication callback. The provider owns the output, which stays
+ * unchanged on refusal. Paula locations reference held sample memory. The
+ * original owners still govern reader, endpoint and device lifetimes. */
+int pt_routed_activation_prepare(const struct pt_routed_midi_schedule *, const struct pt_routed_midi_event *,
+    const struct pt_mixed_readers_activation *, const struct pt_mixed_activation_packet *,
+    struct pt_routed_activation_program *);
 
 #endif

@@ -38,10 +38,14 @@ struct pt_amigus_voice_register_program {
 /* Pure encoding for the Hagen and SHIVA wavetable maps. A trigger selects and
  * stops the voice, programs the inactive state, then puts activation last.
  * The hardware end register uses the address of the last word. The software
- * plan and sample lease keep their original half-open bound. For either
+ * plan and sample lease keep their original half-open bound. For each
  * program, the caller still owns bus access, ordering and reader quiet.
  * These functions make no register writes. Refusal leaves out unchanged. */
 int pt_amigus_voice_trigger_registers(unsigned voice, const struct pt_amigus_voice_plan *,
+    struct pt_amigus_voice_register_program *);
+/* Update rate and stereo levels on the selected active voice. The start,
+ * loop, end and activation registers stay outside this program. */
+int pt_amigus_voice_control_registers(unsigned voice, uint32_t rate, uint16_t left, uint16_t right,
     struct pt_amigus_voice_register_program *);
 int pt_amigus_voice_stop_registers(unsigned voice, struct pt_amigus_voice_register_program *);
 #endif

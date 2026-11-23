@@ -64,6 +64,7 @@ static enum pt_mixed_activation_result timed_fire(struct pt_mixed_readers_activa
 #define PT_ROUTED_ACTIVATION_PUBLISH timed_publish
 #define PT_ROUTED_ACTIVATION_FIRE timed_fire
 #define PT_ROUTED_ACTIVATION_REPORT(message) ((void)0)
+#define PT_ROUTED_ACTIVATION_TEST_CONTROL 0
 #include "routed_activation_test.c"
 
 int main(int argc, char **argv)

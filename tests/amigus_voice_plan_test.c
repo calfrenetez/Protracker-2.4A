@@ -30,6 +30,19 @@ static void check_voice_registers(void)
     assert(program.write[3].offset == 0x24 && program.write[3].value == 0xfffe);
     assert(program.write[5].offset == 0x2c && program.write[5].value == 0xfffe);
     assert(program.write[10].offset == 0x20 && program.write[10].value == 0x8000);
+
+    assert(pt_amigus_voice_control_registers(31, 0x40000000, 0, UINT16_MAX, &program));
+    assert(program.count == 5 && program.write[0].offset == 0x1e && program.write[0].value == 31);
+    assert(program.write[1].offset == 0x2e && program.write[1].value == 0x4000);
+    assert(program.write[2].offset == 0x30 && !program.write[2].value);
+    assert(program.write[3].offset == 0x32 && !program.write[3].value);
+    assert(program.write[4].offset == 0x34 && program.write[4].value == UINT16_MAX);
+    memcpy(&previous, &program, sizeof(program));
+    assert(!pt_amigus_voice_control_registers(32, 1, 2, 3, &program));
+    assert(!pt_amigus_voice_control_registers(5, 0, 2, 3, &program));
+    assert(!pt_amigus_voice_control_registers(5, 0x40000001, 2, 3, &program));
+    assert(!memcmp(&program, &previous, sizeof(program)));
+
     assert(pt_amigus_voice_stop_registers(5, &program));
     assert(program.count == 2 && program.write[0].offset == 0x1e && program.write[0].value == 5);
     assert(program.write[1].offset == 0x20 && !program.write[1].value);

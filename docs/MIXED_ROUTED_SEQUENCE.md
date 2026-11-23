@@ -202,6 +202,14 @@ message bytes. Its numeric endpoint indexes retain the original destination
 mapping. A scheduled consumer can use this copy without reading the renderer,
 live MIDI planner or project strings.
 
+`pt_routed_activation_prepare` copies the Paula DMA geometry and builds the
+ordered AmiGUS register programs alongside the MIDI packet during the original
+publication. The provider gets one complete prepared object after validation.
+The audio owner retains the original reader keys and sample memory. The
+activation fixture applies a rate and level change at frame 960 while both
+MIDI notes and the original audio readers stay active, then stops them at
+frame 1920.
+
 The ordinary-RAM activation diagnostic also measured 24 runs on the native
 709,379 Hz E-clock in Amiberry. At 48 kHz, one sample frame spans 14 or 15
 ticks. Every measured bracket crossed its start frame, including the

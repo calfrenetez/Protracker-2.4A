@@ -1,0 +1,26 @@
+{
+  "date_utc": "2026-11-23",
+  "tested_source": "bdc4f4319525728b7a7166a7891062aeab7838df",
+  "target": "amiberry-030",
+  "guest_cpu_confirmation": "System: 68030",
+  "fixture": "PTRoutedTracker",
+  "candidate_and_guest_readback_sha256": "25f5f024f04bf37d411ad2559c45cab9d2dab26db68e8ea1c53d46b086aeafdd",
+  "build_receipt_sha256": "64fda75110ba26d2fb645a95090bd3a362a1777749be686c59be02580b6a4b6f",
+  "guest_log_sha256": "b2de8d26b55ff1da0f494718667ffb241829b2d98d5de29d933c4aa2132a2e94",
+  "focused_host_methods": 10,
+  "routed_boundaries": [
+    {"frame": 0, "audio_actions": 5, "midi_messages": 1, "operation": "attack"},
+    {"frame": 960, "audio_actions": 5, "midi_messages": 0, "operation": "volume slide"},
+    {"frame": 1920, "audio_actions": 5, "midi_messages": 1, "operation": "F00 Stop"}
+  ],
+  "project_bytes_preserved": true,
+  "reader_retirement_verified_in_fixture": true,
+  "guest_exit_code": 0,
+  "exact_complete_log": true,
+  "guest_startup_completed": true,
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true,
+  "scope": "Real tracker lookahead, plan normalization and audio queue with modeled output. The full editor, live CAMD, physical devices and listening remain untested."
+}

@@ -130,3 +130,5 @@ the genuine audio queue before the fixture commits the corresponding render
 interval. The audio readers and MIDI note are released through their existing
 ownership paths. Build it with `tools/build_render_sequence.py
 --cc <amiga-compiler> --fixture routed-tracker`.
+The Amiberry 68030 run completed at the same three frame boundaries.
+[Routed tracker 030 test receipt](test-evidence/routed_tracker_amiberry_20261123.json)

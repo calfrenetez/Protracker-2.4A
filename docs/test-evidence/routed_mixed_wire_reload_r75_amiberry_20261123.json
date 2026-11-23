@@ -1,0 +1,60 @@
+{
+  "target": "amiberry-030",
+  "profile": "private serial compatibility loopback",
+  "cycle_exact": false,
+  "normal_owned_stop": true,
+  "restored_files": 39,
+  "shared_release_independently_verified": true,
+  "limits": "AmiGUS register stores modeled in RAM. Physical device timing and listening remain pending.",
+  "fixtures": {
+    "reload": {
+      "passed": false,
+      "guest_rc": "20",
+      "candidate_sha256": "8c525a9b9e157ee5008d836bc46806004fdf4f56e07e5e43076884c89866c195",
+      "validated_build_inputs": 128,
+      "exact_guest_readback": true,
+      "build_receipt_sha256": "f647152c6d52a1a78d76dfb57743960c82d35500e84b7d83ec231c57b5258922",
+      "guest_log_sha256": "b10b49cccf6ccc03756f9dd6b66953db15dfd3d219dc4d9ddb2e4893e7c25142",
+      "reason": "The mixed IRQ writes fit both windows. The task did not confirm any Note Off readback bytes before ending the bounded receive. The full reload diagnostic failed.",
+      "clock_reload": {
+        "original_callbacks": 1,
+        "second_origin_tick": 66022,
+        "planned_generations": [
+          0,
+          1
+        ],
+        "issued_generations": [
+          0,
+          1
+        ]
+      },
+      "observations": [
+        {
+          "frame": 0,
+          "window": [
+            8192,
+            8207
+          ],
+          "observed_ticks": [
+            8192,
+            8199
+          ],
+          "serial_readback": "953c5a"
+        },
+        {
+          "frame": 5760,
+          "window": [
+            93318,
+            93333
+          ],
+          "observed_ticks": [
+            93319,
+            93326
+          ],
+          "serial_readback_count": 0,
+          "paula_dma_cleared": true
+        }
+      ]
+    }
+  }
+}

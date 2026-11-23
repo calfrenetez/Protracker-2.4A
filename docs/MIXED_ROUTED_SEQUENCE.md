@@ -37,8 +37,12 @@ publication. It checks the original session, generation, frame and counter
 window, binds the audio queue for the session, and requires advancing audio
 tickets. Audio and MIDI receipts must account for every issued action and the
 whole activation interval inside the shared logical frame. A partial result
-blocks further note submissions and preserves the actual note ownership for
-Stop. The audio queue retains responsibility for its reader retirement.
+blocks further note submissions and preserves the actual active audio keys
+and MIDI notes. A terminal Stop must name all remaining audio keys. If only
+the MIDI leg issues, the confirmed MIDI note-offs stay recorded and the audio
+leg remains outstanding. An independently detached, unissued audio Stop can
+leave those exact readers available for a later frame. The audio queue owns
+reader retirement.
 The combined fixture uses the genuine audio queue and a modeled provider.
 Binding that provider to Paula, AmiGUS and native CAMD delivery remains open.
 
@@ -125,10 +129,11 @@ audio-only publication and cancellation. [Combined 030 test receipt](test-eviden
 The routed tracker fixture uses a complete pattern as its input. Its real
 lookahead produces the attacks at frame 0, a volume-slide control at frame 960
 while the MIDI note is held, and F00 at frame 1920. The existing normalizer
-derives the audio commands, and the modeled joint provider settles them through
-the genuine audio queue before the fixture commits the corresponding render
-interval. The audio readers and MIDI note are released through their existing
-ownership paths. Build it with `tools/build_render_sequence.py
+derives the audio commands, and the sampler factory binds them to held masters
+and adopted readers. The modeled joint provider settles them through the
+genuine audio queue before the fixture commits the corresponding render interval.
+The audio readers and MIDI note are released through their existing ownership
+paths. Build it with `tools/build_render_sequence.py
 --cc <amiga-compiler> --fixture routed-tracker`.
 The Amiberry 68030 run completed at the same three frame boundaries.
 [Routed tracker 030 test receipt](test-evidence/routed_tracker_amiberry_20261123.json)

@@ -39,5 +39,37 @@
     "saved_files_verified": 39,
     "guard_release_verified": true
   },
+  "owned_stop_follow_up": {
+    "tested_source": "718b5ed150f44bc43b94b78e2946a94f660ea6dd",
+    "fixtures": {
+      "PTRoutedCombined": {
+        "candidate_and_guest_readback_sha256": "b5fce69e502556f4b411f064a3d3d0159d71654e1ca1c38cbbba93f17dc2d082",
+        "build_receipt_sha256": "e2ca3e5e7f3bb66a76e0596ce83839e489025eed263cf031d2c4cfefa9bba1a5",
+        "guest_log_sha256": "ec762b490ae3418a478d3bf7b89d9712fb42dd29bd24f2b0254af45331f19c5d",
+        "guest_exit_code": 0
+      },
+      "PTRoutedTracker": {
+        "candidate_and_guest_readback_sha256": "8f45863a21e111c4ced5fac8fa94c847f51350efbcedb95b636815412b177205",
+        "build_receipt_sha256": "6c129378a416ddfc71d70b98030cbc540785a8387cd99c93865f7c99668c6b48",
+        "guest_log_sha256": "63aa80fd118ece396d1d5f313952d83765a683e6dd152adfd9404fb198a8556f",
+        "guest_exit_code": 0
+      }
+    },
+    "combined_fixture_cases": 10,
+    "focused_host_methods": 10,
+    "mixed_queue_regression_methods": 6,
+    "legacy_queue_sanitizer_fixture": "PASS",
+    "additional_checks": [
+      "terminal Stop rejects an omitted route and a stale reader key",
+      "each partial Stop retains only the still-owed output leg",
+      "detached unissued audio Stop admits a later exact Stop for the same active readers"
+    ],
+    "exact_complete_logs": true,
+    "guest_startup_completed": true,
+    "normal_owned_stop": true,
+    "canonical_disk_unchanged": true,
+    "saved_files_verified": 39,
+    "guard_release_verified": true
+  },
   "scope": "Genuine ProTracker audio queue with modeled Paula, AmiGUS and MIDI output. The full editor, live CAMD, physical devices and listening remain untested."
 }

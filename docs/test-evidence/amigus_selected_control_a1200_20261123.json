@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-23",
+  "target": "real-a1200",
+  "kickstart": "47.115",
+  "workbench": "47.5",
+  "transport": "PicoWyfy, Safari AmiConnect, shared physical harness",
+  "test": "AmiGUSTest --wavetable-selected-control",
+  "candidate_source": "bf9f1390dc795f1d3126791c269c50f3572d39f1",
+  "emulator_evidence": "amigus_selected_control_r71_amiberry_20261123.json",
+  "archive": {
+    "bytes": 26326,
+    "source_sha256": "dd14444902ba46ca1836d1685f75be6bd1637bf72027f7ed9c90cfa13b89542e",
+    "matching_host_and_guest_md5": "7744a17c8d7db2de8efaa067039e5cc2",
+    "native_archive_integrity_passed": true
+  },
+  "executable": {
+    "bytes": 25408,
+    "source_sha256": "4fc176bfc464323117722a7c8ed1fca94d22d2f4e5f53a055b30df6a342fcaad",
+    "matching_host_and_guest_md5": "d2900a7ce94e3660e4210ed2f4667da4"
+  },
+  "passed": true,
+  "guest_return_code": 0,
+  "native_log_provenance": "Transcribed from the observed Amiga Shell with display wrapping removed.",
+  "native_log_transcript_sha256": "3e0bc7663acf60d3947222301776d4845cd65f68876e2021fa1ec139d974f537",
+  "native_log": [
+    "WAVETABLE-PROBE scope=Mini-7ea663e7-selected-control writes=NO bank_select=NO bank_identity=UNKNOWN voices_stopped=NOT_QUALIFIED",
+    "WAVETABLE SELECTED CONTROL offset=0x20 value=0x0000",
+    "WAVETABLE RELEASE confirmed=1 retained=0 driver=0x00000000",
+    "WAVETABLE result=PASS reason=observed reads=1 rc=0"
+  ],
+  "observations": {
+    "firmware": "AmiGUS Mini 7ea663e7",
+    "register_offset": "0x20",
+    "control_word": "0x0000",
+    "reads": 1,
+    "writes": 0,
+    "bank_selected_by_probe": false,
+    "original_lease_release_confirmed": true,
+    "lease_retained": false,
+    "release_driver_status": "0x00000000",
+    "bank_identity_established": false,
+    "voices_stopped_qualified": false,
+    "sample_ram_quiescence_qualified": false,
+    "physical_playback_or_midi_tested": false,
+    "human_listening_tested": false
+  },
+  "input_recovery": {
+    "raw_shift_character_mapping_usable": false,
+    "rejected_shell_attempt": "Wget returned missing URL before a transfer. Native List found no stray Workbench file named ram.",
+    "working_path": "Scroll the AmiConnect Latin-1 field into view, verify exact field contents, then use Send text."
+  },
+  "closeout": {
+    "original_shell_stack_bytes_restored": 4096,
+    "shell_idle": true,
+    "host_transfer_server_exited": true,
+    "ram_artifacts_retained": [
+      "RAM:pt58239.lha",
+      "RAM:pt58239/"
+    ],
+    "view_only_verified": true,
+    "physical_guard_release_verified": true,
+    "historical_fence": 121,
+    "proof_sha256": {
+      "authorization": "f9c77b42c26830da253ff996d797e77970af315e83a6cb7c7cb82ec7ef8987b7",
+      "restoration": "354da96dfd1a05c132463078fc9a6da9b52fa3f198c752c48a0498f990495228",
+      "absence": "bc2ae06665c6945bd77914256af6e09ef8ad2f102ded60fe35a74ba15f26efa4",
+      "cleanup": "d6e25d211bc210624db07b7e2687fb304608621af77022170655a2bc98abecc8"
+    }
+  }
+}

@@ -27,7 +27,7 @@ def receipt():
                      f"arm={triplet(threshold + 1000)} delay=1000 calls={index+1} status={2 if expired else 1} "
                      f"attempts=2 pre={triplet(pre)} post={triplet(post)} mark={'0000' if expired else '4752'} "
                      f"tx={tx} rx={rx} received={0 if expired else 3} idle=1")
-    return "\n".join(lines + ["MIDI wire finished callbacks=3 stray=0/0 closed=1 rc=0"])
+    return "\n".join(lines + ["MIDI wire cleanup request=0001/0001 uart=3900", "MIDI wire finished callbacks=3 stray=0/0 closed=1 rc=0"])
 
 
 class MidiWireTest(unittest.TestCase):
@@ -43,6 +43,6 @@ class MidiWireTest(unittest.TestCase):
         report = receipt()
         self.assertEqual(replay(report)["notes"][0]["first_write_ticks"], [8193, 8199])
         for old, new in (("received=3", "received=2"), ("853c00", "853c01"), ("frame=3000", "frame=3001"),
-                         ("period=113", "period=112"), ("rc=0", "rc=20"), ("received=0", "received=1")):
+                         ("period=113", "period=112"), ("request=0001/0001", "request=0001/0000"), ("rc=0", "rc=20"), ("received=0", "received=1")):
             with self.subTest(changed=new), self.assertRaises(ValueError):
                 replay(report.replace(old, new, 1))

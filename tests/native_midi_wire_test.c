@@ -181,10 +181,12 @@ static void report(const struct serial_case *row, unsigned index)
         row->received, row->idle);
 }
 
-static int hold(void) __attribute__((noreturn));
-static int hold(void)
+static int hold(const char *reason, unsigned owned) __attribute__((noreturn));
+static int hold(const char *reason, unsigned owned)
 {
-    puts("MIDI wire HOLD: original timer or UART retained");
+    printf("MIDI wire HOLD reason=%s uart=%04x request=%04x enabled=%04x\n", reason,
+        owned ? (unsigned)*reg(SERIAL_STATUS) : 0, owned ? (unsigned)(*reg(INT_REQUEST) & SERIAL_REQUESTS) : 0,
+        owned ? (unsigned)(*reg(INT_ENABLE) & SERIAL_REQUESTS) : 0);
     fflush(stdout);
     for (;;)
         Delay(50);
@@ -237,26 +239,10 @@ int main(int argc, char **argv)
         goto finish;
     rc = 0;
 
-finish:
-    if (!close_alarm(&alarm) || !pt_diagnostic_cia_close(&clock))
-        return hold();
+finish:;
+    const int alarm_closed = close_alarm(&alarm);
+    const int clock_closed = alarm_closed && pt_diagnostic_cia_close(&clock);
     pt_native_eclock_close(&timebase);
-    if (configured) {
-        for (unsigned i = 0; !quiet(); ++i) {
-            if (i == 49 || (*reg(INT_ENABLE) & SERIAL_REQUESTS))
-                return hold();
-            if (*reg(SERIAL_STATUS) & RX_FULL)
-                *reg(INT_WRITE) = INTF_RBF;
-            Delay(1);
-        }
-        *reg(INT_WRITE) = SERIAL_REQUESTS;
-        if (original_requests)
-            *reg(INT_WRITE) = INTF_SETCLR | original_requests;
-        if ((*reg(INT_REQUEST) & SERIAL_REQUESTS) != original_requests)
-            return hold();
-    }
-    if (owned)
-        FreeMiscResource(MR_SERIALPORT);
     if (strays || alarm.data.stray || alarm.data.calls != 3)
         rc = 20;
     printf("MIDI wire clock hz=%lu timer=%u/%u alarm=%u/%u anchor=%02x%02x%02x epoch=%u period=%u\n",
@@ -264,6 +250,36 @@ finish:
         (unsigned)origin.after[1], (unsigned)origin.after[2], EPOCH, period);
     for (unsigned i = 0; i < 3; ++i)
         report(rows + i, i);
+    fflush(stdout);
+    if (!alarm_closed || !clock_closed)
+        return hold("timer", owned);
+
+    if (configured) {
+        for (unsigned i = 0; !quiet(); ++i) {
+            if (i == 49 || (*reg(INT_ENABLE) & SERIAL_REQUESTS))
+                return hold("drain", owned);
+            const UWORD status = *reg(SERIAL_STATUS);
+            if (status & (RX_FULL | RX_OVERRUN))
+                *reg(INT_WRITE) = INTF_RBF;
+            Delay(1);
+        }
+        const UWORD current = *reg(INT_REQUEST) & SERIAL_REQUESTS;
+        if (current & ~original_requests)
+            *reg(INT_WRITE) = current & ~original_requests;
+        if (original_requests & ~current)
+            *reg(INT_WRITE) = INTF_SETCLR | (original_requests & ~current);
+        /* Verify the request readback once the custom-chip write has settled.
+         * A changed port or unconfirmed restore retains ownership. */
+        for (unsigned i = 0; (*reg(INT_REQUEST) & SERIAL_REQUESTS) != original_requests; ++i) {
+            if (i == 4 || (*reg(INT_ENABLE) & SERIAL_REQUESTS))
+                return hold("requests", owned);
+            Delay(1);
+        }
+        printf("MIDI wire cleanup request=%04x/%04x uart=%04x\n", (unsigned)original_requests,
+            (unsigned)(*reg(INT_REQUEST) & SERIAL_REQUESTS), (unsigned)*reg(SERIAL_STATUS));
+    }
+    if (owned)
+        FreeMiscResource(MR_SERIALPORT);
     printf("MIDI wire finished callbacks=%lu stray=%lu/%lu closed=1 rc=%d\n",
         (unsigned long)alarm.data.calls, (unsigned long)alarm.data.stray, (unsigned long)strays, rc);
     return rc;

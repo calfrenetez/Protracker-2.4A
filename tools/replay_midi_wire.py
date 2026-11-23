@@ -25,8 +25,12 @@ ROW = re.compile(
 
 def replay(text):
     lines = text.splitlines()
-    if len(lines) != 5 or lines[-1] != "MIDI wire finished callbacks=3 stray=0/0 closed=1 rc=0":
+    if len(lines) != 6 or lines[-1] != "MIDI wire finished callbacks=3 stray=0/0 closed=1 rc=0":
         raise ValueError("Missing all three native cases and verified closure")
+    cleanup = re.fullmatch(r"MIDI wire cleanup request=([0-9a-f]{4})/([0-9a-f]{4}) uart=([0-9a-f]{4})", lines[-2])
+    if not cleanup or cleanup[1] != cleanup[2] or int(cleanup[1], 16) not in (0, 1) or (
+            int(cleanup[3], 16) & 0xf000) != 0x3000:
+        raise ValueError("Original UART interrupt requests or transmit drain are unverified")
     clock = CLOCK.fullmatch(lines[0])
     if not clock:
         raise ValueError("Missing the original CIA clock")

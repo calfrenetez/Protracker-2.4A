@@ -1,0 +1,22 @@
+{
+  "target": "amiberry-030",
+  "profile": "cycle-exact guest-internal serial loopback",
+  "candidate_and_guest_readback_sha256": "b3fbba44199bba70cab8366f9b2e63869b4da1e4aacb6d810a3a01d9df7033ef",
+  "build_receipt_sha256": "dcfccb1e109a90d1d09ab6675291d181c522d7b290e7cd9512f6bc71880c9a06",
+  "guest_log_sha256": "2acb57beaaf19cbd83258c4410ede44e4f5e0209568240926f371ae590a5701b",
+  "validated_build_inputs": 37,
+  "frame_zero_window": [
+    8192,
+    8207
+  ],
+  "first_uart_write_ticks": [
+    8195,
+    8201
+  ],
+  "complete_note_loopback_receipts": 0,
+  "guest_outcome": "HOLD awaiting UART drain",
+  "normal_owned_stop": true,
+  "canonical_disk_unchanged": true,
+  "saved_files_verified": 39,
+  "guard_release_verified": true
+}
